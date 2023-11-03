@@ -1,0 +1,1175 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		19ED0C3768C72BB040BDF0E6 /* Pods_iOS_RoutingKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D016DAF18F37232259AF612 /* Pods_iOS_RoutingKitTests.framework */; };
+		311D6FA82176F02800655040 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 311D6F502176EF4B00655040 /* Utilities.framework */; };
+		313EB22C21BA26D800BEF926 /* RoutingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 313EB22321BA26D700BEF926 /* RoutingKit.framework */; };
+		313EB23121BA26D800BEF926 /* RoutingKitAppleTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313EB23021BA26D800BEF926 /* RoutingKitAppleTVTests.swift */; };
+		313EB23321BA26D800BEF926 /* RoutingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 313EB22521BA26D800BEF926 /* RoutingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		313EB26521BA271400BEF926 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 313EB23E21BA26D800BEF926 /* Utilities.framework */; };
+		31471F8C24BA320200057221 /* BadgingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31471F8B24BA320200057221 /* BadgingProtocol.swift */; };
+		31471F8D24BA320200057221 /* BadgingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31471F8B24BA320200057221 /* BadgingProtocol.swift */; };
+		31471F8E24BA320200057221 /* BadgingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31471F8B24BA320200057221 /* BadgingProtocol.swift */; };
+		314B628D23DCCEBB00139EB3 /* MappedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628723DCCEBB00139EB3 /* MappedRouter.swift */; };
+		314B628E23DCCEBB00139EB3 /* MappedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628723DCCEBB00139EB3 /* MappedRouter.swift */; };
+		314B628F23DCCEBB00139EB3 /* MappedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628723DCCEBB00139EB3 /* MappedRouter.swift */; };
+		314B629123DCCEBC00139EB3 /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628823DCCEBB00139EB3 /* RouterProtocol.swift */; };
+		314B629223DCCEBC00139EB3 /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628823DCCEBB00139EB3 /* RouterProtocol.swift */; };
+		314B629323DCCEBC00139EB3 /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628823DCCEBB00139EB3 /* RouterProtocol.swift */; };
+		314B629523DCCEBC00139EB3 /* RoutingHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628923DCCEBB00139EB3 /* RoutingHistory.swift */; };
+		314B629623DCCEBC00139EB3 /* RoutingHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628923DCCEBB00139EB3 /* RoutingHistory.swift */; };
+		314B629723DCCEBC00139EB3 /* RoutingHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628923DCCEBB00139EB3 /* RoutingHistory.swift */; };
+		314B629923DCCEBC00139EB3 /* RoutingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628A23DCCEBB00139EB3 /* RoutingRequest.swift */; };
+		314B629A23DCCEBC00139EB3 /* RoutingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628A23DCCEBB00139EB3 /* RoutingRequest.swift */; };
+		314B629B23DCCEBC00139EB3 /* RoutingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628A23DCCEBB00139EB3 /* RoutingRequest.swift */; };
+		314B629D23DCCEBC00139EB3 /* RoutingAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628C23DCCEBB00139EB3 /* RoutingAction.swift */; };
+		314B629E23DCCEBC00139EB3 /* RoutingAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628C23DCCEBB00139EB3 /* RoutingAction.swift */; };
+		314B629F23DCCEBC00139EB3 /* RoutingAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B628C23DCCEBB00139EB3 /* RoutingAction.swift */; };
+		3196825F21B7947600AE0F28 /* RoutingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3196825D21B7947600AE0F28 /* RoutingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3196826921B7948900AE0F28 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3196826521B7947600AE0F28 /* Utilities.framework */; };
+		31E65B0B216BCA10008ABEE9 /* RoutingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E65B01216BCA10008ABEE9 /* RoutingKit.framework */; };
+		31E65B10216BCA10008ABEE9 /* RoutingKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E65B0F216BCA10008ABEE9 /* RoutingKitTests.swift */; };
+		31E65B12216BCA10008ABEE9 /* RoutingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 31E65B04216BCA10008ABEE9 /* RoutingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E5BA1B2558054BFA0799D92D /* Pods_iOS_RoutingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACE60444F1016EE6EB4C7C82 /* Pods_iOS_RoutingKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		311D6F4F2176EF4B00655040 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 311D6F4A2176EF4B00655040 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AB9216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		311D6F512176EF4B00655040 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 311D6F4A2176EF4B00655040 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AC2216BC9C9008ABEE9;
+			remoteInfo = UtilitiesTests;
+		};
+		311D6F532176EF5400655040 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 311D6F4A2176EF4B00655040 /* Utilities.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E65AB8216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		313EB22D21BA26D800BEF926 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31E65AF8216BCA10008ABEE9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 313EB22221BA26D700BEF926;
+			remoteInfo = RoutingKitAppleTV;
+		};
+		313EB23D21BA26D800BEF926 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 311D6F4A2176EF4B00655040 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536521B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTV;
+		};
+		313EB24121BA26D800BEF926 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 311D6F4A2176EF4B00655040 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536D21B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTVTests;
+		};
+		313EB26321BA270B00BEF926 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 311D6F4A2176EF4B00655040 /* Utilities.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 313A536421B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTV;
+		};
+		3196826421B7947600AE0F28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 311D6F4A2176EF4B00655040 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3196823721B791CF00AE0F28;
+			remoteInfo = UtilitiesAppleWatch;
+		};
+		3196826721B7948000AE0F28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 311D6F4A2176EF4B00655040 /* Utilities.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3196823621B791CF00AE0F28;
+			remoteInfo = UtilitiesAppleWatch;
+		};
+		31E65B0C216BCA10008ABEE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31E65AF8216BCA10008ABEE9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E65B00216BCA10008ABEE9;
+			remoteInfo = RoutingKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01FD8358AB075E5F21E52A66 /* Pods-iOS-RoutingKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-RoutingKit.debug.xcconfig"; path = "Target Support Files/Pods-iOS-RoutingKit/Pods-iOS-RoutingKit.debug.xcconfig"; sourceTree = "<group>"; };
+		289CD7AB972AAFCD780017C4 /* Pods-iOS-RoutingKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-RoutingKitTests.release.xcconfig"; path = "Target Support Files/Pods-iOS-RoutingKitTests/Pods-iOS-RoutingKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		311D6F4A2176EF4B00655040 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
+		313EB22321BA26D700BEF926 /* RoutingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RoutingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		313EB22521BA26D800BEF926 /* RoutingKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoutingKit.h; sourceTree = "<group>"; };
+		313EB22621BA26D800BEF926 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		313EB22B21BA26D800BEF926 /* RoutingKitAppleTVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoutingKitAppleTVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		313EB23021BA26D800BEF926 /* RoutingKitAppleTVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingKitAppleTVTests.swift; sourceTree = "<group>"; };
+		313EB23221BA26D800BEF926 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31471F8B24BA320200057221 /* BadgingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgingProtocol.swift; sourceTree = "<group>"; };
+		314B628723DCCEBB00139EB3 /* MappedRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappedRouter.swift; sourceTree = "<group>"; };
+		314B628823DCCEBB00139EB3 /* RouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
+		314B628923DCCEBB00139EB3 /* RoutingHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingHistory.swift; sourceTree = "<group>"; };
+		314B628A23DCCEBB00139EB3 /* RoutingRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingRequest.swift; sourceTree = "<group>"; };
+		314B628C23DCCEBB00139EB3 /* RoutingAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingAction.swift; sourceTree = "<group>"; };
+		3196825B21B7947600AE0F28 /* RoutingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RoutingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3196825D21B7947600AE0F28 /* RoutingKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoutingKit.h; sourceTree = "<group>"; };
+		3196825E21B7947600AE0F28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31CEE9D72170FB6D00DC61DA /* Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31E65B01216BCA10008ABEE9 /* RoutingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RoutingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31E65B04216BCA10008ABEE9 /* RoutingKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoutingKit.h; sourceTree = "<group>"; };
+		31E65B05216BCA10008ABEE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31E65B0A216BCA10008ABEE9 /* RoutingKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoutingKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		31E65B0F216BCA10008ABEE9 /* RoutingKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingKitTests.swift; sourceTree = "<group>"; };
+		31E65B11216BCA10008ABEE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36609126661F079A0DAEE5AB /* Pods-iOS-RoutingKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-RoutingKitTests.debug.xcconfig"; path = "Target Support Files/Pods-iOS-RoutingKitTests/Pods-iOS-RoutingKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6D016DAF18F37232259AF612 /* Pods_iOS_RoutingKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_RoutingKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		751F8CCFC4CC9BEED49011F2 /* Pods-iOS-RoutingKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-RoutingKit.release.xcconfig"; path = "Target Support Files/Pods-iOS-RoutingKit/Pods-iOS-RoutingKit.release.xcconfig"; sourceTree = "<group>"; };
+		ACE60444F1016EE6EB4C7C82 /* Pods_iOS_RoutingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_RoutingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		313EB22021BA26D700BEF926 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				313EB26521BA271400BEF926 /* Utilities.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		313EB22821BA26D800BEF926 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				313EB22C21BA26D800BEF926 /* RoutingKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3196825821B7947600AE0F28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3196826921B7948900AE0F28 /* Utilities.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31E65AFE216BCA10008ABEE9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				311D6FA82176F02800655040 /* Utilities.framework in Frameworks */,
+				E5BA1B2558054BFA0799D92D /* Pods_iOS_RoutingKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31E65B07216BCA10008ABEE9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31E65B0B216BCA10008ABEE9 /* RoutingKit.framework in Frameworks */,
+				19ED0C3768C72BB040BDF0E6 /* Pods_iOS_RoutingKitTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02684F1E28BD41810007CEFF /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				311D6F4A2176EF4B00655040 /* Utilities.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		311D6F4B2176EF4B00655040 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				311D6F502176EF4B00655040 /* Utilities.framework */,
+				3196826521B7947600AE0F28 /* Utilities.framework */,
+				313EB23E21BA26D800BEF926 /* Utilities.framework */,
+				311D6F522176EF4B00655040 /* UtilitiesTests.xctest */,
+				313EB24221BA26D800BEF926 /* UtilitiesAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		313EB22421BA26D800BEF926 /* RoutingKitAppleTV */ = {
+			isa = PBXGroup;
+			children = (
+				313EB22521BA26D800BEF926 /* RoutingKit.h */,
+				313EB22621BA26D800BEF926 /* Info.plist */,
+			);
+			path = RoutingKitAppleTV;
+			sourceTree = "<group>";
+		};
+		313EB22F21BA26D800BEF926 /* RoutingKitAppleTVTests */ = {
+			isa = PBXGroup;
+			children = (
+				313EB23021BA26D800BEF926 /* RoutingKitAppleTVTests.swift */,
+				313EB23221BA26D800BEF926 /* Info.plist */,
+			);
+			path = RoutingKitAppleTVTests;
+			sourceTree = "<group>";
+		};
+		31471F8824BA31E900057221 /* _Badging */ = {
+			isa = PBXGroup;
+			children = (
+				31471F8B24BA320200057221 /* BadgingProtocol.swift */,
+			);
+			path = _Badging;
+			sourceTree = "<group>";
+		};
+		314B628623DCCEBB00139EB3 /* _Router */ = {
+			isa = PBXGroup;
+			children = (
+				314B628723DCCEBB00139EB3 /* MappedRouter.swift */,
+				314B628823DCCEBB00139EB3 /* RouterProtocol.swift */,
+				314B628923DCCEBB00139EB3 /* RoutingHistory.swift */,
+				314B628A23DCCEBB00139EB3 /* RoutingRequest.swift */,
+			);
+			path = _Router;
+			sourceTree = "<group>";
+		};
+		314B628B23DCCEBB00139EB3 /* _Action */ = {
+			isa = PBXGroup;
+			children = (
+				314B628C23DCCEBB00139EB3 /* RoutingAction.swift */,
+			);
+			path = _Action;
+			sourceTree = "<group>";
+		};
+		3196825C21B7947600AE0F28 /* RoutingKitAppleWatch */ = {
+			isa = PBXGroup;
+			children = (
+				3196825D21B7947600AE0F28 /* RoutingKit.h */,
+				3196825E21B7947600AE0F28 /* Info.plist */,
+			);
+			path = RoutingKitAppleWatch;
+			sourceTree = "<group>";
+		};
+		31E65AF7216BCA10008ABEE9 = {
+			isa = PBXGroup;
+			children = (
+				02684F1E28BD41810007CEFF /* Dependencies */,
+				368D976F606FDCA7601F61E5 /* Frameworks */,
+				31E65B02216BCA10008ABEE9 /* Products */,
+				31E65B03216BCA10008ABEE9 /* RoutingKit */,
+				313EB22421BA26D800BEF926 /* RoutingKitAppleTV */,
+				313EB22F21BA26D800BEF926 /* RoutingKitAppleTVTests */,
+				3196825C21B7947600AE0F28 /* RoutingKitAppleWatch */,
+				31E65B0E216BCA10008ABEE9 /* RoutingKitTests */,
+				386DF2AA8AB0261E9E127A2C /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		31E65B02216BCA10008ABEE9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31E65B01216BCA10008ABEE9 /* RoutingKit.framework */,
+				31E65B0A216BCA10008ABEE9 /* RoutingKitTests.xctest */,
+				3196825B21B7947600AE0F28 /* RoutingKit.framework */,
+				313EB22321BA26D700BEF926 /* RoutingKit.framework */,
+				313EB22B21BA26D800BEF926 /* RoutingKitAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31E65B03216BCA10008ABEE9 /* RoutingKit */ = {
+			isa = PBXGroup;
+			children = (
+				31E65B04216BCA10008ABEE9 /* RoutingKit.h */,
+				31E65B05216BCA10008ABEE9 /* Info.plist */,
+				314B628B23DCCEBB00139EB3 /* _Action */,
+				31471F8824BA31E900057221 /* _Badging */,
+				314B628623DCCEBB00139EB3 /* _Router */,
+			);
+			path = RoutingKit;
+			sourceTree = "<group>";
+		};
+		31E65B0E216BCA10008ABEE9 /* RoutingKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				31E65B0F216BCA10008ABEE9 /* RoutingKitTests.swift */,
+				31E65B11216BCA10008ABEE9 /* Info.plist */,
+			);
+			path = RoutingKitTests;
+			sourceTree = "<group>";
+		};
+		368D976F606FDCA7601F61E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31CEE9D72170FB6D00DC61DA /* Utilities.framework */,
+				ACE60444F1016EE6EB4C7C82 /* Pods_iOS_RoutingKit.framework */,
+				6D016DAF18F37232259AF612 /* Pods_iOS_RoutingKitTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		386DF2AA8AB0261E9E127A2C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				01FD8358AB075E5F21E52A66 /* Pods-iOS-RoutingKit.debug.xcconfig */,
+				751F8CCFC4CC9BEED49011F2 /* Pods-iOS-RoutingKit.release.xcconfig */,
+				36609126661F079A0DAEE5AB /* Pods-iOS-RoutingKitTests.debug.xcconfig */,
+				289CD7AB972AAFCD780017C4 /* Pods-iOS-RoutingKitTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../dydx/Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		313EB21E21BA26D700BEF926 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				313EB23321BA26D800BEF926 /* RoutingKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3196825621B7947600AE0F28 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3196825F21B7947600AE0F28 /* RoutingKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31E65AFC216BCA10008ABEE9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31E65B12216BCA10008ABEE9 /* RoutingKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		313EB22221BA26D700BEF926 /* RoutingKitAppleTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 313EB24521BA26D800BEF926 /* Build configuration list for PBXNativeTarget "RoutingKitAppleTV" */;
+			buildPhases = (
+				313EB21E21BA26D700BEF926 /* Headers */,
+				313EB21F21BA26D700BEF926 /* Sources */,
+				313EB22021BA26D700BEF926 /* Frameworks */,
+				313EB22121BA26D700BEF926 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				313EB26421BA270B00BEF926 /* PBXTargetDependency */,
+			);
+			name = RoutingKitAppleTV;
+			productName = RoutingKitAppleTV;
+			productReference = 313EB22321BA26D700BEF926 /* RoutingKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		313EB22A21BA26D800BEF926 /* RoutingKitAppleTVTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 313EB24621BA26D800BEF926 /* Build configuration list for PBXNativeTarget "RoutingKitAppleTVTests" */;
+			buildPhases = (
+				313EB22721BA26D800BEF926 /* Sources */,
+				313EB22821BA26D800BEF926 /* Frameworks */,
+				313EB22921BA26D800BEF926 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				313EB22E21BA26D800BEF926 /* PBXTargetDependency */,
+			);
+			name = RoutingKitAppleTVTests;
+			productName = RoutingKitAppleTVTests;
+			productReference = 313EB22B21BA26D800BEF926 /* RoutingKitAppleTVTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3196825A21B7947600AE0F28 /* RoutingKitAppleWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3196826621B7947600AE0F28 /* Build configuration list for PBXNativeTarget "RoutingKitAppleWatch" */;
+			buildPhases = (
+				3196825621B7947600AE0F28 /* Headers */,
+				3196825721B7947600AE0F28 /* Sources */,
+				3196825821B7947600AE0F28 /* Frameworks */,
+				3196825921B7947600AE0F28 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3196826821B7948000AE0F28 /* PBXTargetDependency */,
+			);
+			name = RoutingKitAppleWatch;
+			productName = RoutingKitAppleWatch;
+			productReference = 3196825B21B7947600AE0F28 /* RoutingKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		31E65B00216BCA10008ABEE9 /* RoutingKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 31E65B15216BCA10008ABEE9 /* Build configuration list for PBXNativeTarget "RoutingKit" */;
+			buildPhases = (
+				0BC7F71913D87FDC224160FA /* [CP] Check Pods Manifest.lock */,
+				31E65AFC216BCA10008ABEE9 /* Headers */,
+				31E65AFD216BCA10008ABEE9 /* Sources */,
+				31E65AFE216BCA10008ABEE9 /* Frameworks */,
+				31E65AFF216BCA10008ABEE9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				311D6F542176EF5400655040 /* PBXTargetDependency */,
+			);
+			name = RoutingKit;
+			productName = RoutingKit;
+			productReference = 31E65B01216BCA10008ABEE9 /* RoutingKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		31E65B09216BCA10008ABEE9 /* RoutingKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 31E65B18216BCA10008ABEE9 /* Build configuration list for PBXNativeTarget "RoutingKitTests" */;
+			buildPhases = (
+				3A0AEEE2A640025077F4EBD6 /* [CP] Check Pods Manifest.lock */,
+				31E65B06216BCA10008ABEE9 /* Sources */,
+				31E65B07216BCA10008ABEE9 /* Frameworks */,
+				31E65B08216BCA10008ABEE9 /* Resources */,
+				8C9DA90EC5FE4F04F45340BB /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				31E65B0D216BCA10008ABEE9 /* PBXTargetDependency */,
+			);
+			name = RoutingKitTests;
+			productName = RoutingKitTests;
+			productReference = 31E65B0A216BCA10008ABEE9 /* RoutingKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		31E65AF8216BCA10008ABEE9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = "dYdX Trading Inc";
+				TargetAttributes = {
+					313EB22221BA26D700BEF926 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					313EB22A21BA26D800BEF926 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					3196825A21B7947600AE0F28 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					31E65B00216BCA10008ABEE9 = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
+					};
+					31E65B09216BCA10008ABEE9 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+				};
+			};
+			buildConfigurationList = 31E65AFB216BCA10008ABEE9 /* Build configuration list for PBXProject "RoutingKit" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 31E65AF7216BCA10008ABEE9;
+			productRefGroup = 31E65B02216BCA10008ABEE9 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 311D6F4B2176EF4B00655040 /* Products */;
+					ProjectRef = 311D6F4A2176EF4B00655040 /* Utilities.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				31E65B00216BCA10008ABEE9 /* RoutingKit */,
+				3196825A21B7947600AE0F28 /* RoutingKitAppleWatch */,
+				313EB22221BA26D700BEF926 /* RoutingKitAppleTV */,
+				31E65B09216BCA10008ABEE9 /* RoutingKitTests */,
+				313EB22A21BA26D800BEF926 /* RoutingKitAppleTVTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		311D6F502176EF4B00655040 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 311D6F4F2176EF4B00655040 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		311D6F522176EF4B00655040 /* UtilitiesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UtilitiesTests.xctest;
+			remoteRef = 311D6F512176EF4B00655040 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		313EB23E21BA26D800BEF926 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 313EB23D21BA26D800BEF926 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		313EB24221BA26D800BEF926 /* UtilitiesAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UtilitiesAppleTVTests.xctest;
+			remoteRef = 313EB24121BA26D800BEF926 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3196826521B7947600AE0F28 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 3196826421B7947600AE0F28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		313EB22121BA26D700BEF926 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		313EB22921BA26D800BEF926 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3196825921B7947600AE0F28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31E65AFF216BCA10008ABEE9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31E65B08216BCA10008ABEE9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0BC7F71913D87FDC224160FA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-RoutingKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3A0AEEE2A640025077F4EBD6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-RoutingKitTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C9DA90EC5FE4F04F45340BB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-RoutingKitTests/Pods-iOS-RoutingKitTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-RoutingKitTests/Pods-iOS-RoutingKitTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-RoutingKitTests/Pods-iOS-RoutingKitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		313EB21F21BA26D700BEF926 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				314B629F23DCCEBC00139EB3 /* RoutingAction.swift in Sources */,
+				314B629B23DCCEBC00139EB3 /* RoutingRequest.swift in Sources */,
+				314B629723DCCEBC00139EB3 /* RoutingHistory.swift in Sources */,
+				314B629323DCCEBC00139EB3 /* RouterProtocol.swift in Sources */,
+				31471F8E24BA320200057221 /* BadgingProtocol.swift in Sources */,
+				314B628F23DCCEBB00139EB3 /* MappedRouter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		313EB22721BA26D800BEF926 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				313EB23121BA26D800BEF926 /* RoutingKitAppleTVTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3196825721B7947600AE0F28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				314B629E23DCCEBC00139EB3 /* RoutingAction.swift in Sources */,
+				314B629A23DCCEBC00139EB3 /* RoutingRequest.swift in Sources */,
+				314B629623DCCEBC00139EB3 /* RoutingHistory.swift in Sources */,
+				314B629223DCCEBC00139EB3 /* RouterProtocol.swift in Sources */,
+				31471F8D24BA320200057221 /* BadgingProtocol.swift in Sources */,
+				314B628E23DCCEBB00139EB3 /* MappedRouter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31E65AFD216BCA10008ABEE9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				314B629D23DCCEBC00139EB3 /* RoutingAction.swift in Sources */,
+				314B629923DCCEBC00139EB3 /* RoutingRequest.swift in Sources */,
+				314B629523DCCEBC00139EB3 /* RoutingHistory.swift in Sources */,
+				314B629123DCCEBC00139EB3 /* RouterProtocol.swift in Sources */,
+				31471F8C24BA320200057221 /* BadgingProtocol.swift in Sources */,
+				314B628D23DCCEBB00139EB3 /* MappedRouter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31E65B06216BCA10008ABEE9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31E65B10216BCA10008ABEE9 /* RoutingKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		311D6F542176EF5400655040 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Utilities;
+			targetProxy = 311D6F532176EF5400655040 /* PBXContainerItemProxy */;
+		};
+		313EB22E21BA26D800BEF926 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 313EB22221BA26D700BEF926 /* RoutingKitAppleTV */;
+			targetProxy = 313EB22D21BA26D800BEF926 /* PBXContainerItemProxy */;
+		};
+		313EB26421BA270B00BEF926 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UtilitiesAppleTV;
+			targetProxy = 313EB26321BA270B00BEF926 /* PBXContainerItemProxy */;
+		};
+		3196826821B7948000AE0F28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UtilitiesAppleWatch;
+			targetProxy = 3196826721B7948000AE0F28 /* PBXContainerItemProxy */;
+		};
+		31E65B0D216BCA10008ABEE9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 31E65B00216BCA10008ABEE9 /* RoutingKit */;
+			targetProxy = 31E65B0C216BCA10008ABEE9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		313EB23421BA26D800BEF926 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RoutingKitAppleTV/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = www.craziapps.RoutingKitAppleTV;
+				PRODUCT_NAME = RoutingKit;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.1;
+			};
+			name = Debug;
+		};
+		313EB23521BA26D800BEF926 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RoutingKitAppleTV/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = www.craziapps.RoutingKitAppleTV;
+				PRODUCT_NAME = RoutingKit;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.1;
+			};
+			name = Release;
+		};
+		313EB23621BA26D800BEF926 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				INFOPLIST_FILE = RoutingKitAppleTVTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = www.craziapps.RoutingKitAppleTVTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.1;
+			};
+			name = Debug;
+		};
+		313EB23721BA26D800BEF926 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				INFOPLIST_FILE = RoutingKitAppleTVTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = www.craziapps.RoutingKitAppleTVTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.1;
+			};
+			name = Release;
+		};
+		3196826021B7947600AE0F28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RoutingKitAppleWatch/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = www.craziapps.RoutingKitAppleWatch;
+				PRODUCT_NAME = RoutingKit;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.1;
+			};
+			name = Debug;
+		};
+		3196826121B7947600AE0F28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RoutingKitAppleWatch/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = www.craziapps.RoutingKitAppleWatch;
+				PRODUCT_NAME = RoutingKit;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.1;
+			};
+			name = Release;
+		};
+		31E65B13216BCA10008ABEE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		31E65B14216BCA10008ABEE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		31E65B16216BCA10008ABEE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01FD8358AB075E5F21E52A66 /* Pods-iOS-RoutingKit.debug.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RoutingKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = www.particles.RoutingKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_UIKITFORMAC = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		31E65B17216BCA10008ABEE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 751F8CCFC4CC9BEED49011F2 /* Pods-iOS-RoutingKit.release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RoutingKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = www.particles.RoutingKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_UIKITFORMAC = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		31E65B19216BCA10008ABEE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36609126661F079A0DAEE5AB /* Pods-iOS-RoutingKitTests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				INFOPLIST_FILE = RoutingKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = www.craziapps.RoutingKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		31E65B1A216BCA10008ABEE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 289CD7AB972AAFCD780017C4 /* Pods-iOS-RoutingKitTests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				INFOPLIST_FILE = RoutingKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = www.craziapps.RoutingKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		313EB24521BA26D800BEF926 /* Build configuration list for PBXNativeTarget "RoutingKitAppleTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				313EB23421BA26D800BEF926 /* Debug */,
+				313EB23521BA26D800BEF926 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		313EB24621BA26D800BEF926 /* Build configuration list for PBXNativeTarget "RoutingKitAppleTVTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				313EB23621BA26D800BEF926 /* Debug */,
+				313EB23721BA26D800BEF926 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3196826621B7947600AE0F28 /* Build configuration list for PBXNativeTarget "RoutingKitAppleWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3196826021B7947600AE0F28 /* Debug */,
+				3196826121B7947600AE0F28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		31E65AFB216BCA10008ABEE9 /* Build configuration list for PBXProject "RoutingKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31E65B13216BCA10008ABEE9 /* Debug */,
+				31E65B14216BCA10008ABEE9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		31E65B15216BCA10008ABEE9 /* Build configuration list for PBXNativeTarget "RoutingKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31E65B16216BCA10008ABEE9 /* Debug */,
+				31E65B17216BCA10008ABEE9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		31E65B18216BCA10008ABEE9 /* Build configuration list for PBXNativeTarget "RoutingKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31E65B19216BCA10008ABEE9 /* Debug */,
+				31E65B1A216BCA10008ABEE9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 31E65AF8216BCA10008ABEE9 /* Project object */;
+}

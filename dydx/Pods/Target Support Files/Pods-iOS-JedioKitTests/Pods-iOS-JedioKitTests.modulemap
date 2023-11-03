@@ -1,0 +1,6 @@
+framework module Pods_iOS_JedioKitTests {
+  umbrella header "Pods-iOS-JedioKitTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

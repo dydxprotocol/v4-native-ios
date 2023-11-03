@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="YYt-6O-IDf" customClass="ParallaxObjectPresenterTableViewCell" customModule="PlatformParticles" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YYt-6O-IDf" id="Cgr-UT-YmG">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V82-l6-u3D">
+                        <rect key="frame" x="0.0" y="8" width="320" height="64"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="V82-l6-u3D" firstAttribute="leading" secondItem="Cgr-UT-YmG" secondAttribute="leading" id="FgO-zG-qnq"/>
+                    <constraint firstItem="V82-l6-u3D" firstAttribute="centerY" secondItem="Cgr-UT-YmG" secondAttribute="centerY" id="GqD-Th-g6i"/>
+                    <constraint firstAttribute="trailing" secondItem="V82-l6-u3D" secondAttribute="trailing" id="apm-dK-RbB"/>
+                    <constraint firstItem="V82-l6-u3D" firstAttribute="height" secondItem="Cgr-UT-YmG" secondAttribute="height" multiplier="0.8" id="bZj-7u-gMm"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="canvasCenter" destination="GqD-Th-g6i" id="4Xu-Gt-1gP"/>
+                <outlet property="canvasView" destination="V82-l6-u3D" id="i1N-lR-C58"/>
+            </connections>
+            <point key="canvasLocation" x="139.19999999999999" y="286.95652173913044"/>
+        </tableViewCell>
+    </objects>
+</document>

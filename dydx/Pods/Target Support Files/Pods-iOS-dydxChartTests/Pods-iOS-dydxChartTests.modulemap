@@ -1,0 +1,6 @@
+framework module Pods_iOS_dydxChartTests {
+  umbrella header "Pods-iOS-dydxChartTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

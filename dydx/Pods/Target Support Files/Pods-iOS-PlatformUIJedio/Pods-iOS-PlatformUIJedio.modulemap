@@ -1,0 +1,6 @@
+framework module Pods_iOS_PlatformUIJedio {
+  umbrella header "Pods-iOS-PlatformUIJedio-umbrella.h"
+
+  export *
+  module * { export * }
+}

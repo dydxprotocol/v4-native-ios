@@ -1,0 +1,943 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		021A1DCA2AD34103008A3D73 /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 021A1DC92AD34103008A3D73 /* Cartera */; };
+		023F7F082AD09725006CC4CD /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647D11422A9FF29100DA7815 /* Utilities.framework */; platformFilter = ios; };
+		023F7F0D2AD09732006CC4CD /* ParticlesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647D11D12AA0EE8D00DA7815 /* ParticlesKit.framework */; platformFilter = ios; };
+		02439C9029B03E8A00A083FE /* dydxCartera.docc in Sources */ = {isa = PBXBuildFile; fileRef = 02439C8F29B03E8A00A083FE /* dydxCartera.docc */; };
+		02439C9629B03E8A00A083FE /* dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02439C8B29B03E8A00A083FE /* dydxCartera.framework */; };
+		02439C9B29B03E8A00A083FE /* dydxCarteraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02439C9A29B03E8A00A083FE /* dydxCarteraTests.swift */; };
+		02439C9C29B03E8A00A083FE /* dydxCartera.h in Headers */ = {isa = PBXBuildFile; fileRef = 02439C8E29B03E8A00A083FE /* dydxCartera.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02439E4429B04D2700A083FE /* dydxV4WalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02439E4329B04D2700A083FE /* dydxV4WalletSetup.swift */; };
+		02439E4729B0526100A083FE /* secp256k1 in Frameworks */ = {isa = PBXBuildFile; productRef = 02439E4629B0526100A083FE /* secp256k1 */; };
+		02669B932AD872A300A756AA /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 02669B922AD872A300A756AA /* Cartera */; };
+		0274248429E74CA5004C89AE /* Parser+Eth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248329E74CA5004C89AE /* Parser+Eth.swift */; };
+		0274248729E76718004C89AE /* EthConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248629E76718004C89AE /* EthConversions.swift */; };
+		0274248929E78576004C89AE /* ERC20Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248829E78576004C89AE /* ERC20Token.swift */; };
+		0274248B29E785AD004C89AE /* ContractFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248A29E785AD004C89AE /* ContractFunction.swift */; };
+		029853642AFAFDD000197966 /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 029853632AFAFDD000197966 /* Cartera */; };
+		02DB5ECD29E602E5001EA0F1 /* EthereumInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB5ECC29E602E5001EA0F1 /* EthereumInteractor.swift */; };
+		02DB5ED029E603A1001EA0F1 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = 02DB5ECF29E603A1001EA0F1 /* web3.swift */; };
+		02EF44D429F6F5A700C97746 /* dydxWalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF44D329F6F5A700C97746 /* dydxWalletSetup.swift */; };
+		02EF44E429F6FA8D00C97746 /* StarkJavascript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF44D729F6FA8D00C97746 /* StarkJavascript.swift */; };
+		380B90E0F0184BA5387AC70A /* Pods_iOS_dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90BD66B2E0C0AEA29121D4EB /* Pods_iOS_dydxCartera.framework */; };
+		4CEA3DA15AAE34D6C283DEAB /* Pods_iOS_dydxCarteraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8865FEF1835F39EDD09CA04 /* Pods_iOS_dydxCarteraTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		023F7EE82AD0969B006CC4CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74252A032E56004DF574 /* ParticlesKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 311C0FD921B0E9C4001775BA;
+			remoteInfo = ParticlesKit;
+		};
+		023F7EF42AD0969F006CC4CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74372A032E5E004DF574 /* Utilities.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E65AB8216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		02439C9729B03E8A00A083FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02439C8229B03E8A00A083FE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 02439C8A29B03E8A00A083FE;
+			remoteInfo = dydxCartera;
+		};
+		647D11412A9FF29100DA7815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74372A032E5E004DF574 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AB9216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		647D11432A9FF29100DA7815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74372A032E5E004DF574 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3196823721B791CF00AE0F28;
+			remoteInfo = UtilitiesAppleWatch;
+		};
+		647D11452A9FF29100DA7815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74372A032E5E004DF574 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536521B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTV;
+		};
+		647D11472A9FF29100DA7815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74372A032E5E004DF574 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AC2216BC9C9008ABEE9;
+			remoteInfo = UtilitiesTests;
+		};
+		647D11492A9FF29100DA7815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74372A032E5E004DF574 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536D21B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTVTests;
+		};
+		647D11D02AA0EE8D00DA7815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74252A032E56004DF574 /* ParticlesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 311C0FDA21B0E9C4001775BA;
+			remoteInfo = ParticlesKit;
+		};
+		647D11D22AA0EE8D00DA7815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74252A032E56004DF574 /* ParticlesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 319682B421B7967B00AE0F28;
+			remoteInfo = ParticlesKitAppleWatch;
+		};
+		647D11D42AA0EE8D00DA7815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74252A032E56004DF574 /* ParticlesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB16121BA246A00BEF926;
+			remoteInfo = ParticlesKitAppleTV;
+		};
+		647D11D62AA0EE8D00DA7815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74252A032E56004DF574 /* ParticlesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 311C0FE321B0E9C4001775BA;
+			remoteInfo = ParticlesKitTests;
+		};
+		647D11D82AA0EE8D00DA7815 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027C74252A032E56004DF574 /* ParticlesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB16921BA246A00BEF926;
+			remoteInfo = ParticlesKitAppleTVTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		023F7EFB2AD09703006CC4CD /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		023F7EFD2AD09703006CC4CD /* Pods_iOS_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_iOS_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		023F7EFF2AD09703006CC4CD /* Pods_iOS_UtilitiesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_iOS_UtilitiesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		02439C8B29B03E8A00A083FE /* dydxCartera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxCartera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		02439C8E29B03E8A00A083FE /* dydxCartera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dydxCartera.h; sourceTree = "<group>"; };
+		02439C8F29B03E8A00A083FE /* dydxCartera.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = dydxCartera.docc; sourceTree = "<group>"; };
+		02439C9529B03E8A00A083FE /* dydxCarteraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dydxCarteraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		02439C9A29B03E8A00A083FE /* dydxCarteraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCarteraTests.swift; sourceTree = "<group>"; };
+		02439E4329B04D2700A083FE /* dydxV4WalletSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxV4WalletSetup.swift; sourceTree = "<group>"; };
+		0274248329E74CA5004C89AE /* Parser+Eth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Parser+Eth.swift"; sourceTree = "<group>"; };
+		0274248629E76718004C89AE /* EthConversions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthConversions.swift; sourceTree = "<group>"; };
+		0274248829E78576004C89AE /* ERC20Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC20Token.swift; sourceTree = "<group>"; };
+		0274248A29E785AD004C89AE /* ContractFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractFunction.swift; sourceTree = "<group>"; };
+		027C74252A032E56004DF574 /* ParticlesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticlesKit.xcodeproj; path = ../../ParticlesKit/ParticlesKit.xcodeproj; sourceTree = "<group>"; };
+		027C74372A032E5E004DF574 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
+		02DB5ECC29E602E5001EA0F1 /* EthereumInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumInteractor.swift; sourceTree = "<group>"; };
+		02EF44D329F6F5A700C97746 /* dydxWalletSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWalletSetup.swift; sourceTree = "<group>"; };
+		02EF44D729F6FA8D00C97746 /* StarkJavascript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarkJavascript.swift; sourceTree = "<group>"; };
+		755B5FABDB988B2B3FA3C414 /* Pods-iOS-dydxCartera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxCartera.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxCartera/Pods-iOS-dydxCartera.release.xcconfig"; sourceTree = "<group>"; };
+		87F24A5A06C93C6D25E9CABC /* Pods-iOS-dydxCarteraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxCarteraTests.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests.release.xcconfig"; sourceTree = "<group>"; };
+		90BD66B2E0C0AEA29121D4EB /* Pods_iOS_dydxCartera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxCartera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2B84BD453F47B7FDF851873 /* Pods-iOS-dydxCarteraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxCarteraTests.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F8865FEF1835F39EDD09CA04 /* Pods_iOS_dydxCarteraTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxCarteraTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF46E9BCE4665A7F5178EA3F /* Pods-iOS-dydxCartera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxCartera.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxCartera/Pods-iOS-dydxCartera.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		02439C8829B03E8A00A083FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				023F7F0D2AD09732006CC4CD /* ParticlesKit.framework in Frameworks */,
+				029853642AFAFDD000197966 /* Cartera in Frameworks */,
+				023F7F082AD09725006CC4CD /* Utilities.framework in Frameworks */,
+				380B90E0F0184BA5387AC70A /* Pods_iOS_dydxCartera.framework in Frameworks */,
+				02669B932AD872A300A756AA /* Cartera in Frameworks */,
+				021A1DCA2AD34103008A3D73 /* Cartera in Frameworks */,
+				02DB5ED029E603A1001EA0F1 /* web3.swift in Frameworks */,
+				02439E4729B0526100A083FE /* secp256k1 in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02439C9229B03E8A00A083FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02439C9629B03E8A00A083FE /* dydxCartera.framework in Frameworks */,
+				4CEA3DA15AAE34D6C283DEAB /* Pods_iOS_dydxCarteraTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02439C8129B03E8A00A083FE = {
+			isa = PBXGroup;
+			children = (
+				027C74562A0330E4004DF574 /* Dependencies */,
+				02439C8D29B03E8A00A083FE /* dydxCartera */,
+				02439C9929B03E8A00A083FE /* dydxCarteraTests */,
+				02439C8C29B03E8A00A083FE /* Products */,
+				C8D718CBBA38C62DC77F5347 /* Pods */,
+				14CDB532D63AD30EE2F24F26 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		02439C8C29B03E8A00A083FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02439C8B29B03E8A00A083FE /* dydxCartera.framework */,
+				02439C9529B03E8A00A083FE /* dydxCarteraTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02439C8D29B03E8A00A083FE /* dydxCartera */ = {
+			isa = PBXGroup;
+			children = (
+				02EF44D229F6F59A00C97746 /* WalletSetup */,
+				0274248529E766F6004C89AE /* Contracts */,
+				0274248229E74C9B004C89AE /* Utils */,
+				02DB5ECB29E6029C001EA0F1 /* Ethereum */,
+				02439C8E29B03E8A00A083FE /* dydxCartera.h */,
+				02439C8F29B03E8A00A083FE /* dydxCartera.docc */,
+			);
+			path = dydxCartera;
+			sourceTree = "<group>";
+		};
+		02439C9929B03E8A00A083FE /* dydxCarteraTests */ = {
+			isa = PBXGroup;
+			children = (
+				02439C9A29B03E8A00A083FE /* dydxCarteraTests.swift */,
+			);
+			path = dydxCarteraTests;
+			sourceTree = "<group>";
+		};
+		0274248229E74C9B004C89AE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0274248329E74CA5004C89AE /* Parser+Eth.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		0274248529E766F6004C89AE /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				0274248A29E785AD004C89AE /* ContractFunction.swift */,
+				0274248829E78576004C89AE /* ERC20Token.swift */,
+				0274248629E76718004C89AE /* EthConversions.swift */,
+			);
+			path = Contracts;
+			sourceTree = "<group>";
+		};
+		027C74562A0330E4004DF574 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				027C74372A032E5E004DF574 /* Utilities.xcodeproj */,
+				027C74252A032E56004DF574 /* ParticlesKit.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		02DB5ECB29E6029C001EA0F1 /* Ethereum */ = {
+			isa = PBXGroup;
+			children = (
+				02DB5ECC29E602E5001EA0F1 /* EthereumInteractor.swift */,
+			);
+			path = Ethereum;
+			sourceTree = "<group>";
+		};
+		02EF44D229F6F59A00C97746 /* WalletSetup */ = {
+			isa = PBXGroup;
+			children = (
+				02EF44EA29F6FE0F00C97746 /* V4 */,
+				02EF44D729F6FA8D00C97746 /* StarkJavascript.swift */,
+				02EF44D329F6F5A700C97746 /* dydxWalletSetup.swift */,
+			);
+			path = WalletSetup;
+			sourceTree = "<group>";
+		};
+		02EF44EA29F6FE0F00C97746 /* V4 */ = {
+			isa = PBXGroup;
+			children = (
+				02439E4329B04D2700A083FE /* dydxV4WalletSetup.swift */,
+			);
+			path = V4;
+			sourceTree = "<group>";
+		};
+		14CDB532D63AD30EE2F24F26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				023F7EFB2AD09703006CC4CD /* GoogleUtilities.framework */,
+				023F7EFD2AD09703006CC4CD /* Pods_iOS_Utilities.framework */,
+				023F7EFF2AD09703006CC4CD /* Pods_iOS_UtilitiesTests.framework */,
+				90BD66B2E0C0AEA29121D4EB /* Pods_iOS_dydxCartera.framework */,
+				F8865FEF1835F39EDD09CA04 /* Pods_iOS_dydxCarteraTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		647D113A2A9FF29100DA7815 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				647D11422A9FF29100DA7815 /* Utilities.framework */,
+				647D11442A9FF29100DA7815 /* Utilities.framework */,
+				647D11462A9FF29100DA7815 /* Utilities.framework */,
+				647D11482A9FF29100DA7815 /* UtilitiesTests.xctest */,
+				647D114A2A9FF29100DA7815 /* UtilitiesAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		647D11C92AA0EE8D00DA7815 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				647D11D12AA0EE8D00DA7815 /* ParticlesKit.framework */,
+				647D11D32AA0EE8D00DA7815 /* ParticlesKit.framework */,
+				647D11D52AA0EE8D00DA7815 /* ParticlesKit.framework */,
+				647D11D72AA0EE8D00DA7815 /* ParticlesKitTests.xctest */,
+				647D11D92AA0EE8D00DA7815 /* ParticlesKitAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C8D718CBBA38C62DC77F5347 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FF46E9BCE4665A7F5178EA3F /* Pods-iOS-dydxCartera.debug.xcconfig */,
+				755B5FABDB988B2B3FA3C414 /* Pods-iOS-dydxCartera.release.xcconfig */,
+				B2B84BD453F47B7FDF851873 /* Pods-iOS-dydxCarteraTests.debug.xcconfig */,
+				87F24A5A06C93C6D25E9CABC /* Pods-iOS-dydxCarteraTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		02439C8629B03E8A00A083FE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02439C9C29B03E8A00A083FE /* dydxCartera.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		02439C8A29B03E8A00A083FE /* dydxCartera */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02439C9F29B03E8A00A083FE /* Build configuration list for PBXNativeTarget "dydxCartera" */;
+			buildPhases = (
+				F24B672A85EBD5A52347BD2D /* [CP] Check Pods Manifest.lock */,
+				02439C8629B03E8A00A083FE /* Headers */,
+				02439C8729B03E8A00A083FE /* Sources */,
+				02439C8829B03E8A00A083FE /* Frameworks */,
+				02439C8929B03E8A00A083FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				023F7EF52AD0969F006CC4CD /* PBXTargetDependency */,
+				023F7EE92AD0969B006CC4CD /* PBXTargetDependency */,
+			);
+			name = dydxCartera;
+			packageProductDependencies = (
+				02439E4629B0526100A083FE /* secp256k1 */,
+				02DB5ECF29E603A1001EA0F1 /* web3.swift */,
+				021A1DC92AD34103008A3D73 /* Cartera */,
+				02669B922AD872A300A756AA /* Cartera */,
+				029853632AFAFDD000197966 /* Cartera */,
+			);
+			productName = dydxCartera;
+			productReference = 02439C8B29B03E8A00A083FE /* dydxCartera.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		02439C9429B03E8A00A083FE /* dydxCarteraTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02439CA229B03E8A00A083FE /* Build configuration list for PBXNativeTarget "dydxCarteraTests" */;
+			buildPhases = (
+				8DB54B35C64DC065707C5193 /* [CP] Check Pods Manifest.lock */,
+				02439C9129B03E8A00A083FE /* Sources */,
+				02439C9229B03E8A00A083FE /* Frameworks */,
+				02439C9329B03E8A00A083FE /* Resources */,
+				AC4AE11DAABBE305265BC740 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				02439C9829B03E8A00A083FE /* PBXTargetDependency */,
+			);
+			name = dydxCarteraTests;
+			productName = dydxCarteraTests;
+			productReference = 02439C9529B03E8A00A083FE /* dydxCarteraTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		02439C8229B03E8A00A083FE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					02439C8A29B03E8A00A083FE = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					02439C9429B03E8A00A083FE = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 02439C8529B03E8A00A083FE /* Build configuration list for PBXProject "dydxCartera" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 02439C8129B03E8A00A083FE;
+			packageReferences = (
+				02439E4529B0526100A083FE /* XCRemoteSwiftPackageReference "secp256k1.swift" */,
+				02DB5ECE29E603A1001EA0F1 /* XCRemoteSwiftPackageReference "web3" */,
+				029853622AFAFDD000197966 /* XCRemoteSwiftPackageReference "cartera-ios" */,
+			);
+			productRefGroup = 02439C8C29B03E8A00A083FE /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 647D11C92AA0EE8D00DA7815 /* Products */;
+					ProjectRef = 027C74252A032E56004DF574 /* ParticlesKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 647D113A2A9FF29100DA7815 /* Products */;
+					ProjectRef = 027C74372A032E5E004DF574 /* Utilities.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				02439C8A29B03E8A00A083FE /* dydxCartera */,
+				02439C9429B03E8A00A083FE /* dydxCarteraTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		647D11422A9FF29100DA7815 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 647D11412A9FF29100DA7815 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		647D11442A9FF29100DA7815 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 647D11432A9FF29100DA7815 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		647D11462A9FF29100DA7815 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 647D11452A9FF29100DA7815 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		647D11482A9FF29100DA7815 /* UtilitiesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UtilitiesTests.xctest;
+			remoteRef = 647D11472A9FF29100DA7815 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		647D114A2A9FF29100DA7815 /* UtilitiesAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UtilitiesAppleTVTests.xctest;
+			remoteRef = 647D11492A9FF29100DA7815 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		647D11D12AA0EE8D00DA7815 /* ParticlesKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticlesKit.framework;
+			remoteRef = 647D11D02AA0EE8D00DA7815 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		647D11D32AA0EE8D00DA7815 /* ParticlesKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticlesKit.framework;
+			remoteRef = 647D11D22AA0EE8D00DA7815 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		647D11D52AA0EE8D00DA7815 /* ParticlesKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticlesKit.framework;
+			remoteRef = 647D11D42AA0EE8D00DA7815 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		647D11D72AA0EE8D00DA7815 /* ParticlesKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ParticlesKitTests.xctest;
+			remoteRef = 647D11D62AA0EE8D00DA7815 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		647D11D92AA0EE8D00DA7815 /* ParticlesKitAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ParticlesKitAppleTVTests.xctest;
+			remoteRef = 647D11D82AA0EE8D00DA7815 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		02439C8929B03E8A00A083FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02439C9329B03E8A00A083FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8DB54B35C64DC065707C5193 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxCarteraTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC4AE11DAABBE305265BC740 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F24B672A85EBD5A52347BD2D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxCartera-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		02439C8729B03E8A00A083FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0274248429E74CA5004C89AE /* Parser+Eth.swift in Sources */,
+				02439C9029B03E8A00A083FE /* dydxCartera.docc in Sources */,
+				0274248929E78576004C89AE /* ERC20Token.swift in Sources */,
+				02EF44D429F6F5A700C97746 /* dydxWalletSetup.swift in Sources */,
+				02EF44E429F6FA8D00C97746 /* StarkJavascript.swift in Sources */,
+				0274248B29E785AD004C89AE /* ContractFunction.swift in Sources */,
+				02DB5ECD29E602E5001EA0F1 /* EthereumInteractor.swift in Sources */,
+				0274248729E76718004C89AE /* EthConversions.swift in Sources */,
+				02439E4429B04D2700A083FE /* dydxV4WalletSetup.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02439C9129B03E8A00A083FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02439C9B29B03E8A00A083FE /* dydxCarteraTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		023F7EE92AD0969B006CC4CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ParticlesKit;
+			targetProxy = 023F7EE82AD0969B006CC4CD /* PBXContainerItemProxy */;
+		};
+		023F7EF52AD0969F006CC4CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Utilities;
+			targetProxy = 023F7EF42AD0969F006CC4CD /* PBXContainerItemProxy */;
+		};
+		02439C9829B03E8A00A083FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 02439C8A29B03E8A00A083FE /* dydxCartera */;
+			targetProxy = 02439C9729B03E8A00A083FE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		02439C9D29B03E8A00A083FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		02439C9E29B03E8A00A083FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		02439CA029B03E8A00A083FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF46E9BCE4665A7F5178EA3F /* Pods-iOS-dydxCartera.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxCartera;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		02439CA129B03E8A00A083FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 755B5FABDB988B2B3FA3C414 /* Pods-iOS-dydxCartera.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxCartera;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		02439CA329B03E8A00A083FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2B84BD453F47B7FDF851873 /* Pods-iOS-dydxCarteraTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxCarteraTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		02439CA429B03E8A00A083FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87F24A5A06C93C6D25E9CABC /* Pods-iOS-dydxCarteraTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxCarteraTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		02439C8529B03E8A00A083FE /* Build configuration list for PBXProject "dydxCartera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02439C9D29B03E8A00A083FE /* Debug */,
+				02439C9E29B03E8A00A083FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		02439C9F29B03E8A00A083FE /* Build configuration list for PBXNativeTarget "dydxCartera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02439CA029B03E8A00A083FE /* Debug */,
+				02439CA129B03E8A00A083FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		02439CA229B03E8A00A083FE /* Build configuration list for PBXNativeTarget "dydxCarteraTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02439CA329B03E8A00A083FE /* Debug */,
+				02439CA429B03E8A00A083FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		02439E4529B0526100A083FE /* XCRemoteSwiftPackageReference "secp256k1.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GigaBitcoin/secp256k1.swift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		029853622AFAFDD000197966 /* XCRemoteSwiftPackageReference "cartera-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:dydxprotocol/cartera-ios.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		02DB5ECE29E603A1001EA0F1 /* XCRemoteSwiftPackageReference "web3" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/argentlabs/web3.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		021A1DC92AD34103008A3D73 /* Cartera */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Cartera;
+		};
+		02439E4629B0526100A083FE /* secp256k1 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02439E4529B0526100A083FE /* XCRemoteSwiftPackageReference "secp256k1.swift" */;
+			productName = secp256k1;
+		};
+		02669B922AD872A300A756AA /* Cartera */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Cartera;
+		};
+		029853632AFAFDD000197966 /* Cartera */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 029853622AFAFDD000197966 /* XCRemoteSwiftPackageReference "cartera-ios" */;
+			productName = Cartera;
+		};
+		02DB5ECF29E603A1001EA0F1 /* web3.swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02DB5ECE29E603A1001EA0F1 /* XCRemoteSwiftPackageReference "web3" */;
+			productName = web3.swift;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 02439C8229B03E8A00A083FE /* Project object */;
+}

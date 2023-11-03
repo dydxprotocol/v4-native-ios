@@ -1,0 +1,6 @@
+framework module Pods_iOS_ParticlesKit {
+  umbrella header "Pods-iOS-ParticlesKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

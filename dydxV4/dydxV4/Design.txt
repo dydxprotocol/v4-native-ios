@@ -1,0 +1,13 @@
+Tabs
+
+1. Market
+    /markets
+2. Order Book
+    /orderbook
+3. Trade
+    /trade
+4. Settings
+    /settings
+        /settings/wallet
+        /settings/debug
+        /settings/features

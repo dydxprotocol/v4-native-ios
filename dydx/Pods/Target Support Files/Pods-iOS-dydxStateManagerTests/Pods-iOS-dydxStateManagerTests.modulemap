@@ -1,0 +1,6 @@
+framework module Pods_iOS_dydxStateManagerTests {
+  umbrella header "Pods-iOS-dydxStateManagerTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,26 @@
+name: SwiftLint on Changed Files
+
+on: 
+  pull_request:
+    paths:
+      - '**/*.swift'
+
+jobs:
+  swiftlint:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Install SwiftLint
+      run: |
+        brew install swiftlint
+
+    - name: Lint Modified Swift Files
+      run: |
+        # Fetch changes from the base branch of the pull request
+        git fetch origin ${{ github.base_ref }}
+        # Use git diff to find changed Swift files, then lint each file with SwiftLint
+        git diff --name-only origin/${{ github.base_ref }} | grep '\.swift$' | xargs swiftlint --config dydx/.swiftlint.yml --fix lint
+
