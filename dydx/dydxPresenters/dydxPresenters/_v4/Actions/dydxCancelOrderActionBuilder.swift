@@ -33,7 +33,7 @@ private class dydxCancelOrderAction: NSObject, NavigableProtocol {
         default:
             completion?(nil, false)
         }
-    }
+    } 
 
     private func cancelOrder(orderId: String, completion: RoutingCompletionBlock?) {
         AbacusStateManager.shared.cancelOrder(orderId: orderId) { status in
