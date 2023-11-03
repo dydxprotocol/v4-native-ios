@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="bdn-Ec-hrg" customClass="ObjectPresenterView" customModule="PlatformParticles" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="120" height="1"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cFl-17-l10">
+                    <rect key="frame" x="0.0" y="0.0" width="120" height="1"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjE-5C-wKC" customClass="ThinlineView" customModule="UIToolkits">
+                            <rect key="frame" x="16" y="0.0" width="88" height="1"/>
+                            <color key="backgroundColor" systemColor="separatorColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="JO1-Bg-oeY"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="height" destination="JO1-Bg-oeY" id="D4M-Ty-ndB"/>
+                            </connections>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="yjE-5C-wKC" secondAttribute="bottom" id="BRn-l1-XyI"/>
+                        <constraint firstItem="yjE-5C-wKC" firstAttribute="leading" secondItem="cFl-17-l10" secondAttribute="leading" constant="16" id="MdF-RN-8LK"/>
+                        <constraint firstAttribute="trailing" secondItem="yjE-5C-wKC" secondAttribute="trailing" constant="16" id="XNu-PH-es3"/>
+                        <constraint firstItem="yjE-5C-wKC" firstAttribute="top" secondItem="cFl-17-l10" secondAttribute="top" id="kN6-hb-DWy"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="cFl-17-l10" firstAttribute="top" secondItem="bdn-Ec-hrg" secondAttribute="top" id="Cv1-mf-Im0"/>
+                <constraint firstItem="cFl-17-l10" firstAttribute="leading" secondItem="bdn-Ec-hrg" secondAttribute="leading" id="NVR-7C-C1R"/>
+                <constraint firstAttribute="bottom" secondItem="cFl-17-l10" secondAttribute="bottom" id="U81-vr-nJa"/>
+                <constraint firstAttribute="trailing" secondItem="cFl-17-l10" secondAttribute="trailing" priority="900" id="Uxi-9o-DQr"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="presenter" destination="lNZ-C2-ybu" id="hzo-Xz-4OW"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="100"/>
+        </view>
+        <customObject id="lNZ-C2-ybu" customClass="ObjectPresenter" customModule="ParticlesKit"/>
+    </objects>
+    <resources>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

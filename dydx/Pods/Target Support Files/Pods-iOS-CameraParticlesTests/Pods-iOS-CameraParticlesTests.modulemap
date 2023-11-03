@@ -1,0 +1,6 @@
+framework module Pods_iOS_CameraParticlesTests {
+  umbrella header "Pods-iOS-CameraParticlesTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

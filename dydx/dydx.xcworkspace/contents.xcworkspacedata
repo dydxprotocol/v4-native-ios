@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../dydxV4/dydxV4.xcodeproj">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "V4 Frameworks">
+      <Group
+         location = "group:../podspecs"
+         name = "podspecs">
+         <FileRef
+            location = "group:Abacus.podspec">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:"
+         name = "abacus">
+         <FileRef
+            location = "group:../../v4-abacus/src/commonMain">
+         </FileRef>
+         <FileRef
+            location = "group:Pods/abacus/src/commonMain">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:dydxViews/dydxViews.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:dydxPresenters/dydxPresenters.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:dydxStateManager/dydxStateManager.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:dydxPresenters/../dydxCartera/dydxCartera.xcodeproj">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:dydxFormatter/dydxFormatter.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:dydxChart/dydxChart.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../AmplitudeInjections/AmplitudeInjections.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../AppsFlyerStaticInjections/AppsFlyerStaticInjections.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../CameraParticles/CameraParticles.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../FirebaseStaticInjections/FirebaseStaticInjections.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../FullStoryInjections/FullStoryInjections.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../JedioKit/JedioKit.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../WebParticles/WebParticles.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../PlatformParticles/PlatformParticles.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../ParticlesCommonModels/ParticlesCommonModels.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../PlatformRouting/PlatformRouting.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../PlatformUI/PlatformUI.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../PlatformUIJedio/PlatformUIJedio.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../ParticlesKit/ParticlesKit.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../RoutingKit/RoutingKit.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../UIToolkits/UIToolkits.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Utilities/Utilities.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <Group
+      location = "group:../scripts"
+      name = "scripts">
+      <FileRef
+         location = "group:install.command">
+      </FileRef>
+      <FileRef
+         location = "group:upload_dsym.sh">
+      </FileRef>
+      <Group
+         location = "group:secrets"
+         name = "secrets">
+         <FileRef
+            location = "group:GoogleService-Info.plist">
+         </FileRef>
+         <FileRef
+            location = "group:credentials.json">
+         </FileRef>
+         <FileRef
+            location = "group:GoogleService-Info-Staging.plist">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:symbol.command">
+      </FileRef>
+      <Group
+         location = "group:secrets_default"
+         name = "secrets_default">
+         <FileRef
+            location = "group:GoogleService-Info.plist">
+         </FileRef>
+         <FileRef
+            location = "group:credentials.json">
+         </FileRef>
+         <FileRef
+            location = "group:GoogleService-Info-Staging.plist">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:bootstrap.sh">
+      </FileRef>
+      <FileRef
+         location = "group:update_build_number.sh">
+      </FileRef>
+      <FileRef
+         location = "group:update_xcode.sh">
+      </FileRef>
+      <Group
+         location = "group:Templates"
+         name = "Templates">
+         <Group
+            location = "group:dYdX"
+            name = "dYdX">
+            <Group
+               location = "group:Hosted SwiftUI View-Model.xctemplate"
+               name = "Hosted SwiftUI View-Model.xctemplate">
+               <FileRef
+                  location = "group:___FILEBASENAME___.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:TemplateInfo.plist">
+               </FileRef>
+            </Group>
+            <Group
+               location = "group:Platform SwiftUI View-Model.xctemplate"
+               name = "Platform SwiftUI View-Model.xctemplate">
+               <FileRef
+                  location = "group:___FILEBASENAME___.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:TemplateInfo.plist">
+               </FileRef>
+            </Group>
+         </Group>
+      </Group>
+      <FileRef
+         location = "group:install_templates.sh">
+      </FileRef>
+      <FileRef
+         location = "group:bump_abacus.sh">
+      </FileRef>
+      <FileRef
+         location = "group:pod.command">
+      </FileRef>
+      <FileRef
+         location = "group:update_marketing_version.sh">
+      </FileRef>
+   </Group>
+</Workspace>

@@ -1,0 +1,6 @@
+framework module Pods_iOS_WebParticlesTests {
+  umbrella header "Pods-iOS-WebParticlesTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

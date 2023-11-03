@@ -1,0 +1,6 @@
+framework module Pods_iOS_FullStoryInjectionsTests {
+  umbrella header "Pods-iOS-FullStoryInjectionsTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

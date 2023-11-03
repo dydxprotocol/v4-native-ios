@@ -1,0 +1,276 @@
+//
+//  HostingViewController.swift
+//  PlatformUI
+//
+//  Created by Rui Huang on 8/15/22.
+//
+
+import Foundation
+import UIKit
+import SwiftUI
+import ParticlesKit
+import SnapKit
+import PlatformParticles
+import PlatformUI
+import UIToolkits
+import PlatformRouting
+import FloatingPanel
+
+public struct HostingViewControllerConfiguration {
+    public init(ignoreSafeArea: Bool = true, fixedHeight: CGFloat? = nil, gradientTabbar: Bool = false, disableNavigationController: Bool = false) {
+        self.ignoreSafeArea = ignoreSafeArea
+        self.fixedHeight = fixedHeight
+        self.gradientTabbar = gradientTabbar
+        self.disableNavigationController = disableNavigationController
+    }
+
+    let ignoreSafeArea: Bool
+    let fixedHeight: CGFloat?
+    let gradientTabbar: Bool
+    let disableNavigationController: Bool
+
+    public static let `default` = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: false)
+    public static let `tabbarItemView` = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: true)
+    public static let `nav` = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: false, disableNavigationController: false)
+}
+
+open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol {
+
+    private var hostingController: UIHostingController<AnyView>?
+    private let presenterView = ObjectPresenterView()
+    private var configuration: HostingViewControllerConfiguration = .default
+
+    private let gradientView = UIImageView()
+
+    public private(set) var presenter: HostedViewPresenter<VM>?
+
+    public convenience init(presenter: HostedViewPresenter<VM> = SimpleHostedViewPresenter(), view: V, configuration: HostingViewControllerConfiguration = .default) {
+        self.init(nibName: nil, bundle: nil)
+        self.configuration = configuration
+        self.presenter = presenter
+        let view = AnyView(view.navigationBarHidden(true))
+        hostingController = UIHostingController<AnyView>(rootView: view, ignoreSafeArea: configuration.ignoreSafeArea)
+        presenterView.presenter = presenter
+
+        floatingManager = HostingViewEmbeddingFloatingManager(parent: self)
+    }
+
+    open override func loadView() {
+        // Do not call super!
+        view = presenterView
+    }
+
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if let hostingController = hostingController {
+            addChild(hostingController)
+            view.addSubview(hostingController.view)
+            hostingController.navigationController?.navigationBar.isHidden = true
+            hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+            hostingController.view.snp.updateConstraints {  make in
+                make.edges.equalToSuperview()
+                if let fixedHeight = configuration.fixedHeight {
+                    make.height.equalTo(fixedHeight)
+                }
+            }
+            hostingController.didMove(toParent: self)
+
+            hostingController.view.backgroundColor = .clear
+        }
+
+        if configuration.gradientTabbar {
+            tabBarController?.tabBar.backgroundColor = .clear
+            tabBarController?.tabBar.isTranslucent = true
+            tabBarController?.tabBar.shadowImage = UIImage()
+            tabBarController?.tabBar.backgroundImage = UIImage()
+
+            gradientView.backgroundColor = .clear
+            gradientView.contentMode = .scaleToFill
+            view.addSubview(gradientView)
+            gradientView.snp.updateConstraints { make in
+                make.leading.trailing.bottom.equalToSuperview()
+                make.height.equalTo(83)
+            }
+        }
+    }
+
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        updateTabItemGradient()
+
+        if presenter?.isStarted ?? false == false {
+            presenter?.start()
+        }
+    }
+
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        presenter?.stop()
+    }
+
+    /// The hosting controller may in some cases want to make the navigation bar be not hidden.
+    /// Restrict the access to the outside world, by setting the navigation controller to nil when internally accessed.
+    open override var navigationController: UINavigationController? {
+        super.navigationController?.navigationBar.isHidden = true
+        if configuration.disableNavigationController {
+            return nil
+        } else {
+            return super.navigationController
+        }
+    }
+
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
+        switch currentThemeType {
+        case .dark, .system, .classicDark:
+            return .lightContent
+        case .light:
+            return .darkContent
+        }
+    }
+
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if ThemeSettings.respondsToSystemTheme {
+            if UITraitCollection.current.userInterfaceStyle == .dark, currentThemeType != .dark {
+                ThemeSettings.applyDarkTheme()
+            } else if UITraitCollection.current.userInterfaceStyle == .light, currentThemeType != .light {
+                ThemeSettings.applyLightTheme()
+            }
+            updateTabItemGradient()
+        }
+    }
+
+    // MARK: UIViewControllerEmbeddingProtocol
+
+    public var floated: UIViewController? {
+        get {
+            return embeddingFloatingManager?.floated
+        }
+        set {
+            embeddingFloatingManager?.float(newValue, animated: true)
+        }
+    }
+
+    public var embedded: UIViewController? {
+        get {
+            return embeddingFloatingManager?.embedded
+        }
+        set {
+            embeddingFloatingManager?.embed(newValue, animated: true)
+        }
+    }
+
+    public func embed(_ viewController: UIViewController?, animated: Bool) -> Bool {
+        if let embeddingFloatingManager = embeddingFloatingManager {
+            embeddingFloatingManager.embed(viewController, animated: animated)
+            return true
+        }
+        return false
+    }
+
+    public func float(_ viewController: UIViewController?, animated: Bool) -> Bool {
+        if let embeddingFloatingManager = embeddingFloatingManager {
+            embeddingFloatingManager.float(viewController, animated: animated)
+            return true
+        }
+        return false
+    }
+
+    public var embeddingFloatingManager: EmbeddingProtocol? {
+        return floatingManager as? EmbeddingProtocol
+    }
+
+    private func updateTabItemGradient() {
+        let gradientImage = UIImage.named("gradient_tabbar", bundles: Bundle.particles)
+        gradientView.image = gradientImage?.withTintColor(ThemeColor.SemanticColor.layer2.uiColor)
+    }
+}
+
+private class HostingViewEmbeddingFloatingManager: EmbeddingFloatingManager {
+    override var floating: FloatingPanelController? {
+        didSet {
+            floating?.surfaceView.layer.cornerRadius = 36
+            floating?.surfaceView.layer.masksToBounds = true
+
+            let color: UIColor?
+            color = .clear
+
+            //            floating?.view.backgroundColor = color
+            floating?.backdropView.backgroundColor = color
+            floating?.surfaceView.backgroundColor = color
+            floating?.surfaceView.grabberHandle.isHidden = true
+        }
+    }
+
+    override func float(_ viewController: UIViewController?) {
+        let color = ThemeColor.SemanticColor.layer6.uiColor
+
+        floating?.view.backgroundColor = color
+
+        let height = viewController?.intrinsicHeight?.doubleValue
+        if let height = height {
+            HostingViewDefaultLayout.tipHeight = CGFloat(height)
+        } else {
+            HostingViewDefaultLayout.tipHeight = nil
+        }
+        super.float(viewController)
+    }
+
+    override func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
+        if vc == half {
+            return super.floatingPanel(vc, layoutFor: newCollection)
+        } else {
+            return (floated as? FloatingLayoutProviderProtocol)?.floatingLayout(traitCollection: newCollection) ?? HostingViewDefaultLayout(viewController: vc.contentViewController)
+        }
+    }
+}
+
+private class HostingViewDefaultLayout: FloatingPanelLayout {
+    let position: FloatingPanel.FloatingPanelPosition = .bottom
+
+    var anchors: [FloatingPanel.FloatingPanelState: FloatingPanel.FloatingPanelLayoutAnchoring] {
+        if let provider = viewController as? FloatingInsetProvider {
+            return provider.anchors
+        } else {
+            return [
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 60, edge: .bottom, referenceGuide: .safeArea),
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 72, edge: .top, referenceGuide: .safeArea)
+            ]
+        }
+    }
+
+    var initialState: FloatingPanelState {
+        if let provider = viewController as? FloatingInsetProvider {
+            return provider.initialPosition
+        } else {
+            return .tip
+        }
+    }
+
+    weak var viewController: UIViewController?
+
+    static var tipHeight: CGFloat?
+
+    init(viewController: UIViewController?) {
+        self.viewController = viewController
+    }
+
+    func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
+        surfaceView.backgroundColor =  ThemeColor.SemanticColor.layer6.uiColor
+        if ViewControllerStack.shared?.root()?.traitCollection.horizontalSizeClass == .compact {
+            return [
+                surfaceView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0.0),
+                surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0.0)
+            ]
+        } else {
+            return [
+                surfaceView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8.0),
+                surfaceView.widthAnchor.constraint(equalToConstant: 320.0)
+            ]
+        }
+    }
+}
