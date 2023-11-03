@@ -1,0 +1,280 @@
+[
+    {
+        "title":"Under Construction",
+        "input":"1",
+        "fields":[
+            {
+                "title":{
+                    "text":"Deposit"
+                },
+                "field":{
+                    "field":"deposit_feature",
+                    "type":"bool",
+                    "optional":true,
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "0"
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Withdrawal"
+                },
+                "field":{
+                    "field":"withdrawal_feature",
+                    "type":"bool",
+                    "optional":true,
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "0"
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"TransferOut"
+                },
+                "field":{
+                    "field":"transfer_out_feature",
+                    "type":"bool",
+                    "optional":true,
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "0"
+                        }
+                    ]
+                }
+            },
+        ]
+    },
+    {
+        "title":"Restrictions and Compliances",
+        "input":"1",
+        "fields":[
+            {
+                "title":{
+                    "text":"Compliance Enabled"
+                },
+                "field":{
+                    "field":"compliance_enabled",
+                    "type":"bool",
+                    "optional":true,
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "0"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "title":"AB Testing",
+        "input":"1",
+        "fields":[
+            {
+                "title":{
+                    "text":"Skip onboarding check"
+                },
+                "field":{
+                    "field":"skip_onboarding_check",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "0"
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Fixed Gas Estimate"
+                },
+                "field":{
+                    "field":"fixed_gas_estimate",
+                    "type":"bool",
+                    "optional":true,
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "0"
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Requires Username"
+                },
+                "field":{
+                    "field":"username_required",
+                    "type":"bool",
+                    "optional":true,
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "0"
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Enable Leagues"
+                },
+                "field":{
+                    "field":"leagues_enabled",
+                    "type":"bool",
+                    "optional":true,
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "<null>"
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Enable Combined Markets Graph"
+                },
+                "field":{
+                    "field":"combined_markets_graph_enabled",
+                    "type":"bool",
+                    "optional":true,
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "<null>"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "title":"Dev Testing",
+        "input":"1",
+        "fields":[
+            {
+                "title":{
+                    "text":"Wallet Connect Bridge Server"
+                },
+                "field":{
+                    "field":"walletconnect_bridge_url",
+                    "optional":true,
+                    "type" : "text"
+                }
+            },
+            {
+                "title":{
+                    "text":"Push Notification"
+                },
+                "field":{
+                    "field":"push_notification",
+                    "optional":true,
+                    "type" : "text",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "0"
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"FullStory Integration"
+                },
+                "field":{
+                    "field":"full_story",
+                    "optional":true,
+                    "type" : "text",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "0"
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"V4 Theme"
+                },
+                "field":{
+                    "field":"v4_theme",
+                    "optional":true,
+                    "type" : "text",
+                    "options" : [
+                        {
+                            "text": "Dark",
+                            "value" : "dark"
+                        },
+                        {
+                            "text": "Light",
+                            "value" : "light"
+                        },
+                        {
+                            "text": "System",
+                            "value" : "system"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+]

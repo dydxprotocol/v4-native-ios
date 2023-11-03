@@ -1,0 +1,6 @@
+framework module Pods_iOS_PlatformUIJedioTests {
+  umbrella header "Pods-iOS-PlatformUIJedioTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

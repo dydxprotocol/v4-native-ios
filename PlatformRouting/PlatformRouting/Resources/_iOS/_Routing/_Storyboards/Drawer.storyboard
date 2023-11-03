@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="F0I-LP-ec1">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        
+    </dependencies>
+    <scenes>
+        <!--Routing Drawer Controller-->
+        <scene sceneID="kaC-kU-kRM">
+            <objects>
+                <viewController id="F0I-LP-ec1" customClass="RoutingDrawerController" customModule="PlatformRouting" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="klp-0d-PTV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="bus-2a-8ry"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="routingMap" value="drawer.json"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="path" value="/"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Cr-r3-g58" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="26" y="106"/>
+        </scene>
+    </scenes>
+</document>

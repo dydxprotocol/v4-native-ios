@@ -1,0 +1,45 @@
+//
+//  DebugTracking.swift
+//  ParticlesKit
+//
+//  Created by John Huang on 12/20/18.
+//  Copyright © 2019 dYdX. All rights reserved.
+//
+
+import Foundation
+
+public class DebugTracking: NSObject & TrackingProtocol {
+    public var userInfo: [String: String?]?
+
+    public var excluded: Bool = false
+
+    public func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?) {
+        if let path = path {
+            let action = action ?? ""
+            let from = from ?? ""
+            if excluded {
+                Console.shared.log("Debug Tracking: View Excluded Path:\(path) Action:\(action) From:\(from)", data ?? "")
+            } else {
+                Console.shared.log("Debug Tracking: View Path:\(path) Action:\(action) From:\(from)", data ?? "")
+            }
+        }
+    }
+    
+    public func leave(_ path: String?) {
+        if let path = path {
+            if excluded {
+                Console.shared.log("Debug Tracking: Leave Excluded Path:\(path)")
+            } else {
+                Console.shared.log("Debug Tracking: Leave Path:\(path)")
+            }
+        }
+    }
+
+    open func log(event: String, data: [String: Any]?, revenue: NSNumber?) {
+        if let revenue = revenue {
+            Console.shared.log("Debug Tracking: event:\(event), revenue:\(revenue), ", data ?? "")
+        } else {
+            Console.shared.log("Debug Tracking: event:\(event), ", data ?? "")
+        }
+    }
+}

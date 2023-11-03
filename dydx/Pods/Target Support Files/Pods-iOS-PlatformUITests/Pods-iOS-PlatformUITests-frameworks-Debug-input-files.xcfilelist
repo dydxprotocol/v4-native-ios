@@ -1,0 +1,15 @@
+${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUITests/Pods-iOS-PlatformUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework
+${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework
+${BUILT_PRODUCTS_DIR}/CombineExt/CombineExt.framework
+${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework
+${BUILT_PRODUCTS_DIR}/KVOController/KVOController.framework
+${BUILT_PRODUCTS_DIR}/Popovers/Popovers.framework
+${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/SDWebImageSVGKitPlugin/SDWebImageSVGKitPlugin.framework
+${BUILT_PRODUCTS_DIR}/SDWebImageSwiftUI/SDWebImageSwiftUI.framework
+${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework
+${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework
+${BUILT_PRODUCTS_DIR}/Validator/Validator.framework
+${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework

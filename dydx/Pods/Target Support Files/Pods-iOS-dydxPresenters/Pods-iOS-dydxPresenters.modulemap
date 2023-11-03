@@ -1,0 +1,6 @@
+framework module Pods_iOS_dydxPresenters {
+  umbrella header "Pods-iOS-dydxPresenters-umbrella.h"
+
+  export *
+  module * { export * }
+}
