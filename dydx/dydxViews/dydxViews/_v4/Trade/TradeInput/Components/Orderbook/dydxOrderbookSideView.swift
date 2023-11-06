@@ -96,34 +96,19 @@ public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
                 let additionalLineHeight: CGFloat = intendedLineHeight * (numLinesToDisplayExact.truncatingRemainder(dividingBy: 1)) / numLinesToDisplayFloored
                 let actualLineHeight: CGFloat = intendedLineHeight + additionalLineHeight
 
-                switch self.displayStyle {
-                case .sideBySide:
+                LazyVStack(spacing: spacing) {
 
-                    LazyVStack(spacing: spacing) {
-
-                        ForEach(lines.prefix(numLinesToDisplayInt), id: \.self.id) { line in
-                            AnyView(
-                                self.cell(line: line, maxDepth: maxDepth, fixedHeight: actualLineHeight)
-                            )
-                            .id(line.id)
-                        }
-
-                        Spacer()
+                    ForEach(lines.prefix(numLinesToDisplayInt), id: \.self.id) { line in
+                        AnyView(
+                            self.cell(line: line, maxDepth: maxDepth, fixedHeight: actualLineHeight)
+                        )
+                        .id(line.id)
                     }
-                    .topAligned()
 
-                case .topDown:
-                    LazyVStack(spacing: spacing) {
-                        ForEach(lines.prefix(numLinesToDisplayInt), id: \.self.id) { line in
-                            AnyView(
-                                self.cell(line: line, maxDepth: maxDepth, fixedHeight: actualLineHeight)
-                            )
-                            .id(line.id)
-                        }
-                        Spacer()
-                    }
-                    .topAligned()
+                    Spacer()
                 }
+                .animation(.default, value: lines) // Here the animation is applied to the LazyVStack
+                .topAligned()
             }
         }
     }
