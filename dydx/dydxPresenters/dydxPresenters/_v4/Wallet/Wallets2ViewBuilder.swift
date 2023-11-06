@@ -30,7 +30,7 @@ public class Wallets2ViewBuilder: NSObject, ObjectBuilderProtocol {
     public func buildAsync<T>(completion: @escaping ((T?) -> Void)) {
         let presenter = Wallets2ViewPresenter()
         let view = presenter.viewModel?.createView() ?? Wallets2ViewModel().createView()
-        let viewController = WalletV2ViewController(presenter: presenter, view: view, configuration: .init(ignoreSafeArea: true))
+        let viewController = WalletV2ViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea)
 
         // Wait for the wallet list before completion, so that the list is ready before the view is presentered.
         // This is because the PanModal presenter needs intrinsicContentSize of the view to determine

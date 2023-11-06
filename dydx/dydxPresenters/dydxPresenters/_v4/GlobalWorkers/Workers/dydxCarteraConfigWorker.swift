@@ -62,7 +62,9 @@ extension WalletConnectV2Config {
                   clientName: clientName,
                   clientDescription: clientDescription,
                   clientUrl: AbacusStateManager.shared.deploymentUri,
-                  iconUrls: iconUrls)
+                  iconUrls: iconUrls,
+                  redirectNative: "dydxV4",
+                  redirectUniversal: AbacusStateManager.shared.deploymentUri)
     }
 }
 

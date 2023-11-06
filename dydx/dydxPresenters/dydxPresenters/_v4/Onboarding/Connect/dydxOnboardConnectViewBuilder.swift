@@ -18,7 +18,7 @@ public class dydxOnboardConnectViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxOnboardConnectViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxOnboardConnectViewController(presenter: presenter, view: view, configuration: .init(ignoreSafeArea: true)) as? T
+        return dydxOnboardConnectViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
 }
 

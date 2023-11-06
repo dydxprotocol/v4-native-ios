@@ -116,7 +116,14 @@ class dydxPortfolioOrdersViewPresenter: HostedViewPresenter<dydxPortfolioOrdersV
             Router.shared?.navigate(to: RoutingRequest(path: "/order", params: ["id": order.id]), animated: true, completion: nil)
         }
         item.handler?.onCloseAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/action/order/cancel", params: ["orderId": order.id]), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/order/cancel",
+                                                       params: [
+                                                        "orderId": order.id,
+                                                        "orderSide": item.sideText.side.text,
+                                                        "orderSize": item.size ?? "",
+                                                        "orderMarket": item.token?.symbol ?? ""
+                                                       ]),
+                                    animated: true, completion: nil)
         }
 
         return item

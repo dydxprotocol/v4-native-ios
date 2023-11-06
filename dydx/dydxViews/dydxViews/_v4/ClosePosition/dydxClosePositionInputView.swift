@@ -12,16 +12,12 @@ import Utilities
 import Introspect
 
 public class dydxClosePositionInputViewModel: PlatformViewModel {
-    public enum DisplayState {
-        case half, full
-    }
 
     @Published public var headerViewModel: dydxClosePositionHeaderViewModel? = dydxClosePositionHeaderViewModel()
     @Published public var editViewModel: dydxClosePositionInputEditViewModel? = dydxClosePositionInputEditViewModel()
     @Published public var orderbookViewModel: dydxOrderbookViewModel? = dydxOrderbookViewModel()
     @Published public var ctaButtonViewModel: dydxTradeInputCtaButtonViewModel? = dydxTradeInputCtaButtonViewModel()
     @Published public var validationViewModel: dydxValidationViewModel? = dydxValidationViewModel()
-    @Published public var onScrollViewCreated: ((UIScrollView) -> Void)?
     @Published public var group: dydxOrderbookGroupViewModel? = dydxOrderbookGroupViewModel()
 
     public init() {}
@@ -41,8 +37,7 @@ public class dydxClosePositionInputViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view =  ScrollView(showsIndicators: false) {
-                VStack {
+            let view = VStack {
                     VStack(spacing: 0) {
                         self.headerViewModel?.createView(parentStyle: style)
                             .padding(.top, 40)
@@ -78,13 +73,8 @@ public class dydxClosePositionInputViewModel: PlatformViewModel {
                         self.ctaButtonViewModel?.createView(parentStyle: style)
                     }
                 }
-                .frame(height: 580)
-                .introspectScrollView { [weak self] scrollView in
-                    self?.onScrollViewCreated?(scrollView)
-                }
-            }
                 .padding([.leading, .trailing])
-                .padding(.bottom, self.safeAreaInsets?.bottom)
+                .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)
                 .makeSheet(sheetStyle: .fitSize)
 

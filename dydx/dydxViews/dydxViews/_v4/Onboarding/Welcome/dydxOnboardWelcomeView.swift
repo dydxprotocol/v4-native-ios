@@ -22,92 +22,62 @@ public class dydxOnboardWelcomeViewModel: PlatformViewModel {
         return vm
     }
 
+    private func createHeader() -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(DataLocalizer.localize(path: "APP.ONBOARDING.WELCOME"))
+                .themeFont(fontType: .text, fontSize: .largest)
+                .themeColor(foreground: .textPrimary)
+            Text(DataLocalizer.localize(path: "APP.ONBOARDING.WELCOME_TEXT"))
+                .themeFont(fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+        }
+    }
+
+    private func createHighlightView(assetName: String, titlePath: String, subtitlePath: String, style: ThemeStyle) -> some View {
+        HStack {
+            PlatformIconViewModel(type: .asset(name: assetName, bundle: Bundle.dydxView),
+                                  clip: .circle(background: .layer5, spacing: 30),
+                                  size: CGSize(width: 60, height: 60))
+            .createView(parentStyle: style)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(DataLocalizer.localize(path: titlePath))
+                    .themeFont(fontSize: .medium)
+                    .themeColor(foreground: .textPrimary)
+                Text(DataLocalizer.localize(path: subtitlePath))
+                    .themeFont(fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
+
+            }
+
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func createCta(style: ThemeStyle) -> some View {
+        let ctaContent = Text(DataLocalizer.localize(path: "APP.ONBOARDING.GET_STARTED"))
+        return PlatformButtonViewModel(content: ctaContent.wrappedViewModel,
+                                state: .primary) { [weak self] in
+            self?.ctaAction?()
+        }
+                                .createView(parentStyle: style)
+    }
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack {
-
-                VStack(alignment: .leading, spacing: 24) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(DataLocalizer.localize(path: "APP.ONBOARDING.WELCOME"))
-                            .themeFont(fontType: .text, fontSize: .largest)
-                            .themeColor(foreground: .textPrimary)
-
-                        Text(DataLocalizer.localize(path: "APP.ONBOARDING.WELCOME_TEXT"))
-                            .themeFont(fontSize: .small)
-                            .themeColor(foreground: .textTertiary)
-                    }
-
-                    HStack {
-                        PlatformIconViewModel(type: .asset(name: "onboard_powerful", bundle: Bundle.dydxView),
-                                              clip: .circle(background: .layer5, spacing: 30),
-                                              size: CGSize(width: 60, height: 60))
-                        .createView(parentStyle: style)
-
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text(DataLocalizer.localize(path: "APP.ONBOARDING.VALUE_PROP_ADVANCED"))
-                                .themeFont(fontSize: .medium)
-                                .themeColor(foreground: .textPrimary)
-                            Text(DataLocalizer.localize(path: "APP.ONBOARDING.VALUE_PROP_ADVANCED_DESC"))
-                                .themeFont(fontSize: .small)
-                                .themeColor(foreground: .textTertiary)
-
-                        }
-
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity)
-
-                    HStack {
-                        PlatformIconViewModel(type: .asset(name: "onboard_advanced", bundle: Bundle.dydxView),
-                                              clip: .circle(background: .layer5, spacing: 30),
-                                              size: CGSize(width: 60, height: 60))
-                        .createView(parentStyle: style)
-
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text(DataLocalizer.localize(path: "APP.ONBOARDING.VALUE_PROP_LIQUID"))
-                                .themeFont(fontSize: .medium)
-                                .themeColor(foreground: .textPrimary)
-                            Text(DataLocalizer.localize(path: "APP.ONBOARDING.VALUE_PROP_LIQUID_DESC"))
-                                .themeFont(fontSize: .small)
-                                .themeColor(foreground: .textTertiary)
-                        }
-
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity)
-
-                    HStack {
-                        PlatformIconViewModel(type: .asset(name: "onboard_trustless", bundle: Bundle.dydxView),
-                                              clip: .circle(background: .layer5, spacing: 30),
-                                              size: CGSize(width: 60, height: 60))
-                        .createView(parentStyle: style)
-
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text(DataLocalizer.localize(path: "APP.ONBOARDING.VALUE_PROP_TRUSTLESS"))
-                                .themeFont(fontSize: .medium)
-                                .themeColor(foreground: .textPrimary)
-                            Text(DataLocalizer.localize(path: "APP.ONBOARDING.VALUE_PROP_TRUSTLESS_DESC"))
-                                .themeFont(fontSize: .small)
-                                .themeColor(foreground: .textTertiary)
-                        }
-
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity)
-
+            let view = VStack(alignment: .leading, spacing: 0) {
+                VStack(spacing: 24) {
+                    self.createHeader()
+                        .padding(.top, 16)
+                    self.createHighlightView(assetName: "onboard_advanced", titlePath: "APP.ONBOARDING.VALUE_PROP_LIQUID", subtitlePath: "APP.ONBOARDING.VALUE_PROP_LIQUID_DESC", style: style)
+                    self.createHighlightView(assetName: "onboard_powerful", titlePath: "APP.ONBOARDING.VALUE_PROP_ADVANCED", subtitlePath: "APP.ONBOARDING.VALUE_PROP_ADVANCED_DESC", style: style)
+                    self.createHighlightView(assetName: "onboard_trustless", titlePath: "APP.ONBOARDING.VALUE_PROP_TRUSTLESS", subtitlePath: "APP.ONBOARDING.VALUE_PROP_TRUSTLESS_DESC", style: style)
                     self.createTOS(parentStyle: style)
+                    self.createCta(style: style)
                 }
-                .padding()
-
-                let ctaContent = Text(DataLocalizer.localize(path: "APP.ONBOARDING.GET_STARTED"))
-                PlatformButtonViewModel(content: ctaContent.wrappedViewModel,
-                                        state: .primary) { [weak self] in
-                    self?.ctaAction?()
-                }
-                                        .createView(parentStyle: style)
-
                 Spacer()
             }
                 .padding()
@@ -118,13 +88,12 @@ public class dydxOnboardWelcomeViewModel: PlatformViewModel {
         }
     }
 
-    private func createTOS(parentStyle: ThemeStyle) -> AnyView {
-        return AnyView(
-            Text(agreementAttributedString)
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-                .leftAligned()
-        )
+    private func createTOS(parentStyle: ThemeStyle) -> some View {
+        Text(agreementAttributedString)
+            .themeFont(fontSize: .small)
+            .themeColor(foreground: .textTertiary)
+            .leftAligned()
+            .fixedSize(horizontal: false, vertical: true)
     }
 
     private var agreementAttributedString: AttributedString {

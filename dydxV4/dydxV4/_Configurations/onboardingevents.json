@@ -2,7 +2,7 @@
    "/onboard":{
       "event":"OnboardingStepChanged",
       "info":{
-         "step":"VALUE_PROPS",
+         "step":"VALUE_PROPS"
       }
    },
    "/onboard/wallets":{

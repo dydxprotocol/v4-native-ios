@@ -32,19 +32,6 @@ extension UIViewController {
             viewController.removeFromParent()
         }
     }
-
-    @objc open func dragToDismiss() -> Bool {
-        return true
-    }
-
-    @objc open func supportsLongForm() -> Bool {
-        return UIResponder.current is UITextField
-    }
-}
-
-@objc public protocol LayoutUpdateProtocol: NSObjectProtocol {
-    func layoutChanged()
-    func expand(fullScreen: Bool)
 }
 
 extension UIViewController: PanModalPresentable {
@@ -53,10 +40,6 @@ extension UIViewController: PanModalPresentable {
     }
 
     public var longFormHeight: PanModalHeight {
-        return .maxHeightWithTopInset(20)
-    }
-
-    public var shortFormHeight: PanModalHeight {
         return panScrollable == nil ? .intrinsicHeight : .maxHeightWithTopInset(20)
     }
 
@@ -70,45 +53,5 @@ extension UIViewController: PanModalPresentable {
 
     @objc open var showDragIndicator: Bool {
         return false
-    }
-
-    @objc open var allowsDragToDismiss: Bool {
-        return dragToDismiss()
-    }
-
-    public func shouldTransition(to state: PanModalPresentationController.PresentationState) -> Bool {
-        switch state {
-        case .shortForm:
-            return true
-
-        case .longForm:
-            return supportsLongForm()
-        }
-    }
-
-    public func panLayout(to state: PanModalPresentationController.PresentationState?) {
-        panModalSetNeedsLayoutUpdate()
-        if let state = state {
-            panModalTransition(to: state)
-        }
-    }
-    
-    @objc open func panModalWillDismiss() {
-    }
-
-    @objc open func panModalDidDismiss() {
-    }
-}
-
-extension UIViewController: LayoutUpdateProtocol {
-    open func layoutChanged() {
-        if UIResponder.current is UITextField {
-        } else {
-            panLayout(to: .shortForm)
-        }
-    }
-
-    open func expand(fullScreen: Bool) {
-        panLayout(to: fullScreen ? .longForm : .shortForm)
     }
 }

@@ -101,14 +101,14 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
     func updateBuyingPowerChange(buyingPower: TradeStatesWithDoubleValues) {
         let before: AmountTextModel?
         if let beforeAmount = buyingPower.current {
-            before = AmountTextModel(amount: beforeAmount, tickSize: NSNumber(value: 0))
+            before = AmountTextModel(amount: beforeAmount, tickSize: NSNumber(value: 0), requiresPositive: true)
         } else {
             before = nil
         }
 
         let after: AmountTextModel?
         if let afterAmount = buyingPower.postOrder, afterAmount != buyingPower.current {
-            after = AmountTextModel(amount: afterAmount, tickSize: NSNumber(value: 0))
+            after = AmountTextModel(amount: afterAmount, tickSize: NSNumber(value: 0), requiresPositive: true)
         } else {
             after = nil
         }

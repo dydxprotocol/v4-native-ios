@@ -67,6 +67,6 @@
     },
     "pill_tab_group_selected_item": {
         "_textColor": "text_primary",
-        "_layerColor": "layer_2",
+        "_layerColor": "layer_2"
     }
 }

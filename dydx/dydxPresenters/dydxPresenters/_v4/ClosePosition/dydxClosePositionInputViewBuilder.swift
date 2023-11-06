@@ -20,31 +20,20 @@ public class dydxClosePositionInputViewBuilder: NSObject, ObjectBuilderProtocol 
     public func build<T>() -> T? {
         let presenter = dydxClosePositionInputViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
+        // note this fixed height is to combat issues with the hide/show details button which changes the content height.
         let configuration = HostingViewControllerConfiguration(fixedHeight: 600)
         return dydxClosePositionInputViewController(presenter: presenter, view: view, configuration: configuration) as? T
     }
 }
 
 private class dydxClosePositionInputViewController: HostingViewController<PlatformView, dydxClosePositionInputViewModel> {
-    private var scrollView: UIScrollView?
-
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade/close", let marketId = parser.asString(request?.params?["marketId"]) {
             AbacusStateManager.shared.setMarket(market: marketId)
             AbacusStateManager.shared.startClosePosition(marketId: marketId)
-
-            presenter?.viewModel?.onScrollViewCreated = { [weak self] scrollView in
-                self?.scrollView = scrollView
-            }
             return true
         }
         return false
-    }
-
-    // MARK: "half" presentation
-
-    override open var scrollable: UIScrollView? {
-        return scrollView
     }
 }
 
