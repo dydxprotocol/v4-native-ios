@@ -173,13 +173,13 @@ public enum MakeSheetStyle {
 }
 
 public extension View {
-    func makeSheet(topPadding: CGFloat = 18, sheetStyle: MakeSheetStyle = .fullScreen) -> some View {
-        modifier(SheetViewModifier(topPadding: topPadding, sheetStyle: sheetStyle))
+    func makeSheet(sheetStyle: MakeSheetStyle = .fullScreen) -> some View {
+        modifier(SheetViewModifier(sheetStyle: sheetStyle))
     }
 }
 
 private struct SheetViewModifier: ViewModifier {
-    let topPadding: CGFloat
+    let topPadding: CGFloat = 18
     let sheetStyle: MakeSheetStyle
     
     @EnvironmentObject var themeSettings: ThemeSettings
@@ -202,7 +202,7 @@ private struct SheetViewModifier: ViewModifier {
             )
         } else {
             return AnyView(
-                VStack {
+                VStack(spacing: 0) {
                     Spacer()
                     ZStack(alignment: .top) {
                         content

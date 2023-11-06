@@ -18,7 +18,7 @@ public class dydxTosViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxTosViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxTosViewController(presenter: presenter, view: view, configuration: .init(ignoreSafeArea: true)) as? T
+        return dydxTosViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
 }
 

@@ -24,10 +24,13 @@ private class dydxCancelOrderAction: NSObject, NavigableProtocol {
     func navigate(to request: RoutingRequest?, animated: Bool, completion: RoutingCompletionBlock?) {
         switch request?.path {
         case "/action/order/cancel":
-            if let orderId = request?.params?["orderId"] as? String {
-                cancelOrder(orderId: orderId, completion: completion)
+            if let orderId = request?.params?["orderId"] as? String,
+               let side = request?.params?["orderSide"] as? String,
+               let size = request?.params?["orderSize"] as? String,
+               let market = request?.params?["orderMarket"] as? String {
+                cancelOrder(orderId: orderId, side: side, size: size, market: market, completion: completion)
             } else {
-                assertionFailure("orderId not found at dydxCancelOrderAction")
+                assertionFailure("one of orderId, orderSide, orderSize, orderMarket, not found in params dydxCancelOrderAction")
                 completion?(nil, false)
             }
         default:
@@ -35,11 +38,18 @@ private class dydxCancelOrderAction: NSObject, NavigableProtocol {
         }
     }
 
-    private func cancelOrder(orderId: String, completion: RoutingCompletionBlock?) {
+    private func cancelOrder(orderId: String, side: String, size: String, market: String, completion: RoutingCompletionBlock?) {
         AbacusStateManager.shared.cancelOrder(orderId: orderId) { status in
             switch status {
             case .success:
-                ErrorInfo.shared?.info(title: nil, message: DataLocalizer.localize(path: "APP.GENERAL.CANCELED"), type: .success, error: nil)
+                ErrorInfo.shared?.info(
+                    title: DataLocalizer.localize(path: "APP.TRADE.CANCELING_ORDER"),
+                    message: DataLocalizer.localize(path: "APP.TRADE.CANCELING_ORDER_DESC", params: [
+                        "SIDE": side,
+                        "SIZE": size,
+                        "MARKET": market
+                    ]),
+                    type: .success, error: nil)
                 completion?(nil, true)
             case .failed(let error):
                 ErrorInfo.shared?.info(title: nil, message: nil, type: .error, error: error)

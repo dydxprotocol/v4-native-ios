@@ -42,10 +42,6 @@
 		314C368524C7CC7600695F7E /* ui.json in Resources */ = {isa = PBXBuildFile; fileRef = 314C368424C7CC7600695F7E /* ui.json */; };
 		3162B58226E181BB000209E1 /* WebCrypto.js in Resources */ = {isa = PBXBuildFile; fileRef = 3162B55226E181BB000209E1 /* WebCrypto.js */; };
 		31659016227D55CD00BAF133 /* Design.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31659015227D55CD00BAF133 /* Design.txt */; };
-		31A9FB6A264C8360006D7AE6 /* starkware-perpetual-abi.json in Resources */ = {isa = PBXBuildFile; fileRef = 31A9FB66264C8360006D7AE6 /* starkware-perpetual-abi.json */; };
-		31A9FB6B264C8360006D7AE6 /* usdc-abi.json in Resources */ = {isa = PBXBuildFile; fileRef = 31A9FB67264C8360006D7AE6 /* usdc-abi.json */; };
-		31A9FB6C264C8360006D7AE6 /* fact-registry-abi.json in Resources */ = {isa = PBXBuildFile; fileRef = 31A9FB68264C8360006D7AE6 /* fact-registry-abi.json */; };
-		31A9FB6D264C8360006D7AE6 /* mintable-token-abi.json in Resources */ = {isa = PBXBuildFile; fileRef = 31A9FB69264C8360006D7AE6 /* mintable-token-abi.json */; };
 		31AB94D326DEE83700DB42B9 /* CameraParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31AB94CE26DEE81000DB42B9 /* CameraParticles.framework */; platformFilter = ios; };
 		31AB94D426DEE83700DB42B9 /* CameraParticles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31AB94CE26DEE81000DB42B9 /* CameraParticles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31B77C2522DAD0B3004F9B21 /* libFirebaseStaticInjections.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B779FE22DAD020004F9B21 /* libFirebaseStaticInjections.a */; };
@@ -71,8 +67,6 @@
 		31F761CA24BA3E98001EA293 /* WebParticles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31F761B924BA3E7A001EA293 /* WebParticles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6466E116280F664900B8791B /* AmplitudeInjections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6466E0E2280F662600B8791B /* AmplitudeInjections.framework */; };
 		6466E117280F664900B8791B /* AmplitudeInjections.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6466E0E2280F662600B8791B /* AmplitudeInjections.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6468355F2788B53C00A278FA /* ierc20-abi.json in Resources */ = {isa = PBXBuildFile; fileRef = 6468355E2788B53800A278FA /* ierc20-abi.json */; };
-		646835602788B53F00A278FA /* proxy-deposit-abi.json in Resources */ = {isa = PBXBuildFile; fileRef = 6468352E2788B53800A278FA /* proxy-deposit-abi.json */; };
 		64AEE63E27B2F74C0038C791 /* config in Resources */ = {isa = PBXBuildFile; fileRef = 64AEE63D27B2F74C0038C791 /* config */; };
 		64AF47B72817400100EBFDC6 /* events.json in Resources */ = {isa = PBXBuildFile; fileRef = 64AF47B62817400100EBFDC6 /* events.json */; };
 		64AF480E28186EE500EBFDC6 /* dydxevents.json in Resources */ = {isa = PBXBuildFile; fileRef = 64AF480D28186EE500EBFDC6 /* dydxevents.json */; };
@@ -831,10 +825,6 @@
 		314C368424C7CC7600695F7E /* ui.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ui.json; sourceTree = "<group>"; };
 		3162B55226E181BB000209E1 /* WebCrypto.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = WebCrypto.js; sourceTree = "<group>"; };
 		31659015227D55CD00BAF133 /* Design.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Design.txt; sourceTree = "<group>"; };
-		31A9FB66264C8360006D7AE6 /* starkware-perpetual-abi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "starkware-perpetual-abi.json"; sourceTree = "<group>"; };
-		31A9FB67264C8360006D7AE6 /* usdc-abi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "usdc-abi.json"; sourceTree = "<group>"; };
-		31A9FB68264C8360006D7AE6 /* fact-registry-abi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "fact-registry-abi.json"; sourceTree = "<group>"; };
-		31A9FB69264C8360006D7AE6 /* mintable-token-abi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "mintable-token-abi.json"; sourceTree = "<group>"; };
 		31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CameraParticles.xcodeproj; path = ../CameraParticles/CameraParticles.xcodeproj; sourceTree = "<group>"; };
 		31B779F822DAD020004F9B21 /* FirebaseStaticInjections.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FirebaseStaticInjections.xcodeproj; path = ../FirebaseStaticInjections/FirebaseStaticInjections.xcodeproj; sourceTree = "<group>"; };
 		31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
@@ -852,8 +842,6 @@
 		31F7618424BA3E7A001EA293 /* WebParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WebParticles.xcodeproj; path = ../WebParticles/WebParticles.xcodeproj; sourceTree = "<group>"; };
 		4CA3E661F388FD1F860FDCC6 /* Pods-iOS-dydxV4.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxV4.debug.xcconfig"; path = "../../dydx/Pods/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4.debug.xcconfig"; sourceTree = "<group>"; };
 		6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AmplitudeInjections.xcodeproj; path = ../AmplitudeInjections/AmplitudeInjections.xcodeproj; sourceTree = "<group>"; };
-		6468352E2788B53800A278FA /* proxy-deposit-abi.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "proxy-deposit-abi.json"; sourceTree = "<group>"; };
-		6468355E2788B53800A278FA /* ierc20-abi.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ierc20-abi.json"; sourceTree = "<group>"; };
 		646D73AB2A4F434300EDF2E5 /* dydxAbacusBridging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAbacusBridging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64AEE63D27B2F74C0038C791 /* config */ = {isa = PBXFileReference; lastKnownFileType = folder; name = config; path = "../../../v4-localization/config"; sourceTree = "<group>"; };
 		64AF47B62817400100EBFDC6 /* events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = events.json; sourceTree = "<group>"; };
@@ -1102,7 +1090,6 @@
 				0262F07429DB3989009889E2 /* _Localizer */,
 				0217A07D29D78B10007F31C5 /* _Security */,
 				314C365224C7CC5100695F7E /* _Configurations */,
-				31A9FB35264C8340006D7AE6 /* _Contracts */,
 				02756A38287CA32B00803741 /* _Notification */,
 				64AF480F281880A300EBFDC6 /* _Tracking */,
 				3112F462216BBF8400708927 /* AppDelegate.swift */,
@@ -1149,19 +1136,6 @@
 				64AF47B62817400100EBFDC6 /* events.json */,
 			);
 			path = _Configurations;
-			sourceTree = "<group>";
-		};
-		31A9FB35264C8340006D7AE6 /* _Contracts */ = {
-			isa = PBXGroup;
-			children = (
-				31A9FB68264C8360006D7AE6 /* fact-registry-abi.json */,
-				6468355E2788B53800A278FA /* ierc20-abi.json */,
-				6468352E2788B53800A278FA /* proxy-deposit-abi.json */,
-				31A9FB69264C8360006D7AE6 /* mintable-token-abi.json */,
-				31A9FB66264C8360006D7AE6 /* starkware-perpetual-abi.json */,
-				31A9FB67264C8360006D7AE6 /* usdc-abi.json */,
-			);
-			path = _Contracts;
 			sourceTree = "<group>";
 		};
 		31AB94C926DEE81000DB42B9 /* Products */ = {
@@ -2061,23 +2035,17 @@
 			files = (
 				027B7CA62AD5E559005A8288 /* configs in Resources */,
 				3112F46F216BBF8500708927 /* LaunchScreen.storyboard in Resources */,
-				31A9FB6A264C8360006D7AE6 /* starkware-perpetual-abi.json in Resources */,
 				3162B58226E181BB000209E1 /* WebCrypto.js in Resources */,
-				31A9FB6D264C8360006D7AE6 /* mintable-token-abi.json in Resources */,
 				3112F46C216BBF8500708927 /* Assets.xcassets in Resources */,
 				31659016227D55CD00BAF133 /* Design.txt in Resources */,
 				64AEE63E27B2F74C0038C791 /* config in Resources */,
-				6468355F2788B53C00A278FA /* ierc20-abi.json in Resources */,
 				27DBDD232A8FF5B2002383C6 /* GoogleService-Info-Staging.plist in Resources */,
 				314C368524C7CC7600695F7E /* ui.json in Resources */,
 				64AF47B72817400100EBFDC6 /* events.json in Resources */,
 				27DBDD222A8FF5B2002383C6 /* GoogleService-Info.plist in Resources */,
-				31A9FB6B264C8360006D7AE6 /* usdc-abi.json in Resources */,
 				64E39E5A281B3DD300F8ADC7 /* onboardingevents.json in Resources */,
 				64AF480E28186EE500EBFDC6 /* dydxevents.json in Resources */,
-				646835602788B53F00A278FA /* proxy-deposit-abi.json in Resources */,
 				27DBDD242A8FF5B2002383C6 /* credentials.json in Resources */,
-				31A9FB6C264C8360006D7AE6 /* fact-registry-abi.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

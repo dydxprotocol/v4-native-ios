@@ -14,10 +14,12 @@ import dydxFormatter
 public class AmountTextModel: PlatformViewModel, Equatable {
     @Published public var amount: NSNumber?
     @Published public var tickSize: NSNumber?
+    @Published public var requiresPositive: Bool = false
 
-    public init(amount: NSNumber? = nil, tickSize: NSNumber? = nil) {
+    public init(amount: NSNumber? = nil, tickSize: NSNumber? = nil, requiresPositive: Bool = false) {
         self.amount = amount
         self.tickSize = tickSize
+        self.requiresPositive = requiresPositive
     }
 
     public static var previewValue: AmountTextModel {
@@ -29,9 +31,10 @@ public class AmountTextModel: PlatformViewModel, Equatable {
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
-            let amountText = dydxFormatter.shared.dollar(number: self?.amount, size: self?.tickSize?.stringValue)
+            var amount = self?.amount?.filter(filter: self?.requiresPositive == true ? .notNegative : nil)
+            let amountText = dydxFormatter.shared.dollar(number: amount, size: self?.tickSize?.stringValue)
             return AnyView(
-                Text(amountText ?? "")
+                Text(amountText ?? "-")
                     .themeFont(fontType: .number, fontSize: .small)
             )
         }
