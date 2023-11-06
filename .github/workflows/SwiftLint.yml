@@ -13,11 +13,11 @@ jobs:
       with:
         fetch-depth: 0  # fetch all history so that we can get the proper list of changed files
 
-     - name: Get changed files
-        id: changes
-        # Set outputs using the command.
-        run: |
-          echo "::set-output name=all::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)"
+    - name: Get changed files
+      id: changes
+      # Set outputs using the command.
+      run: |
+        echo "::set-output name=all::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)"
 
     - name: Install SwiftLint
       run: brew install swiftlint
