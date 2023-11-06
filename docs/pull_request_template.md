@@ -1,4 +1,4 @@
-## Links
+## Links (dYdX Internal Use Only)
 Linear Ticket: _[Provide link to Linear ticket issue]_
 
 Figma Design: _[Provide link to Figma design here if applicable]_
@@ -20,9 +20,9 @@ _Provide a clear and concise description of the fix(es) or change(s) you made. I
 
 | Before | After |
 |--------|-------|
-| ![before image](url_here){: width="300px" } | ![after image](url_here){: width="300px" } |
+| <img src=""> | <img src=""> |
+| <video src=""> | <video src=""> |
 
-_**Note**: Replace `url_here` with the URL of your image and adjust `width` accordingly._
 
 
 
@@ -36,11 +36,3 @@ _**Note**: Replace `url_here` with the URL of your image and adjust `width` acco
 - [ ] Refactoring or Technical Debt
 - [ ] Documentation update
 - [ ] Other (please describe: )
-
-
-
-
-<br/>
-
-### Additional Comments (optional)
-Provide any additional comments or context about the changes here.
