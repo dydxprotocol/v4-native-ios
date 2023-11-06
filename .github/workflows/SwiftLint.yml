@@ -1,0 +1,43 @@
+name: SwiftLint on Changed Files
+
+on: [pull_request]
+
+jobs:
+  swiftlint:
+    name: Run SwiftLint
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # fetch all history so that we can get the proper list of changed files
+
+    - name: Get changed files
+      id: changes
+      # Set outputs using the command.
+      run: |
+        echo "::set-output name=all::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)"
+
+    - name: Install SwiftLint
+      run: brew install swiftlint
+
+ #   - name: List all changed files
+ #     id: files
+ #     uses: jitterbit/get-changed-files@v1
+ #     with:
+ #       format: space-delimited
+
+    - name: Run SwiftLint on changed files
+      run: |
+        # Extract changed files and filter for Swift files
+        FILES="${{ steps.changes.outputs.all }}"
+        SWIFT_FILES=$(echo "$FILES" | grep -E '\.(swift)$' | xargs)
+        # Run SwiftLint on each changed Swift file
+        # If no Swift files changed, skip the step
+        if [ -z "$SWIFT_FILES" ]; then
+          echo "No Swift files to lint."
+        else
+          echo "Linting changed Swift files..."
+          swiftlint --config dydx/.swiftlint.yml --fix lint -- $SWIFT_FILES
+        fi

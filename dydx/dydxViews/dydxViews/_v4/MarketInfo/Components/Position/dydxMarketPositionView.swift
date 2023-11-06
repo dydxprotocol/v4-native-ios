@@ -236,7 +236,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                 Spacer()
 
                 Text(openPrice ?? "-")
-                    .themeFont(fontType: .number, fontSize: .medium)
+                    .themeFont(fontSize: .medium)
             }
 
             DividerModel().createView(parentStyle: parentStyle)
@@ -249,7 +249,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                 Spacer()
 
                 Text(closePrice ?? "-")
-                    .themeFont(fontType: .number, fontSize: .medium)
+                    .themeFont(fontSize: .medium)
             }
 
             DividerModel().createView(parentStyle: parentStyle)
@@ -261,7 +261,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 
                 Spacer()
 
-                funding?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .medium))
+                funding?.createView(parentStyle: parentStyle.themeFont(fontSize: .medium))
             }
         }
         .padding(.horizontal, 8)
