@@ -83,13 +83,12 @@ public class dydxMarketResourcesViewModel: PlatformViewModel {
                                                    trailing: trailing.wrappedViewModel)
                         .createView(parentStyle: style)
 
-                    Text(sharedMarketViewModel.primaryDescription ?? "")
+                    Group {
+                        Text(sharedMarketViewModel.primaryDescription ?? "")
+                        Text(sharedMarketViewModel.secondaryDescription ?? "")
+                    }
                         .themeFont(fontSize: .medium)
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 16)
-                    Text(sharedMarketViewModel.secondaryDescription ?? "")
-                        .themeFont(fontSize: .medium)
-                        .themeColor(foreground: .textTertiary)
+                        .themeColor(foreground: .textSecondary)
                         .padding(.vertical, 8)
                         .padding(.horizontal, 16)
                 }
