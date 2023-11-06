@@ -12,13 +12,15 @@ import Utilities
 
 public class dydxMarketConfigsViewModel: PlatformViewModel {
     public struct Item: Hashable {
-        public init(title: String, value: String) {
+        public init(title: String, value: String, token: TokenTextViewModel? = nil) {
             self.title = title
             self.value = value
+            self.token = token
         }
 
         let title: String
         let value: String
+        let token: TokenTextViewModel?
     }
 
     @Published public var items: [Item]?
@@ -30,7 +32,7 @@ public class dydxMarketConfigsViewModel: PlatformViewModel {
         vm.items = [
             Item(title: "Title", value: "Value"),
             Item(title: "Title", value: "Value"),
-            Item(title: "Title", value: "Value")
+            Item(title: "Title", value: "Value", token: .previewValue)
         ]
         return vm
     }
@@ -46,8 +48,10 @@ public class dydxMarketConfigsViewModel: PlatformViewModel {
                             Text(item.title)
                                 .themeColor(foreground: .textTertiary)
                             Spacer()
-                            Text(item.value)
-                                .themeFont(fontType: .number)
+                            HStack(spacing: 4) {
+                                Text(item.value)
+                                item.token?.createView(parentStyle: style.themeFont(fontSize: .smaller))
+                            }
                         }
 
                         if item != self.items?.last {

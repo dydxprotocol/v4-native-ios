@@ -69,7 +69,7 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         } else {
             sign = .none
         }
-        let pnl = dydxFormatter.shared.dollarVolume(number: abs(position.realizedPnlPercent?.current?.doubleValue ?? 0), digits: 2)
+        let pnl = dydxFormatter.shared.dollarVolume(number: abs(position.realizedPnl?.current?.doubleValue ?? 0), digits: 2)
         viewModel?.realizedPNLAmount = SignedAmountViewModel(text: pnl, sign: sign, coloringOption: .signOnly)
 
         viewModel?.leverage = sharedOrderViewModel.leverage
