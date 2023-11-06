@@ -48,7 +48,7 @@ public class dydxOnboardQRCodeViewModel: PlatformViewModel {
                 .padding(.horizontal)
                 .padding([.top], 40)
                 .themeColor(background: .layer3)
-                .makeSheet(topPadding: 16)
+                .makeSheet()
             )
         }
     }

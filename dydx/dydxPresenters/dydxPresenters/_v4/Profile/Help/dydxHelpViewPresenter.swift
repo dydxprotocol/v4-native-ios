@@ -17,8 +17,7 @@ public class dydxHelpViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxHelpViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxHelpViewController(presenter: presenter, view: view, configuration: .default) as? T
-        // return HostingViewController(presenter: presenter, view: view) as? T
+        return dydxHelpViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
 }
 

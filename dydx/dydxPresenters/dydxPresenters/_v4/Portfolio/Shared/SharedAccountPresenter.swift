@@ -41,7 +41,7 @@ class SharedAccountPresenter: HostedViewPresenter<SharedAccountViewModel>, Share
 
         viewModel?.freeCollateral = dydxFormatter.shared.dollar(number: account?.freeCollateral?.current?.doubleValue, size: nil)
 
-        viewModel?.buyingPower = dydxFormatter.shared.dollar(number: account?.buyingPower?.current?.doubleValue, size: nil)
+        viewModel?.buyingPower = dydxFormatter.shared.dollar(number: account?.buyingPower?.current?.doubleValue.filter(filter: .notNegative), size: nil)
 
         viewModel?.marginUsage = dydxFormatter.shared.percent(number: account?.marginUsage?.current?.doubleValue, digits: 2)
 

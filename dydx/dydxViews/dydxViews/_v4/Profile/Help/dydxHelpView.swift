@@ -60,7 +60,7 @@ public class dydxHelpViewModel: PlatformViewModel {
             }
                 .padding(.horizontal)
                 .themeColor(background: .layer3)
-                .makeSheet()
+                .makeSheet(sheetStyle: .fitSize)
 
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))

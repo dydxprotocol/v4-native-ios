@@ -262,6 +262,7 @@
 		35EE5B244960774B9B6D4D55 /* Pods_iOS_UtilitiesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF030595A23E85168A3AD589 /* Pods_iOS_UtilitiesTests.framework */; };
 		4EDE0B13DB89059A45D982F2 /* Pods_iOS_Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A32AA5C7AC3D4879568CFBD /* Pods_iOS_Utilities.framework */; };
 		6476164127E23FBC008ACFD9 /* LocalAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6476164027E23FBC008ACFD9 /* LocalAuthenticator.swift */; };
+		648327442AF5665600012B75 /* NumericUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648327432AF5665600012B75 /* NumericUtils.swift */; };
 		64D34AC62792345000127C1B /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D34AC52792345000127C1B /* Clock.swift */; };
 		64FA07B7298AEF8D00626BF0 /* CosmoJavascript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FA07B6298AEF8D00626BF0 /* CosmoJavascript.swift */; };
 /* End PBXBuildFile section */
@@ -411,6 +412,7 @@
 		3A32AA5C7AC3D4879568CFBD /* Pods_iOS_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		439FD4525821BD140CEE8DB1 /* Pods-iOS-UtilitiesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-UtilitiesTests.release.xcconfig"; path = "Target Support Files/Pods-iOS-UtilitiesTests/Pods-iOS-UtilitiesTests.release.xcconfig"; sourceTree = "<group>"; };
 		6476164027E23FBC008ACFD9 /* LocalAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticator.swift; sourceTree = "<group>"; };
+		648327432AF5665600012B75 /* NumericUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericUtils.swift; sourceTree = "<group>"; };
 		64D34AC52792345000127C1B /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		64FA07B6298AEF8D00626BF0 /* CosmoJavascript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmoJavascript.swift; sourceTree = "<group>"; };
 		81539FD394D7847D50BD4749 /* Pods-iOS-UtilitiesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-UtilitiesTests.debug.xcconfig"; path = "Target Support Files/Pods-iOS-UtilitiesTests/Pods-iOS-UtilitiesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				025B752A28A703E800A4AC98 /* ObjectLoader.swift */,
 				025B752C28A7041600A4AC98 /* ClassLoader.swift */,
 				0253CEC12A9FFF8D0033F064 /* CachedFileLoader.swift */,
+				648327432AF5665600012B75 /* NumericUtils.swift */,
 			);
 			path = _Utils;
 			sourceTree = "<group>";
@@ -1357,6 +1360,7 @@
 				025B752D28A7041600A4AC98 /* ClassLoader.swift in Sources */,
 				314B64D823DCCF0200139EB3 /* Tracking.swift in Sources */,
 				314B64A023DCCF0200139EB3 /* Collection+Random.swift in Sources */,
+				648327442AF5665600012B75 /* NumericUtils.swift in Sources */,
 				312CE38C2630A38700C519C0 /* JavascriptRunner.swift in Sources */,
 				31CB2B53256DB261008A26A7 /* LocalizerBuffer.swift in Sources */,
 				31755736262A0CED00D76C4C /* NSNumber+Format.swift in Sources */,

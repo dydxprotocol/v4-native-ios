@@ -18,7 +18,7 @@ public class dydxOnboardWelcomeViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxOnboardWelcomeViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxOnboardWelcomeViewController(presenter: presenter, view: view, configuration: .init(ignoreSafeArea: true)) as? T
+        return dydxOnboardWelcomeViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
 }
 

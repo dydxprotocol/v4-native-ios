@@ -30,8 +30,9 @@ public struct HostingViewControllerConfiguration {
     let disableNavigationController: Bool
 
     public static let `default` = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: false)
-    public static let `tabbarItemView` = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: true)
-    public static let `nav` = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: false, disableNavigationController: false)
+    public static let ignoreSafeArea = HostingViewControllerConfiguration(ignoreSafeArea: true)
+    public static let tabbarItemView = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: true)
+    public static let nav = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: false, disableNavigationController: false)
 }
 
 open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol {
@@ -102,6 +103,14 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
 
         if presenter?.isStarted ?? false == false {
             presenter?.start()
+            // bug fix in PanModal lib
+            // https://github.com/slackhq/PanModal/issues/105#issuecomment-1671658458
+            if isPanModalPresented {
+                DispatchQueue.main.async { [weak self] in
+                    self?.panModalSetNeedsLayoutUpdate()
+                    self?.panModalTransition(to: .shortForm)
+                }
+            }
         }
     }
 

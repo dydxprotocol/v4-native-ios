@@ -187,8 +187,15 @@ private class dydxOrderDetailsViewPresenter: HostedViewPresenter<dydxOrderDetail
 
         viewModel?.items = items.compactMap { $0 }
         if order.status.canCancel {
-            viewModel?.cancelAction = { [weak self] in
-                Router.shared?.navigate(to: RoutingRequest(path: "/action/order/cancel", params: ["orderId": self?.orderOrFillId]), animated: true) { _, success in
+            viewModel?.cancelAction = {
+                Router.shared?.navigate(to: RoutingRequest(path: "/action/order/cancel",
+                                                           params: [
+                                                            "orderId": order.id,
+                                                            "orderSide": sharedOrderViewModel.sideText.side.text,
+                                                            "orderSize": sharedOrderViewModel.size ?? "",
+                                                            "orderMarket": sharedOrderViewModel.token?.symbol ?? ""
+                                                           ])
+                                        , animated: true) { _, success in
                     if success {
                         Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: nil), animated: true, completion: nil)
                     }
