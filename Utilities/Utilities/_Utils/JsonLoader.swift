@@ -39,7 +39,7 @@ import Foundation
     @objc public class func load(bundled fileName: String?) -> Any? {
         return load(bundle: Bundle.main, fileName: fileName)
     }
-    
+
     @objc public class func load(data: Data) -> Any? {
         return try? JSONSerialization.jsonObject(with: data, options: [])
     }

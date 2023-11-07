@@ -5,7 +5,6 @@
 //  Created by Rui Huang on 3/21/23.
 //
 
-
 import Utilities
 import dydxViews
 import PlatformParticles
@@ -17,19 +16,19 @@ import JedioKit
 open class SettingsViewPresenter: BaseSettingsViewPresenter {
     private let keyValueStore: KeyValueStoreProtocol?
     private let appScheme: String?
-    
+
     public init(definitionFile: String, keyValueStore: KeyValueStoreProtocol?, appScheme: String?) {
         self.keyValueStore = keyValueStore
         self.appScheme = appScheme
         super.init(definitionFile: definitionFile)
     }
-    
+
     override open func start() {
         super.start()
-        
+
         loadSettings()
     }
-    
+
     private func loadSettings() {
         var sections = [SettingsViewModel.SectionViewModel]()
         for fieldList in fieldLists ?? [] {
@@ -37,7 +36,7 @@ open class SettingsViewPresenter: BaseSettingsViewPresenter {
         }
         viewModel?.sections = sections
     }
-    
+
     private func createSection(group: FieldListInteractor) -> SettingsViewModel.SectionViewModel {
         let listViewModel = PlatformListViewModel(firstListItemTopSeparator: true, lastListItemBottomSeparator: true)
         listViewModel.width = UIScreen.main.bounds.width - 16
@@ -52,12 +51,12 @@ open class SettingsViewPresenter: BaseSettingsViewPresenter {
         }
         return SettingsViewModel.SectionViewModel(title: group.title, items: listViewModel)
     }
-    
+
     private func createInput(input: FieldInput) -> PlatformViewModel? {
         guard let fieldInputDefinition = input.fieldInput else {
             return nil
         }
-        
+
         if let fieldName = input.fieldName,
            let value = keyValueStore?.value(forKey: fieldName) {
             input.value = value
@@ -84,61 +83,61 @@ open class SettingsViewPresenter: BaseSettingsViewPresenter {
                 } else {
                     return FieldInputTextsInputViewModel(input: input, valueChanged: valueChanged)
                 }
-        
-//            case .int:
-//                if hasOptions {
-//                    return "field_input_grid_int"
-//                } else if fieldInput.min != nil && fieldInput.max != nil {
-//                    return "field_input_slider_int"
-//                } else {
-//                    return "field_input_textfield_int"
-//                }
-//
-//            case .float:
-//                if fieldInput.min != nil && fieldInput.max != nil {
-//                    return "field_input_slider_float"
-//                } else {
-//                    return "field_input_textfield_float"
-//                }
-//
-//            case .percent:
-//                return "field_input_slider_percent"
-//
-//            case .strings:
-//                return "field_input_grid_strings"
+
+            //            case .int:
+            //                if hasOptions {
+            //                    return "field_input_grid_int"
+            //                } else if fieldInput.min != nil && fieldInput.max != nil {
+            //                    return "field_input_slider_int"
+            //                } else {
+            //                    return "field_input_textfield_int"
+            //                }
+            //
+            //            case .float:
+            //                if fieldInput.min != nil && fieldInput.max != nil {
+            //                    return "field_input_slider_float"
+            //                } else {
+            //                    return "field_input_textfield_float"
+            //                }
+            //
+            //            case .percent:
+            //                return "field_input_slider_percent"
+            //
+            //            case .strings:
+            //                return "field_input_grid_strings"
 
             case .bool:
                 return FieldInputSwitchViewModel(input: input, valueChanged: valueChanged)
 
-//            case .image:
-//                #if _iOS
-//                    return "field_button_image"
-//                #else
-//                    return "field_blank"
-//                #endif
-//
-//            case .images:
-//                #if _iOS
-//                    return "field_input_grid_images"
-//                #else
-//                    return "field_blank"
-//                #endif
-//
-//            case .signature:
-//                #if _iOS
-//                    return "field_input_button_signature"
-//                #else
-//                    return "field_blank"
-//                #endif
-                
+            //            case .image:
+            //                #if _iOS
+            //                    return "field_button_image"
+            //                #else
+            //                    return "field_blank"
+            //                #endif
+            //
+            //            case .images:
+            //                #if _iOS
+            //                    return "field_input_grid_images"
+            //                #else
+            //                    return "field_blank"
+            //                #endif
+            //
+            //            case .signature:
+            //                #if _iOS
+            //                    return "field_input_button_signature"
+            //                #else
+            //                    return "field_blank"
+            //                #endif
+
             default:
-                //assertionFailure("Not implemented")
+                // assertionFailure("Not implemented")
                 break
             }
         }
         return nil
     }
-    
+
     private func createOutput(output: FieldOutput) -> PlatformViewModel? {
         if let xib = output.field?.xib {
             // TODO: ...
