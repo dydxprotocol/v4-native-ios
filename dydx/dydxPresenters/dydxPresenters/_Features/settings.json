@@ -9,7 +9,7 @@
                     "text": "APP.GENERAL.MANAGE"
                 },
                 "link": {
-                    "text": "dydxv4:///settings/env"
+                    "text": "{APP_SCHEME}:///settings/env"
                 }
             },
             {
@@ -17,7 +17,7 @@
                     "text": "APP.LANGUAGE.LANGUAGE"
                 },
                 "link": {
-                    "text": "dydxv4:///settings/language"
+                    "text": "{APP_SCHEME}:///settings/language"
                 }
             },
             {
@@ -25,7 +25,7 @@
                     "text": "APP.HEADER.NOTIFICATIONS"
                 },
                 "link": {
-                    "text": "dydxv4:///manage-notifications"
+                    "text": "{APP_SCHEME}:///manage-notifications"
                 }
             },
             {
@@ -36,7 +36,7 @@
                     "text": "APP.GENERAL.MANAGE"
                 },
                 "link": {
-                    "text": "dydxv4:///wallets"
+                    "text": "{APP_SCHEME}:///wallets"
                 }
             }
         ]

@@ -31,6 +31,10 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.environment
     }
 
+    public var appSetting: AppSetting? {
+        asyncStateManager.appSettings?.ios
+    }
+
     public lazy var state: AbacusState = {
         let perpetualStatePublisher =
             $_perpetualState

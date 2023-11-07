@@ -1,7 +1,7 @@
 //
 //  CryptoSwift
 //
-//  Copyright (C) 2014-2022 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
+//  Copyright (C) 2014-2021 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
 //  This software is provided 'as-is', without any express or implied warranty.
 //
 //  In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,11 +28,7 @@ public final class ChaCha20: BlockCipher {
   fileprivate let key: Key
   fileprivate var counter: Array<UInt8>
 
-  public convenience init(key: Array<UInt8>, iv nonce: Array<UInt8>) throws {
-    try self.init(key: key, iv: nonce, blockCounter: 0)
-  }
-
-  init(key: Array<UInt8>, iv nonce: Array<UInt8>, blockCounter: UInt32 = 0) throws {
+  public init(key: Array<UInt8>, iv nonce: Array<UInt8>) throws {
     precondition(nonce.count == 12 || nonce.count == 8)
 
     if key.count != 32 {
@@ -43,9 +39,9 @@ public final class ChaCha20: BlockCipher {
     self.keySize = self.key.count
 
     if nonce.count == 8 {
-      self.counter = blockCounter.bigEndian.bytes() + [0, 0, 0, 0] + nonce
+      self.counter = [0, 0, 0, 0, 0, 0, 0, 0] + nonce
     } else {
-      self.counter = blockCounter.bigEndian.bytes() + nonce
+      self.counter = [0, 0, 0, 0] + nonce
     }
 
     assert(self.counter.count == 16)

@@ -53,7 +53,9 @@ extension WalletConnectV2Config {
     init?(environment: V4Environment) {
         guard let projectId = environment.walletConnection?.walletConnect?.v2?.projectId,
               let clientName = environment.walletConnection?.walletConnect?.client.name,
-              let clientDescription = environment.walletConnection?.walletConnect?.client.description else {
+              let clientDescription = environment.walletConnection?.walletConnect?.client.description,
+              let scheme = AbacusStateManager.shared.appSetting?.scheme
+        else {
             return nil
         }
 
@@ -63,7 +65,7 @@ extension WalletConnectV2Config {
                   clientDescription: clientDescription,
                   clientUrl: AbacusStateManager.shared.deploymentUri,
                   iconUrls: iconUrls,
-                  redirectNative: "dydxV4",
+                  redirectNative: scheme,
                   redirectUniversal: AbacusStateManager.shared.deploymentUri)
     }
 }

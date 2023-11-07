@@ -47,8 +47,4 @@ private class dydxOnboardWelcomeViewPresenter: HostedViewPresenter<dydxOnboardWe
         viewModel?.tosUrl = AbacusStateManager.shared.environment?.links?.tos
         viewModel?.privacyPolicyUrl = AbacusStateManager.shared.environment?.links?.privacy
     }
-
-    override func start() {
-        super.start()
-    }
 }

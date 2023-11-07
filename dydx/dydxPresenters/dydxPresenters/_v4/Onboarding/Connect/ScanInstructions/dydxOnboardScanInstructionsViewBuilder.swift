@@ -47,8 +47,4 @@ private class dydxOnboardScanInstructionsViewPresenter: HostedViewPresenter<dydx
             Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
         }
     }
-
-    override func start() {
-        super.start()
-    }
 }
