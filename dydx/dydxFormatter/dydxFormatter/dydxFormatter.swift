@@ -571,6 +571,9 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
         }
     }
 
+    /// returns a formatted date in the form `M/D/YY, H:MM PM/AM`
+    ///
+    /// e.g. `12/5/23, 6:02 PM`
     public func dateAndTime(date: Date?) -> String? {
         if let date = date {
             return datetimeFormatter.string(from: date)
