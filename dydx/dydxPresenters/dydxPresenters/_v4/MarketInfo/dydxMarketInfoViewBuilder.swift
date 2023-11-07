@@ -16,7 +16,7 @@ import dydxStateManager
 import Abacus
 
 public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
-    public func build<T>() -> T? {
+    public      func build<T>() -> T? {
         let presenter = dydxMarketInfoViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
         let viewController = dydxMarketInfoViewController(presenter: presenter, view: view, configuration: .nav)
@@ -133,8 +133,8 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
         Publishers
             .CombineLatest(AbacusStateManager.shared.state.selectedSubaccountPositions,
                            $marketId
-                                .compactMap { $0 }
-                                .removeDuplicates())
+                            .compactMap { $0 }
+                            .removeDuplicates())
             .sink { [weak self] subaccountPositions, marketId in
                 let position = subaccountPositions.first { (subaccountPosition: SubaccountPosition) in
                     subaccountPosition.id == marketId
@@ -154,7 +154,7 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
         /*
          Comment out for now. Close Position would cause this to trigger and stops orderbook
          */
-//        AbacusStateManager.shared.setMarket(market: nil)
+        //        AbacusStateManager.shared.setMarket(market: nil)
     }
 
     private func updatePositionSection(position: SubaccountPosition?) {
@@ -181,7 +181,7 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
                 }
             } else if presenter.isStarted {
                 presenter.stop()
-           }
+            }
         }
     }
 }
