@@ -1,6 +1,6 @@
 name: SwiftLint on Changed Files
 
-on: [pull_request]
+on: push
 
 jobs:
   swiftlint:
@@ -41,3 +41,6 @@ jobs:
           echo "Linting changed Swift files..."
           swiftlint --config dydx/.swiftlint.yml --fix --format lint -- $SWIFT_FILES
         fi
+        git commit -am "SwiftLint"
+        git push
+
