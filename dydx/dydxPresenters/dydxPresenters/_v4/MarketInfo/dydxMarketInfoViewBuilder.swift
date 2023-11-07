@@ -27,7 +27,7 @@ public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxMarketInfoViewController: HostingViewController<PlatformView, dydxMarketInfoViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if (request?.path == "/trade" || request?.path == "/market"), let presenter = presenter as? dydxMarketInfoViewPresenter {
+    if (request?.path == "/trade" || request?.path == "/market"), let presenter = presenter as? dydxMarketInfoViewPresenter {
             presenter.marketId = request?.params?["market"] as? String ?? "ETH-USD"
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if request?.path == "/trade" {
@@ -133,8 +133,8 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
         Publishers
             .CombineLatest(AbacusStateManager.shared.state.selectedSubaccountPositions,
                            $marketId
-                                .compactMap { $0 }
-                                .removeDuplicates())
+                            .compactMap { $0 }
+                            .removeDuplicates())
             .sink { [weak self] subaccountPositions, marketId in
                 let position = subaccountPositions.first { (subaccountPosition: SubaccountPosition) in
                     subaccountPosition.id == marketId
@@ -154,7 +154,7 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
         /*
          Comment out for now. Close Position would cause this to trigger and stops orderbook
          */
-//        AbacusStateManager.shared.setMarket(market: nil)
+        //        AbacusStateManager.shared.setMarket(market: nil)
     }
 
     private func updatePositionSection(position: SubaccountPosition?) {
@@ -181,7 +181,7 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
                 }
             } else if presenter.isStarted {
                 presenter.stop()
-           }
+            }
         }
     }
 }
