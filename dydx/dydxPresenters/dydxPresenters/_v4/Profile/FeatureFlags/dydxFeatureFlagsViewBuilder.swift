@@ -13,6 +13,7 @@ import ParticlesKit
 import PlatformUI
 import PlatformUIJedio
 import SwiftUI
+import dydxStateManager
 
 public class dydxFeatureFlagsViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -26,7 +27,9 @@ public class dydxFeatureFlagsViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxFeatureFlagsViewPresenter: SettingsViewPresenter {
     init() {
-        super.init(definitionFile: "features.json", keyValueStore: FeatureFlagsStore.shared)
+        super.init(definitionFile: "features.json",
+                   keyValueStore: FeatureFlagsStore.shared,
+                   appScheme: AbacusStateManager.shared.appSetting?.scheme)
 
         let header = SettingHeaderViewModel()
         header.text = "Feature Flags"

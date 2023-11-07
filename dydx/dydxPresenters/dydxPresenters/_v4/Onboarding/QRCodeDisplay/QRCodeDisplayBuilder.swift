@@ -44,10 +44,4 @@ private class QRCodeDisplayPresenter: HostedViewPresenter<QRCodeDisplayModel>, Q
 
         viewModel = QRCodeDisplayModel()
     }
-
-    override func start() {
-        super.start()
-
-        /* Add observation and update viewModel */
-    }
 }
