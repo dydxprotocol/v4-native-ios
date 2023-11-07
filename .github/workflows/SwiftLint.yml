@@ -33,7 +33,6 @@ jobs:
         # Extract changed files and filter for Swift files
         FILES="${{ steps.changes.outputs.all }}"
         SWIFT_FILES=$(echo "$FILES" | grep -E '\.(swift)$' | xargs)
-        echo $SWIFT_FILES
         # Run SwiftLint on each changed Swift file
         # If no Swift files changed, skip the step
         if [ -z "$SWIFT_FILES" ]; then
@@ -42,9 +41,7 @@ jobs:
           echo "Linting changed Swift files..."
           swiftlint --config dydx/.swiftlint.yml --fix --format lint -- $SWIFT_FILES
         fi
-        CHANGED=`git diff --quiet HEAD > /dev/null 2>&1`
-        if [ $CHANGED -ne 0 ]; then
+        if ! git diff --cached --quiet; then
           git commit -am "SwiftLint"
           git push
         fi
-
