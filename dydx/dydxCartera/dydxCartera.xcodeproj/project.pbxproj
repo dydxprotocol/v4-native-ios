@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		020ACC902AF5CB3E00F36B91 /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 020ACC8F2AF5CB3E00F36B91 /* Cartera */; };
 		021A1DCA2AD34103008A3D73 /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 021A1DC92AD34103008A3D73 /* Cartera */; };
 		023F7F082AD09725006CC4CD /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647D11422A9FF29100DA7815 /* Utilities.framework */; platformFilter = ios; };
 		023F7F0D2AD09732006CC4CD /* ParticlesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647D11D12AA0EE8D00DA7815 /* ParticlesKit.framework */; platformFilter = ios; };
@@ -26,6 +25,7 @@
 		02DB5ED029E603A1001EA0F1 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = 02DB5ECF29E603A1001EA0F1 /* web3.swift */; };
 		02EF44D429F6F5A700C97746 /* dydxWalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF44D329F6F5A700C97746 /* dydxWalletSetup.swift */; };
 		02EF44E429F6FA8D00C97746 /* StarkJavascript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF44D729F6FA8D00C97746 /* StarkJavascript.swift */; };
+		276F19292AFAED3C0072B70A /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 276F19282AFAED3C0072B70A /* Cartera */; };
 		380B90E0F0184BA5387AC70A /* Pods_iOS_dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90BD66B2E0C0AEA29121D4EB /* Pods_iOS_dydxCartera.framework */; };
 		4CEA3DA15AAE34D6C283DEAB /* Pods_iOS_dydxCarteraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8865FEF1835F39EDD09CA04 /* Pods_iOS_dydxCarteraTests.framework */; };
 /* End PBXBuildFile section */
@@ -157,7 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				023F7F0D2AD09732006CC4CD /* ParticlesKit.framework in Frameworks */,
-				020ACC902AF5CB3E00F36B91 /* Cartera in Frameworks */,
+				276F19292AFAED3C0072B70A /* Cartera in Frameworks */,
 				023F7F082AD09725006CC4CD /* Utilities.framework in Frameworks */,
 				380B90E0F0184BA5387AC70A /* Pods_iOS_dydxCartera.framework in Frameworks */,
 				02669B932AD872A300A756AA /* Cartera in Frameworks */,
@@ -358,7 +358,7 @@
 				02DB5ECF29E603A1001EA0F1 /* web3.swift */,
 				021A1DC92AD34103008A3D73 /* Cartera */,
 				02669B922AD872A300A756AA /* Cartera */,
-				020ACC8F2AF5CB3E00F36B91 /* Cartera */,
+				276F19282AFAED3C0072B70A /* Cartera */,
 			);
 			productName = dydxCartera;
 			productReference = 02439C8B29B03E8A00A083FE /* dydxCartera.framework */;
@@ -414,7 +414,7 @@
 			packageReferences = (
 				02439E4529B0526100A083FE /* XCRemoteSwiftPackageReference "secp256k1.swift" */,
 				02DB5ECE29E603A1001EA0F1 /* XCRemoteSwiftPackageReference "web3" */,
-				020ACC8E2AF5CB3E00F36B91 /* XCRemoteSwiftPackageReference "cartera-ios" */,
+				276F19272AFAED3C0072B70A /* XCRemoteSwiftPackageReference "cartera-ios" */,
 			);
 			productRefGroup = 02439C8C29B03E8A00A083FE /* Products */;
 			projectDirPath = "";
@@ -887,14 +887,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		020ACC8E2AF5CB3E00F36B91 /* XCRemoteSwiftPackageReference "cartera-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:dydxprotocol/cartera-ios.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		02439E4529B0526100A083FE /* XCRemoteSwiftPackageReference "secp256k1.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/GigaBitcoin/secp256k1.swift.git";
@@ -911,14 +903,17 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		276F19272AFAED3C0072B70A /* XCRemoteSwiftPackageReference "cartera-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:dydxprotocol/cartera-ios.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		020ACC8F2AF5CB3E00F36B91 /* Cartera */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 020ACC8E2AF5CB3E00F36B91 /* XCRemoteSwiftPackageReference "cartera-ios" */;
-			productName = Cartera;
-		};
 		021A1DC92AD34103008A3D73 /* Cartera */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Cartera;
@@ -936,6 +931,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 02DB5ECE29E603A1001EA0F1 /* XCRemoteSwiftPackageReference "web3" */;
 			productName = web3.swift;
+		};
+		276F19282AFAED3C0072B70A /* Cartera */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 276F19272AFAED3C0072B70A /* XCRemoteSwiftPackageReference "cartera-ios" */;
+			productName = Cartera;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
