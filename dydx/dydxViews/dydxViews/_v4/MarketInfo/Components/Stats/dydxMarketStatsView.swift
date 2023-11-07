@@ -81,7 +81,7 @@ public class dydxMarketStatsViewModel: PlatformViewModel {
                                             }
                                             .minimumScaleFactor(0.5)
                                         }
-                                        .padding(.horizontal, 24)
+                                        .padding(.horizontal, 16)
                                         .padding(.vertical, 16)
                                         .frame(maxWidth: .infinity)
                                     } else {
