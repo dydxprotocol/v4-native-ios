@@ -16,11 +16,11 @@ final class dydxCarteraConfigWorker: BaseWorker {
 
     override init() {
         let filePath = "configs/wallets.json"
-#if DEBUG
+        #if DEBUG
         let url: String? = nil
-#else
+        #else
         let url = AbacusStateManager.shared.deploymentUri + "/" + filePath
-#endif
+        #endif
         CachedFileLoader.shared.loadData(filePath: filePath, url: url) { walletJson in
             if let walletJson = walletJson {
                 CarteraConfig.shared.registerWallets(configJsonData: walletJson)

@@ -22,7 +22,7 @@ public enum RoutingPresentation: Int {
     case drawer
 }
 
-fileprivate struct PathTuple {
+private struct PathTuple {
     let path: String
     let params: [String]?
 }
@@ -123,7 +123,7 @@ open class MappedRouter: NSObject, RouterProtocol, ParsingProtocol, CombineObser
     public var defaults: [String: String]?
     public var aliases: [String: String]?
     public var maps: [String: [String: [String: RoutingMap]]]? // ["http":["www.domain.com": ["/": "Home]]]
-//    public var shared: [String: RoutingMap]
+    //    public var shared: [String: RoutingMap]
     public init(file: String) {
         super.init()
         let shared = JsonLoader.load(bundles: Bundle.particles, fileName: "routing_shared.json") as? [String: Any]
@@ -131,12 +131,12 @@ open class MappedRouter: NSObject, RouterProtocol, ParsingProtocol, CombineObser
             parse(dictionary: destinations, shared: shared)
         }
     }
-    
+
     public init(jsonString: String) {
         super.init()
         let shared = JsonLoader.load(bundles: Bundle.particles, fileName: "routing_shared.json") as? [String: Any]
         if let data = jsonString.data(using: .utf8),
-            let destinations = JsonLoader.load(data: data) as? [String: Any] {
+           let destinations = JsonLoader.load(data: data) as? [String: Any] {
             parse(dictionary: destinations, shared: shared)
         }
     }
@@ -185,7 +185,7 @@ open class MappedRouter: NSObject, RouterProtocol, ParsingProtocol, CombineObser
                                     let pathTuple = parsePath(path: key)
                                     let routing = map(destination: destination, params: pathTuple.params)
                                     routing.parse(dictionary: dictionary)
-                                    assert(!maps.keys.contains { $0 == pathTuple.path }, 
+                                    assert(!maps.keys.contains { $0 == pathTuple.path },
                                            "collision on paths \(maps.keys.filter {$0 == pathTuple.path}), remove the duplicate route in routing_swiftui.json")
                                     maps[pathTuple.path] = routing
                                 }
@@ -240,7 +240,7 @@ open class MappedRouter: NSObject, RouterProtocol, ParsingProtocol, CombineObser
     }
 
     open func didSetAppState(oldValue: AppState?) {
-        changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) {[weak self] observer, obj, change, animated in
+        changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) {[weak self] _, _, _, _ in
             self?.sendPending()
         }
     }
