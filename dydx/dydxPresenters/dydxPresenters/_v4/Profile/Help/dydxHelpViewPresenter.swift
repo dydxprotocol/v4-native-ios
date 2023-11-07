@@ -47,8 +47,8 @@ private class dydxHelpViewPresenter: HostedViewPresenter<dydxHelpViewModel>, dyd
                                                 title: DataLocalizer.localize(path: "APP.HELP_MODAL.LIVE_CHAT"),
                                                 subtitle: DataLocalizer.localize(path: "APP.HELP_MODAL.LIVE_CHAT_DESCRIPTION"),
                                                 onTapAction: { [weak self] in
-                self?.handleLink(link: help)
-            }))
+                                                    self?.handleLink(link: help)
+                                                }))
         }
 
         if let community = AbacusStateManager.shared.environment?.links?.community {
@@ -56,8 +56,8 @@ private class dydxHelpViewPresenter: HostedViewPresenter<dydxHelpViewModel>, dyd
                                                 title: DataLocalizer.localize(path: "APP.HELP_MODAL.JOIN_DISCORD"),
                                                 subtitle: DataLocalizer.localize(path: "APP.HELP_MODAL.JOIN_DISCORD_DESCRIPTION"),
                                                 onTapAction: { [weak self] in
-                self?.handleLink(link: community)
-            }))
+                                                    self?.handleLink(link: community)
+                                                }))
         }
 
         if let feedback = AbacusStateManager.shared.environment?.links?.feedback {
@@ -65,16 +65,16 @@ private class dydxHelpViewPresenter: HostedViewPresenter<dydxHelpViewModel>, dyd
                                                 title: DataLocalizer.localize(path: "APP.HELP_MODAL.PROVIDE_FEEDBACK"),
                                                 subtitle: DataLocalizer.localize(path: "APP.HELP_MODAL.PROVIDE_FEEDBACK_DESCRIPTION"),
                                                 onTapAction: { [weak self] in
-                self?.handleLink(link: feedback)
-            }))
+                                                    self?.handleLink(link: feedback)
+                                                }))
         }
         if let documentation = AbacusStateManager.shared.environment?.links?.documentation {
             items.append(dydxHelpViewModel.Item(icon: "help_api",
                                                 title: DataLocalizer.localize(path: "APP.HEADER.API_DOCUMENTATION"),
                                                 subtitle: DataLocalizer.localize(path: "APP.HELP_MODAL.API_DOCUMENTATION_DESCRIPTION"),
                                                 onTapAction: { [weak self] in
-                self?.handleLink(link: documentation)
-            }))
+                                                    self?.handleLink(link: documentation)
+                                                }))
         }
 
         viewModel?.items = items

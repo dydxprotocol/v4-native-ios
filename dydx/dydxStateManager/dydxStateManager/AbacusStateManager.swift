@@ -38,37 +38,37 @@ public final class AbacusStateManager: NSObject {
     public lazy var state: AbacusState = {
         let perpetualStatePublisher =
             $_perpetualState
-                .receive(on: RunLoop.main)
-                .eraseToAnyPublisher()
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
         let alertsPublisher =
             $_alerts
-                .receive(on: RunLoop.main)
-                .eraseToAnyPublisher()
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
         let environmentPublisher =
             $_environment
-                .receive(on: RunLoop.main)
-                .eraseToAnyPublisher()
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
         let apiStatePublisher =
             $_apiState
-                .receive(on: RunLoop.main)
-                .eraseToAnyPublisher()
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
         let errorsStatePublisher =
             $_errors
-                .receive(on: RunLoop.main)
-                .eraseToAnyPublisher()
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
         let lastOrderPublisher =
             $_lastOrder
-                .receive(on: RunLoop.main)
-                .eraseToAnyPublisher()
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
         let walletStatePublisher =
             $_walletState
-                .receive(on: RunLoop.main)
-                .eraseToAnyPublisher()
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
         let transferStatePublisher =
             transferStateManager.$state
-                .compactMap { $0 }
-                .receive(on: RunLoop.main)
-                .eraseToAnyPublisher()
+            .compactMap { $0 }
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
         return AbacusState(walletStatePublisher: walletStatePublisher,
                            perpetualStatePublisher: perpetualStatePublisher,
                            environmentPublisher: environmentPublisher,
@@ -160,7 +160,7 @@ public final class AbacusStateManager: NSObject {
         _ = foregroundToken
         _ = backgroundToken
 
-//        Abacus.ProtocolNativeImpFactory.companion.setStateNotification(stateNotification: self)
+        //        Abacus.ProtocolNativeImpFactory.companion.setStateNotification(stateNotification: self)
     }
 
     private func start() {
@@ -275,23 +275,23 @@ public final class AbacusStateManager: NSObject {
     ///   - callback: returns tuples of addres-restriction pairs
     public func screen(addresses: [String], callback: @escaping ([(address: String, restriction: Restriction)]) -> Void) {
         let group = DispatchGroup()
-            var results: [(String, Restriction)] = []
-            let lock = DispatchQueue(label: "com.yourapp.resultsLock.\(UUID().uuidString)") // to synchronize results array
+        var results: [(String, Restriction)] = []
+        let lock = DispatchQueue(label: "com.yourapp.resultsLock.\(UUID().uuidString)") // to synchronize results array
 
-            for address in addresses {
-                group.enter()
+        for address in addresses {
+            group.enter()
 
-                screen(address: address) { restriction in
-                    lock.async {
-                        results.append((address, restriction))
-                        group.leave()
-                    }
+            screen(address: address) { restriction in
+                lock.async {
+                    results.append((address, restriction))
+                    group.leave()
                 }
             }
+        }
 
-            group.notify(queue: .main) {
-                callback(results)
-            }
+        group.notify(queue: .main) {
+            callback(results)
+        }
     }
 
     public func faucet(amount: Int32) {
@@ -312,9 +312,9 @@ public final class AbacusStateManager: NSObject {
     private func initializeCurrentEnvironment() {
         if currentEnvironment == nil,
            let stored = SettingsStore.shared?.value(forKey: Self.storeKey) as? String,
-            availableEnvironments.contains(where: { selection in
-                selection.type == stored
-            }) {
+           availableEnvironments.contains(where: { selection in
+            selection.type == stored
+           }) {
             currentEnvironment = stored
         } else {
             currentEnvironment = asyncStateManager.environment?.id

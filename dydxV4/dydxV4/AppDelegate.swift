@@ -23,9 +23,9 @@ import dydxFormatter
 import dydxPresenters
 
 #if _iOS
-    import FirebaseStaticInjections
-    import Foundation
-    import UIKit
+import FirebaseStaticInjections
+import Foundation
+import UIKit
 #endif
 
 public class dydxAppInjection: ParticlesPlatformAppInjection {
@@ -39,7 +39,7 @@ public class dydxAppInjection: ParticlesPlatformAppInjection {
 class AppDelegate: CommonAppDelegate {
     private var subscriptions = Set<AnyCancellable>()
     private let workers = dydxGlobalWorkers()
-   
+
     override public init() {
         super.init()
         LocalAuthenticator.shared = dydxBiometricsLocalAuthenticator()
@@ -85,7 +85,7 @@ class AppDelegate: CommonAppDelegate {
     override public func routeToStart(completion: @escaping () -> Void) {
         DataLocalizer.shared = dydxAbacusDataLocalizer(keyValueStore: SettingsStore.shared)
         workers.start()
-        
+
         let localCompletion = { [weak self] in
             // This gets called after passing the security/login screen
             if dydxBoolFeatureFlag.full_story.isEnabled {
@@ -116,11 +116,11 @@ class AppDelegate: CommonAppDelegate {
                 }
                 .store(in: &self.subscriptions)
 
-//            _ = dydxAppUpdateInteractor.shared
-//
-//            if dydxBoolFeatureFlag.push_notification.isEnabled {
-//                _ = dydxNotificationConfigsInteractor.shared
-//            }
+            //            _ = dydxAppUpdateInteractor.shared
+            //
+            //            if dydxBoolFeatureFlag.push_notification.isEnabled {
+            //                _ = dydxNotificationConfigsInteractor.shared
+            //            }
         }
     }
 
@@ -137,13 +137,13 @@ class AppDelegate: CommonAppDelegate {
 
     override func router() -> RouterProtocol? {
         let routingFile = "routing_swiftui.json"
-        
+
         if  let scheme = AbacusStateManager.shared.appSetting?.scheme,
             let file = Bundle.dydxPresenters.path(forResource: routingFile, ofType: ""),
             let jsonString = try? String(contentsOfFile: file).replacingOccurrences(of: "{APP_SCHEME}", with: scheme) {
             let router = MappedUIKitAppRouter(jsonString: jsonString)
             router.appState = AppState.shared
-            //sets up web app routing path
+            // sets up web app routing path
             if let url = URL(string: AbacusStateManager.shared.deploymentUri),
                let host = url.host {
                 router.aliases?[host] = router.defaults?["host"]
@@ -165,7 +165,7 @@ class AppDelegate: CommonAppDelegate {
             Tracking.shared?.view("/notification/deeplink/failure", data: data)
         }
     }
-    
+
     /// Prioritized CoinbaseWalletSDK handling of the deeplink
     /// - Parameter url: the deeplink url to handle
     /// - Returns: true if the CoinbaseWalletSDK handled the url
