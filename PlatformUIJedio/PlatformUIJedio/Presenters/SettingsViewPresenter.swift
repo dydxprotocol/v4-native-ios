@@ -16,9 +16,11 @@ import JedioKit
 
 open class SettingsViewPresenter: BaseSettingsViewPresenter {
     private let keyValueStore: KeyValueStoreProtocol?
+    private let appScheme: String?
     
-    public init(definitionFile: String, keyValueStore: KeyValueStoreProtocol?) {
+    public init(definitionFile: String, keyValueStore: KeyValueStoreProtocol?, appScheme: String?) {
         self.keyValueStore = keyValueStore
+        self.appScheme = appScheme
         super.init(definitionFile: definitionFile)
     }
     
@@ -148,7 +150,8 @@ open class SettingsViewPresenter: BaseSettingsViewPresenter {
 
     open func createOutputItem(output: FieldOutput) -> FieldOutputTextViewModel {
         let textViewModel = FieldOutputTextViewModel(output: output)
-        if let routingRequest = output.routingRequest() {
+        if let appScheme = appScheme, let link = output.link?.replacingOccurrences(of: "{APP_SCHEME}", with: appScheme) {
+            let routingRequest = RoutingRequest(url: link)
             textViewModel.onTapAction = {
                 Router.shared?.navigate(to: routingRequest, animated: true, completion: nil)
             }

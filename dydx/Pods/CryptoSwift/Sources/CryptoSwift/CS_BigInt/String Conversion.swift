@@ -19,14 +19,11 @@ extension CS.BigUInt {
         var overflow = false
         var count = 0
         while !overflow {
-            let (high,low) = power.multipliedFullWidth(by: Word(radix))
-            if high > 0 {
-              overflow = true
-            }
-
-            if !overflow || (high == 1 && low == 0) {
+            let (p, o) = power.multipliedReportingOverflow(by: Word(radix))
+            overflow = o
+            if !o || p == 0 {
                 count += 1
-                power = low
+                power = p
             }
         }
         return (count, power)
@@ -40,8 +37,7 @@ extension CS.BigUInt {
     /// - Parameter `radix`: The base of the number system to use, or 10 if unspecified.
     /// - Returns: The integer represented by `text`, or nil if `text` contains a character that does not represent a numeral in `radix`.
     public init?<S: StringProtocol>(_ text: S, radix: Int = 10) {
-        precondition(radix > 1 && radix < 36)
-        guard !text.isEmpty else { return nil }
+        precondition(radix > 1)
         let (charsPerWord, power) = CS.BigUInt.charsPerWord(forRadix: radix)
 
         var words: [Word] = []
@@ -101,7 +97,7 @@ extension CS.BigInt {
         }
         guard let m = magnitude else { return nil }
         self.magnitude = m
-        self.sign = m.isZero ? .plus : sign
+        self.sign = sign
     }
 }
 

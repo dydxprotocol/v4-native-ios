@@ -80,10 +80,6 @@ private class dydxHelpViewPresenter: HostedViewPresenter<dydxHelpViewModel>, dyd
         viewModel?.items = items
     }
 
-    override func start() {
-        super.start()
-    }
-
     private func handleLink(link: String) {
         if let url = URL(string: link), URLHandler.shared?.canOpenURL(url) ?? false {
             URLHandler.shared?.open(url, completionHandler: nil)

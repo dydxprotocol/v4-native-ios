@@ -49,7 +49,7 @@ class AppDelegate: CommonAppDelegate {
     }
 
     override open func injectAppStart(completion: @escaping () -> Void) {
-        Exporter.shared = EmailExporter() as? any ExporterProtocol
+        Exporter.shared = EmailExporter()
         super.injectAppStart(completion: completion)
     }
 
@@ -137,14 +137,21 @@ class AppDelegate: CommonAppDelegate {
 
     override func router() -> RouterProtocol? {
         let routingFile = "routing_swiftui.json"
-        let router = MappedUIKitAppRouter(file: routingFile)
-        router.appState = AppState.shared
-        //sets up web app routing path
-        if let url = URL(string: AbacusStateManager.shared.deploymentUri),
-           let host = url.host {
-            router.aliases?[host] = router.defaults?["host"]
+        
+        if  let scheme = AbacusStateManager.shared.appSetting?.scheme,
+            let file = Bundle.dydxPresenters.path(forResource: routingFile, ofType: ""),
+            let jsonString = try? String(contentsOfFile: file).replacingOccurrences(of: "{APP_SCHEME}", with: scheme) {
+            let router = MappedUIKitAppRouter(jsonString: jsonString)
+            router.appState = AppState.shared
+            //sets up web app routing path
+            if let url = URL(string: AbacusStateManager.shared.deploymentUri),
+               let host = url.host {
+                router.aliases?[host] = router.defaults?["host"]
+            }
+            return router
+        } else {
+            return nil
         }
-        return router
     }
 
     override func deepLinkHandled(deeplink: URL, successful: Bool) {

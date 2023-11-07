@@ -131,6 +131,15 @@ open class MappedRouter: NSObject, RouterProtocol, ParsingProtocol, CombineObser
             parse(dictionary: destinations, shared: shared)
         }
     }
+    
+    public init(jsonString: String) {
+        super.init()
+        let shared = JsonLoader.load(bundles: Bundle.particles, fileName: "routing_shared.json") as? [String: Any]
+        if let data = jsonString.data(using: .utf8),
+            let destinations = JsonLoader.load(data: data) as? [String: Any] {
+            parse(dictionary: destinations, shared: shared)
+        }
+    }
 
     public func parse(dictionary: [String: Any], shared: [String: Any]?) {
         if let defaultData = dictionary["defaults"] as? [String: String] {

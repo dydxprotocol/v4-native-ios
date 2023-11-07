@@ -48,10 +48,4 @@ private class dydxDebugThemeViewerPresenter: HostedViewPresenter<dydxDebugThemeV
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
     }
-
-    override func start() {
-        super.start()
-
-        /* Add observation and update viewModel */
-    }
 }

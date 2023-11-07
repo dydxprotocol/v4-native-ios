@@ -17,10 +17,10 @@ import JedioKit
 class SettingsLandingViewPresenter: SettingsViewPresenter {
 
     private enum DeepLink: String {
-        case language = "dydxv4:///settings/language"
-        case theme = "dydxv4:///settings/theme"
-        case env = "dydxv4:///settings/env"
-        case colorPreference = "dydxv4:///settings/direction_color_preference"
+        case language = "{APP_SCHEME}:///settings/language"
+        case theme = "{APP_SCHEME}:///settings/theme"
+        case env = "{APP_SCHEME}:///settings/env"
+        case colorPreference = "{APP_SCHEME}:///settings/direction_color_preference"
 
         var settingsStoreKey: String {
             switch self {

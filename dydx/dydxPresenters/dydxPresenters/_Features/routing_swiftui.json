@@ -4,8 +4,7 @@
         "host":"dydx.exchange"
     },
     "aliases":{
-        "dydx":"https",
-        "dydxv4":"https",
+        "{APP_SCHEME}":"https",
         "http":"https",
         "action":"https",
         "go.to":"dydx.exchange",
