@@ -16,7 +16,7 @@ import dydxStateManager
 import Abacus
 
 public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
-       public       func build<T>() -> T? {
+    public func build<T>() -> T? {
         let presenter = dydxMarketInfoViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
         let viewController = dydxMarketInfoViewController(presenter: presenter, view: view, configuration: .nav)
@@ -27,7 +27,7 @@ public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxMarketInfoViewController: HostingViewController<PlatformView, dydxMarketInfoViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if (request?.path == "/trade" || request?.path == "/market"), let presenter = presenter as? dydxMarketInfoViewPresenter {
+    if (request?.path == "/trade" || request?.path == "/market"), let presenter = presenter as? dydxMarketInfoViewPresenter {
             presenter.marketId = request?.params?["market"] as? String ?? "ETH-USD"
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if request?.path == "/trade" {
