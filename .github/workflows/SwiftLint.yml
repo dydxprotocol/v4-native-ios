@@ -39,5 +39,5 @@ jobs:
           echo "No Swift files to lint."
         else
           echo "Linting changed Swift files..."
-          swiftlint --config dydx/.swiftlint.yml --fix lint -- $SWIFT_FILES
+          swiftlint --config dydx/.swiftlint.yml --fix --format lint -- $SWIFT_FILES
         fi
