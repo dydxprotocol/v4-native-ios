@@ -12,7 +12,7 @@
     {
       "identity" : "cartera-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dydxprotocol/cartera-ios",
+      "location" : "git@github.com:dydxprotocol/cartera-ios.git",
       "state" : {
         "branch" : "main",
         "revision" : "610fffe691fb6fc2bf69230efd91d1887c050ae7"
