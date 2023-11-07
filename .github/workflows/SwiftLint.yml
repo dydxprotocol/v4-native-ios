@@ -41,7 +41,8 @@ jobs:
           echo "Linting changed Swift files..."
           swiftlint --config dydx/.swiftlint.yml --fix --format lint -- $SWIFT_FILES
         fi
-        if [ `git diff --quiet HEAD` -eq 1 ]; then
+        changed=`git diff --quiet HEAD > /dev/null 2>&1`
+        if [ $changed -ne 0 ]; then
           git commit -am "SwiftLint"
           git push
         fi
