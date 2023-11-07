@@ -70,16 +70,8 @@ class dydxMarketConfigsViewPresenter: HostedViewPresenter<dydxMarketConfigsViewM
                                             value: dydxFormatter.shared.percent(number: marketConfigs?.maintenanceMarginFraction?.doubleValue, digits: 4) ?? "-"),
             dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.INITIAL_MARGIN_FRACTION"),
                                             value: dydxFormatter.shared.percent(number: marketConfigs?.initialMarginFraction?.doubleValue, digits: 4) ?? "-"),
-            dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.INCREMENTAL_INITIAL_MARGIN_FRACTION"),
-                                            value: dydxFormatter.shared.percent(number: marketConfigs?.incrementalInitialMarginFraction?.doubleValue, digits: 4) ?? "-"),
             dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.BASE_POSITION_NOTIONAL"),
-                                            value: dydxFormatter.shared.localFormatted(number: marketConfigs?.basePositionNotional?.doubleValue, digits: 0) ?? "-"),
-            dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.INCREMENTAL_POSITION_SIZE"),
-                                            value: marketConfigs?.incrementalPositionSize?.doubleValue != nil ? "\(marketConfigs?.incrementalPositionSize?.doubleValue ?? 0)" : "-"),
-            dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.BASELINE_POSITION_SIZE"),
-                                            value: marketConfigs?.baselinePositionSize?.doubleValue != nil ? "\(marketConfigs?.baselinePositionSize?.doubleValue ?? 0)" : "-"),
-            dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.MAXIMUM_POSITION_SIZE"),
-                                            value: marketConfigs?.maxPositionSize?.doubleValue != nil ? "\(marketConfigs?.maxPositionSize?.doubleValue ?? 0)" : "-")
+                                            value: dydxFormatter.shared.localFormatted(number: marketConfigs?.basePositionNotional?.doubleValue, digits: 0) ?? "-")
         ]
     }
 }

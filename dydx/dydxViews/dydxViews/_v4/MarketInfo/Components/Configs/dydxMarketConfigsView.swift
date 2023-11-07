@@ -52,7 +52,7 @@ public class dydxMarketConfigsViewModel: PlatformViewModel {
                                 Text(item.value)
                                 item.token?.createView(parentStyle: style.themeFont(fontSize: .smaller))
                             }
-                        }
+                        }.padding(.horizontal, 8)
 
                         if item != self.items?.last {
                             DividerModel().createView(parentStyle: style)
