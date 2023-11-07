@@ -16,7 +16,7 @@ import dydxStateManager
 import Abacus
 
 public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
-     public func build<T>() -> T? {
+       public func build<T>() -> T? {
         let presenter = dydxMarketInfoViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
         let viewController = dydxMarketInfoViewController(presenter: presenter, view: view, configuration: .nav)

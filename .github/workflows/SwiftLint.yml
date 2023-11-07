@@ -42,6 +42,7 @@ jobs:
           swiftlint --config dydx/.swiftlint.yml --fix --format lint -- $SWIFT_FILES
         fi
         if ! git diff --cached --quiet; then
+          git add .
           git commit -am "SwiftLint"
           git push
         fi
