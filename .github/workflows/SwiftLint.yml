@@ -17,7 +17,7 @@ jobs:
       id: changes
       # Set outputs using the command.
       run: |
-        echo "::set-output name=all::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)"
+        echo "::set-output name=all::$(git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.sha }} | xargs)"
 
     - name: Install SwiftLint
       run: brew install swiftlint
