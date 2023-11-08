@@ -132,20 +132,24 @@ private class dydxOrderDetailsViewPresenter: HostedViewPresenter<dydxOrderDetail
         }
 
         var timePlaced: dydxOrderDetailsViewModel.Item? {
+            let itemValue: dydxOrderDetailsViewModel.Item.ItemValue?
             if let createdAtMilliseconds = order.createdAtMilliseconds?.doubleValue {
-                let text = dydxFormatter.shared.dateAndTime(date: Date(milliseconds: createdAtMilliseconds))
-                return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.PLACED"),
-                                                      value: .string(text))
+                itemValue = .string(dydxFormatter.shared.dateAndTime(date: Date(milliseconds: createdAtMilliseconds)))
+            } else {
+                itemValue = .none
             }
-            return nil
+            return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.CREATED_AT"), value: itemValue)
         }
 
         var goodTil: dydxOrderDetailsViewModel.Item? {
-            if order.timeInForce == .gtt,
-               let expiresAtMilliseconds = order.expiresAtMilliseconds?.doubleValue {
-                let text = dydxFormatter.shared.interval(time: Date(milliseconds: expiresAtMilliseconds))
-                return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.GOOD_TIL"),
-                                                      value: .string(text))
+            if order.timeInForce == .gtt {
+                let itemValue: dydxOrderDetailsViewModel.Item.ItemValue?
+                if let createdAtMilliseconds = order.expiresAtMilliseconds?.doubleValue {
+                    itemValue = .string(dydxFormatter.shared.dateAndTime(date: Date(milliseconds: createdAtMilliseconds)))
+                } else {
+                    itemValue = .none
+                }
+                return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.GOOD_TIL_TIME"), value: itemValue)
             }
             return nil
         }
