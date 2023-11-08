@@ -12,9 +12,9 @@ import Utilities
 import SDWebImageSwiftUI
 
 public class dydxProfileButtonsViewModel: PlatformViewModel {
-    @Published public var settingsAction: (() -> Void)?
-    @Published public var helpAction: (() -> Void)?
-    @Published public var walletAction: (() -> Void)?
+    @Published public var depositAction: (() -> Void)?
+    @Published public var withdrawAction: (() -> Void)?
+    @Published public var transferAction: (() -> Void)?
     @Published public var signOutAction: (() -> Void)?
     @Published public var onboardAction: (() -> Void)?
     @Published public var walletImageUrl: URL?
@@ -34,26 +34,19 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
             return AnyView(
                 HStack {
                     self.createButton(parentStyle: style,
-                                      imageName: "icon_settings",
-                                      title: DataLocalizer.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS"),
-                                      action: self.settingsAction)
+                                      imageName: "icon_transfer_deposit",
+                                      title: DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT"),
+                                      action: self.depositAction)
 
                     self.createButton(parentStyle: style,
-                                      imageName: "icon_info",
-                                      title: DataLocalizer.localize(path: "APP.HEADER.HELP"),
-                                      action: self.helpAction)
+                                      imageName: "icon_transfer_withdrawal",
+                                      title: DataLocalizer.localize(path: "APP.GENERAL.WITHDRAW"),
+                                      action: self.withdrawAction)
 
-                    if let walletImageUrl = self.walletImageUrl {
-                        self.createButton(parentStyle: style,
-                                          imageUrl: walletImageUrl,
-                                          title: DataLocalizer.localize(path: "APP.GENERAL.WALLETS"),
-                                          action: self.walletAction)
-                    } else {
-                        self.createButton(parentStyle: style,
-                                          imageName: "icon_wallet",
-                                          title: DataLocalizer.localize(path: "APP.GENERAL.WALLETS"),
-                                          action: self.walletAction)
-                    }
+                    self.createButton(parentStyle: style,
+                                      imageName: "icon_transfer_dydx",
+                                      title: DataLocalizer.localize(path: "APP.GENERAL.TRANSFER"),
+                                      action: self.transferAction)
 
                     if self.onboarded {
                         self.createButton(parentStyle: style,
