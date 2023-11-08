@@ -29,7 +29,7 @@ private class dydxFeatureFlagsViewPresenter: SettingsViewPresenter {
     init() {
         super.init(definitionFile: "features.json",
                    keyValueStore: FeatureFlagsStore.shared,
-                   appScheme: AbacusStateManager.shared.appSetting?.scheme)
+                   appScheme: Bundle.main.scheme)
 
         let header = SettingHeaderViewModel()
         header.text = "Feature Flags"

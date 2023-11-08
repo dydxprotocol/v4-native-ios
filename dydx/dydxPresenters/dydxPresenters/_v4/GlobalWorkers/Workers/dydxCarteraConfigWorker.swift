@@ -54,7 +54,7 @@ extension WalletConnectV2Config {
         guard let projectId = environment.walletConnection?.walletConnect?.v2?.projectId,
               let clientName = environment.walletConnection?.walletConnect?.client.name,
               let clientDescription = environment.walletConnection?.walletConnect?.client.description,
-              let scheme = AbacusStateManager.shared.appSetting?.scheme
+              let scheme = Bundle.main.scheme
         else {
             return nil
         }
