@@ -16,11 +16,11 @@ final class dydxCarteraConfigWorker: BaseWorker {
 
     override init() {
         let filePath = "configs/wallets.json"
-#if DEBUG
+        #if DEBUG
         let url: String? = nil
-#else
+        #else
         let url = AbacusStateManager.shared.deploymentUri + "/" + filePath
-#endif
+        #endif
         CachedFileLoader.shared.loadData(filePath: filePath, url: url) { walletJson in
             if let walletJson = walletJson {
                 CarteraConfig.shared.registerWallets(configJsonData: walletJson)
@@ -53,7 +53,9 @@ extension WalletConnectV2Config {
     init?(environment: V4Environment) {
         guard let projectId = environment.walletConnection?.walletConnect?.v2?.projectId,
               let clientName = environment.walletConnection?.walletConnect?.client.name,
-              let clientDescription = environment.walletConnection?.walletConnect?.client.description else {
+              let clientDescription = environment.walletConnection?.walletConnect?.client.description,
+              let scheme = AbacusStateManager.shared.appSetting?.scheme
+        else {
             return nil
         }
 
@@ -63,7 +65,7 @@ extension WalletConnectV2Config {
                   clientDescription: clientDescription,
                   clientUrl: AbacusStateManager.shared.deploymentUri,
                   iconUrls: iconUrls,
-                  redirectNative: "dydxV4",
+                  redirectNative: scheme,
                   redirectUniversal: AbacusStateManager.shared.deploymentUri)
     }
 }

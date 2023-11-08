@@ -6,7 +6,7 @@
                     "text" : "APP.LANGUAGE.LANGUAGE"
                 },
                 "link" : {
-                    "text" : "dydxv4:///settings/language"
+                    "text" : "{APP_SCHEME}:///settings/language"
                 }
             },
             {
@@ -14,7 +14,7 @@
                     "text" : "APP.V4.THEME"
                 },
                 "link" : {
-                    "text" : "dydxv4:///settings/theme"
+                    "text" : "{APP_SCHEME}:///settings/theme"
                 }
             },
             {
@@ -22,7 +22,7 @@
                     "text" : "APP.V4.TRADING_NETWORK"
                 },
                 "link" : {
-                    "text" : "dydxv4:///settings/env"
+                    "text" : "{APP_SCHEME}:///settings/env"
                 }
             },
             {
@@ -30,7 +30,7 @@
                     "text" : "APP.V4.SYSTEM_STATUS"
                 },
                 "link" : {
-                    "text" : "dydxv4:///settings/status"
+                    "text" : "{APP_SCHEME}:///settings/status"
                 }
             }
         ]

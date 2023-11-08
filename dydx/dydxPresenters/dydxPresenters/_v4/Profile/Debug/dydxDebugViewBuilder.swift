@@ -13,6 +13,7 @@ import ParticlesKit
 import PlatformUI
 import PlatformUIJedio
 import SwiftUI
+import dydxStateManager
 
 public class dydxDebugViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -26,7 +27,9 @@ public class dydxDebugViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxDebugViewPresenter: SettingsViewPresenter {
     init() {
-        super.init(definitionFile: "debug.json", keyValueStore: SettingsStore.shared)
+        super.init(definitionFile: "debug.json",
+                   keyValueStore: FeatureFlagsStore.shared,
+                   appScheme: AbacusStateManager.shared.appSetting?.scheme)
 
         let header = SettingHeaderViewModel()
         header.text = "Debug Settings"

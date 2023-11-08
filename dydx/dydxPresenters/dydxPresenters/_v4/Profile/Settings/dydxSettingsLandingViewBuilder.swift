@@ -14,6 +14,7 @@ import PlatformUI
 import PlatformUIJedio
 import SwiftUI
 import PlatformRouting
+import dydxStateManager
 
 public class dydxSettingsLandingViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -34,7 +35,9 @@ private class dydxSettingsLandingViewPresenter: SettingsLandingViewPresenter {
         } else {
             definitionFile = "settings_loggedout.json"
         }
-        super.init(definitionFile: definitionFile, keyValueStore: SettingsStore.shared)
+        super.init(definitionFile: definitionFile,
+                   keyValueStore: SettingsStore.shared,
+                   appScheme: AbacusStateManager.shared.appSetting?.scheme)
 
         let header = SettingHeaderViewModel()
         header.text = DataLocalizer.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS")

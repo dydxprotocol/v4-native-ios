@@ -55,9 +55,4 @@ private class dydxTradingNetworkViewPresenter: HostedViewPresenter<dydxTradingNe
             return item
         }
     }
-
-    override func start() {
-        super.start()
-
-    }
 }

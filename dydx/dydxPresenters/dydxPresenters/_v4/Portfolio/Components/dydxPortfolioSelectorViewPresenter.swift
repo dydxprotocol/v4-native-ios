@@ -73,10 +73,6 @@ class dydxPortfolioSelectorViewPresenter: HostedViewPresenter<dydxPortfolioSelec
         })
     }
 
-    override func start() {
-        super.start()
-    }
-
     func updateSelection(displayContent: dydxViews.dydxPortfolioViewModel.DisplayContent) {
         viewModel?.selectedIndex = displayContents.firstIndex(of: displayContent) ?? 0
     }

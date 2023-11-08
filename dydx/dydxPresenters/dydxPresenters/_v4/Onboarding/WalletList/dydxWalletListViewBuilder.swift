@@ -72,10 +72,6 @@ private class dydxWalletListViewPresenter: HostedViewPresenter<dydxWalletListVie
         updateWallets()
     }
 
-    override func start() {
-        super.start()
-    }
-
     private func updateWallets() {
         var installedWalletViewModels = [dydxWalletViewModel]()
         var uninstalledWalletViewModels = [dydxWalletViewModel]()

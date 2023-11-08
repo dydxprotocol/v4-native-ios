@@ -1,7 +1,7 @@
 //
 //  CryptoSwift
 //
-//  Copyright (C) 2014-2022 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
+//  Copyright (C) 2014-2021 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
 //  This software is provided 'as-is', without any express or implied warranty.
 //
 //  In no event will the authors be held liable for any damages arising from the use of this software.
@@ -329,20 +329,12 @@ public final class Blowfish {
   }
 
   private func setupBlockModeWorkers() throws {
-    let decryptBlock = { [weak self] (block: ArraySlice<UInt8>) -> Array<UInt8>? in
-      self?.decrypt(block: block)
-    }
-
-    let encryptBlock = { [weak self] (block: ArraySlice<UInt8>) -> Array<UInt8>? in
-      self?.encrypt(block: block)
-    }
-
-    self.encryptWorker = try self.blockMode.worker(blockSize: Blowfish.blockSize, cipherOperation: encryptBlock, encryptionOperation: encryptBlock)
+    self.encryptWorker = try self.blockMode.worker(blockSize: Blowfish.blockSize, cipherOperation: self.encrypt, encryptionOperation: self.encrypt)
 
     if self.blockMode.options.contains(.useEncryptToDecrypt) {
-      self.decryptWorker = try self.blockMode.worker(blockSize: Blowfish.blockSize, cipherOperation: encryptBlock, encryptionOperation: encryptBlock)
+      self.decryptWorker = try self.blockMode.worker(blockSize: Blowfish.blockSize, cipherOperation: self.encrypt, encryptionOperation: self.encrypt)
     } else {
-      self.decryptWorker = try self.blockMode.worker(blockSize: Blowfish.blockSize, cipherOperation: decryptBlock, encryptionOperation: encryptBlock)
+      self.decryptWorker = try self.blockMode.worker(blockSize: Blowfish.blockSize, cipherOperation: self.decrypt, encryptionOperation: self.encrypt)
     }
   }
 
@@ -384,13 +376,13 @@ public final class Blowfish {
     }
   }
 
-  private func encrypt(block: ArraySlice<UInt8>) -> Array<UInt8>? {
+  fileprivate func encrypt(block: ArraySlice<UInt8>) -> Array<UInt8>? {
     var result = Array<UInt8>()
 
     var l = UInt32(bytes: block[block.startIndex..<block.startIndex.advanced(by: 4)])
     var r = UInt32(bytes: block[block.startIndex.advanced(by: 4)..<block.startIndex.advanced(by: 8)])
 
-    self.encryptBlowfishBlock(l: &l, r: &r)
+    encryptBlowfishBlock(l: &l, r: &r)
 
     // because everything is too complex to be solved in reasonable time o_O
     result += [
@@ -413,13 +405,13 @@ public final class Blowfish {
     return result
   }
 
-  private func decrypt(block: ArraySlice<UInt8>) -> Array<UInt8>? {
+  fileprivate func decrypt(block: ArraySlice<UInt8>) -> Array<UInt8>? {
     var result = Array<UInt8>()
 
     var l = UInt32(bytes: block[block.startIndex..<block.startIndex.advanced(by: 4)])
     var r = UInt32(bytes: block[block.startIndex.advanced(by: 4)..<block.startIndex.advanced(by: 8)])
 
-    self.decryptBlowfishBlock(l: &l, r: &r)
+    decryptBlowfishBlock(l: &l, r: &r)
 
     // because everything is too complex to be solved in reasonable time o_O
     result += [

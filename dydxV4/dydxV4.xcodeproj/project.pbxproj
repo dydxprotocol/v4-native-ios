@@ -1314,6 +1314,7 @@
 			buildPhases = (
 				7BA92DF4D740E1A995F10DA9 /* [CP] Check Pods Manifest.lock */,
 				02C19F3D29DDD79300F77028 /* Run Script (Set Secrets) */,
+				026FC3F22AFAD39800C52F20 /* Run Script (set_scheme.sh) */,
 				026F2E9E28230DBD00DF3EB5 /* Run Script (Swiftlint --fix) */,
 				3112F45B216BBF8400708927 /* Sources */,
 				3112F45C216BBF8400708927 /* Frameworks */,
@@ -1322,6 +1323,7 @@
 				3165906D227F532B00BAF133 /* Run Script (Firebase) */,
 				020F66C02858F29300E2D072 /* Embed Foundation Extensions */,
 				16DEFDB1896BDF443F34E3AC /* [CP] Embed Pods Frameworks */,
+				026FC4232AFAD3EB00C52F20 /* Run Script (unset_scheme.sh) */,
 			);
 			buildRules = (
 			);
@@ -2076,6 +2078,44 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  cd ../dydx\n  swiftlint --fix \nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		026FC3F22AFAD39800C52F20 /* Run Script (set_scheme.sh) */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (set_scheme.sh)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_DIR=${PROJECT_DIR}/../scripts/\n\nOUTPUT=$(bash \"${SCRIPT_DIR}/set_scheme.sh\")\n\n# Echo the captured output (xcode does not automatically mirror it in build log)\necho \"$OUTPUT\"\n";
+		};
+		026FC4232AFAD3EB00C52F20 /* Run Script (unset_scheme.sh) */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (unset_scheme.sh)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_DIR=${PROJECT_DIR}/../scripts/\n\nOUTPUT=$(bash \"${SCRIPT_DIR}/unset_scheme.sh\")\n\n# Echo the captured output (xcode does not automatically mirror it in build log)\necho \"$OUTPUT\"\n\n";
 		};
 		02C19F3D29DDD79300F77028 /* Run Script (Set Secrets) */ = {
 			isa = PBXShellScriptBuildPhase;
