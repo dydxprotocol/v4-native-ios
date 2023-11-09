@@ -17,7 +17,6 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
     @Published public var transferAction: (() -> Void)?
     @Published public var signOutAction: (() -> Void)?
     @Published public var onboardAction: (() -> Void)?
-    @Published public var walletImageUrl: URL?
     @Published public var onboarded: Bool = false
 
     public init() { }
@@ -58,6 +57,7 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
                         self.createButton(parentStyle: style,
                                           imageName: "icon_wallet_connect",
                                           title: DataLocalizer.localize(path: "APP.GENERAL.CONNECT"),
+                                          backgroundColor: .colorPurple,
                                           action: self.onboardAction)
                     }
                 }
@@ -65,21 +65,11 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
         }
     }
 
-    private func createButton(parentStyle: ThemeStyle, imageName: String, title: String, applyTemplateColor: Bool = true, action: (() -> Void)?) -> some View {
+    private func createButton(parentStyle: ThemeStyle, imageName: String, title: String, styleKey: String? = nil, backgroundColor: ThemeColor.SemanticColor = .layer3, applyTemplateColor: Bool = true, action: (() -> Void)?) -> some View {
         let icon = PlatformIconViewModel(type: .asset(name: imageName, bundle: Bundle.dydxView),
-                                         clip: .circle(background: .layer3, spacing: 24, borderColor: .layer6),
+                                     clip: .circle(background: backgroundColor, spacing: 24, borderColor: .layer6),
                                          size: CGSize(width: 48, height: 48),
                                          templateColor: applyTemplateColor ? .textSecondary : nil)
-        return createButton(parentStyle: parentStyle, icon: icon, title: title, action: action)
-    }
-
-    private func createButton(parentStyle: ThemeStyle, imageUrl: URL, title: String, action: (() -> Void)?) -> some View {
-        let image = PlatformIconViewModel(type: .url(url: imageUrl),
-                                          clip: .circle(background: .layer3, spacing: 0),
-                                          size: CGSize(width: 32, height: 32))
-        let icon = PlatformIconViewModel(type: .any(viewModel: image),
-                                         clip: .circle(background: .layer3, spacing: 16, borderColor: .layer6),
-                                         size: CGSize(width: 48, height: 48))
         return createButton(parentStyle: parentStyle, icon: icon, title: title, action: action)
     }
 
