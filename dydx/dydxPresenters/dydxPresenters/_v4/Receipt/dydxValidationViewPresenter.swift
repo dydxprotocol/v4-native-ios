@@ -54,11 +54,10 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
         Publishers.CombineLatest(
             AbacusStateManager.shared.state.validationErrors,
             AbacusStateManager.shared.state.transferInput
-               .map(\.errors)
                .removeDuplicates()
         )
-        .sink { [weak self] validationErrors, transferErrors in
-            self?.update(errors: validationErrors, transferErrors: transferErrors)
+        .sink { [weak self] validationErrors, transferInput in
+            self?.update(errors: validationErrors, transferInput: transferInput)
         }
         .store(in: &subscriptions)
 
@@ -71,7 +70,9 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
         receiptPresenter.stop()
     }
 
-    private func update(errors: [ValidationError], transferErrors: String?) {
+    private func update(errors: [ValidationError], transferInput: TransferInput?) {
+        let transferErrors = transferInput?.errors
+        let errorMessage = transferInput?.errorMessage
         let firstBlockingError = errors.first { $0.type == ErrorType.error }
         let firstWarning = errors.first { $0.type == ErrorType.warning }
         if let firstBlockingError = firstBlockingError {
@@ -91,7 +92,7 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
         } else if let transferErrors = transferErrors, transferErrors.count > 0 {
             viewModel?.title = DataLocalizer.localize(path: "ERRORS.GENERAL.SOMETHING_WENT_WRONG_WITH_MESSAGE",
                                                       params: ["ERROR_MESSAGE": ""])
-            viewModel?.text = transferErrors
+            viewModel?.text = errorMessage ?? transferErrors
             viewModel?.errorType = .error
             if viewModel?.state == .hide {
                 viewModel?.state = .showError
