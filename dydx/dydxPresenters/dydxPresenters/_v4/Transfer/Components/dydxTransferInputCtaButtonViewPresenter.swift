@@ -71,12 +71,15 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
     private func update(transferInput: TransferInput, tradeErrors: [ValidationError]) {
         if hasValidSize(transferInput: transferInput) {
             let firstBlockingError = tradeErrors.first { $0.type == ErrorType.required || $0.type == ErrorType.error }
+            let transferError = transferInput.errors
             if let firstBlockingError = firstBlockingError {
                 if (transferType == .deposit || transferType == .withdrawal) && transferInput.requestPayload == nil {
                     viewModel?.ctaButtonState = .thinking
                 } else {
                     viewModel?.ctaButtonState = .disabled(firstBlockingError.resources.action?.localizedString)
                 }
+            } else if transferError != nil {
+                viewModel?.ctaButtonState = .disabled(DataLocalizer.localize(path: "APP.GENERAL.ERROR"))
             } else {
                 switch transferType {
                 case .deposit:
