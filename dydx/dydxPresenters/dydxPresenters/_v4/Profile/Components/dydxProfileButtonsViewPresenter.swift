@@ -63,11 +63,5 @@ class dydxProfileButtonsViewPresenter: HostedViewPresenter<dydxProfileButtonsVie
                 self?.viewModel?.onboarded = onboarded
             }
             .store(in: &subscriptions)
-
-        AbacusStateManager.shared.state.currentWallet
-            .sink { [weak self] wallet in
-                self?.viewModel?.walletImageUrl = wallet?.imageUrl
-            }
-            .store(in: &subscriptions)
     }
 }
