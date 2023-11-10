@@ -51,6 +51,7 @@ public class dydxPortfolioSectionsViewModel: PlatformViewModel {
                     }
                 }
                 .padding(.vertical, 16)
+                .themeColor(background: .layer2)
             )
         }
     }
