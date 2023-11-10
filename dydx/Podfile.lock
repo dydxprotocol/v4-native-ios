@@ -1,5 +1,5 @@
 PODS:
-  - Abacus (1.0.21)
+  - Abacus (1.0.24)
   - Amplitude-iOS (4.10.0)
   - AppsFlyerFramework (6.12.2):
     - AppsFlyerFramework/Main (= 6.12.2)
@@ -14,7 +14,6 @@ PODS:
   - CocoaLumberjack/Core (3.8.2)
   - CombineExt (1.8.0)
   - COSTouchVisualizer (1.0.6)
-  - CryptoSwift (1.5.1)
   - Differ (1.4.5)
   - DrawerMenu (1.0.1)
   - EasyTipView (2.1.0)
@@ -268,7 +267,6 @@ DEPENDENCIES:
   - Charts (from `https://github.com/dydxprotocol/Charts.git`, branch `releases/3.6.0.3`)
   - CombineExt
   - COSTouchVisualizer
-  - CryptoSwift (= 1.5.1)
   - Differ
   - DrawerMenu
   - EasyTipView
@@ -314,7 +312,6 @@ SPEC REPOS:
     - CocoaLumberjack
     - CombineExt
     - COSTouchVisualizer
-    - CryptoSwift
     - Differ
     - DrawerMenu
     - EasyTipView
@@ -379,7 +376,7 @@ CHECKOUT OPTIONS:
     :http: https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz
 
 SPEC CHECKSUMS:
-  Abacus: e7d0e1e679072953e12b69bc3ae2ebb6465acaf7
+  Abacus: fee4da3726a276a18de4eb2d88b807217c547071
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   AppsFlyerFramework: 6eb4d89d2eb9a6632317f1055b359d9fd85fd5ff
   Atributika: 0eabae2cc37999e79c5b94f60213642946991b1c
@@ -388,7 +385,6 @@ SPEC CHECKSUMS:
   CocoaLumberjack: f8d89a516e7710fdb2e9b8f1560b16ec6040eef0
   CombineExt: c4daa97ef75754d8ef319bd79edeef82652f3eea
   COSTouchVisualizer: a398089327a6c02897823614d7447ccc97198997
-  CryptoSwift: c4f2debceb38bf44c80659afe009f71e23e4a082
   Differ: 3b6bd78e2b20cc795d9a86f7641d087524e4273e
   DrawerMenu: f6ca91901e2b21086e3c19bcca278d3d3127e85f
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
@@ -437,6 +433,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: 6c6f8513dc35d0af8091105053d372bc13a66241
+PODFILE CHECKSUM: a4f25d50f2991cc8e84eca8d34be23b37908132b
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.14.2
