@@ -72,7 +72,8 @@ extension WalletConnectV2Config {
 
 extension WalletSegueConfig {
     init?(environment: V4Environment) {
-        guard let callbackUrl = environment.walletConnection?.walletSegue?.callbackUrl else {
+        guard let callbackUrl = environment.walletConnection?.walletSegue?.callbackUrl,
+                let _ = URL(string: callbackUrl) else {
             return nil
         }
 

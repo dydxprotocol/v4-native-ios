@@ -9,11 +9,12 @@ import Abacus
 import Combine
 import Utilities
 import ParticlesKit
+import dydxFormatter
 
 public final class AbacusStateManager: NSObject {
     public static let shared = AbacusStateManager()
 
-    public let deploymentUri = (CredientialConfig.shared.key(for: "webAppUrl"))!
+    public let deploymentUri = dydxStringFeatureFlag.deployment_url.string ?? (CredientialConfig.shared.key(for: "webAppUrl"))!
 
     public var isMainNet: Bool {
         asyncStateManager.environment?.isMainNet ?? false
@@ -128,7 +129,10 @@ public final class AbacusStateManager: NSObject {
 
         let deployment: String
         let appConfigs: AppConfigs
-        if DebugEnabled.enabled {
+        if dydxBoolFeatureFlag.force_mainnet.isEnabled {
+            deployment = "MAINNET"
+            appConfigs = AppConfigs.companion.forApp
+        } else if DebugEnabled.enabled {
             // For debugging only
             deployment = "DEV"
             #if DEBUG
@@ -143,7 +147,7 @@ public final class AbacusStateManager: NSObject {
         }
 
         return AsyncAbacusStateManager(
-            deploymentUri: deploymentUri + "/",
+            deploymentUri: deploymentUri,
             deployment: deployment,
             appConfigs: appConfigs,
             ioImplementations: IOImplementations.shared,
