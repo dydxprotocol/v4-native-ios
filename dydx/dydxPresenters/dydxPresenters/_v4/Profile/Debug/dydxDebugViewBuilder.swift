@@ -29,7 +29,7 @@ private class dydxDebugViewPresenter: SettingsViewPresenter {
     init() {
         super.init(definitionFile: "debug.json",
                    keyValueStore: FeatureFlagsStore.shared,
-                   appScheme: AbacusStateManager.shared.appSetting?.scheme)
+                   appScheme: Bundle.main.scheme)
 
         let header = SettingHeaderViewModel()
         header.text = "Debug Settings"
