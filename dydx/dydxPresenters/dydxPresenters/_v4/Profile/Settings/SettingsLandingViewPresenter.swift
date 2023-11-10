@@ -60,6 +60,7 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
 
     private static let envLocalizerKeyLookup: [String: String] = [
         "dydxprotocol-testnet": "APP.HEADER.TESTNET",
+        "dydxprotocol-mainnet": "APP.HEADER.MAINNET",
         "1": "APP.HEADER.MAINNET"
     ]
 
@@ -68,11 +69,23 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
 
         guard let link = output.link,
               let deepLink = DeepLink(rawValue: link),
-              let localizerKey = SettingsStore.shared?.value(forKey: deepLink.settingsStoreKey) as? String,
-              let displayTextKey = deepLink.localizerKeyLookup[localizerKey]
+              let localizerKey = SettingsStore.shared?.value(forKey: deepLink.settingsStoreKey) as? String
         else { return textViewModel }
 
-        textViewModel.text = DataLocalizer.shared?.localize(path: displayTextKey, params: nil)
+        let valueComponents = localizerKey.components(separatedBy: "-")
+        if let displayTextKey = deepLink.localizerKeyLookup[localizerKey] {
+            textViewModel.text = DataLocalizer.shared?.localize(path: displayTextKey, params: nil)
+
+            // custom string parsing based on values in config/env.json file. Worst case, if this does not parse a trading network id successfully, the displayed value is empty
+        } else if valueComponents.count >= 2
+                    && valueComponents[0].lowercased() == "dydxprotocol"
+                    && (valueComponents[1].lowercased() == "staging" || valueComponents[1].lowercased() == "testnet" || valueComponents[1].lowercased() == "mainnet" || valueComponents[1].lowercased() == "dev") {
+            var textBuilder = valueComponents[1].localizedCapitalized
+            if valueComponents.count > 2 {
+                textBuilder += " (\(valueComponents[2..<valueComponents.count].joined(separator: " ")))"
+            }
+            textViewModel.text = textBuilder
+        }
 
         return textViewModel
     }
