@@ -23,7 +23,22 @@ class dydxProfileHeaderViewPresenter: HostedViewPresenter<dydxProfileHeaderViewM
         if let chainLogo = AbacusStateManager.shared.environment?.chainLogo {
             self.viewModel?.dydxChainLogoUrl = URL(string: chainLogo)
         }
-        self.viewModel?.onTapAction = {
+        self.viewModel?.switchWalletAction = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            AbacusStateManager.shared.state.walletState
+                .prefix(1)
+                .sink { walletState in
+                    if walletState.wallets.count > 0 {
+                        Router.shared?.navigate(to: RoutingRequest(path: "/wallets"), animated: true, completion: nil)
+                    } else {
+                        Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+                    }
+                }
+                .store(in: &self.subscriptions)
+        }
+        self.viewModel?.seeMoreInfoAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/my-profile/address"), animated: true, completion: nil)
         }
     }
