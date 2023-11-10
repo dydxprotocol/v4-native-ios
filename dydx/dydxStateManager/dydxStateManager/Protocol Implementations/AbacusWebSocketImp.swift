@@ -27,6 +27,10 @@ final public class AbacusWebSocketImp: NSObject, Abacus.WebSocketProtocol {
     }
 
     public func connect(url: String, connected: @escaping (KotlinBoolean) -> Void, received: @escaping (String) -> Void) {
+        guard url.starts(with: "ws") else {
+            return
+        }
+
         self.url = url
         self.connected = connected
         self.received = received

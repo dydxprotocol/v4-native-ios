@@ -12,11 +12,7 @@ import Utilities
 public enum dydxBoolFeatureFlag: String, CaseIterable {
     case push_notification
     case full_story
-    case magic_link
-    case fixed_gas_estimate
-    case deposit_feature
-    case withdrawal_feature
-    case transfer_out_feature
+    case force_mainnet
 
     private static let obj = NSObject()
 
@@ -32,7 +28,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
 }
 
 public enum dydxStringFeatureFlag: String {
-    case v4_theme
+    case deployment_url
 
     private static let obj = NSObject()
 
