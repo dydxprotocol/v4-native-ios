@@ -13,6 +13,7 @@ import ParticlesKit
 import PlatformUI
 import PlatformUIJedio
 import JedioKit
+import dydxStateManager
 
 class SettingsLandingViewPresenter: SettingsViewPresenter {
 
@@ -31,13 +32,13 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
             }
         }
 
-        var localizerKeyLookup: [String: String] {
+        var localizerKeyLookup: [String: String]? {
             switch self {
             // extracting the localizer key lookup from the definition file reduces sources of truth for the key value mapping
             case .language: return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "settings_language.json")
             case .theme: return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "settings_theme.json")
             // this one is hardcoded for now, there is no field input definition file for environment selection yet
-            case .env: return envLocalizerKeyLookup
+            case .env: return nil
             case .colorPreference: return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "settings_direction_color_preference.json")
             }
         }
@@ -58,12 +59,6 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
         return dictionary
     }
 
-    private static let envLocalizerKeyLookup: [String: String] = [
-        "dydxprotocol-testnet": "APP.HEADER.TESTNET",
-        "dydxprotocol-mainnet": "APP.HEADER.MAINNET",
-        "1": "APP.HEADER.MAINNET"
-    ]
-
     override func createOutputItem(output: FieldOutput) -> FieldOutputTextViewModel {
         let textViewModel = super.createOutputItem(output: output)
 
@@ -73,18 +68,10 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
         else { return textViewModel }
 
         let valueComponents = localizerKey.components(separatedBy: "-")
-        if let displayTextKey = deepLink.localizerKeyLookup[localizerKey] {
+        if let displayTextKey = deepLink.localizerKeyLookup?[localizerKey] {
             textViewModel.text = DataLocalizer.shared?.localize(path: displayTextKey, params: nil)
-
-            // custom string parsing based on values in config/env.json file. Worst case, if this does not parse a trading network id successfully, the displayed value is empty
-        } else if valueComponents.count >= 2
-                    && valueComponents[0].lowercased() == "dydxprotocol"
-                    && (valueComponents[1].lowercased() == "staging" || valueComponents[1].lowercased() == "testnet" || valueComponents[1].lowercased() == "mainnet" || valueComponents[1].lowercased() == "dev") {
-            var textBuilder = valueComponents[1].localizedCapitalized
-            if valueComponents.count > 2 {
-                textBuilder += " (\(valueComponents[2..<valueComponents.count].joined(separator: " ")))"
-            }
-            textViewModel.text = textBuilder
+        } else if let env = AbacusStateManager.shared.availableEnvironments.first(where: { $0.type == localizerKey }) {
+            textViewModel.text = env.localizedString
         }
 
         return textViewModel
