@@ -67,7 +67,6 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
               let localizerKey = SettingsStore.shared?.value(forKey: deepLink.settingsStoreKey) as? String
         else { return textViewModel }
 
-        let valueComponents = localizerKey.components(separatedBy: "-")
         if let displayTextKey = deepLink.localizerKeyLookup?[localizerKey] {
             textViewModel.text = DataLocalizer.shared?.localize(path: displayTextKey, params: nil)
         } else if let env = AbacusStateManager.shared.availableEnvironments.first(where: { $0.type == localizerKey }) {
