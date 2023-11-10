@@ -147,26 +147,26 @@ public class dydxPortfolioViewModel: PlatformViewModel {
                     .animateHeight(height: self.expanded ? 460 : 332)
                     .animation(.easeIn(duration: 0.2), value: self.expanded)
 
-                    self.sections.createView(parentStyle: style)
-
-                    switch self.sectionSelection {
-                    case .trades:
-                        self.fills
-                            .createView(parentStyle: style)
-                    case .positions:
-                        self.positions
-                            .createView(parentStyle: style)
-                    case .orders:
-                        self.orders
-                            .createView(parentStyle: style)
-                    case .funding:
-                        self.funding
-                            .createView(parentStyle: style)
-                    case .transfers, .fees:
-                        PlatformView.nilView
+                    Section(header: self.sections.createView(parentStyle: style)) {
+                        switch self.sectionSelection {
+                        case .trades:
+                            self.fills
+                                .createView(parentStyle: style)
+                        case .positions:
+                            self.positions
+                                .createView(parentStyle: style)
+                        case .orders:
+                            self.orders
+                                .createView(parentStyle: style)
+                        case .funding:
+                            self.funding
+                                .createView(parentStyle: style)
+                        case .transfers, .fees:
+                            PlatformView.nilView
+                        }
+                        // add space to adjust for tab bar
+                        Spacer(minLength: 80)
                     }
-                    // add space to adjust for tab bar
-                    Spacer(minLength: 80)
                 }
             }
         )
