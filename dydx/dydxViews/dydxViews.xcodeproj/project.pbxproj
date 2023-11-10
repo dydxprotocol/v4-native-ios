@@ -161,6 +161,7 @@
 		277442982AD88C4900C91357 /* Satoshi-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 277442962AD88C4900C91357 /* Satoshi-Regular.otf */; };
 		27A799B92A66EC2D007C3D04 /* ThemeClassicDark.json in Resources */ = {isa = PBXBuildFile; fileRef = 27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */; };
 		27AAA9862ACE34C800AF3C56 /* SwiftMessages+Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */; };
+		27C027452AFD734800E92CCB /* dydxSettingsHelpRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */; };
 		27ED340C2AD47CB100C159F5 /* dydxBannerErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */; };
 		27ED365C2AD735A800C159F5 /* dydxSecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED365B2AD735A800C159F5 /* dydxSecurityView.swift */; };
 		645299F22AE86FC3000810E6 /* dydxUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645299F12AE86FC3000810E6 /* dydxUpdateView.swift */; };
@@ -495,6 +496,7 @@
 		277442962AD88C4900C91357 /* Satoshi-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Regular.otf"; sourceTree = "<group>"; };
 		27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ThemeClassicDark.json; sourceTree = "<group>"; };
 		27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMessages+Banner.swift"; sourceTree = "<group>"; };
+		27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsHelpRowView.swift; sourceTree = "<group>"; };
 		27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxBannerErrorAlert.swift; sourceTree = "<group>"; };
 		27ED365B2AD735A800C159F5 /* dydxSecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSecurityView.swift; sourceTree = "<group>"; };
 		4FF528D5C65F7B79E5D5812D /* Pods-iOS-dydxViews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxViews.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxViews/Pods-iOS-dydxViews.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1018,6 +1020,7 @@
 				028DB33D2A0589270090BE58 /* dydxProfileHeaderView.swift */,
 				02F95A8B2A1D6A9200828F9A /* dydxProfileHistoryView.swift */,
 				02F6E7102A8292FC0018F00C /* dydxProfileFeesView.swift */,
+				27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1811,6 +1814,7 @@
 				270BA8CF2A6F1470009212EA /* dydxDebugThemeViewerView.swift in Sources */,
 				0273A1382ACCC49C001B89F5 /* dydxHistoryView.swift in Sources */,
 				0246DE5E28B984C700A7FF1F /* Wallets2View.swift in Sources */,
+				27C027452AFD734800E92CCB /* dydxSettingsHelpRowView.swift in Sources */,
 				0253155129BFA62700D6CC9B /* dydxOnboardScanInstructionsView.swift in Sources */,
 				024B7B5C28B7F90100F7C386 /* dydxViewBundleClass.swift in Sources */,
 				02A9B60C29005A3F00AE1516 /* AmountChange.swift in Sources */,
