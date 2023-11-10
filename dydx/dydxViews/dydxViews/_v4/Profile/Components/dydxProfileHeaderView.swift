@@ -62,7 +62,9 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
                     chainIcon
                         .createView(parentStyle: parentStyle)
                     Spacer()
-                    switchWalletButton
+                    if self.dydxAddress?.isEmpty == false {
+                        switchWalletButton
+                    }
                 }
                 HStack {
                     addressInfoView
