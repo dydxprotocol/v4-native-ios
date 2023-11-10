@@ -37,7 +37,7 @@ private class dydxSettingsLandingViewPresenter: SettingsLandingViewPresenter {
         }
         super.init(definitionFile: definitionFile,
                    keyValueStore: SettingsStore.shared,
-                   appScheme: AbacusStateManager.shared.appSetting?.scheme)
+                   appScheme: Bundle.main.scheme)
 
         let header = SettingHeaderViewModel()
         header.text = DataLocalizer.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS")

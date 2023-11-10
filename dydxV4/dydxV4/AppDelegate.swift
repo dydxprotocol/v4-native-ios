@@ -6,26 +6,26 @@
 //  Copyright © 2018 dYdX. All rights reserved.
 //
 
+import Cartera
+import CoinbaseWalletSDK
+import Combine
+import dydxFormatter
+import dydxPresenters
+import dydxStateManager
+import dydxViews
 import ParticlesKit
 import PlatformParticles
 import PlatformRouting
+import PlatformUI
 import RoutingKit
 import UIAppToolkits
 import UIToolkits
 import Utilities
-import CoinbaseWalletSDK
-import PlatformUI
-import dydxViews
-import dydxStateManager
-import Cartera
-import Combine
-import dydxFormatter
-import dydxPresenters
 
 #if _iOS
-import FirebaseStaticInjections
-import Foundation
-import UIKit
+    import FirebaseStaticInjections
+    import Foundation
+    import UIKit
 #endif
 
 public class dydxAppInjection: ParticlesPlatformAppInjection {
@@ -138,9 +138,9 @@ class AppDelegate: CommonAppDelegate {
     override func router() -> RouterProtocol? {
         let routingFile = "routing_swiftui.json"
 
-        if  let scheme = AbacusStateManager.shared.appSetting?.scheme,
-            let file = Bundle.dydxPresenters.path(forResource: routingFile, ofType: ""),
-            let jsonString = try? String(contentsOfFile: file).replacingOccurrences(of: "{APP_SCHEME}", with: scheme) {
+        let scheme = Bundle.main.scheme ?? "dydxv4"
+        if let file = Bundle.dydxPresenters.path(forResource: routingFile, ofType: ""),
+           let jsonString = try? String(contentsOfFile: file).replacingOccurrences(of: "{APP_SCHEME}", with: scheme) {
             let router = MappedUIKitAppRouter(jsonString: jsonString)
             router.appState = AppState.shared
             // sets up web app routing path
@@ -155,7 +155,7 @@ class AppDelegate: CommonAppDelegate {
     }
 
     override func deepLinkHandled(deeplink: URL, successful: Bool) {
-        let data =  ["url": deeplink.absoluteString]
+        let data = ["url": deeplink.absoluteString]
         if successful {
             if let type = deeplink.params?["notification_type"] {
                 Tracking.shared?.view("/notification/deeplink/" + type, data: data)

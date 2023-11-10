@@ -25,7 +25,7 @@ public extension Bundle {
         var bundles = [Bundle]()
         bundles.append(Bundle.main)
         if let json = JsonLoader.load(bundle: Bundle.main, fileName: "ui.json") as? [String] {
-            let names = json.map({ (name) -> String in
+            let names = json.map({ name -> String in
                 name.lowercased()
             })
             let set = Set(names)
@@ -52,9 +52,9 @@ public extension Bundle {
         }
         return bundles
     }()
-    
-    @objc static func load(xib name: String, owner: Any?, options: [UINib.OptionsKey : Any]? = nil) -> [Any]? {
-        var result: [Any]? = nil
+
+    @objc static func load(xib name: String, owner: Any?, options: [UINib.OptionsKey: Any]? = nil) -> [Any]? {
+        var result: [Any]?
         for bundle in particles {
             result = bundle.safeLoad(xib: name, owner: owner, options: options)
         }
@@ -68,6 +68,14 @@ public extension Bundle {
         }
         return nil
     }
+
+    var scheme: String? {
+        return parser.asStrings(
+            parser.asDictionary(
+                parser.asArray(Bundle.main.infoDictionary?["CFBundleURLTypes"])?.first
+            )?["CFBundleURLSchemes"]
+        )?.first
+    }
 }
 
 public extension Bundle {
@@ -76,7 +84,7 @@ public extension Bundle {
             object(forInfoDictionaryKey: "CFBundleName") as? String
     }
 
-    @objc func safeLoad(xib: String, owner: Any? = nil, options: [UINib.OptionsKey : Any]? = nil) -> [Any]? {
+    @objc func safeLoad(xib: String, owner: Any? = nil, options: [UINib.OptionsKey: Any]? = nil) -> [Any]? {
         let file = path(forResource: xib, ofType: "nib")
         if File.exists(file) {
             return loadNibNamed(xib, owner: owner, options: options)
@@ -93,7 +101,7 @@ public extension Bundle {
     var build: String? {
         return infoDictionary?["CFBundleVersion"] as? String
     }
-    
+
     var versionAndBuild: String? {
         if let version = version {
             if let build = build {
@@ -111,7 +119,7 @@ public extension Bundle {
         }
         return nil
     }
-    
+
     func versionCompare(otherVersion: String) -> ComparisonResult {
         guard let version = version else {
             return .orderedAscending
