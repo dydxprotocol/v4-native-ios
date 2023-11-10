@@ -44,11 +44,16 @@ public class FieldInputTextsInputViewModel: FieldInputBaseViewModel {
                     Spacer()
                     PlatformInputModel(value: self.inputBinding,
                                        currentValue: self.input?.value as? String,
-                                       keyboardType: .default)
+                                       keyboardType: .default,
+                                       onEditingChanged: { [weak self] focused in
+                        if (focused == false) {
+                            self?.valueChanged?(self?.input?.value)
+                        }
+                    })
                     .createView(parentStyle: style)
                     .padding(.vertical, 2)
                     .padding(.horizontal, 8)
-                    .themeColor(background: .layer0)
+                    .themeColor(background: .layer5)
                 }
                 .padding()
             )
