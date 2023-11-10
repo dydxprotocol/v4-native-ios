@@ -9,7 +9,6 @@
 import SwiftUI
 import PlatformUI
 import Utilities
-import SDWebImageSwiftUI
 
 public class dydxProfileButtonsViewModel: PlatformViewModel {
     @Published public var depositAction: (() -> Void)?
@@ -57,6 +56,7 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
                         self.createButton(parentStyle: style,
                                           imageName: "icon_wallet_connect",
                                           title: DataLocalizer.localize(path: "APP.GENERAL.CONNECT"),
+                                          // TODO: use primary button style here
                                           backgroundColor: .colorPurple,
                                           action: self.onboardAction)
                     }
