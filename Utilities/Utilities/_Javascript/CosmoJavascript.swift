@@ -42,7 +42,7 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
     }
 
     public func withdrawToIBC(subaccount: Int,
-                              amount: Double,
+                              amount: String,
                               payload: String,
                               completion: @escaping JavascriptCompletion) {
         if let data = payload.data(using: .utf8) {
