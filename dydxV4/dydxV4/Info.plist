@@ -44,6 +44,8 @@
 		<key>RecordOnStart</key>
 		<false/>
 	</dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>rainbow</string>

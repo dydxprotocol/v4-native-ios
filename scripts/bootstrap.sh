@@ -33,8 +33,8 @@ else
 	cd ..
 fi
 
-open native-ios-v4/dydx/dydx.xcworkspace
+open v4-native-ios/dydx/dydx.xcworkspace
 
-#xcodebuild -workspace native-ios-v4/dydx/dydx.xcworkspace -scheme dydxV4 -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.4' build
+#xcodebuild -workspace v4-native-ios/dydx/dydx.xcworkspace -scheme dydxV4 -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.4' build
 
-#xcodebuild clean archive -archivePath build/dydxV4 -scheme dydxV4 -workspace  native-ios-v4/dydx/dydx.xcworkspace -sdk iphoneos -destination 'generic/platform=iOS' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+#xcodebuild clean archive -archivePath build/dydxV4 -scheme dydxV4 -workspace  v4-native-ios/dydx/dydx.xcworkspace -sdk iphoneos -destination 'generic/platform=iOS' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
