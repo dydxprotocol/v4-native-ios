@@ -211,7 +211,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
             self.screen(originationAddress: originationAddress, destinationAddress: destinationAddress) { success in
                 guard success else { return }
                 guard let data = transferInput.requestPayload?.data,
-                      let amount = self.parser.asDecimal(transferInput.size?.usdcSize)?.doubleValue else {
+                      let amount = transferInput.size?.usdcSize, (self.parser.asDecimal(amount)?.doubleValue ?? 0) > 0.0 else {
                     return
                 }
                 let gasFee = transferInput.summary?.gasFee?.doubleValue ?? 0
