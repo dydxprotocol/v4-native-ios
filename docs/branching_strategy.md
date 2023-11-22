@@ -44,33 +44,68 @@ Hotfixes address critical production issues, requiring immediate resolution outs
 - These are no different than a normal release branch aside from being based on a previous `release/...` branch instead of `main`
 - After testing, hotfixes merge into both `main` and `develop` to update the production version and include fixes in the upcoming releases.
 
-**Hotfix Workflow:**
+### Hotfix Workflow
 
-Let's say that an issue needing a hotfix was discovered in released version `1.0.1`
+Let's say that an issue needing a hotfix was discovered in released version `1.0.1` 
 
 1. Locate the `release/1.0.1` branch.
-2. Branch off into a new hotfix `release/1.0.2` branch.
+2. Branch off `release/1.0.1` into a new hotfix `release/1.0.2` branch.
     ```sh
     git checkout release/1.0.1
     git pull
     git checkout -b release/1.0.2
     ```
 3. Implement and test the fix rigorously on the hotfix branch.
-4. Merge the hotfix branch into `main` and deploy to production.
+4. If hotfix release version is **greater** than latest main version tag, follow workflow A. Otherwise follow workflow B.
+
+#### **Workflow A**
+1. merge the hotfix branch into `main`
     ```sh
     git checkout main
     git merge release/1.0.2
     ```
-5. Tag this new release with an updated version number.
+2. Tag this new release merge commit on `main` with an updated version number.
     ```sh
     git tag -a v(new_version) -m "v1.0.2"
     git push origin --tags
     ```
-6. Merge the hotfix into `develop` to ensure it's part of future releases.
+3. Merge the hotfix into `develop` to ensure it's part of future releases.
     ```sh
     git checkout develop
     git merge release/1.0.2
     ```
+
+#### **Workflow B**
+1.  Branch off `release/<LATEST>` into another hotfix `release/<LATEST_PATCH_INCREMENTED>` branch. 
+    ```sh
+    # e.g. LATEST is 2.1.1
+    git checkout release/<LATEST> 
+    git pull
+    # LATEST_PATCH_INCREMENTED would then be 2.1.2
+    git checkout -b release/<LATEST_PATCH_INCREMENTED> 
+    ```
+2. Merge the `release/1.0.2` hotfix changes into `release/<LATEST_PATCH_INCREMENTED>`
+    ```sh
+    git checkout release/<LATEST_PATCH_INCREMENTED>
+    git merge release/1.0.2
+    ```
+3. merge the `release/<LATEST_PATCH_INCREMENTED>` hotfix branch into `main`
+    ```sh
+    git checkout main
+    git merge release/<LATEST_PATCH_INCREMENTED>
+    ```
+4. Tag this new release merge commit on `main` with an updated version number.
+    ```sh
+    git tag -a v(new_version) -m "v<LATEST_PATCH_INCREMENTED>"
+    git push origin --tags
+    ```
+5. Merge the hotfix into `develop` to ensure it's part of future releases.
+    ```sh
+    git checkout develop
+    git merge release/<LATEST_PATCH_INCREMENTED>
+    ``` 
+    
+    
 
 ## 3. Example
 The following branching history visualization depicts a project which:
