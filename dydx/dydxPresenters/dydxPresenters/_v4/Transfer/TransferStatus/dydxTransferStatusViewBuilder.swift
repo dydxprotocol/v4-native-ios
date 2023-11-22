@@ -315,6 +315,10 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
     }
 
     private func routeCompleted(transferStatus: Abacus.TransferStatus, chainId: String?) -> Bool {
+        if transferStatus.squidTransactionStatus == "success" {
+            return true
+        }
+
         if transferStatus.status?.contains("executed") ?? false,
            let lastStatus = transferStatus.routeStatuses?.last,
            lastStatus.chainId == chainId,
