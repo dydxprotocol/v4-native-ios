@@ -26,7 +26,7 @@ Other dependencies are specified by the Cocoapods and Swift Package Manager conf
 
 # API Keys & Secrets
 Unzip the `secrets.zip` from the `iOS Secrets` vault in the dYdX 1Password account. Ask a team member for access.
-Add the `secrets/` folder to the native-ios-v4/scripts folder.
+Add the `secrets/` folder to the v4-native-ios/scripts folder.
 
 > `mv {REPLACE_WITH_PATH_TO_UNZIPPED}/secrets {REPLACE_WITH_REPO}/scripts`
 
@@ -45,7 +45,7 @@ Javascript code is generated in v4-client. To update
 
 Get the desired commit from v4-client
 Copy from {v4-client}/__native__/__ios__/v4-native-client.js
-to {native-ios-v4}/dydx/dydxPresenters/_Feature/
+to {v4-native-ios}/dydx/dydxPresenters/_Feature/
 
 To generate v4-native-client.js from the v4-client repo, run
 
