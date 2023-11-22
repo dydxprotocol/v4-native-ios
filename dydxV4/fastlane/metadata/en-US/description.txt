@@ -1,0 +1,17 @@
+dYdX Chain is the world's most advanced trading software. dYdX Chain is a decentralized finance (DeFi) software that empowers you to be in full control of your assets and trades at all times. Gone are the days of unwanted interference from centralized exchanges. dYdX Chain offers exposure to over 30 unique cryptocurrency markets ranging from Bitcoin (BTC) and Ethereum (ETH) to popular alternate currencies like Aave (AAVE), Avalanche (AVAX), Cardano (ADA), Chainlink (LINK), Dogecoin (DOGE), Solana (SOL), Terra (LUNA), and Uniswap (UNI). After depositing funds to dYdX Chain, traders benefit from:
+
+⛽️ No gas fees for trading
+💸 Low trading fees & minimum order sizes
+⚙ Advanced order types
+💦 Liquid order books
+
+dYdX Chain also offers access to an advanced trading experience with a variety of trading order types, including Market, Limit, Stop Limit, Trailing Stop, and Take Profit Limit orders. It is also compatible with all of the most popular wallets, so you can connect & start trading within minutes.
+
+Explore the community and connect with fellow traders around the world.
+Website: <TODO_INSERT_LINK_HERE>
+Twitter: <TODO_INSERT_LINK_HERE>
+Discord: <TODO_INSERT_LINK_HERE>
+
+Please read the disclosures below before you begin trading on dYdX Chain.
+Terms of Use: <TODO_INSERT_LINK_HERE>
+Privacy Policy: <TODO_INSERT_LINK_HERE>
