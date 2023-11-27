@@ -137,7 +137,8 @@ private class dydxOnboardScanViewPresenter: HostedViewPresenter<dydxOnboardScanV
             completed(decriptionKey)
         } else {
             let prompter = PrompterFactory.shared?.textPrompter()
-            prompter?.prompt(title: "Enter the decoding key", message: nil, text: nil, placeholder: nil, completion: { text, ok in
+            prompter?.prompt(title: DataLocalizer.localize(path: "APP.ONBOARDING.ENTER_CODE"),
+                             message: nil, text: nil, placeholder: nil, completion: { text, ok in
                 if ok, let text = text {
                     completed(text)
                 }
