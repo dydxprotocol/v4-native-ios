@@ -10,6 +10,7 @@ import Abacus
 import dydxStateManager
 import dydxViews
 import RoutingKit
+import Utilities
 
 protocol dydxProfileHeaderViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxProfileHeaderViewModel? { get }
@@ -38,9 +39,6 @@ class dydxProfileHeaderViewPresenter: HostedViewPresenter<dydxProfileHeaderViewM
                 }
                 .store(in: &self.subscriptions)
         }
-        self.viewModel?.seeMoreInfoAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/my-profile/address"), animated: true, completion: nil)
-        }
     }
 
     override func start() {
@@ -49,6 +47,20 @@ class dydxProfileHeaderViewPresenter: HostedViewPresenter<dydxProfileHeaderViewM
         AbacusStateManager.shared.state.walletState
             .sink { [weak self] walletState in
                 self?.viewModel?.dydxAddress = walletState.currentWallet?.cosmoAddress
+                if let address = walletState.currentWallet?.cosmoAddress {
+                    self?.viewModel?.copyAction = {
+                        UIPasteboard.general.string = address
+                    }
+                    self?.viewModel?.openInEtherscanAction = {
+                        let urlString = "https://etherscan.io/address/\(address)"
+                        if let url = URL(string: urlString), URLHandler.shared?.canOpenURL(url) ?? false {
+                            URLHandler.shared?.open(url, completionHandler: nil)
+                        }
+                    }
+                } else {
+                    self?.viewModel?.copyAction = nil
+                    self?.viewModel?.openInEtherscanAction = nil
+                }
             }
             .store(in: &subscriptions)
     }
