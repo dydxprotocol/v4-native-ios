@@ -68,21 +68,6 @@ private class dydxAddressDetailsViewPresenter: HostedViewPresenter<dydxAddressDe
                                            type: .success,
                                            error: nil, time: 3)
                 }
-
-                self?.viewModel?.etherscanAction = {
-                    guard let ethereumAddress = walletState.currentWallet?.ethereumAddress else {
-                        return
-                    }
-
-                    let urlString = "https://etherscan.io/address/\(ethereumAddress)"
-                    if let url = URL(string: urlString), URLHandler.shared?.canOpenURL(url) ?? false {
-                        URLHandler.shared?.open(url, completionHandler: nil)
-                    }
-                }
-
-                self?.viewModel?.keyExportAction = {
-                    Router.shared?.navigate(to: RoutingRequest(url: "/my-profile/keyexport"), animated: true, completion: nil)
-                }
             }
             .store(in: &subscriptions)
     }

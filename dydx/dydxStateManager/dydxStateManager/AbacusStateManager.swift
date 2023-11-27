@@ -14,7 +14,10 @@ import dydxFormatter
 public final class AbacusStateManager: NSObject {
     public static let shared = AbacusStateManager()
 
-    public let deploymentUri = dydxStringFeatureFlag.deployment_url.string ?? (CredientialConfig.shared.key(for: "webAppUrl"))!
+    public let deploymentUri = {
+        let url = dydxStringFeatureFlag.deployment_url.string ?? (CredientialConfig.shared.key(for: "webAppUrl"))!
+        return url.last == "/" ? url : url + "/"
+    }()
 
     public var isMainNet: Bool {
         asyncStateManager.environment?.isMainNet ?? false

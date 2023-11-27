@@ -14,7 +14,7 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
     @Published public var dydxChainLogoUrl: URL?
     @Published public var dydxAddress: String?
     @Published public var seeMoreInfoAction: (() -> Void)?
-    @Published public var switchWalletAction: (() -> Void)?
+    @Published public var manageWalletAction: (() -> Void)?
 
     public init() { }
 
@@ -34,14 +34,14 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
                                                      clip: .noClip,
                                                      size: .init(width: 14, height: 8),
                                                      templateColor: .textTertiary)
-            let switchWalletButton = HStack(spacing: 9) {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.SWITCH_WALLET"))
+            let manageWalletButton = HStack(spacing: 9) {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.MANAGE_WALLET"))
                     .themeFont(fontSize: .small)
                     .themeColor(foreground: .textTertiary)
                     dropDownIcon.createView(parentStyle: parentStyle)
                 }
                 .onTapGesture { [weak self] in
-                    self?.switchWalletAction?()
+                    self?.manageWalletAction?()
                 }
 
             let addressInfoView = VStack(alignment: .leading, spacing: 4) {
@@ -63,7 +63,7 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
                         .createView(parentStyle: parentStyle)
                     Spacer()
                     if self.dydxAddress?.isEmpty == false {
-                        switchWalletButton
+                        manageWalletButton
                     }
                 }
                 HStack {
