@@ -149,8 +149,12 @@ public class dydxPortfolioFundingViewModel: PlatformListViewModel {
 
     private let _placeholder = PlaceholderViewModel()
 
-    public init() {
-        super.init()
+    public init(items: [PlatformViewModel] = [], contentChanged: (() -> Void)? = nil) {
+        super.init(items: items,
+                   intraItemSeparator: true,
+                   firstListItemTopSeparator: true,
+                   lastListItemBottomSeparator: true,
+                   contentChanged: contentChanged)
         self.placeholder = _placeholder
         self.header = createHeader().wrappedViewModel
         self.width = UIScreen.main.bounds.width - 16
@@ -177,6 +181,7 @@ public class dydxPortfolioFundingViewModel: PlatformListViewModel {
             Text(DataLocalizer.localize(path: "APP.GENERAL.PRICE_FEE"))
         }
         .padding(.horizontal, 16)
+        .padding(.bottom, 16)
         .themeFont(fontSize: .small)
         .themeColor(foreground: .textTertiary)
     }

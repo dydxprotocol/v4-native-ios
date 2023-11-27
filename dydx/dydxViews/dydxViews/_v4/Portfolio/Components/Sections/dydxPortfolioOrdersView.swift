@@ -131,6 +131,7 @@ public class dydxPortfolioOrderItemViewModel: PlatformViewModel {
                 .frame(width: 42, height: 42)
             }
         }
+
     }
 
     private func createMain(parentStyle: ThemeStyle) -> some View {
@@ -188,8 +189,12 @@ public class dydxPortfolioOrdersViewModel: PlatformListViewModel {
 
     private let _placeholder = PlaceholderViewModel()
 
-    public init() {
-        super.init(intraItemSeparator: false)
+    public init(items: [PlatformViewModel] = [], contentChanged: (() -> Void)? = nil) {
+        super.init(items: items,
+                   intraItemSeparator: true,
+                   firstListItemTopSeparator: true,
+                   lastListItemBottomSeparator: true,
+                   contentChanged: contentChanged)
         self.placeholder = _placeholder
         self.header = createHeader().wrappedViewModel
         self.width = UIScreen.main.bounds.width - 16
@@ -211,6 +216,7 @@ public class dydxPortfolioOrdersViewModel: PlatformListViewModel {
             Text(DataLocalizer.localize(path: "APP.GENERAL.PRICE_TYPE"))
         }
         .padding(.horizontal, 16)
+        .padding(.bottom, 16)
         .themeFont(fontSize: .small)
         .themeColor(foreground: .textTertiary)
     }
