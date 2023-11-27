@@ -17,7 +17,7 @@ public extension View {
     }
     
     func themeColor(background: ThemeColor.SemanticColor) -> some View {
-        modifier(SemanticColorModifier(layerColor: background))
+        modifier(BackgroundColorModifier(layerColor: background))
     }
     
     func themeGradient(background: ThemeColor.SemanticColor, gradientColor: Color) -> some View {
@@ -31,7 +31,7 @@ public extension Text {
     }
 }
 
-struct TextColorModifier: ViewModifier {
+private struct TextColorModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
     
     let textColor: ThemeColor.SemanticColor
@@ -42,7 +42,7 @@ struct TextColorModifier: ViewModifier {
     }
 }
 
-struct SemanticColorModifier: ViewModifier {
+private struct BackgroundColorModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
     
     let layerColor: ThemeColor.SemanticColor
@@ -53,7 +53,18 @@ struct SemanticColorModifier: ViewModifier {
     }
 }
 
-struct GradientColorModifier: ViewModifier {
+private struct BorderColorModifier: ViewModifier {
+    @EnvironmentObject var themeSettings: ThemeSettings
+    
+    let layerColor: ThemeColor.SemanticColor
+    
+    func body(content: Content) -> some View {
+        content
+            .background(themeSettings.themeConfig.themeColor.color(of: layerColor))
+    }
+}
+
+private struct GradientColorModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
     
     let layerColor: ThemeColor.SemanticColor
@@ -268,7 +279,42 @@ public extension View {
     func border(borderWidth: CGFloat = 1, cornerRadius: CGFloat = 0, borderColor: Color? = ThemeColor.SemanticColor.layer5.color) -> some View {
         modifier(BorderModifier(cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor))
     }
+    
+    func borderAndClip(style: BorderAndClipStyle, borderColor: ThemeColor.SemanticColor, lineWidth: CGFloat) -> some View {
+        modifier(BorderAndClipModifier(style: style, borderColor: borderColor, lineWidth: lineWidth))
+    }
 }
+
+/// The clip shape/style
+public enum BorderAndClipStyle {
+    /// A rectangular shape with rounded corners with specified corner radius, aligned inside the frame of the view containing it.
+    case cornerRadius(CGFloat)
+    /// A capsule shape is equivalent to a rounded rectangle where the corner radius is chosen as half the length of the rectangle’s smallest edge.
+    case capsule
+}
+
+private struct BorderAndClipModifier: ViewModifier {
+    let style: BorderAndClipStyle
+    let borderColor: ThemeColor.SemanticColor
+    let lineWidth: CGFloat
+
+    func body(content: Content) -> some View {
+        switch style {
+        case .cornerRadius(let cornerRadius):
+            content
+                .clipShape(RoundedRectangle(cornerSize: .init(width: cornerRadius, height: cornerRadius)))
+                .overlay(RoundedRectangle(cornerRadius: cornerRadius)
+                    .strokeBorder(borderColor.color, lineWidth: lineWidth))
+
+        case .capsule:
+            content
+                .clipShape(Capsule())
+                .overlay(Capsule()
+                    .strokeBorder(borderColor.color, lineWidth: lineWidth))
+        }
+    }
+}
+
 
 private struct BorderModifier: ViewModifier {
     var cornerRadius: CGFloat = .infinity

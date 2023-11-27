@@ -23,7 +23,7 @@ class dydxProfileHeaderViewPresenter: HostedViewPresenter<dydxProfileHeaderViewM
         if let chainLogo = AbacusStateManager.shared.environment?.chainLogo {
             self.viewModel?.dydxChainLogoUrl = URL(string: chainLogo)
         }
-        self.viewModel?.switchWalletAction = { [weak self] in
+        self.viewModel?.manageWalletAction = { [weak self] in
             guard let self = self else {
                 return
             }
