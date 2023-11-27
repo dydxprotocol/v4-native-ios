@@ -18,6 +18,8 @@ public class WalletConnectionViewModel: PlatformViewModel {
     @Published public var walletImageUrl: URL?
     @Published public var pnl24hPercent: SignedAmountViewModel?
     @Published public var onTap: (() -> Void)?
+    @Published public var openInEtherscanTapped: (() -> Void)?
+    @Published public var exportSecretPhraseTapped: (() -> Void)?
 
     public init() {}
 
@@ -35,45 +37,76 @@ public class WalletConnectionViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             AnyView(
                 Group {
-                    let icon = PlatformIconViewModel(type: .url(url: self?.walletImageUrl), clip: .defaultCircle)
+                    let buttonBorderWidth = 1.5
+                    let buttonContentVerticalPadding: CGFloat = 8
+                    let buttonContentHorizontalPadding: CGFloat = 12
+
+                    let icon = self?.walletImageUrl == nil ? nil : PlatformIconViewModel(type: .url(url: self?.walletImageUrl), clip: .defaultCircle)
                         .createView(parentStyle: style)
                     let status = PlatformIconViewModel(type: .asset(name: "status_filled", bundle: Bundle.dydxView),
-                                              size: CGSize(width: 8, height: 8),
-                                              templateColor: self?.templateColor ?? .textTertiary)
+                                                       size: CGSize(width: 8, height: 8),
+                                                       templateColor: self?.templateColor ?? .textTertiary)
                         .createView(parentStyle: style)
 
-                    let main =
-                        Text(self?.walletAddress ?? "")
-                            .lineLimit(1)
-                            .truncationMode(.middle)
-                            .themeFont(fontSize: .medium)
-                            .themeColor(foreground: .textPrimary)
+                    let addressText = Text(self?.walletAddress ?? "")
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                        .themeFont(fontSize: .medium)
+                        .themeColor(foreground: .textPrimary)
 
-                    let trailing =
-                        VStack(alignment: .trailing, spacing: 2) {
-                            Text(self?.equity ?? "")
-                                .themeFont(fontType: .number, fontSize: .small)
-                            if let pnl24hPercent = self?.pnl24hPercent {
-                                HStack {
-                                    Text(DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.24H", params: nil))
-                                       .themeFont(fontSize: .smaller)
-                                    pnl24hPercent.createView(parentStyle: style
-                                        .themeColor(foreground: .textTertiary)
-                                        .themeFont(fontType: .number, fontSize: .smaller))
-                                }
+                    let blockExplorerButton = Button(action: {
+                        self?.openInEtherscanTapped?()
+                    }, label: {
+                        HStack(spacing: 4) {
+                            Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.BLOCK_EXPLORER", params: nil) ?? "")
+                                .lineLimit(1)
+                                .themeFont(fontSize: .medium)
+                                .themeColor(foreground: .textTertiary)
+                            PlatformIconViewModel(type: .asset(name: "icon_external_link",
+                                                               bundle: .dydxView),
+                                                  clip: .noClip,
+                                                  size: .init(width: 20, height: 20),
+                                                  templateColor: .textTertiary)
+                            .createView(parentStyle: style)
+                        }
+                        .fixedSize()
+                        .padding(.horizontal, buttonContentHorizontalPadding)
+                        .padding(.vertical, buttonContentVerticalPadding)
+                        .themeColor(background: .layer3)
+                    })
+                        .borderAndClip(style: .capsule, borderColor: .layer6, lineWidth: buttonBorderWidth)
+
+                    let exportPhraseButton = Button(action: {
+                        self?.exportSecretPhraseTapped?()
+                    }, label: {
+                        Text(DataLocalizer.shared?.localize(path: "APP.MNEMONIC_EXPORT.EXPORT_PHRASE", params: nil) ?? "")
+                            .lineLimit(1)
+                            .themeFont(fontSize: .medium)
+                            .themeColor(foreground: .colorRed)
+                            .padding(.horizontal, buttonContentHorizontalPadding)
+                            .padding(.vertical, buttonContentVerticalPadding)
+                    })
+                        .themeColor(background: .colorFadedRed)
+                        .borderAndClip(style: .capsule, borderColor: .borderDestructive, lineWidth: buttonBorderWidth)
+
+                    let main = VStack(alignment: .leading) {
+                        addressText
+                        if self?.selected == true {
+                            HStack(spacing: 10) {
+                                blockExplorerButton
+                                exportPhraseButton
                             }
                         }
-
-                    Group {
-                        PlatformTableViewCellViewModel(leading: status.wrappedViewModel,
-                                                       logo: icon.wrappedViewModel,
-                                                       main: main.wrappedViewModel,
-                                                       trailing: trailing.wrappedViewModel)
-                            .createView(parentStyle: style)
                     }
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-                    .themeColor(background: .layer5)
-                    .cornerRadius(16)
+                        .padding(.vertical, 16)
+
+                    PlatformTableViewCellViewModel(leading: status.wrappedViewModel,
+                                                   logo: icon?.wrappedViewModel,
+                                                   main: main.wrappedViewModel)
+                    .createView(parentStyle: style)
+                    .frame(width: UIScreen.main.bounds.width - 32)
+                    .themeColor(background: self?.selected == true ? .layer1 : .layer3)
+                    .borderAndClip(style: .cornerRadius(10), borderColor: .borderDefault, lineWidth: 1)
                     .onTapGesture {
                         self?.onTap?()
                     }
