@@ -13,7 +13,8 @@ import Utilities
 public class dydxProfileHeaderViewModel: PlatformViewModel {
     @Published public var dydxChainLogoUrl: URL?
     @Published public var dydxAddress: String?
-    @Published public var seeMoreInfoAction: (() -> Void)?
+    @Published public var copyAction: (() -> Void)?
+    @Published public var openInEtherscanAction: (() -> Void)?
     @Published public var manageWalletAction: (() -> Void)?
 
     public init() { }
@@ -55,7 +56,32 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
                     .truncationMode(.middle)
             }
 
-            let seeMoreButton = self.dydxAddress != nil ? PlatformIconViewModel(type: .system(name: "chevron.right"), size: CGSize(width: 16, height: 16)) : PlatformView.nilViewModel
+            let iconDim: CGFloat = 40
+            let iconSpacing: CGFloat = 18
+
+            let copyButton: Button? = copyAction == nil ? nil : Button { [weak self] in
+                if let copyAction = self?.copyAction {
+                    copyAction()
+                    ErrorInfo.shared?.info(title: nil,
+                                           message: DataLocalizer.localize(path: "APP.V4.DYDX_ADDRESS_COPIED"),
+                                           type: .info,
+                                           error: nil, time: 3)
+                }
+            } label: {
+                PlatformIconViewModel(type: .asset(name: "icon_copy", bundle: .dydxView),
+                                      clip: .circle(background: .layer4, spacing: iconSpacing, borderColor: .layer6),
+                                      size: CGSize(width: iconDim, height: iconDim))
+                    .createView()
+            }
+
+            let openInEtherscanAction: Button? = openInEtherscanAction == nil ? nil : Button { [weak self] in
+                self?.openInEtherscanAction?()
+            } label: {
+                PlatformIconViewModel(type: .asset(name: "icon_external_link", bundle: .dydxView),
+                                      clip: .circle(background: .layer4, spacing: iconSpacing, borderColor: .layer6),
+                                      size: CGSize(width: iconDim, height: iconDim))
+                    .createView()
+            }
 
             let content = VStack(spacing: 16) {
                 HStack(alignment: .top) {
@@ -66,16 +92,13 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
                         manageWalletButton
                     }
                 }
-                HStack {
+                HStack(spacing: 0) {
                     addressInfoView
-                    Spacer()
-                    seeMoreButton
-                        .createView(parentStyle: parentStyle)
-                        .onTapGesture { [weak self] in
-                            if self?.dydxAddress != nil {
-                                self?.seeMoreInfoAction?()
-                            }
-                        }
+                    Spacer(minLength: 12)
+                    HStack(spacing: 12) {
+                        copyButton
+                        openInEtherscanAction
+                    }
                 }
             }
                 .padding(.all, 20)
