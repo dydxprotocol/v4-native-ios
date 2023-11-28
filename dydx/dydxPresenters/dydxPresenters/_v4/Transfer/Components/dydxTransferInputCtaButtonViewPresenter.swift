@@ -102,7 +102,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
     }
 
     private func updateCtaAction(transferInput: TransferInput, isOnboarded: Bool) {
-        if isOnboarded {
+        if !isOnboarded {
             self.viewModel?.ctaAction = {
                 Router.shared?.navigate(to: RoutingRequest(path: "/onboard", params: nil), animated: true, completion: nil)
             }
