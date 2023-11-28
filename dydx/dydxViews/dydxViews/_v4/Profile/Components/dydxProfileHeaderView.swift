@@ -13,6 +13,7 @@ import Utilities
 public class dydxProfileHeaderViewModel: PlatformViewModel {
     @Published public var dydxChainLogoUrl: URL?
     @Published public var dydxAddress: String?
+    @Published public var sourceAddress: String?
     @Published public var copyAction: (() -> Void)?
     @Published public var openInEtherscanAction: (() -> Void)?
     @Published public var manageWalletAction: (() -> Void)?
@@ -83,26 +84,43 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
                     .createView()
             }
 
-            let content = VStack(spacing: 16) {
-                HStack(alignment: .top) {
-                    chainIcon
-                        .createView(parentStyle: parentStyle)
-                    Spacer()
-                    if self.dydxAddress?.isEmpty == false {
-                        manageWalletButton
+            let content = VStack(spacing: 0) {
+                VStack(spacing: 16) {
+                    HStack(alignment: .top) {
+                        chainIcon
+                            .createView(parentStyle: parentStyle)
+                        Spacer()
+                        if self.dydxAddress?.isEmpty == false {
+                            manageWalletButton
+                        }
+                    }
+                    HStack(spacing: 0) {
+                        addressInfoView
+                        Spacer(minLength: 12)
+                        HStack(spacing: 12) {
+                            copyButton
+                            openInEtherscanAction
+                        }
                     }
                 }
+                    .padding(.all, 20)
+                    .themeColor(background: .layer4)
+                    .cornerRadius(12, corners: .allCorners)
                 HStack(spacing: 0) {
-                    addressInfoView
-                    Spacer(minLength: 12)
-                    HStack(spacing: 12) {
-                        copyButton
-                        openInEtherscanAction
-                    }
+                    Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.SOURCE_ADDRESS", params: nil) ?? "")
+                        .themeFont(fontType: .text, fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
+                    Spacer(minLength: 64)
+                    Text(self.sourceAddress ?? "")
+                        .truncationMode(.middle)
+                        .lineLimit(1)
+                        .themeFont(fontType: .text, fontSize: .small)
+                        .themeColor(foreground: .textSecondary)
                 }
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 12)
             }
-                .padding(.all, 20)
-                .themeColor(background: .layer4)
+                .themeColor(background: .layer1)
                 .cornerRadius(12, corners: .allCorners)
             return AnyView(content)
         }
