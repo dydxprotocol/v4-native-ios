@@ -47,6 +47,7 @@ class dydxProfileHeaderViewPresenter: HostedViewPresenter<dydxProfileHeaderViewM
         AbacusStateManager.shared.state.walletState
             .sink { [weak self] walletState in
                 self?.viewModel?.dydxAddress = walletState.currentWallet?.cosmoAddress
+                self?.viewModel?.sourceAddress = walletState.currentWallet?.ethereumAddress
                 if let address = walletState.currentWallet?.cosmoAddress {
                     self?.viewModel?.copyAction = {
                         UIPasteboard.general.string = address
