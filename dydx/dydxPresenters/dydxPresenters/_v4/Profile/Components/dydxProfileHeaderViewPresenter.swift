@@ -52,6 +52,8 @@ class dydxProfileHeaderViewPresenter: HostedViewPresenter<dydxProfileHeaderViewM
                     self?.viewModel?.copyAction = {
                         UIPasteboard.general.string = cosmoAddress
                     }
+                } else {
+                    self?.viewModel?.copyAction = nil
                 }
                 if let ethereumAddress = walletState.currentWallet?.ethereumAddress {
                     self?.viewModel?.openInEtherscanAction = {
@@ -61,7 +63,6 @@ class dydxProfileHeaderViewPresenter: HostedViewPresenter<dydxProfileHeaderViewM
                         }
                     }
                 } else {
-                    self?.viewModel?.copyAction = nil
                     self?.viewModel?.openInEtherscanAction = nil
                 }
             }
