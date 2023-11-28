@@ -13,6 +13,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     case push_notification
     case full_story
     case force_mainnet
+    case enable_cctp
 
     private static let obj = NSObject()
 

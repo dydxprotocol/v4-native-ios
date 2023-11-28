@@ -18,34 +18,36 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /// Utilities for NSStrings containing XML
 @interface NSString (GTMNSStringXMLAdditions)
 
 /// Get a string where characters that need escaping for XML are escaped and invalid characters removed
-//
+///
 /// This call escapes '&', '<, '>', '\'', '"' per the xml spec and removes all
 /// invalid characters as defined by Section 2.2 of the xml spec.
 ///
 /// For obvious reasons this call is only safe once.
-//
-//  Returns:
-//    Autoreleased NSString
-//
+///
+///  Returns:
+///    Autoreleased NSString.
 - (NSString *)gtm_stringBySanitizingAndEscapingForXML;
 
 /// Get a string where characters that invalid characters per the XML spec have been removed
-//
+///
 /// This call removes all invalid characters as defined by Section 2.2 of the
 /// xml spec.  If you are writing XML yourself, you probably was to use the
 /// above api (gtm_stringBySanitizingAndEscapingForXML) so any entities also
 /// get escaped.
-//
-//  Returns:
-//    Autoreleased NSString
-//
+///
+///  Returns:
+///    Autoreleased NSString.
 - (NSString *)gtm_stringBySanitizingToXMLSpec;
 
 // There is no stringByUnescapingFromXML because the XML parser will do this.
 // The above api is here just incase you need to create XML yourself.
 
 @end
+
+NS_ASSUME_NONNULL_END
