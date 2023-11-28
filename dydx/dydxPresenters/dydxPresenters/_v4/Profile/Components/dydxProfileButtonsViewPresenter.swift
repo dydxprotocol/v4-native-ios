@@ -31,7 +31,7 @@ class dydxProfileButtonsViewPresenter: HostedViewPresenter<dydxProfileButtonsVie
             Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.withdrawal.rawValue]), animated: true, completion: nil)
         }
 
-        viewModel.transferAction = { [weak self] in
+        viewModel.transferAction = { 
             Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.transferOut.rawValue]), animated: true, completion: nil)
         }
 
