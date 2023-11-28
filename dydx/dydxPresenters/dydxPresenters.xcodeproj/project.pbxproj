@@ -77,7 +77,6 @@
 		02860A9F29C15E760079E644 /* dydxOnboardScanViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02860A9329C15E760079E644 /* dydxOnboardScanViewBuilder.swift */; };
 		028AC6A42A5E564B00FE0891 /* dydxTransferAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028AC6A32A5E564B00FE0891 /* dydxTransferAlertsProvider.swift */; };
 		028DB3402A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */; };
-		028DB3562A05BF630090BE58 /* dydxAddressDetailsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028DB3552A05BF630090BE58 /* dydxAddressDetailsViewBuilder.swift */; };
 		028FB3EC2AD642B30013136C /* dydxTokenConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FB3EB2AD642B30013136C /* dydxTokenConstants.swift */; };
 		0295392329FB256E009026E3 /* dydxThemeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295392229FB256E009026E3 /* dydxThemeViewBuilder.swift */; };
 		0295392729FB28B7009026E3 /* settings_theme.json in Resources */ = {isa = PBXBuildFile; fileRef = 0295392629FB28B7009026E3 /* settings_theme.json */; };
@@ -416,7 +415,6 @@
 		02860A9329C15E760079E644 /* dydxOnboardScanViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxOnboardScanViewBuilder.swift; sourceTree = "<group>"; };
 		028AC6A32A5E564B00FE0891 /* dydxTransferAlertsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferAlertsProvider.swift; sourceTree = "<group>"; };
 		028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileHeaderViewPresenter.swift; sourceTree = "<group>"; };
-		028DB3552A05BF630090BE58 /* dydxAddressDetailsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAddressDetailsViewBuilder.swift; sourceTree = "<group>"; };
 		028FB3EB2AD642B30013136C /* dydxTokenConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTokenConstants.swift; sourceTree = "<group>"; };
 		0295392229FB256E009026E3 /* dydxThemeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxThemeViewBuilder.swift; sourceTree = "<group>"; };
 		0295392629FB28B7009026E3 /* settings_theme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = settings_theme.json; sourceTree = "<group>"; };
@@ -854,7 +852,6 @@
 				023848C32A9E6BCD00B1A673 /* SystemStatus */,
 				2741E3712A689702000FA190 /* DirectionColorPreference */,
 				02F958152A1BDEEF00828F9A /* KeyExport */,
-				028DB34D2A05BE650090BE58 /* AddressDetails */,
 				02E90C4C29D62702004E2311 /* FeatureFlags */,
 				02FAFA4E29D4E079001A0903 /* Debug */,
 				027E1EEA29CA27B00098666F /* Settings */,
@@ -1010,14 +1007,6 @@
 				02860A9329C15E760079E644 /* dydxOnboardScanViewBuilder.swift */,
 			);
 			path = Scan;
-			sourceTree = "<group>";
-		};
-		028DB34D2A05BE650090BE58 /* AddressDetails */ = {
-			isa = PBXGroup;
-			children = (
-				028DB3552A05BF630090BE58 /* dydxAddressDetailsViewBuilder.swift */,
-			);
-			path = AddressDetails;
 			sourceTree = "<group>";
 		};
 		0295391529FB254C009026E3 /* Theme */ = {
@@ -1758,7 +1747,6 @@
 				0230376F28C11BE600412B72 /* dydxMarketsViewBuilder.swift in Sources */,
 				270BA8F32A6F278F009212EA /* dydxDebugThemeViewerBuilder.swift in Sources */,
 				02669B952AD87A9D00A756AA /* dydxGlobalWorkers.swift in Sources */,
-				028DB3562A05BF630090BE58 /* dydxAddressDetailsViewBuilder.swift in Sources */,
 				027CB28729EEFF910069781A /* dydxTransferStatusViewBuilder.swift in Sources */,
 				0257C78E2A00485500F6160B /* SparklineDataPoint.swift in Sources */,
 				028DB3402A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift in Sources */,

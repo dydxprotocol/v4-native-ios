@@ -152,10 +152,6 @@
                 "/my-profile":{
                     "destination":"dydxPresenters.dydxProfileViewBuilder"
                 },
-                "/my-profile/address":{
-                    "destination":"dydxPresenters.dydxAddressDetailsViewBuilder",
-                    "presentation":"push"
-                },
                 "/my-profile/keyexport":{
                     "destination":"dydxPresenters.dydxKeyExportViewBuilder",
                     "presentation":"prompt"
