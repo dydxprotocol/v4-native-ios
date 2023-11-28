@@ -50,14 +50,14 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
                         self.createButton(parentStyle: style,
                                           imageName: "settings_signout",
                                           title: DataLocalizer.localize(path: "APP.GENERAL.SIGN_OUT"),
-                                          applyTemplateColor: false,
+                                          templateColor: nil,
                                           action: self.signOutAction)
                     } else {
                         self.createButton(parentStyle: style,
                                           imageName: "icon_wallet_connect",
                                           title: DataLocalizer.localize(path: "APP.GENERAL.CONNECT"),
-                                          // TODO: use primary button style here
                                           backgroundColor: .colorPurple,
+                                          templateColor: .colorWhite,
                                           action: self.onboardAction)
                     }
                 }
@@ -65,11 +65,11 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
         }
     }
 
-    private func createButton(parentStyle: ThemeStyle, imageName: String, title: String, styleKey: String? = nil, backgroundColor: ThemeColor.SemanticColor = .layer3, applyTemplateColor: Bool = true, action: (() -> Void)?) -> some View {
+    private func createButton(parentStyle: ThemeStyle, imageName: String, title: String, styleKey: String? = nil, backgroundColor: ThemeColor.SemanticColor = .layer3, templateColor: ThemeColor.SemanticColor? = .textSecondary, action: (() -> Void)?) -> some View {
         let icon = PlatformIconViewModel(type: .asset(name: imageName, bundle: Bundle.dydxView),
                                      clip: .circle(background: backgroundColor, spacing: 24, borderColor: .layer6),
                                          size: CGSize(width: 48, height: 48),
-                                         templateColor: applyTemplateColor ? .textSecondary : nil)
+                                         templateColor: templateColor)
         return createButton(parentStyle: parentStyle, icon: icon, title: title, action: action)
     }
 
