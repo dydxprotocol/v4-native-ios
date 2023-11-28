@@ -48,12 +48,14 @@ class dydxProfileHeaderViewPresenter: HostedViewPresenter<dydxProfileHeaderViewM
             .sink { [weak self] walletState in
                 self?.viewModel?.dydxAddress = walletState.currentWallet?.cosmoAddress
                 self?.viewModel?.sourceAddress = walletState.currentWallet?.ethereumAddress
-                if let address = walletState.currentWallet?.cosmoAddress {
+                if let cosmoAddress = walletState.currentWallet?.cosmoAddress {
                     self?.viewModel?.copyAction = {
-                        UIPasteboard.general.string = address
+                        UIPasteboard.general.string = cosmoAddress
                     }
+                }
+                if let ethereumAddress = walletState.currentWallet?.ethereumAddress {
                     self?.viewModel?.openInEtherscanAction = {
-                        let urlString = "https://etherscan.io/address/\(address)"
+                        let urlString = "https://etherscan.io/address/\(ethereumAddress)"
                         if let url = URL(string: urlString), URLHandler.shared?.canOpenURL(url) ?? false {
                             URLHandler.shared?.open(url, completionHandler: nil)
                         }
