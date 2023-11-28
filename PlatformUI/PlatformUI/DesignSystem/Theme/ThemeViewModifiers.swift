@@ -53,17 +53,6 @@ private struct BackgroundColorModifier: ViewModifier {
     }
 }
 
-private struct BorderColorModifier: ViewModifier {
-    @EnvironmentObject var themeSettings: ThemeSettings
-    
-    let layerColor: ThemeColor.SemanticColor
-    
-    func body(content: Content) -> some View {
-        content
-            .background(themeSettings.themeConfig.themeColor.color(of: layerColor))
-    }
-}
-
 private struct GradientColorModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
     
