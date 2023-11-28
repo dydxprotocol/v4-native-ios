@@ -71,7 +71,8 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
             } label: {
                 PlatformIconViewModel(type: .asset(name: "icon_copy", bundle: .dydxView),
                                       clip: .circle(background: .layer4, spacing: iconSpacing, borderColor: .layer6),
-                                      size: CGSize(width: iconDim, height: iconDim))
+                                      size: CGSize(width: iconDim, height: iconDim),
+                                      templateColor: .textSecondary)
                     .createView()
             }
 
@@ -80,7 +81,8 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
             } label: {
                 PlatformIconViewModel(type: .asset(name: "icon_external_link", bundle: .dydxView),
                                       clip: .circle(background: .layer4, spacing: iconSpacing, borderColor: .layer6),
-                                      size: CGSize(width: iconDim, height: iconDim))
+                                      size: CGSize(width: iconDim, height: iconDim),
+                                      templateColor: .textSecondary)
                     .createView()
             }
 
@@ -106,19 +108,21 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
                     .padding(.all, 20)
                     .themeColor(background: .layer4)
                     .cornerRadius(12, corners: .allCorners)
-                HStack(spacing: 0) {
-                    Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.SOURCE_ADDRESS", params: nil) ?? "")
-                        .themeFont(fontType: .text, fontSize: .small)
-                        .themeColor(foreground: .textTertiary)
-                    Spacer(minLength: 64)
-                    Text(self.sourceAddress ?? "")
-                        .truncationMode(.middle)
-                        .lineLimit(1)
-                        .themeFont(fontType: .text, fontSize: .small)
-                        .themeColor(foreground: .textSecondary)
+                if let sourceAddress = self.sourceAddress {
+                    HStack(spacing: 0) {
+                        Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.SOURCE_ADDRESS", params: nil) ?? "")
+                            .themeFont(fontType: .text, fontSize: .small)
+                            .themeColor(foreground: .textTertiary)
+                        Spacer(minLength: 64)
+                        Text(sourceAddress)
+                            .truncationMode(.middle)
+                            .lineLimit(1)
+                            .themeFont(fontType: .text, fontSize: .small)
+                            .themeColor(foreground: .textSecondary)
+                    }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
                 }
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 12)
             }
                 .themeColor(background: .layer1)
                 .cornerRadius(12, corners: .allCorners)
