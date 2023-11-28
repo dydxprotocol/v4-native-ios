@@ -35,6 +35,26 @@
             },
             {
                 "title":{
+                    "text":"Enable CCTP"
+                },
+                "field":{
+                    "field":"enable_cctp",
+                    "optional":true,
+                    "type" : "text",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : "1"
+                        },
+                        {
+                            "text": "no",
+                            "value" : "0"
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
                     "text":"Push Notification"
                 },
                 "field":{
