@@ -117,7 +117,10 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
     private func fetchTransferStatus(transfer: dydxTransferInstance) {
         Timer.publish(every: 30, triggerNow: true)
             .sink { _ in
-                AbacusStateManager.shared.transferStatus(hash: transfer.transactionHash, fromChainId: transfer.fromChainId, toChainId: transfer.toChainId)
+                AbacusStateManager.shared.transferStatus(hash: transfer.transactionHash,
+                                                         fromChainId: transfer.fromChainId,
+                                                         toChainId: transfer.toChainId,
+                                                         isCctp: transfer.isCctp ?? false)
             }
             .store(in: &subscriptions)
     }
