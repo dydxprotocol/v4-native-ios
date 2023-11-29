@@ -29,7 +29,7 @@ public class Wallets2ViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack(alignment: .leading, spacing: 16) {
-                Text(DataLocalizer.localize(path: "APP.GENERAL.SWITCH_WALLET", params: nil))
+                Text(DataLocalizer.localize(path: "APP.GENERAL.MANAGE_WALLET", params: nil))
                     .themeFont(fontType: .bold, fontSize: .largest)
                     .padding(.top, 40)
 
