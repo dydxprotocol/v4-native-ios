@@ -133,9 +133,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                         self?.showError(error: error)
                     } else if let hash = hash {
                         self?.addTransferHash(hash: hash,
-                                              fromChainId: transferInput.chain,
-                                              fromChainName: transferInput.chainName,
-                                              toChainId: AbacusStateManager.shared.dydxChainId,
+                                              fromChainName: transferInput.chainName ?? transferInput.networkName,
                                               toChainName: AbacusStateManager.shared.environment?.chainName,
                                               transferInput: transferInput)
                         self?.showTransferStatus(hash: hash, transferInput: transferInput)
@@ -320,10 +318,8 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
             } else if let hash = result["hash"] as? String {
                 let fullHash = "0x" + hash
                 addTransferHash(hash: fullHash,
-                                fromChainId: AbacusStateManager.shared.dydxChainId,
                                 fromChainName: AbacusStateManager.shared.environment?.chainName,
-                                toChainId: transferInput.chain,
-                                toChainName: transferInput.chainName,
+                                toChainName: transferInput.chainName ?? transferInput.networkName,
                                 transferInput: transferInput)
                 showTransferStatus(hash: fullHash, transferInput: transferInput)
                 resetInputFields()
@@ -373,16 +369,17 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
         }
     }
 
-    private func addTransferHash(hash: String, fromChainId: String?, fromChainName: String?, toChainId: String?, toChainName: String?, transferInput: TransferInput) {
+    private func addTransferHash(hash: String, fromChainName: String?, toChainName: String?, transferInput: TransferInput) {
         let transfer = dydxTransferInstance(transferType: transferType.transferInstanceType,
                                             transactionHash: hash,
-                                            fromChainId: fromChainId,
+                                            fromChainId: transferInput.requestPayload?.fromChainId,
                                             fromChainName: fromChainName,
-                                            toChainId: toChainId,
+                                            toChainId: transferInput.requestPayload?.toChainId,
                                             toChainName: toChainName,
                                             date: Date(),
                                             usdcSize: parser.asDecimal(transferInput.size?.usdcSize)?.doubleValue,
-                                            size: parser.asDecimal(transferInput.size?.size)?.doubleValue)
+                                            size: parser.asDecimal(transferInput.size?.size)?.doubleValue,
+                                            isCctp: transferInput.isCctp)
         AbacusStateManager.shared.addTransferInstance(transfer: transfer)
     }
 }
@@ -391,6 +388,13 @@ private extension TransferInput {
     var chainName: String? {
         if let chain = chain {
             return resources?.chainResources?[chain]?.chainName
+        }
+        return nil
+    }
+
+    var networkName: String? {
+        if let chain = chain {
+            return resources?.chainResources?[chain]?.networkName
         }
         return nil
     }
