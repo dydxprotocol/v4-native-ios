@@ -13,6 +13,7 @@ import Utilities
 public class dydxProfileViewModel: PlatformViewModel {
     @Published public var header = dydxProfileHeaderViewModel()
     @Published public var buttons = dydxProfileButtonsViewModel()
+    @Published public var settingsHelp = dydxSettingsHelpRowViewModel()
     @Published public var history: dydxProfileHistoryViewModel? = dydxProfileHistoryViewModel()
     @Published public var fees: dydxProfileFeesViewModel? = dydxProfileFeesViewModel()
     @Published public var rewards: dydxProfileRewardsViewModel? = dydxProfileRewardsViewModel()
@@ -36,9 +37,12 @@ public class dydxProfileViewModel: PlatformViewModel {
                     self.buttons
                         .createView(parentStyle: style)
 
-                    self.rewards?
+                    self.settingsHelp
                         .createView(parentStyle: style)
                         .padding(.top, 8)
+
+                    self.rewards?
+                        .createView(parentStyle: style)
 
                     self.history?
                         .createView(parentStyle: style)

@@ -42,34 +42,31 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
         super.init()
 
         viewModel = dydxTradeInputCtaButtonViewModel()
-        viewModel?.ctaAction = { [weak self] in
-            self?.viewModel?.ctaButtonState = .disabled(DataLocalizer.localize(path: "APP.TRADE.SUBMITTING_ORDER"))
-            switch transferType {
-            case .deposit:
-                self?.deposit()
-            case .withdrawal:
-                self?.withdrawal()
-            case .transferOut:
-                self?.transferOut()
-            }
-        }
     }
 
     override func start() {
         super.start()
 
         Publishers
-            .CombineLatest(
+            .CombineLatest3(
                 AbacusStateManager.shared.state.transferInput,
-                AbacusStateManager.shared.state.validationErrors)
-            .sink { [weak self] transferInput, tradeErrors in
-                self?.update(transferInput: transferInput, tradeErrors: tradeErrors)
+                AbacusStateManager.shared.state.validationErrors,
+                AbacusStateManager.shared.state.onboarded)
+            .sink { [weak self] transferInput, tradeErrors, isOnboarded in
+                self?.update(transferInput: transferInput, tradeErrors: tradeErrors, isOnboarded: isOnboarded)
             }
             .store(in: &subscriptions)
     }
 
-    private func update(transferInput: TransferInput, tradeErrors: [ValidationError]) {
-        if hasValidSize(transferInput: transferInput) {
+    private func update(transferInput: TransferInput, tradeErrors: [ValidationError], isOnboarded: Bool) {
+        updateCtaAction(transferInput: transferInput, isOnboarded: isOnboarded)
+        updateCtaButtonState(transferInput: transferInput, tradeErrors: tradeErrors, isOnboarded: isOnboarded)
+    }
+
+    private func updateCtaButtonState(transferInput: TransferInput, tradeErrors: [ValidationError], isOnboarded: Bool) {
+        if !isOnboarded {
+            viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONNECT_WALLET"))
+        } else if hasValidSize(transferInput: transferInput) {
             let firstBlockingError = tradeErrors.first { $0.type == ErrorType.required || $0.type == ErrorType.error }
             let transferError = transferInput.errors
             if let firstBlockingError = firstBlockingError {
@@ -100,6 +97,27 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 viewModel?.ctaButtonState = .disabled(DataLocalizer.localize(path: "APP.WITHDRAW_MODAL.ENTER_WITHDRAW_AMOUNT"))
             case .transferOut:
                 viewModel?.ctaButtonState = .disabled(DataLocalizer.localize(path: "APP.DIRECT_TRANSFER_MODAL.ENTER_TRANSFER_AMOUNT"))
+            }
+        }
+    }
+
+    private func updateCtaAction(transferInput: TransferInput, isOnboarded: Bool) {
+        if !isOnboarded {
+            self.viewModel?.ctaAction = {
+                Router.shared?.navigate(to: RoutingRequest(path: "/onboard", params: nil), animated: true, completion: nil)
+            }
+        } else {
+            viewModel?.ctaAction = { [weak self] in
+                guard let self = self else { return }
+                self.viewModel?.ctaButtonState = .disabled(DataLocalizer.localize(path: "APP.TRADE.SUBMITTING_ORDER"))
+                switch self.transferType {
+                case .deposit:
+                    self.deposit()
+                case .withdrawal:
+                    self.withdrawal()
+                case .transferOut:
+                    self.transferOut()
+                }
             }
         }
     }

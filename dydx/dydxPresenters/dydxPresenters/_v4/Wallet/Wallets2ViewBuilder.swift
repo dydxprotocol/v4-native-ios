@@ -98,6 +98,18 @@ private class Wallets2ViewPresenter: HostedViewPresenter<Wallets2ViewModel> {
                 }
             }
 
+            viewModel.openInEtherscanTapped = {
+                let ethereumAddress = wallet.ethereumAddress
+                let urlString = "https://etherscan.io/address/\(ethereumAddress)"
+                if let url = URL(string: urlString), URLHandler.shared?.canOpenURL(url) ?? false {
+                    URLHandler.shared?.open(url, completionHandler: nil)
+                }
+            }
+
+            viewModel.exportSecretPhraseTapped = {
+                Router.shared?.navigate(to: RoutingRequest(url: "/my-profile/keyexport"), animated: true, completion: nil)
+            }
+
             viewModel.walletImageUrl  = wallet.imageUrl
 
             // TODO:
