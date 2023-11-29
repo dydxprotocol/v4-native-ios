@@ -1,5 +1,5 @@
 PODS:
-  - Abacus (1.0.31)
+  - Abacus (1.1.1)
   - Amplitude-iOS (4.10.0)
   - AppsFlyerFramework (6.12.2):
     - AppsFlyerFramework/Main (= 6.12.2)
@@ -143,7 +143,7 @@ PODS:
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleDataTransport (9.2.5):
+  - GoogleDataTransport (9.3.0):
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
@@ -376,7 +376,7 @@ CHECKOUT OPTIONS:
     :http: https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz
 
 SPEC CHECKSUMS:
-  Abacus: 43539791303f5f7afa9eed02d8e6221f1dd50ce1
+  Abacus: 461fefadb72910fa8d1181f07a2a51219d4aef26
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   AppsFlyerFramework: 6eb4d89d2eb9a6632317f1055b359d9fd85fd5ff
   Atributika: 0eabae2cc37999e79c5b94f60213642946991b1c
@@ -405,7 +405,7 @@ SPEC CHECKSUMS:
   FloatingPanel: c88e3fd981b7a74121ff48746fb14d496f5fd553
   FullStory: 29e764d32050cb943d38b7b82c60b2f65f814737
   GoogleAppMeasurement: 70ce9aa438cff1cfb31ea3e660bcc67734cb716e
-  GoogleDataTransport: 54dee9d48d14580407f8f5fbf2f496e92437a2f2
+  GoogleDataTransport: 57c22343ab29bc686febbf7cbb13bad167c2d8fe
   GoogleToolboxForMac: 6359011b317e23bb7a470aa15a58fd8b7b6bca93
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
   GTMSessionFetcher: 41b9ef0b4c08a6db4b7eb51a21ae5183ec99a2c8

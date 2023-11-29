@@ -340,8 +340,8 @@ public final class AbacusStateManager: NSObject {
         transferStateManager.remove(transfer: transfer)
     }
 
-    public func transferStatus(hash: String, fromChainId: String?, toChainId: String?) {
-        asyncStateManager.transferStatus(hash: hash, fromChainId: fromChainId, toChainId: toChainId)
+    public func transferStatus(hash: String, fromChainId: String?, toChainId: String?, isCctp: Bool) {
+        asyncStateManager.transferStatus(hash: hash, fromChainId: fromChainId, toChainId: toChainId, isCctp: isCctp)
     }
 
     private static let storeKey = "AbacusStateManager.EnvState"
