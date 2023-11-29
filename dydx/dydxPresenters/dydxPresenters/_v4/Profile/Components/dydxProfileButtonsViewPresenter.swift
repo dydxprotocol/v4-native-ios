@@ -23,29 +23,16 @@ class dydxProfileButtonsViewPresenter: HostedViewPresenter<dydxProfileButtonsVie
 
         self.viewModel = viewModel
 
-        viewModel.settingsAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/settings"), animated: true, completion: nil)
+        viewModel.depositAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.deposit.rawValue]), animated: true, completion: nil)
         }
 
-        viewModel.helpAction = {
-            let request = RoutingRequest(path: "/help")
-            Router.shared?.navigate(to: request, animated: true, completion: nil)
+        viewModel.withdrawAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.withdrawal.rawValue]), animated: true, completion: nil)
         }
 
-        viewModel.walletAction = { [weak self] in
-            guard let self = self else {
-                return
-            }
-            AbacusStateManager.shared.state.walletState
-                .prefix(1)
-                .sink { walletState in
-                    if walletState.wallets.count > 0 {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/wallets"), animated: true, completion: nil)
-                    } else {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
-                    }
-                }
-                .store(in: &self.subscriptions)
+        viewModel.transferAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.transferOut.rawValue]), animated: true, completion: nil)
         }
 
         viewModel.signOutAction = { [weak self] in
@@ -74,12 +61,6 @@ class dydxProfileButtonsViewPresenter: HostedViewPresenter<dydxProfileButtonsVie
         AbacusStateManager.shared.state.onboarded
             .sink { [weak self] onboarded in
                 self?.viewModel?.onboarded = onboarded
-            }
-            .store(in: &subscriptions)
-
-        AbacusStateManager.shared.state.currentWallet
-            .sink { [weak self] wallet in
-                self?.viewModel?.walletImageUrl = wallet?.imageUrl
             }
             .store(in: &subscriptions)
     }

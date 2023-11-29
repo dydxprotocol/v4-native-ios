@@ -38,7 +38,7 @@ private class dydxTransferViewController: HostingViewController<PlatformView, dy
     }
 }
 
-private enum TransferSection: String {
+public enum TransferSection: String {
     case deposit, withdrawal, transferOut
 
     var sectionIndex: Int {
