@@ -60,6 +60,7 @@ public class dydxProfileHistoryViewModel: PlatformViewModel {
                 VStack(spacing: 0) {
                     HStack {
                         Text(DataLocalizer.localize(path: "APP.GENERAL.HISTORY"))
+                            .themeColor(foreground: .textSecondary)
                             .themeFont(fontSize: .small)
                         Spacer()
                         PlatformIconViewModel(type: .system(name: "chevron.right"),
