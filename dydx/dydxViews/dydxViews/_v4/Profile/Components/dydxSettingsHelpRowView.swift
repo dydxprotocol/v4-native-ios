@@ -56,7 +56,7 @@ public class dydxSettingsHelpRowViewModel: PlatformViewModel {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 22)
-        .themeColor(background: .layer4)
+        .themeColor(background: .layer3)
         .cornerRadius(12, corners: .allCorners)
         .frame(maxWidth: .infinity)
         .onTapGesture {

@@ -185,16 +185,19 @@ private struct SheetViewModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
      
     func body(content: Content) -> some View {
+        let dragIndicator = Rectangle()
+            .themeColor(background: .layer1)
+            .frame(width: 36, height: 4)
+            .clipShape(.capsule)
+            .padding(.top, topPadding)
+        
         if sheetStyle == .fullScreen {
             return AnyView(
                 ZStack(alignment: .top) {
                     content
                         .cornerRadius(36, corners: [.topLeft, .topRight])
                     VStack {
-                        Rectangle()
-                            .themeColor(background: .layer1)
-                            .frame(width: 36, height: 4)
-                            .padding(.top, topPadding)
+                        dragIndicator
                         Spacer()
                     }
                 }
@@ -208,10 +211,7 @@ private struct SheetViewModifier: ViewModifier {
                         content
                             .cornerRadius(36, corners: [.topLeft, .topRight])
                         VStack {
-                            Rectangle()
-                                .themeColor(background: .layer1)
-                                .frame(width: 36, height: 4)
-                                .padding(.top, topPadding)
+                            dragIndicator
                         }
                     }
                 }

@@ -34,30 +34,33 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
                     self.createButton(parentStyle: style,
                                       imageName: "icon_transfer_deposit",
                                       title: DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT"),
+                                      isEnabled: self.onboarded,
                                       action: self.depositAction)
 
                     self.createButton(parentStyle: style,
                                       imageName: "icon_transfer_withdrawal",
                                       title: DataLocalizer.localize(path: "APP.GENERAL.WITHDRAW"),
+                                      isEnabled: self.onboarded,
                                       action: self.withdrawAction)
 
                     self.createButton(parentStyle: style,
                                       imageName: "icon_transfer_dydx",
                                       title: DataLocalizer.localize(path: "APP.GENERAL.TRANSFER"),
+                                      isEnabled: self.onboarded,
                                       action: self.transferAction)
 
                     if self.onboarded {
                         self.createButton(parentStyle: style,
                                           imageName: "settings_signout",
                                           title: DataLocalizer.localize(path: "APP.GENERAL.SIGN_OUT"),
-                                          templateColor: nil,
+                                          enabledTemplateColor: nil,
                                           action: self.signOutAction)
                     } else {
                         self.createButton(parentStyle: style,
                                           imageName: "icon_wallet_connect",
                                           title: DataLocalizer.localize(path: "APP.GENERAL.CONNECT"),
                                           backgroundColor: .colorPurple,
-                                          templateColor: .colorWhite,
+                                          enabledTemplateColor: .colorWhite,
                                           action: self.onboardAction)
                     }
                 }
@@ -65,28 +68,31 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
         }
     }
 
-    private func createButton(parentStyle: ThemeStyle, imageName: String, title: String, styleKey: String? = nil, backgroundColor: ThemeColor.SemanticColor = .layer3, templateColor: ThemeColor.SemanticColor? = .textSecondary, action: (() -> Void)?) -> some View {
+    private func createButton(parentStyle: ThemeStyle, imageName: String, title: String, isEnabled: Bool = true, styleKey: String? = nil, backgroundColor: ThemeColor.SemanticColor = .layer3, enabledTemplateColor: ThemeColor.SemanticColor? = .textSecondary, disabledTemplateColor: ThemeColor.SemanticColor? = .textTertiary, action: (() -> Void)?) -> some View {
+        let templateColor: ThemeColor.SemanticColor? = isEnabled ? enabledTemplateColor : disabledTemplateColor
         let icon = PlatformIconViewModel(type: .asset(name: imageName, bundle: Bundle.dydxView),
                                      clip: .circle(background: backgroundColor, spacing: 24, borderColor: .layer6),
                                          size: CGSize(width: 48, height: 48),
-                                         templateColor: templateColor)
-        return createButton(parentStyle: parentStyle, icon: icon, title: title, action: action)
-    }
-
-    private func createButton(parentStyle: ThemeStyle, icon: PlatformViewModel, title: String, action: (() -> Void)?) -> some View {
-        VStack {
-            PlatformButtonViewModel(content: icon,
-                                    type: .iconType,
-                                    state: .primary,
-                                    action: action ?? {})
+                                         templateColor: isEnabled ? enabledTemplateColor : disabledTemplateColor)
             .createView(parentStyle: parentStyle)
 
-            Text(title)
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-                .lineLimit(1)
+        let title = Text(title)
+            .themeFont(fontSize: .small)
+            .themeColor(foreground: templateColor ?? .textSecondary)
+            .lineLimit(1)
+
+        let buttonContent = VStack {
+            icon
+            title
         }
         .frame(maxWidth: .infinity)
+        .wrappedViewModel
+
+        return PlatformButtonViewModel(content: buttonContent,
+                                       type: .iconType,
+                                       state: isEnabled ? .primary : .disabled,
+                                       action: action ?? {})
+               .createView(parentStyle: parentStyle)
     }
 }
 

@@ -145,7 +145,7 @@ public class dydxProfileHistoryViewModel: PlatformViewModel {
                 }
                 .frame(maxWidth: .infinity)
                 .frame(minHeight: 210)
-                .themeColor(background: .layer4)
+                .themeColor(background: .layer3)
                 .cornerRadius(12, corners: .allCorners)
                 .onTapGesture { [weak self] in
                     self?.tapAction?()

@@ -51,7 +51,7 @@ public class dydxProfileRewardsViewModel: PlatformViewModel {
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16)
-                .themeColor(background: .layer4)
+                .themeColor(background: .layer3)
                 .cornerRadius(14, corners: .allCorners)
             )
         }
