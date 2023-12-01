@@ -51,7 +51,7 @@ public class dydxProfileRewardsViewModel: PlatformViewModel {
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16)
-                .themeColor(background: .layer4)
+                .themeColor(background: .layer3)
                 .cornerRadius(14, corners: .allCorners)
             )
         }
@@ -66,7 +66,7 @@ public class dydxProfileRewardsViewModel: PlatformViewModel {
             }
 
             Text(nativeTokenName ?? "")
-                .themeColor(foreground: .textPrimary)
+                .themeColor(foreground: .textSecondary)
                 .themeFont(fontSize: .medium)
 
             Spacer()
@@ -94,17 +94,18 @@ public class dydxProfileRewardsViewModel: PlatformViewModel {
     private func createAmountPanel(style: ThemeStyle, title: String, amount: String) -> some View {
         VStack(spacing: 16) {
             Text(title)
+                .themeColor(foreground: .textSecondary)
                 .themeFont(fontSize: .small)
                 .leftAligned()
 
             Text(amount)
-                .themeColor(foreground: .textPrimary)
+                .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .number, fontSize: .largest)
                 .leftAligned()
 
         }
         .padding(16)
-        .themeColor(background: .layer6)
+        .themeColor(background: .layer4)
         .cornerRadius(10, corners: .allCorners)
         .frame(maxWidth: .infinity)
     }

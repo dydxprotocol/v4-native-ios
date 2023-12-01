@@ -32,6 +32,7 @@ public class Wallets2ViewModel: PlatformViewModel {
                 Text(DataLocalizer.localize(path: "APP.GENERAL.MANAGE_WALLET", params: nil))
                     .themeFont(fontType: .bold, fontSize: .largest)
                     .padding(.top, 40)
+                    .padding(.leading, 16)
 
                 VStack {
                     ForEach(self.walletConnections, id: \.id) { walletConnection in
