@@ -60,6 +60,7 @@ public class dydxProfileHistoryViewModel: PlatformViewModel {
                 VStack(spacing: 0) {
                     HStack {
                         Text(DataLocalizer.localize(path: "APP.GENERAL.HISTORY"))
+                            .themeColor(foreground: .textSecondary)
                             .themeFont(fontSize: .small)
                         Spacer()
                         PlatformIconViewModel(type: .system(name: "chevron.right"),
@@ -145,7 +146,7 @@ public class dydxProfileHistoryViewModel: PlatformViewModel {
                 }
                 .frame(maxWidth: .infinity)
                 .frame(minHeight: 210)
-                .themeColor(background: .layer4)
+                .themeColor(background: .layer3)
                 .cornerRadius(12, corners: .allCorners)
                 .onTapGesture { [weak self] in
                     self?.tapAction?()
