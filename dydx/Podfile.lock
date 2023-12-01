@@ -1,5 +1,5 @@
 PODS:
-  - Abacus (1.1.1)
+  - Abacus (1.1.4)
   - Amplitude-iOS (4.10.0)
   - AppsFlyerFramework (6.12.2):
     - AppsFlyerFramework/Main (= 6.12.2)
@@ -249,7 +249,7 @@ PODS:
   - SDWebImageSVGKitPlugin (1.4.0):
     - SDWebImage/Core (~> 5.10)
     - SVGKit (~> 3.0)
-  - SDWebImageSwiftUI (2.2.4):
+  - SDWebImageSwiftUI (2.2.5):
     - SDWebImage (~> 5.10)
   - SimpleKeychain (0.12.5)
   - SnapKit (5.6.0)
@@ -376,7 +376,7 @@ CHECKOUT OPTIONS:
     :http: https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz
 
 SPEC CHECKSUMS:
-  Abacus: 461fefadb72910fa8d1181f07a2a51219d4aef26
+  Abacus: 5eff6fb1d61c06710c19e5e9898145db416aeea5
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   AppsFlyerFramework: 6eb4d89d2eb9a6632317f1055b359d9fd85fd5ff
   Atributika: 0eabae2cc37999e79c5b94f60213642946991b1c
@@ -426,7 +426,7 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SDWebImage: 7ac2b7ddc5e8484c79aa90fc4e30b149d6a2c88f
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
-  SDWebImageSwiftUI: a3ed505b65903252560fcf37ff493d9d97648ae5
+  SDWebImageSwiftUI: fb78b40fe4ca757b6340ca31fc87e2b19044448c
   SimpleKeychain: 8193a9e40967eccac933c1fde82de46c07a5ae26
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
