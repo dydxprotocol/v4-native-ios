@@ -106,7 +106,7 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
                     }
                 }
                     .padding(.all, 20)
-                    .themeColor(background: .layer4)
+                    .themeColor(background: .layer3)
                     .cornerRadius(12, corners: .allCorners)
                 if let sourceAddress = self.sourceAddress {
                     HStack(spacing: 0) {

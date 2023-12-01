@@ -74,7 +74,7 @@ public class WalletConnectionViewModel: PlatformViewModel {
                         .padding(.vertical, buttonContentVerticalPadding)
                         .themeColor(background: .layer3)
                     })
-                        .borderAndClip(style: .capsule, borderColor: .layer6, lineWidth: buttonBorderWidth)
+                        .borderAndClip(style: .cornerRadius(8), borderColor: .layer6, lineWidth: buttonBorderWidth)
 
                     let exportPhraseButton = Button(action: {
                         self?.exportSecretPhraseTapped?()

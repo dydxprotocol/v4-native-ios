@@ -33,12 +33,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let disabled: Bool
-            if case .disabled = self.state {
-                disabled = true
-            } else {
-                disabled = false
-            }
+            let disabled = .disabled == self.state
             return AnyView(
                 Group {
                     switch self.type {
