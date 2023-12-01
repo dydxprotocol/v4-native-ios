@@ -34,33 +34,33 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
                     self.createButton(parentStyle: style,
                                       imageName: "icon_transfer_deposit",
                                       title: DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT"),
-                                      isEnabled: self.onboarded,
+                                      templateColor: self.onboarded ? .textSecondary : .textTertiary,
                                       action: self.depositAction)
 
                     self.createButton(parentStyle: style,
                                       imageName: "icon_transfer_withdrawal",
                                       title: DataLocalizer.localize(path: "APP.GENERAL.WITHDRAW"),
-                                      isEnabled: self.onboarded,
+                                      templateColor: self.onboarded ? .textSecondary : .textTertiary,
                                       action: self.withdrawAction)
 
                     self.createButton(parentStyle: style,
                                       imageName: "icon_transfer_dydx",
                                       title: DataLocalizer.localize(path: "APP.GENERAL.TRANSFER"),
-                                      isEnabled: self.onboarded,
+                                      templateColor: self.onboarded ? .textSecondary : .textTertiary,
                                       action: self.transferAction)
 
                     if self.onboarded {
                         self.createButton(parentStyle: style,
                                           imageName: "settings_signout",
                                           title: DataLocalizer.localize(path: "APP.GENERAL.SIGN_OUT"),
-                                          enabledTemplateColor: nil,
+                                          templateColor: nil,
                                           action: self.signOutAction)
                     } else {
                         self.createButton(parentStyle: style,
                                           imageName: "icon_wallet_connect",
                                           title: DataLocalizer.localize(path: "APP.GENERAL.CONNECT"),
                                           backgroundColor: .colorPurple,
-                                          enabledTemplateColor: .colorWhite,
+                                          templateColor: .colorWhite,
                                           action: self.onboardAction)
                     }
                 }
@@ -68,12 +68,11 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
         }
     }
 
-    private func createButton(parentStyle: ThemeStyle, imageName: String, title: String, isEnabled: Bool = true, styleKey: String? = nil, backgroundColor: ThemeColor.SemanticColor = .layer3, enabledTemplateColor: ThemeColor.SemanticColor? = .textSecondary, disabledTemplateColor: ThemeColor.SemanticColor? = .textTertiary, action: (() -> Void)?) -> some View {
-        let templateColor: ThemeColor.SemanticColor? = isEnabled ? enabledTemplateColor : disabledTemplateColor
+    private func createButton(parentStyle: ThemeStyle, imageName: String, title: String, styleKey: String? = nil, backgroundColor: ThemeColor.SemanticColor = .layer3, templateColor: ThemeColor.SemanticColor?, action: (() -> Void)?) -> some View {
         let icon = PlatformIconViewModel(type: .asset(name: imageName, bundle: Bundle.dydxView),
                                      clip: .circle(background: backgroundColor, spacing: 24, borderColor: .layer6),
                                          size: CGSize(width: 48, height: 48),
-                                         templateColor: isEnabled ? enabledTemplateColor : disabledTemplateColor)
+                                         templateColor: templateColor)
             .createView(parentStyle: parentStyle)
 
         let title = Text(title)
@@ -90,7 +89,6 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
 
         return PlatformButtonViewModel(content: buttonContent,
                                        type: .iconType,
-                                       state: isEnabled ? .primary : .disabled,
                                        action: action ?? {})
                .createView(parentStyle: parentStyle)
     }
