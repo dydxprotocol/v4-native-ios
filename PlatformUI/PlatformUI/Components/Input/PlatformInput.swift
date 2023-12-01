@@ -502,6 +502,8 @@ open class PlatformPopoverOptionsInputViewModel: PlatformOptionsInputViewModel {
 
 open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
     
+    open var isEnabled: Bool = true
+    
     override open var value: String? {
         didSet {
             inputBinding.update()
@@ -528,6 +530,7 @@ open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
                     Spacer()
                     Toggle("", isOn: self.inputBinding)
                         .toggleStyle(SwitchToggleStyle(tint: ThemeColor.SemanticColor.colorPurple.color))
+                        .disabled(!self.isEnabled)
                 }
             )
         }
