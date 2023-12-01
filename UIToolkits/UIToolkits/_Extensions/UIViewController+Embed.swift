@@ -42,8 +42,6 @@ extension UIViewController: PanModalPresentable {
     public var longFormHeight: PanModalHeight {
         return panScrollable == nil ? .intrinsicHeight : .maxHeightWithTopInset(20)
     }
-    
-    
 
     @objc open var cornerRadius: CGFloat {
         return 36.0
