@@ -188,7 +188,7 @@ private struct SheetViewModifier: ViewModifier {
         let dragIndicator = Rectangle()
             .themeColor(background: .layer1)
             .frame(width: 36, height: 4)
-            .clipShape(.capsule)
+            .clipShape(Capsule())
             .padding(.top, topPadding)
         
         if sheetStyle == .fullScreen {
