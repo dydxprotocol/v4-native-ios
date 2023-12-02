@@ -11,6 +11,7 @@ import dydxStateManager
 import Combine
 import Abacus
 import ParticlesKit
+import dydxFormatter
 
 final class dydxTransferSubaccountWorker: BaseWorker {
 
@@ -39,14 +40,20 @@ final class dydxTransferSubaccountWorker: BaseWorker {
                     subaccountNumber = 0
                 }
                 let depositAmount = (balance ?? 0) - dydxTransferSubaccountWorker.balanceRetainAmount
-                self?.depositToSubaccount(amount: depositAmount,
-                                          subaccount: subaccountNumber,
-                                          walletState: state.walletState)
+                let amountString = dydxFormatter.shared.raw(number: NSNumber(value: depositAmount),
+                                                            digits: dydxTokenConstants.usdcTokenDecimal)
+                if let amountString = amountString {
+                    self?.depositToSubaccount(amount: amountString,
+                                              subaccount: subaccountNumber,
+                                              walletState: state.walletState)
+                } else {
+                    Console.shared.log("dydxTransferSubaccountWorker: Invalid amount")
+                }
             }
             .store(in: &subscriptions)
     }
 
-    private func depositToSubaccount(amount: Double, subaccount: Int, walletState: dydxWalletState) {
+    private func depositToSubaccount(amount: String, subaccount: Int, walletState: dydxWalletState) {
         CosmoJavascript.shared.depositToSubaccount(subaccount: subaccount, amount: amount) { result in
             let trackingData = [
                 "amount": "\(amount)",
