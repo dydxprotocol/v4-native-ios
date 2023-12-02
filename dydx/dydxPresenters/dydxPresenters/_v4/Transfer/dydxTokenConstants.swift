@@ -24,6 +24,10 @@ struct dydxTokenConstants {
         }
     }
 
+    static var usdcTokenDecimal: Int {
+        Int(AbacusStateManager.shared.environment?.tokens[dydxTokenConstants.usdcTokenKey]?.decimals ?? 2)
+    }
+
     static var nativeTokenName: String {
         AbacusStateManager.shared.environment?.tokens[dydxTokenConstants.nativeTokenKey]?.name ?? "DYDX"
     }

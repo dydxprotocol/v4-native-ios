@@ -54,9 +54,9 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
     }
 
     public func depositToSubaccount(subaccount: Int,
-                                    amount: Double,
+                                    amount: String,
                                     completion: @escaping JavascriptCompletion) {
-        let json = "{\"subaccountNumber\": \(subaccount),\"amount\": \(amount)}"
+        let json = "{\"subaccountNumber\": \(subaccount),\"amount\": \"\(amount)\"}"
         callNativeClient(functionName: "deposit", params: [json], completion: completion)
     }
 
