@@ -324,7 +324,7 @@ public final class AbacusStateManager: NSObject {
         if currentEnvironment == nil,
            let stored = SettingsStore.shared?.value(forKey: Self.storeKey) as? String,
            availableEnvironments.contains(where: { selection in
-            selection.type == stored
+               selection.type == stored
            }) {
             currentEnvironment = stored
         } else {
@@ -349,6 +349,7 @@ public final class AbacusStateManager: NSObject {
 
 extension AbacusStateManager: Abacus.StateNotificationProtocol {
     public func environmentsChanged() {
+        _environment = asyncStateManager.environment
         DispatchQueue.main.async { [weak self] in
             self?.initializeCurrentEnvironment()
         }
