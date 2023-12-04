@@ -1,5 +1,5 @@
 //
-//  dydxProfileRewardsView.swift
+//  dydxProfileBalancesViewModel.swift
 //  dydxUI
 //
 //  Created by Rui Huang on 9/18/23.
@@ -10,7 +10,7 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxProfileRewardsViewModel: PlatformViewModel {
+public class dydxProfileBalancesViewModel: PlatformViewModel {
     @Published public var walletAmount: String?
     @Published public var stakedAmount: String?
     @Published public var totalAmount: String?
@@ -20,8 +20,8 @@ public class dydxProfileRewardsViewModel: PlatformViewModel {
 
     public init() { }
 
-    public static var previewValue: dydxProfileRewardsViewModel {
-        let vm = dydxProfileRewardsViewModel()
+    public static var previewValue: dydxProfileBalancesViewModel {
+        let vm = dydxProfileBalancesViewModel()
         vm.walletAmount = "20.00"
         vm.stakedAmount = "30.00"
         vm.totalAmount = "50.00"
@@ -125,13 +125,13 @@ public class dydxProfileRewardsViewModel: PlatformViewModel {
 }
 
 #if DEBUG
-struct dydxProfileRewardsView_Previews_Dark: PreviewProvider {
+struct dydxProfileBalancesViewModel_Previews_Dark: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyDarkTheme()
         ThemeSettings.applyStyles()
-        return dydxProfileRewardsViewModel.previewValue
+        return dydxProfileBalancesViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)
@@ -140,13 +140,13 @@ struct dydxProfileRewardsView_Previews_Dark: PreviewProvider {
     }
 }
 
-struct dydxProfileRewardsView_Previews_Light: PreviewProvider {
+struct dydxProfileBalancesViewModel_Previews_Light: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyLightTheme()
         ThemeSettings.applyStyles()
-        return dydxProfileRewardsViewModel.previewValue
+        return dydxProfileBalancesViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)

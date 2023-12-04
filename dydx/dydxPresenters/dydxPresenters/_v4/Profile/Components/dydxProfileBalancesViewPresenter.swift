@@ -1,5 +1,5 @@
 //
-//  dydxProfileRewardsViewPresenter.swift
+//  dydxProfileBalancesViewPresenter.swift
 //  dydxPresenters
 //
 //  Created by Rui Huang on 9/18/23.
@@ -16,15 +16,15 @@ import dydxStateManager
 import dydxFormatter
 import Combine
 
-public protocol dydxProfileRewardsViewPresenterProtocol: HostedViewPresenterProtocol {
-    var viewModel: dydxProfileRewardsViewModel? { get }
+public protocol dydxProfileBalancesViewPresenterProtocol: HostedViewPresenterProtocol {
+    var viewModel: dydxProfileBalancesViewModel? { get }
 }
 
-public class dydxProfileRewardsViewPresenter: HostedViewPresenter<dydxProfileRewardsViewModel>, dydxProfileRewardsViewPresenterProtocol {
+public class dydxProfileBalancesViewPresenter: HostedViewPresenter<dydxProfileBalancesViewModel>, dydxProfileBalancesViewPresenterProtocol {
     override init() {
         super.init()
 
-        viewModel = dydxProfileRewardsViewModel()
+        viewModel = dydxProfileBalancesViewModel()
         viewModel?.nativeTokenName = dydxTokenConstants.nativeTokenName
         viewModel?.nativeTokenLogoUrl = dydxTokenConstants.nativeTokenLogoUrl
     }
