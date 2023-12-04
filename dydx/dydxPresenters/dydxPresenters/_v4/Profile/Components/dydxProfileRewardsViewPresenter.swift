@@ -25,35 +25,7 @@ public class dydxProfileRewardsViewPresenter: HostedViewPresenter<dydxProfileRew
         super.init()
 
         viewModel = dydxProfileRewardsViewModel()
-        viewModel?.nativeTokenName = dydxTokenConstants.nativeTokenName
-        viewModel?.nativeTokenLogoUrl = dydxTokenConstants.nativeTokenLogoUrl
-    }
-
-    public override func start() {
-        super.start()
-
-        AbacusStateManager.shared.state.accountBalance(of: .dydx)
-            .sink { [weak self] dydxAmount in
-                if let dydxAmount = dydxAmount {
-                    self?.viewModel?.walletAmount = dydxFormatter.shared.raw(number: Parser.standard.asNumber(dydxAmount), digits: 4)
-                    self?.viewModel?.transferAction = {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": "transferOut"]), animated: true, completion: nil)
-                    }
-                } else {
-                    self?.viewModel?.walletAmount = "-"
-                    self?.viewModel?.transferAction = nil
-                }
-            }
-            .store(in: &subscriptions)
-
-        AbacusStateManager.shared.state.stakingBalance(of: .dydx)
-            .sink { [weak self] dydxAmount in
-                if let dydxAmount = dydxAmount {
-                    self?.viewModel?.stakedAmount = dydxFormatter.shared.raw(number: Parser.standard.asNumber(dydxAmount), digits: 4)
-                } else {
-                    self?.viewModel?.stakedAmount = "-"
-                }
-            }
-            .store(in: &subscriptions)
+        viewModel?.last7DaysRewardsAmount = "PLACEHOLDER"
+        viewModel?.allTimeRewardsAmount = "PLACEHOLDER"
     }
 }

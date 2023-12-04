@@ -40,6 +40,7 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
     private let historyPresenter: dydxProfileHistoryViewPresenter
     private let feesPresenter: dydxProfileFeesViewPresenter
     private let rewardsPresenter: dydxProfileRewardsViewPresenter
+    private let balancesPresenter: dydxProfileBalancesViewPresenter
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         buttonsPresenter,
@@ -47,7 +48,8 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
         headerPresenter,
         historyPresenter,
         feesPresenter,
-        rewardsPresenter
+        rewardsPresenter,
+        balancesPresenter
     ]
 
     override init() {
@@ -58,6 +60,7 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
         historyPresenter = .init()
         feesPresenter = .init()
         rewardsPresenter = .init()
+        balancesPresenter = .init()
 
         super.init()
 
@@ -66,6 +69,7 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
         historyPresenter.$viewModel.assign(to: &viewModel.$history)
         feesPresenter.$viewModel.assign(to: &viewModel.$fees)
         rewardsPresenter.$viewModel.assign(to: &viewModel.$rewards)
+        balancesPresenter.$viewModel.assign(to: &viewModel.$balances)
 
         attachChildren(workers: childPresenters)
     }

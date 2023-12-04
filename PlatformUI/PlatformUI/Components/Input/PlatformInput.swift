@@ -432,7 +432,7 @@ open class PlatformPopoverOptionsInputViewModel: PlatformOptionsInputViewModel {
                     guard let self = self else {
                         return
                     }
-                    attrs.position = self.position 
+                    attrs.position = self.position
                     attrs.sourceFrameInset.top = -8
                     let animation = Animation.easeOut(duration: 0.2)
                     attrs.presentation.animation = animation
@@ -504,6 +504,17 @@ open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
     
     open var isEnabled: Bool = true
     
+    open override var header: PlatformViewModel {
+        if let label = label, label.length > 0 {
+            return Text(label)
+                .themeColor(foreground: isEnabled ? .textSecondary : .textTertiary)
+                        .themeFont(fontSize: .smaller)
+                        .wrappedViewModel
+    
+        }
+        return PlatformView.nilViewModel
+    }
+    
     override open var value: String? {
         didSet {
             inputBinding.update()
@@ -525,8 +536,9 @@ open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
             
             return AnyView(
-                HStack {
+                HStack(spacing: 0) {
                     self.header.createView(parentStyle: style)
+                        .fixedSize()
                     Spacer()
                     Toggle("", isOn: self.inputBinding)
                         .toggleStyle(SwitchToggleStyle(tint: ThemeColor.SemanticColor.colorPurple.color))

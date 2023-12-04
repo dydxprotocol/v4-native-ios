@@ -16,6 +16,7 @@ public class dydxProfileViewModel: PlatformViewModel {
     @Published public var settingsHelp = dydxSettingsHelpRowViewModel()
     @Published public var history: dydxProfileHistoryViewModel? = dydxProfileHistoryViewModel()
     @Published public var fees: dydxProfileFeesViewModel? = dydxProfileFeesViewModel()
+    @Published public var balances: dydxProfileBalancesViewModel? = dydxProfileBalancesViewModel()
     @Published public var rewards: dydxProfileRewardsViewModel? = dydxProfileRewardsViewModel()
 
     public init() { }
@@ -41,20 +42,19 @@ public class dydxProfileViewModel: PlatformViewModel {
                         .createView(parentStyle: style)
                         .padding(.top, 8)
 
-                    self.rewards?
+                    self.balances?
                         .createView(parentStyle: style)
 
-                    self.history?
-                        .createView(parentStyle: style)
-
-                    HStack {
+                    HStack(spacing: 14) {
                         self.fees?
                             .createView(parentStyle: style)
-                            .frame(maxWidth: .infinity)
-
-                        Text("")
-                            .frame(maxWidth: .infinity)
+                            //TODO, comment in when abacus is ready
+//                        self.rewards?
+//                            .createView(parentStyle: style)
                     }
+                    
+                    self.history?
+                        .createView(parentStyle: style)
 
                     Spacer(minLength: 100)
                 }
