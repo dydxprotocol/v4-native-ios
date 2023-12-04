@@ -2082,7 +2082,7 @@
 		026FC3F22AFAD39800C52F20 /* Run Script (set_scheme.sh) */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -2096,12 +2096,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_DIR=${PROJECT_DIR}/../scripts/\n\nOUTPUT=$(bash \"${SCRIPT_DIR}/set_scheme.sh\")\n\n# Echo the captured output (xcode does not automatically mirror it in build log)\necho \"$OUTPUT\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_DIR=${PROJECT_DIR}/../scripts/\n\nif [ $ENABLE_PREVIEWS == \"NO\" ]\nthen\n    OUTPUT=$(bash \"${SCRIPT_DIR}/set_scheme.sh\")\n\n    # Echo the captured output (xcode does not automatically mirror it in build log)\n    echo \"$OUTPUT\"\nfi\n\n";
 		};
 		026FC4232AFAD3EB00C52F20 /* Run Script (unset_scheme.sh) */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -2115,7 +2115,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_DIR=${PROJECT_DIR}/../scripts/\n\nOUTPUT=$(bash \"${SCRIPT_DIR}/unset_scheme.sh\")\n\n# Echo the captured output (xcode does not automatically mirror it in build log)\necho \"$OUTPUT\"\n\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_DIR=${PROJECT_DIR}/../scripts/\n\nif [ $ENABLE_PREVIEWS == \"NO\" ]\nthen\n    OUTPUT=$(bash \"${SCRIPT_DIR}/unset_scheme.sh\")\n\n# Echo the captured output (xcode does not automatically mirror it in build log)\n    echo \"$OUTPUT\"\nfi\n\n";
 		};
 		02C19F3D29DDD79300F77028 /* Run Script (Set Secrets) */ = {
 			isa = PBXShellScriptBuildPhase;
