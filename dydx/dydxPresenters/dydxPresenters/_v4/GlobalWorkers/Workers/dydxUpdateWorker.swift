@@ -17,6 +17,8 @@ public final class dydxUpdateWorker: BaseWorker {
     public override func start() {
         super.start()
 
+        // Wait 2 seconds for the root view to load first.  Otherwise, "/portfolio/" would take
+        // place after "/update"
         Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { [weak self] _ in
             guard let self = self else { return }
 
