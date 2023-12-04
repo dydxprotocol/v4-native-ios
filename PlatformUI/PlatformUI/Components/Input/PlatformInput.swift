@@ -542,6 +542,7 @@ open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
                     Spacer()
                     Toggle("", isOn: self.inputBinding)
                         .toggleStyle(SwitchToggleStyle(tint: ThemeColor.SemanticColor.colorPurple.color))
+                        .disabled(!self.isEnabled)
                 }
             )
         }
