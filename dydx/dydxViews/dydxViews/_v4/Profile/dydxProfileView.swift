@@ -51,6 +51,7 @@ public class dydxProfileViewModel: PlatformViewModel {
                     HStack(spacing: 14) {
                         self.fees?
                             .createView(parentStyle: style)
+                            //TODO, comment in when abacus is ready
 //                        self.rewards?
 //                            .createView(parentStyle: style)
                     }
