@@ -13,8 +13,6 @@ public class dydxTitledCardViewModel: PlatformViewModel {
 
     public let title: String
     @Published public var tapAction: (() -> Void)?
-    /// override this in inheriting classes
-    public var content: AnyView { AnyView(erasing: PlatformView.nilView) }
 
     public init(title: String) {
         self.title = title
@@ -24,6 +22,10 @@ public class dydxTitledCardViewModel: PlatformViewModel {
     fileprivate static var previewValue: dydxTitledCardViewModel {
         let vm = dydxTitledCardViewModel(title: "TEST")
         return vm
+    }
+
+    func createContent(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
+        PlatformView.nilView?.wrappedInAnyView()
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
@@ -44,7 +46,7 @@ public class dydxTitledCardViewModel: PlatformViewModel {
 
                 DividerModel()
                     .createView(parentStyle: style)
-                self.content
+                self.createContent(parentStyle: style)
                     .padding(.vertical, 10)
                     .padding(.horizontal, 18)
             }

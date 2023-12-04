@@ -33,52 +33,50 @@ public class dydxProfileFeesViewModel: dydxTitledCardViewModel, Equatable {
         return vm
     }
 
-    public override var content: AnyView {
-        AnyView(
-            VStack(spacing: 16) {
-                HStack {
-                    VStack(spacing: 8) {
-                        Text(DataLocalizer.localize(path: "APP.TRADE.TAKER"))
-                            .themeFont(fontType: .text, fontSize: .smaller)
-                            .leftAligned()
+    override func createContent(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
+        VStack(spacing: 16) {
+            HStack {
+                VStack(spacing: 8) {
+                    Text(DataLocalizer.localize(path: "APP.TRADE.TAKER"))
+                        .themeFont(fontType: .text, fontSize: .smaller)
+                        .leftAligned()
 
-                        Text(self.takerFeeRate ?? "-")
-                            .themeFont(fontType: .text, fontSize: .small)
-                            .themeColor(foreground: .textPrimary)
-                            .leftAligned()
-                    }
-
-                    VStack(spacing: 8) {
-                        Text(DataLocalizer.localize(path: "APP.TRADE.MAKER"))
-                            .themeFont(fontType: .text, fontSize: .smaller)
-                            .leftAligned()
-
-                        Text(self.makerFeeRate ?? "-")
-                            .themeFont(fontType: .text, fontSize: .small)
-                            .themeColor(foreground: .textPrimary)
-                            .leftAligned()
-                    }
+                    Text(self.takerFeeRate ?? "-")
+                        .themeFont(fontType: .text, fontSize: .small)
+                        .themeColor(foreground: .textPrimary)
+                        .leftAligned()
                 }
 
                 VStack(spacing: 8) {
-                    HStack {
-                        Text(DataLocalizer.localize(path: "APP.TRADE.VOLUME"))
+                    Text(DataLocalizer.localize(path: "APP.TRADE.MAKER"))
+                        .themeFont(fontType: .text, fontSize: .smaller)
+                        .leftAligned()
 
-                        Text(DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.30D"))
-                            .themeColor(foreground: .textTertiary)
-                    }
-                    .themeFont(fontType: .text, fontSize: .smaller)
-                    .leftAligned()
-
-                    Text(self.tradingVolume ?? "-")
+                    Text(self.makerFeeRate ?? "-")
                         .themeFont(fontType: .text, fontSize: .small)
                         .themeColor(foreground: .textPrimary)
                         .leftAligned()
                 }
             }
-            .padding(16)
 
-        )
+            VStack(spacing: 8) {
+                HStack {
+                    Text(DataLocalizer.localize(path: "APP.TRADE.VOLUME"))
+
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.30D"))
+                        .themeColor(foreground: .textTertiary)
+                }
+                .themeFont(fontType: .text, fontSize: .smaller)
+                .leftAligned()
+
+                Text(self.tradingVolume ?? "-")
+                    .themeFont(fontType: .text, fontSize: .small)
+                    .themeColor(foreground: .textPrimary)
+                    .leftAligned()
+            }
+        }
+        .padding(16)
+        .wrappedInAnyView()
     }
 }
 

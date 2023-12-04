@@ -10,7 +10,7 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxProfileHistoryViewModel: PlatformViewModel {
+public class dydxProfileHistoryViewModel: dydxTitledCardViewModel {
     public class Item: PlatformViewModel, Equatable {
         public static func == (lhs: dydxProfileHistoryViewModel.Item, rhs: dydxProfileHistoryViewModel.Item) -> Bool {
             lhs.action == rhs.action &&
@@ -43,116 +43,94 @@ public class dydxProfileHistoryViewModel: PlatformViewModel {
     }
 
     @Published public var items: [Item] = []
-    @Published public var tapAction: (() -> Void)?
 
-    public init() { }
+    public init() {
+        super.init(title: DataLocalizer.localize(path: "APP.GENERAL.HISTORY"))
+    }
 
     public static var previewValue: dydxProfileHistoryViewModel {
         let vm = dydxProfileHistoryViewModel()
         return vm
     }
 
-    public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
-            guard let self = self else { return AnyView(PlatformView.nilView) }
-
-            return AnyView(
-                VStack(spacing: 0) {
+    public override func createContent(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
+        VStack(spacing: 0) {
+            GeometryReader { metrics in
+                VStack(spacing: 8) {
                     HStack {
-                        Text(DataLocalizer.localize(path: "APP.GENERAL.HISTORY"))
-                            .themeColor(foreground: .textSecondary)
-                            .themeFont(fontSize: .small)
-                        Spacer()
-                        PlatformIconViewModel(type: .system(name: "chevron.right"),
-                                              size: CGSize(width: 10, height: 10),
-                                              templateColor: .textSecondary)
-                        .createView(parentStyle: style)
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.ACTION"))
+                            .leftAligned()
+                            .frame(width: metrics.size.width / 10 * 3)
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.SIDE"))
+                            .leftAligned()
+                            .frame(width: metrics.size.width / 10 * 2)
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.TYPE"))
+                            .leftAligned()
+                            .frame(width: metrics.size.width / 10 * 2)
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.AMOUNT"))
+                            .frame(width: metrics.size.width / 10 * 3)
+                            .rightAligned()
                     }
-                    .padding()
 
-                    DividerModel()
-                        .createView(parentStyle: style)
-
-                    GeometryReader { metrics in
-                        VStack(spacing: 8) {
-                            HStack {
-                                Text(DataLocalizer.localize(path: "APP.GENERAL.ACTION"))
-                                    .leftAligned()
-                                    .frame(width: metrics.size.width / 10 * 3)
-                                Text(DataLocalizer.localize(path: "APP.GENERAL.SIDE"))
-                                    .leftAligned()
-                                    .frame(width: metrics.size.width / 10 * 2)
-                                Text(DataLocalizer.localize(path: "APP.GENERAL.TYPE"))
-                                    .leftAligned()
-                                    .frame(width: metrics.size.width / 10 * 2)
-                                Text(DataLocalizer.localize(path: "APP.GENERAL.AMOUNT"))
-                                    .frame(width: metrics.size.width / 10 * 3)
-                                    .rightAligned()
-                            }
-
-                            ForEach(self.items, id: \.id ) { item in
-                                HStack {
-                                    Group {
-                                        switch item.action {
-                                        case .fill(let side, let market):
-                                            HStack {
-                                                side?.createView(parentStyle: style.themeFont(fontSize: .smaller))
-                                                TokenTextViewModel(symbol: market)
-                                                    .createView(parentStyle: style.themeFont(fontSize: .smallest))
-                                            }
-                                        case .string(let value):
-                                            Text(value)
-                                                .themeColor(foreground: .textSecondary)
-                                        case .none:
-                                            Text("-")
-                                        }
+                    ForEach(self.items, id: \.id ) { item in
+                        HStack {
+                            Group {
+                                switch item.action {
+                                case .fill(let side, let market):
+                                    HStack {
+                                        side?.createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))
+                                        TokenTextViewModel(symbol: market)
+                                            .createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
                                     }
-                                        .themeFont(fontSize: .smaller)
-                                        .leftAligned()
-                                        .frame(width: metrics.size.width / 10 * 3)
-
-                                    item.side?.createView(parentStyle: style
-                                        .themeFont(fontSize: .smaller)
-                                        .themeColor(foreground: .textTertiary))
-                                        .leftAligned()
-                                        .frame(width: metrics.size.width / 10 * 2)
-
-                                    if let type = item.type {
-                                        switch type {
-                                        case .token(let token):
-                                            token.createView(parentStyle: style.themeFont(fontSize: .smallest))
-                                                .leftAligned()
-                                                .frame(width: metrics.size.width / 10 * 2)
-                                        case .string(let value):
-                                            Text(value)
-                                                .themeFont(fontSize: .smaller)
-                                                .leftAligned()
-                                                .frame(width: metrics.size.width / 10 * 2)
-                                        }
-                                    }
-
-                                    Text(item.amount ?? "-")
-                                        .themeFont(fontSize: .smaller)
-                                        .frame(width: metrics.size.width / 10 * 3)
-                                        .rightAligned()
+                                case .string(let value):
+                                    Text(value)
+                                        .themeColor(foreground: .textSecondary)
+                                case .none:
+                                    Text("-")
                                 }
                             }
+                                .themeFont(fontSize: .smaller)
+                                .leftAligned()
+                                .frame(width: metrics.size.width / 10 * 3)
+
+                            item.side?.createView(parentStyle: parentStyle
+                                .themeFont(fontSize: .smaller)
+                                .themeColor(foreground: .textTertiary))
+                                .leftAligned()
+                                .frame(width: metrics.size.width / 10 * 2)
+
+                            if let type = item.type {
+                                switch type {
+                                case .token(let token):
+                                    token.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
+                                        .leftAligned()
+                                        .frame(width: metrics.size.width / 10 * 2)
+                                case .string(let value):
+                                    Text(value)
+                                        .themeFont(fontSize: .smaller)
+                                        .leftAligned()
+                                        .frame(width: metrics.size.width / 10 * 2)
+                                }
+                            }
+
+                            Text(item.amount ?? "-")
+                                .themeFont(fontSize: .smaller)
+                                .frame(width: metrics.size.width / 10 * 3)
+                                .rightAligned()
                         }
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .themeFont(fontSize: .smaller)
-                    .themeColor(foreground: .textTertiary)
                 }
-                .frame(maxWidth: .infinity)
-                .frame(minHeight: 210)
-                .themeColor(background: .layer3)
-                .cornerRadius(12, corners: .allCorners)
-                .onTapGesture { [weak self] in
-                    self?.tapAction?()
-                }
-            )
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .themeFont(fontSize: .smaller)
+            .themeColor(foreground: .textTertiary)
         }
+        .frame(maxWidth: .infinity)
+        .frame(minHeight: 210)
+        .themeColor(background: .layer3)
+        .cornerRadius(12, corners: .allCorners)
+        .wrappedInAnyView()
     }
 }
 
