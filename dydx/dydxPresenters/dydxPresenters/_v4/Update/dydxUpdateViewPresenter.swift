@@ -37,24 +37,24 @@ private protocol dydxUpdateViewPresenterProtocol: HostedViewPresenterProtocol {
 }
 
 private class dydxUpdateViewPresenter: HostedViewPresenter<dydxUpdateViewModel>, dydxUpdateViewPresenterProtocol {
+    override init() {
+        super.init()
+
+        viewModel = dydxUpdateViewModel()
+    }
+    
     override func start() {
         super.start()
 
         if let ios = AbacusStateManager.shared.environment?.apps?.ios {
-            viewModel?.title = ios.title
-            viewModel?.text = ios.text
-            viewModel?.action = ios.action
+            viewModel?.title = DataLocalizer.localize(path: ios.title ?? "FORCED_UPDATE.TITLE")
+            viewModel?.text = DataLocalizer.localize(path: ios.text ?? "FORCED_UPDATE.TEXT")
+            viewModel?.action = DataLocalizer.localize(path: ios.action ?? "FORCED_UPDATE.ACTION")
             viewModel?.updateTapped = { [weak self] in
                 if let url = URL(string: ios.url) {
                     Router.shared?.navigate(to: url, completion: nil)
                 }
             }
         }
-    }
-
-    override init() {
-        super.init()
-
-        viewModel = dydxUpdateViewModel()
     }
 }

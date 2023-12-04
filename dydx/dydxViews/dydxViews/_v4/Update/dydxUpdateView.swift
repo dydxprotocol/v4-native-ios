@@ -20,6 +20,9 @@ public class dydxUpdateViewModel: PlatformViewModel {
 
     public static var previewValue: dydxUpdateViewModel {
         let vm = dydxUpdateViewModel()
+        vm.title = "Title"
+        vm.text = "text"
+        vm.action = "Action"
         return vm
     }
 
@@ -38,7 +41,9 @@ public class dydxUpdateViewModel: PlatformViewModel {
                         self.updateButton(parentStyle: parentStyle, styleKey: styleKey)
                     }
                 }
+                .frame(maxWidth: .infinity)
                 .padding(16)
+                .themeColor(background: .layer2)
             )
         }
     }
@@ -79,10 +84,16 @@ public class dydxUpdateViewModel: PlatformViewModel {
     }
 
     private func logoImage(parentStyle: ThemeStyle, styleKey: String?) -> PlatformView {
-        PlatformIconViewModel(type: .asset(name: "brand", bundle: Bundle.particles.first),
-                              clip: .noClip,
-                              size: .init(width: 100, height: 100),
-                              templateColor: nil)
+        let imageName: String
+        if currentThemeType == .light {
+            imageName = "brand_light"
+        } else {
+            imageName = "brand_dark"
+        }
+        return PlatformIconViewModel(type: .asset(name: imageName, bundle: Bundle.dydxView),
+                                     clip: .noClip,
+                                     size: .init(width: 100, height: 100),
+                                     templateColor: nil)
             .createView(parentStyle: parentStyle, styleKey: styleKey)
     }
 }
