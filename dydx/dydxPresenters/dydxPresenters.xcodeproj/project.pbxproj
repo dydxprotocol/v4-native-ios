@@ -130,6 +130,7 @@
 		2741E3702A68787A000FA190 /* settings_direction_color_preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 2741E3632A68787A000FA190 /* settings_direction_color_preference.json */; };
 		2741E3732A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */; };
 		276908FF2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */; };
+		277E8FC92B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E8FC82B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift */; };
 		27C027532AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027522AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift */; };
 		27DB2EA32AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DB2EA22AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift */; };
 		314BBDE9F332ECA910BC414E /* Pods_iOS_dydxPresenters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1551C00FFF41C29CFC5BD94 /* Pods_iOS_dydxPresenters.framework */; };
@@ -468,6 +469,7 @@
 		2741E3632A68787A000FA190 /* settings_direction_color_preference.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings_direction_color_preference.json; sourceTree = "<group>"; };
 		2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxDirectionColorPreferenceViewBuilder.swift; sourceTree = "<group>"; };
 		276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewPresenter.swift; sourceTree = "<group>"; };
+		277E8FC82B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxProfileRewardsViewPresenter.swift; sourceTree = "<group>"; };
 		27C027522AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsHelpRowViewPresenter.swift; sourceTree = "<group>"; };
 		27DB2EA22AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradeRestrictedViewPresenter.swift; sourceTree = "<group>"; };
 		64487FFE2AA248340068DD87 /* dydxAlertsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxAlertsWorker.swift; sourceTree = "<group>"; };
@@ -867,6 +869,7 @@
 		0258BA2729929E7D0098E1BE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				277E8FC82B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift */,
 				027F3F052AB93B3700602E5B /* dydxProfileBalancesViewPresenter.swift */,
 				0258BA2829929E870098E1BE /* dydxProfileButtonsViewPresenter.swift */,
 				028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */,
@@ -1802,6 +1805,7 @@
 				02669B7C2AD8661F00A756AA /* dydxCarteraConfigWorker.swift in Sources */,
 				02B841B228EF6C6400C4D25B /* dydxMarketInfoViewBuilder.swift in Sources */,
 				02031F1C2AC3A7130069E00D /* dydxTradeSheetTipDraftViewPresenter.swift in Sources */,
+				277E8FC92B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift in Sources */,
 				64A4DB9B2966490C008D8E20 /* dydxTradeInputOrderTypePresenter.swift in Sources */,
 				0236F118296ABEF500EB995F /* dydxPortfolioPositionsViewPresenter.swift in Sources */,
 				02282E752AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift in Sources */,

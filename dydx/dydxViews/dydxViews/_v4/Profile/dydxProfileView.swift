@@ -17,6 +17,7 @@ public class dydxProfileViewModel: PlatformViewModel {
     @Published public var history: dydxProfileHistoryViewModel? = dydxProfileHistoryViewModel()
     @Published public var fees: dydxProfileFeesViewModel? = dydxProfileFeesViewModel()
     @Published public var balances: dydxProfileBalancesViewModel? = dydxProfileBalancesViewModel()
+    @Published public var rewards: dydxProfileRewardsViewModel? = dydxProfileRewardsViewModel()
 
     public init() { }
 
@@ -50,6 +51,8 @@ public class dydxProfileViewModel: PlatformViewModel {
                     HStack(spacing: 14) {
                         self.fees?
                             .createView(parentStyle: style)
+//                        self.rewards?
+//                            .createView(parentStyle: style)
                     }
 
                     Spacer(minLength: 100)

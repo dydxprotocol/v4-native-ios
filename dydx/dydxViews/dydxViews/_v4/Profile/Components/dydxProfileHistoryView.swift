@@ -122,7 +122,6 @@ public class dydxProfileHistoryViewModel: dydxTitledCardViewModel {
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding()
             .themeFont(fontSize: .smaller)
             .themeColor(foreground: .textTertiary)
         }

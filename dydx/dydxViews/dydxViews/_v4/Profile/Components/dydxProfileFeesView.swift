@@ -75,7 +75,6 @@ public class dydxProfileFeesViewModel: dydxTitledCardViewModel, Equatable {
                     .leftAligned()
             }
         }
-        .padding(16)
         .wrappedInAnyView()
     }
 }
