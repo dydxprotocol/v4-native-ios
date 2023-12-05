@@ -38,6 +38,8 @@ public class dydxProfileRewardsViewModel: dydxTitledCardViewModel {
                 Text(value ?? "-")
                     .themeColor(foreground: .textSecondary)
                     .themeFont(fontType: .number, fontSize: .medium)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                 PlatformIconViewModel(type: .asset(name: "icon_dydx", bundle: .dydxView), clip: .noClip, size: .init(width: 24, height: 24), templateColor: nil)
                     .createView()
             }
