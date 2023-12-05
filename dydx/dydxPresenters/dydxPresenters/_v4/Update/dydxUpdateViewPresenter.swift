@@ -42,7 +42,7 @@ private class dydxUpdateViewPresenter: HostedViewPresenter<dydxUpdateViewModel>,
 
         viewModel = dydxUpdateViewModel()
     }
-
+    
     override func start() {
         super.start()
 

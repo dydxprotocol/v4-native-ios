@@ -25,14 +25,13 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
             return VStack(spacing: 24) {
-                    ScrollView(showsIndicators: false) {
-                        self.headerViewModel.createView(parentStyle: parentStyle)
-                        self.rewardsSummary.createView(parentStyle: style)
-                        Spacer(minLength: 68)
-                    }
-                    .padding()
+                ScrollView(showsIndicators: false) {
+                    self.headerViewModel.createView(parentStyle: parentStyle)
+                    self.rewardsSummary.createView(parentStyle: style)
+                    Spacer(minLength: 68)
                 }
-//            }
+                .padding()
+            }
             .frame(maxWidth: .infinity)
             .themeColor(background: .layer2)
             .ignoresSafeArea(edges: [.bottom])
