@@ -16,6 +16,7 @@ public class dydxRewardsHelpViewModel: dydxTitledCardViewModel {
             listViewModel.items = faqs
         }
     }
+    @Published public var learnMoreTapped: (() -> Void)?
     private let listViewModel = PlatformListViewModel()
 
     public init() {
@@ -24,8 +25,25 @@ public class dydxRewardsHelpViewModel: dydxTitledCardViewModel {
                    horizontalContentPadding: 0)
     }
 
-    override func createContent(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
-        return listViewModel
+    public override func createTitleAccessoryView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
+        HStack {
+            Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.LEARN_MORE", params: nil) ?? "")
+                    .themeColor(foreground: .textSecondary)
+                    .themeFont(fontType: .text, fontSize: .medium)
+            PlatformIconViewModel(type: .asset(name: "icon_link", bundle: .dydxView),
+                                  clip: .noClip,
+                                  size: .init(width: 16, height: 16),
+                                  templateColor: .textSecondary)
+                .createView()
+        }
+        .onTapGesture { [weak self] in
+            self?.learnMoreTapped?()
+        }
+        .wrappedInAnyView()
+    }
+
+    public override func createContentView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
+        listViewModel
             .createView()
         .wrappedInAnyView()
     }

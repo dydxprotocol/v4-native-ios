@@ -53,7 +53,7 @@ public class dydxProfileHistoryViewModel: dydxTitledCardViewModel {
         return vm
     }
 
-    public override func createContent(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
+    public override func createContentView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
         VStack(spacing: 0) {
             GeometryReader { metrics in
                 VStack(spacing: 8) {

@@ -33,7 +33,7 @@ public class dydxProfileFeesViewModel: dydxTitledCardViewModel, Equatable {
         return vm
     }
 
-    override func createContent(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
+    override func createContentView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
         VStack(spacing: 16) {
             HStack {
                 VStack(spacing: 8) {

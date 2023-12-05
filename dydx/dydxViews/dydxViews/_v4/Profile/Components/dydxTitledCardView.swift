@@ -16,10 +16,12 @@ public class dydxTitledCardViewModel: PlatformViewModel {
     public let horizontalContentPadding: CGFloat
     @Published public var tapAction: (() -> Void)?
 
-    public init(title: String, verticalContentPadding: CGFloat = 10, horizontalContentPadding: CGFloat = 18) {
+    public init(title: String,
+                verticalContentPadding: CGFloat = 10,
+                horizontalContentPadding: CGFloat = 18) {
+        self.title = title
         self.verticalContentPadding = verticalContentPadding
         self.horizontalContentPadding = horizontalContentPadding
-        self.title = title
         super.init()
     }
 
@@ -28,8 +30,17 @@ public class dydxTitledCardViewModel: PlatformViewModel {
         return vm
     }
 
-    func createContent(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
-        PlatformView.nilView?.wrappedInAnyView()
+    func createContentView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
+        AnyView(PlatformView.nilView)
+    }
+
+    /// defaults to a right facing chevron. override if you want a different accessory view or no accessory view at all
+    func createTitleAccessoryView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
+        PlatformIconViewModel(type: .system(name: "chevron.right"),
+                              size: CGSize(width: 10, height: 10),
+                              templateColor: .textSecondary)
+        .createView(parentStyle: parentStyle)
+        .wrappedInAnyView()
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
@@ -40,19 +51,15 @@ public class dydxTitledCardViewModel: PlatformViewModel {
                 HStack {
                     Text(self.title)
                         .themeFont(fontSize: .small)
+                        .themeColor(foreground: .textSecondary)
                     Spacer()
-                    if self.tapAction != nil {
-                        PlatformIconViewModel(type: .system(name: "chevron.right"),
-                                              size: CGSize(width: 10, height: 10),
-                                              templateColor: .textSecondary)
-                        .createView(parentStyle: style)
-                    }
+                    self.createTitleAccessoryView(parentStyle: parentStyle)
                 }
                 .padding()
 
                 DividerModel()
                     .createView(parentStyle: style)
-                self.createContent(parentStyle: style)
+                self.createContentView(parentStyle: parentStyle)
                     .padding(.vertical, self.verticalContentPadding)
                     .padding(.horizontal, self.horizontalContentPadding)
             }
