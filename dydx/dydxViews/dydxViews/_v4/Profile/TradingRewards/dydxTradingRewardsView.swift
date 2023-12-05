@@ -25,7 +25,7 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            return VStack(spacing: 24) {
+            return VStack(spacing: 8) {
                 self.headerViewModel.createView(parentStyle: parentStyle)
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 16) {
@@ -34,8 +34,8 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
                         Spacer(minLength: 68)
                     }
                 }
-                .padding()
             }
+            .padding(.horizontal, 16)
             .frame(maxWidth: .infinity)
             .themeColor(background: .layer2)
             .ignoresSafeArea(edges: [.bottom])
