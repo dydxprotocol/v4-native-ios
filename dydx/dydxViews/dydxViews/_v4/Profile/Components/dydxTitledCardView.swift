@@ -12,9 +12,13 @@ import Utilities
 public class dydxTitledCardViewModel: PlatformViewModel {
 
     public let title: String
+    public let verticalContentPadding: CGFloat
+    public let horizontalContentPadding: CGFloat
     @Published public var tapAction: (() -> Void)?
 
-    public init(title: String) {
+    public init(title: String, verticalContentPadding: CGFloat = 10, horizontalContentPadding: CGFloat = 18) {
+        self.verticalContentPadding = verticalContentPadding
+        self.horizontalContentPadding = horizontalContentPadding
         self.title = title
         super.init()
     }
@@ -49,8 +53,8 @@ public class dydxTitledCardViewModel: PlatformViewModel {
                 DividerModel()
                     .createView(parentStyle: style)
                 self.createContent(parentStyle: style)
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 18)
+                    .padding(.vertical, self.verticalContentPadding)
+                    .padding(.horizontal, self.horizontalContentPadding)
             }
             .themeColor(background: .layer3)
             .cornerRadius(12, corners: .allCorners)
