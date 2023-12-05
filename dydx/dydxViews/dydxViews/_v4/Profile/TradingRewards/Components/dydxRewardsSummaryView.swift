@@ -1,54 +1,56 @@
 //
-//  dydxProfileRewardsViewModel.swift
-//  dydxUI
+//  dydxRewardsSummaryView.swift
+//  dydxViews
 //
-//  Created by Rui Huang on 9/18/23.
-//  Copyright © 2023 dYdX Trading Inc. All rights reserved.
+//  Created by Michael Maguire on 12/4/23.
 //
 
 import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxProfileRewardsViewModel: dydxTitledCardViewModel {
+public class dydxRewardsSummaryViewModel: dydxTitledCardViewModel {
     @Published public var last7DaysRewardsAmount: String?
+    @Published public var last7DaysRewardsPeriod: String?
     @Published public var allTimeRewardsAmount: String?
+    @Published public var allTimeRewardsValue: String?
 
     public init() {
-        super.init(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.TRADING_REWARDS", params: nil) ?? "")
+        super.init(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.TRADING_REWARDS_SUMMARY", params: nil) ?? "")
     }
 
     override func createContent(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
-        HStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 10) {
-                titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_LAST_7_DAYS", params: nil) ?? "", value: last7DaysRewardsAmount)
-                titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_ALL_TIME", params: nil) ?? "", value: allTimeRewardsAmount)
+        HStack(spacing: 18) {
+            HStack {
+                titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_LAST_7_DAYS", params: nil) ?? "", primaryValue: last7DaysRewardsAmount, secondaryValue: last7DaysRewardsPeriod)
+                titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_ALL_TIME", params: nil) ?? "", primaryValue: last7DaysRewardsAmount, secondaryValue: allTimeRewardsValue)
             }
-            Spacer()
         }
         .wrappedInAnyView()
     }
 
-    private func titleValueStack(title: String, value: String?) -> some View {
+    private func titleValueStack(title: String, primaryValue: String?, secondaryValue: String?) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .text, fontSize: .smaller)
             HStack(spacing: 6) {
-                Text(value ?? "-")
+                Text(primaryValue ?? "-")
                     .themeColor(foreground: .textSecondary)
                     .themeFont(fontType: .number, fontSize: .medium)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
                 PlatformIconViewModel(type: .asset(name: "icon_dydx", bundle: .dydxView), clip: .noClip, size: .init(width: 24, height: 24), templateColor: nil)
                     .createView()
             }
+            Text(secondaryValue ?? "-")
+                .themeColor(foreground: .textTertiary)
+                .themeFont(fontType: .text, fontSize: .small)
         }
+        .leftAligned()
 
     }
 
-    public static var previewValue: dydxProfileRewardsViewModel {
-        let vm = dydxProfileRewardsViewModel()
+    public static var previewValue: dydxRewardsSummaryViewModel {
+        let vm = dydxRewardsSummaryViewModel()
         vm.last7DaysRewardsAmount = "20.00"
         vm.allTimeRewardsAmount = "30.00"
         return vm
@@ -57,13 +59,13 @@ public class dydxProfileRewardsViewModel: dydxTitledCardViewModel {
 }
 
 #if DEBUG
-struct dydxProfileRewardsViewModel_Previews_Dark: PreviewProvider {
+struct dydxRewardsSummaryViewModel_Previews_Dark: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyDarkTheme()
         ThemeSettings.applyStyles()
-        return dydxProfileRewardsViewModel.previewValue
+        return dydxRewardsSummaryViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)
@@ -72,13 +74,13 @@ struct dydxProfileRewardsViewModel_Previews_Dark: PreviewProvider {
     }
 }
 
-struct dydxProfileRewardsViewModel_Previews_Light: PreviewProvider {
+struct dydxRewardsSummaryViewModel_Previews_Light: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyLightTheme()
         ThemeSettings.applyStyles()
-        return dydxProfileRewardsViewModel.previewValue
+        return dydxRewardsSummaryViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)

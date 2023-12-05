@@ -27,5 +27,9 @@ public class dydxProfileRewardsViewPresenter: HostedViewPresenter<dydxProfileRew
         viewModel = dydxProfileRewardsViewModel()
         viewModel?.last7DaysRewardsAmount = "PLACEHOLDER"
         viewModel?.allTimeRewardsAmount = "PLACEHOLDER"
+
+        viewModel?.tapAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/profile/trading-rewards"), animated: true, completion: nil)
+        }
     }
 }
