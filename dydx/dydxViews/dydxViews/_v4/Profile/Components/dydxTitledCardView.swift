@@ -37,10 +37,12 @@ public class dydxTitledCardViewModel: PlatformViewModel {
                     Text(self.title)
                         .themeFont(fontSize: .small)
                     Spacer()
-                    PlatformIconViewModel(type: .system(name: "chevron.right"),
-                                          size: CGSize(width: 10, height: 10),
-                                          templateColor: .textSecondary)
-                    .createView(parentStyle: style)
+                    if self.tapAction != nil {
+                        PlatformIconViewModel(type: .system(name: "chevron.right"),
+                                              size: CGSize(width: 10, height: 10),
+                                              templateColor: .textSecondary)
+                        .createView(parentStyle: style)
+                    }
                 }
                 .padding()
 
