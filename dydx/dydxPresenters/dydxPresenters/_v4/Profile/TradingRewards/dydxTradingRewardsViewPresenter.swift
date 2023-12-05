@@ -7,11 +7,8 @@
 
 import Utilities
 import dydxViews
-import PlatformParticles
 import RoutingKit
-import ParticlesKit
 import PlatformUI
-import dydxStateManager
 
 public class dydxTradingRewardsViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
