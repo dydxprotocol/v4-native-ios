@@ -1,8 +1,8 @@
 //
-//  dydxProfileRewardsViewPresenter.swift
+//  dydxRewardsSummaryPresenter.swift
 //  dydxPresenters
 //
-//  Created by Rui Huang on 9/18/23.
+//  Created by Michael Maguire on 12/4/23.
 //
 
 import Utilities
@@ -16,20 +16,16 @@ import dydxStateManager
 import dydxFormatter
 import Combine
 
-public protocol dydxProfileRewardsViewPresenterProtocol: HostedViewPresenterProtocol {
+public protocol dydxRewardsSummaryPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxProfileRewardsViewModel? { get }
 }
 
-public class dydxProfileRewardsViewPresenter: HostedViewPresenter<dydxProfileRewardsViewModel>, dydxProfileRewardsViewPresenterProtocol {
+public class dydxRewardsSummaryViewPresenter: HostedViewPresenter<dydxProfileRewardsViewModel>, dydxProfileRewardsViewPresenterProtocol {
     override init() {
         super.init()
 
         viewModel = dydxProfileRewardsViewModel()
         viewModel?.last7DaysRewardsAmount = "PLACEHOLDER"
         viewModel?.allTimeRewardsAmount = "PLACEHOLDER"
-
-        viewModel?.tapAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/profile/trading-rewards"), animated: true, completion: nil)
-        }
     }
 }

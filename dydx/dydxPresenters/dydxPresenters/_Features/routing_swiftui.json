@@ -209,6 +209,10 @@
                     "destination":"dydxPresenters.dydxFeesStuctureViewBuilder",
                     "presentation":"push"
                 },
+                "/profile/trading-rewards":{
+                    "destination":"dydxPresenters.dydxTradingRewardsViewBuilder",
+                    "presentation":"push"
+                },
                 "/portfolio":{
                     "destination":"dydxPresenters.dydxPortfolioViewBuilder"
                 },

@@ -160,6 +160,8 @@
 		277442982AD88C4900C91357 /* Satoshi-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 277442962AD88C4900C91357 /* Satoshi-Regular.otf */; };
 		277E8F9F2B1A847D005CCBCB /* dydxTitledCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E8F9E2B1A847D005CCBCB /* dydxTitledCardView.swift */; };
 		277E8FCB2B1E5798005CCBCB /* dydxProfileRewardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E8FCA2B1E5798005CCBCB /* dydxProfileRewardsViewModel.swift */; };
+		277E90132B1EA0D3005CCBCB /* dydxTradingRewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E90122B1EA0D3005CCBCB /* dydxTradingRewardsView.swift */; };
+		277E901B2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E901A2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift */; };
 		27A799B92A66EC2D007C3D04 /* ThemeClassicDark.json in Resources */ = {isa = PBXBuildFile; fileRef = 27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */; };
 		27AAA9862ACE34C800AF3C56 /* SwiftMessages+Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */; };
 		27C027452AFD734800E92CCB /* dydxSettingsHelpRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */; };
@@ -496,6 +498,8 @@
 		277442962AD88C4900C91357 /* Satoshi-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Regular.otf"; sourceTree = "<group>"; };
 		277E8F9E2B1A847D005CCBCB /* dydxTitledCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTitledCardView.swift; sourceTree = "<group>"; };
 		277E8FCA2B1E5798005CCBCB /* dydxProfileRewardsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxProfileRewardsViewModel.swift; sourceTree = "<group>"; };
+		277E90122B1EA0D3005CCBCB /* dydxTradingRewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradingRewardsView.swift; sourceTree = "<group>"; };
+		277E901A2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsSummaryView.swift; sourceTree = "<group>"; };
 		27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ThemeClassicDark.json; sourceTree = "<group>"; };
 		27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMessages+Banner.swift"; sourceTree = "<group>"; };
 		27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsHelpRowView.swift; sourceTree = "<group>"; };
@@ -1001,6 +1005,7 @@
 		0258BA0F2992947E0098E1BE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				277E8FF82B1EA083005CCBCB /* TradingRewards */,
 				02B27A382AE8BC4500A995EC /* Help */,
 				0273A12A2ACCC48D001B89F5 /* History */,
 				024FEB622ACB75C00087A55E /* FeesStructure */,
@@ -1336,6 +1341,23 @@
 				270BA8CE2A6F1470009212EA /* dydxDebugThemeViewerView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		277E8FF82B1EA083005CCBCB /* TradingRewards */ = {
+			isa = PBXGroup;
+			children = (
+				277E90162B1EA36E005CCBCB /* Components */,
+				277E90122B1EA0D3005CCBCB /* dydxTradingRewardsView.swift */,
+			);
+			path = TradingRewards;
+			sourceTree = "<group>";
+		};
+		277E90162B1EA36E005CCBCB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				277E901A2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		27AAA9782ACE34B600AF3C56 /* Banner */ = {
@@ -1798,6 +1820,7 @@
 				02D1344128EBA86200B46941 /* dydxMarketAssetSortView.swift in Sources */,
 				02EC0D9E29FAD3EB0015C4B3 /* IntervalText.swift in Sources */,
 				270E7E342A5F700B00136793 /* dydxOrderbookManagerView.swift in Sources */,
+				277E901B2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift in Sources */,
 				02084B2D297FC2CD00CF9522 /* dydxTransferFaucetView.swift in Sources */,
 				022EDC8E29A048B3003D59A7 /* dydxClosePositionHeaderView.swift in Sources */,
 				0256F53629AFFC9800A083C0 /* dydxOnboardConnectView.swift in Sources */,
@@ -1887,6 +1910,7 @@
 				02DDE09F28F37D4200945990 /* dydxMarketPriceCandlesHighlightView.swift in Sources */,
 				02A9B6102900605400AE1516 /* SizeText.swift in Sources */,
 				64A4DB6F2966218B008D8E20 /* dydxTradeInputOrderTypeView.swift in Sources */,
+				277E90132B1EA0D3005CCBCB /* dydxTradingRewardsView.swift in Sources */,
 				02678F5B2965DEAD00EE346B /* dydxPortfolioSectionsView.swift in Sources */,
 				64A4DB762966276B008D8E20 /* dydxTradeInputTriggerPriceView.swift in Sources */,
 				0238FEBF2970CBEF002E1C1A /* dydxMarketAccountView.swift in Sources */,
