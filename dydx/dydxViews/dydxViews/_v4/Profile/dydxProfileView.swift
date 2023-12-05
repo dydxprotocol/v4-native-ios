@@ -9,6 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import dydxFormatter
 
 public class dydxProfileViewModel: PlatformViewModel {
     @Published public var header = dydxProfileHeaderViewModel()
@@ -48,11 +49,12 @@ public class dydxProfileViewModel: PlatformViewModel {
                     HStack(spacing: 14) {
                         self.fees?
                             .createView(parentStyle: style)
-                            //TODO, comment in when abacus is ready
-//                        self.rewards?
-//                            .createView(parentStyle: style)
+                        if dydxBoolFeatureFlag.enable_trading_rewards.isEnabled {
+                            self.rewards?
+                                .createView(parentStyle: style)
+                        }
                     }
-                    
+
                     self.history?
                         .createView(parentStyle: style)
 
