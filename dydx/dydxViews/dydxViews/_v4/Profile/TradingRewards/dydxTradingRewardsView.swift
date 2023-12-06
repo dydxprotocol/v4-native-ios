@@ -13,6 +13,7 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
 
     @Published public var headerViewModel: NavHeaderModel = NavHeaderModel()
     @Published public var rewardsSummary: dydxRewardsSummaryViewModel = dydxRewardsSummaryViewModel()
+    @Published public var help: dydxRewardsHelpViewModel? = dydxRewardsHelpViewModel()
 
     public init() { }
 
@@ -24,14 +25,17 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            return VStack(spacing: 24) {
+            return VStack(spacing: 8) {
+                self.headerViewModel.createView(parentStyle: parentStyle)
                 ScrollView(showsIndicators: false) {
-                    self.headerViewModel.createView(parentStyle: parentStyle)
-                    self.rewardsSummary.createView(parentStyle: style)
-                    Spacer(minLength: 68)
+                    VStack(spacing: 16) {
+                        self.rewardsSummary.createView(parentStyle: style)
+                        self.help?.createView(parentStyle: style)
+                        Spacer(minLength: 68)
+                    }
                 }
-                .padding()
             }
+            .padding(.horizontal, 16)
             .frame(maxWidth: .infinity)
             .themeColor(background: .layer2)
             .ignoresSafeArea(edges: [.bottom])
