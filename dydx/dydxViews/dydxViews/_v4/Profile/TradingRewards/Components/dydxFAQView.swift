@@ -25,20 +25,21 @@ public class dydxFAQViewModel: PlatformViewModel {
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
+            let hideShowImageDiameter: CGFloat = 20
+            let hideShowViewDiameter: CGFloat = 28
+            let paddingDim: CGFloat = (hideShowViewDiameter - hideShowImageDiameter) / 2
             return VStack(spacing: 0) {
                 HStack {
                     Text(self.question)
                         .themeFont(fontType: .text, fontSize: .small)
                         .themeColor(foreground: .textSecondary)
                     Spacer(minLength: 16)
-                    PlatformIconViewModel(type: .asset(name: self.isExpanded ? "icon_cancel" : "icon_plus",
-                                                       bundle: .dydxView),
-                                          clip: .circle(background: .layer5,
-                                                        spacing: 16,
-                                                        borderColor: .layer6),
-                                          size: .init(width: 28, height: 28),
-                                          templateColor: .textTertiary)
-                    .createView(parentStyle: parentStyle)
+                    //PlatformIconViewModel behaves weirdly here. When isExpanded is toggled, sometimes the icon hides entirely. Do not use.
+                    Image(self.isExpanded ? "icon_collapse" : "icon_expand", bundle: .dydxView)
+                        .frame(width: hideShowImageDiameter, height: hideShowImageDiameter)
+                        .padding(.all, paddingDim)
+                        .themeColor(background: .layer5)
+                        .borderAndClip(style: .cornerRadius(hideShowViewDiameter/2), borderColor: .layer6, lineWidth: 1)
                     .onTapGesture { [weak self] in
                         withAnimation {
                             self?.isExpanded.toggle()
