@@ -18,7 +18,7 @@ public class dydxProfileRewardsViewModel: dydxTitledCardViewModel {
         super.init(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.TRADING_REWARDS", params: nil) ?? "")
     }
 
-    override func createContent(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
+    override func createContentView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 10) {
                 titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_LAST_7_DAYS", params: nil) ?? "", value: last7DaysRewardsAmount)
