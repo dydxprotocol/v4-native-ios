@@ -162,6 +162,8 @@
 		277E8FCB2B1E5798005CCBCB /* dydxProfileRewardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E8FCA2B1E5798005CCBCB /* dydxProfileRewardsViewModel.swift */; };
 		277E90132B1EA0D3005CCBCB /* dydxTradingRewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E90122B1EA0D3005CCBCB /* dydxTradingRewardsView.swift */; };
 		277E901B2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E901A2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift */; };
+		277E90412B1FAEAF005CCBCB /* dydxRewardsHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E90402B1FAEAF005CCBCB /* dydxRewardsHelpView.swift */; };
+		277E904F2B1FAFCB005CCBCB /* dydxFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E904E2B1FAFCB005CCBCB /* dydxFAQView.swift */; };
 		27A799B92A66EC2D007C3D04 /* ThemeClassicDark.json in Resources */ = {isa = PBXBuildFile; fileRef = 27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */; };
 		27AAA9862ACE34C800AF3C56 /* SwiftMessages+Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */; };
 		27C027452AFD734800E92CCB /* dydxSettingsHelpRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */; };
@@ -500,6 +502,8 @@
 		277E8FCA2B1E5798005CCBCB /* dydxProfileRewardsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxProfileRewardsViewModel.swift; sourceTree = "<group>"; };
 		277E90122B1EA0D3005CCBCB /* dydxTradingRewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradingRewardsView.swift; sourceTree = "<group>"; };
 		277E901A2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsSummaryView.swift; sourceTree = "<group>"; };
+		277E90402B1FAEAF005CCBCB /* dydxRewardsHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsHelpView.swift; sourceTree = "<group>"; };
+		277E904E2B1FAFCB005CCBCB /* dydxFAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxFAQView.swift; sourceTree = "<group>"; };
 		27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ThemeClassicDark.json; sourceTree = "<group>"; };
 		27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMessages+Banner.swift"; sourceTree = "<group>"; };
 		27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsHelpRowView.swift; sourceTree = "<group>"; };
@@ -1356,6 +1360,8 @@
 			isa = PBXGroup;
 			children = (
 				277E901A2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift */,
+				277E90402B1FAEAF005CCBCB /* dydxRewardsHelpView.swift */,
+				277E904E2B1FAFCB005CCBCB /* dydxFAQView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1850,6 +1856,7 @@
 				0284201629AD71B600C0E7CC /* Enums.swift in Sources */,
 				02678FA629666BE600EE346B /* dydxPortfolioOrdersView.swift in Sources */,
 				020DBF0F29E0924E0068AAA6 /* dydxTransferDepositView.swift in Sources */,
+				277E90412B1FAEAF005CCBCB /* dydxRewardsHelpView.swift in Sources */,
 				02714C9F29E0C7C500CC1C44 /* TokensComboBox.swift in Sources */,
 				64A4DC652968A17C008D8E20 /* dydxTradeInputSideView.swift in Sources */,
 				024FEB7E2ACB82A10087A55E /* NavHeader.swift in Sources */,
@@ -1901,6 +1908,7 @@
 				02D3C46E28F74F5400683843 /* dydxMarketResourcesView.swift in Sources */,
 				02FA5B6F2A12FB040045F2F5 /* dydxTransferWithdrawalView.swift in Sources */,
 				0230377628C13DA500412B72 /* dydxMarketsHeaderView.swift in Sources */,
+				277E904F2B1FAFCB005CCBCB /* dydxFAQView.swift in Sources */,
 				277E8F9F2B1A847D005CCBCB /* dydxTitledCardView.swift in Sources */,
 				024B44F129834D1F00E35D54 /* dydxTradeStatusCtaButtonView.swift in Sources */,
 				0230A2A228B84A140036DDF3 /* UIHostingController+Ext.swift in Sources */,

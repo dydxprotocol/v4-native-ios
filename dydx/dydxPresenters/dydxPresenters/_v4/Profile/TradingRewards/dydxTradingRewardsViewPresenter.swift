@@ -32,14 +32,21 @@ private protocol dydxTradingRewardsViewPresenterProtocol: HostedViewPresenterPro
 }
 
 private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRewardsViewModel>, dydxTradingRewardsViewPresenterProtocol {
+
+    private let helpPresenter = dydxRewardsHelpViewPresenter()
+
     override init() {
         super.init()
 
-        viewModel = dydxTradingRewardsViewModel()
+        let viewModel = dydxTradingRewardsViewModel()
 
-        viewModel?.headerViewModel.title = DataLocalizer.localize(path: "APP.GENERAL.TRADING_REWARDS")
-        viewModel?.headerViewModel.backButtonAction = {
+        viewModel.headerViewModel.title = DataLocalizer.localize(path: "APP.GENERAL.TRADING_REWARDS")
+        viewModel.headerViewModel.backButtonAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
+
+        helpPresenter.$viewModel.assign(to: &viewModel.$help)
+
+        self.viewModel = viewModel
     }
 }
