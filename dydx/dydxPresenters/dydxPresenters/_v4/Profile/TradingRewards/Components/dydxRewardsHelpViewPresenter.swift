@@ -1,5 +1,5 @@
 //
-//  dydxRewardsHelpViewBuilder.swift
+//  dydxRewardsHelpViewPresenter.swift
 //  dydxPresenters
 //
 //  Created by Michael Maguire on 12/5/23.

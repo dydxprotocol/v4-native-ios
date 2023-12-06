@@ -34,6 +34,7 @@ private protocol dydxTradingRewardsViewPresenterProtocol: HostedViewPresenterPro
 private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRewardsViewModel>, dydxTradingRewardsViewPresenterProtocol {
 
     private let helpPresenter = dydxRewardsHelpViewPresenter()
+    private let historyPresenter = dydxRewardsHistoryViewPresenter()
 
     override init() {
         super.init()
@@ -46,6 +47,7 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
         }
 
         helpPresenter.$viewModel.assign(to: &viewModel.$help)
+        historyPresenter.$viewModel.assign(to: &viewModel.$history)
 
         self.viewModel = viewModel
     }

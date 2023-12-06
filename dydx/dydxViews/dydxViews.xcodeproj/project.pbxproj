@@ -164,6 +164,7 @@
 		277E901B2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E901A2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift */; };
 		277E90412B1FAEAF005CCBCB /* dydxRewardsHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E90402B1FAEAF005CCBCB /* dydxRewardsHelpView.swift */; };
 		277E904F2B1FAFCB005CCBCB /* dydxFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E904E2B1FAFCB005CCBCB /* dydxFAQView.swift */; };
+		277E907D2B211553005CCBCB /* dydxRewardsHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E907C2B211553005CCBCB /* dydxRewardsHistoryView.swift */; };
 		27A799B92A66EC2D007C3D04 /* ThemeClassicDark.json in Resources */ = {isa = PBXBuildFile; fileRef = 27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */; };
 		27AAA9862ACE34C800AF3C56 /* SwiftMessages+Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */; };
 		27C027452AFD734800E92CCB /* dydxSettingsHelpRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */; };
@@ -504,6 +505,7 @@
 		277E901A2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsSummaryView.swift; sourceTree = "<group>"; };
 		277E90402B1FAEAF005CCBCB /* dydxRewardsHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsHelpView.swift; sourceTree = "<group>"; };
 		277E904E2B1FAFCB005CCBCB /* dydxFAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxFAQView.swift; sourceTree = "<group>"; };
+		277E907C2B211553005CCBCB /* dydxRewardsHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsHistoryView.swift; sourceTree = "<group>"; };
 		27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ThemeClassicDark.json; sourceTree = "<group>"; };
 		27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMessages+Banner.swift"; sourceTree = "<group>"; };
 		27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsHelpRowView.swift; sourceTree = "<group>"; };
@@ -1362,6 +1364,7 @@
 				277E901A2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift */,
 				277E90402B1FAEAF005CCBCB /* dydxRewardsHelpView.swift */,
 				277E904E2B1FAFCB005CCBCB /* dydxFAQView.swift */,
+				277E907C2B211553005CCBCB /* dydxRewardsHistoryView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1900,6 +1903,7 @@
 				0238FEDF2972B5C9002E1C1A /* dydxTradeInputCtaButtonView.swift in Sources */,
 				02AEE36C28EF7CC8006842E8 /* dydxMarketInfoHeaderView.swift in Sources */,
 				024F488529657F1900E40247 /* dydxPortfolioView.swift in Sources */,
+				277E907D2B211553005CCBCB /* dydxRewardsHistoryView.swift in Sources */,
 				024B79BF28B7F53800F7C386 /* dydxViews.docc in Sources */,
 				02E51E5F29FB167F00BC0236 /* ImageFactory.swift in Sources */,
 				64A4DB6B2966215A008D8E20 /* dydxOrderbookSideView.swift in Sources */,

@@ -48,11 +48,12 @@ public class dydxTitledCardViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack(spacing: 0) {
-                HStack {
+                HStack(spacing: 0) {
                     Text(self.title)
                         .themeFont(fontSize: .small)
                         .themeColor(foreground: .textSecondary)
-                    Spacer()
+                        .fixedSize()
+                    Spacer(minLength: 16)
                     self.createTitleAccessoryView(parentStyle: parentStyle)
                 }
                 .padding()
