@@ -70,7 +70,7 @@ open class dydxMarketAssetItemViewModel: PlatformViewModel {
                                            trailing: trailing.wrappedViewModel)
                 .createView(parentStyle: parentStyle)
                 .frame(height: 64)
-                .themeGradient(background: .layer4, gradientType: gradientType)
+                .themeGradient(background: .layer3, gradientType: gradientType)
                 .cornerRadius(16)
 
             if isFavorited {

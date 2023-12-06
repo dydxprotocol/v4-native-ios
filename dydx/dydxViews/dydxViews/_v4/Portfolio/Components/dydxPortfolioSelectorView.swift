@@ -74,6 +74,7 @@ public class dydxPortfolioSelectorViewModel: PlatformViewModel {
                         HStack {
                             Text(items[selectedIndex].title ?? "")
                                 .themeFont(fontType: .bold, fontSize: .largest)
+                                .themeColor(foreground: .textPrimary)
                             PlatformIconViewModel(type: .system(name: self.present ? "chevron.up": "chevron.down"),
                                                   clip: .circle(background: .layer5, spacing: 16, borderColor: ThemeColor.SemanticColor.layer6),
                                                   size: CGSize(width: 28, height: 28),
