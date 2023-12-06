@@ -64,7 +64,7 @@ public class dydxTransferOutViewModel: PlatformViewModel {
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .themeColor(background: .layer0)
+                        .themeColor(background: .layer1)
                         .cornerRadius(12, corners: [.topLeft, .topRight])
 
                         self.ctaButton?.createView(parentStyle: style)
@@ -84,7 +84,7 @@ struct dydxTransferOutView_Previews_Dark: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxTransferOutViewModel.previewValue
             .createView()
-            .themeColor(background: .layer0)
+            .themeColor(background: .layer1)
             .environmentObject(themeSettings)
             .previewLayout(.sizeThatFits)
     }
@@ -98,7 +98,7 @@ struct dydxTransferOutView_Previews_Light: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxTransferOutViewModel.previewValue
             .createView()
-            .themeColor(background: .layer0)
+            .themeColor(background: .layer1)
             .environmentObject(themeSettings)
             .previewLayout(.sizeThatFits)
     }
