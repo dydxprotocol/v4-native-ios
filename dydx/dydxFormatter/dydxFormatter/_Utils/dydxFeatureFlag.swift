@@ -19,7 +19,10 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     private static let obj = NSObject()
 
     public var isEnabled: Bool {
-        Self.obj.parser.asBoolean(FeatureService.shared?.flag(feature: rawValue))?.boolValue ?? false
+        if FeatureService.shared == nil {
+            Console.shared.log("WARNING: FeatureService not yet set up.")
+        }
+        return Self.obj.parser.asBoolean(FeatureService.shared?.flag(feature: rawValue))?.boolValue ?? false
     }
 
     public static var enabledFlags: [String] {
@@ -35,7 +38,10 @@ public enum dydxStringFeatureFlag: String {
     private static let obj = NSObject()
 
     public var string: String? {
-        Self.obj.parser.asString(FeatureService.shared?.flag(feature: rawValue))
+        if FeatureService.shared == nil {
+            Console.shared.log("WARNING: FeatureService not yet set up.")
+        }
+        return Self.obj.parser.asString(FeatureService.shared?.flag(feature: rawValue))
     }
 }
 
@@ -45,6 +51,9 @@ public enum dydxNumberFeatureFlag: String {
     private static let obj = NSObject()
 
     public var number: NSNumber? {
-        Self.obj.parser.asNumber(FeatureService.shared?.flag(feature: rawValue))
+        if FeatureService.shared == nil {
+            Console.shared.log("WARNING: FeatureService not yet set up.")
+        }
+        return Self.obj.parser.asNumber(FeatureService.shared?.flag(feature: rawValue))
     }
 }

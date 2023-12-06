@@ -14,7 +14,9 @@ import Cartera
 
 final class dydxCarteraConfigWorker: BaseWorker {
 
-    override init() {
+    public override func start() {
+        super.start()
+
         let filePath = "configs/wallets.json"
         #if DEBUG
         let url: String? = nil
@@ -26,10 +28,6 @@ final class dydxCarteraConfigWorker: BaseWorker {
                 CarteraConfig.shared.registerWallets(configJsonData: walletJson)
             }
         }
-    }
-
-    public override func start() {
-        super.start()
 
         AbacusStateManager.shared.$currentEnvironment
             .removeDuplicates()
