@@ -36,6 +36,7 @@ public class dydxPortfolioSectionsViewModel: PlatformViewModel {
             let selectedItems = self.itemTitles?.compactMap {
                 Text($0)
                     .themeFont(fontType: .bold, fontSize: .largest)
+                    .themeColor(foreground: .textPrimary)
                     .wrappedViewModel
             }
             return AnyView(

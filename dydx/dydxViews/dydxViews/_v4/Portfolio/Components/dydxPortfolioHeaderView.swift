@@ -33,33 +33,34 @@ public class dydxPortfolioHeaderViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let title: String?
-            let icon: String?
+            let title: String
+            let icon: String
             let action: (() -> Void)?
+            let backgroundColor: ThemeColor.SemanticColor
+            let borderColor: ThemeColor.SemanticColor?
             switch self.state {
             case .onboard:
                 title = DataLocalizer.localize(path: "APP.ONBOARDING.GET_STARTED")
                 icon = "icon_wallet_connect"
                 action = self.onboardAction
+                backgroundColor = .colorPurple
+                borderColor = nil
             case .onboardCompleted:
                 title = DataLocalizer.localize(path: "APP.GENERAL.TRANSFER")
                 icon = "icon_transfer"
                 action = self.depositAction
+                backgroundColor = .layer4
+                borderColor = .layer6
             }
 
             return AnyView(
                 HStack {
-//                    Text(DataLocalizer.localize(path: "APP.PORTFOLIO.PORTFOLIO", params: nil))
-//                        .themeFont(fontType: .bold, fontSize: .largest)
-//
-//                    Spacer()
-
-                    Text(title ?? "")
+                    Text(title)
                         .themeFont(fontType: .bold, fontSize: .small)
                         .themeColor(foreground: .textTertiary)
 
                     let icon = PlatformIconViewModel(type: .asset(name: icon, bundle: Bundle.dydxView),
-                                                     clip: .circle(background: .layer5, spacing: 24, borderColor: .layer6),
+                                                     clip: .circle(background: backgroundColor, spacing: 24, borderColor: borderColor),
                                                      size: CGSize(width: 42, height: 42))
                     PlatformButtonViewModel(content: icon,
                                             type: .iconType,

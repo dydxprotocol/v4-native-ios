@@ -96,7 +96,7 @@ public class dydxTosViewModel: PlatformViewModel {
             .leftAligned()
             .padding()
         }
-        .themeColor(background: .layer4)
+        .themeColor(background: .layer3)
         .cornerRadius(12, corners: .allCorners)
     }
 

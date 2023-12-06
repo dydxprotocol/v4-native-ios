@@ -90,7 +90,7 @@ public class dydxSearchViewModel: PlatformViewModel {
                     .frame(height: 40)
                     .padding(.vertical, 2)
                     .padding(.horizontal, 12)
-                    .themeColor(background: .layer4)
+                    .themeColor(background: .layer3)
                     .clipShape(Capsule())
 
                 if presentationStyle == .modal {

@@ -49,7 +49,7 @@ public class dydxTradingNetworkItemViewModel: PlatformViewModel {
                             .createView(parentStyle: style)
                     }
                     .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-                    .themeColor(background: .layer4)
+                    .themeColor(background: .layer3)
                     .cornerRadius(16)
                     .onTapGesture { [weak self] in
                         self?.onSelected?()
