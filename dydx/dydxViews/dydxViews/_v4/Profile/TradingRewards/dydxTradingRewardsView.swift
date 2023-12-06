@@ -61,7 +61,6 @@ struct dydxTradingRewardsViewModel_Previews_Dark: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxHelpViewModel.previewValue
             .createView()
-            .themeColor(background: .layer0)
             .environmentObject(themeSettings)
             // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
@@ -76,7 +75,6 @@ struct dydxTradingRewardsViewModel_Previews_Light: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxHelpViewModel.previewValue
             .createView()
-            .themeColor(background: .layer0)
             .environmentObject(themeSettings)
         // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)

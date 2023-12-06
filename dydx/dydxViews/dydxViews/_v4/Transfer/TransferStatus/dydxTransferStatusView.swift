@@ -67,7 +67,7 @@ public class dydxTransferStatusViewModel: PlatformViewModel {
                             .padding(.bottom, 12)
                             .frame(height: 180)
                             .frame(maxWidth: .infinity)
-                            .themeColor(background: .layer0)
+                            .themeColor(background: .layer1)
                             .cornerRadius(12, corners: [.topLeft, .topRight])
 
                             if self.deleteAction != nil {

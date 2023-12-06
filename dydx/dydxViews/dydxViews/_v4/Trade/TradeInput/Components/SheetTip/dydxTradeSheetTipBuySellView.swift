@@ -66,7 +66,6 @@ struct dydxTradeSheetTipBuySellView_Previews_Dark: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxTradeSheetTipBuySellViewModel.previewValue
             .createView()
-            .themeColor(background: .layer0)
             .environmentObject(themeSettings)
             // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
@@ -81,7 +80,6 @@ struct dydxTradeSheetTipBuySellView_Previews_Light: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxTradeSheetTipBuySellViewModel.previewValue
             .createView()
-            .themeColor(background: .layer0)
             .environmentObject(themeSettings)
         // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
