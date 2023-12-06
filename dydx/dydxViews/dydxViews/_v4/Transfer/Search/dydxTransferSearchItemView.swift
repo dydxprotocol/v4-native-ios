@@ -52,7 +52,7 @@ public class dydxTransferSearchItemViewModel: PlatformViewModel {
                                                trailing: trailing.wrappedViewModel)
                 .createView(parentStyle: style)
                 .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-                .themeColor(background: .layer4)
+                .themeColor(background: .layer3)
                 .cornerRadius(12)
                 .onTapGesture { [weak self] in
                     self?.onTapAction?()

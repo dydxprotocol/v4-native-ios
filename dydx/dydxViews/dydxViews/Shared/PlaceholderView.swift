@@ -38,7 +38,7 @@ public class PlaceholderViewModel: PlatformViewModel {
                  PlatformTableViewCellViewModel(main: main)
                     .createView(parentStyle: style)
                     .frame(width: UIScreen.main.bounds.width - 32)
-                    .themeColor(background: .layer4)
+                    .themeColor(background: .layer3)
                     .cornerRadius(16)
             )
         }

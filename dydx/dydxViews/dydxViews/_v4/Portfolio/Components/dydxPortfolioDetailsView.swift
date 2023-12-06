@@ -47,7 +47,7 @@ public class dydxPortfolioDetailsViewModel: PlatformViewModel {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .themeColor(background: .layer1)
+                .themeColor(background: .layer5)
                 .cornerRadius(28)
             )
         }

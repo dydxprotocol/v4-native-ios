@@ -80,7 +80,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                                                       trailing: trailing.wrappedViewModel)
                                .createView(parentStyle: parentStyle)
                                .frame(height: 64)
-                               .themeGradient(background: .layer4, gradientType: self.gradientType)
+                               .themeGradient(background: .layer3, gradientType: self.gradientType)
                                .cornerRadius(16)
                                .onTapGesture { [weak self] in
                                    self?.handler?.onTapAction?()
