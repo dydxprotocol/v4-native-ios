@@ -14,7 +14,8 @@ import dydxFormatter
 public final class AbacusStateManager: NSObject {
     public static let shared = AbacusStateManager()
 
-    public let deploymentUri = {
+    public lazy var deploymentUri: String = {
+        // "lazy var" because FeatureService.shared needs be assigned first
         let url = dydxStringFeatureFlag.deployment_url.string ?? (CredientialConfig.shared.key(for: "webAppUrl"))!
         return url.last == "/" ? url : url + "/"
     }()
