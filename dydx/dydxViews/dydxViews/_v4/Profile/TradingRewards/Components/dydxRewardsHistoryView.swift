@@ -13,18 +13,16 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
     @Published public var filters: [TabItemViewModel.TabItemContent] = []
     @Published public var onSelectionChanged: ((Int) -> Void)?
 
-    @Published public var items: [dydxFAQViewModel] = [] {
+    @Published public var items: [dydxRewardsRewardView] = [] {
         didSet {
             listViewModel.items = items
         }
     }
-    private let listViewModel = PlatformListViewModel()
+    private let listViewModel = PlatformListViewModel(intraItemSeparator: false)
     @Published private var filtersViewWidth: CGFloat = .zero
 
     public init() {
-        super.init(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.REWARD_HISTORY", params: nil) ?? "",
-                   verticalContentPadding: 0,
-                   horizontalContentPadding: 0)
+        super.init(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.REWARD_HISTORY", params: nil) ?? "")
     }
 
     public override func createTitleAccessoryView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {

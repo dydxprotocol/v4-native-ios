@@ -43,13 +43,23 @@ public class dydxRewardsHistoryViewPresenter: HostedViewPresenter<dydxRewardsHis
 
         viewModel?.onSelectionChanged = { index in
             let period = Period.allCases[index]
-            // TODO get url from abacus
+            // TODO filter abacus results by period
 //            Router.shared?.navigate(to: .init(url: ...), animated: true, completion: nil)
         }
 
         // TODO get todos from abacus
         viewModel?.items = [
-
+            .init(period: "period 1 -> period 2", amount: "1.000"),
+            .init(period: "period 2 -> period 3", amount: "2.000"),
+            .init(period: "period 3 -> period 4", amount: "3.000"),
+            .init(period: "period 4 -> period 5", amount: "4.000"),
+            .init(period: "period 5 -> period 6", amount: "5.000"),
+            .init(period: "period 6 -> period 7", amount: "6.000"),
+            .init(period: "period 7 -> period 8", amount: "7.000"),
+            .init(period: "period 8 -> period 9", amount: "8.000"),
+            .init(period: "period 9 -> period 10", amount: "9.000"),
+            .init(period: "period 10 -> period 11", amount: "10.000"),
+            .init(period: "period 11 -> period 12", amount: "11.000")
         ]
     }
 }

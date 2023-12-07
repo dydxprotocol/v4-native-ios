@@ -499,16 +499,28 @@ public extension View {
 // MARK: AttributedString
 
 public extension AttributedString {
-    func themeFont(fontType: ThemeFont.FontType = .text, fontSize: ThemeFont.FontSize = .medium) -> Self {
-        var copy = self
-        copy.font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
-        return copy
+    /// Applies a font to the attributed string.
+    /// - Parameters:
+    ///   - foreground: the font to apply
+    ///   - range: the range to modify, `nil` if the entire string should be modified
+    mutating func themeFont(fontType: ThemeFont.FontType = .text, fontSize: ThemeFont.FontSize = .medium, to range: Range<AttributedString.Index>? = nil) {
+        if let range = range {
+            self[range].font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
+        } else {
+            self.font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
+        }
     }
- 
-    func themeColor(foreground: ThemeColor.SemanticColor) -> Self {
-        var copy = self
-        copy.foregroundColor = ThemeSettings.shared.themeConfig.themeColor.color(of: foreground)
-        return copy
+    
+    /// Applies a foreground color to the attributed string.
+    /// - Parameters:
+    ///   - foreground: the color to apply
+    ///   - range: the range to modify, `nil` if the entire string should be modified
+    mutating func themeColor(foreground: ThemeColor.SemanticColor, to range: Range<AttributedString.Index>? = nil) {
+        if let range = range {
+            self[range].foregroundColor = ThemeSettings.shared.themeConfig.themeColor.color(of: foreground)
+        } else {
+            self.foregroundColor = ThemeSettings.shared.themeConfig.themeColor.color(of: foreground)
+        }
     }
 }
 

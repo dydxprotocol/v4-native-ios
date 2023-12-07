@@ -33,7 +33,7 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
                         self.rewardsSummary.createView(parentStyle: style)
                         self.help?.createView(parentStyle: style)
                         self.history?.createView(parentStyle: style)
-                        Spacer(minLength: 68)
+                        Spacer(minLength: 80)
                     }
                 }
             }

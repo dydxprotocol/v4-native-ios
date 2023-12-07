@@ -56,7 +56,8 @@ public class dydxTitledCardViewModel: PlatformViewModel {
                     Spacer(minLength: 16)
                     self.createTitleAccessoryView(parentStyle: parentStyle)
                 }
-                .padding()
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
 
                 DividerModel()
                     .createView(parentStyle: style)
