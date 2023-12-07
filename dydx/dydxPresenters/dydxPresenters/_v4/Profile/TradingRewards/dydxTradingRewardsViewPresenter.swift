@@ -49,6 +49,10 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
         helpPresenter.$viewModel.assign(to: &viewModel.$help)
         historyPresenter.$viewModel.assign(to: &viewModel.$history)
 
+        historyPresenter.viewModel?.contentChanged = { [weak self] in
+            self?.viewModel?.objectWillChange.send()
+        }
+
         self.viewModel = viewModel
     }
 }

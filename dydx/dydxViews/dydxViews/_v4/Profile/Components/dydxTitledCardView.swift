@@ -17,8 +17,8 @@ public class dydxTitledCardViewModel: PlatformViewModel {
     @Published public var tapAction: (() -> Void)?
 
     public init(title: String,
-                verticalContentPadding: CGFloat = 10,
-                horizontalContentPadding: CGFloat = 18) {
+                verticalContentPadding: CGFloat = 16,
+                horizontalContentPadding: CGFloat = 16) {
         self.title = title
         self.verticalContentPadding = verticalContentPadding
         self.horizontalContentPadding = horizontalContentPadding

@@ -10,16 +10,22 @@ import PlatformUI
 import Utilities
 
 public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
+    // MARK: public properties
     @Published public var filters: [TabItemViewModel.TabItemContent] = []
     @Published public var onSelectionChanged: ((Int) -> Void)?
+    @Published public var items: [dydxRewardsRewardView] = []
+    public var contentChanged: (() -> Void)?
 
-    @Published public var items: [dydxRewardsRewardView] = [] {
-        didSet {
-            listViewModel.items = items
-        }
+    // MARK: private properties
+    private static let numItemsStepSize: Int = 10
+    private var visibleItems: [dydxRewardsRewardView] {
+        Array(items.prefix(maxItemsToDisplay))
     }
-    private let listViewModel = PlatformListViewModel(intraItemSeparator: false)
+    private var hasMoreItemsToDisplay: Bool { items.count > maxItemsToDisplay }
+    @Published private var maxItemsToDisplay: Int = dydxRewardsHistoryViewModel.numItemsStepSize
     @Published private var filtersViewWidth: CGFloat = .zero
+
+    // MARK: impl
 
     public init() {
         super.init(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.REWARD_HISTORY", params: nil) ?? "")
@@ -44,12 +50,62 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
         .disableBounces()
         .frame(maxWidth: filtersViewWidth, alignment: .trailing)
         .wrappedInAnyView()
+    }
 
+    let headerViewModel: PlatformViewModel = {
+        PlatformViewModel { _ in
+            HStack(spacing: 0) {
+                Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.EVENT", params: nil) ?? "")
+                    .themeFont(fontType: .text, fontSize: .smaller)
+                    .themeColor(foreground: .textTertiary)
+                Spacer()
+                Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.TRADING_REWARD", params: nil) ?? "")
+                    .themeFont(fontType: .text, fontSize: .smaller)
+                    .themeColor(foreground: .textTertiary)
+            }
+            .wrappedInAnyView()
+        }
+    }()
+
+    private var itemsListViewModel: PlatformListViewModel {
+        PlatformListViewModel(items: visibleItems,
+                              intraItemSeparator: false,
+                              contentChanged: contentChanged)
+    }
+
+    private var viewMoreButtonViewModel: PlatformButtonViewModel<PlatformViewModel> {
+        PlatformButtonViewModel(content: PlatformViewModel { _ in
+            HStack(spacing: 8) {
+                Text("View More")
+                    .themeFont(fontType: .text, fontSize: .small)
+                    .themeColor(foreground: .textSecondary)
+                PlatformIconViewModel(type: .asset(name: "icon_dropdown", bundle: Bundle.dydxView),
+                                                         clip: .noClip,
+                                                         size: .init(width: 14, height: 8),
+                                                         templateColor: .textSecondary)
+                .createView()
+            }
+            .wrappedInAnyView()
+        },
+                                type: .defaultType,
+                                state: .secondary,
+                                action: {
+            withAnimation { [weak self] in
+                self?.maxItemsToDisplay += dydxRewardsHistoryViewModel.numItemsStepSize
+            }
+        })
     }
 
     public override func createContentView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
-        listViewModel
-            .createView()
+        VStack(spacing: 16) {
+            VStack(spacing: 10) {
+                headerViewModel.createView(parentStyle: parentStyle)
+                itemsListViewModel.createView(parentStyle: parentStyle)
+            }
+            if self.hasMoreItemsToDisplay {
+                viewMoreButtonViewModel.createView(parentStyle: parentStyle)
+            }
+        }
         .wrappedInAnyView()
     }
 
