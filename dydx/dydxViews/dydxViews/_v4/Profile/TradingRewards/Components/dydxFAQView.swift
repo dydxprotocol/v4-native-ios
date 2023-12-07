@@ -34,7 +34,7 @@ public class dydxFAQViewModel: PlatformViewModel {
                         .themeFont(fontType: .text, fontSize: .small)
                         .themeColor(foreground: .textSecondary)
                     Spacer(minLength: 16)
-                    //PlatformIconViewModel behaves weirdly here. When isExpanded is toggled, sometimes the icon hides entirely. Do not use.
+                    // PlatformIconViewModel behaves weirdly here. When isExpanded is toggled, sometimes the icon hides entirely. Do not use.
                     Image(self.isExpanded ? "icon_collapse" : "icon_expand", bundle: .dydxView)
                         .frame(width: hideShowImageDiameter, height: hideShowImageDiameter)
                         .padding(.all, paddingDim)
