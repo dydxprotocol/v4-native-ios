@@ -24,9 +24,9 @@ public class dydxRewardsHistoryViewPresenter: HostedViewPresenter<dydxRewardsHis
 
         var text: String? {
             switch self {
-            case .monthly: DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.MONTHLY", params: nil)
-            case .weekly: DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.WEEKLY", params: nil)
-            case .daily: DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.DAILY", params: nil)
+            case .monthly: return DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.MONTHLY", params: nil)
+            case .weekly: return DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.WEEKLY", params: nil)
+            case .daily: return DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.DAILY", params: nil)
             }
         }
     }
