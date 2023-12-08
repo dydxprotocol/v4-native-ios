@@ -76,39 +76,41 @@ open class PlatformListViewModel: PlatformViewModeling {
         }
         
         return AnyView(
-            ForEach(list, id: \.id) { [weak self] item in
-                Group {
-                    let cell =
+            VStack(spacing: intraItemSeparator ? 0 : 10) {
+                ForEach(list, id: \.id) { [weak self] item in
                     Group {
-                        if item === list.first, let header = self?.header {
-                            header.createView(parentStyle: parentStyle)
-                        } else {
-                            VStack(alignment: .leading, spacing: 0) {
-                                if self?.intraItemSeparator == true {
-                                    let shouldDisplayTopSeparator = self?.intraItemSeparator == true && (self?.firstListItemTopSeparator == true && item === list.first)
-                                    let shouldDisplayBottomSeparator = self?.intraItemSeparator == true || (item !== list.last || self?.lastListItemBottomSeparator == true)
-                                    if shouldDisplayTopSeparator {
-                                        DividerModel().createView(parentStyle: parentStyle)
+                        let cell =
+                        Group {
+                            if item === list.first, let header = self?.header {
+                                header.createView(parentStyle: parentStyle)
+                            } else {
+                                VStack(alignment: .leading, spacing: 0) {
+                                    if self?.intraItemSeparator == true {
+                                        let shouldDisplayTopSeparator = self?.intraItemSeparator == true && (self?.firstListItemTopSeparator == true && item === list.first)
+                                        let shouldDisplayBottomSeparator = self?.intraItemSeparator == true || (item !== list.last || self?.lastListItemBottomSeparator == true)
+                                        if shouldDisplayTopSeparator {
+                                            DividerModel().createView(parentStyle: parentStyle)
+                                        }
+                                        
+                                        Spacer()
+                                        item.createView(parentStyle: parentStyle)
+                                        Spacer()
+                                        
+                                        if shouldDisplayBottomSeparator {
+                                            DividerModel().createView(parentStyle: parentStyle)
+                                        }
+                                    } else {
+                                        item.createView(parentStyle: parentStyle)
                                     }
-                                    
-                                    Spacer()
-                                    item.createView(parentStyle: parentStyle)
-                                    Spacer()
-                                    
-                                    if shouldDisplayBottomSeparator {
-                                        DividerModel().createView(parentStyle: parentStyle)
-                                    }
-                                } else {
-                                    item.createView(parentStyle: parentStyle)
                                 }
                             }
                         }
-                    }
-                    
-                    if let width = self?.width {
-                        cell.frame(width: width)
-                    } else {
-                        cell
+                        
+                        if let width = self?.width {
+                            cell.frame(width: width)
+                        } else {
+                            cell
+                        }
                     }
                 }
             }
