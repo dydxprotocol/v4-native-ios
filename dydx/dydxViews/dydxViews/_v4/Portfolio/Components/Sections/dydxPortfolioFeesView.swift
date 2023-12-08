@@ -91,18 +91,18 @@ public class dydxPortfolioFeesItemViewModel: PlatformViewModel {
     }
 
     private func createCondition(parentStyle: ThemeStyle, condition: Condition) -> some View {
-        var titleString: AttributedString
+        let titleString: AttributedString
         if let title = condition.title {
             titleString = AttributedString(title)
-            titleString.themeFont(fontType: .text, fontSize: .smaller)
-            titleString.themeColor(foreground: .textTertiary)
+                .themeFont(fontType: .text, fontSize: .smaller)
+                .themeColor(foreground: .textTertiary)
         } else {
             titleString = AttributedString("")
         }
 
-        var valueString = AttributedString(condition.value)
-        valueString.themeFont(fontType: .text, fontSize: .smaller)
-        valueString.themeColor(foreground: .textPrimary)
+        let valueString = AttributedString(condition.value)
+            .themeFont(fontType: .text, fontSize: .smaller)
+            .themeColor(foreground: .textPrimary)
 
         return Text(titleString + AttributedString(" ") + valueString)
                 .multilineTextAlignment(.trailing)

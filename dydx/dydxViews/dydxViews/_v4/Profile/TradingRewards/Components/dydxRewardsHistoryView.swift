@@ -13,12 +13,12 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
     // MARK: public properties
     @Published public var filters: [TabItemViewModel.TabItemContent] = []
     @Published public var onSelectionChanged: ((Int) -> Void)?
-    @Published public var items: [dydxRewardsRewardView] = []
+    @Published public var items: [dydxRewardsRewardViewModel] = []
     public var contentChanged: (() -> Void)?
 
     // MARK: private properties
     private static let numItemsStepSize: Int = 10
-    private var visibleItems: [dydxRewardsRewardView] {
+    private var visibleItems: [dydxRewardsRewardViewModel] {
         Array(items.prefix(maxItemsToDisplay))
     }
     private var hasMoreItemsToDisplay: Bool { items.count > maxItemsToDisplay }
@@ -52,7 +52,7 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
         .wrappedInAnyView()
     }
 
-    let headerViewModel: PlatformViewModel = {
+    private let headerViewModel: PlatformViewModel = {
         PlatformViewModel { _ in
             HStack(spacing: 0) {
                 Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.EVENT", params: nil) ?? "")

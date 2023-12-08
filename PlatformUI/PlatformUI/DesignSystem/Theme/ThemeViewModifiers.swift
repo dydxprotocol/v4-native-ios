@@ -503,24 +503,28 @@ public extension AttributedString {
     /// - Parameters:
     ///   - foreground: the font to apply
     ///   - range: the range to modify, `nil` if the entire string should be modified
-    mutating func themeFont(fontType: ThemeFont.FontType = .text, fontSize: ThemeFont.FontSize = .medium, to range: Range<AttributedString.Index>? = nil) {
+    func themeFont(fontType: ThemeFont.FontType = .text, fontSize: ThemeFont.FontSize = .medium, to range: Range<AttributedString.Index>? = nil) -> Self {
+        var string = self
         if let range = range {
-            self[range].font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
+            string[range].font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
         } else {
-            self.font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
+            string.font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
         }
+        return string
     }
     
     /// Applies a foreground color to the attributed string.
     /// - Parameters:
     ///   - foreground: the color to apply
     ///   - range: the range to modify, `nil` if the entire string should be modified
-    mutating func themeColor(foreground: ThemeColor.SemanticColor, to range: Range<AttributedString.Index>? = nil) {
+    func themeColor(foreground: ThemeColor.SemanticColor, to range: Range<AttributedString.Index>? = nil) -> Self {
+        var string = self
         if let range = range {
-            self[range].foregroundColor = ThemeSettings.shared.themeConfig.themeColor.color(of: foreground)
+            string[range].foregroundColor = ThemeSettings.shared.themeConfig.themeColor.color(of: foreground)
         } else {
-            self.foregroundColor = ThemeSettings.shared.themeConfig.themeColor.color(of: foreground)
+            string.foregroundColor = ThemeSettings.shared.themeConfig.themeColor.color(of: foreground)
         }
+        return string
     }
 }
 
