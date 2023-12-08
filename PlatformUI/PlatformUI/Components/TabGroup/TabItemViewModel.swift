@@ -54,33 +54,23 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
             let borderWidth: CGFloat = 1
             switch value {
             case .text(let value):
-                let content = Text(value)
-                    .themeFont(fontSize: .medium)
-                    .padding([.bottom, .top], 6)
-                    .padding([.leading, .trailing], 12)
+                return Text(value)
+                    .themeFont(fontSize: .small)
+                    .padding(.vertical, 6)
+                    .padding(.horizontal, 8)
                     .themeStyle(styleKey: styleKey, parentStyle: style)
-                    .clipShape(Capsule())
-                    .overlay(
-                        Capsule(style: .circular)
-                            .stroke(ThemeColor.SemanticColor.layer6.color, lineWidth: borderWidth)
-                    )
-                    .padding(borderWidth * 2)
-                return AnyView(content)
+                    .borderAndClip(style: .capsule, borderColor: .layer6, lineWidth: borderWidth)
+                    .wrappedInAnyView()
             case .icon(let image):
-                let content = PlatformIconViewModel(type: .uiImage(image: image),
+                return PlatformIconViewModel(type: .uiImage(image: image),
                                                     size: CGSize(width: 18, height: 18),
                                                     templateColor: templateColor)
                     .createView(parentStyle: parentStyle)
                     .padding([.bottom, .top], 6)
                     .padding([.leading, .trailing], 12)
                     .themeStyle(styleKey: styleKey, parentStyle: style)
-                    .clipShape(Capsule())
-                    .overlay(
-                        Capsule(style: .circular)
-                            .stroke(ThemeColor.SemanticColor.layer6.color, lineWidth: borderWidth)
-                    )
-                    .padding(borderWidth * 2)
-                return AnyView(content)
+                    .borderAndClip(style: .capsule, borderColor: .layer6, lineWidth: borderWidth)
+                    .wrappedInAnyView()
             case .bar(let value):
                 let content = VStack {
                     value.createView(parentStyle: style)

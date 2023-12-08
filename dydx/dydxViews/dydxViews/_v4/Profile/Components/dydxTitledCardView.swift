@@ -17,8 +17,8 @@ public class dydxTitledCardViewModel: PlatformViewModel {
     @Published public var tapAction: (() -> Void)?
 
     public init(title: String,
-                verticalContentPadding: CGFloat = 10,
-                horizontalContentPadding: CGFloat = 18) {
+                verticalContentPadding: CGFloat = 16,
+                horizontalContentPadding: CGFloat = 16) {
         self.title = title
         self.verticalContentPadding = verticalContentPadding
         self.horizontalContentPadding = horizontalContentPadding
@@ -48,14 +48,16 @@ public class dydxTitledCardViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack(spacing: 0) {
-                HStack {
+                HStack(spacing: 0) {
                     Text(self.title)
                         .themeFont(fontSize: .small)
                         .themeColor(foreground: .textSecondary)
-                    Spacer()
+                        .fixedSize()
+                    Spacer(minLength: 16)
                     self.createTitleAccessoryView(parentStyle: parentStyle)
                 }
-                .padding()
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
 
                 DividerModel()
                     .createView(parentStyle: style)
