@@ -499,16 +499,32 @@ public extension View {
 // MARK: AttributedString
 
 public extension AttributedString {
-    func themeFont(fontType: ThemeFont.FontType = .text, fontSize: ThemeFont.FontSize = .medium) -> Self {
-        var copy = self
-        copy.font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
-        return copy
+    /// Applies a font to the attributed string.
+    /// - Parameters:
+    ///   - foreground: the font to apply
+    ///   - range: the range to modify, `nil` if the entire string should be modified
+    func themeFont(fontType: ThemeFont.FontType = .text, fontSize: ThemeFont.FontSize = .medium, to range: Range<AttributedString.Index>? = nil) -> Self {
+        var string = self
+        if let range = range {
+            string[range].font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
+        } else {
+            string.font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
+        }
+        return string
     }
- 
-    func themeColor(foreground: ThemeColor.SemanticColor) -> Self {
-        var copy = self
-        copy.foregroundColor = ThemeSettings.shared.themeConfig.themeColor.color(of: foreground)
-        return copy
+    
+    /// Applies a foreground color to the attributed string.
+    /// - Parameters:
+    ///   - foreground: the color to apply
+    ///   - range: the range to modify, `nil` if the entire string should be modified
+    func themeColor(foreground: ThemeColor.SemanticColor, to range: Range<AttributedString.Index>? = nil) -> Self {
+        var string = self
+        if let range = range {
+            string[range].foregroundColor = ThemeSettings.shared.themeConfig.themeColor.color(of: foreground)
+        } else {
+            string.foregroundColor = ThemeSettings.shared.themeConfig.themeColor.color(of: foreground)
+        }
+        return string
     }
 }
 
@@ -608,3 +624,22 @@ public extension View {
     }
 }
 
+// MARK: ScrollView
+
+public extension View {
+  func disableBounces() -> some View {
+    modifier(DisableBouncesModifier())
+  }
+}
+
+struct DisableBouncesModifier: ViewModifier {
+  func body(content: Content) -> some View {
+      content
+          .onAppear {
+              UIScrollView.appearance().bounces = false
+          }
+          .onDisappear {
+              UIScrollView.appearance().bounces = true
+          }
+  }
+}

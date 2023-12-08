@@ -14,6 +14,7 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
     @Published public var headerViewModel: NavHeaderModel = NavHeaderModel()
     @Published public var rewardsSummary: dydxRewardsSummaryViewModel = dydxRewardsSummaryViewModel()
     @Published public var help: dydxRewardsHelpViewModel? = dydxRewardsHelpViewModel()
+    @Published public var history: dydxRewardsHistoryViewModel? = dydxRewardsHistoryViewModel()
 
     public init() { }
 
@@ -31,7 +32,8 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
                     VStack(spacing: 16) {
                         self.rewardsSummary.createView(parentStyle: style)
                         self.help?.createView(parentStyle: style)
-                        Spacer(minLength: 68)
+                        self.history?.createView(parentStyle: style)
+                        Spacer(minLength: 80)
                     }
                 }
             }
