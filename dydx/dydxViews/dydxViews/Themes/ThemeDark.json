@@ -8,11 +8,11 @@
             "layer_0": "#000000",
             "layer_1": "#18181B",
             "layer_2": "#0C0C0D",
-            "layer_3": "#18181B",
-            "layer_4": "#252528",
-            "layer_5": "#313135",
-            "layer_6": "#3D3D42",
-            "layer_7": "#494950",
+            "layer_3": "#212124",
+            "layer_4": "#303033",
+            "layer_5": "#3B3B3F",
+            "layer_6": "#494950",
+            "layer_7": "#56565C",
             
             "color_purple": "#7774FF",
             "color_green": "#1AFFB9",
@@ -25,15 +25,15 @@
             "color_faded_red": "#FF5C5C29",
             "color_faded_yellow": "#FFCC4829",
             
-            "border_default": "#313135",
-            "border_destructive": "#FF616133",
-            "border_button": "#7774FF",
+            "border_default": "#494950",
+            "border_destructive": "#FF5C5C33",
+            "border_button": "#FFFFFF",
             
             "gradient_gray_start": "#313135",
             "gradient_gray_end": "#18181B",
-            "gradient_green_start": "#17332C",
+            "gradient_green_start": "#17332C29",
             "gradient_green_end": "#313135",
-            "gradient_red_start": "#331A1A",
+            "gradient_red_start": "#331A1A29",
             "gradient_red_end": "#313135"
         }
     },
