@@ -46,6 +46,11 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
 
+        // TODO: get from abacus
+        viewModel.launchIncentivesViewModel.seasonOrdinal = "--"
+        viewModel.launchIncentivesViewModel.estimatedPoints = "--"
+        viewModel.launchIncentivesViewModel.points = "--"
+
         viewModel.governanceViewModel = .init(
             title: DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.GOVERNANCE", params: nil) ?? "",
             description: DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.GOVERNANCE_LINK_DESCRIPTION", params: nil) ?? "") {

@@ -49,7 +49,7 @@ public class dydxProfileViewModel: PlatformViewModel {
                     HStack(spacing: 14) {
                         self.fees?
                             .createView(parentStyle: style)
-                        if dydxBoolFeatureFlag.enable_trading_rewards.isEnabled {
+                        if dydxBoolFeatureFlag.enable_trading_rewards.isEnabled || true {
                             self.rewards?
                                 .createView(parentStyle: style)
                         }
