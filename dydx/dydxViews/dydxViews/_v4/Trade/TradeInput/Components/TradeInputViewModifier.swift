@@ -20,7 +20,7 @@ struct TradeInputModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .themeColor(background: .layer5)
+            .themeColor(background: .layer4)
             .cornerRadius(12)
     }
 }
