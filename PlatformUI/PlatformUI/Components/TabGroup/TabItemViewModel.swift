@@ -81,8 +81,8 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
                 }
                 .frame(maxWidth: .infinity)
                 return AnyView(content)
+                
             }
-
         }
     }
 }
