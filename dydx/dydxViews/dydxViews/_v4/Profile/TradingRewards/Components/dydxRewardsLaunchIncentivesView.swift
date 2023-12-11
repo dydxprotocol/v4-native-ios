@@ -14,6 +14,8 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
     @Published public var estimatedPoints: String?
     @Published public var seasonOrdinal: String?
     @Published public var points: String?
+    @Published public var aboutAction: (() -> Void)?
+    @Published public var leaderboardAction: (() -> Void)?
 
     public static var previewValue: dydxRewardsLaunchIncentivesViewModel = {
         let vm = dydxRewardsLaunchIncentivesViewModel()
@@ -54,8 +56,8 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
 
     private func createEstimateSubCard() -> some View {
         HStack(spacing: 0) {
-            VStack(spacing: 52) {
-                VStack(spacing: 4) {
+            VStack(alignment: .leading, spacing: 52) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text(DataLocalizer.shared?.localize(path: "APP.PORTFOLIO.ESTIMATED_REWARDS", params: nil) ?? "")
                         .themeFont(fontType: .text, fontSize: .medium)
                         .themeColor(foreground: .textPrimary)
@@ -65,7 +67,42 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
                 }
                 Text(pointsFormatted)
             }
+            Spacer()
+            Image("stars", bundle: .dydxView)
         }
+        .padding(.all, 16)
+        .themeColor(background: .layer4)
+        .borderAndClip(style: .cornerRadius(12), borderColor: .layer6, lineWidth: 1)
+    }
+
+    private func createAboutButton(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
+        let content = PlatformViewModel { style in
+            HStack(spacing: 8) {
+                Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.ABOUT", params: nil) ?? "")
+                    .themeFont(fontType: .text, fontSize: .small)
+                    .themeStyle(style: style)
+                PlatformIconViewModel(type: .asset(name: "icon_link", bundle: .dydxView), size: .init(width: 12, height: 12))
+                    .createView(parentStyle: parentStyle)
+            }
+            .wrappedInAnyView()
+        }
+        return PlatformButtonViewModel(content: content, type: .defaultType, state: .secondary, action: self.aboutAction ?? {})
+            .createView(parentStyle: parentStyle)
+    }
+
+    private func createLeaderboardButton(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
+        let content = PlatformViewModel { style in
+           HStack(spacing: 8) {
+               PlatformIconViewModel(type: .asset(name: "icon_leaderboard", bundle: .dydxView), size: .init(width: 12, height: 12))
+                   .createView(parentStyle: parentStyle)
+                Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.LEADERBOARD", params: nil) ?? "")
+                    .themeFont(fontType: .text, fontSize: .small)
+                    .themeStyle(style: style)
+            }
+            .wrappedInAnyView()
+        }
+        return PlatformButtonViewModel(content: content, type: .defaultType, state: .primary, action: self.aboutAction ?? {})
+            .createView(parentStyle: parentStyle)
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
@@ -73,14 +110,26 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
             return VStack(spacing: 16) {
                 self.createEstimateSubCard()
-                VStack(spacing: 8) {
+                VStack(alignment: .leading, spacing: 8) {
                     Text(self.launchIncentivesFormatted)
-                    Text(DataLocalizer.shared?.localize(path: "APP_TRADING_REWARDS.LAUNCH_INCENTIVES_DESCRIPTION", params: nil) ?? "")
+                    Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.LAUNCH_INCENTIVES_DESCRIPTION", params: nil) ?? "")
+                        .themeFont(fontType: .text, fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
                     HStack(spacing: 8) {
-                        Text(DataLocalizer.shared?.localize(path: "APP_TRADING_REWARDS.POWERED_BY", params: nil) ?? "")
-
+                        Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.POWERED_BY", params: nil) ?? "")
+                            .themeFont(fontType: .text, fontSize: .smaller)
+                            .themeColor(foreground: .textSecondary)
+                        Image("icon_chaos_labs", bundle: .dydxView)
+                        Image("text_chaos_labs", bundle: .dydxView)
+                            .templateColor(.textPrimary)
                     }
                 }
+                HStack(spacing: 10) {
+                    self.createAboutButton(parentStyle: parentStyle)
+                        .fixedSize()
+                    self.createLeaderboardButton(parentStyle: parentStyle)
+                }
+
             }
             .padding(.all, 16)
             .themeColor(background: .layer3)

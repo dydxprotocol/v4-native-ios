@@ -48,12 +48,12 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         .disabled(disabled)
-                        .padding()
+                        .padding(.all, 14)
                         .frame(maxWidth: .infinity)
                         .themeStyle(styleKey: self.buttonStyleKey, parentStyle: style)
                         .cornerRadius(8)
                         
-                        let borderWidth: CGFloat = 1.5
+                        let borderWidth: CGFloat = 1
                         let cornerRadius: CGFloat = 8
                         switch self.state {
                         case .primary:
@@ -63,7 +63,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                                 .border(borderWidth: borderWidth, cornerRadius: cornerRadius, borderColor: ThemeColor.SemanticColor.colorFadedRed.color)
                         case .secondary:
                             button
-                                .border(borderWidth: borderWidth, cornerRadius: cornerRadius, borderColor: ThemeColor.SemanticColor.layer5.color)
+                                .border(borderWidth: borderWidth, cornerRadius: cornerRadius, borderColor: ThemeColor.SemanticColor.layer7.color)
                         case .disabled:
                             button
                                 .border(borderWidth: borderWidth, cornerRadius: cornerRadius, borderColor: ThemeColor.SemanticColor.layer6.color)
