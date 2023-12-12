@@ -46,6 +46,17 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
 
+        // TODO: get from abacus
+        viewModel.launchIncentivesViewModel.seasonOrdinal = "--"
+        viewModel.launchIncentivesViewModel.estimatedPoints = "--"
+        viewModel.launchIncentivesViewModel.points = "--"
+        viewModel.launchIncentivesViewModel.aboutAction = {
+            Router.shared?.navigate(to: URL(string: "https://dydx.exchange/blog/v4-full-trading"), completion: nil)
+        }
+        viewModel.launchIncentivesViewModel.leaderboardAction = {
+            Router.shared?.navigate(to: URL(string: "https://community.chaoslabs.xyz/dydx-v4/risk/leaderboard"), completion: nil)
+        }
+
         viewModel.governanceViewModel = .init(
             title: DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.GOVERNANCE", params: nil) ?? "",
             description: DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.GOVERNANCE_LINK_DESCRIPTION", params: nil) ?? "") {
