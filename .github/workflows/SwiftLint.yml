@@ -22,5 +22,5 @@ jobs:
         # Fetch changes from the base branch of the pull request
         git fetch origin ${{ github.base_ref }}
         # Use git diff to find changed Swift files, then lint each file with SwiftLint
-        git diff --name-only origin/${{ github.base_ref }} | grep '\.swift$' | xargs swiftlint lint
+        git diff --name-only origin/${{ github.base_ref }} | grep '\.swift$' | xargs swiftlint --config dydx/.swiftlint.yml --fix lint
 
