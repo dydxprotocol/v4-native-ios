@@ -4,6 +4,7 @@
 dydx/fastlane
 dydx/Pods/abacus/.gradle
 dydx/Pods/abacus/build
+dydx/Pods/Abacus
 dydxV4/dydxV4/_Configurations/credentials.json
 dydxV4/dydxV4/_Configurations/GoogleService-Info-Staging.plist
 dydxV4/dydxV4/_Configurations/GoogleService-Info.plist
