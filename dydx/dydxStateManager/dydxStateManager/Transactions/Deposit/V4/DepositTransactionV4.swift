@@ -31,7 +31,9 @@ struct DepositTransactionV4: AsyncStep {
               let chainId = transferInput.chain,
               let chainIdInt = Parser.standard.asInt(chainId),
               let payload = transferInput.requestPayload,
-              let ethereumTransactionRequest = EthereumTransactionRequest(requestPayload: payload, chainId: chainIdInt, walletAddress: walletAddress) else {
+              let ethereumTransactionRequest = EthereumTransactionRequest(requestPayload: payload,
+                                                                          chainId: chainIdInt,
+                                                                          walletAddress: walletAddress) else {
             let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid input"])
             return Just(AsyncEvent.result(nil, error)).eraseToAnyPublisher()
         }
@@ -81,7 +83,9 @@ struct DepositTransactionV4: AsyncStep {
                         let transaction = EthereumTransactionRequest(transaction: ethereumTransactionRequest.transaction,
                                                                      gasPrice: ethereumTransactionRequest.gasPrice,
                                                                      gas: ethereumTransactionRequest.gas,
-                                                                     nonce: nonce)
+                                                                     nonce: nonce,
+                                                                     maxPriorityFeePerGas: ethereumTransactionRequest.maxPriorityFeePerGas,
+                                                                     maxFeePerGas: ethereumTransactionRequest.maxFeePerGas)
                         return WalletSendTransactionStep(transaction: transaction,
                                                          chainIdInt: chainIdInt,
                                                          provider: provider,
@@ -141,7 +145,9 @@ private extension EthereumTransactionRequest {
         self.init(transaction: transaction,
                   gasPrice: requestPayload.gasPrice?.asBigUInt,
                   gas: requestPayload.gasLimit?.asBigUInt,
-                  nonce: nil)
+                  nonce: nil,
+                  maxPriorityFeePerGas: requestPayload.maxPriorityFeePerGas?.asBigUInt,
+                  maxFeePerGas: requestPayload.maxFeePerGas?.asBigUInt)
     }
 }
 
