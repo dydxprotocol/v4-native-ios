@@ -281,6 +281,12 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.screen(address: address, callback: callback)
     }
 
+    public func commitCCTPWithdraw(callback: @escaping ((Bool, Error?, Any?) -> Void)) {
+        asyncStateManager.commitCCTPWithdraw { success, parsingError, result in
+            callback(success.boolValue, parsingError, result)
+        }
+    }
+
     /// batch parallel address screening
     /// - Parameters:
     ///   - addresses: the addresses to scan
