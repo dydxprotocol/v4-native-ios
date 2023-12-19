@@ -235,13 +235,13 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 if usdcBalanceInWallet >= gasFee {
                     if transferInput.isCctp {
                         AbacusStateManager.shared.commitCCTPWithdraw { [weak self] success, error, result in
-                            if success == false, let error = error {
+                            if success {
+                                self?.postTransaction(result: result, transferInput: transferInput)
+                            } else {
                                 ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
-                                                       message: error.localizedDescription,
+                                                       message: error?.localizedDescription,
                                                        type: .error,
                                                        error: nil, time: nil)
-                            } else {
-                                self?.postTransaction(result: result, transferInput: transferInput)
                             }
                             self?.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
                         }
