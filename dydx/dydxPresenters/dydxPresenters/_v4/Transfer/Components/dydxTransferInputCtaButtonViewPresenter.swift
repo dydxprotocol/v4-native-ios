@@ -233,9 +233,23 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 let gasFee = transferInput.summary?.gasFee?.doubleValue ?? 0
                 let usdcBalanceInWallet = usdcBalanceInWallet ?? 0
                 if usdcBalanceInWallet >= gasFee {
-                    CosmoJavascript.shared.withdrawToIBC(subaccount: Int(selectedSubaccount.subaccountNumber), amount: amount, payload: data) { [weak self] result in
-                        self?.postTransaction(result: result, transferInput: transferInput)
-                        self?.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
+                    if transferInput.isCctp {
+                        AbacusStateManager.shared.commitCCTPWithdraw { [weak self] success, error, result in
+                            if success {
+                                self?.postTransaction(result: result, transferInput: transferInput)
+                            } else {
+                                ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
+                                                       message: error?.localizedDescription,
+                                                       type: .error,
+                                                       error: nil, time: nil)
+                            }
+                            self?.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
+                        }
+                    } else {
+                        CosmoJavascript.shared.withdrawToIBC(subaccount: Int(selectedSubaccount.subaccountNumber), amount: amount, payload: data) { [weak self] result in
+                            self?.postTransaction(result: result, transferInput: transferInput)
+                            self?.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
+                        }
                     }
                 } else {
                     self.showNoGas()
@@ -333,6 +347,14 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                                        message: error["message"] as? String,
                                        type: .error,
                                        error: nil, time: nil)
+            } else if let hash = result["transactionHash"] as? String {
+                let fullHash = "0x" + hash
+                addTransferHash(hash: fullHash,
+                                fromChainName: AbacusStateManager.shared.environment?.chainName,
+                                toChainName: transferInput.chainName ?? transferInput.networkName,
+                                transferInput: transferInput)
+                showTransferStatus(hash: fullHash, transferInput: transferInput)
+                resetInputFields()
             } else if let hash = result["hash"] as? String {
                 let fullHash = "0x" + hash
                 addTransferHash(hash: fullHash,
@@ -341,6 +363,11 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                                 transferInput: transferInput)
                 showTransferStatus(hash: fullHash, transferInput: transferInput)
                 resetInputFields()
+            } else {
+                ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
+                                       message: DataLocalizer.localize(path: "APP.V4.NO_HASH"),
+                                       type: .error,
+                                       error: nil, time: nil)
             }
         } else {
             ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
