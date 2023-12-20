@@ -63,7 +63,7 @@ public class dydxTitledCardViewModel: PlatformViewModel {
                 self.createContentView(parentStyle: parentStyle)
                     .padding(.vertical, self.verticalContentPadding)
                     .padding(.horizontal, self.horizontalContentPadding)
-                Spacer()
+                Spacer(minLength: 0)
             }
             .themeColor(background: .layer3)
             .cornerRadius(12, corners: .allCorners)

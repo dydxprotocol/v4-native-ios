@@ -87,7 +87,7 @@ open class PlatformListViewModel: PlatformViewModeling {
                                 VStack(alignment: .leading, spacing: 0) {
                                     if self?.intraItemSeparator == true {
                                         let shouldDisplayTopSeparator = self?.intraItemSeparator == true && (self?.firstListItemTopSeparator == true && item === list.first)
-                                        let shouldDisplayBottomSeparator = self?.intraItemSeparator == true || (item !== list.last || self?.lastListItemBottomSeparator == true)
+                                        let shouldDisplayBottomSeparator = self?.intraItemSeparator == true && (item !== list.last || self?.lastListItemBottomSeparator == true)
                                         if shouldDisplayTopSeparator {
                                             DividerModel().createView(parentStyle: parentStyle)
                                         }
