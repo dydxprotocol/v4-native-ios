@@ -11,14 +11,14 @@ import Utilities
 
 public class dydxFAQViewModel: PlatformViewModel {
 
-    public var id: String { question + answer }
-    private let question: String
-    private let answer: String
+    public var id: String { questionLocalizationKey + answerLocalizationKey }
+    private let questionLocalizationKey: String
+    private let answerLocalizationKey: String
     @Published var isExpanded: Bool = false
 
-    public init(question: String, answer: String) {
-        self.question = question
-        self.answer = answer
+    public init(questionLocalizationKey: String, answerLocalizationKey: String) {
+        self.questionLocalizationKey = questionLocalizationKey
+        self.answerLocalizationKey = answerLocalizationKey
         super.init()
     }
 
@@ -30,7 +30,7 @@ public class dydxFAQViewModel: PlatformViewModel {
             let paddingDim: CGFloat = (hideShowViewDiameter - hideShowImageDiameter) / 2
             return VStack(spacing: 0) {
                 HStack {
-                    Text(self.question)
+                    Text(DataLocalizer.shared?.localize(path: self.questionLocalizationKey, params: nil) ?? "")
                         .themeFont(fontType: .text, fontSize: .small)
                         .themeColor(foreground: .textSecondary)
                     Spacer(minLength: 16)
@@ -47,7 +47,7 @@ public class dydxFAQViewModel: PlatformViewModel {
                     }
                 }
 
-                Text(self.answer)
+                Text(DataLocalizer.shared?.localize(path: self.answerLocalizationKey, params: nil) ?? "")
                     .themeFont(fontType: .text, fontSize: .small)
                     .themeColor(foreground: .textTertiary)
                     .leftAligned()
@@ -64,7 +64,7 @@ public class dydxFAQViewModel: PlatformViewModel {
     }
 
     public static var previewValue: dydxFAQViewModel {
-        let vm = dydxFAQViewModel(question: "question", answer: "answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer")
+        let vm = dydxFAQViewModel(questionLocalizationKey: "question", answerLocalizationKey: "answer")
         return vm
     }
 
