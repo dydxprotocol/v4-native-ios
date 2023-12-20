@@ -32,4 +32,15 @@ public class dydxProfileRewardsViewPresenter: HostedViewPresenter<dydxProfileRew
             Router.shared?.navigate(to: RoutingRequest(path: "/profile/trading-rewards"), animated: true, completion: nil)
         }
     }
+
+    public override func start() {
+        super.start()
+
+        AbacusStateManager.shared.state.account
+            .sink { [weak self] account in
+                self?.viewModel?.allTimeRewardsAmount = dydxFormatter.shared.format(decimal: account?.tradingRewards?.total?.decimalValue)
+                self?.viewModel?.last7DaysRewardsAmount = dydxFormatter.shared.format(number: account?.tradingRewards?.historical?["WEEKLY"]?.first?.amount)
+            }
+            .store(in: &subscriptions)
+    }
 }
