@@ -25,8 +25,6 @@ public class dydxProfileRewardsViewPresenter: HostedViewPresenter<dydxProfileRew
         super.init()
 
         viewModel = dydxProfileRewardsViewModel()
-        viewModel?.last7DaysRewardsAmount = "PLACEHOLDER"
-        viewModel?.allTimeRewardsAmount = "PLACEHOLDER"
 
         viewModel?.tapAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/profile/trading-rewards"), animated: true, completion: nil)
@@ -38,7 +36,9 @@ public class dydxProfileRewardsViewPresenter: HostedViewPresenter<dydxProfileRew
 
         AbacusStateManager.shared.state.account
             .sink { [weak self] account in
-                self?.viewModel?.allTimeRewardsAmount = dydxFormatter.shared.format(decimal: account?.tradingRewards?.total?.decimalValue)
+                // allTimeRewardsAmount is commented out because at time of writing, we do not have historical data accurate for "all time"
+                // see thread: https://dydx-team.slack.com/archives/C066T2L1HM4/p1703107669507409
+//                self?.viewModel?.allTimeRewardsAmount = dydxFormatter.shared.format(decimal: account?.tradingRewards?.total?.decimalValue)
                 self?.viewModel?.last7DaysRewardsAmount = dydxFormatter.shared.format(number: account?.tradingRewards?.historical?["WEEKLY"]?.first?.amount)
             }
             .store(in: &subscriptions)

@@ -13,7 +13,6 @@ public class dydxRewardsSummaryViewModel: dydxTitledCardViewModel {
     @Published public var last7DaysRewardsAmount: String?
     @Published public var last7DaysRewardsPeriod: String?
     @Published public var allTimeRewardsAmount: String?
-    @Published public var allTimeRewardsValue: String?
 
     public init() {
         super.init(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.TRADING_REWARDS_SUMMARY", params: nil) ?? "")
@@ -23,7 +22,9 @@ public class dydxRewardsSummaryViewModel: dydxTitledCardViewModel {
         HStack(spacing: 18) {
             HStack {
                 titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_LAST_7_DAYS", params: nil) ?? "", primaryValue: last7DaysRewardsAmount, secondaryValue: last7DaysRewardsPeriod)
-                titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_ALL_TIME", params: nil) ?? "", primaryValue: last7DaysRewardsAmount, secondaryValue: allTimeRewardsValue)
+                if let allTimeRewardsAmount = allTimeRewardsAmount {
+                    titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_ALL_TIME", params: nil) ?? "", primaryValue: allTimeRewardsAmount, secondaryValue: nil)
+                }
             }
         }
         .wrappedInAnyView()
