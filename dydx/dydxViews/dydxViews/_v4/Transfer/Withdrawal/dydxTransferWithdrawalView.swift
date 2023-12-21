@@ -48,8 +48,7 @@ public class dydxTransferWithdrawalViewModel: PlatformViewModel {
                         VStack(spacing: 12) {
                             HStack {
                                 self.addressInput?.createView(parentStyle: style)
-                                    .themeColor(background: .layer4)
-                                    .cornerRadius(12)
+                                    .makeInput()
 
                                 self.chainsComboBox?.createView(parentStyle: style)
                             }

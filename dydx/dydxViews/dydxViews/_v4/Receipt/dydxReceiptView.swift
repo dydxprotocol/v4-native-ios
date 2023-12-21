@@ -104,8 +104,7 @@ public class dydxReceiptViewModel: PlatformViewModel {
          .frame(maxWidth: .infinity)
          .padding()
          .themeColor(background: .layer3)
-         .cornerRadius(8)
-         .border(cornerRadius: 8)
+         .borderAndClip(style: .cornerRadius(12), borderColor: .borderDefault, lineWidth: 1)
          .padding(.horizontal, -8)
     }
 

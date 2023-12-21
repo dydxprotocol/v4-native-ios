@@ -49,8 +49,7 @@ public class dydxTransferOutViewModel: PlatformViewModel {
                         VStack(spacing: 12) {
                             self.chainsComboBox?.createView(parentStyle: style)
                             self.addressInput?.createView(parentStyle: style)
-                                .themeColor(background: .layer4)
-                                .cornerRadius(12)
+                                .makeInput()
                             self.tokensComboBox?.createView(parentStyle: style)
                             self.amountBox?.createView(parentStyle: style)
                         }

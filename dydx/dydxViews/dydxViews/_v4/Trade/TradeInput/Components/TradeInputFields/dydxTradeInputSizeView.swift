@@ -93,8 +93,7 @@ public class dydxTradeInputSizeViewModel: PlatformTextInputViewModel {
 
     private func createTopView(inputView: PlatformView, parentStyle: ThemeStyle) -> some View {
         inputView
-        .themeColor(background: .layer4)
-        .cornerRadius(12)
+        .makeInput()
     }
 
     private func createBottomView(parentStyle: ThemeStyle) -> some View {
