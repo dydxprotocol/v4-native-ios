@@ -41,9 +41,8 @@ https://apps.apple.com/us/app/transporter/id1450874784?mt=12
 
 # Update Javascript
 
-Javascript code is generated in v4-client. To update
+Javascript code is generated from v4-client. Note, this shell script must be executed from the **scripts/** directory. It will attemp to clone `v4-clients` if `v4-clients` does not exist next to where you have checked out `v4-native-ios`
 
-> cd scripts
 > ./update_client_apis.sh
 
 # Update Fonts
