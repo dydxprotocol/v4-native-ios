@@ -43,15 +43,8 @@ https://apps.apple.com/us/app/transporter/id1450874784?mt=12
 
 Javascript code is generated in v4-client. To update
 
-Get the desired commit from v4-client
-Copy from {v4-client}/__native__/__ios__/v4-native-client.js
-to {v4-native-ios}/dydx/dydxPresenters/_Feature/
-
-To generate v4-native-client.js from the v4-client repo, run
-
-> npm run build
-
-> npm run webpack
+> cd scripts
+> ./update_client_apis.sh
 
 # Update Fonts
 
