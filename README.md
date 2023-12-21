@@ -41,17 +41,9 @@ https://apps.apple.com/us/app/transporter/id1450874784?mt=12
 
 # Update Javascript
 
-Javascript code is generated in v4-client. To update
+Javascript code is generated from v4-client. Note, this shell script must be executed from the **scripts/** directory. It will attemp to clone `v4-clients` if `v4-clients` does not exist next to where you have checked out `v4-native-ios`
 
-Get the desired commit from v4-client
-Copy from {v4-client}/__native__/__ios__/v4-native-client.js
-to {v4-native-ios}/dydx/dydxPresenters/_Feature/
-
-To generate v4-native-client.js from the v4-client repo, run
-
-> npm run build
-
-> npm run webpack
+> ./update_client_apis.sh
 
 # Update Fonts
 
