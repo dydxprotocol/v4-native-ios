@@ -1,0 +1,346 @@
+---
+format_version: '11'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ios
+workflows:
+  crashlytics_upload:
+    description: |
+      The workflow tests, builds and deploys the app using *Deploy to bitrise.io* step.
+
+      For testing the *retry_on_failure* test repetition mode is enabled.
+
+      Next steps:
+      - Set up [Connecting to an Apple service with API key](https://devcenter.bitrise.io/en/accounts/connecting-to-services/connecting-to-an-apple-service-with-api-key.html##).
+      - Or further customise code signing following our [iOS code signing](https://devcenter.bitrise.io/en/code-signing/ios-code-signing.html) guide.
+    steps:
+    - activate-ssh-key@4: {}
+    - fastlane@3:
+        inputs:
+        - verbose_log: 'yes'
+        - lane: refresh_dsyms build_number:20050
+  deploy:
+    description: |
+      The workflow tests, builds and deploys the app using *Deploy to bitrise.io* step.
+
+      For testing the *retry_on_failure* test repetition mode is enabled.
+
+      Next steps:
+      - Set up [Connecting to an Apple service with API key](https://devcenter.bitrise.io/en/accounts/connecting-to-services/connecting-to-an-apple-service-with-api-key.html##).
+      - Or further customise code signing following our [iOS code signing](https://devcenter.bitrise.io/en/code-signing/ios-code-signing.html) guide.
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@8: {}
+    - script@1:
+        title: Script (Inject Secrets)
+        inputs:
+        - content: |+
+            #!/usr/bin/env bash
+            # fail if any commands fail
+            set -e
+            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+            set -o pipefail
+            # debug log
+            set -x
+
+            # write your script here
+
+
+            # Check if required environment variables are set
+            if [ -z "$CREDENTIALS_JSON" ]; then
+              echo "Error: CREDENTIALS_JSON environment variable not set."
+              exit 1
+            fi
+
+            if [ -z "$GOOGLESERVICE_INFO_STAGING_PLIST" ]; then
+              echo "Error: GOOGLESERVICE_INFO_STAGING_PLIST environment variable not set."
+              exit 1
+            fi
+
+            if [ -z "$GOOGLESERVICE_INFO_PLIST" ]; then
+              echo "Error: GOOGLESERVICE_INFO_PLIST environment variable not set."
+              exit 1
+            fi
+
+            # Create folder at scripts/secrets
+            cd scripts
+            mkdir -p secrets
+            cd secrets
+
+            echo "$CREDENTIALS_JSON" > credentials.json
+            echo "First 4 characters of credentials.json: $(head -c 10 credentials.json)"
+            echo "String length of credentials.json: $(wc -m < credentials.json) characters"
+
+            # Write GoogleService-Info-Staging.plist file with contents of GOOGLESERVICE_INFO_STAGING_PLIST
+            echo "$GOOGLESERVICE_INFO_STAGING_PLIST" > GoogleService-Info-Staging.plist
+            echo "First 4 characters of GoogleService-Info-Staging.plist: $(head -c 4 GoogleService-Info-Staging.plist)"
+            echo "String length of GoogleService-Info-Staging.plist: $(wc -m < GoogleService-Info-Staging.plist) characters"
+
+            # Write GoogleService-Info.plist file with contents of GOOGLESERVICE_INFO_PLIST
+            echo "$GOOGLESERVICE_INFO_PLIST" > GoogleService-Info.plist
+            echo "First 4 characters of GoogleService-Info.plist: $(head -c 4 GoogleService-Info.plist)"
+            echo "String length of GoogleService-Info.plist: $(wc -m < GoogleService-Info.plist) characters"
+
+    - script@1:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+            set -o pipefail
+            # debug log
+            set -x
+
+            # write your script here
+            echo "Pulling v4-localization!"
+
+            cd ..
+            git clone git@github.com:dydxprotocol/v4-localization.git
+
+            # or run a script from your repository, like:
+            # bash ./path/to/script.sh
+            # not just bash, e.g.:
+            # ruby ./path/to/script.rb
+        title: Script (Pull v4-localization)
+    - script@1:
+        title: Script (Pull v4-web)
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+            set -o pipefail
+            # debug log
+            set -x
+
+            # write your script here
+            echo "Pulling v4-web!"
+
+            cd ..
+            git clone git@github.com:dydxprotocol/v4-web.git
+
+            # or run a script from your repository, like:
+            # bash ./path/to/script.sh
+            # not just bash, e.g.:
+            # ruby ./path/to/script.rb
+    - script@1:
+        title: Script (Install gradle)
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+            set -o pipefail
+            # debug log
+            set -x
+
+            # write your script here
+            brew install gradle
+
+            # or run a script from your repository, like:
+            # bash ./path/to/script.sh
+            # not just bash, e.g.:
+            # ruby ./path/to/script.rb
+    - cache-pull@2: {}
+    - script@1:
+        title: Script (Update Build Number)
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+            set -o pipefail
+            # debug log
+            set -x
+
+            # write your script here
+            echo "Hello World!"
+
+            cd dydxV4
+            build=`expr $BITRISE_BUILD_NUMBER + 30000`
+            ../scripts/update_build_number.sh $build
+
+            # or run a script from your repository, like:
+            # bash ./path/to/script.sh
+            # not just bash, e.g.:
+            # ruby ./path/to/script.rb
+    - xcode-archive@4.8:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - distribution_method: app-store
+        - verbose_log: 'yes'
+        - automatic_code_signing: api-key
+    - cache-push@2: {}
+    - deploy-to-bitrise-io@2: {}
+    - deploy-to-itunesconnect-application-loader@1:
+        inputs:
+        - connection: api_key
+    - git-tag-project-version-and-build-number@1:
+        inputs:
+        - bitrise_tag_xcodeproj_path: dydxV4/dydxV4.xcodeproj
+        - bitrise_tag_info_plist_path: dydxV4/dydxV4/info.plist
+    envs:
+    - opts:
+        is_expand: false
+      COCOAPODS_SKIP_KOTLIN_BUILD: 'NO'
+  primary:
+    description: |
+      The workflow executes the tests. The *retry_on_failure* test repetition mode is enabled.
+
+      Next steps:
+      - Check out [Getting started with iOS apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-ios-apps.html).
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@8: {}
+    - script@1:
+        title: Script (Pull v4-localization)
+        inputs:
+        - content: |+
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+            set -o pipefail
+            # debug log
+            set -x
+
+            echo "Pulling v4-localization!"
+
+            cd ..
+            git clone git@github.com:dydxprotocol/v4-localization.git
+
+    - script@1:
+        title: Script (Pull v4-web)
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+            set -o pipefail
+            # debug log
+            set -x
+
+            echo "Pulling v4-web!"
+
+            cd ..
+            git clone git@github.com:dydxprotocol/v4-web.git
+    - script@1:
+        title: Script (Install gradle)
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+            set -o pipefail
+            # debug log
+            set -x
+
+            # write your script here
+            brew install gradle
+
+            # or run a script from your repository, like:
+            # bash ./path/to/script.sh
+            # not just bash, e.g.:
+            # ruby ./path/to/script.rb
+    - cache-pull@2: {}
+    - restore-spm-cache@1: {}
+    - xcode-test@5:
+        timeout: 1200
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - test_repetition_mode: retry_on_failure
+    - save-spm-cache@1: {}
+    - cache-push@2: {}
+    - deploy-to-bitrise-io@2: {}
+    envs:
+    - opts:
+        is_expand: false
+      COCOAPODS_SKIP_KOTLIN_BUILD: 'NO'
+  test:
+    description: |
+      The workflow executes the tests. The *retry_on_failure* test repetition mode is enabled.
+
+      Next steps:
+      - Check out [Getting started with iOS apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-ios-apps.html).
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@6: {}
+    - script@1:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+            set -o pipefail
+            # debug log
+            set -x
+
+            # write your script here
+            brew install gradle
+
+            # or run a script from your repository, like:
+            # bash ./path/to/script.sh
+            # not just bash, e.g.:
+            # ruby ./path/to/script.rb
+    - script@1:
+        title: Script (Pull Veronica)
+        inputs:
+        - content: |+
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
+            set -o pipefail
+            # debug log
+            set -x
+
+            echo "Pulling Veronica!"
+
+            cd ..
+            git clone git@github.com:dydxprotocol/veronica-v4.git
+
+    - cache-pull@2: {}
+    - xcode-test@4:
+        timeout: 1200
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - test_repetition_mode: retry_on_failure
+    - cache-push@2: {}
+    - deploy-to-bitrise-io@2: {}
+    envs:
+    - opts:
+        is_expand: false
+      COCOAPODS_SKIP_KOTLIN_BUILD: 'NO'
+meta:
+  bitrise.io:
+    stack: osx-xcode-15.0.x
+    machine_type_id: g2-m1.4core
+app:
+  envs:
+  - BITRISE_PROJECT_PATH: dydx/dydx.xcworkspace
+    opts:
+      is_expand: false
+  - BITRISE_SCHEME: dydxV4
+    opts:
+      is_expand: false
+  - opts:
+      is_expand: false
+    BITRISE_DISTRIBUTION_METHOD: development
+trigger_map:
+- push_branch: releases/*
+  workflow: deploy
+- pull_request_source_branch: "*"
+  pull_request_target_branch: releases/*
+  workflow: primary
+- pull_request_source_branch: "*"
+  pull_request_target_branch: main
+  workflow: primary
