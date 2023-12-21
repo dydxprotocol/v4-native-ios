@@ -45,7 +45,13 @@ open class PlatformListViewModel: PlatformViewModeling {
     
     public var contentChanged: (() -> Void)?
 
-    public init(items: [PlatformViewModel] = [], header: PlatformViewModel? = nil, placeholder: PlatformViewModel? = nil, intraItemSeparator: Bool = true, firstListItemTopSeparator: Bool = false, lastListItemBottomSeparator: Bool = false, contentChanged: (() -> Void)? = nil) {
+    public init(items: [PlatformViewModel] = [], 
+                header: PlatformViewModel? = nil,
+                placeholder: PlatformViewModel? = nil,
+                intraItemSeparator: Bool = true,
+                firstListItemTopSeparator: Bool = false,
+                lastListItemBottomSeparator: Bool = false,
+                contentChanged: (() -> Void)? = nil) {
         self.items = items
         self.header = header
         self.placeholder = placeholder

@@ -19,7 +19,7 @@ extension OrderStatusModel {
             self.init(status: .green)
         case .partiallyfilled, .pending:
             self.init(status: .yellow)
-        case .open, .untriggered, .cancelled:
+        case .open, .untriggered:
             self.init(status: .blank)
         default:
             self.init(status: .blank)
