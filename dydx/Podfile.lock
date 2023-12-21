@@ -1,5 +1,5 @@
 PODS:
-  - abacus (0.4.18)
+  - Abacus (1.1.29)
   - Amplitude-iOS (4.10.0)
   - AppsFlyerFramework (6.12.2):
     - AppsFlyerFramework/Main (= 6.12.2)
@@ -259,7 +259,7 @@ PODS:
   - ZSWTappableLabel (3.3.2)
 
 DEPENDENCIES:
-  - abacus (from `~/v4-abacus`)
+  - Abacus (from `../podspecs/Abacus.podspec`)
   - Amplitude-iOS
   - AppsFlyerFramework
   - Atributika
@@ -360,8 +360,8 @@ SPEC REPOS:
     - ZSWTappableLabel
 
 EXTERNAL SOURCES:
-  abacus:
-    :path: "~/v4-abacus"
+  Abacus:
+    :podspec: "../podspecs/Abacus.podspec"
   Charts:
     :branch: releases/3.6.0.3
     :git: https://github.com/dydxprotocol/Charts.git
@@ -376,7 +376,7 @@ CHECKOUT OPTIONS:
     :http: https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz
 
 SPEC CHECKSUMS:
-  abacus: 46f62be6dc9b3f888093eb2c9952d0267ab40670
+  Abacus: 3076a00f4491ae0092744e1a45a857a8d294338c
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   AppsFlyerFramework: 6eb4d89d2eb9a6632317f1055b359d9fd85fd5ff
   Atributika: 0eabae2cc37999e79c5b94f60213642946991b1c
@@ -433,6 +433,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: 798253b3080337f14d7b743dcdc6a5358c8040c6
+PODFILE CHECKSUM: a4f25d50f2991cc8e84eca8d34be23b37908132b
 
 COCOAPODS: 1.14.3
