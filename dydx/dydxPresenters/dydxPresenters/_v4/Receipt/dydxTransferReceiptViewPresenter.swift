@@ -103,7 +103,7 @@ final class dydxTransferReceiptViewPresenter: dydxReceiptPresenter {
                     value = nil
                 }
             case .withdrawal:
-                if let toAmount = transferSummary?.toAmount, let toAmount = Double(toAmount),
+                if let toAmount = transferSummary?.toAmount?.doubleValue,
                    let decimals = transferInput?.resources?.tokenResources?[token]?.decimals?.doubleValue {
                     let size = toAmount / pow(10, decimals)
                     if let converted = dydxFormatter.shared.raw(number: parser.asNumber(size), size: "0.0001") {
