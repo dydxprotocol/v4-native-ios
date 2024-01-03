@@ -32,6 +32,10 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.environment?.dydxChainId
     }
 
+    public var documentation: Documentation? {
+        asyncStateManager.documentation
+    }
+
     public var environment: V4Environment? {
         asyncStateManager.environment
     }

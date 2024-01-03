@@ -52,7 +52,6 @@ public class dydxTitledCardViewModel: PlatformViewModel {
                     Text(self.title)
                         .themeFont(fontSize: .small)
                         .themeColor(foreground: .textSecondary)
-                        .fixedSize()
                     Spacer(minLength: 16)
                     self.createTitleAccessoryView(parentStyle: parentStyle)
                 }
@@ -64,6 +63,7 @@ public class dydxTitledCardViewModel: PlatformViewModel {
                 self.createContentView(parentStyle: parentStyle)
                     .padding(.vertical, self.verticalContentPadding)
                     .padding(.horizontal, self.horizontalContentPadding)
+                Spacer(minLength: 0)
             }
             .themeColor(background: .layer3)
             .cornerRadius(12, corners: .allCorners)

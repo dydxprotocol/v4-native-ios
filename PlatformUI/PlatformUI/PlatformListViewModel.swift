@@ -45,7 +45,13 @@ open class PlatformListViewModel: PlatformViewModeling {
     
     public var contentChanged: (() -> Void)?
 
-    public init(items: [PlatformViewModel] = [], header: PlatformViewModel? = nil, placeholder: PlatformViewModel? = nil, intraItemSeparator: Bool = true, firstListItemTopSeparator: Bool = false, lastListItemBottomSeparator: Bool = false, contentChanged: (() -> Void)? = nil) {
+    public init(items: [PlatformViewModel] = [], 
+                header: PlatformViewModel? = nil,
+                placeholder: PlatformViewModel? = nil,
+                intraItemSeparator: Bool = true,
+                firstListItemTopSeparator: Bool = false,
+                lastListItemBottomSeparator: Bool = false,
+                contentChanged: (() -> Void)? = nil) {
         self.items = items
         self.header = header
         self.placeholder = placeholder
@@ -87,7 +93,7 @@ open class PlatformListViewModel: PlatformViewModeling {
                                 VStack(alignment: .leading, spacing: 0) {
                                     if self?.intraItemSeparator == true {
                                         let shouldDisplayTopSeparator = self?.intraItemSeparator == true && (self?.firstListItemTopSeparator == true && item === list.first)
-                                        let shouldDisplayBottomSeparator = self?.intraItemSeparator == true || (item !== list.last || self?.lastListItemBottomSeparator == true)
+                                        let shouldDisplayBottomSeparator = self?.intraItemSeparator == true && (item !== list.last || self?.lastListItemBottomSeparator == true)
                                         if shouldDisplayTopSeparator {
                                             DividerModel().createView(parentStyle: parentStyle)
                                         }
