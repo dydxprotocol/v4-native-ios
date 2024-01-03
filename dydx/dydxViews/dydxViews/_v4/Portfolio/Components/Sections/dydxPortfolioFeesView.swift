@@ -192,7 +192,7 @@ public class dydxPortfolioFeesViewModel: PlatformViewModel {
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 12)
-        .themeColor(background: .layer4)
+        .themeColor(background: .layer3)
         .cornerRadius(9, corners: .allCorners)
     }
 

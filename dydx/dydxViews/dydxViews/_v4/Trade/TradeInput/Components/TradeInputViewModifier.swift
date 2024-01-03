@@ -21,6 +21,6 @@ struct TradeInputModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .themeColor(background: .layer4)
-            .cornerRadius(12)
+            .borderAndClip(style: .cornerRadius(12), borderColor: .borderDefault, lineWidth: 1)
     }
 }

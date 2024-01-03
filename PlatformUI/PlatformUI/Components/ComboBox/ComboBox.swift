@@ -59,7 +59,7 @@ public class ComboBoxModel: PlatformViewModel {
                                               trailing: trailing)
                 .createView(parentStyle: style)
                 .themeColor(background: .layer4)
-                .cornerRadius(12)
+                .borderAndClip(style: .cornerRadius(12), borderColor: .borderDefault, lineWidth: 1)
                 .onTapGesture { [weak self] in
                     self?.onTapAction?()
                 }

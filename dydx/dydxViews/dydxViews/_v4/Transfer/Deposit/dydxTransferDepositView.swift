@@ -54,7 +54,7 @@ public class dydxTransferDepositViewModel: PlatformViewModel {
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .themeColor(background: .layer0)
+                        .themeColor(background: .layer1)
                         .cornerRadius(12, corners: [.topLeft, .topRight])
 
                         self.ctaButton?.createView(parentStyle: style)

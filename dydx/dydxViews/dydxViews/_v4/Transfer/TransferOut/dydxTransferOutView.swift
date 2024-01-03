@@ -49,8 +49,7 @@ public class dydxTransferOutViewModel: PlatformViewModel {
                         VStack(spacing: 12) {
                             self.chainsComboBox?.createView(parentStyle: style)
                             self.addressInput?.createView(parentStyle: style)
-                                .themeColor(background: .layer4)
-                                .cornerRadius(12)
+                                .makeInput()
                             self.tokensComboBox?.createView(parentStyle: style)
                             self.amountBox?.createView(parentStyle: style)
                         }
@@ -64,7 +63,7 @@ public class dydxTransferOutViewModel: PlatformViewModel {
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .themeColor(background: .layer0)
+                        .themeColor(background: .layer1)
                         .cornerRadius(12, corners: [.topLeft, .topRight])
 
                         self.ctaButton?.createView(parentStyle: style)
@@ -84,7 +83,7 @@ struct dydxTransferOutView_Previews_Dark: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxTransferOutViewModel.previewValue
             .createView()
-            .themeColor(background: .layer0)
+            .themeColor(background: .layer1)
             .environmentObject(themeSettings)
             .previewLayout(.sizeThatFits)
     }
@@ -98,7 +97,7 @@ struct dydxTransferOutView_Previews_Light: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxTransferOutViewModel.previewValue
             .createView()
-            .themeColor(background: .layer0)
+            .themeColor(background: .layer1)
             .environmentObject(themeSettings)
             .previewLayout(.sizeThatFits)
     }

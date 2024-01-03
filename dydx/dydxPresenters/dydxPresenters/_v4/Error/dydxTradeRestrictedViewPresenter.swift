@@ -62,7 +62,7 @@ public class dydxTradeRestrictedViewModel: PlatformViewModel {
 
             return AnyView(
                 ZStack(alignment: .bottom) {
-                    ThemeColor.SemanticColor.layer0.color
+                    ThemeColor.SemanticColor.layer1.color
                         .opacity(0.8)
                     VStack(alignment: .leading, spacing: 16) {
                         HStack(spacing: 0) {

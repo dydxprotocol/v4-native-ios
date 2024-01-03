@@ -35,18 +35,21 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
                                       imageName: "icon_transfer_deposit",
                                       title: DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT"),
                                       templateColor: self.onboarded ? .textSecondary : .textTertiary,
+                                      textColor: self.onboarded ? .textSecondary : .textTertiary,
                                       action: self.depositAction)
 
                     self.createButton(parentStyle: style,
                                       imageName: "icon_transfer_withdrawal",
                                       title: DataLocalizer.localize(path: "APP.GENERAL.WITHDRAW"),
                                       templateColor: self.onboarded ? .textSecondary : .textTertiary,
+                                      textColor: self.onboarded ? .textSecondary : .textTertiary,
                                       action: self.withdrawAction)
 
                     self.createButton(parentStyle: style,
                                       imageName: "icon_transfer_dydx",
                                       title: DataLocalizer.localize(path: "APP.GENERAL.TRANSFER"),
                                       templateColor: self.onboarded ? .textSecondary : .textTertiary,
+                                      textColor: self.onboarded ? .textSecondary : .textTertiary,
                                       action: self.transferAction)
 
                     if self.onboarded {
@@ -54,6 +57,7 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
                                           imageName: "settings_signout",
                                           title: DataLocalizer.localize(path: "APP.GENERAL.SIGN_OUT"),
                                           templateColor: nil,
+                                          textColor: .textSecondary,
                                           action: self.signOutAction)
                     } else {
                         self.createButton(parentStyle: style,
@@ -61,6 +65,7 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
                                           title: DataLocalizer.localize(path: "APP.GENERAL.CONNECT"),
                                           backgroundColor: .colorPurple,
                                           templateColor: .colorWhite,
+                                          textColor: .textSecondary,
                                           action: self.onboardAction)
                     }
                 }
@@ -68,7 +73,7 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
         }
     }
 
-    private func createButton(parentStyle: ThemeStyle, imageName: String, title: String, styleKey: String? = nil, backgroundColor: ThemeColor.SemanticColor = .layer3, templateColor: ThemeColor.SemanticColor?, action: (() -> Void)?) -> some View {
+    private func createButton(parentStyle: ThemeStyle, imageName: String, title: String, styleKey: String? = nil, backgroundColor: ThemeColor.SemanticColor = .layer3, templateColor: ThemeColor.SemanticColor?, textColor: ThemeColor.SemanticColor, action: (() -> Void)?) -> some View {
         let icon = PlatformIconViewModel(type: .asset(name: imageName, bundle: Bundle.dydxView),
                                      clip: .circle(background: backgroundColor, spacing: 24, borderColor: .layer6),
                                          size: CGSize(width: 48, height: 48),
@@ -77,7 +82,7 @@ public class dydxProfileButtonsViewModel: PlatformViewModel {
 
         let title = Text(title)
             .themeFont(fontSize: .small)
-            .themeColor(foreground: templateColor ?? .textSecondary)
+            .themeColor(foreground: textColor)
             .lineLimit(1)
 
         let buttonContent = VStack {
