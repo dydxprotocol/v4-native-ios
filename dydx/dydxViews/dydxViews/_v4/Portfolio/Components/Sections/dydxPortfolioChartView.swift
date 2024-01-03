@@ -53,7 +53,7 @@ public class dydxPortfolioChartViewModel: PlatformViewModel {
                     }
                     .frame(height: 290)
                     .frame(maxWidth: .infinity)
-                    .themeColor(background: .layer4)
+                    .themeColor(background: .layer3)
                     .cornerRadius(28)
                 }
                 .cornerRadius(28, corners: [.topLeft, .topRight])
@@ -100,15 +100,15 @@ public class dydxPortfolioChartViewModel: PlatformViewModel {
         let items = self.resolutionTitles?.compactMap {
             Text($0)
                 .themeFont(fontType: .bold, fontSize: .small)
-                .padding(8)
                 .themeColor(foreground: .textTertiary)
+                .padding(8)
                 .wrappedViewModel
         }
         let selectedItems = self.resolutionTitles?.compactMap {
             Text($0)
                 .themeFont(fontType: .bold, fontSize: .small)
+                .themeColor(foreground: .textPrimary)
                 .padding(8)
-                .themeColor(background: .layer0)
                 .cornerRadius(8)
                 .wrappedViewModel
         }

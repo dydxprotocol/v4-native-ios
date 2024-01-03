@@ -44,7 +44,7 @@ public class dydxTransferFaucetViewModel: PlatformViewModel {
                             .createView(parentStyle: style)
                             .padding(.vertical, 2)
                             .padding(.horizontal, 10)
-                            .themeColor(background: .layer0)
+                            .themeColor(background: .layer1)
                             .clipShape(Capsule())
                             .frame(minWidth: 0, maxWidth: .infinity)
 

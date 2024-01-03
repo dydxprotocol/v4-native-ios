@@ -58,7 +58,7 @@ public class dydxAlertItemModel: PlatformViewModel, Equatable {
                 Spacer()
             }
                 .padding(16)
-                .themeColor(background: .layer4)
+                .themeColor(background: .layer3)
                 .cornerRadius(16, corners: .allCorners)
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)

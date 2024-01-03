@@ -47,7 +47,7 @@ public class TransferAmountBoxModel: PlatformTextInputViewModel {
                     }
                     .padding()
                     .padding(.top, 6)
-                    .themeColor(background: .layer0)
+                    .themeColor(background: .layer1)
                     .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
 
                     VStack {
