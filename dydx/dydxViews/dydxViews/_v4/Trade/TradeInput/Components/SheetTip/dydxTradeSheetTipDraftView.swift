@@ -81,7 +81,6 @@ struct dydxTradeSheetTipDraftView_Previews_Dark: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxTradeSheetTipDraftViewModel.previewValue
             .createView()
-            .themeColor(background: .layer0)
             .environmentObject(themeSettings)
             // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
@@ -96,7 +95,6 @@ struct dydxTradeSheetTipDraftView_Previews_Light: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxTradeSheetTipDraftViewModel.previewValue
             .createView()
-            .themeColor(background: .layer0)
             .environmentObject(themeSettings)
         // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)

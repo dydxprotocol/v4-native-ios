@@ -20,7 +20,7 @@ public class dydxRewardsHelpViewModel: dydxTitledCardViewModel {
     private let listViewModel = PlatformListViewModel()
 
     public init() {
-        super.init(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.HELP", params: nil) ?? "",
+        super.init(title: DataLocalizer.shared?.localize(path: "APP.HEADER.HELP", params: nil) ?? "",
                    verticalContentPadding: 0,
                    horizontalContentPadding: 0)
     }
