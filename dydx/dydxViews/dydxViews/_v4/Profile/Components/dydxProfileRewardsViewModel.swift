@@ -22,7 +22,9 @@ public class dydxProfileRewardsViewModel: dydxTitledCardViewModel {
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 10) {
                 titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_LAST_7_DAYS", params: nil) ?? "", value: last7DaysRewardsAmount)
-                titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_ALL_TIME", params: nil) ?? "", value: allTimeRewardsAmount)
+                if let allTimeRewardsAmount = allTimeRewardsAmount {
+                    titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_ALL_TIME", params: nil) ?? "", value: allTimeRewardsAmount)
+                }
             }
             Spacer()
         }
