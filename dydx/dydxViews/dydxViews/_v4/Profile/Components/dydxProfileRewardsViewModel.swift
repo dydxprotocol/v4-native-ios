@@ -21,9 +21,9 @@ public class dydxProfileRewardsViewModel: dydxTitledCardViewModel {
     override func createContentView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 10) {
-                titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_LAST_7_DAYS", params: nil) ?? "", value: last7DaysRewardsAmount)
+                titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.THIS_WEEK", params: nil) ?? "", value: last7DaysRewardsAmount)
                 if let allTimeRewardsAmount = allTimeRewardsAmount {
-                    titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.PROFILES_PAGE.REWARDS_ALL_TIME", params: nil) ?? "", value: allTimeRewardsAmount)
+                    titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.ALL_TIME", params: nil) ?? "", value: allTimeRewardsAmount)
                 }
             }
             Spacer()

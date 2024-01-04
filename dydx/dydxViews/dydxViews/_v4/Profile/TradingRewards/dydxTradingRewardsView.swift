@@ -16,8 +16,11 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
     @Published public var rewardsSummary: dydxRewardsSummaryViewModel = dydxRewardsSummaryViewModel()
     @Published public var help: dydxRewardsHelpViewModel? = dydxRewardsHelpViewModel()
     @Published public var history: dydxRewardsHistoryViewModel? = dydxRewardsHistoryViewModel()
-    @Published public var governanceViewModel: dydxRewardsLearnMoreViewModel?
-    @Published public var stakingViewModel: dydxRewardsLearnMoreViewModel?
+    // removed as part of https://linear.app/dydx/issue/TRCL-3445/remove-governance-and-staking-cards
+    // non-zero chance we add back
+    // these vars and their corresponding files can be fully deleted if rewards is no longer relevant
+//    @Published public var governanceViewModel: dydxRewardsLearnMoreViewModel?
+//    @Published public var stakingViewModel: dydxRewardsLearnMoreViewModel?
 
     public init() { }
 
@@ -37,8 +40,9 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
                         self.rewardsSummary.createView(parentStyle: style)
                         self.help?.createView(parentStyle: style)
                         self.history?.createView(parentStyle: style)
-                        self.governanceViewModel?.createView(parentStyle: style)
-                        self.stakingViewModel?.createView(parentStyle: style)
+                        // see comment near top
+//                        self.governanceViewModel?.createView(parentStyle: style)
+//                        self.stakingViewModel?.createView(parentStyle: style)
                         Spacer(minLength: 80)
                     }
                 }

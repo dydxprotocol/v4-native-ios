@@ -57,19 +57,22 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
             Router.shared?.navigate(to: URL(string: "https://community.chaoslabs.xyz/dydx-v4/risk/leaderboard"), completion: nil)
         }
 
-        viewModel.governanceViewModel = .init(
-            title: DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.GOVERNANCE", params: nil) ?? "",
-            description: DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.GOVERNANCE_LINK_DESCRIPTION", params: nil) ?? "") {
+        // comment out as part of https://linear.app/dydx/issue/TRCL-3445/remove-governance-and-staking-cards
+        // non-zero chance we add back
+        // these vars and their corresponding files can be fully deleted if rewards is no longer relevant
+//        viewModel.governanceViewModel = .init(
+//            title: DataLocalizer.shared?.localize(path: "APP.GENERAL.GOVERNANCE", params: nil) ?? "",
+//            description: DataLocalizer.shared?.localize(path: "APP.GENERAL.GOVERNANCE_DESCRIPTION", params: nil) ?? "") {
                 // TODO: configure in env json
 //                Router.shared?.navigate (to: , completion: nil)
-            }
+//            }
 
-        viewModel.stakingViewModel = .init(
-            title: DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.STAKING", params: nil) ?? "",
-            description: DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.STAKING_LINK_DESCRIPTION", params: nil) ?? "") {
+//        viewModel.stakingViewModel = .init(
+//            title: DataLocalizer.shared?.localize(path: "APP.GENERAL.STAKING", params: nil) ?? "",
+//            description: DataLocalizer.shared?.localize(path: "APP.GENERAL.STAKING_DESCRIPTION", params: nil) ?? "") {
                 // TODO: configure in env json
 //                Router.shared?.navigate (to: , completion: nil)
-            }
+//            }
 
         helpPresenter.$viewModel.assign(to: &viewModel.$help)
         historyPresenter.$viewModel.assign(to: &viewModel.$history)
