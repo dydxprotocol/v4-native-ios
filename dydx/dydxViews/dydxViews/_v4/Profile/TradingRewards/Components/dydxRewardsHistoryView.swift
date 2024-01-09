@@ -8,6 +8,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import Popovers
 
 public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
     // MARK: public properties
@@ -28,7 +29,8 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
     // MARK: impl
 
     public init() {
-        super.init(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.REWARD_HISTORY", params: nil) ?? "")
+        super.init(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.REWARD_HISTORY", params: nil) ?? "",
+                   tooltip: DataLocalizer.shared?.localize(path: "TRADE.REWARD_HISTORY.BODY", params: nil) ?? "")
     }
 
     public override func createTitleAccessoryView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {

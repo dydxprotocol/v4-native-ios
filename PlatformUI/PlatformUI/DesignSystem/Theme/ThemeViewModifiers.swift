@@ -526,6 +526,15 @@ public extension AttributedString {
         }
         return string
     }
+    
+    func dottedUnderline(foreground: ThemeColor.SemanticColor, for range: Range<AttributedString.Index>? = nil) -> Self {
+        var string = self
+        let range = range ?? string.startIndex..<string.endIndex
+        let underlineStyle = NSUnderlineStyle.single.union(.patternDot)
+        string[range].underlineStyle = underlineStyle
+        string[range].underlineColor = UIColor(ThemeSettings.shared.themeConfig.themeColor.color(of: foreground))
+        return string
+    }
 }
 
 // MARK: Keyboard Accessory
