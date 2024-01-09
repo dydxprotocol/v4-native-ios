@@ -142,6 +142,18 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
                 self?.updatePositionSection(position: position)
             }
             .store(in: &subscriptions)
+
+        AbacusStateManager.shared.state.marketList
+            .sink { markets in
+                guard markets.contains(where: { market in
+                    // TODO
+                    market.status == .init(canTrade: true, canReduce: true)
+                }) else {
+                    Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: false, completion: nil)
+                    return
+                }
+            }
+            .store(in: &subscriptions)
     }
 
     override func stop() {
