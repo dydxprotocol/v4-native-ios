@@ -12,14 +12,22 @@ import Utilities
 public class dydxTitledCardViewModel: PlatformViewModel {
 
     public let title: String
+    public let tooltip: String?
     public let verticalContentPadding: CGFloat
     public let horizontalContentPadding: CGFloat
     @Published public var tapAction: (() -> Void)?
+    @Published private var isTooltipPresented: Bool = false
+    private lazy var isTooltipPresentedBinding = Binding(
+        get: { [weak self] in self?.isTooltipPresented == true },
+        set: { [weak self] in self?.isTooltipPresented = $0 }
+    )
 
     public init(title: String,
+                tooltip: String? = nil,
                 verticalContentPadding: CGFloat = 16,
                 horizontalContentPadding: CGFloat = 16) {
         self.title = title
+        self.tooltip = tooltip
         self.verticalContentPadding = verticalContentPadding
         self.horizontalContentPadding = horizontalContentPadding
         super.init()
@@ -32,6 +40,45 @@ public class dydxTitledCardViewModel: PlatformViewModel {
 
     func createContentView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
         AnyView(PlatformView.nilView)
+    }
+
+    /// creates the title text view. If tooltip is non-nil, the title will be hyperlinked and underlined such that tapping displays the tooltip text.
+    func createTitleTextView() -> AnyView? {
+        let attributedTitle = AttributedString(self.title)
+            .themeFont(fontSize: .small)
+            .themeColor(foreground: .textSecondary)
+        if let tooltip = tooltip {
+            return Text(attributedTitle.dottedUnderline(foreground: .textSecondary))
+                .onTapGesture { [weak self] in
+                    self?.isTooltipPresented.toggle()
+                }
+                .popover(present: self.isTooltipPresentedBinding, attributes: {
+                    $0.position = .absolute(
+                          originAnchor: .top,
+                          popoverAnchor: .bottom
+                      )
+                    $0.sourceFrameInset = .init(top: 0, left: 0, bottom: -16, right: 0)
+                    $0.presentation.animation = .none
+                    $0.blocksBackgroundTouches = true
+                    $0.onTapOutside = {
+                        self.isTooltipPresented = false
+                    }
+                }, view: {
+                    Text(tooltip)
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 12)
+                        .themeFont(fontType: .text, fontSize: .small)
+                        .themeColor(foreground: .textSecondary)
+                        .themeColor(background: .layer5)
+                        .borderAndClip(style: .cornerRadius(8), borderColor: .layer6, lineWidth: 1)
+                        .environmentObject(ThemeSettings.shared)
+                })
+                .wrappedInAnyView()
+        } else {
+            return Text(attributedTitle)
+                .wrappedInAnyView()
+        }
+
     }
 
     /// defaults to a right facing chevron. override if you want a different accessory view or no accessory view at all
@@ -49,9 +96,7 @@ public class dydxTitledCardViewModel: PlatformViewModel {
 
             let view = VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    Text(self.title)
-                        .themeFont(fontSize: .small)
-                        .themeColor(foreground: .textSecondary)
+                    self.createTitleTextView()
                     Spacer(minLength: 16)
                     self.createTitleAccessoryView(parentStyle: parentStyle)
                 }
