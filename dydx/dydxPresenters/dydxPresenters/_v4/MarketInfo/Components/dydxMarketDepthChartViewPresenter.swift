@@ -259,9 +259,7 @@ class dydxMarketDepthChartViewPresenter: HostedViewPresenter<dydxMarketDepthChar
                     let stepSize = market.configs?.displayStepSizeDecimals?.intValue ?? 1
                     self?.viewModel?.hightlight?.price = dydxFormatter.shared.dollar(number: NSNumber(value: order.price), digits: tickSize)
                     self?.viewModel?.hightlight?.size = dydxFormatter.shared.localFormatted(number: NSNumber(value: order.size), digits: stepSize)
-                    if let depth = order.depth?.doubleValue {
-                        self?.viewModel?.hightlight?.cost = dydxFormatter.shared.dollar(number: NSNumber(value: depth), digits: tickSize)
-                    }
+                    self?.viewModel?.hightlight?.cost = dydxFormatter.shared.dollar(number: NSNumber(value: order.depthCost), digits: 2)    // This is total cost, always round to cents
                     self?.viewModel?.hightlight?.impact = dydxFormatter.shared.percent(number: self?.priceImpact(orderDataPoint: orderDataPoint), digits: 2)
 
                     switch orderDataPoint.side {
