@@ -1,42 +1,28 @@
 [
     {
-        "fields": [
+        "fields" :[
             {
-                "title": {
-                    "text": "APP.V4.TRADING_NETWORK"
+                "title" : {
+                    "text" : "APP.LANGUAGE.LANGUAGE"
                 },
-                "text": {
-                    "text": "APP.GENERAL.MANAGE"
-                },
-                "link": {
-                    "text": "{APP_SCHEME}:///settings/env"
+                "link" : {
+                    "text" : "{APP_SCHEME}:///settings/language"
                 }
             },
             {
-                "title": {
-                    "text": "APP.LANGUAGE.LANGUAGE"
+                "title" : {
+                    "text" : "APP.V4.THEME"
                 },
-                "link": {
-                    "text": "{APP_SCHEME}:///settings/language"
+                "link" : {
+                    "text" : "{APP_SCHEME}:///settings/theme"
                 }
             },
             {
-                "title": {
-                    "text": "APP.HEADER.NOTIFICATIONS"
+                "title" : {
+                    "text" : "APP.V4.SYSTEM_STATUS"
                 },
-                "link": {
-                    "text": "{APP_SCHEME}:///manage-notifications"
-                }
-            },
-            {
-                "title": {
-                    "text": "APP.GENERAL.WALLET"
-                },
-                "text": {
-                    "text": "APP.GENERAL.MANAGE"
-                },
-                "link": {
-                    "text": "{APP_SCHEME}:///wallets"
+                "link" : {
+                    "text" : "{APP_SCHEME}:///settings/status"
                 }
             }
         ]
