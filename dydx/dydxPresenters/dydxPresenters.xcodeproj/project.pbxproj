@@ -108,8 +108,6 @@
 		02E7B39C29D79A4400D6626D /* debug.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37229D79A4400D6626D /* debug.json */; };
 		02E7B3A629D79A4400D6626D /* settings_notifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37C29D79A4400D6626D /* settings_notifications.json */; };
 		02E7B3A729D79A4400D6626D /* debug_default.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37D29D79A4400D6626D /* debug_default.json */; };
-		02E7B3A929D79A4400D6626D /* settings_loggedout.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37F29D79A4400D6626D /* settings_loggedout.json */; };
-		02E7B3AA29D79A4400D6626D /* settings_loggedout_debug.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B38029D79A4400D6626D /* settings_loggedout_debug.json */; };
 		02E7B3B129D79A4400D6626D /* v4-native-client.js in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B38729D79A4400D6626D /* v4-native-client.js */; };
 		02E90C5A29D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90C5929D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift */; };
 		02EF485629F732C600C97746 /* dydxFavoriteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF485529F732C600C97746 /* dydxFavoriteStore.swift */; };
@@ -450,8 +448,6 @@
 		02E7B37229D79A4400D6626D /* debug.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = debug.json; sourceTree = "<group>"; };
 		02E7B37C29D79A4400D6626D /* settings_notifications.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings_notifications.json; sourceTree = "<group>"; };
 		02E7B37D29D79A4400D6626D /* debug_default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = debug_default.json; sourceTree = "<group>"; };
-		02E7B37F29D79A4400D6626D /* settings_loggedout.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings_loggedout.json; sourceTree = "<group>"; };
-		02E7B38029D79A4400D6626D /* settings_loggedout_debug.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings_loggedout_debug.json; sourceTree = "<group>"; };
 		02E7B38729D79A4400D6626D /* v4-native-client.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "v4-native-client.js"; sourceTree = "<group>"; };
 		02E7DD9128CFB30000727949 /* dydxStateManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxStateManager.xcodeproj; path = ../dydxStateManager/dydxStateManager.xcodeproj; sourceTree = "<group>"; };
 		02E90C5929D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxFeatureFlagsViewBuilder.swift; sourceTree = "<group>"; };
@@ -1184,8 +1180,6 @@
 				02E7B37029D79A4400D6626D /* settings.json */,
 				02E7B36D29D79A4400D6626D /* settings_debug.json */,
 				02E7B37C29D79A4400D6626D /* settings_notifications.json */,
-				02E7B37F29D79A4400D6626D /* settings_loggedout.json */,
-				02E7B38029D79A4400D6626D /* settings_loggedout_debug.json */,
 				0295392629FB28B7009026E3 /* settings_theme.json */,
 				2741E3632A68787A000FA190 /* settings_direction_color_preference.json */,
 				0279656929D795E7004DEB20 /* routing_swiftui.json */,
@@ -1655,7 +1649,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				02E7B39729D79A4400D6626D /* settings_debug.json in Resources */,
-				02E7B3AA29D79A4400D6626D /* settings_loggedout_debug.json in Resources */,
 				02E7B3B129D79A4400D6626D /* v4-native-client.js in Resources */,
 				0279656C29D795E8004DEB20 /* routing_swiftui.json in Resources */,
 				02DA6E0E2AD897EE0048126C /* starkex-eth.js in Resources */,
@@ -1664,7 +1657,6 @@
 				02E7B3A729D79A4400D6626D /* debug_default.json in Resources */,
 				02E7B39929D79A4400D6626D /* test.js in Resources */,
 				02E7B39A29D79A4400D6626D /* settings.json in Resources */,
-				02E7B3A929D79A4400D6626D /* settings_loggedout.json in Resources */,
 				0279656A29D795E8004DEB20 /* tabs_v4.json in Resources */,
 				02E7B3A629D79A4400D6626D /* settings_notifications.json in Resources */,
 				02E7B39C29D79A4400D6626D /* debug.json in Resources */,

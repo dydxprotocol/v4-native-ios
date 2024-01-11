@@ -31,9 +31,9 @@ private class dydxSettingsLandingViewPresenter: SettingsLandingViewPresenter {
     init() {
         let definitionFile: String
         if DebugEnabled.enabled {
-            definitionFile = "settings_loggedout_debug.json"
+            definitionFile = "settings_debug.json"
         } else {
-            definitionFile = "settings_loggedout.json"
+            definitionFile = "settings.json"
         }
         super.init(definitionFile: definitionFile,
                    keyValueStore: SettingsStore.shared,
