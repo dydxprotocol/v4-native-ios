@@ -13,7 +13,7 @@ import SDWebImage
 /// A Image observable object for handle image load process. This drive the Source of Truth for image loading status.
 /// You can use `@ObservedObject` to associate each instance of manager to your View type, which update your view's body from SwiftUI framework when image was loaded.
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
-public final class ImageManager : ObservableObject {
+public final class ImageManager: ObservableObject {
     /// loaded image, note when progressive loading, this will published multiple times with different partial image
     @Published public var image: PlatformImage?
     /// loaded image data, may be nil if hit from memory cache. This will only published once even on incremental image loading
@@ -26,28 +26,28 @@ public final class ImageManager : ObservableObject {
     @Published public var isIncremental: Bool = false
     /// A observed object to pass through the image manager loading status to indicator
     @Published public var indicatorStatus = IndicatorStatus()
-    
-    weak var currentOperation: SDWebImageOperation? = nil
+
+    weak var currentOperation: SDWebImageOperation?
 
     var currentURL: URL?
     var successBlock: ((PlatformImage, Data?, SDImageCacheType) -> Void)?
     var failureBlock: ((Error) -> Void)?
     var progressBlock: ((Int, Int) -> Void)?
-    
+
     public init() {}
-    
+
     /// Start to load the url operation
     /// - Parameter url: The image url
     /// - Parameter options: The options to use when downloading the image. See `SDWebImageOptions` for the possible values.
     /// - Parameter context: A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
-    public func load(url: URL?, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil) {
+    public func load(url: URL?, options: SDWebImageOptions = [], context: [SDWebImageContextOption: Any]? = nil) {
         let manager: SDWebImageManager
         if let customManager = context?[.customManager] as? SDWebImageManager {
             manager = customManager
         } else {
             manager = .shared
         }
-        if (currentOperation != nil && currentURL == url) {
+        if currentOperation != nil && currentURL == url {
             return
         }
         currentURL = url
@@ -58,7 +58,7 @@ public final class ImageManager : ObservableObject {
                 return
             }
             let progress: Double
-            if (expectedSize > 0) {
+            if expectedSize > 0 {
                 progress = Double(receivedSize) / Double(expectedSize)
             } else {
                 progress = 0
@@ -94,7 +94,7 @@ public final class ImageManager : ObservableObject {
             }
         }
     }
-    
+
     /// Cancel the current url loading
     public func cancel() {
         if let operation = currentOperation {
@@ -104,7 +104,7 @@ public final class ImageManager : ObservableObject {
         indicatorStatus.isLoading = false
         currentURL = nil
     }
-    
+
 }
 
 // Completion Handler
@@ -116,14 +116,14 @@ extension ImageManager {
     public func setOnFailure(perform action: ((Error) -> Void)? = nil) {
         self.failureBlock = action
     }
-    
+
     /// Provide the action when image load successes.
     /// - Parameters:
     ///   - action: The action to perform. The first arg is the loaded image, the second arg is the loaded image data, the third arg is the cache type loaded from. If `action` is `nil`, the call has no effect.
     public func setOnSuccess(perform action: ((PlatformImage, Data?, SDImageCacheType) -> Void)? = nil) {
         self.successBlock = action
     }
-    
+
     /// Provide the action when image load progress changes.
     /// - Parameters:
     ///   - action: The action to perform. The first arg is the received size, the second arg is the total size, all in bytes. If `action` is `nil`, the call has no effect.

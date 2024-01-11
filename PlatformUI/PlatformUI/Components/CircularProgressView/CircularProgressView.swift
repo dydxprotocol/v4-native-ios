@@ -13,15 +13,15 @@ public class CircularProgressViewModel: PlatformViewModel {
     @Published public var outerTrackColor: Color = Color.pink
     @Published public var innerTrackColor: Color = Color.red
     @Published public var lineWidth: Double = 20
-   
+
     public static var previewValue: CircularProgressViewModel = {
         let vm = CircularProgressViewModel()
         vm.progress = 0.6
         return vm
     }()
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
@@ -30,7 +30,7 @@ public class CircularProgressViewModel: PlatformViewModel {
                         .stroke(lineWidth: self.lineWidth)
                         .opacity(0.2)
                         .foregroundColor(self.outerTrackColor)
-                    
+
                     Circle()
                         .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
                         .stroke(style: StrokeStyle(lineWidth: self.lineWidth, lineCap: .round, lineJoin: .round))
@@ -57,4 +57,3 @@ struct CircularProgressBar_Previews: PreviewProvider {
     }
 }
 #endif
-

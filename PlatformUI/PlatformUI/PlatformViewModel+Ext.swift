@@ -12,7 +12,7 @@ public extension PlatformViewModel {
     var safeAreaInsets: UIEdgeInsets? {
         keyWindow?.safeAreaInsets
     }
- 
+
     var keyWindow: UIWindow? {
         UIApplication
             .shared

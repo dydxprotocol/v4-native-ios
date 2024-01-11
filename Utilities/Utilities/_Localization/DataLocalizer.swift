@@ -12,7 +12,7 @@ import Combine
 public protocol DataLocalizerProtocol {
     var language: String? { get }
     var languagePublisher: AnyPublisher<String?, Never> { get }
-    func setLanguage(language: String, completed: @escaping (_ successful: Bool)-> Void)
+    func setLanguage(language: String, completed: @escaping (_ successful: Bool) -> Void)
     func localize(path: String, params: [String: String]?) -> String?
 }
 

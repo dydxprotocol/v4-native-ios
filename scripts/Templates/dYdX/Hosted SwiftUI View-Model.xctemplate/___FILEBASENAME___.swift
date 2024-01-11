@@ -67,7 +67,7 @@ public class ___FILEBASENAMEASIDENTIFIER___Model: PlatformViewModel {
         vm.text = "Test String"
         return vm
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
@@ -110,4 +110,3 @@ struct ___FILEBASENAMEASIDENTIFIER____Previews_Light: PreviewProvider {
     }
 }
 #endif
-

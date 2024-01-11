@@ -15,7 +15,7 @@ open class Loader<EntityClass>: NSObject, LoaderProtocol where EntityClass: NSOb
         }
         return loadingIo !== nil
     }
-    
+
     internal var path: String
     internal var io: [IOProtocol]
     internal var fields: [String]?
@@ -95,17 +95,17 @@ open class Loader<EntityClass>: NSObject, LoaderProtocol where EntityClass: NSOb
         }
         return nil
     }
-    
+
     open func merge(data: [String: Any], key: String) -> [String: Any] {
         var modified = data
         modified["map_key"] = key
         return modified
     }
-    
+
     open func list(data: Any?) -> [[String: Any]]? {
         return data as? [[String: Any]]
     }
-    
+
     open func map(data: Any?) -> [String: [String: Any]]? {
         return data as? [String: [String: Any]]
     }

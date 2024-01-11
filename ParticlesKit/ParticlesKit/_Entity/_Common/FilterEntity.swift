@@ -24,11 +24,11 @@ open class FilterEntity: DictionaryEntity {
             }
         }
     }
-    
+
      public required init() {
         super.init()
     }
-    
+
     public init(key: String) {
         self.key = key
         super.init()
@@ -42,7 +42,7 @@ open class FilterEntity: DictionaryEntity {
         super.init()
         data = entity.data
     }
-    
+
     public func apply(to entity: FilterEntity) {
         entity.data = data
     }

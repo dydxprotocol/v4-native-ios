@@ -24,7 +24,7 @@ open class GraphingPresenter: NSObject {
         }
     }
 
-    @IBOutlet public weak var graphingDelegate: GraphingDelegate? = nil
+    @IBOutlet public weak var graphingDelegate: GraphingDelegate?
 
     @IBOutlet public var xAxisFormatter: IAxisValueFormatter? {
         didSet {

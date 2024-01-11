@@ -74,7 +74,7 @@ open class RoutingTabBarController: UITabBarController, ParsingProtocol {
         RoutingHistory.shared.record(destination: self)
         alignCenterButton()
     }
-    
+
     public func alignCenterButton() {
         if let centerButton = centerButton {
             if let barItems = tabBar.items, barItems.count > 0 {
@@ -196,11 +196,11 @@ open class RoutingTabBarController: UITabBarController, ParsingProtocol {
                                 }
                             } else {
                                 var tabViewController: UIViewController = viewController
-                                //if !(viewController is UIViewControllerEmbeddingProtocol) {
+                                // if !(viewController is UIViewControllerEmbeddingProtocol) {
                                     if let nav = UINavigationController.load(storyboard: "Nav", with: viewController) {
                                         tabViewController = nav
                                     }
-                                //}
+                                // }
                                 self?.setup(viewController: tabViewController, info: info)
                                 completion(tabViewController)
                             }

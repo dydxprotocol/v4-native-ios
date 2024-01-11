@@ -10,7 +10,7 @@ import Utilities
 
 open class FeaturesConfig: NSObject, IOProtocol {
     @objc public dynamic var isLoading: Bool = false
-    
+
     public var priority: Int = 0
 
     public func load(path: String, params: [String: Any]?, completion: @escaping IOReadCompletionHandler) {

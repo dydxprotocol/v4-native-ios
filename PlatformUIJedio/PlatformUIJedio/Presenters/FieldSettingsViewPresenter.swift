@@ -16,18 +16,18 @@ import JedioKit
 open class FieldSettingsViewPresenter: BaseSettingsViewPresenter {
     private let fieldName: String
     private let keyValueStore: KeyValueStoreProtocol?
-    
+
     private var fieldInput: FieldInput?
-    
+
     public init(definitionFile: String, fieldName: String, keyValueStore: KeyValueStoreProtocol?) {
         self.fieldName = fieldName
         self.keyValueStore = keyValueStore
         super.init(definitionFile: definitionFile)
-        
+
         fieldInput = findInput(fieldName: fieldName)
         loadOptions()
     }
-    
+
     private func loadOptions() {
         let listModel = PlatformListViewModel(firstListItemTopSeparator: true, lastListItemBottomSeparator: true)
         listModel.width = UIScreen.main.bounds.width - 16
@@ -37,7 +37,7 @@ open class FieldSettingsViewPresenter: BaseSettingsViewPresenter {
                   let value = parser.asString(option["value"]) else {
                 return nil
             }
-            
+
             let optionViewModel = SettingOptionViewModel()
             optionViewModel.text = DataLocalizer.localize(path: text)
             optionViewModel.isSelected = parser.asString(keyValueStore?.value(forKey: fieldName)) == value
@@ -60,7 +60,7 @@ open class FieldSettingsViewPresenter: BaseSettingsViewPresenter {
         }
         viewModel?.sections = [SettingsViewModel.SectionViewModel(items: listModel)]
     }
-    
+
     open func onOptionSelected(option: [String: Any], changed: Bool) {
     }
 

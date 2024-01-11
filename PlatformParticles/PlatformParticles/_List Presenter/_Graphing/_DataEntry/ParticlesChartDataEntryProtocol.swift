@@ -42,7 +42,7 @@ extension ChartDataEntry {
     @objc open func didSetModel(oldValue: ModelObjectProtocol?) {
         sync()
     }
-    
+
     @objc open func sync() {
     }
 }
@@ -56,7 +56,7 @@ public extension ParticlesChartDataEntryProtocol {
     var color: UIColor? {
         return nil
     }
-    
+
     func notify() {
         if let particlesDataSet = dataSet.object as? ParticlesChartDataSetProtocol {
 //            particlesDataSet.notify()

@@ -24,8 +24,8 @@ public class LocalAuthenticator: NSObject {
 }
 
 open class TimedLocalAuthenticator: NSObject, LocalAuthenticatorProtocol, CombineObserving {
-    public var cancellableMap = [AnyKeyPath : AnyCancellable]()
-    
+    public var cancellableMap = [AnyKeyPath: AnyCancellable]()
+
     public var paused: Bool = false {
         didSet {
             if paused {

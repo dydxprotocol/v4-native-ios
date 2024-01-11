@@ -72,7 +72,7 @@ import Utilities
         }
         return nil
     }
-    
+
     public func customized() -> Bool {
         return false
     }

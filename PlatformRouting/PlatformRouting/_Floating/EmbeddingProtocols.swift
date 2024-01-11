@@ -47,7 +47,7 @@ extension UINavigationController: FloatedDelegate {
     public func floatingChanged() {
         (topViewController as? FloatedDelegate)?.floatingChanged()
     }
-    
+
     public func shouldPan(currentState: FloatingPanelState, velocity: CGPoint) -> Bool {
         true
     }

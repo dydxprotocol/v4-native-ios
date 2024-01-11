@@ -30,7 +30,7 @@ public class RGBA: NSObject {
         self.blue = CGFloat(blue)/ChannelDivider
         self.alpha = CGFloat(alpha)/ChannelDivider
     }
-    
+
     public convenience init(uiColor: UIColor) {
         self.init(red: 0, green: 0, blue: 0, alpha: 0)
         uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)

@@ -42,7 +42,7 @@ open class JsonDocumentFileCaching: NSObject, JsonCachingProtocol {
         let object = read(path: path)
         completion(object, nil)
     }
-    
+
     open func read(path: String) -> Any? {
         if let file = file(path: path) {
             var object = JsonLoader.load(file: file)

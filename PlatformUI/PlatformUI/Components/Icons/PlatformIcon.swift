@@ -16,10 +16,10 @@ public class PlatformIconViewModel: PlatformViewModel {
         case uiImage(image: UIImage)
         case any(viewModel: PlatformViewModel)
     }
-    
+
     public enum IconClip {
         case noClip
-        
+
         case circle(background: ThemeColor.SemanticColor,
                     spacing: CGFloat,
                     borderColor: ThemeColor.SemanticColor? = nil)
@@ -28,23 +28,23 @@ public class PlatformIconViewModel: PlatformViewModel {
             .circle(background: .transparent, spacing: 0)
         }
     }
-    
+
     @Published public var type: IconType
     @Published public var clip: IconClip
     @Published public var size: CGSize
     @Published public var templateColor: ThemeColor.SemanticColor?
-    
+
     public init(type: IconType, clip: IconClip = .noClip, size: CGSize = CGSize(width: 32, height: 32), templateColor: ThemeColor.SemanticColor? = nil) {
         self.type = type
         self.clip = clip
         self.size = size
         self.templateColor = templateColor
     }
-  
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            
+
             let view = Group {
                 switch self.type {
                 case .system(let name):
@@ -67,7 +67,7 @@ public class PlatformIconViewModel: PlatformViewModel {
                         .templateColor(self.templateColor)
                         .scaledToFit()
                 case .uiImage(let image):
-                    if let cgImage = image.cgImage  {
+                    if let cgImage = image.cgImage {
                         Image(decorative: cgImage, scale: 1)
                             .resizable()
                             .templateColor(self.templateColor)
@@ -121,47 +121,47 @@ public class PlatformIconViewModel: PlatformViewModel {
 #if DEBUG
 struct PlatformIcon_Previews: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings()
-    
+
     static var imageView: some View {
        Image(systemName: "heart.fill")
                .resizable()
                .scaledToFit()
                .frame(width: 32, height: 32)
     }
-    
+
     static var previews: some View {
         Group {
             PlatformIconViewModel(type: .system(name: "heart.fill"))
                 .createView()
                .previewLayout(.sizeThatFits)
-            
+
             PlatformIconViewModel(type: .system(name: "heart.fill"), size: CGSize(width: 64, height: 64))
                 .createView()
                .previewLayout(.sizeThatFits)
-            
+
             PlatformIconViewModel(type: .system(name: "heart.fill"), templateColor: .colorYellow)
                 .createView()
                .previewLayout(.sizeThatFits)
-            
+
             let url = URL(string: "https://s3.amazonaws.com/dydx.exchange/logos/walletconnect/lg/9d373b43ad4d2cf190fb1a774ec964a1addf406d6fd24af94ab7596e58c291b2.jpeg")
 
             PlatformIconViewModel(type: .url(url: url))
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
+
             PlatformIconViewModel(type: .url(url: url), clip: .defaultCircle)
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
+
             PlatformIconViewModel(type: .system(name: "heart.fill"), clip: .circle(background: .layer0, spacing: 10))
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
+
             let uiImage = UIImage(named: "heart.fill")
             PlatformIconViewModel(type: .uiImage(image: uiImage ?? UIImage()))
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
+
         }
         .environmentObject(themeSettings)
    }

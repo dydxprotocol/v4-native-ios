@@ -30,7 +30,7 @@ open class AmplitudeTracking: TransformerTracker {
             Console.shared.log("Amplitude: user properties were set to: \((userInfo ?? [:]).description)")
         }
     }
-    
+
     override open func log(event: String, data: [String: Any]?, revenue: NSNumber?) {
         if !excluded {
             var data = data

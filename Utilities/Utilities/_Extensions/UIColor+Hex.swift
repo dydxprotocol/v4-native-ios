@@ -45,7 +45,7 @@ extension UIColor {
            }
            self.init(red: red, green: green, blue: blue, alpha: alpha)
        }
-    
+
     static func colorComponent(from string: String!, start: Int, length: Int) -> CGFloat {
             let substring = (string as NSString)
                 .substring(with: NSRange(location: start, length: length))

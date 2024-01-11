@@ -53,7 +53,7 @@ public extension NSObjectProtocol {
 
 public extension AnyTransition {
     /// Wraps an `AnyTransition` that can be extended to provide backport functionality.
-    static var backport: Backport<AnyTransition>{
+    static var backport: Backport<AnyTransition> {
         Backport(.identity)
     }
 }

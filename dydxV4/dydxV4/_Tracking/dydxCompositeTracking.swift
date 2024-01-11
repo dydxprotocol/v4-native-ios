@@ -25,7 +25,7 @@ extension TrackingProtocol {
     fileprivate func set(userId: String?) {
         self.set(userProperty: .walletAddress, toValue: userId)
     }
-    
+
     func set(userProperty: UserProperty, toValue value: String?) {
         self.setUserInfo(key: userProperty.rawValue, value: value)
     }
@@ -36,13 +36,13 @@ public class dydxCompositeTracking: CompositeTracking {
     private var onboardingEvents: DictionaryEntity?
 
     private var subscriptions = Set<AnyCancellable>()
-    
+
     override public init() {
         super.init()
 
         setUpCurrentWalletObserver()
         setUpCurrentEnvironmentObserver()
-        
+
         if let destinations = (JsonLoader.load(bundle: Bundle.main, fileName: "dydxevents.json") ?? JsonLoader.load(bundles: Bundle.particles, fileName: "dydxevents.json")) as? [String: Any] {
             viewEvents = DictionaryEntity()
             viewEvents?.parse(dictionary: destinations)
@@ -52,21 +52,21 @@ public class dydxCompositeTracking: CompositeTracking {
             onboardingEvents?.parse(dictionary: destinations)
         }
     }
-    
+
     private func setUpCurrentWalletObserver() {
         AbacusStateManager.shared.state.currentWallet
             .sink { [weak self] walletState in
                 guard let self = self else { return }
                 let wallet = CarteraConfig.shared.wallets.first { $0.id == walletState?.walletId }
                 self.set(userId: walletState?.ethereumAddress ?? walletState?.cosmoAddress)
-                //TODO: might have to change this to match https://www.notion.so/dydx/V4-Web-Analytics-Events-d12c9dd791ee4c5d89e48588bb3ef702?pvs=4, but first this linear task needs to finish https://linear.app/dydx/issue/TRCL-2473/create-wallettype-user-property-field-value-in-cartera-wallets-json
+                // TODO: might have to change this to match https://www.notion.so/dydx/V4-Web-Analytics-Events-d12c9dd791ee4c5d89e48588bb3ef702?pvs=4, but first this linear task needs to finish https://linear.app/dydx/issue/TRCL-2473/create-wallettype-user-property-field-value-in-cartera-wallets-json
                 self.set(userProperty: .walletType, toValue: wallet?.metadata?.shortName?.uppercased() )
                 self.set(userProperty: .dydxAddress, toValue: walletState?.cosmoAddress)
                 self.set(userProperty: .subaccountNumber, toValue: walletState?.subaccountNumber)
             }
             .store(in: &subscriptions)
     }
-    
+
     private func setUpCurrentEnvironmentObserver() {
         AbacusStateManager.shared.$currentEnvironment
             .sink { [weak self] environment in
@@ -75,9 +75,6 @@ public class dydxCompositeTracking: CompositeTracking {
             }
             .store(in: &subscriptions)
     }
-
-
-    
 
     override public func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?) {
         if let transformed = transform(events: viewEvents, path: path), let event = parser.asString(transformed["event"]) {

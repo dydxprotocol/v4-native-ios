@@ -40,4 +40,3 @@ struct Divider_Previews: PreviewProvider {
     }
 }
 #endif
-

@@ -122,7 +122,7 @@ import Utilities
 
         case "leverage":
             return leverageFormatter
-            
+
         case "amount":
             return amountFormatter
 
@@ -171,7 +171,7 @@ import Utilities
 
     open func reallyUpdateList() {
     }
-    
+
     open func add(to: inout [ObjectLineInteractor], key: String) {
         if let field = fields?[key] {
             to.append(field)

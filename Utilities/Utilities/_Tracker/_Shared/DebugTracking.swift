@@ -24,7 +24,7 @@ public class DebugTracking: NSObject & TrackingProtocol {
             }
         }
     }
-    
+
     public func leave(_ path: String?) {
         if let path = path {
             if excluded {

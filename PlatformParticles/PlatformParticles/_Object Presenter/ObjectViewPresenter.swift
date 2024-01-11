@@ -11,7 +11,7 @@ import Utilities
 import Combine
 
 open class ObjectViewPresenter: ObjectPresenter, HighlightableProtocol {
-    
+
     @IBOutlet open var view: UIView?
     @IBInspectable public var automaticHighlight: Bool = false
 

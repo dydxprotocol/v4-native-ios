@@ -20,7 +20,7 @@ import ParticlesKit
             didSetTitle(oldValue: oldValue)
         }
     }
-    
+
     @objc open dynamic var formatter: ValueFormatterProtocol? {
         didSet {
             didSetFormatter(oldValue: oldValue)
@@ -40,7 +40,7 @@ import ParticlesKit
     open func didSetTitle(oldValue: String?) {
         titleLabel?.text = title
     }
-    
+
     open func didSetFormatter(oldValue: ValueFormatterProtocol?) {
     }
 }

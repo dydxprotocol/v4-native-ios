@@ -22,7 +22,7 @@ import Utilities
     }
 
     public var size: CGSize?
-    
+
     @IBInspectable public var radius: CGFloat = 10.0
     @IBInspectable public var lineWidth: CGFloat = 2.0
     @IBInspectable public var innerTrackColor: UIColor? = nil {
@@ -33,7 +33,7 @@ import Utilities
         }
     }
 
-    @IBInspectable public var outerTrackColor: UIColor? = nil {
+    @IBInspectable public var outerTrackColor: UIColor? {
         didSet {
             if outerTrackColor !== oldValue {
                 progressLayer?.outerTrackShapeLayer.strokeColor = outerTrackColor?.cgColor
@@ -59,7 +59,7 @@ import Utilities
             redrawSelf()
         }
     }
-    
+
     public func redraw() {
         drawingDebouncer.debounce()?.run({ [weak self] in
             self?.redrawSelf()

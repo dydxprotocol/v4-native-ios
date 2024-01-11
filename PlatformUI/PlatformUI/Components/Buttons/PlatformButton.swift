@@ -21,8 +21,8 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
     @Published public var content: Content
     @Published public var type: PlatformButtonType
     @Published public var state: PlatformButtonState
-    
     public init(content: Content, type: PlatformButtonType = .defaultType, state: PlatformButtonState = .primary, action: @escaping () -> ()) {
+
         self.action = action
         self.content = content
         self.type = type
@@ -52,7 +52,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         .frame(maxWidth: .infinity)
                         .themeStyle(styleKey: self.buttonStyleKey, parentStyle: style)
                         .cornerRadius(8)
-                        
+
                         let borderWidth: CGFloat = 1
                         let cornerRadius: CGFloat = 8
                         switch self.state {
@@ -68,7 +68,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                             button
                                 .border(borderWidth: borderWidth, cornerRadius: cornerRadius, borderColor: ThemeColor.SemanticColor.layer6.color)
                         }
-                      
+
                     case .small:
                         Button(action: self.action) {
                                 self.content
@@ -79,14 +79,14 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         .padding(9)
                         .themeStyle(styleKey: self.buttonStyleKey, parentStyle: style)
                         .cornerRadius(6)
-                        
+
                     case .iconType:
                         Button(action: self.action) {
                             self.content.createView(parentStyle: style, styleKey: nil)
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         .disabled(disabled)
-                       
+
                     case .pill:
                         Button(action: self.action) {
                             self.content.createView(parentStyle: style, styleKey: nil)
@@ -102,7 +102,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
             )
         }
     }
-    
+
     private var buttonStyleKey: String {
         switch state {
         case .primary:
@@ -164,9 +164,8 @@ struct PlatformButton_Previews: PreviewProvider {
                                     type: .small) {}
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
+
         }
     }
 }
 #endif
-

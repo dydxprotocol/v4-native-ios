@@ -81,7 +81,7 @@ import Foundation
         }
         return nil
     }
-    
+
     @objc open func asNumbers(_ data: Any?) -> [NSNumber]? {
         if let numbers = data as? [NSNumber] {
             return numbers

@@ -114,8 +114,7 @@ extension BigUInt {
             if w1 != 0 {
                 storage.append(w0)
                 storage.append(w1)
-            }
-            else if w0 != 0 {
+            } else if w0 != 0 {
                 storage.append(w0)
             }
         case let .slice(from: start, to: end):
@@ -180,7 +179,7 @@ extension BigUInt {
 }
 
 extension BigUInt {
-    //MARK: Collection-like members
+    // MARK: Collection-like members
 
     /// The number of digits in this integer, excluding leading zero digits.
     var count: Int {
@@ -261,14 +260,11 @@ extension BigUInt {
             let bounds = bounds.clamped(to: 0 ..< 2)
             if bounds == 0 ..< 2 {
                 return BigUInt(low: w0, high: w1)
-            }
-            else if bounds == 0 ..< 1 {
+            } else if bounds == 0 ..< 1 {
                 return BigUInt(word: w0)
-            }
-            else if bounds == 1 ..< 2 {
+            } else if bounds == 1 ..< 2 {
                 return BigUInt(word: w1)
-            }
-            else {
+            } else {
                 return BigUInt()
             }
         case let .slice(from: start, to: end):
@@ -293,22 +289,20 @@ extension BigUInt {
         switch kind {
         case let .inline(_, w1) where amount == 1:
             kind = .inline(w1, 0)
-        case .inline(_, _):
+        case .inline:
             kind = .inline(0, 0)
         case let .slice(from: start, to: end):
             let s = start + amount
             if s >= end {
                 kind = .inline(0, 0)
-            }
-            else {
+            } else {
                 kind = .slice(from: s, to: end)
                 normalize()
             }
         case .array:
             if amount >= storage.count {
                 storage.removeAll(keepingCapacity: true)
-            }
-            else {
+            } else {
                 storage.removeFirst(amount)
             }
         }
@@ -344,8 +338,8 @@ extension BigUInt {
 }
 
 extension BigUInt {
-    //MARK: Low and High
-    
+    // MARK: Low and High
+
     /// Split this integer into a high-order and a low-order part.
     ///
     /// - Requires: count > 1
@@ -383,4 +377,3 @@ extension BigUInt {
         return self.extract(middleIndex ..< count)
     }
 }
-

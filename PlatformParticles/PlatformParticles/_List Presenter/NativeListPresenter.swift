@@ -49,7 +49,7 @@ open class NativeListPresenter: ListPresenter {
             didSetBrowsingListInteractor(oldValue: oldValue)
         }
     }
-    
+
     @objc public dynamic var isReady: Bool = true {
         didSet {
             didSetIsReady(oldValue: oldValue)

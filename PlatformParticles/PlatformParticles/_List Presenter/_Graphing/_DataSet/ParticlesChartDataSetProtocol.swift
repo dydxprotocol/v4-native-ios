@@ -78,7 +78,7 @@ public extension ParticlesChartDataSetProtocol {
         var entries: [ChartDataEntry]?
 
         syncing = true
-        syncDebouncer.debounce()?.run(backgrounds: [{ [weak self] in
+        syncDebouncer.debounce()?.run(backgrounds: [ { [weak self] in
             sorted = self?.sort(list: self?.filter(list: list))
         }, { [weak self] in
             entries = self?.dataEntries(list: sorted, existing: existing)

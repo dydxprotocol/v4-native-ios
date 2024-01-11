@@ -103,13 +103,13 @@ public class TabGroupModel<ItemContent: PlatformViewModeling> : PlatformViewMode
         self.layoutConfig = layoutConfig
         self.selectionAnimation = selectionAnimation
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            
+
             assert(self.items?.count == self.selectedItems?.count)
-            
+
             return AnyView(
                 TabGroupView(model: self, selectionAnimation: self.selectionAnimation, parentStyle: parentStyle, styleKey: styleKey)
             )
@@ -120,7 +120,7 @@ public class TabGroupModel<ItemContent: PlatformViewModeling> : PlatformViewMode
 #if DEBUG
 struct TabGroup_Previews: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
-    
+
     static var previews: some View {
         Group {
             let items = [
@@ -133,7 +133,7 @@ struct TabGroup_Previews: PreviewProvider {
                 Text("item 2").themeColor(foreground: .textTertiary).wrappedViewModel,
                 Text("item 3").themeColor(foreground: .textTertiary).wrappedViewModel
             ]
-            
+
             TabGroupModel(items: items, selectedItems: selected, currentSelection: 1)
                 .createView()
                 .environmentObject(themeSettings)
@@ -142,4 +142,3 @@ struct TabGroup_Previews: PreviewProvider {
     }
 }
 #endif
-

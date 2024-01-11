@@ -12,11 +12,11 @@ import Utilities
 import Combine
 
 public class SimpleLocalNotification: NSObject, LocalNotificationProtocol, CombineObserving {
-    public var cancellableMap = [AnyKeyPath : AnyCancellable]()
-    
+    public var cancellableMap = [AnyKeyPath: AnyCancellable]()
+
     private var appState: AppState? {
         didSet {
-            changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) { [weak self] _, _, _, animated in
+            changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) { [weak self] _, _, _, _ in
                 self?.backgrounded = self?.appState?.background ?? false
             }
         }
@@ -129,8 +129,8 @@ extension SimpleLocalNotification: NotificationBridgeProtocol {
             completionHandler(.noData)
         }
     }
-    
-    public func receivedDeeplink(userInfo: [AnyHashable : Any]) -> URL? {
+
+    public func receivedDeeplink(userInfo: [AnyHashable: Any]) -> URL? {
         if let routing = userInfo["routing"] as? String {
             return RoutingRequest(url: routing).url
         }

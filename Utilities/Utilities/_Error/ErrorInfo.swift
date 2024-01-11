@@ -93,7 +93,7 @@ public extension ErrorInfoProtocol {
 
         process(data: ErrorInfoData(title: title, message: message, type: type, error: error, time: time, actions: actions))
     }
-    
+
     private func trim(message: String) -> String {
         return message.components(separatedBy: "(error=").first?.trim() ?? message
     }

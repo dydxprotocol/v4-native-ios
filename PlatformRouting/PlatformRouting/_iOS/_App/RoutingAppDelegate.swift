@@ -89,14 +89,13 @@ open class RoutingAppDelegate: UIResponder, UIApplicationDelegate {
         #endif
     }
 
-    
     /// Prioritized handling of the deeplink
     /// - Parameter url: the deeplink url to handle
     /// - Returns: true if the custom handling handled the url
     open func customHandle(url: URL) -> Bool {
         return false
     }
-    
+
     open func handleDeeplink() {
         if started {
             if let urlString = shortcut?.type, let url = URL(string: urlString) {
@@ -114,7 +113,7 @@ open class RoutingAppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+
     open func deepLinkHandled(deeplink: URL, successful: Bool) { }
 
     open func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

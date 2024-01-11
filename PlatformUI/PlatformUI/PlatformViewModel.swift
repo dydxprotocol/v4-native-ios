@@ -18,7 +18,7 @@ public protocol PlatformViewModeling: ObservableObject, Identifiable {
 
 open class PlatformViewModel: PlatformViewModeling {
     private let bodyBuilder: ((_ style: ThemeStyle) -> AnyView)?
-    
+
     public init(bodyBuilder: ((_ style: ThemeStyle) -> AnyView)? = nil) {
         self.bodyBuilder = bodyBuilder
     }
@@ -32,8 +32,8 @@ open class PlatformViewModel: PlatformViewModeling {
             }
         }
     }
-    
-    public func updateView(){
+
+    public func updateView() {
         self.objectWillChange.send()
     }
 }
@@ -42,7 +42,7 @@ public struct PlatformView: View, PlatformUIViewProtocol {
     public static let nilView: Text? = nil
     public static let nilViewModel = PlatformViewModel() { _ in AnyView(nilView) }
     public static let emptyView = Text("")
-    
+
     private var bodyBuilder: ((_ style: ThemeStyle) -> AnyView)?
 
     public init(viewModel: PlatformViewModel = PlatformViewModel(),

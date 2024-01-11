@@ -9,7 +9,7 @@
 import Utilities
 
 @objc open class LocalJsonCacheInteractor: BaseInteractor, LocalCacheProtocol {
-    
+
     @objc open var key: String?
     open var defaultJson: String?
     private var _loader: LoaderProtocol?
@@ -30,7 +30,7 @@ import Utilities
     open var loadingParams: [String: Any]? {
         return nil
     }
-    
+
     private var loadDebouncer = Debouncer()
 
     override public init() {
@@ -53,11 +53,11 @@ import Utilities
             self?.loadSelf()
         }, delay: nil)
     }
-    
+
     open func loadSelf() {
         loader?.load(params: loadingParams, completion: { [weak self] (io: IOProtocol?, object: Any?, loadTime: Date?, error: Error?) in
             if error == nil {
-                self?.receive(io:io, object: object, loadTime: loadTime, error: error)
+                self?.receive(io: io, object: object, loadTime: loadTime, error: error)
             } else {
                 self?.loadDefaults()
             }
@@ -70,7 +70,7 @@ import Utilities
             (entity as? ParsingProtocol)?.parse?(dictionary: defaultPayload)
             receive(io: nil, object: entity, loadTime: nil, error: nil)
         } else {
-           //receive(io: nil, object: nil, loadTime: nil, error: nil)
+           // receive(io: nil, object: nil, loadTime: nil, error: nil)
         }
     }
 

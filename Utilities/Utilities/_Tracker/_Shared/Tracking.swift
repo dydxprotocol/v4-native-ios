@@ -32,7 +32,7 @@ public extension TrackingProtocol {
     func log(event: String, data: [String: Any]?) {
         log(event: event, data: data, revenue: nil)
     }
-    
+
     func setUserInfo(key: String, value: String?) {
         var userInfo = userInfo ?? [String: String?]()
         userInfo[key] = value

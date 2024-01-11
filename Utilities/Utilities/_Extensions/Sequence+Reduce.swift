@@ -20,8 +20,7 @@ extension Sequence {
     ) rethrows -> Result {
         do {
             return try reduce(
-                initialResult,
-                {
+                initialResult, {
                     if conditionPassFor($0, $1) {
                         throw BreakConditionError(result: $0)
                     } else {
@@ -41,8 +40,7 @@ extension Sequence {
     ) rethrows -> Result {
         do {
             return try reduce(
-                initialResult,
-                {
+                initialResult, {
                     let _nextPartialResult = try nextPartialResult($0, $1)
                     if conditionPassFor(_nextPartialResult, $1) {
                         return _nextPartialResult

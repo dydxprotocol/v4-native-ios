@@ -61,18 +61,17 @@ extension MaterialActivityIndicatorView: SpinnerProtocol, CombineObserving {
             }
         }
     }
-    
-    public var cancellableMap: [AnyKeyPath : AnyCancellable] {
+
+    public var cancellableMap: [AnyKeyPath: AnyCancellable] {
         get {
             associatedObject(base: self, key: &SpinnerKey.cancellableMap) {
-                [AnyKeyPath : AnyCancellable]()
+                [AnyKeyPath: AnyCancellable]()
             }
         }
         set {
             retainObject(base: self, key: &SpinnerKey.cancellableMap, value: newValue)
         }
     }
-  
 
     public var spinning: Bool {
         get {

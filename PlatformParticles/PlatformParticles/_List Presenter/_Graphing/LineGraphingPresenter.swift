@@ -29,7 +29,7 @@ open class LineGraphingPresenter: GraphingPresenter {
 
     override open func setupChart(chartView: ChartViewBase?) {
         super.setupChart(chartView: chartView)
-        
+
         lineChartView?.doubleTapToZoomEnabled = doubleTapToZoomEnabled
         lineChartView?.autoScaleMinMaxEnabled = true
         lineChartView?.highlightPerDragEnabled = true

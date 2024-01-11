@@ -14,7 +14,7 @@ public typealias SVGImageFunction = (_ image: UIImage?, _ error: Error?) -> Void
     public static var shared = SVGCache()
 
     var cache: [String: UIImage] = [:]
-    
+
     public func image(url: URL?, completion: @escaping SVGImageFunction) {
         if let url = url {
             let urlString = url.absoluteString

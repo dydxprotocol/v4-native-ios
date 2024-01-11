@@ -33,7 +33,7 @@ import Foundation
         }
         return urlComponents.url
     }
-    
+
     /// use this initializer to piecewise create a routing request
     public init(originalUrl: String? = nil, scheme: String? = nil, host: String? = nil, path: String, params: [String: Any]? = nil) {
         self.originalUrl = originalUrl
@@ -43,7 +43,7 @@ import Foundation
         self.params = params
         super.init()
     }
-    
+
     /// use this initializer to initialize a router request given a url
     public init(url: String?) {
         originalUrl = url

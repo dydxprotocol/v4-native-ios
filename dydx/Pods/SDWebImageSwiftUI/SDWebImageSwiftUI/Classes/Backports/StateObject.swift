@@ -146,6 +146,5 @@ public extension Backport where Wrapped: ObservableObject {
             }
         }
     }
-    
-}
 
+}

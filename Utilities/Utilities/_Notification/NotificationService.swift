@@ -10,11 +10,11 @@ import Foundation
 
 public class FirebaseNotificationConfiguration: NSObject {
     public let subscribedTopics: Set<String>
-    
+
     public init(subscribedTopics: Set<String> = []) {
         self.subscribedTopics = subscribedTopics
     }
-    
+
     public override func isEqual(_ object: Any?) -> Bool {
         let other = object as? FirebaseNotificationConfiguration
         return subscribedTopics == other?.subscribedTopics
@@ -23,11 +23,11 @@ public class FirebaseNotificationConfiguration: NSObject {
 
 public class NotificationConfiguration: NSObject {
     public let firebase: FirebaseNotificationConfiguration?
-    
+
     public init(firebase: FirebaseNotificationConfiguration?) {
         self.firebase = firebase
     }
-    
+
     public override func isEqual(_ object: Any?) -> Bool {
         let other = object as? NotificationConfiguration
         return firebase == other?.firebase
@@ -44,7 +44,7 @@ public class NotificationConfiguration: NSObject {
     @objc var configuration: NotificationConfiguration? { get set }
     @objc var permission: EPrivacyPermission { get set }
     @objc var delegate: NotificationHandlerDelegate? { get set }
-    
+
     func request()
     func present(message: [AnyHashable: Any])
     func receive(message: [AnyHashable: Any]) -> Bool
@@ -59,9 +59,9 @@ public class NotificationService: NSObject {
 }
 
 @objc open class NotificationHandler: NSObject, NotificationHandlerProtocol {
-  
+
     public var delegate: NotificationHandlerDelegate?
-    
+
     @objc open dynamic var authorization: NotificationPermission? {
         didSet {
             changeObservation(from: oldValue, to: authorization, keyPath: #keyPath(PrivacyPermission.authorization)) { [weak self] _, _, _, _ in
@@ -73,7 +73,7 @@ public class NotificationService: NSObject {
             }
         }
     }
-    
+
     @objc open dynamic var configuration: NotificationConfiguration? {
         didSet {
             didSetConfiguration(oldValue: oldValue)
@@ -112,7 +112,7 @@ public class NotificationService: NSObject {
     open func receive(message: [AnyHashable: Any]) -> Bool {
         return false
     }
-    
+
     open func didSetConfiguration(oldValue: NotificationConfiguration?) {
     }
 }

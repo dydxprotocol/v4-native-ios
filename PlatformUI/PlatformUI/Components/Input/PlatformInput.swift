@@ -24,7 +24,7 @@ private struct PlatformInputView: View {
         self.parentStyle = parentStyle
         self.styleKey = styleKey
     }
-    
+
     var body: some View {
         return HStack(alignment: .center, spacing: 4) {
             VStack(alignment: .leading, spacing: 4) {
@@ -48,7 +48,7 @@ private struct PlatformInputView: View {
             isFocused = model.focusedOnAppear
         }
     }
-    
+
     private var fontType: ThemeFont.FontType {
         switch model.keyboardType {
         case .numberPad, .numbersAndPunctuation, .decimalPad:
@@ -57,7 +57,7 @@ private struct PlatformInputView: View {
             return .text
         }
     }
-    
+
     private var textField: some View {
         TextField("", text: model.value, onEditingChanged: { editingChanged in
             isFocused = editingChanged
@@ -70,7 +70,7 @@ private struct PlatformInputView: View {
         .themeColor(foreground: .textPrimary)
         .themeFont(fontType: fontType, fontSize: .large)
     }
-    
+
     private var placeholder: some View {
         Text(model.placeHolder)
             .themeColor(foreground: .textTertiary)
@@ -79,7 +79,7 @@ private struct PlatformInputView: View {
             .minimumScaleFactor(0.5)
             .truncationMode(model.truncateMode)
     }
-    
+
     private var header: Text? {
         guard let headerText = model.label else { return nil }
         return Text(headerText)
@@ -99,7 +99,7 @@ public class PlatformInputModel: PlatformViewModel {
     @Published public var onEditingChanged: ((Bool) -> Void)?
     @Published public var truncateMode: Text.TruncationMode = .tail
     @Published public var focusedOnAppear: Bool = false
-    
+
     public init(label: String? = nil,
                 value: Binding<String>,
                 valueAccessory: AnyView? = nil,
@@ -153,20 +153,20 @@ open class PlatformValueInputViewModel: PlatformViewModel {
         self.valueAccessoryView = valueAccessoryView
         self.onEdited = onEdited
     }
-    
+
     open func valueChanged(value: String?) {
         onEdited?(value)
     }
-    
+
     open var header: PlatformViewModel {
         if let label = label, label.length > 0 {
             return Text(label)
                         .themeColor(foreground: .textTertiary)
                         .themeFont(fontSize: .smaller)
                         .wrappedViewModel
-    
+
         }
-        
+
         return PlatformView.nilViewModel
     }
 }
@@ -176,7 +176,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
         case `default`
         case decimalDigits
         case wholeNumber
-        
+
         fileprivate var keyboardType: UIKeyboardType {
             switch self {
             case .default: return .default
@@ -184,7 +184,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
             case .wholeNumber: return .numberPad
             }
         }
-        
+
         fileprivate var sanitize: (String) -> String? {
             switch self {
             case .default: return { $0 }
@@ -193,11 +193,11 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
             }
         }
     }
-    
+
     private var debouncer = Debouncer()
 
     private var inputType: InputType
-    
+
     override open var value: String? {
         didSet {
             if !focused {
@@ -206,14 +206,14 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
             }
         }
     }
-    
+
     open override func valueChanged(value: String?) {
         let handler = debouncer.debounce()
         handler?.run({ [weak self] in
             self?.onEdited?(value)
         }, delay: 0.25)
     }
-    
+
     @Published private var input: String = ""
 
     public lazy var inputBinding = Binding(
@@ -248,7 +248,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     }
 
     public var contentType: UITextContentType?
-    
+
     private let truncateMode: Text.TruncationMode
 
     public init(label: String? = nil,
@@ -269,9 +269,9 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     }
 
     override open func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            
+
             let model = PlatformInputModel(
                 label: self.label,
                 value: self.inputBinding,
@@ -284,7 +284,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 },
                 truncateMode: self.truncateMode
             )
-            
+
             return AnyView( PlatformInputView(model: model,
                                               parentStyle: parentStyle,
                                               styleKey: styleKey) )
@@ -304,16 +304,16 @@ public struct InputSelectOption {
 
 open class PlatformOptionsInputViewModel: PlatformValueInputViewModel {
     @Published public var options: [InputSelectOption]? // options of values to select from, set at update
-    
+
     public var optionTitles: [String]? {
         options?.compactMap { $0.string }
     }
-    
+
     override open var value: String? {
         didSet {
             if value != oldValue {
                 index = valueIndex()
-                //onEdited?(value)
+                // onEdited?(value)
             }
         }
     }
@@ -373,7 +373,7 @@ open class PlatformButtonOptionsInputViewModel: PlatformOptionsInputViewModel {
             onEdited?(value)
         }
     }
-    
+
     open func unselected(item: String) -> PlatformViewModel {
         Text(item)
             .themeFont(fontType: .bold, fontSize: .largest)
@@ -393,9 +393,9 @@ open class PlatformPopoverOptionsInputViewModel: PlatformOptionsInputViewModel {
         originAnchor: .topRight,
         popoverAnchor: .bottomRight
     )
-    
+
     @Published private var present: Bool = false
-    
+
     private lazy var presentBinding = Binding(
         get: { [weak self] in
             self?.present ?? false
@@ -404,7 +404,7 @@ open class PlatformPopoverOptionsInputViewModel: PlatformOptionsInputViewModel {
             self?.present = $0
         }
     )
-    
+
     override open func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
@@ -442,7 +442,7 @@ open class PlatformPopoverOptionsInputViewModel: PlatformOptionsInputViewModel {
                     attrs.onTapOutside = {
                         self.present = false
                     }
-                    
+
                 }, view: {
                     VStack(alignment: .leading, spacing: 0) {
                         ForEach(Array(titles.enumerated()), id: \.element) { index, title in
@@ -486,7 +486,7 @@ open class PlatformPopoverOptionsInputViewModel: PlatformOptionsInputViewModel {
             )
         }
     }
-    
+
     open var selectedItemView: PlatformViewModel {
         let index = index ?? 0
         if let titles = optionTitles, index < titles.count {
@@ -501,26 +501,26 @@ open class PlatformPopoverOptionsInputViewModel: PlatformOptionsInputViewModel {
 }
 
 open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
-    
+
     open var isEnabled: Bool = true
-    
+
     open override var header: PlatformViewModel {
         if let label = label, label.length > 0 {
             return Text(label)
                 .themeColor(foreground: isEnabled ? .textSecondary : .textTertiary)
                         .themeFont(fontSize: .smaller)
                         .wrappedViewModel
-    
+
         }
         return PlatformView.nilViewModel
     }
-    
+
     override open var value: String? {
         didSet {
             inputBinding.update()
         }
     }
-    
+
     public lazy var inputBinding = Binding<Bool> {
         self.value == "true"
     } set: { newValue in
@@ -530,11 +530,11 @@ open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
             self.valueChanged(value: self.value)
         }
     }
-    
+
     override open func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            
+
             return AnyView(
                 HStack(spacing: 0) {
                     self.header.createView(parentStyle: style)

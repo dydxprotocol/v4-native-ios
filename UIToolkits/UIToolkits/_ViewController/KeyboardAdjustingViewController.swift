@@ -13,17 +13,12 @@ open class KeyboardAdjustingViewController: UIViewController, KeyboardAdjustingP
 
     @IBOutlet public var bottomConstraint: NSLayoutConstraint?
     public var keyboardObserver: NotificationToken?
-    
+
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if bottomConstraint != nil {
             registerKeyboardObserver()
         }
-    }
-
-    override open func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-//        keyboardObserver = nil
     }
 
     open func layout(notif: Notification, bottom: CGFloat?) {

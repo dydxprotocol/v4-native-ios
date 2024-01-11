@@ -14,7 +14,7 @@ public class SettingOptionViewModel: PlatformViewModel {
     @Published public var text: String?
     @Published public var isSelected = false
     @Published public var onTapAction: (() -> Void)?
-    
+
     public init() { }
 
     public static var previewValue: SettingOptionViewModel {
@@ -23,7 +23,7 @@ public class SettingOptionViewModel: PlatformViewModel {
         vm.isSelected = true
         return vm
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
@@ -75,4 +75,3 @@ struct SettingOptionView_Previews_Light: PreviewProvider {
     }
 }
 #endif
-

@@ -14,13 +14,13 @@ import Utilities
 import Combine
 
 public class dydxAbacusDataLocalizer: DataLocalizerProtocol, AbacusLocalizerProtocol {
-    
+
     public var languages: [SelectionOption] {
         get {
             (UIImplementations.shared?.localizer as? DynamicLocalizer)?.languages ?? []
         }
     }
-    
+
     public var languagePublisher: AnyPublisher<String?, Never> {
         $language.eraseToAnyPublisher()
     }
@@ -29,7 +29,7 @@ public class dydxAbacusDataLocalizer: DataLocalizerProtocol, AbacusLocalizerProt
     private let _languageTag = "language"
 
     @Published public var language: String? = (UIImplementations.shared?.localizer as? DynamicLocalizer)?.language
-  
+
     public init(keyValueStore: KeyValueStoreProtocol?) {
         self.keyValueStore = keyValueStore
 
@@ -46,7 +46,7 @@ public class dydxAbacusDataLocalizer: DataLocalizerProtocol, AbacusLocalizerProt
             completed(successful.boolValue)
         }
     }
-    
+
     public func setLanguage(language: String, callback: @escaping (KotlinBoolean, ParsingError?) -> Void) {
         if let code = language.components(separatedBy: "-").first {
             (UIImplementations.shared?.localizer as? DynamicLocalizer)?.setLanguage(language: code, callback: { [weak self] successful, error in
@@ -62,7 +62,6 @@ public class dydxAbacusDataLocalizer: DataLocalizerProtocol, AbacusLocalizerProt
             callback(false, nil)
         }
     }
-    
 
     private func json(params: [String: String]?) -> String? {
         if let params = params {
@@ -76,7 +75,7 @@ public class dydxAbacusDataLocalizer: DataLocalizerProtocol, AbacusLocalizerProt
     public func localize(path: String, params: [String: String]?) -> String? {
         return localize(path: path, paramsAsJson: json(params: params))
     }
-    
+
     public func localize(path: String, paramsAsJson: String?) -> String {
         UIImplementations.shared?.localizer?.localize(path: path, paramsAsJson: paramsAsJson) ?? path
     }

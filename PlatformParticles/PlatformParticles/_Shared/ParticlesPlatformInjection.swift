@@ -20,10 +20,10 @@ open class ParticlesPlatformInjection: ParticlesInjection {
             completion()
         }
     }
-    
+
     open func injectUI() {
         Console.shared.log("injectUI")
-        
+
         HapticFeedback.shared = MotionHapticFeedback()
         SDImageCodersManager.shared.addCoder(SDImageSVGKCoder.shared)
         RoutingTabBarController.parserOverwrite = Parser.featureFlagged

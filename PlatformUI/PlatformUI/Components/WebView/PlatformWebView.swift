@@ -22,23 +22,23 @@ public class PlatformWebViewModel: PlatformViewModel {
             webViewDelegate.pageLoaded = pageLoaded
         }
     }
-    
+
     public var canGoBack: Bool {
         webView.canGoBack
     }
-    
+
     public var canGoForward: Bool {
         webView.canGoForward
     }
-    
-    public func goBack(){
+
+    public func goBack() {
         webView.goBack()
     }
 
-    public func goForward(){
+    public func goForward() {
         webView.goForward()
     }
-    
+
     private let webView = WKWebView()
     private let webViewDelegate = WebViewDelegate()
 
@@ -72,19 +72,19 @@ public class PlatformWebViewModel: PlatformViewModel {
 
 private class WebViewDelegate: NSObject, WKNavigationDelegate {
     var url: URL?
-    
     init(pageLoaded: (() -> ())? = nil) {
+
         self.pageLoaded = pageLoaded
     }
-    
     var pageLoaded: (() -> ())?
-    
+
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         DispatchQueue.main.async { [weak self] in
             self?.pageLoaded?()
         }
     }
-    
+
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.request.mainDocumentURL?.path == url?.path {
             decisionHandler(.allow)
@@ -95,9 +95,9 @@ private class WebViewDelegate: NSObject, WKNavigationDelegate {
             decisionHandler(.cancel)
         }
     }
-    
+
      // Observe URL change
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if let key = change?[NSKeyValueChangeKey.newKey] {
            // print("observeValue \(key)") // url value
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
@@ -115,10 +115,10 @@ private struct WebView: UIViewRepresentable {
         self.webView = webView
         self.request = request
     }
-    
+
     func makeUIView(context: Context) -> WKWebView {
         let webView = webView ?? WKWebView()
-        webView.isOpaque = false;
+        webView.isOpaque = false
         webView.backgroundColor = .clear
         return webView
     }
@@ -142,4 +142,3 @@ struct PlatformWebView_Previews: PreviewProvider {
     }
 }
 #endif
-

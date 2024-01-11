@@ -53,7 +53,7 @@ import UIToolkits
             }
         }
     }
-    
+
     @IBInspectable open var stacked: Bool = false {
         didSet {
             if stacked != oldValue {
@@ -67,7 +67,7 @@ import UIToolkits
             updateFlat()
         }
     }
-    
+
     @IBOutlet open var stackedConstraints: [NSLayoutConstraint]? {
         didSet {
             updateFlat()

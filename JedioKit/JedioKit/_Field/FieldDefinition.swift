@@ -135,13 +135,13 @@ public enum FieldValidateType: String {
 
         case "percent":
             return .percent
-            
+
         case "image":
             return .image
-            
+
         case "images":
             return .images
-            
+
         case "signature":
             return .signature
 

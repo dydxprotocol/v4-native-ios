@@ -10,7 +10,7 @@ import Foundation
 
 public struct DebugEnabled {
     public static let key = "debug.enabled"
-    
+
     public static var enabled: Bool {
     #if DEBUG
         true

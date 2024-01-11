@@ -13,12 +13,12 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
         lhs.isSelected == rhs.isSelected &&
         lhs.value == rhs.value
     }
-    
+
     public enum TabItemContent: Equatable {
         case text(String)
         case icon(UIImage)
         case bar(PlatformViewModel)
-        
+
         public static func ==(lhs: TabItemContent, rhs: TabItemContent) -> Bool {
             switch (lhs, rhs) {
             case let (.text(leftText), .text(rightText)):
@@ -81,7 +81,7 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
                 }
                 .frame(maxWidth: .infinity)
                 return AnyView(content)
-                
+
             }
         }
     }

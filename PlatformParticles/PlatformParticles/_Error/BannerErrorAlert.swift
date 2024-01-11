@@ -14,16 +14,16 @@ import Utilities
 import Combine
 
 open class BannerErrorAlert: NSObject, ErrorInfoProtocol, CombineObserving {
-    public var cancellableMap = [AnyKeyPath : AnyCancellable]()
-    
+    public var cancellableMap = [AnyKeyPath: AnyCancellable]()
+
     public var appState: AppState? {
         didSet {
             didSetAppState(oldValue: oldValue)
         }
     }
-    
+
     public var pending: ErrorInfoData?
-    
+
     public func configuration(type: EInfoType?, time: Double?) -> SwiftMessages.Config {
         var config = SwiftMessages.defaultConfig
         config.presentationContext = .window(windowLevel: .statusBar)

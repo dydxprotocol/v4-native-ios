@@ -14,7 +14,7 @@ public enum NumericFilter {
 
 public extension Double {
     func filter(filter: NumericFilter?) -> Double? {
-        if (filter == .notNegative) {
+        if filter == .notNegative {
             if self >= 0.0 {
                 return self
             } else {
@@ -28,7 +28,7 @@ public extension Double {
 
 public extension NSNumber {
     func filter(filter: NumericFilter?) -> NSNumber? {
-        if (filter == .notNegative) {
+        if filter == .notNegative {
             if self.doubleValue >= 0.0 {
                 return self
             } else {

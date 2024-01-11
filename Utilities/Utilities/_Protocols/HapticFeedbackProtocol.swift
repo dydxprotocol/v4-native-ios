@@ -24,7 +24,7 @@ public protocol HapticFeedbackProtocol {
     func prepareImpact(level: ImpactLevel)
     func prepareSelection()
     func prepareNotify(type: NotificationType)
-    
+
     func impact(level: ImpactLevel)
     func selection()
     func notify(type: NotificationType)

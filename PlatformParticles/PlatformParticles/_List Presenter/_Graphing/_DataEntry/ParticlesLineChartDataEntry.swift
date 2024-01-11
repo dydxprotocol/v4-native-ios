@@ -17,7 +17,7 @@ import Utilities
     private var lineData: LinearGraphingObjectProtocol? {
         return model as? LinearGraphingObjectProtocol
     }
-    
+
     override open func sync() {
         if let graphing = model as? LinearGraphingObjectProtocol {
             if let value = graphing.graphingX?.doubleValue {

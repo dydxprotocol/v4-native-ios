@@ -24,9 +24,8 @@ public func associatedObject<T>(base: AnyObject, key: UnsafeRawPointer, initiali
     if let associated = objc_getAssociatedObject(base, key) as? T {
         return associated
     }
-            
+
     let associated = initialiser()
     objc_setAssociatedObject(base, key, associated, .OBJC_ASSOCIATION_RETAIN)
     return associated
 }
-

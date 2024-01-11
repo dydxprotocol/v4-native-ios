@@ -21,7 +21,7 @@ open class GraphingListPresenter: NativeListPresenter {
             didSetColor(oldValue: oldValue)
         }
     }
-    
+
     public var allowColorOverride = true
 
     @IBInspectable public dynamic var showLabel: Bool = false
@@ -85,7 +85,7 @@ open class GraphingListPresenter: NativeListPresenter {
     open func graphingDataSet() -> ParticlesChartDataSetProtocol? {
         return nil
     }
-    
+
     open func didSetColor(oldValue: UIColor?) {
         if let color = color, allowColorOverride {
             graphingSet?.colors = [color]
@@ -147,7 +147,7 @@ open class GraphingListPresenter: NativeListPresenter {
         }
         super.update()
     }
-    
+
 }
 
 @objc public class BarGraphingListPresenter: GraphingListPresenter {
@@ -173,7 +173,7 @@ open class GraphingListPresenter: NativeListPresenter {
 
 @objc public class CandleStickGraphingListPresenter: GraphingListPresenter {
     @IBInspectable var lineWidth: CGFloat = 1.0
-    
+
     @IBInspectable public var increasingColor: UIColor?
     @IBInspectable public var decreasingColor: UIColor?
     @IBInspectable public var neutralColor: UIColor?

@@ -16,11 +16,11 @@ open class FieldInputBaseViewModel: PlatformViewModel {
     @Published public var text: String?
     @Published public var image: String?
     @Published public var valueChanged: ((Any?) -> Void)?
-    
+
     @Published public var input: FieldInputProtocol?
-    
+
     public init() {}
-    
+
     public init(input: FieldInputProtocol, valueChanged: ((Any?) -> Void)?) {
         self.input = input
         self.valueChanged = valueChanged

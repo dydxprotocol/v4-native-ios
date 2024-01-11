@@ -11,7 +11,7 @@ import Utilities
 
 open class JsonAppGroupFileCaching: NSObject, JsonCachingProtocol {
     @objc public dynamic var isLoading: Bool = false
-    
+
     public var priority: Int = 0
 
     public var debouncer: Debouncer = Debouncer()

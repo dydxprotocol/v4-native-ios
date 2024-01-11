@@ -8,11 +8,11 @@
 
 import Foundation
 
-public typealias ForegroundTask = ()->Void
+public typealias ForegroundTask = () -> Void
 
 public final class AppState: NSObject, SingletonProtocol {
     public static var shared: AppState = AppState()
-    
+
     @objc public private(set) dynamic var background: Bool = false {
         didSet {
             didSetBackground(oldValue: oldValue)
@@ -21,7 +21,7 @@ public final class AppState: NSObject, SingletonProtocol {
 
     private var foregroundToken: NotificationToken?
     private var backgroundToken: NotificationToken?
-    
+
     private var foregroundTasks: [ForegroundTask] = []
 
     override public init() {
@@ -33,7 +33,7 @@ public final class AppState: NSObject, SingletonProtocol {
             self?.background = false
         })
     }
-    
+
     public func runForegrounding(task: @escaping ForegroundTask) {
         if background {
             foregroundTasks.append(task)
@@ -41,7 +41,7 @@ public final class AppState: NSObject, SingletonProtocol {
             task()
         }
     }
-    
+
     private func didSetBackground(oldValue: Bool) {
         if background != oldValue {
             if !background {

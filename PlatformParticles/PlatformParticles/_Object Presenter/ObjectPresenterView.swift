@@ -50,7 +50,7 @@ open class ObjectPresenterView: UIView, ObjectPresenterProtocol, SelectableProto
             }
         }
     }
-    
+
     public var isFirst: Bool = false {
         didSet {
             presenter?.isFirst = isFirst

@@ -33,7 +33,7 @@ struct SwipeActionsModifier: ViewModifier {
     @State var cellSwipeAccessoryPosition: CellSwipeAccessoryPosition
     let leftCellSwipeAccessory: CellSwipeAccessory?
     let rightCellSwipeAccessory: CellSwipeAccessory?
-    
+
     @State var shouldResetStatusOnAppear = true
 
     @State var accessoryVisibility: CellSwipeAccessoryVisibility = .showNone
@@ -114,8 +114,7 @@ struct SwipeActionsModifier: ViewModifier {
         
         if position == .left {
             return -width + offset
-        }
-        else {
+        } else {
             return width + offset
         }
 
@@ -134,7 +133,7 @@ struct SwipeActionsModifier: ViewModifier {
         }
         return
     }
-    
+
     func body(content: Content) -> some View {
 
         return ZStack(alignment: .topLeading) {
@@ -226,14 +225,14 @@ struct SwipeActionsModifier: ViewModifier {
     func dismissNotification() {
         NotificationCenter.default.post(name: .cellSwipeAccessoryVisibilityReset, object: nil)
     }
-    
+
     func getGesture() -> _EndedGesture<_ChangedGesture<DragGesture>> {
         return DragGesture(minimumDistance: 0)
         .onChanged { value in
             var dragWidth = value.translation.width
 
             self.shouldResetStatusOnAppear = false
-            
+
             if currentCellID != cellID {
                 currentCellID = cellID
                 NotificationCenter.default.post(Notification(name: .cellSwipeAccessoryVisibilityReset, object: cellID))
@@ -297,7 +296,7 @@ struct SwipeActionsModifier: ViewModifier {
             let dragWidth = value.translation.width
 
             let swipeCommitDistance: CGFloat = 30
-            
+
             switch accessoryVisibility {
             case .showNone:
                 if abs(dragWidth) < swipeCommitDistance {

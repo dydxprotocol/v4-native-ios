@@ -26,9 +26,9 @@ public protocol FullStoryTrackingProtocol {
 
 public final class FullStoryTracking: NSObject, SingletonProtocol, FSDelegate, FullStoryTrackingProtocol {
     public weak var delegate: FullStoryTrackingStatusDelegate?
-    
+
     public static var shared = FullStoryTracking()
-    
+
     public override init() {
         super.init()
         FS.delegate = self
@@ -39,23 +39,23 @@ public final class FullStoryTracking: NSObject, SingletonProtocol, FSDelegate, F
 
         FS.restart()
     }
-    
+
     public func stop() {
         Console.shared.log("FullStoryTracking stop")
-        
+
         FS.shutdown()
     }
-    
+
     public func fullstoryDidStopSession() {
         Console.shared.log("fullstoryDidStopSession")
         delegate?.statusUpdate(.stopped)
     }
-    
+
     public func fullstoryDidStartSession(_ sessionUrl: String) {
         Console.shared.log("fullstoryDidStartSession " +  sessionUrl)
         delegate?.statusUpdate(.started)
     }
-    
+
     public func fullstoryDidTerminateWithError(_ error: Error) {
         Console.shared.log("fullstoryDidTerminateWithError " +  error.localizedDescription)
         delegate?.statusUpdate(.error(error))

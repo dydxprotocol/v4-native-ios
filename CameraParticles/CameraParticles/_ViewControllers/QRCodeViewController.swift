@@ -8,7 +8,7 @@
 
 @objc open class QRCodeViewController: CameraViewController {
     @Published public var qrcode: String?
-    
+
     override open var capture: CameraCapture? {
         didSet {
             changeObservation(from: oldValue, to: qrcodeCapture, keyPath: #keyPath(QRCodeCapture.qrcode)) { [weak self] _, _, _, _ in

@@ -9,18 +9,15 @@
 //  https://github.com/danielgindi/Charts
 //
 
-enum Orientation
-{
+enum Orientation {
     case portrait, landscape
 }
 
-extension CGSize
-{
+extension CGSize {
     var orientation: Orientation { return width > height ? .landscape : .portrait }
 }
 
-extension CGRect
-{
+extension CGRect {
     var orientation: Orientation { size.orientation }
 }
 
@@ -28,43 +25,35 @@ extension CGRect
 #if canImport(UIKit)
 import UIKit
 
-func NSUIGraphicsGetCurrentContext() -> CGContext?
-{
+func NSUIGraphicsGetCurrentContext() -> CGContext? {
     return UIGraphicsGetCurrentContext()
 }
 
-func NSUIGraphicsGetImageFromCurrentImageContext() -> NSUIImage!
-{
+func NSUIGraphicsGetImageFromCurrentImageContext() -> NSUIImage! {
     return UIGraphicsGetImageFromCurrentImageContext()
 }
 
-func NSUIGraphicsPushContext(_ context: CGContext)
-{
+func NSUIGraphicsPushContext(_ context: CGContext) {
     UIGraphicsPushContext(context)
 }
 
-func NSUIGraphicsPopContext()
-{
+func NSUIGraphicsPopContext() {
     UIGraphicsPopContext()
 }
 
-func NSUIGraphicsEndImageContext()
-{
+func NSUIGraphicsEndImageContext() {
     UIGraphicsEndImageContext()
 }
 
-func NSUIImagePNGRepresentation(_ image: NSUIImage) -> Data?
-{
+func NSUIImagePNGRepresentation(_ image: NSUIImage) -> Data? {
     return image.pngData()
 }
 
-func NSUIImageJPEGRepresentation(_ image: NSUIImage, _ quality: CGFloat = 0.8) -> Data?
-{
+func NSUIImageJPEGRepresentation(_ image: NSUIImage, _ quality: CGFloat = 0.8) -> Data? {
     return image.jpegData(compressionQuality: quality)
 }
 
-func NSUIGraphicsBeginImageContextWithOptions(_ size: CGSize, _ opaque: Bool, _ scale: CGFloat)
-{
+func NSUIGraphicsBeginImageContextWithOptions(_ size: CGSize, _ opaque: Bool, _ scale: CGFloat) {
     UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
 }
 #endif
@@ -73,54 +62,46 @@ func NSUIGraphicsBeginImageContextWithOptions(_ size: CGSize, _ opaque: Bool, _ 
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
 
-func NSUIGraphicsGetCurrentContext() -> CGContext?
-{
+func NSUIGraphicsGetCurrentContext() -> CGContext? {
     return NSGraphicsContext.current?.cgContext
 }
 
-func NSUIGraphicsPushContext(_ context: CGContext)
-{
+func NSUIGraphicsPushContext(_ context: CGContext) {
     let cx = NSGraphicsContext(cgContext: context, flipped: true)
     NSGraphicsContext.saveGraphicsState()
     NSGraphicsContext.current = cx
 }
 
-func NSUIGraphicsPopContext()
-{
+func NSUIGraphicsPopContext() {
     NSGraphicsContext.restoreGraphicsState()
 }
 
-func NSUIImagePNGRepresentation(_ image: NSUIImage) -> Data?
-{
+func NSUIImagePNGRepresentation(_ image: NSUIImage) -> Data? {
     image.lockFocus()
-    let rep = NSBitmapImageRep(focusedViewRect: NSMakeRect(0, 0, image.size.width, image.size.height))
+    let rep = NSBitmapImageRep(focusedViewRect: NSRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
     image.unlockFocus()
     return rep?.representation(using: .png, properties: [:])
 }
 
-func NSUIImageJPEGRepresentation(_ image: NSUIImage, _ quality: CGFloat = 0.9) -> Data?
-{
+func NSUIImageJPEGRepresentation(_ image: NSUIImage, _ quality: CGFloat = 0.9) -> Data? {
     image.lockFocus()
-    let rep = NSBitmapImageRep(focusedViewRect: NSMakeRect(0, 0, image.size.width, image.size.height))
+    let rep = NSBitmapImageRep(focusedViewRect: NSRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
     image.unlockFocus()
     return rep?.representation(using: .jpeg, properties: [NSBitmapImageRep.PropertyKey.compressionFactor: quality])
 }
 
 private var imageContextStack: [CGFloat] = []
 
-func NSUIGraphicsBeginImageContextWithOptions(_ size: CGSize, _ opaque: Bool, _ scale: CGFloat)
-{
+func NSUIGraphicsBeginImageContextWithOptions(_ size: CGSize, _ opaque: Bool, _ scale: CGFloat) {
     var scale = scale
-    if scale == 0.0
-    {
+    if scale == 0.0 {
         scale = NSScreen.main?.backingScaleFactor ?? 1.0
     }
 
     let width = Int(size.width * scale)
     let height = Int(size.height * scale)
 
-    if width > 0 && height > 0
-    {
+    if width > 0 && height > 0 {
         imageContextStack.append(scale)
 
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -134,16 +115,13 @@ func NSUIGraphicsBeginImageContextWithOptions(_ size: CGSize, _ opaque: Bool, _ 
     }
 }
 
-func NSUIGraphicsGetImageFromCurrentImageContext() -> NSUIImage?
-{
-    if !imageContextStack.isEmpty
-    {
+func NSUIGraphicsGetImageFromCurrentImageContext() -> NSUIImage? {
+    if !imageContextStack.isEmpty {
         guard let ctx = NSUIGraphicsGetCurrentContext()
             else { return nil }
 
         let scale = imageContextStack.last!
-        if let theCGImage = ctx.makeImage()
-        {
+        if let theCGImage = ctx.makeImage() {
             let size = CGSize(width: CGFloat(ctx.width) / scale, height: CGFloat(ctx.height) / scale)
             let image = NSImage(cgImage: theCGImage, size: size)
             return image
@@ -152,10 +130,8 @@ func NSUIGraphicsGetImageFromCurrentImageContext() -> NSUIImage?
     return nil
 }
 
-func NSUIGraphicsEndImageContext()
-{
-    if imageContextStack.last != nil
-    {
+func NSUIGraphicsEndImageContext() {
+    if imageContextStack.last != nil {
         imageContextStack.removeLast()
         NSUIGraphicsPopContext()
     }

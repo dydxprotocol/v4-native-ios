@@ -195,7 +195,7 @@ open class MappedUIKitRouter: MappedRouter {
             }
         }
     }
-    
+
     private func route(storyboardOrBuilder map: RoutingMap, request: RoutingRequest, presentation: RoutingPresentation?, animated: Bool, completion: RoutingCompletionBlock?) {
         loadViewController(from: map) { [weak self] viewController in
             if let viewController = viewController {
@@ -448,7 +448,7 @@ open class MappedUIKitRouter: MappedRouter {
             return nil
         }
     }
-    
+
     private func loadViewController(from map: RoutingMap, completion: @escaping ((UIViewController?) -> Void)) {
         if let builder = map.builder {
             ClassLoader.load(from: builder, completion: completion)
@@ -460,8 +460,8 @@ open class MappedUIKitRouter: MappedRouter {
             completion(nil)
         }
     }
-    
     private func loadAction(from map: RoutingMap, completion:  @escaping (((NSObject & NavigableProtocol)?) -> Void)) {
+
         if let xib = map.xib {
             let action: (NSObject & NavigableProtocol)? = XibLoader.load(from: xib)
             completion(action)

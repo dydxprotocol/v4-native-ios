@@ -10,7 +10,7 @@ public extension String {
 
         let dataDetector = try? NSRegularExpression(pattern: regex, options: options)
         dataDetector?.enumerateMatches(
-            in: self, options: [], range: NSMakeRange(0, (self as NSString).length),
+            in: self, options: [], range: NSRange(location: 0, length: (self as NSString).length),
             using: { result, _, _ in
                 if let r = result, let range = Range(r.range, in: self) {
                     ranges.append(range)
@@ -34,7 +34,7 @@ public extension String {
 
         let dataDetector = try? NSDataDetector(types: textCheckingTypes.rawValue)
         dataDetector?.enumerateMatches(
-            in: self, options: [], range: NSMakeRange(0, (self as NSString).length),
+            in: self, options: [], range: NSRange(location: 0, length: (self as NSString).length),
             using: { result, _, _ in
                 if let r = result, let range = Range(r.range, in: self) {
                     ranges.append(range)

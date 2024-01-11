@@ -19,11 +19,11 @@ public class PlatformOverlayIconViewModel<MainIcon: PlatformViewModeling, Overla
         self.size = size
         self.offset = offset
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            
+
             return AnyView(
                 Group {
                     ZStack {
@@ -44,14 +44,14 @@ public class PlatformOverlayIconViewModel<MainIcon: PlatformViewModeling, Overla
 #if DEBUG
 struct PlatformOverlayIcon_Previews: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings()
-    
+
     static var imageView: some View {
        Image(systemName: "heart.fill")
                .resizable()
                .scaledToFit()
                .frame(width: 32, height: 32)
     }
-    
+
     static var previews: some View {
         Group {
             let mainIcon = PlatformIconViewModel(type: .system(name: "heart.fill"), size: CGSize(width: 24, height: 24))

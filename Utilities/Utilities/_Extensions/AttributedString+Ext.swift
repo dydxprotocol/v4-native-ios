@@ -16,7 +16,7 @@ extension AttributedString {
             self.foregroundColor = .link
         }
     }
-    
+
     public init(text: String, urlString: String?) {
         self.init(text: text, url: createUrl(string: urlString))
     }

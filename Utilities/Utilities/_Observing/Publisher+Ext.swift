@@ -17,7 +17,7 @@ public extension Publisher {
         // In this case prepended `Optional.some(nil)` will become just `nil` after `combineLatest`.
             .map { (value: $0, ()) }
             .prepend((value: nil, ()))
-        
+
         return map { (value: $0, token: UUID()) }
             .combineLatest(other)
             .removeDuplicates(by: { (old, new) in

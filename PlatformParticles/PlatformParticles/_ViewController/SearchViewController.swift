@@ -78,7 +78,7 @@ open class SearchViewController: ListPresenterViewController {
             navigationItem.rightBarButtonItems = rightBarButtonItems
         }
     }
-    
+
     open var titleView: UIView? {
         return searchView
     }
@@ -112,7 +112,7 @@ open class SearchViewController: ListPresenterViewController {
             Router.shared?.navigate(to: RoutingRequest(path: filtersRoute), animated: true, completion: nil)
         }
     }
-    
+
     open override func searchingChanged(animated: Bool) {
         super.searchingChanged(animated: animated)
         leftBarButtonItems = leftButtons

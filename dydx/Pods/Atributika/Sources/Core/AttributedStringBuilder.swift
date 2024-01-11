@@ -32,7 +32,7 @@ public final class AttributedStringBuilder {
         let string = attributedString.string
         var info: [AttributesRangeInfo] = []
 
-        attributedString.enumerateAttributes(in: NSMakeRange(0, attributedString.length), options: []) { attributes, range, _ in
+        attributedString.enumerateAttributes(in: NSRange(location: 0, length: attributedString.length), options: []) { attributes, range, _ in
             if let range = Range(range, in: string) {
                 info.append(AttributesRangeInfo(attributes: attributes, range: range, level: -1))
             }
@@ -155,7 +155,7 @@ public struct DefaultHTMLSpecialsProvider: HTMLSpecialsProvider {
         "apos": "\u{27}",
         "lt": "\u{3C}",
         "gt": "\u{3E}",
-        "nbsp": "\u{A0}",
+        "nbsp": "\u{A0}"
     ]
 }
 

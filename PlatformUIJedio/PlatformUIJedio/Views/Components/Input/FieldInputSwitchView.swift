@@ -19,7 +19,7 @@ public class FieldInputSwitchViewModel: FieldInputBaseViewModel {
         vm.text = "text"
         return vm
     }
-    
+
     public lazy var inputBinding = Binding<Bool> {
         return self.input?.checked ?? false
     } set: { newValue in
@@ -78,4 +78,3 @@ struct FieldInputSwitchView_Previews_Light: PreviewProvider {
     }
 }
 #endif
-

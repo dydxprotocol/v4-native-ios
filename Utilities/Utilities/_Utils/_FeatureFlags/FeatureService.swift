@@ -14,7 +14,7 @@ public protocol FeatureFlagsProtocol {
     func refresh(completion: @escaping () -> Void)
     func activate(completion: @escaping () -> Void)
     func flag(feature: String?) -> Any?
-    
+
     func customized() -> Bool
 }
 

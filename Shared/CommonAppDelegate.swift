@@ -26,7 +26,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     open var notificationTag: String {
         return "firebase"
     }
- 
+
     private lazy var firebaseNotification: FirebaseNotificationHandler = {
         return FirebaseNotificationHandler(tag: notificationTag)
     }()
@@ -115,7 +115,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
             add(tracking: dydxAmplitudeTracking())
         }
     }
-    
+
     open func injectAttribution() {
         Console.shared.log("injectAttribution")
 //        if Installation.appStore && !Installation.jailBroken {
@@ -168,7 +168,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
             completion()
         }
     }
-    
+
     open override func applicationDidBecomeActive(_ application: UIApplication) {
         super.applicationDidBecomeActive(application)
         Tracking.shared?.log(event: "AppStart", data: nil)
@@ -181,7 +181,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     open func injectNotificationHandler() {
         NotificationBridge.shared = firebaseNotification
     }
-    
+
     open func injectURLHandler() {
         URLHandler.shared = UIApplication.shared
     }
