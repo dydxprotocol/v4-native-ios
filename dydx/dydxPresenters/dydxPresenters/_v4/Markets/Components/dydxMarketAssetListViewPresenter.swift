@@ -6,6 +6,7 @@
 //
 
 import Utilities
+import dydxFormatter
 import dydxViews
 import PlatformParticles
 import RoutingKit
@@ -169,7 +170,32 @@ final class dydxMarketAssetListViewPresenter: HostedViewPresenter<dydxMarketAsse
 
 struct SortAction {
     static var actions: [SortAction] {
+        dydxBoolFeatureFlag.enable_spot_experience.isEnabled ?
         [
+            SortAction(type: .name,
+                       text: DataLocalizer.localize(path: "APP.GENERAL.NAME"),
+                       action: { first, second  in
+                           first.market ?? "" < second.market ?? ""
+                       }),
+
+            SortAction(type: .gainers,
+                       text: DataLocalizer.localize(path: "APP.GENERAL.GAINERS"),
+                       action: { first, second  in
+                           first.priceChange24HPercent?.doubleValue ?? 0 > second.priceChange24HPercent?.doubleValue ?? 0
+                       }),
+
+            SortAction(type: .losers,
+                       text: DataLocalizer.localize(path: "APP.GENERAL.LOSERS"),
+                       action: { first, second  in
+                           first.priceChange24HPercent?.doubleValue ?? 0 < second.priceChange24HPercent?.doubleValue ?? 0
+                       }),
+
+            SortAction(type: .price,
+                       text: DataLocalizer.localize(path: "APP.GENERAL.PRICE"),
+                       action: { first, second  in
+                           first.oraclePrice?.doubleValue ?? 0 > second.oraclePrice?.doubleValue ?? 0
+                       })
+        ] : [
             SortAction(type: .volume24h,
                        text: DataLocalizer.localize(path: "APP.TRADE.VOLUME"),
                        action: { first, second  in

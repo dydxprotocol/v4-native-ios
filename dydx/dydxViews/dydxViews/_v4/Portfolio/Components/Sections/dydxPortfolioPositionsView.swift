@@ -6,6 +6,7 @@
 //  Copyright © 2023 dYdX Trading Inc. All rights reserved.
 //
 
+import dydxFormatter
 import SwiftUI
 import PlatformUI
 import Utilities
@@ -119,16 +120,18 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                     token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
                 }
 
-                HStack(spacing: 2) {
-                    sideText
-                        .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))
+                if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+                    HStack(spacing: 2) {
+                        sideText
+                            .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))
 
-                    Text("@")
-                        .themeFont(fontSize: .smaller)
-                        .themeColor(foreground: .textTertiary)
+                        Text("@")
+                            .themeFont(fontSize: .smaller)
+                            .themeColor(foreground: .textTertiary)
 
-                    Text(leverage ?? "")
-                        .themeFont(fontType: .number, fontSize: .smaller)
+                        Text(leverage ?? "")
+                            .themeFont(fontType: .number, fontSize: .smaller)
+                    }
                 }
             }
 

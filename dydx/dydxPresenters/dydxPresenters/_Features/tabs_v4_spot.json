@@ -1,0 +1,32 @@
+[
+    {
+        "path":"/portfolio",
+        "title":"",
+        "image":"icon_wallet",
+        "split":true
+    },
+    {
+        "path":"/markets",
+        "title":"",
+        "image":"icon_market",
+        "split":true
+    },
+    {
+        "title":"",
+        "path":"/history/history",
+        "image":"icon_trade",
+        "split":true
+    },
+    {
+        "path":"/alerts",
+        "title":"",
+        "image":"icon_alerts",
+        "split":true
+    },
+    {
+        "path":"/settings",
+        "title":"",
+        "image":"icon_profile",
+        "split":true
+    }
+]

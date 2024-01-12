@@ -136,6 +136,7 @@
 		27C027532AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027522AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift */; };
 		27DB2EA32AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DB2EA22AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift */; };
 		314BBDE9F332ECA910BC414E /* Pods_iOS_dydxPresenters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1551C00FFF41C29CFC5BD94 /* Pods_iOS_dydxPresenters.framework */; };
+		643328A62B5062BF00C1E110 /* tabs_v4_spot.json in Resources */ = {isa = PBXBuildFile; fileRef = 643328992B5062BF00C1E110 /* tabs_v4_spot.json */; };
 		6448800B2AA248340068DD87 /* dydxAlertsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64487FFE2AA248340068DD87 /* dydxAlertsWorker.swift */; };
 		645299EF2AE86FB1000810E6 /* dydxUpdateViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645299E22AE86FB1000810E6 /* dydxUpdateViewPresenter.swift */; };
 		64529A4C2AE8705E000810E6 /* dydxUpdateWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64529A4B2AE8705E000810E6 /* dydxUpdateWorker.swift */; };
@@ -476,6 +477,7 @@
 		277E908A2B2118AE005CCBCB /* dydxRewardsHistoryViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsHistoryViewPresenter.swift; sourceTree = "<group>"; };
 		27C027522AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsHelpRowViewPresenter.swift; sourceTree = "<group>"; };
 		27DB2EA22AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradeRestrictedViewPresenter.swift; sourceTree = "<group>"; };
+		643328992B5062BF00C1E110 /* tabs_v4_spot.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabs_v4_spot.json; sourceTree = "<group>"; };
 		64487FFE2AA248340068DD87 /* dydxAlertsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxAlertsWorker.swift; sourceTree = "<group>"; };
 		645299E22AE86FB1000810E6 /* dydxUpdateViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxUpdateViewPresenter.swift; sourceTree = "<group>"; };
 		64529A4B2AE8705E000810E6 /* dydxUpdateWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxUpdateWorker.swift; sourceTree = "<group>"; };
@@ -1184,6 +1186,7 @@
 				2741E3632A68787A000FA190 /* settings_direction_color_preference.json */,
 				0279656929D795E7004DEB20 /* routing_swiftui.json */,
 				0279655B29D795E7004DEB20 /* tabs_v4.json */,
+				643328992B5062BF00C1E110 /* tabs_v4_spot.json */,
 				02E7B38729D79A4400D6626D /* v4-native-client.js */,
 				02E7B36F29D79A4400D6626D /* test.js */,
 				02DA6E0C2AD897EE0048126C /* starkex-eth.js */,
@@ -1662,6 +1665,7 @@
 				02E7B39C29D79A4400D6626D /* debug.json in Resources */,
 				0295392729FB28B7009026E3 /* settings_theme.json in Resources */,
 				02DA6E0D2AD897EE0048126C /* starkex-lib.js in Resources */,
+				643328A62B5062BF00C1E110 /* tabs_v4_spot.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

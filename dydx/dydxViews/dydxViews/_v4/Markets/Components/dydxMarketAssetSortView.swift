@@ -6,6 +6,7 @@
 //  Copyright © 2022 dYdX Trading Inc. All rights reserved.
 //
 
+import dydxFormatter
 import SwiftUI
 import PlatformUI
 import Utilities

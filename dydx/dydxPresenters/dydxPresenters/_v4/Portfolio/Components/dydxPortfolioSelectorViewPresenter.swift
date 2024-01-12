@@ -5,13 +5,13 @@
 //  Created by Rui Huang on 5/23/23.
 //
 
-import Utilities
-import dydxViews
-import PlatformParticles
-import RoutingKit
-import ParticlesKit
-import PlatformUI
 import dydxFormatter
+import dydxViews
+import ParticlesKit
+import PlatformParticles
+import PlatformUI
+import RoutingKit
+import Utilities
 
 protocol dydxPortfolioSelectorViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxPortfolioSelectorViewModel? { get }
@@ -19,16 +19,23 @@ protocol dydxPortfolioSelectorViewPresenterProtocol: HostedViewPresenterProtocol
 }
 
 class dydxPortfolioSelectorViewPresenter: HostedViewPresenter<dydxPortfolioSelectorViewModel>, dydxPortfolioSelectorViewPresenterProtocol {
-
     // TODO: add payments when ready
-    private let displayContents: [dydxPortfolioViewModel.DisplayContent] = [
-        .overview,
-        .positions,
-        .orders,
-        .fees,
-        .trades,
-        .transfers
-    ].filterNils()
+    private let displayContents: [dydxPortfolioViewModel.DisplayContent] = {
+        return dydxBoolFeatureFlag.enable_spot_experience.isEnabled ?
+            [
+                .overview,
+                .trades,
+                .transfers
+            ].filterNils() :
+            [
+                .overview,
+                .positions,
+                .orders,
+                .fees,
+                .trades,
+                .transfers
+            ].filterNils()
+    }()
 
     private func titleText(forDisplayContent displayContent: dydxPortfolioViewModel.DisplayContent) -> String {
         let path: String
@@ -64,7 +71,7 @@ class dydxPortfolioSelectorViewPresenter: HostedViewPresenter<dydxPortfolioSelec
         self.viewModel = viewModel
 
         self.viewModel?.items = displayContents.map({ displayContent in
-            return dydxPortfolioSelectorViewModel.Item(
+            dydxPortfolioSelectorViewModel.Item(
                 title: titleText(forDisplayContent: displayContent),
                 subtitle: subtitleText(forDisplayContent: displayContent),
                 action: { [weak self] in

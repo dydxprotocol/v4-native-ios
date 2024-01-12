@@ -7,6 +7,7 @@
 //
 
 import dydxStateManager
+import dydxFormatter
 import SwiftUI
 import Utilities
 import dydxViews
@@ -116,10 +117,12 @@ private class dydxPortfolioViewPresenter: HostedViewPresenter<dydxPortfolioViewM
             self?.viewModel?.details.expanded = expanded
             self?.viewModel?.expanded = expanded
         }
-        viewModel.sections.itemTitles = Section.allSections.map(\.text)
+        let sections: [Section] = dydxBoolFeatureFlag.enable_spot_experience.isEnabled ? [Section.allSections.first!] : Section.allSections
+
+        viewModel.sections.itemTitles = sections.map(\.text)
         viewModel.sections.onSelectionChanged = { [weak self] index in
-            if index <  Section.allSections.count {
-                let selectedSection = Section.allSections[index]
+            if index <  sections.count {
+                let selectedSection = sections[index]
                 viewModel.sectionSelection = selectedSection.key
                 viewModel.sections.sectionIndex = index
                 self?.resetPresentersForVisibilityChange()

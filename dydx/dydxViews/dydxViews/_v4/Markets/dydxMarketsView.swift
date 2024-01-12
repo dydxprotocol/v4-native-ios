@@ -6,6 +6,7 @@
 //  Copyright © 2022 dYdX Trading Inc. All rights reserved.
 //
 
+import dydxFormatter
 import SwiftUI
 import PlatformUI
 import Utilities
@@ -46,10 +47,12 @@ public class dydxMarketsViewModel: PlatformViewModel {
                 ScrollViewReader { proxy in
                     ScrollView(showsIndicators: false) {
                         LazyVStack(pinnedViews: [.sectionHeaders]) {
-                             self?.summary.createView(parentStyle: style)
-                                 .themeColor(background: .layer2)
-                                 .zIndex(.greatestFiniteMagnitude)
-                                 .padding(.horizontal, 16)
+                            if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+                                self?.summary.createView(parentStyle: style)
+                                    .themeColor(background: .layer2)
+                                    .zIndex(.greatestFiniteMagnitude)
+                                    .padding(.horizontal, 16)
+                            }
 
                              let header =
                              VStack(spacing: 0) {

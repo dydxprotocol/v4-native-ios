@@ -13,6 +13,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     case push_notification
     case full_story
     case force_mainnet
+    case enable_spot_experience
     case enable_cctp
     case enable_trading_rewards
 

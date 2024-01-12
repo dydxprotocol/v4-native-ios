@@ -5,16 +5,17 @@
 //  Created by John Huang on 12/28/22.
 //
 
-import dydxStateManager
 import Abacus
+import Combine
+import dydxFormatter
+import dydxStateManager
+import dydxViews
+import ParticlesKit
 import PlatformRouting
+import PlatformUI
+import SnapKit
 import UIKit
 import Utilities
-import SnapKit
-import Combine
-import dydxViews
-import PlatformUI
-import ParticlesKit
 
 public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -25,7 +26,7 @@ public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
 @objc public class dydxV4TabBarController: RoutingTabBarController {
     public var subscriptions = Set<AnyCancellable>()
 
-     private var firstSubaccount: Subaccount? {
+    private var firstSubaccount: Subaccount? {
         didSet {
             updateCenterButton()
         }
@@ -40,11 +41,11 @@ public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
         }
     }
 
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         createCenterButton()
-        routingMap = "tabs_v4.json"
+        routingMap = dydxBoolFeatureFlag.enable_spot_experience.isEnabled ? "tabs_v4_spot.json" : "tabs_v4.json"
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -57,7 +58,7 @@ public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
             .store(in: &subscriptions)
     }
 
-    public override func viewDidDisappear(_ animated: Bool) {
+    override public func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         subscriptions.forEach { cancellable in
@@ -72,15 +73,17 @@ public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
     }
 
     private func createCenterButton() {
-        centerButton = UIButton()
-        centerButton?.setImage(UIImage(named: "icon_trade", in: Bundle.dydxView, with: .none), for: .normal)
-        centerButton?.backgroundColor = ThemeColor.SemanticColor.colorPurple.uiColor
-        centerButton?.tintColor = ThemeColor.SemanticColor.colorWhite.uiColor
-        centerButton?.snp.makeConstraints { make in
-            make.size.equalTo(60)
+        if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+            centerButton = UIButton()
+            centerButton?.setImage(UIImage(named: "icon_trade", in: Bundle.dydxView, with: .none), for: .normal)
+            centerButton?.backgroundColor = ThemeColor.SemanticColor.colorPurple.uiColor
+            centerButton?.tintColor = ThemeColor.SemanticColor.colorWhite.uiColor
+            centerButton?.snp.makeConstraints { make in
+                make.size.equalTo(60)
+            }
+            centerButton?.layer.cornerRadius = 30
+            centerButton?.layer.masksToBounds = true
         }
-        centerButton?.layer.cornerRadius = 30
-        centerButton?.layer.masksToBounds = true
     }
 
     private func updateCenterButton() {

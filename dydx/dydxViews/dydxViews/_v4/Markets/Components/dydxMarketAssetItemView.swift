@@ -6,6 +6,7 @@
 //  Copyright © 2022 dYdX Trading Inc. All rights reserved.
 //
 
+import dydxFormatter
 import SwiftUI
 import PlatformUI
 import Utilities
@@ -96,8 +97,10 @@ open class dydxMarketAssetItemViewModel: PlatformViewModel {
                             .themeFont(fontType: .bold, fontSize: .medium)
                             .minimumScaleFactor(0.5)
                     }
-                    Text(sharedMarketViewModel?.volume24H ?? "")
-                        .themeFont(fontType: .text, fontSize: .small)
+                    if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+                        Text(sharedMarketViewModel?.volume24H ?? "")
+                            .themeFont(fontType: .text, fontSize: .small)
+                    }
                 }
                 Spacer()
             }
