@@ -1,0 +1,5 @@
+${PODS_ROOT}/Target Support Files/Pods-iOS-FirebaseStaticInjectionsTests/Pods-iOS-FirebaseStaticInjectionsTests-resources.sh
+${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle
+${PODS_ROOT}/GoogleAuthUtilities/Frameworks/frameworks/GoogleAuthUtilities.framework/Resources/GTMOAuth2ViewTouch.xib
+${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle
