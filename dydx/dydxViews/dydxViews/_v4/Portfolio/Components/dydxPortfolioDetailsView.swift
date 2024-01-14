@@ -6,8 +6,9 @@
 //  Copyright © 2023 dYdX Trading Inc. All rights reserved.
 //
 
-import SwiftUI
+import dydxFormatter
 import PlatformUI
+import SwiftUI
 import Utilities
 
 public class dydxPortfolioDetailsViewModel: PlatformViewModel {
@@ -23,22 +24,27 @@ public class dydxPortfolioDetailsViewModel: PlatformViewModel {
         return vm
     }
 
-    public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+    override public func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
                 VStack(spacing: 0) {
                     Spacer()
 
-                    self.createDetails(parentStyle: style)
-                        .padding(.horizontal, 16)
+                    if dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+                        self.createSpotDetails(parentStyle: style)
+                            .padding(.horizontal, 16)
+                    } else {
+                        self.createPerpDetails(parentStyle: style)
+                            .padding(.horizontal, 16)
+                    }
                     Button(action: self.expandAction ?? {}) {
                         HStack {
                             Spacer()
                             let iconName = self.expanded ? "dragger_close" : "dragger_open"
                             PlatformIconViewModel(type: .asset(name: iconName, bundle: Bundle.dydxView),
-                                                             size: CGSize(width: 44, height: 44))
+                                                  size: CGSize(width: 44, height: 44))
                                 .createView(parentStyle: parentStyle)
                             Spacer()
                         }
@@ -53,7 +59,42 @@ public class dydxPortfolioDetailsViewModel: PlatformViewModel {
         }
     }
 
-    private func createDetails(parentStyle: ThemeStyle) -> some View {
+    private func createSpotDetails(parentStyle: ThemeStyle) -> some View {
+        VStack(spacing: 8) {
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Cash")
+                        .themeColor(foreground: .textTertiary)
+                        .themeFont(fontSize: .small)
+
+                    Text(sharedAccountViewModel?.quoteBalance ?? "-")
+                }
+                Spacer()
+                VStack(alignment: .trailing, spacing: 8) {
+                }
+            }
+
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(DataLocalizer.localize(path: "APP.TRADE.POSITIONS"))
+                        .themeColor(foreground: .textTertiary)
+                        .themeFont(fontSize: .small)
+
+                    Text(sharedAccountViewModel?.openInterest ?? "-")
+                }
+                Spacer()
+                VStack(alignment: .trailing, spacing: 8) {
+                    Text(DataLocalizer.localize(path: "APP.TRADE.TOTAL"))
+                        .themeColor(foreground: .textTertiary)
+                        .themeFont(fontSize: .small)
+
+                    Text(sharedAccountViewModel?.equity ?? "-")
+                }
+            }
+        }
+    }
+
+    private func createPerpDetails(parentStyle: ThemeStyle) -> some View {
         VStack(spacing: 8) {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
@@ -101,29 +142,29 @@ public class dydxPortfolioDetailsViewModel: PlatformViewModel {
 }
 
 #if DEBUG
-struct dydxPortfolioDetailsView_Previews_Dark: PreviewProvider {
-    @StateObject static var themeSettings = ThemeSettings.shared
+    struct dydxPortfolioDetailsView_Previews_Dark: PreviewProvider {
+        @StateObject static var themeSettings = ThemeSettings.shared
 
-    static var previews: some View {
-        ThemeSettings.applyDarkTheme()
-        ThemeSettings.applyStyles()
-        return dydxPortfolioDetailsViewModel.previewValue
-            .createView()
-            // .edgesIgnoringSafeArea(.bottom)
-            .previewLayout(.sizeThatFits)
+        static var previews: some View {
+            ThemeSettings.applyDarkTheme()
+            ThemeSettings.applyStyles()
+            return dydxPortfolioDetailsViewModel.previewValue
+                .createView()
+                // .edgesIgnoringSafeArea(.bottom)
+                .previewLayout(.sizeThatFits)
+        }
     }
-}
 
-struct dydxPortfolioDetailsView_Previews_Light: PreviewProvider {
-    @StateObject static var themeSettings = ThemeSettings.shared
+    struct dydxPortfolioDetailsView_Previews_Light: PreviewProvider {
+        @StateObject static var themeSettings = ThemeSettings.shared
 
-    static var previews: some View {
-        ThemeSettings.applyLightTheme()
-        ThemeSettings.applyStyles()
-        return dydxPortfolioDetailsViewModel.previewValue
-            .createView()
-        // .edgesIgnoringSafeArea(.bottom)
-            .previewLayout(.sizeThatFits)
+        static var previews: some View {
+            ThemeSettings.applyLightTheme()
+            ThemeSettings.applyStyles()
+            return dydxPortfolioDetailsViewModel.previewValue
+                .createView()
+                // .edgesIgnoringSafeArea(.bottom)
+                .previewLayout(.sizeThatFits)
+        }
     }
-}
 #endif

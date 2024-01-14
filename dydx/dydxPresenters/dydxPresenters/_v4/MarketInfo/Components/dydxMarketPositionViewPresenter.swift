@@ -7,6 +7,7 @@
 
 import Abacus
 import Combine
+import dydxFormatter
 import dydxStateManager
 import dydxViews
 import ParticlesKit
@@ -14,7 +15,6 @@ import PlatformParticles
 import PlatformUI
 import RoutingKit
 import Utilities
-import dydxFormatter
 
 protocol dydxMarketPositionViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxMarketPositionViewModel? { get }

@@ -5,15 +5,16 @@
 //  Created by Rui Huang on 10/6/22.
 //
 
-import Utilities
-import dydxViews
-import PlatformParticles
-import RoutingKit
-import ParticlesKit
-import PlatformUI
-import Combine
-import dydxStateManager
 import Abacus
+import Combine
+import dydxFormatter
+import dydxStateManager
+import dydxViews
+import ParticlesKit
+import PlatformParticles
+import PlatformUI
+import RoutingKit
+import Utilities
 
 public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -59,20 +60,37 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
     private let positionPresenter: dydxMarketPositionViewPresenter
     private let ordersPresenter: dydxPortfolioOrdersViewPresenter
 
-    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
-        pagingPresenter,
-        statsPresenter,
-        configsPresenter,
-        sharedMarketPresenter,
-        favoritePresenter
-    ]
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = {
+        if dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+            return [
+                pagingPresenter,
+                sharedMarketPresenter,
+                favoritePresenter
+            ]
+        } else {
+            return [
+                pagingPresenter,
+                statsPresenter,
+                configsPresenter,
+                sharedMarketPresenter,
+                favoritePresenter
+            ]
+        }}()
 
-    private lazy var selectionPresenters: [PortfolioSection: HostedViewPresenterProtocol] = [
-        .positions: positionPresenter,
-        .orders: ordersPresenter,
-        .trades: fillsPresenter,
-        .funding: fundingPresenter
-    ]
+    private lazy var selectionPresenters: [PortfolioSection: HostedViewPresenterProtocol] = {
+        if dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+            return [
+                .positions: positionPresenter
+            ]
+        } else {
+            return [
+                .positions: positionPresenter,
+                .orders: ordersPresenter,
+                .trades: fillsPresenter,
+                .funding: fundingPresenter
+            ]
+        }
+    }()
 
     override init() {
         let viewModel = dydxMarketInfoViewModel()
@@ -95,10 +113,11 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
 
-        viewModel.sections.itemTitles = Section.allSections.map(\.text)
+        let sections = dydxBoolFeatureFlag.enable_spot_experience.isEnabled ? [Section.allSections.first!] : Section.allSections
+        viewModel.sections.itemTitles = sections.map(\.text)
         viewModel.sections.onSelectionChanged = { [weak self] index in
-            if index <  Section.allSections.count {
-                let selectedSection = Section.allSections[index]
+            if index < sections.count {
+                let selectedSection = sections[index]
                 viewModel.sectionSelection = selectedSection.key
                 viewModel.sections.sectionIndex = index
                 self?.resetPresentersForVisibilityChange()
@@ -133,8 +152,8 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
         Publishers
             .CombineLatest(AbacusStateManager.shared.state.selectedSubaccountPositions,
                            $marketId
-                            .compactMap { $0 }
-                            .removeDuplicates())
+                               .compactMap { $0 }
+                               .removeDuplicates())
             .sink { [weak self] subaccountPositions, marketId in
                 let position = subaccountPositions.first { (subaccountPosition: SubaccountPosition) in
                     subaccountPosition.id == marketId

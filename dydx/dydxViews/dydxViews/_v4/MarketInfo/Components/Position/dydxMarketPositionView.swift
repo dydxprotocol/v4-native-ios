@@ -6,8 +6,9 @@
 //  Copyright © 2023 dYdX Trading Inc. All rights reserved.
 //
 
-import SwiftUI
+import dydxFormatter
 import PlatformUI
+import SwiftUI
 import Utilities
 
 public class dydxMarketPositionViewModel: PlatformViewModel {
@@ -54,7 +55,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
         return vm
     }
 
-    public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
+    override public func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
@@ -77,22 +78,24 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
             HStack {
                 createPositionTab(parentStyle: parentStyle)
 
-                VStack(alignment: .leading, spacing: 16) {
-                    let value = HStack {
-                        Text(leverage ?? "-")
-                        leverageIcon?.createView(parentStyle: parentStyle)
+                if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+                    VStack(alignment: .leading, spacing: 16) {
+                        let value = HStack {
+                            Text(leverage ?? "-")
+                            leverageIcon?.createView(parentStyle: parentStyle)
+                        }
+                        self.createCollectionItem(parentStyle: parentStyle, title: DataLocalizer.localize(path: "APP.GENERAL.LEVERAGE"), valueViewModel: value.wrappedViewModel)
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .frame(height: 58)
+
+                        DividerModel().createView(parentStyle: parentStyle)
+
+                        self.createCollectionItem(parentStyle: parentStyle, title: DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE"), stringValue: liquidationPrice)
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .frame(height: 58)
                     }
-                    self.createCollectionItem(parentStyle: parentStyle, title: DataLocalizer.localize(path: "APP.GENERAL.LEVERAGE"), valueViewModel: value.wrappedViewModel)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .frame(height: 58)
-
-                    DividerModel().createView(parentStyle: parentStyle)
-
-                    self.createCollectionItem(parentStyle: parentStyle, title: DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE"), stringValue: liquidationPrice)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .frame(height: 58)
+                    .frame(minWidth: 0, maxWidth: .infinity)
                 }
-                .frame(minWidth: 0, maxWidth: .infinity)
             }
             .padding(.vertical, 8)
 
@@ -269,29 +272,29 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 }
 
 #if DEBUG
-struct dydxMarketPositionView_Previews_Dark: PreviewProvider {
-    @StateObject static var themeSettings = ThemeSettings.shared
+    struct dydxMarketPositionView_Previews_Dark: PreviewProvider {
+        @StateObject static var themeSettings = ThemeSettings.shared
 
-    static var previews: some View {
-        ThemeSettings.applyDarkTheme()
-        ThemeSettings.applyStyles()
-        return dydxMarketPositionViewModel.previewValue
-            .createView()
-            // .edgesIgnoringSafeArea(.bottom)
-            .previewLayout(.sizeThatFits)
+        static var previews: some View {
+            ThemeSettings.applyDarkTheme()
+            ThemeSettings.applyStyles()
+            return dydxMarketPositionViewModel.previewValue
+                .createView()
+                // .edgesIgnoringSafeArea(.bottom)
+                .previewLayout(.sizeThatFits)
+        }
     }
-}
 
-struct dydxMarketPositionView_Previews_Light: PreviewProvider {
-    @StateObject static var themeSettings = ThemeSettings.shared
+    struct dydxMarketPositionView_Previews_Light: PreviewProvider {
+        @StateObject static var themeSettings = ThemeSettings.shared
 
-    static var previews: some View {
-        ThemeSettings.applyLightTheme()
-        ThemeSettings.applyStyles()
-        return dydxMarketPositionViewModel.previewValue
-            .createView()
-        // .edgesIgnoringSafeArea(.bottom)
-            .previewLayout(.sizeThatFits)
+        static var previews: some View {
+            ThemeSettings.applyLightTheme()
+            ThemeSettings.applyStyles()
+            return dydxMarketPositionViewModel.previewValue
+                .createView()
+                // .edgesIgnoringSafeArea(.bottom)
+                .previewLayout(.sizeThatFits)
+        }
     }
-}
 #endif

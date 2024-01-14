@@ -82,6 +82,7 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
             item.gradientType = .minus
        }
 
+        item.notional = dydxFormatter.shared.dollar(number: NSNumber(value: position.notionalTotal?.current?.doubleValue ?? 0), digits: 2)
         item.leverage = dydxFormatter.shared.leverage(number: NSNumber(value: position.leverage?.current?.doubleValue ?? 0))
         if let leverage = position.leverage?.current?.doubleValue, let maxLeverage = position.maxLeverage?.current?.doubleValue, maxLeverage > 0 {
             item.leverageIcon = LeverageRiskModel(level: LeverageRiskModel.Level(marginUsage: leverage / maxLeverage), viewSize: 16, displayOption: .iconOnly)

@@ -14,6 +14,7 @@ public class SharedAccountViewModel: PlatformViewModel {
     @Published public var marginUsage: String?
     @Published public var marginUsageIcon: MarginUsageModel?
     @Published public var equity: String?
+    @Published public var quoteBalance: String?
     @Published public var freeCollateral: String?
     @Published public var openInterest: String?
     @Published public var leverage: String?
@@ -27,6 +28,7 @@ public class SharedAccountViewModel: PlatformViewModel {
         vm.marginUsage = "4.55%"
         vm.marginUsageIcon = .previewValue
         vm.equity = "$22,222.12"
+        vm.quoteBalance = "100.00"
         vm.freeCollateral = "$22,222.12"
         vm.openInterest = "$22,222.12"
         vm.leverage = "0.12x"

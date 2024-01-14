@@ -23,10 +23,11 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         public var onCloseAction: (() -> Void)?
     }
 
-    public init(size: String? = nil, token: TokenTextViewModel? = TokenTextViewModel(), sideText: SideTextViewModel = SideTextViewModel(), leverage: String? = nil, leverageIcon: LeverageRiskModel? = nil, indexPrice: String? = nil, entryPrice: String? = nil, unrealizedPnlPercent: SignedAmountViewModel? = nil, unrealizedPnl: SignedAmountViewModel? = nil, logoUrl: URL? = nil, gradientType: GradientType = .none, onTapAction: (() -> Void)? = nil) {
+    public init(size: String? = nil, token: TokenTextViewModel? = TokenTextViewModel(), sideText: SideTextViewModel = SideTextViewModel(), notional: String? = nil, leverage: String? = nil, leverageIcon: LeverageRiskModel? = nil, indexPrice: String? = nil, entryPrice: String? = nil, unrealizedPnlPercent: SignedAmountViewModel? = nil, unrealizedPnl: SignedAmountViewModel? = nil, logoUrl: URL? = nil, gradientType: GradientType = .none, onTapAction: (() -> Void)? = nil) {
         self.size = size
         self.token = token
         self.sideText = sideText
+        self.notional = notional
         self.leverage = leverage
         self.leverageIcon = leverageIcon
         self.indexPrice = indexPrice
@@ -41,6 +42,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     public var size: String?
     public var token: TokenTextViewModel?
     public var sideText = SideTextViewModel()
+    public var notional: String?
     public var leverage: String?
     public var leverageIcon: LeverageRiskModel?
     public var indexPrice: String?
@@ -56,6 +58,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             size: "299",
             token: .previewValue,
             sideText: .previewValue,
+            notional: "$100.00",
             leverage: "0.01x",
             indexPrice: "$1,200",
             entryPrice: "$1,200",
@@ -120,7 +123,10 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                     token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
                 }
 
-                if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+                if dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+                    Text(notional ?? "")
+                        .themeFont(fontType: .number, fontSize: .smaller)
+                } else {
                     HStack(spacing: 2) {
                         sideText
                             .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))

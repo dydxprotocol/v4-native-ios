@@ -51,6 +51,8 @@ class SharedAccountPresenter: HostedViewPresenter<SharedAccountViewModel>, Share
 
         viewModel?.openInterest = dydxFormatter.shared.dollarVolume(number: account?.notionalTotal?.current?.doubleValue, digits: 2)
 
+        viewModel?.quoteBalance = dydxFormatter.shared.dollar(number: account?.quoteBalance?.current?.doubleValue, digits: 2)
+
         if let margin = account?.marginUsage?.current?.doubleValue {
             viewModel?.marginUsageIcon = MarginUsageModel(percent: margin, displayOption: .iconOnly)
             viewModel?.leverageIcon = LeverageRiskModel(level: LeverageRiskModel.Level(marginUsage: margin), viewSize: 16, displayOption: .iconOnly)

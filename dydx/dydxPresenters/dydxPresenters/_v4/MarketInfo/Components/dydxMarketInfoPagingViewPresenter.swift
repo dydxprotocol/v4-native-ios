@@ -5,15 +5,16 @@
 //  Created by Rui Huang on 10/10/22.
 //
 
-import Utilities
-import dydxViews
-import PlatformParticles
-import RoutingKit
-import ParticlesKit
-import PlatformUI
-import Combine
-import dydxStateManager
 import Abacus
+import Combine
+import dydxFormatter
+import dydxStateManager
+import dydxViews
+import ParticlesKit
+import PlatformParticles
+import PlatformUI
+import RoutingKit
+import Utilities
 
 protocol dydxMarketInfoPagingViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxMarketInfoPagingViewModel? { get }
@@ -47,29 +48,38 @@ class dydxMarketInfoPagingViewPresenter: HostedViewPresenter<dydxMarketInfoPagin
     ]
 
     private var tiles: [MarketInfoPagingTile] {
-        [
-            isAccountVisible ?
+        if dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+            return [
+                MarketInfoPagingTile(type: .price,
+                                     text: DataLocalizer.localize(path: "APP.GENERAL.PRICE_CHART_SHORT"),
+                                     icon: UIImage.named("icon_market_price", bundles: Bundle.particles) ?? UIImage())
+            ]
+                .filterNils()
+        } else {
+            return [
+                isAccountVisible ?
                 MarketInfoPagingTile(type: .account,
-                                 text: DataLocalizer.localize(path: "APP.GENERAL.ACCOUNT"),
-                                 icon: UIImage.named("icon_market_wallet", bundles: Bundle.particles) ?? UIImage()) :
-                nil,
-            MarketInfoPagingTile(type: .price,
-                                 text: DataLocalizer.localize(path: "APP.GENERAL.PRICE_CHART_SHORT"),
-                                 icon: UIImage.named("icon_market_price", bundles: Bundle.particles) ?? UIImage()),
-            MarketInfoPagingTile(type: .depth,
-                                 text: DataLocalizer.localize(path: "APP.GENERAL.DEPTH_CHART_SHORT"),
-                                 icon: UIImage.named("icon_market_depth", bundles: Bundle.particles) ?? UIImage()),
-            MarketInfoPagingTile(type: .funding,
-                                 text: DataLocalizer.localize(path: "APP.GENERAL.FUNDING_RATE_CHART_SHORT"),
-                                 icon: UIImage.named("icon_market_funding", bundles: Bundle.particles) ?? UIImage()),
-            MarketInfoPagingTile(type: .orderbook,
-                                 text: DataLocalizer.localize(path: "APP.TRADE.ORDERBOOK_SHORT"),
-                                 icon: UIImage.named("icon_market_book", bundles: Bundle.particles) ?? UIImage()),
-            MarketInfoPagingTile(type: .recent,
-                                 text: DataLocalizer.localize(path: "APP.GENERAL.RECENT"),
-                                 icon: UIImage.named("icon_market_recent", bundles: Bundle.particles) ?? UIImage())
-        ]
-        .filterNils()
+                                     text: DataLocalizer.localize(path: "APP.GENERAL.ACCOUNT"),
+                                     icon: UIImage.named("icon_market_wallet", bundles: Bundle.particles) ?? UIImage()) :
+                    nil,
+                MarketInfoPagingTile(type: .price,
+                                     text: DataLocalizer.localize(path: "APP.GENERAL.PRICE_CHART_SHORT"),
+                                     icon: UIImage.named("icon_market_price", bundles: Bundle.particles) ?? UIImage()),
+                MarketInfoPagingTile(type: .depth,
+                                     text: DataLocalizer.localize(path: "APP.GENERAL.DEPTH_CHART_SHORT"),
+                                     icon: UIImage.named("icon_market_depth", bundles: Bundle.particles) ?? UIImage()),
+                MarketInfoPagingTile(type: .funding,
+                                     text: DataLocalizer.localize(path: "APP.GENERAL.FUNDING_RATE_CHART_SHORT"),
+                                     icon: UIImage.named("icon_market_funding", bundles: Bundle.particles) ?? UIImage()),
+                MarketInfoPagingTile(type: .orderbook,
+                                     text: DataLocalizer.localize(path: "APP.TRADE.ORDERBOOK_SHORT"),
+                                     icon: UIImage.named("icon_market_book", bundles: Bundle.particles) ?? UIImage()),
+                MarketInfoPagingTile(type: .recent,
+                                     text: DataLocalizer.localize(path: "APP.GENERAL.RECENT"),
+                                     icon: UIImage.named("icon_market_recent", bundles: Bundle.particles) ?? UIImage())
+            ]
+                .filterNils()
+        }
     }
 
     override init() {
@@ -120,14 +130,14 @@ class dydxMarketInfoPagingViewPresenter: HostedViewPresenter<dydxMarketInfoPagin
     }
 
     private func resetPresentersForVisibilityChange() {
-        for i in 0..<childPresenters.count {
+        for i in 0 ..< childPresenters.count {
             if i == viewModel?.tileSelection {
                 if childPresenters[i].isStarted == false {
                     childPresenters[i].start()
                 }
             } else if childPresenters[i].isStarted, i != 0 {
                 childPresenters[i].stop()
-           }
+            }
         }
     }
 
