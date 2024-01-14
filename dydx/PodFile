@@ -19,8 +19,17 @@ def firebase_core_pods
   pod 'Firebase/RemoteConfig'
 end
 
+def firebase_auth_pods
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Email'
+  pod 'FirebaseUI/Phone'
+  pod 'FirebaseUI/OAuth'
+#  pod 'FirebaseUI/Google'
+end
+
 def firebase_pods
   firebase_core_pods
+  firebase_auth_pods
   pod 'Firebase/Messaging'
 end
 

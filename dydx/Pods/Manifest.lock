@@ -65,6 +65,17 @@ PODS:
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseAppCheckInterop (10.19.0)
+  - FirebaseAuth (10.19.0):
+    - FirebaseAppCheckInterop (~> 10.17)
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GTMSessionFetcher/Core (< 4.0, >= 2.1)
+    - RecaptchaInterop (~> 100.0)
+  - FirebaseAuthUI (13.1.0):
+    - FirebaseAuth (< 11.0, >= 8.0)
+    - FirebaseCore
   - FirebaseCore (10.19.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.12)
@@ -81,6 +92,11 @@ PODS:
     - GoogleUtilities/Environment (~> 7.8)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (~> 2.1)
+  - FirebaseEmailAuthUI (13.1.0):
+    - FirebaseAuth
+    - FirebaseAuthUI
+    - FirebaseCore
+    - GoogleUtilities/UserDefaults
   - FirebaseInstallations (10.19.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
@@ -95,6 +111,9 @@ PODS:
     - GoogleUtilities/Reachability (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseOAuthUI (13.1.0):
+    - FirebaseAuth (< 11.0, >= 8.0)
+    - FirebaseAuthUI (< 14.0, >= 12.0.2)
   - FirebasePerformance (10.19.0):
     - FirebaseCore (~> 10.5)
     - FirebaseInstallations (~> 10.0)
@@ -105,6 +124,9 @@ PODS:
     - GoogleUtilities/ISASwizzler (~> 7.8)
     - GoogleUtilities/MethodSwizzler (~> 7.8)
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebasePhoneAuthUI (13.1.0):
+    - FirebaseAuth
+    - FirebaseAuthUI
   - FirebaseRemoteConfig (10.19.0):
     - FirebaseABTesting (~> 10.0)
     - FirebaseCore (~> 10.0)
@@ -121,6 +143,14 @@ PODS:
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesSwift (~> 2.1)
   - FirebaseSharedSwift (10.19.0)
+  - FirebaseUI/Auth (13.1.0):
+    - FirebaseAuthUI (~> 13.0)
+  - FirebaseUI/Email (13.1.0):
+    - FirebaseEmailAuthUI (~> 13.0)
+  - FirebaseUI/OAuth (13.1.0):
+    - FirebaseOAuthUI (~> 13.0)
+  - FirebaseUI/Phone (13.1.0):
+    - FirebasePhoneAuthUI (~> 13.0)
   - FloatingPanel (2.7.0)
   - FullStory (1.29.0)
   - GoogleAppMeasurement (10.19.0):
@@ -243,6 +273,7 @@ PODS:
     - PromisesObjC (= 2.3.1)
   - RDHCollectionViewGridLayout (1.2.5)
   - ReachabilitySwift (5.0.0)
+  - RecaptchaInterop (100.0.0)
   - SDWebImage (5.18.8):
     - SDWebImage/Core (= 5.18.8)
   - SDWebImage/Core (5.18.8)
@@ -277,6 +308,10 @@ DEPENDENCIES:
   - Firebase/Performance
   - Firebase/RemoteConfig
   - FirebaseCrashlytics
+  - FirebaseUI/Auth
+  - FirebaseUI/Email
+  - FirebaseUI/OAuth
+  - FirebaseUI/Phone
   - FloatingPanel (= 2.7.0)
   - "FullStory (from `{:http=>\"https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz\"}`)"
   - GoogleToolboxForMac
@@ -319,16 +354,23 @@ SPEC REPOS:
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
+    - FirebaseAppCheckInterop
+    - FirebaseAuth
+    - FirebaseAuthUI
     - FirebaseCore
     - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseCrashlytics
+    - FirebaseEmailAuthUI
     - FirebaseInstallations
     - FirebaseMessaging
+    - FirebaseOAuthUI
     - FirebasePerformance
+    - FirebasePhoneAuthUI
     - FirebaseRemoteConfig
     - FirebaseSessions
     - FirebaseSharedSwift
+    - FirebaseUI
     - FloatingPanel
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -350,6 +392,7 @@ SPEC REPOS:
     - PromisesSwift
     - RDHCollectionViewGridLayout
     - ReachabilitySwift
+    - RecaptchaInterop
     - SDWebImage
     - SDWebImageSVGKitPlugin
     - SDWebImageSwiftUI
@@ -392,16 +435,23 @@ SPEC CHECKSUMS:
   Firebase: 63ce8ece0d43743dc28eacac0c6867a2d7fd5a9d
   FirebaseABTesting: bfa3b384b68cee10a89183649c64cd7998a37a12
   FirebaseAnalytics: 87513010b13b7c8610164d3602ea10571f76afc1
+  FirebaseAppCheckInterop: 37884781f3e16a1ba47e7ec80a1e805f987788e3
+  FirebaseAuth: 2492acdcd1245d841fabdf58a050d6aa07dfce3f
+  FirebaseAuthUI: 9b4de780078d674019a2bfc560bb812f23b45ff1
   FirebaseCore: dc5c7badf99d47613c52b2e3a57a64cd187f8554
   FirebaseCoreExtension: c08d14c7b22e07994e876d837e6f58642f340087
   FirebaseCoreInternal: b444828ea7cfd594fca83046b95db98a2be4f290
   FirebaseCrashlytics: a4d2ad12f5c07ec8ee0ebc89133a45498a293ba6
+  FirebaseEmailAuthUI: 548b1b5b557b67b15fd3197d18da29d91a154ef8
   FirebaseInstallations: 033d199474164db20c8350736842a94fe717b960
   FirebaseMessaging: d322bd030a0e97398bf134746e087b88e6ba0074
+  FirebaseOAuthUI: 5f19522e97d992841163d89a0b44afe315674020
   FirebasePerformance: 634a9b06effc436c991273d90053a2086dd2d427
+  FirebasePhoneAuthUI: 4e32b332ba0484a0b6cf8246c93c23a24f9dbcad
   FirebaseRemoteConfig: a7fcc7a5941faa7e09248e91c8797340aa4c85f6
   FirebaseSessions: e5f4caa188dc8bc6142abc974355be75b042215e
   FirebaseSharedSwift: f34eeb7d3ea87a34497629b6ca41657beadef76a
+  FirebaseUI: d3e0d3f81f5c464554945195a6133a3ab905b6a7
   FloatingPanel: c88e3fd981b7a74121ff48746fb14d496f5fd553
   FullStory: 29e764d32050cb943d38b7b82c60b2f65f814737
   GoogleAppMeasurement: 68afe759316673c6554dac35a0c7ae8f5d6cb4ed
@@ -424,6 +474,7 @@ SPEC CHECKSUMS:
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
   RDHCollectionViewGridLayout: 4b4229212ed8c136aa70101d92ecd43742ca62b6
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   SDWebImage: a81bbb3ba4ea5f810f4069c68727cb118467a04a
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageSwiftUI: 3a8448b76833ed0e954a651be6c6f45faceed29d
@@ -433,6 +484,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: a4f25d50f2991cc8e84eca8d34be23b37908132b
+PODFILE CHECKSUM: 739716d280c37a8eaed9fe1add2a007f7efcc081
 
 COCOAPODS: 1.14.2
