@@ -30,8 +30,65 @@ workflows:
     steps:
     - activate-ssh-key@4: {}
     - git-clone@8: {}
+    - set-ios-product-bundle-identifier@1:
+        inputs:
+        - new_bundle_identifier: "$PRODUCT_BUNDLE_IDENTIFIER"
+        - project_path: dydxV4/dydxV4.xcodeproj
     - script@1:
-        title: Script (Inject Secrets)
+        title: Set DEVELOPMENT_TEAM
+        inputs:
+        - content: "#!/usr/bin/env bash\n# fail if any commands fails\nset -e\n# debug
+            log\nset -x\n\necho \"Updating Team ID for all .xcodeproj in subdirectories\"\n\n#
+            Current directory\nCURRENT_DIR=\".\"\n\n# Find all .xcodeproj directories
+            in subdirectories\nfind \"$CURRENT_DIR\" -name '*.xcodeproj' -type d |
+            while read XCODEPROJ_DIR; do\n    PROJECT_FILE=\"$XCODEPROJ_DIR/project.pbxproj\"\n
+            \   \n    if [ -f \"$PROJECT_FILE\" ]; then\n        echo \"Updating Team
+            ID in $PROJECT_FILE\"\n\n        # Update the Team ID in project.pbxproj\n
+            \       sed -i '' \"s/DEVELOPMENT_TEAM = .*;/DEVELOPMENT_TEAM = $APPLE_DEVELOPMENT_TEAM;/g\"
+            \"$PROJECT_FILE\"\n\n        echo \"Team ID updated to: $APPLE_DEVELOPMENT_TEAM
+            in $PROJECT_FILE\"\n    else\n        echo \"No project.pbxproj found
+            in $XCODEPROJ_DIR\"\n    fi\ndone\n\necho \"All Team IDs updated\""
+    - script@1:
+        title: Set URL Scheme
+        inputs:
+        - content: |
+            #!/usr/bin/env bash
+            set -ex
+
+            # Check if URL_SCHEME is set
+            if [ -z "$URL_SCHEME" ]; then
+                echo "URL_SCHEME environment variable is not set"
+                exit 1
+            fi
+
+            # Define the path to the Info.plist you want to modify.
+            # You might need to adjust the path according to your project structure.
+            INFO_PLIST_PATH="${BITRISE_SOURCE_DIR}/dydxV4/dydxV4/Info.plist"
+
+            # Check if the Info.plist file exists at the specified location
+            if [ ! -f "$INFO_PLIST_PATH" ]; then
+                echo "Info.plist not found at expected path: ${INFO_PLIST_PATH}"
+                exit 1
+            fi
+
+            # Use PlistBuddy to find the current URL Types entry in the Info.plist
+            EXISTING_URL_TYPE=$(/usr/libexec/PlistBuddy -c "Print :CFBundleURLTypes:0:CFBundleURLSchemes:0" "${INFO_PLIST_PATH}" 2>/dev/null)
+
+            # If the URL type exists, we'll update it. Otherwise, we'll add a new entry.
+            if [ -n "$EXISTING_URL_TYPE" ]; then
+                # Replace the existing URL scheme with the one from our environment variable
+                /usr/libexec/PlistBuddy -c "Set :CFBundleURLTypes:0:CFBundleURLSchemes:0 $URL_SCHEME" "${INFO_PLIST_PATH}"
+            else
+                # The URL type doesn't exist, so let's create a new one
+                /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes array" "${INFO_PLIST_PATH}"
+                /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0 dict" "${INFO_PLIST_PATH}"
+                /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes array" "${INFO_PLIST_PATH}"
+                /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes:0 string $URL_SCHEME" "${INFO_PLIST_PATH}"
+            fi
+
+            echo "URL Scheme updated successfully."
+    - script@1:
+        title: Inject Secrets
         inputs:
         - content: |+
             #!/usr/bin/env bash
@@ -101,9 +158,9 @@ workflows:
             # bash ./path/to/script.sh
             # not just bash, e.g.:
             # ruby ./path/to/script.rb
-        title: Script (Pull v4-localization)
+        title: Pull v4-localization
     - script@1:
-        title: Script (Pull v4-web)
+        title: Pull v4-web
         inputs:
         - content: |-
             #!/usr/bin/env bash
@@ -114,18 +171,12 @@ workflows:
             # debug log
             set -x
 
-            # write your script here
             echo "Pulling v4-web!"
 
             cd ..
-            git clone git@github.com:dydxprotocol/v4-web.git
-
-            # or run a script from your repository, like:
-            # bash ./path/to/script.sh
-            # not just bash, e.g.:
-            # ruby ./path/to/script.rb
+            git clone $WEB_GIT_REPO_SSH_URL
     - script@1:
-        title: Script (Install gradle)
+        title: Install gradle
         inputs:
         - content: |-
             #!/usr/bin/env bash
@@ -145,7 +196,7 @@ workflows:
             # ruby ./path/to/script.rb
     - cache-pull@2: {}
     - script@1:
-        title: Script (Update Build Number)
+        title: Update Build Number
         inputs:
         - content: |-
             #!/usr/bin/env bash
@@ -160,7 +211,7 @@ workflows:
             echo "Hello World!"
 
             cd dydxV4
-            build=`expr $BITRISE_BUILD_NUMBER + 30000`
+            build=`expr $BITRISE_BUILD_NUMBER + 31000`
             ../scripts/update_build_number.sh $build
 
             # or run a script from your repository, like:
@@ -196,8 +247,26 @@ workflows:
     steps:
     - activate-ssh-key@4: {}
     - git-clone@8: {}
+    - set-ios-product-bundle-identifier@1:
+        inputs:
+        - project_path: dydxV4/dydxV4.xcodeproj
+        - new_bundle_identifier: "$PRODUCT_BUNDLE_IDENTIFIER"
     - script@1:
-        title: Script (Pull v4-localization)
+        title: Set DEVELOPMENT_TEAM
+        inputs:
+        - content: "#!/usr/bin/env bash\n# fail if any commands fails\nset -e\n# debug
+            log\nset -x\n\necho \"Updating Team ID for all .xcodeproj in subdirectories\"\n\n#
+            Current directory\nCURRENT_DIR=\".\"\n\n# Find all .xcodeproj directories
+            in subdirectories\nfind \"$CURRENT_DIR\" -name '*.xcodeproj' -type d |
+            while read XCODEPROJ_DIR; do\n    PROJECT_FILE=\"$XCODEPROJ_DIR/project.pbxproj\"\n
+            \   \n    if [ -f \"$PROJECT_FILE\" ]; then\n        echo \"Updating Team
+            ID in $PROJECT_FILE\"\n\n        # Update the Team ID in project.pbxproj\n
+            \       sed -i '' \"s/DEVELOPMENT_TEAM = .*;/DEVELOPMENT_TEAM = $APPLE_DEVELOPMENT_TEAM;/g\"
+            \"$PROJECT_FILE\"\n\n        echo \"Team ID updated to: $APPLE_DEVELOPMENT_TEAM
+            in $PROJECT_FILE\"\n    else\n        echo \"No project.pbxproj found
+            in $XCODEPROJ_DIR\"\n    fi\ndone\n\necho \"All Team IDs updated\""
+    - script@1:
+        title: Pull v4-localization
         inputs:
         - content: |+
             #!/usr/bin/env bash
@@ -214,7 +283,7 @@ workflows:
             git clone git@github.com:dydxprotocol/v4-localization.git
 
     - script@1:
-        title: Script (Pull v4-web)
+        title: Pull v4-web
         inputs:
         - content: |-
             #!/usr/bin/env bash
@@ -228,9 +297,9 @@ workflows:
             echo "Pulling v4-web!"
 
             cd ..
-            git clone git@github.com:dydxprotocol/v4-web.git
+            git clone $WEB_GIT_REPO_SSH_URL
     - script@1:
-        title: Script (Install gradle)
+        title: Install gradle
         inputs:
         - content: |-
             #!/usr/bin/env bash
@@ -263,66 +332,9 @@ workflows:
     - opts:
         is_expand: false
       COCOAPODS_SKIP_KOTLIN_BUILD: 'NO'
-  test:
-    description: |
-      The workflow executes the tests. The *retry_on_failure* test repetition mode is enabled.
-
-      Next steps:
-      - Check out [Getting started with iOS apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-ios-apps.html).
-    steps:
-    - activate-ssh-key@4: {}
-    - git-clone@6: {}
-    - script@1:
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            # fail if any commands fails
-            set -e
-            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
-            set -o pipefail
-            # debug log
-            set -x
-
-            # write your script here
-            brew install gradle
-
-            # or run a script from your repository, like:
-            # bash ./path/to/script.sh
-            # not just bash, e.g.:
-            # ruby ./path/to/script.rb
-    - script@1:
-        title: Script (Pull Veronica)
-        inputs:
-        - content: |+
-            #!/usr/bin/env bash
-            # fail if any commands fails
-            set -e
-            # make pipelines' return status equal the last command to exit with a non-zero status, or zero if all commands exit successfully
-            set -o pipefail
-            # debug log
-            set -x
-
-            echo "Pulling Veronica!"
-
-            cd ..
-            git clone git@github.com:dydxprotocol/veronica-v4.git
-
-    - cache-pull@2: {}
-    - xcode-test@4:
-        timeout: 1200
-        inputs:
-        - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
-        - test_repetition_mode: retry_on_failure
-    - cache-push@2: {}
-    - deploy-to-bitrise-io@2: {}
-    envs:
-    - opts:
-        is_expand: false
-      COCOAPODS_SKIP_KOTLIN_BUILD: 'NO'
 meta:
   bitrise.io:
-    stack: osx-xcode-15.0.x
+    stack: osx-xcode-15.2.x
     machine_type_id: g2-m1.4core
 app:
   envs:
@@ -335,6 +347,18 @@ app:
   - opts:
       is_expand: false
     BITRISE_DISTRIBUTION_METHOD: development
+  - opts:
+      is_expand: false
+    URL_SCHEME: dydxv4
+  - opts:
+      is_expand: false
+    PRODUCT_BUNDLE_IDENTIFIER: <PRODUCT_BUNDLE_IDENTIFIER>
+  - opts:
+      is_expand: false
+    WEB_GIT_REPO_SSH_URL: <WEB_GIT_REPO_SSH_URL>
+  - opts:
+      is_expand: false
+    APPLE_DEVELOPMENT_TEAM: <APPLE_DEVELOPMENT_TEAM>
 trigger_map:
 - push_branch: releases/*
   workflow: deploy
