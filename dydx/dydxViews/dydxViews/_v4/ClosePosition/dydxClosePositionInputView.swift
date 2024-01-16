@@ -6,6 +6,7 @@
 //  Copyright © 2023 dYdX Trading Inc. All rights reserved.
 //
 
+import dydxFormatter
 import PlatformUI
 import SwiftUI
 import Utilities
@@ -43,13 +44,14 @@ public class dydxClosePositionInputViewModel: PlatformViewModel {
                             .padding(.top, 40)
 
                         HStack(spacing: 16) {
-                            VStack {
-                                self.group?.createView(parentStyle: style)
-                                self.orderbookViewModel?.createView(parentStyle: style)
-                                Spacer()
-                            }
+                            if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+                                VStack {
+                                    self.group?.createView(parentStyle: style)
+                                    self.orderbookViewModel?.createView(parentStyle: style)
+                                    Spacer()
+                                }
                                 .frame(minWidth: 0, maxWidth: .infinity)
-
+                            }
                             self.editViewModel?.createView(parentStyle: style)
                                 .frame(minWidth: 0, maxWidth: .infinity)
                         }
