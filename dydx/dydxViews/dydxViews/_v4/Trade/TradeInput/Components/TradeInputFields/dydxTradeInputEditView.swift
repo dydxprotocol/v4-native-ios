@@ -5,10 +5,11 @@
 //  Created by John Huang on 1/4/23.
 //
 
-import SwiftUI
-import PlatformUI
-import Utilities
+import dydxFormatter
 import Introspect
+import PlatformUI
+import SwiftUI
+import Utilities
 
 public class dydxTradeInputEditViewModel: PlatformViewModel {
     @Published public var children: [PlatformValueInputViewModel]?
@@ -26,7 +27,7 @@ public class dydxTradeInputEditViewModel: PlatformViewModel {
         return vm
     }
 
-    public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
+    override public func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
@@ -48,29 +49,29 @@ public class dydxTradeInputEditViewModel: PlatformViewModel {
 }
 
 #if DEBUG
-struct dydxTradeInputEditView_Previews_Dark: PreviewProvider {
-    @StateObject static var themeSettings = ThemeSettings.shared
+    struct dydxTradeInputEditView_Previews_Dark: PreviewProvider {
+        @StateObject static var themeSettings = ThemeSettings.shared
 
-    static var previews: some View {
-        ThemeSettings.applyDarkTheme()
-        ThemeSettings.applyStyles()
-        return dydxTradeInputEditViewModel.previewValue
-            .createView()
-        // .edgesIgnoringSafeArea(.bottom)
-            .previewLayout(.sizeThatFits)
+        static var previews: some View {
+            ThemeSettings.applyDarkTheme()
+            ThemeSettings.applyStyles()
+            return dydxTradeInputEditViewModel.previewValue
+                .createView()
+                // .edgesIgnoringSafeArea(.bottom)
+                .previewLayout(.sizeThatFits)
+        }
     }
-}
 
-struct dydxTradeInputEditView_Previews_Light: PreviewProvider {
-    @StateObject static var themeSettings = ThemeSettings.shared
+    struct dydxTradeInputEditView_Previews_Light: PreviewProvider {
+        @StateObject static var themeSettings = ThemeSettings.shared
 
-    static var previews: some View {
-        ThemeSettings.applyLightTheme()
-        ThemeSettings.applyStyles()
-        return dydxTradeInputEditViewModel.previewValue
-            .createView()
-        // .edgesIgnoringSafeArea(.bottom)
-            .previewLayout(.sizeThatFits)
+        static var previews: some View {
+            ThemeSettings.applyLightTheme()
+            ThemeSettings.applyStyles()
+            return dydxTradeInputEditViewModel.previewValue
+                .createView()
+                // .edgesIgnoringSafeArea(.bottom)
+                .previewLayout(.sizeThatFits)
+        }
     }
-}
 #endif

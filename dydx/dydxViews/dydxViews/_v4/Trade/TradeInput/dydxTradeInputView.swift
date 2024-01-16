@@ -5,6 +5,7 @@
 //  Created by Rui Huang on 1/4/23.
 //
 
+import dydxFormatter
 import PlatformUI
 import SwiftUI
 import Utilities
@@ -20,7 +21,9 @@ public class dydxTradeInputViewModel: PlatformViewModel {
 
     @Published public var displayState: DisplayState = .tip
     @Published public var tipState: TipState = .buySell
-    @Published public var isOrderbookCollapsed: Bool = false
+    @Published public var isOrderbookCollapsed: Bool = {
+        return dydxBoolFeatureFlag.enable_spot_experience.isEnabled
+    }()
     @Published public var isShowingValidation: Bool = false
     @Published public var orderTypeViewModel: dydxTradeInputOrderTypeViewModel? = dydxTradeInputOrderTypeViewModel()
     @Published public var sideViewModel: dydxTradeInputSideViewModel? = dydxTradeInputSideViewModel()
@@ -79,8 +82,10 @@ public class dydxTradeInputViewModel: PlatformViewModel {
                         .padding(.horizontal, -spacing)
 
                     HStack(spacing: spacing) {
-                        self.orderbookManagerViewModel?.createView(parentStyle: style)
-                            .frame(width: orderbookWdith)
+                        if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+                            self.orderbookManagerViewModel?.createView(parentStyle: style)
+                                .frame(width: orderbookWdith)
+                        }
                         self.sideViewModel?.createView(parentStyle: style)
                             .frame(width: editViewWidth)
                     }

@@ -22,6 +22,7 @@ protocol dydxReceiptPresenterProtocol: HostedViewPresenterProtocol {
 }
 
 class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxReceiptPresenterProtocol {
+    let quoteBalanceViewModel = dydxReceiptQuoteBalanceViewModel()
     let buyingPowerViewModel = dydxReceiptBuyingPowerViewModel()
     let marginUsageViewModel = dydxReceiptMarginUsageViewModel()
     let feeViewModel = dydxReceiptFeeViewModel()
@@ -62,12 +63,12 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
     }
 
     private func updateLines(lines: [ReceiptLine]) {
-        viewModel?.children = lines.compactMap { line -> PlatformViewModel? in
+        var lines = lines.compactMap { line -> PlatformViewModel? in
             switch line {
             case .buyingpower:
-                return buyingPowerViewModel
+                return dydxBoolFeatureFlag.enable_spot_experience.isEnabled ? nil : buyingPowerViewModel
             case .marginusage:
-                return marginUsageViewModel
+                return dydxBoolFeatureFlag.enable_spot_experience.isEnabled ? nil : marginUsageViewModel
             case .fee:
                 return feeViewModel
             case .expectedprice:
@@ -96,6 +97,29 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
                 return nil
             }
         }
+        if dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+            lines.append(quoteBalanceViewModel)
+        }
+
+        viewModel?.children = lines
+    }
+
+    func updateQuoteBalanceChange(quoteBalance: TradeStatesWithDoubleValues) {
+        let before: AmountTextModel?
+        if let beforeAmount = quoteBalance.current {
+            before = AmountTextModel(amount: beforeAmount, tickSize: NSNumber(value: 0), requiresPositive: true)
+        } else {
+            before = nil
+        }
+
+        let after: AmountTextModel?
+        if let afterAmount = quoteBalance.postOrder, afterAmount != quoteBalance.current {
+            after = AmountTextModel(amount: afterAmount, tickSize: NSNumber(value: 0), requiresPositive: true)
+        } else {
+            after = nil
+        }
+
+        quoteBalanceViewModel.quoteBalanceChange = dydxReceiptQuoteBalanceViewModel.QuoteBalanceChange(symbol: "USD", change: .init(before: before, after: after))
     }
 
     func updateBuyingPowerChange(buyingPower: TradeStatesWithDoubleValues) {

@@ -62,6 +62,14 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
                 }
             }
             .store(in: &subscriptions)
+
+        AbacusStateManager.shared.state.selectedSubaccount
+            .sink { [weak self] subaccount in
+                if let quoteBalance = subaccount?.quoteBalance {
+                    self?.updateQuoteBalanceChange(quoteBalance: quoteBalance)
+                }
+            }
+            .store(in: &subscriptions)
     }
 
     private func updateTradingFee(tradeSummary: TradeInputSummary?) {

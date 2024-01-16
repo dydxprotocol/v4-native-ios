@@ -32,6 +32,9 @@ final class dydxTransferReceiptViewPresenter: dydxReceiptPresenter {
                 if let buyingPower = subaccount?.buyingPower {
                     self?.updateBuyingPowerChange(buyingPower: buyingPower)
                 }
+                if let quoteBalance = subaccount?.quoteBalance {
+                    self?.updateQuoteBalanceChange(quoteBalance: quoteBalance)
+                }
             }
             .store(in: &subscriptions)
     }

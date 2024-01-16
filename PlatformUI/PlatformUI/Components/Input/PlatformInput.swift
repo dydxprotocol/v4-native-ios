@@ -6,6 +6,7 @@
 //  Copyright © 2022 dYdX Trading Inc. All rights reserved.
 //
 
+import dydxFormatter
 import SwiftUI
 import Utilities
 import Introspect
@@ -306,7 +307,11 @@ open class PlatformOptionsInputViewModel: PlatformValueInputViewModel {
     @Published public var options: [InputSelectOption]? // options of values to select from, set at update
     
     public var optionTitles: [String]? {
-        options?.compactMap { $0.string }
+        if dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+            return []
+        } else {
+            return options?.compactMap { $0.string }
+        }
     }
     
     override open var value: String? {

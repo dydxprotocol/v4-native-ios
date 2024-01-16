@@ -5,6 +5,7 @@
 //  Created by John Huang on 1/4/23.
 //
 
+import dydxFormatter
 import PlatformUI
 import SwiftUI
 import Utilities
@@ -27,7 +28,12 @@ public class dydxReceiptViewModel: PlatformViewModel {
 
     public static var previewValue: dydxReceiptViewModel {
         let vm = dydxReceiptViewModel()
-        vm.children = [
+        vm.children = dydxBoolFeatureFlag.enable_spot_experience.isEnabled ?
+        [
+            dydxReceiptQuoteBalanceViewModel.previewValue,
+            dydxReceiptFeeViewModel.previewValue,
+            dydxReceiptItemViewModel.previewValue
+        ] : [
             dydxReceiptBuyingPowerViewModel.previewValue,
             dydxReceiptMarginUsageViewModel.previewValue,
             dydxReceiptFeeViewModel.previewValue,

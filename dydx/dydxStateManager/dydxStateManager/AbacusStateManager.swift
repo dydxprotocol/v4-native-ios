@@ -246,7 +246,11 @@ public final class AbacusStateManager: NSObject {
     }
 
     public func startTrade() {
-        asyncStateManager.trade(data: nil, type: nil)
+        if dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+            asyncStateManager.trade(data: "MARKET", type: TradeInputField.type)
+        } else {
+            asyncStateManager.trade(data: nil, type: nil)
+        }
     }
 
     public func startTransfer() {

@@ -135,85 +135,88 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
             sizeViewModel.tokenSymbol = asset?.id ?? configsAndAsset?.assetId
             visible.append(sizeViewModel)
 
-            if tradeInput.options?.needsLeverage ?? false {
-                if let side = tradeInput.side {
-                    switch side {
-                    case .buy:
-                        leverageViewModel.tradeSide = .BUY
-                    case .sell:
-                        leverageViewModel.tradeSide = .SELL
-                    default:
-                        break
+            if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+                if tradeInput.options?.needsLeverage ?? false {
+                    if let side = tradeInput.side {
+                        switch side {
+                        case .buy:
+                            leverageViewModel.tradeSide = .BUY
+                        case .sell:
+                            leverageViewModel.tradeSide = .SELL
+                        default:
+                            break
+                        }
                     }
+                    if let leverage = tradeInput.size?.leverage?.doubleValue {
+                        leverageViewModel.leverage = leverage
+                    }
+                    leverageViewModel.maxLeverage = tradeInput.options?.maxLeverage?.doubleValue ?? 10
+                    leverageViewModel.positionLeverage = positionLeverage ?? 0
+                    visible.append(leverageViewModel)
                 }
-                if let leverage = tradeInput.size?.leverage?.doubleValue {
-                    leverageViewModel.leverage = leverage
+            }
+        }
+        if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+            if tradeInput.options?.needsLimitPrice ?? false {
+                if let limitPrice = tradeInput.price?.limitPrice {
+                    limitPriceViewModel.value = dydxFormatter.shared.raw(number: limitPrice, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 2)
+                } else {
+                    limitPriceViewModel.value = nil
                 }
-                leverageViewModel.maxLeverage = tradeInput.options?.maxLeverage?.doubleValue ?? 10
-                leverageViewModel.positionLeverage = positionLeverage ?? 0
-                visible.append(leverageViewModel)
+                visible.append(limitPriceViewModel)
             }
-        }
-        if tradeInput.options?.needsLimitPrice ?? false {
-            if let limitPrice = tradeInput.price?.limitPrice {
-                limitPriceViewModel.value = dydxFormatter.shared.raw(number: limitPrice, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 2)
-            } else {
-                limitPriceViewModel.value = nil
+            if tradeInput.options?.needsTriggerPrice ?? false {
+                if let triggerPrice = tradeInput.price?.triggerPrice {
+                    triggerPriceViewModel.value = dydxFormatter.shared.raw(number: triggerPrice, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 2)
+                } else {
+                    triggerPriceViewModel.value = nil
+                }
+                visible.append(triggerPriceViewModel)
             }
-            visible.append(limitPriceViewModel)
-        }
-        if tradeInput.options?.needsTriggerPrice ?? false {
-            if let triggerPrice = tradeInput.price?.triggerPrice {
-                triggerPriceViewModel.value = dydxFormatter.shared.raw(number: triggerPrice, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 2)
-            } else {
-                triggerPriceViewModel.value = nil
+            if tradeInput.options?.needsTrailingPercent ?? false {
+                if let trailingPercent = tradeInput.price?.trailingPercent?.doubleValue {
+                    trailingPercentViewModel.value = dydxFormatter.shared.percent(number: trailingPercent, digits: 0)
+                } else {
+                    trailingPercentViewModel.value = nil
+                }
+                visible.append(trailingPercentViewModel)
             }
-            visible.append(triggerPriceViewModel)
-        }
-        if tradeInput.options?.needsTrailingPercent ?? false {
-            if let trailingPercent = tradeInput.price?.trailingPercent?.doubleValue {
-                trailingPercentViewModel.value = dydxFormatter.shared.percent(number: trailingPercent, digits: 0)
-            } else {
-                trailingPercentViewModel.value = nil
+            if let timeInForceOptions = tradeInput.options?.timeInForceOptions {
+                var options = [InputSelectOption]()
+                for timeInForce in timeInForceOptions {
+                    let string = timeInForce.string ?? DataLocalizer.shared?.localize(path: timeInForce.stringKey ?? "", params: nil) ?? ""
+                    options.append(InputSelectOption(value: timeInForce.type, string: string))
+                }
+                timeInForceViewModel.options = options
+                timeInForceViewModel.value = tradeInput.timeInForce
+                visible.append(timeInForceViewModel)
             }
-            visible.append(trailingPercentViewModel)
-        }
-        if let timeInForceOptions = tradeInput.options?.timeInForceOptions {
-            var options = [InputSelectOption]()
-            for timeInForce in timeInForceOptions {
-                let string = timeInForce.string ?? DataLocalizer.shared?.localize(path: timeInForce.stringKey ?? "", params: nil) ?? ""
-                options.append(InputSelectOption(value: timeInForce.type, string: string))
+            if tradeInput.options?.needsGoodUntil ?? false {
+                if let goodUntilUnitOptions = tradeInput.options?.goodTilUnitOptions {
+                    goodTilViewModel.unit?.options = AbacusUtils.translate(options: goodUntilUnitOptions)
+                    goodTilViewModel.unit?.value = tradeInput.goodTil?.unit
+                    visible.append(goodTilViewModel)
+                }
+                if let duration = tradeInput.goodTil?.duration?.intValue {
+                    goodTilViewModel.duration?.value = "\(duration)"
+                } else {
+                    goodTilViewModel.duration?.value = nil
+                }
             }
-            timeInForceViewModel.options = options
-            timeInForceViewModel.value = tradeInput.timeInForce
-            visible.append(timeInForceViewModel)
-        }
-        if tradeInput.options?.needsGoodUntil ?? false {
-            if let goodUntilUnitOptions = tradeInput.options?.goodTilUnitOptions {
-                goodTilViewModel.unit?.options = AbacusUtils.translate(options: goodUntilUnitOptions)
-                goodTilViewModel.unit?.value = tradeInput.goodTil?.unit
-                visible.append(goodTilViewModel)
+            if let executionOptions = tradeInput.options?.executionOptions {
+                executionViewModel.options = AbacusUtils.translate(options: executionOptions)
+                executionViewModel.value = tradeInput.execution
+                visible.append(executionViewModel)
             }
-            if let duration = tradeInput.goodTil?.duration?.intValue {
-                goodTilViewModel.duration?.value = "\(duration)"
-            } else {
-                goodTilViewModel.duration?.value = nil
-            }
-        }
-        if let executionOptions = tradeInput.options?.executionOptions {
-            executionViewModel.options = AbacusUtils.translate(options: executionOptions)
-            executionViewModel.value = tradeInput.execution
-            visible.append(executionViewModel)
-        }
 
-        postOnlyViewModel.isEnabled = tradeInput.options?.needsPostOnly == true
-        postOnlyViewModel.value = (tradeInput.postOnly == true) ? "true" : "false"
-        visible.append(postOnlyViewModel)
+            postOnlyViewModel.isEnabled = tradeInput.options?.needsPostOnly == true
+            postOnlyViewModel.value = (tradeInput.postOnly == true) ? "true" : "false"
+            visible.append(postOnlyViewModel)
 
-        reduceOnlyViewModel.isEnabled = tradeInput.options?.needsReduceOnly == true
-        reduceOnlyViewModel.value = (tradeInput.reduceOnly == true) ? "true" : "false"
-        visible.append(reduceOnlyViewModel)
-
+            reduceOnlyViewModel.isEnabled = tradeInput.options?.needsReduceOnly == true
+            reduceOnlyViewModel.value = (tradeInput.reduceOnly == true) ? "true" : "false"
+            visible.append(reduceOnlyViewModel)
+        }
         viewModel?.children = visible
     }
 }
