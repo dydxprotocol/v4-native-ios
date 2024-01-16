@@ -50,9 +50,9 @@ class dydxMarketInfoPagingViewPresenter: HostedViewPresenter<dydxMarketInfoPagin
     private var tiles: [MarketInfoPagingTile] {
         if dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
             return [
-                MarketInfoPagingTile(type: .price,
-                                     text: DataLocalizer.localize(path: "APP.GENERAL.PRICE_CHART_SHORT"),
-                                     icon: UIImage.named("icon_market_price", bundles: Bundle.particles) ?? UIImage())
+//                MarketInfoPagingTile(type: .price,
+//                                     text: DataLocalizer.localize(path: "APP.GENERAL.PRICE_CHART_SHORT"),
+//                                     icon: UIImage.named("icon_market_price", bundles: Bundle.particles) ?? UIImage())
             ]
                 .filterNils()
         } else {

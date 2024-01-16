@@ -139,7 +139,7 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
 
         combinedGraph.chartView = chartView
         combinedGraph.xAxisFormatter = xAxisFormatter
-        combinedGraph.presenters = [candlesGraph, barGraph]
+        combinedGraph.presenters = dydxBoolFeatureFlag.enable_spot_experience.isEnabled ? [lineGraph, barGraph] : [candlesGraph, barGraph]
 
         candlesGraph.interactor = listInteractor
         lineGraph.interactor = listInteractor

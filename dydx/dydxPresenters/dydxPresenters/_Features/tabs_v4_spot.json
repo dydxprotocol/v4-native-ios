@@ -12,12 +12,6 @@
         "split":true
     },
     {
-        "title":"",
-        "path":"/history/history",
-        "image":"icon_trade",
-        "split":true
-    },
-    {
         "path":"/alerts",
         "title":"",
         "image":"icon_alerts",

@@ -6,6 +6,7 @@
 //  Copyright © 2022 dYdX Trading Inc. All rights reserved.
 //
 
+import dydxFormatter
 import SwiftUI
 import PlatformUI
 import Utilities
@@ -34,8 +35,10 @@ public class dydxMarketPriceCandlesControlViewModel: PlatformViewModel {
 
             return AnyView(
                 HStack {
-                    self.types.createView(parentStyle: style)
-                    Spacer()
+                    if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+                        self.types.createView(parentStyle: style)
+                        Spacer()
+                    }
                     self.resolutions.createView(parentStyle: style)
                 }
             )
