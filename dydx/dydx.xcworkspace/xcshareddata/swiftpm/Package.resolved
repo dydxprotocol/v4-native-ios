@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "percy-xcui-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/percy/percy-xcui-swift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a2e9a86dfc3f5b69ef53cbda28a0ea71098c9f77"
+      }
+    },
+    {
       "identity" : "qrcode",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WalletConnect/QRCode",
