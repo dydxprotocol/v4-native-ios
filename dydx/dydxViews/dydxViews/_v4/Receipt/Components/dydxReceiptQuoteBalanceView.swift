@@ -40,7 +40,7 @@ public class dydxReceiptQuoteBalanceViewModel: PlatformViewModel {
 
             return AnyView(
                 HStack {
-                    Text("Cash")
+                    Text("Available Fund")
                         .themeFont(fontSize: .small)
                         .themeColor(foreground: .textTertiary)
                         .lineLimit(1)

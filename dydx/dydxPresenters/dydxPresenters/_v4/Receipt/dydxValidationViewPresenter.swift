@@ -5,15 +5,16 @@
 //  Created by Rui Huang on 1/25/23.
 //
 
-import Utilities
-import dydxViews
-import PlatformParticles
-import RoutingKit
-import ParticlesKit
-import PlatformUI
 import Abacus
 import Combine
+import dydxFormatter
 import dydxStateManager
+import dydxViews
+import ParticlesKit
+import PlatformParticles
+import PlatformUI
+import RoutingKit
+import Utilities
 
 protocol dydxValidationViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxValidationViewModel? { get }
@@ -24,6 +25,7 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
         case open
         case close
     }
+
     enum ReceiptType {
         case trade(TradeReceiptType), transfer
     }
@@ -34,7 +36,7 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
     init(receiptType: ReceiptType) {
         self.receiptType = receiptType
         switch receiptType {
-        case .trade(let tradeReceiptType):
+        case let .trade(tradeReceiptType):
             receiptPresenter = dydxTradeReceiptPresenter(tradeReceiptType: tradeReceiptType)
         case .transfer:
             receiptPresenter = dydxTransferReceiptViewPresenter()
@@ -51,13 +53,15 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
     override func start() {
         super.start()
 
-        Publishers.CombineLatest(
+        Publishers.CombineLatest3(
+            AbacusStateManager.shared.state.selectedSubaccount,
             AbacusStateManager.shared.state.validationErrors,
             AbacusStateManager.shared.state.transferInput
-               .removeDuplicates()
+                .removeDuplicates()
         )
-        .sink { [weak self] validationErrors, transferInput in
-            self?.update(errors: validationErrors, transferInput: transferInput)
+        .sink { [weak self] subaccount, validationErrors, transferInput in
+            let customErrors = self?.customErrors(subaccount: subaccount) ?? []
+            self?.update(errors: customErrors.count > 0 ? customErrors : validationErrors, transferInput: transferInput)
         }
         .store(in: &subscriptions)
 
@@ -68,6 +72,46 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
         super.stop()
 
         receiptPresenter.stop()
+    }
+
+    private func customErrors(subaccount: Subaccount?) -> [ValidationError] {
+        if dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+            if (subaccount?.quoteBalance?.postOrder?.doubleValue ?? 0.0) < 0.0 {
+                return [
+                    ValidationError(
+                        code: "ERROR_NOT_ENOUGH_FUND",
+                        type: ErrorType.error,
+                        fields: ["size.size"],
+                        action: nil,
+                        link: nil,
+                        resources: ErrorResources(
+                            title: ErrorString(stringKey: "NOT_ENOUGH_FUND_TITLE", params: nil, localized: "Not enough fund"),
+                            text: ErrorString(stringKey: "NOT_ENOUGH_FUND_TEXT", params: nil, localized: "Not enough fund to execute the order"),
+                            action: nil)
+                    )
+                ]
+            } else if let shortPosition = subaccount?.openPositions?.first(where: { position in
+                    position.side.postOrder == PositionSide.short_
+            }) {
+                return [
+                    ValidationError(
+                        code: "ERROR_NOT_ENOUGH_POSITION",
+                        type: ErrorType.error,
+                        fields: ["size.size"],
+                        action: nil,
+                        link: nil,
+                        resources: ErrorResources(
+                            title: ErrorString(stringKey: "ERROR_NOT_ENOUGH_POSITION_TITLE", params: nil, localized: "Overselling"),
+                            text: ErrorString(stringKey: "ERROR_NOT_ENOUGH_POSITION_TEXT", params: nil, localized: "You cannot sell more than you have"),
+                            action: nil)
+                    )
+                ]
+            } else {
+                return []
+            }
+        } else {
+            return []
+        }
     }
 
     private func update(errors: [ValidationError], transferInput: TransferInput?) {

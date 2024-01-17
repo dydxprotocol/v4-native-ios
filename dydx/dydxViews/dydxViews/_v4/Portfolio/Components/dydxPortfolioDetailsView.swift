@@ -63,7 +63,7 @@ public class dydxPortfolioDetailsViewModel: PlatformViewModel {
         VStack(spacing: 8) {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Cash")
+                    Text("Available Fund")
                         .themeColor(foreground: .textTertiary)
                         .themeFont(fontSize: .small)
 

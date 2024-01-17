@@ -6,6 +6,7 @@
 //
 
 import Abacus
+import dydxFormatter
 import dydxStateManager
 import Utilities
 import dydxViews
@@ -41,9 +42,11 @@ internal class dydxTradeInputOrderTypeViewPresenter: HostedViewPresenter<dydxTra
     }
 
     private func update(tradeInput: TradeInput) {
-        if let typeOptions = tradeInput.options?.typeOptions {
-            viewModel?.options = AbacusUtils.translate(options: typeOptions)
+        if !dydxBoolFeatureFlag.enable_spot_experience.isEnabled {
+            if let typeOptions = tradeInput.options?.typeOptions {
+                viewModel?.options = AbacusUtils.translate(options: typeOptions)
+            }
+            viewModel?.value = tradeInput.type?.rawValue
         }
-        viewModel?.value = tradeInput.type?.rawValue
     }
 }
