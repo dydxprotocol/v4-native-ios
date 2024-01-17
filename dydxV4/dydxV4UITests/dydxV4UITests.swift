@@ -34,6 +34,8 @@ final class dydxV4UITests: XCTestCase {
         let appPercy = AppPercy()
         try appPercy.screenshot(name: "First Screenshot")
         
+        print(1)
+        
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
