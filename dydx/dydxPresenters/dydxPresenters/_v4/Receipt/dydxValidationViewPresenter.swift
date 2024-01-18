@@ -86,7 +86,7 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
                         link: nil,
                         resources: ErrorResources(
                             title: ErrorString(stringKey: "NOT_ENOUGH_FUND_TITLE", params: nil, localized: "Not enough fund"),
-                            text: ErrorString(stringKey: "NOT_ENOUGH_FUND_TEXT", params: nil, localized: "Not enough fund to execute the order"),
+                            text: ErrorString(stringKey: "NOT_ENOUGH_FUND_TEXT", params: nil, localized: "Not enough fund to execute the order\n\nTo trade on leverage, try dYdX v4"),
                             action: nil)
                     )
                 ]
@@ -102,7 +102,7 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
                         link: nil,
                         resources: ErrorResources(
                             title: ErrorString(stringKey: "ERROR_NOT_ENOUGH_POSITION_TITLE", params: nil, localized: "Overselling"),
-                            text: ErrorString(stringKey: "ERROR_NOT_ENOUGH_POSITION_TEXT", params: nil, localized: "You cannot sell more than you have"),
+                            text: ErrorString(stringKey: "ERROR_NOT_ENOUGH_POSITION_TEXT", params: nil, localized: "You cannot sell more than you have\n\nTo short market, try dYdX v4"),
                             action: nil)
                     )
                 ]
