@@ -22,6 +22,19 @@ internal protocol dydxTradeInputEditViewPresenterProtocol: HostedViewPresenterPr
 }
 
 internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInputEditViewModel>, dydxTradeInputEditViewPresenterProtocol {
+    private var tradeInput: TradeInput?
+    private var configsAndAsset: MarketConfigsAndAsset?
+    private var positionLeverage: Double?
+    private var oraclePrice: Double?
+    private var isBuy: Bool { tradeInput?.side == .buy }
+    private var isSell: Bool { tradeInput?.side == .sell }
+    private var marketConfigs: MarketConfigs? { configsAndAsset?.configs }
+    private var hasNonZeroSize: Bool { (tradeInput?.size?.size?.doubleValue ?? 0) > 0 || (tradeInput?.size?.usdcSize?.doubleValue ?? 0) > 0 }
+    private var hasNonZeroLeverage: Bool { (tradeInput?.size?.leverage?.doubleValue ?? 0) > 0 }
+    private var hasNonZeroLimitPrice: Bool { (tradeInput?.price?.limitPrice?.doubleValue ?? 0) > 0 }
+    private var hasNonZeroTriggerPrice: Bool { (tradeInput?.price?.triggerPrice?.doubleValue ?? 0) > 0 }
+    private var isTriggerPriceGreaterThanOracle: Bool { (tradeInput?.price?.triggerPrice?.doubleValue ?? 0) > (oraclePrice ?? 0) }
+
     private lazy var sizeViewModel: dydxTradeInputSizeViewModel = {
         let viewModel = dydxTradeInputSizeViewModel(label: DataLocalizer.localize(path: "APP.GENERAL.AMOUNT"), placeHolder: "0.000") { [weak self] value in
             if let vm = self?.sizeViewModel {
@@ -99,121 +112,159 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
                 .eraseToAnyPublisher()
 
         Publishers
-            .CombineLatest3(
+            .CombineLatest4(
                 AbacusStateManager.shared.state.tradeInput.compactMap { $0 },
                 AbacusStateManager.shared.state.configsAndAssetMap,
-                positionLeveragePublisher)
-            .sink { [weak self] tradeInput, configsAndAssetMap, positionLeverage in
+                AbacusStateManager.shared.state.marketMap,
+                positionLeveragePublisher
+            )
+            .sink { [weak self] tradeInput, configsAndAssetMap, marketMap, positionLeverage in
                 if let marketId = tradeInput.marketId {
-                    self?.update(tradeInput: tradeInput, configsAndAsset: configsAndAssetMap[marketId], positionLeverage: positionLeverage)
+                    self?.update(tradeInput: tradeInput, configsAndAsset: configsAndAssetMap[marketId], positionLeverage: positionLeverage, market: marketMap[marketId])
                 }
             }
             .store(in: &subscriptions)
     }
 
-    private func update(tradeInput: TradeInput, configsAndAsset: MarketConfigsAndAsset?, positionLeverage: Double?) {
-        let marketConfigs = configsAndAsset?.configs
-        let asset = configsAndAsset?.asset
+    private func getSizeInput() -> PlatformValueInputViewModel? {
+        if let size = tradeInput?.size?.size {
+            sizeViewModel.size = dydxFormatter.shared.raw(number: size, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
+        } else {
+            sizeViewModel.size = nil
+        }
+        if let usdcSize = tradeInput?.size?.usdcSize {
+            sizeViewModel.usdcSize = dydxFormatter.shared.raw(number: usdcSize, digits: 2)
+        } else {
+            sizeViewModel.usdcSize = nil
+        }
+        sizeViewModel.tokenSymbol = configsAndAsset?.asset?.id ?? configsAndAsset?.assetId
+        return sizeViewModel
+    }
 
-        var visible = [PlatformValueInputViewModel]()
+    private func getLeverageInput() -> PlatformValueInputViewModel? {
+        guard !hasNonZeroLimitPrice && !hasNonZeroTriggerPrice else { return nil }
+        if let side = tradeInput?.side {
+            switch side {
+            case .buy:
+                leverageViewModel.tradeSide = .BUY
+            case .sell:
+                leverageViewModel.tradeSide = .SELL
+            default:
+                break
+            }
+        }
+        if let leverage = tradeInput?.size?.leverage?.doubleValue {
+            leverageViewModel.leverage = leverage
+        }
+        leverageViewModel.maxLeverage = tradeInput?.options?.maxLeverage?.doubleValue ?? 10
+        leverageViewModel.positionLeverage = positionLeverage ?? 0
+        return leverageViewModel
+    }
+
+    private func getLimitPriceInput() -> PlatformValueInputViewModel? {
+        guard hasNonZeroSize else { return nil }
+        if let limitPrice = tradeInput?.price?.limitPrice {
+            limitPriceViewModel.value = dydxFormatter.shared.raw(number: limitPrice, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 2)
+        } else {
+            limitPriceViewModel.value = nil
+        }
+        return limitPriceViewModel
+    }
+
+    private func getTriggerPriceInput() -> PlatformValueInputViewModel? {
+        guard hasNonZeroSize else { return nil }
+        if let triggerPrice = tradeInput?.price?.triggerPrice {
+            triggerPriceViewModel.value = dydxFormatter.shared.raw(number: triggerPrice, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 2)
+        } else {
+            triggerPriceViewModel.value = nil
+        }
+        return triggerPriceViewModel
+    }
+
+    private func getTimeInForceInput() -> PlatformValueInputViewModel? {
+        var options = [InputSelectOption]()
+        for timeInForce in tradeInput?.options?.timeInForceOptions ?? [] {
+            let string = timeInForce.string ?? DataLocalizer.shared?.localize(path: timeInForce.stringKey ?? "", params: nil) ?? ""
+            options.append(InputSelectOption(value: timeInForce.type, string: string))
+        }
+        timeInForceViewModel.options = options
+        timeInForceViewModel.value = tradeInput?.timeInForce
+        return timeInForceViewModel
+    }
+
+    private func getGoodUntilInput() -> PlatformValueInputViewModel? {
+        if let goodUntilUnitOptions = tradeInput?.options?.goodTilUnitOptions {
+            goodTilViewModel.unit?.options = AbacusUtils.translate(options: goodUntilUnitOptions)
+            goodTilViewModel.unit?.value = tradeInput?.goodTil?.unit
+            return goodTilViewModel
+        }
+        if let duration = tradeInput?.goodTil?.duration?.intValue {
+            goodTilViewModel.duration?.value = "\(duration)"
+        } else {
+            goodTilViewModel.duration?.value = nil
+        }
+        return nil
+    }
+
+    private func getExecutionInput() -> PlatformValueInputViewModel? {
+        if let executionOptions = tradeInput?.options?.executionOptions {
+            executionViewModel.options = AbacusUtils.translate(options: executionOptions)
+            executionViewModel.value = tradeInput?.execution
+            return executionViewModel
+        } else {
+            return nil
+        }
+    }
+
+    private func getReduceOnly() -> PlatformValueInputViewModel? {
+        reduceOnlyViewModel.isEnabled = tradeInput?.options?.needsReduceOnly == true
+        reduceOnlyViewModel.value = (tradeInput?.reduceOnly == true) ? "true" : "false"
+        return reduceOnlyViewModel
+    }
+
+    private func getPostOnly() -> PlatformValueInputViewModel? {
+        postOnlyViewModel.isEnabled = tradeInput?.options?.needsPostOnly == true
+        postOnlyViewModel.value = (tradeInput?.postOnly == true) ? "true" : "false"
+        return postOnlyViewModel
+    }
+
+    private func update(tradeInput: TradeInput, configsAndAsset: MarketConfigsAndAsset?, positionLeverage: Double?, market: PerpetualMarket?) {
+        self.tradeInput = tradeInput
+        self.configsAndAsset = configsAndAsset
+        self.positionLeverage = positionLeverage
+        self.oraclePrice = market?.oraclePrice?.doubleValue
 
         sizeViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
         limitPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
         triggerPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
 
-        if tradeInput.options?.needsSize ?? false {
-            if let size = tradeInput.size?.size {
-                sizeViewModel.size = dydxFormatter.shared.raw(number: size, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
-            } else {
-                sizeViewModel.size = nil
-            }
-            if let usdcSize = tradeInput.size?.usdcSize {
-                sizeViewModel.usdcSize = dydxFormatter.shared.raw(number: usdcSize, digits: 2)
-            } else {
-                sizeViewModel.usdcSize = nil
-            }
-            sizeViewModel.tokenSymbol = asset?.id ?? configsAndAsset?.assetId
-            visible.append(sizeViewModel)
+        viewModel?.children = [
+            getSizeInput(),
+            getLeverageInput(),
+            getLimitPriceInput(),
+            getTriggerPriceInput()
+        ].compactMap { $0 }
 
-            if tradeInput.options?.needsLeverage ?? false {
-                if let side = tradeInput.side {
-                    switch side {
-                    case .buy:
-                        leverageViewModel.tradeSide = .BUY
-                    case .sell:
-                        leverageViewModel.tradeSide = .SELL
-                    default:
-                        break
-                    }
-                }
-                if let leverage = tradeInput.size?.leverage?.doubleValue {
-                    leverageViewModel.leverage = leverage
-                }
-                leverageViewModel.maxLeverage = tradeInput.options?.maxLeverage?.doubleValue ?? 10
-                leverageViewModel.positionLeverage = positionLeverage ?? 0
-                visible.append(leverageViewModel)
-            }
-        }
-        if tradeInput.options?.needsLimitPrice ?? false {
-            if let limitPrice = tradeInput.price?.limitPrice {
-                limitPriceViewModel.value = dydxFormatter.shared.raw(number: limitPrice, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 2)
-            } else {
-                limitPriceViewModel.value = nil
-            }
-            visible.append(limitPriceViewModel)
-        }
-        if tradeInput.options?.needsTriggerPrice ?? false {
-            if let triggerPrice = tradeInput.price?.triggerPrice {
-                triggerPriceViewModel.value = dydxFormatter.shared.raw(number: triggerPrice, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 2)
-            } else {
-                triggerPriceViewModel.value = nil
-            }
-            visible.append(triggerPriceViewModel)
-        }
-        if tradeInput.options?.needsTrailingPercent ?? false {
-            if let trailingPercent = tradeInput.price?.trailingPercent?.doubleValue {
-                trailingPercentViewModel.value = dydxFormatter.shared.percent(number: trailingPercent, digits: 0)
-            } else {
-                trailingPercentViewModel.value = nil
-            }
-            visible.append(trailingPercentViewModel)
-        }
-        if let timeInForceOptions = tradeInput.options?.timeInForceOptions {
-            var options = [InputSelectOption]()
-            for timeInForce in timeInForceOptions {
-                let string = timeInForce.string ?? DataLocalizer.shared?.localize(path: timeInForce.stringKey ?? "", params: nil) ?? ""
-                options.append(InputSelectOption(value: timeInForce.type, string: string))
-            }
-            timeInForceViewModel.options = options
-            timeInForceViewModel.value = tradeInput.timeInForce
-            visible.append(timeInForceViewModel)
-        }
-        if tradeInput.options?.needsGoodUntil ?? false {
-            if let goodUntilUnitOptions = tradeInput.options?.goodTilUnitOptions {
-                goodTilViewModel.unit?.options = AbacusUtils.translate(options: goodUntilUnitOptions)
-                goodTilViewModel.unit?.value = tradeInput.goodTil?.unit
-                visible.append(goodTilViewModel)
-            }
-            if let duration = tradeInput.goodTil?.duration?.intValue {
-                goodTilViewModel.duration?.value = "\(duration)"
-            } else {
-                goodTilViewModel.duration?.value = nil
-            }
-        }
-        if let executionOptions = tradeInput.options?.executionOptions {
-            executionViewModel.options = AbacusUtils.translate(options: executionOptions)
-            executionViewModel.value = tradeInput.execution
-            visible.append(executionViewModel)
+        let isMarketOrder = hasNonZeroSize && !hasNonZeroLimitPrice && !hasNonZeroTriggerPrice
+        let isLimitOrder = hasNonZeroSize && hasNonZeroLimitPrice && !hasNonZeroTriggerPrice
+        let isStopLimitOrder = hasNonZeroSize && hasNonZeroLimitPrice && !hasNonZeroTriggerPrice && (isTriggerPriceGreaterThanOracle && isBuy || !isTriggerPriceGreaterThanOracle && isSell)
+        let isStopMarketOrder = hasNonZeroSize && !hasNonZeroLimitPrice && !hasNonZeroTriggerPrice && (isTriggerPriceGreaterThanOracle && isBuy || !isTriggerPriceGreaterThanOracle && isSell)
+        let isTakeProfitLimitOrder = hasNonZeroSize && !hasNonZeroLimitPrice && !hasNonZeroTriggerPrice && (!isTriggerPriceGreaterThanOracle && isBuy || isTriggerPriceGreaterThanOracle && isSell)
+        let isTakeProfitMarketOrder = hasNonZeroSize && !hasNonZeroLimitPrice && !hasNonZeroTriggerPrice && (!isTriggerPriceGreaterThanOracle && isBuy || isTriggerPriceGreaterThanOracle && isSell)
+
+        if isMarketOrder {
+            AbacusStateManager.shared.trade(input: OrderType.market.rawValue, type: TradeInputField.type)
+        } else if isLimitOrder {
+            AbacusStateManager.shared.trade(input: OrderType.limit.rawValue, type: TradeInputField.type)
+        } else if isStopLimitOrder {
+            AbacusStateManager.shared.trade(input: OrderType.stoplimit.rawValue, type: TradeInputField.type)
+        } else if isStopMarketOrder {
+            AbacusStateManager.shared.trade(input: OrderType.stopmarket.rawValue, type: TradeInputField.type)
+        } else if isTakeProfitLimitOrder {
+            AbacusStateManager.shared.trade(input: OrderType.takeprofitlimit.rawValue, type: TradeInputField.type)
+        } else if isTakeProfitMarketOrder {
+            AbacusStateManager.shared.trade(input: OrderType.takeprofitmarket.rawValue, type: TradeInputField.type)
         }
 
-        postOnlyViewModel.isEnabled = tradeInput.options?.needsPostOnly == true
-        postOnlyViewModel.value = (tradeInput.postOnly == true) ? "true" : "false"
-        visible.append(postOnlyViewModel)
-
-        reduceOnlyViewModel.isEnabled = tradeInput.options?.needsReduceOnly == true
-        reduceOnlyViewModel.value = (tradeInput.reduceOnly == true) ? "true" : "false"
-        visible.append(reduceOnlyViewModel)
-
-        viewModel?.children = visible
     }
 }
