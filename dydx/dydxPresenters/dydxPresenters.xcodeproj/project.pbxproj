@@ -122,6 +122,7 @@
 		02FA5B7E2A12FB280045F2F5 /* dydxTransferWithdrawalViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA5B7D2A12FB280045F2F5 /* dydxTransferWithdrawalViewPresenter.swift */; };
 		02FAFA5C29D4E08E001A0903 /* dydxDebugViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FAFA5B29D4E08E001A0903 /* dydxDebugViewBuilder.swift */; };
 		02FF0BD229AE92FE00781EDA /* dydxWalletListViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF0BD129AE92FE00781EDA /* dydxWalletListViewBuilder.swift */; };
+		2706409A2B598CE7006A10C4 /* dydxOrderTranslationViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270640992B598CE7006A10C4 /* dydxOrderTranslationViewPresenter.swift */; };
 		270BA8F32A6F278F009212EA /* dydxDebugThemeViewerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270BA8F22A6F278F009212EA /* dydxDebugThemeViewerBuilder.swift */; };
 		270E7E242A5F6B1B00136793 /* dydxTradeInputSideViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270E7E232A5F6B1B00136793 /* dydxTradeInputSideViewPresenter.swift */; };
 		27351D452AC4A67900E4A563 /* dydxRestrictionsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27351D442AC4A67900E4A563 /* dydxRestrictionsWorker.swift */; };
@@ -463,6 +464,7 @@
 		02FA5B7D2A12FB280045F2F5 /* dydxTransferWithdrawalViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferWithdrawalViewPresenter.swift; sourceTree = "<group>"; };
 		02FAFA5B29D4E08E001A0903 /* dydxDebugViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxDebugViewBuilder.swift; sourceTree = "<group>"; };
 		02FF0BD129AE92FE00781EDA /* dydxWalletListViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWalletListViewBuilder.swift; sourceTree = "<group>"; };
+		270640992B598CE7006A10C4 /* dydxOrderTranslationViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOrderTranslationViewPresenter.swift; sourceTree = "<group>"; };
 		270BA8F22A6F278F009212EA /* dydxDebugThemeViewerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxDebugThemeViewerBuilder.swift; sourceTree = "<group>"; };
 		270E7E232A5F6B1B00136793 /* dydxTradeInputSideViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradeInputSideViewPresenter.swift; sourceTree = "<group>"; };
 		27351D442AC4A67900E4A563 /* dydxRestrictionsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRestrictionsWorker.swift; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 			children = (
 				02031F132AC374150069E00D /* dydxTradeSheetTipBuySellViewPresenter.swift */,
 				02031F1B2AC3A7130069E00D /* dydxTradeSheetTipDraftViewPresenter.swift */,
+				270640992B598CE7006A10C4 /* dydxOrderTranslationViewPresenter.swift */,
 			);
 			path = SheetTip;
 			sourceTree = "<group>";
@@ -1792,6 +1795,7 @@
 				020EB697299D36AD00E8026B /* dydxApiStatusWorker.swift in Sources */,
 				02A5C85E297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift in Sources */,
 				023848C22A9E637C00B1A673 /* SettingsLandingViewPresenter.swift in Sources */,
+				2706409A2B598CE7006A10C4 /* dydxOrderTranslationViewPresenter.swift in Sources */,
 				0258BA23299294BF0098E1BE /* dydxProfileViewBuilder.swift in Sources */,
 				0208631028F5186E00C9D3A0 /* OrderbookLineDataPoint.swift in Sources */,
 				0276FA992A0DB8FD000BDF0B /* Model+Ext.swift in Sources */,

@@ -126,6 +126,7 @@ private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputVie
     }
 
     private let orderTypePresenter = dydxTradeInputOrderTypeViewPresenter()
+    private let orderTranslationPresenter = dydxOrderTranslationViewPresenter()
     private let sideViewPresenter = dydxTradeInputSideViewPresenter()
     private let orderbookPresenter = dydxOrderbookPresenter()
     private let editPresenter = dydxTradeInputEditViewPresenter()
@@ -137,6 +138,7 @@ private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputVie
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         orderTypePresenter,
+        orderTranslationPresenter,
         sideViewPresenter,
         orderbookPresenter,
         editPresenter,
@@ -151,6 +153,7 @@ private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputVie
         let viewModel = dydxTradeInputViewModel()
 
         orderTypePresenter.$viewModel.assign(to: &viewModel.$orderTypeViewModel)
+        orderTranslationPresenter.$viewModel.assign(to: &viewModel.$orderTranslationViewModel)
         sideViewPresenter.$viewModel.assign(to: &viewModel.$sideViewModel)
         orderbookPresenter.$viewModel.assign(to: &viewModel.$orderbookViewModel)
         editPresenter.$viewModel.assign(to: &viewModel.$editViewModel)

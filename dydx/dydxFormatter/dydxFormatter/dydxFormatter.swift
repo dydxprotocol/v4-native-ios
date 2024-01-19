@@ -252,7 +252,18 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
         }
     }
 
-    public func dollar(number: Double?, size: String? = nil) -> String? {
+    public func dollarDecimalOnlyIfNecessary(number: Double?) -> String? {
+        if let number = number {
+            if number.truncatingRemainder(dividingBy: 1) == 0 {
+                return dollar(number: NSNumber(value: number), size: "0")
+            } else {
+                return dollar(number: NSNumber(value: number), size: nil)
+            }
+        }
+        return nil
+    }
+
+    public func dollar(number: Double?, size: String? = nil, decimalOnlyIfNecessary: Bool = false) -> String? {
         if let number = number {
             return dollar(number: NSNumber(value: number), size: size)
         }

@@ -54,10 +54,14 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
         }
         return viewModel
     }()
-    private let limitPriceViewModel = dydxTradeInputLimitPriceViewModel(label: DataLocalizer.localize(path: "APP.TRADE.LIMIT_PRICE"), placeHolder: "0.00", onEdited: { value in
+    private lazy var limitPriceViewModel = dydxTradeInputLimitPriceViewModel(label: DataLocalizer.localize(path: "APP.TRADE.LIMIT_PRICE"), placeHolder: "0.00", onEdited: { [weak self] value in
+        guard let self = self else { return }
+        self.updateTradeInput(afterChangingField: .limitprice, to: value?.unlocalizedNumericValue, in: self.tradeInput)
         AbacusStateManager.shared.trade(input: value?.unlocalizedNumericValue, type: TradeInputField.limitprice)
     })
-    private let triggerPriceViewModel = dydxTradeInputTriggerPriceViewModel(label: DataLocalizer.localize(path: "APP.TRADE.TRIGGER_PRICE"), placeHolder: "0.00", onEdited: { value in
+    private lazy var triggerPriceViewModel = dydxTradeInputTriggerPriceViewModel(label: DataLocalizer.localize(path: "APP.TRADE.TRIGGER_PRICE"), placeHolder: "0.00", onEdited: { [weak self] value in
+        guard let self = self else { return }
+        self.updateTradeInput(afterChangingField: .triggerprice, to: value?.unlocalizedNumericValue, in: self.tradeInput)
         AbacusStateManager.shared.trade(input: value?.unlocalizedNumericValue, type: TradeInputField.triggerprice)
     })
     private let trailingPercentViewModel = dydxTradeInputTrailingPercentViewModel(label: DataLocalizer.localize(path: "APP.TRADE.TRAILING_PERCENT"), onEdited: { value in
@@ -118,9 +122,9 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
                 AbacusStateManager.shared.state.marketMap,
                 positionLeveragePublisher
             )
-            .sink { [weak self] tradeInput, configsAndAssetMap, marketMap, positionLeverage in
+            .sink { [weak self] tradeInput, configsAndAsset, marketMap, positionLeverage  in
                 if let marketId = tradeInput.marketId {
-                    self?.update(tradeInput: tradeInput, configsAndAsset: configsAndAssetMap[marketId], positionLeverage: positionLeverage, market: marketMap[marketId])
+                    self?.update(tradeInput: tradeInput, configsAndAsset: configsAndAsset[marketId], positionLeverage: positionLeverage, oraclePrice: marketMap[marketId]?.oraclePrice?.doubleValue)
                 }
             }
             .store(in: &subscriptions)
@@ -228,11 +232,11 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
         return postOnlyViewModel
     }
 
-    private func update(tradeInput: TradeInput, configsAndAsset: MarketConfigsAndAsset?, positionLeverage: Double?, market: PerpetualMarket?) {
+    private func update(tradeInput: TradeInput, configsAndAsset: MarketConfigsAndAsset?, positionLeverage: Double?, oraclePrice: Double?) {
         self.tradeInput = tradeInput
         self.configsAndAsset = configsAndAsset
         self.positionLeverage = positionLeverage
-        self.oraclePrice = market?.oraclePrice?.doubleValue
+        self.oraclePrice = oraclePrice
 
         sizeViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
         limitPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
@@ -245,12 +249,12 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
             getTriggerPriceInput()
         ].compactMap { $0 }
 
-        let isMarketOrder = hasNonZeroSize && !hasNonZeroLimitPrice && !hasNonZeroTriggerPrice
-        let isLimitOrder = hasNonZeroSize && hasNonZeroLimitPrice && !hasNonZeroTriggerPrice
-        let isStopLimitOrder = hasNonZeroSize && hasNonZeroLimitPrice && !hasNonZeroTriggerPrice && (isTriggerPriceGreaterThanOracle && isBuy || !isTriggerPriceGreaterThanOracle && isSell)
-        let isStopMarketOrder = hasNonZeroSize && !hasNonZeroLimitPrice && !hasNonZeroTriggerPrice && (isTriggerPriceGreaterThanOracle && isBuy || !isTriggerPriceGreaterThanOracle && isSell)
-        let isTakeProfitLimitOrder = hasNonZeroSize && !hasNonZeroLimitPrice && !hasNonZeroTriggerPrice && (!isTriggerPriceGreaterThanOracle && isBuy || isTriggerPriceGreaterThanOracle && isSell)
-        let isTakeProfitMarketOrder = hasNonZeroSize && !hasNonZeroLimitPrice && !hasNonZeroTriggerPrice && (!isTriggerPriceGreaterThanOracle && isBuy || isTriggerPriceGreaterThanOracle && isSell)
+        let isMarketOrder =             hasNonZeroSize && !hasNonZeroLimitPrice && !hasNonZeroTriggerPrice
+        let isLimitOrder =              hasNonZeroSize && hasNonZeroLimitPrice && !hasNonZeroTriggerPrice
+        let isStopLimitOrder =          hasNonZeroSize && hasNonZeroLimitPrice && hasNonZeroTriggerPrice && (isTriggerPriceGreaterThanOracle && isBuy || !isTriggerPriceGreaterThanOracle && isSell)
+        let isStopMarketOrder =         hasNonZeroSize && !hasNonZeroLimitPrice && hasNonZeroTriggerPrice && (isTriggerPriceGreaterThanOracle && isBuy || !isTriggerPriceGreaterThanOracle && isSell)
+        let isTakeProfitLimitOrder =    hasNonZeroSize && hasNonZeroLimitPrice && hasNonZeroTriggerPrice && (!isTriggerPriceGreaterThanOracle && isBuy || isTriggerPriceGreaterThanOracle && isSell)
+        let isTakeProfitMarketOrder =   hasNonZeroSize && !hasNonZeroLimitPrice && hasNonZeroTriggerPrice && (!isTriggerPriceGreaterThanOracle && isBuy || isTriggerPriceGreaterThanOracle && isSell)
 
         if isMarketOrder {
             AbacusStateManager.shared.trade(input: OrderType.market.rawValue, type: TradeInputField.type)
@@ -265,6 +269,85 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
         } else if isTakeProfitMarketOrder {
             AbacusStateManager.shared.trade(input: OrderType.takeprofitmarket.rawValue, type: TradeInputField.type)
         }
+    }
 
+    private func updateTradeInput(afterChangingField field: TradeInputField, to value: String?, in tradeInput: TradeInput?) {
+        guard let value = value,
+              let value = Double(value),
+              let tradeInput = tradeInput else {
+            return
+        }
+
+        let newTradeInput: TradeInput
+        switch field {
+        case .size:
+            newTradeInput = .init(type: tradeInput.type,
+                                    side: tradeInput.side,
+                                    marketId: tradeInput.marketId,
+                                    size: .init(size: .init(double: value), usdcSize: tradeInput.size?.usdcSize, leverage: tradeInput.size?.leverage, input: tradeInput.size?.input),
+                                    price: tradeInput.price,
+                                    timeInForce: tradeInput.timeInForce,
+                                    goodTil: tradeInput.goodTil,
+                                    execution: tradeInput.execution,
+                                    reduceOnly: tradeInput.reduceOnly,
+                                    postOnly: tradeInput.postOnly,
+                                    fee: tradeInput.fee,
+                                    bracket: tradeInput.bracket,
+                                    marketOrder: tradeInput.marketOrder,
+                                    options: tradeInput.options,
+                                    summary: tradeInput.summary)
+
+        case .usdcsize:
+            newTradeInput = .init(type: tradeInput.type,
+                                    side: tradeInput.side,
+                                    marketId: tradeInput.marketId,
+                                    size: .init(size: tradeInput.size?.size, usdcSize: .init(double: value), leverage: tradeInput.size?.leverage, input: tradeInput.size?.input),
+                                    price: tradeInput.price,
+                                    timeInForce: tradeInput.timeInForce,
+                                    goodTil: tradeInput.goodTil,
+                                    execution: tradeInput.execution,
+                                    reduceOnly: tradeInput.reduceOnly,
+                                    postOnly: tradeInput.postOnly,
+                                    fee: tradeInput.fee,
+                                    bracket: tradeInput.bracket,
+                                    marketOrder: tradeInput.marketOrder,
+                                    options: tradeInput.options,
+                                    summary: tradeInput.summary)
+        case .triggerprice:
+            newTradeInput = .init(type: tradeInput.type,
+                                    side: tradeInput.side,
+                                    marketId: tradeInput.marketId,
+                                    size: tradeInput.size,
+                                    price: .init(limitPrice: tradeInput.price?.limitPrice, triggerPrice: .init(double: value), trailingPercent: tradeInput.price?.trailingPercent),
+                                    timeInForce: tradeInput.timeInForce,
+                                    goodTil: tradeInput.goodTil,
+                                    execution: tradeInput.execution,
+                                    reduceOnly: tradeInput.reduceOnly,
+                                    postOnly: tradeInput.postOnly,
+                                    fee: tradeInput.fee,
+                                    bracket: tradeInput.bracket,
+                                    marketOrder: tradeInput.marketOrder,
+                                    options: tradeInput.options,
+                                    summary: tradeInput.summary)
+        case .limitprice:
+            newTradeInput = .init(type: tradeInput.type,
+                                    side: tradeInput.side,
+                                    marketId: tradeInput.marketId,
+                                    size: tradeInput.size,
+                                    price: .init(limitPrice: .init(double: value), triggerPrice: tradeInput.price?.triggerPrice, trailingPercent: tradeInput.price?.trailingPercent),
+                                    timeInForce: tradeInput.timeInForce,
+                                    goodTil: tradeInput.goodTil,
+                                    execution: tradeInput.execution,
+                                    reduceOnly: tradeInput.reduceOnly,
+                                    postOnly: tradeInput.postOnly,
+                                    fee: tradeInput.fee,
+                                    bracket: tradeInput.bracket,
+                                    marketOrder: tradeInput.marketOrder,
+                                    options: tradeInput.options,
+                                    summary: tradeInput.summary)
+        default:
+            return
+        }
+        update(tradeInput: newTradeInput, configsAndAsset: configsAndAsset, positionLeverage: positionLeverage, oraclePrice: oraclePrice)
     }
 }

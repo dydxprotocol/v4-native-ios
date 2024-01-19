@@ -23,6 +23,7 @@ public class dydxTradeInputViewModel: PlatformViewModel {
     @Published public var isOrderbookCollapsed: Bool = false
     @Published public var isShowingValidation: Bool = false
     @Published public var orderTypeViewModel: dydxTradeInputOrderTypeViewModel? = dydxTradeInputOrderTypeViewModel()
+    @Published public var orderTranslationViewModel: dydxOrderTranslationViewModel? = dydxOrderTranslationViewModel()
     @Published public var sideViewModel: dydxTradeInputSideViewModel? = dydxTradeInputSideViewModel()
     @Published public var orderbookManagerViewModel: dydxOrderbookManagerViewModel? = dydxOrderbookManagerViewModel()
     @Published public var editViewModel: dydxTradeInputEditViewModel? = dydxTradeInputEditViewModel()
@@ -45,6 +46,7 @@ public class dydxTradeInputViewModel: PlatformViewModel {
     public static var previewValue: dydxTradeInputViewModel {
         let vm = dydxTradeInputViewModel()
         vm.orderTypeViewModel = .previewValue
+        vm.orderTranslationViewModel = .previewValue
         vm.editViewModel = .previewValue
         vm.sideViewModel = .previewValue
         vm.orderbookManagerViewModel = .previewValue
@@ -73,10 +75,13 @@ public class dydxTradeInputViewModel: PlatformViewModel {
                         self.createSwipeUpView(parentStyle: style)
                     }
 
-                    self.orderTypeViewModel?.createView(parentStyle: style)
-                        .frame(height: 64)
+                    self.orderTranslationViewModel?.createView(parentStyle: style)
                         .padding(.top, 32)
-                        .padding(.horizontal, -spacing)
+                        .padding(.bottom, 12)
+                        .frame(width: fullWidth)
+
+                    DividerModel()
+                        .createView(parentStyle: style)
 
                     HStack(spacing: spacing) {
                         self.orderbookManagerViewModel?.createView(parentStyle: style)
