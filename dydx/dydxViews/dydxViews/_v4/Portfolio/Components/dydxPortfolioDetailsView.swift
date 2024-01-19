@@ -70,11 +70,7 @@ public class dydxPortfolioDetailsViewModel: PlatformViewModel {
                     Text(sharedAccountViewModel?.quoteBalance ?? "-")
                 }
                 Spacer()
-                VStack(alignment: .trailing, spacing: 8) {
-                }
-            }
 
-            HStack {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(DataLocalizer.localize(path: "APP.TRADE.POSITIONS"))
                         .themeColor(foreground: .textTertiary)
@@ -90,6 +86,35 @@ public class dydxPortfolioDetailsViewModel: PlatformViewModel {
 
                     Text(sharedAccountViewModel?.equity ?? "-")
                 }
+            }
+
+            HStack {
+                let content = AnyView(
+                    HStack {
+                        Spacer()
+                        Text("Deposit")
+                            .themeFont(fontSize: .medium)
+                        Spacer()
+                    }
+                )
+
+                PlatformButtonViewModel(content: content.wrappedViewModel, state: .primary) {
+                }
+                .createView(parentStyle: parentStyle)
+
+                let content2 = AnyView(
+                    HStack {
+                        Spacer()
+                        Text("Withdraw")
+                            .themeFont(fontSize: .medium)
+                            .themeColor(foreground: ThemeSettings.negativeColor)
+                        Spacer()
+                    }
+                )
+
+                PlatformButtonViewModel(content: content2.wrappedViewModel, state: .destructive) {
+                }
+                .createView(parentStyle: parentStyle)
             }
         }
     }
