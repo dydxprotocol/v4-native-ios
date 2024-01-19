@@ -244,7 +244,6 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
 
         viewModel?.children = [
             getSizeInput(),
-            getLeverageInput(),
             getLimitPriceInput(),
             getTriggerPriceInput()
         ].compactMap { $0 }
