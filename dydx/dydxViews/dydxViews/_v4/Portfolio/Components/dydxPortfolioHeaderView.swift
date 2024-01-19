@@ -6,6 +6,7 @@
 //  Copyright © 2023 dYdX Trading Inc. All rights reserved.
 //
 
+import dydxFormatter
 import SwiftUI
 import PlatformUI
 import Utilities
@@ -46,7 +47,7 @@ public class dydxPortfolioHeaderViewModel: PlatformViewModel {
                 backgroundColor = .colorPurple
                 borderColor = nil
             case .onboardCompleted:
-                title = DataLocalizer.localize(path: "APP.GENERAL.TRANSFER")
+                title = dydxBoolFeatureFlag.enable_spot_experience.isEnabled ? "Log out" : DataLocalizer.localize(path: "APP.GENERAL.TRANSFER")
                 icon = "icon_transfer"
                 action = self.depositAction
                 backgroundColor = .layer4
