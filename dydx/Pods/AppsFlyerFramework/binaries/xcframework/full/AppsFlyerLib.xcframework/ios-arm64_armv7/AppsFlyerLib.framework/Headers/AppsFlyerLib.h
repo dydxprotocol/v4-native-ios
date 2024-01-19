@@ -2,7 +2,7 @@
 //  AppsFlyerLib.h
 //  AppsFlyerLib
 //
-//  AppsFlyer iOS SDK 6.12.2 (132)
+//  AppsFlyer iOS SDK 6.12.3 (137)
 //  Copyright (c) 2012-2023 AppsFlyer Ltd. All rights reserved.
 //
 
@@ -350,7 +350,7 @@ NS_SWIFT_NAME(waitForATTUserAuthorization(timeoutInterval:));
  [[AppsFlyerLib shared] setResolveDeepLinkURLs:@[@"domain.com", @"subdomain.domain.com"]];
  </pre>
  */
-@property(nonatomic, nullable) NSArray<NSString *> *resolveDeepLinkURLs;
+@property(nonatomic, nullable, copy) NSArray<NSString *> *resolveDeepLinkURLs;
 
 /**
  For advertisers who use vanity OneLinks.
@@ -361,12 +361,12 @@ NS_SWIFT_NAME(waitForATTUserAuthorization(timeoutInterval:));
  [[AppsFlyerLib shared] oneLinkCustomDomains:@[@"domain.com", @"subdomain.domain.com"]];
  </pre>
  */
-@property(nonatomic, nullable) NSArray<NSString *> *oneLinkCustomDomains;
+@property(nonatomic, nullable, copy) NSArray<NSString *> *oneLinkCustomDomains;
 
 /*
  * Set phone number for each `start` event. `phoneNumber` will be sent as SHA256 string
  */
-@property(nonatomic, nullable) NSString *phoneNumber;
+@property(nonatomic, nullable, copy) NSString *phoneNumber;
 
 - (NSString *)phoneNumber UNAVAILABLE_ATTRIBUTE;
 
@@ -389,7 +389,7 @@ NS_SWIFT_NAME(waitForATTUserAuthorization(timeoutInterval:));
  AppsFlyerLib.shared().currentDeviceLanguage("EN")
  </pre>
  */
-@property(nonatomic, nullable) NSString *currentDeviceLanguage;
+@property(nonatomic, nullable, copy) NSString *currentDeviceLanguage;
 
 /**
  Internal API. Please don't use.
@@ -636,13 +636,13 @@ NS_SWIFT_NAME(logEvent(name:values:completionHandler:));
 /**
  API to set manually Facebook deferred app link
  */
-@property(nonatomic, nullable) NSURL *facebookDeferredAppLink;
+@property(nonatomic, nullable, copy) NSURL *facebookDeferredAppLink;
 
 /**
  Block an events from being shared with ad networks and other 3rd party integrations
  Must only include letters/digits or underscore, maximum length: 45
  */
-@property(nonatomic, nullable) NSArray<NSString *> *sharingFilter DEPRECATED_MSG_ATTRIBUTE("starting SDK version 6.4.0, please use `setSharingFilterForPartners:`");
+@property(nonatomic, nullable, copy) NSArray<NSString *> *sharingFilter DEPRECATED_MSG_ATTRIBUTE("starting SDK version 6.4.0, please use `setSharingFilterForPartners:`");
 
 @property(nonatomic) NSUInteger deepLinkTimeout;
 
