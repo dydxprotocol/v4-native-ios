@@ -179,15 +179,15 @@ public extension View {
 }
 
 private struct SheetViewModifier: ViewModifier {
-    let topPadding: CGFloat = 18
+    let topPadding: CGFloat = 12
     let sheetStyle: MakeSheetStyle
     
     @EnvironmentObject var themeSettings: ThemeSettings
      
     func body(content: Content) -> some View {
         let dragIndicator = Rectangle()
-            .themeColor(background: .layer1)
-            .frame(width: 36, height: 4)
+            .themeColor(background: .layer7)
+            .frame(width: 29, height: 2 )
             .clipShape(Capsule())
             .padding(.top, topPadding)
         

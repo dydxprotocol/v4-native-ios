@@ -82,6 +82,7 @@ public class dydxTradeInputViewModel: PlatformViewModel {
 
                     DividerModel()
                         .createView(parentStyle: style)
+                        .padding(.bottom, 12)
 
                     HStack(spacing: spacing) {
                         self.orderbookManagerViewModel?.createView(parentStyle: style)
