@@ -154,9 +154,7 @@ public final class AbacusStateManager: NSObject {
             appConfigs = AppConfigs.companion.forApp
         }
 
-        if dydxBoolFeatureFlag.enable_cctp.isEnabled {
-            appConfigs.squidVersion = AppConfigs.SquidVersion.v2
-        }
+        appConfigs.squidVersion = AppConfigs.SquidVersion.v2
 
         return AsyncAbacusStateManager(
             deploymentUri: deploymentUri,
