@@ -70,7 +70,13 @@ public class dydxSecurityViewModel: PlatformViewModel {
     }
 
     private func logoImage(parentStyle: ThemeStyle, styleKey: String?) -> PlatformView {
-        PlatformIconViewModel(type: .asset(name: "brand", bundle: Bundle.particles.first),
+        let imageName: String
+        if currentThemeType == .light {
+            imageName = "brand_light"
+        } else {
+            imageName = "brand_dark"
+        }
+        return PlatformIconViewModel(type: .asset(name: imageName, bundle: Bundle.dydxView),
                               clip: .noClip,
                               size: .init(width: 100, height: 100),
                               templateColor: nil)
