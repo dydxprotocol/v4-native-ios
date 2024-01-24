@@ -807,7 +807,6 @@
 				024B7B5A28B7F8F000F7C386 /* Marker */,
 				024B7B5428B7F89500F7C386 /* Themes */,
 				024B7AD628B7F78900F7C386 /* Shared */,
-				648327342AF5630200012B75 /* Utils */,
 				024B79BD28B7F53800F7C386 /* dydxViews.h */,
 				024B7BE328B80C2A00F7C386 /* Media.xcassets */,
 				024B79BE28B7F53800F7C386 /* dydxViews.docc */,
@@ -1420,13 +1419,6 @@
 				022EDC8D29A048B3003D59A7 /* dydxClosePositionHeaderView.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		648327342AF5630200012B75 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		64A4DB452966205A008D8E20 /* Components */ = {

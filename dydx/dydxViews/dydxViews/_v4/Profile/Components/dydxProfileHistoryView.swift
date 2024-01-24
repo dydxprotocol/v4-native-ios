@@ -126,7 +126,7 @@ public class dydxProfileHistoryViewModel: dydxTitledCardViewModel {
             .themeColor(foreground: .textTertiary)
         }
         .frame(maxWidth: .infinity)
-        .frame(minHeight: 210)
+        .frame(minHeight: 134)
         .themeColor(background: .layer3)
         .cornerRadius(12, corners: .allCorners)
         .wrappedInAnyView()
