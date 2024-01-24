@@ -84,7 +84,6 @@ public class dydxPortfolioFeesItemViewModel: PlatformViewModel {
              .themeFont(fontType: .text, fontSize: .smaller)
              .themeColor(foreground: .textPrimary)
              .padding(.horizontal, 8)
-             .padding(.top, -20)
 
             return AnyView(view)
         }
