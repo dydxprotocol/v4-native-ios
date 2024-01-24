@@ -25,13 +25,14 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
             .store(in: &subscriptions)
     }
 
-    private var priceFormatter: NumberFormatter = {
+    private func priceFormatter(withDigits digits: Int) -> NumberFormatter {
         let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.minimumFractionDigits = 2
-        formatter.maximumFractionDigits = 2
+        formatter.numberStyle = .currency
+        formatter.minimumFractionDigits = digits
+        formatter.maximumFractionDigits = digits
+        formatter.currencySymbol = "$"
         return formatter
-    }()
+    }
 
     private var significantDigitsFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -279,14 +280,16 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     }
 
     public func dollar(number: NSNumber?, digits: Int) -> String? {
-        if let dollar = localFormatted(number: number?.abs(), digits: digits) {
-            if (number?.doubleValue ?? Double.zero) >= Double.zero {
-                return "$\(dollar)"
-            } else {
-                return "-$\(dollar)"
-            }
+        let priceFormatter = priceFormatter(withDigits: digits)
+        guard let number = number,
+              let formatted = priceFormatter.string(from: number) else {
+                  return nil
+              }
+        // need to special case for negative 0, see dydxFormatter tests. E.g. "-$0.001" should go to "$0.00"
+        if priceFormatter.number(from: formatted) == 0 {
+            return priceFormatter.string(from: 0)
         } else {
-            return nil
+            return formatted
         }
     }
 
