@@ -25,7 +25,7 @@ public final class AbacusStateManager: NSObject {
     }
 
     public var ethereumChainId: Int {
-        parser.asInt(asyncStateManager.environment?.ethereumChainId) ?? 5
+        parser.asInt(asyncStateManager.environment?.ethereumChainId) ?? 11155111
     }
 
     public var dydxChainId: String? {
