@@ -138,7 +138,7 @@ class AppDelegate: CommonAppDelegate {
     override func router() -> RouterProtocol? {
         let routingFile = "routing_swiftui.json"
 
-        let scheme = Bundle.main.scheme ?? "dydxv4"
+        let scheme = Bundle.main.scheme ?? "dydx_t_v4"
         if let file = Bundle.dydxPresenters.path(forResource: routingFile, ofType: ""),
            let jsonString = try? String(contentsOfFile: file).replacingOccurrences(of: "{APP_SCHEME}", with: scheme) {
             let router = MappedUIKitAppRouter(jsonString: jsonString)
