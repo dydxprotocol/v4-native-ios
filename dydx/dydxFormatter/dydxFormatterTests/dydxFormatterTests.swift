@@ -18,12 +18,48 @@ final class dydxFormatterTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testDollarFormatting() throws {
+        var number: Double = 1
+        var digits = 2
+        var formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
+        var expected = "$1.00"
+        XCTAssertEqual(formatted, expected)
+        
+        number = -0.001
+        digits = 0
+        formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
+        expected = "$0"
+        XCTAssertEqual(formatted, expected)
+        
+        number = -0.001
+        digits = 2
+        formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
+        expected = "$0.00"
+        XCTAssertEqual(formatted, expected)
+        
+        number = -0.001
+        digits = 3
+        formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
+        expected = "-$0.001"
+        XCTAssertEqual(formatted, expected)
+        
+        number = 0.001
+        digits = 2
+        formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
+        expected = "$0.00"
+        XCTAssertEqual(formatted, expected)
+        
+        number = -0.005
+        digits = 2
+        formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
+        expected = "$0.00"
+        XCTAssertEqual(formatted, expected)
+        
+        number = -0.0051
+        digits = 2
+        formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
+        expected = "-$0.01"
+        XCTAssertEqual(formatted, expected)
     }
 
     func testPerformanceExample() throws {
