@@ -213,11 +213,13 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
             visible.append(executionViewModel)
         }
 
-        if tradeInput.options?.needsReduceOnly == true {
-            let vm = reduceOnlyViewModel()
-            vm.isEnabled = tradeInput.options?.needsReduceOnly == true
-            vm.value = (tradeInput.reduceOnly == true) ? "true" : "false"
-            visible.append(vm)
+        if dydxBoolFeatureFlag.enable_reduce_only.isEnabled {
+            if tradeInput.options?.needsReduceOnly == true {
+                let vm = reduceOnlyViewModel()
+                vm.isEnabled = tradeInput.options?.needsReduceOnly == true
+                vm.value = (tradeInput.reduceOnly == true) ? "true" : "false"
+                visible.append(vm)
+            }
         }
 
         if tradeInput.options?.needsPostOnly == true {
