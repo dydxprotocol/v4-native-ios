@@ -521,15 +521,13 @@ open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
         }
     }
     
-    public lazy var inputBinding = Binding<Bool> {
-        self.value == "true"
-    } set: { newValue in
-        let newValue = newValue ? "true" : "false"
-        if newValue != self.value {
-            self.value = newValue
+    public lazy var inputBinding = Binding(
+        get: { self.value == "true" },
+        set: {
+            self.value = $0 ? "true" : "false"
             self.valueChanged(value: self.value)
         }
-    }
+    )
     
     override open func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
