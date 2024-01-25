@@ -5,17 +5,17 @@
 //  Created by Rui Huang on 1/10/23.
 //
 
-import Utilities
-import dydxViews
-import PlatformParticles
-import RoutingKit
-import ParticlesKit
-import PlatformUI
 import Abacus
-import dydxStateManager
 import Combine
 import dydxFormatter
+import dydxStateManager
+import dydxViews
+import ParticlesKit
+import PlatformParticles
+import PlatformUI
+import RoutingKit
 import SwiftUI
+import Utilities
 
 public class dydxOrderDetailsViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -28,7 +28,7 @@ public class dydxOrderDetailsViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxOrderDetailsViewController: HostingViewController<PlatformView, dydxOrderDetailsViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if request?.path == "/order" || request?.path == "/orders"{
+        if request?.path == "/order" || request?.path == "/orders" {
             if let presenter = presenter as? dydxOrderDetailsViewPresenter,
                let orderOrFillId = request?.params?["id"] as? String {
                 presenter.orderOrFillId = orderOrFillId
@@ -44,7 +44,6 @@ private protocol dydxOrderDetailsViewPresenterProtocol: HostedViewPresenterProto
 }
 
 private class dydxOrderDetailsViewPresenter: HostedViewPresenter<dydxOrderDetailsViewModel>, dydxOrderDetailsViewPresenterProtocol {
-
     fileprivate var orderOrFillId: String?
 
     override init() {
@@ -59,8 +58,8 @@ private class dydxOrderDetailsViewPresenter: HostedViewPresenter<dydxOrderDetail
         guard let orderOrFillId = orderOrFillId else { return }
         Publishers
             .CombineLatest3(AbacusStateManager.shared.state.selectedSubaccountFills,
-                           AbacusStateManager.shared.state.selectedSubaccountOrders,
-                           AbacusStateManager.shared.state.configsAndAssetMap)
+                            AbacusStateManager.shared.state.selectedSubaccountOrders,
+                            AbacusStateManager.shared.state.configsAndAssetMap)
             .sink { [weak self] fills, orders, configsAndAssetMap in
                 if let fill = fills.first(where: { $0.id == orderOrFillId }) {
                     self?.updateFill(fill: fill, configsAndAssetMap: configsAndAssetMap)
@@ -69,7 +68,6 @@ private class dydxOrderDetailsViewPresenter: HostedViewPresenter<dydxOrderDetail
                 }
             }
             .store(in: &subscriptions)
-
     }
 
     private func updateFill(fill: SubaccountFill, configsAndAssetMap: [String: MarketConfigsAndAsset]) {
@@ -131,25 +129,52 @@ private class dydxOrderDetailsViewPresenter: HostedViewPresenter<dydxOrderDetail
             viewModel?.side = SideTextViewModel(side: .sell)
         }
 
-        var timePlaced: dydxOrderDetailsViewModel.Item? {
-            let itemValue: dydxOrderDetailsViewModel.Item.ItemValue?
-            if let createdAtMilliseconds = order.createdAtMilliseconds?.doubleValue {
-                itemValue = .string(dydxFormatter.shared.dateAndTime(date: Date(milliseconds: createdAtMilliseconds)))
-            } else {
-                itemValue = .none
+        var triggerPrice: dydxOrderDetailsViewModel.Item? {
+            if let triggerPrice = sharedOrderViewModel.triggerPrice {
+                let itemValue = dydxOrderDetailsViewModel.Item.ItemValue.string(triggerPrice)
+                return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.TRIGGER_PRICE"), value: itemValue)
             }
-            return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.CREATED_AT"), value: itemValue)
+            return nil
+        }
+
+        var timePlaced: dydxOrderDetailsViewModel.Item? {
+            // short term orders do not have created time
+            if let createdAtMilliseconds = order.createdAtMilliseconds?.doubleValue {
+                let itemValue = dydxOrderDetailsViewModel.Item.ItemValue.string(dydxFormatter.shared.dateAndTime(date: Date(milliseconds: createdAtMilliseconds)))
+                return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.CREATED_AT"), value: itemValue)
+            }
+            return nil
+        }
+
+        var timeInForce: dydxOrderDetailsViewModel.Item? {
+            if let timeInForce = order.resources.timeInForceString {
+                let itemValue = dydxOrderDetailsViewModel.Item.ItemValue.string(timeInForce)
+                return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.TIME_IN_FORCE"), value: .string(timeInForce))
+            }
+            return nil
         }
 
         var goodTil: dydxOrderDetailsViewModel.Item? {
-            if order.timeInForce == .gtt {
-                let itemValue: dydxOrderDetailsViewModel.Item.ItemValue?
-                if let createdAtMilliseconds = order.expiresAtMilliseconds?.doubleValue {
-                    itemValue = .string(dydxFormatter.shared.dateAndTime(date: Date(milliseconds: createdAtMilliseconds)))
-                } else {
-                    itemValue = .none
-                }
+            // Do not use timeInForce gtt for filtering. Conditional orders also have goodTil
+            if let expiresAtMilliseconds = order.expiresAtMilliseconds?.doubleValue {
+                let itemValue = dydxOrderDetailsViewModel.Item.ItemValue.string(dydxFormatter.shared.dateAndTime(date: Date(milliseconds: expiresAtMilliseconds)))
                 return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.GOOD_TIL_TIME"), value: itemValue)
+            }
+            return nil
+        }
+
+        var goodTilBlock: dydxOrderDetailsViewModel.Item? {
+            if let goodTilBlock = order.goodTilBlock?.intValue {
+                let itemValue = dydxOrderDetailsViewModel.Item.ItemValue.number("\(goodTilBlock)")
+                return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.GOOD_TIL"), value: itemValue)
+            }
+            return nil
+        }
+
+        var cancelReason: dydxOrderDetailsViewModel.Item? {
+            if let cancelReason = order.cancelReason {
+                let itemValue = dydxOrderDetailsViewModel.Item.ItemValue.string(cancelReason)
+                return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.CANCEL_REASON"), value: itemValue)
             }
             return nil
         }
@@ -173,15 +198,12 @@ private class dydxOrderDetailsViewPresenter: HostedViewPresenter<dydxOrderDetail
             .init(title: DataLocalizer.localize(path: "APP.GENERAL.PRICE"),
                   value: .number(sharedOrderViewModel.price)),
 
-            .init(title: DataLocalizer.localize(path: "APP.TRADE.TRIGGER_PRICE"),
-                  value: .number(sharedOrderViewModel.triggerPrice)),
-
+            triggerPrice,
             timePlaced,
-
+            timeInForce,
             goodTil,
-
-            .init(title: DataLocalizer.localize(path: "APP.TRADE.TIME_IN_FORCE"),
-                  value: .string(DataLocalizer.localize(path: order.resources.timeInForceStringKey ?? "")))
+            goodTilBlock,
+            cancelReason
         ]
 
         if order.reduceOnly {
@@ -194,10 +216,10 @@ private class dydxOrderDetailsViewPresenter: HostedViewPresenter<dydxOrderDetail
             viewModel?.cancelAction = {
                 Router.shared?.navigate(to: RoutingRequest(path: "/action/order/cancel",
                                                            params: [
-                                                            "orderId": order.id,
-                                                            "orderSide": sharedOrderViewModel.sideText.side.text,
-                                                            "orderSize": sharedOrderViewModel.size ?? "",
-                                                            "orderMarket": sharedOrderViewModel.token?.symbol ?? ""
+                                                               "orderId": order.id,
+                                                               "orderSide": sharedOrderViewModel.sideText.side.text,
+                                                               "orderSize": sharedOrderViewModel.size ?? "",
+                                                               "orderMarket": sharedOrderViewModel.token?.symbol ?? ""
                                                            ])
                                         , animated: true) { _, success in
                     if success {
