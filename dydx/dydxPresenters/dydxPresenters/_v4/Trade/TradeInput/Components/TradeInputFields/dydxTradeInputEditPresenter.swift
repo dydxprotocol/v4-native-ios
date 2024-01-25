@@ -67,12 +67,6 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
     private let executionViewModel = dydxTradeInputExecutionViewModel(label: DataLocalizer.localize(path: "APP.TRADE.EXECUTION"), onEdited: { value in
         AbacusStateManager.shared.trade(input: value, type: TradeInputField.execution)
     })
-    private let postOnlyViewModel = dydxTradeInputPostOnlyViewModel(label: DataLocalizer.localize(path: "APP.TRADE.POST_ONLY"), onEdited: { value in
-        AbacusStateManager.shared.trade(input: value, type: TradeInputField.postonly)
-    })
-    private let reduceOnlyViewModel = dydxTradeInputReduceOnlyViewModel(label: DataLocalizer.localize(path: "APP.TRADE.REDUCE_ONLY"), onEdited: { value in
-        AbacusStateManager.shared.trade(input: value, type: TradeInputField.reduceonly)
-    })
 
     override init() {
         super.init()
@@ -206,9 +200,16 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
             visible.append(executionViewModel)
         }
 
+        let postOnlyViewModel = dydxTradeInputPostOnlyViewModel(label: DataLocalizer.localize(path: "APP.TRADE.POST_ONLY"), onEdited: { value in
+            AbacusStateManager.shared.trade(input: value, type: TradeInputField.postonly)
+        })
         postOnlyViewModel.isEnabled = tradeInput.options?.needsPostOnly == true
         postOnlyViewModel.value = (tradeInput.postOnly == true) ? "true" : "false"
         visible.append(postOnlyViewModel)
+
+        let reduceOnlyViewModel = dydxTradeInputReduceOnlyViewModel(label: DataLocalizer.localize(path: "APP.TRADE.REDUCE_ONLY"), onEdited: { value in
+            AbacusStateManager.shared.trade(input: value, type: TradeInputField.reduceonly)
+        })
 
         reduceOnlyViewModel.isEnabled = tradeInput.options?.needsReduceOnly == true
         reduceOnlyViewModel.value = (tradeInput.reduceOnly == true) ? "true" : "false"
