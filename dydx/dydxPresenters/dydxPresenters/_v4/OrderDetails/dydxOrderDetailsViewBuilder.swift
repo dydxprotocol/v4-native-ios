@@ -173,7 +173,7 @@ private class dydxOrderDetailsViewPresenter: HostedViewPresenter<dydxOrderDetail
 
         var cancelReason: dydxOrderDetailsViewModel.Item? {
             if let cancelReason = order.cancelReason {
-                let itemValue = dydxOrderDetailsViewModel.Item.ItemValue.string(cancelReason)
+                let itemValue = dydxOrderDetailsViewModel.Item.ItemValue.string(DataLocalizer.localize(path: "APP.TRADE.\(cancelReason)"))
                 return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.CANCEL_REASON"), value: itemValue)
             }
             return nil
