@@ -42,7 +42,7 @@ class dydxTransferAlertsProvider: dydxBaseAlertsProvider, dydxCustomAlertsProvid
     }
 
     private func createTransferStatusAlertItem(transfer: dydxTransferInstance) -> PlatformViewModel? {
-        let usdcSize = dydxFormatter.shared.dollar(number: transfer.usdcSize, digits: 2)
+        let usdcSize = dydxFormatter.shared.dollar(number: transfer.usdcSize)
         let size = dydxFormatter.shared.raw(number: Parser.standard.asNumber(transfer.size), digits: 2)
 
         let title: String?
