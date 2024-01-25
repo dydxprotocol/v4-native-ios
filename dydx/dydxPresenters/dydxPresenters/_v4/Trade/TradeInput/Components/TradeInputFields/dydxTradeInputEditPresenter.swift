@@ -6,6 +6,8 @@
 //
 
 import Abacus
+import Combine
+import dydxFormatter
 import dydxStateManager
 import dydxViews
 import ParticlesKit
@@ -14,8 +16,6 @@ import PlatformUI
 import RoutingKit
 import SwiftUI
 import Utilities
-import Combine
-import dydxFormatter
 
 internal protocol dydxTradeInputEditViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxTradeInputEditViewModel? { get }
@@ -30,6 +30,7 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
         }
         return viewModel
     }()
+
     private lazy var leverageViewModel: dydxTradeInputLeverageViewModel = {
         let viewModel = dydxTradeInputLeverageViewModel(label: DataLocalizer.localize(path: "APP.GENERAL.LEVERAGE"),
                                                         placeHolder: "0.00")
@@ -41,6 +42,7 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
         }
         return viewModel
     }()
+
     private let limitPriceViewModel = dydxTradeInputLimitPriceViewModel(label: DataLocalizer.localize(path: "APP.TRADE.LIMIT_PRICE"), placeHolder: "0.00", onEdited: { value in
         AbacusStateManager.shared.trade(input: value?.unlocalizedNumericValue, type: TradeInputField.limitprice)
     })
@@ -67,12 +69,17 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
     private let executionViewModel = dydxTradeInputExecutionViewModel(label: DataLocalizer.localize(path: "APP.TRADE.EXECUTION"), onEdited: { value in
         AbacusStateManager.shared.trade(input: value, type: TradeInputField.execution)
     })
-    private let postOnlyViewModel = dydxTradeInputPostOnlyViewModel(label: DataLocalizer.localize(path: "APP.TRADE.POST_ONLY"), onEdited: { value in
-        AbacusStateManager.shared.trade(input: value, type: TradeInputField.postonly)
-    })
-    private let reduceOnlyViewModel = dydxTradeInputReduceOnlyViewModel(label: DataLocalizer.localize(path: "APP.TRADE.REDUCE_ONLY"), onEdited: { value in
-        AbacusStateManager.shared.trade(input: value, type: TradeInputField.reduceonly)
-    })
+    private func postOnlyViewModel() -> dydxTradeInputPostOnlyViewModel {
+        return dydxTradeInputPostOnlyViewModel(label: DataLocalizer.localize(path: "APP.TRADE.POST_ONLY"), onEdited: { value in
+            AbacusStateManager.shared.trade(input: value, type: TradeInputField.postonly)
+        })
+    }
+
+    private func reduceOnlyViewModel() -> dydxTradeInputReduceOnlyViewModel {
+        return dydxTradeInputReduceOnlyViewModel(label: DataLocalizer.localize(path: "APP.TRADE.REDUCE_ONLY"), onEdited: { value in
+            AbacusStateManager.shared.trade(input: value, type: TradeInputField.reduceonly)
+        })
+    }
 
     override init() {
         super.init()
@@ -206,13 +213,21 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
             visible.append(executionViewModel)
         }
 
-        postOnlyViewModel.isEnabled = tradeInput.options?.needsPostOnly == true
-        postOnlyViewModel.value = (tradeInput.postOnly == true) ? "true" : "false"
-        visible.append(postOnlyViewModel)
+        if dydxBoolFeatureFlag.enable_reduce_only.isEnabled {
+            if tradeInput.options?.needsReduceOnly == true {
+                let vm = reduceOnlyViewModel()
+                vm.isEnabled = tradeInput.options?.needsReduceOnly == true
+                vm.value = (tradeInput.reduceOnly == true) ? "true" : "false"
+                visible.append(vm)
+            }
+        }
 
-        reduceOnlyViewModel.isEnabled = tradeInput.options?.needsReduceOnly == true
-        reduceOnlyViewModel.value = (tradeInput.reduceOnly == true) ? "true" : "false"
-        visible.append(reduceOnlyViewModel)
+        if tradeInput.options?.needsPostOnly == true {
+            let vm = postOnlyViewModel()
+            vm.isEnabled = tradeInput.options?.needsPostOnly == true
+            vm.value = (tradeInput.postOnly == true) ? "true" : "false"
+            visible.append(vm)
+        }
 
         viewModel?.children = visible
     }
