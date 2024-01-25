@@ -206,13 +206,17 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
             visible.append(executionViewModel)
         }
 
-        postOnlyViewModel.isEnabled = tradeInput.options?.needsPostOnly == true
-        postOnlyViewModel.value = (tradeInput.postOnly == true) ? "true" : "false"
-        visible.append(postOnlyViewModel)
+        if tradeInput.options?.needsReduceOnly == true {
+            reduceOnlyViewModel.isEnabled = tradeInput.options?.needsReduceOnly == true
+            reduceOnlyViewModel.value = (tradeInput.reduceOnly == true) ? "true" : "false"
+            visible.append(reduceOnlyViewModel)
+        }
 
-        reduceOnlyViewModel.isEnabled = tradeInput.options?.needsReduceOnly == true
-        reduceOnlyViewModel.value = (tradeInput.reduceOnly == true) ? "true" : "false"
-        visible.append(reduceOnlyViewModel)
+        if tradeInput.options?.needsPostOnly == true {
+            postOnlyViewModel.isEnabled = tradeInput.options?.needsPostOnly == true
+            postOnlyViewModel.value = (tradeInput.postOnly == true) ? "true" : "false"
+            visible.append(postOnlyViewModel)
+        }
 
         viewModel?.children = visible
     }
