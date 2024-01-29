@@ -12,10 +12,10 @@ public struct DebugEnabled {
     public static let key = "debug.enabled"
     
     public static var enabled: Bool {
-    #if DEBUG
-        true
-    #else
-        !Installation.appStore && UserDefaults.standard.bool(forKey: key)
-    #endif
+        switch Installation.source {
+        case .debug: return true
+        case .testFlight: return UserDefaults.standard.bool(forKey: key)
+        case .appStore, .jailBroken: return false
+        }
     }
 }
