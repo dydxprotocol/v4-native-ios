@@ -12,14 +12,10 @@ public final class Console: NSObject, SingletonProtocol {
     public static var shared: Console = Console()
 
     private var visible: Bool = {
-        #if DEBUG
-            return true
-        #else
-            if Installation.appStore || Installation.jailBroken {
-                return false
-            }
-            return true
-        #endif
+        switch Installation.source {
+        case .debug, .testFlight: return true
+        case .appStore: return false
+        }
     }()
 
     public func log(_ object: Any?) {

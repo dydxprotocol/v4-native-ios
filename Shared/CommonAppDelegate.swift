@@ -45,7 +45,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         Console.shared.log("injectFeatures")
         injectFirebase()
         let compositeFeatureFlags = CompositeFeatureFlagsProvider()
-        if !Installation.appStore {
+        if Installation.source != .appStore {
             compositeFeatureFlags.local = FeatureFlagsStore.shared
         }
         compositeFeatureFlags.remote = FirebaseRunner.shared.enabled ? FirebaseFeatureFlagsProvider() : nil
@@ -76,11 +76,10 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     }
 
     open func useProductionFirebase() -> Bool {
-        #if DEBUG
-        return false
-        #else
-        return !Installation.jailBroken && Installation.appStore
-        #endif
+        switch Installation.source {
+        case .debug, .testFlight: return false
+        case .appStore: return !Installation.jailBroken
+        }
     }
 
     open func injectFirebase() {
@@ -100,7 +99,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     open func injectAmplitude() {
         Console.shared.log("injectAmplitude")
         let apiKey: String?
-        if Installation.appStore && !Installation.jailBroken {
+        if Installation.source == .appStore && !Installation.jailBroken {
             apiKey = CredientialConfig.shared.key(for: "amplitudeApiKey")
         } else {
             apiKey = CredientialConfig.shared.key(for: "amplitudeStagingApiKey")

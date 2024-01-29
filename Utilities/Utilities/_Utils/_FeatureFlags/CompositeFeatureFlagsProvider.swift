@@ -57,7 +57,7 @@ public class CompositeFeatureFlagsProvider: NSObject & FeatureFlagsProtocol {
     }
 
     public func flag(feature: String?) -> Any? {
-        if Installation.appStore {
+        if Installation.source == .appStore {
             return remote?.flag(feature: feature)
         } else {
             if let localFlag = local?.flag(feature: feature) {
