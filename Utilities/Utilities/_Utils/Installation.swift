@@ -28,7 +28,7 @@ public class Installation {
         #endif
     }
     
-    public static var isJailBroken: Bool = {
+    private static var isJailBroken: Bool = {
         #if targetEnvironment(simulator)
             return false
         #else
@@ -56,6 +56,7 @@ public class Installation {
     }()
     
     public static var source: Source {
+        return .appStore
         if isJailBroken {
             return .jailBroken
         } else if isDebug {
