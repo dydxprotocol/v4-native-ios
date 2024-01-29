@@ -45,8 +45,11 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         Console.shared.log("injectFeatures")
         injectFirebase()
         let compositeFeatureFlags = CompositeFeatureFlagsProvider()
-        if Installation.source != .appStore {
+        switch  Installation.source {
+        case .debug, .testFlight:
             compositeFeatureFlags.local = FeatureFlagsStore.shared
+        case .appStore, .jailBroken:
+            break
         }
         compositeFeatureFlags.remote = FirebaseRunner.shared.enabled ? FirebaseFeatureFlagsProvider() : nil
         FeatureService.shared = compositeFeatureFlags
@@ -77,8 +80,8 @@ open class CommonAppDelegate: ParticlesAppDelegate {
 
     open func useProductionFirebase() -> Bool {
         switch Installation.source {
-        case .debug, .testFlight: return false
-        case .appStore: return !Installation.jailBroken
+        case .debug, .testFlight, .jailBroken: return false
+        case .appStore: return true
         }
     }
 
@@ -99,10 +102,11 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     open func injectAmplitude() {
         Console.shared.log("injectAmplitude")
         let apiKey: String?
-        if Installation.source == .appStore && !Installation.jailBroken {
-            apiKey = CredientialConfig.shared.key(for: "amplitudeApiKey")
-        } else {
+        switch Installation.source {
+        case .jailBroken, .debug, .testFlight:
             apiKey = CredientialConfig.shared.key(for: "amplitudeStagingApiKey")
+        case .appStore:
+            apiKey = CredientialConfig.shared.key(for: "amplitudeApiKey")
         }
         if let apiKey = apiKey, apiKey.isNotEmpty {
             AmplitudeRunner.shared.apiKey = apiKey
@@ -112,7 +116,6 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     
     open func injectAttribution() {
         Console.shared.log("injectAttribution")
-//        if Installation.appStore && !Installation.jailBroken {
         if let devKey = CredientialConfig.shared.key(for: "appsFlyerDevKey"), devKey.isNotEmpty,
            let appId = CredientialConfig.shared.key(for: "appsFlyerAppId"), appId.isNotEmpty {
             AppsFlyerRunner.shared.devKey = devKey
@@ -121,7 +124,6 @@ open class CommonAppDelegate: ParticlesAppDelegate {
             Attributer.shared?.launch()
             add(tracking: AppsFlyerTracking())
         }
-//        }
     }
 
     open func injectLocalNotifications() {

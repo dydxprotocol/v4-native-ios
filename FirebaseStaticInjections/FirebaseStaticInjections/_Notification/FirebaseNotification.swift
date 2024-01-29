@@ -30,8 +30,11 @@ public class FirebaseNotificationHandler: NotificationHandler {
                 if let token = token {
                     Console.shared.log("Firebase registration token: \(token)")
                 }
-                if Installation.source != .appStore {
+                switch Installation.source {
+                case .debug, .testFlight:
                     DebugSettings.shared?.debug?["push_token"] = token
+                case .appStore, .jailBroken:
+                    break
                 }
             }
         }

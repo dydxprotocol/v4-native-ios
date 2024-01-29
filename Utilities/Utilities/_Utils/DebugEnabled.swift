@@ -15,7 +15,7 @@ public struct DebugEnabled {
         switch Installation.source {
         case .debug: return true
         case .testFlight: return UserDefaults.standard.bool(forKey: key)
-        case .appStore: return true
+        case .appStore, .jailBroken: return false
         }
     }
 }

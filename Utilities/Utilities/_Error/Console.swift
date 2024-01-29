@@ -14,7 +14,7 @@ public final class Console: NSObject, SingletonProtocol {
     private var visible: Bool = {
         switch Installation.source {
         case .debug, .testFlight: return true
-        case .appStore: return false
+        case .appStore, .jailBroken: return false
         }
     }()
 

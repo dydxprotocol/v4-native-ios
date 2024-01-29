@@ -13,6 +13,7 @@ public class Installation {
         case debug
         case testFlight
         case appStore
+        case jailBroken // potentially side-loaded
     }
     
     // This is private because the use of 'appConfiguration' is preferred.
@@ -27,17 +28,7 @@ public class Installation {
         #endif
     }
     
-    public static var source: Source {
-        if isDebug {
-            return .debug
-        } else if isTestFlight {
-            return .testFlight
-        } else {
-            return .appStore
-        }
-    }
-    
-    public static var jailBroken: Bool = {
+    public static var isJailBroken: Bool = {
 #if targetEnvironment(simulator)
         return false
 #else
@@ -63,6 +54,18 @@ public class Installation {
         }
 #endif
     }()
+    
+    public static var source: Source {
+        if isJailBroken {
+            return .jailBroken
+        } else if isDebug {
+            return .debug
+        } else if isTestFlight {
+            return .testFlight
+        } else {
+            return .appStore
+        }
+    }
     
     public static var isSimulator: Bool = {
 #if targetEnvironment(simulator)
