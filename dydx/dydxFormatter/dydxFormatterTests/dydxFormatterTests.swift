@@ -24,37 +24,37 @@ final class dydxFormatterTests: XCTestCase {
         var formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
         var expected = "$1.00"
         XCTAssertEqual(formatted, expected)
-        
+
         number = -0.001
         digits = 0
         formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
         expected = "$0"
         XCTAssertEqual(formatted, expected)
-        
+
         number = -0.001
         digits = 2
         formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
         expected = "$0.00"
         XCTAssertEqual(formatted, expected)
-        
+
         number = -0.001
         digits = 3
         formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
         expected = "-$0.001"
         XCTAssertEqual(formatted, expected)
-        
+
         number = 0.001
         digits = 2
         formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
         expected = "$0.00"
         XCTAssertEqual(formatted, expected)
-        
+
         number = -0.005
         digits = 2
         formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
         expected = "$0.00"
         XCTAssertEqual(formatted, expected)
-        
+
         number = -0.0051
         digits = 2
         formatted = dydxFormatter.shared.dollar(number: number, digits: digits)
