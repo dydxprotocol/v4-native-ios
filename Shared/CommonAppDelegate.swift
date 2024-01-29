@@ -77,14 +77,9 @@ open class CommonAppDelegate: ParticlesAppDelegate {
 
     open func useProductionFirebase() -> Bool {
         #if DEBUG
-            return false
+        return false
         #else
-            if !Installation.jailBroken {
-                return AbacusStateManager.shared.currentEnvironment == "1"
-            } else {
-                return false
-            }
-//        return Installation.appStore && !Installation.jailBroken
+        return !Installation.jailBroken && Installation.appStore
         #endif
     }
 
