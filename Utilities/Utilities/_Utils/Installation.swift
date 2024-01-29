@@ -56,15 +56,14 @@ public class Installation {
     }()
     
     public static var source: Source {
-        return .appStore
         if isJailBroken {
             return .jailBroken
         } else if isDebug {
             return .debug
-        } else if isTestFlight {
-            return .testFlight
-        } else {
+        } else if !isTestFlight {
             return .appStore
+        } else {
+            return .testFlight
         }
     }
     
