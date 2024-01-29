@@ -9,17 +9,26 @@
 import Foundation
 
 public class Installation {
-    public static var appStore: Bool = {
-        if let receipt: URL = Bundle.main.appStoreReceiptURL {
-            var error: NSError?
-            if (receipt as NSURL).checkResourceIsReachableAndReturnError(&error), error == nil {
-                return true
-            }
-        }
+    public enum Source {
+        case debug
+        case testFlight
+        case appStore
+        case jailBroken // potentially side-loaded
+    }
+    
+    // This is private because the use of 'appConfiguration' is preferred.
+    private static let isTestFlight = Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+    
+    // This can be used to add debug statements.
+    static var isDebug: Bool {
+        #if DEBUG
+        return true
+        #else
         return false
-    }()
-
-    public static var jailBroken: Bool = {
+        #endif
+    }
+    
+    private static var isJailBroken: Bool = {
         #if targetEnvironment(simulator)
             return false
         #else
@@ -45,7 +54,20 @@ public class Installation {
             }
         #endif
     }()
-
+    
+    public static var source: Source {
+        return .appStore
+        if isJailBroken {
+            return .jailBroken
+        } else if isDebug {
+            return .debug
+        } else if isTestFlight {
+            return .testFlight
+        } else {
+            return .appStore
+        }
+    }
+    
     public static var isSimulator: Bool = {
         #if targetEnvironment(simulator)
             return true

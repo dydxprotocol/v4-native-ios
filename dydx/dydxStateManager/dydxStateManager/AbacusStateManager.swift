@@ -150,7 +150,12 @@ public final class AbacusStateManager: NSObject {
             #endif
         } else {
             // Expose more options for Testflight build
-            deployment = Installation.appStore ? "MAINNET" : "TESTNET"
+            switch Installation.source {
+            case .appStore:
+                deployment = "MAINNET"
+            case .testFlight, .debug, .jailBroken:
+                deployment = "TESTNET"
+            }
             appConfigs = AppConfigs.companion.forApp
         }
 
