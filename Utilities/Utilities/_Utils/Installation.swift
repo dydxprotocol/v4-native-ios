@@ -20,6 +20,7 @@ public class Installation {
     private static let isTestFlight = Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
 
     private static let isAppStore = {
+        // Keep this code for reference. In case "sandboxReceipt" changes in later iOS
         if let receipt: URL = Bundle.main.appStoreReceiptURL {
             var error: NSError?
             if (receipt as NSURL).checkResourceIsReachableAndReturnError(&error), error == nil {
@@ -70,10 +71,10 @@ public class Installation {
             return .jailBroken
         } else if isDebug {
             return .debug
-        } else if isAppStore {
-            return .appStore
-        } else {
+        } else if isTestFlight {
             return .testFlight
+        } else {
+            return .appStore
         }
     }
 
