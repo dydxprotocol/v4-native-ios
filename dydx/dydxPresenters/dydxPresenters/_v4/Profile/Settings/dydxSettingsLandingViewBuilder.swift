@@ -30,7 +30,7 @@ private class dydxSettingsLandingViewPresenter: SettingsLandingViewPresenter {
 
     init() {
         let definitionFile: String
-        if DebugEnabled.enabled {
+        if DebugEnabled.enabled || Installation.source == .debug {
             definitionFile = "settings_debug.json"
         } else {
             definitionFile = "settings.json"
