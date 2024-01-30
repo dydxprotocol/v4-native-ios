@@ -30,11 +30,18 @@ private class dydxSettingsLandingViewPresenter: SettingsLandingViewPresenter {
 
     init() {
         let definitionFile: String
-        if DebugEnabled.enabled {
+        switch Installation.source {
+        case .debug:
             definitionFile = "settings_debug.json"
-        } else {
+            
+        case .testFlight:
+            definitionFile = DebugEnabled.enabled ? "settings_debug.json" : "settings.json"
+            
+        default:
+            // Other than during debugging and DebugEnabled for TestFlight build, we should never show the debug screen
             definitionFile = "settings.json"
         }
+        
         super.init(definitionFile: definitionFile,
                    keyValueStore: SettingsStore.shared,
                    appScheme: Bundle.main.scheme)
