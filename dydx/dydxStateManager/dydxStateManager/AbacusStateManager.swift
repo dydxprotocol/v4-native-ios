@@ -153,8 +153,10 @@ public final class AbacusStateManager: NSObject {
             switch Installation.source {
             case .appStore:
                 deployment = "MAINNET"
-            case .testFlight, .debug, .jailBroken:
+            case .debug, .jailBroken:
                 deployment = "TESTNET"
+            case .testFlight:
+                deployment = "TESTFLIGHT"
             }
             appConfigs = AppConfigs.companion.forApp
         }
