@@ -15,19 +15,30 @@ public class Installation {
         case appStore
         case jailBroken // potentially side-loaded
     }
-    
+
     // This is private because the use of 'appConfiguration' is preferred.
     private static let isTestFlight = Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-    
+
+    private static let isAppStore = {
+        // Keep this code for reference. In case "sandboxReceipt" changes in later iOS
+        if let receipt: URL = Bundle.main.appStoreReceiptURL {
+            var error: NSError?
+            if (receipt as NSURL).checkResourceIsReachableAndReturnError(&error), error == nil {
+                return true
+            }
+        }
+        return false
+    }()
+
     // This can be used to add debug statements.
     static var isDebug: Bool {
         #if DEBUG
-        return true
+            return true
         #else
-        return false
+            return false
         #endif
     }
-    
+
     private static var isJailBroken: Bool = {
         #if targetEnvironment(simulator)
             return false
@@ -54,9 +65,8 @@ public class Installation {
             }
         #endif
     }()
-    
+
     public static var source: Source {
-        return .appStore
         if isJailBroken {
             return .jailBroken
         } else if isDebug {
@@ -67,7 +77,7 @@ public class Installation {
             return .appStore
         }
     }
-    
+
     public static var isSimulator: Bool = {
         #if targetEnvironment(simulator)
             return true
