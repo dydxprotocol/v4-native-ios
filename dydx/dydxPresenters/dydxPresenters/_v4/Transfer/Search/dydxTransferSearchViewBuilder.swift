@@ -14,6 +14,7 @@ import PlatformUI
 import dydxStateManager
 import Abacus
 import Combine
+import SwiftUI
 
 public class dydxTransferSearchViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -110,8 +111,17 @@ private extension dydxTransferSearchItemViewModel {
             self.tokenText = TokenTextViewModel(symbol: symbol)
         }
         self.isSelected = selected
-        if let iconUrl = option.iconUrl, let url = URL(string: iconUrl), UIDevice.current.isSimulator == false {
-            self.icon = PlatformIconViewModel(type: .url(url: url), size: CGSize(width: 32, height: 32))
+        if let iconUrl = option.iconUrl, let url = URL(string: iconUrl) {
+            self.icon = PlatformIconViewModel(
+                type: .urlWithPlaceholder(url: url, placeholderContent: {
+                    Text(option.localizedString?.prefix(1) ?? "")
+                        .frame(width: 32, height: 32)
+                        .themeColor(foreground: .textTertiary)
+                        .themeColor(background: .layer5)
+                        .borderAndClip(style: .circle, borderColor: .layer7, lineWidth: 1)
+                        .wrappedInAnyView()
+                }),
+                size: CGSize(width: 32, height: 32))
         }
         self.onTapAction = onTapAction
     }

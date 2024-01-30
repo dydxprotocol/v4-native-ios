@@ -12,6 +12,7 @@ public class PlatformIconViewModel: PlatformViewModel {
     public enum IconType {
         case asset(name: String?, bundle: Bundle?)
         case url(url: URL?)
+        case urlWithPlaceholder(url: URL?, placeholderContent: () -> AnyView)
         case system(name: String)
         case uiImage(image: UIImage)
         case any(viewModel: PlatformViewModel)
@@ -33,7 +34,7 @@ public class PlatformIconViewModel: PlatformViewModel {
     @Published public var clip: IconClip
     @Published public var size: CGSize
     @Published public var templateColor: ThemeColor.SemanticColor?
-    
+
     public init(type: IconType, clip: IconClip = .noClip, size: CGSize = CGSize(width: 32, height: 32), templateColor: ThemeColor.SemanticColor? = nil) {
         self.type = type
         self.clip = clip
@@ -62,7 +63,13 @@ public class PlatformIconViewModel: PlatformViewModel {
                         PlatformView.nilView
                     }
                 case .url(let url):
-                    WebImage(url: url)
+                    WebImage (url: url)
+                        .resizable()
+                        .templateColor(self.templateColor)
+                        .scaledToFit()
+                case .urlWithPlaceholder(let url, let placeholderContent):
+                    WebImage (url: url)
+                        .placeholder(content: placeholderContent)
                         .resizable()
                         .templateColor(self.templateColor)
                         .scaledToFit()
