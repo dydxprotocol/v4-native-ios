@@ -280,6 +280,7 @@ public enum BorderAndClipStyle {
     case cornerRadius(CGFloat)
     /// A capsule shape is equivalent to a rounded rectangle where the corner radius is chosen as half the length of the rectangle’s smallest edge.
     case capsule
+    case circle
 }
 
 private struct BorderAndClipModifier: ViewModifier {
@@ -289,6 +290,12 @@ private struct BorderAndClipModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         switch style {
+        case .circle:
+            content
+                .clipShape(Circle())
+                .overlay(Circle()
+                    .strokeBorder(borderColor.color, lineWidth: lineWidth))
+
         case .cornerRadius(let cornerRadius):
             content
                 .clipShape(RoundedRectangle(cornerSize: .init(width: cornerRadius, height: cornerRadius)))
