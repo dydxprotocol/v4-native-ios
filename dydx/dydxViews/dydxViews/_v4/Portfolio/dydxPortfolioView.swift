@@ -40,7 +40,7 @@ public class dydxPortfolioViewModel: PlatformViewModel {
     @Published private var scrollViewHeight: CGFloat = 0
     @Published private var lastSectionVisibleContentHeight: CGFloat = 0
 
-    var spacerHeight: CGFloat {
+    private var spacerHeight: CGFloat {
         max(
             100,
             self.lastSectionVisibleContentHeight - self.contentViewHeight
@@ -179,18 +179,13 @@ public class dydxPortfolioViewModel: PlatformViewModel {
                                     // add space to adjust for tab bar
                                 }
                                 .background {
-                                    Text("")
                                     GeometryReader { proxy in
-                                        Text("\(proxy.size.height)")
-                                            .themeColor(foreground: .colorRed)
-                                            .themeFont(fontType: .bold, fontSize: .largest)
+                                        Color.clear
                                             .onAppear {
                                                 self.contentViewHeight = proxy.size.height
-                                                print("mmmm onAppear contentViewHeight: \(self.contentViewHeight)")
                                             }
                                             .onChange(of: proxy.frame(in: .named("scroll"))) { _ in
                                                 self.contentViewHeight = proxy.size.height
-                                                print("mmmm onChange contentViewHeight: \(self.contentViewHeight)")
                                                 let frameRelativeToScrollView = proxy.frame(in: .named("scroll"))
 
                                                 if self.contentViewHeight < self.lastSectionVisibleContentHeight {
@@ -198,33 +193,17 @@ public class dydxPortfolioViewModel: PlatformViewModel {
                                                 } else {
                                                     self.lastSectionVisibleContentHeight = self.scrollViewHeight - frameRelativeToScrollView.origin.y
                                                 }
-                                                print("mmmm onChange proxy.frame(in: .global): \(proxy.frame(in: .global))")
-                                                print("mmmm onChange lastVisibleSectionContentHeight: \(self.lastSectionVisibleContentHeight)")
                                             }
                                     }
                                 }
-                                Rectangle()
+                                Spacer()
                                     .frame(height: self.spacerHeight)
-                                    .overlay {
-                                        GeometryReader { proxy in
-                                            VStack(spacing: 0) {
-                                                Color(.red)
-                                                    .frame(height: self.spacerHeight/2)
-                                                Color(.blue)
-                                                    .frame(height: self.spacerHeight/2)
-                                            }
-                                            .onChange(of: proxy.frame(in: .named("scroll"))) { _ in
-                                                print("mmmm onChange Spacer height: \(proxy.size.height)")
-                                            }
-                                        }
-                                    }
                             }
                         } header: {
                             self.sections.createView(parentStyle: style)
                         }
                     }
             }
-                .disableBounces()
                 .background {
                     GeometryReader { scrollViewProxy in
                         Color.clear
