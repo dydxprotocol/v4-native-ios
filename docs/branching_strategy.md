@@ -126,7 +126,6 @@ gitGraph
     commit id:"commit_b (same HEAD)"
     checkout develop
     commit id:"commit_c"
-    merge release/1.0.0
     commit id:"commit_d"
     checkout main
     merge release/1.0.0 tag:"v1.0.0"
