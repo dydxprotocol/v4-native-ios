@@ -112,7 +112,7 @@ The following branching history visualization depicts a project which:
 1. Released 1.0.0 based off the latest develop at the time
 2. Released 1.0.1 based off 1.0.0 for a hotfix
 3. Released 1.1.0 based off the latest develop at the time
-<img src="https://github.com/dydxprotocol/v4-chain/assets/3445394/53e12dcc-84b6-4f51-9a16-0ecb19288d64">
+<img src="https://mermaid.ink/img/pako:eNqVU8tqwzAQ_BWxEEggJNHVt0JKe-9VUDbS2hKxLCPLoSXk3ytXdvqwYxKdhGZnRzMrnUE6RZBBYcKLx1qLisUlnbUmMKMyAXyz2-wEJODgsZKaCVB0otLVw_lvQtq_4wx2-NfPU0nY0DZpJZYmeXRtmMQmOrJlg5bY6_PTfnVVHnoMt73FlgNjsWCWfEF3qqqRkkVTpaOJPixgEcmnP5HOGZ2Ih98XAZtJn9iydqVp9Fa7kJuPcV6j-Y7N8AeM82_jrHfO7x0Pu944H7v5AYs5UN98aXzmpfGZmes-Zk2oVg_Mn_fzTzF0CgBriFWRouIPPHc0AUGTJQFdmUJ_7AQusQ7b4N4-KwlZ8C2toa0VBtobLDxayHIsG7p8AQ6yNNY?type=png)](https://mermaid.live/edit#pako:eNqVU8tqwzAQ_BWxEEggJNHVt0JKe-9VUDbS2hKxLCPLoSXk3ytXdvqwYxKdhGZnRzMrnUE6RZBBYcKLx1qLisUlnbUmMKMyAXyz2-wEJODgsZKaCVB0otLVw_lvQtq_4wx2-NfPU0nY0DZpJZYmeXRtmMQmOrJlg5bY6_PTfnVVHnoMt73FlgNjsWCWfEF3qqqRkkVTpaOJPixgEcmnP5HOGZ2Ih98XAZtJn9iydqVp9Fa7kJuPcV6j-Y7N8AeM82_jrHfO7x0Pu944H7v5AYs5UN98aXzmpfGZmes-Zk2oVg_Mn_fzTzF0CgBriFWRouIPPHc0AUGTJQFdmUJ_7AQusQ7b4N4-KwlZ8C2toa0VBtobLDxayHIsG7p8AQ6yNNY">
 
 This example can be recreated with [mermaid.live's tool](https://mermaid.live/) and the following code.
 ```
@@ -126,7 +126,6 @@ gitGraph
     commit id:"commit_b (same HEAD)"
     checkout develop
     commit id:"commit_c"
-    merge release/1.0.0
     commit id:"commit_d"
     checkout main
     merge release/1.0.0 tag:"v1.0.0"
