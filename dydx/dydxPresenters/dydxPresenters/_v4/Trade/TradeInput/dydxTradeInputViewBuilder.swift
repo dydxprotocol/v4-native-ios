@@ -164,6 +164,8 @@ private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputVie
         self.viewModel = viewModel
         tipBuySellPresenter.delegate = self
 
+        orderbookPresenter.viewModel?.delegate = editPresenter
+
         orderbookGroupPresenter.$viewModel
             .sink { [weak self] groupViewModel in
                 self?.viewModel?.orderbookManagerViewModel?.group = groupViewModel

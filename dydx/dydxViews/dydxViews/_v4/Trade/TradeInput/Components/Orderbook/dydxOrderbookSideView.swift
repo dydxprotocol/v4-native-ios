@@ -40,6 +40,11 @@ public struct dydxOrderbookLine: Identifiable, Equatable {
     }
 }
 
+/// Delegates what happens upon price selection action
+public protocol dydxOrderbookSideDelegate: AnyObject {
+    func onPriceSelected(price: Double)
+}
+
 public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
     public static func == (lhs: dydxOrderbookSideViewModel, rhs: dydxOrderbookSideViewModel) -> Bool {
         lhs.tickSize == rhs.tickSize &&
@@ -70,6 +75,7 @@ public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
     @Published public var lines = [dydxOrderbookLine]()
     @Published public var maxDepth: Double = 0.0
     @Published public var displayStyle: DisplayStyle = .topDown
+    var delegate: dydxOrderbookSideDelegate?
 
     override public func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
@@ -135,14 +141,20 @@ public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
                 }
             }
 
-        if let fixedHeight = fixedHeight, fixedHeight > 0 {
-            return lineView
-                .frame(height: fixedHeight)
-                .animation(.default, value: line)
-        } else {
-            return lineView
-                .frame(maxHeight: .infinity)
-                .animation(.default, value: line)
+        return Group {
+            if let fixedHeight = fixedHeight, fixedHeight > 0 {
+                lineView
+                    .frame(height: fixedHeight)
+                    .animation(.default, value: line)
+            } else {
+                 lineView
+                    .frame(maxHeight: .infinity)
+                    .animation(.default, value: line)
+            }
+        }
+        .contentShape(.rect)
+        .onTapGesture {[weak self, line] in
+            self?.delegate?.onPriceSelected(price: line.price)
         }
     }
 
