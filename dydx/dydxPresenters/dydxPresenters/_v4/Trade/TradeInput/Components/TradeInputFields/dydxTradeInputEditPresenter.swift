@@ -81,6 +81,8 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
         })
     }
 
+    private var orderTypeRequiresLimitPrice: Bool = false
+
     override init() {
         super.init()
 
@@ -118,6 +120,19 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
             .store(in: &subscriptions)
     }
 
+    private func updateOrderTypeRequiresLimitPrice(forOrderType orderType: Abacus.OrderType?) {
+        if let orderType {
+            switch orderType {
+            case .limit, .stoplimit, .takeprofitlimit:
+                orderTypeRequiresLimitPrice = true
+            default:
+                orderTypeRequiresLimitPrice = false
+            }
+        } else {
+            orderTypeRequiresLimitPrice = false
+        }
+    }
+
     private func update(tradeInput: TradeInput, configsAndAsset: MarketConfigsAndAsset?, positionLeverage: Double?) {
         let marketConfigs = configsAndAsset?.configs
         let asset = configsAndAsset?.asset
@@ -127,6 +142,8 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
         sizeViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
         limitPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
         triggerPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
+
+        updateOrderTypeRequiresLimitPrice(forOrderType: tradeInput.type)
 
         if tradeInput.options?.needsSize ?? false {
             if let size = tradeInput.size?.size {
@@ -230,5 +247,12 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
         }
 
         viewModel?.children = visible
+    }
+}
+
+extension dydxTradeInputEditViewPresenter: dydxOrderbookSideDelegate {
+    func onPriceSelected(price: Double) {
+        guard orderTypeRequiresLimitPrice else { return }
+        AbacusStateManager.shared.trade(input: "\(price)", type: TradeInputField.limitprice)
     }
 }

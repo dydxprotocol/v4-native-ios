@@ -19,6 +19,15 @@ public class dydxOrderbookViewModel: PlatformViewModel {
     @Published public var asks: dydxOrderbookAsksViewModel? = dydxOrderbookAsksViewModel()
     @Published public var bids: dydxOrderbookBidsViewModel? = dydxOrderbookBidsViewModel()
     @Published public var spread: dydxOrderbookSpreadViewModel? = dydxOrderbookSpreadViewModel()
+    public var delegate: dydxOrderbookSideDelegate? {
+        get {
+            return asks?.delegate ?? bids?.delegate
+        }
+        set {
+            asks?.delegate = newValue
+            bids?.delegate = newValue
+        }
+    }
 
     public static var previewValue: dydxOrderbookViewModel {
         let vm = dydxOrderbookViewModel()
