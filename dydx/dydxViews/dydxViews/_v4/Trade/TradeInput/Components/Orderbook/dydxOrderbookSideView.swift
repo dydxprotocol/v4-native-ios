@@ -75,7 +75,7 @@ public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
     @Published public var lines = [dydxOrderbookLine]()
     @Published public var maxDepth: Double = 0.0
     @Published public var displayStyle: DisplayStyle = .topDown
-    @Published var delegate: dydxOrderbookSideDelegate?
+    var delegate: dydxOrderbookSideDelegate?
 
     override public func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
