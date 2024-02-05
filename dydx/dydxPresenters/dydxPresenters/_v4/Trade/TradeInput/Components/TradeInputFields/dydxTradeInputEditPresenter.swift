@@ -232,3 +232,9 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
         viewModel?.children = visible
     }
 }
+
+extension dydxTradeInputEditViewPresenter: dydxOrderbookSideDelegate {
+    func onPriceSelected(price: Double) {
+        AbacusStateManager.shared.trade(input: "\(price)", type: TradeInputField.limitprice)
+    }
+}
