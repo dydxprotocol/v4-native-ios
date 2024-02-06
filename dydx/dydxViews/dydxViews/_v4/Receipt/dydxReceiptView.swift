@@ -15,11 +15,7 @@ public class dydxReceiptViewModel: PlatformViewModel {
             updateCollapsed()
         }
     }
-    @Published public var maxCollapsedItems: Int = 4 {
-        didSet {
-            updateCollapsed()
-        }
-    }
+    public let maxCollapsedItems: Int = 4
 
     @Published private var collapsed: Bool = true
 
@@ -43,13 +39,6 @@ public class dydxReceiptViewModel: PlatformViewModel {
             let children = self.children ?? []
             let items = self.collapsed ? Array(children.prefix(self.maxCollapsedItems - 1)) : children
 
-            let height: Double?
-            if children.count <= self.maxCollapsedItems || self.collapsed {
-                height = 132
-            } else {
-                height = nil
-            }
-
             let content = VStack(alignment: .leading) {
                 ForEach(items, id: \.self.id) { child in
                     child.createView(parentStyle: style)
@@ -58,23 +47,12 @@ public class dydxReceiptViewModel: PlatformViewModel {
                 Spacer().frame(maxHeight: 16)
                 if children.count > self.maxCollapsedItems {
                     self.createCollapseButton(parentStyle: style)
-                } else {
-                    Spacer()
                 }
             }
-
-            if let height = height {
-                return AnyView(
-                    content
-                        .frame(height: height)
-                        .animation(.default, value: UUID())
-                )
-            } else {
-                return AnyView(
-                    content
-                        .animation(.default, value: UUID())
-                )
-            }
+            return AnyView(
+                content
+                    .animation(.default, value: UUID())
+            )
         }
     }
 
@@ -94,18 +72,18 @@ public class dydxReceiptViewModel: PlatformViewModel {
             .padding(.vertical, -4)
 
         return Button(action: { [weak self] in
-            withAnimation(Animation.linear(duration: 0.1)) {
+            withAnimation {
                 self?.collapsed.toggle()
             }
         }) {
             content
-         }
-         .buttonStyle(BorderlessButtonStyle())
-         .frame(maxWidth: .infinity)
-         .padding()
-         .themeColor(background: .layer3)
-         .borderAndClip(style: .cornerRadius(12), borderColor: .borderDefault, lineWidth: 1)
-         .padding(.horizontal, -8)
+        }
+        .buttonStyle(BorderlessButtonStyle())
+        .frame(maxWidth: .infinity)
+        .padding()
+        .themeColor(background: .layer3)
+        .borderAndClip(style: .cornerRadius(12), borderColor: .borderDefault, lineWidth: 1)
+        .padding(.horizontal, -8)
     }
 
     private func updateCollapsed() {
