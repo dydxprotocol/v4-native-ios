@@ -10,12 +10,12 @@ import JavaScriptCore
 
 public final class CosmoJavascript: NSObject, SingletonProtocol {
     public static var shared: CosmoJavascript = CosmoJavascript()
-
+    
     private var v4ClientInitialized: Bool = false
     public var v4ClientRunner: JavascriptRunner? = {
         JavascriptRunner.runner(file: "v4-native-client.js")
     }()
-
+    
     public func loadV4Client(completion: @escaping JavascriptCompletion) {
         if v4ClientInitialized {
             completion(nil)
@@ -58,6 +58,17 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
                                     completion: @escaping JavascriptCompletion) {
         let json = "{\"subaccountNumber\": \(subaccount),\"amount\": \"\(amount)\"}"
         callNativeClient(functionName: "deposit", params: [json], completion: completion)
+    }
+    
+    public func getWithdrawalCapacity(
+        denom: String,
+        completion: @escaping JavascriptCompletion) {
+        callNativeClient(functionName: "getWithdrawalCapacityByDenom", params: [denom], completion: completion)
+    }
+    
+    public func getWithdrawalAndTransferGatingStatus(
+        completion: @escaping JavascriptCompletion) {
+        callNativeClient(functionName: "GetWithdrawalAndTransferGatingStatus", params: [], completion: completion)
     }
 
     private func callNativeClient(functionName: String, params: [Any?], completion: @escaping JavascriptCompletion) {

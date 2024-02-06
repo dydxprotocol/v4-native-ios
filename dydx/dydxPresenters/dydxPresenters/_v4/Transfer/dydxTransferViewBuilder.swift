@@ -5,6 +5,7 @@
 //  Created by Rui Huang on 1/24/23.
 //
 
+import Abacus
 import Utilities
 import dydxViews
 import PlatformParticles
@@ -95,6 +96,18 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
                                    type: .success,
                                    error: nil, time: nil)
             HapticFeedback.shared?.notify(type: .success)
+        }
+
+        if let usdcDenom = AbacusStateManager.shared.environment?.tokens["usdc"]?.denom {
+            CosmoJavascript.shared.getWithdrawalCapacity(denom: usdcDenom) { result in
+                // TODO: do something w/ result
+                print("getWithdrawalCapacity result: \(result)")
+            }
+        }
+
+        CosmoJavascript.shared.getWithdrawalAndTransferGatingStatus { result in
+            // TODO: do something w/ result
+            print("getWithdrawalAndTransferGatingStatus result: \(result)")
         }
 
         self.viewModel = viewModel
