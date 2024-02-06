@@ -97,7 +97,6 @@ public class dydxTradeInputViewModel: PlatformViewModel {
                         self.editViewModel?.createView(parentStyle: style)
                             .frame(width: self.isOrderbookCollapsed ? fullWidth: editViewWidth)
                     }
-                    .frame(minHeight: 0, maxHeight: .infinity)
 
                     VStack(spacing: -8) {
                         if self.isShowingValidation {
