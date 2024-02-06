@@ -72,12 +72,9 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         let pnl = dydxFormatter.shared.dollarVolume(number: abs(position.realizedPnl?.current?.doubleValue ?? 0), digits: 2)
         viewModel?.realizedPNLAmount = SignedAmountViewModel(text: pnl, sign: sign, coloringOption: .signOnly)
 
-        viewModel?.leverage = sharedOrderViewModel.leverage
-        viewModel?.leverageIcon = sharedOrderViewModel.leverageIcon
         viewModel?.liquidationPrice = dydxFormatter.shared.dollar(number: position.liquidationPrice?.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
         viewModel?.size = sharedOrderViewModel.size
-        viewModel?.side = sharedOrderViewModel.sideText
         viewModel?.token = sharedOrderViewModel.token
         viewModel?.logoUrl = sharedOrderViewModel.logoUrl
         viewModel?.gradientType = sharedOrderViewModel.gradientType

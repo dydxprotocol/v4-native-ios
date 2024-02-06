@@ -22,12 +22,19 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         public var onCloseAction: (() -> Void)?
     }
 
-    public init(size: String? = nil, token: TokenTextViewModel? = TokenTextViewModel(), sideText: SideTextViewModel = SideTextViewModel(), leverage: String? = nil, leverageIcon: LeverageRiskModel? = nil, indexPrice: String? = nil, entryPrice: String? = nil, unrealizedPnlPercent: SignedAmountViewModel? = nil, unrealizedPnl: SignedAmountViewModel? = nil, logoUrl: URL? = nil, gradientType: GradientType = .none, onTapAction: (() -> Void)? = nil) {
+    public init(marketValue: String? = nil, 
+                size: String? = nil,
+                token: TokenTextViewModel? = TokenTextViewModel(),
+                indexPrice: String? = nil, 
+                entryPrice: String? = nil,
+                unrealizedPnlPercent: SignedAmountViewModel? = nil,
+                unrealizedPnl: SignedAmountViewModel? = nil, 
+                logoUrl: URL? = nil,
+                gradientType: GradientType = .none, 
+                onTapAction: (() -> Void)? = nil) {
+        self.marketValue = marketValue
         self.size = size
         self.token = token
-        self.sideText = sideText
-        self.leverage = leverage
-        self.leverageIcon = leverageIcon
         self.indexPrice = indexPrice
         self.entryPrice = entryPrice
         self.unrealizedPnlPercent = unrealizedPnlPercent
@@ -37,11 +44,9 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         self.handler = Handler(onTapAction: onTapAction)
     }
 
+    public var marketValue: String?
     public var size: String?
     public var token: TokenTextViewModel?
-    public var sideText = SideTextViewModel()
-    public var leverage: String?
-    public var leverageIcon: LeverageRiskModel?
     public var indexPrice: String?
     public var entryPrice: String?
     public var unrealizedPnlPercent: SignedAmountViewModel?
@@ -54,8 +59,6 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         let item = dydxPortfolioPositionItemViewModel(
             size: "299",
             token: .previewValue,
-            sideText: .previewValue,
-            leverage: "0.01x",
             indexPrice: "$1,200",
             entryPrice: "$1,200",
             unrealizedPnlPercent: .previewValue,
@@ -112,23 +115,14 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     private func createMain(parentStyle: ThemeStyle) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 0) {
+                Text(marketValue ?? "$69.420")
+                    .themeFont(fontType: .number, fontSize: .small)
+
                 HStack(spacing: 2) {
                     Text(size ?? "")
-                        .themeFont(fontType: .number, fontSize: .small)
+                        .themeFont(fontType: .number, fontSize: .smaller)
 
                     token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
-                }
-
-                HStack(spacing: 2) {
-                    sideText
-                        .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))
-
-                    Text("@")
-                        .themeFont(fontSize: .smaller)
-                        .themeColor(foreground: .textTertiary)
-
-                    Text(leverage ?? "")
-                        .themeFont(fontType: .number, fontSize: .smaller)
                 }
             }
 

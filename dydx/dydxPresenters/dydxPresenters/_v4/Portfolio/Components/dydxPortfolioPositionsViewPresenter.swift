@@ -71,21 +71,16 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         let item = cache?[position.assetId] ?? dydxPortfolioPositionItemViewModel()
 
         let positionSize = abs(position.size?.current?.doubleValue ?? 0)
+        item.marketValue = dydxFormatter.shared.dollar(number: position.valueTotal?.current?.doubleValue)
         item.size = dydxFormatter.shared.localFormatted(number: positionSize, digits: configs.displayStepSizeDecimals?.intValue ?? 1)
         item.token?.symbol = asset.id
 
         if position.resources.indicator.current == "long" {
-            item.sideText.side = .long
             item.gradientType = .plus
         } else {
-            item.sideText.side = .short
             item.gradientType = .minus
        }
 
-        item.leverage = dydxFormatter.shared.leverage(number: NSNumber(value: position.leverage?.current?.doubleValue ?? 0))
-        if let leverage = position.leverage?.current?.doubleValue, let maxLeverage = position.maxLeverage?.current?.doubleValue, maxLeverage > 0 {
-            item.leverageIcon = LeverageRiskModel(level: LeverageRiskModel.Level(marginUsage: leverage / maxLeverage), viewSize: 16, displayOption: .iconOnly)
-        }
         item.indexPrice = dydxFormatter.shared.dollar(number: market.oraclePrice, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
         item.entryPrice = dydxFormatter.shared.dollar(number: position.entryPrice?.current, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
