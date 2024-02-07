@@ -87,18 +87,18 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         item.entryPrice = dydxFormatter.shared.dollar(number: position.entryPrice?.current, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
         let sign: PlatformUISign
-        if position.unrealizedPnlPercent?.current?.doubleValue ?? 0 > 0 {
-            sign = .plus
-        } else if position.unrealizedPnlPercent?.current?.doubleValue ?? 0 < 0 {
-            sign = .minus
-        } else {
+        let formattedPnl = dydxFormatter.shared.dollarVolume(number: abs(position.unrealizedPnl?.current?.doubleValue ?? 0), digits: 2)
+        let formattedZero = dydxFormatter.shared.dollarVolume(number: 0.00, digits: 2)
+        if formattedZero == formattedPnl {
             sign = .none
+        } else if position.realizedPnlPercent?.current?.doubleValue ?? 0 > 0 {
+            sign = .plus
+        } else {    
+            sign = .minus
         }
-        let pnlPercent = dydxFormatter.shared.percent(number: abs(position.unrealizedPnlPercent?.current?.doubleValue ?? 0), digits: 2)
-        item.unrealizedPnlPercent = SignedAmountViewModel(text: pnlPercent, sign: sign, coloringOption: .allText)
+        item.unrealizedPnl = SignedAmountViewModel(text: formattedPnl, sign: sign, coloringOption: .allText)
 
-        let pnl = dydxFormatter.shared.dollarVolume(number: abs(position.unrealizedPnl?.current?.doubleValue ?? 0), digits: 2)
-        item.unrealizedPnl =  SignedAmountViewModel(text: pnl, sign: sign, coloringOption: .signOnly)
+        item.unrealizedPnlPercent = dydxFormatter.shared.percent(number: abs(position.unrealizedPnlPercent?.current?.doubleValue ?? 0), digits: 2)
 
         if let url = asset.resources?.imageUrl {
             item.logoUrl = URL(string: url)

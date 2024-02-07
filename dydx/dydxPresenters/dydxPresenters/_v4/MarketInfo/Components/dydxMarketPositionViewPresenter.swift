@@ -62,15 +62,16 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         viewModel?.unrealizedPNLPercent = sharedOrderViewModel.unrealizedPnlPercent
 
         let sign: PlatformUISign
-        if position.realizedPnlPercent?.current?.doubleValue ?? 0 > 0 {
-            sign = .plus
-        } else if position.realizedPnlPercent?.current?.doubleValue ?? 0 < 0 {
-            sign = .minus
-        } else {
+        let formattedPnl = dydxFormatter.shared.dollarVolume(number: abs(position.realizedPnl?.current?.doubleValue ?? 0), digits: 2)
+        let formattedZero = dydxFormatter.shared.dollarVolume(number: 0.00, digits: 2)
+        if formattedZero == formattedPnl {
             sign = .none
+        } else if position.realizedPnlPercent?.current?.doubleValue ?? 0 > 0 {
+            sign = .plus
+        } else {
+            sign = .minus
         }
-        let pnl = dydxFormatter.shared.dollarVolume(number: abs(position.realizedPnl?.current?.doubleValue ?? 0), digits: 2)
-        viewModel?.realizedPNLAmount = SignedAmountViewModel(text: pnl, sign: sign, coloringOption: .signOnly)
+        viewModel?.realizedPNLAmount = SignedAmountViewModel(text: formattedPnl, sign: sign, coloringOption: .allText)
 
         viewModel?.liquidationPrice = dydxFormatter.shared.dollar(number: position.liquidationPrice?.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 

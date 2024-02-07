@@ -28,8 +28,8 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                 sideText: SideTextViewModel = SideTextViewModel(),
                 indexPrice: String? = nil,
                 entryPrice: String? = nil,
-                unrealizedPnlPercent: SignedAmountViewModel? = nil,
                 unrealizedPnl: SignedAmountViewModel? = nil,
+                unrealizedPnlPercent: String? = nil,
                 logoUrl: URL? = nil,
                 gradientType: GradientType = .none,
                 onTapAction: (() -> Void)? = nil) {
@@ -39,8 +39,8 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         self.sideText = sideText
         self.indexPrice = indexPrice
         self.entryPrice = entryPrice
-        self.unrealizedPnlPercent = unrealizedPnlPercent
         self.unrealizedPnl = unrealizedPnl
+        self.unrealizedPnlPercent = unrealizedPnlPercent
         self.gradientType = gradientType
         self.logoUrl = logoUrl
         self.handler = Handler(onTapAction: onTapAction)
@@ -52,8 +52,8 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     public var sideText: SideTextViewModel
     public var indexPrice: String?
     public var entryPrice: String?
-    public var unrealizedPnlPercent: SignedAmountViewModel?
     public var unrealizedPnl: SignedAmountViewModel?
+    public var unrealizedPnlPercent: String?
     public var logoUrl: URL?
     public var gradientType: GradientType
     public var handler: Handler?
@@ -65,8 +65,8 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             sideText: .previewValue,
             indexPrice: "$1,200",
             entryPrice: "$1,200",
-            unrealizedPnlPercent: .previewValue,
             unrealizedPnl: .previewValue,
+            unrealizedPnlPercent: "$0.00",
             logoUrl: URL(string: "https://media.dydx.exchange/currencies/eth.png"),
             gradientType: .plus)
         return item
@@ -152,9 +152,11 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         HStack {
             Spacer()
             VStack(alignment: .trailing) {
-                unrealizedPnlPercent?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .small))
+                unrealizedPnl?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .small))
 
-                unrealizedPnl?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .smaller))
+                Text(unrealizedPnlPercent ?? "")
+                    .themeFont(fontType: .number, fontSize: .smaller)
+                    .themeColor(foreground: .textTertiary)
             }
         }
         .frame(maxWidth: 80)
