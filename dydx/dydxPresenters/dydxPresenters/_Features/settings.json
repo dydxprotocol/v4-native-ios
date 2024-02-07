@@ -24,6 +24,14 @@
                 "link" : {
                     "text" : "{APP_SCHEME}:///settings/status"
                 }
+            },
+            {
+                "title" : {
+                    "text" : "APP.V4.DIRECTION_COLOR_PREFERENCE"
+                },
+                "link" : {
+                    "text" : "{APP_SCHEME}:///settings/direction_color_preference"
+                }
             }
         ]
     }
