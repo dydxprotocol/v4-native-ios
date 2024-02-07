@@ -22,19 +22,21 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         public var onCloseAction: (() -> Void)?
     }
 
-    public init(marketValue: String? = nil, 
+    public init(marketValue: String? = nil,
                 size: String? = nil,
                 token: TokenTextViewModel? = TokenTextViewModel(),
-                indexPrice: String? = nil, 
+                sideText: SideTextViewModel = SideTextViewModel(),
+                indexPrice: String? = nil,
                 entryPrice: String? = nil,
                 unrealizedPnlPercent: SignedAmountViewModel? = nil,
-                unrealizedPnl: SignedAmountViewModel? = nil, 
+                unrealizedPnl: SignedAmountViewModel? = nil,
                 logoUrl: URL? = nil,
-                gradientType: GradientType = .none, 
+                gradientType: GradientType = .none,
                 onTapAction: (() -> Void)? = nil) {
         self.marketValue = marketValue
         self.size = size
         self.token = token
+        self.sideText = sideText
         self.indexPrice = indexPrice
         self.entryPrice = entryPrice
         self.unrealizedPnlPercent = unrealizedPnlPercent
@@ -47,6 +49,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     public var marketValue: String?
     public var size: String?
     public var token: TokenTextViewModel?
+    public var sideText: SideTextViewModel
     public var indexPrice: String?
     public var entryPrice: String?
     public var unrealizedPnlPercent: SignedAmountViewModel?
@@ -59,6 +62,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         let item = dydxPortfolioPositionItemViewModel(
             size: "299",
             token: .previewValue,
+            sideText: .previewValue,
             indexPrice: "$1,200",
             entryPrice: "$1,200",
             unrealizedPnlPercent: .previewValue,
@@ -119,6 +123,8 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                     .themeFont(fontType: .number, fontSize: .small)
 
                 HStack(spacing: 2) {
+                    sideText
+                        .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))
                     Text(size ?? "")
                         .themeFont(fontType: .number, fontSize: .smaller)
 

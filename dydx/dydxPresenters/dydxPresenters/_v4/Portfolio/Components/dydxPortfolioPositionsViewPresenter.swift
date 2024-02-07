@@ -77,8 +77,10 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
 
         if position.resources.indicator.current == "long" {
             item.gradientType = .plus
+            item.sideText.side = .long
         } else {
             item.gradientType = .minus
+            item.sideText.side = .short
        }
 
         item.indexPrice = dydxFormatter.shared.dollar(number: market.oraclePrice, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
