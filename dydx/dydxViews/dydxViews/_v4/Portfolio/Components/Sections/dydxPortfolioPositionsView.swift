@@ -119,7 +119,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     private func createMain(parentStyle: ThemeStyle) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 0) {
-                Text(marketValue ?? "$69.420")
+                Text(marketValue ?? "--")
                     .themeFont(fontType: .number, fontSize: .small)
 
                 HStack(spacing: 2) {
