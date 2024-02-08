@@ -28,7 +28,7 @@ public class WalletConnectionViewModel: PlatformViewModel {
         vm.walletAddress = "0xAA...AAAA"
         vm.walletImageUrl = URL(string: "https://s3.amazonaws.com/dydx.exchange/logos/walletconnect/lg/9d373b43ad4d2cf190fb1a774ec964a1addf406d6fd24af94ab7596e58c291b2.jpeg")
         vm.equity = "$1234.50"
-        vm.pnl24hPercent = SignedAmountViewModel(text: "12%", sign: .plus)
+        vm.pnl24hPercent = SignedAmountViewModel(text: "12%", sign: .plus, coloringOption: .allText)
         return vm
     }()
 

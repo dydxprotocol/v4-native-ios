@@ -86,14 +86,14 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         viewModel?.closePrice = dydxFormatter.shared.dollar(number: position.exitPrice?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
         let fundingSign: PlatformUISign
-        if position.netFunding?.doubleValue ?? 0 > 0 {
-            fundingSign = .plus
-        } else if position.netFunding?.doubleValue ?? 0 < 0 {
-            fundingSign = .minus
-        } else {
-            fundingSign = .none
-        }
         let funding = dydxFormatter.shared.dollarVolume(number: abs(position.netFunding?.doubleValue ?? 0), digits: 2)
-        viewModel?.funding = SignedAmountViewModel(text: funding, sign: fundingSign, coloringOption: .signOnly)
+        if formattedZero == funding {
+            fundingSign = .none
+        } else if position.netFunding?.doubleValue ?? 0 > 0 {
+            fundingSign = .plus
+        } else {
+            fundingSign = .minus
+        }
+        viewModel?.funding = SignedAmountViewModel(text: funding, sign: fundingSign, coloringOption: .allText)
     }
 }

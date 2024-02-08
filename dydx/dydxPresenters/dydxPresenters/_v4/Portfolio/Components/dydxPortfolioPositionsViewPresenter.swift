@@ -93,7 +93,7 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
             sign = .none
         } else if position.realizedPnlPercent?.current?.doubleValue ?? 0 > 0 {
             sign = .plus
-        } else {    
+        } else {
             sign = .minus
         }
         item.unrealizedPnl = SignedAmountViewModel(text: formattedPnl, sign: sign, coloringOption: .allText)
