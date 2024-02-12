@@ -60,19 +60,7 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
 
         viewModel?.unrealizedPNLAmount = sharedOrderViewModel.unrealizedPnl
         viewModel?.unrealizedPNLPercent = sharedOrderViewModel.unrealizedPnlPercent
-
-        let sign: PlatformUISign
-        let formattedPnl = dydxFormatter.shared.dollarVolume(number: abs(position.realizedPnl?.current?.doubleValue ?? 0), digits: 2)
-        let formattedZero = dydxFormatter.shared.dollarVolume(number: 0.00, digits: 2)
-        if formattedZero == formattedPnl {
-            sign = .none
-        } else if position.realizedPnlPercent?.current?.doubleValue ?? 0 > 0 {
-            sign = .plus
-        } else {
-            sign = .minus
-        }
-        viewModel?.realizedPNLAmount = SignedAmountViewModel(text: formattedPnl, sign: sign, coloringOption: .allText)
-
+        viewModel?.realizedPNLAmount = SignedAmountViewModel(amount: position.realizedPnl?.current?.doubleValue, displayType: .dollar, coloringOption: .allText)
         viewModel?.liquidationPrice = dydxFormatter.shared.dollar(number: position.liquidationPrice?.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
         viewModel?.size = sharedOrderViewModel.size
@@ -85,15 +73,6 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         viewModel?.openPrice = dydxFormatter.shared.dollar(number: position.entryPrice?.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
         viewModel?.closePrice = dydxFormatter.shared.dollar(number: position.exitPrice?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
-        let fundingSign: PlatformUISign
-        let funding = dydxFormatter.shared.dollarVolume(number: abs(position.netFunding?.doubleValue ?? 0), digits: 2)
-        if formattedZero == funding {
-            fundingSign = .none
-        } else if position.netFunding?.doubleValue ?? 0 > 0 {
-            fundingSign = .plus
-        } else {
-            fundingSign = .minus
-        }
-        viewModel?.funding = SignedAmountViewModel(text: funding, sign: fundingSign, coloringOption: .allText)
+        viewModel?.funding = SignedAmountViewModel(amount: position.netFunding?.doubleValue, displayType: .dollar, coloringOption: .allText)
     }
 }

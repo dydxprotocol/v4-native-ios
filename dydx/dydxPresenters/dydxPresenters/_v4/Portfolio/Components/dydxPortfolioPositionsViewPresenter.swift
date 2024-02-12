@@ -96,7 +96,7 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         } else {
             sign = .minus
         }
-        item.unrealizedPnl = SignedAmountViewModel(text: formattedPnl, sign: sign, coloringOption: .allText)
+        item.unrealizedPnl =  SignedAmountViewModel(text: formattedPnl, sign: sign, coloringOption: .allText)
 
         item.unrealizedPnlPercent = dydxFormatter.shared.percent(number: abs(position.unrealizedPnlPercent?.current?.doubleValue ?? 0), digits: 2)
 
