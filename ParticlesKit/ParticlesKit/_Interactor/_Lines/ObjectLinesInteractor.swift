@@ -22,7 +22,7 @@ import Utilities
     private lazy var dollarFormatter: ValueFormatterProtocol = DollarValueFormatter()
     private lazy var leverageFormatter: ValueFormatterProtocol = LeverageValueFormatter()
     private lazy var amountFormatter: ValueFormatterProtocol = AmountValueFormatter()
-    private lazy var percentFormatter: ValueFormatterProtocol = PercentValueFormatter()
+    private lazy var decimalFormatter: ValueFormatterProtocol = PercentValueFormatter()
 
     @objc open dynamic var fields: [String: ObjectLineInteractor]? {
         didSet {
@@ -118,7 +118,7 @@ import Utilities
             return dollarFormatter
 
         case "percent":
-            return percentFormatter
+            return decimalFormatter
 
         case "leverage":
             return leverageFormatter

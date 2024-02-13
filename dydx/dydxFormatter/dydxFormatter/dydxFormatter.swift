@@ -45,7 +45,6 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
 
     private var percentFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
-        formatter.roundingMode = .up
         formatter.numberStyle = .decimal
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
@@ -242,7 +241,7 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     /// - Returns: the number formatted as a dollar amount
     public func dollarVolume(number: Double?, digits: Int = 2, shouldDisplaySignForPositiveNumbers: Bool = false) -> String? {
         if let number = number {
-            return dollarVolume(number: NSNumber(value: number), digits: digits)
+            return dollarVolume(number: NSNumber(value: number), digits: digits, shouldDisplaySignForPositiveNumbers: shouldDisplaySignForPositiveNumbers)
         }
         return nil
     }
@@ -256,7 +255,7 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     public func dollarVolume(number: NSNumber?, digits: Int = 2, shouldDisplaySignForPositiveNumbers: Bool = false) -> String? {
         if let number = number,
             let formatted = condensed(number: number.abs(), digits: digits),
-            let formattedZero = condensed(number: number.abs(), digits: digits) {
+           let formattedZero = condensed(number: 0.0, digits: digits) {
             if formattedZero == formatted {
                 return "$\(formatted)"
             } else if number.doubleValue >= 0.0 {
@@ -463,12 +462,14 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
                 let percent = NSNumber(value: number.doubleValue * 100.0)
                 percentFormatter.minimumFractionDigits = minDigits ?? digits
                 percentFormatter.maximumFractionDigits = digits
-                if let formatted = percentFormatter.string(from: percent),
+                if let formatted = percentFormatter.string(from: percent.abs()),
                    let formattedZero = percentFormatter.string(from: 0) {
                     if formattedZero == formatted {
                         return "\(formatted)%"
                     } else if number.doubleValue >= 0.0 {
                         return "\(shouldDisplayPlusSignForPositiveNumbers ? "+" : "")\(formatted)%"
+                    } else if number.doubleValue < 0.0 {
+                        return "-\(formatted)%"
                     } else {
                         return nil
                     }
