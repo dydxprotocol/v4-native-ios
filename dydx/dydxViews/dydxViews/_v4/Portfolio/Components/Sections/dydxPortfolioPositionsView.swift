@@ -22,10 +22,11 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         public var onCloseAction: (() -> Void)?
     }
 
-    public init(marketValue: String? = nil,
-                size: String? = nil,
+    public init(size: String? = nil,
                 token: TokenTextViewModel? = TokenTextViewModel(),
                 sideText: SideTextViewModel = SideTextViewModel(),
+                leverage: String? = nil,
+                leverageIcon: LeverageRiskModel? = nil,
                 indexPrice: String? = nil,
                 entryPrice: String? = nil,
                 unrealizedPnl: SignedAmountViewModel? = nil,
@@ -33,7 +34,6 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                 logoUrl: URL? = nil,
                 gradientType: GradientType = .none,
                 onTapAction: (() -> Void)? = nil) {
-        self.marketValue = marketValue
         self.size = size
         self.token = token
         self.sideText = sideText
@@ -46,10 +46,11 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         self.handler = Handler(onTapAction: onTapAction)
     }
 
-    public var marketValue: String?
     public var size: String?
     public var token: TokenTextViewModel?
-    public var sideText: SideTextViewModel
+    public var sideText = SideTextViewModel()
+    public var leverage: String?
+    public var leverageIcon: LeverageRiskModel?
     public var indexPrice: String?
     public var entryPrice: String?
     public var unrealizedPnl: SignedAmountViewModel?
@@ -63,6 +64,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             size: "299",
             token: .previewValue,
             sideText: .previewValue,
+            leverage: "0.01x",
             indexPrice: "$1,200",
             entryPrice: "$1,200",
             unrealizedPnl: .previewValue,
@@ -85,13 +87,13 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             let cell = PlatformTableViewCellViewModel(logo: icon.wrappedViewModel,
                                                       main: main.wrappedViewModel,
                                                       trailing: trailing.wrappedViewModel)
-                               .createView(parentStyle: parentStyle)
-                               .frame(height: 64)
-                               .themeGradient(background: .layer3, gradientType: self.gradientType)
-                               .cornerRadius(16)
-                               .onTapGesture { [weak self] in
-                                   self?.handler?.onTapAction?()
-                               }
+                .createView(parentStyle: parentStyle)
+                .frame(height: 64)
+                .themeGradient(background: .layer3, gradientType: self.gradientType)
+                .cornerRadius(16)
+                .onTapGesture { [weak self] in
+                    self?.handler?.onTapAction?()
+                }
 
             let rightCellSwipeAccessoryView = PlatformIconViewModel(type: .asset(name: "action_cancel", bundle: Bundle.dydxView), size: .init(width: 16, height: 16))
                 .createView(parentStyle: style, styleKey: styleKey)
@@ -112,23 +114,29 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             PlatformIconViewModel(type: .url(url: logoUrl),
                                   clip: .defaultCircle,
                                   size: CGSize(width: 32, height: 32))
-                .createView(parentStyle: parentStyle)
+            .createView(parentStyle: parentStyle)
         }
     }
 
     private func createMain(parentStyle: ThemeStyle) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 0) {
-                Text(marketValue ?? "--")
-                    .themeFont(fontType: .number, fontSize: .small)
+                HStack(spacing: 2) {
+                    Text(size ?? "")
+                        .themeFont(fontType: .number, fontSize: .small)
+
+                    token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
+                }
 
                 HStack(spacing: 2) {
                     sideText
                         .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))
-                    Text(size ?? "")
-                        .themeFont(fontType: .number, fontSize: .smaller)
+                    Text("@")
+                        .themeFont(fontSize: .smaller)
+                        .themeColor(foreground: .textTertiary)
 
-                    token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
+                    Text(leverage ?? "")
+                        .themeFont(fontType: .number, fontSize: .smaller)
                 }
             }
 
@@ -215,7 +223,7 @@ struct dydxPortfolioPositionsView_Previews_Dark: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxPortfolioPositionsViewModel.previewValue
             .createView()
-            // .edgesIgnoringSafeArea(.bottom)
+        // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
     }
 }

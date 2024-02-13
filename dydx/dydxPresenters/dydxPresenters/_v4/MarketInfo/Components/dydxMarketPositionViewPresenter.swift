@@ -63,6 +63,8 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         viewModel?.realizedPNLAmount = SignedAmountViewModel(amount: position.realizedPnl?.current?.doubleValue, displayType: .dollar, coloringOption: .allText)
         viewModel?.liquidationPrice = dydxFormatter.shared.dollar(number: position.liquidationPrice?.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
+        viewModel?.leverage = sharedOrderViewModel.leverage
+        viewModel?.leverageIcon = sharedOrderViewModel.leverageIcon
         viewModel?.size = sharedOrderViewModel.size
         viewModel?.token = sharedOrderViewModel.token
         viewModel?.logoUrl = sharedOrderViewModel.logoUrl

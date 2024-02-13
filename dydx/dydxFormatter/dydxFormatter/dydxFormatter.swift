@@ -254,7 +254,7 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     /// - Returns: the number formatted as a dollar amount
     public func dollarVolume(number: NSNumber?, digits: Int = 2, shouldDisplaySignForPositiveNumbers: Bool = false) -> String? {
         if let number = number,
-            let formatted = condensed(number: number.abs(), digits: digits),
+           let formatted = condensed(number: number.abs(), digits: digits),
            let formattedZero = condensed(number: 0.0, digits: digits) {
             if formattedZero == formatted {
                 return "$\(formatted)"
