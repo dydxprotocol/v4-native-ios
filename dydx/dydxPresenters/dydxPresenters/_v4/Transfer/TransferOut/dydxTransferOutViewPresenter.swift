@@ -106,7 +106,7 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
             AbacusStateManager.shared.state.selectedSubaccount
                 .map(\.?.freeCollateral?.current)
                 .removeDuplicates(),
-            AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.dydxTokenInfo?.denom ?? "")
+            AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.dydxTokenInfo?.denom)
         )
             .sink { [weak self] selectedToken, freeCollateral, dydxTokenAmount in
                 if selectedToken?.type == dydxTokenConstants.usdcTokenKey {
