@@ -75,11 +75,11 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         item.token?.symbol = asset.id
 
         if position.resources.indicator.current == "long" {
-            item.gradientType = .plus
             item.sideText.side = .long
+            item.gradientType = .plus
         } else {
-            item.gradientType = .minus
             item.sideText.side = .short
+            item.gradientType = .minus
        }
 
         item.leverage = dydxFormatter.shared.leverage(number: NSNumber(value: position.leverage?.current?.doubleValue ?? 0))
@@ -90,18 +90,7 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         item.indexPrice = dydxFormatter.shared.dollar(number: market.oraclePrice, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
         item.entryPrice = dydxFormatter.shared.dollar(number: position.entryPrice?.current, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
-        let sign: PlatformUISign
-        let formattedPnl = dydxFormatter.shared.dollarVolume(number: abs(position.unrealizedPnl?.current?.doubleValue ?? 0), digits: 2)
-        let formattedZero = dydxFormatter.shared.dollarVolume(number: 0.00, digits: 2)
-        if formattedZero == formattedPnl {
-            sign = .none
-        } else if position.realizedPnlPercent?.current?.doubleValue ?? 0 > 0 {
-            sign = .plus
-        } else {
-            sign = .minus
-        }
-        item.unrealizedPnl =  SignedAmountViewModel(text: formattedPnl, sign: sign, coloringOption: .allText)
-
+        item.unrealizedPnl = SignedAmountViewModel(amount: position.unrealizedPnl?.current?.doubleValue ?? 0, displayType: .dollar, coloringOption: .allText)
         item.unrealizedPnlPercent = dydxFormatter.shared.percent(number: abs(position.unrealizedPnlPercent?.current?.doubleValue ?? 0), digits: 2)
 
         if let url = asset.resources?.imageUrl {
