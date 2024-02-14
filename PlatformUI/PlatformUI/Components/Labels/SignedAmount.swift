@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import dydxFormatter
 
 public class SignedAmountViewModel: PlatformViewModel, Hashable {
     public enum ColoringOption {
@@ -34,35 +33,6 @@ public class SignedAmountViewModel: PlatformViewModel, Hashable {
         self.positiveTextStyleKey = positiveTextStyleKey
         self.negativeTextStyleKey = negativeTextStyleKey
     }
-    
-    public convenience init(amount: Double?, displayType: DisplayType, coloringOption: ColoringOption, positiveTextStyleKey: String, negativeTextStyleKey: String, shouldDisplaySignForPositiveNumbers: Bool = false) {
-        let formattedZero: String
-        let formattedText: String
-        let sign: PlatformUISign
-        switch displayType {
-        case .dollar:
-            formattedText = dydxFormatter.shared.dollarVolume(number: amount, shouldDisplaySignForPositiveNumbers: shouldDisplaySignForPositiveNumbers) ?? ""
-            formattedZero = dydxFormatter.shared.dollarVolume(number: 0.0, shouldDisplaySignForPositiveNumbers: shouldDisplaySignForPositiveNumbers) ?? ""
-        case .percent:
-            let digits = 2
-            formattedText = dydxFormatter.shared.percent(number: amount, digits: digits, shouldDisplayPlusSignForPositiveNumbers: shouldDisplaySignForPositiveNumbers) ?? ""
-            formattedZero = dydxFormatter.shared.percent(number: 0.0, digits: digits, shouldDisplayPlusSignForPositiveNumbers: shouldDisplaySignForPositiveNumbers) ?? ""
-        }
-        // special logic for when a value like -0.001 would render as "-$0.00" instead of "$0.00"
-        if formattedText == formattedZero {
-            sign = .none
-        } else if (amount ?? 0) > 0 {
-            sign = .plus
-        } else {
-            sign = .minus
-        }
-        self.init(text: formattedText,
-                  sign: sign,
-                  coloringOption: coloringOption,
-                  positiveTextStyleKey: positiveTextStyleKey,
-                  negativeTextStyleKey: negativeTextStyleKey)
-    }
-    
     
     
     public static func == (lhs: SignedAmountViewModel, rhs: SignedAmountViewModel) -> Bool {

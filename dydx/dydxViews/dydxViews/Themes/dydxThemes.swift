@@ -146,21 +146,6 @@ struct GradientTypeModifier: ViewModifier {
     }
 }
 
-public extension SignedAmountViewModel {
-    convenience init(text: String? = nil, sign: PlatformUISign = .plus, coloringOption: ColoringOption) {
-        self.init(text: text, sign: sign, coloringOption: coloringOption, positiveTextStyleKey: ThemeSettings.positiveTextStyleKey, negativeTextStyleKey: ThemeSettings.negativeTextStyleKey)
-    }
-
-    convenience init(amount: Double?, displayType: DisplayType, coloringOption: ColoringOption, shouldDisplaySignForPositiveNumbers: Bool = false) {
-        self.init(amount: amount,
-                  displayType: displayType,
-                  coloringOption: coloringOption,
-                  positiveTextStyleKey: ThemeSettings.positiveTextStyleKey,
-                  negativeTextStyleKey: ThemeSettings.negativeTextStyleKey,
-                  shouldDisplaySignForPositiveNumbers: shouldDisplaySignForPositiveNumbers)
-    }
-}
-
 private extension UIWindow {
 
     /// Unload all views and add back.
