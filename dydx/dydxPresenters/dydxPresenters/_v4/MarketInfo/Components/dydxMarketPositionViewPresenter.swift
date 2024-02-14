@@ -60,22 +60,11 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
 
         viewModel?.unrealizedPNLAmount = sharedOrderViewModel.unrealizedPnl
         viewModel?.unrealizedPNLPercent = sharedOrderViewModel.unrealizedPnlPercent
-
-        let sign: PlatformUISign
-        if position.realizedPnlPercent?.current?.doubleValue ?? 0 > 0 {
-            sign = .plus
-        } else if position.realizedPnlPercent?.current?.doubleValue ?? 0 < 0 {
-            sign = .minus
-        } else {
-            sign = .none
-        }
-        let pnl = dydxFormatter.shared.dollarVolume(number: abs(position.realizedPnl?.current?.doubleValue ?? 0), digits: 2)
-        viewModel?.realizedPNLAmount = SignedAmountViewModel(text: pnl, sign: sign, coloringOption: .signOnly)
+        viewModel?.realizedPNLAmount = SignedAmountViewModel(amount: position.realizedPnl?.current?.doubleValue, displayType: .dollar, coloringOption: .allText)
+        viewModel?.liquidationPrice = dydxFormatter.shared.dollar(number: position.liquidationPrice?.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
         viewModel?.leverage = sharedOrderViewModel.leverage
         viewModel?.leverageIcon = sharedOrderViewModel.leverageIcon
-        viewModel?.liquidationPrice = dydxFormatter.shared.dollar(number: position.liquidationPrice?.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
-
         viewModel?.size = sharedOrderViewModel.size
         viewModel?.side = sharedOrderViewModel.sideText
         viewModel?.token = sharedOrderViewModel.token
@@ -87,15 +76,6 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         viewModel?.openPrice = dydxFormatter.shared.dollar(number: position.entryPrice?.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
         viewModel?.closePrice = dydxFormatter.shared.dollar(number: position.exitPrice?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
-        let fundingSign: PlatformUISign
-        if position.netFunding?.doubleValue ?? 0 > 0 {
-            fundingSign = .plus
-        } else if position.netFunding?.doubleValue ?? 0 < 0 {
-            fundingSign = .minus
-        } else {
-            fundingSign = .none
-        }
-        let funding = dydxFormatter.shared.dollarVolume(number: abs(position.netFunding?.doubleValue ?? 0), digits: 2)
-        viewModel?.funding = SignedAmountViewModel(text: funding, sign: fundingSign, coloringOption: .signOnly)
+        viewModel?.funding = SignedAmountViewModel(amount: position.netFunding?.doubleValue, displayType: .dollar, coloringOption: .allText)
     }
 }
