@@ -37,9 +37,10 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         self.size = size
         self.token = token
         self.sideText = sideText
+        self.leverage = leverage
+        self.leverageIcon = leverageIcon
         self.indexPrice = indexPrice
         self.entryPrice = entryPrice
-        self.unrealizedPnl = unrealizedPnl
         self.unrealizedPnlPercent = unrealizedPnlPercent
         self.gradientType = gradientType
         self.logoUrl = logoUrl
