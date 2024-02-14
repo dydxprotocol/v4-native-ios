@@ -436,3 +436,13 @@ extension AbacusStateManager {
         }
     }
 }
+
+public extension V4Environment {
+    var usdcTokenInfo: TokenInfo? {
+        tokens["usdc"]
+    }
+
+    var dydxTokenInfo: TokenInfo? {
+        tokens["chain"]
+    }
+}

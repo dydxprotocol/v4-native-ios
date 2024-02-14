@@ -107,8 +107,8 @@ public class TransferInstanceViewModel: PlatformViewModel {
                 .themeFont(fontSize: .smaller)
                 .themeColor(foreground: .textTertiary)
                 .lineLimit(1)
-            SignedAmountViewModel(text: dydxFormatter.shared.dollarVolume(number: amount.magnitude), sign: type.sign, coloringOption: .signOnly)
-                .createView(parentStyle: parentStyle)
+            Text(dydxFormatter.shared.dollarVolume(number: amount) ?? "")
+                .themeColor(foreground: .textSecondary)
                 .themeFont(fontSize: .small)
         }
     }

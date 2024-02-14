@@ -32,7 +32,7 @@ public class dydxProfileBalancesViewPresenter: HostedViewPresenter<dydxProfileBa
     public override func start() {
         super.start()
 
-        AbacusStateManager.shared.state.accountBalance(of: .dydx)
+        AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.dydxTokenInfo?.denom)
             .sink { [weak self] dydxAmount in
                 if let dydxAmount = dydxAmount {
                     self?.viewModel?.walletAmount = dydxFormatter.shared.raw(number: Parser.standard.asNumber(dydxAmount), digits: 4)
@@ -46,7 +46,7 @@ public class dydxProfileBalancesViewPresenter: HostedViewPresenter<dydxProfileBa
             }
             .store(in: &subscriptions)
 
-        AbacusStateManager.shared.state.stakingBalance(of: .dydx)
+        AbacusStateManager.shared.state.stakingBalance(of: AbacusStateManager.shared.environment?.dydxTokenInfo?.denom ?? "")
             .sink { [weak self] dydxAmount in
                 if let dydxAmount = dydxAmount {
                     self?.viewModel?.stakedAmount = dydxFormatter.shared.raw(number: Parser.standard.asNumber(dydxAmount), digits: 4)

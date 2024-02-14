@@ -217,7 +217,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
             AbacusStateManager.shared.state.transferInput,
             AbacusStateManager.shared.state.currentWallet,
             AbacusStateManager.shared.state.selectedSubaccount.compactMap { $0 },
-            AbacusStateManager.shared.state.accountBalance(of: .usdc)
+            AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.usdcTokenInfo?.denom)
         )
         .prefix(1)
         .sink { [weak self] transferInput, currentWallet, selectedSubaccount, usdcBalanceInWallet in
@@ -264,8 +264,8 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
         Publishers.CombineLatest4(
             AbacusStateManager.shared.state.transferInput,
             AbacusStateManager.shared.state.currentWallet,
-            AbacusStateManager.shared.state.accountBalance(of: .usdc),
-            AbacusStateManager.shared.state.accountBalance(of: .dydx)
+            AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.usdcTokenInfo?.denom),
+            AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.dydxTokenInfo?.denom)
         )
         .prefix(1)
         .map {
