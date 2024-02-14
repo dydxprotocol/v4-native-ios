@@ -104,28 +104,20 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
-    /**
-     Account balances (wallet balances)
-     **/
-    public enum NativeTokenDenom: String {
-        case usdc = "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"
-        case dydx = "dv4tnt"
-    }
-
-    public func accountBalance(of tokenDenom: NativeTokenDenom) -> AnyPublisher<Double?, Never> {
+    public func accountBalance(of tokenDenom: String?) -> AnyPublisher<Double?, Never> {
         account
             .map { account in
-                self.parser.asDecimal(account?.balances?[tokenDenom.rawValue]?.amount)?.doubleValue
+                self.parser.asDecimal(account?.balances?[tokenDenom ?? ""]?.amount)?.doubleValue
             }
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
     }
 
-    public func stakingBalance(of tokenDenom: NativeTokenDenom) -> AnyPublisher<Double?, Never> {
+    public func stakingBalance(of tokenDenom: String) -> AnyPublisher<Double?, Never> {
         account
             .map { account in
-                self.parser.asDecimal(account?.stakingBalances?[tokenDenom.rawValue]?.amount)?.doubleValue
+                self.parser.asDecimal(account?.stakingBalances?[tokenDenom]?.amount)?.doubleValue
             }
             .removeDuplicates()
             .share()

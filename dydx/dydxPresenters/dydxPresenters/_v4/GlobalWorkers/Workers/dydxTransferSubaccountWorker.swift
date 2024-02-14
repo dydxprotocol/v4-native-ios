@@ -20,7 +20,7 @@ final class dydxTransferSubaccountWorker: BaseWorker {
     override func start() {
         super.start()
 
-        AbacusStateManager.shared.state.accountBalance(of: .usdc)
+        AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.usdcTokenInfo?.denom)
             .filter { value in
                 (value ?? 0) > dydxTransferSubaccountWorker.balanceRetainAmount
             }

@@ -22,7 +22,18 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         public var onCloseAction: (() -> Void)?
     }
 
-    public init(size: String? = nil, token: TokenTextViewModel? = TokenTextViewModel(), sideText: SideTextViewModel = SideTextViewModel(), leverage: String? = nil, leverageIcon: LeverageRiskModel? = nil, indexPrice: String? = nil, entryPrice: String? = nil, unrealizedPnlPercent: SignedAmountViewModel? = nil, unrealizedPnl: SignedAmountViewModel? = nil, logoUrl: URL? = nil, gradientType: GradientType = .none, onTapAction: (() -> Void)? = nil) {
+    public init(size: String? = nil,
+                token: TokenTextViewModel? = TokenTextViewModel(),
+                sideText: SideTextViewModel = SideTextViewModel(),
+                leverage: String? = nil,
+                leverageIcon: LeverageRiskModel? = nil,
+                indexPrice: String? = nil,
+                entryPrice: String? = nil,
+                unrealizedPnl: SignedAmountViewModel? = nil,
+                unrealizedPnlPercent: String? = nil,
+                logoUrl: URL? = nil,
+                gradientType: GradientType = .none,
+                onTapAction: (() -> Void)? = nil) {
         self.size = size
         self.token = token
         self.sideText = sideText
@@ -31,7 +42,6 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         self.indexPrice = indexPrice
         self.entryPrice = entryPrice
         self.unrealizedPnlPercent = unrealizedPnlPercent
-        self.unrealizedPnl = unrealizedPnl
         self.gradientType = gradientType
         self.logoUrl = logoUrl
         self.handler = Handler(onTapAction: onTapAction)
@@ -44,8 +54,8 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     public var leverageIcon: LeverageRiskModel?
     public var indexPrice: String?
     public var entryPrice: String?
-    public var unrealizedPnlPercent: SignedAmountViewModel?
     public var unrealizedPnl: SignedAmountViewModel?
+    public var unrealizedPnlPercent: String?
     public var logoUrl: URL?
     public var gradientType: GradientType
     public var handler: Handler?
@@ -58,8 +68,8 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             leverage: "0.01x",
             indexPrice: "$1,200",
             entryPrice: "$1,200",
-            unrealizedPnlPercent: .previewValue,
             unrealizedPnl: .previewValue,
+            unrealizedPnlPercent: "$0.00",
             logoUrl: URL(string: "https://media.dydx.exchange/currencies/eth.png"),
             gradientType: .plus)
         return item
@@ -78,13 +88,13 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             let cell = PlatformTableViewCellViewModel(logo: icon.wrappedViewModel,
                                                       main: main.wrappedViewModel,
                                                       trailing: trailing.wrappedViewModel)
-                               .createView(parentStyle: parentStyle)
-                               .frame(height: 64)
-                               .themeGradient(background: .layer3, gradientType: self.gradientType)
-                               .cornerRadius(16)
-                               .onTapGesture { [weak self] in
-                                   self?.handler?.onTapAction?()
-                               }
+                .createView(parentStyle: parentStyle)
+                .frame(height: 64)
+                .themeGradient(background: .layer3, gradientType: self.gradientType)
+                .cornerRadius(16)
+                .onTapGesture { [weak self] in
+                    self?.handler?.onTapAction?()
+                }
 
             let rightCellSwipeAccessoryView = PlatformIconViewModel(type: .asset(name: "action_cancel", bundle: Bundle.dydxView), size: .init(width: 16, height: 16))
                 .createView(parentStyle: style, styleKey: styleKey)
@@ -105,7 +115,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             PlatformIconViewModel(type: .url(url: logoUrl),
                                   clip: .defaultCircle,
                                   size: CGSize(width: 32, height: 32))
-                .createView(parentStyle: parentStyle)
+            .createView(parentStyle: parentStyle)
         }
     }
 
@@ -122,7 +132,6 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                 HStack(spacing: 2) {
                     sideText
                         .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))
-
                     Text("@")
                         .themeFont(fontSize: .smaller)
                         .themeColor(foreground: .textTertiary)
@@ -152,9 +161,11 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         HStack {
             Spacer()
             VStack(alignment: .trailing) {
-                unrealizedPnlPercent?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .small))
+                unrealizedPnl?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .small))
 
-                unrealizedPnl?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .smaller))
+                Text(unrealizedPnlPercent ?? "")
+                    .themeFont(fontType: .number, fontSize: .smaller)
+                    .themeColor(foreground: .textTertiary)
             }
         }
         .frame(maxWidth: 80)
@@ -213,7 +224,7 @@ struct dydxPortfolioPositionsView_Previews_Dark: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxPortfolioPositionsViewModel.previewValue
             .createView()
-            // .edgesIgnoringSafeArea(.bottom)
+        // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
     }
 }

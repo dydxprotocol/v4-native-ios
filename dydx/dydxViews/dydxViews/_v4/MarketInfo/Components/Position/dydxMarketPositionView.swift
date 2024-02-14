@@ -14,7 +14,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     @Published public var shareAction: (() -> Void)?
     @Published public var closeAction: (() -> Void)?
     @Published public var unrealizedPNLAmount: SignedAmountViewModel?
-    @Published public var unrealizedPNLPercent: SignedAmountViewModel?
+    @Published public var unrealizedPNLPercent: String?
     @Published public var realizedPNLAmount: SignedAmountViewModel?
     @Published public var leverage: String?
     @Published public var leverageIcon: LeverageRiskModel?
@@ -37,7 +37,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
         vm.shareAction = {}
         vm.closeAction = {}
         vm.unrealizedPNLAmount = .previewValue
-        vm.unrealizedPNLPercent = .previewValue
+        vm.unrealizedPNLPercent = "0.00%"
         vm.realizedPNLAmount = .previewValue
         vm.leverage = "$12.00"
         vm.leverageIcon = .previewValue
@@ -100,22 +100,29 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                 .padding(.top, 8)
 
             HStack(alignment: .top, spacing: 0) {
-                let value = VStack(alignment: .leading) {
+                let unrealizedValue = VStack(alignment: .leading) {
                     unrealizedPNLAmount?
                         .createView(parentStyle: parentStyle.themeFont(fontSize: .large))
 
-                    unrealizedPNLPercent?
-                        .createView(parentStyle: parentStyle.themeFont(fontSize: .small))
+                    Text(unrealizedPNLPercent ?? "")
+                        .themeFont(fontType: .number, fontSize: .smaller)
+                        .themeColor(foreground: .textTertiary)
                 }.wrappedViewModel
 
-                self.createCollectionItem(parentStyle: parentStyle, title: DataLocalizer.localize(path: "APP.TRADE.UNREALIZED_PNL"), valueViewModel: value)
+                let realizedValue = VStack(alignment: .leading) {
+                    realizedPNLAmount?
+                        .createView(parentStyle: parentStyle.themeFont(fontSize: .large))
+                    Spacer()
+                }.wrappedViewModel
+
+                self.createCollectionItem(parentStyle: parentStyle, title: DataLocalizer.localize(path: "APP.TRADE.UNREALIZED_PNL"), valueViewModel: unrealizedValue)
                     .padding(.vertical, 16)
                     .frame(height: 96)
 
                 DividerModel().createView(parentStyle: parentStyle)
                     .frame(height: 82)
 
-                self.createCollectionItem(parentStyle: parentStyle, title: DataLocalizer.localize(path: "APP.TRADE.REALIZED_PNL"), valueViewModel: realizedPNLAmount)
+                self.createCollectionItem(parentStyle: parentStyle, title: DataLocalizer.localize(path: "APP.TRADE.REALIZED_PNL"), valueViewModel: realizedValue)
                     .padding(.vertical, 16)
                     .frame(height: 96)
             }
