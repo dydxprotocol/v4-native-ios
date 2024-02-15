@@ -56,8 +56,8 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
             case .text(let value):
                 return Text(value)
                     .themeFont(fontSize: .small)
-                    .padding([.bottom, .top], 8)
-                    .padding([.leading, .trailing], 12)
+                    .padding([.bottom, .top], 6)
+                    .padding([.leading, .trailing], 8)
                     .themeStyle(styleKey: styleKey, parentStyle: style)
                     .borderAndClip(style: .capsule, borderColor: .layer6, lineWidth: borderWidth)
                     .wrappedInAnyView()
