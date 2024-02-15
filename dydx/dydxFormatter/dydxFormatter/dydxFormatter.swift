@@ -11,6 +11,15 @@ import Utilities
 import Combine
 
 public final class dydxFormatter: NSObject, SingletonProtocol {
+
+    public enum DateFormat: String {
+        /// "e.g. Jan 1"
+        case MMM_d = "MMM d"
+
+        /// "e.g. Jan 1, 2024"
+        case MMM_d_yyyy = "MMM d, yyyy"
+    }
+
     private var subscriptions = Set<AnyCancellable>()
 
     public static let shared = dydxFormatter()
@@ -607,6 +616,13 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
         } else {
             return nil
         }
+    }
+
+    public func millisecondsToDate(_ milliseconds: Double, format: DateFormat) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
+        let formatter = datetimeFormatter
+        formatter.dateFormat = format.rawValue
+        return datetimeFormatter.string(from: date)
     }
 
     public func multiple(of tickText: String, is sizeText: String) -> Bool {
