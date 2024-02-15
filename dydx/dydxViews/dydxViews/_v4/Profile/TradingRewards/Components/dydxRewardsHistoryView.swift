@@ -14,6 +14,7 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
     @Published public var filters: [TabItemViewModel.TabItemContent] = []
     @Published public var onSelectionChanged: ((Int) -> Void)?
     @Published public var items: [dydxRewardsRewardViewModel] = []
+    @Published public var currentSelection: Int = 0
     public var contentChanged: (() -> Void)?
 
     // MARK: private properties
@@ -34,11 +35,11 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
 
     public override func createTitleAccessoryView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
         let items = filters.compactMap { TabItemViewModel(value: $0, isSelected: false) }
-        let selectedItems = filters.compactMap {TabItemViewModel(value: $0, isSelected: true) }
+        let selectedItems = filters.compactMap { TabItemViewModel(value: $0, isSelected: true) }
         return ScrollView(.horizontal, showsIndicators: false) {
                 TabGroupModel(items: items,
                               selectedItems: selectedItems,
-                              currentSelection: 0,
+                              currentSelection: self.currentSelection,
                               onSelectionChanged: { [weak self] index in
                     self?.onSelectionChanged?(index)
                 },
