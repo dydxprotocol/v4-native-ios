@@ -9,6 +9,8 @@ import Utilities
 import dydxViews
 import RoutingKit
 import PlatformUI
+import dydxStateManager
+import dydxFormatter
 
 public class dydxTradingRewardsViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -33,11 +35,17 @@ private protocol dydxTradingRewardsViewPresenterProtocol: HostedViewPresenterPro
 
 private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRewardsViewModel>, dydxTradingRewardsViewPresenterProtocol {
 
+    private let summaryPresenter = dydxRewardsSummaryViewPresenter()
     private let helpPresenter = dydxRewardsHelpViewPresenter()
     private let historyPresenter = dydxRewardsHistoryViewPresenter()
 
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        summaryPresenter,
+        helpPresenter,
+        historyPresenter
+    ]
+
     override init() {
-        super.init()
 
         let viewModel = dydxTradingRewardsViewModel()
 
@@ -46,10 +54,6 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
 
-        // TODO: get from abacus
-        viewModel.launchIncentivesViewModel.seasonOrdinal = "--"
-        viewModel.launchIncentivesViewModel.estimatedPoints = "--"
-        viewModel.launchIncentivesViewModel.points = "--"
         viewModel.launchIncentivesViewModel.aboutAction = {
             Router.shared?.navigate(to: URL(string: "https://dydx.exchange/blog/v4-full-trading"), completion: nil)
         }
@@ -74,13 +78,32 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
 //                Router.shared?.navigate (to: , completion: nil)
 //            }
 
+        summaryPresenter.$viewModel.assign(to: &viewModel.$rewardsSummary)
         helpPresenter.$viewModel.assign(to: &viewModel.$help)
         historyPresenter.$viewModel.assign(to: &viewModel.$history)
 
-        historyPresenter.viewModel?.contentChanged = { [weak self] in
-            self?.viewModel?.objectWillChange.send()
+        historyPresenter.viewModel?.contentChanged = { [weak viewModel] in
+            viewModel?.objectWillChange.send()
         }
 
+        super.init()
+
         self.viewModel = viewModel
+
+        attachChildren(workers: childPresenters)
+    }
+
+    override func start() {
+        super.start()
+
+        AbacusStateManager.shared.state.account
+            .sink { [weak self] _ in
+                // TODO: get from chaos labs
+                self?.viewModel?.launchIncentivesViewModel.seasonOrdinal = "--"
+                self?.viewModel?.launchIncentivesViewModel.estimatedPoints = "--"
+                self?.viewModel?.launchIncentivesViewModel.points = "--"
+            }
+            .store(in: &subscriptions)
+
     }
 }

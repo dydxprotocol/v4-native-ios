@@ -25,7 +25,7 @@ public class dydxRewardsRewardViewModel: PlatformViewModel {
         let localizedString = DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.FOR_TRADING", params: ["PERIOD": period]) ?? ""
 
         var attributedString = AttributedString(localizedString)
-            .themeFont(fontType: .text, fontSize: .smaller)
+            .themeFont(fontType: .text, fontSize: .smallest)
 
         attributedString = attributedString.themeColor(foreground: .textTertiary, to: nil)
         if let periodTextRange = attributedString.range(of: period) {

@@ -13,7 +13,7 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
 
     @Published public var headerViewModel: NavHeaderModel = NavHeaderModel()
     @Published public var launchIncentivesViewModel: dydxRewardsLaunchIncentivesViewModel = dydxRewardsLaunchIncentivesViewModel()
-    @Published public var rewardsSummary: dydxRewardsSummaryViewModel = dydxRewardsSummaryViewModel()
+    @Published public var rewardsSummary: dydxRewardsSummaryViewModel? = dydxRewardsSummaryViewModel()
     @Published public var help: dydxRewardsHelpViewModel? = dydxRewardsHelpViewModel()
     @Published public var history: dydxRewardsHistoryViewModel? = dydxRewardsHistoryViewModel()
     // removed as part of https://linear.app/dydx/issue/TRCL-3445/remove-governance-and-staking-cards
@@ -37,7 +37,7 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 16) {
                         self.launchIncentivesViewModel.createView(parentStyle: style)
-                        self.rewardsSummary.createView(parentStyle: style)
+                        self.rewardsSummary?.createView(parentStyle: style)
                         self.help?.createView(parentStyle: style)
                         self.history?.createView(parentStyle: style)
                         // see comment near top
