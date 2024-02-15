@@ -39,7 +39,7 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
         return ScrollView(.horizontal, showsIndicators: false) {
                 TabGroupModel(items: items,
                               selectedItems: selectedItems,
-                              currentSelection: self.currentSelection,
+                              currentSelection: currentSelection,
                               onSelectionChanged: { [weak self] index in
                     self?.onSelectionChanged?(index)
                 },

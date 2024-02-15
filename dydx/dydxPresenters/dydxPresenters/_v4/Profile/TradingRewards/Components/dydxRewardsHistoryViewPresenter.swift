@@ -20,7 +20,7 @@ public protocol dydxRewardsHistoryViewPresenterProtocol: HostedViewPresenterProt
 
 public class dydxRewardsHistoryViewPresenter: HostedViewPresenter<dydxRewardsHistoryViewModel>, dydxRewardsHistoryViewPresenterProtocol {
 
-    enum Period: CaseIterable {
+    private enum Period: CaseIterable {
         case monthly
         case weekly
         case daily
