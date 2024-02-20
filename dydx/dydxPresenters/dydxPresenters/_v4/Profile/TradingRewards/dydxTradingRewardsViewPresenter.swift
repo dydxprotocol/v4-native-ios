@@ -55,13 +55,6 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
 
-        viewModel.launchIncentivesViewModel.aboutAction = {
-            Router.shared?.navigate(to: URL(string: "https://dydx.exchange/blog/v4-full-trading"), completion: nil)
-        }
-        viewModel.launchIncentivesViewModel.leaderboardAction = {
-            Router.shared?.navigate(to: URL(string: "https://community.chaoslabs.xyz/dydx-v4/risk/leaderboard"), completion: nil)
-        }
-
         // comment out as part of https://linear.app/dydx/issue/TRCL-3445/remove-governance-and-staking-cards
         // non-zero chance we add back
         // these vars and their corresponding files can be fully deleted if rewards is no longer relevant
@@ -79,7 +72,7 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
 //                Router.shared?.navigate (to: , completion: nil)
 //            }
 
-        summaryPresenter.$viewModel.assign(to: &viewModel.$rewardsSummary)
+        launchIncentivesPresenter.$viewModel.assign(to: &viewModel.launchIncentivesViewModel)
         summaryPresenter.$viewModel.assign(to: &viewModel.$rewardsSummary)
         helpPresenter.$viewModel.assign(to: &viewModel.$help)
         historyPresenter.$viewModel.assign(to: &viewModel.$history)
@@ -106,6 +99,5 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
                 self?.viewModel?.launchIncentivesViewModel.points = "--"
             }
             .store(in: &subscriptions)
-
     }
 }

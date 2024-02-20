@@ -37,6 +37,16 @@ public class dydxRewardsLaunchIncentivesPresenter: HostedViewPresenter<dydxRewar
 
         }
         .store(in: &subscriptions)
+        
+        
+
+        viewModel.aboutAction = {
+            Router.shared?.navigate(to: URL(string: "https://dydx.exchange/blog/v4-full-trading"), completion: nil)
+        }
+        
+        viewModel.leaderboardAction = {
+            Router.shared?.navigate(to: URL(string: "https://community.chaoslabs.xyz/dydx-v4/risk/leaderboard"), completion: nil)
+        }
     }
 
     private func update(currentSeason: String?, seasonPointMap: [String: LaunchIncentivePoint]?) {
