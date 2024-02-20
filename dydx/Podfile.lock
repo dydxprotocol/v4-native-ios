@@ -1,5 +1,5 @@
 PODS:
-  - Abacus (1.4.8)
+  - Abacus (1.4.10)
   - Amplitude-iOS (4.10.0)
   - AppsFlyerFramework (6.13.0):
     - AppsFlyerFramework/Main (= 6.13.0)
@@ -376,7 +376,7 @@ CHECKOUT OPTIONS:
     :http: https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz
 
 SPEC CHECKSUMS:
-  Abacus: 12c54006967e95366a27910f6499e58fb89564bf
+  Abacus: b8137d2ad17e9cb88896f9f4fa042d55e2b94420
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   AppsFlyerFramework: cb54b4f27d2da2b3e2b286800476ce3b2007c75f
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
