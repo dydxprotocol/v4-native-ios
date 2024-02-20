@@ -35,6 +35,7 @@ private protocol dydxTradingRewardsViewPresenterProtocol: HostedViewPresenterPro
 
 private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRewardsViewModel>, dydxTradingRewardsViewPresenterProtocol {
 
+    private let launchIncentivesPresenter = dydxRewardsLaunchIncentivesPresenter()
     private let summaryPresenter = dydxRewardsSummaryViewPresenter()
     private let helpPresenter = dydxRewardsHelpViewPresenter()
     private let historyPresenter = dydxRewardsHistoryViewPresenter()
@@ -78,6 +79,7 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
 //                Router.shared?.navigate (to: , completion: nil)
 //            }
 
+        summaryPresenter.$viewModel.assign(to: &viewModel.$rewardsSummary)
         summaryPresenter.$viewModel.assign(to: &viewModel.$rewardsSummary)
         helpPresenter.$viewModel.assign(to: &viewModel.$help)
         historyPresenter.$viewModel.assign(to: &viewModel.$history)
