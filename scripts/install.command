@@ -4,7 +4,7 @@
 # export DYDX_IOS_ROOT="$HOME/path/to/ios"
 
 # If not set, use "~/native-ios"
-ios_root_dir=${DYDX_IOS_ROOT:-"$HOME/native-ios"}
+ios_root_dir=${DYDX_IOS_ROOT:-"$HOME/v4-native-ios"}
 echo "Using ios root dir: $ios_root_dir"
 
 cd "$ios_root_dir/dydx" || exit 1
