@@ -50,11 +50,9 @@ public class dydxRewardsLaunchIncentivesPresenter: HostedViewPresenter<dydxRewar
 
     private func update(currentSeason: String?, seasonPointMap: [String: LaunchIncentivePoint]?) {
         viewModel?.seasonOrdinal = currentSeason
-        if let currentSeason, let points = seasonPointMap?[currentSeason] {
-            viewModel?.estimatedPoints = "\(points)"
-            viewModel?.points = "\(points)"
+        if let currentSeason, let incentivePoints = seasonPointMap?[currentSeason]?.incentivePoints {
+            viewModel?.points = "\(incentivePoints)"
         } else {
-            viewModel?.estimatedPoints = "--"
             viewModel?.points = "--"
         }
     }

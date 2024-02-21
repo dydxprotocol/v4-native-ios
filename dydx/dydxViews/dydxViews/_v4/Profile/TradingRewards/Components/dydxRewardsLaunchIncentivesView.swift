@@ -11,7 +11,6 @@ import PlatformUI
 import Utilities
 
 public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
-    @Published public var estimatedPoints: String?
     @Published public var seasonOrdinal: String?
     @Published public var points: String?
     @Published public var aboutAction: (() -> Void)?
@@ -19,7 +18,6 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
 
     public static var previewValue: dydxRewardsLaunchIncentivesViewModel = {
         let vm = dydxRewardsLaunchIncentivesViewModel()
-        vm.estimatedPoints = "10"
         vm.seasonOrdinal = "1"
         return vm
     }()
