@@ -9,7 +9,7 @@
 import ParticlesKit
 import PlatformRouting
 import SDWebImage
-import SDWebImageSVGKitPlugin
+import SDWebImageSVGCoder
 import Utilities
 import UIToolkits
 
@@ -25,7 +25,7 @@ open class ParticlesPlatformInjection: ParticlesInjection {
         Console.shared.log("injectUI")
         
         HapticFeedback.shared = MotionHapticFeedback()
-        SDImageCodersManager.shared.addCoder(SDImageSVGKCoder.shared)
+        SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
         RoutingTabBarController.parserOverwrite = Parser.featureFlagged
         PrompterFactory.shared = UIKitPrompterFactory()
     }
