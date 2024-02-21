@@ -194,6 +194,7 @@ workflows:
     - git-tag-project-version-and-build-number@1:
         inputs:
         - bitrise_tag_xcodeproj_path: dydxV4/dydxV4.xcodeproj
+        - bitrise_tag_format: build_v_VERSION_(_BUILD_)
         - bitrise_tag_info_plist_path: dydxV4/dydxV4/info.plist
     - dsym-upload-to-crashlytics--no-cocoapods@0:
         inputs:
