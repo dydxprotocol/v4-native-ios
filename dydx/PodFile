@@ -77,13 +77,13 @@ def uikit_pods
   pod 'pop'
   pod 'RDHCollectionViewGridLayout'
   pod 'SDWebImage'
-  pod 'SDWebImageSVGKitPlugin'
+  pod 'SDWebImageSVGCoder'
   pod 'SVGKit'
 end
 
 def swifiui_pods
   pod 'SDWebImage'
-  pod 'SDWebImageSVGKitPlugin'
+  pod 'SDWebImageSVGCoder'
   pod 'SDWebImageSwiftUI'
   pod 'Popovers'
 end
