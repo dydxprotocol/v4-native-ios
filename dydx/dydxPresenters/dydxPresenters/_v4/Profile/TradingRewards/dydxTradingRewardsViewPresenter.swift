@@ -41,6 +41,7 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
     private let historyPresenter = dydxRewardsHistoryViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        launchIncentivesPresenter,
         summaryPresenter,
         helpPresenter,
         historyPresenter
@@ -72,7 +73,7 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
 //                Router.shared?.navigate (to: , completion: nil)
 //            }
 
-        launchIncentivesPresenter.$viewModel.assign(to: &viewModel.launchIncentivesViewModel)
+        launchIncentivesPresenter.$viewModel.assign(to: &viewModel.$launchIncentivesViewModel)
         summaryPresenter.$viewModel.assign(to: &viewModel.$rewardsSummary)
         helpPresenter.$viewModel.assign(to: &viewModel.$help)
         historyPresenter.$viewModel.assign(to: &viewModel.$history)
@@ -86,18 +87,5 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
         self.viewModel = viewModel
 
         attachChildren(workers: childPresenters)
-    }
-
-    override func start() {
-        super.start()
-
-        AbacusStateManager.shared.state.account
-            .sink { [weak self] _ in
-                // TODO: get from chaos labs
-                self?.viewModel?.launchIncentivesViewModel.seasonOrdinal = "--"
-                self?.viewModel?.launchIncentivesViewModel.estimatedPoints = "--"
-                self?.viewModel?.launchIncentivesViewModel.points = "--"
-            }
-            .store(in: &subscriptions)
     }
 }

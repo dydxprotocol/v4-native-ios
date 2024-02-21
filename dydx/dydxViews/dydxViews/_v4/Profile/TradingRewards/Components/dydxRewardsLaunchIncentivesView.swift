@@ -101,7 +101,7 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
             }
             .wrappedInAnyView()
         }
-        return PlatformButtonViewModel(content: content, type: .defaultType, state: .primary, action: self.aboutAction ?? {})
+        return PlatformButtonViewModel(content: content, type: .defaultType, state: .primary, action: self.leaderboardAction ?? {})
             .createView(parentStyle: parentStyle)
     }
 

@@ -13,6 +13,7 @@ import dydxStateManager
 import dydxFormatter
 import Utilities
 import Abacus
+import RoutingKit
 
 public protocol dydxRewardsLaunchIncentivesPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxRewardsLaunchIncentivesViewModel? { get }
@@ -37,14 +38,12 @@ public class dydxRewardsLaunchIncentivesPresenter: HostedViewPresenter<dydxRewar
 
         }
         .store(in: &subscriptions)
-        
-        
 
-        viewModel.aboutAction = {
+        viewModel?.aboutAction = {
             Router.shared?.navigate(to: URL(string: "https://dydx.exchange/blog/v4-full-trading"), completion: nil)
         }
-        
-        viewModel.leaderboardAction = {
+
+        viewModel?.leaderboardAction = {
             Router.shared?.navigate(to: URL(string: "https://community.chaoslabs.xyz/dydx-v4/risk/leaderboard"), completion: nil)
         }
     }
@@ -55,8 +54,8 @@ public class dydxRewardsLaunchIncentivesPresenter: HostedViewPresenter<dydxRewar
             viewModel?.estimatedPoints = "\(points)"
             viewModel?.points = "\(points)"
         } else {
-            viewModel?.estimatedPoints = nil
-            viewModel?.points = nil
+            viewModel?.estimatedPoints = "--"
+            viewModel?.points = "--"
         }
     }
 }
