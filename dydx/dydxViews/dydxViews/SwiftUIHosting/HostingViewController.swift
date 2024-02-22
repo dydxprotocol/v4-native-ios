@@ -15,6 +15,7 @@ import PlatformUI
 import UIToolkits
 import PlatformRouting
 import FloatingPanel
+import Utilities
 
 public struct HostingViewControllerConfiguration {
     public init(ignoreSafeArea: Bool = true, fixedHeight: CGFloat? = nil, gradientTabbar: Bool = false, disableNavigationController: Bool = false) {
@@ -49,11 +50,22 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
         self.init(nibName: nil, bundle: nil)
         self.configuration = configuration
         self.presenter = presenter
-        let view = AnyView(view.navigationBarHidden(true))
+        let view = view
+            .navigationBarHidden(true)
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.userDidTakeScreenshotNotification)) {[weak self] _ in
+                self?.screenshotDetected()
+            }
+            .wrappedInAnyView()
         hostingController = UIHostingController<AnyView>(rootView: view, ignoreSafeArea: configuration.ignoreSafeArea)
         presenterView.presenter = presenter
 
         floatingManager = HostingViewEmbeddingFloatingManager(parent: self)
+    }
+
+    private func screenshotDetected() {
+        if UIViewController.topmost() == self {
+            Tracking.shared?.log(event: "ScreenshotCaptured", data: ["view_controller_class_name": String(describing: type(of: self))])
+        }
     }
 
     open override func loadView() {
