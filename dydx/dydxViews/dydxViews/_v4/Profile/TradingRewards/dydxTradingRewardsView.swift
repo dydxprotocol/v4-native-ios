@@ -12,7 +12,7 @@ import Utilities
 public class dydxTradingRewardsViewModel: PlatformViewModel {
 
     @Published public var headerViewModel: NavHeaderModel = NavHeaderModel()
-    @Published public var launchIncentivesViewModel: dydxRewardsLaunchIncentivesViewModel = dydxRewardsLaunchIncentivesViewModel()
+    @Published public var launchIncentivesViewModel: dydxRewardsLaunchIncentivesViewModel? = dydxRewardsLaunchIncentivesViewModel()
     @Published public var rewardsSummary: dydxRewardsSummaryViewModel? = dydxRewardsSummaryViewModel()
     @Published public var help: dydxRewardsHelpViewModel? = dydxRewardsHelpViewModel()
     @Published public var history: dydxRewardsHistoryViewModel? = dydxRewardsHistoryViewModel()
@@ -36,7 +36,7 @@ public class dydxTradingRewardsViewModel: PlatformViewModel {
                 self.headerViewModel.createView(parentStyle: parentStyle)
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 16) {
-                        self.launchIncentivesViewModel.createView(parentStyle: style)
+                        self.launchIncentivesViewModel?.createView(parentStyle: style)
                         self.rewardsSummary?.createView(parentStyle: style)
                         self.help?.createView(parentStyle: style)
                         self.history?.createView(parentStyle: style)
