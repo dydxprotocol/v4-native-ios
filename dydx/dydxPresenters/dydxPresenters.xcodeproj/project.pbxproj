@@ -127,6 +127,7 @@
 		27351D452AC4A67900E4A563 /* dydxRestrictionsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27351D442AC4A67900E4A563 /* dydxRestrictionsWorker.swift */; };
 		2741E3702A68787A000FA190 /* settings_direction_color_preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 2741E3632A68787A000FA190 /* settings_direction_color_preference.json */; };
 		2741E3732A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */; };
+		2749F8FF2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */; };
 		276908FF2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */; };
 		277E8FC92B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E8FC82B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift */; };
 		277E90152B1EA0E3005CCBCB /* dydxTradingRewardsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E90142B1EA0E3005CCBCB /* dydxTradingRewardsViewPresenter.swift */; };
@@ -468,6 +469,7 @@
 		27351D442AC4A67900E4A563 /* dydxRestrictionsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRestrictionsWorker.swift; sourceTree = "<group>"; };
 		2741E3632A68787A000FA190 /* settings_direction_color_preference.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings_direction_color_preference.json; sourceTree = "<group>"; };
 		2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxDirectionColorPreferenceViewBuilder.swift; sourceTree = "<group>"; };
+		2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsLaunchIncentivesPresenter.swift; sourceTree = "<group>"; };
 		276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewPresenter.swift; sourceTree = "<group>"; };
 		277E8FC82B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxProfileRewardsViewPresenter.swift; sourceTree = "<group>"; };
 		277E90142B1EA0E3005CCBCB /* dydxTradingRewardsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradingRewardsViewPresenter.swift; sourceTree = "<group>"; };
@@ -1295,6 +1297,7 @@
 				277E90182B1EA3C3005CCBCB /* dydxRewardsSummaryPresenter.swift */,
 				277E90322B1FAE9A005CCBCB /* dydxRewardsHelpViewPresenter.swift */,
 				277E908A2B2118AE005CCBCB /* dydxRewardsHistoryViewPresenter.swift */,
+				2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1856,6 +1859,7 @@
 				64529A4C2AE8705E000810E6 /* dydxUpdateWorker.swift in Sources */,
 				02DDAD55292587C600CC7531 /* QRCodeDisplayBuilder.swift in Sources */,
 				0268BBFB2A8BE27800D0C59B /* dydxTransferOutViewPresenter.swift in Sources */,
+				2749F8FF2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift in Sources */,
 				027CA87229EDFC990069781A /* dydxTransferInputCtaButtonViewPresenter.swift in Sources */,
 				02D1CEE129C8DEA7009ADF9A /* dydxLanguageViewBuilder.swift in Sources */,
 				02D1342828EB572100B46941 /* SharedMarketPresenter.swift in Sources */,

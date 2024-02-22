@@ -86,6 +86,14 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
+    public var launchIncentive: AnyPublisher<LaunchIncentive?, Never> {
+        statePublisher
+            .map(\.?.launchIncentive)
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
     public var hasAccount: AnyPublisher<Bool, Never> {
         statePublisher
             .compactMap {
