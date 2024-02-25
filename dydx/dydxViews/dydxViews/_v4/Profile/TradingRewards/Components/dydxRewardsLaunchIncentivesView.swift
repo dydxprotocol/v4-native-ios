@@ -71,11 +71,12 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
             Image("stars", bundle: .dydxView)
         }
         .padding(.all, 16)
-        .background {
-            Image("texture", bundle: .dydxView)
-                .resizable()
-                .scaledToFill()
-        }
+        // commented out until light and classic mode images are provided
+//        .background {
+//            Image("texture", bundle: .dydxView)
+//                .resizable()
+//                .scaledToFill()
+//        }
         .themeColor(background: .layer4)
         .borderAndClip(style: .cornerRadius(12), borderColor: .layer6, lineWidth: 1)
     }
