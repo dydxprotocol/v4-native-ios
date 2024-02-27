@@ -19,12 +19,10 @@ public class dydxRewardsSummaryViewModel: dydxTitledCardViewModel {
     }
 
     override func createContentView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
-        HStack(spacing: 18) {
-            HStack {
-                titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.THIS_WEEK", params: nil) ?? "", primaryValue: last7DaysRewardsAmount, secondaryValue: last7DaysRewardsPeriod)
-                if let allTimeRewardsAmount = allTimeRewardsAmount {
-                    titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.ALL_TIME", params: nil) ?? "", primaryValue: allTimeRewardsAmount, secondaryValue: nil)
-                }
+        HStack {
+            titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.THIS_WEEK", params: nil) ?? "", primaryValue: last7DaysRewardsAmount, secondaryValue: last7DaysRewardsPeriod)
+            if let allTimeRewardsAmount = allTimeRewardsAmount {
+                titleValueStack(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.ALL_TIME", params: nil) ?? "", primaryValue: allTimeRewardsAmount, secondaryValue: nil)
             }
         }
         .wrappedInAnyView()
@@ -41,7 +39,7 @@ public class dydxRewardsSummaryViewModel: dydxTitledCardViewModel {
                 .themeFont(fontType: .text, fontSize: .smaller)
             HStack(spacing: 6) {
                 Text(primaryValue ?? "-")
-                    .themeColor(foreground: .textSecondary)
+                    .themeColor(foreground: .textPrimary)
                     .themeFont(fontType: .number, fontSize: .medium)
                 PlatformIconViewModel(type: .asset(name: "icon_dydx", bundle: .dydxView), clip: .noClip, size: .init(width: 24, height: 24), templateColor: nil)
                     .createView()

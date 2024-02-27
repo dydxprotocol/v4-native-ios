@@ -11,7 +11,6 @@ import PlatformUI
 import Utilities
 
 public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
-    @Published public var estimatedPoints: String?
     @Published public var seasonOrdinal: String?
     @Published public var points: String?
     @Published public var aboutAction: (() -> Void)?
@@ -19,7 +18,6 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
 
     public static var previewValue: dydxRewardsLaunchIncentivesViewModel = {
         let vm = dydxRewardsLaunchIncentivesViewModel()
-        vm.estimatedPoints = "10"
         vm.seasonOrdinal = "1"
         return vm
     }()
@@ -61,9 +59,11 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
                     Text(DataLocalizer.shared?.localize(path: "APP.PORTFOLIO.ESTIMATED_REWARDS", params: nil) ?? "")
                         .themeFont(fontType: .text, fontSize: .medium)
                         .themeColor(foreground: .textPrimary)
-                    Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.SEASON_ID", params: ["SEASON_ID": self.seasonOrdinal ?? ""]) ?? "")
-                        .themeFont(fontType: .text, fontSize: .small)
-                        .themeColor(foreground: .textPrimary)
+                    if let seasonOrdinal {
+                        Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.SEASON_ID", params: ["SEASON_ID": seasonOrdinal]) ?? "")
+                            .themeFont(fontType: .text, fontSize: .small)
+                            .themeColor(foreground: .textPrimary)
+                    }
                 }
                 Text(pointsFormatted)
             }
@@ -71,6 +71,11 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
             Image("stars", bundle: .dydxView)
         }
         .padding(.all, 16)
+        .background {
+            Image(themedImageBaseName: "texture", bundle: .dydxView)
+                .resizable()
+                .scaledToFill()
+        }
         .themeColor(background: .layer4)
         .borderAndClip(style: .cornerRadius(12), borderColor: .layer6, lineWidth: 1)
     }
@@ -101,7 +106,7 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
             }
             .wrappedInAnyView()
         }
-        return PlatformButtonViewModel(content: content, type: .defaultType, state: .primary, action: self.aboutAction ?? {})
+        return PlatformButtonViewModel(content: content, type: .defaultType, state: .primary, action: self.leaderboardAction ?? {})
             .createView(parentStyle: parentStyle)
     }
 

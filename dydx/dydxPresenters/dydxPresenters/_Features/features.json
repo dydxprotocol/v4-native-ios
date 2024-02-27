@@ -35,10 +35,10 @@
             },
             {
                 "title":{
-                    "text":"Enable CCTP"
+                    "text":"Enable Trading Rewards"
                 },
                 "field":{
-                    "field":"enable_cctp",
+                    "field":"enable_trading_rewards",
                     "optional":true,
                     "type" : "text",
                     "options" : [
@@ -55,10 +55,10 @@
             },
             {
                 "title":{
-                    "text":"Enable Trading Rewards"
+                    "text":"Enable Reduce-only"
                 },
                 "field":{
-                    "field":"enable_trading_rewards",
+                    "field":"enable_reduce_only",
                     "optional":true,
                     "type" : "text",
                     "options" : [

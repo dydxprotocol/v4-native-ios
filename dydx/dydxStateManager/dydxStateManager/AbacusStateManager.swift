@@ -25,7 +25,7 @@ public final class AbacusStateManager: NSObject {
     }
 
     public var ethereumChainId: Int {
-        parser.asInt(asyncStateManager.environment?.ethereumChainId) ?? 5
+        parser.asInt(asyncStateManager.environment?.ethereumChainId) ?? 11155111
     }
 
     public var dydxChainId: String? {
@@ -140,23 +140,26 @@ public final class AbacusStateManager: NSObject {
         if dydxBoolFeatureFlag.force_mainnet.isEnabled {
             deployment = "MAINNET"
             appConfigs = AppConfigs.companion.forApp
-        } else if DebugEnabled.enabled {
-            // For debugging only
-            deployment = "DEV"
-            #if DEBUG
-            appConfigs = AppConfigs.companion.forAppDebug
-            #else
-            appConfigs = AppConfigs.companion.forApp
-            #endif
         } else {
             // Expose more options for Testflight build
-            deployment = Installation.appStore ? "MAINNET" : "TESTNET"
-            appConfigs = AppConfigs.companion.forApp
+            switch Installation.source {
+            case .appStore:
+                deployment = "MAINNET"
+                appConfigs = AppConfigs.companion.forApp
+            case .debug:
+                // For debugging only
+                deployment = "DEV"
+                appConfigs = AppConfigs.companion.forAppDebug
+            case .jailBroken:
+                deployment = "TESTNET"
+                appConfigs = AppConfigs.companion.forApp
+            case .testFlight:
+                deployment = "TESTFLIGHT"
+                appConfigs = AppConfigs.companion.forApp
+            }
         }
 
-        if dydxBoolFeatureFlag.enable_cctp.isEnabled {
-            appConfigs.squidVersion = AppConfigs.SquidVersion.v2
-        }
+        appConfigs.squidVersion = AppConfigs.SquidVersion.v2
 
         return AsyncAbacusStateManager(
             deploymentUri: deploymentUri,
@@ -431,5 +434,15 @@ extension AbacusStateManager {
                 callback(.failed(error))
             }
         }
+    }
+}
+
+public extension V4Environment {
+    var usdcTokenInfo: TokenInfo? {
+        tokens["usdc"]
+    }
+
+    var dydxTokenInfo: TokenInfo? {
+        tokens["chain"]
     }
 }

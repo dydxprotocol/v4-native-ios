@@ -291,7 +291,7 @@
 		02E7DC6028CFAF5C00727949 /* dydxStateManager */ = {
 			isa = PBXGroup;
 			children = (
-				6473ACAC2A65B17500BBC01F /* Protocol Implementations */,
+				6473ACAC2A65B17500BBC01F /* Protocol_Implementations */,
 				02603B8D29F1A53500DFFD11 /* ClientStates */,
 				020EB67D299C0C1F00E8026B /* Transactions */,
 				02E7DD8428CFB1C600727949 /* network */,
@@ -324,7 +324,7 @@
 			path = network;
 			sourceTree = "<group>";
 		};
-		6473ACAC2A65B17500BBC01F /* Protocol Implementations */ = {
+		6473ACAC2A65B17500BBC01F /* Protocol_Implementations */ = {
 			isa = PBXGroup;
 			children = (
 				6473ACB32A65B18B00BBC01F /* AbacusRestImp.swift */,
@@ -338,7 +338,7 @@
 				646EE0842A75A8F4006A68E4 /* AbacusTimerImp.swift */,
 				646EDDEE2A732DBB006A68E4 /* Implementations.swift */,
 			);
-			path = "Protocol Implementations";
+			path = Protocol_Implementations;
 			sourceTree = "<group>";
 		};
 		6478FC0F296DEF7400654C56 /* Products */ = {

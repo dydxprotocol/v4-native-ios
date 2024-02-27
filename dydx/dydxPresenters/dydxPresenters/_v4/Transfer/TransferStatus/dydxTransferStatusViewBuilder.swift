@@ -144,7 +144,7 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
         let size = parser.asNumber(transfer.usdcSize ?? transferInput?.size?.usdcSize)?.doubleValue
         if transferInput != nil {
             viewModel?.title = DataLocalizer.localize(path: "APP.V4_DEPOSIT.IN_PROGRESS_TITLE")
-            let params = ["AMOUNT_ELEMENT": dydxFormatter.shared.dollar(number: size, digits: 2) ?? ""]
+            let params = ["AMOUNT_ELEMENT": dydxFormatter.shared.dollar(number: size) ?? ""]
             viewModel?.text = DataLocalizer.localize(path: "APP.V4_DEPOSIT.IN_PROGRESS_TEXT", params: params)
         } else {
             viewModel?.title = DataLocalizer.localize(path: "APP.V4_DEPOSIT.CHECK_STATUS_TITLE")
@@ -173,7 +173,7 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
                 deleteTransferInstance(transactionHash: transactionHash)
             } else {
                 let size = parser.asNumber(transfer.usdcSize ?? transferInput?.size?.usdcSize)?.doubleValue
-                let params = ["AMOUNT_ELEMENT": dydxFormatter.shared.dollar(number: size, digits: 2) ?? ""]
+                let params = ["AMOUNT_ELEMENT": dydxFormatter.shared.dollar(number: size) ?? ""]
                 viewModel?.title = DataLocalizer.localize(path: "APP.V4_DEPOSIT.IN_PROGRESS_TITLE")
                 viewModel?.text = DataLocalizer.localize(path: "APP.V4_DEPOSIT.IN_PROGRESS_TEXT", params: params) + " " + status.statusText
 
@@ -204,7 +204,7 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
         let size = parser.asNumber(transfer.usdcSize ?? transferInput?.size?.usdcSize)?.doubleValue
         if transferInput != nil {
             viewModel?.title = DataLocalizer.localize(path: "APP.V4_WITHDRAWAL.IN_PROGRESS_TITLE")
-            let params = ["AMOUNT_ELEMENT": dydxFormatter.shared.dollar(number: size, digits: 2) ?? ""]
+            let params = ["AMOUNT_ELEMENT": dydxFormatter.shared.dollar(number: size) ?? ""]
             viewModel?.text = DataLocalizer.localize(path: "APP.V4_WITHDRAWAL.IN_PROGRESS_TEXT", params: params)
         } else {
             viewModel?.title = DataLocalizer.localize(path: "APP.V4_WITHDRAWAL.CHECK_STATUS_TITLE")
@@ -234,7 +234,7 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
                 deleteTransferInstance(transactionHash: transactionHash)
             } else {
                 let size = parser.asNumber(transfer.usdcSize ?? transferInput?.size?.usdcSize)?.doubleValue
-                let params = ["AMOUNT_ELEMENT": dydxFormatter.shared.dollar(number: size, digits: 2) ?? ""]
+                let params = ["AMOUNT_ELEMENT": dydxFormatter.shared.dollar(number: size) ?? ""]
                 viewModel?.title = DataLocalizer.localize(path: "APP.V4_WITHDRAWAL.IN_PROGRESS_TITLE")
                 viewModel?.text = DataLocalizer.localize(path: "APP.V4_WITHDRAWAL.IN_PROGRESS_TEXT", params: params) + " " + status.statusText
 
@@ -268,7 +268,7 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
         let params: [String: String]
         if let usdcSize = transfer.usdcSize {
             params = [
-                "AMOUNT_ELEMENT": dydxFormatter.shared.dollar(number: usdcSize, digits: 2) ?? "",
+                "AMOUNT_ELEMENT": dydxFormatter.shared.dollar(number: usdcSize) ?? "",
                 "TOKEN": dydxTokenConstants.usdcTokenName
             ]
         } else if let size = transfer.size {

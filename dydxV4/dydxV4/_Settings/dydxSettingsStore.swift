@@ -14,7 +14,6 @@ class dydxDebugSettingsStore: DebugSettingsStore {
     static let defaultValues: [String: String?] = [
         "language": DataLocalizer.shared?.language,
         "v4_theme": dydxThemeType.dark.rawValue,
-        "AbacusStateManager.EnvState": "dydxprotocol-testnet",
         // whether green or red is the positive direction
         "direction_color_preference": "green_is_up"
     ]

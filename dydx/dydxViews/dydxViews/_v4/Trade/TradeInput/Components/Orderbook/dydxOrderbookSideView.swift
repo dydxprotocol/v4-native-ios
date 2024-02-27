@@ -5,18 +5,18 @@
 //  Created by John Huang on 1/4/23.
 //
 
+import dydxFormatter
 import PlatformUI
 import SwiftUI
 import Utilities
-import dydxFormatter
 
 public struct dydxOrderbookLine: Identifiable, Equatable {
     public static func == (lhs: dydxOrderbookLine, rhs: dydxOrderbookLine) -> Bool {
         lhs.price == rhs.price &&
-        lhs.size == rhs.size &&
-        lhs.sizeText == rhs.sizeText &&
-        lhs.depth == rhs.depth &&
-        lhs.taken == rhs.taken
+            lhs.size == rhs.size &&
+            lhs.sizeText == rhs.sizeText &&
+            lhs.depth == rhs.depth &&
+            lhs.taken == rhs.taken
     }
 
     public var id: String {
@@ -40,13 +40,17 @@ public struct dydxOrderbookLine: Identifiable, Equatable {
     }
 }
 
-public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
+/// Delegates what happens upon price selection action
+public protocol dydxOrderbookSideDelegate: AnyObject {
+    func onPriceSelected(price: Double)
+}
 
+public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
     public static func == (lhs: dydxOrderbookSideViewModel, rhs: dydxOrderbookSideViewModel) -> Bool {
         lhs.tickSize == rhs.tickSize &&
-        lhs.lines == rhs.lines &&
-        lhs.maxDepth == rhs.maxDepth &&
-        lhs.displayStyle == rhs.displayStyle
+            lhs.lines == rhs.lines &&
+            lhs.maxDepth == rhs.maxDepth &&
+            lhs.displayStyle == rhs.displayStyle
     }
 
     public enum DisplayStyle {
@@ -71,6 +75,7 @@ public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
     @Published public var lines = [dydxOrderbookLine]()
     @Published public var maxDepth: Double = 0.0
     @Published public var displayStyle: DisplayStyle = .topDown
+    weak var delegate: dydxOrderbookSideDelegate?
 
     override public func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
@@ -97,7 +102,6 @@ public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
                 let actualLineHeight: CGFloat = intendedLineHeight + additionalLineHeight
 
                 LazyVStack(spacing: spacing) {
-
                     ForEach(lines.prefix(numLinesToDisplayInt), id: \.self.id) { line in
                         AnyView(
                             self.cell(line: line, maxDepth: maxDepth, fixedHeight: actualLineHeight)
@@ -115,50 +119,67 @@ public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
 
     func cell(line: dydxOrderbookLine, maxDepth: Double, fixedHeight: Double?) -> any View {
         let lineView =
-        ZStack {
-            AnyView(depthBar(line: line, maxDepth: maxDepth))
+            ZStack {
+                AnyView(depthBar(line: line, maxDepth: maxDepth))
 
-            let textContent =
-            HStack {
-                let priceText = dydxFormatter.shared.dollar(number: line.price, size: tickSize)
-
-                Text(line.sizeText)
-
-                Spacer()
-
-                Text(priceText ?? "")
+                switch displayStyle {
+                case .sideBySide:
+                    AnyView(
+                        sideBySideView(line: line)
+                            .themeColor(foreground: line.textColor)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 4)
+                            .themeFont(fontType: .number, fontSize: .medium)
+                    )
+                case .topDown:
+                    AnyView(
+                        topDownView(line: line)
+                            .themeColor(foreground: line.textColor)
+                            .padding(.horizontal, 8)
+                            .themeFont(fontType: .number, fontSize: .smaller)
+                    )
+                }
             }
-            .themeColor(foreground: line.textColor)
 
-            switch displayStyle {
-
-            case .sideBySide:
-                textContent
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 4)
-                    .themeFont(fontType: .number, fontSize: .medium)
-            case .topDown:
-                textContent
-                    .padding(.horizontal, 8)
-                    .themeFont(fontType: .number, fontSize: .smaller)
+        return Group {
+            if let fixedHeight = fixedHeight, fixedHeight > 0 {
+                lineView
+                    .frame(height: fixedHeight)
+                    .animation(.default, value: line)
+            } else {
+                 lineView
+                    .frame(maxHeight: .infinity)
+                    .animation(.default, value: line)
             }
         }
+        .contentShape(.rect)
+        .onTapGesture {[weak self, line] in
+            self?.delegate?.onPriceSelected(price: line.price)
+        }
+    }
 
-        if let fixedHeight = fixedHeight, fixedHeight > 0 {
-            return lineView
-                .frame(height: fixedHeight)
-                .animation(.default, value: line)
-        } else {
-            return lineView
-                .frame(maxHeight: .infinity)
-                .animation(.default, value: line)
+    func sideBySideView(line: dydxOrderbookLine) -> any View {
+        HStack {
+            let priceText = dydxFormatter.shared.dollar(number: line.price, size: tickSize)
+            Text(priceText ?? "")
+            Spacer()
+            Text(line.sizeText)
+        }
+    }
+
+    func topDownView(line: dydxOrderbookLine) -> any View {
+        HStack {
+            let priceText = dydxFormatter.shared.dollar(number: line.price, size: tickSize)
+            Text(line.sizeText)
+            Spacer()
+            Text(priceText ?? "")
         }
     }
 
     func depthBar(line: dydxOrderbookLine, maxDepth: Double) -> any View {
         GeometryReader { [weak self] geometry in
             let width = geometry.size.width
-            let sizeRatio = min(1.0, (line.size ) / maxDepth)
+            let sizeRatio = min(1.0, (line.size) / maxDepth)
             let depthRatio = min(1.0, (line.depth ?? 0.0) / maxDepth)
             let takenRatio = min(1.0, (line.taken ?? 0.0) / maxDepth)
             ZStack {
@@ -219,6 +240,15 @@ public class dydxOrderbookAsksViewModel: dydxOrderbookSideViewModel {
 
     override func color() -> ThemeColor.SemanticColor {
         return ThemeSettings.negativeColor
+    }
+
+    override func sideBySideView(line: dydxOrderbookLine) -> any View {
+        HStack {
+            let priceText = dydxFormatter.shared.dollar(number: line.price, size: tickSize)
+            Text(line.sizeText)
+            Spacer()
+            Text(priceText ?? "")
+        }
     }
 }
 
