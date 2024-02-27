@@ -29,6 +29,7 @@ public final class ThemeSettings: ObservableObject, SingletonProtocol {
 // MARK: - ThemeConfig
 
 public struct ThemeConfig: Codable, Equatable {
+    public let id: String
     public let themeColor: ThemeColor
     public let themeFont: ThemeFont
 }
