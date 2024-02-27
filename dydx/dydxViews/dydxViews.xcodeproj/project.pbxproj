@@ -159,6 +159,7 @@
 		276909102AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */; };
 		277442972AD88C4900C91357 /* Satoshi-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 277442952AD88C4900C91357 /* Satoshi-Bold.otf */; };
 		277442982AD88C4900C91357 /* Satoshi-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 277442962AD88C4900C91357 /* Satoshi-Regular.otf */; };
+		27759F5C2B89125F002865A9 /* dydxInlineShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27759F5B2B89125F002865A9 /* dydxInlineShareView.swift */; };
 		277E8F9F2B1A847D005CCBCB /* dydxTitledCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E8F9E2B1A847D005CCBCB /* dydxTitledCardView.swift */; };
 		277E8FCB2B1E5798005CCBCB /* dydxProfileRewardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E8FCA2B1E5798005CCBCB /* dydxProfileRewardsViewModel.swift */; };
 		277E90132B1EA0D3005CCBCB /* dydxTradingRewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E90122B1EA0D3005CCBCB /* dydxTradingRewardsView.swift */; };
@@ -504,6 +505,7 @@
 		2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewModel.swift; sourceTree = "<group>"; };
 		277442952AD88C4900C91357 /* Satoshi-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Bold.otf"; sourceTree = "<group>"; };
 		277442962AD88C4900C91357 /* Satoshi-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Regular.otf"; sourceTree = "<group>"; };
+		27759F5B2B89125F002865A9 /* dydxInlineShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxInlineShareView.swift; sourceTree = "<group>"; };
 		277E8F9E2B1A847D005CCBCB /* dydxTitledCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTitledCardView.swift; sourceTree = "<group>"; };
 		277E8FCA2B1E5798005CCBCB /* dydxProfileRewardsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxProfileRewardsViewModel.swift; sourceTree = "<group>"; };
 		277E90122B1EA0D3005CCBCB /* dydxTradingRewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradingRewardsView.swift; sourceTree = "<group>"; };
@@ -1376,6 +1378,7 @@
 				277E91072B2241C1005CCBCB /* dydxRewardsRewardView.swift */,
 				277E91492B23BB74005CCBCB /* dydxRewardsLearnMoreView.swift */,
 				277E918A2B27762F005CCBCB /* dydxRewardsLaunchIncentivesView.swift */,
+				27759F5B2B89125F002865A9 /* dydxInlineShareView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1988,6 +1991,7 @@
 				024F488E2965C91E00E40247 /* dydxPortfolioChartView.swift in Sources */,
 				645299F22AE86FC3000810E6 /* dydxUpdateView.swift in Sources */,
 				02031F052AC373B50069E00D /* dydxTradeSheetTipBuySellView.swift in Sources */,
+				27759F5C2B89125F002865A9 /* dydxInlineShareView.swift in Sources */,
 				0230377328C13BBB00412B72 /* dydxMarketsView.swift in Sources */,
 				02F958142A1BDEE500828F9A /* dydxKeyExportView.swift in Sources */,
 				0238B90B29FB38F200FCE4D0 /* dydxThemeLoader.swift in Sources */,
