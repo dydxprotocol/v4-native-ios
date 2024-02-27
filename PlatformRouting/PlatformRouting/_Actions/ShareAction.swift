@@ -7,7 +7,15 @@
 //
 
 import RoutingKit
+import Utilities
 import UIToolkits
+
+public class ShareActionBuilder: NSObject, ObjectBuilderProtocol {
+    public func build<T>() -> T? {
+        let action = ShareAction()
+        return action as? T
+    }
+}
 
 open class ShareAction: NSObject, NavigableProtocol {
     private var completion: RoutingCompletionBlock?

@@ -64,7 +64,7 @@
                     "destination":"dydxPresenters.dydxCancelOrderActionBuilder"
                 },
                 "/action/share": {
-                    "destination":"ShareAction.xib"
+                    "destination":"PlatformRouting.ShareActionBuilder"
                 },
                 "/action/wallet/connect": {
                     "destination":"dydxPresenters.WalletActionBuilder"
