@@ -11,6 +11,7 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import dydxStateManager
 
 public class dydxProfileViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -72,5 +73,13 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
         balancesPresenter.$viewModel.assign(to: &viewModel.$balances)
 
         attachChildren(workers: childPresenters)
+
+        viewModel.share?.shareAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/share",
+                                                       params: ["text": DataLocalizer.shared?.localize(path: "APP.GENERAL.SHARE_MESSAGE", params: nil) ?? "",
+                                                                                       "link": AbacusStateManager.shared.environment?.apps?.ios?.url ?? AbacusStateManager.shared.deploymentUri,
+                                                                                       "share_source": "account_screen_share_app_inline_button"]),
+                                                       animated: true, completion: nil)
+        }
     }
 }
