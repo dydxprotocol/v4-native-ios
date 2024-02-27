@@ -72,7 +72,7 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
         }
         .padding(.all, 16)
         .background {
-            Image("texture", bundle: .dydxView)
+            Image(themedImageBaseName: "texture", bundle: .dydxView)
                 .resizable()
                 .scaledToFill()
         }
