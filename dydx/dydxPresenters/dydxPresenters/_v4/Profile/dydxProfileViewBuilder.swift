@@ -75,8 +75,11 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
         attachChildren(workers: childPresenters)
 
         viewModel.share?.shareAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/action/share", params: ["text": DataLocalizer.shared?.localize(path: "APP.GENERAL.SHARE_MESSAGE", params: nil) ?? "",
-                                                                                       "link": AbacusStateManager.shared.environment?.apps?.ios?.url ?? AbacusStateManager.shared.deploymentUri]), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/share",
+                                                       params: ["text": DataLocalizer.shared?.localize(path: "APP.GENERAL.SHARE_MESSAGE", params: nil) ?? "",
+                                                                                       "link": AbacusStateManager.shared.environment?.apps?.ios?.url ?? AbacusStateManager.shared.deploymentUri,
+                                                                                       "share_source": "account_screen_share_app_inline_button"]),
+                                                       animated: true, completion: nil)
         }
     }
 }

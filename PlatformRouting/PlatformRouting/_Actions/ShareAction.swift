@@ -33,6 +33,14 @@ open class ShareAction: NSObject, NavigableProtocol {
                 activityVC.popoverPresentationController?.sourceView = UserInteraction.shared.sender as? UIView
                 activityVC.popoverPresentationController?.barButtonItem = UserInteraction.shared.sender as? UIBarButtonItem
                 UIViewController.topmost()?.present(activityVC, animated: true, completion: nil)
+                
+                let data: [String: String]?
+                if let shareSource = request?.params?["share_source"] as? String {
+                    data = ["share_source": shareSource]
+                } else {
+                    data = nil
+                }
+                Tracking.shared?.log(event: "ShareDialogDisplayed", data: data)
                 completion?(nil, true)
             } else {
                 completion?(nil, false)
