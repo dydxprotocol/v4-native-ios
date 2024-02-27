@@ -75,6 +75,14 @@ private struct GradientColorModifier: ViewModifier {
 }
 
 public extension Image {
+    /// iniitalizes an image that supports app themes
+    /// - Parameters:
+    ///   - themedImageBaseName: the base image name. e.g. if the app supports 3 themes and the corresponding themed image names are "circle_light" "circle_dark" and "circle_classic_dark" then your base name is "circle"
+    ///   - bundle: the bundle
+    init(themedImageBaseName: String, bundle: Bundle, themeSettings: ThemeSettings = ThemeSettings.shared) {
+        self.init(themedImageBaseName + "_" + "\(themeSettings.themeConfig.id)", bundle: bundle)
+    }
+    
     func templateColor(_ foreground: ThemeColor.SemanticColor?) -> some View {
         if let foreground = foreground {
             return AnyView(self.renderingMode(.template).themeColor(foreground: foreground))
