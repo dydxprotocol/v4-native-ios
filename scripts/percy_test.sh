@@ -28,7 +28,7 @@ echo $PERCY_TOKEN
 
 PERCY_COMMIT=`git log --pretty=format:‘%H’ -n 1`
 # Remove the leading and trailing single quotes
-PERCY_COMMIT="${PERCY_COMMIT#‘}"
+PERCY_COMMIT="${PERCY_COMMIT:1:${#PERCY_COMMIT}-2}"
 echo "PERCY_COMMIT: $PERCY_COMMIT"
 
 ./scripts/percy_run_build.sh ruihuang_ry52wv:HXRCy79y5SDuDvvQw6Qw "$PERCY_BUILD_URL" "$PERCY_TEST_SUITE_URL" "$PERCY_TOKEN" "$PERCY_BRANCH" "$PERCY_COMMIT"
