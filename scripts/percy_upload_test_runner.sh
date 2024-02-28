@@ -42,7 +42,3 @@ echo "Test Suite URL: $test_suite_url"
 
 # export the test suite URL as an environment variable
 export PERCY_TEST_SUITE_URL=$test_suite_url
-
-echo "Test Suite URL: $PERCY_TEST_SUITE_URL"
-exit 0
-

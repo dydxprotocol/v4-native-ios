@@ -34,5 +34,3 @@ echo "App URL: $app_url"
 
 # export the app URL as an environment variable
 export PERCY_BUILD_URL=$app_url
-
-exit 0
