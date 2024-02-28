@@ -9,7 +9,14 @@
 import Foundation
 
 public protocol RatingProtocol: NSObjectProtocol {
-    func add(points: Int)
+    func connectedWallet()
+    func launchedApp()
+    func orderCreated()
+    func capturedScreenshotOrShare()
+    func portfolioCrossedPositiveFivePercent()
+    
+    func promptForRating()
+    func tryPromptForRating()
 }
 
 public class RatingService {

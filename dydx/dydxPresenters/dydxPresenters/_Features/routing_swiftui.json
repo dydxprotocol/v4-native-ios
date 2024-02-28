@@ -233,6 +233,10 @@
                 "/r/:code":{
                     "destination":"AffiliateReferral.xib"
                 },
+                "/rate_app":{
+                    "destination":"dydxPresenters.dydxRateAppViewBuilder",
+                    "presentation":"half"
+                },
                 "/restricted":{
                     "destination":"Restricted.storyboard",
                     "presentation":"half"

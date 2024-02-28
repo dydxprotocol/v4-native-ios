@@ -41,6 +41,7 @@ open class ShareAction: NSObject, NavigableProtocol {
                     data = nil
                 }
                 Tracking.shared?.log(event: "ShareDialogDisplayed", data: data)
+                RatingService.shared?.capturedScreenshotOrShare()
                 completion?(nil, true)
             } else {
                 completion?(nil, false)
