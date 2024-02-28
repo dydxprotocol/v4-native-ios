@@ -66,6 +66,9 @@
                 "/action/share": {
                     "destination":"PlatformRouting.ShareActionBuilder"
                 },
+                "/action/collect_feedback": {
+                    "destination":"dydxPresenters.dydxCollectFeedbackActionBuilder"
+                },
                 "/action/wallet/connect": {
                     "destination":"dydxPresenters.WalletActionBuilder"
                 },
