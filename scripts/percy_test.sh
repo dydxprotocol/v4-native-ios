@@ -20,9 +20,15 @@ if [ -z "$PERCY_TEST_SUITE_URL" ]; then
 fi
 
 PERCY_TOKEN=app_840d58d0148ceacff970b7f143832b469d650bdaf222d18c4db0b9324dd5b40c
+PERCY_BRANCH=features/ui_tests
 
 echo $PERCY_BUILD_URL
 echo $PERCY_TEST_SUITE_URL
 echo $PERCY_TOKEN
 
-./scripts/percy_run_build.sh ruihuang_ry52wv:HXRCy79y5SDuDvvQw6Qw "$PERCY_BUILD_URL" "$PERCY_TEST_SUITE_URL" "$PERCY_TOKEN"
+PERCY_COMMIT=`git log --pretty=format:‘%H’ -n 1`
+# Remove the leading and trailing single quotes
+PERCY_COMMIT="${PERCY_COMMIT#‘}"
+echo "PERCY_COMMIT: $PERCY_COMMIT"
+
+./scripts/percy_run_build.sh ruihuang_ry52wv:HXRCy79y5SDuDvvQw6Qw "$PERCY_BUILD_URL" "$PERCY_TEST_SUITE_URL" "$PERCY_TOKEN" "$PERCY_BRANCH" "$PERCY_COMMIT"

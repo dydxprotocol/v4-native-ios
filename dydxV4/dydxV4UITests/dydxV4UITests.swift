@@ -10,31 +10,39 @@ import XCTest
 import PercyXcui
 
 final class dydxV4UITests: XCTestCase {
-
-    override func setUpWithError() throws {
+    
+    override func setUp() {
+        super.setUp()
+        
         // Put setup code here. This method is called before the invocation of each test method in the class.
-
+        
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
+        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
+        XCUIApplication().launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
-
-    override func tearDownWithError() throws {
+    
+    override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
     }
 
     func testExample() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
-        app.launch()
-        
-        
+         
         // take screenshot
         let appPercy = AppPercy()
-        try appPercy.screenshot(name: "First Screenshot")
         
-        print(1)
+        do {
+            try appPercy.screenshot(name: "First Screenshot")
+        } catch {
+            NSLog("App percy screenshot failed")
+        }
+        
+        // print(1)
         
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }

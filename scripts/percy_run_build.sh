@@ -30,14 +30,23 @@ fi
 PERCY_USER=$1
 PERCY_BUILD_URL=$2
 PERCY_TEST_SUITE_URL=$3
-PERCY_TOKEN=$4      
+PERCY_TOKEN=$4   
+PERCY_BRANCH=$5
+if [ -z "$5" ]; then
+  PERCY_BRANCH=""
+fi
+PERCY_COMMIT=$6
+if [ -z "$6" ]; then
+  PERCY_COMMIT=""
+fi
+PERCY_PULL_REQUEST=$7
 
 JSON_FMT='{ 
   "devices": ["iPhone 15 Pro-17"], 
   "debugscreenshots": "true", 
-  "appPercy": { "env": {"PERCY_BRANCH": "features/ui_tests", "PERCY_PULL_REQUEST": "56" }, "PERCY_TOKEN": "%s"}, 
+  "appPercy": { "env": {"PERCY_BRANCH": "%s", "PERCY_COMMIT": "%s" }, "PERCY_TOKEN": "%s"}, 
   "app": "%s", "testSuite": "%s"}'
-PAYLOAD=$(printf "$JSON_FMT" "$PERCY_TOKEN", "$PERCY_BUILD_URL", "$PERCY_TEST_SUITE_URL")
+PAYLOAD=$(printf "$JSON_FMT" "$PERCY_BRANCH" "$PERCY_COMMIT" "$PERCY_TOKEN" "$PERCY_BUILD_URL" "$PERCY_TEST_SUITE_URL")
 echo $PAYLOAD
 
 curl -u $PERCY_USER \
