@@ -32,6 +32,14 @@
                 "link" : {
                     "text" : "{APP_SCHEME}:///settings/direction_color_preference"
                 }
+            },
+            {
+                "title" : {
+                    "text" : "APP.HELP_MODAL.PROVIDE_FEEDBACK"
+                },
+                "link" : {
+                    "text" : "{APP_SCHEME}:///action/collect_feedback?context=settings"
+                }
             }
         ]
     }
