@@ -122,7 +122,7 @@ PODS:
     - PromisesSwift (~> 2.1)
   - FirebaseSharedSwift (10.21.0)
   - FloatingPanel (2.7.0)
-  - FullStory (1.29.0)
+  - FullStory (1.45.0)
   - GoogleAppMeasurement (10.21.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.21.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
@@ -277,7 +277,7 @@ DEPENDENCIES:
   - Firebase/RemoteConfig
   - FirebaseCrashlytics
   - FloatingPanel (= 2.7.0)
-  - "FullStory (from `{:http=>\"https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz\"}`)"
+  - "FullStory (from `{:http=>\"https://ios-releases.fullstory.com/fullstory-1.45.0-xcframework.tar.gz\"}`)"
   - GoogleToolboxForMac
   - GoogleUtilities
   - GTMSessionFetcher
@@ -365,14 +365,14 @@ EXTERNAL SOURCES:
     :branch: releases/3.6.0.3
     :git: https://github.com/dydxprotocol/Charts.git
   FullStory:
-    :http: https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz
+    :http: https://ios-releases.fullstory.com/fullstory-1.45.0-xcframework.tar.gz
 
 CHECKOUT OPTIONS:
   Charts:
     :commit: 62e38eb96692b9c3bf15ac7d7812910bf62c6827
     :git: https://github.com/dydxprotocol/Charts.git
   FullStory:
-    :http: https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz
+    :http: https://ios-releases.fullstory.com/fullstory-1.45.0-xcframework.tar.gz
 
 SPEC CHECKSUMS:
   Abacus: b8137d2ad17e9cb88896f9f4fa042d55e2b94420
@@ -402,7 +402,7 @@ SPEC CHECKSUMS:
   FirebaseSessions: 80c2bbdd28166267b3d132debe5f7531efdb00bc
   FirebaseSharedSwift: 19b3f709993d6fa1d84941d41c01e3c4c11eab93
   FloatingPanel: c88e3fd981b7a74121ff48746fb14d496f5fd553
-  FullStory: 29e764d32050cb943d38b7b82c60b2f65f814737
+  FullStory: 27d6ec4145b95f04fb6669aaa19b057b1a3b989c
   GoogleAppMeasurement: a65314d316443969ed3d3709b3a187448ed6418f
   GoogleDataTransport: 57c22343ab29bc686febbf7cbb13bad167c2d8fe
   GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
@@ -432,6 +432,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: 9e6e5d5e9ea0594fa77a099c8fd30545318f1cb9
+PODFILE CHECKSUM: 718bf70c0b9b199d89b750195fd8edd4cc6bf0af
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2
