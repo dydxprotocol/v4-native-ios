@@ -7,6 +7,7 @@
 # run this script with the Percy user as the first argument
 # e.g. ./percy_upload_test_runner.sh ruihuang_ry52wv:HXRCy79y5SDuDvvQw6Qw
 
+
 unset PERCY_TEST_SUITE_URL
 
 if [ -z "$1" ]; then
@@ -16,25 +17,40 @@ fi
 
 PERCY_USER=$1
 
-# get the DerivedData folder
-derived_data_path=$(xcodebuild -workspace "dydx/dydx.xcworkspace"  -scheme "dydxV4" -showBuildSettings | grep OBJROOT | cut -d "=" -f 2 - | sed 's/^ *//')
+xcodebuild -workspace "dydx/dydx.xcworkspace" \
+  -scheme "dydxV4UITests" -derivedDataPath /tmp/dydxV4UITests \
+  -configuration Debug -sdk iphoneos build-for-testing
 
-# remove the last part of the path
-derived_data_path=$(dirname $derived_data_path)
+derived_data_path=/tmp/dydxV4UITests/Build
 
-app_path="$derived_data_path/Products/Debug-iphonesimulator/dydxV4UITests-Runner.app"
+# # get the DerivedData folder
+# derived_data_path=$(xcodebuild -workspace "dydx/dydx.xcworkspace"  -scheme "dydxV4" -showBuildSettings | grep OBJROOT | cut -d "=" -f 2 - | sed 's/^ *//')
+
+# # remove the last part of the path
+# derived_data_path=$(dirname $derived_data_path)
+
+app_path="$derived_data_path/Products/Debug-iphoneos/dydxV4UITests-Runner.app"
 
 if [ ! -d "$app_path" ]; then
   echo "App path not found: $app_path"
   exit 1
 fi
 
+if [ -f /tmp/dydxV4UITests.zip ]; then
+  rm /tmp/dydxV4UITests.zip
+fi
+
+cwd=$(pwd)
 cp -r "$app_path" /tmp/dydxV4UITests-Runner.app
-zip -r /tmp/dydxV4UITests.zip /tmp/dydxV4UITests-Runner.app
+cd /tmp
+zip -r dydxV4UITests.zip dydxV4UITests-Runner.app/
+cd $cwd
 
 response=`curl -u $PERCY_USER \
   -X POST "https://api-cloud.browserstack.com/app-automate/xcuitest/v2/test-suite"  \
   -F "file=@/tmp/dydxV4UITests.zip"`
+
+echo $response
 
 # read response as JSON and extract the "test_suite_url" field
 test_suite_url=`echo $response | jq -r .test_suite_url`
