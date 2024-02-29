@@ -4,7 +4,7 @@
 
 # upload UI Test Runner to percy
 
-# run this script with the Percy user as the first argument
+# Usage: Run this script with the Percy user as the first argument
 # e.g. ./percy_upload_test_runner.sh ruihuang_ry52wv:HXRCy79y5SDuDvvQw6Qw
 
 
@@ -18,7 +18,9 @@ fi
 PERCY_USER=$1
 TEST_BUNDLE_PATH=$2
 
-cp $TEST_BUNDLE_PATH /tmp/dydxV4UITests.zip
+if [ $TEST_BUNDLE_PATH != "/tmp/dydxV4UITests.zip" ]; then
+    cp $TEST_BUNDLE_PATH /tmp/dydxV4UITests.zip
+fi
 
 response=`curl -u $PERCY_USER \
   -X POST "https://api-cloud.browserstack.com/app-automate/xcuitest/v2/test-suite"  \
