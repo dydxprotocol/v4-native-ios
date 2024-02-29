@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/percy/percy-xcui-swift",
       "state" : {
-        "branch" : "main",
-        "revision" : "8c87e02c3cbd93bfa3c9c32ca4cdee5358688e0e"
+        "revision" : "a2e9a86dfc3f5b69ef53cbda28a0ea71098c9f77",
+        "version" : "1.0.0"
       }
     },
     {
