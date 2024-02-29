@@ -46,7 +46,7 @@ end
 
 def fullstory_pods
   pod 'FullStory', :http =>
-  'https://ios-releases.fullstory.com/fullstory-1.45.0-xcframework.tar.gz'
+  'https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz'
 end
 
 def abacus_pods

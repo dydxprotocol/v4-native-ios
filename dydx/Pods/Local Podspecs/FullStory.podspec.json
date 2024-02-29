@@ -1,6 +1,6 @@
 {
   "name": "FullStory",
-  "version": "1.45.0",
+  "version": "1.29.0",
   "summary": "FullStory's iOS capture library.",
   "authors": {
     "FullStory": "sales@fullstory.com"
@@ -12,10 +12,10 @@
     "file": "FullStory.xcframework/ACKNOWLEDGEMENTS.md"
   },
   "platforms": {
-    "ios": "11.0"
+    "ios": "9.0"
   },
   "source": {
-    "http": "https://ios-releases.fullstory.com/fullstory-1.45.0-xcframework.tar.gz"
+    "http": "https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz"
   },
   "vendored_frameworks": "FullStory.xcframework",
   "preserve_paths": "tools",
