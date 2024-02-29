@@ -41,10 +41,6 @@ final class dydxV4UITests: XCTestCase {
         } catch {
             NSLog("App percy screenshot failed")
         }
-        
-        // print(1)
-        
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
 //    func testLaunchPerformance() throws {
