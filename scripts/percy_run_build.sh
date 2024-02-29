@@ -4,7 +4,7 @@
 
 # run Percy build
 
-# run this script with the Percy user as the first argument
+# Usage: Run this script with the Percy user as the first argument
 # e.g. ./percy_run_build.sh ruihuang_ry52wv:HXRCy79y5SDuDvvQw6Qw
 
 if [ -z "$1" ]; then

@@ -4,7 +4,7 @@
 
 # upload IPA to percy
 
-# run this script with the Percy user id as the first argument
+# Usage: Run this script with the Percy user id as the first argument and the path to the IPA as the second argument
 # e.g. ./percy_upload_ipa.sh ruihuang_ry52wv:HXRCy79y5SDuDvvQw6Qw /path/to/dydxV4.ipa
 
 unset PERCY_BUILD_URL
