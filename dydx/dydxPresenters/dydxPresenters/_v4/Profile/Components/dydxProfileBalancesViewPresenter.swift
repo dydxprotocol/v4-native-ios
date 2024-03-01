@@ -32,10 +32,16 @@ public class dydxProfileBalancesViewPresenter: HostedViewPresenter<dydxProfileBa
     public override func start() {
         super.start()
 
-        AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.dydxTokenInfo?.denom)
-            .sink { [weak self] dydxAmount in
-                if let dydxAmount = dydxAmount {
-                    self?.viewModel?.walletAmount = dydxFormatter.shared.raw(number: Parser.standard.asNumber(dydxAmount), digits: 4)
+        let decimal = 4
+        let dydxTokenDenom = AbacusStateManager.shared.environment?.dydxTokenInfo?.denom
+        Publishers
+            .CombineLatest(
+                AbacusStateManager.shared.state.accountBalance(of: dydxTokenDenom),
+                AbacusStateManager.shared.state.stakingBalance(of: dydxTokenDenom)
+            )
+            .sink { [weak self] accountBalance, stakingBalance in
+                if let accountBalance = accountBalance {
+                    self?.viewModel?.walletAmount = dydxFormatter.shared.raw(number: Parser.standard.asNumber(accountBalance), digits: decimal)
                     self?.viewModel?.transferAction = {
                         Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": "transferOut"]), animated: true, completion: nil)
                     }
@@ -43,15 +49,18 @@ public class dydxProfileBalancesViewPresenter: HostedViewPresenter<dydxProfileBa
                     self?.viewModel?.walletAmount = "-"
                     self?.viewModel?.transferAction = nil
                 }
-            }
-            .store(in: &subscriptions)
 
-        AbacusStateManager.shared.state.stakingBalance(of: AbacusStateManager.shared.environment?.dydxTokenInfo?.denom ?? "")
-            .sink { [weak self] dydxAmount in
-                if let dydxAmount = dydxAmount {
-                    self?.viewModel?.stakedAmount = dydxFormatter.shared.raw(number: Parser.standard.asNumber(dydxAmount), digits: 4)
+                if let stakingBalance = stakingBalance {
+                    self?.viewModel?.stakedAmount = dydxFormatter.shared.raw(number: Parser.standard.asNumber(stakingBalance), digits: decimal)
                 } else {
                     self?.viewModel?.stakedAmount = "-"
+                }
+
+                let totalAmount = (accountBalance ?? 0.0) + (stakingBalance ?? 0.0)
+                if totalAmount != 0 {
+                    self?.viewModel?.totalAmount = dydxFormatter.shared.raw(number: Parser.standard.asNumber(totalAmount), digits: decimal)
+                } else {
+                    self?.viewModel?.totalAmount = "-"
                 }
             }
             .store(in: &subscriptions)

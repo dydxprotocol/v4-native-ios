@@ -122,10 +122,10 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
-    public func stakingBalance(of tokenDenom: String) -> AnyPublisher<Double?, Never> {
+    public func stakingBalance(of tokenDenom: String?) -> AnyPublisher<Double?, Never> {
         account
             .map { account in
-                self.parser.asDecimal(account?.stakingBalances?[tokenDenom]?.amount)?.doubleValue
+                self.parser.asDecimal(account?.stakingBalances?[tokenDenom ?? ""]?.amount)?.doubleValue
             }
             .removeDuplicates()
             .share()
