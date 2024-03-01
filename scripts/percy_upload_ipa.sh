@@ -22,11 +22,18 @@ fi
 PERCY_USER=$1
 IPA_PATH=$2
 
-cp $IPA_PATH /tmp/dydxV4.ipa
+# create a temporary name
+TMP_FOLDER=$(mktemp -d -q /tmp/ipa.XXXXXX)
+if [ $? -ne 0 ]; then
+    echo "$0: Can't create temp folder, bye.."
+    exit 1
+fi
+
+cp $IPA_PATH $TMP_FOLDER/dydxV4.ipa
 
 response=`curl -u $PERCY_USER  \
     -X POST "https://api-cloud.browserstack.com/app-automate/xcuitest/v2/app"  \
-    -F "file=@/tmp/dydxV4.ipa"`
+    -F "file=@$TMP_FOLDER/dydxV4.ipa"`
 
 # read response as JSON and extract the "app_url" field
 app_url=`echo $response | jq -r .app_url`
