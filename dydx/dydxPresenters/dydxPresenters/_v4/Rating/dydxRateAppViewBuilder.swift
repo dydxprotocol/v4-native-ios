@@ -22,34 +22,33 @@ public class dydxRateAppViewBuilder: NSObject, ObjectBuilderProtocol {
 }
 
 private class dydxRateAppViewBuilderController: HostingViewController<PlatformView, dydxRateAppViewModel> {
-    override func navigate(to request: RoutingRequest?, animated: Bool, completion: RoutingCompletionBlock?) {
-        super.navigate(to: request, animated: animated, completion: completion)
-        // Create the alert controller
-        let alertController = UIAlertController(title: "Your Title", message: "Your Message", preferredStyle: .alert)
-
-        // Create the "Yes" action
-        let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
-            // Handle the user's response here
-            print("The user selected 'Yes'")
-            // stop requesting review after user says "yes" the first time
-            RatingService.shared?.shouldStopPrompting = true
-        }
-
-        // Create the "No" action
-        let noAction = UIAlertAction(title: "No", style: .cancel) { _ in
-            // Handle the user's response here
-            print("The user selected 'No'")
-        }
-
-        // Add the actions to the alert controller
-        alertController.addAction(yesAction)
-        alertController.addAction(noAction)
-
-        // Present the alert
-        UIViewController.topmost()?.present(alertController, animated: true) {
-            alertController.dismiss(animated: true)
-        }
-    }
+//    override func navigate(to request: RoutingRequest?, animated: Bool, completion: RoutingCompletionBlock?) {
+//        super.navigate(to: request, animated: animated, completion: completion)
+//        // Create the alert controller
+//        let alertController = UIAlertController(title: "Your Title", message: "Your Message", preferredStyle: .alert)
+//
+//        // Create the "Yes" action
+//        let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
+//            Tracking.shared?.log(event: "FollowedAppRating", data: nil)
+//            RatingService.shared?.shouldStopPrompting = true
+//            UIViewController.topmost()?.dismiss(animated: true)
+//        }
+//
+//        // Create the "No" action
+//        let noAction = UIAlertAction(title: "No", style: .cancel) { _ in
+//            Tracking.shared?.log(event: "DeferredAppRating", data: nil)
+//            UIViewController.topmost()?.dismiss(animated: true)
+//        }
+//
+//        // Add the actions to the alert controller
+//        alertController.addAction(yesAction)
+//        alertController.addAction(noAction)
+//
+//        // Present the alert
+//        UIViewController.topmost()?.present(alertController, animated: true) {
+//            alertController.dismiss(animated: true)
+//        }
+//    }
 
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/rate_app" {

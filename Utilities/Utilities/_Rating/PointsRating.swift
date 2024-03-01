@@ -13,6 +13,17 @@ import StoreKit
 open class PointsRating: NSObject, RatingProtocol {
     
     var secondsInADay: TimeInterval { 24 * 60 * 60 }
+    
+    public var stateData: [String: Any] {[
+        "transfers_created_count": transfersCreatedSinceLastPrompt.count,
+        "orders_created_count": ordersCreatedSinceLastPrompt.count,
+        "unique_day_app_opens_count": uniqueDayAppOpensCount,
+        "last_app_open_timestamp": lastAppOpenTimestamp,
+        "last_prompted_timestamp": lastPromptedTimestamp,
+        "has_ever_connected_wallet": hasEverConnectedWallet,
+        "has_shared_or_screenshotted": hasSharedOrScreenshottedSinceLastPrompt,
+        "should_stop_prompting": shouldStopPrompting,
+    ]}
 
     public func connectedWallet() {
         hasEverConnectedWallet = true
@@ -52,7 +63,6 @@ open class PointsRating: NSObject, RatingProtocol {
     var lastAppOpenTimestampKey: String { "\(String(describing: className)).lastAppOpenTimestampKey" }
     var lastPromptedTimestampKey: String { "\(String(describing: className)).lastPromptedTimestampKey" }
     var hasEverConnectedWalletKey: String { "\(String(describing: className)).hasEverConnectedWallet" }
-    
     var hasSharedOrScreenshottedSinceLastPromptKey: String { "\(String(describing: className)).hasSharedOrScreenshottedKey" }
     var shouldStopPromptingKey: String { "\(String(describing: className)).shouldStopPromptingKey" }
 
@@ -128,21 +138,12 @@ open class PointsRating: NSObject, RatingProtocol {
     ///            - ~~trader portfolio is positive (up 5% or more in total)~~ this was not work the effort
     ///            - trader has shared a screenshot or the app
     ///            - trader has created 8 or more orders
-    open func tryPromptForRating() {
-        Console.shared.log("mmm transfersCreatedSinceLastPrompt: \(transfersCreatedSinceLastPrompt.count)")
-        Console.shared.log("mmm ordersCreatedSinceLastPrompt: \(ordersCreatedSinceLastPrompt.count)")
-        Console.shared.log("mmm uniqueDayAppOpensCount: \(uniqueDayAppOpensCount)")
-        Console.shared.log("mmm lastAppOpenTimestamp: \(lastAppOpenTimestamp)")
-        Console.shared.log("mmm lastPromptedTimestamp: \(lastPromptedTimestamp)")
-        Console.shared.log("mmm hasEverConnectedWallet: \(hasEverConnectedWallet)")
-        Console.shared.log("mmm hasSharedOrScreenshottedSinceLastPrompt: \(hasSharedOrScreenshottedSinceLastPrompt)")
-        Console.shared.log("mmm shouldStopPrompting: \(shouldStopPrompting)")
-        
+    open func tryPromptForRating() {        
         let shouldPrompt =
             hasSharedOrScreenshottedSinceLastPrompt
             || (hasEverConnectedWallet && (uniqueDayAppOpensCount >= 8 || transfersCreatedSinceLastPrompt.count >= 2 || ordersCreatedSinceLastPrompt.count >= 8))
             || (!hasEverConnectedWallet && uniqueDayAppOpensCount >= 4)
-        if shouldPrompt {
+        if shouldPrompt || true {
             promptForRating()
             reset()
         }

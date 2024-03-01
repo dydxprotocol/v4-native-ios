@@ -19,6 +19,7 @@ class dydxPointsRating: PointsRating {
     }
     
     override func promptForRating() {
+        Tracking.shared?.log(event: "PrepromptedForRating", data: stateData)
         Router.shared?.navigate(to: RoutingRequest(path: "/rate_app"), animated: true, completion: nil)
     }
 }
