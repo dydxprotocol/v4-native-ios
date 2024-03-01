@@ -31,6 +31,8 @@ private class dydxRateAppViewBuilderController: HostingViewController<PlatformVi
         let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
             // Handle the user's response here
             print("The user selected 'Yes'")
+            // stop requesting review after user says "yes" the first time
+            RatingService.shared?.shouldStopPrompting = true
         }
 
         // Create the "No" action
@@ -44,7 +46,9 @@ private class dydxRateAppViewBuilderController: HostingViewController<PlatformVi
         alertController.addAction(noAction)
 
         // Present the alert
-        UIViewController.topmost()?.present(alertController, animated: true, completion: nil)
+        UIViewController.topmost()?.present(alertController, animated: true) {
+            alertController.dismiss(animated: true)
+        }
     }
 
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {

@@ -25,20 +25,22 @@ public final class dydxRatingsWorker: BaseWorker {
             }
             .store(in: &self.subscriptions)
 
-        AbacusStateManager.shared.state.account
+        AbacusStateManager.shared.state.transfers
             .compactMap { $0 }
             .removeDuplicates()
-            .sink { account in
-                let x = account.balances
-                RatingService.shared?.portfolioCrossedPositiveFivePercent()
+            .sink { transfers in
+                for transfer in transfers {
+                    RatingService.shared?.transferCreated(transferId: transfer.id, transferCreatedTimestampMillis: transfer.updatedAtMilliseconds)
+                }
             }
             .store(in: &self.subscriptions)
 
-        AbacusStateManager.shared.state.lastOrder
-            .compactMap { $0 }
-            .removeDuplicates()
-            .sink { _ in
-                RatingService.shared?.orderCreated()
+        AbacusStateManager.shared.state.selectedSubaccountFills
+            .sink { fills in
+                for fill in fills {
+                    guard let orderId = fill.orderId else { return }
+                    RatingService.shared?.orderCreated(orderId: orderId, orderCreatedTimestampMillis: fill.createdAtMilliseconds)
+                }
             }
             .store(in: &self.subscriptions)
 

@@ -11,9 +11,11 @@ import Foundation
 public protocol RatingProtocol: NSObjectProtocol {
     func connectedWallet()
     func launchedApp()
-    func orderCreated()
+    func orderCreated(orderId: String, orderCreatedTimestampMillis: TimeInterval)
+    func transferCreated(transferId: String, transferCreatedTimestampMillis: TimeInterval)
     func capturedScreenshotOrShare()
-    func portfolioCrossedPositiveFivePercent()
+    
+    var shouldStopPrompting: Bool { get set }
     
     func promptForRating()
     func tryPromptForRating()

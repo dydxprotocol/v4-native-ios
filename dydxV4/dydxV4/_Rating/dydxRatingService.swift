@@ -11,6 +11,13 @@ import dydxPresenters
 import RoutingKit
 
 class dydxPointsRating: PointsRating {
+    override func tryPromptForRating() {
+        if shouldStopPrompting {
+            return
+        }
+        super.tryPromptForRating()
+    }
+    
     override func promptForRating() {
         Router.shared?.navigate(to: RoutingRequest(path: "/rate_app"), animated: true, completion: nil)
     }

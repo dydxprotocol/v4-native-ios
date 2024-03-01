@@ -29,6 +29,7 @@
 		02EE90552829A95600225B56 /* NSObject+ObservingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EE90542829A95600225B56 /* NSObject+ObservingTests.swift */; };
 		02F958032A18278B00828F9A /* SecureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F958022A18278B00828F9A /* SecureStore.swift */; };
 		02F958052A182BC400828F9A /* SecureStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F958042A182BC400828F9A /* SecureStoreProtocol.swift */; };
+		278A4DEA2B915D82003898EB /* PointsRatingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4DE92B915D82003898EB /* PointsRatingTests.swift */; };
 		3101F94725112C4100AC4010 /* AuthProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101F94625112C4100AC4010 /* AuthProtocol.swift */; };
 		3101F94A25112C5900AC4010 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101F94925112C5900AC4010 /* AuthService.swift */; };
 		310E61E9216C0F910043BB33 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 310E61E8216C0F910043BB33 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -305,6 +306,7 @@
 		02EE90542829A95600225B56 /* NSObject+ObservingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+ObservingTests.swift"; sourceTree = "<group>"; };
 		02F958022A18278B00828F9A /* SecureStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStore.swift; sourceTree = "<group>"; };
 		02F958042A182BC400828F9A /* SecureStoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStoreProtocol.swift; sourceTree = "<group>"; };
+		278A4DE92B915D82003898EB /* PointsRatingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsRatingTests.swift; sourceTree = "<group>"; };
 		3101F94625112C4100AC4010 /* AuthProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProtocol.swift; sourceTree = "<group>"; };
 		3101F94925112C5900AC4010 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		310E61E8216C0F910043BB33 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -876,6 +878,7 @@
 				02EE8FDF2828305C00225B56 /* _Observing */,
 				31E65AC7216BC9C9008ABEE9 /* UtilitiesTests.swift */,
 				31E65AC9216BC9C9008ABEE9 /* Info.plist */,
+				278A4DE92B915D82003898EB /* PointsRatingTests.swift */,
 			);
 			path = UtilitiesTests;
 			sourceTree = "<group>";
@@ -1462,6 +1465,7 @@
 				31E65AC8216BC9C9008ABEE9 /* UtilitiesTests.swift in Sources */,
 				02EE90552829A95600225B56 /* NSObject+ObservingTests.swift in Sources */,
 				02EE8FE12828307900225B56 /* CombineObservingTests.swift in Sources */,
+				278A4DEA2B915D82003898EB /* PointsRatingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
