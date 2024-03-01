@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;### find ${DWARF_DSYM_FOLDER_PATH} -name &quot;*.dSYM&quot; | xargs -I \{\} ${PODS_ROOT}/Fabric/upload-symbols -gsp ${PROJECT_DIR}/_Configurations/GoogleService-Info.plist -p ios \{\}&#10;&#10;# https://www.browserstack.com/docs/app-automate/xcuitest/build-export-testsuite&#10;&#10;if [[ $CI_XCODEBUILD_ACTION = &apos;build-for-testing&apos; ]]; then&#10;&#10;    echo $TARGET_BUILD_DIR&#10;    cd $TARGET_BUILD_DIR&#10;&#10;    cp -r dydxV4UITests-Runner.app /tmp/&#10;    cd /tmp&#10;    zip --symlinks -r dydxV4UITests.zip dydxV4UITests-Runner.app&#10;&#10;fi&#10;&#10;">
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;### find ${DWARF_DSYM_FOLDER_PATH} -name &quot;*.dSYM&quot; | xargs -I \{\} ${PODS_ROOT}/Fabric/upload-symbols -gsp ${PROJECT_DIR}/_Configurations/GoogleService-Info.plist -p ios \{\}&#10;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
