@@ -56,8 +56,8 @@ public class dydxProfileBalancesViewPresenter: HostedViewPresenter<dydxProfileBa
                     self?.viewModel?.stakedAmount = "-"
                 }
 
-                let totalAmount = (accountBalance ?? 0.0) + (stakingBalance ?? 0.0)
-                if totalAmount != 0 {
+                if accountBalance != nil || stakingBalance != nil {
+                    let totalAmount = (accountBalance ?? 0.0) + (stakingBalance ?? 0.0)
                     self?.viewModel?.totalAmount = dydxFormatter.shared.raw(number: Parser.standard.asNumber(totalAmount), digits: decimal)
                 } else {
                     self?.viewModel?.totalAmount = "-"
