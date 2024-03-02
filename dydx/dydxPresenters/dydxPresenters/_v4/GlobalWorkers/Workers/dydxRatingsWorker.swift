@@ -46,7 +46,6 @@ public final class dydxRatingsWorker: BaseWorker {
 
         NotificationCenter.default.publisher(for: UIApplication.userDidTakeScreenshotNotification)
             .compactMap { $0 }
-            .removeDuplicates()
             .sink { _ in
                 RatingService.shared?.capturedScreenshotOrShare()
             }

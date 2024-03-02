@@ -14,8 +14,7 @@ public protocol RatingProtocol: NSObjectProtocol {
     func orderCreated(orderId: String, orderCreatedTimestampMillis: TimeInterval)
     func transferCreated(transferId: String, transferCreatedTimestampMillis: TimeInterval)
     func capturedScreenshotOrShare()
-    
-    var shouldStopPrompting: Bool { get set }
+    func disablePrompting()
     
     func promptForRating()
     func tryPromptForRating()

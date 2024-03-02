@@ -62,7 +62,7 @@ final class PointsRatingTests: XCTestCase {
         XCTAssertEqual(testPointRating.promptWasReached, false)
     }
     
-    func testConnectedWalletAndMultipleAppLaunches() {
+    func testConnectedWalletAndMultipleAppLaunchesAndDisablePrompting() {
         testPointRating.connectedWallet()
         for i in 1...8 {
             Thread.sleep(forTimeInterval: testPointRating.secondsInADay)
@@ -77,6 +77,15 @@ final class PointsRatingTests: XCTestCase {
             testPointRating.launchedApp()
             testPointRating.tryPromptForRating()
             XCTAssertEqual(testPointRating.promptWasReached, i == 8 ? true : false)
+        }
+        testPointRating.promptWasReached = false
+        
+        testPointRating.disablePrompting()
+        for i in 1...8 {
+            Thread.sleep(forTimeInterval: testPointRating.secondsInADay)
+            testPointRating.launchedApp()
+            testPointRating.tryPromptForRating()
+            XCTAssertEqual(testPointRating.promptWasReached, false)
         }
     }
     

@@ -57,6 +57,10 @@ open class PointsRating: NSObject, RatingProtocol {
         }
     }
     
+    public func disablePrompting() {
+        shouldStopPrompting = true
+    }
+    
     var transfersCreatedSinceLastPromptKey: String { "\(String(describing: className)).transfersCreatedSinceLastPromptKey" }
     var ordersCreatedSinceLastPromptKey: String { "\(String(describing: className)).ordersCreatedSinceLastPromptKey" }
     var uniqueDayAppOpensCountKey: String { "\(String(describing: className)).uniqueDayAppOpensCountKey" }
@@ -106,7 +110,7 @@ open class PointsRating: NSObject, RatingProtocol {
     }
     
     /// whether the user has continued to app store review after pre-prompt
-    public var shouldStopPrompting: Bool {
+    var shouldStopPrompting: Bool {
         get { UserDefaults.standard.bool(forKey: shouldStopPromptingKey) }
         set { UserDefaults.standard.set(newValue, forKey: shouldStopPromptingKey) }
     }
@@ -138,7 +142,8 @@ open class PointsRating: NSObject, RatingProtocol {
     ///            - ~~trader portfolio is positive (up 5% or more in total)~~ this was not work the effort
     ///            - trader has shared a screenshot or the app
     ///            - trader has created 8 or more orders
-    open func tryPromptForRating() {        
+    open func tryPromptForRating() {
+        guard !shouldStopPrompting else { return }
         let shouldPrompt =
             hasSharedOrScreenshottedSinceLastPrompt
             || (hasEverConnectedWallet && (uniqueDayAppOpensCount >= 8 || transfersCreatedSinceLastPrompt.count >= 2 || ordersCreatedSinceLastPrompt.count >= 8))
