@@ -15,6 +15,8 @@ import Utilities
 public typealias BacktrackRoutingCompletionBlock = (UIViewController?) -> Void
 
 open class MappedUIKitRouter: MappedRouter {
+    let fadeTransitioner = CustomTransition.fade.transitionDelegate
+    
     var actions: [NSObject & NavigableProtocol] = [NSObject & NavigableProtocol]()
     override open func backtrack(request: RoutingRequest, animated: Bool, completion: RoutingCompletionBlock?) {
 //        backtrack(to: ViewControllerStack.shared?.topmost(), request: request, animated: animated, completion: completion)
@@ -348,8 +350,23 @@ open class MappedUIKitRouter: MappedRouter {
     
     private func popup(_ viewController: UIViewController, animated: Bool, completion: RoutingCompletionBlock?) {
         if let root = UIViewController.root() {
-            viewController.modalPresentationStyle = .overFullScreen
-            root.present(viewController, animated: true)
+            // wrapper is necessary for custom transitions
+            let wrapperViewController = UIViewController()
+            wrapperViewController.modalPresentationStyle = .overFullScreen // or .custom for other presentation styles
+            wrapperViewController.transitioningDelegate = fadeTransitioner
+            
+            // Add the UIHostingController to the wrapper UIViewController
+            wrapperViewController.addChild(viewController)
+            wrapperViewController.view.addSubview(viewController.view)
+            viewController.didMove(toParent: wrapperViewController)
+            
+            // Ensure the hosting controller's view fills the wrapper view
+            viewController.view.translatesAutoresizingMaskIntoConstraints = false
+            viewController.view.snp.makeConstraints { $0.edges.equalTo(wrapperViewController.view) }
+            
+            // Present the wrapper UIViewController
+            root.present(wrapperViewController, animated: true, completion: nil)
+
             completion?(viewController, true)
         } else {
             completion?(nil, false)
