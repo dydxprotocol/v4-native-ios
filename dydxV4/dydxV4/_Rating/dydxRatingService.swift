@@ -17,5 +17,6 @@ class dydxPointsRating: PointsRating {
         if dydxBoolFeatureFlag.disable_app_rating.isEnabled { return }
         Tracking.shared?.log(event: "PrepromptedForRating", data: stateData)
         Router.shared?.navigate(to: RoutingRequest(path: "/rate_app"), animated: true, completion: nil)
+        super.promptForRating()
     }
 }

@@ -42,15 +42,22 @@ private class dydxRateAppViewBuilderPresenter: HostedViewPresenter<dydxRateAppVi
 
         viewModel = dydxRateAppViewModel()
 
-        viewModel?.deferAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        viewModel?.negativeRatingIntentAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { (_, _) in
+                Router.shared?.navigate(to: RoutingRequest(path: "/action/collect_feedback"), animated: true, completion: nil)
+            }
         }
-        viewModel?.rateAction = {
+
+        viewModel?.positiveRatingIntentAction = {
             #if DEBUG
             #else
                 SKStoreReviewController.requestReview()
             #endif
             RatingService.shared?.disablePrompting()
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        }
+
+        viewModel?.deferAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
     }

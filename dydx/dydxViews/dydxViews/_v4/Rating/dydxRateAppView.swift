@@ -23,7 +23,8 @@ struct BlurView: UIViewRepresentable {
 }
 
 public class dydxRateAppViewModel: PlatformViewModel {
-    @Published public var rateAction: (() -> Void)?
+    @Published public var positiveRatingIntentAction: (() -> Void)?
+    @Published public var negativeRatingIntentAction: (() -> Void)?
     @Published public var deferAction: (() -> Void)?
 
     public static var previewValue: dydxRateAppViewModel = {
@@ -52,18 +53,24 @@ public class dydxRateAppViewModel: PlatformViewModel {
                     .opacity(0.8)
 
                 ZStack(alignment: .center) {
-                    VStack {
-                        Text("Placholder (continue to app review?)")
+                    VStack(spacing: 32) {
+                        Text("Placholder\nare you enjoying this app?")
                             .themeFont(fontSize: .large)
                             .themeColor(foreground: .textPrimary)
                         HStack {
-                            PlatformButtonViewModel(content: self.createButtonContent(title: "defer").wrappedViewModel) { [weak self] in
-                                self?.deferAction?()
+                            PlatformButtonViewModel(content: self.createButtonContent(title: "no").wrappedViewModel) { [weak self] in
+                                self?.negativeRatingIntentAction?()
                             }.createView(parentStyle: parentStyle, styleKey: styleKey)
-                            PlatformButtonViewModel(content: self.createButtonContent(title: "rate").wrappedViewModel) { [weak self] in
-                                self?.rateAction?()
+                            PlatformButtonViewModel(content: self.createButtonContent(title: "yes").wrappedViewModel) { [weak self] in
+                                self?.positiveRatingIntentAction?()
                             }.createView(parentStyle: parentStyle, styleKey: styleKey)
                         }
+                        Text("later")
+                            .themeColor(foreground: .textSecondary)
+                            .themeFont(fontSize: .medium)
+                            .onTapGesture {[weak self] in
+                                self?.deferAction?()
+                            }
                     }
                     .padding(.all, 16)
                 }
@@ -73,26 +80,6 @@ public class dydxRateAppViewModel: PlatformViewModel {
             }
 
             .wrappedInAnyView()
-
-//            ZStack(alignment: .center) {
-//                VStack {
-//                    Spacer()
-//                    Text("wanna rate it?")
-//                    HStack {
-//                        Button("later") { [weak self] in
-//                            self?.deferAction?()
-//                        }
-//                        Button("sure") { [weak self] in
-//                            self?.rateAction?()
-//                        }
-//                    }
-//                    Spacer()
-//                }
-//            }
-//            .frame(width: 400, height: 400)
-////            .ignoresSafeArea(.all)
-//            .themeColor(background: .colorRed)
-//            .wrappedInAnyView()
         }
     }
 }
