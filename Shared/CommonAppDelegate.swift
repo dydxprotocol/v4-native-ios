@@ -139,7 +139,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     open func injectRating() {
         Console.shared.log("injectRating")
         //TODO: Comment in when rate pre-prompt UI is ready
-        RatingService.shared = dydxPointsRating()
+//        RatingService.shared = dydxPointsRating()
     }
 
     open func injectAppearances() {
