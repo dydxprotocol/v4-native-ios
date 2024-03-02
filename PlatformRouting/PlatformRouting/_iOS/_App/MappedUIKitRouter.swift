@@ -250,6 +250,10 @@ open class MappedUIKitRouter: MappedRouter {
 
         case .drawer:
             drawer(viewController, animated: animated, completion: completion)
+            
+        case .popup: 
+            popup(viewController, animated: animated, completion: completion)
+
         }
     }
 
@@ -337,6 +341,16 @@ open class MappedUIKitRouter: MappedRouter {
 //                topmost.present(navigationController, animated: animated) {
 //                }
 //            }
+        } else {
+            completion?(nil, false)
+        }
+    }
+    
+    private func popup(_ viewController: UIViewController, animated: Bool, completion: RoutingCompletionBlock?) {
+        if let root = UIViewController.root() {
+            viewController.modalPresentationStyle = .overFullScreen
+            root.present(viewController, animated: true)
+            completion?(viewController, true)
         } else {
             completion?(nil, false)
         }

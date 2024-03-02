@@ -12,6 +12,7 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import StoreKit
 
 public class dydxRateAppViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -22,33 +23,6 @@ public class dydxRateAppViewBuilder: NSObject, ObjectBuilderProtocol {
 }
 
 private class dydxRateAppViewBuilderController: HostingViewController<PlatformView, dydxRateAppViewModel> {
-//    override func navigate(to request: RoutingRequest?, animated: Bool, completion: RoutingCompletionBlock?) {
-//        super.navigate(to: request, animated: animated, completion: completion)
-//        // Create the alert controller
-//        let alertController = UIAlertController(title: "Your Title", message: "Your Message", preferredStyle: .alert)
-//
-//        // Create the "Yes" action
-//        let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
-//            Tracking.shared?.log(event: "FollowedAppRating", data: nil)
-//            RatingService.shared?.shouldStopPrompting = true
-//            UIViewController.topmost()?.dismiss(animated: true)
-//        }
-//
-//        // Create the "No" action
-//        let noAction = UIAlertAction(title: "No", style: .cancel) { _ in
-//            Tracking.shared?.log(event: "DeferredAppRating", data: nil)
-//            UIViewController.topmost()?.dismiss(animated: true)
-//        }
-//
-//        // Add the actions to the alert controller
-//        alertController.addAction(yesAction)
-//        alertController.addAction(noAction)
-//
-//        // Present the alert
-//        UIViewController.topmost()?.present(alertController, animated: true) {
-//            alertController.dismiss(animated: true)
-//        }
-//    }
 
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/rate_app" {
@@ -67,5 +41,16 @@ private class dydxRateAppViewBuilderPresenter: HostedViewPresenter<dydxRateAppVi
         super.init()
 
         viewModel = dydxRateAppViewModel()
+
+        viewModel?.deferAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        }
+        viewModel?.rateAction = {
+            #if DEBUG
+            #else
+                SKStoreReviewController.requestReview()
+            #endif
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        }
     }
 }

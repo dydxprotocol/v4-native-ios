@@ -31,22 +31,47 @@ public class dydxRateAppViewModel: PlatformViewModel {
         return vm
     }()
 
+    private func createButtonContent(title: String) -> AnyView {
+        HStack {
+            Spacer()
+            Text(title)
+                .themeFont(fontSize: .medium)
+                .themeColor(foreground: .textPrimary)
+            Spacer()
+        }.wrappedInAnyView()
+    }
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return ZStack {
-                // Your content here
                 Color.clear // Use clear color for the background to show the blur effect
-                    .background(BlurView(style: .systemMaterialDark)) // Custom Blur View
-                    .edgesIgnoringSafeArea(.all) // Extend to the edges of the display
+                    .background(BlurView(style: .systemMaterialDark))
+                    .edgesIgnoringSafeArea(.all)
+                    .opacity(0.8)
 
-                VStack {
-                    Text("Hello, World!")
-                        .font(.largeTitle)
-                        .foregroundColor(.white)
+                ZStack(alignment: .center) {
+                    VStack {
+                        Text("Placholder (continue to app review?)")
+                            .themeFont(fontSize: .large)
+                            .themeColor(foreground: .textPrimary)
+                        HStack {
+                            PlatformButtonViewModel(content: self.createButtonContent(title: "defer").wrappedViewModel) { [weak self] in
+                                self?.deferAction?()
+                            }.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            PlatformButtonViewModel(content: self.createButtonContent(title: "rate").wrappedViewModel) { [weak self] in
+                                self?.rateAction?()
+                            }.createView(parentStyle: parentStyle, styleKey: styleKey)
+                        }
+                    }
+                    .padding(.all, 16)
                 }
+                .themeColor(background: .layer1)
+                .borderAndClip(style: .cornerRadius(8), borderColor: .borderDefault, lineWidth: 1)
+                .padding(.horizontal, 32)
             }
+
             .wrappedInAnyView()
 
 //            ZStack(alignment: .center) {
