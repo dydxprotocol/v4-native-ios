@@ -143,7 +143,7 @@ open class PointsRating: NSObject, RatingProtocol {
             hasSharedOrScreenshottedSinceLastPrompt
             || (hasEverConnectedWallet && (uniqueDayAppOpensCount >= 8 || transfersCreatedSinceLastPrompt.count >= 2 || ordersCreatedSinceLastPrompt.count >= 8))
             || (!hasEverConnectedWallet && uniqueDayAppOpensCount >= 4)
-        if shouldPrompt || true {
+        if shouldPrompt {
             promptForRating()
             reset()
         }
