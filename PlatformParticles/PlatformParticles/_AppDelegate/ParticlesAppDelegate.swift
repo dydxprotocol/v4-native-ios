@@ -44,7 +44,6 @@ open class ParticlesAppDelegate: RoutingAppDelegate {
 
     override public init() {
         super.init()
-        injectAppInfo()
         let injection = self.injection()
         Injection.inject(injeciton: injection) {
             ReachabilityMessage.shared.connectivityXib = "Connectivity"
@@ -100,9 +99,6 @@ open class ParticlesAppDelegate: RoutingAppDelegate {
                 completion()
             }
         }
-    }
-
-    open func injectAppInfo() {
     }
 
     open func inject(completion: @escaping () -> Void) {

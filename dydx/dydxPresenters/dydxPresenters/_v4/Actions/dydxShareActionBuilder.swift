@@ -1,5 +1,5 @@
 //
-//  ShareAction.swift
+//  dydxShareActionBuilder.swift
 //  PlatformRouting
 //
 //  Created by Qiang Huang on 11/2/20.
@@ -9,15 +9,16 @@
 import RoutingKit
 import Utilities
 import UIToolkits
+import dydxStateManager
 
 public class ShareActionBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        let action = ShareAction()
+        let action = dydxShareAction()
         return action as? T
     }
 }
 
-open class ShareAction: NSObject, NavigableProtocol {
+open class dydxShareAction: NSObject, NavigableProtocol {
     private var completion: RoutingCompletionBlock?
     open func navigate(to request: RoutingRequest?, animated: Bool, completion: RoutingCompletionBlock?) {
         switch request?.path {
@@ -27,13 +28,13 @@ open class ShareAction: NSObject, NavigableProtocol {
                 let activityVC = UIActivityViewController(activityItems: toShare, applicationActivities: nil)
                 activityVC.excludedActivityTypes = [
                     UIActivity.ActivityType.airDrop,
-                    UIActivity.ActivityType.addToReadingList,
+                    UIActivity.ActivityType.addToReadingList
                 ]
 
                 activityVC.popoverPresentationController?.sourceView = UserInteraction.shared.sender as? UIView
                 activityVC.popoverPresentationController?.barButtonItem = UserInteraction.shared.sender as? UIBarButtonItem
                 UIViewController.topmost()?.present(activityVC, animated: true, completion: nil)
-                
+
                 let data: [String: String]?
                 if let shareSource = request?.params?["share_source"] as? String {
                     data = ["share_source": shareSource]
@@ -41,6 +42,7 @@ open class ShareAction: NSObject, NavigableProtocol {
                     data = nil
                 }
                 Tracking.shared?.log(event: "ShareDialogDisplayed", data: data)
+                dydxRatingService.shared?.capturedScreenshotOrShare()
                 completion?(nil, true)
             } else {
                 completion?(nil, false)
