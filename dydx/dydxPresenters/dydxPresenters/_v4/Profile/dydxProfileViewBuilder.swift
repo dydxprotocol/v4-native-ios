@@ -28,6 +28,11 @@ private class dydxProfileViewController: HostingViewController<PlatformView, dyd
         }
         return false
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        dydxRatingService.shared?.tryPromptForRating()
+    }
 }
 
 private protocol dydxProfileViewPresenterProtocol: HostedViewPresenterProtocol {

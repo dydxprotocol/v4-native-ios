@@ -54,7 +54,6 @@
 		31471F8724BA315200057221 /* RectPreviewOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31471F8624BA315200057221 /* RectPreviewOverlay.swift */; };
 		314B630C23DCCEE500139EB3 /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B62B123DCCEE400139EB3 /* OCRService.swift */; };
 		314B630D23DCCEE500139EB3 /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B62B123DCCEE400139EB3 /* OCRService.swift */; };
-		314B630E23DCCEE500139EB3 /* AppStoreRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B62B323DCCEE400139EB3 /* AppStoreRating.swift */; };
 		314B631023DCCEE500139EB3 /* UIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B62B523DCCEE400139EB3 /* UIProtocols.swift */; };
 		314B631123DCCEE500139EB3 /* UIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B62B523DCCEE400139EB3 /* UIProtocols.swift */; };
 		314B631223DCCEE500139EB3 /* UIBarButtonItem+Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B62B723DCCEE400139EB3 /* UIBarButtonItem+Target.swift */; };
@@ -330,7 +329,6 @@
 		31471F8424BA313A00057221 /* PreviewOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewOverlay.swift; sourceTree = "<group>"; };
 		31471F8624BA315200057221 /* RectPreviewOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectPreviewOverlay.swift; sourceTree = "<group>"; };
 		314B62B123DCCEE400139EB3 /* OCRService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCRService.swift; sourceTree = "<group>"; };
-		314B62B323DCCEE400139EB3 /* AppStoreRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreRating.swift; sourceTree = "<group>"; };
 		314B62B523DCCEE400139EB3 /* UIProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIProtocols.swift; sourceTree = "<group>"; };
 		314B62B723DCCEE400139EB3 /* UIBarButtonItem+Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Target.swift"; sourceTree = "<group>"; };
 		314B62B823DCCEE400139EB3 /* Debouncer+View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Debouncer+View.swift"; sourceTree = "<group>"; };
@@ -624,7 +622,6 @@
 		314B62B223DCCEE400139EB3 /* _Rating */ = {
 			isa = PBXGroup;
 			children = (
-				314B62B323DCCEE400139EB3 /* AppStoreRating.swift */,
 			);
 			path = _Rating;
 			sourceTree = "<group>";
@@ -1589,7 +1586,6 @@
 				318A084924DF1AA100981B5F /* NVActivityIndicatorView+Waiting.swift in Sources */,
 				314B632C23DCCEE500139EB3 /* HMSegmentedControl+SegmentedProtocol.swift in Sources */,
 				317F16EE2572D24600D178B8 /* TextTableViewCell.swift in Sources */,
-				314B630E23DCCEE500139EB3 /* AppStoreRating.swift in Sources */,
 				31308B4424FAEC34003B5B9A /* ColorPalette.swift in Sources */,
 				314B635823DCCEE500139EB3 /* CachedImageView.swift in Sources */,
 				31C016EF2737266B004B300E /* SpinImageView.swift in Sources */,

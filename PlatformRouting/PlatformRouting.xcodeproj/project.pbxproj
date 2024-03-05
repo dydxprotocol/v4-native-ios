@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		278A4EDC2B92C62A003898EB /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4EDB2B92C62A003898EB /* FadeTransition.swift */; };
+		278A4EDE2B92C639003898EB /* TransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4EDD2B92C639003898EB /* TransitionDelegate.swift */; };
 		310CDBAD21C6FA44009665CF /* UIToolkits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 313EBC0D21BB7B7E00BEF926 /* UIToolkits.framework */; };
 		311BAFEB255083C1004331D8 /* Mail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 311BAFDE255083C1004331D8 /* Mail.xib */; };
-		311BB0182550843C004331D8 /* ShareAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311BB0172550843C004331D8 /* ShareAction.swift */; };
 		311BB01F2550845A004331D8 /* Share.xib in Resources */ = {isa = PBXBuildFile; fileRef = 311BB01E2550845A004331D8 /* Share.xib */; };
 		311D6FA92176F04900655040 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 311D6F702176EF7B00655040 /* Utilities.framework */; };
 		311D6FAA2176F04900655040 /* RoutingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 311D6F5E2176EF6E00655040 /* RoutingKit.framework */; };
@@ -316,9 +317,10 @@
 /* Begin PBXFileReference section */
 		1A4A40F832E3D20D7A978DE2 /* Pods_iOS_PlatformRoutingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_PlatformRoutingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D0A34C88FFB5FB1165548D /* Pods_iOS_PlatformRouting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_PlatformRouting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		278A4EDB2B92C62A003898EB /* FadeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeTransition.swift; sourceTree = "<group>"; };
+		278A4EDD2B92C639003898EB /* TransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionDelegate.swift; sourceTree = "<group>"; };
 		306E17287D7FE48D8EEA3648 /* Pods-iOS-PlatformRouting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-PlatformRouting.debug.xcconfig"; path = "Target Support Files/Pods-iOS-PlatformRouting/Pods-iOS-PlatformRouting.debug.xcconfig"; sourceTree = "<group>"; };
 		311BAFDE255083C1004331D8 /* Mail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Mail.xib; sourceTree = "<group>"; };
-		311BB0172550843C004331D8 /* ShareAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareAction.swift; sourceTree = "<group>"; };
 		311BB01E2550845A004331D8 /* Share.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Share.xib; sourceTree = "<group>"; };
 		311D6F582176EF6E00655040 /* RoutingKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RoutingKit.xcodeproj; path = ../RoutingKit/RoutingKit.xcodeproj; sourceTree = "<group>"; };
 		311D6F612176EF7500655040 /* UIToolkits.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UIToolkits.xcodeproj; path = ../UIToolkits/UIToolkits.xcodeproj; sourceTree = "<group>"; };
@@ -438,6 +440,15 @@
 				311D6F6A2176EF7B00655040 /* Utilities.xcodeproj */,
 			);
 			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		278A4ECE2B92C4EA003898EB /* _Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				278A4EDB2B92C62A003898EB /* FadeTransition.swift */,
+				278A4EDD2B92C639003898EB /* TransitionDelegate.swift */,
+			);
+			path = _Transitions;
 			sourceTree = "<group>";
 		};
 		311D6F592176EF6E00655040 /* Products */ = {
@@ -593,6 +604,7 @@
 		314B625E23DCCE8900139EB3 /* _iOS */ = {
 			isa = PBXGroup;
 			children = (
+				278A4ECE2B92C4EA003898EB /* _Transitions */,
 				314B626123DCCE8900139EB3 /* _Action */,
 				314B626923DCCE8900139EB3 /* _App */,
 				314B626523DCCE8900139EB3 /* _Extensions */,
@@ -678,7 +690,6 @@
 			isa = PBXGroup;
 			children = (
 				314C35B524C7C29600695F7E /* DebugEnableAction.swift */,
-				311BB0172550843C004331D8 /* ShareAction.swift */,
 			);
 			path = _Actions;
 			sourceTree = "<group>";
@@ -1275,7 +1286,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				314B627823DCCE8900139EB3 /* RoutingEmbeddingController.swift in Sources */,
-				311BB0182550843C004331D8 /* ShareAction.swift in Sources */,
 				314B627D23DCCE8900139EB3 /* TelAction.swift in Sources */,
 				314B628223DCCE8900139EB3 /* MappedUIKitAppRouter.swift in Sources */,
 				314B626D23DCCE8900139EB3 /* RoutingDrawerController.swift in Sources */,
@@ -1284,11 +1294,13 @@
 				314B627523DCCE8900139EB3 /* RoutingMap+iOS.swift in Sources */,
 				314B627723DCCE8900139EB3 /* EmbeddingFloatingManager.swift in Sources */,
 				314B627C23DCCE8900139EB3 /* RateAction.swift in Sources */,
+				278A4EDC2B92C62A003898EB /* FadeTransition.swift in Sources */,
 				31331DC6255345E40050D74C /* SimpleLocalNotification.swift in Sources */,
 				314B626E23DCCE8900139EB3 /* RoutingViewController.swift in Sources */,
 				314D9C172485AA2D00582A1A /* RoutingContainingController.swift in Sources */,
 				314B627623DCCE8900139EB3 /* EmbeddingProtocols.swift in Sources */,
 				314B627423DCCE8900139EB3 /* UISplitViewController+Routing.swift in Sources */,
+				278A4EDE2B92C639003898EB /* TransitionDelegate.swift in Sources */,
 				314B627223DCCE8900139EB3 /* UITabBarController+Routing.swift in Sources */,
 				314B626F23DCCE8900139EB3 /* RoutingSplitViewController.swift in Sources */,
 				314B627E23DCCE8900139EB3 /* MappedUIKitExtensionRouter.swift in Sources */,

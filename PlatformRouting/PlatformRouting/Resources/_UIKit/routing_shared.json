@@ -32,7 +32,7 @@
       "destination":"Refresh.xib"
    },
    "/action/share":{
-       "destination":"PlatformRouting.ShareActionBuilder"
+       "destination":"dydxPresenters.dydxShareActionBuilder"
    },
    "/action/wallet":{
       "destination":"Wallet.xib"
