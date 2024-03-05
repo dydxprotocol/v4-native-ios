@@ -20,6 +20,8 @@ public enum RoutingPresentation: Int {
     case float
     case embed
     case drawer
+    /// center-screen popup which dims the background
+    case popup
 }
 
 private struct PathTuple {
@@ -72,6 +74,9 @@ public class RoutingMap: NSObject, ParsingProtocol {
 
         case "embed":
             presentation = .embed
+            
+        case "popup":
+            presentation = .popup
 
         default:
             presentation = nil

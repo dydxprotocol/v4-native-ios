@@ -64,7 +64,7 @@
                     "destination":"dydxPresenters.dydxCancelOrderActionBuilder"
                 },
                 "/action/share": {
-                    "destination":"PlatformRouting.ShareActionBuilder"
+                    "destination":"dydxPresenters.dydxShareActionBuilder"
                 },
                 "/action/collect_feedback": {
                     "destination":"dydxPresenters.dydxCollectFeedbackActionBuilder"
@@ -232,6 +232,10 @@
                 },
                 "/r/:code":{
                     "destination":"AffiliateReferral.xib"
+                },
+                "/rate_app":{
+                    "destination":"dydxPresenters.dydxRateAppViewBuilder",
+                    "presentation":"popup"
                 },
                 "/restricted":{
                     "destination":"Restricted.storyboard",
