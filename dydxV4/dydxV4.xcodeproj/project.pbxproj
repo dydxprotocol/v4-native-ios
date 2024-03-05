@@ -28,7 +28,6 @@
 		02FF092E29ADBD9900781EDA /* dydxFormatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028420CF29AD77F400C0E7CC /* dydxFormatter.framework */; };
 		02FF092F29ADBD9F00781EDA /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E11EB29ADB9BC00FE271C /* dydxChart.framework */; };
 		02FF093029ADBDA300781EDA /* dydxPresenters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; };
-		278A4D822B8FA3DA003898EB /* dydxRatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4D812B8FA3DA003898EB /* dydxRatingService.swift */; };
 		27A7967B2A620BF6007C3D04 /* dydxSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A7967A2A620BF6007C3D04 /* dydxSettingsStore.swift */; };
 		27D41AF12A8E9214009A2F37 /* UIApplication+URLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D41AF02A8E9214009A2F37 /* UIApplication+URLHandler.swift */; };
 		27DBDD222A8FF5B2002383C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27DBDCED2A8FF5B2002383C6 /* GoogleService-Info.plist */; };
@@ -807,7 +806,6 @@
 		02C7262A29D793C90098AFBC /* dydxCompositeTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCompositeTracking.swift; sourceTree = "<group>"; };
 		02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxStateManager.xcodeproj; path = ../dydx/dydxStateManager/dydxStateManager.xcodeproj; sourceTree = "<group>"; };
 		171807B0CCAE5C86B5D65793 /* Pods_iOS_dydxV4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxV4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		278A4D812B8FA3DA003898EB /* dydxRatingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRatingService.swift; sourceTree = "<group>"; };
 		27A7967A2A620BF6007C3D04 /* dydxSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsStore.swift; sourceTree = "<group>"; };
 		27D41AF02A8E9214009A2F37 /* UIApplication+URLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+URLHandler.swift"; sourceTree = "<group>"; };
 		27DBDCED2A8FF5B2002383C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1054,14 +1052,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		278A4D502B8FA3C3003898EB /* _Rating */ = {
-			isa = PBXGroup;
-			children = (
-				278A4D812B8FA3DA003898EB /* dydxRatingService.swift */,
-			);
-			path = _Rating;
-			sourceTree = "<group>";
-		};
 		27A796482A620BE4007C3D04 /* _Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1096,7 +1086,6 @@
 		3112F461216BBF8400708927 /* dydx */ = {
 			isa = PBXGroup;
 			children = (
-				278A4D502B8FA3C3003898EB /* _Rating */,
 				27A796482A620BE4007C3D04 /* _Settings */,
 				0262F07429DB3989009889E2 /* _Localizer */,
 				0217A07D29D78B10007F31C5 /* _Security */,
@@ -2259,7 +2248,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				27A7967B2A620BF6007C3D04 /* dydxSettingsStore.swift in Sources */,
-				278A4D822B8FA3DA003898EB /* dydxRatingService.swift in Sources */,
 				02C7262B29D793C90098AFBC /* dydxCompositeTracking.swift in Sources */,
 				27D41AF12A8E9214009A2F37 /* UIApplication+URLHandler.swift in Sources */,
 				02756A6A287CA33E00803741 /* dydxNotificationHandlerDelegate.swift in Sources */,

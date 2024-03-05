@@ -21,7 +21,7 @@ public final class dydxRatingsWorker: BaseWorker {
             .compactMap { $0 }
             .removeDuplicates()
             .sink { _ in
-                RatingService.shared?.connectedWallet()
+                dydxRatingService.shared?.connectedWallet()
             }
             .store(in: &self.subscriptions)
 
@@ -30,7 +30,7 @@ public final class dydxRatingsWorker: BaseWorker {
             .removeDuplicates()
             .sink { transfers in
                 for transfer in transfers {
-                    RatingService.shared?.transferCreated(transferId: transfer.id, transferCreatedTimestampMillis: transfer.updatedAtMilliseconds)
+                    dydxRatingService.shared?.transferCreated(transferId: transfer.id, transferCreatedTimestampMillis: transfer.updatedAtMilliseconds)
                 }
             }
             .store(in: &self.subscriptions)
@@ -39,7 +39,7 @@ public final class dydxRatingsWorker: BaseWorker {
             .sink { fills in
                 for fill in fills {
                     guard let orderId = fill.orderId else { return }
-                    RatingService.shared?.orderCreated(orderId: orderId, orderCreatedTimestampMillis: fill.createdAtMilliseconds)
+                    dydxRatingService.shared?.orderCreated(orderId: orderId, orderCreatedTimestampMillis: fill.createdAtMilliseconds)
                 }
             }
             .store(in: &self.subscriptions)
@@ -47,7 +47,7 @@ public final class dydxRatingsWorker: BaseWorker {
         NotificationCenter.default.publisher(for: UIApplication.userDidTakeScreenshotNotification)
             .compactMap { $0 }
             .sink { _ in
-                RatingService.shared?.capturedScreenshotOrShare()
+                dydxRatingService.shared?.capturedScreenshotOrShare()
             }
             .store(in: &self.subscriptions)
 

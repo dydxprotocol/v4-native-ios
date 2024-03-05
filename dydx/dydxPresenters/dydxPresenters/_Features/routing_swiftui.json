@@ -64,7 +64,7 @@
                     "destination":"dydxPresenters.dydxCancelOrderActionBuilder"
                 },
                 "/action/share": {
-                    "destination":"PlatformRouting.ShareActionBuilder"
+                    "destination":"dydxPresenters.dydxShareActionBuilder"
                 },
                 "/action/collect_feedback": {
                     "destination":"dydxPresenters.dydxCollectFeedbackActionBuilder"

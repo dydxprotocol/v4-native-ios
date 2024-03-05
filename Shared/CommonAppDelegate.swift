@@ -138,8 +138,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
 
     open func injectRating() {
         Console.shared.log("injectRating")
-        //TODO: Comment in when rate pre-prompt UI is ready
-//        RatingService.shared = dydxPointsRating()
+        dydxRatingService.shared = dydxPointsRating()
     }
 
     open func injectAppearances() {
@@ -170,7 +169,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     open override func applicationDidBecomeActive(_ application: UIApplication) {
         super.applicationDidBecomeActive(application)
         Tracking.shared?.log(event: "AppStart", data: nil)
-        RatingService.shared?.launchedApp()
+        dydxRatingService.shared?.launchedApp()
     }
 
     open func injectNotification() {

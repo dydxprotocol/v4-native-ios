@@ -31,7 +31,7 @@ private class dydxProfileViewController: HostingViewController<PlatformView, dyd
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        RatingService.shared?.tryPromptForRating()
+        dydxRatingService.shared?.tryPromptForRating()
     }
 }
 

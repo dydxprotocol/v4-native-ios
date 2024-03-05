@@ -13,6 +13,7 @@ import RoutingKit
 import ParticlesKit
 import PlatformUI
 import StoreKit
+import dydxStateManager
 
 public class dydxRateAppViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -53,7 +54,7 @@ private class dydxRateAppViewBuilderPresenter: HostedViewPresenter<dydxRateAppVi
             #else
                 SKStoreReviewController.requestReview()
             #endif
-            RatingService.shared?.disablePrompting()
+            dydxRatingService.shared?.disablePrompting()
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
 
