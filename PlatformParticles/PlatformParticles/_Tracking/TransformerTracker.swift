@@ -10,6 +10,7 @@ import ParticlesKit
 import Utilities
 
 open class TransformerTracker: NSObject & TrackingProtocol {
+    
     open var userInfo: [String: String?]?
 
     public var excluded: Bool = false
@@ -25,7 +26,7 @@ open class TransformerTracker: NSObject & TrackingProtocol {
         }
     }
 
-    open func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?) {
+    open func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?, contextViewController: UIViewController?) {
         if !excluded {
             if let path = transform(path: path)?.trim() {
                 if let action = action {

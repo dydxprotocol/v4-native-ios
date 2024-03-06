@@ -35,7 +35,7 @@ open class TrackingViewController: NavigableViewController, TrackingViewProtocol
     open func logView(path: String?, data: [String: Any]?, from: String?, time: Date?) {
         if let path = path, trackingData?.path != path {
             trackingData = TrackingData(path: path, data: data)
-            Tracking.shared?.view(path, data: data, from: from, time: time)
+            Tracking.shared?.view(path, data: data, from: from, time: time, revenue: nil, contextViewController: self)
         }
     }
 }
