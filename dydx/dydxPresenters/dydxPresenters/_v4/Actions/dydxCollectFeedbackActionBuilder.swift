@@ -23,16 +23,10 @@ open class dydxCollectFeedbackAction: NSObject, NavigableProtocol {
         switch request?.path {
     case "/action/collect_feedback":
             if let feedbackUrl = URL(string: AbacusStateManager.shared.environment?.links?.feedback ?? "") {
-                let data: [String: String]?
-                if let shareSource = request?.params?["context"] as? String {
-                    data = ["source_context": shareSource]
-                } else {
-                    data = nil
-                }
                 Router.shared?.navigate(to: feedbackUrl, completion: { _, success in
                     completion?(nil, success)
                 })
-                Tracking.shared?.log(event: "CollectFeedbackDisplayed", data: data)
+                Tracking.shared?.log(event: "CollectFeedbackDisplayed", data: nil)
                 completion?(nil, true)
             } else {
                 completion?(nil, false)

@@ -235,7 +235,7 @@
                 },
                 "/rate_app":{
                     "destination":"dydxPresenters.dydxRateAppViewBuilder",
-                    "presentation":"popup"
+                    "presentation":"half"
                 },
                 "/restricted":{
                     "destination":"Restricted.storyboard",
