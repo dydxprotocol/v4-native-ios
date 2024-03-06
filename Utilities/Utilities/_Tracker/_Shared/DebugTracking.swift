@@ -13,7 +13,7 @@ public class DebugTracking: NSObject & TrackingProtocol {
 
     public var excluded: Bool = false
 
-    public func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?) {
+    public func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?, contextViewController: UIViewController?) {
         if let path = path {
             let action = action ?? ""
             let from = from ?? ""
