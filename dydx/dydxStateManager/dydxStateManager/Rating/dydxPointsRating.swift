@@ -127,12 +127,6 @@ open class dydxPointsRating: NSObject, dydxRatingProtocol {
         if !dydxBoolFeatureFlag.enable_app_rating.isEnabled { return }
         Tracking.shared?.log(event: "PrepromptedForRating", data: stateData)
         Router.shared?.navigate(to: RoutingRequest(path: "/rate_app"), animated: true, completion: nil)
-
-        #if DEBUG
-            Console.shared.log("mock prompt for rating")
-        #else
-            SKStoreReviewController.requestReview()
-        #endif
     }
 
     ///    See discussion below:
