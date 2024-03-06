@@ -38,7 +38,7 @@
                     "text" : "APP.HELP_MODAL.PROVIDE_FEEDBACK"
                 },
                 "link" : {
-                    "text" : "{APP_SCHEME}:///action/collect_feedback?context=settings"
+                    "text" : "{APP_SCHEME}:///action/rate_app?context=settings"
                 }
             }
         ]

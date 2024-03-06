@@ -8,19 +8,7 @@
 
 import SwiftUI
 import PlatformUI
-
-// Define a UIViewRepresentable to use UIVisualEffectView in SwiftUI
-struct BlurView: UIViewRepresentable {
-    var style: UIBlurEffect.Style
-
-    func makeUIView(context: Context) -> UIVisualEffectView {
-        return UIVisualEffectView(effect: UIBlurEffect(style: style))
-    }
-
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-        uiView.effect = UIBlurEffect(style: style)
-    }
-}
+import Utilities
 
 public class dydxRateAppViewModel: PlatformViewModel {
     @Published public var positiveRatingIntentAction: (() -> Void)?
@@ -32,54 +20,45 @@ public class dydxRateAppViewModel: PlatformViewModel {
         return vm
     }()
 
-    private func createButtonContent(title: String) -> AnyView {
-        HStack {
-            Spacer()
-            Text(title)
-                .themeFont(fontSize: .medium)
-                .themeColor(foreground: .textPrimary)
-            Spacer()
-        }.wrappedInAnyView()
+    private func createButtonContent(title: String, parentStyle: ThemeStyle, styleKey: String?, action: (() -> Void)?) -> PlatformView {
+        PlatformButtonViewModel(
+            content: Text(title).wrappedViewModel,
+            state: .secondary,
+            action: { action?() })
+        .createView(parentStyle: parentStyle, styleKey: styleKey)
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            return ZStack {
-                Color.clear // Use clear color for the background to show the blur effect
-                    .background(BlurView(style: .systemMaterialDark))
-                    .edgesIgnoringSafeArea(.all)
-                    .opacity(0.8)
-
-                ZStack(alignment: .center) {
-                    VStack(spacing: 32) {
-                        Text("Placholder\nare you enjoying this app?")
-                            .themeFont(fontSize: .large)
-                            .themeColor(foreground: .textPrimary)
-                        HStack {
-                            PlatformButtonViewModel(content: self.createButtonContent(title: "no").wrappedViewModel) { [weak self] in
-                                self?.negativeRatingIntentAction?()
-                            }.createView(parentStyle: parentStyle, styleKey: styleKey)
-                            PlatformButtonViewModel(content: self.createButtonContent(title: "yes").wrappedViewModel) { [weak self] in
-                                self?.positiveRatingIntentAction?()
-                            }.createView(parentStyle: parentStyle, styleKey: styleKey)
-                        }
-                        Text("later")
+            return VStack(alignment: .center, spacing: 24) {
+                        Text(DataLocalizer.shared?.localize(path: "RATE_APP.QUESTION", params: nil) ?? "")
+                            .themeFont(fontType: .text, fontSize: .large)
                             .themeColor(foreground: .textSecondary)
+                        HStack(spacing: 16) {
+                            self.createButtonContent(title: DataLocalizer.shared?.localize(path: "RATE_APP.YES", params: nil) ?? "",
+                                                     parentStyle: parentStyle,
+                                                     styleKey: styleKey,
+                                                     action: self.positiveRatingIntentAction)
+                            self.createButtonContent(title: DataLocalizer.shared?.localize(path: "RATE_APP.NO", params: nil) ?? "",
+                                                     parentStyle: parentStyle,
+                                                     styleKey: styleKey,
+                                                     action: self.negativeRatingIntentAction)
+                        }
+                        Text(DataLocalizer.shared?.localize(path: "RATE_APP.DEFER", params: nil) ?? "")
+                            .themeColor(foreground: .textTertiary)
                             .themeFont(fontSize: .medium)
                             .onTapGesture {[weak self] in
                                 self?.deferAction?()
                             }
                     }
-                    .padding(.all, 16)
-                }
-                .themeColor(background: .layer1)
-                .borderAndClip(style: .cornerRadius(8), borderColor: .borderDefault, lineWidth: 1)
-                .padding(.horizontal, 32)
-            }
-
-            .wrappedInAnyView()
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 46)
+                    .themeColor(background: .layer4)
+                    .makeSheet(sheetStyle: .fitSize)
+                    .ignoresSafeArea(edges: .bottom)
+                    .wrappedInAnyView()
         }
     }
 }

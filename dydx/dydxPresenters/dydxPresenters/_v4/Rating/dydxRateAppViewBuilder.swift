@@ -27,6 +27,11 @@ private class dydxRateAppViewBuilderController: HostingViewController<PlatformVi
 
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/rate_app" {
+            var eventMetaData = dydxRatingService.shared?.stateData ?? [:]
+            if let shareSource = request?.params?["context"] as? String {
+                eventMetaData["source_context"] = shareSource
+            }
+            Tracking.shared?.log(event: "PrepromptedForRating", data: eventMetaData)
             return true
         }
         return false
@@ -44,13 +49,16 @@ private class dydxRateAppViewBuilderPresenter: HostedViewPresenter<dydxRateAppVi
         viewModel = dydxRateAppViewModel()
 
         viewModel?.negativeRatingIntentAction = {
+            Tracking.shared?.log(event: "NegativeRatingIntentFollowed", data: dydxRatingService.shared?.stateData)
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { (_, _) in
                 Router.shared?.navigate(to: RoutingRequest(path: "/action/collect_feedback"), animated: true, completion: nil)
             }
         }
 
         viewModel?.positiveRatingIntentAction = {
+            Tracking.shared?.log(event: "PositiveRatingIntentFollowed", data: dydxRatingService.shared?.stateData)
             #if DEBUG
+                Console.shared.log("log prompt for rating")
             #else
                 SKStoreReviewController.requestReview()
             #endif
@@ -59,6 +67,7 @@ private class dydxRateAppViewBuilderPresenter: HostedViewPresenter<dydxRateAppVi
         }
 
         viewModel?.deferAction = {
+            Tracking.shared?.log(event: "DeferRatingIntentFollowed", data: dydxRatingService.shared?.stateData)
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
     }

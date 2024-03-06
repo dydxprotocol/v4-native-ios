@@ -10,6 +10,8 @@ import Foundation
 import Utilities
 
 public protocol dydxRatingProtocol {
+    var stateData: [String: Any] { get }
+
     func connectedWallet()
     func launchedApp()
     func orderCreated(orderId: String, orderCreatedTimestampMillis: TimeInterval)
