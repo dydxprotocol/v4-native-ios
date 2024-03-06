@@ -39,9 +39,9 @@ open class CompositeTracking: NSObject & TrackingProtocol {
         }
     }
 
-    open func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?) {
+    open func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?, contextViewController: UIViewController?) {
         for tracking: TrackingProtocol in trackings {
-            tracking.view(path, action: action, data: data, from: from, time: time, revenue: revenue)
+            tracking.view(path, action: action, data: data, from: from, time: time, revenue: revenue, contextViewController: nil)
         }
     }
 
