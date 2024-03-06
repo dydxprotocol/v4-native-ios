@@ -26,7 +26,6 @@ open class dydxCollectFeedbackAction: NSObject, NavigableProtocol {
                 Router.shared?.navigate(to: feedbackUrl, completion: { _, success in
                     completion?(nil, success)
                 })
-                Tracking.shared?.log(event: "CollectFeedbackDisplayed", data: nil)
                 completion?(nil, true)
             } else {
                 completion?(nil, false)
