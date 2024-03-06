@@ -33,20 +33,20 @@ public class dydxRateAppViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return VStack(alignment: .center, spacing: 24) {
-                        Text(DataLocalizer.shared?.localize(path: "APP.RATE_APP.QUESTION", params: nil) ?? "")
+                        Text(DataLocalizer.shared?.localize(path: "RATE_APP.QUESTION", params: nil) ?? "")
                             .themeFont(fontType: .text, fontSize: .large)
                             .themeColor(foreground: .textSecondary)
                         HStack(spacing: 16) {
-                            self.createButtonContent(title: DataLocalizer.shared?.localize(path: "APP.RATE_APP.YES", params: nil) ?? "",
+                            self.createButtonContent(title: DataLocalizer.shared?.localize(path: "RATE_APP.YES", params: nil) ?? "",
                                                      parentStyle: parentStyle,
                                                      styleKey: styleKey,
                                                      action: self.positiveRatingIntentAction)
-                            self.createButtonContent(title: DataLocalizer.shared?.localize(path: "APP.RATE_APP.NO", params: nil) ?? "",
+                            self.createButtonContent(title: DataLocalizer.shared?.localize(path: "RATE_APP.NO", params: nil) ?? "",
                                                      parentStyle: parentStyle,
                                                      styleKey: styleKey,
                                                      action: self.negativeRatingIntentAction)
                         }
-                        Text(DataLocalizer.shared?.localize(path: "APP.RATE_APP.DEFER", params: nil) ?? "")
+                        Text(DataLocalizer.shared?.localize(path: "RATE_APP.DEFER", params: nil) ?? "")
                             .themeColor(foreground: .textTertiary)
                             .themeFont(fontSize: .medium)
                             .onTapGesture {[weak self] in
