@@ -142,7 +142,7 @@
                ReferencedContainer = "container:dydxV4.xcodeproj">
             </BuildableReference>
          </TestableReference>
-      <TestableReference
+         <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -151,10 +151,6 @@
                BlueprintName = "dydxStateManagerTests"
                ReferencedContainer = "container:../dydx/dydxStateManager/dydxStateManager.xcodeproj">
             </BuildableReference>
-
-
-
-
          </TestableReference>
          <TestableReference
             skipped = "NO">
