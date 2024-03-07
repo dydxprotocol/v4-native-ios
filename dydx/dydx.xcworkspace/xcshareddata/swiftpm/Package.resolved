@@ -1,4 +1,5 @@
 {
+  "originHash" : "3cd7346cace16cf660f9c22302c5ca6770335c67902f3fd155011356a9d43929",
   "pins" : [
     {
       "identity" : "bigint",
@@ -181,15 +182,6 @@
       }
     },
     {
-      "identity" : "swiftui-introspect",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
-      "state" : {
-        "revision" : "121c146fe591b1320238d054ae35c81ffa45f45a",
-        "version" : "0.12.0"
-      }
-    },
-    {
       "identity" : "wallet-mobile-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coinbase/wallet-mobile-sdk",
@@ -235,5 +227,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

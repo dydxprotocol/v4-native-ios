@@ -64,7 +64,10 @@
                     "destination":"dydxPresenters.dydxCancelOrderActionBuilder"
                 },
                 "/action/share": {
-                    "destination":"ShareAction.xib"
+                    "destination":"dydxPresenters.dydxShareActionBuilder"
+                },
+                "/action/collect_feedback": {
+                    "destination":"dydxPresenters.dydxCollectFeedbackActionBuilder"
                 },
                 "/action/wallet/connect": {
                     "destination":"dydxPresenters.WalletActionBuilder"
@@ -229,6 +232,10 @@
                 },
                 "/r/:code":{
                     "destination":"AffiliateReferral.xib"
+                },
+                "/rate_app":{
+                    "destination":"dydxPresenters.dydxRateAppViewBuilder",
+                    "presentation":"half"
                 },
                 "/restricted":{
                     "destination":"Restricted.storyboard",
