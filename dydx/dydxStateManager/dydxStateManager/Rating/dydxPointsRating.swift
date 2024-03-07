@@ -23,7 +23,7 @@ open class dydxPointsRating: NSObject, dydxRatingProtocol {
         case lastPromptedTimestamp
         case hasEverConnectedWallet
         case hasSharedOrScreenshottedSinceLastPrompt
-        case shouldStopPrompting
+        case shouldStopPreprompting
 
         var storeKey: String { "\(String(describing: dydxPointsRating.self)).\(self.rawValue)Key" }
     }
@@ -38,7 +38,7 @@ open class dydxPointsRating: NSObject, dydxRatingProtocol {
         "last_prompted_timestamp": lastPromptedTimestamp,
         "has_ever_connected_wallet": hasEverConnectedWallet,
         "has_shared_or_screenshotted": hasSharedOrScreenshottedSinceLastPrompt,
-        "should_stop_prompting": shouldStopPrompting
+        "should_stop_preprompting": shouldStopPreprompting
     ]}
 
     public func connectedWallet() {
@@ -73,8 +73,8 @@ open class dydxPointsRating: NSObject, dydxRatingProtocol {
         }
     }
 
-    public func disablePrompting() {
-        shouldStopPrompting = true
+    public func disablePreprompting() {
+        shouldStopPreprompting = true
     }
 
     /// this is maintained as a set for easier order count de-duping
@@ -117,16 +117,25 @@ open class dydxPointsRating: NSObject, dydxRatingProtocol {
     }
 
     /// whether the user has continued to app store review after pre-prompt
-    var shouldStopPrompting: Bool {
-        get { UserDefaults.standard.bool(forKey: Key.shouldStopPrompting.storeKey) }
-        set { UserDefaults.standard.set(newValue, forKey: Key.shouldStopPrompting.storeKey) }
+    var shouldStopPreprompting: Bool {
+        get { UserDefaults.standard.bool(forKey: Key.shouldStopPreprompting.storeKey) }
+        set { UserDefaults.standard.set(newValue, forKey: Key.shouldStopPreprompting.storeKey) }
     }
 
     public func promptForRating() {
         // feature flag in case the prompt has issues
-        if !dydxBoolFeatureFlag.enable_app_rating.isEnabled { return }
-        Tracking.shared?.log(event: "PrepromptedForRating", data: stateData)
-        Router.shared?.navigate(to: RoutingRequest(path: "/rate_app"), animated: true, completion: nil)
+        guard dydxBoolFeatureFlag.enable_app_rating.isEnabled else { return }
+        if shouldStopPreprompting {
+            #if DEBUG
+                Console.shared.log("Simulate SKStoreReviewController.requestReview")
+            #else
+                SKStoreReviewController.requestReview()
+            #endif
+        } else {
+            Tracking.shared?.log(event: "PrepromptedForRating", data: stateData)
+            Router.shared?.navigate(to: RoutingRequest(path: "/rate_app"), animated: true, completion: nil)
+            reset()
+        }
     }
 
     ///    See discussion below:
@@ -148,14 +157,12 @@ open class dydxPointsRating: NSObject, dydxRatingProtocol {
     ///            - trader has shared a screenshot or the app
     ///            - trader has created 8 or more orders
     open func tryPromptForRating() {
-        guard !shouldStopPrompting else { return }
         let shouldPrompt =
             hasSharedOrScreenshottedSinceLastPrompt
             || (hasEverConnectedWallet && (uniqueDayAppOpensCount >= 8 || transfersCreatedSinceLastPrompt.count >= 2 || ordersCreatedSinceLastPrompt.count >= 8))
             || (!hasEverConnectedWallet && uniqueDayAppOpensCount >= 4)
         if shouldPrompt {
             promptForRating()
-            reset()
         }
     }
 
