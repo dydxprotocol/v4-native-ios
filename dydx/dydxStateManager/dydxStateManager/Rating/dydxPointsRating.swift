@@ -38,7 +38,7 @@ open class dydxPointsRating: NSObject, dydxRatingProtocol {
         "last_prompted_timestamp": lastPromptedTimestamp,
         "has_ever_connected_wallet": hasEverConnectedWallet,
         "has_shared_or_screenshotted": hasSharedOrScreenshottedSinceLastPrompt,
-        "should_stop_pre_prompting": shouldStopPreprompting
+        "should_stop_preprompting": shouldStopPreprompting
     ]}
 
     public func connectedWallet() {
@@ -127,7 +127,7 @@ open class dydxPointsRating: NSObject, dydxRatingProtocol {
         guard dydxBoolFeatureFlag.enable_app_rating.isEnabled else { return }
         if shouldStopPreprompting {
             #if DEBUG
-                Console.shared.log("log prompt for rating")
+                Console.shared.log("Simulate SKStoreReviewController.requestReview")
             #else
                 SKStoreReviewController.requestReview()
             #endif
