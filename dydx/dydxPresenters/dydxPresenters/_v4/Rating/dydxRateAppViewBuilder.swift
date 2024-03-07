@@ -62,7 +62,7 @@ private class dydxRateAppViewBuilderPresenter: HostedViewPresenter<dydxRateAppVi
             #else
                 SKStoreReviewController.requestReview()
             #endif
-            dydxRatingService.shared?.disablePrompting()
+            dydxRatingService.shared?.disablePreprompting()
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
 

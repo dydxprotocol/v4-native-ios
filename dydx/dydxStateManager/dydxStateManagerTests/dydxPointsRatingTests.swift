@@ -15,9 +15,10 @@ private class TestPointsRating: dydxPointsRating {
     var promptWasReached: Bool = false
 
     override func promptForRating() {
+        guard !shouldStopPreprompting else { return }
         promptWasReached = true
+        reset()
     }
-
 }
 
 final class dydxPointsRatingTests: XCTestCase {
@@ -62,7 +63,7 @@ final class dydxPointsRatingTests: XCTestCase {
         XCTAssertEqual(testPointRating.promptWasReached, false)
     }
 
-    func testConnectedWalletAndMultipleAppLaunchesAndDisablePrompting() {
+    func testConnectedWalletAndMultipleAppLaunchesAndDisablePreprompting() {
         testPointRating.connectedWallet()
         for i in 1...8 {
             Thread.sleep(forTimeInterval: testPointRating.secondsInADay)
@@ -80,7 +81,7 @@ final class dydxPointsRatingTests: XCTestCase {
         }
         testPointRating.promptWasReached = false
 
-        testPointRating.disablePrompting()
+        testPointRating.disablePreprompting()
         for i in 1...8 {
             Thread.sleep(forTimeInterval: testPointRating.secondsInADay)
             testPointRating.launchedApp()
