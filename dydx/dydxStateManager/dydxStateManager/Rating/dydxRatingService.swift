@@ -17,7 +17,7 @@ public protocol dydxRatingProtocol {
     func orderCreated(orderId: String, orderCreatedTimestampMillis: TimeInterval)
     func transferCreated(transferId: String, transferCreatedTimestampMillis: TimeInterval)
     func capturedScreenshotOrShare()
-    func disablePrompting()
+    func disablePreprompting()
 
     func promptForRating()
     func tryPromptForRating()
