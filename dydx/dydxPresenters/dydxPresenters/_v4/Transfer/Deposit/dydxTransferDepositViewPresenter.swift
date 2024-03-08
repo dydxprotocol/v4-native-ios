@@ -70,6 +70,12 @@ class dydxTransferDepositViewPresenter: HostedViewPresenter<dydxTransferDepositV
             }
          }
 
+        viewModel.connectWalletAction = {
+            let request = RoutingRequest(path: "/onboard/wallets",
+                                         params: ["mobileOnly": "true"])
+            Router.shared?.navigate(to: request, animated: true, completion: nil)
+        }
+
         self.viewModel = viewModel
 
         attachChildren(workers: childPresenters)
@@ -108,16 +114,19 @@ class dydxTransferDepositViewPresenter: HostedViewPresenter<dydxTransferDepositV
                 AbacusStateManager.shared.state.currentWallet
                     .map(\.?.ethereumAddress)
                     .removeDuplicates()
-            ).sink { [weak self] (resources: TransferInputResources?, chain: String?, tokenAddress: String?, walletAddress: String?) in
+            ).sink { [weak self] (resources: TransferInputResources?, chain: String?, tokenAddress: String?, ethereumAddress: String?) in
                 if let tokenAddress = tokenAddress,
-                   let walletAddress = walletAddress,
+                   let walletAddress = ethereumAddress,
+                   walletAddress.starts(with: "dydx") == false,
                    let chain = chain,
                    let chainRpc = resources?.chainResources?[chain]?.rpc,
                    let tokenResource = resources?.tokenResources?[tokenAddress],
                    let tokenSymbol = tokenResource.symbol,
                    let tokenDecimals = tokenResource.decimals {
+                    self?.viewModel?.showConnectWallet = false
                     self?.fetchTokenAmount(chainRpc: chainRpc, tokenSymbol: tokenSymbol, tokenAddress: tokenAddress, tokenDecimals: tokenDecimals.intValue, walletAddress: walletAddress)
                 } else {
+                    self?.viewModel?.showConnectWallet = true
                     self?.ethereumInteractor = nil
                 }
             }

@@ -218,7 +218,7 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.accountAddress = ethereumAddress
     }
 
-    public func setV4(ethereumAddress: String, walletId: String?, cosmoAddress: String, mnemonic: String) {
+    public func setV4(ethereumAddress: String?, walletId: String?, cosmoAddress: String, mnemonic: String) {
         CosmoJavascript.shared.connectWallet(mnemonic: mnemonic) { [weak self] _ in
             if let self = self {
                 let wallet = dydxWalletInstance.V4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic)

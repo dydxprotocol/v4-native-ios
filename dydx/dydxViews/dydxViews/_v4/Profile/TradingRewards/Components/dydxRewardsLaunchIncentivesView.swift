@@ -91,7 +91,7 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
             }
             .wrappedInAnyView()
         }
-        return PlatformButtonViewModel(content: content, type: .defaultType, state: .secondary, action: self.aboutAction ?? {})
+        return PlatformButtonViewModel(content: content, type: .defaultType(fillWidth: true), state: .secondary, action: self.aboutAction ?? {})
             .createView(parentStyle: parentStyle)
     }
 
@@ -106,7 +106,7 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
             }
             .wrappedInAnyView()
         }
-        return PlatformButtonViewModel(content: content, type: .defaultType, state: .primary, action: self.leaderboardAction ?? {})
+        return PlatformButtonViewModel(content: content, type: .defaultType(fillWidth: true), state: .primary, action: self.leaderboardAction ?? {})
             .createView(parentStyle: parentStyle)
     }
 
