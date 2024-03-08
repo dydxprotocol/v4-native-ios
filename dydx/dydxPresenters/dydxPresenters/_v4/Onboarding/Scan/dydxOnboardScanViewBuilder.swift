@@ -151,11 +151,13 @@ private class dydxOnboardScanViewPresenter: HostedViewPresenter<dydxOnboardScanV
             showingError = false
             if let address = parser.asString(json["cosmosAddress"]), let mnemonic = parser.asString(json["mnemonic"]) {
                 // TODO: parse ethereum address when it becomes available in the Sync with Desktop QR Scan flow
-                AbacusStateManager.shared.setV4(ethereumAddress: address,
+                AbacusStateManager.shared.setV4(ethereumAddress: nil,
                                                 walletId: nil,
                                                 cosmoAddress: address,
                                                 mnemonic: mnemonic)
-                Router.shared?.navigate(to: RoutingRequest(path: "/portfolio", params: ["ethereumAddress": address]), animated: true, completion: nil)
+                Router.shared?.navigate(to: RoutingRequest(path: "/portfolio",
+                                                           params: ["cosmoAddress": address, "mnemonic": mnemonic]),
+                                        animated: true, completion: nil)
             } else {
                 showingError = true
             }

@@ -28,6 +28,8 @@ private class dydxWalletListViewController: HostingViewController<PlatformView, 
 
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/onboard/wallets" {
+            let presenter = presenter as? dydxWalletListViewPresenterProtocol
+            presenter?.mobileOnly = (request?.params?["mobileOnly"] as? String) == "true"
             presenter?.viewModel?.onScrollViewCreated = { [weak self] scrollView in
                 self?.scrollView = scrollView
             }
@@ -45,9 +47,17 @@ private class dydxWalletListViewController: HostingViewController<PlatformView, 
 
 private protocol dydxWalletListViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxWalletListViewModel? { get }
+    var mobileOnly: Bool { get set }
 }
 
 private class dydxWalletListViewPresenter: HostedViewPresenter<dydxWalletListViewModel>, dydxWalletListViewPresenterProtocol {
+
+    var mobileOnly: Bool = false {
+        didSet {
+            updateWallets()
+        }
+    }
+
     private var desktopSyncViewModel: dydxSyncDesktopViewModel = {
         let viewModel = dydxSyncDesktopViewModel()
         viewModel.onTap = {
@@ -108,6 +118,10 @@ private class dydxWalletListViewPresenter: HostedViewPresenter<dydxWalletListVie
         }
 
         let debugScan = UIDevice.current.isSimulator ? [debugScanViewModel] : []
-        viewModel?.items = [desktopSyncViewModel] + debugScan + installedWalletViewModels + uninstalledWalletViewModels
+        if mobileOnly {
+            viewModel?.items = installedWalletViewModels + uninstalledWalletViewModels
+        } else {
+            viewModel?.items = [desktopSyncViewModel] + debugScan + installedWalletViewModels + uninstalledWalletViewModels
+        }
     }
 }

@@ -87,7 +87,7 @@ private class Wallets2ViewPresenter: HostedViewPresenter<Wallets2ViewModel> {
     private func updateWalletState(walletState: dydxWalletState) {
         viewModel?.walletConnections = walletState.wallets.map { wallet in
             let viewModel = WalletConnectionViewModel()
-            viewModel.walletAddress = wallet.ethereumAddress
+            viewModel.walletAddress = wallet.ethereumAddress ?? wallet.cosmoAddress
             viewModel.selected = wallet == walletState.currentWallet
             viewModel.onTap = {
                 if let cosmoAddress = wallet.cosmoAddress, let mnemonic = wallet.mnemonic {
@@ -99,10 +99,11 @@ private class Wallets2ViewPresenter: HostedViewPresenter<Wallets2ViewModel> {
             }
 
             viewModel.openInEtherscanTapped = {
-                let ethereumAddress = wallet.ethereumAddress
-                let urlString = "https://etherscan.io/address/\(ethereumAddress)"
-                if let url = URL(string: urlString), URLHandler.shared?.canOpenURL(url) ?? false {
-                    URLHandler.shared?.open(url, completionHandler: nil)
+                if let ethereumAddress = wallet.ethereumAddress {
+                    let urlString = "https://etherscan.io/address/\(ethereumAddress)"
+                    if let url = URL(string: urlString), URLHandler.shared?.canOpenURL(url) ?? false {
+                        URLHandler.shared?.open(url, completionHandler: nil)
+                    }
                 }
             }
 
