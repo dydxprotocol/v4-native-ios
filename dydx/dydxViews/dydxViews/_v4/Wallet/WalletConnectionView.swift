@@ -48,7 +48,8 @@ public class WalletConnectionViewModel: PlatformViewModel {
                                                        templateColor: self?.templateColor ?? .textTertiary)
                         .createView(parentStyle: style)
 
-                    let addressText = Text(self?.walletAddress ?? "")
+                    let walletAddress = self?.walletAddress ?? ""
+                    let addressText = Text(walletAddress)
                         .lineLimit(1)
                         .truncationMode(.middle)
                         .themeFont(fontSize: .medium)
@@ -91,7 +92,8 @@ public class WalletConnectionViewModel: PlatformViewModel {
 
                     let main = VStack(alignment: .leading) {
                         addressText
-                        if self?.selected == true {
+                        if self?.selected == true &&
+                            walletAddress.isNotEmpty && walletAddress.starts(with: "dydx") == false {
                             HStack(spacing: 10) {
                                 blockExplorerButton
                                 exportPhraseButton

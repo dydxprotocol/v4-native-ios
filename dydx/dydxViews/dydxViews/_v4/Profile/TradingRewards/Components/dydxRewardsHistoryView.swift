@@ -89,7 +89,7 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
             }
             .wrappedInAnyView()
         },
-                                type: .defaultType,
+                                type: .defaultType(fillWidth: true),
                                 state: .secondary,
                                 action: {
             withAnimation { [weak self] in

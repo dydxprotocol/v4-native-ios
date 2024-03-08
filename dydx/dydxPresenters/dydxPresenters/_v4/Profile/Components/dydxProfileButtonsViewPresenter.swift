@@ -43,9 +43,8 @@ class dydxProfileButtonsViewPresenter: HostedViewPresenter<dydxProfileButtonsVie
                 .map(\.currentWallet)
                 .prefix(1)
                 .sink { currentWallet in
-                    if let ethereumAddress = currentWallet?.ethereumAddress {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/action/wallet/disconnect", params: ["ethereumAddress": ethereumAddress]), animated: true, completion: nil)
-                    }
+                    let ethereumAddress = currentWallet?.ethereumAddress ?? ""
+                    Router.shared?.navigate(to: RoutingRequest(path: "/action/wallet/disconnect", params: ["ethereumAddress": ethereumAddress]), animated: true, completion: nil)
                 }
                 .store(in: &self.subscriptions)
         }

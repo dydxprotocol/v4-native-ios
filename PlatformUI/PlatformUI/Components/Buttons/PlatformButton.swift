@@ -13,7 +13,7 @@ public enum PlatformButtonState {
 }
 
 public enum PlatformButtonType {
-    case defaultType, iconType, pill, small
+    case defaultType(fillWidth: Bool), iconType, pill, small
 }
 
 public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformViewModel {
@@ -22,7 +22,10 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
     @Published public var type: PlatformButtonType
     @Published public var state: PlatformButtonState
     
-    public init(content: Content, type: PlatformButtonType = .defaultType, state: PlatformButtonState = .primary, action: @escaping () -> ()) {
+    public init(content: Content,
+                type: PlatformButtonType = .defaultType(fillWidth: true),
+                state: PlatformButtonState = .primary,
+                action: @escaping () -> ()) {
         self.action = action
         self.content = content
         self.type = type
@@ -37,19 +40,25 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
             return AnyView(
                 Group {
                     switch self.type {
-                    case .defaultType:
+                    case .defaultType(let fillWidth):
                        let button = Button(action: self.action) {
                             HStack {
-                                Spacer()
+                                if fillWidth {
+                                    Spacer()
+                                }
                                 self.content
                                     .createView(parentStyle: style.themeFont(fontType: .bold), styleKey: self.buttonStyleKey)
-                                Spacer()
+                                if fillWidth {
+                                    Spacer()
+                                }
                             }
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         .disabled(disabled)
                         .padding(.all, 14)
-                        .frame(maxWidth: .infinity)
+                        .if(fillWidth) { view in
+                            view.frame(maxWidth: .infinity)
+                        }
                         .themeStyle(styleKey: self.buttonStyleKey, parentStyle: style)
                         .cornerRadius(8)
                         
