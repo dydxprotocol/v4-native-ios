@@ -24,6 +24,9 @@
 		029E11F029ADB9C600FE271C /* dydxChart.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 029E11EB29ADB9BC00FE271C /* dydxChart.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02A5BB9F2A04617800BEE77E /* dydxAbacusDataLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5BB9E2A04617800BEE77E /* dydxAbacusDataLocalizer.swift */; };
 		02C7262B29D793C90098AFBC /* dydxCompositeTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C7262A29D793C90098AFBC /* dydxCompositeTracking.swift */; };
+		02DA0AFA2B57609100BFA975 /* dydxV4UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA0AF92B57609100BFA975 /* dydxV4UITests.swift */; };
+		02DA0AFC2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA0AFB2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift */; };
+		02DA0B062B57633E00BFA975 /* PercyXcui in Frameworks */ = {isa = PBXBuildFile; productRef = 02DA0B052B57633E00BFA975 /* PercyXcui */; };
 		02E7DDDF28CFB33B00727949 /* dydxStateManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DDA828CFB31000727949 /* dydxStateManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02FF092E29ADBD9900781EDA /* dydxFormatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028420CF29AD77F400C0E7CC /* dydxFormatter.framework */; };
 		02FF092F29ADBD9F00781EDA /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E11EB29ADB9BC00FE271C /* dydxChart.framework */; };
@@ -243,6 +246,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 029E0FD429ADB41400FE271C;
 			remoteInfo = dydxChart;
+		};
+		02DA0AFD2B57609100BFA975 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3112F457216BBF8400708927 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3112F45E216BBF8400708927;
+			remoteInfo = dydxV4;
 		};
 		02E7DDA728CFB31000727949 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -804,6 +814,10 @@
 		029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxChart.xcodeproj; path = ../dydx/dydxChart/dydxChart.xcodeproj; sourceTree = "<group>"; };
 		02A5BB9E2A04617800BEE77E /* dydxAbacusDataLocalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAbacusDataLocalizer.swift; sourceTree = "<group>"; };
 		02C7262A29D793C90098AFBC /* dydxCompositeTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCompositeTracking.swift; sourceTree = "<group>"; };
+		02DA0AF72B57609100BFA975 /* dydxV4UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dydxV4UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		02DA0AF92B57609100BFA975 /* dydxV4UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxV4UITests.swift; sourceTree = "<group>"; };
+		02DA0AFB2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxV4UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		02DA0B022B57622B00BFA975 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxStateManager.xcodeproj; path = ../dydx/dydxStateManager/dydxStateManager.xcodeproj; sourceTree = "<group>"; };
 		171807B0CCAE5C86B5D65793 /* Pods_iOS_dydxV4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxV4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A7967A2A620BF6007C3D04 /* dydxSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsStore.swift; sourceTree = "<group>"; };
@@ -855,6 +869,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		02DA0AF42B57609100BFA975 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02DA0B062B57633E00BFA975 /* PercyXcui in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3112F45C216BBF8400708927 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1028,6 +1050,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		02DA0AF82B57609100BFA975 /* dydxV4UITests */ = {
+			isa = PBXGroup;
+			children = (
+				02DA0AF92B57609100BFA975 /* dydxV4UITests.swift */,
+				02DA0AFB2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift */,
+			);
+			path = dydxV4UITests;
+			sourceTree = "<group>";
+		};
 		02E7DD9B28CFB31000727949 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1040,6 +1071,7 @@
 		0904864F08DCEDE87F5B4956 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02DA0B022B57622B00BFA975 /* XCTest.framework */,
 				646D73AB2A4F434300EDF2E5 /* dydxAbacusBridging.framework */,
 				31B77C2422DAD0B3004F9B21 /* dydxUI.framework */,
 				31E65C08216BCB01008ABEE9 /* Utilities.framework */,
@@ -1071,6 +1103,7 @@
 				31C138BF23DE044C0064B5F5 /* Shared */,
 				3112F461216BBF8400708927 /* dydx */,
 				3112F478216BBF8600708927 /* dydxTests */,
+				02DA0AF82B57609100BFA975 /* dydxV4UITests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1079,6 +1112,7 @@
 			children = (
 				3112F45F216BBF8400708927 /* dydxV4.app */,
 				3112F475216BBF8600708927 /* dydxV4Tests.xctest */,
+				02DA0AF72B57609100BFA975 /* dydxV4UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1308,6 +1342,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		02DA0AF62B57609100BFA975 /* dydxV4UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02DA0AFF2B57609100BFA975 /* Build configuration list for PBXNativeTarget "dydxV4UITests" */;
+			buildPhases = (
+				02DA0AF32B57609100BFA975 /* Sources */,
+				02DA0AF42B57609100BFA975 /* Frameworks */,
+				02DA0AF52B57609100BFA975 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				02DA0AFE2B57609100BFA975 /* PBXTargetDependency */,
+			);
+			name = dydxV4UITests;
+			packageProductDependencies = (
+				02DA0B052B57633E00BFA975 /* PercyXcui */,
+			);
+			productName = dydxV4UITests;
+			productReference = 02DA0AF72B57609100BFA975 /* dydxV4UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		3112F45E216BBF8400708927 /* dydxV4 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3112F489216BBF8600708927 /* Build configuration list for PBXNativeTarget "dydxV4" */;
@@ -1353,6 +1408,8 @@
 				31B77BCA22DAD077004F9B21 /* PBXTargetDependency */,
 			);
 			name = dydxV4;
+			packageProductDependencies = (
+			);
 			productName = dydx;
 			productReference = 3112F45F216BBF8400708927 /* dydxV4.app */;
 			productType = "com.apple.product-type.application";
@@ -1383,10 +1440,14 @@
 		3112F457216BBF8400708927 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1330;
+				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "dYdX Trading Inc";
 				TargetAttributes = {
+					02DA0AF62B57609100BFA975 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 3112F45E216BBF8400708927;
+					};
 					3112F45E216BBF8400708927 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1020;
@@ -1430,6 +1491,9 @@
 				"zh-Hans",
 			);
 			mainGroup = 3112F456216BBF8400708927;
+			packageReferences = (
+				02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */,
+			);
 			productRefGroup = 3112F460216BBF8400708927 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -1526,6 +1590,7 @@
 			targets = (
 				3112F45E216BBF8400708927 /* dydxV4 */,
 				3112F474216BBF8600708927 /* dydxV4Tests */,
+				02DA0AF62B57609100BFA975 /* dydxV4UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -2031,6 +2096,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		02DA0AF52B57609100BFA975 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3112F45D216BBF8400708927 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2243,6 +2315,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		02DA0AF32B57609100BFA975 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02DA0AFA2B57609100BFA975 /* dydxV4UITests.swift in Sources */,
+				02DA0AFC2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3112F45B216BBF8400708927 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2309,6 +2390,11 @@
 			isa = PBXTargetDependency;
 			name = dydxChart;
 			targetProxy = 029E11EE29ADB9BF00FE271C /* PBXContainerItemProxy */;
+		};
+		02DA0AFE2B57609100BFA975 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3112F45E216BBF8400708927 /* dydxV4 */;
+			targetProxy = 02DA0AFD2B57609100BFA975 /* PBXContainerItemProxy */;
 		};
 		02E7DDDE28CFB32D00727949 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2404,6 +2490,55 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		02DA0B002B57609100BFA975 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxV4UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = dydxV4;
+			};
+			name = Debug;
+		};
+		02DA0B012B57609100BFA975 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxV4UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = dydxV4;
+			};
+			name = Release;
+		};
 		3112F487216BBF8600708927 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2617,6 +2752,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		02DA0AFF2B57609100BFA975 /* Build configuration list for PBXNativeTarget "dydxV4UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02DA0B002B57609100BFA975 /* Debug */,
+				02DA0B012B57609100BFA975 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3112F45A216BBF8400708927 /* Build configuration list for PBXProject "dydxV4" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2645,6 +2789,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/percy/percy-xcui-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		02DA0B052B57633E00BFA975 /* PercyXcui */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */;
+			productName = PercyXcui;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3112F457216BBF8400708927 /* Project object */;
 }
