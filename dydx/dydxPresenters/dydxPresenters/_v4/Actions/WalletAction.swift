@@ -33,7 +33,8 @@ public class WalletAction: NSObject, NavigableProtocol {
             completion?(nil, true)
 
         case "/action/wallet/disconnect":
-            WalletAction.shared?.disconnect(ethereumAddress: parser.asString(request?.params?["ethereumAddress"]))
+            let ethereumAddress = parser.asString(request?.params?["ethereumAddress"])
+            WalletAction.shared?.disconnect(ethereumAddress: ethereumAddress)
             completion?(nil, true)
 
         case "/action/wallet/etherscan":
@@ -64,18 +65,16 @@ private class WalletActionImp: WalletActionProtocol {
     }
 
     public func disconnect(ethereumAddress: String?) {
-        if let ethereumAddress = ethereumAddress {
-            let prompter = PrompterFactory.shared?.prompter()
-            let signout = PrompterAction(title: DataLocalizer.localize(path: "APP.GENERAL.SIGN_OUT"), style: .destructive, enabled: true) { [weak self] in
-                self?.reallyDisconnect(ethereumAddress: ethereumAddress)
-            }
-            let cancel = PrompterAction(title: DataLocalizer.localize(path: "APP.GENERAL.CANCEL"), style: .cancel, enabled: true, selection: nil)
-            prompter?.title = DataLocalizer.localize(path: "APP.GENERAL.SIGN_OUT_WARNING")
-            prompter?.prompt([signout, cancel])
+        let prompter = PrompterFactory.shared?.prompter()
+        let signout = PrompterAction(title: DataLocalizer.localize(path: "APP.GENERAL.SIGN_OUT"), style: .destructive, enabled: true) { [weak self] in
+            self?.reallyDisconnect()
         }
+        let cancel = PrompterAction(title: DataLocalizer.localize(path: "APP.GENERAL.CANCEL"), style: .cancel, enabled: true, selection: nil)
+        prompter?.title = DataLocalizer.localize(path: "APP.GENERAL.SIGN_OUT_WARNING")
+        prompter?.prompt([signout, cancel])
     }
 
-    private func reallyDisconnect(ethereumAddress: String) {
+    private func reallyDisconnect() {
         AbacusStateManager.shared.disconnectAndReplaceCurrentWallet()
         Tracking.shared?.log(event: "DisconnectWallet", data: nil)
     }

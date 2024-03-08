@@ -19,6 +19,8 @@ public class dydxTransferDepositViewModel: PlatformViewModel {
                                inputType: .decimalDigits)
     @Published public var ctaButton: dydxTradeInputCtaButtonViewModel? = dydxTradeInputCtaButtonViewModel()
     @Published public var validationViewModel: dydxValidationViewModel? = dydxValidationViewModel()
+    @Published public var showConnectWallet = false
+    @Published public var connectWalletAction: (() -> Void)?
 
     public init() { }
 
@@ -40,9 +42,23 @@ public class dydxTransferDepositViewModel: PlatformViewModel {
                 VStack {
                     Group {
                         VStack(spacing: 12) {
-                            self.chainsComboBox?.createView(parentStyle: style)
-                            self.tokensComboBox?.createView(parentStyle: style)
-                            self.amountBox?.createView(parentStyle: style)
+                            if self.showConnectWallet {
+                                HStack(spacing: 8) {
+                                    Text(DataLocalizer.localize(path: "APP.V4_DEPOSIT.MOBILE_WALLET_REQUIRED"))
+                                        .themeFont(fontSize: .medium)
+
+                                    let content = Text(DataLocalizer.localize(path: "APP.GENERAL.CONNECT_WALLET")).lineLimit(1).wrappedViewModel
+                                    PlatformButtonViewModel(content: content,
+                                                            type: .defaultType(fillWidth: false)) { [weak self] in
+                                        self?.connectWalletAction?()
+                                    }
+                                    .createView(parentStyle: style)
+                                }
+                            } else {
+                                self.chainsComboBox?.createView(parentStyle: style)
+                                self.tokensComboBox?.createView(parentStyle: style)
+                                self.amountBox?.createView(parentStyle: style)
+                            }
                         }
                     }
 
