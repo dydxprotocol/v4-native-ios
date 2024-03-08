@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;### find ${DWARF_DSYM_FOLDER_PATH} -name &quot;*.dSYM&quot; | xargs -I \{\} ${PODS_ROOT}/Fabric/upload-symbols -gsp ${PROJECT_DIR}/_Configurations/GoogleService-Info.plist -p ios \{\}&#10;">
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;### find ${DWARF_DSYM_FOLDER_PATH} -name &quot;*.dSYM&quot; | xargs -I \{\} ${PODS_ROOT}/Fabric/upload-symbols -gsp ${PROJECT_DIR}/_Configurations/GoogleService-Info.plist -p ios \{\}&#10;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
@@ -78,34 +78,6 @@
                BuildableName = "RoutingKitTests.xctest"
                BlueprintName = "RoutingKitTests"
                ReferencedContainer = "container:../RoutingKit/RoutingKit.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "31BA152A26307DF000E5DACC"
-               BuildableName = "dydxWalletTests.xctest"
-               BlueprintName = "dydxWalletTests"
-               ReferencedContainer = "container:dydxWallet/dydxWallet.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "31A00BDC21DC5401004A06BA"
-               BuildableName = "dydxModelsTests.xctest"
-               BlueprintName = "dydxModelsTests"
-               ReferencedContainer = "container:dydxModels/dydxModels.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -179,6 +151,20 @@
                BlueprintName = "dydxStateManagerTests"
                ReferencedContainer = "container:../dydx/dydxStateManager/dydxStateManager.xcodeproj">
             </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "02DA0AF62B57609100BFA975"
+               BuildableName = "dydxV4UITests.xctest"
+               BlueprintName = "dydxV4UITests"
+               ReferencedContainer = "container:dydxV4.xcodeproj">
+            </BuildableReference>
+            <LocationScenarioReference
+               identifier = "Tokyo, Japan"
+               referenceType = "1">
+            </LocationScenarioReference>
          </TestableReference>
       </Testables>
    </TestAction>
