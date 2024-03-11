@@ -12,11 +12,13 @@ import Utilities
 
 public class dydxUserFavoriteViewModel: PlatformViewModel {
     @Published public var isFavorited: Bool = false
-    @Published public var size = CGSize(width: 16, height: 16)
+    @Published public var size: CGSize
     @Published public var onTapped: (() -> Void)?
     @Published public var handleTap: Bool = true
 
-    public init() { }
+    public init(size: CGSize = .init(width: 16, height: 16)) {
+        self.size = size
+    }
 
     public static var previewValue: dydxUserFavoriteViewModel {
         let vm = dydxUserFavoriteViewModel()
