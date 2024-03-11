@@ -50,12 +50,10 @@
         },
         "type": {
             "bold": {
-                "name": "Satoshi-Bold",
-                "weight": 0.45
+                "name": "Satoshi-Bold"
             },
             "text": {
-                "name": "Satoshi-Regular",
-                "weight": 0.45
+                "name": "Satoshi-Medium"
             },
             "number": {
                 "name": "",
