@@ -67,12 +67,12 @@ public class dydxTradeRestrictedViewModel: PlatformViewModel {
                     VStack(alignment: .leading, spacing: 16) {
                         HStack(spacing: 0) {
                             Text(DataLocalizer.shared?.localize(path: "ERRORS.ONBOARDING.REGION_NOT_PERMITTED_TITLE", params: nil) ?? "")
-                                .themeFont(fontType: .bold, fontSize: .larger)
+                                .themeFont(fontType: .plus, fontSize: .larger)
                                 .themeColor(foreground: .textPrimary)
                             Spacer()
                         }
                         Text(DataLocalizer.shared?.localize(path: "ERRORS.ONBOARDING.REGION_NOT_PERMITTED_SUBTITLE", params: nil) ?? "")
-                            .themeFont(fontType: .text, fontSize: .medium)
+                            .themeFont(fontType: .base, fontSize: .medium)
                             .themeColor(foreground: .textSecondary)
                     }
                     .padding([.top, .leading, .trailing], 36)

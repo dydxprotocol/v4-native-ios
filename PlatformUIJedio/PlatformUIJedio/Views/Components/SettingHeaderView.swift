@@ -38,7 +38,7 @@ public class SettingHeaderViewModel: PlatformViewModel {
                     }
                     
                     Text(self.text ?? "")
-                        .themeFont(fontType: .text, fontSize: .largest)
+                        .themeFont(fontType: .base, fontSize: .largest)
                         .themeColor(foreground: .textPrimary)
                 }
                     .padding(.horizontal, 8)

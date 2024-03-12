@@ -45,7 +45,7 @@ public class dydxSecurityViewModel: PlatformViewModel {
     private func errorLabel() -> Text? {
         if let errorLabelText = self.errorLabelText {
             return Text(errorLabelText)
-                .themeFont(fontType: .text, fontSize: .large)
+                .themeFont(fontType: .base, fontSize: .large)
                 .themeColor(foreground: .textPrimary)
         }
         return nil

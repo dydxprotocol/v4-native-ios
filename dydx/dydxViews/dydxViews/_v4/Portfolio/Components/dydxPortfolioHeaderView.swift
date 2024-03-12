@@ -56,7 +56,7 @@ public class dydxPortfolioHeaderViewModel: PlatformViewModel {
             return AnyView(
                 HStack {
                     Text(title)
-                        .themeFont(fontType: .bold, fontSize: .small)
+                        .themeFont(fontType: .plus, fontSize: .small)
                         .themeColor(foreground: .textTertiary)
 
                     let icon = PlatformIconViewModel(type: .asset(name: icon, bundle: Bundle.dydxView),

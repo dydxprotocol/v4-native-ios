@@ -53,7 +53,7 @@ public class dydxUpdateViewModel: PlatformViewModel {
             return nil
         }
         return Text(title)
-            .themeFont(fontType: .text, fontSize: .large)
+            .themeFont(fontType: .base, fontSize: .large)
             .themeColor(foreground: .textPrimary)
     }
 
@@ -62,7 +62,7 @@ public class dydxUpdateViewModel: PlatformViewModel {
             return nil
         }
         return Text(text)
-            .themeFont(fontType: .text, fontSize: .medium)
+            .themeFont(fontType: .base, fontSize: .medium)
             .themeColor(foreground: .textSecondary)
     }
 

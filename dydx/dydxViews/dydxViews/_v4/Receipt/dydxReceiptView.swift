@@ -60,7 +60,7 @@ public class dydxReceiptViewModel: PlatformViewModel {
         let buttonText = self.collapsed ? DataLocalizer.localize(path: "APP.GENERAL.SHOW_ALL_DETAILS") : DataLocalizer.localize(path: "APP.GENERAL.HIDE_ALL_DETAILS")
         let content = HStack {
             Text(buttonText)
-                .themeFont(fontType: .text, fontSize: .small)
+                .themeFont(fontType: .base, fontSize: .small)
                 .themeColor(foreground: .textTertiary)
             Spacer()
             let imageName = self.collapsed ? "chevron.down": "chevron.up"

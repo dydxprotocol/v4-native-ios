@@ -22,7 +22,7 @@ public class dydxClosePositionInputPercentViewModel: PlatformOptionsInputViewMod
 
     private func unselected(item: String) -> PlatformViewModel {
         Text(item)
-            .themeFont(fontType: .bold, fontSize: .small)
+            .themeFont(fontType: .plus, fontSize: .small)
             .padding(8)
             .themeColor(foreground: .textTertiary)
             .themeColor(background: .layer6)
@@ -32,7 +32,7 @@ public class dydxClosePositionInputPercentViewModel: PlatformOptionsInputViewMod
 
     private func selected(item: String) -> PlatformViewModel {
         Text(item)
-            .themeFont(fontType: .bold, fontSize: .small)
+            .themeFont(fontType: .plus, fontSize: .small)
             .padding(8)
             .themeColor(background: .layer0)
             .cornerRadius(8)

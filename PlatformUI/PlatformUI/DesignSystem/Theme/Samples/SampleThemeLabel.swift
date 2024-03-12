@@ -10,7 +10,7 @@ import SwiftUI
 struct SampleThemeLabel: View {
     init(text: String,
                 textColor: ThemeColor.SemanticColor = .textTertiary,
-                fontType: ThemeFont.FontType = .text,
+                fontType: ThemeFont.FontType = .base,
                 fontSize: ThemeFont.FontSize = .largest) {
         self.text = text
         self.textColor = textColor
@@ -41,8 +41,9 @@ struct SampleThemeLabel_Previews: PreviewProvider {
             VStack {
                 Spacer()
                 Group {
-                    SampleThemeLabel(text: "labelText", fontType: .bold)
-                    SampleThemeLabel(text: "labelText", fontType: .text)
+                    SampleThemeLabel(text: "labelText", fontType: .minus)
+                    SampleThemeLabel(text: "labelText", fontType: .base)
+                    SampleThemeLabel(text: "labelText", fontType: .plus)
                     SampleThemeLabel(text: "labelText", fontType: .number)
                 }
                 Spacer()

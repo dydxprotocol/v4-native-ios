@@ -54,7 +54,7 @@ private struct PlatformInputView: View {
         case .numberPad, .numbersAndPunctuation, .decimalPad:
             return .number
         default:
-            return .text
+            return .base
         }
     }
     
@@ -376,14 +376,14 @@ open class PlatformButtonOptionsInputViewModel: PlatformOptionsInputViewModel {
     
     open func unselected(item: String) -> PlatformViewModel {
         Text(item)
-            .themeFont(fontType: .bold, fontSize: .largest)
+            .themeFont(fontType: .plus, fontSize: .largest)
             .themeColor(foreground: .textTertiary)
             .wrappedViewModel
     }
 
     open func selected(item: String) -> PlatformViewModel {
         Text(item)
-            .themeFont(fontType: .bold, fontSize: .largest)
+            .themeFont(fontType: .plus, fontSize: .largest)
             .wrappedViewModel
     }
 }

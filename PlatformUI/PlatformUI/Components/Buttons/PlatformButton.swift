@@ -47,7 +47,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                                     Spacer()
                                 }
                                 self.content
-                                    .createView(parentStyle: style.themeFont(fontType: .bold), styleKey: self.buttonStyleKey)
+                                    .createView(parentStyle: style.themeFont(fontType: .plus), styleKey: self.buttonStyleKey)
                                 if fillWidth {
                                     Spacer()
                                 }

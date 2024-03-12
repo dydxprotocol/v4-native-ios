@@ -104,7 +104,7 @@ public extension WebImage {
 
 public extension View {
     func themeFont(fontType: ThemeFont.FontType? = nil, fontSize: ThemeFont.FontSize = .medium) -> some View {
-        let fontType = fontType ?? .text
+        let fontType = fontType ?? .base
         return modifier(ThemeFontModifier(fontType: fontType, fontSize: fontSize))
     }
 }
@@ -123,7 +123,7 @@ private struct ThemeFontModifier: ViewModifier {
 
 public extension Text {
     func themeFont(fontType: ThemeFont.FontType? = nil, fontSize: ThemeFont.FontSize = .medium) -> Text {
-        let fontType = fontType ?? .text
+        let fontType = fontType ?? .base
         return self.font(ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize))
     }
 }
@@ -518,7 +518,7 @@ public extension AttributedString {
     /// - Parameters:
     ///   - foreground: the font to apply
     ///   - range: the range to modify, `nil` if the entire string should be modified
-    func themeFont(fontType: ThemeFont.FontType = .text, fontSize: ThemeFont.FontSize = .medium, to range: Range<AttributedString.Index>? = nil) -> Self {
+    func themeFont(fontType: ThemeFont.FontType = .base, fontSize: ThemeFont.FontSize = .medium, to range: Range<AttributedString.Index>? = nil) -> Self {
         var string = self
         if let range = range {
             string[range].font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
