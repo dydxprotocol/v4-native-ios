@@ -171,7 +171,7 @@ private struct SectionModifier: ViewModifier {
                 VStack(alignment: .leading) {
                     HStack {
                         Text(DataLocalizer.localize(path: localizedStringPath))
-                            .themeFont(fontType: .bold, fontSize: .largest)
+                            .themeFont(fontType: .plus, fontSize: .largest)
                             .padding(.leading, 16)
                         Spacer()
                     }

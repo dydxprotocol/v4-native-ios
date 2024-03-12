@@ -36,7 +36,7 @@ public class dydxRewardsSummaryViewModel: dydxTitledCardViewModel {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
                 .themeColor(foreground: .textTertiary)
-                .themeFont(fontType: .text, fontSize: .smaller)
+                .themeFont(fontType: .base, fontSize: .smaller)
             HStack(spacing: 6) {
                 Text(primaryValue ?? "-")
                     .themeColor(foreground: .textPrimary)
@@ -46,7 +46,7 @@ public class dydxRewardsSummaryViewModel: dydxTitledCardViewModel {
             }
             Text(secondaryValue ?? "-")
                 .themeColor(foreground: .textTertiary)
-                .themeFont(fontType: .text, fontSize: .small)
+                .themeFont(fontType: .base, fontSize: .small)
         }
         .leftAligned()
 

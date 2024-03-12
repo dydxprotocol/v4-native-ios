@@ -25,7 +25,7 @@ public class dydxOnboardWelcomeViewModel: PlatformViewModel {
     private func createHeader() -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(DataLocalizer.localize(path: "APP.ONBOARDING.WELCOME"))
-                .themeFont(fontType: .text, fontSize: .largest)
+                .themeFont(fontType: .base, fontSize: .largest)
                 .themeColor(foreground: .textPrimary)
             Text(DataLocalizer.localize(path: "APP.ONBOARDING.WELCOME_TEXT"))
                 .themeFont(fontSize: .small)

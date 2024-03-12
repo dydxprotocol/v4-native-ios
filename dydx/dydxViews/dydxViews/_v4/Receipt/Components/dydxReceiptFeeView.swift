@@ -41,7 +41,7 @@ public class dydxReceiptFeeViewModel: PlatformViewModel {
                             .lineLimit(1)
                         if let feeType = self.feeType {
                             Text(feeType)
-                                .themeFont(fontType: .bold, fontSize: .small)
+                                .themeFont(fontType: .plus, fontSize: .small)
                                 .lineLimit(1)
                         }
                     }
@@ -55,7 +55,7 @@ public class dydxReceiptFeeViewModel: PlatformViewModel {
                                 .lineLimit(1)
                         case .string(let value):
                             Text(value)
-                                .themeFont(fontType: .bold, fontSize: .small)
+                                .themeFont(fontType: .plus, fontSize: .small)
                                 .themeColor(foreground: .textPrimary)
                                 .lineLimit(1)
                         }

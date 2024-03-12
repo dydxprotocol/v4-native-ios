@@ -33,14 +33,14 @@ public class dydxRewardsLearnMoreViewModel: PlatformViewModel {
             return HStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(self.title)
-                        .themeFont(fontType: .text, fontSize: .medium)
+                        .themeFont(fontType: .base, fontSize: .medium)
                         .themeColor(foreground: .textPrimary)
                     VStack(alignment: .leading, spacing: 8) {
                         Text(self.description)
-                            .themeFont(fontType: .text, fontSize: .small)
+                            .themeFont(fontType: .base, fontSize: .small)
                             .themeColor(foreground: .textTertiary)
                         Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.LEARN_MORE_ARROW", params: nil) ?? "")
-                            .themeFont(fontType: .text, fontSize: .small)
+                            .themeFont(fontType: .base, fontSize: .small)
                             .themeColor(foreground: .textSecondary)
                     }
                 }.leftAligned()

@@ -39,7 +39,7 @@ public class dydxOnboardScanViewModel: PlatformViewModel {
                     .createView(parentStyle: style)
 
                     Text(DataLocalizer.localize(path: "APP.ONBOARDING.SCAN_QR_CODE"))
-                        .themeFont(fontType: .bold, fontSize: .largest)
+                        .themeFont(fontType: .plus, fontSize: .largest)
                 }
                 .leftAligned()
 

@@ -85,7 +85,7 @@ public class dydxNewsAlertsViewModel: PlatformViewModel {
     private func createHeader(parentStyle: ThemeStyle) -> some View {
         HStack {
             Text(DataLocalizer.localize(path: "APP.GENERAL.ALERTS", params: nil))
-                .themeFont(fontType: .bold, fontSize: .largest)
+                .themeFont(fontType: .plus, fontSize: .largest)
 
             Spacer()
 
