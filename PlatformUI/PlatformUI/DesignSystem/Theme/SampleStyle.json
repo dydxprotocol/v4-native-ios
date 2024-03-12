@@ -1,30 +1,30 @@
 {
     "default-style": {
         "_fontSize": "largest",
-        "_fontType": "text",
+        "_fontType": "medium",
         "_layerColor": "transparent",
         "_textColor": "text_secondary"
     },
     "title-style": {
         "_fontSize": "larger",
-        "_fontType": "text",
+        "_fontType": "medium",
         "_layerColor": "lowest",
         "_textColor": "text_secondary"
     },
     "subtitle-style": {
         "_fontSize": "small",
-        "_fontType": "text",
+        "_fontType": "medium",
         "_textColor": "text_tertiary"
     },
     
     "table-cell-title-style": {
         "_fontSize": "larger",
-        "_fontType": "text",
+        "_fontType": "medium",
         "_textColor": "text_secondary"
     },
     "table-cell-subtitle-style": {
         "_fontSize": "small",
-        "_fontType": "text",
+        "_fontType": "medium",
         "_textColor": "text_tertiary"
     },
     "signed-plus": {
