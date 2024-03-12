@@ -59,8 +59,7 @@
                 "name": "Satoshi-Bold"
             },
             "number": {
-                "name": ".AppleSystemUIFontMonospaced-Medium",
-                "weight": 0.23
+                "name": ".AppleSystemUIFontMonospaced-Medium"
             }
         }
     }

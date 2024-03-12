@@ -377,7 +377,6 @@ public struct ThemeFont: Codable, Equatable {
 
 public struct FontTypeDetail: Codable, Equatable {
     let name: String?
-    let weight: Float?
 }
 
 public extension ThemeFont {
@@ -395,54 +394,32 @@ public extension ThemeFont {
                 return nil
             }
         }
-        
-        let fontName = type[fontType.rawValue]?.name
-        
-        let fontWeight: UIFont.Weight?
-        let weight = type[fontType.rawValue]?.weight
-        if let weight = weight {
-            fontWeight = UIFont.Weight(rawValue: CGFloat(weight))
-        } else {
-            fontWeight = nil
-        }
-        
                 
-        if let fontName = fontName, fontName.length > 0 {
+        if let fontName = type[fontType.rawValue]?.name, fontName.length > 0 {
             return loadFont(name: fontName,
-                            size: sizeValue,
-                            weight: fontWeight ?? fontType.defaultWeight)
+                            size: sizeValue)
         }
         switch fontType {
         case .custom:
             return nil
         case .number:
-            if let fontWeight = fontWeight {
-                return UIFont.monospacedSystemFont(ofSize: CGFloat(sizeValue), weight: fontWeight)
-            } else {
-                assertionFailure("monospacedSystemFont requires a font weight")
-                return nil
-            }
+            return UIFont.monospacedSystemFont(ofSize: CGFloat(sizeValue), weight: fontType.defaultWeight)
         case .plus:
-            return UIFont.boldSystemFont(ofSize: CGFloat(sizeValue)).withWeight(fontWeight ?? .bold)
+            return UIFont.boldSystemFont(ofSize: CGFloat(sizeValue)).withWeight(fontType.defaultWeight)
         case .base:
-            return UIFont.systemFont(ofSize: CGFloat(sizeValue)).withWeight(fontWeight ?? .medium)
+            return UIFont.systemFont(ofSize: CGFloat(sizeValue)).withWeight(fontType.defaultWeight)
         case .minus:
-            return UIFont.systemFont(ofSize: CGFloat(sizeValue)).withWeight(fontWeight ?? .regular)
+            return UIFont.systemFont(ofSize: CGFloat(sizeValue)).withWeight(fontType.defaultWeight)
         }
     }
     
-    private func loadFont(name: String, size: Float, weight: UIFont.Weight? = nil) -> UIFont? {
+    private func loadFont(name: String, size: Float) -> UIFont? {
         let font = UIFont(name: name, size: CGFloat(size))
         guard let font = font else {
             assertionFailure("Font not found: \(name) \(size)")
             return nil
         }
-        
-        if let weight = weight {
-            return font.withWeight(weight)
-        } else {
-            return font
-        }
+        return font
     }
     
     func font(of fontType: FontType, fontSize: FontSize) -> Font? {
