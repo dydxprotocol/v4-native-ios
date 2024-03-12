@@ -49,17 +49,17 @@
             "smallest": "11"
         },
         "type": {
-            "light": {
+            "minus": {
                 "name": "Satoshi-Regular"
-            }
-            "medium": {
+            },
+            "base": {
                 "name": "Satoshi-Medium"
             },
-            "bold": {
+            "plus": {
                 "name": "Satoshi-Bold"
             },
             "number": {
-                "name": "",
+                "name": ".AppleSystemUIFontMonospaced-Medium",
                 "weight": 0.23
             }
         }
