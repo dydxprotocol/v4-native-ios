@@ -49,15 +49,18 @@
             "smallest": "11"
         },
         "type": {
+            "light": {
+                "name": "Satoshi-Regular"
+            }
+            "medium": {
+                "name": "Satoshi-Medium"
+            },
             "bold": {
                 "name": "Satoshi-Bold"
             },
-            "text": {
-                "name": "Satoshi-Medium"
-            },
             "number": {
                 "name": "",
-                "weight": 0.25
+                "weight": 0.23
             }
         }
     }
