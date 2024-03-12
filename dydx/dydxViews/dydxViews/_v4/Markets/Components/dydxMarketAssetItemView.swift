@@ -89,15 +89,15 @@ open class dydxMarketAssetItemViewModel: PlatformViewModel {
                     HStack(spacing: 4) {
                         Text(sharedMarketViewModel?.tokenSymbol ?? "")
                             .themeColor(foreground: .textPrimary)
-                            .themeFont(fontType: .bold, fontSize: .medium)
+                            .themeFont(fontType: .plus, fontSize: .medium)
                             .layoutPriority(1)
                         Text("USD")
                             .themeColor(foreground: .textSecondary)
-                            .themeFont(fontType: .bold, fontSize: .medium)
+                            .themeFont(fontType: .plus, fontSize: .medium)
                             .minimumScaleFactor(0.5)
                     }
                     Text(sharedMarketViewModel?.volume24H ?? "")
-                        .themeFont(fontType: .text, fontSize: .small)
+                        .themeFont(fontType: .base, fontSize: .small)
                 }
                 Spacer()
             }
@@ -115,7 +115,7 @@ open class dydxMarketAssetItemViewModel: PlatformViewModel {
         VStack(alignment: .trailing, spacing: 2) {
             Text(sharedMarketViewModel?.indexPrice ?? "")
                 .themeColor(foreground: .textPrimary)
-                .themeFont(fontType: .bold, fontSize: .medium)
+                .themeFont(fontType: .plus, fontSize: .medium)
                 .minimumScaleFactor(0.5)
             if let priceChangePercent24H = sharedMarketViewModel?.priceChangePercent24H {
                 priceChangePercent24H

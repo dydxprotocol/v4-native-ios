@@ -18,7 +18,7 @@ public class dydxInlineShareViewModel: PlatformViewModel {
         let unhighlightedString = DataLocalizer.shared?.localize(path: "APP.GENERAL.SHARE", params: nil) ?? ""
 
         var attributedString = AttributedString(localizedString)
-            .themeFont(fontType: .text, fontSize: .medium)
+            .themeFont(fontType: .base, fontSize: .medium)
 
         attributedString = attributedString.themeColor(foreground: .textSecondary)
         if let unhighlightedStringRange = attributedString.range(of: unhighlightedString) {

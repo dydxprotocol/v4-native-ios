@@ -37,7 +37,7 @@ public class dydxClosePositionHeaderViewModel: PlatformViewModel {
 
                     let main =
                         Text(DataLocalizer.localize(path: "APP.GENERAL.CLOSE", params: nil))
-                            .themeFont(fontType: .bold, fontSize: .largest)
+                            .themeFont(fontType: .plus, fontSize: .largest)
 
                     let trailing =
                         HStack {
@@ -46,7 +46,7 @@ public class dydxClosePositionHeaderViewModel: PlatformViewModel {
                             VStack(alignment: .trailing, spacing: 2) {
                                 Text(sharedMarketViewModel.indexPrice ?? "")
                                     .themeColor(foreground: .textPrimary)
-                                    .themeFont(fontType: .bold, fontSize: .medium)
+                                    .themeFont(fontType: .plus, fontSize: .medium)
                                     .lineLimit(1)
                                 if let priceChangePercent24H = sharedMarketViewModel.priceChangePercent24H {
                                     priceChangePercent24H

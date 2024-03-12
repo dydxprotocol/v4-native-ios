@@ -34,7 +34,7 @@ public class dydxRateAppViewModel: PlatformViewModel {
 
             return VStack(alignment: .center, spacing: 24) {
                         Text(DataLocalizer.shared?.localize(path: "RATE_APP.QUESTION", params: nil) ?? "")
-                            .themeFont(fontType: .text, fontSize: .large)
+                            .themeFont(fontType: .base, fontSize: .large)
                             .themeColor(foreground: .textSecondary)
                         HStack(spacing: 16) {
                             self.createButtonContent(title: DataLocalizer.shared?.localize(path: "RATE_APP.YES", params: nil) ?? "",
