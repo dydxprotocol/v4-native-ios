@@ -21,7 +21,7 @@ public class dydxMarketOrderbookSpreadViewModel: dydxOrderbookSpreadViewModel {
                 HStack {
                     Text(DataLocalizer.localize(path: "APP.TRADE.ORDERBOOK_SPREAD"))
                         .themeColor(foreground: .textTertiary)
-                        .themeFont(fontType: .text, fontSize: .small)
+                        .themeFont(fontType: .base, fontSize: .small)
 
                     Text(text)
                         .themeColor(foreground: .textPrimary)

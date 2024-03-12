@@ -25,7 +25,7 @@ public class dydxRewardsRewardViewModel: PlatformViewModel {
         let localizedString = DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.FOR_TRADING", params: ["PERIOD": period]) ?? ""
 
         var attributedString = AttributedString(localizedString)
-            .themeFont(fontType: .text, fontSize: .smallest)
+            .themeFont(fontType: .base, fontSize: .smallest)
 
         attributedString = attributedString.themeColor(foreground: .textTertiary, to: nil)
         if let periodTextRange = attributedString.range(of: period) {
@@ -41,14 +41,14 @@ public class dydxRewardsRewardViewModel: PlatformViewModel {
             return HStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.REWARDED", params: nil) ?? "")
-                        .themeFont(fontType: .text, fontSize: .smaller)
+                        .themeFont(fontType: .base, fontSize: .smaller)
                         .themeColor(foreground: .textSecondary)
                     Text(self.periodFormatted)
                 }
                 Spacer(minLength: 16)
                 HStack(spacing: 4) {
                     Text(self.amount)
-                        .themeFont(fontType: .text, fontSize: .smaller)
+                        .themeFont(fontType: .base, fontSize: .smaller)
                         .themeColor(foreground: .textSecondary)
                     PlatformIconViewModel(type: .asset(name: "icon_dydx", bundle: .dydxView), clip: .noClip, size: .init(width: 24, height: 24), templateColor: nil)
                         .createView()

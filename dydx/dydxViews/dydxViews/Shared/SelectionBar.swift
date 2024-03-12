@@ -27,9 +27,9 @@ public class SelectionBarModel: PlatformViewModel {
         var fontType: ThemeFont.FontType {
             switch self {
             case.header:
-                return .bold
+                return .plus
             case .content:
-                return .text
+                return .base
             }
         }
 

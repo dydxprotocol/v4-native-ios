@@ -81,7 +81,7 @@ public class dydxPortfolioFeesItemViewModel: PlatformViewModel {
                 Text(self.takerPercent ?? "")
                     .frame(width: 60)
             }
-             .themeFont(fontType: .text, fontSize: .smaller)
+             .themeFont(fontType: .base, fontSize: .smaller)
              .themeColor(foreground: .textPrimary)
              .padding(.horizontal, 8)
 
@@ -93,14 +93,14 @@ public class dydxPortfolioFeesItemViewModel: PlatformViewModel {
         let titleString: AttributedString
         if let title = condition.title {
             titleString = AttributedString(title)
-                .themeFont(fontType: .text, fontSize: .smaller)
+                .themeFont(fontType: .base, fontSize: .smaller)
                 .themeColor(foreground: .textTertiary)
         } else {
             titleString = AttributedString("")
         }
 
         let valueString = AttributedString(condition.value)
-            .themeFont(fontType: .text, fontSize: .smaller)
+            .themeFont(fontType: .base, fontSize: .smaller)
             .themeColor(foreground: .textPrimary)
 
         return Text(titleString + AttributedString(" ") + valueString)
@@ -181,11 +181,11 @@ public class dydxPortfolioFeesViewModel: PlatformViewModel {
                 Text(DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.30D"))
                     .themeColor(foreground: .textTertiary)
             }
-            .themeFont(fontType: .text, fontSize: .smaller)
+            .themeFont(fontType: .base, fontSize: .smaller)
             .leftAligned()
 
             Text(tradingVolume ?? "-")
-                .themeFont(fontType: .text, fontSize: .small)
+                .themeFont(fontType: .base, fontSize: .small)
                 .themeColor(foreground: .textPrimary)
                 .leftAligned()
         }

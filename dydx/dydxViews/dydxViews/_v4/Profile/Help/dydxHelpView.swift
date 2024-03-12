@@ -47,7 +47,7 @@ public class dydxHelpViewModel: PlatformViewModel {
 
             let view = VStack(alignment: .leading, spacing: 16) {
                 Text(DataLocalizer.localize(path: "APP.HEADER.HELP", params: nil))
-                    .themeFont(fontType: .bold, fontSize: .largest)
+                    .themeFont(fontType: .plus, fontSize: .largest)
                     .padding(.top, 40)
 
                 VStack {

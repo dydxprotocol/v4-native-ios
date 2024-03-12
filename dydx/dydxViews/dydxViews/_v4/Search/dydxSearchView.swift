@@ -54,7 +54,7 @@ public class dydxSearchViewModel: PlatformViewModel {
                         HStack {
                             Spacer()
                             Text(DataLocalizer.localize(path: "APP.GENERAL.START_SEARCH"))
-                                .themeFont(fontType: .bold, fontSize: .larger)
+                                .themeFont(fontType: .plus, fontSize: .larger)
                                 .themeColor(foreground: .textTertiary)
                             Spacer()
                         }

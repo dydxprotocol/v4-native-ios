@@ -63,10 +63,10 @@ public class dydxMarketResourcesViewModel: PlatformViewModel {
                                 HStack(spacing: 4) {
                                     Text(sharedMarketViewModel.tokenFullName ?? "")
                                         .themeColor(foreground: .textPrimary)
-                                        .themeFont(fontType: .bold, fontSize: .medium)
+                                        .themeFont(fontType: .plus, fontSize: .medium)
                                 }
                                 Text(sharedMarketViewModel.tokenSymbol ?? "")
-                                    .themeFont(fontType: .text, fontSize: .small)
+                                    .themeFont(fontType: .base, fontSize: .small)
                             }
                             Spacer()
                         }

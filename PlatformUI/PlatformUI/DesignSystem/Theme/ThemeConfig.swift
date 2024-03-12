@@ -126,7 +126,7 @@ public extension ThemeStyle {
     }
     
     func themeFont(fontType: ThemeFont.FontType? = nil, fontSize: ThemeFont.FontSize = .medium) -> Self {
-        let fontType = fontType ?? .text
+        let fontType = fontType ?? .base
         let newStyle = ThemeStyle(_fontSize: fontSize.rawValue, _fontType: fontType.rawValue)
         return merge(from: newStyle)
     }
@@ -318,13 +318,14 @@ public struct ThemeFont: Codable, Equatable {
     }
 
     public enum FontType: Hashable {
-        case bold, text, number
+        case minus, base, plus, number
         case custom(name: String)
         
         init(rawValue: String) {
             switch rawValue {
-            case "bold": self = .bold
-            case "text": self = .text
+            case "minus": self = .minus
+            case "base": self = .base
+            case "plus": self = .plus
             case "number": self = .number
             default: self = .custom(name: rawValue)
             }
@@ -332,17 +333,50 @@ public struct ThemeFont: Codable, Equatable {
         
         var rawValue: String {
             switch self {
-            case .bold: return "bold"
-            case .text: return "text"
+            case .minus: return "minus"
+            case .base: return "base"
+            case .plus: return "plus"
             case .number: return "number"
             case .custom(name: let name): return name
+            }
+        }
+        
+        var defaultWeight: UIFont.Weight {
+            switch self {
+            case .minus:
+                return .regular
+            case .base:
+                return .medium
+            case .plus:
+                return .bold
+            case .number:
+                return .medium
+            case .custom(let name):
+                preconditionFailure("unrecognized font type \(name)")
+                return .regular
+            }
+        }
+        
+        var defaultFontName: String {
+            switch self {
+            case .minus:
+                return UIFont.systemFont(ofSize: 0).fontName
+            case .base:
+                return UIFont.systemFont(ofSize: 0).fontName
+            case .plus:
+                return UIFont.boldSystemFont(ofSize: 0).fontName
+            case .number:
+                return UIFont.monospacedSystemFont(ofSize: 0, weight: defaultWeight).fontName
+            case .custom(let name):
+                preconditionFailure("unrecognized font type \(name)")
+                return UIFont.systemFont(ofSize: 0).fontName
             }
         }
     }
 }
 
 public struct FontTypeDetail: Codable, Equatable {
-    let name: String
+    let name: String?
     let weight: Float?
 }
 
@@ -372,44 +406,28 @@ public extension ThemeFont {
             fontWeight = nil
         }
         
+                
+        if let fontName = fontName, fontName.length > 0 {
+            return loadFont(name: fontName,
+                            size: sizeValue,
+                            weight: fontWeight ?? fontType.defaultWeight)
+        }
         switch fontType {
         case .custom:
-            if let fontName = fontName, fontName.length > 0 {
-                return loadFont(name: fontName, size: sizeValue, weight: fontWeight)
+            return nil
+        case .number:
+            if let fontWeight = fontWeight {
+                return UIFont.monospacedSystemFont(ofSize: CGFloat(sizeValue), weight: fontWeight)
             } else {
+                assertionFailure("monospacedSystemFont requires a font weight")
                 return nil
             }
-        case .number:
-            if let fontName = fontName, fontName.length > 0 {
-                return loadFont(name: fontName, size: sizeValue, weight: fontWeight)
-            } else {
-                if let fontWeight = fontWeight {
-                    return UIFont.monospacedSystemFont(ofSize: CGFloat(sizeValue), weight: fontWeight)
-                } else {
-                    assertionFailure("monospacedSystemFont requires a font weight")
-                    return nil
-                }
-            }
-        case .bold:
-            if let fontName = fontName, fontName.length > 0 {
-                return loadFont(name: fontName, size: sizeValue, weight: fontWeight)
-            } else {
-                if let fontWeight = fontWeight {
-                    return UIFont.boldSystemFont(ofSize: CGFloat(sizeValue)).withWeight(fontWeight)
-                } else {
-                    return UIFont.boldSystemFont(ofSize: CGFloat(sizeValue))
-                }
-            }
-        case .text:
-            if let fontName = fontName, fontName.length > 0 {
-                return loadFont(name: fontName, size: sizeValue, weight: fontWeight)
-             } else {
-                 if let fontWeight = fontWeight {
-                     return UIFont.systemFont(ofSize: CGFloat(sizeValue), weight: fontWeight)
-                 } else {
-                     return UIFont.systemFont(ofSize: CGFloat(sizeValue))
-                 }
-            }
+        case .plus:
+            return UIFont.boldSystemFont(ofSize: CGFloat(sizeValue)).withWeight(fontWeight ?? .bold)
+        case .base:
+            return UIFont.systemFont(ofSize: CGFloat(sizeValue)).withWeight(fontWeight ?? .medium)
+        case .minus:
+            return UIFont.systemFont(ofSize: CGFloat(sizeValue)).withWeight(fontWeight ?? .regular)
         }
     }
     

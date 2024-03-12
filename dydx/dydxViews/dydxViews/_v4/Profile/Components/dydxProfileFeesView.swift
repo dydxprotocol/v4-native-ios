@@ -38,22 +38,22 @@ public class dydxProfileFeesViewModel: dydxTitledCardViewModel, Equatable {
             HStack {
                 VStack(spacing: 8) {
                     Text(DataLocalizer.localize(path: "APP.TRADE.TAKER"))
-                        .themeFont(fontType: .text, fontSize: .smaller)
+                        .themeFont(fontType: .base, fontSize: .smaller)
                         .leftAligned()
 
                     Text(self.takerFeeRate ?? "-")
-                        .themeFont(fontType: .text, fontSize: .small)
+                        .themeFont(fontType: .base, fontSize: .small)
                         .themeColor(foreground: .textPrimary)
                         .leftAligned()
                 }
 
                 VStack(spacing: 8) {
                     Text(DataLocalizer.localize(path: "APP.TRADE.MAKER"))
-                        .themeFont(fontType: .text, fontSize: .smaller)
+                        .themeFont(fontType: .base, fontSize: .smaller)
                         .leftAligned()
 
                     Text(self.makerFeeRate ?? "-")
-                        .themeFont(fontType: .text, fontSize: .small)
+                        .themeFont(fontType: .base, fontSize: .small)
                         .themeColor(foreground: .textPrimary)
                         .leftAligned()
                 }
@@ -66,11 +66,11 @@ public class dydxProfileFeesViewModel: dydxTitledCardViewModel, Equatable {
                     Text(DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.30D"))
                         .themeColor(foreground: .textTertiary)
                 }
-                .themeFont(fontType: .text, fontSize: .smaller)
+                .themeFont(fontType: .base, fontSize: .smaller)
                 .leftAligned()
 
                 Text(self.tradingVolume ?? "-")
-                    .themeFont(fontType: .text, fontSize: .small)
+                    .themeFont(fontType: .base, fontSize: .small)
                     .themeColor(foreground: .textPrimary)
                     .leftAligned()
             }
