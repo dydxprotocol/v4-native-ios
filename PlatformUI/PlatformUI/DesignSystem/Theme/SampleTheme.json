@@ -70,7 +70,7 @@
         "type": {
             "minus": {
                 "name": "Satoshi-Regular"
-            }
+            },
             "base": {
                 "name": "Satoshi-Medium"
             },
@@ -78,7 +78,7 @@
                 "name": "Satoshi-Bold"
             },
             "number": {
-                "name": "",
+                "name": ".AppleSystemUIFontMonospaced-Medium",
                 "weight": 0.23
             }
         }
