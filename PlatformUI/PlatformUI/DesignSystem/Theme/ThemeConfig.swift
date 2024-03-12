@@ -343,7 +343,7 @@ public struct ThemeFont: Codable, Equatable {
 
 public struct FontTypeDetail: Codable, Equatable {
     let name: String
-    let weight: Float
+    let weight: Float?
 }
 
 public extension ThemeFont {
