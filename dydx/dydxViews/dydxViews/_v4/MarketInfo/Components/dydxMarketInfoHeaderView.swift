@@ -35,7 +35,7 @@ public class dydxMarketInfoHeaderViewModel: PlatformViewModel {
                     HStack(spacing: 4) {
                         Text(sharedMarketViewModel?.tokenFullName ?? "")
                             .themeColor(foreground: .textSecondary)
-                            .themeFont(fontType: .text, fontSize: .large)
+                            .themeFont(fontType: .base, fontSize: .large)
                         TokenTextViewModel(symbol: sharedMarketViewModel?.tokenSymbol ?? "")
                             .createView(parentStyle: parentStyle.themeFont(fontSize: .smallest), styleKey: styleKey)
                     }
@@ -70,48 +70,9 @@ public class dydxMarketInfoHeaderViewModel: PlatformViewModel {
 
                 self.createMarketSelectorView(parentStyle: parentStyle, styleKey: styleKey)
 
-                    let main =
-                        HStack {
-                            VStack(alignment: .leading) {
-                                HStack(spacing: 4) {
-                                    Text(sharedMarketViewModel.tokenFullName ?? "")
-                                        .themeColor(foreground: .textPrimary)
-                                        .themeFont(fontType: .plus, fontSize: .medium)
-                                    Text("USD")
-                                        .themeFont(fontType: .plus, fontSize: .medium)
-
-                                }
-                                Text(sharedMarketViewModel.tokenSymbol ?? "")
-                                    .themeFont(fontType: .base, fontSize: .small)
-                            }
-
-                            self.favoriteViewModel?.createView(parentStyle: style)
-                                .padding(.leading, 4)
-                                .padding(.top, -18)
-
-                            Spacer()
-                        }
-
-                    let trailing =
-                        VStack(alignment: .trailing, spacing: 2) {
-                            Text(sharedMarketViewModel.indexPrice ?? "")
-                                .themeColor(foreground: .textPrimary)
-                                .themeFont(fontType: .plus, fontSize: .medium)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.5)
-                            if let priceChangePercent24H = sharedMarketViewModel.priceChangePercent24H {
-                                priceChangePercent24H
-                                    .createView(parentStyle: style, styleKey: "asset_list_item_24h_volume")
-                            }
-                        }
-                    PlatformTableViewCellViewModel(logo: icon,
-                                                   main: main.wrappedViewModel,
-                                                   trailing: trailing.wrappedViewModel)
-                        .createView(parentStyle: style)
-                }
-                .frame(height: 72)
-                .padding([.leading])
-            )
+                self.favoriteViewModel?.createView(parentStyle: style)
+                    .viewModel.createView(parentStyle: parentStyle, styleKey: styleKey)
+            }.wrappedInAnyView()
         }
     }
 }
