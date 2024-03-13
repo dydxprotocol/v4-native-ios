@@ -424,7 +424,8 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                                             date: Date(),
                                             usdcSize: parser.asDecimal(transferInput.size?.usdcSize)?.doubleValue,
                                             size: parser.asDecimal(transferInput.size?.size)?.doubleValue,
-                                            isCctp: transferInput.isCctp)
+                                            isCctp: transferInput.isCctp,
+                                            requestId: transferInput.requestPayload?.requestId)
         AbacusStateManager.shared.addTransferInstance(transfer: transfer)
     }
 }

@@ -10,6 +10,7 @@ import Abacus
 import Utilities
 
 final public class AbacusRestImp: Abacus.RestProtocol {
+    public typealias RestCallback = (String?, KotlinInt, String?) -> Void
 
     private var backgroundTaskId: UIBackgroundTaskIdentifier = .invalid
 
@@ -19,26 +20,26 @@ final public class AbacusRestImp: Abacus.RestProtocol {
         return URLSession(configuration: config, delegate: nil, delegateQueue: nil)
     }()
 
-    public func delete(url: String, headers: [String: String]?, callback: @escaping (String?, KotlinInt) -> Void) {
+    public func delete(url: String, headers: [String: String]?, callback: @escaping RestCallback) {
         processRest(url: url, headers: headers, body: nil, verb: "DELETE", callback: callback)
     }
 
-    public func get(url: String, headers: [String: String]?, callback: @escaping (String?, KotlinInt) -> Void) {
+    public func get(url: String, headers: [String: String]?, callback: @escaping RestCallback) {
         processRest(url: url, headers: headers, body: nil, verb: "GET", callback: callback)
     }
 
-    public func post(url: String, headers: [String: String]?, body: String?, callback_ callback: @escaping (String?, KotlinInt) -> Void) {
+    public func post(url: String, headers: [String: String]?, body: String?, callback_ callback: @escaping RestCallback) {
         processRest(url: url, headers: headers, body: body, verb: "POST", callback: callback)
     }
 
-    public func put(url: String, headers: [String: String]?, body: String?, callback: @escaping (String?, KotlinInt) -> Void) {
+    public func put(url: String, headers: [String: String]?, body: String?, callback: @escaping RestCallback) {
         processRest(url: url, headers: headers, body: body, verb: "PUT", callback: callback)
     }
 
-    private func processRest(url: String, headers: [String: String]?, body: String?, verb: String, callback: @escaping (String?, KotlinInt) -> Void) {
+    private func processRest(url: String, headers: [String: String]?, body: String?, verb: String, callback: @escaping RestCallback) {
         guard let url = URL(string: url) else {
             Console.shared.log("AbacusRestImp: invalid url \(url)")
-            callback(nil, 0)
+            callback(nil, 0, nil)
             return
         }
 
@@ -57,21 +58,29 @@ final public class AbacusRestImp: Abacus.RestProtocol {
         return request
     }
 
-    private func run(request: URLRequest, completionHandler: @escaping (String?, KotlinInt) -> Void) {
+    private func run(request: URLRequest, completionHandler: @escaping RestCallback) {
         beginBackgroundTask()
         Console.shared.log("AbacusRestImp Requesting \(request.url!.absoluteURL)")
         session.dataTask(with: request) {  [weak self] (raw: Data?, response: URLResponse?, _: Swift.Error?) in
             Console.shared.log("AbacusRestImp Receiving \(request.url!.absoluteURL)")
             self?.endBackgroundTask()
             DispatchQueue.main.async {
-                if let code = (response as? HTTPURLResponse)?.statusCode {
-                    if let raw = raw, let text = String(data: raw, encoding: .utf8) {
-                        completionHandler(text, KotlinInt(integerLiteral: code))
-                    } else {
-                        completionHandler(nil, KotlinInt(integerLiteral: code))
+                guard let response = response as? HTTPURLResponse else {
+                    completionHandler(nil, KotlinInt(integerLiteral: 0), nil)
+                    return
+                }
+                var headers = [String: Any]()
+                for key in response.allHeaderFields.keys {
+                    if let key = key as? String, let value = response.value(forHTTPHeaderField: key) {
+                        headers[key] = value
                     }
+                }
+                let headersJsonString = headers.jsonString
+                let code = response.statusCode
+                if let raw = raw, let text = String(data: raw, encoding: .utf8) {
+                    completionHandler(text, KotlinInt(integerLiteral: code), headersJsonString)
                 } else {
-                    completionHandler(nil, KotlinInt(integerLiteral: 0))
+                    completionHandler(nil, KotlinInt(integerLiteral: code), headersJsonString)
                 }
             }
         }.resume()
