@@ -14,6 +14,7 @@ public class dydxMarketInfoHeaderViewModel: PlatformViewModel {
     @Published public var sharedMarketViewModel: SharedMarketViewModel? = SharedMarketViewModel()
     @Published public var favoriteViewModel: dydxUserFavoriteViewModel? = dydxUserFavoriteViewModel(size: .init(width: 20, height: 20))
     @Published public var onBackButtonTap: (() -> Void)?
+    @Published public var onMarketSelectorTap: (() -> Void)?
 
     public init() {}
 
@@ -56,6 +57,7 @@ public class dydxMarketInfoHeaderViewModel: PlatformViewModel {
         .padding(.vertical, 8)
         .themeColor(background: .layer3)
         .borderAndClip(style: .cornerRadius(12), borderColor: .borderDefault, lineWidth: 1)
+        .onTapGesture(perform: self.onMarketSelectorTap ?? {})
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {

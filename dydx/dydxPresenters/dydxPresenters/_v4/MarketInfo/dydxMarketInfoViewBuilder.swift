@@ -95,6 +95,13 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
 
+        viewModel.header.onMarketSelectorTap = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/markets/search",
+                                                       params: ["shouldShowResultsForEmptySearch": true]),
+                                    animated: true,
+                                    completion: nil)
+        }
+
         viewModel.sections.itemTitles = Section.allSections.map(\.text)
         viewModel.sections.onSelectionChanged = { [weak self] index in
             if index <  Section.allSections.count {
