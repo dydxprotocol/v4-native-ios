@@ -58,8 +58,9 @@ public struct dydxTransferInstance: Codable, Equatable {
     public let usdcSize: Double?
     public let size: Double?
     public let isCctp: Bool?
+    public let requestId: String?
 
-    public init(transferType: dydxTransferInstance.TransferType, transactionHash: String, fromChainId: String?, fromChainName: String?, toChainId: String?, toChainName: String?, date: Date, usdcSize: Double?, size: Double?, isCctp: Bool?) {
+    public init(transferType: dydxTransferInstance.TransferType, transactionHash: String, fromChainId: String?, fromChainName: String?, toChainId: String?, toChainName: String?, date: Date, usdcSize: Double?, size: Double?, isCctp: Bool?, requestId: String?) {
         self.transferType = transferType
         self.transactionHash = transactionHash
         self.fromChainId = fromChainId
@@ -70,5 +71,6 @@ public struct dydxTransferInstance: Codable, Equatable {
         self.usdcSize = usdcSize
         self.size = size
         self.isCctp = isCctp
+        self.requestId = requestId
     }
 }
