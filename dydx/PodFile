@@ -84,7 +84,7 @@ end
 def swifiui_pods
   pod 'SDWebImage'
   pod 'SDWebImageSVGCoder'
-  pod 'SDWebImageSwiftUI'
+  pod 'SDWebImageSwiftUI', '2.2.6'
   pod 'Popovers'
 end
 
