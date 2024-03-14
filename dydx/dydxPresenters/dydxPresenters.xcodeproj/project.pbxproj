@@ -129,6 +129,7 @@
 		2741E3732A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */; };
 		2749F8FF2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */; };
 		276908FF2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */; };
+		277987512BA33F15006DC5CD /* dydxSelectedMarketStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */; };
 		277E8FC92B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E8FC82B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift */; };
 		277E90152B1EA0E3005CCBCB /* dydxTradingRewardsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E90142B1EA0E3005CCBCB /* dydxTradingRewardsViewPresenter.swift */; };
 		277E90192B1EA3C3005CCBCB /* dydxRewardsSummaryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E90182B1EA3C3005CCBCB /* dydxRewardsSummaryPresenter.swift */; };
@@ -475,6 +476,7 @@
 		2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxDirectionColorPreferenceViewBuilder.swift; sourceTree = "<group>"; };
 		2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsLaunchIncentivesPresenter.swift; sourceTree = "<group>"; };
 		276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewPresenter.swift; sourceTree = "<group>"; };
+		277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSelectedMarketStore.swift; sourceTree = "<group>"; };
 		277E8FC82B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxProfileRewardsViewPresenter.swift; sourceTree = "<group>"; };
 		277E90142B1EA0E3005CCBCB /* dydxTradingRewardsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradingRewardsViewPresenter.swift; sourceTree = "<group>"; };
 		277E90182B1EA3C3005CCBCB /* dydxRewardsSummaryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsSummaryPresenter.swift; sourceTree = "<group>"; };
@@ -1126,6 +1128,7 @@
 		02B8419F28EF68E400C4D25B /* MarketInfo */ = {
 			isa = PBXGroup;
 			children = (
+				277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */,
 				0274B34328F113FD005AF69E /* Components */,
 				02B841B128EF6C6400C4D25B /* dydxMarketInfoViewBuilder.swift */,
 			);
@@ -1839,6 +1842,7 @@
 				02F700FE29EA0FD9004DEB5E /* dydxReceiptPresenter.swift in Sources */,
 				027E1EF829CA27CD0098666F /* dydxSettingsLandingViewBuilder.swift in Sources */,
 				020DBF1E29E092C00068AAA6 /* dydxTransferDepositViewPresenter.swift in Sources */,
+				277987512BA33F15006DC5CD /* dydxSelectedMarketStore.swift in Sources */,
 				0238FB72296C4438002E1C1A /* HistoricalPNLDataPoint.swift in Sources */,
 				021B68B12AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift in Sources */,
 				024B43A229812DC700E35D54 /* dydxValidationViewPresenter.swift in Sources */,

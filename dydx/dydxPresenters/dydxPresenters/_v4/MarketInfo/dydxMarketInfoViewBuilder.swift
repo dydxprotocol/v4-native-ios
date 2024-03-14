@@ -28,7 +28,9 @@ public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
 private class dydxMarketInfoViewController: HostingViewController<PlatformView, dydxMarketInfoViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade" || request?.path == "/market", let presenter = presenter as? dydxMarketInfoViewPresenter {
-            presenter.marketId = request?.params?["market"] as? String ?? "ETH-USD"
+            let selectedMarketId = request?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
+            dydxSelectedMarketsStore.shared.lastSelectedMarket = selectedMarketId
+            presenter.marketId = selectedMarketId
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if request?.path == "/trade" {
                     Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["full": "true"]), animated: true, completion: nil)
@@ -122,6 +124,7 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
     override func start() {
         super.start()
 
+        guard let marketId = marketId else { return }
         AbacusStateManager.shared.setMarket(market: marketId)
 
         $marketId
