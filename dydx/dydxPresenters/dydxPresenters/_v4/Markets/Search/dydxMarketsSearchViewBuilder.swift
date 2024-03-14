@@ -56,7 +56,7 @@ private class dydxMarketsSearchViewPresenter: dydxSearchViewPresenter {
                             AbacusStateManager.shared.state.assetMap,
                             searchTextPublisher.removeDuplicates())
             .sink { [weak self] (markets: [PerpetualMarket], candlesMap: [String: MarketCandles], assetMap: [String: Asset], searchText: String) in
-                var filterMarkets = markets.filter { [weak self] market in
+                var filterMarkets = markets.filter { market in
                     guard market.status?.canTrade == true,
                         searchText.isNotEmpty || self?.shouldShowResultsForEmptySearch == true,
                         let asset = assetMap[market.assetId] else {
