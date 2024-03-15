@@ -11,7 +11,7 @@ import Utilities
 import UIToolkits
 import dydxStateManager
 
-public class ShareActionBuilder: NSObject, ObjectBuilderProtocol {
+public class dydxShareActionBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let action = dydxShareAction()
         return action as? T
