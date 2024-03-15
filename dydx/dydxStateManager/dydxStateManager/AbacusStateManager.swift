@@ -136,32 +136,32 @@ public final class AbacusStateManager: NSObject {
         UIImplementations.reset(language: nil)
 
         let deployment: String
-        let appConfigs: AppConfigs
+        let appConfigs: AppConfigsV2
         if dydxBoolFeatureFlag.force_mainnet.isEnabled {
             deployment = "MAINNET"
-            appConfigs = AppConfigs.companion.forApp
+            appConfigs = AppConfigsV2.companion.forApp
         } else {
             // Expose more options for Testflight build
             switch Installation.source {
             case .appStore:
                 deployment = "MAINNET"
-                appConfigs = AppConfigs.companion.forApp
+                appConfigs = AppConfigsV2.companion.forApp
             case .debug:
                 // For debugging only
                 deployment = "DEV"
-                appConfigs = AppConfigs.companion.forAppDebug
+                appConfigs = AppConfigsV2.companion.forAppDebug
             case .jailBroken:
                 deployment = "TESTNET"
-                appConfigs = AppConfigs.companion.forApp
+                appConfigs = AppConfigsV2.companion.forApp
             case .testFlight:
                 deployment = "TESTFLIGHT"
-                appConfigs = AppConfigs.companion.forApp
+                appConfigs = AppConfigsV2.companion.forApp
             }
         }
 
-        appConfigs.squidVersion = AppConfigs.SquidVersion.v2
+        appConfigs.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
 
-        return AsyncAbacusStateManager(
+        return AsyncAbacusStateManagerV2(
             deploymentUri: deploymentUri,
             deployment: deployment,
             appConfigs: appConfigs,
