@@ -21,7 +21,7 @@ public class dydxSystemStatusBuilder: NSObject, ObjectBuilderProtocol {
 private class SystemStatusAction: NSObject, NavigableProtocol {
      func navigate(to request: RoutingRequest?, animated: Bool, completion: RoutingCompletionBlock?) {
         if request?.path == "/settings/status" {
-            if let statusPageUrl = AbacusStateManager.shared.environment?.links?.community,
+            if let statusPageUrl = AbacusStateManager.shared.environment?.links?.statusPage ?? AbacusStateManager.shared.environment?.links?.community,
                let url = URL(string: statusPageUrl),
                 URLHandler.shared?.canOpenURL(url) ?? false {
                 URLHandler.shared?.open(url) { success in
