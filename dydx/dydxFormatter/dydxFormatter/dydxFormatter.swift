@@ -388,6 +388,13 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     }
 
     /*
+     xxxxx.yyyyy
+     */
+    public func decimalRaw(number: NSNumber?, digits: Int) -> String? {
+        return raw(number: number, digits: digits)?.replacingOccurrences(of: ",", with: ".")
+    }
+
+    /*
      xxxxxx,yyyyy or xxxxx.yyyyy
      */
     public func raw(number: NSNumber?, digits: Int) -> String? {
