@@ -369,7 +369,7 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     /*
      xxxxxx,yyyyy or xxxxx.yyyyy
      */
-    public func raw(number: NSNumber?, size: String?) -> String? {
+    public func raw(number: NSNumber?, size: String?, locale: Locale = Locale.current) -> String? {
         if let number = number {
             let size = size ?? "0.01"
             let digits = digits(size: size)
@@ -384,27 +384,36 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
      xxxxx.yyyyy
      */
     public func decimalRaw(number: NSNumber?, size: String?) -> String? {
-        return raw(number: number, size: size)?.replacingOccurrences(of: ",", with: ".")
+        raw(number: number, size: size, locale: Locale(identifier: "en-US"))
     }
 
     /*
      xxxxx.yyyyy
      */
     public func decimalRaw(number: NSNumber?, digits: Int) -> String? {
-        return raw(number: number, digits: digits)?.replacingOccurrences(of: ",", with: ".")
+        raw(number: number, digits: digits, locale: Locale(identifier: "en-US"))
     }
 
     /*
      xxxxxx,yyyyy or xxxxx.yyyyy
      */
-    public func raw(number: NSNumber?, digits: Int) -> String? {
+    public func raw(number: NSNumber?, digits: Int, locale: Locale = Locale.current) -> String? {
         if let value = number?.doubleValue {
             if value.isFinite {
                 if let number = number {
+                    rawFormatter.locale = locale
                     rawFormatter.minimumFractionDigits = max(digits, 0)
                     rawFormatter.maximumFractionDigits = max(digits, 0)
                     rawFormatter.roundingMode = .halfUp
-                    return rawFormatter.string(from: number)
+                   
+                    let formatted = rawFormatter.string(from: number)
+                    
+                    // need to special case for negative 0, see dydxFormatter tests. E.g. "-$0.001" should go to "$0.00"
+                    if let formatted = formatted, rawFormatter.number(from: formatted) == 0 {
+                        return rawFormatter.string(from: 0)
+                    } else {
+                        return formatted
+                    }
                 } else {
                     return nil
                 }
@@ -451,10 +460,12 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
 
     private func rounded(number: NSNumber, digits: Int) -> NSNumber {
         if number.doubleValue.isFinite {
-            if digits >= 0 {
-                return number
+            let double = number.doubleValue
+             if digits >= 0 {
+                let divideBy = pow(10, UInt(digits))
+                let roundedUp = Int(double / Double(divideBy)) * divideBy
+                return NSNumber(value: roundedUp)
             } else {
-                let double = number.doubleValue
                 let reversed = digits * -1
                 let divideBy = pow(10, UInt(reversed))
                 let roundedUp = Int(double / Double(divideBy)) * divideBy
