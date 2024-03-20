@@ -374,7 +374,7 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
             let size = size ?? "0.01"
             let digits = digits(size: size)
             let rounded = rounded(number: number, digits: digits)
-            return raw(number: rounded, digits: digits)
+            return raw(number: rounded, digits: digits, locale: locale)
         } else {
             return nil
         }
