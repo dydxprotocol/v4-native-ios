@@ -460,12 +460,10 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
 
     private func rounded(number: NSNumber, digits: Int) -> NSNumber {
         if number.doubleValue.isFinite {
-            let double = number.doubleValue
-             if digits >= 0 {
-                let divideBy = pow(10, UInt(digits))
-                let roundedUp = Int(double / Double(divideBy)) * divideBy
-                return NSNumber(value: roundedUp)
+            if digits >= 0 {
+                return number
             } else {
+                let double = number.doubleValue
                 let reversed = digits * -1
                 let divideBy = pow(10, UInt(reversed))
                 let roundedUp = Int(double / Double(divideBy)) * divideBy
