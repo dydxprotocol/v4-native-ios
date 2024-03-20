@@ -1,5 +1,5 @@
 PODS:
-  - Abacus (1.6.10)
+  - Abacus (1.6.12)
   - Amplitude-iOS (4.10.0)
   - AppsFlyerFramework (6.13.1):
     - AppsFlyerFramework/Main (= 6.13.1)
@@ -19,27 +19,27 @@ PODS:
   - EasyTipView (2.1.0)
   - EFQRCode (6.2.1):
     - swift_qrcodejs (~> 2.2.2)
-  - Firebase/AnalyticsWithoutAdIdSupport (10.22.0):
+  - Firebase/AnalyticsWithoutAdIdSupport (10.23.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics/WithoutAdIdSupport (~> 10.22.0)
-  - Firebase/Core (10.22.0):
+    - FirebaseAnalytics/WithoutAdIdSupport (~> 10.23.0)
+  - Firebase/Core (10.23.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 10.22.0)
-  - Firebase/CoreOnly (10.22.0):
-    - FirebaseCore (= 10.22.0)
-  - Firebase/Messaging (10.22.0):
+    - FirebaseAnalytics (~> 10.23.0)
+  - Firebase/CoreOnly (10.23.0):
+    - FirebaseCore (= 10.23.0)
+  - Firebase/Messaging (10.23.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 10.22.0)
-  - Firebase/Performance (10.22.0):
+    - FirebaseMessaging (~> 10.23.0)
+  - Firebase/Performance (10.23.0):
     - Firebase/CoreOnly
-    - FirebasePerformance (~> 10.22.0)
-  - Firebase/RemoteConfig (10.22.0):
+    - FirebasePerformance (~> 10.23.0)
+  - Firebase/RemoteConfig (10.23.0):
     - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 10.22.0)
+    - FirebaseRemoteConfig (~> 10.23.0)
   - FirebaseABTesting (10.23.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseAnalytics (10.22.0):
-    - FirebaseAnalytics/AdIdSupport (= 10.22.0)
+  - FirebaseAnalytics (10.23.0):
+    - FirebaseAnalytics/AdIdSupport (= 10.23.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
@@ -47,25 +47,25 @@ PODS:
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30911.0, >= 2.30908.0)
-  - FirebaseAnalytics/AdIdSupport (10.22.0):
+  - FirebaseAnalytics/AdIdSupport (10.23.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
-    - GoogleAppMeasurement (= 10.22.0)
+    - GoogleAppMeasurement (= 10.23.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30911.0, >= 2.30908.0)
-  - FirebaseAnalytics/WithoutAdIdSupport (10.22.0):
+  - FirebaseAnalytics/WithoutAdIdSupport (10.23.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.22.0)
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.23.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30911.0, >= 2.30908.0)
-  - FirebaseCore (10.22.0):
+  - FirebaseCore (10.23.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.12)
     - GoogleUtilities/Logger (~> 7.12)
@@ -87,7 +87,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
-  - FirebaseMessaging (10.22.0):
+  - FirebaseMessaging (10.23.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
     - GoogleDataTransport (~> 9.3)
@@ -96,7 +96,7 @@ PODS:
     - GoogleUtilities/Reachability (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - nanopb (< 2.30911.0, >= 2.30908.0)
-  - FirebasePerformance (10.22.0):
+  - FirebasePerformance (10.23.0):
     - FirebaseCore (~> 10.5)
     - FirebaseInstallations (~> 10.0)
     - FirebaseRemoteConfig (~> 10.0)
@@ -106,10 +106,11 @@ PODS:
     - GoogleUtilities/ISASwizzler (~> 7.8)
     - GoogleUtilities/MethodSwizzler (~> 7.8)
     - nanopb (< 2.30911.0, >= 2.30908.0)
-  - FirebaseRemoteConfig (10.22.0):
+  - FirebaseRemoteConfig (10.23.0):
     - FirebaseABTesting (~> 10.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
+    - FirebaseRemoteConfigInterop (~> 10.23)
     - FirebaseSharedSwift (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
@@ -125,21 +126,21 @@ PODS:
   - FirebaseSharedSwift (10.23.0)
   - FloatingPanel (2.7.0)
   - FullStory (1.29.0)
-  - GoogleAppMeasurement (10.22.0):
-    - GoogleAppMeasurement/AdIdSupport (= 10.22.0)
+  - GoogleAppMeasurement (10.23.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.23.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30911.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (10.22.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.22.0)
+  - GoogleAppMeasurement/AdIdSupport (10.23.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.23.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30911.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (10.22.0):
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.23.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
@@ -229,10 +230,10 @@ PODS:
   - GoogleUtilities/UserDefaults (7.13.0):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - GTMSessionFetcher (3.3.1):
-    - GTMSessionFetcher/Full (= 3.3.1)
-  - GTMSessionFetcher/Core (3.3.1)
-  - GTMSessionFetcher/Full (3.3.1):
+  - GTMSessionFetcher (3.3.2):
+    - GTMSessionFetcher/Full (= 3.3.2)
+  - GTMSessionFetcher/Core (3.3.2)
+  - GTMSessionFetcher/Full (3.3.2):
     - GTMSessionFetcher/Core
   - HMSegmentedControl (1.5.6)
   - iCarousel (1.8.3)
@@ -389,7 +390,7 @@ CHECKOUT OPTIONS:
     :http: https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz
 
 SPEC CHECKSUMS:
-  Abacus: 7a2a5cc6c8122a4ff2de4520dc6111b3cf8efc83
+  Abacus: a104c8310e63be12eb94df57fc27d65de3cd91ff
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   AppsFlyerFramework: 971521cf5b890c2afeab2f2c91734547b8b169ca
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
@@ -402,27 +403,27 @@ SPEC CHECKSUMS:
   DrawerMenu: f6ca91901e2b21086e3c19bcca278d3d3127e85f
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
   EFQRCode: a4d39ec3466b68dffa71de3b5caef7c9ceefdc53
-  Firebase: 797fd7297b7e1be954432743a0b3f90038e45a71
+  Firebase: 333ec7c6b12fa09c77b5162cda6b862102211d50
   FirebaseABTesting: aec61ed9a34d85a95e2013a3fdf051426a2419df
-  FirebaseAnalytics: 8d0ff929c63b7f72260f332b86ccf569776b75d3
-  FirebaseCore: 0326ec9b05fbed8f8716cddbf0e36894a13837f7
+  FirebaseAnalytics: 45f6e2e5ef8ccbb90be73ae983c3b20fa78837f7
+  FirebaseCore: 63efb128decaebb04c4033ed4e05fb0bb1cccef1
   FirebaseCoreExtension: cb88851781a24e031d1b58e0bd01eb1f46b044b5
   FirebaseCoreInternal: 6a292e6f0bece1243a737e81556e56e5e19282e3
   FirebaseCrashlytics: b7aca2d52dd2440257a13741d2909ad80745ac6c
   FirebaseInstallations: 42d6ead4605d6eafb3b6683674e80e18eb6f2c35
-  FirebaseMessaging: 9f71037fd9db3376a4caa54e5a3949d1027b4b6e
-  FirebasePerformance: 095debad1fc8d7d73148a835fcaec9e528946166
-  FirebaseRemoteConfig: e1b992a94d3674dddbcaf5d0d31a0312156ceb1c
+  FirebaseMessaging: 1b2270e66c81bbf184f70184db1d6a736ad0def5
+  FirebasePerformance: 702cd035354b2d2b2896e128129b978b41d02ad7
+  FirebaseRemoteConfig: 70ebe9542cf5242d762d1c0b4d53bfc472e0a4ce
   FirebaseRemoteConfigInterop: cbc87ffa4932719a7911a08e94510f18f026f5a7
   FirebaseSessions: f06853e30f99fe42aa511014d7ee6c8c319f08a3
   FirebaseSharedSwift: c92645b392db3c41a83a0aa967de16f8bad25568
   FloatingPanel: c88e3fd981b7a74121ff48746fb14d496f5fd553
   FullStory: 29e764d32050cb943d38b7b82c60b2f65f814737
-  GoogleAppMeasurement: ccefe3eac9b0aa27f96066809fb1a7fe4b462626
+  GoogleAppMeasurement: 453eb0de99fcf2bdec9403e9ac5d7871fdba3e3f
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
   GoogleUtilities: d053d902a8edaa9904e1bd00c37535385b8ed152
-  GTMSessionFetcher: 8a1b34ad97ebe6f909fb8b9b77fba99943007556
+  GTMSessionFetcher: 0e876eea9782ec6462e91ab872711c357322c94f
   HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   JTCalendar: 1b326e0d59dd1855b52c5f3feb059d2ff953805d
