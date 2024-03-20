@@ -39,9 +39,20 @@ public class dydxValidationViewModel: PlatformViewModel {
         }
     }
 
+    public struct Hyperlink {
+        public let text: String
+        public let url: String
+
+        public init(text: String, url: String) {
+            self.text = text
+            self.url = url
+        }
+    }
+
     @Published public var title: String?
     @Published public var text: String?
     @Published public var state: State = .hide
+    @Published public var hyperlink: Hyperlink?
     @Published public var errorType: ErrorType = .error
     @Published public var receiptViewModel: dydxReceiptViewModel? = dydxReceiptViewModel()
 
@@ -107,20 +118,25 @@ public class dydxValidationViewModel: PlatformViewModel {
                         }
                     }
 
-                    Group {
-                        if self.state == .hide || self.state == .showReceipt {
-                            self.receiptViewModel?.createView(parentStyle: style)
-                                .frame(minWidth: 0)
-                        } else {
-                            ScrollView(showsIndicators: false) {
+                    switch self.state {
+                    case .hide, .showReceipt:
+                        self.receiptViewModel?.createView(parentStyle: style)
+                            .frame(minWidth: 0)
+                    case .showError:
+                        ScrollView(showsIndicators: false) {
+                            VStack(spacing: 8) {
                                 Text(self.text ?? "")
-                                    .themeFont(fontSize: .small)
+                                    .themeFont(fontType: .base, fontSize: .medium)
+                                    .themeColor(foreground: .textTertiary)
+                                Text(self.hyperlink?.text ?? "")
+                                    .themeFont(fontType: .base, fontSize: .medium)
+                                    .themeColor(foreground: .textSecondary)
                             }
-                            .frame(height: 132)
                         }
+                        .frame(height: 132)
                     }
-                }
-                .animation(.default)
+                }.animation(.default, value: self.state)
+
             )
         }
     }
