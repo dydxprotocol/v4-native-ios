@@ -75,6 +75,7 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
         let errorMessage = transferInput?.errorMessage
         let firstBlockingError = errors.first { $0.type == ErrorType.error }
         let firstWarning = errors.first { $0.type == ErrorType.warning }
+        viewModel?.hyperlink = .init(hyperlink: transferInput?.hyperlink)
         if let firstBlockingError = firstBlockingError {
             viewModel?.title = firstBlockingError.resources.title?.localizedString
             viewModel?.text = firstBlockingError.resources.text?.localizedString
@@ -99,6 +100,16 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
             }
         } else {
             viewModel?.state = .hide
+        }
+    }
+}
+
+extension dydxValidationViewModel.Hyperlink {
+    init?(hyperlink: TransferInputHyperlink?) {
+        if let text = hyperlink?.label, let url = hyperlink?.url {
+            self.init(text: text, url: url)
+        } else {
+            return nil
         }
     }
 }
