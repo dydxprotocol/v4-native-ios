@@ -539,7 +539,7 @@ public final class AbacusState {
 
     private let statePublisher: AnyPublisher<PerpetualState?, Never>
     private let errorsStatePublisher: AnyPublisher<[ParsingError], Never>
-    private let abacusStateManager: AsyncAbacusStateManagerV2
+    private let abacusStateManager: AsyncAbacusStateManagerProtocol & AsyncAbacusStateManagerSingletonProtocol
 
     private var subaccountNumber: String? {
         "\(abacusStateManager.subaccountNumber)"
@@ -551,7 +551,7 @@ public final class AbacusState {
          apiStatePublisher: AnyPublisher<ApiState?, Never>,
          errorsStatePublisher: AnyPublisher<[ParsingError], Never>,
          lastOrderPublisher: AnyPublisher<SubaccountOrder?, Never>,
-         abacusStateManager: AsyncAbacusStateManagerV2,
+         abacusStateManager: AsyncAbacusStateManagerProtocol & AsyncAbacusStateManagerSingletonProtocol,
          alertsPublisher: AnyPublisher<[Abacus.Notification], Never>,
          transferStatePublisher: AnyPublisher<dydxTransferState, Never>) {
         self.walletState = walletStatePublisher.removeDuplicates().share(replay: 1).eraseToAnyPublisher()

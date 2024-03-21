@@ -16,6 +16,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     case enable_trading_rewards
     case enable_reduce_only
     case enable_app_rating
+    case enable_parent_subaccounts
 
     private static let obj = NSObject()
 
