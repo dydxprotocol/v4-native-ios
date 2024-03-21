@@ -41,7 +41,7 @@ final class dydxFormatterTests: XCTestCase {
         }
     }
     
-    func testDRaw() {
+    func testRaw() {
         struct TestCase {
             let number: NSNumber
             let digits: Int
