@@ -383,14 +383,14 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     /*
      xxxxx.yyyyy
      */
-    public func decimalRaw(number: NSNumber?, size: String?) -> String? {
+    public func decimalLocalAgnostic(number: NSNumber?, size: String?) -> String? {
         raw(number: number, size: size, locale: Locale(identifier: "en-US"))
     }
 
     /*
      xxxxx.yyyyy
      */
-    public func decimalRaw(number: NSNumber?, digits: Int) -> String? {
+    public func decimalLocalAgnostic(number: NSNumber?, digits: Int) -> String? {
         raw(number: number, digits: digits, locale: Locale(identifier: "en-US"))
     }
 
