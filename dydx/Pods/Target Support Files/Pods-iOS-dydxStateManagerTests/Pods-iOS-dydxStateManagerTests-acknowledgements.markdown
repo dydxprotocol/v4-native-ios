@@ -328,7 +328,7 @@ THE SOFTWARE.
    END OF TERMS AND CONDITIONS
 
 
-## Abacus
+## abacus
 
 Copyright (C) dYdX Trading Inc.
 
