@@ -383,7 +383,7 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     /*
      xxxxx.yyyyy
      */
-    public func decimalLocalAgnostic(number: NSNumber?, size: String?) -> String? {
+    public func decimalLocaleAgnostic(number: NSNumber?, size: String?) -> String? {
         raw(number: number, size: size, locale: Locale(identifier: "en-US"))
     }
 
@@ -405,9 +405,9 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
                     rawFormatter.minimumFractionDigits = max(digits, 0)
                     rawFormatter.maximumFractionDigits = max(digits, 0)
                     rawFormatter.roundingMode = .halfUp
-                   
+
                     let formatted = rawFormatter.string(from: number)
-                    
+
                     // need to special case for negative 0, see dydxFormatter tests. E.g. "-$0.001" should go to "$0.00"
                     if let formatted = formatted, rawFormatter.number(from: formatted) == 0 {
                         return rawFormatter.string(from: 0)

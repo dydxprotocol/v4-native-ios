@@ -40,8 +40,8 @@ final class dydxTransferSubaccountWorker: BaseWorker {
                     subaccountNumber = 0
                 }
                 let depositAmount = (balance ?? 0) - dydxTransferSubaccountWorker.balanceRetainAmount
-                let amountString = dydxFormatter.shared.decimalLocalAgnostic(number: NSNumber(value: depositAmount),
-                                                                             digits: dydxTokenConstants.usdcTokenDecimal)
+                let amountString = dydxFormatter.shared.decimalLocaleAgnostic(number: NSNumber(value: depositAmount),
+                                                                              digits: dydxTokenConstants.usdcTokenDecimal)
                 if let amountString = amountString {
                     self?.depositToSubaccount(amount: amountString,
                                               subaccount: subaccountNumber,

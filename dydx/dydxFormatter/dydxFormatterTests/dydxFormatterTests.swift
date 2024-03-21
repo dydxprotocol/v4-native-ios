@@ -17,7 +17,7 @@ final class dydxFormatterTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
+
     func testDecimalLocaleAgnostic() {
         struct TestCase {
             let number: NSNumber
@@ -32,7 +32,7 @@ final class dydxFormatterTests: XCTestCase {
             .init(number: -0.001, digits: 2, expected: "0.00"),
             .init(number: 0.001, digits: 2, expected: "0.00"),
             .init(number: -0.005, digits: 2, expected: "-0.01"),
-            .init(number: -0.0051, digits: 2, expected: "-0.01"),
+            .init(number: -0.0051, digits: 2, expected: "-0.01")
         ]
 
         for testCase in testCases {
@@ -40,7 +40,7 @@ final class dydxFormatterTests: XCTestCase {
             XCTAssertEqual(formatted, testCase.expected, "Test case: \(testCase)")
         }
     }
-    
+
     func testRaw() {
         struct TestCase {
             let number: NSNumber
@@ -57,7 +57,7 @@ final class dydxFormatterTests: XCTestCase {
             .init(number: 0.001, digits: 2, expected: "0.00"),
             .init(number: -0.005, digits: 2, expected: "-0.01"),
             .init(number: -0.0051, digits: 2, expected: "-0.01"),
-            .init(number: 1123345.123, digits: 2, expected: "1123345,12", locale: Locale(identifier: "fr_FR")),
+            .init(number: 1123345.123, digits: 2, expected: "1123345,12", locale: Locale(identifier: "fr_FR"))
         ]
 
         for testCase in testCases {
@@ -65,7 +65,7 @@ final class dydxFormatterTests: XCTestCase {
             XCTAssertEqual(formatted, testCase.expected, "Test case: \(testCase)")
         }
     }
-    
+
     func testDollarFormatting() throws {
         struct TestCase {
             let number: Double
