@@ -168,7 +168,7 @@ public final class AbacusStateManager: NSObject {
         appConfigs.squidVersion = AppConfigs.SquidVersion.v2
         appConfigsV2.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
 
-        if dydxBoolFeatureFlag.enable_parent_subaccounts.isEnabled {
+        if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
             return AsyncAbacusStateManagerV2(
                 deploymentUri: deploymentUri,
                 deployment: deployment,
