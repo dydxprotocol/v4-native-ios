@@ -18,7 +18,7 @@ final class dydxFormatterTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testDecimalRaw() {
+    func testDecimalLocalAgnostic() {
         struct TestCase {
             let number: NSNumber
             let digits: Int
