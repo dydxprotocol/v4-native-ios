@@ -369,12 +369,12 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     /*
      xxxxxx,yyyyy or xxxxx.yyyyy
      */
-    public func raw(number: NSNumber?, size: String?) -> String? {
+    public func raw(number: NSNumber?, size: String?, locale: Locale = Locale.current) -> String? {
         if let number = number {
             let size = size ?? "0.01"
             let digits = digits(size: size)
             let rounded = rounded(number: number, digits: digits)
-            return raw(number: rounded, digits: digits)
+            return raw(number: rounded, digits: digits, locale: locale)
         } else {
             return nil
         }
@@ -383,21 +383,37 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     /*
      xxxxx.yyyyy
      */
-    public func decimalRaw(number: NSNumber?, size: String?) -> String? {
-        return raw(number: number, size: size)?.replacingOccurrences(of: ",", with: ".")
+    public func decimalLocaleAgnostic(number: NSNumber?, size: String?) -> String? {
+        raw(number: number, size: size, locale: Locale(identifier: "en-US"))
+    }
+
+    /*
+     xxxxx.yyyyy
+     */
+    public func decimalLocaleAgnostic(number: NSNumber?, digits: Int) -> String? {
+        raw(number: number, digits: digits, locale: Locale(identifier: "en-US"))
     }
 
     /*
      xxxxxx,yyyyy or xxxxx.yyyyy
      */
-    public func raw(number: NSNumber?, digits: Int) -> String? {
+    public func raw(number: NSNumber?, digits: Int, locale: Locale = Locale.current) -> String? {
         if let value = number?.doubleValue {
             if value.isFinite {
                 if let number = number {
+                    rawFormatter.locale = locale
                     rawFormatter.minimumFractionDigits = max(digits, 0)
                     rawFormatter.maximumFractionDigits = max(digits, 0)
                     rawFormatter.roundingMode = .halfUp
-                    return rawFormatter.string(from: number)
+
+                    let formatted = rawFormatter.string(from: number)
+
+                    // need to special case for negative 0, see dydxFormatter tests. E.g. "-$0.001" should go to "$0.00"
+                    if let formatted = formatted, rawFormatter.number(from: formatted) == 0 {
+                        return rawFormatter.string(from: 0)
+                    } else {
+                        return formatted
+                    }
                 } else {
                     return nil
                 }
