@@ -390,7 +390,7 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     /*
      xxxxx.yyyyy
      */
-    public func decimalLocalAgnostic(number: NSNumber?, digits: Int) -> String? {
+    public func decimalLocaleAgnostic(number: NSNumber?, digits: Int) -> String? {
         raw(number: number, digits: digits, locale: Locale(identifier: "en-US"))
     }
 

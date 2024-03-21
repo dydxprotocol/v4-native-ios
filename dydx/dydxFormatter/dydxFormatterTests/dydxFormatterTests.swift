@@ -18,7 +18,7 @@ final class dydxFormatterTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testDecimalLocalAgnostic() {
+    func testDecimalLocaleAgnostic() {
         struct TestCase {
             let number: NSNumber
             let digits: Int
@@ -36,7 +36,7 @@ final class dydxFormatterTests: XCTestCase {
         ]
 
         for testCase in testCases {
-            let formatted = dydxFormatter.shared.decimalLocalAgnostic(number: testCase.number, digits: testCase.digits)
+            let formatted = dydxFormatter.shared.decimalLocaleAgnostic(number: testCase.number, digits: testCase.digits)
             XCTAssertEqual(formatted, testCase.expected, "Test case: \(testCase)")
         }
     }
