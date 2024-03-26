@@ -72,7 +72,7 @@ public class dydxWalletSetup: WalletStatusDelegate {
                 self?.status = .connected
                 let walletName = info?.wallet?.name ?? ""
                 let walletType = info?.wallet?.metadata?.shortName?.uppercased()
-                Tracking.shared?.log(event: "ConnectWallet", data: ["walletConnectionType": walletName.uppercased(), "autoReconnect": true])
+                Tracking.shared?.log(event: "ConnectWallet", data: ["walletType": walletName.uppercased(), "autoReconnect": true])
                 self?.sign(wallet: wallet, address: address, ethereumChainId: ethereumChainId, signTypedDataAction: signTypedDataAction, signTypedDataDomainName: signTypedDataDomainName)
             } else if let error = error {
                 self?.status = .error(error)

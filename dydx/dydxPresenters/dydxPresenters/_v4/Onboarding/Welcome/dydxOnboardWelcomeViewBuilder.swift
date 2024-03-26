@@ -37,11 +37,14 @@ private protocol dydxOnboardWelcomeViewPresenterProtocol: HostedViewPresenterPro
 }
 
 private class dydxOnboardWelcomeViewPresenter: HostedViewPresenter<dydxOnboardWelcomeViewModel>, dydxOnboardWelcomeViewPresenterProtocol {
+    private let onboardingAnalytics = OnboardingAnalytics()
+
     override init() {
         super.init()
 
         viewModel = dydxOnboardWelcomeViewModel()
-        viewModel?.ctaAction = {
+        viewModel?.ctaAction = { [weak self] in
+            self?.onboardingAnalytics.log(step: .chooseWallet)
             Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
         }
         viewModel?.tosUrl = AbacusStateManager.shared.environment?.links?.tos

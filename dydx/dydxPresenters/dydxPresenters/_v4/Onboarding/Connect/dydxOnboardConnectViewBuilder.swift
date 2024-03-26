@@ -40,6 +40,8 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
 
     var walletId: String?
 
+    private let onboardingAnalytics = OnboardingAnalytics()
+
     private var step1ViewModel: ProgressStepViewModel = {
         let viewModel = ProgressStepViewModel()
         viewModel.title = DataLocalizer.localize(path: "APP.ONBOARDING.CONNECT_YOUR_WALLET")
@@ -101,6 +103,7 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
             step2ViewModel.status = .completed
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 if let cosmoAddress = result.cosmoAddress, let mnemonic = result.mnemonic {
+                    self?.onboardingAnalytics.log(step: .keyDerivation)
                     self?.finish(ethereumAddress: result.ethereumAddress, cosmoAddress: cosmoAddress, mnemonic: mnemonic, walletId: result.walletId ?? "")
                 }
             }
@@ -123,10 +126,10 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
         AbacusStateManager.shared.state.currentWallet
             .prefix(1)
             .sink { walletInstance in
+                let accepted: (() -> Void) = {
+                    Router.shared?.navigate(to: RoutingRequest(path: "/portfolio", params: ["ethereumAddress": ethereumAddress, "cosmoAddress": cosmoAddress, "mnemonic": mnemonic, "walletId": walletId]), animated: true, completion: nil)
+                }
                 if walletInstance == nil {
-                    let accepted: (() -> Void) = {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/portfolio", params: ["ethereumAddress": ethereumAddress, "cosmoAddress": cosmoAddress, "mnemonic": mnemonic, "walletId": walletId]), animated: true, completion: nil)
-                    }
                     Router.shared?.navigate(to: RoutingRequest(path: "/onboard/tos", params: ["accepted": accepted]), animated: true, completion: nil)
                 } else {
                     Router.shared?.navigate(to: RoutingRequest(path: "/portfolio", params: ["ethereumAddress": ethereumAddress, "cosmoAddress": cosmoAddress, "mnemonic": mnemonic, "walletId": walletId]), animated: true, completion: nil)

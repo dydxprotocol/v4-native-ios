@@ -40,9 +40,12 @@ private protocol dydxTosViewPresenterProtocol: HostedViewPresenterProtocol {
 }
 
 private class dydxTosViewPresenter: HostedViewPresenter<dydxTosViewModel>, dydxTosViewPresenterProtocol {
+    private let onboardingAnalytics = OnboardingAnalytics()
+
     var accepted: (() -> Void)? {
         didSet {
             viewModel?.ctaAction = { [weak self] in
+                self?.onboardingAnalytics.log(step: .acknowledgeTerms)
                 self?.accepted?()
             }
         }
@@ -53,6 +56,7 @@ private class dydxTosViewPresenter: HostedViewPresenter<dydxTosViewModel>, dydxT
 
         viewModel = dydxTosViewModel()
         viewModel?.ctaAction = { [weak self] in
+            self?.onboardingAnalytics.log(step: .acknowledgeTerms)
             self?.accepted?()
         }
         viewModel?.tosUrl = AbacusStateManager.shared.environment?.links?.tos
