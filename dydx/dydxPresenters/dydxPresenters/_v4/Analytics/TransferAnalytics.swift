@@ -21,8 +21,8 @@ final class TransferAnalytics {
     private func log(event: AnalyticsEvent, transferInput: TransferInput) {
         let data = [
             "chainId": Parser.standard.asString(transferInput.chainResource?.chainId),
-            "tokenAddress": transferInput.tokenResouce?.address,
-            "tokenSymbol": transferInput.tokenResouce?.symbol,
+            "tokenAddress": transferInput.tokenResource?.address,
+            "tokenSymbol": transferInput.tokenResource?.symbol,
             "slippage": Parser.standard.asString(transferInput.summary?.slippage),
             "gasFee": Parser.standard.asString(transferInput.summary?.gasFee),
             "bridgeFee": Parser.standard.asString(transferInput.summary?.bridgeFee),
@@ -45,7 +45,7 @@ private extension TransferInput {
         return nil
     }
 
-    var tokenResouce: TransferInputTokenResource? {
+    var tokenResource: TransferInputTokenResource? {
         if let token = token {
             return resources?.tokenResources?[token]
         }

@@ -16,7 +16,7 @@ import dydxStateManager
 
 public class dydxTosViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        let presenter = dydxTosViewPresenter()
+        let presenter = dydxTosViewPresenter(onboardingAnalytics: OnboardingAnalytics())
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
         return dydxTosViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
@@ -40,7 +40,7 @@ private protocol dydxTosViewPresenterProtocol: HostedViewPresenterProtocol {
 }
 
 private class dydxTosViewPresenter: HostedViewPresenter<dydxTosViewModel>, dydxTosViewPresenterProtocol {
-    private let onboardingAnalytics = OnboardingAnalytics()
+    private let onboardingAnalytics: OnboardingAnalytics
 
     var accepted: (() -> Void)? {
         didSet {
@@ -51,14 +51,12 @@ private class dydxTosViewPresenter: HostedViewPresenter<dydxTosViewModel>, dydxT
         }
     }
 
-    override init() {
+    init(onboardingAnalytics: OnboardingAnalytics) {
+        self.onboardingAnalytics = onboardingAnalytics
+
         super.init()
 
         viewModel = dydxTosViewModel()
-        viewModel?.ctaAction = { [weak self] in
-            self?.onboardingAnalytics.log(step: .acknowledgeTerms)
-            self?.accepted?()
-        }
         viewModel?.tosUrl = AbacusStateManager.shared.environment?.links?.tos
         viewModel?.privacyPolicyUrl = AbacusStateManager.shared.environment?.links?.privacy
     }
