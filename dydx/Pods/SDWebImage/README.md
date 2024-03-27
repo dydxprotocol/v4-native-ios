@@ -39,19 +39,20 @@ Note: `SD` is the prefix for **Simple Design** (which is the team name in Daily 
 
 ## For Apple visionOS
 
-From 5.18.0, SDWebImage can be compiled for visionOS platform. However, it's still in beta and may contains issues unlike the stable iOS UIKit support. Welcome to have a try and [report issue](https://github.com/SDWebImage/SDWebImage/issues).
+From 5.19+, SDWebImage supports visionOS on all Package Managers (include CocoaPods/Carthage/SPM). Upgrade the related tools if you're facing issues.
+
+For 5.18+, SDWebImage can be compiled for visionOS platform. However, it's still in beta and may contains issues unlike the stable iOS UIKit support. Welcome to have a try and [report issue](https://github.com/SDWebImage/SDWebImage/issues).
 
 To build on visionOS, currently we only support the standard Xcode integration.
 
 See `Installation with Swift Package Manager` and `Manual Installation Guide` below.
-
-Once the visionOS toolchain is stable, we will add the other package manager support later (include CocoaPods).
 
 ## Supported Image Formats
 
 - Image formats supported by Apple system (JPEG, PNG, TIFF, BMP, ...), including [GIF](https://github.com/SDWebImage/SDWebImage/wiki/Advanced-Usage#gif-coder)/[APNG](https://github.com/SDWebImage/SDWebImage/wiki/Advanced-Usage#apng-coder) animated image
 - HEIC format from iOS 11/macOS 10.13, including animated HEIC from iOS 13/macOS 10.15 via [SDWebImageHEICCoder](https://github.com/SDWebImage/SDWebImage/wiki/Advanced-Usage#heic-coder). For lower firmware, use coder plugin [SDWebImageHEIFCoder](https://github.com/SDWebImage/SDWebImageHEIFCoder)
 - WebP format from iOS 14/macOS 11.0 via [SDWebImageAWebPCoder](https://github.com/SDWebImage/SDWebImage/wiki/Advanced-Usage#awebp-coder). For lower firmware, use coder plugin [SDWebImageWebPCoder](https://github.com/SDWebImage/SDWebImageWebPCoder)
+- JPEG-XL format from iOS 17/macOS 14.0 built-in. For lower firmware, use coder plugin [SDWebImageJPEGXLCoder](https://github.com/SDWebImage/SDWebImageJPEGXLCoder)
 - Support extendable coder plugins for new image formats like BPG, AVIF. And vector format like PDF, SVG. See all the list in [Image coder plugin List](https://github.com/SDWebImage/SDWebImage/wiki/Coder-Plugin-List)
 
 ## Additional modules and Ecosystem
@@ -67,8 +68,8 @@ We support SwiftUI by building a brand new framework called [SDWebImageSwiftUI](
 The new framework introduce two View structs `WebImage` and `AnimatedImage` for SwiftUI world, `ImageIndicator` modifier for any View, `ImageManager` observable object for data source. Supports iOS 13+/macOS 10.15+/tvOS 13+/watchOS 6+ and Swift 5.1. Have a nice try and provide feedback!
 
 #### Coders for additional image formats
-- [SDWebImageWebPCoder](https://github.com/SDWebImage/SDWebImageWebPCoder) - coder for WebP format. iOS 8+/macOS 10.10+. Based on [libwebp](https://chromium.googlesource.com/webm/libwebp)
-- [SDWebImageHEIFCoder](https://github.com/SDWebImage/SDWebImageHEIFCoder) - coder for HEIF format, iOS 8+/macOS 10.10+ support. Based on [libheif](https://github.com/strukturag/libheif)
+- [SDWebImageWebPCoder](https://github.com/SDWebImage/SDWebImageWebPCoder) - coder for WebP format. iOS 9+/macOS 10.11+. Based on [libwebp](https://chromium.googlesource.com/webm/libwebp)
+- [SDWebImageHEIFCoder](https://github.com/SDWebImage/SDWebImageHEIFCoder) - coder for HEIF format, iOS 9+/macOS 10.11+ support. Based on [libheif](https://github.com/strukturag/libheif)
 - [SDWebImageBPGCoder](https://github.com/SDWebImage/SDWebImageBPGCoder) - coder for BPG format. Based on [libbpg](https://github.com/mirrorer/libbpg)
 - [SDWebImageFLIFCoder](https://github.com/SDWebImage/SDWebImageFLIFCoder) - coder for FLIF format. Based on [libflif](https://github.com/FLIF-hub/FLIF)
 - [SDWebImageAVIFCoder](https://github.com/SDWebImage/SDWebImageAVIFCoder) - coder for AVIF (AV1-based) format. Based on [libavif](https://github.com/AOMediaCodec/libavif)
@@ -76,6 +77,7 @@ The new framework introduce two View structs `WebImage` and `AnimatedImage` for 
 - [SDWebImageSVGCoder](https://github.com/SDWebImage/SDWebImageSVGCoder) - coder for SVG vector format. Using built-in frameworks
 - [SDWebImageSVGNativeCoder](https://github.com/SDWebImage/SDWebImageSVGNativeCoder) - coder for SVG-Native vector format. Based on [svg-native](https://github.com/adobe/svg-native-viewer)
 - [SDWebImageLottieCoder](https://github.com/SDWebImage/SDWebImageLottieCoder) - coder for Lottie animation format. Based on [rlottie](https://github.com/Samsung/rlottie)
+- [SDWebImageJPEGXLCoder](https://github.com/SDWebImage/SDWebImageJPEGXLCoder) - coder for JPEG-XL format. iOS 9+/macOS 10.11+. Based on [libjxl](https://github.com/libjxl/libjxl)
 - and more from community!
 
 #### Custom Caches
@@ -88,7 +90,7 @@ The new framework introduce two View structs `WebImage` and `AnimatedImage` for 
 
 #### Integration with 3rd party libraries
 - [SDWebImageLottiePlugin](https://github.com/SDWebImage/SDWebImageLottiePlugin) - plugin to support [Lottie-iOS](https://github.com/airbnb/lottie-ios), vector animation rending with remote JSON files
-- [SDWebImageSVGKitPlugin](https://github.com/SDWebImage/SDWebImageSVGKitPlugin) - plugin to support [SVGKit](https://github.com/SVGKit/SVGKit), SVG rendering using Core Animation, iOS 8+/macOS 10.10+ support
+- [SDWebImageSVGKitPlugin](https://github.com/SDWebImage/SDWebImageSVGKitPlugin) - plugin to support [SVGKit](https://github.com/SVGKit/SVGKit), SVG rendering using Core Animation, iOS 9+/macOS 10.11+ support
 - [SDWebImageFLPlugin](https://github.com/SDWebImage/SDWebImageFLPlugin) - plugin to support [FLAnimatedImage](https://github.com/Flipboard/FLAnimatedImage) as the engine for animated GIFs
 - [SDWebImageYYPlugin](https://github.com/SDWebImage/SDWebImageYYPlugin) - plugin to integrate [YYImage](https://github.com/ibireme/YYImage) & [YYCache](https://github.com/ibireme/YYCache) for image rendering & caching
 
