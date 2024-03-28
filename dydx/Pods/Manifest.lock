@@ -1,9 +1,9 @@
 PODS:
-  - Abacus (1.6.13)
+  - abacus (0.4.18)
   - Amplitude-iOS (4.10.0)
-  - AppsFlyerFramework (6.13.1):
-    - AppsFlyerFramework/Main (= 6.13.1)
-  - AppsFlyerFramework/Main (6.13.1)
+  - AppsFlyerFramework (6.13.2):
+    - AppsFlyerFramework/Main (= 6.13.2)
+  - AppsFlyerFramework/Main (6.13.2)
   - Atributika (5.0.5)
   - BigInt (5.2.0)
   - Charts (3.6.0):
@@ -257,9 +257,9 @@ PODS:
     - PromisesObjC (= 2.4.0)
   - RDHCollectionViewGridLayout (1.2.5)
   - ReachabilitySwift (5.2.1)
-  - SDWebImage (5.19.0):
-    - SDWebImage/Core (= 5.19.0)
-  - SDWebImage/Core (5.19.0)
+  - SDWebImage (5.19.1):
+    - SDWebImage/Core (= 5.19.1)
+  - SDWebImage/Core (5.19.1)
   - SDWebImageSVGCoder (1.7.0):
     - SDWebImage/Core (~> 5.6)
   - SDWebImageSwiftUI (2.2.6):
@@ -272,7 +272,7 @@ PODS:
   - ZSWTappableLabel (3.3.2)
 
 DEPENDENCIES:
-  - Abacus (from `../podspecs/Abacus.podspec`)
+  - abacus (from `~/v4-abacus`)
   - Amplitude-iOS
   - AppsFlyerFramework
   - Atributika
@@ -374,8 +374,8 @@ SPEC REPOS:
     - ZSWTappableLabel
 
 EXTERNAL SOURCES:
-  Abacus:
-    :podspec: "../podspecs/Abacus.podspec"
+  abacus:
+    :path: "~/v4-abacus"
   Charts:
     :branch: releases/3.6.0.3
     :git: https://github.com/dydxprotocol/Charts.git
@@ -390,9 +390,9 @@ CHECKOUT OPTIONS:
     :http: https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz
 
 SPEC CHECKSUMS:
-  Abacus: e7384578413405752f00660160befe9ae7d7a743
+  abacus: 46f62be6dc9b3f888093eb2c9952d0267ab40670
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
-  AppsFlyerFramework: 971521cf5b890c2afeab2f2c91734547b8b169ca
+  AppsFlyerFramework: 39efd4d2523ca9e3234805aea0c6b3c3a4a387d1
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
   BigInt: f668a80089607f521586bbe29513d708491ef2f7
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
@@ -439,7 +439,7 @@ SPEC CHECKSUMS:
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   RDHCollectionViewGridLayout: 4b4229212ed8c136aa70101d92ecd43742ca62b6
   ReachabilitySwift: 5ae15e16814b5f9ef568963fb2c87aeb49158c66
-  SDWebImage: 981fd7e860af070920f249fd092420006014c3eb
+  SDWebImage: 40b0b4053e36c660a764958bff99eed16610acbb
   SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
   SDWebImageSwiftUI: 3a8448b76833ed0e954a651be6c6f45faceed29d
   SimpleKeychain: 8193a9e40967eccac933c1fde82de46c07a5ae26
@@ -448,6 +448,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: 582c5d496bf910ceb49c860c7efd28bf1c85e533
+PODFILE CHECKSUM: 20f3834d6592e6d78fb498af73293ca19cacd729
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.14.3

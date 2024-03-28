@@ -79,6 +79,13 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
             viewModel?.title = firstBlockingError.resources.title?.localizedString
             viewModel?.text = firstBlockingError.resources.text?.localizedString
             viewModel?.errorType = .error
+            if let hyperlinkText = firstBlockingError.linkText,
+                let link = firstBlockingError.link {
+                viewModel?.hyperlinkText = firstBlockingError.linkText
+                viewModel?.validationViewDescriptionHyperlinkAction = {
+                    Router.shared?.navigate(to: URL(string: link), completion: nil)
+                }
+            }
             if viewModel?.state == .hide {
                 viewModel?.state = .showError
             }
@@ -86,6 +93,14 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
             viewModel?.title = firstWarning.resources.title?.localizedString
             viewModel?.text = firstWarning.resources.text?.localizedString
             viewModel?.errorType = .warning
+            viewModel?.hyperlinkText = firstWarning.linkText
+            if let hyperlinkText = firstWarning.linkText,
+                let link = firstWarning.link {
+                viewModel?.hyperlinkText = firstWarning.linkText
+                viewModel?.validationViewDescriptionHyperlinkAction = {
+                    Router.shared?.navigate(to: URL(string: link), completion: nil)
+                }
+            }
             if viewModel?.state == .hide {
                 viewModel?.state = .showError
             }

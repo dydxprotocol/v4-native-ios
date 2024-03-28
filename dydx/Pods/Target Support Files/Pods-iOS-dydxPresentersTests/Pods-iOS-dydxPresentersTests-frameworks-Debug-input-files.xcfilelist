@@ -28,4 +28,4 @@ ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/ZSWTappableLabel/ZSWTappableLabel.framework
 ${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework
 ${BUILT_PRODUCTS_DIR}/pop/pop.framework
-${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework
+${PODS_ROOT}/../../../v4-abacus/build/cocoapods/framework/Abacus.framework
