@@ -36,6 +36,8 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
     }
 
     private let transferType: TransferType
+    private let onboardingAnalytics = OnboardingAnalytics()
+    private let transferAnalytics = TransferAnalytics()
 
     init(transferType: TransferType) {
         self.transferType = transferType
@@ -150,6 +152,8 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                     if let error = error {
                         self?.showError(error: error)
                     } else if let hash = hash {
+                        self?.sendOnboardingAnalytics()
+                        self?.transferAnalytics.logDeposit(transferInput: transferInput)
                         self?.addTransferHash(hash: hash,
                                               fromChainName: transferInput.chainName ?? transferInput.networkName,
                                               toChainName: AbacusStateManager.shared.environment?.chainName,
@@ -233,6 +237,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 if transferInput.isCctp {
                     AbacusStateManager.shared.commitCCTPWithdraw { [weak self] success, error, result in
                         if success {
+                            self?.transferAnalytics.logWithdrawal(transferInput: transferInput)
                             self?.postTransaction(result: result, transferInput: transferInput)
                         } else {
                             ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
@@ -247,6 +252,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                     let usdcBalanceInWallet = usdcBalanceInWallet ?? 0
                     if usdcBalanceInWallet >= gasFee {
                         CosmoJavascript.shared.withdrawToIBC(subaccount: Int(selectedSubaccount.subaccountNumber), amount: amount, payload: data) { [weak self] result in
+                            self?.transferAnalytics.logWithdrawal(transferInput: transferInput)
                             self?.postTransaction(result: result, transferInput: transferInput)
                             self?.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
                         }
@@ -427,6 +433,18 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                                             isCctp: transferInput.isCctp,
                                             requestId: transferInput.requestPayload?.requestId)
         AbacusStateManager.shared.addTransferInstance(transfer: transfer)
+    }
+
+    private func sendOnboardingAnalytics() {
+        AbacusStateManager.shared.state.hasAccount
+            .prefix(1)
+            .sink { [weak self] hasAccount in
+                // only log for newly onboarded users (i.e., user without an account)
+                if !hasAccount {
+                    self?.onboardingAnalytics.log(step: .depositFunds)
+                }
+            }
+            .store(in: &subscriptions)
     }
 }
 
