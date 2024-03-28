@@ -16,8 +16,7 @@ import dydxCartera
 
 public class dydxOnboardConnectViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        let presenter = dydxOnboardConnectViewPresenter(onboardingAnalytics: OnboardingAnalytics(),
-                                                        walletSetup: dydxV4WalletSetup())
+        let presenter = dydxOnboardConnectViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
         return dydxOnboardConnectViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
@@ -61,7 +60,7 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
 
     private let walletSetup: dydxV4WalletSetup
 
-    init(onboardingAnalytics: OnboardingAnalytics = OnboardingAnalytics(), walletSetup: dydxV4WalletSetup = OnboardingAnalytics()) {
+    init(onboardingAnalytics: OnboardingAnalytics = OnboardingAnalytics(), walletSetup: dydxV4WalletSetup = dydxV4WalletSetup()) {
         self.onboardingAnalytics = onboardingAnalytics
         self.walletSetup = walletSetup
 

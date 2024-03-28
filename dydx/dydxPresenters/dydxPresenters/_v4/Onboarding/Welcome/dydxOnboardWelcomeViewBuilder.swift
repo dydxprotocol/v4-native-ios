@@ -16,7 +16,7 @@ import dydxStateManager
 
 public class dydxOnboardWelcomeViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        let presenter = dydxOnboardWelcomeViewPresenter(onboardingAnalytics: OnboardingAnalytics())
+        let presenter = dydxOnboardWelcomeViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
         return dydxOnboardWelcomeViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
@@ -39,7 +39,7 @@ private protocol dydxOnboardWelcomeViewPresenterProtocol: HostedViewPresenterPro
 private class dydxOnboardWelcomeViewPresenter: HostedViewPresenter<dydxOnboardWelcomeViewModel>, dydxOnboardWelcomeViewPresenterProtocol {
     private let onboardingAnalytics: OnboardingAnalytics
 
-    init(onboardingAnalytics: OnboardingAnalytics) {
+    init(onboardingAnalytics: OnboardingAnalytics = OnboardingAnalytics()) {
         self.onboardingAnalytics = OnboardingAnalytics()
         super.init()
 

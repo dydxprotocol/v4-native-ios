@@ -16,7 +16,7 @@ import dydxStateManager
 
 public class dydxTosViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        let presenter = dydxTosViewPresenter(onboardingAnalytics: OnboardingAnalytics())
+        let presenter = dydxTosViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
         return dydxTosViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
@@ -51,7 +51,7 @@ private class dydxTosViewPresenter: HostedViewPresenter<dydxTosViewModel>, dydxT
         }
     }
 
-    init(onboardingAnalytics: OnboardingAnalytics) {
+    init(onboardingAnalytics: OnboardingAnalytics = OnboardingAnalytics()) {
         self.onboardingAnalytics = onboardingAnalytics
 
         super.init()
