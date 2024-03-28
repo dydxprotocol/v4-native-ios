@@ -57,10 +57,12 @@ final class dydxAlertsWorker: BaseWorker {
                 let actions = (link != nil) ? [ErrorAction(text: DataLocalizer.localize(path: "APP.GENERAL.VIEW")) {
                     Router.shared?.navigate(to: RoutingRequest(path: link!), animated: true, completion: nil)
                 }] : nil
-                ErrorInfo.shared?.info(title: alert.title,
-                                       message: alert.text,
-                                       type: alert.type.infoType,
-                                       error: nil, time: nil, actions: actions)
+                if SettingsStore.shouldDisplayInAppNotifications != false {
+                    ErrorInfo.shared?.info(title: alert.title,
+                                           message: alert.text,
+                                           type: alert.type.infoType,
+                                           error: nil, time: nil, actions: actions)
+                }
                 // add to alert ids set to avoid double handling
                 handledAlertHashes.insert(alert.hashValue)
             }
