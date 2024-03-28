@@ -61,9 +61,17 @@ public class dydxCompositeTracking: CompositeTracking {
                 let wallet = CarteraConfig.shared.wallets.first { $0.id == walletState?.walletId }
                 self.set(userId: walletState?.ethereumAddress ?? walletState?.cosmoAddress)
                 //TODO: might have to change this to match https://www.notion.so/dydx/V4-Web-Analytics-Events-d12c9dd791ee4c5d89e48588bb3ef702?pvs=4, but first this linear task needs to finish https://linear.app/dydx/issue/TRCL-2473/create-wallettype-user-property-field-value-in-cartera-wallets-json
-                self.set(userProperty: .walletType, toValue: wallet?.metadata?.shortName?.uppercased() )
+                self.set(userProperty: .walletType, toValue: wallet?.userFields?["analyticEvent"])
                 self.set(userProperty: .dydxAddress, toValue: walletState?.cosmoAddress)
-                self.set(userProperty: .subaccountNumber, toValue: walletState?.subaccountNumber)
+            }
+            .store(in: &subscriptions)
+        
+        AbacusStateManager.shared.state.selectedSubaccount
+            .map(\.?.subaccountNumber)
+            .removeDuplicates()
+            .sink { [weak self] subaccountNumber in
+                guard let self = self else { return }
+                self.set(userProperty: .subaccountNumber, toValue: self.parser.asString(subaccountNumber))
             }
             .store(in: &subscriptions)
     }

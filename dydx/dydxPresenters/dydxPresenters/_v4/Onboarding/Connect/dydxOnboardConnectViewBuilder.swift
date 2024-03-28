@@ -16,7 +16,8 @@ import dydxCartera
 
 public class dydxOnboardConnectViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        let presenter = dydxOnboardConnectViewPresenter()
+        let presenter = dydxOnboardConnectViewPresenter(onboardingAnalytics: OnboardingAnalytics(),
+                                                        walletSetup: dydxV4WalletSetup())
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
         return dydxOnboardConnectViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
@@ -40,6 +41,8 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
 
     var walletId: String?
 
+    private let onboardingAnalytics: OnboardingAnalytics
+
     private var step1ViewModel: ProgressStepViewModel = {
         let viewModel = ProgressStepViewModel()
         viewModel.title = DataLocalizer.localize(path: "APP.ONBOARDING.CONNECT_YOUR_WALLET")
@@ -56,9 +59,12 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
         return viewModel
     }()
 
-    private let walletSetup = dydxV4WalletSetup()
+    private let walletSetup: dydxV4WalletSetup
 
-    override init() {
+    init(onboardingAnalytics: OnboardingAnalytics, walletSetup: dydxV4WalletSetup) {
+        self.onboardingAnalytics = onboardingAnalytics
+        self.walletSetup = walletSetup
+
         super.init()
 
         viewModel = dydxOnboardConnectViewModel()
@@ -101,6 +107,7 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
             step2ViewModel.status = .completed
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 if let cosmoAddress = result.cosmoAddress, let mnemonic = result.mnemonic {
+                    self?.onboardingAnalytics.log(step: .keyDerivation)
                     self?.finish(ethereumAddress: result.ethereumAddress, cosmoAddress: cosmoAddress, mnemonic: mnemonic, walletId: result.walletId ?? "")
                 }
             }
