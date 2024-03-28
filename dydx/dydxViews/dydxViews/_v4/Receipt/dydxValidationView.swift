@@ -9,6 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import RoutingKit
 
 public class dydxValidationViewModel: PlatformViewModel {
     public enum ErrorType {
@@ -39,22 +40,13 @@ public class dydxValidationViewModel: PlatformViewModel {
         }
     }
 
-    public struct Hyperlink {
-        public let text: String
-        public let url: String
-
-        public init(text: String, url: String) {
-            self.text = text
-            self.url = url
-        }
-    }
-
     @Published public var title: String?
     @Published public var text: String?
     @Published public var state: State = .hide
-    @Published public var hyperlink: Hyperlink?
+    @Published public var hyperlinkText: String?
     @Published public var errorType: ErrorType = .error
     @Published public var receiptViewModel: dydxReceiptViewModel? = dydxReceiptViewModel()
+    @Published public var validationViewDescriptionHyperlinkAction: (() -> Void)?
 
     public init() { }
 
@@ -124,18 +116,21 @@ public class dydxValidationViewModel: PlatformViewModel {
                             .frame(minWidth: 0)
                     case .showError:
                         ScrollView(showsIndicators: false) {
-                            VStack(spacing: 8) {
+                            VStack(alignment: .leading, spacing: 8) {
                                 Text(self.text ?? "")
                                     .themeFont(fontType: .base, fontSize: .medium)
                                     .themeColor(foreground: .textTertiary)
-                                Text(self.hyperlink?.text ?? "")
+                                Text(DataLocalizer.localize(path: self.hyperlinkText ?? ""))
                                     .themeFont(fontType: .base, fontSize: .medium)
                                     .themeColor(foreground: .textSecondary)
+                                    .onTapGesture { [weak self] in
+                                        self?.validationViewDescriptionHyperlinkAction?()
+                                    }
                             }
                         }
                         .frame(height: 132)
                     }
-                }.animation(.default, value: self.state)
+                }.animation(.default)
 
             )
         }
