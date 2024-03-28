@@ -75,11 +75,17 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
         let errorMessage = transferInput?.errorMessage
         let firstBlockingError = errors.first { $0.type == ErrorType.error }
         let firstWarning = errors.first { $0.type == ErrorType.warning }
-        viewModel?.hyperlink = .init(hyperlink: transferInput?.hyperlink)
         if let firstBlockingError = firstBlockingError {
             viewModel?.title = firstBlockingError.resources.title?.localizedString
             viewModel?.text = firstBlockingError.resources.text?.localizedString
             viewModel?.errorType = .error
+            if let hyperlinkText = firstBlockingError.linkText,
+                let link = firstBlockingError.link {
+                viewModel?.hyperlinkText = firstBlockingError.linkText
+                viewModel?.validationViewDescriptionHyperlinkAction = {
+                    Router.shared?.navigate(to: URL(string: link), completion: nil)
+                }
+            }
             if viewModel?.state == .hide {
                 viewModel?.state = .showError
             }
@@ -87,6 +93,14 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
             viewModel?.title = firstWarning.resources.title?.localizedString
             viewModel?.text = firstWarning.resources.text?.localizedString
             viewModel?.errorType = .warning
+            viewModel?.hyperlinkText = firstWarning.linkText
+            if let hyperlinkText = firstWarning.linkText,
+                let link = firstWarning.link {
+                viewModel?.hyperlinkText = firstWarning.linkText
+                viewModel?.validationViewDescriptionHyperlinkAction = {
+                    Router.shared?.navigate(to: URL(string: link), completion: nil)
+                }
+            }
             if viewModel?.state == .hide {
                 viewModel?.state = .showError
             }
@@ -100,16 +114,6 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
             }
         } else {
             viewModel?.state = .hide
-        }
-    }
-}
-
-extension dydxValidationViewModel.Hyperlink {
-    init?(hyperlink: TransferInputHyperlink?) {
-        if let text = hyperlink?.label, let url = hyperlink?.url {
-            self.init(text: text, url: url)
-        } else {
-            return nil
         }
     }
 }
