@@ -61,7 +61,7 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
 
     private let walletSetup: dydxV4WalletSetup
 
-    init(onboardingAnalytics: OnboardingAnalytics, walletSetup: dydxV4WalletSetup) {
+    init(onboardingAnalytics: OnboardingAnalytics = OnboardingAnalytics(), walletSetup: dydxV4WalletSetup = OnboardingAnalytics()) {
         self.onboardingAnalytics = onboardingAnalytics
         self.walletSetup = walletSetup
 
