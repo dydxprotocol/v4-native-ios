@@ -11,9 +11,6 @@
          "modalType":"DEPOSIT"
       }
    },
-   "/deposited":{
-      "event":"TransferDeposit"
-   },
    "/hedgies":{
       "event":"NavigatePage",
       "info":{
@@ -204,7 +201,4 @@
          "modalType":"WITHDRAW"
       }
    },
-   "/withdraw/posted":{
-      "event":"TransferWithdraw"
-   }
 }
