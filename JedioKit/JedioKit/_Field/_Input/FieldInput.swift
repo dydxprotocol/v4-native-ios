@@ -160,8 +160,9 @@ import Utilities
     public func validate() -> Error? {
         if field?.definition(for: "field") != nil {
             let optional = input?.optional ?? false
-            let fieldName = field?.title?["text"] as? String ?? field?.subtext?["text"] as? String
-            return validator?.validate(field: fieldName, data: string, optional: optional)
+            let fieldName = field?.title?["text"] as? String ?? field?.subtext?["text"] as? String ?? ""
+            let fieldNameLocalized = DataLocalizer.shared?.localize(path: fieldName, params: nil) ?? fieldName
+            return validator?.validate(field: fieldNameLocalized, data: string, optional: optional)
         }
         return nil
     }

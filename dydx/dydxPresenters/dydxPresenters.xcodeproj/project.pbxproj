@@ -141,6 +141,9 @@
 		278A4D1E2B8EA95A003898EB /* dydxCollectFeedbackActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4D1D2B8EA95A003898EB /* dydxCollectFeedbackActionBuilder.swift */; };
 		278A4D932B8FA5E8003898EB /* dydxRateAppViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4D922B8FA5E8003898EB /* dydxRateAppViewBuilder.swift */; };
 		278A4DA42B8FDD9D003898EB /* dydxRatingsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4DA32B8FDD9D003898EB /* dydxRatingsWorker.swift */; };
+		278EA5612BB60F51007A0E17 /* notifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 278EA5602BB60F51007A0E17 /* notifications.json */; };
+		278EA5642BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278EA5632BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift */; };
+		278EA5662BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278EA5652BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift */; };
 		27B957ED2B97C07400EF9304 /* dydxShareActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B957EC2B97C07400EF9304 /* dydxShareActionBuilder.swift */; };
 		27C027532AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027522AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift */; };
 		27DB2EA32AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DB2EA22AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift */; };
@@ -491,6 +494,9 @@
 		278A4D1D2B8EA95A003898EB /* dydxCollectFeedbackActionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCollectFeedbackActionBuilder.swift; sourceTree = "<group>"; };
 		278A4D922B8FA5E8003898EB /* dydxRateAppViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRateAppViewBuilder.swift; sourceTree = "<group>"; };
 		278A4DA32B8FDD9D003898EB /* dydxRatingsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRatingsWorker.swift; sourceTree = "<group>"; };
+		278EA5602BB60F51007A0E17 /* notifications.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = notifications.json; sourceTree = "<group>"; };
+		278EA5632BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNotificationsSettingsViewBuilder.swift; sourceTree = "<group>"; };
+		278EA5652BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyValueStoreProtocolStore+Ext.swift"; sourceTree = "<group>"; };
 		27B957EC2B97C07400EF9304 /* dydxShareActionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxShareActionBuilder.swift; sourceTree = "<group>"; };
 		27C027522AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsHelpRowViewPresenter.swift; sourceTree = "<group>"; };
 		27DB2EA22AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradeRestrictedViewPresenter.swift; sourceTree = "<group>"; };
@@ -628,6 +634,7 @@
 				024F487B29657DFC00E40247 /* User */,
 				026FC3F12AFACA5700C52F20 /* Marker */,
 				0276FA982A0DB8FD000BDF0B /* Model+Ext.swift */,
+				278EA5652BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift */,
 			);
 			path = _v4;
 			sourceTree = "<group>";
@@ -874,6 +881,7 @@
 		0258BA1E299294A90098E1BE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				278EA5622BB61094007A0E17 /* Notifications */,
 				277E90052B1EA093005CCBCB /* TradingRewards */,
 				02B27A3B2AE8BC6B00A995EC /* Help */,
 				0273A1392ACCC4A9001B89F5 /* History */,
@@ -1208,6 +1216,7 @@
 		02E7B36B29D79A4400D6626D /* _Features */ = {
 			isa = PBXGroup;
 			children = (
+				278EA5602BB60F51007A0E17 /* notifications.json */,
 				02E7B36E29D79A4400D6626D /* features.json */,
 				02E7B37229D79A4400D6626D /* debug.json */,
 				02E7B37D29D79A4400D6626D /* debug_default.json */,
@@ -1340,6 +1349,14 @@
 				278A4D922B8FA5E8003898EB /* dydxRateAppViewBuilder.swift */,
 			);
 			path = Rating;
+			sourceTree = "<group>";
+		};
+		278EA5622BB61094007A0E17 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				278EA5632BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		27DB2E932AC1E7040047BC39 /* Error */ = {
@@ -1696,6 +1713,7 @@
 				0279656C29D795E8004DEB20 /* routing_swiftui.json in Resources */,
 				02DA6E0E2AD897EE0048126C /* starkex-eth.js in Resources */,
 				2741E3702A68787A000FA190 /* settings_direction_color_preference.json in Resources */,
+				278EA5612BB60F51007A0E17 /* notifications.json in Resources */,
 				02E7B39829D79A4400D6626D /* features.json in Resources */,
 				02E7B3A729D79A4400D6626D /* debug_default.json in Resources */,
 				02E7B39929D79A4400D6626D /* test.js in Resources */,
@@ -1855,6 +1873,7 @@
 				0236F0CB2968793A00EB995F /* dydxPortfolioFillsViewPresenter.swift in Sources */,
 				02A565AF2A5E310B0035469F /* dydxAlertsProvider.swift in Sources */,
 				025841F428EE9DE8007338D3 /* dydxAssetItemChartViewPresenter.swift in Sources */,
+				278EA5662BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift in Sources */,
 				02860A9F29C15E760079E644 /* dydxOnboardScanViewBuilder.swift in Sources */,
 				277E90332B1FAE9A005CCBCB /* dydxRewardsHelpViewPresenter.swift in Sources */,
 				02FAFA5C29D4E08E001A0903 /* dydxDebugViewBuilder.swift in Sources */,
@@ -1889,6 +1908,7 @@
 				028AC6A42A5E564B00FE0891 /* dydxTransferAlertsProvider.swift in Sources */,
 				02B27A492AE8BC7600A995EC /* dydxHelpViewPresenter.swift in Sources */,
 				0258BA2929929E870098E1BE /* dydxProfileButtonsViewPresenter.swift in Sources */,
+				278EA5642BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift in Sources */,
 				023848C52A9E6BD800B1A673 /* dydxSystemStatusBuilder.swift in Sources */,
 				276908FF2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift in Sources */,
 				6496DBC9295CBBDD00174CE7 /* dydxV4TabBarBuilder.swift in Sources */,

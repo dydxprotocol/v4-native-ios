@@ -255,6 +255,10 @@
                         "/my-profile"
                     ]
                 },
+                "/settings/notifications":{
+                    "destination":"dydxPresenters.dydxNotificationsSettingsViewBuilder",
+                    "presentation":"push"
+                },
                 "/settings/debug":{
                     "destination":"dydxPresenters.dydxDebugViewBuilder",
                     "presentation":"push"
