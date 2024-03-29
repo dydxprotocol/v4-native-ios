@@ -32,7 +32,7 @@ public class FieldInputSwitchViewModel: FieldInputBaseViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
-                HStack {
+                HStack(spacing: 0) {
                     VStack(alignment: .leading) {
                         Text(self.title ?? "")
                             .themeFont(fontSize: .medium)
@@ -42,6 +42,7 @@ public class FieldInputSwitchViewModel: FieldInputBaseViewModel {
                                 .themeFont(fontSize: .small)
                         }
                     }
+                    .fixedSize()
                     Spacer()
                     Toggle("", isOn: self.inputBinding)
                 }

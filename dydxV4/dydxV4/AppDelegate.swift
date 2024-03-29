@@ -53,14 +53,6 @@ class AppDelegate: CommonAppDelegate {
         super.injectAppStart(completion: completion)
     }
 
-    private func initializeSettingsStoreDefaults() {
-        for (key, value) in dydxDebugSettingsStore.defaultValues {
-            if SettingsStore.shared?.value(forKey: key) == nil {
-                SettingsStore.shared?.setValue(value, forKey: key)
-            }
-        }
-    }
-
     open func cleanUp() {
         let flagTag = "cleaning_flag1"
         let flag = UserDefaults.standard.bool(forKey: flagTag)
@@ -91,7 +83,6 @@ class AppDelegate: CommonAppDelegate {
             if dydxBoolFeatureFlag.full_story.isEnabled {
                 // _ = dydxFullStoryInteractor.shared
             }
-            self?.initializeSettingsStoreDefaults()
             completion()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
