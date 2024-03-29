@@ -18,10 +18,10 @@ import dydxStateManager
 class SettingsLandingViewPresenter: SettingsViewPresenter {
 
     private enum DeepLink: String {
-        case language = "{APP_SCHEME}:///settings/language"
-        case theme = "{APP_SCHEME}:///settings/theme"
-        case env = "{APP_SCHEME}:///settings/env"
-        case colorPreference = "{APP_SCHEME}:///settings/direction_color_preference"
+        case language = "/settings/language"
+        case theme = "/settings/theme"
+        case env = "/settings/env"
+        case colorPreference = "/settings/direction_color_preference"
 
         var settingsStoreKey: String {
             switch self {
