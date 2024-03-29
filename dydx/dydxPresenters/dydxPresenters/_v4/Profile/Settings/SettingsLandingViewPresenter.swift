@@ -26,11 +26,11 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
 
         var settingsStoreKey: String {
             switch self {
-            case .language: return SettingsStore.Key.language.rawValue
-            case .theme: return SettingsStore.Key.v4Theme.rawValue
+            case .language: return dydxSettingsStoreKey.language.rawValue
+            case .theme: return dydxSettingsStoreKey.v4Theme.rawValue
             case .env: return "AbacusStateManager.EnvState"
-            case .colorPreference: return SettingsStore.Key.directionColorPreference.rawValue
-            case .notifications: return SettingsStore.Key.shouldDisplayInAppNotifications.rawValue
+            case .colorPreference: return dydxSettingsStoreKey.directionColorPreference.rawValue
+            case .notifications: return dydxSettingsStoreKey.shouldDisplayInAppNotifications.rawValue
             }
         }
 
