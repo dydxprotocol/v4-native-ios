@@ -11,7 +11,7 @@ import dydxViews
 
 extension SettingsStore {
 
-    private enum Key: String {
+    enum Key: String {
         case language = "language"
         case v4Theme = "v4_theme"
         case directionColorPreference = "direction_color_preference"
