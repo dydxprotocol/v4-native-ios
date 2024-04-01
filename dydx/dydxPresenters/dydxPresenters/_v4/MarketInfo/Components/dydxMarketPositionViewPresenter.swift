@@ -32,7 +32,7 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         #if DEBUG
         viewModel?.takeProfitStopLossAction = {[weak self] in
             if let assetId = self?.position?.assetId {
-                Router.shared?.navigate(to: RoutingRequest(path: "/trade/take_proft_stop_loss", params: ["marketId": "\(assetId)-USD"]), animated: true, completion: nil)
+                Router.shared?.navigate(to: RoutingRequest(path: "/trade/take_profit_stop_loss", params: ["marketId": "\(assetId)-USD"]), animated: true, completion: nil)
             }
         }
         #endif
