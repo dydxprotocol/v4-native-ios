@@ -9,6 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import RoutingKit
 
 public class dydxValidationViewModel: PlatformViewModel {
     public enum ErrorType {
@@ -42,8 +43,10 @@ public class dydxValidationViewModel: PlatformViewModel {
     @Published public var title: String?
     @Published public var text: String?
     @Published public var state: State = .hide
+    @Published public var hyperlinkText: String?
     @Published public var errorType: ErrorType = .error
     @Published public var receiptViewModel: dydxReceiptViewModel? = dydxReceiptViewModel()
+    @Published public var validationViewDescriptionHyperlinkAction: (() -> Void)?
 
     public init() { }
 
@@ -107,20 +110,28 @@ public class dydxValidationViewModel: PlatformViewModel {
                         }
                     }
 
-                    Group {
-                        if self.state == .hide || self.state == .showReceipt {
-                            self.receiptViewModel?.createView(parentStyle: style)
-                                .frame(minWidth: 0)
-                        } else {
-                            ScrollView(showsIndicators: false) {
+                    switch self.state {
+                    case .hide, .showReceipt:
+                        self.receiptViewModel?.createView(parentStyle: style)
+                            .frame(minWidth: 0)
+                    case .showError:
+                        ScrollView(showsIndicators: false) {
+                            VStack(alignment: .leading, spacing: 8) {
                                 Text(self.text ?? "")
-                                    .themeFont(fontSize: .small)
+                                    .themeFont(fontType: .base, fontSize: .medium)
+                                    .themeColor(foreground: .textTertiary)
+                                Text(DataLocalizer.localize(path: self.hyperlinkText ?? ""))
+                                    .themeFont(fontType: .base, fontSize: .medium)
+                                    .themeColor(foreground: .textSecondary)
+                                    .onTapGesture { [weak self] in
+                                        self?.validationViewDescriptionHyperlinkAction?()
+                                    }
                             }
-                            .frame(height: 132)
                         }
+                        .frame(height: 132)
                     }
-                }
-                .animation(.default)
+                }.animation(.default)
+
             )
         }
     }
