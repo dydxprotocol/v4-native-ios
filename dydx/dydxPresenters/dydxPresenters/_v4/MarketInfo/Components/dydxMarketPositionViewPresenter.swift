@@ -28,7 +28,14 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
 
         self.viewModel = viewModel
 
-        viewModel?.shareAction = {}
+        // hide for now until feature work complete
+        #if DEBUG
+        viewModel?.takeProfitStopLossAction = {[weak self] in
+            if let assetId = self?.position?.assetId {
+                Router.shared?.navigate(to: RoutingRequest(path: "/trade/take_proft_stop_loss", params: ["marketId": "\(assetId)-USD"]), animated: true, completion: nil)
+            }
+        }
+        #endif
         viewModel?.closeAction = {[weak self] in
             if let assetId = self?.position?.assetId {
                 Router.shared?.navigate(to: RoutingRequest(path: "/trade/close", params: ["marketId": "\(assetId)-USD"]), animated: true, completion: nil)
