@@ -12,6 +12,7 @@ import Utilities
 
 public class dydxMarketPositionViewModel: PlatformViewModel {
     @Published public var shareAction: (() -> Void)?
+    @Published public var takeProfitStopLossAction: (() -> Void)?
     @Published public var closeAction: (() -> Void)?
     @Published public var unrealizedPNLAmount: SignedAmountViewModel?
     @Published public var unrealizedPNLPercent: String?
@@ -209,6 +210,22 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 
                 PlatformButtonViewModel(content: content.wrappedViewModel, state: .disabled) {
                     shareAction()
+                }
+                .createView(parentStyle: parentStyle)
+            }
+
+            if let takeProfitStopLossAction = self.takeProfitStopLossAction {
+                let content = AnyView(
+                    HStack {
+                        Spacer()
+                        Text(DataLocalizer.localize(path: "APP.TRADE.ADD_TP_SL"))
+                            .themeFont(fontSize: .medium)
+                        Spacer()
+                    }
+                )
+
+                PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+                    takeProfitStopLossAction()
                 }
                 .createView(parentStyle: parentStyle)
             }

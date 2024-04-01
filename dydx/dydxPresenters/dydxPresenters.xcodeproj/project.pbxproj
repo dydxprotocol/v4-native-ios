@@ -125,6 +125,7 @@
 		02FA5B7E2A12FB280045F2F5 /* dydxTransferWithdrawalViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA5B7D2A12FB280045F2F5 /* dydxTransferWithdrawalViewPresenter.swift */; };
 		02FAFA5C29D4E08E001A0903 /* dydxDebugViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FAFA5B29D4E08E001A0903 /* dydxDebugViewBuilder.swift */; };
 		02FF0BD229AE92FE00781EDA /* dydxWalletListViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF0BD129AE92FE00781EDA /* dydxWalletListViewBuilder.swift */; };
+		27044F702BBB1CDF004C750D /* dydxTakeProfitStopLossViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27044F6F2BBB1CDF004C750D /* dydxTakeProfitStopLossViewPresenter.swift */; };
 		270BA8F32A6F278F009212EA /* dydxDebugThemeViewerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270BA8F22A6F278F009212EA /* dydxDebugThemeViewerBuilder.swift */; };
 		270E7E242A5F6B1B00136793 /* dydxTradeInputSideViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270E7E232A5F6B1B00136793 /* dydxTradeInputSideViewPresenter.swift */; };
 		27351D452AC4A67900E4A563 /* dydxRestrictionsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27351D442AC4A67900E4A563 /* dydxRestrictionsWorker.swift */; };
@@ -478,6 +479,7 @@
 		02FA5B7D2A12FB280045F2F5 /* dydxTransferWithdrawalViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferWithdrawalViewPresenter.swift; sourceTree = "<group>"; };
 		02FAFA5B29D4E08E001A0903 /* dydxDebugViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxDebugViewBuilder.swift; sourceTree = "<group>"; };
 		02FF0BD129AE92FE00781EDA /* dydxWalletListViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWalletListViewBuilder.swift; sourceTree = "<group>"; };
+		27044F6F2BBB1CDF004C750D /* dydxTakeProfitStopLossViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTakeProfitStopLossViewPresenter.swift; sourceTree = "<group>"; };
 		270BA8F22A6F278F009212EA /* dydxDebugThemeViewerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxDebugThemeViewerBuilder.swift; sourceTree = "<group>"; };
 		270E7E232A5F6B1B00136793 /* dydxTradeInputSideViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradeInputSideViewPresenter.swift; sourceTree = "<group>"; };
 		27351D442AC4A67900E4A563 /* dydxRestrictionsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRestrictionsWorker.swift; sourceTree = "<group>"; };
@@ -627,6 +629,7 @@
 				0252A39528C10A5500C8E2C9 /* RootTab */,
 				02F99F2A29E4BFF90009B3E8 /* Search */,
 				02D1342328EB56B900B46941 /* Shared */,
+				27044F6D2BBB1CB0004C750D /* TakeProfitStopLoss */,
 				02A5C859297FBCCB00FFE1F9 /* Transfer */,
 				6496DC3C295E121000174CE7 /* Trade */,
 				0262EFA729D79EF3009889E2 /* Wallet */,
@@ -1315,6 +1318,14 @@
 			path = WalletList;
 			sourceTree = "<group>";
 		};
+		27044F6D2BBB1CB0004C750D /* TakeProfitStopLoss */ = {
+			isa = PBXGroup;
+			children = (
+				27044F6F2BBB1CDF004C750D /* dydxTakeProfitStopLossViewPresenter.swift */,
+			);
+			path = TakeProfitStopLoss;
+			sourceTree = "<group>";
+		};
 		2741E3712A689702000FA190 /* DirectionColorPreference */ = {
 			isa = PBXGroup;
 			children = (
@@ -1923,6 +1934,7 @@
 				02F6E71F2A8293270018F00C /* dydxProfileFeesViewPresenter.swift in Sources */,
 				647D0F152A9FB1C600DA7815 /* dydxFrontendAlertsProvider.swift in Sources */,
 				02D1345828ECF30000B46941 /* dydxMarketsSearchViewBuilder.swift in Sources */,
+				27044F702BBB1CDF004C750D /* dydxTakeProfitStopLossViewPresenter.swift in Sources */,
 				64529A4C2AE8705E000810E6 /* dydxUpdateWorker.swift in Sources */,
 				278A4DA42B8FDD9D003898EB /* dydxRatingsWorker.swift in Sources */,
 				02DDAD55292587C600CC7531 /* QRCodeDisplayBuilder.swift in Sources */,

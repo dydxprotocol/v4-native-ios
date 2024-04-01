@@ -151,6 +151,7 @@
 		02FD2B8B292307A200A5609E /* LeverageRiskChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FD2B8A292307A200A5609E /* LeverageRiskChange.swift */; };
 		02FF0BCE29AE928700781EDA /* dydxWalletListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF0BCD29AE928700781EDA /* dydxWalletListView.swift */; };
 		02FF0BD529AEB91900781EDA /* dydxWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF0BD429AEB91900781EDA /* dydxWalletView.swift */; };
+		27044F7F2BBB1D5A004C750D /* dydxTakeProfitStopLossViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27044F7E2BBB1D5A004C750D /* dydxTakeProfitStopLossViewModel.swift */; };
 		270BA8CF2A6F1470009212EA /* dydxDebugThemeViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270BA8CE2A6F1470009212EA /* dydxDebugThemeViewerView.swift */; };
 		270E7E342A5F700B00136793 /* dydxOrderbookManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270E7E332A5F700B00136793 /* dydxOrderbookManagerView.swift */; };
 		272030182A7812B900D233B9 /* UINavigationController+SwipeBackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272030172A7812B900D233B9 /* UINavigationController+SwipeBackNavigation.swift */; };
@@ -499,6 +500,7 @@
 		02FD2B8A292307A200A5609E /* LeverageRiskChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeverageRiskChange.swift; sourceTree = "<group>"; };
 		02FF0BCD29AE928700781EDA /* dydxWalletListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWalletListView.swift; sourceTree = "<group>"; };
 		02FF0BD429AEB91900781EDA /* dydxWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWalletView.swift; sourceTree = "<group>"; };
+		27044F7E2BBB1D5A004C750D /* dydxTakeProfitStopLossViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTakeProfitStopLossViewModel.swift; sourceTree = "<group>"; };
 		270BA8CE2A6F1470009212EA /* dydxDebugThemeViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxDebugThemeViewerView.swift; sourceTree = "<group>"; };
 		270E7E332A5F700B00136793 /* dydxOrderbookManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOrderbookManagerView.swift; sourceTree = "<group>"; };
 		272030172A7812B900D233B9 /* UINavigationController+SwipeBackNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+SwipeBackNavigation.swift"; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 		0230375D28C11AFA00412B72 /* _v4 */ = {
 			isa = PBXGroup;
 			children = (
+				27044F712BBB1D44004C750D /* TakeProfitStopLoss */,
 				278A4D942B8FA5F5003898EB /* Rating */,
 				27ED364E2AD7358C00C159F5 /* Auth */,
 				27AAA9782ACE34B600AF3C56 /* Banner */,
@@ -1357,6 +1360,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		27044F712BBB1D44004C750D /* TakeProfitStopLoss */ = {
+			isa = PBXGroup;
+			children = (
+				27044F7E2BBB1D5A004C750D /* dydxTakeProfitStopLossViewModel.swift */,
+			);
+			path = TakeProfitStopLoss;
+			sourceTree = "<group>";
+		};
 		270BA8C12A6F145B009212EA /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1989,6 +2000,7 @@
 				02DDAD3C2925859D00CC7531 /* QRCodeDisplay.swift in Sources */,
 				0276FA7C2A0DB515000BDF0B /* OrderStatus.swift in Sources */,
 				024B7B4F28B7F85100F7C386 /* SideText.swift in Sources */,
+				27044F7F2BBB1D5A004C750D /* dydxTakeProfitStopLossViewModel.swift in Sources */,
 				64A4DB5D296620DE008D8E20 /* dydxTradeInputExecutionView.swift in Sources */,
 				024F47AB2964AAE200E40247 /* dydxMarketConfigsView.swift in Sources */,
 				64A4DB7429662629008D8E20 /* dydxTradeInputLeverageView.swift in Sources */,
