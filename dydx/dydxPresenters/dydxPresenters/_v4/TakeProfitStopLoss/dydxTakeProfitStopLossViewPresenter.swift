@@ -14,6 +14,7 @@ import RoutingKit
 import Utilities
 import PlatformRouting
 import PanModal
+import Combine
 
 public class dydxTakeProfitStopLossViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -25,8 +26,9 @@ public class dydxTakeProfitStopLossViewBuilder: NSObject, ObjectBuilderProtocol 
 
 private class dydxTakeProfitStopLossViewController: HostingViewController<PlatformView, dydxTakeProfitStopLossViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if request?.path == "/trade/take_proft_stop_loss", let marketId = parser.asString(request?.params?["marketId"]) {
+        if request?.path == "/trade/take_profit_stop_loss", let marketId = parser.asString(request?.params?["marketId"]), let presenter = presenter as? dydxTakeProfitStopLossViewPresenter {
             AbacusStateManager.shared.setMarket(market: marketId)
+            presenter.marketId = marketId
             return true
         }
         return false
@@ -38,6 +40,25 @@ private protocol dydxTakeProfitStopLossViewPresenterProtocol: HostedViewPresente
 }
 
 private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeProfitStopLossViewModel>, dydxTakeProfitStopLossViewPresenterProtocol {
+    fileprivate var marketId: String?
+
+    override func start() {
+        super.start()
+
+        guard let marketId = marketId else { return }
+
+        Publishers
+            .CombineLatest(AbacusStateManager.shared.state.selectedSubaccountPositions,
+                            AbacusStateManager.shared.state.market(of: marketId))
+            .sink { [weak self] subaccountPositions, market in
+                let position = subaccountPositions.first { subaccountPosition in
+                    subaccountPosition.id == self?.marketId
+                }
+                self?.viewModel?.entryPrice = position?.entryPrice?.current?.doubleValue
+                self?.viewModel?.oraclePrice = market?.oraclePrice?.doubleValue
+            }
+            .store(in: &subscriptions)
+    }
 
     override init() {
         let viewModel = dydxTakeProfitStopLossViewModel()
