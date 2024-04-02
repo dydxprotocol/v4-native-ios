@@ -125,7 +125,6 @@ PODS:
     - PromisesSwift (~> 2.1)
   - FirebaseSharedSwift (10.23.0)
   - FloatingPanel (2.7.0)
-  - FullStory (1.29.0)
   - GoogleAppMeasurement (10.23.1):
     - GoogleAppMeasurement/AdIdSupport (= 10.23.1)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
@@ -291,7 +290,6 @@ DEPENDENCIES:
   - Firebase/RemoteConfig
   - FirebaseCrashlytics
   - FloatingPanel (= 2.7.0)
-  - "FullStory (from `{:http=>\"https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz\"}`)"
   - GoogleToolboxForMac
   - GoogleUtilities
   - GTMSessionFetcher
@@ -379,15 +377,11 @@ EXTERNAL SOURCES:
   Charts:
     :branch: releases/3.6.0.3
     :git: https://github.com/dydxprotocol/Charts.git
-  FullStory:
-    :http: https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz
 
 CHECKOUT OPTIONS:
   Charts:
     :commit: 62e38eb96692b9c3bf15ac7d7812910bf62c6827
     :git: https://github.com/dydxprotocol/Charts.git
-  FullStory:
-    :http: https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz
 
 SPEC CHECKSUMS:
   Abacus: 74e9d01baa9f017414ca85340ab57631bc6f3fdd
@@ -418,7 +412,6 @@ SPEC CHECKSUMS:
   FirebaseSessions: f06853e30f99fe42aa511014d7ee6c8c319f08a3
   FirebaseSharedSwift: c92645b392db3c41a83a0aa967de16f8bad25568
   FloatingPanel: c88e3fd981b7a74121ff48746fb14d496f5fd553
-  FullStory: 29e764d32050cb943d38b7b82c60b2f65f814737
   GoogleAppMeasurement: 794d1d2f71fdf77a077a3986258a5c2dac0f9d48
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
@@ -448,6 +441,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: 582c5d496bf910ceb49c860c7efd28bf1c85e533
+PODFILE CHECKSUM: 96db9e18859b897ba93282f59a6a43f75d6c5312
 
 COCOAPODS: 1.15.2

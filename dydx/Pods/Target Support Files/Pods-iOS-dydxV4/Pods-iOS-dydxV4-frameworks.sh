@@ -228,7 +228,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework"
   install_framework "${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework"
-  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FullStory/FullStory.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework"
@@ -283,7 +282,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework"
   install_framework "${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework"
-  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FullStory/FullStory.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
