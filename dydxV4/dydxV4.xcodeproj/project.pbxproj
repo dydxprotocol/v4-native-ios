@@ -204,20 +204,6 @@
 			remoteGlobalIDString = 024B79C428B7F53800F7C386;
 			remoteInfo = dydxViewsTests;
 		};
-		0296233F289881DF009E4A5B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02962333289881DF009E4A5B /* FullStoryInjections.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0212CD29289838E300EBF7E4;
-			remoteInfo = FullStoryInjections;
-		};
-		02962341289881DF009E4A5B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02962333289881DF009E4A5B /* FullStoryInjections.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0212CD31289838E300EBF7E4;
-			remoteInfo = FullStoryInjectionsTests;
-		};
 		029E11EA29ADB9BC00FE271C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */;
@@ -801,7 +787,6 @@
 		027B7CA52AD5E559005A8288 /* configs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = configs; path = "../../../v4-web/public/configs"; sourceTree = "<group>"; };
 		027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformUIJedio.xcodeproj; path = ../PlatformUIJedio/PlatformUIJedio.xcodeproj; sourceTree = "<group>"; };
 		028420C729AD77F400C0E7CC /* dydxFormatter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFormatter.xcodeproj; path = ../dydx/dydxFormatter/dydxFormatter.xcodeproj; sourceTree = "<group>"; };
-		02962333289881DF009E4A5B /* FullStoryInjections.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FullStoryInjections.xcodeproj; path = ../FullStoryInjections/FullStoryInjections.xcodeproj; sourceTree = "<group>"; };
 		029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxChart.xcodeproj; path = ../dydx/dydxChart/dydxChart.xcodeproj; sourceTree = "<group>"; };
 		02A5BB9E2A04617800BEE77E /* dydxAbacusDataLocalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAbacusDataLocalizer.swift; sourceTree = "<group>"; };
 		02C7262A29D793C90098AFBC /* dydxCompositeTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCompositeTracking.swift; sourceTree = "<group>"; };
@@ -958,7 +943,6 @@
 				029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */,
 				028420C729AD77F400C0E7CC /* dydxFormatter.xcodeproj */,
 				025B83C328AAAB120037FF7C /* PlatformUI.xcodeproj */,
-				02962333289881DF009E4A5B /* FullStoryInjections.xcodeproj */,
 				6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */,
 				31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */,
 				024B7AC928B7F73700F7C386 /* dydxViews.xcodeproj */,
@@ -1019,15 +1003,6 @@
 			children = (
 				0293B69B28CE94E200DDB103 /* dydxViews.framework */,
 				0293B69D28CE94E200DDB103 /* dydxViewsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		02962334289881DF009E4A5B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				02962340289881DF009E4A5B /* FullStoryInjections.framework */,
-				02962342289881DF009E4A5B /* FullStoryInjectionsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1528,10 +1503,6 @@
 					ProjectRef = 31B779F822DAD020004F9B21 /* FirebaseStaticInjections.xcodeproj */;
 				},
 				{
-					ProductGroup = 02962334289881DF009E4A5B /* Products */;
-					ProjectRef = 02962333289881DF009E4A5B /* FullStoryInjections.xcodeproj */;
-				},
-				{
 					ProductGroup = 31B77A4422DAD021004F9B21 /* Products */;
 					ProjectRef = 31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */;
 				},
@@ -1668,20 +1639,6 @@
 			fileType = wrapper.cfbundle;
 			path = dydxViewsTests.xctest;
 			remoteRef = 0293B69C28CE94E200DDB103 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		02962340289881DF009E4A5B /* FullStoryInjections.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FullStoryInjections.framework;
-			remoteRef = 0296233F289881DF009E4A5B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		02962342289881DF009E4A5B /* FullStoryInjectionsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = FullStoryInjectionsTests.xctest;
-			remoteRef = 02962341289881DF009E4A5B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		029E11EB29ADB9BC00FE271C /* dydxChart.framework */ = {
