@@ -20,7 +20,8 @@ public class dydxTakeProfitStopLossViewBuilder: NSObject, ObjectBuilderProtocol 
     public func build<T>() -> T? {
         let presenter = dydxTakeProfitStopLossViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxTakeProfitStopLossViewController(presenter: presenter, view: view, configuration: .default) as? T
+        let configuration = HostingViewControllerConfiguration(fixedHeight: UIScreen.main.bounds.height)
+        return dydxTakeProfitStopLossViewController(presenter: presenter, view: view, configuration: configuration) as? T
     }
 }
 
