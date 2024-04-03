@@ -95,26 +95,6 @@
             },
             {
                 "title":{
-                    "text":"FullStory Integration"
-                },
-                "field":{
-                    "field":"full_story",
-                    "optional":true,
-                    "type" : "text",
-                    "options" : [
-                        {
-                            "text": "yes",
-                            "value" : "1"
-                        },
-                        {
-                            "text": "no",
-                            "value" : "0"
-                        }
-                    ]
-                }
-            },
-            {
-                "title":{
                     "text":"Enabled Isolated Margins"
                 },
                 "field":{

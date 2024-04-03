@@ -56,9 +56,6 @@
       location = "group:../FirebaseStaticInjections/FirebaseStaticInjections.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../FullStoryInjections/FullStoryInjections.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:../JedioKit/JedioKit.xcodeproj">
    </FileRef>
    <FileRef

@@ -80,9 +80,6 @@ class AppDelegate: CommonAppDelegate {
 
         let localCompletion = { [weak self] in
             // This gets called after passing the security/login screen
-            if dydxBoolFeatureFlag.full_story.isEnabled {
-                // _ = dydxFullStoryInteractor.shared
-            }
             completion()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in

@@ -2267,8 +2267,6 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/pop\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/secp256k1.swift\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/web3.swift\"",
-					"\"${PODS_ROOT}/FullStory\"",
-					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/FullStory\"",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxViews;
@@ -2349,8 +2347,6 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/pop\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/secp256k1.swift\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/web3.swift\"",
-					"\"${PODS_ROOT}/FullStory\"",
-					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/FullStory\"",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxViews;
