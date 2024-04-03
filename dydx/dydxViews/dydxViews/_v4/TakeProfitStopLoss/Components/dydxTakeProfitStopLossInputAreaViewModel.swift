@@ -93,7 +93,7 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            return VStack(alignment: .leading, spacing: 12) {
+            return VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 16) {
                     self.createTooltipSectionHeader(triggerType: .takeProfit)
                     HStack(spacing: 12) {

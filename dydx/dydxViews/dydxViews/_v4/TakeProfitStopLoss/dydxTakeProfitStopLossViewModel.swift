@@ -76,8 +76,7 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
                         .themeFont(fontType: .base, fontSize: .small)
                     Rectangle()
                         .frame(height: 1)
-                        .themeFont(fontType: .base, fontSize: .smallest)
-                        .themeColor(background: .textTertiary)
+                        .themeColor(background: .layer6)
                 }
                 Spacer()
             }
