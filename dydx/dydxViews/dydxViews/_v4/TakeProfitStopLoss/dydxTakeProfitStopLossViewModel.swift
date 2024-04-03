@@ -72,6 +72,8 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
 
                 HStack(alignment: .center, spacing: 8) {
                     Text(localizerPathKey: "APP.GENERAL.ADVANCED")
+                        .themeColor(foreground: .textTertiary)
+                        .themeFont(fontType: .base, fontSize: .small)
                     Rectangle()
                         .frame(height: 1)
                         .themeFont(fontType: .base, fontSize: .smallest)
