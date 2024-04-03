@@ -37,13 +37,6 @@
 	<string>18540</string>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
 	<false/>
-	<key>FullStory</key>
-	<dict>
-		<key>OrgId</key>
-		<string>o-1BY8HJ-na1</string>
-		<key>RecordOnStart</key>
-		<false/>
-	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

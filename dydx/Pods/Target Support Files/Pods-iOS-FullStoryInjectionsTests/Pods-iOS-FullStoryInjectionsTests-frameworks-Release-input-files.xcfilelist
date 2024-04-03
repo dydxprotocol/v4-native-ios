@@ -1,9 +1,0 @@
-${PODS_ROOT}/Target Support Files/Pods-iOS-FullStoryInjectionsTests/Pods-iOS-FullStoryInjectionsTests-frameworks.sh
-${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework
-${BUILT_PRODUCTS_DIR}/CombineExt/CombineExt.framework
-${BUILT_PRODUCTS_DIR}/KVOController/KVOController.framework
-${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework
-${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework
-${BUILT_PRODUCTS_DIR}/Validator/Validator.framework
-${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework
-${PODS_XCFRAMEWORKS_BUILD_DIR}/FullStory/FullStory.framework/FullStory
