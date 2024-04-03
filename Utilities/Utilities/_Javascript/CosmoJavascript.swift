@@ -66,7 +66,6 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
                 if let runner = self?.v4ClientRunner {
                     runner.invoke(className: nil, function: functionName, params: params) { result in
                         DispatchQueue.main.async {
-                            print(functionName, result)
                             completion(result)
                         }
                     }
