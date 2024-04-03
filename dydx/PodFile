@@ -44,11 +44,6 @@ def amplitude_pods
   pod 'Amplitude-iOS'
 end
 
-def fullstory_pods
-  pod 'FullStory', :http =>
-  'https://ios-releases.fullstory.com/fullstory-1.29.0-xcframework.tar.gz'
-end
-
 def abacus_pods
   #pod 'abacus', :path => '~/v4-abacus'
   pod 'Abacus', :podspec => '../podspecs/Abacus.podspec'
@@ -265,18 +260,6 @@ abstract_target 'iOS' do
     amplitude_pods
   end
   
-  target 'FullStoryInjections' do
-    project '../FullStoryInjections/FullStoryInjections'
-    ios_util_pods
-    fullstory_pods
-  end
-  
-  target 'FullStoryInjectionsTests' do
-    project '../FullStoryInjections/FullStoryInjections'
-    ios_util_pods
-    fullstory_pods
-  end
-  
   target 'CameraParticles' do
     project '../CameraParticles/CameraParticles'
     ios_ui_pods
@@ -364,7 +347,6 @@ abstract_target 'iOS' do
     appsflyer_pods
     amplitude_pods
     abacus_pods
-#    fullstory_pods
   end
   
   target 'dydxV4Tests' do
@@ -376,7 +358,6 @@ abstract_target 'iOS' do
     appsflyer_pods
     amplitude_pods
     abacus_pods
-#    fullstory_pods
   end
   
 #  target 'NotificationExtensionV4' do

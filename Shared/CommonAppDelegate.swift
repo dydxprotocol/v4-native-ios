@@ -18,7 +18,6 @@ import WebParticles
 import AmplitudeInjections
 import AppsFlyerStaticInjections
 import FirebaseStaticInjections
-import FullStoryInjections
 import dydxStateManager
 import dydxViews
 
