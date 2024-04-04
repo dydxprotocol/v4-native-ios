@@ -12,15 +12,17 @@ import Utilities
 
 public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
 
-    @Published public var openTakeProfitOrders: Int?
     @Published public var numOpenTakeProfitOrders: Int?
     @Published public var takeProfitPriceInputViewModel: dydxTriggerPriceInputViewModel?
     @Published public var gainInputViewModel: dydxGainLossInputViewModel?
 
-    @Published public var openStopLossOrders: Int?
     @Published public var numOpenStopLossOrders: Int?
     @Published public var stopLossPriceInputViewModel: dydxTriggerPriceInputViewModel?
     @Published public var lossInputViewModel: dydxGainLossInputViewModel?
+
+    @Published public var multipleOrdersExistViewModel: dydxMultipleOrdersExistViewModel?
+    private var hasMultipleTakeProfitOrders: Bool { (numOpenTakeProfitOrders ?? 0) > 1 }
+    private var hasMultipleStopLossOrders: Bool { (numOpenStopLossOrders ?? 0) > 1 }
 
     @Published private var isTakeProfitTooltipPresented: Bool = false
     private lazy var isTakeProfitTooltipPresentedBinding = Binding(
@@ -131,16 +133,24 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
             return VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 16) {
                     self.createSectionHeader(triggerType: .takeProfit)
-                    HStack(spacing: 12) {
-                        self.takeProfitPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                        self.gainInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                    if self.hasMultipleTakeProfitOrders {
+                        self.multipleOrdersExistViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                    } else {
+                        HStack(spacing: 12) {
+                            self.takeProfitPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            self.gainInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                        }
                     }
                 }
                 VStack(alignment: .leading, spacing: 16) {
                     self.createSectionHeader(triggerType: .stopLoss)
-                    HStack(spacing: 12) {
-                        self.stopLossPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                        self.lossInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                    if self.hasMultipleStopLossOrders {
+                        self.multipleOrdersExistViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                    } else {
+                        HStack(spacing: 12) {
+                            self.stopLossPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            self.lossInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                        }
                     }
                 }
             }

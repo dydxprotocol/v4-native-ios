@@ -123,6 +123,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         let viewModel = dydxTakeProfitStopLossViewModel()
 
         viewModel.takeProfitStopLossInputAreaViewModel = dydxTakeProfitStopLossInputAreaModel()
+        viewModel.takeProfitStopLossInputAreaViewModel?.multipleOrdersExistViewModel = .init()
         viewModel.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel = .init(triggerType: .takeProfit)
         viewModel.takeProfitStopLossInputAreaViewModel?.gainInputViewModel = .init(triggerType: .takeProfit)
         viewModel.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel = .init(triggerType: .stopLoss)
@@ -130,6 +131,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
         super.init()
 
+        // set up edit actions
         viewModel.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.onEdited = {
             AbacusStateManager.shared.triggerOrders(input: $0, type: .takeprofitprice)
         }
@@ -141,6 +143,11 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
         viewModel.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.onEdited = {
             AbacusStateManager.shared.triggerOrders(input: $0, type: .stoplossusdcdiff)
+        }
+
+        // set up button interactions
+        viewModel.takeProfitStopLossInputAreaViewModel?.multipleOrdersExistViewModel?.viewAllAction = {
+            Router.shared?.navigate(to: .init(path: "/portfolio/orders"), animated: true, completion: nil)
         }
 
         self.viewModel = viewModel

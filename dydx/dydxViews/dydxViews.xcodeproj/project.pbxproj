@@ -177,6 +177,7 @@
 		27A799B92A66EC2D007C3D04 /* ThemeClassicDark.json in Resources */ = {isa = PBXBuildFile; fileRef = 27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */; };
 		27AAA9862ACE34C800AF3C56 /* SwiftMessages+Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */; };
 		27C027452AFD734800E92CCB /* dydxSettingsHelpRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */; };
+		27CDA3D42BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CDA3D32BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift */; };
 		27ED340C2AD47CB100C159F5 /* dydxBannerErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */; };
 		27ED365C2AD735A800C159F5 /* dydxSecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED365B2AD735A800C159F5 /* dydxSecurityView.swift */; };
 		27F624112BBD9FEB00AB6D1A /* dydxTriggerPriceInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F624042BBD9FEB00AB6D1A /* dydxTriggerPriceInputViewModel.swift */; };
@@ -529,6 +530,7 @@
 		27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ThemeClassicDark.json; sourceTree = "<group>"; };
 		27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMessages+Banner.swift"; sourceTree = "<group>"; };
 		27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsHelpRowView.swift; sourceTree = "<group>"; };
+		27CDA3D32BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMultipleOrdersExistViewModel.swift; sourceTree = "<group>"; };
 		27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxBannerErrorAlert.swift; sourceTree = "<group>"; };
 		27ED365B2AD735A800C159F5 /* dydxSecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSecurityView.swift; sourceTree = "<group>"; };
 		27F624042BBD9FEB00AB6D1A /* dydxTriggerPriceInputViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxTriggerPriceInputViewModel.swift; sourceTree = "<group>"; };
@@ -1381,6 +1383,7 @@
 				27F624042BBD9FEB00AB6D1A /* dydxTriggerPriceInputViewModel.swift */,
 				2728CE1A2BBCD2AB004C9323 /* dydxGainLossInputViewModel.swift */,
 				27F624122BBDB4D400AB6D1A /* dydxTakeProfitStopLossInputAreaViewModel.swift */,
+				27CDA3D32BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1895,6 +1898,7 @@
 				0246DE5E28B984C700A7FF1F /* Wallets2View.swift in Sources */,
 				27C027452AFD734800E92CCB /* dydxSettingsHelpRowView.swift in Sources */,
 				0253155129BFA62700D6CC9B /* dydxOnboardScanInstructionsView.swift in Sources */,
+				27CDA3D42BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift in Sources */,
 				024B7B5C28B7F90100F7C386 /* dydxViewBundleClass.swift in Sources */,
 				02A9B60C29005A3F00AE1516 /* AmountChange.swift in Sources */,
 				64A4DB5329662070008D8E20 /* dydxTradeInputSizeView.swift in Sources */,
