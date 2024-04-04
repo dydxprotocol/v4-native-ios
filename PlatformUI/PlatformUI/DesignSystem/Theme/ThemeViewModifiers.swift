@@ -277,7 +277,7 @@ public extension View {
         modifier(BorderModifier(cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor))
     }
     
-    func borderAndClip(style: BorderAndClipStyle, borderColor: ThemeColor.SemanticColor, lineWidth: CGFloat) -> some View {
+    func borderAndClip(style: BorderAndClipStyle, borderColor: ThemeColor.SemanticColor, lineWidth: CGFloat = 1) -> some View {
         modifier(BorderAndClipModifier(style: style, borderColor: borderColor, lineWidth: lineWidth))
     }
 }
