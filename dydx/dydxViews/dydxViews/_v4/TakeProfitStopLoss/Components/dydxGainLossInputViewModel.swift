@@ -12,16 +12,14 @@ import dydxFormatter
 import Utilities
 
 public class dydxGainLossInputViewModel: PlatformTextInputViewModel {
-    @Published var triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType
-
-    public init(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType) {
-        self.triggerType = triggerType
-        let accessoryView = Color.red.frame(width: 20, height: 20).wrappedInAnyView()
+    public init(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType, onEdited: ((String?) -> Void)? = nil) {
         super.init(
             label: DataLocalizer.shared?.localize(path: triggerType.gainLossInputTitleLocalizerPath, params: nil),
             placeHolder: dydxFormatter.shared.dollar(number: 0.0, digits: 0),
-            valueAccessoryView: accessoryView,
-            inputType: .decimalDigits
+            // TODO: replace when percentage input is in abacus
+//            valueAccessoryView: accessoryView,
+            inputType: .decimalDigits,
+            onEdited: onEdited
         )
     }
 
@@ -33,8 +31,6 @@ public class dydxGainLossInputViewModel: PlatformTextInputViewModel {
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         let view = super.createView(parentStyle: parentStyle, styleKey: styleKey)
         return PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
-            guard let self = self else { return AnyView(PlatformView.nilView) }
-
             return view
                 .makeInput()
                 .wrappedInAnyView()

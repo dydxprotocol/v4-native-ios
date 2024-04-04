@@ -11,10 +11,16 @@ import PlatformUI
 import Utilities
 
 public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
-    @Published public var gainInputViewModel: dydxGainLossInputViewModel?
-    @Published public var lossInputViewModel: dydxGainLossInputViewModel?
+
+    @Published public var openTakeProfitOrders: Int?
+    @Published public var numOpenTakeProfitOrders: Int?
     @Published public var takeProfitPriceInputViewModel: dydxTriggerPriceInputViewModel?
+    @Published public var gainInputViewModel: dydxGainLossInputViewModel?
+
+    @Published public var openStopLossOrders: Int?
+    @Published public var numOpenStopLossOrders: Int?
     @Published public var stopLossPriceInputViewModel: dydxTriggerPriceInputViewModel?
+    @Published public var lossInputViewModel: dydxGainLossInputViewModel?
 
     @Published private var isTakeProfitTooltipPresented: Bool = false
     private lazy var isTakeProfitTooltipPresentedBinding = Binding(
@@ -37,7 +43,7 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
         return vm
     }()
 
-    private func createTooltipSectionHeader(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType) -> some View {
+    private func createTooltip(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType) -> some View {
         guard let localizedString = DataLocalizer.shared?.localize(path: triggerType.sectionTitleLocalizerPath, params: nil) else { return EmptyView().wrappedInAnyView() }
         let attributedTitle = AttributedString(localizedString)
             .themeFont(fontSize: .medium)
@@ -89,20 +95,49 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
             .wrappedInAnyView()
     }
 
+    private func createClearButton(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType) -> AnyView? {
+        guard let numOrders = triggerType == .takeProfit ? numOpenTakeProfitOrders : numOpenStopLossOrders else { return nil }
+        if numOrders == 1 {
+            return Text(localizerPathKey: "APP.GENERAL.CLEAR")
+                .themeFont(fontType: .base, fontSize: .medium)
+                .themeColor(foreground: .colorRed)
+                .onTapGesture { [weak self] in
+                    switch triggerType {
+                    case .takeProfit:
+                        self?.takeProfitPriceInputViewModel?.onEdited?(nil)
+                        self?.gainInputViewModel?.onEdited?(nil)
+                    case .stopLoss:
+                        self?.stopLossPriceInputViewModel?.onEdited?(nil)
+                        self?.lossInputViewModel?.onEdited?(nil)
+                    }
+                }
+                .wrappedInAnyView()
+        }
+        return nil
+    }
+
+    private func createSectionHeader(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType) -> some View {
+        return HStack(spacing: 0) {
+            createTooltip(triggerType: triggerType)
+            Spacer()
+            createClearButton(triggerType: triggerType)
+        }
+    }
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 16) {
-                    self.createTooltipSectionHeader(triggerType: .takeProfit)
+                    self.createSectionHeader(triggerType: .takeProfit)
                     HStack(spacing: 12) {
                         self.takeProfitPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
                         self.gainInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
                     }
                 }
                 VStack(alignment: .leading, spacing: 16) {
-                    self.createTooltipSectionHeader(triggerType: .stopLoss)
+                    self.createSectionHeader(triggerType: .stopLoss)
                     HStack(spacing: 12) {
                         self.stopLossPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
                         self.lossInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
@@ -122,9 +157,9 @@ extension dydxTakeProfitStopLossInputAreaModel {
         var sectionTitleLocalizerPath: String {
             switch self {
             case .takeProfit:
-                return "TRADE.BRACKET_ORDER_SL.TITLE"
-            case .stopLoss:
                 return "TRADE.BRACKET_ORDER_TP.TITLE"
+            case .stopLoss:
+                return "TRADE.BRACKET_ORDER_SL.TITLE"
             }
         }
 

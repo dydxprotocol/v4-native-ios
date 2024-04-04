@@ -12,15 +12,14 @@ import dydxFormatter
 import Utilities
 
 public class dydxTriggerPriceInputViewModel: PlatformTextInputViewModel {
-    @Published var triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType
 
-    public init(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType) {
-        self.triggerType = triggerType
+    public init(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType, onEdited: ((String?) -> Void)? = nil) {
         super.init(
             label: DataLocalizer.shared?.localize(path: triggerType.priceInputTitleLocalizerPath, params: nil),
             labelAccessory: TokenTextViewModel(symbol: "USD").createView(parentStyle: ThemeStyle.defaultStyle.themeFont(fontSize: .smallest)).wrappedInAnyView(),
             placeHolder: dydxFormatter.shared.dollar(number: 0.0, digits: 0),
-            inputType: .decimalDigits
+            inputType: .decimalDigits,
+            onEdited: onEdited
         )
     }
 
