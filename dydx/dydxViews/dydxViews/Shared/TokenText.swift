@@ -26,7 +26,8 @@ public class TokenTextViewModel: PlatformViewModel, Hashable {
             return AnyView(
                 Group {
                     Text(self.symbol)
-                        .padding(.all, 3.0)
+                        .padding(.vertical, 1)
+                        .padding(.horizontal, 3)
                 }
                 .themeColor(background: .layer6)
                 .cornerRadius(4)
