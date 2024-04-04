@@ -34,7 +34,6 @@ final class dydxPointsRatingTests: XCTestCase {
 
     func testSingleAppLaunch() throws {
         testPointRating.launchedApp()
-        print("mmm: lastAppOpenTimestamp \(testPointRating.lastAppOpenTimestamp)")
         testPointRating.tryPromptForRating()
         XCTAssertEqual(testPointRating.promptWasReached, false)
         XCTAssertLessThan(testStartMillis, testPointRating.lastAppOpenTimestamp)
