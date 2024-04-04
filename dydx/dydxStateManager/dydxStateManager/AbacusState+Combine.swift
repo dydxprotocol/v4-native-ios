@@ -412,10 +412,6 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
-    /**
-     Trade input
-     **/
-
     public var tradeInput: AnyPublisher<TradeInput?, Never> {
         statePublisher
             .map(\.?.input?.trade)
@@ -425,9 +421,14 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
-    /**
-     Close Position input
-     **/
+    public var triggerOrdersInput: AnyPublisher<TriggerOrdersInput?, Never> {
+        statePublisher
+            .map(\.?.input?.triggerOrders)
+            .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
 
     public var closePositionInput: AnyPublisher<ClosePositionInput, Never> {
         statePublisher

@@ -296,6 +296,10 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.trade(data: input, type: type)
     }
 
+    public func triggerOrders(input: String?, type: TriggerOrdersInputField?) {
+        asyncStateManager.triggerOrders(data: input, type: type)
+    }
+
     public func closePosition(input: String?, type: ClosePositionInputField) {
         asyncStateManager.closePosition(data: input, type: type)
     }

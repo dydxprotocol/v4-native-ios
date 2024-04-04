@@ -10,11 +10,13 @@ import SwiftUI
 import Utilities
 import Introspect
 import dydxFormatter
+import Popovers
 
 public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
 
     @Published public var entryPrice: Double?
     @Published public var oraclePrice: Double?
+    @Published public var takeProfitStopLossInputAreaViewModel: dydxTakeProfitStopLossInputAreaModel?
 
     public init() {}
 
@@ -66,13 +68,17 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
             let view = VStack(spacing: 18) {
                 self.createHeader()
                 self.createReceipt()
+                self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+
                 HStack(alignment: .center, spacing: 8) {
                     Text(localizerPathKey: "APP.GENERAL.ADVANCED")
+                        .themeColor(foreground: .textTertiary)
+                        .themeFont(fontType: .base, fontSize: .small)
                     Rectangle()
                         .frame(height: 1)
-                        .themeFont(fontType: .base, fontSize: .smallest)
-                        .themeColor(background: .textTertiary)
+                        .themeColor(background: .layer6)
                 }
+                Spacer()
             }
             .padding(.top, 32)
             .padding([.leading, .trailing])
