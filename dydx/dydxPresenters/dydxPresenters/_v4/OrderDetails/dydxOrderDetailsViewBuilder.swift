@@ -132,7 +132,7 @@ private class dydxOrderDetailsViewPresenter: HostedViewPresenter<dydxOrderDetail
         var triggerPrice: dydxOrderDetailsViewModel.Item? {
             if let triggerPrice = sharedOrderViewModel.triggerPrice {
                 let itemValue = dydxOrderDetailsViewModel.Item.ItemValue.string(triggerPrice)
-                return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.TRIGGER_PRICE"), value: itemValue)
+                return dydxOrderDetailsViewModel.Item(title: DataLocalizer.localize(path: "APP.TRADE.TRIGGER_PRICE"), value: itemValue)
             }
             return nil
         }
