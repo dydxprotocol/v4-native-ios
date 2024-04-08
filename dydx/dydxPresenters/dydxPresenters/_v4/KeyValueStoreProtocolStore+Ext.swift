@@ -9,13 +9,13 @@ import Foundation
 import Utilities
 import dydxViews
 
-enum dydxSettingsStoreKey: String {
+public enum dydxSettingsStoreKey: String, CaseIterable {
     case language = "language"
     case v4Theme = "v4_theme"
     case directionColorPreference = "direction_color_preference"
     case shouldDisplayInAppNotifications = "should_display_in_app_notifications"
 
-    var defaultValue: Any? {
+    public var defaultValue: Any? {
         switch self {
         case .language: return DataLocalizer.shared?.language
         case .v4Theme: return dydxThemeType.dark.rawValue

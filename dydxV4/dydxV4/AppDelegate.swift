@@ -43,7 +43,7 @@ class AppDelegate: CommonAppDelegate {
     override public init() {
         super.init()
         LocalAuthenticator.shared = dydxBiometricsLocalAuthenticator()
-        SettingsStore.shared = DebugSettingsStore(tag: "Settings")
+        SettingsStore.shared = dydxSettingsStore()
         DebugSettings.shared = SettingsStore.shared
         FeatureFlagsStore.shared = FeatureFlagsStore(tag: "FeatureFlags")
     }
