@@ -11,6 +11,14 @@
             },
             {
                 "title" : {
+                    "text" : "APP.V4.NOTIFICATIONS"
+                },
+                "link" : {
+                    "text" : "/settings/notifications"
+                }
+            },
+            {
+                "title" : {
                     "text" : "APP.V4.THEME"
                 },
                 "link" : {
