@@ -15,10 +15,12 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
     @Published public var numOpenTakeProfitOrders: Int?
     @Published public var takeProfitPriceInputViewModel: dydxTriggerPriceInputViewModel?
     @Published public var gainInputViewModel: dydxGainLossInputViewModel?
+    @Published public var takeProfitAlert: InlineAlertViewModel?
 
     @Published public var numOpenStopLossOrders: Int?
     @Published public var stopLossPriceInputViewModel: dydxTriggerPriceInputViewModel?
     @Published public var lossInputViewModel: dydxGainLossInputViewModel?
+    @Published public var stopLossAlert: InlineAlertViewModel?
 
     @Published public var multipleOrdersExistViewModel: dydxMultipleOrdersExistViewModel?
     private var hasMultipleTakeProfitOrders: Bool { (numOpenTakeProfitOrders ?? 0) > 1 }
@@ -141,6 +143,7 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
                             self.gainInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
                         }
                     }
+                    self.takeProfitAlert?.createView(parentStyle: parentStyle, styleKey: styleKey)
                 }
                 VStack(alignment: .leading, spacing: 16) {
                     self.createSectionHeader(triggerType: .stopLoss)
@@ -152,6 +155,7 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
                             self.lossInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
                         }
                     }
+                    self.stopLossAlert?.createView(parentStyle: parentStyle, styleKey: styleKey)
                 }
             }
             .wrappedInAnyView()
