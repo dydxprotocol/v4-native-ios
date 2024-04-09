@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/AppsFlyerLib.h</key>
 		<data>
-		bcs2DlBsP8YRA/KbpobyJ+ViRRQ=
+		qJe/o2pdYXqG8LhRjG7Vejt+n0o=
 		</data>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>
 		<data>
@@ -34,11 +34,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		rDLfk+TCS4gW27SasccUi1rY5ic=
+		whHU+peDai/TXSQVqIVMfBS3Eto=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		r+QHVTsITCgZyCe0Vpvj+KSPIWc=
+		</data>
+		<key>PrivacyInfo.xcprivacy</key>
+		<data>
+		Z5diDfyJ8Q98I5JWKtVGWEvkXII=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -91,11 +95,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bcs2DlBsP8YRA/KbpobyJ+ViRRQ=
+			qJe/o2pdYXqG8LhRjG7Vejt+n0o=
 			</data>
 			<key>hash2</key>
 			<data>
-			YBggbbYNlrfNNcs9s4bfJPq2dzQjjia2iLZwJ60OZgM=
+			NOAf6o70w31tAm/aihHQGzUyvJirRxAmnWEElldgDhA=
 			</data>
 		</dict>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>
@@ -129,6 +133,17 @@
 			<key>hash2</key>
 			<data>
 			ZcaMjc66PAFkteksoe5Rzelk7opMMS8QdKiza/LgQwA=
+			</data>
+		</dict>
+		<key>PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Z5diDfyJ8Q98I5JWKtVGWEvkXII=
+			</data>
+			<key>hash2</key>
+			<data>
+			6xKWyp82bfdpIC+qSEbhTjD40SP5BWjupWVxQg5FQkY=
 			</data>
 		</dict>
 	</dict>
