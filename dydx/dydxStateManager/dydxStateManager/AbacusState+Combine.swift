@@ -424,8 +424,8 @@ public final class AbacusState {
     public var triggerOrdersInput: AnyPublisher<TriggerOrdersInput?, Never> {
         statePublisher
             .map(\.?.input?.triggerOrders)
-            .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
             .removeDuplicates()
+            .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
             .share()
             .eraseToAnyPublisher()
     }
