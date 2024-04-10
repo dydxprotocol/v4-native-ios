@@ -50,4 +50,3 @@ ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
 ${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework
 ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
 ${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework
-${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework
