@@ -156,6 +156,13 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                 if triggerOrdersInput?.takeProfitOrder?.side == .buy {
                     viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = alert
                 }
+            case "USER_MAX_ORDERS":
+                if triggerOrdersInput?.stopLossOrder?.price?.triggerPrice != nil {
+                    viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = alert
+                }
+                if triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice != nil {
+                    viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = alert
+                }
             default:
                 print("mmm: ", error.code)
             }
