@@ -15,13 +15,14 @@ import Popovers
 public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
 
     public enum SubmissionStatus {
-        case readyToSubmit
-        case needsInput
-        case fixErrors(cta: String?)
+        case ready
+        case addPriceTrigger
+        case fixErrors
         case submitting
+        case submissionError
     }
 
-    @Published public var submissionReadiness: SubmissionStatus = .needsInput
+    @Published public var submissionReadiness: SubmissionStatus = .addPriceTrigger
     @Published public var submissionAction: (() -> Void)?
 
     @Published public var entryPrice: Double?
@@ -72,32 +73,28 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
     }
 
     private func createCta(parentStyle: ThemeStyle, styleKey: String?) -> AnyView? {
-        let buttonText: String
-        let buttonState: PlatformButtonState
-        switch submissionReadiness {
-        case .readyToSubmit:
-            buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_TRIGGERS", params: nil) ?? ""
-            buttonState = .primary
-        case .needsInput:
-            buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_TRIGGERS", params: nil) ?? ""
-            buttonState = .disabled
-        case .fixErrors(let cta):
-            buttonText = cta ?? ""
-            buttonState = .disabled
-        case .submitting:
-            buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.SUBMITTING_ORDER", params: nil) ?? ""
-            buttonState = .primary
-        }
         let content = HStack(spacing: 0) {
             Spacer()
-            Text(buttonText)
+            // TODO
+            switch submissionReadiness {
+            case .ready:
+                Text(DataLocalizer.shared?.localize(path: "N/A 1", params: nil) ?? "")
+            case .addPriceTrigger:
+                Text(DataLocalizer.shared?.localize(path: "N/A 1", params: nil) ?? "")
+            case .fixErrors:
+                Text(DataLocalizer.shared?.localize(path: "N/A 1", params: nil) ?? "")
+            case .submitting:
+                Text(DataLocalizer.shared?.localize(path: "APP.TRADE.SUBMITTING_ORDER", params: nil) ?? "")
+            case .submissionError:
+                Text(DataLocalizer.shared?.localize(path: "N/A 1", params: nil) ?? "")
+            }
             Spacer()
         }.wrappedInAnyView()
 
         if let submissionAction = submissionAction {
             return PlatformButtonViewModel(content: PlatformViewModel(bodyBuilder: { _ in
                 content
-            }), state: buttonState, action: submissionAction)
+            }), action: submissionAction)
             .createView(parentStyle: parentStyle, styleKey: styleKey)
             .wrappedInAnyView()
         } else {
