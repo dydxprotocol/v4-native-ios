@@ -48,8 +48,8 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
     override func start() {
         super.start()
 
+        clearTriggersInput()
         guard let marketId = marketId else { return }
-        AbacusStateManager.shared.triggerOrders(input: marketId, type: .marketid)
 
         Publishers
             .CombineLatest(AbacusStateManager.shared.state.selectedSubaccountPositions,
@@ -75,17 +75,95 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                 self?.update(triggerOrdersInput: triggerOrdersInput)
             }
             .store(in: &subscriptions)
+
+        AbacusStateManager.shared.state.validationErrors
+            .compactMap { $0 }
+            .sink { [weak self] errors in
+                self?.updateValidationErrors(errors)
+            }
+            .store(in: &subscriptions)
+    }
+
+    private func clearTriggersInput() {
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .marketid)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .size)
+        clearStopLossOrder()
+        clearTakeProfitOrder()
+    }
+
+    private func clearStopLossOrder() {
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplossorderid)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplossordersize)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplossordertype)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplosslimitprice)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplossprice)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplosspercentdiff)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplossusdcdiff)
+    }
+
+    private func clearTakeProfitOrder() {
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitorderid)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitordersize)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitordertype)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitlimitprice)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitprice)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitpercentdiff)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitusdcdiff)
     }
 
     private func update(market: PerpetualMarket?) {
         viewModel?.oraclePrice = market?.oraclePrice?.doubleValue
     }
 
+    private func updateValidationErrors(_ errors: [ValidationError]) {
+        // TODO: update
+        if errors.isEmpty {
+            print("mmm: no errors")
+            viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = nil
+            viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = nil
+        } else {
+            for error in errors {
+                switch error.code {
+                case "TRIGGER_MUST_BELOW_INDEX_PRICE":
+                    print("mmm: TRIGGER_MUST_BELOW_INDEX_PRICE")
+                default:
+                    print("mmm: ", error.code)
+                }
+            }
+        }
+    }
+
     private func update(triggerOrdersInput: TriggerOrdersInput?) {
-        viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.value = dydxFormatter.shared.dollar(number: triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue)
-        viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.value = dydxFormatter.shared.dollar(number: triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue)
-        viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.value = dydxFormatter.shared.dollar(number: triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue)
-        viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.value = dydxFormatter.shared.dollar(number: triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue)
+        #if DEBUG
+        // TODO: move this to abacus, needs more validation
+        if let tpUsdcDiff = triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue, tpUsdcDiff < 0 {
+            viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = .init(.init(title: "test error bad take profit",
+                                                                                           body: "test error take profit description",
+                                                                                           level: .error))
+        } else {
+            viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = nil
+        }
+        if let slUsdcDiff = triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue, slUsdcDiff < 0 {
+            viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = .init(.init(title: "test error bad stop loss",
+                                                                                           body: "test error stop loss description",
+                                                                                           level: .error))
+        } else {
+            viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = nil
+        }
+        #endif
+
+        viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue, digits: 2)
+        viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue, digits: 2)
+        viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue, digits: 2)
+        viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue, digits: 2)
+
+        // TODO: add to this for stop limit and take prof limit
+        if let takeProfitOrderTriggerPrice = triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue, !takeProfitOrderTriggerPrice.isZero {
+            AbacusStateManager.shared.triggerOrders(input: Abacus.OrderType.takeprofitmarket.rawValue, type: .takeprofitordertype)
+        }
+        if let stopLossOrderTriggerPrice = triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue, !stopLossOrderTriggerPrice.isZero {
+            AbacusStateManager.shared.triggerOrders(input: Abacus.OrderType.stopmarket.rawValue, type: .stoplossordertype)
+        }
     }
 
     private func update(subaccountPositions: [SubaccountPosition], subaccountOrders: [SubaccountOrder]) {
@@ -94,10 +172,10 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             subaccountPosition.id == marketId
         }
         let takeProfitOrders = subaccountOrders.filter { (order: SubaccountOrder) in
-            order.marketId == marketId && (order.type == .takeprofitmarket || order.type == .takeprofitlimit) && order.side.opposite == position?.side.current
+            order.marketId == marketId && (order.type == .takeprofitmarket || order.type == .takeprofitlimit) && order.side.opposite == position?.side.current && order.status == Abacus.OrderStatus.untriggered
         }
         let stopLossOrders = subaccountOrders.filter { (order: SubaccountOrder) in
-            order.marketId == marketId && (order.type == .stopmarket || order.type == .stoplimit) && order.side.opposite == position?.side.current
+            order.marketId == marketId && (order.type == .stopmarket || order.type == .stoplimit) && order.side.opposite == position?.side.current && order.status == Abacus.OrderStatus.untriggered
         }
 
         viewModel?.entryPrice = position?.entryPrice?.current?.doubleValue
@@ -106,17 +184,23 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenStopLossOrders = stopLossOrders.count
 
         if takeProfitOrders.count == 1, let order = takeProfitOrders.first {
+            AbacusStateManager.shared.triggerOrders(input: order.id, type: .takeprofitorderid)
             AbacusStateManager.shared.triggerOrders(input: order.size.description, type: .takeprofitordersize)
             AbacusStateManager.shared.triggerOrders(input: order.type.rawValue, type: .takeprofitordertype)
             AbacusStateManager.shared.triggerOrders(input: order.price.description, type: .takeprofitlimitprice)
             AbacusStateManager.shared.triggerOrders(input: order.triggerPrice?.stringValue, type: .takeprofitprice)
         }
         if stopLossOrders.count == 1, let order = stopLossOrders.first {
+            AbacusStateManager.shared.triggerOrders(input: order.id, type: .stoplossorderid)
             AbacusStateManager.shared.triggerOrders(input: order.size.description, type: .stoplossordersize)
             AbacusStateManager.shared.triggerOrders(input: order.type.rawValue, type: .stoplossordertype)
             AbacusStateManager.shared.triggerOrders(input: order.price.description, type: .stoplosslimitprice)
             AbacusStateManager.shared.triggerOrders(input: order.triggerPrice?.stringValue, type: .stoplossprice)
         }
+
+        AbacusStateManager.shared.triggerOrders(input: position?.size?.current?.stringValue, type: .size)
+        AbacusStateManager.shared.triggerOrders(input: marketId, type: .marketid)
+
     }
 
     override init() {
