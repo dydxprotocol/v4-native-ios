@@ -68,13 +68,9 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             }
             .store(in: &subscriptions)
 
-        Publishers
-            .CombineLatest(
-                AbacusStateManager.shared.state.triggerOrdersInput,
-                AbacusStateManager.shared.state.validationErrors
-            )
+        AbacusStateManager.shared.state.triggerOrdersInput
             .compactMap { $0 }
-            .sink { [weak self] triggerOrdersInput, errors in
+            .sink { [weak self] triggerOrdersInput in
                 #if DEBUG
                 if let triggerOrdersInput {
                     Console.shared.log("\nmmm marketId: \(triggerOrdersInput.marketId)")
@@ -97,7 +93,14 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                     Console.shared.log("mmm takeProfitOrder?.price?.usdcDiff: \(triggerOrdersInput.takeProfitOrder?.price?.usdcDiff)\n")
                 }
                 #endif
-                self?.update(triggerOrdersInput: triggerOrdersInput, errors: errors)
+                self?.update(triggerOrdersInput: triggerOrdersInput)
+            }
+            .store(in: &subscriptions)
+
+        AbacusStateManager.shared.state.validationErrors
+            .compactMap { $0 }
+            .sink { [weak self] errors in
+                self?.updateValidationErrors(errors)
             }
             .store(in: &subscriptions)
     }
@@ -136,18 +139,19 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel?.customAmountViewModel?.minimumValue = market?.configs?.minOrderSize?.floatValue
     }
 
-    private func update(triggerOrdersInput: TriggerOrdersInput?, errors: [ValidationError]) {
-
-        viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = nil
-        viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = nil
-
-        for error in errors {
-            let alert = InlineAlertViewModel(.init(title: error.resources.title?.localized, body: error.resources.text?.localized, level: .error))
-            switch error.code {
-            case "TRIGGER_MUST_ABOVE_INDEX_PRICE":
-                print("mmm: \(error)")
-                if triggerOrdersInput?.stopLossOrder?.side == .buy {
-                    viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = alert
+    private func updateValidationErrors(_ errors: [ValidationError]) {
+        // TODO: update
+        if errors.isEmpty {
+            print("mmm: no errors")
+            viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = nil
+            viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = nil
+        } else {
+            for error in errors {
+                switch error.code {
+                case "TRIGGER_MUST_BELOW_INDEX_PRICE":
+                    print("mmm: TRIGGER_MUST_BELOW_INDEX_PRICE")
+                default:
+                    print("mmm: ", error.code)
                 }
                 if triggerOrdersInput?.takeProfitOrder?.side == .sell {
                     viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = alert
@@ -164,8 +168,27 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                 print("mmm: ", error.code)
             }
         }
+    }
 
-        // update displayed values
+    private func update(triggerOrdersInput: TriggerOrdersInput?) {
+        #if DEBUG
+        // TODO: move this to abacus, needs more validation
+        if let tpUsdcDiff = triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue, tpUsdcDiff < 0 {
+            viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = .init(.init(title: "test error bad take profit",
+                                                                                           body: "test error take profit description",
+                                                                                           level: .error))
+        } else {
+            viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = nil
+        }
+        if let slUsdcDiff = triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue, slUsdcDiff < 0 {
+            viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = .init(.init(title: "test error bad stop loss",
+                                                                                           body: "test error stop loss description",
+                                                                                           level: .error))
+        } else {
+            viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = nil
+        }
+        #endif
+
         viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue, digits: 2)
         viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue, digits: 2)
         viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue, digits: 2)
@@ -180,21 +203,8 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         } else {
             AbacusStateManager.shared.triggerOrders(input: Abacus.OrderType.takeprofitmarket.rawValue, type: .takeprofitordertype)
         }
-        if let _ = triggerOrdersInput?.stopLossOrder?.price?.limitPrice?.doubleValue {
-            AbacusStateManager.shared.triggerOrders(input: Abacus.OrderType.stoplimit.rawValue, type: .stoplossordertype)
-        } else {
+        if let stopLossOrderTriggerPrice = triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue, !stopLossOrderTriggerPrice.isZero {
             AbacusStateManager.shared.triggerOrders(input: Abacus.OrderType.stopmarket.rawValue, type: .stoplossordertype)
-        }
-
-        if let error = errors.first {
-            viewModel?.submissionReadiness = .fixErrors(cta: error.resources.action?.localized)
-        } else if triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue == nil
-            && triggerOrdersInput?.takeProfitOrder?.orderId == nil
-            && triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue == nil
-            && triggerOrdersInput?.stopLossOrder?.orderId == nil {
-            viewModel?.submissionReadiness = .needsInput
-        } else {
-            viewModel?.submissionReadiness = .readyToSubmit
         }
     }
 
