@@ -214,7 +214,6 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     
     override open var value: String? {
         didSet {
-            print("mmm value: \(focused) \(value)")
             if !focused {
                 input = value ?? ""
                 updateView()
