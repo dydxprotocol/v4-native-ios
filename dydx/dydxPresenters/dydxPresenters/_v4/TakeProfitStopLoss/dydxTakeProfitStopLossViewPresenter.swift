@@ -72,6 +72,20 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         AbacusStateManager.shared.state.triggerOrdersInput
             .compactMap { $0 }
             .sink { [weak self] triggerOrdersInput in
+                #if DEBUG
+                Console.shared.log("\nmmm marketId: \(triggerOrdersInput.marketId)")
+                Console.shared.log("mmm size: \(triggerOrdersInput.size)")
+                Console.shared.log("mmm stopLossOrder?.orderId: \(triggerOrdersInput.stopLossOrder?.orderId)")
+                Console.shared.log("mmm stopLossOrder?.price?.size: \(triggerOrdersInput.stopLossOrder?.size?.doubleValue)")
+                Console.shared.log("mmm stopLossOrder?.price?.triggerPrice: \(triggerOrdersInput.stopLossOrder?.price?.triggerPrice)")
+                Console.shared.log("mmm stopLossOrder?.price?.percentDiff: \(triggerOrdersInput.stopLossOrder?.price?.percentDiff)")
+                Console.shared.log("mmm stopLossOrder?.price?.usdcDiff: \(triggerOrdersInput.stopLossOrder?.price?.usdcDiff)")
+                Console.shared.log("mmm takeProfitOrder?.price?.size: \(triggerOrdersInput.takeProfitOrder?.size?.doubleValue)")
+                Console.shared.log("mmm takeProfitOrder?.orderId: \(triggerOrdersInput.takeProfitOrder?.orderId)")
+                Console.shared.log("mmm takeProfitOrder?.price?.triggerPrice: \(triggerOrdersInput.takeProfitOrder?.price?.triggerPrice)")
+                Console.shared.log("mmm takeProfitOrder?.price?.percentDiff: \(triggerOrdersInput.takeProfitOrder?.price?.percentDiff)")
+                Console.shared.log("mmm takeProfitOrder?.price?.usdcDiff: \(triggerOrdersInput.takeProfitOrder?.price?.usdcDiff)\n")
+                #endif
                 self?.update(triggerOrdersInput: triggerOrdersInput)
             }
             .store(in: &subscriptions)
@@ -232,6 +246,21 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         // set up button interactions
         viewModel.takeProfitStopLossInputAreaViewModel?.multipleOrdersExistViewModel?.viewAllAction = {
             Router.shared?.navigate(to: .init(path: "/portfolio/orders"), animated: true, completion: nil)
+        }
+        viewModel.submissionAction = { [weak self] in
+            self?.viewModel?.submissionReadiness = .submitting
+
+            AbacusStateManager.shared.placeTriggerOrders { status in
+                switch status {
+                case .success:
+                    // check self is not deinitialized, otherwise abacus may call callback more than once
+                    guard let self = self else { return }
+                    Router.shared?.navigate(to: .init(path: "/action/dismiss"), animated: true, completion: nil)
+                case .failed(let error):
+                    // TODO: how to handle errors?
+                    self?.viewModel?.submissionReadiness = .submissionError
+                }
+            }
         }
 
         self.viewModel = viewModel
