@@ -85,6 +85,9 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
             .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
             .themeColor(background: .layer3)
             .makeSheet(sheetStyle: .fitSize)
+            .onTapGesture {
+                PlatformView.hideKeyboard()
+            }
 
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))

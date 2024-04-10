@@ -87,16 +87,28 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
     private func clearTriggersInput() {
         AbacusStateManager.shared.triggerOrders(input: nil, type: .marketid)
         AbacusStateManager.shared.triggerOrders(input: nil, type: .size)
+        clearStopLossOrder()
+        clearTakeProfitOrder()
+    }
+
+    private func clearStopLossOrder() {
         AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplossorderid)
         AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplossordersize)
         AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplossordertype)
         AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplosslimitprice)
         AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplossprice)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplosspercentdiff)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .stoplossusdcdiff)
+    }
+
+    private func clearTakeProfitOrder() {
         AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitorderid)
         AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitordersize)
         AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitordertype)
         AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitlimitprice)
         AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitprice)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitpercentdiff)
+        AbacusStateManager.shared.triggerOrders(input: nil, type: .takeprofitusdcdiff)
     }
 
     private func update(market: PerpetualMarket?) {
@@ -140,11 +152,18 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
         #endif
 
-        viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.value = triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue.round(size: 2).description
-        viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.value = triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue.round(size: 2).description
-        viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.value = triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue.round(size: 2).description
-        viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.value = triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue.round(size: 2).description
+        viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue, digits: 2)
+        viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue, digits: 2)
+        viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue, digits: 2)
+        viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue, digits: 2)
 
+        // TODO: add to this for stop limit and take prof limit
+        if let takeProfitOrderTriggerPrice = triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue, !takeProfitOrderTriggerPrice.isZero {
+            AbacusStateManager.shared.triggerOrders(input: Abacus.OrderType.takeprofitmarket.rawValue, type: .takeprofitordertype)
+        }
+        if let stopLossOrderTriggerPrice = triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue, !stopLossOrderTriggerPrice.isZero {
+            AbacusStateManager.shared.triggerOrders(input: Abacus.OrderType.stopmarket.rawValue, type: .stoplossordertype)
+        }
     }
 
     private func update(subaccountPositions: [SubaccountPosition], subaccountOrders: [SubaccountOrder]) {
@@ -153,10 +172,10 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             subaccountPosition.id == marketId
         }
         let takeProfitOrders = subaccountOrders.filter { (order: SubaccountOrder) in
-            order.marketId == marketId && (order.type == .takeprofitmarket || order.type == .takeprofitlimit) && order.side.opposite == position?.side.current
+            order.marketId == marketId && (order.type == .takeprofitmarket || order.type == .takeprofitlimit) && order.side.opposite == position?.side.current && order.status == Abacus.OrderStatus.untriggered
         }
         let stopLossOrders = subaccountOrders.filter { (order: SubaccountOrder) in
-            order.marketId == marketId && (order.type == .stopmarket || order.type == .stoplimit) && order.side.opposite == position?.side.current
+            order.marketId == marketId && (order.type == .stopmarket || order.type == .stoplimit) && order.side.opposite == position?.side.current && order.status == Abacus.OrderStatus.untriggered
         }
 
         viewModel?.entryPrice = position?.entryPrice?.current?.doubleValue

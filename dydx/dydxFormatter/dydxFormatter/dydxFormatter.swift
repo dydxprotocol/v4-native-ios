@@ -394,6 +394,11 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
         raw(number: number, digits: digits, locale: Locale(identifier: "en-US"))
     }
 
+    public func raw(number: Double?, digits: Int, locale: Locale = Locale.current) -> String? {
+        guard let number = number else { return nil }
+        return raw(number: NSNumber(value: number), digits: digits, locale: locale)
+    }
+
     /*
      xxxxxx,yyyyy or xxxxx.yyyyy
      */

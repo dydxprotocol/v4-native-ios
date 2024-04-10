@@ -139,9 +139,9 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
 
         var visible = [PlatformValueInputViewModel]()
 
-        sizeViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
-        limitPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
-        triggerPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
+        sizeViewModel.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
+        limitPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
+        triggerPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
 
         updateOrderTypeRequiresLimitPrice(forOrderType: tradeInput.type)
 
