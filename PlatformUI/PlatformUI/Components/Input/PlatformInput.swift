@@ -229,26 +229,32 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     }
     
     @Published private var input: String = ""
-
-    public lazy var inputBinding = Binding(
-        get: {
-            return self.input
-        },
-        set: { newInput in
-            if self.focused {
-                let sanitized = self.inputType.sanitize(newInput)
-                if let sanitized {
-                    self.input = sanitized
-                } else if newInput.isEmpty {
-                    self.input = ""
-                } else {
-                    // this is necessary to make binding work properly
-                    self.input = self.input
-                }
-                self.valueChanged(value: self.input)
-            }
-        }
+    
+    /// use this to bind input to another source which cannot be focused (such as a slider)
+    public lazy var inputBindingIgnoringFocus = Binding(
+        get: { self.input },
+        set: { self.updateInput($0, shouldConsiderFocus: false) }
     )
+    
+    public lazy var inputBinding = Binding(
+        get: { self.input },
+        set: { self.updateInput($0, shouldConsiderFocus: true) }
+    )
+    
+    private func updateInput(_ newInput: String, shouldConsiderFocus: Bool) {
+        if self.focused || !shouldConsiderFocus {
+            let sanitized = self.inputType.sanitize(newInput)
+            if let sanitized {
+                self.input = sanitized
+            } else if newInput.isEmpty {
+                self.input = ""
+            } else {
+                // this is necessary to make binding work properly
+                self.input = self.input
+            }
+            self.valueChanged(value: self.input)
+        }
+    }
 
     @Published public var placeHolder: String?
     private var focused: Bool = false {
@@ -524,7 +530,7 @@ open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
         if let label = label, label.length > 0 {
             return Text(label)
                 .themeColor(foreground: isEnabled ? .textSecondary : .textTertiary)
-                        .themeFont(fontSize: .smaller)
+                        .themeFont(fontSize: .medium)
                         .wrappedViewModel
     
         }

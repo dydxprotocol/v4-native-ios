@@ -130,6 +130,9 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
     private func update(market: PerpetualMarket?) {
         viewModel?.oraclePrice = market?.oraclePrice?.doubleValue
+        viewModel?.customAmountViewModel?.assetId = market?.assetId
+        viewModel?.customAmountViewModel?.stepSizeDecimals = market?.configs?.stepSizeDecimals?.intValue
+        viewModel?.customAmountViewModel?.minAmount = market?.configs?.minOrderSize?.doubleValue
     }
 
     private func update(triggerOrdersInput: TriggerOrdersInput?, errors: [ValidationError]) {
@@ -208,6 +211,8 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenTakeProfitOrders = takeProfitOrders.count
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenStopLossOrders = stopLossOrders.count
 
+        viewModel?.customAmountViewModel?.maxAmount = position?.size?.current?.doubleValue.magnitude
+
         if takeProfitOrders.count == 1, let order = takeProfitOrders.first {
             AbacusStateManager.shared.triggerOrders(input: order.id, type: .takeprofitorderid)
             AbacusStateManager.shared.triggerOrders(input: order.size.description, type: .takeprofitordersize)
@@ -238,6 +243,8 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel = .init(triggerType: .stopLoss)
         viewModel.takeProfitStopLossInputAreaViewModel?.lossInputViewModel = .init(triggerType: .stopLoss)
 
+        viewModel.customAmountViewModel = dydxCustomAmountViewModel()
+
         super.init()
 
         // set up edit actions
@@ -252,6 +259,9 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
         viewModel.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.onEdited = {
             AbacusStateManager.shared.triggerOrders(input: $0, type: .stoplossusdcdiff)
+        }
+        viewModel.customAmountViewModel?.onEdited = {
+            AbacusStateManager.shared.triggerOrders(input: $0, type: .size)
         }
 
         // set up button interactions
