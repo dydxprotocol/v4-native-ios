@@ -26,8 +26,16 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
             self.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: stepSizeDecimals)
         }
     }
-    @Published public var minAmount: Double?
-    @Published public var maxAmount: Double?
+    @Published public var minimumValue: Float? {
+        didSet {
+            slider.minimumValue = minimumValue ?? 0
+        }
+    }
+    @Published public var maximumValue: Float? {
+        didSet {
+            slider.maximumValue = maximumValue ?? 0
+        }
+    }
     @Published private var isOn: Bool = false
 
     public init() {
@@ -42,7 +50,7 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
         PlatformBooleanInputViewModel(label: DataLocalizer.shared?.localize(path: "APP.GENERAL.CUSTOM_AMOUNT", params: nil), labelAccessory: nil, value: isOn.description, valueAccessoryView: nil) { [weak self] value in
             guard let self, let value, let isOn = Bool(value) else { return }
             self.isOn = isOn
-            self.onEdited?(isOn ? value : nil)
+            self.onEdited?(isOn ? "\(minimumValue ?? 0)" : nil)
         }
         .createView()
     }
@@ -54,19 +62,23 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
             .wrappedInAnyView()
     }
 
-    private var slider: UISliderView? {
-        UISliderView(value: inputBindingIgnoringFocus,
-                     minValue: minAmount,
-                     maxValue: maxAmount,
-                     stepSizeDecimals: stepSizeDecimals,
-                     thumbColor: ThemeColor.SemanticColor.textSecondary.uiColor,
-                     minTrackColor: .clear,
-                     maxTrackColor: .clear)
-    }
+    private lazy var slider: UISlider = {
+        let slider = UISlider(frame: .zero)
+        slider.value = 0
+        slider.thumbTintColor = ThemeColor.SemanticColor.textSecondary.uiColor
+        slider.minimumTrackTintColor = .clear
+        slider.maximumTrackTintColor = .clear
+        slider.addTarget(
+            self,
+            action: #selector(self.sliderValueChanged),
+            for: .valueChanged
+        )
 
-    private var sliderBackground: AnyView? {
-        GeometryReader {[weak self] geometry in
-            guard let self = self else { return EmptyView().wrappedInAnyView() }
+        return slider
+    }()
+
+    private var sliderBackground: some View {
+        GeometryReader { geometry in
             let tickWidth = 1.5
             let tickSpacing = 5.0
             let numTicks = (geometry.size.width - tickSpacing * 2) / (tickWidth + tickSpacing)
@@ -84,16 +96,13 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
             .wrappedInAnyView()
         }
         .frame(height: 8)
-        .wrappedInAnyView()
     }
 
-    private var sliderCompositeView: AnyView? {
-        guard isOn else { return nil }
+    private var sliderCompositeView: some View {
         return ZStack(alignment: .center) {
             self.sliderBackground
-            self.slider
+            self.slider.swiftUIView
         }
-        .wrappedInAnyView()
     }
 
     public static var previewValue: dydxTriggerPriceInputViewModel = {
@@ -104,97 +113,39 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             // if min == max, there is no need for a custom amount since there can only be one value
-            guard let self = self, minAmount != maxAmount else { return PlatformView.emptyView.wrappedInAnyView() }
+            guard let self = self, minimumValue != maximumValue else { return PlatformView.emptyView.wrappedInAnyView() }
             return VStack(spacing: 15) {
                 self.onOffSwitch
                 HStack(alignment: .center, spacing: 20) {
-                    self.sliderCompositeView
-                    self.input
+                    if self.isOn {
+                        self.sliderCompositeView
+                        self.input
+                    }
                 }
             }
             .wrappedInAnyView()
         }
     }
 
+    @objc private func sliderValueChanged(sender: UISlider) {
+        guard let stepSizeDecimals else { return }
+        let roundedValue = dydxFormatter.shared.raw(number: NSNumber(value: sender.value), digits: stepSizeDecimals)
+        self.value = roundedValue
+        slider.value = Parser.standard.asInputDecimal(value)?.floatValue ?? minimumValue ?? 0
+        PlatformView.hideKeyboard()
+        self.onEdited?(value)
+    }
+
     public override func valueChanged(value: String?) {
-        guard let stepSizeDecimals else {
-            preconditionFailure("need to set step size first")
+        if let stepSizeDecimals,
+           let value = Parser.standard.asInputDecimal(value)?.floatValue {
+            let valueWithinRange = min(max(slider.minimumValue, value), slider.maximumValue)
+            let roundedValue = dydxFormatter.shared.raw(number: Parser.standard.asInputDecimal(valueWithinRange), digits: stepSizeDecimals)
+            super.valueChanged(value: roundedValue)
+        } else {
+            super.valueChanged(value: "\(minimumValue ?? 0)")
         }
-        let roundedValue = dydxFormatter.shared.raw(number: Parser.standard.asInputDecimal(value), digits: stepSizeDecimals)
-        super.valueChanged(value: roundedValue)
-    }
-}
-
-public struct UISliderView: UIViewRepresentable {
-    @Binding var value: String
-
-    private var tickRoundedValue: Float {
-        if let value = dydxFormatter.shared.raw(number: Parser.standard.asInputDecimal(value), digits: self.stepSizeDecimals),
-            let valueAsFloat = Float(value) {
-            return valueAsFloat
-        }
-        return minValue
-    }
-
-    public init?(value: Binding<String>?, minValue: Double?, maxValue: Double?, stepSizeDecimals: Int?, thumbColor: UIColor, minTrackColor: UIColor, maxTrackColor: UIColor) {
-        guard let value = value,
-              let minValue = minValue,
-              let maxValue = maxValue,
-              let stepSizeDecimals = stepSizeDecimals else { return nil }
-        self._value = value
-        self.minValue = Float(minValue)
-        self.maxValue = Float(maxValue)
-        self.stepSizeDecimals = stepSizeDecimals
-        self.thumbColor = thumbColor
-        self.minTrackColor = minTrackColor
-        self.maxTrackColor = maxTrackColor
-    }
-
-    var minValue: Float
-    var maxValue: Float
-    var stepSizeDecimals: Int
-    var thumbColor: UIColor
-    var minTrackColor: UIColor
-    var maxTrackColor: UIColor
-
-    public class Coordinator: NSObject {
-        var value: Binding<String>
-        var stepSizeDecimals: Int
-
-        init(stepSizeDecimals: Int, value: Binding<String>) {
-            self.stepSizeDecimals = stepSizeDecimals
-            self.value = value
-        }
-
-        @objc func valueChanged(_ sender: UISlider) {
-            guard let rounded = dydxFormatter.shared.raw(number: Double(sender.value), digits: self.stepSizeDecimals) else { return }
-            self.value.wrappedValue = rounded
-        }
-    }
-
-    public func makeCoordinator() -> UISliderView.Coordinator {
-        Coordinator(stepSizeDecimals: stepSizeDecimals, value: $value)
-    }
-
-    public func makeUIView(context: Context) -> UISlider {
-        let slider = UISlider(frame: .zero)
-        slider.thumbTintColor = thumbColor
-        slider.minimumTrackTintColor = minTrackColor
-        slider.maximumTrackTintColor = maxTrackColor
-        slider.minimumValue = minValue
-        slider.maximumValue = maxValue
-        slider.value = tickRoundedValue
-        slider.addTarget(
-            context.coordinator,
-            action: #selector(Coordinator.valueChanged(_:)),
-            for: .valueChanged
-        )
-
-        return slider
-    }
-
-    public func updateUIView(_ uiView: UISlider, context: Context) {
-        uiView.value = tickRoundedValue
+        slider.value = Parser.standard.asDecimal(value)?.floatValue ?? slider.minimumValue
     }
 }
 
