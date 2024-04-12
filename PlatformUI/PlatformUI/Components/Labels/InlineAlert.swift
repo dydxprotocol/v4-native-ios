@@ -21,6 +21,22 @@ public class InlineAlertViewModel: PlatformViewModel {
         return vm
     }()
     
+    private var title: AnyView? {
+        guard let titleText = config.title else { return nil }
+        return Text(titleText)
+            .themeColor(foreground: .textPrimary)
+            .themeFont(fontType: .plus, fontSize: .medium)
+            .wrappedInAnyView()
+    }
+    
+    private var body: AnyView? {
+        guard let bodyText = config.body else { return nil }
+        return Text(bodyText)
+            .themeColor(foreground: .textPrimary)
+            .themeFont(fontType: .base, fontSize: .small)
+            .wrappedInAnyView()
+    }
+    
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
@@ -31,12 +47,9 @@ public class InlineAlertViewModel: PlatformViewModel {
                     .frame(width: 6)
                 HStack(spacing: 0) {
                     VStack(alignment: .leading) {
-                        Text(config.title)
-                            .themeColor(foreground: .textPrimary)
-                            .themeFont(fontType: .plus, fontSize: .medium)
-                        Text(config.body)
-                            .themeColor(foreground: .textPrimary)
-                            .themeFont(fontType: .base, fontSize: .small)
+                        self.title
+                        self.body
+
                     }
                     Spacer()
                 }
@@ -53,11 +66,11 @@ public class InlineAlertViewModel: PlatformViewModel {
 
 public extension InlineAlertViewModel {
     struct Config {
-        public var title: String
-        public var body: String
+        public var title: String?
+        public var body: String?
         public var level: Level
         
-        public init(title: String, body: String, level: Level) {
+        public init(title: String?, body: String?, level: Level) {
             self.title = title
             self.body = body
             self.level = level

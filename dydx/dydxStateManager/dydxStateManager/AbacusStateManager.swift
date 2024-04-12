@@ -428,6 +428,16 @@ extension AbacusStateManager {
         case failed(Abacus.ParsingError?)
     }
 
+    public func placeTriggerOrders(callback: @escaping ((SubmissionStatus) -> Void)) {
+        asyncStateManager.commitTriggerOrders { successful, error, _ in
+            if successful.boolValue {
+                callback(.success)
+            } else {
+                callback(.failed(error))
+            }
+        }
+    }
+
     public func placeOrder(callback: @escaping ((SubmissionStatus) -> Void)) {
         asyncStateManager.commitPlaceOrder { successful, error, _ in
             if successful.boolValue {
