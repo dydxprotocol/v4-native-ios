@@ -130,6 +130,9 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
     private func update(market: PerpetualMarket?) {
         viewModel?.oraclePrice = market?.oraclePrice?.doubleValue
+        viewModel?.customAmountViewModel?.assetId = market?.assetId
+        viewModel?.customAmountViewModel?.stepSize = market?.configs?.stepSize?.stringValue
+        viewModel?.customAmountViewModel?.minimumValue = market?.configs?.minOrderSize?.floatValue
     }
 
     private func update(triggerOrdersInput: TriggerOrdersInput?, errors: [ValidationError]) {
@@ -156,13 +159,6 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                 if triggerOrdersInput?.takeProfitOrder?.side == .buy {
                     viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = alert
                 }
-            case "USER_MAX_ORDERS":
-                if triggerOrdersInput?.stopLossOrder?.price?.triggerPrice != nil {
-                    viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = alert
-                }
-                if triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice != nil {
-                    viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = alert
-                }
             default:
                 print("mmm: ", error.code)
             }
@@ -173,6 +169,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue, digits: 2)
         viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue, digits: 2)
         viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue, digits: 2)
+        viewModel?.customAmountViewModel?.value = triggerOrdersInput?.size?.stringValue
 
         // update order types
         if let _ = triggerOrdersInput?.takeProfitOrder?.price?.limitPrice?.doubleValue {
@@ -215,6 +212,8 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenTakeProfitOrders = takeProfitOrders.count
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenStopLossOrders = stopLossOrders.count
 
+        viewModel?.customAmountViewModel?.maximumValue = position?.size?.current?.floatValue.magnitude
+
         if takeProfitOrders.count == 1, let order = takeProfitOrders.first {
             AbacusStateManager.shared.triggerOrders(input: order.id, type: .takeprofitorderid)
             AbacusStateManager.shared.triggerOrders(input: order.size.description, type: .takeprofitordersize)
@@ -245,6 +244,8 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel = .init(triggerType: .stopLoss)
         viewModel.takeProfitStopLossInputAreaViewModel?.lossInputViewModel = .init(triggerType: .stopLoss)
 
+        viewModel.customAmountViewModel = dydxCustomAmountViewModel()
+
         super.init()
 
         // set up edit actions
@@ -259,6 +260,9 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
         viewModel.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.onEdited = {
             AbacusStateManager.shared.triggerOrders(input: $0, type: .stoplossusdcdiff)
+        }
+        viewModel.customAmountViewModel?.onEdited = {
+            AbacusStateManager.shared.triggerOrders(input: $0, type: .size)
         }
 
         // set up button interactions
