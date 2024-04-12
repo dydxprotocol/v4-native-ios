@@ -14,6 +14,16 @@ import Popovers
 
 public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
 
+    public enum SubmissionStatus {
+        case readyToSubmit
+        case needsInput
+        case fixErrors(cta: String?)
+        case submitting
+    }
+
+    @Published public var submissionReadiness: SubmissionStatus = .needsInput
+    @Published public var submissionAction: (() -> Void)?
+
     @Published public var entryPrice: Double?
     @Published public var oraclePrice: Double?
     @Published public var takeProfitStopLossInputAreaViewModel: dydxTakeProfitStopLossInputAreaModel?
@@ -61,24 +71,61 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
         }
     }
 
+    private func createCta(parentStyle: ThemeStyle, styleKey: String?) -> AnyView? {
+        let buttonText: String
+        let buttonState: PlatformButtonState
+        switch submissionReadiness {
+        case .readyToSubmit:
+            buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_TRIGGERS", params: nil) ?? ""
+            buttonState = .primary
+        case .needsInput:
+            buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_TRIGGERS", params: nil) ?? ""
+            buttonState = .disabled
+        case .fixErrors(let cta):
+            buttonText = cta ?? ""
+            buttonState = .disabled
+        case .submitting:
+            buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.SUBMITTING_ORDER", params: nil) ?? ""
+            buttonState = .primary
+        }
+        let content = HStack(spacing: 0) {
+            Spacer()
+            Text(buttonText)
+            Spacer()
+        }.wrappedInAnyView()
+
+        if let submissionAction = submissionAction {
+            return PlatformButtonViewModel(content: PlatformViewModel(bodyBuilder: { _ in
+                content
+            }), state: buttonState, action: submissionAction)
+            .createView(parentStyle: parentStyle, styleKey: styleKey)
+            .wrappedInAnyView()
+        } else {
+            return nil
+        }
+    }
+
     override public func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack(spacing: 18) {
-                self.createHeader()
-                self.createReceipt()
-                self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+            let view = VStack(spacing: 0) {
+                VStack(spacing: 18) {
+                    self.createHeader()
+                    self.createReceipt()
+                    self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
 
-                HStack(alignment: .center, spacing: 8) {
-                    Text(localizerPathKey: "APP.GENERAL.ADVANCED")
-                        .themeColor(foreground: .textTertiary)
-                        .themeFont(fontType: .base, fontSize: .small)
-                    Rectangle()
-                        .frame(height: 1)
-                        .themeColor(background: .layer6)
+                    HStack(alignment: .center, spacing: 8) {
+                        Text(localizerPathKey: "APP.GENERAL.ADVANCED")
+                            .themeColor(foreground: .textTertiary)
+                            .themeFont(fontType: .base, fontSize: .small)
+                        Rectangle()
+                            .frame(height: 1)
+                            .themeColor(background: .layer6)
+                    }
+                    Spacer()
+                    self.createCta(parentStyle: parentStyle, styleKey: styleKey)
                 }
-                Spacer()
             }
             .padding(.top, 32)
             .padding([.leading, .trailing])
