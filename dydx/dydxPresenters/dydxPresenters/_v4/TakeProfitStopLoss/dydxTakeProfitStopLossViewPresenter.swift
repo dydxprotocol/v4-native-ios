@@ -132,7 +132,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
     private func update(market: PerpetualMarket?) {
         viewModel?.oraclePrice = market?.oraclePrice?.doubleValue
         viewModel?.customAmountViewModel?.assetId = market?.assetId
-        viewModel?.customAmountViewModel?.stepSizeDecimals = market?.configs?.stepSizeDecimals?.intValue
+        viewModel?.customAmountViewModel?.stepSize = market?.configs?.stepSize?.stringValue
         viewModel?.customAmountViewModel?.minimumValue = market?.configs?.minOrderSize?.floatValue
     }
 

@@ -58,10 +58,10 @@ final class dydxAlertsWorker: BaseWorker {
                     Router.shared?.navigate(to: RoutingRequest(path: link!), animated: true, completion: nil)
                 }] : nil
                 if SettingsStore.shared?.shouldDisplayInAppNotifications != false {
-                        ErrorInfo.shared?.info(title: alert.title,
-                                               message: alert.text,
-                                               type: alert.type.infoType,
-                                               error: nil, time: nil, actions: actions)
+                    ErrorInfo.shared?.info(title: alert.title,
+                                           message: alert.text,
+                                           type: alert.type.infoType,
+                                           error: nil, time: nil, actions: actions)
                 }
                 // add to alert ids set to avoid double handling
                 handledAlertHashes.insert(alert.hashValue)
