@@ -239,12 +239,16 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
         viewModel.takeProfitStopLossInputAreaViewModel = dydxTakeProfitStopLossInputAreaModel()
         viewModel.takeProfitStopLossInputAreaViewModel?.multipleOrdersExistViewModel = .init()
-        viewModel.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel = .init(triggerType: .takeProfit)
+        viewModel.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel = .init(title: DataLocalizer.shared?.localize(path: "APP.TRIGGERS_MODAL.TP_PRICE", params: nil))
         viewModel.takeProfitStopLossInputAreaViewModel?.gainInputViewModel = .init(triggerType: .takeProfit)
-        viewModel.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel = .init(triggerType: .stopLoss)
+        viewModel.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel = .init(title: DataLocalizer.shared?.localize(path: "APP.TRIGGERS_MODAL.SL_PRICE", params: nil))
         viewModel.takeProfitStopLossInputAreaViewModel?.lossInputViewModel = .init(triggerType: .stopLoss)
 
         viewModel.customAmountViewModel = dydxCustomAmountViewModel()
+
+        viewModel.customLimitPriceViewModel = dydxCustomLimitPriceViewModel()
+        viewModel.customLimitPriceViewModel?.takeProfitPriceInputViewModel = .init(title: DataLocalizer.shared?.localize(path: "APP.TRIGGERS_MODAL.TP_LIMIT", params: nil))
+        viewModel.customLimitPriceViewModel?.stopLossPriceInputViewModel = .init(title: DataLocalizer.shared?.localize(path: "APP.TRIGGERS_MODAL.SL_LIMIT", params: nil))
 
         super.init()
 
@@ -263,6 +267,12 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
         viewModel.customAmountViewModel?.onEdited = {
             AbacusStateManager.shared.triggerOrders(input: $0, type: .size)
+        }
+        viewModel.customLimitPriceViewModel?.takeProfitPriceInputViewModel?.onEdited = {
+            AbacusStateManager.shared.triggerOrders(input: $0, type: .takeprofitlimitprice)
+        }
+        viewModel.customLimitPriceViewModel?.stopLossPriceInputViewModel?.onEdited = {
+            AbacusStateManager.shared.triggerOrders(input: $0, type: .stoplosslimitprice)
         }
 
         // set up button interactions
