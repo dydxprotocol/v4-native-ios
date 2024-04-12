@@ -11,7 +11,6 @@ import PlatformUI
 import Utilities
 
 public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
-
     @Published public var numOpenTakeProfitOrders: Int?
     @Published public var takeProfitPriceInputViewModel: dydxTriggerPriceInputViewModel?
     @Published public var gainInputViewModel: dydxGainLossInputViewModel?
@@ -132,30 +131,32 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            return VStack(alignment: .leading, spacing: 16) {
+            return VStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 16) {
-                    self.createSectionHeader(triggerType: .takeProfit)
-                    if self.hasMultipleTakeProfitOrders {
-                        self.multipleOrdersExistViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                    } else {
-                        HStack(spacing: 12) {
-                            self.takeProfitPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                            self.gainInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                    VStack(alignment: .leading, spacing: 16) {
+                        self.createSectionHeader(triggerType: .takeProfit)
+                        if self.hasMultipleTakeProfitOrders {
+                            self.multipleOrdersExistViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                        } else {
+                            HStack(spacing: 12) {
+                                self.takeProfitPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                                self.gainInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            }
                         }
+                        self.takeProfitAlert?.createView(parentStyle: parentStyle, styleKey: styleKey)
                     }
-                    self.takeProfitAlert?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                }
-                VStack(alignment: .leading, spacing: 16) {
-                    self.createSectionHeader(triggerType: .stopLoss)
-                    if self.hasMultipleStopLossOrders {
-                        self.multipleOrdersExistViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                    } else {
-                        HStack(spacing: 12) {
-                            self.stopLossPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                            self.lossInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                    VStack(alignment: .leading, spacing: 16) {
+                        self.createSectionHeader(triggerType: .stopLoss)
+                        if self.hasMultipleStopLossOrders {
+                            self.multipleOrdersExistViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                        } else {
+                            HStack(spacing: 12) {
+                                self.stopLossPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                                self.lossInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            }
                         }
+                        self.stopLossAlert?.createView(parentStyle: parentStyle, styleKey: styleKey)
                     }
-                    self.stopLossAlert?.createView(parentStyle: parentStyle, styleKey: styleKey)
                 }
             }
             .wrappedInAnyView()
