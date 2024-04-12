@@ -524,7 +524,7 @@ open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
         if let label = label, label.length > 0 {
             return Text(label)
                 .themeColor(foreground: isEnabled ? .textSecondary : .textTertiary)
-                        .themeFont(fontSize: .smaller)
+                        .themeFont(fontSize: .medium)
                         .wrappedViewModel
     
         }

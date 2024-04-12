@@ -27,6 +27,7 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
     @Published public var entryPrice: Double?
     @Published public var oraclePrice: Double?
     @Published public var takeProfitStopLossInputAreaViewModel: dydxTakeProfitStopLossInputAreaModel?
+    @Published public var customAmountViewModel: dydxCustomAmountViewModel?
 
     public init() {}
 
@@ -105,6 +106,17 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
         }
     }
 
+    var separator: some View {
+        HStack(alignment: .center, spacing: 8) {
+            Text(localizerPathKey: "APP.GENERAL.ADVANCED")
+                .themeColor(foreground: .textTertiary)
+                .themeFont(fontType: .base, fontSize: .small)
+            Rectangle()
+                .frame(height: 1)
+                .themeColor(background: .layer6)
+        }
+    }
+
     override public func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
@@ -114,15 +126,8 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
                     self.createHeader()
                     self.createReceipt()
                     self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-
-                    HStack(alignment: .center, spacing: 8) {
-                        Text(localizerPathKey: "APP.GENERAL.ADVANCED")
-                            .themeColor(foreground: .textTertiary)
-                            .themeFont(fontType: .base, fontSize: .small)
-                        Rectangle()
-                            .frame(height: 1)
-                            .themeColor(background: .layer6)
-                    }
+                    self.separator
+                    self.customAmountViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
                     Spacer()
                     self.createCta(parentStyle: parentStyle, styleKey: styleKey)
                 }
