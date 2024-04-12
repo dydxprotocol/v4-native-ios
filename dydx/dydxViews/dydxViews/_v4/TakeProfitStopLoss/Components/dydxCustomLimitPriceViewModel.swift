@@ -23,12 +23,13 @@ public class dydxCustomLimitPriceViewModel: PlatformViewModel {
         set: { [weak self] in self?.isTooltipPresented = $0 }
     )
 
-    private var onOffSwitch: PlatformView {
+    private var onOffSwitch: some View {
         PlatformBooleanInputViewModel(label: DataLocalizer.shared?.localize(path: "APP.TRADE.LIMIT_PRICE", params: nil), labelAccessory: nil, value: isOn.description, valueAccessoryView: nil) { [weak self] value in
             guard let self, let value, let isOn = Bool(value) else { return }
             self.isOn = isOn
         }
         .createView()
+        .padding(.trailing, 2) // swiftui bug where toggle view in a scrollview gets clipped without this
     }
 
     private var input: AnyView? {

@@ -11,6 +11,7 @@ import Utilities
 import Introspect
 import dydxFormatter
 import Popovers
+import KeyboardObserving
 
 public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
 
@@ -88,7 +89,7 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
             buttonState = .disabled
         case .submitting:
             buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.SUBMITTING_ORDER", params: nil) ?? ""
-            buttonState = .primary
+            buttonState = .disabled
         }
         let content = HStack(spacing: 0) {
             Spacer()
@@ -123,7 +124,7 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack(spacing: 0) {
-                VStack(spacing: 18) {
+                 VStack(spacing: 0) {
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 18) {
                             self.createHeader()
@@ -134,7 +135,9 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
                             self.customLimitPriceViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
                         }
                     }
-                    Spacer()
+                    .keyboardObserving()
+                    .keyboardAccessory(background: .layer3, parentStyle: parentStyle)
+                    Spacer(minLength: 18)
                     self.createCta(parentStyle: parentStyle, styleKey: styleKey)
                 }
             }
