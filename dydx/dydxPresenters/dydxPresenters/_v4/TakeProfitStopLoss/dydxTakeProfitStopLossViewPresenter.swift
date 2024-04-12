@@ -132,7 +132,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel?.oraclePrice = market?.oraclePrice?.doubleValue
         viewModel?.customAmountViewModel?.assetId = market?.assetId
         viewModel?.customAmountViewModel?.stepSizeDecimals = market?.configs?.stepSizeDecimals?.intValue
-        viewModel?.customAmountViewModel?.minAmount = market?.configs?.minOrderSize?.doubleValue
+        viewModel?.customAmountViewModel?.minimumValue = market?.configs?.minOrderSize?.floatValue
     }
 
     private func update(triggerOrdersInput: TriggerOrdersInput?, errors: [ValidationError]) {
@@ -169,6 +169,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue, digits: 2)
         viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue, digits: 2)
         viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue, digits: 2)
+        viewModel?.customAmountViewModel?.value = triggerOrdersInput?.size?.stringValue
 
         // update order types
         if let _ = triggerOrdersInput?.takeProfitOrder?.price?.limitPrice?.doubleValue {
@@ -211,7 +212,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenTakeProfitOrders = takeProfitOrders.count
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenStopLossOrders = stopLossOrders.count
 
-        viewModel?.customAmountViewModel?.maxAmount = position?.size?.current?.doubleValue.magnitude
+        viewModel?.customAmountViewModel?.maximumValue = position?.size?.current?.floatValue.magnitude
 
         if takeProfitOrders.count == 1, let order = takeProfitOrders.first {
             AbacusStateManager.shared.triggerOrders(input: order.id, type: .takeprofitorderid)
