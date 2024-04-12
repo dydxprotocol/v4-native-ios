@@ -20,10 +20,10 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
                 .wrappedInAnyView()
         }
     }
-    @Published public var stepSizeDecimals: Int? {
+    @Published public var stepSize: String? {
         didSet {
-            guard let stepSizeDecimals else { return }
-            self.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: stepSizeDecimals)
+            guard let stepSize else { return }
+            self.placeHolder = dydxFormatter.shared.raw(number: .zero, size: stepSize)
         }
     }
     @Published public var minimumValue: Float? {
@@ -128,8 +128,8 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
     }
 
     @objc private func sliderValueChanged(sender: UISlider) {
-        guard let stepSizeDecimals else { return }
-        let roundedValue = dydxFormatter.shared.raw(number: NSNumber(value: sender.value), digits: stepSizeDecimals)
+        guard let stepSize else { return }
+        let roundedValue = dydxFormatter.shared.raw(number: NSNumber(value: sender.value), size: stepSize)
         self.value = roundedValue
         slider.value = Parser.standard.asInputDecimal(value)?.floatValue ?? minimumValue ?? 0
         PlatformView.hideKeyboard()
@@ -137,10 +137,10 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
     }
 
     public override func valueChanged(value: String?) {
-        if let stepSizeDecimals,
+        if let stepSize,
            let value = Parser.standard.asInputDecimal(value)?.floatValue {
             let valueWithinRange = min(max(slider.minimumValue, value), slider.maximumValue)
-            let roundedValue = dydxFormatter.shared.raw(number: Parser.standard.asInputDecimal(valueWithinRange), digits: stepSizeDecimals)
+            let roundedValue = dydxFormatter.shared.raw(number: Parser.standard.asInputDecimal(valueWithinRange), size: stepSize)
             super.valueChanged(value: roundedValue)
         } else {
             super.valueChanged(value: "\(minimumValue ?? 0)")
