@@ -210,8 +210,8 @@ public final class AbacusStateManager: NSObject {
     }
 
     private func reallyStart() {
-        if let ethereumAddress = _walletState.currentWallet?.ethereumAddress,
-           let cosmoAddress = _walletState.currentWallet?.cosmoAddress,
+        let ethereumAddress = _walletState.currentWallet?.ethereumAddress
+        if let cosmoAddress = _walletState.currentWallet?.cosmoAddress,
            let mnemonic = _walletState.currentWallet?.mnemonic {
             let walletId = _walletState.currentWallet?.walletId
             setV4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic)
