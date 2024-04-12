@@ -112,7 +112,7 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
         vm.minimumValue = 0
         vm.maximumValue = 1
         vm.assetId = "ETH"
-        vm.stepSizeDecimals = 2
+        vm.stepSize = "0.01"
         return vm
     }()
 
