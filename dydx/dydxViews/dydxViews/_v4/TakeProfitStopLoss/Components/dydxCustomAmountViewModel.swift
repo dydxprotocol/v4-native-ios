@@ -1,5 +1,5 @@
 //
-//  dydxTriggerPriceInputViewModel.swift
+//  dydxCustomAmountViewModel.swift
 //  dydxUI
 //
 //  Created by Michael Maguire on 4/2/24.
@@ -105,8 +105,13 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
         }
     }
 
-    public static var previewValue: dydxTriggerPriceInputViewModel = {
-        let vm = dydxTriggerPriceInputViewModel(triggerType: .takeProfit)
+    public static var previewValue: dydxCustomAmountViewModel = {
+        let vm = dydxCustomAmountViewModel()
+        vm.isOn = true
+        vm.minimumValue = 0
+        vm.maximumValue = 1
+        vm.assetId = "ETH"
+        vm.stepSizeDecimals = 2
         return vm
     }()
 

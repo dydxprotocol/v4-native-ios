@@ -28,6 +28,7 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
     @Published public var oraclePrice: Double?
     @Published public var takeProfitStopLossInputAreaViewModel: dydxTakeProfitStopLossInputAreaModel?
     @Published public var customAmountViewModel: dydxCustomAmountViewModel?
+    @Published public var customLimitPriceViewModel: dydxCustomLimitPriceViewModel?
 
     public init() {}
 
@@ -123,11 +124,16 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
 
             let view = VStack(spacing: 0) {
                 VStack(spacing: 18) {
-                    self.createHeader()
-                    self.createReceipt()
-                    self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                    self.separator
-                    self.customAmountViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 18) {
+                            self.createHeader()
+                            self.createReceipt()
+                            self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            self.separator
+                            self.customAmountViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            self.customLimitPriceViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                        }
+                    }
                     Spacer()
                     self.createCta(parentStyle: parentStyle, styleKey: styleKey)
                 }
