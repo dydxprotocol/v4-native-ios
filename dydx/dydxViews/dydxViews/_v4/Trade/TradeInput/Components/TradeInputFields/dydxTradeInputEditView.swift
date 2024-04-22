@@ -9,6 +9,7 @@ import SwiftUI
 import PlatformUI
 import Utilities
 import Introspect
+import KeyboardObserving
 
 public class dydxTradeInputEditViewModel: PlatformViewModel {
     @Published public var children: [PlatformValueInputViewModel]?
@@ -32,10 +33,15 @@ public class dydxTradeInputEditViewModel: PlatformViewModel {
 
             return AnyView(
                 ScrollView(showsIndicators: false) {
-                    VStack {
-                        ForEach(self.children ?? [], id: \.self.id) { child in
+                    VStack(spacing: 8) {
+                        // need to find a better way to do this. Might not be sustainable.
+                        // This is a bandaid workaround for keyboard. Might not be great on SE. Will not be good if we add more inputs
+                        // if keyboardobserving is applied to more than one of the children, or applied to the scrollview, bizarre behavior ensues
+                        ForEach(self.children?.prefix(while: { $0 !== self.children?.last }) ?? [], id: \.self.id) { child in
                             child.createView(parentStyle: style)
                         }
+                        self.children?.last?.createView(parentStyle: style)
+                            .keyboardObserving()
                     }
                     .introspectScrollView { [weak self] scrollView in
                         self?.onScrollViewCreated?(scrollView)

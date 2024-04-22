@@ -305,7 +305,7 @@
                 },
                 "/trade/take_profit_stop_loss":{
                     "destination":"dydxPresenters.dydxTakeProfitStopLossViewBuilder",
-                    "presentation":"half"
+                    "presentation":"prompt"
                 },
                 "/transfer":{
                     "destination":"dydxPresenters.dydxTransferViewBuilder",
