@@ -66,4 +66,13 @@ extension Double {
             return 0
         }
     }
+    
+    public var stringValue: String? { "\(self)" }
+}
+
+public extension Optional where Wrapped == Double  {
+    var stringValue: String? {
+        guard let self else { return nil }
+        return "\(self)"
+    }
 }
