@@ -1,5 +1,5 @@
 //
-//  dydxTriggerPriceInputViewModel.swift
+//  dydxCustomAmountViewModel.swift
 //  dydxUI
 //
 //  Created by Michael Maguire on 4/2/24.
@@ -46,13 +46,14 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
         )
     }
 
-    private var onOffSwitch: PlatformView {
+    private var onOffSwitch: some View {
         PlatformBooleanInputViewModel(label: DataLocalizer.shared?.localize(path: "APP.GENERAL.CUSTOM_AMOUNT", params: nil), labelAccessory: nil, value: isOn.description, valueAccessoryView: nil) { [weak self] value in
             guard let self, let value, let isOn = Bool(value) else { return }
             self.isOn = isOn
             self.onEdited?(isOn ? "\(minimumValue ?? 0)" : nil)
         }
         .createView()
+        .padding(.trailing, 2) // swiftui bug where toggle view in a scrollview gets clipped without this
     }
 
     private var input: AnyView? {
@@ -105,8 +106,13 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
         }
     }
 
-    public static var previewValue: dydxTriggerPriceInputViewModel = {
-        let vm = dydxTriggerPriceInputViewModel(triggerType: .takeProfit)
+    public static var previewValue: dydxCustomAmountViewModel = {
+        let vm = dydxCustomAmountViewModel()
+        vm.isOn = true
+        vm.minimumValue = 0
+        vm.maximumValue = 1
+        vm.assetId = "ETH"
+        vm.stepSize = "0.01"
         return vm
     }()
 

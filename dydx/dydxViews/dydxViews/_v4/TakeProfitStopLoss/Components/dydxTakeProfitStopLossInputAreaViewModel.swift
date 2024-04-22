@@ -12,12 +12,12 @@ import Utilities
 
 public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
     @Published public var numOpenTakeProfitOrders: Int?
-    @Published public var takeProfitPriceInputViewModel: dydxTriggerPriceInputViewModel?
+    @Published public var takeProfitPriceInputViewModel: dydxPriceInputViewModel?
     @Published public var gainInputViewModel: dydxGainLossInputViewModel?
     @Published public var takeProfitAlert: InlineAlertViewModel?
 
     @Published public var numOpenStopLossOrders: Int?
-    @Published public var stopLossPriceInputViewModel: dydxTriggerPriceInputViewModel?
+    @Published public var stopLossPriceInputViewModel: dydxPriceInputViewModel?
     @Published public var lossInputViewModel: dydxGainLossInputViewModel?
     @Published public var stopLossAlert: InlineAlertViewModel?
 
@@ -41,8 +41,8 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
         let vm = dydxTakeProfitStopLossInputAreaModel()
         vm.gainInputViewModel = dydxGainLossInputViewModel(triggerType: .takeProfit)
         vm.lossInputViewModel = dydxGainLossInputViewModel(triggerType: .stopLoss)
-        vm.takeProfitPriceInputViewModel = dydxTriggerPriceInputViewModel(triggerType: .takeProfit)
-        vm.stopLossPriceInputViewModel = dydxTriggerPriceInputViewModel(triggerType: .stopLoss)
+        vm.takeProfitPriceInputViewModel = dydxPriceInputViewModel(title: "TP Price")
+        vm.stopLossPriceInputViewModel = dydxPriceInputViewModel(title: "SL Price")
         return vm
     }()
 
@@ -184,15 +184,6 @@ extension dydxTakeProfitStopLossInputAreaModel {
                 return "TRADE.BRACKET_ORDER_SL.BODY"
             case .stopLoss:
                 return "TRADE.BRACKET_ORDER_TP.BODY"
-            }
-        }
-
-        var priceInputTitleLocalizerPath: String {
-            switch self {
-            case .takeProfit:
-                return "APP.TRIGGERS_MODAL.TP_PRICE"
-            case .stopLoss:
-                return "APP.TRIGGERS_MODAL.SL_PRICE"
             }
         }
 
