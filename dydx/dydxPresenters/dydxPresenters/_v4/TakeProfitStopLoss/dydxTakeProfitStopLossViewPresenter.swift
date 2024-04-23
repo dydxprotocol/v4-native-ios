@@ -144,7 +144,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
         if let error = errors.first {
             if let field = error.fields?.first {
-                let alert = InlineAlertViewModel(.init(title: error.resources.title?.localized, body: error.resources.text?.localized, level: .error))
+                let alert = InlineAlertViewModel(.init(title: error.resources.title?.localizedString, body: error.resources.text?.localizedString, level: .error))
                 switch field {
                 case TriggerOrdersInputField.stoplossprice.rawValue, TriggerOrdersInputField.stoplossusdcdiff.rawValue, TriggerOrdersInputField.stoplosspercentdiff.rawValue:
                     viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = alert
@@ -153,7 +153,6 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                 case TriggerOrdersInputField.takeprofitlimitprice.rawValue, TriggerOrdersInputField.stoplosslimitprice.rawValue:
                     viewModel?.customLimitPriceViewModel?.alert = alert
                 default:
-                    print("mmm: unknown field \(field)")
                     break
                 }
             }
@@ -183,8 +182,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
 
         if let error = errors.first {
-            let errorCta = error.resources.action?.localized ?? DataLocalizer.shared?.localize(path: error.resources.action?.stringKey ?? "", params: nil)
-            viewModel?.submissionReadiness = .fixErrors(cta: errorCta)
+            viewModel?.submissionReadiness = .fixErrors(cta: error.resources.action?.localizedString)
         } else if triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue == nil
             && triggerOrdersInput?.takeProfitOrder?.orderId == nil
             && triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue == nil
@@ -292,7 +290,6 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             AbacusStateManager.shared.triggerOrders(input: $0, type: .stoplossusdcdiff)
         }
         viewModel.customAmountViewModel?.onEdited = {
-            print("mmm: custom amount edited \($0)")
             AbacusStateManager.shared.triggerOrders(input: $0, type: .size)
         }
         viewModel.customLimitPriceViewModel?.takeProfitPriceInputViewModel?.onEdited = {
