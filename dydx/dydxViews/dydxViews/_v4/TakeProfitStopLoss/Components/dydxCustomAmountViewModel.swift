@@ -12,6 +12,10 @@ import dydxFormatter
 import Utilities
 
 public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
+
+    @Published private var isOn: Bool = false
+    @Published public var toggleAction: ((Bool) -> Void)?
+
     @Published public var assetId: String? {
         didSet {
             guard let assetId = assetId else { return }
@@ -36,7 +40,6 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
             slider.maximumValue = maximumValue ?? 0
         }
     }
-    @Published private var isOn: Bool = false
 
     public init() {
         super.init(
@@ -50,7 +53,7 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
         PlatformBooleanInputViewModel(label: DataLocalizer.shared?.localize(path: "APP.GENERAL.CUSTOM_AMOUNT", params: nil), labelAccessory: nil, value: isOn.description, valueAccessoryView: nil) { [weak self] value in
             guard let self, let value, let isOn = Bool(value) else { return }
             self.isOn = isOn
-            self.onEdited?(isOn ? "\(minimumValue ?? 0)" : nil)
+            self.toggleAction?(isOn)
         }
         .createView()
         .padding(.trailing, 2) // swiftui bug where toggle view in a scrollview gets clipped without this
