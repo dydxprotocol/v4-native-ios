@@ -2,7 +2,7 @@
 //  AppsFlyerLib.h
 //  AppsFlyerLib
 //
-//  AppsFlyer iOS SDK 6.14.0 (153)
+//  AppsFlyer iOS SDK 6.14.2 (172)
 //  Copyright (c) 2012-2023 AppsFlyer Ltd. All rights reserved.
 //
 
@@ -13,6 +13,9 @@
 #import <AppsFlyerLib/AppsFlyerDeepLinkResult.h>
 #import <AppsFlyerLib/AppsFlyerDeepLink.h>
 #import <AppsFlyerLib/AppsFlyerConsent.h>
+#import <AppsFlyerLib/AFSDKPurchaseDetails.h>
+#import <AppsFlyerLib/AFSDKValidateAndLogResult.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -489,6 +492,20 @@ NS_SWIFT_NAME(logEvent(name:values:completionHandler:));
                additionalParameters:(NSDictionary * _Nullable)params
                             success:(void (^ _Nullable)(NSDictionary * response))successBlock
                             failure:(void (^ _Nullable)(NSError * _Nullable error, id _Nullable reponse))failedBlock NS_AVAILABLE(10_7, 7_0);
+
+typedef void (^AFSDKValidateAndLogCompletion)(AFSDKValidateAndLogResult * _Nullable result);
+
+/**
+ To log and validate in app purchases you can call this method from the completeTransaction: method on
+ your `SKPaymentTransactionObserver`.
+ 
+ @param details The product details
+ @param extraEventValues The additional param, which you want to receive it in the raw reports
+ @param completionHandler The callback
+ */
+- (void)validateAndLogInAppPurchase:(AFSDKPurchaseDetails *)details
+                   extraEventValues:(NSDictionary * _Nullable)extraEventValues
+                  completionHandler:(AFSDKValidateAndLogCompletion)completionHandler NS_AVAILABLE(10_7, 7_0);
 
 /**
  To log location for geo-fencing. Does the same as code below.
