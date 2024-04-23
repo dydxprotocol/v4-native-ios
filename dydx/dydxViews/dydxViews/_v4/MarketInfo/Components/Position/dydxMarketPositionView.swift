@@ -11,7 +11,6 @@ import PlatformUI
 import Utilities
 
 public class dydxMarketPositionViewModel: PlatformViewModel {
-    @Published public var shareAction: (() -> Void)?
     @Published public var takeProfitStopLossAction: (() -> Void)?
     @Published public var closeAction: (() -> Void)?
     @Published public var unrealizedPNLAmount: SignedAmountViewModel?
@@ -31,11 +30,13 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     @Published public var closePrice: String?
     @Published public var funding: SignedAmountViewModel?
 
+    @Published public var takeProfitStatusViewModel: dydxTakeProftiStopLossStatusViewModel?
+    @Published public var stopLossStatusViewModel: dydxTakeProftiStopLossStatusViewModel?
+
     public init() { }
 
     public static var previewValue: dydxMarketPositionViewModel {
         let vm = dydxMarketPositionViewModel()
-        vm.shareAction = {}
         vm.closeAction = {}
         vm.unrealizedPNLAmount = .previewValue
         vm.unrealizedPNLPercent = "0.00%"
@@ -197,54 +198,54 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     }
 
     private func createButtons(parentStyle: ThemeStyle) -> some View {
-        HStack {
-            if let shareAction = self.shareAction {
-                let content = AnyView(
-                    HStack {
-                        Spacer()
-                        Text(DataLocalizer.localize(path: "APP.GENERAL.SHARE"))
-                            .themeFont(fontSize: .medium)
-                        Spacer()
-                    }
-                )
+        var closePositionButton: AnyView?
+        var addTakeProfitStopLossButton: AnyView?
 
-                PlatformButtonViewModel(content: content.wrappedViewModel, state: .disabled) {
-                    shareAction()
-                }
-                .createView(parentStyle: parentStyle)
+        if let closeAction = self.closeAction {
+            let content = HStack {
+                Spacer()
+                Text(DataLocalizer.localize(path: "APP.TRADE.CLOSE_POSITION"))
+                    .themeFont(fontSize: .medium)
+                    .themeColor(foreground: ThemeSettings.negativeColor)
+                Spacer()
             }
 
-            if let takeProfitStopLossAction = self.takeProfitStopLossAction {
-                let content = AnyView(
-                    HStack {
-                        Spacer()
-                        Text(DataLocalizer.localize(path: "APP.TRADE.ADD_TP_SL"))
-                            .themeFont(fontSize: .medium)
-                        Spacer()
-                    }
-                )
-
-                PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
-                    takeProfitStopLossAction()
-                }
-                .createView(parentStyle: parentStyle)
+            closePositionButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+                closeAction()
             }
+            .createView(parentStyle: parentStyle)
+            .wrappedInAnyView()
+        }
 
-            if let closeAction = self.closeAction {
-                let content = AnyView(
-                    HStack {
-                        Spacer()
-                        Text(DataLocalizer.localize(path: "APP.TRADE.CLOSE_POSITION"))
-                            .themeFont(fontSize: .medium)
-                            .themeColor(foreground: ThemeSettings.negativeColor)
-                        Spacer()
-                    }
-                )
-
-                PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
-                    closeAction()
+        if let takeProfitStopLossAction = self.takeProfitStopLossAction {
+            let content = AnyView(
+                HStack {
+                    Spacer()
+                    Text(DataLocalizer.localize(path: "APP.TRADE.ADD_TP_SL"))
+                        .themeFont(fontSize: .medium)
+                    Spacer()
                 }
-                .createView(parentStyle: parentStyle)
+            )
+
+            addTakeProfitStopLossButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+                takeProfitStopLossAction()
+            }
+            .createView(parentStyle: parentStyle)
+            .wrappedInAnyView()
+        }
+
+        return VStack(spacing: 10) {
+            if takeProfitStatusViewModel?.triggerPrice ?? stopLossStatusViewModel?.triggerPrice != nil {
+                HStack(spacing: 10) {
+                    takeProfitStatusViewModel?.createView(parentStyle: parentStyle)
+                    stopLossStatusViewModel?.createView(parentStyle: parentStyle)
+                }
+                closePositionButton
+            } else {
+                HStack(spacing: 10) {
+                    addTakeProfitStopLossButton
+                    closePositionButton
+                }
             }
         }
         .padding(.bottom, 16)

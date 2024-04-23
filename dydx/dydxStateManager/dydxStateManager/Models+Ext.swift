@@ -28,3 +28,13 @@ public extension TradeInput {
         }
     }
 }
+
+public extension OrderSide {
+    var opposite: Abacus.PositionSide {
+        switch self {
+        case .buy: return .short_
+        case .sell: return .long_
+        default: return .short_
+        }
+    }
+}

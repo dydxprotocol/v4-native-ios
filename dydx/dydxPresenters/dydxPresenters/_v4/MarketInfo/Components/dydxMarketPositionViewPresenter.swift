@@ -28,14 +28,6 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
 
         self.viewModel = viewModel
 
-        // hide for now until feature work complete
-        #if DEBUG
-        viewModel?.takeProfitStopLossAction = {[weak self] in
-            if let assetId = self?.position?.assetId {
-                Router.shared?.navigate(to: RoutingRequest(path: "/trade/take_profit_stop_loss", params: ["marketId": "\(assetId)-USD"]), animated: true, completion: nil)
-            }
-        }
-        #endif
         viewModel?.closeAction = {[weak self] in
             if let assetId = self?.position?.assetId {
                 Router.shared?.navigate(to: RoutingRequest(path: "/trade/close", params: ["marketId": "\(assetId)-USD"]), animated: true, completion: nil)
@@ -47,16 +39,17 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         super.start()
 
         Publishers
-            .CombineLatest3($position.compactMap { $0 }.removeDuplicates(),
+            .CombineLatest4($position.compactMap { $0 }.removeDuplicates(),
+                            AbacusStateManager.shared.state.selectedSubaccountOrders,
                             AbacusStateManager.shared.state.marketMap,
                             AbacusStateManager.shared.state.assetMap)
-            .sink { [weak self] position, marketMap, assetMap in
-                self?.updatePosition(position: position, marketMap: marketMap, assetMap: assetMap)
+            .sink { [weak self] position, subaccountOrders, marketMap, assetMap in
+                self?.updatePosition(position: position, subaccountOrders: subaccountOrders, marketMap: marketMap, assetMap: assetMap)
             }
             .store(in: &subscriptions)
     }
 
-    private func updatePosition(position: SubaccountPosition, marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
+    private func updatePosition(position: SubaccountPosition, subaccountOrders: [SubaccountOrder], marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
         guard let sharedOrderViewModel = dydxPortfolioPositionsViewPresenter.createViewModelItem(position: position, marketMap: marketMap, assetMap: assetMap) else {
             return
         }
@@ -84,5 +77,39 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         viewModel?.closePrice = dydxFormatter.shared.dollar(number: position.exitPrice?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
         viewModel?.funding = SignedAmountViewModel(amount: position.netFunding?.doubleValue, displayType: .dollar, coloringOption: .allText)
+
+        // hide for now until feature work complete
+        #if DEBUG
+        let takeProfitOrders = subaccountOrders.filter { (order: SubaccountOrder) in
+            order.marketId == position.id && (order.type == .takeprofitmarket || order.type == .takeprofitlimit) && order.side.opposite == position.side.current && order.status == Abacus.OrderStatus.untriggered
+        }
+        let stopLossOrders = subaccountOrders.filter { (order: SubaccountOrder) in
+            order.marketId == position.id && (order.type == .stopmarket || order.type == .stoplimit) && order.side.opposite == position.side.current && order.status == Abacus.OrderStatus.untriggered
+        }
+        if takeProfitOrders.isEmpty && stopLossOrders.isEmpty {
+            viewModel?.takeProfitStatusViewModel = nil
+            viewModel?.stopLossStatusViewModel = nil
+        } else {
+            if takeProfitOrders.count > 1 {
+                viewModel?.takeProfitStatusViewModel = .init(triggerSide: .takeProfit, triggerPrice: takeProfitOrders.first?.triggerPrice?.stringValue)
+            } else {
+                viewModel?.takeProfitStatusViewModel = .init(triggerSide: .takeProfit, triggerPrice: takeProfitOrders.first?.triggerPrice?.stringValue)
+            }
+            if stopLossOrders.count > 1 {
+                viewModel?.stopLossStatusViewModel = .init(triggerSide: .stopLoss, triggerPrice: stopLossOrders.first?.triggerPrice?.stringValue)
+            } else {
+                viewModel?.stopLossStatusViewModel = .init(triggerSide: .stopLoss, triggerPrice: stopLossOrders.first?.triggerPrice?.stringValue)
+            }
+        }
+
+        let routeToTakeProfitStopLossAction = {[weak self] in
+            if let assetId = self?.position?.assetId {
+                Router.shared?.navigate(to: RoutingRequest(path: "/trade/take_profit_stop_loss", params: ["marketId": "\(assetId)-USD"]), animated: true, completion: nil)
+            }
+        }
+        viewModel?.takeProfitStopLossAction = routeToTakeProfitStopLossAction
+        viewModel?.takeProfitStatusViewModel?.action = routeToTakeProfitStopLossAction
+        viewModel?.stopLossStatusViewModel?.action = routeToTakeProfitStopLossAction
+        #endif
     }
 }
