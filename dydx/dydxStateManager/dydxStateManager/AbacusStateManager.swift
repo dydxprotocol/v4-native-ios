@@ -132,44 +132,64 @@ public final class AbacusStateManager: NSObject {
 
     private var isStarted = false
 
-    private lazy var asyncStateManager = {
+    private lazy var asyncStateManager: AsyncAbacusStateManagerProtocol & AsyncAbacusStateManagerSingletonProtocol = {
         UIImplementations.reset(language: nil)
 
         let deployment: String
         let appConfigs: AppConfigs
+        let appConfigsV2: AppConfigsV2
         if dydxBoolFeatureFlag.force_mainnet.isEnabled {
             deployment = "MAINNET"
             appConfigs = AppConfigs.companion.forApp
+            appConfigsV2 = AppConfigsV2.companion.forApp
         } else {
             // Expose more options for Testflight build
             switch Installation.source {
             case .appStore:
                 deployment = "MAINNET"
                 appConfigs = AppConfigs.companion.forApp
+                appConfigsV2 = AppConfigsV2.companion.forApp
             case .debug:
                 // For debugging only
                 deployment = "DEV"
                 appConfigs = AppConfigs.companion.forAppDebug
+                appConfigsV2 = AppConfigsV2.companion.forAppDebug
             case .jailBroken:
                 deployment = "TESTNET"
                 appConfigs = AppConfigs.companion.forApp
+                appConfigsV2 = AppConfigsV2.companion.forApp
             case .testFlight:
                 deployment = "TESTFLIGHT"
                 appConfigs = AppConfigs.companion.forApp
+                appConfigsV2 = AppConfigsV2.companion.forApp
             }
         }
 
         appConfigs.squidVersion = AppConfigs.SquidVersion.v2
+        appConfigsV2.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
 
-        return AsyncAbacusStateManager(
-            deploymentUri: deploymentUri,
-            deployment: deployment,
-            appConfigs: appConfigs,
-            ioImplementations: IOImplementations.shared,
-            uiImplementations: UIImplementations.shared!,
-            stateNotification: self,
-            dataNotification: nil
-        )
+        if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
+            return AsyncAbacusStateManagerV2(
+                deploymentUri: deploymentUri,
+                deployment: deployment,
+                appConfigs: appConfigsV2,
+                ioImplementations: IOImplementations.shared,
+                uiImplementations: UIImplementations.shared!,
+                stateNotification: self,
+                dataNotification: nil
+            )
+        } else {
+            return AsyncAbacusStateManager(
+                deploymentUri: deploymentUri,
+                deployment: deployment,
+                appConfigs: appConfigs,
+                ioImplementations: IOImplementations.shared,
+                uiImplementations: UIImplementations.shared!,
+                stateNotification: self,
+                dataNotification: nil
+            )
+
+        }
     }()
 
     override private init() {
@@ -190,8 +210,8 @@ public final class AbacusStateManager: NSObject {
     }
 
     private func reallyStart() {
-        if let ethereumAddress = _walletState.currentWallet?.ethereumAddress,
-           let cosmoAddress = _walletState.currentWallet?.cosmoAddress,
+        let ethereumAddress = _walletState.currentWallet?.ethereumAddress
+        if let cosmoAddress = _walletState.currentWallet?.cosmoAddress,
            let mnemonic = _walletState.currentWallet?.mnemonic {
             let walletId = _walletState.currentWallet?.walletId
             setV4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic)
@@ -218,7 +238,7 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.accountAddress = ethereumAddress
     }
 
-    public func setV4(ethereumAddress: String, walletId: String?, cosmoAddress: String, mnemonic: String) {
+    public func setV4(ethereumAddress: String?, walletId: String?, cosmoAddress: String, mnemonic: String) {
         CosmoJavascript.shared.connectWallet(mnemonic: mnemonic) { [weak self] _ in
             if let self = self {
                 let wallet = dydxWalletInstance.V4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic)
@@ -274,6 +294,10 @@ public final class AbacusStateManager: NSObject {
 
     public func trade(input: String?, type: TradeInputField?) {
         asyncStateManager.trade(data: input, type: type)
+    }
+
+    public func triggerOrders(input: String?, type: TriggerOrdersInputField?) {
+        asyncStateManager.triggerOrders(data: input, type: type)
     }
 
     public func closePosition(input: String?, type: ClosePositionInputField) {
@@ -354,8 +378,16 @@ public final class AbacusStateManager: NSObject {
         transferStateManager.remove(transfer: transfer)
     }
 
-    public func transferStatus(hash: String, fromChainId: String?, toChainId: String?, isCctp: Bool) {
-        asyncStateManager.transferStatus(hash: hash, fromChainId: fromChainId, toChainId: toChainId, isCctp: isCctp)
+    public func transferStatus(hash: String,
+                               fromChainId: String?,
+                               toChainId: String?,
+                               isCctp: Bool,
+                               requestId: String?) {
+        asyncStateManager.transferStatus(hash: hash,
+                                         fromChainId: fromChainId,
+                                         toChainId: toChainId,
+                                         isCctp: isCctp,
+                                         requestId: requestId)
     }
 
     private static let storeKey = "AbacusStateManager.EnvState"
@@ -434,5 +466,15 @@ extension AbacusStateManager {
                 callback(.failed(error))
             }
         }
+    }
+}
+
+public extension V4Environment {
+    var usdcTokenInfo: TokenInfo? {
+        tokens["usdc"]
+    }
+
+    var dydxTokenInfo: TokenInfo? {
+        tokens["chain"]
     }
 }

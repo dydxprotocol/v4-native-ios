@@ -75,6 +75,14 @@ private struct GradientColorModifier: ViewModifier {
 }
 
 public extension Image {
+    /// iniitalizes an image that supports app themes
+    /// - Parameters:
+    ///   - themedImageBaseName: the base image name. e.g. if the app supports 3 themes and the corresponding themed image names are "circle_light" "circle_dark" and "circle_classic_dark" then your base name is "circle"
+    ///   - bundle: the bundle
+    init(themedImageBaseName: String, bundle: Bundle, themeSettings: ThemeSettings = ThemeSettings.shared) {
+        self.init(themedImageBaseName + "_" + "\(themeSettings.themeConfig.id)", bundle: bundle)
+    }
+    
     func templateColor(_ foreground: ThemeColor.SemanticColor?) -> some View {
         if let foreground = foreground {
             return AnyView(self.renderingMode(.template).themeColor(foreground: foreground))
@@ -96,7 +104,7 @@ public extension WebImage {
 
 public extension View {
     func themeFont(fontType: ThemeFont.FontType? = nil, fontSize: ThemeFont.FontSize = .medium) -> some View {
-        let fontType = fontType ?? .text
+        let fontType = fontType ?? .base
         return modifier(ThemeFontModifier(fontType: fontType, fontSize: fontSize))
     }
 }
@@ -115,7 +123,7 @@ private struct ThemeFontModifier: ViewModifier {
 
 public extension Text {
     func themeFont(fontType: ThemeFont.FontType? = nil, fontSize: ThemeFont.FontSize = .medium) -> Text {
-        let fontType = fontType ?? .text
+        let fontType = fontType ?? .base
         return self.font(ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize))
     }
 }
@@ -269,7 +277,7 @@ public extension View {
         modifier(BorderModifier(cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor))
     }
     
-    func borderAndClip(style: BorderAndClipStyle, borderColor: ThemeColor.SemanticColor, lineWidth: CGFloat) -> some View {
+    func borderAndClip(style: BorderAndClipStyle, borderColor: ThemeColor.SemanticColor, lineWidth: CGFloat = 1) -> some View {
         modifier(BorderAndClipModifier(style: style, borderColor: borderColor, lineWidth: lineWidth))
     }
 }
@@ -510,7 +518,7 @@ public extension AttributedString {
     /// - Parameters:
     ///   - foreground: the font to apply
     ///   - range: the range to modify, `nil` if the entire string should be modified
-    func themeFont(fontType: ThemeFont.FontType = .text, fontSize: ThemeFont.FontSize = .medium, to range: Range<AttributedString.Index>? = nil) -> Self {
+    func themeFont(fontType: ThemeFont.FontType = .base, fontSize: ThemeFont.FontSize = .medium, to range: Range<AttributedString.Index>? = nil) -> Self {
         var string = self
         if let range = range {
             string[range].font = ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize)
@@ -658,4 +666,16 @@ struct DisableBouncesModifier: ViewModifier {
               UIScrollView.appearance().bounces = true
           }
   }
+}
+
+// MARK: Conditional
+
+public extension View {
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
 }

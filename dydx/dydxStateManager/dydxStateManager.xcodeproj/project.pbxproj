@@ -33,6 +33,9 @@
 		02E7DD7F28CFAFF000727949 /* AbacusStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E7DD7E28CFAFF000727949 /* AbacusStateManager.swift */; };
 		02E7DD8C28CFB1C600727949 /* HttpCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E7DD8628CFB1C600727949 /* HttpCall.swift */; };
 		02E7DD8D28CFB1C600727949 /* ParamsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E7DD8728CFB1C600727949 /* ParamsHelper.swift */; };
+		27B957EE2B97C11200EF9304 /* dydxPointsRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B957C62B97BE3700EF9304 /* dydxPointsRating.swift */; };
+		27B957EF2B97C11400EF9304 /* dydxRatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B957C72B97BE3700EF9304 /* dydxRatingService.swift */; };
+		27B957F12B97C38100EF9304 /* dydxPointsRatingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B957F02B97C38100EF9304 /* dydxPointsRatingTests.swift */; };
 		2C5008B2746C7DE99CEE2723 /* Pods_iOS_dydxStateManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B98F46FECD9489BD361B435 /* Pods_iOS_dydxStateManager.framework */; };
 		646EDDEF2A732DBB006A68E4 /* Implementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EDDEE2A732DBB006A68E4 /* Implementations.swift */; };
 		646EE0852A75A8F4006A68E4 /* AbacusTimerImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EE0842A75A8F4006A68E4 /* AbacusTimerImp.swift */; };
@@ -150,6 +153,9 @@
 		02E7DD8628CFB1C600727949 /* HttpCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpCall.swift; sourceTree = "<group>"; };
 		02E7DD8728CFB1C600727949 /* ParamsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParamsHelper.swift; sourceTree = "<group>"; };
 		1B98F46FECD9489BD361B435 /* Pods_iOS_dydxStateManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxStateManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27B957C62B97BE3700EF9304 /* dydxPointsRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxPointsRating.swift; sourceTree = "<group>"; };
+		27B957C72B97BE3700EF9304 /* dydxRatingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxRatingService.swift; sourceTree = "<group>"; };
+		27B957F02B97C38100EF9304 /* dydxPointsRatingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPointsRatingTests.swift; sourceTree = "<group>"; };
 		646EDDEE2A732DBB006A68E4 /* Implementations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Implementations.swift; sourceTree = "<group>"; };
 		646EE0842A75A8F4006A68E4 /* AbacusTimerImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbacusTimerImp.swift; sourceTree = "<group>"; };
 		6473ACB32A65B18B00BBC01F /* AbacusRestImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbacusRestImp.swift; sourceTree = "<group>"; };
@@ -291,7 +297,8 @@
 		02E7DC6028CFAF5C00727949 /* dydxStateManager */ = {
 			isa = PBXGroup;
 			children = (
-				6473ACAC2A65B17500BBC01F /* Protocol Implementations */,
+				27B957C82B97BE3700EF9304 /* Rating */,
+				6473ACAC2A65B17500BBC01F /* Protocol_Implementations */,
 				02603B8D29F1A53500DFFD11 /* ClientStates */,
 				020EB67D299C0C1F00E8026B /* Transactions */,
 				02E7DD8428CFB1C600727949 /* network */,
@@ -309,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				02E7DC6D28CFAF5C00727949 /* dydxStateManagerTests.swift */,
+				27B957F02B97C38100EF9304 /* dydxPointsRatingTests.swift */,
 			);
 			path = dydxStateManagerTests;
 			sourceTree = "<group>";
@@ -324,7 +332,16 @@
 			path = network;
 			sourceTree = "<group>";
 		};
-		6473ACAC2A65B17500BBC01F /* Protocol Implementations */ = {
+		27B957C82B97BE3700EF9304 /* Rating */ = {
+			isa = PBXGroup;
+			children = (
+				27B957C62B97BE3700EF9304 /* dydxPointsRating.swift */,
+				27B957C72B97BE3700EF9304 /* dydxRatingService.swift */,
+			);
+			path = Rating;
+			sourceTree = "<group>";
+		};
+		6473ACAC2A65B17500BBC01F /* Protocol_Implementations */ = {
 			isa = PBXGroup;
 			children = (
 				6473ACB32A65B18B00BBC01F /* AbacusRestImp.swift */,
@@ -338,7 +355,7 @@
 				646EE0842A75A8F4006A68E4 /* AbacusTimerImp.swift */,
 				646EDDEE2A732DBB006A68E4 /* Implementations.swift */,
 			);
-			path = "Protocol Implementations";
+			path = Protocol_Implementations;
 			sourceTree = "<group>";
 		};
 		6478FC0F296DEF7400654C56 /* Products */ = {
@@ -624,6 +641,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0219D8C82AD36CD700EF31EF /* EthGetNonceStep.swift in Sources */,
+				27B957EF2B97C11400EF9304 /* dydxRatingService.swift in Sources */,
 				6473ACB42A65B18B00BBC01F /* AbacusRestImp.swift in Sources */,
 				023BFFD72ABBBAA900D3ED5C /* EnableERC20TokenStep.swift in Sources */,
 				6473ACB62A65B19F00BBC01F /* AbacusLocalizerImp.swift in Sources */,
@@ -634,6 +652,7 @@
 				0260350929EF30EE00DFFD11 /* WalletSwitchChainStep.swift in Sources */,
 				6473ACBE2A65B1EA00BBC01F /* AbacusFileSystemImp.swift in Sources */,
 				6473ACBA2A65B1C200BBC01F /* AbacusTrackingImp.swift in Sources */,
+				27B957EE2B97C11200EF9304 /* dydxPointsRating.swift in Sources */,
 				6473AE412A65D3E700BBC01F /* AbacusChainImp.swift in Sources */,
 				02E7DD7F28CFAFF000727949 /* AbacusStateManager.swift in Sources */,
 				6473ACC02A65B1FD00BBC01F /* AbacusFormatterImp.swift in Sources */,
@@ -662,6 +681,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27B957F12B97C38100EF9304 /* dydxPointsRatingTests.swift in Sources */,
 				02E7DC6E28CFAF5C00727949 /* dydxStateManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

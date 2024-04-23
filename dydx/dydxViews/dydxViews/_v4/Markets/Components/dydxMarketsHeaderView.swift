@@ -31,12 +31,12 @@ public class dydxMarketsHeaderViewModel: PlatformViewModel {
             return AnyView(
                 HStack {
                     Text(DataLocalizer.localize(path: "APP.GENERAL.MARKETS", params: nil))
-                        .themeFont(fontType: .bold, fontSize: .largest)
+                        .themeFont(fontType: .plus, fontSize: .largest)
 
                     Spacer()
 
                     Text(DataLocalizer.localize(path: "APP.GENERAL.SEARCH", params: nil))
-                        .themeFont(fontType: .bold, fontSize: .small)
+                        .themeFont(fontType: .plus, fontSize: .small)
                         .themeColor(foreground: .textTertiary)
 
                     PlatformButtonViewModel(content: PlatformIconViewModel(type: .asset(name: "icon_search", bundle: Bundle.dydxView),

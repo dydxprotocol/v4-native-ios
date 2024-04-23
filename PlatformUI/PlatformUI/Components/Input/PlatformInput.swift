@@ -54,7 +54,7 @@ private struct PlatformInputView: View {
         case .numberPad, .numbersAndPunctuation, .decimalPad:
             return .number
         default:
-            return .text
+            return .base
         }
     }
     
@@ -80,16 +80,21 @@ private struct PlatformInputView: View {
             .truncationMode(model.truncateMode)
     }
     
-    private var header: Text? {
+    private var header: AnyView? {
         guard let headerText = model.label else { return nil }
-        return Text(headerText)
-            .themeColor(foreground: .textTertiary)
-            .themeFont(fontSize: .smaller)
+        return HStack(spacing: 4) {
+            Text(headerText)
+                .themeColor(foreground: .textTertiary)
+                .themeFont(fontSize: .smaller)
+            model.labelAccessory
+            Spacer()
+        }.wrappedInAnyView()
     }
 }
 
 public class PlatformInputModel: PlatformViewModel {
     @Published public var label: String?
+    @Published public var labelAccessory: AnyView?
     @Published public var value: Binding<String>
     @Published public var valueAccessory: AnyView?
     @Published public var currentValue: String?
@@ -101,6 +106,7 @@ public class PlatformInputModel: PlatformViewModel {
     @Published public var focusedOnAppear: Bool = false
     
     public init(label: String? = nil,
+                labelAccessory: AnyView? = nil,
                 value: Binding<String>,
                 valueAccessory: AnyView? = nil,
                 currentValue: String? = nil,
@@ -111,6 +117,7 @@ public class PlatformInputModel: PlatformViewModel {
                 truncateMode: Text.TruncationMode = .tail,
                 focusedOnAppear: Bool = false) {
         self.label = label
+        self.labelAccessory = labelAccessory
         self.value = value
         self.valueAccessory = valueAccessory
         self.currentValue = currentValue
@@ -145,10 +152,17 @@ open class PlatformValueInputViewModel: PlatformViewModel {
             updateView()
         }
     }
+    @Published open var labelAccessory: AnyView? {
+        didSet {
+            updateView()
+        }
+    }
+
     public var onEdited: ((String?) -> Void)?
 
-    public init(label: String? = nil, value: String? = nil, valueAccessoryView: AnyView? = nil, onEdited: ((String?) -> Void)? = nil) {
+    public init(label: String? = nil, labelAccessory: AnyView? = nil, value: String? = nil, valueAccessoryView: AnyView? = nil, onEdited: ((String?) -> Void)? = nil) {
         self.label = label
+        self.labelAccessory = labelAccessory
         self.value = value
         self.valueAccessoryView = valueAccessoryView
         self.onEdited = onEdited
@@ -252,6 +266,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     private let truncateMode: Text.TruncationMode
 
     public init(label: String? = nil,
+                labelAccessory: AnyView? = nil,
                 value: String? = nil,
                 placeHolder: String? = nil,
                 valueAccessoryView: AnyView? = nil,
@@ -261,7 +276,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 truncateMode: Text.TruncationMode = .middle) {
         self.inputType = inputType
         self.truncateMode = truncateMode
-        super.init(label: label, valueAccessoryView: valueAccessoryView, onEdited: onEdited)
+        super.init(label: label, labelAccessory: labelAccessory, valueAccessoryView: valueAccessoryView, onEdited: onEdited)
         self.value = value
         input = value ?? ""
         self.placeHolder = placeHolder
@@ -274,6 +289,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
             
             let model = PlatformInputModel(
                 label: self.label,
+                labelAccessory: self.labelAccessory,
                 value: self.inputBinding,
                 valueAccessory: self.valueAccessoryView,
                 currentValue: self.input,
@@ -376,14 +392,14 @@ open class PlatformButtonOptionsInputViewModel: PlatformOptionsInputViewModel {
     
     open func unselected(item: String) -> PlatformViewModel {
         Text(item)
-            .themeFont(fontType: .bold, fontSize: .largest)
+            .themeFont(fontType: .plus, fontSize: .largest)
             .themeColor(foreground: .textTertiary)
             .wrappedViewModel
     }
 
     open func selected(item: String) -> PlatformViewModel {
         Text(item)
-            .themeFont(fontType: .bold, fontSize: .largest)
+            .themeFont(fontType: .plus, fontSize: .largest)
             .wrappedViewModel
     }
 }

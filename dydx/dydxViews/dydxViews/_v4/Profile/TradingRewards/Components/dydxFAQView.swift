@@ -31,7 +31,7 @@ public class dydxFAQViewModel: PlatformViewModel {
             return VStack(spacing: 0) {
                 HStack {
                     Text(DataLocalizer.shared?.localize(path: self.questionLocalizationKey, params: nil) ?? "")
-                        .themeFont(fontType: .text, fontSize: .small)
+                        .themeFont(fontType: .base, fontSize: .small)
                         .themeColor(foreground: .textSecondary)
                     Spacer(minLength: 16)
                     // PlatformIconViewModel behaves weirdly here. When isExpanded is toggled, sometimes the icon hides entirely. Do not use.
@@ -48,7 +48,7 @@ public class dydxFAQViewModel: PlatformViewModel {
                 }
 
                 Text(DataLocalizer.shared?.localize(path: self.answerLocalizationKey, params: nil) ?? "")
-                    .themeFont(fontType: .text, fontSize: .small)
+                    .themeFont(fontType: .base, fontSize: .small)
                     .themeColor(foreground: .textTertiary)
                     .leftAligned()
                 // this is for the animation to have a "slide-over" effect when hiding/showing the answer

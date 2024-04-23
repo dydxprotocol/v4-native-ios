@@ -14,6 +14,7 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
     @Published public var filters: [TabItemViewModel.TabItemContent] = []
     @Published public var onSelectionChanged: ((Int) -> Void)?
     @Published public var items: [dydxRewardsRewardViewModel] = []
+    @Published public var currentSelection: Int = 0
     public var contentChanged: (() -> Void)?
 
     // MARK: private properties
@@ -34,11 +35,11 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
 
     public override func createTitleAccessoryView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView? {
         let items = filters.compactMap { TabItemViewModel(value: $0, isSelected: false) }
-        let selectedItems = filters.compactMap {TabItemViewModel(value: $0, isSelected: true) }
+        let selectedItems = filters.compactMap { TabItemViewModel(value: $0, isSelected: true) }
         return ScrollView(.horizontal, showsIndicators: false) {
                 TabGroupModel(items: items,
                               selectedItems: selectedItems,
-                              currentSelection: 0,
+                              currentSelection: currentSelection,
                               onSelectionChanged: { [weak self] index in
                     self?.onSelectionChanged?(index)
                 },
@@ -57,11 +58,11 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
         PlatformViewModel { _ in
             HStack(spacing: 0) {
                 Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.EVENT", params: nil) ?? "")
-                    .themeFont(fontType: .text, fontSize: .smaller)
+                    .themeFont(fontType: .base, fontSize: .smaller)
                     .themeColor(foreground: .textTertiary)
                 Spacer()
                 Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.TRADING_REWARD", params: nil) ?? "")
-                    .themeFont(fontType: .text, fontSize: .smaller)
+                    .themeFont(fontType: .base, fontSize: .smaller)
                     .themeColor(foreground: .textTertiary)
             }
             .wrappedInAnyView()
@@ -78,7 +79,7 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
         PlatformButtonViewModel(content: PlatformViewModel { _ in
             HStack(spacing: 8) {
                 Text("View More")
-                    .themeFont(fontType: .text, fontSize: .small)
+                    .themeFont(fontType: .base, fontSize: .small)
                     .themeColor(foreground: .textSecondary)
                 PlatformIconViewModel(type: .asset(name: "icon_dropdown", bundle: Bundle.dydxView),
                                                          clip: .noClip,
@@ -88,7 +89,7 @@ public class dydxRewardsHistoryViewModel: dydxTitledCardViewModel {
             }
             .wrappedInAnyView()
         },
-                                type: .defaultType,
+                                type: .defaultType(fillWidth: true),
                                 state: .secondary,
                                 action: {
             withAnimation { [weak self] in

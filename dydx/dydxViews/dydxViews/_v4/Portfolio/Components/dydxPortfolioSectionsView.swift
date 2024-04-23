@@ -29,13 +29,13 @@ public class dydxPortfolioSectionsViewModel: PlatformViewModel {
 
             let items = self.itemTitles?.compactMap {
                 Text($0)
-                    .themeFont(fontType: .bold, fontSize: .largest)
+                    .themeFont(fontType: .plus, fontSize: .largest)
                     .themeColor(foreground: .textTertiary)
                     .wrappedViewModel
             }
             let selectedItems = self.itemTitles?.compactMap {
                 Text($0)
-                    .themeFont(fontType: .bold, fontSize: .largest)
+                    .themeFont(fontType: .plus, fontSize: .largest)
                     .themeColor(foreground: .textPrimary)
                     .wrappedViewModel
             }

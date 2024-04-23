@@ -30,7 +30,7 @@ public class AppsFlyerTracking: TransformerTracker {
         }
     }
 
-    override open func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?) {
+    override open func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?, contextViewController: UIViewController?) {
         // Only track the ones required by growth
     }
 

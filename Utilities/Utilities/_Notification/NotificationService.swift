@@ -43,7 +43,7 @@ public class NotificationConfiguration: NSObject {
     @objc var authorization: NotificationPermission? { get set }
     @objc var configuration: NotificationConfiguration? { get set }
     @objc var permission: EPrivacyPermission { get set }
-    @objc var delegate: NotificationHandlerDelegate? { get set }
+    @objc weak var delegate: NotificationHandlerDelegate? { get set }
     
     func request()
     func present(message: [AnyHashable: Any])
@@ -60,7 +60,7 @@ public class NotificationService: NSObject {
 
 @objc open class NotificationHandler: NSObject, NotificationHandlerProtocol {
   
-    public var delegate: NotificationHandlerDelegate?
+    public weak var delegate: NotificationHandlerDelegate?
     
     @objc open dynamic var authorization: NotificationPermission? {
         didSet {

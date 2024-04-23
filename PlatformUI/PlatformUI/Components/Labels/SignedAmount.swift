@@ -15,19 +15,25 @@ public class SignedAmountViewModel: PlatformViewModel, Hashable {
         case allText
     }
     
+    public enum DisplayType {
+        case dollar
+        case percent
+    }
+    
     @Published public var text: String?
     @Published public var sign: PlatformUISign
     @Published public var coloringOption: ColoringOption
     @Published public var positiveTextStyleKey: String
     @Published public var negativeTextStyleKey: String
 
-    public init(text: String? = nil, sign: PlatformUISign = .plus, coloringOption: ColoringOption = .signOnly, positiveTextStyleKey: String, negativeTextStyleKey: String) {
+    public init(text: String? = nil, sign: PlatformUISign = .plus, coloringOption: ColoringOption, positiveTextStyleKey: String, negativeTextStyleKey: String) {
         self.text = text
         self.sign = sign
         self.coloringOption = coloringOption
         self.positiveTextStyleKey = positiveTextStyleKey
         self.negativeTextStyleKey = negativeTextStyleKey
     }
+    
     
     public static func == (lhs: SignedAmountViewModel, rhs: SignedAmountViewModel) -> Bool {
         lhs.text == rhs.text &&
@@ -41,7 +47,7 @@ public class SignedAmountViewModel: PlatformViewModel, Hashable {
         hasher.combine(coloringOption)
     }
     
-    public static var previewValue = SignedAmountViewModel(text: "2.02", sign: .plus, positiveTextStyleKey: "signed-plus", negativeTextStyleKey: "signed-minus")
+    public static var previewValue = SignedAmountViewModel(text: "2.02", sign: .plus, coloringOption: .allText, positiveTextStyleKey: "signed-plus", negativeTextStyleKey: "signed-minus")
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
@@ -98,10 +104,10 @@ struct SignedAmount_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            SignedAmountViewModel(text: "$2.00", sign: .plus, positiveTextStyleKey: "signed-plus", negativeTextStyleKey: "signed-minus").createView()
+            SignedAmountViewModel(text: "$2.00", sign: .plus, coloringOption: .allText, positiveTextStyleKey: "signed-plus", negativeTextStyleKey: "signed-minus").createView()
                 .previewLayout(.sizeThatFits)
             
-            SignedAmountViewModel(text: "$2.00", sign: .minus, positiveTextStyleKey: "signed-plus", negativeTextStyleKey: "signed-minus").createView()
+            SignedAmountViewModel(text: "$2.00", sign: .minus, coloringOption: .allText, positiveTextStyleKey: "signed-plus", negativeTextStyleKey: "signed-minus").createView()
                 .previewLayout(.sizeThatFits)
             
             SignedAmountViewModel(text: "$2.00", sign: .plus, coloringOption: .allText, positiveTextStyleKey: "signed-plus", negativeTextStyleKey: "signed-minus").createView()

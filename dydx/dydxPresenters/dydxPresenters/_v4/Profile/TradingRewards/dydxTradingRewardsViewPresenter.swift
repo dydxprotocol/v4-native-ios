@@ -9,6 +9,8 @@ import Utilities
 import dydxViews
 import RoutingKit
 import PlatformUI
+import dydxStateManager
+import dydxFormatter
 
 public class dydxTradingRewardsViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -33,28 +35,25 @@ private protocol dydxTradingRewardsViewPresenterProtocol: HostedViewPresenterPro
 
 private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRewardsViewModel>, dydxTradingRewardsViewPresenterProtocol {
 
+    private let launchIncentivesPresenter = dydxRewardsLaunchIncentivesPresenter()
+    private let summaryPresenter = dydxRewardsSummaryViewPresenter()
     private let helpPresenter = dydxRewardsHelpViewPresenter()
     private let historyPresenter = dydxRewardsHistoryViewPresenter()
 
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        launchIncentivesPresenter,
+        summaryPresenter,
+        helpPresenter,
+        historyPresenter
+    ]
+
     override init() {
-        super.init()
 
         let viewModel = dydxTradingRewardsViewModel()
 
         viewModel.headerViewModel.title = DataLocalizer.localize(path: "APP.GENERAL.TRADING_REWARDS")
         viewModel.headerViewModel.backButtonAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
-        }
-
-        // TODO: get from abacus
-        viewModel.launchIncentivesViewModel.seasonOrdinal = "--"
-        viewModel.launchIncentivesViewModel.estimatedPoints = "--"
-        viewModel.launchIncentivesViewModel.points = "--"
-        viewModel.launchIncentivesViewModel.aboutAction = {
-            Router.shared?.navigate(to: URL(string: "https://dydx.exchange/blog/v4-full-trading"), completion: nil)
-        }
-        viewModel.launchIncentivesViewModel.leaderboardAction = {
-            Router.shared?.navigate(to: URL(string: "https://community.chaoslabs.xyz/dydx-v4/risk/leaderboard"), completion: nil)
         }
 
         // comment out as part of https://linear.app/dydx/issue/TRCL-3445/remove-governance-and-staking-cards
@@ -74,13 +73,19 @@ private class dydxTradingRewardsViewPresenter: HostedViewPresenter<dydxTradingRe
 //                Router.shared?.navigate (to: , completion: nil)
 //            }
 
+        launchIncentivesPresenter.$viewModel.assign(to: &viewModel.$launchIncentivesViewModel)
+        summaryPresenter.$viewModel.assign(to: &viewModel.$rewardsSummary)
         helpPresenter.$viewModel.assign(to: &viewModel.$help)
         historyPresenter.$viewModel.assign(to: &viewModel.$history)
 
-        historyPresenter.viewModel?.contentChanged = { [weak self] in
-            self?.viewModel?.objectWillChange.send()
+        historyPresenter.viewModel?.contentChanged = { [weak viewModel] in
+            viewModel?.objectWillChange.send()
         }
 
+        super.init()
+
         self.viewModel = viewModel
+
+        attachChildren(workers: childPresenters)
     }
 }

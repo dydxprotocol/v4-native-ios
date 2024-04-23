@@ -16,7 +16,8 @@ public final class dydxGlobalWorkers: BaseWorker {
         dydxTransferSubaccountWorker(),
         dydxRestrictionsWorker(),
         dydxCarteraConfigWorker(),
-        dydxUpdateWorker()
+        dydxUpdateWorker(),
+        dydxRatingsWorker()
     ]
 
     override public func start() {

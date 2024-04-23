@@ -11,6 +11,7 @@ import Utilities
 import dydxStateManager
 import Combine
 import Cartera
+import FirebaseAnalytics
 
 enum UserProperty: String {
     case walletAddress
@@ -60,9 +61,17 @@ public class dydxCompositeTracking: CompositeTracking {
                 let wallet = CarteraConfig.shared.wallets.first { $0.id == walletState?.walletId }
                 self.set(userId: walletState?.ethereumAddress ?? walletState?.cosmoAddress)
                 //TODO: might have to change this to match https://www.notion.so/dydx/V4-Web-Analytics-Events-d12c9dd791ee4c5d89e48588bb3ef702?pvs=4, but first this linear task needs to finish https://linear.app/dydx/issue/TRCL-2473/create-wallettype-user-property-field-value-in-cartera-wallets-json
-                self.set(userProperty: .walletType, toValue: wallet?.metadata?.shortName?.uppercased() )
+                self.set(userProperty: .walletType, toValue: wallet?.userFields?["analyticEvent"])
                 self.set(userProperty: .dydxAddress, toValue: walletState?.cosmoAddress)
-                self.set(userProperty: .subaccountNumber, toValue: walletState?.subaccountNumber)
+            }
+            .store(in: &subscriptions)
+        
+        AbacusStateManager.shared.state.selectedSubaccount
+            .map(\.?.subaccountNumber)
+            .removeDuplicates()
+            .sink { [weak self] subaccountNumber in
+                guard let self = self else { return }
+                self.set(userProperty: .subaccountNumber, toValue: self.parser.asString(subaccountNumber))
             }
             .store(in: &subscriptions)
     }
@@ -79,13 +88,21 @@ public class dydxCompositeTracking: CompositeTracking {
 
     
 
-    override public func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?) {
+    override public func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?, contextViewController: UIViewController?) {
         if let transformed = transform(events: viewEvents, path: path), let event = parser.asString(transformed["event"]) {
-            super.view(path, action: action, data: data, from: from, time: time, revenue: nil)
+            super.view(path, action: action, data: data, from: from, time: time, revenue: nil, contextViewController: contextViewController)
             let info = parser.asDictionary(transformed["info"]) ?? data ?? [String: Any]()
             log(event: event, data: info, revenue: revenue)
         } else {
-            super.view(path, action: action, data: data, from: from, time: time, revenue: revenue)
+            super.view(path, action: action, data: data, from: from, time: time, revenue: revenue, contextViewController: contextViewController)
+        }
+        if let contextViewController {
+            
+            log(event: AnalyticsEventScreenView,
+                data: [
+                    AnalyticsParameterScreenName: path as Any,
+                    AnalyticsParameterScreenClass: String(describing: type(of: contextViewController))
+                ])
         }
         if let transformed = transform(events: onboardingEvents, path: path), let event = parser.asString(transformed["event"]) {
             var info = parser.asDictionary(transformed["info"]) ?? data ?? [String: Any]()

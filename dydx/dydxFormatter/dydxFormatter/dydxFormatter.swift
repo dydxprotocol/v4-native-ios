@@ -11,6 +11,15 @@ import Utilities
 import Combine
 
 public final class dydxFormatter: NSObject, SingletonProtocol {
+
+    public enum DateFormat: String {
+        /// "e.g. Jan 1"
+        case MMM_d = "MMM d"
+
+        /// "e.g. Jan 1, 2024"
+        case MMM_d_yyyy = "MMM d, yyyy"
+    }
+
     private var subscriptions = Set<AnyCancellable>()
 
     public static let shared = dydxFormatter()
@@ -45,7 +54,6 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
 
     private var percentFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
-        formatter.roundingMode = .up
         formatter.numberStyle = .decimal
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
@@ -234,17 +242,33 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
         return nil
     }
 
-    public func dollarVolume(number: Double?, digits: Int = 2) -> String? {
+    ///  formats the number as "$" or "-$" of "+$" prefixed
+    /// - Parameters:
+    ///   - number: the number to format
+    ///   - digits: after-decimal precision
+    ///   - shouldDisplaySignForPositiveNumbers: whether to include "+" in the prefix for positive numbers
+    /// - Returns: the number formatted as a dollar amount
+    public func dollarVolume(number: Double?, digits: Int = 2, shouldDisplaySignForPositiveNumbers: Bool = false) -> String? {
         if let number = number {
-            return dollarVolume(number: NSNumber(value: number), digits: digits)
+            return dollarVolume(number: NSNumber(value: number), digits: digits, shouldDisplaySignForPositiveNumbers: shouldDisplaySignForPositiveNumbers)
         }
         return nil
     }
 
-    public func dollarVolume(number: NSNumber?, digits: Int = 2) -> String? {
-        if let number = number, let formatted = condensed(number: number.abs(), digits: digits) {
-            if number.doubleValue >= 0.0 {
+    ///  formats the number as "$" or "-$" of "+$" prefixed
+    /// - Parameters:
+    ///   - number: the number to format
+    ///   - digits: after-decimal precision
+    ///   - shouldDisplaySignForPositiveNumbers: whether to include "+" in the prefix for positive numbers
+    /// - Returns: the number formatted as a dollar amount
+    public func dollarVolume(number: NSNumber?, digits: Int = 2, shouldDisplaySignForPositiveNumbers: Bool = false) -> String? {
+        if let number = number,
+           let formatted = condensed(number: number.abs(), digits: digits),
+           let formattedZero = condensed(number: 0.0, digits: digits) {
+            if formattedZero == formatted {
                 return "$\(formatted)"
+            } else if number.doubleValue >= 0.0 {
+                return "\(shouldDisplaySignForPositiveNumbers ? "+" : "")$\(formatted)"
             } else {
                 return "-$\(formatted)"
             }
@@ -345,12 +369,12 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     /*
      xxxxxx,yyyyy or xxxxx.yyyyy
      */
-    public func raw(number: NSNumber?, size: String?) -> String? {
+    public func raw(number: NSNumber?, size: String?, locale: Locale = Locale.current) -> String? {
         if let number = number {
             let size = size ?? "0.01"
             let digits = digits(size: size)
             let rounded = rounded(number: number, digits: digits)
-            return raw(number: rounded, digits: digits)
+            return raw(number: rounded, digits: digits, locale: locale)
         } else {
             return nil
         }
@@ -359,21 +383,37 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     /*
      xxxxx.yyyyy
      */
-    public func decimalRaw(number: NSNumber?, size: String?) -> String? {
-        return raw(number: number, size: size)?.replacingOccurrences(of: ",", with: ".")
+    public func decimalLocaleAgnostic(number: NSNumber?, size: String?) -> String? {
+        raw(number: number, size: size, locale: Locale(identifier: "en-US"))
+    }
+
+    /*
+     xxxxx.yyyyy
+     */
+    public func decimalLocaleAgnostic(number: NSNumber?, digits: Int) -> String? {
+        raw(number: number, digits: digits, locale: Locale(identifier: "en-US"))
     }
 
     /*
      xxxxxx,yyyyy or xxxxx.yyyyy
      */
-    public func raw(number: NSNumber?, digits: Int) -> String? {
+    public func raw(number: NSNumber?, digits: Int, locale: Locale = Locale.current) -> String? {
         if let value = number?.doubleValue {
             if value.isFinite {
                 if let number = number {
+                    rawFormatter.locale = locale
                     rawFormatter.minimumFractionDigits = max(digits, 0)
                     rawFormatter.maximumFractionDigits = max(digits, 0)
                     rawFormatter.roundingMode = .halfUp
-                    return rawFormatter.string(from: number)
+
+                    let formatted = rawFormatter.string(from: number)
+
+                    // need to special case for negative 0, see dydxFormatter tests. E.g. "-$0.001" should go to "$0.00"
+                    if let formatted = formatted, rawFormatter.number(from: formatted) == 0 {
+                        return rawFormatter.string(from: 0)
+                    } else {
+                        return formatted
+                    }
                 } else {
                     return nil
                 }
@@ -434,21 +474,30 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
         }
     }
 
-    public func percent(number: Double?, digits: Int, minDigits: Int? = nil) -> String? {
+    public func percent(number: Double?, digits: Int, minDigits: Int? = nil, shouldDisplayPlusSignForPositiveNumbers: Bool = false) -> String? {
         if let number = number {
-            return percent(number: NSNumber(value: number), digits: digits, minDigits: minDigits)
+            return percent(number: NSNumber(value: number), digits: digits, minDigits: minDigits, shouldDisplayPlusSignForPositiveNumbers: shouldDisplayPlusSignForPositiveNumbers)
         }
         return nil
     }
 
-    public func percent(number: NSNumber?, digits: Int, minDigits: Int? = nil) -> String? {
+    public func percent(number: NSNumber?, digits: Int, minDigits: Int? = nil, shouldDisplayPlusSignForPositiveNumbers: Bool = false) -> String? {
         if let number = number {
             if number.doubleValue.isFinite {
                 let percent = NSNumber(value: number.doubleValue * 100.0)
                 percentFormatter.minimumFractionDigits = minDigits ?? digits
                 percentFormatter.maximumFractionDigits = digits
-                if let formatted = percentFormatter.string(from: percent) {
-                    return "\(formatted)%"
+                if let formatted = percentFormatter.string(from: percent.abs()),
+                   let formattedZero = percentFormatter.string(from: 0) {
+                    if formattedZero == formatted {
+                        return "\(formatted)%"
+                    } else if number.doubleValue >= 0.0 {
+                        return "\(shouldDisplayPlusSignForPositiveNumbers ? "+" : "")\(formatted)%"
+                    } else if number.doubleValue < 0.0 {
+                        return "-\(formatted)%"
+                    } else {
+                        return nil
+                    }
                 } else {
                     return nil
                 }
@@ -583,6 +632,13 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
         } else {
             return nil
         }
+    }
+
+    public func millisecondsToDate(_ milliseconds: Double, format: DateFormat) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
+        let formatter = datetimeFormatter
+        formatter.dateFormat = format.rawValue
+        return datetimeFormatter.string(from: date)
     }
 
     public func multiple(of tickText: String, is sizeText: String) -> Bool {

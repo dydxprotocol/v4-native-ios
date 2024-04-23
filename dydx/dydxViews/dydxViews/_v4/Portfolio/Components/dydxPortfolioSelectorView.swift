@@ -73,7 +73,7 @@ public class dydxPortfolioSelectorViewModel: PlatformViewModel {
                     if selectedIndex < items.count {
                         HStack {
                             Text(items[selectedIndex].title ?? "")
-                                .themeFont(fontType: .bold, fontSize: .largest)
+                                .themeFont(fontType: .plus, fontSize: .largest)
                                 .themeColor(foreground: .textPrimary)
                             PlatformIconViewModel(type: .system(name: self.present ? "chevron.up": "chevron.down"),
                                                   clip: .circle(background: .layer5, spacing: 16, borderColor: ThemeColor.SemanticColor.layer6),
@@ -153,7 +153,7 @@ public class dydxPortfolioSelectorViewModel: PlatformViewModel {
 //                    if selectedIndex < items.count {
 //                        HStack {
 //                            Text(items[selectedIndex].title ?? "")
-//                                .themeFont(fontType: .bold, fontSize: .largest)
+//                                .themeFont(fontType: .plus, fontSize: .largest)
 //                            PlatformIconViewModel(type: .system(name: "chevron.down"),
 //                                                  clip: .circle(background: .layer2, spacing: 16),
 //                                                  size: CGSize(width: 28, height: 28),

@@ -80,7 +80,7 @@ public class dydxTradingNetworkViewModel: PlatformViewModel {
 
             let view = VStack(alignment: .leading, spacing: 16) {
                 Text(DataLocalizer.localize(path: "APP.V4.SWITCH_NETWORK", params: nil))
-                    .themeFont(fontType: .bold, fontSize: .largest)
+                    .themeFont(fontType: .plus, fontSize: .largest)
 
                 ScrollView(showsIndicators: false) {
                     ForEach(self.items, id: \.id) { item in

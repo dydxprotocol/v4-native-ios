@@ -43,7 +43,7 @@ class AppDelegate: CommonAppDelegate {
     override public init() {
         super.init()
         LocalAuthenticator.shared = dydxBiometricsLocalAuthenticator()
-        SettingsStore.shared = DebugSettingsStore(tag: "Settings")
+        SettingsStore.shared = dydxSettingsStore()
         DebugSettings.shared = SettingsStore.shared
         FeatureFlagsStore.shared = FeatureFlagsStore(tag: "FeatureFlags")
     }
@@ -51,14 +51,6 @@ class AppDelegate: CommonAppDelegate {
     override open func injectAppStart(completion: @escaping () -> Void) {
         Exporter.shared = EmailExporter()
         super.injectAppStart(completion: completion)
-    }
-
-    private func initializeSettingsStoreDefaults() {
-        for (key, value) in dydxDebugSettingsStore.defaultValues {
-            if SettingsStore.shared?.value(forKey: key) == nil {
-                SettingsStore.shared?.setValue(value, forKey: key)
-            }
-        }
     }
 
     open func cleanUp() {
@@ -88,10 +80,6 @@ class AppDelegate: CommonAppDelegate {
 
         let localCompletion = { [weak self] in
             // This gets called after passing the security/login screen
-            if dydxBoolFeatureFlag.full_story.isEnabled {
-                // _ = dydxFullStoryInteractor.shared
-            }
-            self?.initializeSettingsStoreDefaults()
             completion()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in

@@ -2,7 +2,7 @@
 //  AppsFlyerLib.h
 //  AppsFlyerLib
 //
-//  AppsFlyer iOS SDK 6.12.3 (137)
+//  AppsFlyer iOS SDK 6.13.2 (163)
 //  Copyright (c) 2012-2023 AppsFlyer Ltd. All rights reserved.
 //
 
@@ -12,6 +12,7 @@
 #import <AppsFlyerLib/AppsFlyerShareInviteHelper.h>
 #import <AppsFlyerLib/AppsFlyerDeepLinkResult.h>
 #import <AppsFlyerLib/AppsFlyerDeepLink.h>
+#import <AppsFlyerLib/AppsFlyerConsent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -581,6 +582,11 @@ NS_SWIFT_NAME(logEvent(name:values:completionHandler:));
 - (void)remoteDebuggingCallWithData:(NSString *)data;
 
 /**
+ This is for internal use.
+ */
+- (void)remoteDebuggingCallV2WithData:(NSString *)dataAsString;
+
+/**
  Used to force the trigger `onAppOpenAttribution` delegate.
  Notice, re-engagement, session and launch won't be counted.
  Only for OneLink/UniversalLink/Deeplink resolving.
@@ -662,6 +668,27 @@ NS_SWIFT_NAME(logEvent(name:values:completionHandler:));
  the sharing filter will be set for ALL partners.
  */
 - (void)setSharingFilterForPartners:(NSArray<NSString *> * _Nullable)sharingFilter;
+
+
+/**
+    Sets or updates the user consent data related to GDPR and DMA regulations for advertising and data usage
+    purposes within the application. This method must be invoked with the user's current consent status each
+    time the app starts or whenever there is a change in the user's consent preferences.
+    
+    Note that this method does not persist the consent data across app sessions; it only applies for the
+    duration of the current app session. If you wish to stop providing the consent data, you should
+    cease calling this method.
+     
+    @param consent an instance of AppsFlyerConsent that encapsulates the user's consent information.
+    */
+- (void)setConsentData:(AppsFlyerConsent *)consent;
+
+/**
+    Enable the SDK to collect and send TCF data
+     
+    @param shouldCollectConsentData indicates if the TCF data collection is enabled.
+ */
+- (void)enableTCFDataCollection:(BOOL)shouldCollectConsentData;
 
 /**
  Validate if URL contains certain string and append quiery

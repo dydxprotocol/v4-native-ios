@@ -4,6 +4,10 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/AppsFlyerConsent.h</key>
+		<data>
+		Bx0db1e1DLeeuq3va7QJCITQH2k=
+		</data>
 		<key>Headers/AppsFlyerCrossPromotionHelper.h</key>
 		<data>
 		ezewyhf50Apa+1HjqfRFE7nXZIE=
@@ -18,7 +22,7 @@
 		</data>
 		<key>Headers/AppsFlyerLib.h</key>
 		<data>
-		p1za4yMuS+iSAhCmMeMlb2RH5ho=
+		bcs2DlBsP8YRA/KbpobyJ+ViRRQ=
 		</data>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>
 		<data>
@@ -30,7 +34,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Ytm/KUicVBcAcufaBrFRHFUUwRw=
+		rDLfk+TCS4gW27SasccUi1rY5ic=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -39,6 +43,17 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/AppsFlyerConsent.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Bx0db1e1DLeeuq3va7QJCITQH2k=
+			</data>
+			<key>hash2</key>
+			<data>
+			VIYU7EyY+VmJF4vKtTem3hkI/fjGfSK7lYs2zq/9D4E=
+			</data>
+		</dict>
 		<key>Headers/AppsFlyerCrossPromotionHelper.h</key>
 		<dict>
 			<key>hash</key>
@@ -76,11 +91,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			p1za4yMuS+iSAhCmMeMlb2RH5ho=
+			bcs2DlBsP8YRA/KbpobyJ+ViRRQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			qFJAjrO9GYZEqEhbk0Fe74+njDjIxcqxBnybmjsrGs8=
+			YBggbbYNlrfNNcs9s4bfJPq2dzQjjia2iLZwJ60OZgM=
 			</data>
 		</dict>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>

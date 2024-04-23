@@ -99,14 +99,14 @@ public class dydxPortfolioChartViewModel: PlatformViewModel {
     private func createResolutionControl(parentStyle: ThemeStyle) -> some View {
         let items = self.resolutionTitles?.compactMap {
             Text($0)
-                .themeFont(fontType: .bold, fontSize: .small)
+                .themeFont(fontType: .plus, fontSize: .small)
                 .themeColor(foreground: .textTertiary)
                 .padding(8)
                 .wrappedViewModel
         }
         let selectedItems = self.resolutionTitles?.compactMap {
             Text($0)
-                .themeFont(fontType: .bold, fontSize: .small)
+                .themeFont(fontType: .plus, fontSize: .small)
                 .themeColor(foreground: .textPrimary)
                 .padding(8)
                 .cornerRadius(8)

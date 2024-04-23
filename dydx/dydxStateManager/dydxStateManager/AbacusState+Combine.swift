@@ -18,11 +18,7 @@ public final class AbacusState {
     public var onboarded: AnyPublisher<Bool, Never> {
         walletState
             .map { walletState in
-                if let currentWallet = walletState.currentWallet,
-                   currentWallet.ethereumAddress.length > 0 {
-                    return (currentWallet.cosmoAddress?.length ?? 0) > 0
-                }
-                return false
+                (walletState.currentWallet?.cosmoAddress?.length ?? 0) > 0
             }
             .removeDuplicates()
             .share()
@@ -86,6 +82,14 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
+    public var launchIncentive: AnyPublisher<LaunchIncentive?, Never> {
+        statePublisher
+            .map(\.?.launchIncentive)
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
     public var hasAccount: AnyPublisher<Bool, Never> {
         statePublisher
             .compactMap {
@@ -104,28 +108,20 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
-    /**
-     Account balances (wallet balances)
-     **/
-    public enum NativeTokenDenom: String {
-        case usdc = "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"
-        case dydx = "dv4tnt"
-    }
-
-    public func accountBalance(of tokenDenom: NativeTokenDenom) -> AnyPublisher<Double?, Never> {
+    public func accountBalance(of tokenDenom: String?) -> AnyPublisher<Double?, Never> {
         account
             .map { account in
-                self.parser.asDecimal(account?.balances?[tokenDenom.rawValue]?.amount)?.doubleValue
+                self.parser.asDecimal(account?.balances?[tokenDenom ?? ""]?.amount)?.doubleValue
             }
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
     }
 
-    public func stakingBalance(of tokenDenom: NativeTokenDenom) -> AnyPublisher<Double?, Never> {
+    public func stakingBalance(of tokenDenom: String?) -> AnyPublisher<Double?, Never> {
         account
             .map { account in
-                self.parser.asDecimal(account?.stakingBalances?[tokenDenom.rawValue]?.amount)?.doubleValue
+                self.parser.asDecimal(account?.stakingBalances?[tokenDenom ?? ""]?.amount)?.doubleValue
             }
             .removeDuplicates()
             .share()
@@ -416,10 +412,6 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
-    /**
-     Trade input
-     **/
-
     public var tradeInput: AnyPublisher<TradeInput?, Never> {
         statePublisher
             .map(\.?.input?.trade)
@@ -429,9 +421,14 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
-    /**
-     Close Position input
-     **/
+    public var triggerOrdersInput: AnyPublisher<TriggerOrdersInput?, Never> {
+        statePublisher
+            .map(\.?.input?.triggerOrders)
+            .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
 
     public var closePositionInput: AnyPublisher<ClosePositionInput, Never> {
         statePublisher
@@ -543,7 +540,7 @@ public final class AbacusState {
 
     private let statePublisher: AnyPublisher<PerpetualState?, Never>
     private let errorsStatePublisher: AnyPublisher<[ParsingError], Never>
-    private let abacusStateManager: AsyncAbacusStateManager
+    private let abacusStateManager: AsyncAbacusStateManagerProtocol & AsyncAbacusStateManagerSingletonProtocol
 
     private var subaccountNumber: String? {
         "\(abacusStateManager.subaccountNumber)"
@@ -555,7 +552,7 @@ public final class AbacusState {
          apiStatePublisher: AnyPublisher<ApiState?, Never>,
          errorsStatePublisher: AnyPublisher<[ParsingError], Never>,
          lastOrderPublisher: AnyPublisher<SubaccountOrder?, Never>,
-         abacusStateManager: AsyncAbacusStateManager,
+         abacusStateManager: AsyncAbacusStateManagerProtocol & AsyncAbacusStateManagerSingletonProtocol,
          alertsPublisher: AnyPublisher<[Abacus.Notification], Never>,
          transferStatePublisher: AnyPublisher<dydxTransferState, Never>) {
         self.walletState = walletStatePublisher.removeDuplicates().share(replay: 1).eraseToAnyPublisher()

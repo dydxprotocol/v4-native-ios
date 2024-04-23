@@ -120,7 +120,8 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
                 AbacusStateManager.shared.transferStatus(hash: transfer.transactionHash,
                                                          fromChainId: transfer.fromChainId,
                                                          toChainId: transfer.toChainId,
-                                                         isCctp: transfer.isCctp ?? false)
+                                                         isCctp: transfer.isCctp ?? false,
+                                                         requestId: transfer.requestId)
             }
             .store(in: &subscriptions)
     }
