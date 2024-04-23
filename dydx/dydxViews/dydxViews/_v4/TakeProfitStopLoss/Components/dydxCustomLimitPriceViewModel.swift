@@ -13,9 +13,12 @@ import Utilities
 
 public class dydxCustomLimitPriceViewModel: PlatformViewModel {
 
+    @Published public var toggleAction: ((Bool) -> Void)?
+
     @Published private var isOn: Bool = false
     @Published public var takeProfitPriceInputViewModel: dydxPriceInputViewModel?
     @Published public var stopLossPriceInputViewModel: dydxPriceInputViewModel?
+    @Published public var alert: InlineAlertViewModel?
 
     @Published private var isTooltipPresented: Bool = false
     private lazy var isTooltipPresentedBinding = Binding(
@@ -27,6 +30,7 @@ public class dydxCustomLimitPriceViewModel: PlatformViewModel {
         PlatformBooleanInputViewModel(label: DataLocalizer.shared?.localize(path: "APP.TRADE.LIMIT_PRICE", params: nil), labelAccessory: nil, value: isOn.description, valueAccessoryView: nil) { [weak self] value in
             guard let self, let value, let isOn = Bool(value) else { return }
             self.isOn = isOn
+            self.toggleAction?(isOn)
         }
         .createView()
         .padding(.trailing, 2) // swiftui bug where toggle view in a scrollview gets clipped without this
@@ -49,10 +53,13 @@ public class dydxCustomLimitPriceViewModel: PlatformViewModel {
             guard let self = self else { return PlatformView.emptyView.wrappedInAnyView() }
             return VStack(spacing: 15) {
                 self.onOffSwitch
-                HStack(alignment: .center, spacing: 20) {
-                    if self.isOn {
-                        self.takeProfitPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                        self.stopLossPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                if self.isOn {
+                    VStack(spacing: 16) {
+                        HStack(alignment: .center, spacing: 20) {
+                            self.takeProfitPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            self.stopLossPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                        }
+                        self.alert?.createView(parentStyle: parentStyle, styleKey: styleKey)
                     }
                 }
             }
