@@ -4,6 +4,14 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/AFSDKPurchaseDetails.h</key>
+		<data>
+		JFCJYWlcCsMjEbsAF0aQh2JXaKQ=
+		</data>
+		<key>Headers/AFSDKValidateAndLogResult.h</key>
+		<data>
+		h3cMtJeCvFHGPKBZbeqwFQic6m0=
+		</data>
 		<key>Headers/AppsFlyerConsent.h</key>
 		<data>
 		Bx0db1e1DLeeuq3va7QJCITQH2k=
@@ -22,7 +30,7 @@
 		</data>
 		<key>Headers/AppsFlyerLib.h</key>
 		<data>
-		qJe/o2pdYXqG8LhRjG7Vejt+n0o=
+		ysITjre0rikg579EZzhjlAOzNz0=
 		</data>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>
 		<data>
@@ -34,7 +42,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		E4HkSl37/Aey+o1t9MtfjLo4qpw=
+		VBMqvgqQsmVKEyOgNNiWkZu5eVU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -47,6 +55,28 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/AFSDKPurchaseDetails.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			JFCJYWlcCsMjEbsAF0aQh2JXaKQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			UNK4h738nezlAQq+5weKs6WQUIVzBoBZIFYlfSGbhRA=
+			</data>
+		</dict>
+		<key>Headers/AFSDKValidateAndLogResult.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			h3cMtJeCvFHGPKBZbeqwFQic6m0=
+			</data>
+			<key>hash2</key>
+			<data>
+			8B0SIW1N+hhdxvGum5eyxLMW5e/T797WSXOd2i+irv4=
+			</data>
+		</dict>
 		<key>Headers/AppsFlyerConsent.h</key>
 		<dict>
 			<key>hash</key>
@@ -95,11 +125,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qJe/o2pdYXqG8LhRjG7Vejt+n0o=
+			ysITjre0rikg579EZzhjlAOzNz0=
 			</data>
 			<key>hash2</key>
 			<data>
-			NOAf6o70w31tAm/aihHQGzUyvJirRxAmnWEElldgDhA=
+			lz8pgR6YtA59wYujS74/JGu6eyZGWQogxj8TJWVQD7A=
 			</data>
 		</dict>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>
