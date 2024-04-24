@@ -31,6 +31,11 @@ private class dydxMarketInfoViewController: HostingViewController<PlatformView, 
             let selectedMarketId = request?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
             dydxSelectedMarketsStore.shared.lastSelectedMarket = selectedMarketId
             presenter.marketId = selectedMarketId
+            if let sectionRaw = request?.params?["currentSection"] as? String {
+                let section = PortfolioSection(rawValue: sectionRaw) ?? .positions
+                let preselectedSection = Section.allSections.map(\.key).firstIndex(of: section) ?? 0
+                presenter.viewModel?.sections.onSelectionChanged?(preselectedSection)
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if request?.path == "/trade" {
                     Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["full": "true"]), animated: true, completion: nil)
@@ -113,8 +118,6 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
                 self?.resetPresentersForVisibilityChange()
             }
         }
-        viewModel.sectionSelection = .positions
-        viewModel.sections.sectionIndex = 0
 
         self.viewModel = viewModel
 

@@ -55,7 +55,8 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         .disabled(disabled)
-                        .padding(.all, 14)
+                        .padding(.vertical, 14)
+                        .padding(.horizontal, 10)
                         .if(fillWidth) { view in
                             view.frame(maxWidth: .infinity)
                         }

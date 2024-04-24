@@ -29,8 +29,8 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         self.viewModel = viewModel
 
         viewModel?.closeAction = {[weak self] in
-            if let assetId = self?.position?.assetId {
-                Router.shared?.navigate(to: RoutingRequest(path: "/trade/close", params: ["marketId": "\(assetId)-USD"]), animated: true, completion: nil)
+            if let marketId = self?.position?.id {
+                Router.shared?.navigate(to: RoutingRequest(path: "/trade/close", params: ["marketId": "\(marketId)"]), animated: true, completion: nil)
             }
         }
     }
@@ -90,26 +90,32 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
             viewModel?.takeProfitStatusViewModel = nil
             viewModel?.stopLossStatusViewModel = nil
         } else {
+            let digits = market.configs?.tickSizeDecimals?.intValue ?? 0
             if takeProfitOrders.count > 1 {
                 viewModel?.takeProfitStatusViewModel = .init(triggerSide: .takeProfit, triggerPrice: takeProfitOrders.first?.triggerPrice?.stringValue)
             } else {
-                viewModel?.takeProfitStatusViewModel = .init(triggerSide: .takeProfit, triggerPrice: takeProfitOrders.first?.triggerPrice?.stringValue)
+                viewModel?.takeProfitStatusViewModel = .init(triggerSide: .takeProfit, triggerPrice: dydxFormatter.shared.raw(number: takeProfitOrders.first?.triggerPrice?.doubleValue, digits: digits))
             }
             if stopLossOrders.count > 1 {
                 viewModel?.stopLossStatusViewModel = .init(triggerSide: .stopLoss, triggerPrice: stopLossOrders.first?.triggerPrice?.stringValue)
             } else {
-                viewModel?.stopLossStatusViewModel = .init(triggerSide: .stopLoss, triggerPrice: stopLossOrders.first?.triggerPrice?.stringValue)
+                viewModel?.stopLossStatusViewModel = .init(triggerSide: .stopLoss, triggerPrice: dydxFormatter.shared.raw(number: stopLossOrders.first?.triggerPrice?.doubleValue, digits: digits))
             }
         }
 
         let routeToTakeProfitStopLossAction = {[weak self] in
-            if let assetId = self?.position?.assetId {
-                Router.shared?.navigate(to: RoutingRequest(path: "/trade/take_profit_stop_loss", params: ["marketId": "\(assetId)-USD"]), animated: true, completion: nil)
+            if let marketId = self?.position?.id {
+                Router.shared?.navigate(to: RoutingRequest(path: "/trade/take_profit_stop_loss", params: ["marketId": "\(marketId)"]), animated: true, completion: nil)
             }
         }
+        let routeToOrdersAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["currentSection": "orders"]), animated: true, completion: nil)
+            return
+        }
         viewModel?.takeProfitStopLossAction = routeToTakeProfitStopLossAction
-        viewModel?.takeProfitStatusViewModel?.action = routeToTakeProfitStopLossAction
-        viewModel?.stopLossStatusViewModel?.action = routeToTakeProfitStopLossAction
+        // TODO
+        viewModel?.takeProfitStatusViewModel?.action = routeToOrdersAction
+        viewModel?.stopLossStatusViewModel?.action = routeToOrdersAction
         #endif
     }
 }

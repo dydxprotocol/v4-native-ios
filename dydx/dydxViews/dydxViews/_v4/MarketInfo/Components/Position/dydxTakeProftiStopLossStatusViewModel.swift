@@ -32,6 +32,7 @@ public class dydxTakeProftiStopLossStatusViewModel: PlatformViewModel {
             let content = HStack {
                 TokenTextViewModel(symbol: DataLocalizer.shared?.localize(path: self.triggerSide.titleStringKey, params: nil) ?? "")
                     .createView(parentStyle: parentStyle.themeFont(fontSize: .smallest), styleKey: styleKey)
+                    .fixedSize()
                 Spacer()
                 Text(self.triggerPrice ?? DataLocalizer.localize(path: self.triggerSide.placeholderStringKey))
                     .themeFont(fontSize: .large)

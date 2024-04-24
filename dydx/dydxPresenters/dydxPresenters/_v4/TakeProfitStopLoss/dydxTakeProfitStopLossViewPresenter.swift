@@ -51,13 +51,11 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         guard let marketId = marketId else { return }
 
         Publishers
-            .CombineLatest(AbacusStateManager.shared.state.selectedSubaccountPositions,
-                 AbacusStateManager.shared.state.selectedSubaccountOrders)
-            .removeAllDuplicates(by: { v1, v2 in
-                v1.0.count == v2.0.count && v1.1.count == v2.1.count
-            })
-            .sink { [weak self] subaccountPositions, subaccountOrders in
-                self?.update(subaccountPositions: subaccountPositions, subaccountOrders: subaccountOrders)
+            .CombineLatest3(AbacusStateManager.shared.state.selectedSubaccountPositions,
+                           AbacusStateManager.shared.state.selectedSubaccountOrders,
+                           AbacusStateManager.shared.state.configsAndAssetMap)
+            .sink { [weak self] subaccountPositions, subaccountOrders, configsMap in
+                self?.update(subaccountPositions: subaccountPositions, subaccountOrders: subaccountOrders, configsMap: configsMap)
             }
             .store(in: &subscriptions)
 
@@ -69,12 +67,13 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             .store(in: &subscriptions)
 
         Publishers
-            .CombineLatest(
+            .CombineLatest3(
                 AbacusStateManager.shared.state.triggerOrdersInput,
-                AbacusStateManager.shared.state.validationErrors
+                AbacusStateManager.shared.state.validationErrors,
+                AbacusStateManager.shared.state.configsAndAssetMap
             )
             .compactMap { $0 }
-            .sink { [weak self] triggerOrdersInput, errors in
+            .sink { [weak self] triggerOrdersInput, errors, configsMap in
                 #if DEBUG
                 if let triggerOrdersInput {
                     Console.shared.log("\nmmm marketId: \(triggerOrdersInput.marketId)")
@@ -97,7 +96,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                     Console.shared.log("mmm takeProfitOrder?.price?.usdcDiff: \(triggerOrdersInput.takeProfitOrder?.price?.usdcDiff)\n")
                 }
                 #endif
-                self?.update(triggerOrdersInput: triggerOrdersInput, errors: errors)
+                self?.update(triggerOrdersInput: triggerOrdersInput, errors: errors, configsMap: configsMap)
             }
             .store(in: &subscriptions)
     }
@@ -130,14 +129,13 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
     }
 
     private func update(market: PerpetualMarket?) {
-        viewModel?.oraclePrice = market?.oraclePrice?.doubleValue
+        viewModel?.oraclePrice = dydxFormatter.shared.raw(number: market?.oraclePrice?.doubleValue, digits: market?.configs?.displayTickSizeDecimals?.intValue ?? 2)
         viewModel?.customAmountViewModel?.assetId = market?.assetId
         viewModel?.customAmountViewModel?.stepSize = market?.configs?.stepSize?.stringValue
         viewModel?.customAmountViewModel?.minimumValue = market?.configs?.minOrderSize?.floatValue
     }
 
-    private func update(triggerOrdersInput: TriggerOrdersInput?, errors: [ValidationError]) {
-
+    private func update(triggerOrdersInput: TriggerOrdersInput?, errors: [ValidationError], configsMap: [String: MarketConfigsAndAsset]) {
         viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = nil
         viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = nil
         viewModel?.customLimitPriceViewModel?.alert = nil
@@ -159,9 +157,10 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
 
         // update displayed values
-        viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue, digits: 2)
+        let digits = configsMap[marketId ?? ""]?.configs?.displayTickSizeDecimals?.intValue ?? 2
+        viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue, digits: digits)
         viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue, digits: 2)
-        viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue, digits: 2)
+        viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue, digits: digits)
         viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue, digits: 2)
 
         viewModel?.customAmountViewModel?.value = triggerOrdersInput?.size?.doubleValue.magnitude.stringValue
@@ -193,7 +192,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
     }
 
-    private func update(subaccountPositions: [SubaccountPosition], subaccountOrders: [SubaccountOrder]) {
+    private func update(subaccountPositions: [SubaccountPosition], subaccountOrders: [SubaccountOrder], configsMap: [String: MarketConfigsAndAsset]) {
         // TODO: move this logic to abacus
         let position = subaccountPositions.first { subaccountPosition in
             subaccountPosition.id == marketId
@@ -205,7 +204,8 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             order.marketId == marketId && (order.type == .stopmarket || order.type == .stoplimit) && order.side.opposite == position?.side.current && order.status == Abacus.OrderStatus.untriggered
         }
 
-        viewModel?.entryPrice = position?.entryPrice?.current?.doubleValue
+        viewModel?.entryPrice = dydxFormatter.shared.raw(number: position?.entryPrice?.current?.doubleValue,
+                                                         digits: configsMap[marketId ?? ""]?.configs?.displayTickSizeDecimals?.intValue ?? 2)
 
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenTakeProfitOrders = takeProfitOrders.count
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenStopLossOrders = stopLossOrders.count
