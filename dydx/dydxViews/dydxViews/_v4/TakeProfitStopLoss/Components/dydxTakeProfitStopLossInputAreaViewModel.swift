@@ -11,7 +11,6 @@ import PlatformUI
 import Utilities
 
 public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
-
     @Published public var numOpenTakeProfitOrders: Int?
     @Published public var takeProfitPriceInputViewModel: dydxPriceInputViewModel?
     @Published public var gainInputViewModel: dydxGainLossInputViewModel?

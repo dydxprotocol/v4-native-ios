@@ -30,8 +30,8 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     @Published public var closePrice: String?
     @Published public var funding: SignedAmountViewModel?
 
-    @Published public var takeProfitStatusViewModel: dydxTakeProftiStopLossStatusViewModel?
-    @Published public var stopLossStatusViewModel: dydxTakeProftiStopLossStatusViewModel?
+    @Published public var takeProfitStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
+    @Published public var stopLossStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
 
     public init() { }
 
@@ -155,8 +155,8 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                         token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
                     }
                     Text(amount ?? "")
-                        .themeColor(foreground: .textTertiary)
                         .themeFont(fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                 }
@@ -223,6 +223,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                     Spacer()
                     Text(DataLocalizer.localize(path: "APP.TRADE.ADD_TP_SL"))
                         .themeFont(fontSize: .medium)
+                        .themeColor(foreground: .textSecondary)
                     Spacer()
                 }
             )
@@ -265,6 +266,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 
                 Text(openPrice ?? "-")
                     .themeFont(fontSize: .medium)
+                    .themeColor(foreground: .textSecondary)
             }
 
             DividerModel().createView(parentStyle: parentStyle)
@@ -278,6 +280,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 
                 Text(closePrice ?? "-")
                     .themeFont(fontSize: .medium)
+                    .themeColor(foreground: .textSecondary)
             }
 
             DividerModel().createView(parentStyle: parentStyle)

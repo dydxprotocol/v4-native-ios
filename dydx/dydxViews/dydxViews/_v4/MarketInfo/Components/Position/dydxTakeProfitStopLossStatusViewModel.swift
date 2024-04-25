@@ -1,5 +1,5 @@
 //
-//  dydxTakeProftiStopLossStatusViewModel.swift
+//  dydxTakeProfitStopLossStatusViewModel.swift
 //  dydxUI
 //
 //  Created by Michael Maguire on 4/23/24.
@@ -10,7 +10,7 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxTakeProftiStopLossStatusViewModel: PlatformViewModel {
+public class dydxTakeProfitStopLossStatusViewModel: PlatformViewModel {
 
     @Published public var triggerPriceText: String?
     @Published public var limitPrice: String?
@@ -27,8 +27,8 @@ public class dydxTakeProftiStopLossStatusViewModel: PlatformViewModel {
 
     }
 
-    public static var previewValue: dydxTakeProftiStopLossStatusViewModel {
-        dydxTakeProftiStopLossStatusViewModel(triggerSide: .stopLoss, triggerPriceText: "0.000001")
+    public static var previewValue: dydxTakeProfitStopLossStatusViewModel {
+        dydxTakeProfitStopLossStatusViewModel(triggerSide: .stopLoss, triggerPriceText: "0.000001")
     }
 
     private func createTitleValueRow(titleStringKey: String, value: String?) -> AnyView? {
@@ -81,6 +81,7 @@ public class dydxTakeProftiStopLossStatusViewModel: PlatformViewModel {
                 }
                 Spacer(minLength: 0)
             }
+                .padding(.horizontal, -4) // this padding counteracts some of the button horizontal padding, to be updated
 
             return PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {[weak self] in
                 self?.action?()
@@ -92,13 +93,13 @@ public class dydxTakeProftiStopLossStatusViewModel: PlatformViewModel {
 }
 
 #if DEBUG
-struct dydxTakeProftiStopLossStatusViewModel_Previews_Dark: PreviewProvider {
+struct dydxTakeProfitStopLossStatusViewModel_Previews_Dark: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyDarkTheme()
         ThemeSettings.applyStyles()
-        return dydxTakeProftiStopLossStatusViewModel.previewValue
+        return dydxTakeProfitStopLossStatusViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)
@@ -107,13 +108,13 @@ struct dydxTakeProftiStopLossStatusViewModel_Previews_Dark: PreviewProvider {
     }
 }
 
-struct dydxTakeProftiStopLossStatusViewModel_Previews_Light: PreviewProvider {
+struct dydxTakeProfitStopLossStatusViewModel_Previews_Light: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyLightTheme()
         ThemeSettings.applyStyles()
-        return dydxTakeProftiStopLossStatusViewModel.previewValue
+        return dydxTakeProfitStopLossStatusViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)
@@ -123,7 +124,7 @@ struct dydxTakeProftiStopLossStatusViewModel_Previews_Light: PreviewProvider {
 }
 #endif
 
-extension dydxTakeProftiStopLossStatusViewModel {
+extension dydxTakeProfitStopLossStatusViewModel {
     public enum TriggerSide {
         case takeProfit, stopLoss
 

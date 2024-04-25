@@ -122,8 +122,7 @@ private struct ThemeFontModifier: ViewModifier {
 }
 
 public extension Text {
-    func themeFont(fontType: ThemeFont.FontType? = nil, fontSize: ThemeFont.FontSize = .medium) -> Text {
-        let fontType = fontType ?? .base
+    func themeFont(fontType: ThemeFont.FontType = .base, fontSize: ThemeFont.FontSize = .medium) -> Text {
         return self.font(ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize))
     }
 }
