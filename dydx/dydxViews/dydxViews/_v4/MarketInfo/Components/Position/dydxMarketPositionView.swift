@@ -235,10 +235,13 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
         }
 
         return VStack(spacing: 10) {
-            if takeProfitStatusViewModel?.triggerPrice ?? stopLossStatusViewModel?.triggerPrice != nil {
+            if takeProfitStatusViewModel != nil || stopLossStatusViewModel != nil {
                 HStack(spacing: 10) {
-                    takeProfitStatusViewModel?.createView(parentStyle: parentStyle)
-                    stopLossStatusViewModel?.createView(parentStyle: parentStyle)
+                    Group {
+                        takeProfitStatusViewModel?.createView(parentStyle: parentStyle)
+                        stopLossStatusViewModel?.createView(parentStyle: parentStyle)
+                    }
+                    .frame(maxHeight: .infinity)
                 }
                 closePositionButton
             } else {

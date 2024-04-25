@@ -12,33 +12,74 @@ import Utilities
 
 public class dydxTakeProftiStopLossStatusViewModel: PlatformViewModel {
 
+    @Published public var triggerPriceText: String?
+    @Published public var limitPrice: String?
+    @Published public var amount: String?
     @Published public var action: (() -> Void)?
-    @Published public var triggerPrice: String?
     public let triggerSide: TriggerSide
 
-    public init(triggerSide: TriggerSide, triggerPrice: String?) {
+    public init(triggerSide: TriggerSide, triggerPriceText: String? = nil, limitPrice: String? = nil, amount: String? = nil, action: (() -> Void)? = nil) {
         self.triggerSide = triggerSide
-        self.triggerPrice = triggerPrice
+        self.triggerPriceText = triggerPriceText
+        self.limitPrice = limitPrice
+        self.amount = amount
+        self.action = action
+
     }
 
     public static var previewValue: dydxTakeProftiStopLossStatusViewModel {
-        dydxTakeProftiStopLossStatusViewModel(triggerSide: .stopLoss, triggerPrice: "0.000001")
+        dydxTakeProftiStopLossStatusViewModel(triggerSide: .stopLoss, triggerPriceText: "0.000001")
+    }
+
+    private func createTitleValueRow(titleStringKey: String, value: String?) -> AnyView? {
+        guard let value = value else { return nil }
+        return HStack(spacing: 0) {
+            Text(DataLocalizer.shared?.localize(path: titleStringKey, params: nil) ?? "")
+                .themeFont(fontType: .base, fontSize: .smaller)
+                .themeColor(foreground: .textTertiary)
+                .fixedSize()
+            Spacer(minLength: 10)
+            Text(value)
+                .themeFont(fontType: .base, fontSize: .smaller)
+                .themeColor(foreground: .textSecondary)
+                .fixedSize()
+        }
+        .wrappedInAnyView()
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let content = HStack {
-                TokenTextViewModel(symbol: DataLocalizer.shared?.localize(path: self.triggerSide.titleStringKey, params: nil) ?? "")
-                    .createView(parentStyle: parentStyle.themeFont(fontSize: .smallest), styleKey: styleKey)
-                    .fixedSize()
-                Spacer()
-                Text(self.triggerPrice ?? DataLocalizer.localize(path: self.triggerSide.placeholderStringKey))
-                    .themeFont(fontSize: .large)
-                    .themeColor(foreground: self.triggerPrice == nil ? .textTertiary : .textPrimary)
-                    .truncationMode(.middle)
-                    .fixedSize()
+            let content = VStack(spacing: 0) {
+                Spacer(minLength: 0)
+                VStack(spacing: 14) {
+                    HStack(spacing: 0) {
+                        TokenTextViewModel(symbol: DataLocalizer.shared?.localize(path: self.triggerSide.titleStringKey, params: nil) ?? "")
+                            .createView(parentStyle: parentStyle.themeFont(fontSize: .smallest), styleKey: styleKey)
+                            .fixedSize()
+                        Spacer(minLength: 10)
+                        Text(self.triggerPriceText ?? DataLocalizer.localize(path: self.triggerSide.placeholderStringKey))
+                            .themeFont(fontType: .base, fontSize: .large)
+                            .themeColor(foreground: self.triggerPriceText == nil ? .textTertiary : .textPrimary)
+                            .truncationMode(.middle)
+                            .fixedSize()
+                    }
+                    if self.limitPrice != nil || self.amount != nil {
+                        VStack(spacing: 8) {
+                            Divider()
+                                .overlay(ThemeColor.SemanticColor.layer7.color)
+                                .padding(.horizontal, -100) // this padding counteracts the button horizontal padding
+                            VStack(spacing: 4) {
+                                self.createTitleValueRow(titleStringKey: "APP.TRADE.LIMIT_ORDER_SHORT", value: self.limitPrice)
+                                self.createTitleValueRow(titleStringKey: "APP.GENERAL.AMOUNT", value: self.amount)
+                            }
+                            .padding(.bottom, -6) // this padding counteracts the button bottom padding
+                        }
+                    }
+
+                }
+                Spacer(minLength: 0)
             }
 
             return PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {[weak self] in

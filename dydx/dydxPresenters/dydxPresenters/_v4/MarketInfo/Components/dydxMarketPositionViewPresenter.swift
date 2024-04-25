@@ -80,6 +80,16 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
 
         // hide for now until feature work complete
         #if DEBUG
+        let routeToTakeProfitStopLossAction = {[weak self] in
+            if let marketId = self?.position?.id {
+                Router.shared?.navigate(to: RoutingRequest(path: "/trade/take_profit_stop_loss", params: ["marketId": "\(marketId)"]), animated: true, completion: nil)
+            }
+        }
+        let routeToOrdersAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["currentSection": "orders"]), animated: true, completion: nil)
+            return
+        }
+
         let takeProfitOrders = subaccountOrders.filter { (order: SubaccountOrder) in
             order.marketId == position.id && (order.type == .takeprofitmarket || order.type == .takeprofitlimit) && order.side.opposite == position.side.current && order.status == Abacus.OrderStatus.untriggered
         }
@@ -90,32 +100,46 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
             viewModel?.takeProfitStatusViewModel = nil
             viewModel?.stopLossStatusViewModel = nil
         } else {
-            let digits = market.configs?.tickSizeDecimals?.intValue ?? 0
+            let decimalDigits = market.configs?.tickSizeDecimals?.intValue ?? 0
+            let stepSizeDecimals = market.configs?.stepSizeDecimals?.intValue ?? 0
             if takeProfitOrders.count > 1 {
-                viewModel?.takeProfitStatusViewModel = .init(triggerSide: .takeProfit, triggerPrice: takeProfitOrders.first?.triggerPrice?.stringValue)
+                viewModel?.takeProfitStatusViewModel = .init(
+                    triggerSide: .takeProfit,
+                    triggerPriceText: DataLocalizer.shared?.localize(path: "APP.TRADE.MULTIPLE_ARROW", params: nil),
+                    action: routeToOrdersAction)
+            } else if let takeProfitOrder = takeProfitOrders.first {
+                viewModel?.takeProfitStatusViewModel = .init(
+                    triggerSide: .takeProfit,
+                    triggerPriceText: dydxFormatter.shared.raw(number: takeProfitOrder.triggerPrice?.doubleValue, digits: decimalDigits),
+                    limitPrice: takeProfitOrder.type == .takeprofitlimit ? dydxFormatter.shared.raw(number: takeProfitOrder.price, digits: decimalDigits) : nil,
+                    amount: dydxFormatter.shared.raw(number: takeProfitOrder.size, digits: stepSizeDecimals),
+                    action: routeToTakeProfitStopLossAction)
             } else {
-                viewModel?.takeProfitStatusViewModel = .init(triggerSide: .takeProfit, triggerPrice: dydxFormatter.shared.raw(number: takeProfitOrders.first?.triggerPrice?.doubleValue, digits: digits))
+                viewModel?.takeProfitStatusViewModel = .init(
+                    triggerSide: .takeProfit,
+                    action: routeToTakeProfitStopLossAction)
             }
+
             if stopLossOrders.count > 1 {
-                viewModel?.stopLossStatusViewModel = .init(triggerSide: .stopLoss, triggerPrice: stopLossOrders.first?.triggerPrice?.stringValue)
+                viewModel?.stopLossStatusViewModel = .init(
+                    triggerSide: .stopLoss,
+                    triggerPriceText: DataLocalizer.shared?.localize(path: "APP.TRADE.MULTIPLE_ARROW", params: nil),
+                    action: routeToOrdersAction)
+            } else if let stopLossOrder = stopLossOrders.first {
+                viewModel?.stopLossStatusViewModel = .init(
+                    triggerSide: .stopLoss,
+                    triggerPriceText: dydxFormatter.shared.raw(number: stopLossOrder.triggerPrice?.doubleValue, digits: decimalDigits),
+                    limitPrice: stopLossOrder.type == .stoplimit ? dydxFormatter.shared.raw(number: stopLossOrder.price, digits: decimalDigits) : nil,
+                    amount: dydxFormatter.shared.raw(number: stopLossOrder.size, digits: stepSizeDecimals),
+                    action: routeToTakeProfitStopLossAction)
             } else {
-                viewModel?.stopLossStatusViewModel = .init(triggerSide: .stopLoss, triggerPrice: dydxFormatter.shared.raw(number: stopLossOrders.first?.triggerPrice?.doubleValue, digits: digits))
+                viewModel?.stopLossStatusViewModel = .init(
+                    triggerSide: .stopLoss,
+                    action: routeToTakeProfitStopLossAction)
             }
         }
 
-        let routeToTakeProfitStopLossAction = {[weak self] in
-            if let marketId = self?.position?.id {
-                Router.shared?.navigate(to: RoutingRequest(path: "/trade/take_profit_stop_loss", params: ["marketId": "\(marketId)"]), animated: true, completion: nil)
-            }
-        }
-        let routeToOrdersAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["currentSection": "orders"]), animated: true, completion: nil)
-            return
-        }
         viewModel?.takeProfitStopLossAction = routeToTakeProfitStopLossAction
-        // TODO
-        viewModel?.takeProfitStatusViewModel?.action = routeToOrdersAction
-        viewModel?.stopLossStatusViewModel?.action = routeToOrdersAction
         #endif
     }
 }

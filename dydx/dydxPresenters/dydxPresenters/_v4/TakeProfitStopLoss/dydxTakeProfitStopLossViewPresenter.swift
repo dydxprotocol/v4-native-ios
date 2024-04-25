@@ -315,8 +315,13 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
 
         // set up button interactions
-        viewModel.takeProfitStopLossInputAreaViewModel?.multipleOrdersExistViewModel?.viewAllAction = {
-            Router.shared?.navigate(to: .init(path: "/portfolio/orders"), animated: true, completion: nil)
+        viewModel.takeProfitStopLossInputAreaViewModel?.multipleOrdersExistViewModel?.viewAllAction = { [weak self] in
+            guard let marketId = self?.marketId else { return }
+            Router.shared?.navigate(to: .init(path: "/market",
+                                              params: ["marketId": "\(marketId)",
+                                                       "currentSection": "orders"]),
+                                    animated: true,
+                                    completion: nil)
         }
         viewModel.submissionAction = { [weak self] in
             self?.viewModel?.submissionReadiness = .submitting
