@@ -44,7 +44,7 @@ public enum PositionSide {
     case SHORT
 }
 
-public enum PortfolioSection {
+public enum PortfolioSection: String {
     case positions
     case orders
     case trades
