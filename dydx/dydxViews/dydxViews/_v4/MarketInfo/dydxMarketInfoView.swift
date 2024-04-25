@@ -23,7 +23,7 @@ public class dydxMarketInfoViewModel: PlatformViewModel {
     @Published public var position = dydxMarketPositionViewModel()
     @Published public var orders = dydxPortfolioOrdersViewModel()
     @Published public var funding = dydxPortfolioFundingViewModel()
-    @Published public var sectionSelection: PortfolioSection = .orders
+    @Published public var sectionSelection: PortfolioSection = .positions
 
     public init() {
         super.init()
