@@ -30,6 +30,7 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
     @Published public var takeProfitStopLossInputAreaViewModel: dydxTakeProfitStopLossInputAreaModel?
     @Published public var customAmountViewModel: dydxCustomAmountViewModel?
     @Published public var customLimitPriceViewModel: dydxCustomLimitPriceViewModel?
+    @Published public var shouldDisplayCustomLimitPriceViewModel: Bool = false
 
     public init() {}
 
@@ -132,7 +133,11 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
                             self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
                             self.separator
                             self.customAmountViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                            self.customLimitPriceViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            #if DEBUG
+                            if self.shouldDisplayCustomLimitPriceViewModel {
+                                self.customLimitPriceViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            }
+                            #endif
                         }
                     }
                     .keyboardObserving()
