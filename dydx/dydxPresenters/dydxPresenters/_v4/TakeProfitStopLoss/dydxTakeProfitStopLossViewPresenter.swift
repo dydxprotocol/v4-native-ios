@@ -52,10 +52,10 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
         Publishers
             .CombineLatest3(AbacusStateManager.shared.state.selectedSubaccountPositions,
-                           AbacusStateManager.shared.state.selectedSubaccountOrders,
+                           AbacusStateManager.shared.state.selectedSubaccountTriggerOrders,
                            AbacusStateManager.shared.state.configsAndAssetMap)
-            .sink { [weak self] subaccountPositions, subaccountOrders, configsMap in
-                self?.update(subaccountPositions: subaccountPositions, subaccountOrders: subaccountOrders, configsMap: configsMap)
+            .sink { [weak self] subaccountPositions, triggerOrders, configsMap in
+                self?.update(subaccountPositions: subaccountPositions, triggerOrders: triggerOrders, configsMap: configsMap)
             }
             .store(in: &subscriptions)
 
@@ -192,16 +192,20 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
     }
 
-    private func update(subaccountPositions: [SubaccountPosition], subaccountOrders: [SubaccountOrder], configsMap: [String: MarketConfigsAndAsset]) {
+    private func update(subaccountPositions: [SubaccountPosition], triggerOrders: [SubaccountOrder], configsMap: [String: MarketConfigsAndAsset]) {
         // TODO: move this logic to abacus
         let position = subaccountPositions.first { subaccountPosition in
             subaccountPosition.id == marketId
         }
-        let takeProfitOrders = subaccountOrders.filter { (order: SubaccountOrder) in
-            order.marketId == marketId && (order.type == .takeprofitmarket || order.type == .takeprofitlimit) && order.side.opposite == position?.side.current && order.status == Abacus.OrderStatus.untriggered
+        let takeProfitOrders = triggerOrders.filter { (order: SubaccountOrder) in
+            order.marketId == marketId
+            && (order.type == .takeprofitmarket || order.type == .takeprofitlimit)
+            && order.side.opposite == position?.side.current
         }
-        let stopLossOrders = subaccountOrders.filter { (order: SubaccountOrder) in
-            order.marketId == marketId && (order.type == .stopmarket || order.type == .stoplimit) && order.side.opposite == position?.side.current && order.status == Abacus.OrderStatus.untriggered
+        let stopLossOrders = triggerOrders.filter { (order: SubaccountOrder) in
+            order.marketId == marketId
+            && (order.type == .stopmarket || order.type == .stoplimit)
+            && order.side.opposite == position?.side.current
         }
 
         viewModel?.entryPrice = dydxFormatter.shared.raw(number: position?.entryPrice?.current?.doubleValue,
