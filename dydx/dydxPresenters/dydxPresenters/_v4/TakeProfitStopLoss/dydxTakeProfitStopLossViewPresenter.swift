@@ -249,13 +249,17 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             AbacusStateManager.shared.triggerOrders(input: order.id, type: .takeprofitorderid)
             AbacusStateManager.shared.triggerOrders(input: order.size.magnitude.stringValue, type: .takeprofitordersize)
             AbacusStateManager.shared.triggerOrders(input: order.type.rawValue, type: .takeprofitordertype)
-            AbacusStateManager.shared.triggerOrders(input: order.price.stringValue, type: .takeprofitlimitprice)
+            if order.type == .takeprofitlimit {
+                AbacusStateManager.shared.triggerOrders(input: order.price.stringValue, type: .takeprofitlimitprice)
+            }
             AbacusStateManager.shared.triggerOrders(input: order.triggerPrice?.stringValue, type: .takeprofitprice)
         case .stoplimit, .stopmarket:
             AbacusStateManager.shared.triggerOrders(input: order.id, type: .stoplossorderid)
             AbacusStateManager.shared.triggerOrders(input: order.size.magnitude.stringValue, type: .stoplossordersize)
             AbacusStateManager.shared.triggerOrders(input: order.type.rawValue, type: .stoplossordertype)
-            AbacusStateManager.shared.triggerOrders(input: order.price.stringValue, type: .stoplosslimitprice)
+            if order.type == .stoplimit {
+                AbacusStateManager.shared.triggerOrders(input: order.price.stringValue, type: .stoplosslimitprice)
+            }
             AbacusStateManager.shared.triggerOrders(input: order.triggerPrice?.stringValue, type: .stoplossprice)
         default:
             assertionFailure("should not update from non trigger order")
@@ -271,6 +275,10 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel.takeProfitStopLossInputAreaViewModel?.gainInputViewModel = .init(triggerType: .takeProfit)
         viewModel.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel = .init(title: DataLocalizer.shared?.localize(path: "APP.TRIGGERS_MODAL.SL_PRICE", params: nil))
         viewModel.takeProfitStopLossInputAreaViewModel?.lossInputViewModel = .init(triggerType: .stopLoss)
+
+        #if DEBUG
+        viewModel.shouldDisplayCustomLimitPriceViewModel = AbacusStateManager.shared.environment?.featureFlags.isSlTpLimitOrdersEnabled == true
+        #endif
 
         viewModel.customAmountViewModel = dydxCustomAmountViewModel()
 
