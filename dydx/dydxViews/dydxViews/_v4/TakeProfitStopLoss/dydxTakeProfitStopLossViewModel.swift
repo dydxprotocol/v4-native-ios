@@ -115,7 +115,7 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
                 .themeFont(fontType: .base, fontSize: .small)
             Rectangle()
                 .frame(height: 1)
-                .themeColor(background: .layer6)
+                .overlay(ThemeColor.SemanticColor.layer6.color)
         }
     }
 
