@@ -1348,6 +1348,7 @@
 				020F66C02858F29300E2D072 /* Embed Foundation Extensions */,
 				16DEFDB1896BDF443F34E3AC /* [CP] Embed Pods Frameworks */,
 				026FC4232AFAD3EB00C52F20 /* Run Script (unset_scheme.sh) */,
+				52574510D5C216006099A2F7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1376,8 +1377,6 @@
 				31B77BCA22DAD077004F9B21 /* PBXTargetDependency */,
 			);
 			name = dydxV4;
-			packageProductDependencies = (
-			);
 			productName = dydx;
 			productReference = 3112F45F216BBF8400708927 /* dydxV4.app */;
 			productType = "com.apple.product-type.application";
@@ -1391,6 +1390,7 @@
 				3112F472216BBF8600708927 /* Frameworks */,
 				3112F473216BBF8600708927 /* Resources */,
 				5BD099095C70B5B9617985A5 /* [CP] Embed Pods Frameworks */,
+				0EDD4459F9EEEA64AF8E4A1F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2165,6 +2165,23 @@
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\n\n# Path to the secrets directory\nSET_SECRETS_PATH=\"${PROJECT_DIR}/../scripts/set_secrets.sh\"\n\n# Check if the set_secrets script is available\nif [ ! -f \"$SET_SECRETS_PATH\" ]; then\n  echo \"Error: set_secrets.sh not found at $SET_SECRETS_PATH\"\n  exit 1\nfi\n\n# Execute the set_secrets script with the shouldUseEmptySecrets argument\nset_secrets_output=$(bash \"$SET_SECRETS_PATH\")\n\n# Echo the captured output (xcode does not automatically mirror it in build log)\necho \"Output from set_secrets was:\\n$set_secrets_output\"\n";
 		};
+		0EDD4459F9EEEA64AF8E4A1F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		16DEFDB1896BDF443F34E3AC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2223,6 +2240,23 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		52574510D5C216006099A2F7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		5BD099095C70B5B9617985A5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
