@@ -94,12 +94,12 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
 
             let takeProfitOrders = triggerOrders.filter { (order: SubaccountOrder) in
                 order.marketId == position.id
-                && (order.type == .takeprofitmarket || order.type == .takeprofitlimit)
+                && (order.type == .takeprofitmarket || (order.type == .takeprofitlimit && AbacusStateManager.shared.environment?.featureFlags.isSlTpLimitOrdersEnabled == true))
                 && order.side.opposite == position.side.current
             }
             let stopLossOrders = triggerOrders.filter { (order: SubaccountOrder) in
                 order.marketId == position.id
-                && (order.type == .stopmarket || order.type == .stoplimit)
+                && (order.type == .stopmarket || (order.type == .stoplimit && AbacusStateManager.shared.environment?.featureFlags.isSlTpLimitOrdersEnabled == true))
                 && order.side.opposite == position.side.current
             }
             if takeProfitOrders.isEmpty && stopLossOrders.isEmpty {
@@ -113,12 +113,13 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
                         triggerSide: .takeProfit,
                         triggerPriceText: DataLocalizer.shared?.localize(path: "APP.TRADE.MULTIPLE_ARROW", params: nil),
                         action: routeToOrdersAction)
-                } else if let takeProfitOrder = takeProfitOrders.first {
+                } else if let takeProfitOrder = takeProfitOrders.first, let positionSize = position.size?.current?.doubleValue.magnitude {
+                    let orderSize = takeProfitOrder.size.magnitude
                     viewModel?.takeProfitStatusViewModel = .init(
                         triggerSide: .takeProfit,
-                        triggerPriceText: dydxFormatter.shared.raw(number: takeProfitOrder.triggerPrice?.doubleValue, digits: decimalDigits),
-                        limitPrice: takeProfitOrder.type == .takeprofitlimit ? dydxFormatter.shared.raw(number: takeProfitOrder.price, digits: decimalDigits) : nil,
-                        amount: position.size?.current?.doubleValue.magnitude == takeProfitOrder.size.magnitude ? nil : dydxFormatter.shared.raw(number: takeProfitOrder.size, digits: stepSizeDecimals),
+                        triggerPriceText: dydxFormatter.shared.dollar(number: takeProfitOrder.triggerPrice?.doubleValue, digits: decimalDigits),
+                        limitPrice: takeProfitOrder.type == .takeprofitlimit ? dydxFormatter.shared.dollar(number: takeProfitOrder.price, digits: decimalDigits) : nil,
+                        amount: positionSize == orderSize ? nil : dydxFormatter.shared.percent(number: orderSize/positionSize, digits: 2),
                         action: routeToTakeProfitStopLossAction)
                 } else {
                     viewModel?.takeProfitStatusViewModel = .init(
@@ -131,13 +132,14 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
                         triggerSide: .stopLoss,
                         triggerPriceText: DataLocalizer.shared?.localize(path: "APP.TRADE.MULTIPLE_ARROW", params: nil),
                         action: routeToOrdersAction)
-                } else if let stopLossOrder = stopLossOrders.first {
+                } else if let stopLossOrder = stopLossOrders.first, let positionSize = position.size?.current?.doubleValue.magnitude {
+                    let orderSize = stopLossOrder.size.magnitude
                     viewModel?.stopLossStatusViewModel = .init(
                         triggerSide: .stopLoss,
-                        triggerPriceText: dydxFormatter.shared.raw(number: stopLossOrder.triggerPrice?.doubleValue, digits: decimalDigits),
-                        limitPrice: stopLossOrder.type == .stoplimit ? dydxFormatter.shared.raw(number: stopLossOrder.price, digits: decimalDigits) : nil,
+                        triggerPriceText: dydxFormatter.shared.dollar(number: stopLossOrder.triggerPrice?.doubleValue, digits: decimalDigits),
+                        limitPrice: stopLossOrder.type == .stoplimit ? dydxFormatter.shared.dollar(number: stopLossOrder.price, digits: decimalDigits) : nil,
                         // don't show amount unless order size is custom
-                        amount: position.size?.current?.doubleValue.magnitude == stopLossOrder.size.magnitude ? nil : dydxFormatter.shared.raw(number: stopLossOrder.size, digits: stepSizeDecimals),
+                        amount: positionSize == orderSize ? nil : dydxFormatter.shared.percent(number: orderSize/positionSize, digits: 2),
                         action: routeToTakeProfitStopLossAction)
                 } else {
                     viewModel?.stopLossStatusViewModel = .init(

@@ -68,7 +68,7 @@ public class dydxTakeProfitStopLossStatusViewModel: PlatformViewModel {
                     if self.limitPrice != nil || self.amount != nil {
                         VStack(spacing: 8) {
                             Divider()
-                                .overlay(ThemeColor.SemanticColor.layer7.color)
+                                .overlay(ThemeColor.SemanticColor.textTertiary.color)
                                 .padding(.horizontal, -100) // this padding counteracts the button horizontal padding
                             VStack(spacing: 4) {
                                 self.createTitleValueRow(titleStringKey: "APP.TRADE.LIMIT_ORDER_SHORT", value: self.limitPrice)

@@ -41,6 +41,13 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
         }
     }
 
+    /// Sets value and related UI without triggering action callbacks
+    public func programmaticallySet(newValue: String?) {
+        isOn = newValue != nil
+        setSliderValue(value: newValue)
+        value = newValue
+    }
+
     public init() {
         super.init(
             label: DataLocalizer.shared?.localize(path: "APP.GENERAL.AMOUNT", params: nil),
@@ -154,6 +161,10 @@ public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
         } else {
             super.valueChanged(value: "\(minimumValue ?? 0)")
         }
+        setSliderValue(value: value)
+    }
+
+    private func setSliderValue(value: String?) {
         slider.value = Parser.standard.asDecimal(value)?.floatValue ?? slider.minimumValue
     }
 }
