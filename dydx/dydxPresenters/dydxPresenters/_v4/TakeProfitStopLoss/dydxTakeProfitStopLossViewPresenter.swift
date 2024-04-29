@@ -255,7 +255,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
         AbacusStateManager.shared.triggerOrders(input: marketId, type: .marketid)
 
-        // update toggle interaction since it depends on position size
+        // update toggle interaction, must do it within position listener update method since it depends on market config min order size
         viewModel?.customAmountViewModel?.toggleAction = { isOn in
             if isOn {
                 // start at min amount
