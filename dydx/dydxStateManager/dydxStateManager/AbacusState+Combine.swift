@@ -200,6 +200,18 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
+    public var selectedSubaccountTriggerOrders: AnyPublisher<[SubaccountOrder], Never> {
+        selectedSubaccountOrders
+            .map { orders in
+                orders.filter { order in
+                    order.status == .untriggered
+                }
+            }
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
     public var selectedSubaccountPNLs: AnyPublisher<[SubaccountHistoricalPNL], Never> {
         statePublisher
             .compactMap { [weak self] (state: PerpetualState?) in
