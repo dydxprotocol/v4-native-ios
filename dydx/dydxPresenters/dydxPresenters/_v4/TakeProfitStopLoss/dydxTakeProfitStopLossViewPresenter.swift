@@ -44,10 +44,13 @@ private protocol dydxTakeProfitStopLossViewPresenterProtocol: HostedViewPresente
 private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeProfitStopLossViewModel>, dydxTakeProfitStopLossViewPresenterProtocol {
     fileprivate var marketId: String?
 
+    deinit {
+        clearTriggersInput()
+    }
+
     override func start() {
         super.start()
 
-        clearTriggersInput()
         guard let marketId = marketId else { return }
 
         Publishers
@@ -261,7 +264,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                 // start at min amount
                 AbacusStateManager.shared.triggerOrders(input: marketConfig.minOrderSize?.stringValue, type: .size)
             } else {
-                AbacusStateManager.shared.triggerOrders(input: nil, type: .size)
+                AbacusStateManager.shared.triggerOrders(input: position?.size?.current?.doubleValue.magnitude.stringValue, type: .size)
             }
         }
     }
