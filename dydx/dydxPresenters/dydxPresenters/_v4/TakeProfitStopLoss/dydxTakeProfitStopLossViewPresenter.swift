@@ -201,6 +201,8 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             && triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue == nil
             && triggerOrdersInput?.stopLossOrder?.orderId == nil {
             viewModel?.submissionReadiness = .needsInput
+        } else if pendingOrders ?? 0 > 0 {
+            viewModel?.submissionReadiness = .submitting
         } else {
             viewModel?.submissionReadiness = .readyToSubmit
         }
@@ -364,13 +366,16 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel.submissionAction = { [weak self] in
             self?.viewModel?.submissionReadiness = .submitting
 
-            AbacusStateManager.shared.placeTriggerOrders { status in
+            self?.pendingOrders = AbacusStateManager.shared.placeTriggerOrders { status in
                 switch status {
                 case .success:
                     // check self is not deinitialized, otherwise abacus may call callback more than once
-                    guard let self = self else { return }
-                    Router.shared?.navigate(to: .init(path: "/action/dismiss"), animated: true, completion: nil)
+                    self?.pendingOrders? -= 1
+                    if let pendingOrders = self?.pendingOrders, pendingOrders <= 0 {
+                        Router.shared?.navigate(to: .init(path: "/action/dismiss"), animated: true, completion: nil)
+                    }
                 case .failed(let error):
+                    self?.pendingOrders = nil
                     // TODO: how to handle errors?
                     self?.viewModel?.submissionReadiness = .fixErrors(cta: DataLocalizer.shared?.localize(path: "APP.GENERAL.UNKNOWN_ERROR", params: nil))
                 }
@@ -379,6 +384,9 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
         self.viewModel = viewModel
     }
+
+    @SynchronizedLock var pendingOrders: Int?
+
 }
 
 private extension Abacus.OrderSide {
@@ -388,5 +396,32 @@ private extension Abacus.OrderSide {
         case .sell: return .long_
         default: return .short_
         }
+    }
+}
+
+import Darwin
+
+@propertyWrapper
+public struct SynchronizedLock<Value> {
+    private var value: Value
+    private var lock = NSLock()
+
+    public var wrappedValue: Value {
+        get { lock.synchronized { value } }
+        set { lock.synchronized { value = newValue } }
+    }
+
+    public init(wrappedValue value: Value) {
+        self.value = value
+    }
+}
+
+private extension NSLock {
+
+    @discardableResult
+    func synchronized<T>(_ block: () -> T) -> T {
+        lock()
+        defer { unlock() }
+        return block()
     }
 }

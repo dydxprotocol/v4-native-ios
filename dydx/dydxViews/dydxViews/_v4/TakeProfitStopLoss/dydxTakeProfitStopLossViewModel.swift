@@ -86,7 +86,7 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
         let buttonText: String
         let buttonState: PlatformButtonState
         let spinner: AnyView?
-        
+
         switch submissionReadiness {
         case .readyToSubmit:
             buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_TRIGGERS", params: nil) ?? ""
@@ -105,7 +105,7 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
             buttonState = .disabled
             spinner = self.spinner
         }
-        
+
         let content = HStack(spacing: 8) {
             Spacer()
             Text(buttonText)
