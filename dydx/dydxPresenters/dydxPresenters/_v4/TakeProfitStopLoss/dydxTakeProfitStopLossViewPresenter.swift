@@ -148,6 +148,10 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
         viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = nil
         viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = nil
+
+        viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.hasInputError = false
+        viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.hasInputError = false
+
         viewModel?.customLimitPriceViewModel?.alert = nil
 
         if let error = errors.first {
@@ -155,9 +159,11 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                 let alert = InlineAlertViewModel(.init(title: error.resources.title?.localizedString, body: error.resources.text?.localizedString, level: .error))
                 switch field {
                 case TriggerOrdersInputField.stoplossprice.rawValue, TriggerOrdersInputField.stoplossusdcdiff.rawValue, TriggerOrdersInputField.stoplosspercentdiff.rawValue:
+                    viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.hasInputError = true
                     viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossAlert = alert
                 case TriggerOrdersInputField.takeprofitprice.rawValue, TriggerOrdersInputField.takeprofitusdcdiff.rawValue, TriggerOrdersInputField.takeprofitpercentdiff.rawValue:
                     viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitAlert = alert
+                    viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.hasInputError = true
                 case TriggerOrdersInputField.takeprofitlimitprice.rawValue, TriggerOrdersInputField.stoplosslimitprice.rawValue:
                     viewModel?.customLimitPriceViewModel?.alert = alert
                 default:
@@ -210,7 +216,6 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
     private func update(subaccountPositions: [SubaccountPosition], triggerOrders: [SubaccountOrder], configsMap: [String: MarketConfigsAndAsset]) {
         guard let marketConfig = configsMap[marketId ?? ""]?.configs else { return }
-        // TODO: move this logic to abacus
         let position = subaccountPositions.first { subaccountPosition in
             subaccountPosition.id == marketId
         }
