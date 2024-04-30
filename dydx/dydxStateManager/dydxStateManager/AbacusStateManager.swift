@@ -177,7 +177,7 @@ public final class AbacusStateManager: NSObject {
                 uiImplementations: UIImplementations.shared!,
                 stateNotification: self,
                 dataNotification: nil,
-                presentationProtocol: nil
+                presentationProtocol: AbacusPresentationImp()
             )
         } else {
             return AsyncAbacusStateManager(
