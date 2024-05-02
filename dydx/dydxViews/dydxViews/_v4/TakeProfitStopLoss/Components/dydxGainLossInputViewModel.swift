@@ -34,8 +34,8 @@ public class dydxGainLossInputViewModel: PlatformViewModeling {
     @Published fileprivate var onEdited: ((String?, Unit) -> Void)?
     @Published fileprivate var isPresentingUnitOptions: Bool = false
 
-    @Published fileprivate var dollars: String = ""
-    @Published fileprivate var percentage: String = ""
+    @Published public var dollars: String = ""
+    @Published public var percentage: String = ""
 
     fileprivate var displayText: String {
         switch curUnit {
@@ -43,16 +43,6 @@ public class dydxGainLossInputViewModel: PlatformViewModeling {
             return dollars
         case .percentage:
             return percentage
-        }
-    }
-
-    /// Attempts to set the value for the unit. Will not set if actively editing/has focus.
-    public func programmaticallySet(value: String, forUnit unit: Unit) {
-        switch unit {
-        case .dollars:
-            dollars = value
-        case .percentage:
-            percentage = value
         }
     }
 
