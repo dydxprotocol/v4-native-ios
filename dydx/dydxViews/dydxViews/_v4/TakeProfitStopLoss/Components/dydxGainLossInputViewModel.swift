@@ -30,25 +30,49 @@ public class dydxGainLossInputViewModel: PlatformViewModeling {
 
     @Published fileprivate var isFocused: Bool = false
     @Published fileprivate var triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType
-    @Published fileprivate var curUnit: Unit = .percentage
-    @Published fileprivate var onEdited: ((String?, Unit) -> Void)?
-    @Published fileprivate var isPresentingUnitOptions: Bool = false
-
-    @Published public var dollars: String = ""
-    @Published public var percentage: String = ""
-
-    fileprivate var displayText: String {
-        switch curUnit {
-        case .dollars:
-            return dollars
-        case .percentage:
-            return percentage
+    @Published fileprivate var curUnit: Unit = .percentage {
+        didSet {
+            updateDisplayText()
         }
     }
 
+    @Published fileprivate var onEdited: ((String?, Unit) -> Void)?
+    @Published fileprivate var isPresentingUnitOptions: Bool = false
+
+    /// text that is edited by user (or in some cases, programmatically)
+    @Published private var dollars: String = ""
+    @Published private var percentage: String = ""
+
+    @Published fileprivate var displayText: String = ""
+
+    /// sets the value text for the specified unit, but will not override active edit if user has this input focused
+    public func set(value: String, forUnit unit: Unit) {
+        switch unit {
+        case .dollars:
+            dollars = value
+        case .percentage:
+            percentage = value
+        }
+
+        if !isFocused {
+            updateDisplayText()
+        }
+    }
+
+    private func updateDisplayText() {
+        switch curUnit {
+        case .dollars:
+            displayText = dollars
+        case .percentage:
+            displayText = percentage
+        }
+    }
+
+    /// force clear the texts, even if user is actively editing
     public func clear() {
-        dollars = ""
-        percentage = ""
+        set(value: "", forUnit: .dollars)
+        set(value: "", forUnit: .percentage)
+        displayText = ""
     }
 
     public init(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType, onEdited: ((String?, Unit) -> Void)? = nil) {
@@ -65,17 +89,10 @@ public class dydxGainLossInputViewModel: PlatformViewModeling {
 struct dydxGainLossInputView: View {
 
     @FocusState private var isFocused: Bool
-    @State private var text: String
     @ObservedObject private var viewModel: dydxGainLossInputViewModel
 
     fileprivate init(viewModel: dydxGainLossInputViewModel) {
         self.viewModel = viewModel
-        switch viewModel.curUnit {
-            case .dollars:
-                text = viewModel.dollars
-            case .percentage:
-                text = viewModel.percentage
-        }
     }
 
     var header: some View {
@@ -91,37 +108,29 @@ struct dydxGainLossInputView: View {
     }
 
     var textInput: some View {
-        let textField = TextField("", text: $text, prompt: placeholder)
+        let textField = TextField("", text: $viewModel.displayText, prompt: placeholder)
             .themeFont(fontType: .number, fontSize: .large)
             .themeColor(foreground: .textPrimary)
             .keyboardType(.decimalPad)
             .focused($isFocused)
         if #available(iOS 17.0, *) {
             return textField
-                .onChange(of: text) { _, newValue in
-                    // only propagate updates if they are from user editing
-                    guard isFocused else { return }
-                    viewModel.onEdited?(newValue, viewModel.curUnit)
-                }
-                .onChange(of: viewModel.displayText) { _, newValue in
-                    // do not overwrite user entry while user is editing
-                    guard !isFocused else { return }
-                    text = newValue
-                }
-                .onChange(of: isFocused) { _, newValue in
-                    viewModel.isFocused = newValue
-                    viewModel.onEdited?(text, viewModel.curUnit)
-                }
+                .onChange(of: viewModel.displayText) { displayTextOnChange(newValue: $1) }
+                .onChange(of: isFocused) { isFocusedOnChange(newValue: $1) }
         } else {
             return textField
-                .onChange(of: text) { newValue in
-                    viewModel.onEdited?(newValue, viewModel.curUnit)
-                }
-                .onChange(of: isFocused) { newValue in
-                    viewModel.isFocused = newValue
-                    viewModel.onEdited?(text, viewModel.curUnit)
-                }
+                .onChange(of: viewModel.displayText) { displayTextOnChange(newValue: $0) }
+                .onChange(of: isFocused) { isFocusedOnChange(newValue: $0) }
         }
+    }
+
+    private func displayTextOnChange(newValue: String) {
+        viewModel.onEdited?(newValue, viewModel.curUnit)
+    }
+
+    private func isFocusedOnChange(newValue: Bool) {
+        viewModel.isFocused = newValue
+        viewModel.onEdited?(viewModel.displayText, viewModel.curUnit)
     }
 
     var displaySelector: some View {

@@ -44,7 +44,7 @@ private protocol dydxTakeProfitStopLossViewPresenterProtocol: HostedViewPresente
 private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeProfitStopLossViewModel>, dydxTakeProfitStopLossViewPresenterProtocol {
     fileprivate var marketId: String?
     @SynchronizedLock private var pendingOrders: Int?
-    
+
     deinit {
         clearTriggersInput()
     }
@@ -180,13 +180,13 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
         let formattedTakeProfitUsdcDiff = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue, digits: 2) ?? ""
         let formattedTakeProfitUsdcPercentage = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.percentDiff?.doubleValue, digits: 2) ?? ""
-        viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.dollars = formattedTakeProfitUsdcDiff
-        viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.percentage = formattedTakeProfitUsdcPercentage
+        viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.set(value: formattedTakeProfitUsdcDiff, forUnit: .dollars)
+        viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.set(value: formattedTakeProfitUsdcPercentage, forUnit: .percentage)
 
         let formattedStopLossUsdcDiff = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue, digits: 2) ?? ""
         let formattedStopLossUsdcPercentage = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.percentDiff?.doubleValue, digits: 2) ?? ""
-        viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.dollars = formattedStopLossUsdcDiff
-        viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.percentage = formattedStopLossUsdcPercentage
+        viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.set(value: formattedStopLossUsdcDiff, forUnit: .dollars)
+        viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.set(value: formattedStopLossUsdcPercentage, forUnit: .percentage)
 
         // logic primarily to pre-populate custom amount. need to account 3 situations: 1 take profit order or 1 stop loss order or both
         if let customSize = triggerOrdersInput?.size?.doubleValue.magnitude, customSize != position?.size?.current?.doubleValue.magnitude {

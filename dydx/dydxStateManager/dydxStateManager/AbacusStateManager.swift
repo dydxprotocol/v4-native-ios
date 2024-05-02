@@ -428,7 +428,7 @@ extension AbacusStateManager {
         case success
         case failed(Abacus.ParsingError?)
     }
-    
+
     /// places the currently drafted trigger order(s)
     /// - Returns: the number of resulting cancel orders + place order requests
     public func placeTriggerOrders(callback: @escaping ((SubmissionStatus) -> Void)) -> Int? {
