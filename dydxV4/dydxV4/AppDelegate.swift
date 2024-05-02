@@ -6,6 +6,7 @@
 //  Copyright © 2018 dYdX. All rights reserved.
 //
 
+import BackgroundTasks
 import Cartera
 import CoinbaseWalletSDK
 import Combine
@@ -39,6 +40,7 @@ public class dydxAppInjection: ParticlesPlatformAppInjection {
 class AppDelegate: CommonAppDelegate {
     private var subscriptions = Set<AnyCancellable>()
     private let workers = dydxGlobalWorkers()
+    private let backgroundUpdatingTaskIdentifier = "exchange.dydx.updating"
 
     override public init() {
         super.init()
@@ -167,6 +169,53 @@ class AppDelegate: CommonAppDelegate {
             // Coinbase SDK throwing error -> URL is still considered handled.
             Console.shared.log("Coinbase SDK throwing error: \(error)")
             return true
+        }
+    }
+
+    override open func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let result = super.application(application, didFinishLaunchingWithOptions: launchOptions)
+        if result {
+            registerBackgroundTasks()
+        }
+
+        return result
+    }
+
+    private func registerBackgroundTasks() {
+        // Use the identifier which represents your needs
+        BackgroundTasks.BGTaskScheduler.shared.register(forTaskWithIdentifier: backgroundUpdatingTaskIdentifier, using: nil) { [weak self] task in
+            print("BackgroundTasks is executed NOW!")
+            print("Background time remaining: \(UIApplication.shared.backgroundTimeRemaining)s")
+            task.expirationHandler = {
+                task.setTaskCompleted(success: false)
+            }
+            self?.updateData(task: task)
+        }
+    }
+
+    private func updateData(task: BGTask) {
+        AbacusStateManager.shared.update {
+            print("BackgroundTasks is sending a local notification")
+            LocalNotificationService.shared?.send(message: LocalNotificationMessage(title: "Test me"))
+            task.setTaskCompleted(success: true)
+        }
+    }
+
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        print("BackgroundTasks is started")
+        submitBackgroundTasks()
+    }
+
+    func submitBackgroundTasks() {
+        let timeDelay = 10.0
+
+        do {
+            let request = BGAppRefreshTaskRequest(identifier: backgroundUpdatingTaskIdentifier)
+            request.earliestBeginDate = Date(timeIntervalSinceNow: timeDelay)
+            try BGTaskScheduler.shared.submit(request)
+            print("Submitted task request")
+        } catch {
+            print("Failed to submit BGTask")
         }
     }
 }

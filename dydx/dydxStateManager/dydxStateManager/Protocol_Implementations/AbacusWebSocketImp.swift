@@ -83,6 +83,7 @@ final public class AbacusWebSocketImp: NSObject, Abacus.WebSocketProtocol {
                     }
 
                 case .string(let text):
+                    LocalNotificationService.shared?.send(message: LocalNotificationMessage(title: "Test me"))
                     self?.dispatch(text: text)
 
                 @unknown default:

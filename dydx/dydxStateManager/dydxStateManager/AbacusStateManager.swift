@@ -44,6 +44,20 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.appSettings?.ios
     }
 
+    private var backgroundUpdateTimer: Timer? {
+        didSet {
+            if backgroundUpdateTimer !== oldValue {
+                if let oldValue = oldValue {
+                    oldValue.invalidate()
+                    asyncStateManager.readyToConnect = false
+                }
+                if let backgroundUpdateTimer = backgroundUpdateTimer {
+                    asyncStateManager.readyToConnect = true
+                }
+            }
+        }
+    }
+
     public lazy var state: AbacusState = {
         let perpetualStatePublisher =
             $_perpetualState
@@ -476,6 +490,13 @@ extension AbacusStateManager {
                 callback(.failed(error))
             }
         }
+    }
+
+    public func update(callback: @escaping (() -> Void)) {
+        backgroundUpdateTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: {[weak self] _ in
+            self?.backgroundUpdateTimer = nil
+            callback()
+        })
     }
 }
 

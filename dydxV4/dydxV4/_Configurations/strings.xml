@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">dYdX_t</string>
+    <string name="app_scheme">dydxv4</string>
+    <string name="app_scheme_host">open</string>
+    <string name="app_web_host">v4.testnet.dydx.exchange</string>
+    <string name="app_deployment">DEV</string>
+    <string name="amplitude_api_key">9d0a1e48e6119798219271a5110c5abe</string>
+</resources>

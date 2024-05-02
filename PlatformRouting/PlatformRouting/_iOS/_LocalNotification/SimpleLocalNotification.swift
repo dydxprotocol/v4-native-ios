@@ -24,6 +24,8 @@ public class SimpleLocalNotification: NSObject, LocalNotificationProtocol, Combi
     private var backgroundId: String?
 
     private var outstandingIds: [String]?
+    
+    private let handler = SimpleLocalNotificationHandler()
 
     public var background: LocalNotificationMessage? {
         didSet {
@@ -50,6 +52,13 @@ public class SimpleLocalNotification: NSObject, LocalNotificationProtocol, Combi
             }
         }
     }
+    
+    public override init() {
+        super.init()
+        DispatchQueue.main.async {[weak self] in
+            self?.appState = AppState.shared
+        }
+    }
 
     public func sending(message: LocalNotificationMessage?) -> String? {
         if let message = message {
@@ -73,9 +82,14 @@ public class SimpleLocalNotification: NSObject, LocalNotificationProtocol, Combi
             let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
 
             let center = UNUserNotificationCenter.current()
-            center.add(request) { error in
-                if error != nil {
-                    print("error \(String(describing: error))")
+            center.requestAuthorization(options: [UNAuthorizationOptions.alert]) { success, error in
+                if success {
+                    UNUserNotificationCenter.current().delegate = self.handler
+                    center.add(request) { error in
+                        if error != nil {
+                            print("error \(String(describing: error))")
+                        }
+                    }
                 }
             }
             return uuidString
@@ -84,18 +98,11 @@ public class SimpleLocalNotification: NSObject, LocalNotificationProtocol, Combi
     }
 
     public func send(message: LocalNotificationMessage) {
-        if backgrounded, let identifier = sending(message: message) {
+        if let identifier = sending(message: message) {
             if outstandingIds == nil {
                 outstandingIds = [String]()
             }
             outstandingIds?.append(identifier)
-        }
-    }
-
-    override public init() {
-        super.init()
-        DispatchQueue.main.async {[weak self] in
-            self?.appState = AppState.shared
         }
     }
 
@@ -135,5 +142,12 @@ extension SimpleLocalNotification: NotificationBridgeProtocol {
             return RoutingRequest(url: routing).url
         }
         return nil
+    }
+}
+
+public class SimpleLocalNotificationHandler: NSObject, UNUserNotificationCenterDelegate {
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        ErrorInfo.shared?.info(title: notification.request.content.title, message: notification.request.content.body, type: EInfoType.info, error: nil)
+        completionHandler([])
     }
 }
