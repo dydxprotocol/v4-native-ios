@@ -175,9 +175,17 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         // update displayed values
         let digits = marketConfig.displayTickSizeDecimals?.intValue ?? 2
         viewModel?.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue, digits: digits)
-        viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue, digits: 2)
         viewModel?.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue, digits: digits)
-        viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.value = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue, digits: 2)
+
+        let formattedTakeProfitUsdcDiff = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.usdcDiff?.doubleValue, digits: 2) ?? ""
+        let formattedTakeProfitUsdcPercentage = dydxFormatter.shared.raw(number: triggerOrdersInput?.takeProfitOrder?.price?.percentDiff?.doubleValue, digits: 2) ?? ""
+        viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.programmaticallySet(value: formattedTakeProfitUsdcDiff, forUnit: .dollars)
+        viewModel?.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.programmaticallySet(value: formattedTakeProfitUsdcPercentage, forUnit: .percentage)
+
+        let formattedStopLossUsdcDiff = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.usdcDiff?.doubleValue, digits: 2) ?? ""
+        let formattedStopLossUsdcPercentage = dydxFormatter.shared.raw(number: triggerOrdersInput?.stopLossOrder?.price?.percentDiff?.doubleValue, digits: 2) ?? ""
+        viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.programmaticallySet(value: formattedStopLossUsdcDiff, forUnit: .dollars)
+        viewModel?.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.programmaticallySet(value: formattedStopLossUsdcPercentage, forUnit: .percentage)
 
         // logic primarily to pre-populate custom amount. need to account 3 situations: 1 take profit order or 1 stop loss order or both
         if let customSize = triggerOrdersInput?.size?.doubleValue.magnitude, customSize != position?.size?.current?.doubleValue.magnitude {
@@ -311,11 +319,26 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel.takeProfitStopLossInputAreaViewModel = dydxTakeProfitStopLossInputAreaModel()
         viewModel.takeProfitStopLossInputAreaViewModel?.multipleOrdersExistViewModel = .init()
         viewModel.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel = .init(title: DataLocalizer.shared?.localize(path: "APP.TRIGGERS_MODAL.TP_PRICE", params: nil))
-        viewModel.takeProfitStopLossInputAreaViewModel?.gainInputViewModel = .init(triggerType: .takeProfit)
         viewModel.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel = .init(title: DataLocalizer.shared?.localize(path: "APP.TRIGGERS_MODAL.SL_PRICE", params: nil))
-        viewModel.takeProfitStopLossInputAreaViewModel?.lossInputViewModel = .init(triggerType: .stopLoss)
 
-        #if DEBUG
+        viewModel.takeProfitStopLossInputAreaViewModel?.gainInputViewModel = .init(triggerType: .takeProfit) { (value, unit) in
+            switch unit {
+            case .dollars:
+                AbacusStateManager.shared.triggerOrders(input: value, type: .takeprofitusdcdiff)
+            case .percentage:
+                AbacusStateManager.shared.triggerOrders(input: value, type: .takeprofitpercentdiff)
+            }
+        }
+        viewModel.takeProfitStopLossInputAreaViewModel?.lossInputViewModel = .init(triggerType: .stopLoss) { (value, unit) in
+            switch unit {
+            case .dollars:
+                AbacusStateManager.shared.triggerOrders(input: value, type: .stoplossusdcdiff)
+            case .percentage:
+                AbacusStateManager.shared.triggerOrders(input: value, type: .stoplosspercentdiff)
+            }
+        }
+
+#if DEBUG
         viewModel.shouldDisplayCustomLimitPriceViewModel = AbacusStateManager.shared.environment?.featureFlags.isSlTpLimitOrdersEnabled == true
         #endif
 
@@ -331,14 +354,8 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel?.onEdited = {
             AbacusStateManager.shared.triggerOrders(input: $0, type: .takeprofitprice)
         }
-        viewModel.takeProfitStopLossInputAreaViewModel?.gainInputViewModel?.onEdited = {
-            AbacusStateManager.shared.triggerOrders(input: $0, type: .takeprofitusdcdiff)
-        }
         viewModel.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.onEdited = {
             AbacusStateManager.shared.triggerOrders(input: $0, type: .stoplossprice)
-        }
-        viewModel.takeProfitStopLossInputAreaViewModel?.lossInputViewModel?.onEdited = {
-            AbacusStateManager.shared.triggerOrders(input: $0, type: .stoplossusdcdiff)
         }
         viewModel.customAmountViewModel?.onEdited = {
             AbacusStateManager.shared.triggerOrders(input: $0, type: .size)

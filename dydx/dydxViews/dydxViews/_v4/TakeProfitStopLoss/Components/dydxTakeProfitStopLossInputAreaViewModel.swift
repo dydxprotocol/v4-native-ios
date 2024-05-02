@@ -108,10 +108,10 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
                     switch triggerType {
                     case .takeProfit:
                         self?.takeProfitPriceInputViewModel?.onEdited?(nil)
-                        self?.gainInputViewModel?.onEdited?(nil)
+                        self?.gainInputViewModel?.clear()
                     case .stopLoss:
                         self?.stopLossPriceInputViewModel?.onEdited?(nil)
-                        self?.lossInputViewModel?.onEdited?(nil)
+                        self?.lossInputViewModel?.clear()
                     }
                 }
                 .wrappedInAnyView()
@@ -165,7 +165,7 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
 }
 
 extension dydxTakeProfitStopLossInputAreaModel {
-    public enum TriggerType {
+    public enum TriggerType: CaseIterable {
         case takeProfit
         case stopLoss
 
