@@ -100,18 +100,19 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
 
     private func createClearButton(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType) -> AnyView? {
         guard let numOrders = triggerType == .takeProfit ? numOpenTakeProfitOrders : numOpenStopLossOrders else { return nil }
-        if numOrders == 1 {
+        if numOrders <= 1 {
             return Text(localizerPathKey: "APP.GENERAL.CLEAR")
                 .themeFont(fontType: .base, fontSize: .medium)
                 .themeColor(foreground: .colorRed)
                 .onTapGesture { [weak self] in
+                    PlatformView.hideKeyboard()
                     switch triggerType {
                     case .takeProfit:
                         self?.takeProfitPriceInputViewModel?.onEdited?(nil)
-                        self?.gainInputViewModel?.onEdited?(nil)
+                        self?.gainInputViewModel?.clear()
                     case .stopLoss:
                         self?.stopLossPriceInputViewModel?.onEdited?(nil)
-                        self?.lossInputViewModel?.onEdited?(nil)
+                        self?.lossInputViewModel?.clear()
                     }
                 }
                 .wrappedInAnyView()
@@ -165,7 +166,7 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
 }
 
 extension dydxTakeProfitStopLossInputAreaModel {
-    public enum TriggerType {
+    public enum TriggerType: CaseIterable {
         case takeProfit
         case stopLoss
 
