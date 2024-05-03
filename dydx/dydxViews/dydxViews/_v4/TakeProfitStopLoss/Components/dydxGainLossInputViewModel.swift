@@ -125,6 +125,7 @@ struct dydxGainLossInputView: View {
     }
 
     private func displayTextOnChange(newValue: String) {
+        guard isFocused else { return }
         viewModel.onEdited?(newValue, viewModel.curUnit)
     }
 
