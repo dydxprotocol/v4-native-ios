@@ -100,9 +100,19 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
+    /// protocol pre v5.0
     public var restriction: AnyPublisher<Restriction, Never> {
         statePublisher
             .compactMap { $0?.restriction?.restriction ?? .noRestriction }
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
+    // protocol v5.0 and up
+    public var complianceStatus: AnyPublisher<ComplianceStatus, Never> {
+        statePublisher
+            .compactMap { $0?.compliance?.status }
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
