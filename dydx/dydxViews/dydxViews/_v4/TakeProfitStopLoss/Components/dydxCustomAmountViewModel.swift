@@ -13,7 +13,7 @@ import Utilities
 
 public class dydxCustomAmountViewModel: PlatformTextInputViewModel {
 
-    @Published private var isOn: Bool = false
+    @Published private (set) public var isOn: Bool = false
     @Published public var toggleAction: ((Bool) -> Void)?
 
     @Published public var assetId: String? {
