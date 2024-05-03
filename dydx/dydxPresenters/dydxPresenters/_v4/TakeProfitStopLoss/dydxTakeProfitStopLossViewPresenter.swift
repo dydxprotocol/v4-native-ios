@@ -79,28 +79,6 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             )
             .compactMap { $0 }
             .sink { [weak self] subaccountPositions, triggerOrdersInput, errors, configsMap in
-                #if DEBUG
-                if let triggerOrdersInput {
-                    Console.shared.log("\nmmm marketId: \(triggerOrdersInput.marketId)")
-                    Console.shared.log("mmm size: \(triggerOrdersInput.size)")
-                    Console.shared.log("mmm stopLossOrder?.orderId: \(triggerOrdersInput.stopLossOrder?.orderId)")
-                    Console.shared.log("mmm stopLossOrder?.size: \(triggerOrdersInput.stopLossOrder?.size?.doubleValue)")
-                    Console.shared.log("mmm stopLossOrder?.side: \(triggerOrdersInput.stopLossOrder?.side?.rawValue)")
-                    Console.shared.log("mmm stopLossOrder?.type: \(triggerOrdersInput.stopLossOrder?.type?.rawValue)\n")
-                    Console.shared.log("mmm stopLossOrder?.price?.triggerPrice: \(triggerOrdersInput.stopLossOrder?.price?.triggerPrice)")
-                    Console.shared.log("mmm stopLossOrder?.price?.limitPrice: \(triggerOrdersInput.stopLossOrder?.price?.limitPrice)")
-                    Console.shared.log("mmm stopLossOrder?.price?.percentDiff: \(triggerOrdersInput.stopLossOrder?.price?.percentDiff)")
-                    Console.shared.log("mmm stopLossOrder?.price?.usdcDiff: \(triggerOrdersInput.stopLossOrder?.price?.usdcDiff)")
-                    Console.shared.log("mmm takeProfitOrder?.orderId: \(triggerOrdersInput.takeProfitOrder?.orderId)")
-                    Console.shared.log("mmm takeProfitOrder?.size: \(triggerOrdersInput.takeProfitOrder?.size?.doubleValue)")
-                    Console.shared.log("mmm takeProfitOrder?.side: \(triggerOrdersInput.takeProfitOrder?.side?.rawValue)\n")
-                    Console.shared.log("mmm takeProfitOrder?.type: \(triggerOrdersInput.takeProfitOrder?.type?.rawValue)\n")
-                    Console.shared.log("mmm takeProfitOrder?.price?.triggerPrice: \(triggerOrdersInput.takeProfitOrder?.price?.triggerPrice)")
-                    Console.shared.log("mmm takeProfitOrder?.price?.limitPrice: \(triggerOrdersInput.takeProfitOrder?.price?.limitPrice)\n")
-                    Console.shared.log("mmm takeProfitOrder?.price?.percentDiff: \(triggerOrdersInput.takeProfitOrder?.price?.percentDiff)")
-                    Console.shared.log("mmm takeProfitOrder?.price?.usdcDiff: \(triggerOrdersInput.takeProfitOrder?.price?.usdcDiff)\n")
-                }
-                #endif
                 self?.update(subaccountPositions: subaccountPositions, triggerOrdersInput: triggerOrdersInput, errors: errors, configsMap: configsMap)
             }
             .store(in: &subscriptions)
@@ -134,7 +112,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
     }
 
     private func update(market: PerpetualMarket?) {
-        viewModel?.oraclePrice = dydxFormatter.shared.raw(number: market?.oraclePrice?.doubleValue, digits: market?.configs?.displayTickSizeDecimals?.intValue ?? 2)
+        viewModel?.oraclePrice = dydxFormatter.shared.dollar(number: market?.oraclePrice?.doubleValue, digits: market?.configs?.displayTickSizeDecimals?.intValue ?? 2)
         viewModel?.customAmountViewModel?.assetId = market?.assetId
         viewModel?.customAmountViewModel?.stepSize = market?.configs?.stepSize?.stringValue
         viewModel?.customAmountViewModel?.minimumValue = market?.configs?.minOrderSize?.floatValue
@@ -240,7 +218,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             && order.side.opposite == position?.side.current
         }
 
-        viewModel?.entryPrice = dydxFormatter.shared.raw(number: position?.entryPrice?.current?.doubleValue,
+        viewModel?.entryPrice = dydxFormatter.shared.dollar(number: position?.entryPrice?.current?.doubleValue,
                                                          digits: marketConfig.displayTickSizeDecimals?.intValue ?? 2)
 
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenTakeProfitOrders = takeProfitOrders.count
@@ -397,11 +375,14 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                     if let pendingOrders = self?.pendingOrders, pendingOrders <= 0 {
                         Router.shared?.navigate(to: .init(path: "/action/dismiss"), animated: true, completion: nil)
                     }
-                case .failed(let error):
+                case .failed:
                     self?.pendingOrders = nil
-                    // TODO: how to handle errors?
                     self?.viewModel?.submissionReadiness = .fixErrors(cta: DataLocalizer.shared?.localize(path: "APP.GENERAL.UNKNOWN_ERROR", params: nil))
                 }
+            }
+            // dismiss immediately if no changes
+            if (self?.pendingOrders ?? 0) == 0 {
+                Router.shared?.navigate(to: .init(path: "/action/dismiss"), animated: true, completion: nil)
             }
         }
 
