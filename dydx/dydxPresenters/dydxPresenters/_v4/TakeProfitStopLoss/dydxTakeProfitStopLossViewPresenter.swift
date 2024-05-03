@@ -112,7 +112,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
     }
 
     private func update(market: PerpetualMarket?) {
-        viewModel?.oraclePrice = dydxFormatter.shared.raw(number: market?.oraclePrice?.doubleValue, digits: market?.configs?.displayTickSizeDecimals?.intValue ?? 2)
+        viewModel?.oraclePrice = dydxFormatter.shared.dollar(number: market?.oraclePrice?.doubleValue, digits: market?.configs?.displayTickSizeDecimals?.intValue ?? 2)
         viewModel?.customAmountViewModel?.assetId = market?.assetId
         viewModel?.customAmountViewModel?.stepSize = market?.configs?.stepSize?.stringValue
         viewModel?.customAmountViewModel?.minimumValue = market?.configs?.minOrderSize?.floatValue
@@ -218,7 +218,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             && order.side.opposite == position?.side.current
         }
 
-        viewModel?.entryPrice = dydxFormatter.shared.raw(number: position?.entryPrice?.current?.doubleValue,
+        viewModel?.entryPrice = dydxFormatter.shared.dollar(number: position?.entryPrice?.current?.doubleValue,
                                                          digits: marketConfig.displayTickSizeDecimals?.intValue ?? 2)
 
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenTakeProfitOrders = takeProfitOrders.count
