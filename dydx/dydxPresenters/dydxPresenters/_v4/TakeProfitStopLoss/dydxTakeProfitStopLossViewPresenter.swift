@@ -380,6 +380,10 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                     self?.viewModel?.submissionReadiness = .fixErrors(cta: DataLocalizer.shared?.localize(path: "APP.GENERAL.UNKNOWN_ERROR", params: nil))
                 }
             }
+            // dismiss immediately if no changes
+            if (self?.pendingOrders ?? 0) == 0 {
+                Router.shared?.navigate(to: .init(path: "/action/dismiss"), animated: true, completion: nil)
+            }
         }
 
         self.viewModel = viewModel
