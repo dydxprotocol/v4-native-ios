@@ -10,7 +10,6 @@ import SwiftUI
 import Utilities
 import Introspect
 import dydxFormatter
-import Popovers
 import KeyboardObserving
 
 public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
@@ -75,26 +74,41 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
         }
     }
 
+    private var spinner: AnyView {
+        ProgressView()
+            .progressViewStyle(.circular)
+            .tint(ThemeColor.SemanticColor.textSecondary.color)
+            .wrappedInAnyView()
+    }
+
     private func createCta(parentStyle: ThemeStyle, styleKey: String?) -> AnyView? {
         let buttonText: String
         let buttonState: PlatformButtonState
+        let spinner: AnyView?
+
         switch submissionReadiness {
         case .readyToSubmit:
             buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_TRIGGERS", params: nil) ?? ""
             buttonState = .primary
+            spinner = nil
         case .needsInput:
             buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_TRIGGERS", params: nil) ?? ""
             buttonState = .disabled
+            spinner = nil
         case .fixErrors(let cta):
             buttonText = cta ?? ""
             buttonState = .disabled
+            spinner = nil
         case .submitting:
             buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.SUBMITTING_ORDER", params: nil) ?? ""
             buttonState = .disabled
+            spinner = self.spinner
         }
-        let content = HStack(spacing: 0) {
+
+        let content = HStack(spacing: 8) {
             Spacer()
             Text(buttonText)
+            spinner
             Spacer()
         }.wrappedInAnyView()
 

@@ -13,6 +13,8 @@ import Utilities
 
 public class dydxPriceInputViewModel: PlatformTextInputViewModel {
 
+    @Published public var hasInputError: Bool = false
+
     public init(title: String?, onEdited: ((String?) -> Void)? = nil) {
         super.init(
             label: title,
@@ -33,6 +35,7 @@ public class dydxPriceInputViewModel: PlatformTextInputViewModel {
         return PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { _  in
             return view
                 .makeInput()
+                .border(borderWidth: 1, cornerRadius: 12, borderColor: self.hasInputError ? ThemeColor.SemanticColor.colorRed.color : .clear)
                 .wrappedInAnyView()
         }
     }
