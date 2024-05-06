@@ -113,7 +113,7 @@ private extension dydxTransferSearchItemViewModel {
         self.isSelected = selected
         if let iconUrl = option.iconUrl, let url = URL(string: iconUrl) {
             self.icon = PlatformIconViewModel(
-                type: .urlWithPlaceholder(url: url, placeholderContent: {
+                type: .url(url: url, placeholderContent: {
                     Text(option.localizedString?.prefix(1) ?? "")
                         .frame(width: 32, height: 32)
                         .themeColor(foreground: .textTertiary)

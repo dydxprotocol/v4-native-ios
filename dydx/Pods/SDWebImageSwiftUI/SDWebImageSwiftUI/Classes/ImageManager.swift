@@ -12,20 +12,50 @@ import SDWebImage
 
 /// A Image observable object for handle image load process. This drive the Source of Truth for image loading status.
 /// You can use `@ObservedObject` to associate each instance of manager to your View type, which update your view's body from SwiftUI framework when image was loaded.
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
 public final class ImageManager : ObservableObject {
     /// loaded image, note when progressive loading, this will published multiple times with different partial image
-    @Published public var image: PlatformImage?
+    public var image: PlatformImage? {
+        didSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
     /// loaded image data, may be nil if hit from memory cache. This will only published once even on incremental image loading
-    @Published public var imageData: Data?
+    public var imageData: Data? {
+        didSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
     /// loaded image cache type, .none means from network
-    @Published public var cacheType: SDImageCacheType = .none
+    public var cacheType: SDImageCacheType = .none {
+        didSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
     /// loading error, you can grab the error code and reason listed in `SDWebImageErrorDomain`, to provide a user interface about the error reason
-    @Published public var error: Error?
+    public var error: Error? {
+        didSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
     /// true means during incremental loading
-    @Published public var isIncremental: Bool = false
+    public var isIncremental: Bool = false {
+        didSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
     /// A observed object to pass through the image manager loading status to indicator
-    @Published public var indicatorStatus = IndicatorStatus()
+    public var indicatorStatus = IndicatorStatus()
     
     weak var currentOperation: SDWebImageOperation? = nil
 
@@ -51,8 +81,8 @@ public final class ImageManager : ObservableObject {
             return
         }
         currentURL = url
-        indicatorStatus.isLoading = true
-        indicatorStatus.progress = 0
+        self.indicatorStatus.isLoading = true
+        self.indicatorStatus.progress = 0
         currentOperation = manager.loadImage(with: url, options: options, context: context, progress: { [weak self] (receivedSize, expectedSize, _) in
             guard let self = self else {
                 return
@@ -63,9 +93,7 @@ public final class ImageManager : ObservableObject {
             } else {
                 progress = 0
             }
-            DispatchQueue.main.async {
-                self.indicatorStatus.progress = progress
-            }
+            self.indicatorStatus.progress = progress
             self.progressBlock?(receivedSize, expectedSize)
         }) { [weak self] (image, data, error, cacheType, finished, _) in
             guard let self = self else {
@@ -108,7 +136,7 @@ public final class ImageManager : ObservableObject {
 }
 
 // Completion Handler
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ImageManager {
     /// Provide the action when image load fails.
     /// - Parameters:

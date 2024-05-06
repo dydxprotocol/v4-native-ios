@@ -9,8 +9,45 @@
 import SwiftUI
 import SDWebImage
 
+public enum WebImagePhase {
+    /// No image is loaded.
+    case empty
+
+    /// An image succesfully loaded.
+    case success(Image)
+
+    /// An image failed to load with an error.
+    case failure(Error)
+
+    /// The loaded image, if any.
+    ///
+    /// If this value isn't `nil`, the image load operation has finished,
+    /// and you can use the image to update the view. You can use the image
+    /// directly, or you can modify it in some way. For example, you can add
+    /// a ``Image/resizable(capInsets:resizingMode:)`` modifier to make the
+    /// image resizable.
+    public var image: Image? {
+        switch self {
+        case let .success(image):
+            return image
+        case .empty, .failure:
+            return nil
+        }
+    }
+
+    /// The error that occurred when attempting to load an image, if any.
+    public var error: Error? {
+        switch self {
+        case .empty, .success:
+            return nil
+        case let .failure(error):
+            return error
+        }
+    }
+}
+
 /// Data Binding Object, only properties in this object can support changes from user with @State and refresh
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
 final class WebImageModel : ObservableObject {
     /// URL image
     @Published var url: URL?
@@ -19,7 +56,7 @@ final class WebImageModel : ObservableObject {
 }
 
 /// Completion Handler Binding Object, supports dynamic @State changes
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
 final class WebImageHandler: ObservableObject {
     // Completion Handler
     @Published var successBlock: ((PlatformImage, Data?, SDImageCacheType) -> Void)?
@@ -28,7 +65,7 @@ final class WebImageHandler: ObservableObject {
 }
 
 /// Configuration Binding Object, supports dynamic @State changes
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
 final class WebImageConfiguration: ObservableObject {
     var retryOnAppear: Bool = true
     var cancelOnDisappear: Bool = true
@@ -42,11 +79,13 @@ final class WebImageConfiguration: ObservableObject {
 }
 
 /// A Image View type to load image from url. Supports static/animated image format.
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
-public struct WebImage : View {
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+public struct WebImage<Content> : View where Content: View {
+    var transaction: Transaction
+    
     var configurations: [(Image) -> Image] = []
     
-    var placeholder: AnyView?
+    var content: (WebImagePhase) -> Content
     
     /// A Binding to control the animation. You can bind external logic to control the animation status.
     /// True to start animation, false to stop animation.
@@ -63,18 +102,32 @@ public struct WebImage : View {
     
     @ObservedObject var indicatorStatus : IndicatorStatus
     
-    // FIXME: Use SwiftUI StateObject and remove onPlatformAppear once drop iOS 13 support
-    @Backport.StateObject var imagePlayer = ImagePlayer()
+    @StateObject var imagePlayer = ImagePlayer()
     
-    // FIXME: Use SwiftUI StateObject and remove onPlatformAppear once drop iOS 13 support
-    @Backport.StateObject var imageManager : ImageManager
+    @StateObject var imageManager : ImageManager
     
     /// Create a web image with url, placeholder, custom options and context. Optional can support animated image using Binding.
     /// - Parameter url: The image url
     /// - Parameter options: The options to use when downloading the image. See `SDWebImageOptions` for the possible values.
     /// - Parameter context: A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
     /// - Parameter isAnimating: The binding for animation control. The binding value should be `true` when initialized to setup the correct animated image class. If not, you must provide the `.animatedImageClass` explicitly. When the animation started, this binding can been used to start / stop the animation.
-    public init(url: URL?, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool>) {
+    public init(url: URL?, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true)) where Content == Image {
+        self.init(url: url, options: options, context: context, isAnimating: isAnimating) { phase in
+            phase.image ?? Image(platformImage: .empty)
+        }
+    }
+
+    public init<I, P>(url: URL?, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true), @ViewBuilder content: @escaping (Image) -> I, @ViewBuilder placeholder: @escaping () -> P) where Content == _ConditionalContent<I, P>, I: View, P: View {
+        self.init(url: url, options: options, context: context, isAnimating: isAnimating) { phase in
+            if let i = phase.image {
+                content(i)
+            } else {
+                placeholder()
+            }
+        }
+    }
+
+    public init(url: URL?, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true), transaction: Transaction = Transaction(), @ViewBuilder content: @escaping (WebImagePhase) -> Content) {
         self._isAnimating = isAnimating
         var context = context ?? [:]
         // provide animated image class if the initialized `isAnimating` is true, user can still custom the image class if they want
@@ -89,29 +142,18 @@ public struct WebImage : View {
         imageModel.context = context
         _imageModel = ObservedObject(wrappedValue: imageModel)
         let imageManager = ImageManager()
-        _imageManager = Backport.StateObject(wrappedValue: imageManager)
+        _imageManager = StateObject(wrappedValue: imageManager)
         _indicatorStatus = ObservedObject(wrappedValue: imageManager.indicatorStatus)
-    }
-    
-    /// Create a web image with url, placeholder, custom options and context.
-    /// - Parameter url: The image url
-    /// - Parameter options: The options to use when downloading the image. See `SDWebImageOptions` for the possible values.
-    /// - Parameter context: A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
-    public init(url: URL?, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil) {
-        self.init(url: url, options: options, context: context, isAnimating: .constant(true))
+        
+        self.transaction = transaction
+        self.content = { phase in
+            content(phase)
+        }
     }
     
     public var body: some View {
         // Container
         return ZStack {
-            // This empty Image is used to receive container's level appear/disappear to start/stop player, reduce CPU usage
-            Image(platformImage: .empty)
-            .onAppear {
-                self.appearAction()
-            }
-            .onDisappear {
-                self.disappearAction()
-            }
             // Render Logic for actual animated image frame or static image
             if imageManager.image != nil && imageModel.url == imageManager.currentURL {
                 if isAnimating && !imageManager.isIncremental {
@@ -120,26 +162,23 @@ public struct WebImage : View {
                     displayImage()
                 }
             } else {
+                content((imageManager.error != nil) ? .failure(imageManager.error!) : .empty)
+                setupInitialState()
                 // Load Logic
-                setupPlaceholder()
-                .onPlatformAppear(appear: {
-                    self.setupManager()
-                    if (self.imageManager.error == nil) {
-                        // Load remote image when first appear
-                        self.imageManager.load(url: imageModel.url, options: imageModel.options, context: imageModel.context)
-                    }
+                .onAppear {
                     guard self.imageConfiguration.retryOnAppear else { return }
                     // When using prorgessive loading, the new partial image will cause onAppear. Filter this case
                     if self.imageManager.error != nil && !self.imageManager.isIncremental {
                         self.imageManager.load(url: imageModel.url, options: imageModel.options, context: imageModel.context)
                     }
-                }, disappear: {
+                }
+                .onDisappear {
                     guard self.imageConfiguration.cancelOnDisappear else { return }
                     // When using prorgessive loading, the previous partial image will cause onDisappear. Filter this case
                     if self.imageManager.error != nil && !self.imageManager.isIncremental {
                         self.imageManager.cancel()
                     }
-                })
+                }
             }
         }
     }
@@ -147,7 +186,7 @@ public struct WebImage : View {
     /// Configure the platform image into the SwiftUI rendering image
     func configure(image: PlatformImage) -> some View {
         // Actual rendering SwiftUI image
-        let result: Image
+        var result: Image
         // NSImage works well with SwiftUI, include Vector and EXIF images.
         #if os(macOS)
         result = Image(nsImage: image)
@@ -160,9 +199,11 @@ public struct WebImage : View {
             // ensure CGImage is nil
             if image.cgImage == nil {
                 // draw vector into bitmap with the screen scale (behavior like AppKit)
-                #if os(iOS) || os(tvOS)
+                #if os(visionOS)
+                let scale = UITraitCollection.current.displayScale
+                #elseif os(iOS) || os(tvOS) || os(visionOS)
                 let scale = UIScreen.main.scale
-                #else
+                #elseif os(watchOS)
                 let scale = WKInterfaceDevice.current().screenScale
                 #endif
                 UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
@@ -188,9 +229,12 @@ public struct WebImage : View {
         
         // Should not use `EmptyView`, which does not respect to the container's frame modifier
         // Using a empty image instead for better compatible
-        return configurations.reduce(result) { (previous, configuration) in
+        let i = configurations.reduce(result) { (previous, configuration) in
             configuration(previous)
         }
+    
+        // Apply view builder
+        return content(.success(i))
     }
     
     /// Image Manager status
@@ -280,20 +324,19 @@ public struct WebImage : View {
         }
     }
     
+    /// Initial state management (update when imageModel.url changed)
+    func setupInitialState() -> some View {
+        self.setupManager()
+        if (self.imageManager.error == nil) {
+            // Load remote image when first appear
+            self.imageManager.load(url: imageModel.url, options: imageModel.options, context: imageModel.context)
+        }
+        return setupPlaceholder()
+    }
+    
     /// Placeholder View Support
     func setupPlaceholder() -> some View {
-        // Don't use `Group` because it will trigger `.onAppear` and `.onDisappear` when condition view removed, treat placeholder as an entire component
-        let result: AnyView
-        if let placeholder = placeholder {
-            // If use `.delayPlaceholder`, the placeholder is applied after loading failed, hide during loading :)
-            if imageModel.options.contains(.delayPlaceholder) && imageManager.error == nil {
-                result = AnyView(configure(image: .empty))
-            } else {
-                result = placeholder
-            }
-        } else {
-            result = AnyView(configure(image: .empty))
-        }
+        let result = content((imageManager.error != nil) ? .failure(imageManager.error!) : .empty)
         // Custom ID to avoid SwiftUI engine cache the status, and does not call `onAppear` when placeholder not changed (See `ContentView.swift/ContentView2` case)
         // Because we load the image url in placeholder's `onAppear`, it should be called to sync with state changes :)
         return result.id(imageModel.url)
@@ -301,7 +344,7 @@ public struct WebImage : View {
 }
 
 // Layout
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
     func configure(_ block: @escaping (Image) -> Image) -> WebImage {
         var result = self
@@ -339,7 +382,7 @@ extension WebImage {
 }
 
 // Completion Handler
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
     
     /// Provide the action when image load fails.
@@ -371,29 +414,8 @@ extension WebImage {
 }
 
 // WebImage Modifier
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
-    
-    /// Associate a placeholder when loading image with url
-    /// - note: The differences between Placeholder and Indicator, is that placeholder does not supports animation, and return type is different
-    /// - Parameter content: A view that describes the placeholder.
-    public func placeholder<T>(@ViewBuilder content: () -> T) -> WebImage where T : View {
-        var result = self
-        result.placeholder = AnyView(content())
-        return result
-    }
-    
-    /// Associate a placeholder image when loading image with url
-    /// - note: This placeholder image will apply the same size and resizable from WebImage for convenience. If you don't want this, use the ViewBuilder one above instead
-    /// - Parameter image: A Image view that describes the placeholder.
-    public func placeholder(_ image: Image) -> WebImage {
-        return placeholder {
-            configurations.reduce(image) { (previous, configuration) in
-                configuration(previous)
-            }
-        }
-    }
-    
     /// Control the behavior to retry the failed loading when view become appears again
     /// - Parameter flag: Whether or not to retry the failed loading
     public func retryOnAppear(_ flag: Bool) -> WebImage {
@@ -410,7 +432,7 @@ extension WebImage {
 }
 
 // Indicator
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
     
     /// Associate a indicator when loading image with url
@@ -427,7 +449,7 @@ extension WebImage {
 }
 
 // Animated Image
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
     
     /// Total loop count for animated image rendering. Defaults to nil.
@@ -495,7 +517,7 @@ extension WebImage {
 }
 
 #if DEBUG
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
 struct WebImage_Previews : PreviewProvider {
     static var previews: some View {
         Group {
