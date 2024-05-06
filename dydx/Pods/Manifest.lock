@@ -263,7 +263,7 @@ PODS:
   - SDWebImage/Core (5.19.1)
   - SDWebImageSVGCoder (1.7.0):
     - SDWebImage/Core (~> 5.6)
-  - SDWebImageSwiftUI (2.2.6):
+  - SDWebImageSwiftUI (3.0.4):
     - SDWebImage (~> 5.10)
   - SimpleKeychain (0.12.5)
   - SnapKit (5.7.1)
@@ -309,7 +309,7 @@ DEPENDENCIES:
   - ReachabilitySwift
   - SDWebImage
   - SDWebImageSVGCoder
-  - SDWebImageSwiftUI (= 2.2.6)
+  - SDWebImageSwiftUI
   - SimpleKeychain (~> 0.12.5)
   - SnapKit
   - SVGKit
@@ -436,13 +436,13 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 2128f3a8c9107e1ad33574c6e58e8285d460b149
   SDWebImage: 40b0b4053e36c660a764958bff99eed16610acbb
   SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
-  SDWebImageSwiftUI: 3a8448b76833ed0e954a651be6c6f45faceed29d
+  SDWebImageSwiftUI: 824628d8220906aa101f62b39a7492edd138449d
   SimpleKeychain: 8193a9e40967eccac933c1fde82de46c07a5ae26
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: 96db9e18859b897ba93282f59a6a43f75d6c5312
+PODFILE CHECKSUM: e6f17a3740fec78173732202f4a12a9dd7ed9e8e
 
 COCOAPODS: 1.15.2
