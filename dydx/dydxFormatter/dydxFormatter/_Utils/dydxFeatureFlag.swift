@@ -11,7 +11,6 @@ import Utilities
 
 public enum dydxBoolFeatureFlag: String, CaseIterable {
     case push_notification
-    case full_story
     case force_mainnet
     case enable_trading_rewards
     case enable_reduce_only

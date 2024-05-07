@@ -90,8 +90,8 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         item.indexPrice = dydxFormatter.shared.dollar(number: market.oraclePrice, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
         item.entryPrice = dydxFormatter.shared.dollar(number: position.entryPrice?.current, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
-        item.unrealizedPnl = SignedAmountViewModel(amount: position.unrealizedPnl?.current?.doubleValue ?? 0, displayType: .dollar, coloringOption: .allText)
-        item.unrealizedPnlPercent = dydxFormatter.shared.percent(number: position.unrealizedPnlPercent?.current?.doubleValue ?? 0, digits: 2)
+        item.unrealizedPnl = SignedAmountViewModel(amount: position.unrealizedPnl?.current?.doubleValue ?? 0, displayType: .dollar, coloringOption: .signOnly)
+        item.unrealizedPnlPercent = SignedAmountViewModel(amount: position.unrealizedPnlPercent?.current?.doubleValue, displayType: .percent, coloringOption: .allText)
 
         if let url = asset.resources?.imageUrl {
             item.logoUrl = URL(string: url)

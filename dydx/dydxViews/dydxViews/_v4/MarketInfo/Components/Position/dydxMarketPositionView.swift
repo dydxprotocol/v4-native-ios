@@ -14,7 +14,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     @Published public var takeProfitStopLossAction: (() -> Void)?
     @Published public var closeAction: (() -> Void)?
     @Published public var unrealizedPNLAmount: SignedAmountViewModel?
-    @Published public var unrealizedPNLPercent: String?
+    @Published public var unrealizedPNLPercent: SignedAmountViewModel?
     @Published public var realizedPNLAmount: SignedAmountViewModel?
     @Published public var leverage: String?
     @Published public var leverageIcon: LeverageRiskModel?
@@ -39,7 +39,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
         let vm = dydxMarketPositionViewModel()
         vm.closeAction = {}
         vm.unrealizedPNLAmount = .previewValue
-        vm.unrealizedPNLPercent = "0.00%"
+        vm.unrealizedPNLPercent = .previewValue
         vm.realizedPNLAmount = .previewValue
         vm.leverage = "$12.00"
         vm.leverageIcon = .previewValue
@@ -106,9 +106,8 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                     unrealizedPNLAmount?
                         .createView(parentStyle: parentStyle.themeFont(fontSize: .large))
 
-                    Text(unrealizedPNLPercent ?? "")
-                        .themeFont(fontType: .number, fontSize: .smaller)
-                        .themeColor(foreground: .textTertiary)
+                    unrealizedPNLPercent?
+                        .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller).themeColor(foreground: .textTertiary))
                 }.wrappedViewModel
 
                 let realizedValue = VStack(alignment: .leading) {
