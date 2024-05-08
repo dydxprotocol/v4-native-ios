@@ -313,7 +313,7 @@
                 },
                 "/trade/target_leverage":{
                     "destination":"dydxPresenters.dydxTargetLeverageViewBuilder",
-                    "presentation":"prompt"
+                    "presentation":"half"
                 },
                 "/transfer":{
                     "destination":"dydxPresenters.dydxTransferViewBuilder",

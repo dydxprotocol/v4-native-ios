@@ -16,8 +16,7 @@ public class dydxTargetLeverageViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxTargetLeverageViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxTargetLeverageViewController(presenter: presenter, view: view, configuration: .default) as? T
-        // return HostingViewController(presenter: presenter, view: view) as? T
+        return dydxTargetLeverageViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
 }
 
@@ -39,5 +38,6 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
         super.init()
 
         viewModel = dydxTargetLeverageViewModel()
+        viewModel?.description = DataLocalizer.localize(path: "APP.TRADE.ADJUST_TARGET_LEVERAGE_DESCRIPTION")
     }
 }

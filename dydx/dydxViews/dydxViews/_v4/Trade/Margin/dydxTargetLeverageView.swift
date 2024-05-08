@@ -11,13 +11,13 @@ import PlatformUI
 import Utilities
 
 public class dydxTargetLeverageViewModel: PlatformViewModel {
-    @Published public var text: String?
+    @Published public var description: String?
 
     public init() { }
 
     public static var previewValue: dydxTargetLeverageViewModel {
         let vm = dydxTargetLeverageViewModel()
-        vm.text = "Test String"
+        vm.description = "Test String"
         return vm
     }
 
@@ -25,9 +25,26 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            return AnyView(
-                Text(self.text ?? "")
-            )
+            let view = VStack(alignment: .leading, spacing: 20) {
+                Text(DataLocalizer.localize(path: "APP.TRADE.ADJUST_TARGET_LEVERAGE"))
+                        .themeColor(foreground: .textPrimary)
+                        .leftAligned()
+                        .themeFont(fontType: .plus, fontSize: .largest)
+                        .padding(.top, 40)
+
+                Text(self.description ?? "")
+                    .themeColor(foreground: .textTertiary)
+                    .leftAligned()
+                    .themeFont(fontSize: .medium)
+
+                Spacer()
+            }
+                .padding(.horizontal)
+                .themeColor(background: .layer3)
+                .makeSheet(sheetStyle: .fitSize)
+
+            // make it visible under the tabbar
+            return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
     }
 }
