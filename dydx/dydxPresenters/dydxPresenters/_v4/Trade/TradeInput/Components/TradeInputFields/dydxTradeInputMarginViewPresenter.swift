@@ -29,7 +29,7 @@ class dydxTradeInputMarginViewPresenter: HostedViewPresenter<dydxTradeInputMargi
         // TODO: Fetch from Abacus
         viewModel?.marginMode = DataLocalizer.localize(path: "APP.GENERAL.ISOLATED")
         viewModel?.marginLeverage = "2x"
-        
+
         viewModel?.marginModeAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/trade/margin_type"), animated: true, completion: nil)
         }
