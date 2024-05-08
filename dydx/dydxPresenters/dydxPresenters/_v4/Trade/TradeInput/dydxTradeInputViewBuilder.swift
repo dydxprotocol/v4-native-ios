@@ -134,6 +134,7 @@ private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputVie
     private let tipBuySellPresenter = dydxTradeSheetTipBuySellViewPresenter()
     private let tipDraftPresenter = dydxTradeSheetTipDraftViewPresenter()
     private let orderbookGroupPresenter = dydxOrderbookGroupViewPresenter()
+    private let marginViewPresenter = dydxTradeInputMarginViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         orderTypePresenter,
@@ -144,7 +145,8 @@ private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputVie
         validationPresenter,
         tipBuySellPresenter,
         tipDraftPresenter,
-        orderbookGroupPresenter
+        orderbookGroupPresenter,
+        marginViewPresenter
     ]
 
     override init() {
@@ -158,6 +160,7 @@ private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputVie
         validationPresenter.$viewModel.assign(to: &viewModel.$validationViewModel)
         tipBuySellPresenter.$viewModel.assign(to: &viewModel.$tipBuySellViewModel)
         tipDraftPresenter.$viewModel.assign(to: &viewModel.$tipDraftViewModel)
+        marginViewPresenter.$viewModel.assign(to: &viewModel.$marginViewModel)
 
         super.init()
 

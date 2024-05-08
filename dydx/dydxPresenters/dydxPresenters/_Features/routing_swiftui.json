@@ -307,6 +307,14 @@
                     "destination":"dydxPresenters.dydxTakeProfitStopLossViewBuilder",
                     "presentation":"prompt"
                 },
+                "/trade/margin_type":{
+                    "destination":"dydxPresenters.dydxMarginModeViewBuilder",
+                    "presentation":"prompt"
+                },
+                "/trade/target_leverage":{
+                    "destination":"dydxPresenters.dydxTargetLeverageViewBuilder",
+                    "presentation":"prompt"
+                },
                 "/transfer":{
                     "destination":"dydxPresenters.dydxTransferViewBuilder",
                     "presentation":"prompt"
