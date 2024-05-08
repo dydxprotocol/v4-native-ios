@@ -11,7 +11,25 @@ import PlatformUI
 import Utilities
 
 public class dydxTargetLeverageViewModel: PlatformViewModel {
+    public struct LeverageTextAndValue {
+        let text: String
+        let value: Double
+
+        public init(text: String, value: Double) {
+            self.text = text
+            self.value = value
+        }
+    }
+
     @Published public var description: String?
+    @Published public var leverageOptions: [LeverageTextAndValue] = []
+    @Published public var selectedOptionIndex: Int?
+    @Published public var optionSelectedAction: ((LeverageTextAndValue) -> Void)?
+    @Published public var leverageInput: PlatformTextInputViewModel? =
+        PlatformTextInputViewModel(label: DataLocalizer.localize(path: "APP.TRADE.TARGET_LEVERAGE"),
+                                   placeHolder: "0.0",
+                                   inputType: PlatformTextInputViewModel.InputType.decimalDigits)
+    @Published public var ctaButton: dydxTargetLeverageCtaButtonViewModel? = dydxTargetLeverageCtaButtonViewModel()
 
     public init() { }
 
@@ -22,7 +40,7 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack(alignment: .leading, spacing: 20) {
@@ -37,16 +55,57 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
                     .leftAligned()
                     .themeFont(fontSize: .medium)
 
+                self.leverageInput?
+                    .createView(parentStyle: style)
+                    .makeInput()
+
+                self.createOptionsGroup(parentStyle: style)
+
                 Spacer()
+
+                self.ctaButton?.createView(parentStyle: style)
             }
                 .padding(.horizontal)
                 .themeColor(background: .layer3)
                 .makeSheet(sheetStyle: .fitSize)
 
-            // make it visible under the tabbar
-            return AnyView(view.ignoresSafeArea(edges: [.bottom]))
+            return AnyView(view)
         }
     }
+
+    private func createOptionsGroup(parentStyle: ThemeStyle) -> some View {
+        let items = self.leverageOptions.compactMap {
+            Text($0.text)
+                .themeFont(fontType: .plus, fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+                .padding(8)
+                .frame(minWidth: 60)
+                .themeColor(background: .layer5)
+                .border(borderWidth: 1, cornerRadius: 8, borderColor: ThemeColor.SemanticColor.layer5.color)
+                .wrappedViewModel
+        }
+        let selectedItems = self.leverageOptions.compactMap {
+            Text($0.text)
+                .themeFont(fontType: .plus, fontSize: .small)
+                .themeColor(foreground: .textPrimary)
+                .padding(8)
+                .frame(minWidth: 60)
+                .themeColor(background: .layer1)
+                .border(borderWidth: 1, cornerRadius: 8, borderColor: ThemeColor.SemanticColor.layer5.color)
+                .wrappedViewModel
+        }
+
+        return
+            ScrollView(.horizontal, showsIndicators: false) {
+                TabGroupModel(items: items,
+                          selectedItems: selectedItems,
+                          currentSelection: self.selectedOptionIndex,
+                          onSelectionChanged: { index in
+                    self.optionSelectedAction?(self.leverageOptions[index])
+                })
+                .createView(parentStyle: parentStyle)
+            }
+        }
 }
 
 #if DEBUG
