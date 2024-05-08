@@ -184,8 +184,8 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                                                                   size: CGSize(width: 12, height: 12),
                                                                   templateColor: .textSecondary)
                         PlatformButtonViewModel(content: buttonContent,
-                                                type: PlatformButtonType.iconType) {
-                            self.handler?.onMarginEditAction?()
+                                                type: PlatformButtonType.iconType) { [weak self] in
+                            self?.handler?.onMarginEditAction?()
                         }
                             .createView(parentStyle: parentStyle)
                             .frame(width: 32, height: 32)
