@@ -11,13 +11,15 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import Abacus
+import dydxStateManager
+import dydxFormatter
 
 public class dydxTargetLeverageViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxTargetLeverageViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
         return dydxTargetLeverageViewController(presenter: presenter, view: view, configuration: .default) as? T
-        // return HostingViewController(presenter: presenter, view: view) as? T
     }
 }
 
@@ -35,9 +37,39 @@ private protocol dydxTargetLeverageViewPresenterProtocol: HostedViewPresenterPro
 }
 
 private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLeverageViewModel>, dydxTargetLeverageViewPresenterProtocol {
+    private let ctaButtonPresenter = dydxTargetLeverageCtaButtonViewPresenter()
+
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        ctaButtonPresenter
+    ]
+
     override init() {
         super.init()
 
         viewModel = dydxTargetLeverageViewModel()
+        viewModel?.description = DataLocalizer.localize(path: "APP.TRADE.ADJUST_TARGET_LEVERAGE_DESCRIPTION")
+
+        viewModel?.leverageOptions = [
+            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "1x", value: 1.0),
+            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "2x", value: 2.0),
+            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "5x", value: 5.0),
+            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "10.0", value: 10.0),
+            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "Max", value: 20.0)
+        ]
+
+        attachChildren(workers: childPresenters)
+    }
+
+    override func start() {
+        super.start()
+
+        // TODO: Fix... tradeInput?.targetLeverage is nil for now
+
+        AbacusStateManager.shared.state.tradeInput
+            .sink { [weak self] tradeInput in
+                let value = dydxFormatter.shared.localFormatted(number: tradeInput?.targetLeverage ?? 1, digits: 1)
+                self?.viewModel?.leverageInput?.value = value
+            }
+            .store(in: &subscriptions)
     }
 }
