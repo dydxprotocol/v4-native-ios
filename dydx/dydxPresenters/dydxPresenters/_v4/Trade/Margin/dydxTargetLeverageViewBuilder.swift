@@ -68,7 +68,7 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
         AbacusStateManager.shared.state.tradeInput
             .sink { [weak self] tradeInput in
                 let value = dydxFormatter.shared.localFormatted(number: tradeInput?.targetLeverage ?? 1, digits: 1)
-                self?.viewModel?.leverageInput?.value = value            
+                self?.viewModel?.leverageInput?.value = value
             }
             .store(in: &subscriptions)
     }
