@@ -47,7 +47,7 @@ public class dydxTradeStatusViewModel: PlatformViewModel {
                 }
             )
                 .padding([.leading, .trailing])
-                .padding(.bottom, self.safeAreaInsets?.bottom)
+                .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)
                 .makeSheet(sheetStyle: .fitSize)
 

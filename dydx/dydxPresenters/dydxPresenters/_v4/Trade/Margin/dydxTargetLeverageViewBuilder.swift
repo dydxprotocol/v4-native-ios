@@ -14,6 +14,7 @@ import PlatformUI
 import Abacus
 import dydxStateManager
 import dydxFormatter
+import Combine
 
 public class dydxTargetLeverageViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -44,18 +45,23 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
     ]
 
     override init() {
+        let viewModel = dydxTargetLeverageViewModel()
+
+        ctaButtonPresenter.$viewModel.assign(to: &viewModel.$ctaButton)
+
         super.init()
 
-        viewModel = dydxTargetLeverageViewModel()
-        viewModel?.description = DataLocalizer.localize(path: "APP.TRADE.ADJUST_TARGET_LEVERAGE_DESCRIPTION")
+        viewModel.description = DataLocalizer.localize(path: "APP.TRADE.ADJUST_TARGET_LEVERAGE_DESCRIPTION")
 
-        viewModel?.leverageOptions = [
+        viewModel.leverageOptions = [
             dydxTargetLeverageViewModel.LeverageTextAndValue(text: "1x", value: 1.0),
             dydxTargetLeverageViewModel.LeverageTextAndValue(text: "2x", value: 2.0),
             dydxTargetLeverageViewModel.LeverageTextAndValue(text: "5x", value: 5.0),
             dydxTargetLeverageViewModel.LeverageTextAndValue(text: "10.0", value: 10.0),
             dydxTargetLeverageViewModel.LeverageTextAndValue(text: "Max", value: 20.0)
         ]
+
+        self.viewModel = viewModel
 
         attachChildren(workers: childPresenters)
     }
@@ -68,7 +74,7 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
         AbacusStateManager.shared.state.tradeInput
             .sink { [weak self] tradeInput in
                 let value = dydxFormatter.shared.localFormatted(number: tradeInput?.targetLeverage ?? 1, digits: 1)
-                self?.viewModel?.leverageInput?.value = value            
+                self?.viewModel?.leverageInput?.value = value
             }
             .store(in: &subscriptions)
     }
