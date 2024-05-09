@@ -100,18 +100,20 @@ public class PlatformIconViewModel: PlatformViewModel {
                     )
                 } else {
                     let clippedView = Group {
+                   
                         ZStack {
-                            ZStack {
-                                view
-                                    .frame(width: size.width - spacing, height: size.height - spacing)
-                                    .clipped()
-                            }
-                            .frame(width: size.width, height: size.height)
-                            .themeColor(background: background)
-                            .clipShape(Circle())
-                            .overlay(
-                                Circle().stroke(borderColor?.color ?? .clear, lineWidth: 1)
-                            )
+                            Circle()
+                                .fill(background.color)
+                                .frame(width: size.width, height: size.height)
+                                .themeColor(background: background)
+                                .clipShape(Circle())
+                                .overlay(
+                                    Circle().stroke(borderColor?.color ?? .clear, lineWidth: 1)
+                                )
+                            
+                            view
+                                .frame(width: size.width - spacing, height: size.height - spacing)
+                                .clipped()
                         }
                         .themeStyle(style: style)
                     }

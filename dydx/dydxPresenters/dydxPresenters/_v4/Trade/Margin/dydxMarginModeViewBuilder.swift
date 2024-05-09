@@ -16,8 +16,7 @@ public class dydxMarginModeViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxMarginModeViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxMarginModeViewController(presenter: presenter, view: view, configuration: .default) as? T
-        // return HostingViewController(presenter: presenter, view: view) as? T
+        return dydxMarginModeViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
 }
 
@@ -39,5 +38,20 @@ private class dydxMarginModeViewPresenter: HostedViewPresenter<dydxMarginModeVie
         super.init()
 
         viewModel = dydxMarginModeViewModel()
+        viewModel?.market = "BTC-USD"
+        viewModel?.items = [
+            dydxMarginModeItemViewModel(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN"),
+                                        detail: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN_DESCRIPTION"),
+                                        isSelected: true,
+                                        selectedAction: {
+                                            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+                                        }),
+            dydxMarginModeItemViewModel(title: DataLocalizer.localize(path: "APP.GENERAL.ISOLATED_MARGIN"),
+                                        detail: DataLocalizer.localize(path: "APP.GENERAL.ISOLATED_MARGIN_DESCRIPTION"),
+                                        isSelected: false,
+                                        selectedAction: {
+                                            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+                                        })
+        ]
     }
 }

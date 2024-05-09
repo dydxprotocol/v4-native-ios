@@ -309,7 +309,7 @@
                 },
                 "/trade/margin_type":{
                     "destination":"dydxPresenters.dydxMarginModeViewBuilder",
-                    "presentation":"prompt"
+                    "presentation":"half"
                 },
                 "/trade/target_leverage":{
                     "destination":"dydxPresenters.dydxTargetLeverageViewBuilder",
