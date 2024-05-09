@@ -11,25 +11,101 @@ import PlatformUI
 import Utilities
 
 public class dydxTargetLeverageViewModel: PlatformViewModel {
-    @Published public var text: String?
+    public struct LeverageTextAndValue {
+        let text: String
+        let value: Double
+
+        public init(text: String, value: Double) {
+            self.text = text
+            self.value = value
+        }
+    }
+
+    @Published public var description: String?
+    @Published public var leverageOptions: [LeverageTextAndValue] = []
+    @Published public var selectedOptionIndex: Int?
+    @Published public var optionSelectedAction: ((LeverageTextAndValue) -> Void)?
+    @Published public var leverageInput: PlatformTextInputViewModel? =
+        PlatformTextInputViewModel(label: DataLocalizer.localize(path: "APP.TRADE.TARGET_LEVERAGE"),
+                                   placeHolder: "0.0",
+                                   inputType: PlatformTextInputViewModel.InputType.decimalDigits)
+    @Published public var ctaButton: dydxTargetLeverageCtaButtonViewModel? = dydxTargetLeverageCtaButtonViewModel()
 
     public init() { }
 
     public static var previewValue: dydxTargetLeverageViewModel {
         let vm = dydxTargetLeverageViewModel()
-        vm.text = "Test String"
+        vm.description = "Test String"
         return vm
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            return AnyView(
-                Text(self.text ?? "")
-            )
+            let view = VStack(alignment: .leading, spacing: 20) {
+                Text(DataLocalizer.localize(path: "APP.TRADE.ADJUST_TARGET_LEVERAGE"))
+                        .themeColor(foreground: .textPrimary)
+                        .leftAligned()
+                        .themeFont(fontType: .plus, fontSize: .largest)
+                        .padding(.top, 40)
+
+                Text(self.description ?? "")
+                    .themeColor(foreground: .textTertiary)
+                    .leftAligned()
+                    .themeFont(fontSize: .medium)
+
+                self.leverageInput?
+                    .createView(parentStyle: style)
+                    .makeInput()
+
+                self.createOptionsGroup(parentStyle: style)
+
+                Spacer()
+
+                self.ctaButton?.createView(parentStyle: style)
+            }
+                .padding(.horizontal)
+                .themeColor(background: .layer3)
+                .makeSheet(sheetStyle: .fitSize)
+
+            return AnyView(view)
         }
     }
+
+    private func createOptionsGroup(parentStyle: ThemeStyle) -> some View {
+        let items = self.leverageOptions.compactMap {
+            Text($0.text)
+                .themeFont(fontType: .plus, fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+                .padding(8)
+                .frame(minWidth: 60)
+                .themeColor(background: .layer5)
+                .border(borderWidth: 1, cornerRadius: 8, borderColor: ThemeColor.SemanticColor.layer5.color)
+                .wrappedViewModel
+        }
+        let selectedItems = self.leverageOptions.compactMap {
+            Text($0.text)
+                .themeFont(fontType: .plus, fontSize: .small)
+                .themeColor(foreground: .textPrimary)
+                .padding(8)
+                .frame(minWidth: 60)
+                .themeColor(background: .layer1)
+                .border(borderWidth: 1, cornerRadius: 8, borderColor: ThemeColor.SemanticColor.layer5.color)
+                .wrappedViewModel
+        }
+
+        return
+            ScrollView(.horizontal, showsIndicators: false) {
+                TabGroupModel(items: items,
+                          selectedItems: selectedItems,
+                          currentSelection: self.selectedOptionIndex,
+                          onSelectionChanged: { index in
+                    self.optionSelectedAction?(self.leverageOptions[index])
+                })
+                .createView(parentStyle: parentStyle)
+            }
+        }
 }
 
 #if DEBUG
