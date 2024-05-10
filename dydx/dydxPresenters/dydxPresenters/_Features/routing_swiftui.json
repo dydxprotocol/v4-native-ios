@@ -315,6 +315,10 @@
                     "destination":"dydxPresenters.dydxTargetLeverageViewBuilder",
                     "presentation":"prompt"
                 },
+                "/trade/adjust_margin":{
+                    "destination":"dydxPresenters.dydxAdjustMarginInputViewBuilder",
+                    "presentation":"prompt"
+                },
                 "/transfer":{
                     "destination":"dydxPresenters.dydxTransferViewBuilder",
                     "presentation":"prompt"

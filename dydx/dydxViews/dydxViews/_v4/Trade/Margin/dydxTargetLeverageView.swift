@@ -66,10 +66,11 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
                 self.ctaButton?.createView(parentStyle: style)
             }
                 .padding(.horizontal)
+                .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)
-                .makeSheet(sheetStyle: .fitSize)
+                .makeSheet()
 
-            return AnyView(view)
+            return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
     }
 
