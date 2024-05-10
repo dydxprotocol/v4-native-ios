@@ -82,7 +82,7 @@ public class dydxTransferStatusViewModel: PlatformViewModel {
                 }
                     .padding([.leading, .trailing])
                     .padding(.top, 40)
-                    .padding(.bottom, self.safeAreaInsets?.bottom)
+                    .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                     .themeColor(background: .layer3)
                     .makeSheet()
                     .ignoresSafeArea(edges: [.bottom])

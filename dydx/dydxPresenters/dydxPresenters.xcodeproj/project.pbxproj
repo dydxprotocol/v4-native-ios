@@ -75,6 +75,8 @@
 		0279656A29D795E8004DEB20 /* tabs_v4.json in Resources */ = {isa = PBXBuildFile; fileRef = 0279655B29D795E7004DEB20 /* tabs_v4.json */; };
 		0279656C29D795E8004DEB20 /* routing_swiftui.json in Resources */ = {isa = PBXBuildFile; fileRef = 0279656929D795E7004DEB20 /* routing_swiftui.json */; };
 		0279DE482BEBE76900F9ECF8 /* dydxTargetLeverageCtaButtonViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE472BEBE76900F9ECF8 /* dydxTargetLeverageCtaButtonViewPresenter.swift */; };
+		0279DE792BEC472600F9ECF8 /* dydxAdjustMarginInputViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE782BEC472600F9ECF8 /* dydxAdjustMarginInputViewBuilder.swift */; };
+		0279DE952BED63E100F9ECF8 /* dydxAdjustMarginCtaButtonViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE942BED63E100F9ECF8 /* dydxAdjustMarginCtaButtonViewPresenter.swift */; };
 		027CA87229EDFC990069781A /* dydxTransferInputCtaButtonViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027CA87129EDFC990069781A /* dydxTransferInputCtaButtonViewPresenter.swift */; };
 		027CB28729EEFF910069781A /* dydxTransferStatusViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027CB28629EEFF910069781A /* dydxTransferStatusViewBuilder.swift */; };
 		027E1EF829CA27CD0098666F /* dydxSettingsLandingViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027E1EF729CA27CD0098666F /* dydxSettingsLandingViewBuilder.swift */; };
@@ -433,6 +435,8 @@
 		0279655B29D795E7004DEB20 /* tabs_v4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabs_v4.json; sourceTree = "<group>"; };
 		0279656929D795E7004DEB20 /* routing_swiftui.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = routing_swiftui.json; sourceTree = "<group>"; };
 		0279DE472BEBE76900F9ECF8 /* dydxTargetLeverageCtaButtonViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTargetLeverageCtaButtonViewPresenter.swift; sourceTree = "<group>"; };
+		0279DE782BEC472600F9ECF8 /* dydxAdjustMarginInputViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginInputViewBuilder.swift; sourceTree = "<group>"; };
+		0279DE942BED63E100F9ECF8 /* dydxAdjustMarginCtaButtonViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginCtaButtonViewPresenter.swift; sourceTree = "<group>"; };
 		027CA87129EDFC990069781A /* dydxTransferInputCtaButtonViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferInputCtaButtonViewPresenter.swift; sourceTree = "<group>"; };
 		027CB28629EEFF910069781A /* dydxTransferStatusViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferStatusViewBuilder.swift; sourceTree = "<group>"; };
 		027E1EF729CA27CD0098666F /* dydxSettingsLandingViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsLandingViewBuilder.swift; sourceTree = "<group>"; };
@@ -754,6 +758,7 @@
 				0279DE462BEBE75D00F9ECF8 /* Components */,
 				023AB3C32BEAD56A005230B2 /* dydxMarginModeViewBuilder.swift */,
 				023AB3C72BEAD5F3005230B2 /* dydxTargetLeverageViewBuilder.swift */,
+				0279DE782BEC472600F9ECF8 /* dydxAdjustMarginInputViewBuilder.swift */,
 			);
 			path = Margin;
 			sourceTree = "<group>";
@@ -1035,6 +1040,7 @@
 			isa = PBXGroup;
 			children = (
 				0279DE472BEBE76900F9ECF8 /* dydxTargetLeverageCtaButtonViewPresenter.swift */,
+				0279DE942BED63E100F9ECF8 /* dydxAdjustMarginCtaButtonViewPresenter.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1868,6 +1874,7 @@
 				023789ED28BD381C00F212E1 /* dydxPresenters.docc in Sources */,
 				0258B9E72991BC900098E1BE /* dydxNewsAlertsViewBuilder.swift in Sources */,
 				277E908B2B2118AE005CCBCB /* dydxRewardsHistoryViewPresenter.swift in Sources */,
+				0279DE952BED63E100F9ECF8 /* dydxAdjustMarginCtaButtonViewPresenter.swift in Sources */,
 				0230376F28C11BE600412B72 /* dydxMarketsViewBuilder.swift in Sources */,
 				023AB3C42BEAD56A005230B2 /* dydxMarginModeViewBuilder.swift in Sources */,
 				270BA8F32A6F278F009212EA /* dydxDebugThemeViewerBuilder.swift in Sources */,
@@ -1928,6 +1935,7 @@
 				021B68B12AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift in Sources */,
 				024B43A229812DC700E35D54 /* dydxValidationViewPresenter.swift in Sources */,
 				024B44D42982D24A00E35D54 /* dydxTradeStatusViewBuilder.swift in Sources */,
+				0279DE792BEC472600F9ECF8 /* dydxAdjustMarginInputViewBuilder.swift in Sources */,
 				6496DC3E295E122B00174CE7 /* dydxTradeInputViewBuilder.swift in Sources */,
 				64A4DB9529664803008D8E20 /* dydxTradeInputEditPresenter.swift in Sources */,
 				0238FB6D296BD4E0002E1C1A /* dydxPortfolioChartViewPresenter.swift in Sources */,
