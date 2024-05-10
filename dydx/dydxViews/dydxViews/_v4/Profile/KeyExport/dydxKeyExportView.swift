@@ -67,7 +67,7 @@ public class dydxKeyExportViewModel: PlatformViewModel {
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .padding(.horizontal, 24)
                 .padding(.top, 40)
-                .padding(.bottom, self.safeAreaInsets?.bottom)
+                .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)
                 .makeSheet()
 

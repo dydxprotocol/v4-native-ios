@@ -101,7 +101,10 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
             Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["market": market.id]), animated: true, completion: nil)
         }
         item.handler?.onCloseAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/trade/close", params: ["marketId": "\(position.id)"]), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/close", params: ["marketId": market.id]), animated: true, completion: nil)
+        }
+        item.handler?.onMarginEditAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/adjust_margin", params: ["marketId": market.id]), animated: true, completion: nil)
         }
 
         return item
