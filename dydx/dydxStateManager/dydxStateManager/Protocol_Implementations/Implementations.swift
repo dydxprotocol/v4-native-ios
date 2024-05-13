@@ -14,7 +14,8 @@ extension IOImplementations {
                                                  tracking: AbacusTrackingImp(),
                                                  threading: AbacusThreadingImp(),
                                                  timer: AbacusTimerImp(),
-                                                 fileSystem: AbacusFileSystemImp())
+                                                 fileSystem: AbacusFileSystemImp(),
+                                                 logging: nil)
 }
 
 extension UIImplementations {
