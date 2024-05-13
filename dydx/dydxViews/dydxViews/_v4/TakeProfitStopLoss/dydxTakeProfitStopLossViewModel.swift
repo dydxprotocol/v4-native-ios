@@ -147,11 +147,9 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
                             self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
                             self.separator
                             self.customAmountViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                            #if DEBUG
                             if self.shouldDisplayCustomLimitPriceViewModel {
                                 self.customLimitPriceViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
                             }
-                            #endif
                         }
                     }
                     .keyboardObserving()

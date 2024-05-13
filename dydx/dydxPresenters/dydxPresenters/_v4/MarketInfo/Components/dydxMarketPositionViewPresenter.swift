@@ -78,9 +78,6 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
 
         viewModel?.funding = SignedAmountViewModel(amount: position.netFunding?.doubleValue, displayType: .dollar, coloringOption: .allText)
 
-        // hide for now until feature work complete and E2E testing
-        #if DEBUG
-        // TODO: comment this in when available
         if AbacusStateManager.shared.environment?.featureFlags.isSlTpEnabled == true {
             let routeToTakeProfitStopLossAction = {[weak self] in
                 if let marketId = self?.position?.id {
@@ -150,6 +147,5 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
 
             viewModel?.takeProfitStopLossAction = routeToTakeProfitStopLossAction
         }
-        #endif
     }
 }
