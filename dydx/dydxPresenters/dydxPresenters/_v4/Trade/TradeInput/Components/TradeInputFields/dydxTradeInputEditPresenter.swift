@@ -230,7 +230,7 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
             visible.append(executionViewModel)
         }
 
-        if dydxBoolFeatureFlag.enable_reduce_only.isEnabled {
+        if AbacusStateManager.shared.environment?.featureFlags.reduceOnlySupported == true {
             if tradeInput.options?.needsReduceOnly == true {
                 let vm = reduceOnlyViewModel()
                 vm.isEnabled = tradeInput.options?.needsReduceOnly == true

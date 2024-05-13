@@ -301,9 +301,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel.takeProfitStopLossInputAreaViewModel?.takeProfitPriceInputViewModel = .init(title: DataLocalizer.shared?.localize(path: "APP.TRIGGERS_MODAL.TP_PRICE", params: nil))
         viewModel.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel = .init(title: DataLocalizer.shared?.localize(path: "APP.TRIGGERS_MODAL.SL_PRICE", params: nil))
 
-        #if DEBUG
         viewModel.shouldDisplayCustomLimitPriceViewModel = AbacusStateManager.shared.environment?.featureFlags.isSlTpLimitOrdersEnabled == true
-        #endif
 
         viewModel.customAmountViewModel = dydxCustomAmountViewModel()
 
