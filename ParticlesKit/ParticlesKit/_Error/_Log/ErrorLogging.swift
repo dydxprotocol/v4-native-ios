@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Utilities
 
-public protocol ErrorLoggingProtocol: NSObjectProtocol {
+public protocol ErrorLoggingProtocol: NSObjectProtocol, Logging {
     func log(_ error: Error?)
 }
 
