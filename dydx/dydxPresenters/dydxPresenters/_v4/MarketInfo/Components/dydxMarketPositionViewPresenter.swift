@@ -71,7 +71,7 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         viewModel?.logoUrl = sharedOrderViewModel.logoUrl
         viewModel?.gradientType = sharedOrderViewModel.gradientType
 
-        viewModel?.amount = dydxFormatter.shared.dollar(number: position.valueTotal.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
+        viewModel?.amount = dydxFormatter.shared.dollar(number: position.valueTotal.current?.doubleValue, digits: 2)
 
         viewModel?.openPrice = dydxFormatter.shared.dollar(number: position.entryPrice.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
         viewModel?.closePrice = dydxFormatter.shared.dollar(number: position.exitPrice?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
