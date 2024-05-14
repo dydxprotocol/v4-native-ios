@@ -55,6 +55,7 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
             switch value {
             case .text(let value, let edgeInsets):
                 return Text(value)
+                    .frame(maxHeight: .infinity)
                     .themeFont(fontSize: .small)
                     .padding(edgeInsets)
                     .themeStyle(styleKey: styleKey, parentStyle: style)
