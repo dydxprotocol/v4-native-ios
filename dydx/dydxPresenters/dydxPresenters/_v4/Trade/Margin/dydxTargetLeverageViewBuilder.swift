@@ -57,11 +57,14 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
             dydxTargetLeverageViewModel.LeverageTextAndValue(text: "1x", value: 1.0),
             dydxTargetLeverageViewModel.LeverageTextAndValue(text: "2x", value: 2.0),
             dydxTargetLeverageViewModel.LeverageTextAndValue(text: "5x", value: 5.0),
-            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "10.0", value: 10.0),
+            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "10x", value: 10.0),
             dydxTargetLeverageViewModel.LeverageTextAndValue(text: "Max", value: 20.0)
         ]
 
         self.viewModel = viewModel
+        
+        // TODO: get from Abacus
+        self.viewModel?.inlineAlert = .previewValue
 
         attachChildren(workers: childPresenters)
     }

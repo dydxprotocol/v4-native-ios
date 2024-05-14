@@ -164,7 +164,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                             /*
                              TODO: Get from Abacus
                              */
-                            Text("$??.??")
+                            Text("$TODO_isolated")
                                 .themeFont(fontSize: .small)
                                 .themeColor(foreground: .textPrimary)
                                 .minimumScaleFactor(0.5)
@@ -172,7 +172,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                             /*
                              TODO: Get from Abacus
                              */
-                            Text("isolated")
+                            Text("TODO_isolated")
                                 .themeFont(fontSize: .smaller)
                                 .themeColor(foreground: .textTertiary)
                                 .minimumScaleFactor(0.5)

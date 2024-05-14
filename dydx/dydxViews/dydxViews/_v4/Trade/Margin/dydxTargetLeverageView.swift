@@ -29,6 +29,7 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
         PlatformTextInputViewModel(label: DataLocalizer.localize(path: "APP.TRADE.TARGET_LEVERAGE"),
                                    placeHolder: "0.0",
                                    inputType: PlatformTextInputViewModel.InputType.decimalDigits)
+    @Published public var inlineAlert: InlineAlertViewModel?
     @Published public var ctaButton: dydxTargetLeverageCtaButtonViewModel? = dydxTargetLeverageCtaButtonViewModel()
 
     public init() { }
@@ -60,7 +61,8 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
                     .makeInput()
 
                 self.createOptionsGroup(parentStyle: style)
-
+                self.inlineAlert?.createView(parentStyle: style)
+                
                 Spacer()
 
                 self.ctaButton?.createView(parentStyle: style)
