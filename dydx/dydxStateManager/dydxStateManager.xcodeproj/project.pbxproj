@@ -23,6 +23,7 @@
 		0260351029EF3C2E00DFFD11 /* WalletSendTransactionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0260350F29EF3C2E00DFFD11 /* WalletSendTransactionStep.swift */; };
 		02603B9129F1A95E00DFFD11 /* dydxClientState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02603B9029F1A95E00DFFD11 /* dydxClientState.swift */; };
 		02603B9429F1A99D00DFFD11 /* dydxTransferState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02603B9329F1A99D00DFFD11 /* dydxTransferState.swift */; };
+		026734F22BF2BFCC00DBF51A /* AbacusLoggingImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026734F12BF2BFCC00DBF51A /* AbacusLoggingImp.swift */; };
 		027CB28E29EF02C50069781A /* DepositTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027CB28D29EF02C50069781A /* DepositTransaction.swift */; };
 		027CB29429EF035E0069781A /* DepositTransactionV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027CB29329EF035E0069781A /* DepositTransactionV4.swift */; };
 		027CB2A029EF04270069781A /* dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 027CB29B29EF04170069781A /* dydxCartera.framework */; };
@@ -142,6 +143,7 @@
 		0260350F29EF3C2E00DFFD11 /* WalletSendTransactionStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSendTransactionStep.swift; sourceTree = "<group>"; };
 		02603B9029F1A95E00DFFD11 /* dydxClientState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxClientState.swift; sourceTree = "<group>"; };
 		02603B9329F1A99D00DFFD11 /* dydxTransferState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferState.swift; sourceTree = "<group>"; };
+		026734F12BF2BFCC00DBF51A /* AbacusLoggingImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbacusLoggingImp.swift; sourceTree = "<group>"; };
 		027CB28D29EF02C50069781A /* DepositTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositTransaction.swift; sourceTree = "<group>"; };
 		027CB29329EF035E0069781A /* DepositTransactionV4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositTransactionV4.swift; sourceTree = "<group>"; };
 		027CB29529EF04170069781A /* dydxCartera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxCartera.xcodeproj; path = ../dydxCartera/dydxCartera.xcodeproj; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				6473ACBF2A65B1FD00BBC01F /* AbacusFormatterImp.swift */,
 				6473AE402A65D3E700BBC01F /* AbacusChainImp.swift */,
 				646EE0842A75A8F4006A68E4 /* AbacusTimerImp.swift */,
+				026734F12BF2BFCC00DBF51A /* AbacusLoggingImp.swift */,
 				646EDDEE2A732DBB006A68E4 /* Implementations.swift */,
 			);
 			path = Protocol_Implementations;
@@ -672,6 +675,7 @@
 				0260351029EF3C2E00DFFD11 /* WalletSendTransactionStep.swift in Sources */,
 				023BFFD92ABBC4C000D3ED5C /* ERC20ApprovalStep.swift in Sources */,
 				02603B9429F1A99D00DFFD11 /* dydxTransferState.swift in Sources */,
+				026734F22BF2BFCC00DBF51A /* AbacusLoggingImp.swift in Sources */,
 				022E928828EA4FD80096CDA9 /* Models+Ext.swift in Sources */,
 				027CB29429EF035E0069781A /* DepositTransactionV4.swift in Sources */,
 				646EDDEF2A732DBB006A68E4 /* Implementations.swift in Sources */,

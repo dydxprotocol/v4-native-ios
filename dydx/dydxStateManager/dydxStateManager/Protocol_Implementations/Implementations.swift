@@ -6,6 +6,7 @@
 //
 
 import Abacus
+import ParticlesKit
 
 extension IOImplementations {
     public static let shared = IOImplementations(rest: AbacusRestImp(),
@@ -15,7 +16,7 @@ extension IOImplementations {
                                                  threading: AbacusThreadingImp(),
                                                  timer: AbacusTimerImp(),
                                                  fileSystem: AbacusFileSystemImp(),
-                                                 logging: nil)
+                                                 logging: AbacusLoggingImp())
 }
 
 extension UIImplementations {
