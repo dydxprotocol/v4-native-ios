@@ -168,7 +168,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
         // logic primarily to pre-populate custom amount.
         // we do not want to turn on custom amount if it is not already on and the order size is the same amount as the position size. The custom amount may already be on if user manually turned it on, or a pre-existing custom amount exists that is less than the position size
-        if let customSize = triggerOrdersInput?.size?.doubleValue.magnitude, customSize != position?.size?.current?.doubleValue.magnitude || viewModel?.customAmountViewModel?.isOn == true {
+        if let customSize = triggerOrdersInput?.size?.doubleValue.magnitude, customSize != position?.size.current?.doubleValue.magnitude || viewModel?.customAmountViewModel?.isOn == true {
             let formattedSize = dydxFormatter.shared.raw(number: customSize, digits: marketConfig.displayStepSizeDecimals?.intValue ?? 2)
             viewModel?.customAmountViewModel?.programmaticallySet(newValue: formattedSize)
         }
@@ -218,37 +218,37 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             && order.side.opposite == position?.side.current
         }
 
-        viewModel?.entryPrice = dydxFormatter.shared.dollar(number: position?.entryPrice?.current?.doubleValue,
+        viewModel?.entryPrice = dydxFormatter.shared.dollar(number: position?.entryPrice.current?.doubleValue,
                                                          digits: marketConfig.displayTickSizeDecimals?.intValue ?? 2)
 
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenTakeProfitOrders = takeProfitOrders.count
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenStopLossOrders = stopLossOrders.count
 
-        viewModel?.customAmountViewModel?.maximumValue = position?.size?.current?.floatValue.magnitude
+        viewModel?.customAmountViewModel?.maximumValue = position?.size.current?.floatValue.magnitude
 
         if takeProfitOrders.count == 1, stopLossOrders.count == 1,
             let takeProfitOrder = takeProfitOrders.first, let stopLossOrder = stopLossOrders.first {
             updateAbacusTriggerOrdersState(order: takeProfitOrder)
             updateAbacusTriggerOrdersState(order: stopLossOrder)
             // this separated logic is to figure out if custom amount should be set
-            if takeProfitOrder.size == stopLossOrder.size, takeProfitOrder.size != position?.size?.current?.doubleValue.magnitude {
+            if takeProfitOrder.size == stopLossOrder.size, takeProfitOrder.size != position?.size.current?.doubleValue.magnitude {
                 AbacusStateManager.shared.triggerOrders(input: takeProfitOrder.size.magnitude.stringValue, type: .size)
             }
         } else if takeProfitOrders.count == 1, let order = takeProfitOrders.first {
             updateAbacusTriggerOrdersState(order: order)
             // this separated logic is to figure out if custom amount should be set
-            if order.size.magnitude != position?.size?.current?.doubleValue.magnitude, order.size != position?.size?.current?.doubleValue.magnitude {
+            if order.size.magnitude != position?.size.current?.doubleValue.magnitude, order.size != position?.size.current?.doubleValue.magnitude {
                 AbacusStateManager.shared.triggerOrders(input: order.size.magnitude.stringValue, type: .size)
             }
         } else if stopLossOrders.count == 1, let order = stopLossOrders.first {
             updateAbacusTriggerOrdersState(order: order)
             // this separated logic is to figure out if custom amount should be set
-            if order.size.magnitude != position?.size?.current?.doubleValue.magnitude, order.size != position?.size?.current?.doubleValue.magnitude {
+            if order.size.magnitude != position?.size.current?.doubleValue.magnitude, order.size != position?.size.current?.doubleValue.magnitude {
                 AbacusStateManager.shared.triggerOrders(input: order.size.magnitude.stringValue, type: .size)
             }
         } else {
-            AbacusStateManager.shared.triggerOrders(input: position?.size?.current?.doubleValue.magnitude.stringValue, type: .takeprofitordersize)
-            AbacusStateManager.shared.triggerOrders(input: position?.size?.current?.doubleValue.magnitude.stringValue, type: .stoplossordersize)
+            AbacusStateManager.shared.triggerOrders(input: position?.size.current?.doubleValue.magnitude.stringValue, type: .takeprofitordersize)
+            AbacusStateManager.shared.triggerOrders(input: position?.size.current?.doubleValue.magnitude.stringValue, type: .stoplossordersize)
         }
 
         AbacusStateManager.shared.triggerOrders(input: marketId, type: .marketid)
@@ -259,7 +259,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
                 // start at min amount
                 AbacusStateManager.shared.triggerOrders(input: marketConfig.minOrderSize?.stringValue, type: .size)
             } else {
-                AbacusStateManager.shared.triggerOrders(input: position?.size?.current?.doubleValue.magnitude.stringValue, type: .size)
+                AbacusStateManager.shared.triggerOrders(input: position?.size.current?.doubleValue.magnitude.stringValue, type: .size)
             }
         }
     }

@@ -28,7 +28,7 @@ final public class AbacusRestImp: Abacus.RestProtocol {
         processRest(url: url, headers: headers, body: nil, verb: "GET", callback: callback)
     }
 
-    public func post(url: String, headers: [String: String]?, body: String?, callback_ callback: @escaping RestCallback) {
+    public func post(url: String, headers: [String: String]?, body: String?, callback: @escaping RestCallback) {
         processRest(url: url, headers: headers, body: body, verb: "POST", callback: callback)
     }
 
