@@ -9,6 +9,14 @@
 import Utilities
 
 public class DebugErrorLogging: NSObject & ErrorLoggingProtocol {
+    public func e(tag: String, message: String) {
+        Console.shared.log("Error: \(tag) \(message)")
+    }
+    
+    public func d(tag: String, message: String) {
+        Console.shared.log("Debug: \(tag) \(message)")
+    }
+    
     public func log(_ error: Error?) {
         if let error = error {
             Console.shared.log("Error:\(error)")
