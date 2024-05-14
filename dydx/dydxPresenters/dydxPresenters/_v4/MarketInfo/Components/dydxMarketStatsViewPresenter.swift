@@ -42,20 +42,17 @@ class dydxMarketStatsViewPresenter: HostedViewPresenter<dydxMarketStatsViewModel
             .CombineLatest(marketPublisher,
                             AbacusStateManager.shared.state.assetMap)
             .sink { [weak self] market, assetMap in
-                let stepSize = market.configs?.displayStepSize?.doubleValue
-                let tickSize = market.configs?.displayTickSize?.doubleValue
-                self?.updateStats(market: market, asset: assetMap[market.assetId], stepSize: stepSize, tickSize: tickSize)
+                let tickSizeNumDecimals = market.configs?.displayTickSizeDecimals?.intValue ?? 0
+                let stepSizeNumDecimals = market.configs?.displayStepSizeDecimals?.intValue ?? 0
+                self?.updateStats(market: market, asset: assetMap[market.assetId], stepSizeNumDecimals: stepSizeNumDecimals, tickSizeNumDecimals: tickSizeNumDecimals)
             }
             .store(in: &subscriptions)
     }
 
-    private func updateStats(market: PerpetualMarket, asset: Asset?, stepSize: Double? = nil, tickSize: Double? = nil) {
+    private func updateStats(market: PerpetualMarket, asset: Asset?, stepSizeNumDecimals: Int, tickSizeNumDecimals: Int) {
         var items = [dydxMarketStatsViewModel.StatItem]()
 
-        let stepSize = String(value: stepSize)
-        let tickSize = String(value: tickSize)
-
-        let oraclePrice = dydxFormatter.shared.dollar(number: market.oraclePrice?.doubleValue, size: tickSize) ?? "-"
+        let oraclePrice = dydxFormatter.shared.dollar(number: market.oraclePrice?.doubleValue, digits: tickSizeNumDecimals) ?? "-"
         items += [
             .init(header: DataLocalizer.localize(path: "APP.TRADE.ORACLE_PRICE"),
                   value: SignedAmountViewModel(text: oraclePrice, sign: .none, coloringOption: .allText))
@@ -105,7 +102,7 @@ class dydxMarketStatsViewPresenter: HostedViewPresenter<dydxMarketStatsViewModel
                   value: nextFundingViewModel)
         ]
 
-        let openInterest = dydxFormatter.shared.localFormatted(number: market.perpetual?.openInterest, size: stepSize) ?? "-"
+        let openInterest = dydxFormatter.shared.localFormatted(number: market.perpetual?.openInterest, digits: stepSizeNumDecimals) ?? "-"
         let token: TokenTextViewModel?
         if let symbol = asset?.id {
             token = TokenTextViewModel(symbol: symbol)
