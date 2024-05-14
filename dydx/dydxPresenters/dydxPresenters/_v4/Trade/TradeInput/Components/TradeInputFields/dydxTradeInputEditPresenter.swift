@@ -102,7 +102,7 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
                         return nil
                     }
                     let position: SubaccountPosition? = positions.first { $0.id == marketId }
-                    return position?.leverage?.current?.doubleValue
+                    return position?.leverage.current?.doubleValue
                 }
                 .removeDuplicates()
                 .eraseToAnyPublisher()

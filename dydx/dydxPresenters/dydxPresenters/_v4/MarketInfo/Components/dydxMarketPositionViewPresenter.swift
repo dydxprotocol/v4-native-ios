@@ -60,8 +60,8 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
 
         viewModel?.unrealizedPNLAmount = sharedOrderViewModel.unrealizedPnl
         viewModel?.unrealizedPNLPercent = sharedOrderViewModel.unrealizedPnlPercent
-        viewModel?.realizedPNLAmount = SignedAmountViewModel(amount: position.realizedPnl?.current?.doubleValue, displayType: .dollar, coloringOption: .allText)
-        viewModel?.liquidationPrice = dydxFormatter.shared.dollar(number: position.liquidationPrice?.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
+        viewModel?.realizedPNLAmount = SignedAmountViewModel(amount: position.realizedPnl.current?.doubleValue, displayType: .dollar, coloringOption: .allText)
+        viewModel?.liquidationPrice = dydxFormatter.shared.dollar(number: position.liquidationPrice.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
         viewModel?.leverage = sharedOrderViewModel.leverage
         viewModel?.leverageIcon = sharedOrderViewModel.leverageIcon
@@ -71,9 +71,9 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         viewModel?.logoUrl = sharedOrderViewModel.logoUrl
         viewModel?.gradientType = sharedOrderViewModel.gradientType
 
-        viewModel?.amount = dydxFormatter.shared.dollar(number: position.valueTotal?.current?.doubleValue, digits: 2)
+        viewModel?.amount = dydxFormatter.shared.dollar(number: position.valueTotal.current?.doubleValue, digits: 2)
 
-        viewModel?.openPrice = dydxFormatter.shared.dollar(number: position.entryPrice?.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
+        viewModel?.openPrice = dydxFormatter.shared.dollar(number: position.entryPrice.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
         viewModel?.closePrice = dydxFormatter.shared.dollar(number: position.exitPrice?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
         viewModel?.funding = SignedAmountViewModel(amount: position.netFunding?.doubleValue, displayType: .dollar, coloringOption: .allText)
@@ -110,7 +110,7 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
                         triggerSide: .takeProfit,
                         triggerPriceText: DataLocalizer.shared?.localize(path: "APP.TRADE.MULTIPLE_ARROW", params: nil),
                         action: routeToOrdersAction)
-                } else if let takeProfitOrder = takeProfitOrders.first, let positionSize = position.size?.current?.doubleValue.magnitude {
+                } else if let takeProfitOrder = takeProfitOrders.first, let positionSize = position.size.current?.doubleValue.magnitude {
                     let orderSize = takeProfitOrder.size.magnitude
                     viewModel?.takeProfitStatusViewModel = .init(
                         triggerSide: .takeProfit,
@@ -129,7 +129,7 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
                         triggerSide: .stopLoss,
                         triggerPriceText: DataLocalizer.shared?.localize(path: "APP.TRADE.MULTIPLE_ARROW", params: nil),
                         action: routeToOrdersAction)
-                } else if let stopLossOrder = stopLossOrders.first, let positionSize = position.size?.current?.doubleValue.magnitude {
+                } else if let stopLossOrder = stopLossOrders.first, let positionSize = position.size.current?.doubleValue.magnitude {
                     let orderSize = stopLossOrder.size.magnitude
                     viewModel?.stopLossStatusViewModel = .init(
                         triggerSide: .stopLoss,
