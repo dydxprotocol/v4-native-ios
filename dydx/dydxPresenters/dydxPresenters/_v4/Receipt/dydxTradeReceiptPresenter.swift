@@ -56,9 +56,8 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
                 AbacusStateManager.shared.state.tradeInput)
             .sink { [weak self] positions, tradeInput in
                 let marketId = tradeInput?.marketId ?? "ETH-USD"
-                if let position = positions.first(where: { $0.id == marketId}),
-                   let buyingPower = position.buyingPower {
-                    self?.updateBuyingPowerChange(buyingPower: buyingPower)
+                if let position = positions.first(where: { $0.id == marketId}) {
+                    self?.updateBuyingPowerChange(buyingPower: position.buyingPower)
                 }
             }
             .store(in: &subscriptions)
