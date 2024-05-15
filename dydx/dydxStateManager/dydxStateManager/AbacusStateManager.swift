@@ -168,6 +168,18 @@ public final class AbacusStateManager: NSObject {
         appConfigs.squidVersion = AppConfigs.SquidVersion.v2
         appConfigsV2.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
 
+        #if DEBUG
+        return AsyncAbacusStateManagerV2(
+            deploymentUri: deploymentUri,
+            deployment: deployment,
+            appConfigs: appConfigsV2,
+            ioImplementations: IOImplementations.shared,
+            uiImplementations: UIImplementations.shared!,
+            stateNotification: self,
+            dataNotification: nil,
+            presentationProtocol: AbacusPresentationImp()
+        )
+        #else
         if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
             return AsyncAbacusStateManagerV2(
                 deploymentUri: deploymentUri,
@@ -191,6 +203,7 @@ public final class AbacusStateManager: NSObject {
             )
 
         }
+        #endif
     }()
 
     override private init() {
