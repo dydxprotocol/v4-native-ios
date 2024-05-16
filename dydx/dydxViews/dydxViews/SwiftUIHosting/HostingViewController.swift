@@ -16,6 +16,7 @@ import UIToolkits
 import PlatformRouting
 import FloatingPanel
 import Utilities
+ import dydxAnalytics
 
 public struct HostingViewControllerConfiguration {
     public init(ignoreSafeArea: Bool = true, fixedHeight: CGFloat? = nil, gradientTabbar: Bool = false, disableNavigationController: Bool = false) {
@@ -37,6 +38,11 @@ public struct HostingViewControllerConfiguration {
 }
 
 open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol {
+
+    open override var navigationEvent: TrackableEvent? {
+        guard let path = history?.path else { assertionFailure("no path?"); return nil }
+        return AnalyticsEventV2.navigatePage(page: .custom(path: path))
+    }
 
     private var hostingController: UIHostingController<AnyView>?
     private let presenterView = ObjectPresenterView()

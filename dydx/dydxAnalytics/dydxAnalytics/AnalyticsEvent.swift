@@ -55,6 +55,7 @@ public extension AnalyticsEventV2 {
         case market(market: String)
         case trade(market: String)
         case addSlTp
+        case custom(path: String)
 
         /// a path that uniquely identifies the mobile screen
         var mobilePath: String {
@@ -67,6 +68,8 @@ public extension AnalyticsEventV2 {
                 return "/market/\(market)"
             case .addSlTp:
                 return "/trade/take_profit_stop_loss"
+            case .custom(let path):
+                return path
             }
         }
 
@@ -75,6 +78,8 @@ public extension AnalyticsEventV2 {
             switch self {
             case .addSlTp:
                 return nil // displayed as a modal on web
+            case .custom:
+                return nil
             case .market(let market):
                 // web does not have the /market/ETH-USD path and routes back to `/trade/ETH-USD`
                 return Page.trade(market: market).correspondingWebPath
