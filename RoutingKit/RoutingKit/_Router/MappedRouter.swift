@@ -282,17 +282,11 @@ open class MappedRouter: NSObject, RouterProtocol, ParsingProtocol, CombineObser
             if let map = self.map(for: transformed) {
                 backtrack(request: transformed, animated: animated) { [weak self] data, completed in
                     if completed {
-                        if let viewController = data as? TrackingViewProtocol, let navigationEvent = viewController.navigationEvent {
-                            Tracking.shared?.log(trackableEvent: navigationEvent)
-                        }
                         completion?(nil, true)
                     } else {
                         self?.route(dependencies: map, request: transformed, completion: { [weak self] _, successful in
                             if successful {
                                 self?.navigate(to: map, request: transformed, presentation: presentation ?? transformed.presentation, animated: animated, completion: { /* [weak self] */ data, successful in
-                                    if successful, let viewController = data as? TrackingViewProtocol, let navigationEvent = viewController.navigationEvent {
-                                        Tracking.shared?.log(trackableEvent: navigationEvent)
-                                    }
                                     completion?(data, successful)
                                 })
                             } else {
