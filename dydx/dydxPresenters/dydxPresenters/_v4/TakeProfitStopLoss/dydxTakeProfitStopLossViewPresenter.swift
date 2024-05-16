@@ -17,6 +17,7 @@ import PanModal
 import Combine
 import Abacus
 import dydxFormatter
+import dydxAnalytics
 
 public class dydxTakeProfitStopLossViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {

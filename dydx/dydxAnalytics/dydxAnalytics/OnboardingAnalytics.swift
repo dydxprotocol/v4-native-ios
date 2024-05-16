@@ -5,16 +5,19 @@
 //  Created by Rui Huang on 26/03/2024.
 //
 
- import Foundation
- import Utilities
- import dydxStateManager
- import Combine
+import Foundation
+import Utilities
+import dydxStateManager
+import Combine
 
- final class OnboardingAnalytics {
+public final class OnboardingAnalytics {
+
+    public init() {}
+
     public var subscriptions = Set<AnyCancellable>()
 
-    func log(step: AnalyticsEventV2.OnboardingStep) {
-       AbacusStateManager.shared.state.currentWallet
+    public func log(step: AnalyticsEventV2.OnboardingStep) {
+        AbacusStateManager.shared.state.currentWallet
             .prefix(1)
             .sink { wallet in
                 let state: AnalyticsEventV2.OnboardingState
@@ -29,4 +32,4 @@
             }
             .store(in: &subscriptions)
     }
- }
+}

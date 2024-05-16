@@ -16,6 +16,7 @@ import dydxStateManager
 import Combine
 import Charts
 import dydxFormatter
+import dydxAnalytics
 
 public class dydxMarketsViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {

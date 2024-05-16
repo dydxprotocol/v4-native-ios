@@ -13,6 +13,7 @@ import ParticlesKit
 import PlatformUI
 import Abacus
 import dydxStateManager
+import dydxAnalytics
 
 public class dydxTosViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {

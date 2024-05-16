@@ -11,7 +11,7 @@ import Utilities
 //
 // Events defined in the v4-web repo.  Ideally, we should keep this in-sync with v4-web
 //
-enum AnalyticsEvent: String {
+public enum AnalyticsEvent: String {
     // App
     case appStart = "AppStart"
     case networkStatus = "NetworkStatus"
@@ -48,7 +48,7 @@ enum AnalyticsEvent: String {
     case notificationAction = "NotificationAction"
 }
 
-extension AnalyticsEventV2 {
+public extension AnalyticsEventV2 {
     // probably move this to like a dydxRouter, next to where `routing_swift.json` currently lives
     enum Page {
         case markets
@@ -85,7 +85,7 @@ extension AnalyticsEventV2 {
     }
 }
 
-extension AnalyticsEventV2 {
+public extension AnalyticsEventV2 {
     enum OnboardingStep: String {
         case chooseWallet = "ChooseWallet"
         case keyDerivation = "KeyDerivation"
@@ -94,7 +94,7 @@ extension AnalyticsEventV2 {
     }
 }
 
-extension AnalyticsEventV2 {
+public extension AnalyticsEventV2 {
     enum OnboardingState: String {
         case disconnected = "Disconnected"
         case walletConnected = "WalletConnected"
@@ -102,14 +102,14 @@ extension AnalyticsEventV2 {
     }
 }
 
-enum AnalyticsEventV2: TrackableEvent {
+public enum AnalyticsEventV2: TrackableEvent {
     case appStart
     case navigatePage(page: Page)
     case navigateDialog(page: Page)
     case navigateDialogClose(page: Page)
     case onboardingStepChanged(step: OnboardingStep, state: OnboardingState)
 
-    var name: String {
+    public var name: String {
         switch self {
         case .navigatePage:
             return "NavigatePage"
@@ -124,7 +124,7 @@ enum AnalyticsEventV2: TrackableEvent {
         }
     }
 
-    var customParameters: [String: Any] {
+    public var customParameters: [String: Any] {
         switch self {
         case .appStart:
             return [:]
@@ -142,7 +142,7 @@ enum AnalyticsEventV2: TrackableEvent {
     }
 }
 
-extension TrackingProtocol {
+public extension TrackingProtocol {
     /// convenience wrapper of log(trackableEvent:)
     func log(event: AnalyticsEventV2) {
         Tracking.shared?.log(trackableEvent: event)

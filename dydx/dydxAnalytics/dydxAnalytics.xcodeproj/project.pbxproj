@@ -11,6 +11,12 @@
 		2742BEB82BF6860100E13C09 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742BEAD2BF6860100E13C09 /* dydxAnalytics.framework */; };
 		2742BEBD2BF6860100E13C09 /* dydxAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742BEBC2BF6860100E13C09 /* dydxAnalyticsTests.swift */; };
 		2742BEBE2BF6860100E13C09 /* dydxAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 2742BEB02BF6860100E13C09 /* dydxAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2742C0312BF6887100E13C09 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0302BF6887100E13C09 /* Utilities.framework */; platformFilter = ios; };
+		2742C0352BF6888500E13C09 /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0342BF6888500E13C09 /* PlatformParticles.framework */; };
+		2742C0382BF6888A00E13C09 /* dydxStateManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0372BF6888A00E13C09 /* dydxStateManager.framework */; platformFilter = ios; };
+		2742C04A2BF688BD00E13C09 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */; };
+		2742C04B2BF688BD00E13C09 /* OnboardingAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742C03A2BF688B400E13C09 /* OnboardingAnalytics.swift */; };
+		2742C04C2BF688BD00E13C09 /* TransferAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742C03B2BF688B400E13C09 /* TransferAnalytics.swift */; };
 		B0A26DA7EA1E90F936ECE27B /* Pods_iOS_dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCEC9737902553D7EB58EF0 /* Pods_iOS_dydxAnalytics.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +37,12 @@
 		2742BEB12BF6860100E13C09 /* dydxAnalytics.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = dydxAnalytics.docc; sourceTree = "<group>"; };
 		2742BEB72BF6860100E13C09 /* dydxAnalyticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dydxAnalyticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742BEBC2BF6860100E13C09 /* dydxAnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAnalyticsTests.swift; sourceTree = "<group>"; };
+		2742C0302BF6887100E13C09 /* Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2742C0342BF6888500E13C09 /* PlatformParticles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PlatformParticles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2742C0372BF6888A00E13C09 /* dydxStateManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxStateManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2742C03A2BF688B400E13C09 /* OnboardingAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnalytics.swift; sourceTree = "<group>"; };
+		2742C03B2BF688B400E13C09 /* TransferAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAnalytics.swift; sourceTree = "<group>"; };
+		2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		2FCEC9737902553D7EB58EF0 /* Pods_iOS_dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0A5DAA1E87EA50A32BE597 /* Pods-iOS-dydxAnalytics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxAnalytics.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxAnalytics/Pods-iOS-dydxAnalytics.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -41,6 +53,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0A26DA7EA1E90F936ECE27B /* Pods_iOS_dydxAnalytics.framework in Frameworks */,
+				2742C0352BF6888500E13C09 /* PlatformParticles.framework in Frameworks */,
+				2742C0312BF6887100E13C09 /* Utilities.framework in Frameworks */,
+				2742C0382BF6888A00E13C09 /* dydxStateManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +73,9 @@
 		1D21DCC99EA6EE27EE38A5E2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2742C0372BF6888A00E13C09 /* dydxStateManager.framework */,
+				2742C0342BF6888500E13C09 /* PlatformParticles.framework */,
+				2742C0302BF6887100E13C09 /* Utilities.framework */,
 				2FCEC9737902553D7EB58EF0 /* Pods_iOS_dydxAnalytics.framework */,
 			);
 			name = Frameworks;
@@ -96,6 +114,9 @@
 		2742BEAF2BF6860100E13C09 /* dydxAnalytics */ = {
 			isa = PBXGroup;
 			children = (
+				2742C03A2BF688B400E13C09 /* OnboardingAnalytics.swift */,
+				2742C03B2BF688B400E13C09 /* TransferAnalytics.swift */,
+				2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */,
 				2742BEB02BF6860100E13C09 /* dydxAnalytics.h */,
 				2742BEB12BF6860100E13C09 /* dydxAnalytics.docc */,
 			);
@@ -245,7 +266,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2742C04B2BF688BD00E13C09 /* OnboardingAnalytics.swift in Sources */,
 				2742BEB22BF6860100E13C09 /* dydxAnalytics.docc in Sources */,
+				2742C04A2BF688BD00E13C09 /* AnalyticsEvent.swift in Sources */,
+				2742C04C2BF688BD00E13C09 /* TransferAnalytics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +432,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -441,6 +466,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,6 +488,7 @@
 		2742BEC52BF6860100E13C09 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 75C6UARB5H;
@@ -478,6 +505,7 @@
 		2742BEC62BF6860100E13C09 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 75C6UARB5H;

@@ -9,12 +9,15 @@ import Foundation
 import Abacus
 import Utilities
 
-final class TransferAnalytics {
-    func logDeposit(transferInput: TransferInput) {
+public final class TransferAnalytics {
+
+    public init() {}
+
+    public func logDeposit(transferInput: TransferInput) {
         log(event: .transferDeposit, transferInput: transferInput)
     }
 
-    func logWithdrawal(transferInput: TransferInput) {
+    public func logWithdrawal(transferInput: TransferInput) {
         log(event: .transferWithdraw, transferInput: transferInput)
     }
 

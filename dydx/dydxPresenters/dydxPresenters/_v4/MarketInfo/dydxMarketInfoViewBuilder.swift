@@ -14,6 +14,7 @@ import PlatformUI
 import Combine
 import dydxStateManager
 import Abacus
+import dydxAnalytics
 
 public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
