@@ -56,5 +56,5 @@ public protocol TrackableEvent {
 }
 
 public protocol TrackingViewProtocol {
-    var navigationEvent: TrackableEvent? { get set }
+    var navigationEvent: TrackableEvent? { get }
 }

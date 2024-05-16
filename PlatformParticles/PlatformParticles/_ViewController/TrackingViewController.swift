@@ -13,7 +13,7 @@ import Utilities
 
 open class TrackingViewController: NavigableViewController, TrackingViewProtocol {
     
-    open var navigationEvent: TrackableEvent?
+    open private(set) var navigationEvent: TrackableEvent?
     
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
