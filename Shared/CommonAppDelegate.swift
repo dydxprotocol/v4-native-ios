@@ -169,7 +169,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     
     open override func applicationDidBecomeActive(_ application: UIApplication) {
         super.applicationDidBecomeActive(application)
-        Tracking.shared?.log(event: "AppStart", data: nil)
+        Tracking.shared?.log(event: .appStart)
         dydxRatingService.shared?.launchedApp()
     }
 

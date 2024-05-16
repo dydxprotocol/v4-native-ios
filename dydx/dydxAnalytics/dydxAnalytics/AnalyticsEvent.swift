@@ -13,7 +13,6 @@ import Utilities
 //
 public enum AnalyticsEvent: String {
     // App
-    case appStart = "AppStart"
     case networkStatus = "NetworkStatus"
 
     // Navigation
