@@ -26,8 +26,9 @@ public class dydxTakeProfitStopLossViewBuilder: NSObject, ObjectBuilderProtocol 
     }
 }
 
-private class dydxTakeProfitStopLossViewController: HostingViewController<PlatformView, dydxTakeProfitStopLossViewModel> {
+private class dydxTakeProfitStopLossViewController: HostingViewController<PlatformView, dydxTakeProfitStopLossViewModel> {    
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
+        navigationEvent = AnalyticsEventV2.navigatePage(page: .addSlTp)
         if request?.path == "/trade/take_profit_stop_loss", let marketId = parser.asString(request?.params?["marketId"]), let presenter = presenter as? dydxTakeProfitStopLossViewPresenter {
             AbacusStateManager.shared.setMarket(market: marketId)
             presenter.marketId = marketId
@@ -42,6 +43,7 @@ private protocol dydxTakeProfitStopLossViewPresenterProtocol: HostedViewPresente
 }
 
 private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeProfitStopLossViewModel>, dydxTakeProfitStopLossViewPresenterProtocol {
+    
     fileprivate var marketId: String?
     @SynchronizedLock private var pendingOrders: Int?
 

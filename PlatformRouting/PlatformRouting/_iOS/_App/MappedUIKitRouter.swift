@@ -471,14 +471,6 @@ open class MappedUIKitRouter: MappedRouter {
             completion(nil)
         }
     }
-
-    override open func previousTracking() -> TrackingData? {
-        if let vc = UIViewController.topmost() as? TrackingViewProtocol {
-            return vc.trackingData
-        } else {
-            return nil
-        }
-    }
     
     private func loadViewController(from map: RoutingMap, completion: @escaping ((UIViewController?) -> Void)) {
         if let builder = map.builder {

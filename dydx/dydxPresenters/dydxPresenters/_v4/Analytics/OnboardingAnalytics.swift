@@ -5,50 +5,19 @@
 //  Created by Rui Huang on 26/03/2024.
 //
 
-import Foundation
-import Utilities
-import dydxStateManager
-import Combine
+ import Foundation
+ import Utilities
+ import dydxStateManager
+ import Combine
 
-final class OnboardingAnalytics {
-
-    // The three main OnboardingStates:
-    /// - Disconnected
-    /// - WalletConnected
-    /// - AccountConnected
-    private enum OnboardingState: String {
-        /// User is disconnected.
-        case disconnected = "Disconnected"
-
-        /// Wallet is connected.
-        case walletConnected = "WalletConnected"
-
-        /// Account is connected.
-        case accountConnected = "AccountConnected"
-    }
-
-    /// Enum representing the various steps in the onboarding process.
-    enum OnboardingSteps: String {
-        /// Step: Choose Wallet
-        case chooseWallet = "ChooseWallet"
-
-        /// Step: Key Derivation
-        case keyDerivation = "KeyDerivation"
-
-        /// Step: Acknowledge Terms
-        case acknowledgeTerms = "AcknowledgeTerms"
-
-        /// Step: Deposit Funds
-        case depositFunds = "DepositFunds"
-    }
-
+ final class OnboardingAnalytics {
     public var subscriptions = Set<AnyCancellable>()
 
-    func log(step: OnboardingSteps) {
+    func log(step: AnalyticsEventV2.OnboardingStep) {
        AbacusStateManager.shared.state.currentWallet
             .prefix(1)
             .sink { wallet in
-                let state: OnboardingState
+                let state: AnalyticsEventV2.OnboardingState
                 if wallet == nil {
                     state = .disconnected
                 } else if (wallet?.cosmoAddress?.length ?? 0) > 0 {
@@ -56,13 +25,8 @@ final class OnboardingAnalytics {
                 } else {
                     state = .walletConnected
                 }
-                let data: [String: String] = [
-                    "state": state.rawValue,
-                    "step": step.rawValue
-                ]
-                Tracking.shared?.log(event: AnalyticsEvent.onboardingStepChanged.rawValue,
-                                     data: data)
+                Tracking.shared?.log(event: .onboardingStepChanged(step: step, state: state))
             }
             .store(in: &subscriptions)
     }
-}
+ }

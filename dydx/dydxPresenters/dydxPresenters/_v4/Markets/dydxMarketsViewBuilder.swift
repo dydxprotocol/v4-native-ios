@@ -28,8 +28,11 @@ public class dydxMarketsViewBuilder: NSObject, ObjectBuilderProtocol {
 }
 
 private class dydxMarketsViewController: HostingViewController<PlatformView, dydxMarketsViewModel> {
+
+    override var navigationEvent: TrackableEvent? { AnalyticsEventV2.navigatePage(page: .markets) }
+
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        request?.path == "/portfolio/overview" || request?.path == "/markets"
+        request?.path == "/markets"
     }
 }
 

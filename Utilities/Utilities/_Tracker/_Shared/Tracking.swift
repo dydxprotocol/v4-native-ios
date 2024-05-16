@@ -35,6 +35,9 @@ public extension TrackingProtocol {
     func log(event: String, data: [String: Any]?) {
         log(event: event, data: data, revenue: nil)
     }
+    func log(trackableEvent: TrackableEvent) {
+        log(event: trackableEvent.name, data: trackableEvent.customParameters, revenue: nil)
+    }
     
     func setUserInfo(key: String, value: String?) {
         var userInfo = userInfo ?? [String: String?]()
@@ -47,19 +50,11 @@ public class Tracking {
     public static var shared: TrackingProtocol?
 }
 
-public class TrackingData {
-    public var path: String
-    public var data: [String: Any]?
-    public var startTime: Date
-
-    public init(path: String, data: [String: Any]?) {
-        self.path = path
-        self.data = data
-        startTime = Date()
-    }
+public protocol TrackableEvent {
+    var name: String { get }
+    var customParameters: [String: Any] { get }
 }
 
 public protocol TrackingViewProtocol {
-    var trackingData: TrackingData? { get }
-    func logView(path: String?, data: [String: Any]?, from: String?, time: Date?)
+    var navigationEvent: TrackableEvent? { get set }
 }

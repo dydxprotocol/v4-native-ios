@@ -26,6 +26,7 @@ public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
 }
 
 private class dydxMarketInfoViewController: HostingViewController<PlatformView, dydxMarketInfoViewModel> {
+
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade" || request?.path == "/market", let presenter = presenter as? dydxMarketInfoViewPresenter {
             let selectedMarketId = request?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
@@ -35,6 +36,12 @@ private class dydxMarketInfoViewController: HostingViewController<PlatformView, 
                 let section = PortfolioSection(rawValue: sectionRaw) ?? .positions
                 let preselectedSection = Section.allSections.map(\.key).firstIndex(of: section) ?? 0
                 presenter.viewModel?.sections.onSelectionChanged?(preselectedSection)
+            }
+            // only count navigation event if trade input is not immediately displayed
+            if request?.path == "/market" {
+                navigationEvent = AnalyticsEventV2.navigatePage(page: .market(market: selectedMarketId))
+            } else if request?.path == "/trade" {
+                navigationEvent = AnalyticsEventV2.navigatePage(page: .trade(market: selectedMarketId))
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if request?.path == "/trade" {
