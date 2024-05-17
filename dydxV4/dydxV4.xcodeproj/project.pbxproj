@@ -970,28 +970,28 @@
 		02684D6028BD40830007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */,
+				314B726523DD124E00139EB3 /* AppsFlyerStaticInjections.xcodeproj */,
+				31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */,
 				275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */,
-				027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */,
 				02439CCC29B03F4C00A083FE /* dydxCartera.xcodeproj */,
 				029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */,
 				028420C729AD77F400C0E7CC /* dydxFormatter.xcodeproj */,
-				025B83C328AAAB120037FF7C /* PlatformUI.xcodeproj */,
-				6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */,
-				31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */,
+				02684CE428BD3CD50007CEFF /* dydxPresenters.xcodeproj */,
+				02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */,
 				024B7AC928B7F73700F7C386 /* dydxViews.xcodeproj */,
-				314B726523DD124E00139EB3 /* AppsFlyerStaticInjections.xcodeproj */,
 				31B779F822DAD020004F9B21 /* FirebaseStaticInjections.xcodeproj */,
 				31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */,
 				31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */,
 				31B77A6D22DAD022004F9B21 /* ParticlesKit.xcodeproj */,
 				31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */,
 				31B77A9722DAD022004F9B21 /* PlatformRouting.xcodeproj */,
+				025B83C328AAAB120037FF7C /* PlatformUI.xcodeproj */,
+				027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */,
 				31B77A2222DAD021004F9B21 /* RoutingKit.xcodeproj */,
 				31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */,
 				31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */,
 				31F7618424BA3E7A001EA293 /* WebParticles.xcodeproj */,
-				02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */,
-				02684CE428BD3CD50007CEFF /* dydxPresenters.xcodeproj */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";

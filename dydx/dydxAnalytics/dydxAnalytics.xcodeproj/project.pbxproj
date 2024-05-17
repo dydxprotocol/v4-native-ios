@@ -236,9 +236,9 @@
 		275C16CB2BF7D70C009313EC /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				275C16F62BF7D723009313EC /* dydxStateManager.xcodeproj */,
 				275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */,
 				275C16E42BF7D723009313EC /* Utilities.xcodeproj */,
-				275C16F62BF7D723009313EC /* dydxStateManager.xcodeproj */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
