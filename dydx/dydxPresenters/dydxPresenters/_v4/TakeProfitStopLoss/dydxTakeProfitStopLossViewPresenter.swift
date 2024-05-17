@@ -28,8 +28,6 @@ public class dydxTakeProfitStopLossViewBuilder: NSObject, ObjectBuilderProtocol 
 }
 
 private class dydxTakeProfitStopLossViewController: HostingViewController<PlatformView, dydxTakeProfitStopLossViewModel> {
-    override var navigationEvent: TrackableEvent? { AnalyticsEventV2.navigatePage(page: .addSlTp) }
-
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade/take_profit_stop_loss", let marketId = parser.asString(request?.params?["marketId"]), let presenter = presenter as? dydxTakeProfitStopLossViewPresenter {
             AbacusStateManager.shared.setMarket(market: marketId)

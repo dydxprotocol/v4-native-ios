@@ -451,9 +451,6 @@ open class MappedUIKitRouter: MappedRouter {
                     self?.actions.removeAll(where: { (actionInList) -> Bool in
                         actionReference === actionInList
                     })
-                    if success, request.path?.hasPrefix("/action") ?? false {
-                        Tracking.shared?.view(request.path, data: request.params, from: nil, time: nil)
-                    }
                     completion?(data, success)
                 }
             } else {

@@ -8,6 +8,8 @@
 import Foundation
 import PlatformParticles
 import Utilities
+import FirebaseAnalytics
+
 //
 // Events defined in the v4-web repo.  Ideally, we should keep this in-sync with v4-web
 //
@@ -48,48 +50,6 @@ public enum AnalyticsEvent: String {
 }
 
 public extension AnalyticsEventV2 {
-    // probably move this to like a dydxRouter, next to where `routing_swift.json` currently lives
-    enum Page {
-        case markets
-        case market(market: String)
-        case trade(market: String)
-        case addSlTp
-        case custom(path: String)
-
-        /// a path that uniquely identifies the mobile screen
-        var mobilePath: String {
-            switch self {
-            case .markets:
-                return "/markets"
-            case .trade(let market):
-                return "/trade/\(market)"
-            case .market(let market):
-                return "/market/\(market)"
-            case .addSlTp:
-                return "/trade/take_profit_stop_loss"
-            case .custom(let path):
-                return path
-            }
-        }
-
-        /// the web-equivalent web page (if there is a good match)
-        var correspondingWebPath: String? {
-            switch self {
-            case .addSlTp:
-                return nil // displayed as a modal on web
-            case .custom:
-                return nil
-            case .market(let market):
-                // web does not have the /market/ETH-USD path and routes back to `/trade/ETH-USD`
-                return Page.trade(market: market).correspondingWebPath
-            default:
-                return mobilePath
-            }
-        }
-    }
-}
-
-public extension AnalyticsEventV2 {
     enum OnboardingStep: String {
         case chooseWallet = "ChooseWallet"
         case keyDerivation = "KeyDerivation"
@@ -108,23 +68,23 @@ public extension AnalyticsEventV2 {
 
 public enum AnalyticsEventV2: TrackableEvent {
     case appStart
-    case navigatePage(page: Page)
-    case navigateDialog(page: Page)
-    case navigateDialogClose(page: Page)
+    case navigatePage(screen: ScreenIdentifiable)
+    case deepLinkHandled(url: String, succeeded: Bool)
+    case notificationPermissionsChanged(isAuthorized: Bool)
     case onboardingStepChanged(step: OnboardingStep, state: OnboardingState)
 
     public var name: String {
         switch self {
         case .navigatePage:
             return "NavigatePage"
-        case .navigateDialog:
-            return "NavigateDialog"
-        case .navigateDialogClose:
-            return "NavigateDialogClose"
+        case .deepLinkHandled:
+            return "DeeplinkHandled"
         case .appStart:
             return "AppStart"
         case .onboardingStepChanged:
             return "OnboardingStepChanged"
+        case .notificationPermissionsChanged:
+            return "NotificationPermissionsChanged"
         }
     }
 
@@ -132,23 +92,41 @@ public enum AnalyticsEventV2: TrackableEvent {
         switch self {
         case .appStart:
             return [:]
-        case .navigatePage(let page), .navigateDialog(let page), .navigateDialogClose(let page):
+        case .navigatePage(let screen):
             return [
-                "mobile_path": page.mobilePath,
-                "path": page.correspondingWebPath as Any
+                "mobile_path": screen.mobilePath,
+                "path": screen.correspondingWebPath as Any,
+                // for firebase auto-generated dashboard(s)
+                "\(AnalyticsParameterScreenClass)": screen.screenClass,
+                "\(AnalyticsParameterScreenName)": screen.mobilePath
+            ]
+        case .deepLinkHandled(let url, let succeeded):
+            return [
+                "successfully_handled": succeeded,
+                "url": url
             ]
         case .onboardingStepChanged(let step, let state):
             return [
                 "step": step.rawValue,
                 "state": state.rawValue
             ]
+        case .notificationPermissionsChanged(let isAuthorized):
+            return [
+                "is_authorized": isAuthorized
+            ]
         }
     }
 }
 
 public extension TrackingProtocol {
-    /// convenience wrapper of log(trackableEvent:)
     func log(event: AnalyticsEventV2) {
-        Tracking.shared?.log(trackableEvent: event)
+        log(event: event.name, data: event.customParameters)
+        switch event {
+        case .navigatePage:
+            // for firebase auto-generated dashboard(s)
+            log(event: AnalyticsEventScreenView, data: event.customParameters)
+        default:
+            break
+        }
     }
 }

@@ -31,6 +31,7 @@
 		02FF092F29ADBD9F00781EDA /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E11EB29ADB9BC00FE271C /* dydxChart.framework */; };
 		02FF093029ADBDA300781EDA /* dydxPresenters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; };
 		274F43062BA4C0B400645059 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 274F43052BA4C0B400645059 /* PrivacyInfo.xcprivacy */; };
+		27968BA92BF7AC7A002F2C34 /* TrackingViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27968BA82BF7AC7A002F2C34 /* TrackingViewController+Ext.swift */; };
 		27ADEE6C2BC4A23400B8F1DB /* dydxSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ADEE6B2BC4A23400B8F1DB /* dydxSettingsStore.swift */; };
 		27D41AF12A8E9214009A2F37 /* UIApplication+URLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D41AF02A8E9214009A2F37 /* UIApplication+URLHandler.swift */; };
 		27DBDD222A8FF5B2002383C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27DBDCED2A8FF5B2002383C6 /* GoogleService-Info.plist */; };
@@ -798,6 +799,7 @@
 		02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxStateManager.xcodeproj; path = ../dydx/dydxStateManager/dydxStateManager.xcodeproj; sourceTree = "<group>"; };
 		171807B0CCAE5C86B5D65793 /* Pods_iOS_dydxV4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxV4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		274F43052BA4C0B400645059 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		27968BA82BF7AC7A002F2C34 /* TrackingViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackingViewController+Ext.swift"; sourceTree = "<group>"; };
 		27ADEE6B2BC4A23400B8F1DB /* dydxSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsStore.swift; sourceTree = "<group>"; };
 		27D41AF02A8E9214009A2F37 /* UIApplication+URLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+URLHandler.swift"; sourceTree = "<group>"; };
 		27DBDCED2A8FF5B2002383C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1292,6 +1294,7 @@
 			children = (
 				64AF4810281880B100EBFDC6 /* dydxAmplitudeTracking.swift */,
 				02C7262A29D793C90098AFBC /* dydxCompositeTracking.swift */,
+				27968BA82BF7AC7A002F2C34 /* TrackingViewController+Ext.swift */,
 			);
 			path = _Tracking;
 			sourceTree = "<group>";
@@ -2317,6 +2320,7 @@
 				27D41AF12A8E9214009A2F37 /* UIApplication+URLHandler.swift in Sources */,
 				02756A6A287CA33E00803741 /* dydxNotificationHandlerDelegate.swift in Sources */,
 				3112F463216BBF8400708927 /* AppDelegate.swift in Sources */,
+				27968BA92BF7AC7A002F2C34 /* TrackingViewController+Ext.swift in Sources */,
 				27ADEE6C2BC4A23400B8F1DB /* dydxSettingsStore.swift in Sources */,
 				3101FC582511508800AC4010 /* CommonAppDelegate.swift in Sources */,
 				0217A0A129D78BD5007F31C5 /* dydxBiometricsLocalAuthenticator.swift in Sources */,

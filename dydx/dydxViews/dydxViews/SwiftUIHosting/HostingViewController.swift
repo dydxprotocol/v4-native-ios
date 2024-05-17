@@ -39,11 +39,6 @@ public struct HostingViewControllerConfiguration {
 
 open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol {
 
-    open override var navigationEvent: TrackableEvent? {
-        guard let path = history?.path else { assertionFailure("no path?"); return nil }
-        return AnalyticsEventV2.navigatePage(page: .custom(path: path))
-    }
-
     private var hostingController: UIHostingController<AnyView>?
     private let presenterView = ObjectPresenterView()
     private var configuration: HostingViewControllerConfiguration = .default

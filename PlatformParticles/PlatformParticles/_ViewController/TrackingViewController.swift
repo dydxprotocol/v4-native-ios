@@ -11,9 +11,7 @@ import PlatformRouting
 import UIToolkits
 import Utilities
 
-open class TrackingViewController: NavigableViewController, TrackingViewProtocol {
-    
-    open private(set) var navigationEvent: TrackableEvent?
+open class TrackingViewController: NavigableViewController {
     
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,8 +23,8 @@ open class TrackingViewController: NavigableViewController, TrackingViewProtocol
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if let navigationEvent {
-            Tracking.shared?.log(trackableEvent: navigationEvent)
+        if let self = self as? TrackingViewProtocol {
+            self.logScreenView()
         }
     }
 }

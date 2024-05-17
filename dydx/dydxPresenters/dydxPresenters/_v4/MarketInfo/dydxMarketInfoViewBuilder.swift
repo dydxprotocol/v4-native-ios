@@ -31,16 +31,6 @@ private class dydxMarketInfoViewController: HostingViewController<PlatformView, 
         history?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
     }
 
-    override var navigationEvent: TrackableEvent? {
-        // only count navigation event if trade input is not immediately displayed
-        if history?.path == "/market" {
-            return AnalyticsEventV2.navigatePage(page: .market(market: selectedMarketId))
-        } else if history?.path == "/trade" {
-            return AnalyticsEventV2.navigatePage(page: .trade(market: selectedMarketId))
-        }
-        return nil
-    }
-
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade" || request?.path == "/market", let presenter = presenter as? dydxMarketInfoViewPresenter {
             dydxSelectedMarketsStore.shared.lastSelectedMarket = selectedMarketId
