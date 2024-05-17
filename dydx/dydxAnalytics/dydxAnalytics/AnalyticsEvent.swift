@@ -66,7 +66,7 @@ public extension AnalyticsEventV2 {
     }
 }
 
-public enum AnalyticsEventV2: TrackableEvent {
+public enum AnalyticsEventV2: TrackableEvent, CustomDebugStringConvertible {
     case appStart
     case navigatePage(screen: ScreenIdentifiable)
     case deepLinkHandled(url: String, succeeded: Bool)
@@ -116,6 +116,11 @@ public enum AnalyticsEventV2: TrackableEvent {
             ]
         }
     }
+
+    public var debugDescription: String {
+        let sorted = customParameters.sorted { $0.key < $1.key }
+        return "dydxAnalytics event \(name) with data: \(sorted)"
+    }
 }
 
 public extension TrackingProtocol {
@@ -128,5 +133,8 @@ public extension TrackingProtocol {
         default:
             break
         }
+        #if DEBUG
+        Console.shared.log(event.debugDescription)
+        #endif
     }
 }

@@ -33,6 +33,8 @@
 		274F43062BA4C0B400645059 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 274F43052BA4C0B400645059 /* PrivacyInfo.xcprivacy */; };
 		27968BA92BF7AC7A002F2C34 /* TrackingViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27968BA82BF7AC7A002F2C34 /* TrackingViewController+Ext.swift */; };
 		27ADEE6C2BC4A23400B8F1DB /* dydxSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ADEE6B2BC4A23400B8F1DB /* dydxSettingsStore.swift */; };
+		27B7B9882BF7C6DC00BB0114 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B7B9872BF7C6DC00BB0114 /* dydxAnalytics.framework */; };
+		27B7B9892BF7C6DC00BB0114 /* dydxAnalytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27B7B9872BF7C6DC00BB0114 /* dydxAnalytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27D41AF12A8E9214009A2F37 /* UIApplication+URLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D41AF02A8E9214009A2F37 /* UIApplication+URLHandler.swift */; };
 		27DBDD222A8FF5B2002383C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27DBDCED2A8FF5B2002383C6 /* GoogleService-Info.plist */; };
 		27DBDD232A8FF5B2002383C6 /* GoogleService-Info-Staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27DBDD202A8FF5B2002383C6 /* GoogleService-Info-Staging.plist */; };
@@ -254,6 +256,34 @@
 			proxyType = 1;
 			remoteGlobalIDString = 02E7DC5D28CFAF5C00727949;
 			remoteInfo = dydxStateManager;
+		};
+		275956052BF7D1FD008C77EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E65AB8216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		275C17042BF7D730009313EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2742BEAD2BF6860100E13C09;
+			remoteInfo = dydxAnalytics;
+		};
+		275C17062BF7D730009313EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2742BEB72BF6860100E13C09;
+			remoteInfo = dydxAnalyticsTests;
+		};
+		275C17082BF7D737009313EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2742BEAC2BF6860100E13C09;
+			remoteInfo = dydxAnalytics;
 		};
 		3112F476216BBF8600708927 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -640,13 +670,6 @@
 			remoteGlobalIDString = 31E65B00216BCA10008ABEE9;
 			remoteInfo = RoutingKit;
 		};
-		31B77BB722DAD077004F9B21 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 31E65AB8216BC9C9008ABEE9;
-			remoteInfo = Utilities;
-		};
 		31B77BBB22DAD077004F9B21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */;
@@ -757,6 +780,7 @@
 				022F35CD28D39304000BCA41 /* dydxPresenters.framework in Embed Frameworks */,
 				02E7DDDF28CFB33B00727949 /* dydxStateManager.framework in Embed Frameworks */,
 				025B83FF28AAAB270037FF7C /* PlatformUI.framework in Embed Frameworks */,
+				27B7B9892BF7C6DC00BB0114 /* dydxAnalytics.framework in Embed Frameworks */,
 				31B77C2722DAD0B3004F9B21 /* JedioKit.framework in Embed Frameworks */,
 				31B77C4922DAD0B4004F9B21 /* Utilities.framework in Embed Frameworks */,
 				31B77C4322DAD0B4004F9B21 /* UIToolkits.framework in Embed Frameworks */,
@@ -798,9 +822,12 @@
 		02DA0B022B57622B00BFA975 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxStateManager.xcodeproj; path = ../dydx/dydxStateManager/dydxStateManager.xcodeproj; sourceTree = "<group>"; };
 		171807B0CCAE5C86B5D65793 /* Pods_iOS_dydxV4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxV4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2729BA102BF7C93100729A85 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		274F43052BA4C0B400645059 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxAnalytics.xcodeproj; path = ../dydx/dydxAnalytics/dydxAnalytics.xcodeproj; sourceTree = "<group>"; };
 		27968BA82BF7AC7A002F2C34 /* TrackingViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackingViewController+Ext.swift"; sourceTree = "<group>"; };
 		27ADEE6B2BC4A23400B8F1DB /* dydxSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsStore.swift; sourceTree = "<group>"; };
+		27B7B9872BF7C6DC00BB0114 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27D41AF02A8E9214009A2F37 /* UIApplication+URLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+URLHandler.swift"; sourceTree = "<group>"; };
 		27DBDCED2A8FF5B2002383C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27DBDD202A8FF5B2002383C6 /* GoogleService-Info-Staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Staging.plist"; sourceTree = "<group>"; };
@@ -878,6 +905,7 @@
 				6466E116280F664900B8791B /* AmplitudeInjections.framework in Frameworks */,
 				31B77C2622DAD0B3004F9B21 /* JedioKit.framework in Frameworks */,
 				31B77C2522DAD0B3004F9B21 /* libFirebaseStaticInjections.a in Frameworks */,
+				27B7B9882BF7C6DC00BB0114 /* dydxAnalytics.framework in Frameworks */,
 				024B7A9528B7F6CC00F7C386 /* dydxViews.framework in Frameworks */,
 				31F761C924BA3E98001EA293 /* WebParticles.framework in Frameworks */,
 				31B77C3422DAD0B3004F9B21 /* PlatformRouting.framework in Frameworks */,
@@ -942,6 +970,7 @@
 		02684D6028BD40830007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */,
 				027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */,
 				02439CCC29B03F4C00A083FE /* dydxCartera.xcodeproj */,
 				029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */,
@@ -1041,6 +1070,8 @@
 		0904864F08DCEDE87F5B4956 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2729BA102BF7C93100729A85 /* dydxAnalytics.framework */,
+				27B7B9872BF7C6DC00BB0114 /* dydxAnalytics.framework */,
 				02DA0B022B57622B00BFA975 /* XCTest.framework */,
 				646D73AB2A4F434300EDF2E5 /* dydxAbacusBridging.framework */,
 				31B77C2422DAD0B3004F9B21 /* dydxUI.framework */,
@@ -1052,6 +1083,15 @@
 				79E0C92C7C4A09FD5F8E76A6 /* Pods_iOS_dydxV4Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		275C17002BF7D730009313EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				275C17052BF7D730009313EC /* dydxAnalytics.framework */,
+				275C17072BF7D730009313EC /* dydxAnalyticsTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		27ADEE6D2BC4A23B00B8F1DB /* _Settings */ = {
@@ -1356,13 +1396,16 @@
 			buildRules = (
 			);
 			dependencies = (
-				027E1E1229C9125C0098666F /* PBXTargetDependency */,
+				275956062BF7D1FD008C77EE /* PBXTargetDependency */,
+				31B77BC422DAD077004F9B21 /* PBXTargetDependency */,
 				02439D1029B03F5D00A083FE /* PBXTargetDependency */,
 				029E11EF29ADB9BF00FE271C /* PBXTargetDependency */,
 				0284210829AD77FF00C0E7CC /* PBXTargetDependency */,
+				275C17092BF7D737009313EC /* PBXTargetDependency */,
 				022F358F28D392CF000BCA41 /* PBXTargetDependency */,
 				022F35CB28D392D6000BCA41 /* PBXTargetDependency */,
 				02E7DDDE28CFB32D00727949 /* PBXTargetDependency */,
+				027E1E1229C9125C0098666F /* PBXTargetDependency */,
 				025B83FE28AAAB1F0037FF7C /* PBXTargetDependency */,
 				6466E115280F663000B8791B /* PBXTargetDependency */,
 				31AB94D226DEE82A00DB42B9 /* PBXTargetDependency */,
@@ -1371,12 +1414,10 @@
 				31B77BB222DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BB422DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BB622DAD077004F9B21 /* PBXTargetDependency */,
-				31B77BB822DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BBC22DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BBE22DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BC022DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BC222DAD077004F9B21 /* PBXTargetDependency */,
-				31B77BC422DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BCA22DAD077004F9B21 /* PBXTargetDependency */,
 			);
 			name = dydxV4;
@@ -1479,6 +1520,10 @@
 				{
 					ProductGroup = 31AB94C926DEE81000DB42B9 /* Products */;
 					ProjectRef = 31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */;
+				},
+				{
+					ProductGroup = 275C17002BF7D730009313EC /* Products */;
+					ProjectRef = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
 				},
 				{
 					ProductGroup = 02439CCD29B03F4C00A083FE /* Products */;
@@ -1673,6 +1718,20 @@
 			fileType = wrapper.cfbundle;
 			path = dydxStateManagerTests.xctest;
 			remoteRef = 02E7DDA928CFB31000727949 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		275C17052BF7D730009313EC /* dydxAnalytics.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxAnalytics.framework;
+			remoteRef = 275C17042BF7D730009313EC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		275C17072BF7D730009313EC /* dydxAnalyticsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = dydxAnalyticsTests.xctest;
+			remoteRef = 275C17062BF7D730009313EC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		314B726A23DD124E00139EB3 /* libAppsFlyerStaticInjections.a */ = {
@@ -2385,6 +2444,16 @@
 			name = dydxStateManager;
 			targetProxy = 02E7DDDD28CFB32D00727949 /* PBXContainerItemProxy */;
 		};
+		275956062BF7D1FD008C77EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Utilities;
+			targetProxy = 275956052BF7D1FD008C77EE /* PBXContainerItemProxy */;
+		};
+		275C17092BF7D737009313EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxAnalytics;
+			targetProxy = 275C17082BF7D737009313EC /* PBXContainerItemProxy */;
+		};
 		3112F477216BBF8600708927 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3112F45E216BBF8400708927 /* dydxV4 */;
@@ -2414,11 +2483,6 @@
 			isa = PBXTargetDependency;
 			name = RoutingKit;
 			targetProxy = 31B77BB522DAD077004F9B21 /* PBXContainerItemProxy */;
-		};
-		31B77BB822DAD077004F9B21 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Utilities;
-			targetProxy = 31B77BB722DAD077004F9B21 /* PBXContainerItemProxy */;
 		};
 		31B77BBC22DAD077004F9B21 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

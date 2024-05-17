@@ -12,18 +12,6 @@ public class DebugTracking: NSObject & TrackingProtocol {
     public var userInfo: [String: String?]?
 
     public var excluded: Bool = false
-
-    public func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?, contextViewController: UIViewController?) {
-        if let path = path {
-            let action = action ?? ""
-            let from = from ?? ""
-            if excluded {
-                Console.shared.log("Debug Tracking: View Excluded Path:\(path) Action:\(action) From:\(from)", data ?? "")
-            } else {
-                Console.shared.log("Debug Tracking: View Path:\(path) Action:\(action) From:\(from)", data ?? "")
-            }
-        }
-    }
     
     public func leave(_ path: String?) {
         if let path = path {

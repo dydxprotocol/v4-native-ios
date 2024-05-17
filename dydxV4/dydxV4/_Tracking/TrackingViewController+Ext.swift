@@ -8,8 +8,9 @@
 
 import Utilities
 import PlatformParticles
+import dydxPresenters
 
-extension TrackingViewController: ScreenIdentifiable {
+extension TrackingViewController: ScreenIdentifiable, TrackingViewProtocol {
     public var mobilePath: String {
         switch path {
         case "/market", "/trade":
@@ -35,6 +36,10 @@ extension TrackingViewController: ScreenIdentifiable {
     public var screenClass: String {
         String(describing: type(of: self))
     }
+
+    public func logScreenView() {
+        Tracking.shared?.log(event: .navigatePage(screen: self))
+    }
     
 }
 
@@ -49,10 +54,6 @@ private extension TrackingViewController {
     }
     
     private var marketId: String {
-        guard let marketId = history?.params?["market"] as? String else {
-            assertionFailure("no marketId for \(screenClass)")
-            return ""
-        }
-        return marketId
+        history?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
     }
 }

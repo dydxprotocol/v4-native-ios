@@ -24,7 +24,7 @@ public class FirebaseTracking: TransformerTracker {
 
     override public init() {
         super.init()
-        FirebaseConfiguration.shared.setLoggerLevel(.min)
+        FirebaseConfiguration.shared.setLoggerLevel(.max)
         Analytics.setUserProperty(String(format: "%.4f", UIDevice.current.systemVersionAsFloat), forName: "os_version")
     }
 

@@ -16,7 +16,7 @@ import UIToolkits
 import PlatformRouting
 import FloatingPanel
 import Utilities
- import dydxAnalytics
+import dydxAnalytics
 
 public struct HostingViewControllerConfiguration {
     public init(ignoreSafeArea: Bool = true, fixedHeight: CGFloat? = nil, gradientTabbar: Bool = false, disableNavigationController: Bool = false) {
