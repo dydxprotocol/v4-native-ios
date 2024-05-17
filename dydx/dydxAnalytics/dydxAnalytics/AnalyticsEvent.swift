@@ -13,6 +13,7 @@ import FirebaseAnalytics
 //
 // Events defined in the v4-web repo.  Ideally, we should keep this in-sync with v4-web
 //
+// TODO: deprecate and replace with AnalyticsEventV2
 public enum AnalyticsEvent: String {
     // App
     case networkStatus = "NetworkStatus"
@@ -67,6 +68,7 @@ public extension AnalyticsEventV2 {
 }
 
 public enum AnalyticsEventV2: TrackableEvent, CustomDebugStringConvertible {
+    // TODO: add and replace all events
     case appStart
     case navigatePage(screen: ScreenIdentifiable)
     case deepLinkHandled(url: String, succeeded: Bool)

@@ -19,6 +19,11 @@ open class TrackingViewController: NavigableViewController {
             navigationController?.navigationBar.setNeedsLayout()
         }
     }
+    
+    override open func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        Tracking.shared?.leave(history?.path)
+    }
 
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

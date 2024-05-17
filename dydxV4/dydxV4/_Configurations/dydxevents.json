@@ -50,6 +50,13 @@
          "modalType":"EMAIL_NOTIFICATIONS"
       }
    },
+   "/markets":{
+      "event":"NavigatePage",
+      "info":{
+         "path":"/portfolio/overview",
+         "isInitialNavigatePage":false
+      }
+   },
    "/my-profile":{
       "event":"NavigatePage",
       "info":{

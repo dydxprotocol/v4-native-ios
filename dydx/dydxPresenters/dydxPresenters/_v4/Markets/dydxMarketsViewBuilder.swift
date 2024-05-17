@@ -16,7 +16,6 @@ import dydxStateManager
 import Combine
 import Charts
 import dydxFormatter
-import dydxAnalytics
 
 public class dydxMarketsViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -30,7 +29,7 @@ public class dydxMarketsViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxMarketsViewController: HostingViewController<PlatformView, dydxMarketsViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        request?.path == "/markets"
+        request?.path == "/portfolio/overview" || request?.path == "/markets"
     }
 }
 

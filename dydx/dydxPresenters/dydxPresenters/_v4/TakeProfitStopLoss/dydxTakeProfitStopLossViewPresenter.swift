@@ -17,7 +17,6 @@ import PanModal
 import Combine
 import Abacus
 import dydxFormatter
-import dydxAnalytics
 
 public class dydxTakeProfitStopLossViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -43,7 +42,6 @@ private protocol dydxTakeProfitStopLossViewPresenterProtocol: HostedViewPresente
 }
 
 private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeProfitStopLossViewModel>, dydxTakeProfitStopLossViewPresenterProtocol {
-
     fileprivate var marketId: String?
     @SynchronizedLock private var pendingOrders: Int?
 

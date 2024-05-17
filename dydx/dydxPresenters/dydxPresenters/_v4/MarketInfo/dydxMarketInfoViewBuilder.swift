@@ -14,7 +14,6 @@ import PlatformUI
 import Combine
 import dydxStateManager
 import Abacus
-import dydxAnalytics
 
 public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -27,12 +26,9 @@ public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
 }
 
 private class dydxMarketInfoViewController: HostingViewController<PlatformView, dydxMarketInfoViewModel> {
-    private var selectedMarketId: String {
-        history?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
-    }
-
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade" || request?.path == "/market", let presenter = presenter as? dydxMarketInfoViewPresenter {
+            let selectedMarketId = request?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
             dydxSelectedMarketsStore.shared.lastSelectedMarket = selectedMarketId
             presenter.marketId = selectedMarketId
             if let sectionRaw = request?.params?["currentSection"] as? String {
