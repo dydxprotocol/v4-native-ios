@@ -284,6 +284,7 @@ abstract_target 'iOS' do
 
   target 'dydxAnalytics' do
     project '../dydx/dydxAnalytics/dydxAnalytics'
+    firebase_core_pods
     ios_util_pods
     abacus_pods
   end
