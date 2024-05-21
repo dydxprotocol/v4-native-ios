@@ -141,6 +141,7 @@ public enum AnalyticsEventV2 {
 public extension TrackingProtocol {
     func log(event: TrackableEvent) {
         if let event = event as? AnalyticsEventV2.NavigatePage {
+            // for firebase auto-generated dashboard(s)
             log(event: AnalyticsEventScreenView, data: event.customParameters)
         }
         log(event: event.name, data: event.customParameters)

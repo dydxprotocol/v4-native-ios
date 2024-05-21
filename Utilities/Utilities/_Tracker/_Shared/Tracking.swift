@@ -19,9 +19,6 @@ public extension TrackingProtocol {
     func log(event: String, data: [String: Any]?) {
         log(event: event, data: data, revenue: nil)
     }
-//    func log(trackableEvent: TrackableEvent) {
-//        log(event: trackableEvent.name, data: trackableEvent.customParameters, revenue: nil)
-//    }
     
     func setUserInfo(key: String, value: String?) {
         var userInfo = userInfo ?? [String: String?]()
