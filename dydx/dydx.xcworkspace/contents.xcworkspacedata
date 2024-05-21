@@ -25,6 +25,9 @@
          </FileRef>
       </Group>
       <FileRef
+         location = "group:dydxAnalytics/dydxAnalytics.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:dydxViews/dydxViews.xcodeproj">
       </FileRef>
       <FileRef

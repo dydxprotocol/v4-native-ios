@@ -171,6 +171,7 @@
 		27289B172BC9AA44009D21AD /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 27289B162BC9AA44009D21AD /* KeyboardObserving */; };
 		2728CE1B2BBCD2AB004C9323 /* dydxGainLossInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2728CE1A2BBCD2AB004C9323 /* dydxGainLossInputViewModel.swift */; };
 		273F50162B7C3F120034792A /* SignedAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F50152B7C3F120034792A /* SignedAmountView.swift */; };
+		2742C04E2BF6897A00E13C09 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C04D2BF6897A00E13C09 /* dydxAnalytics.framework */; };
 		27685F4D2B9FCAE200F37DE2 /* Satoshi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27685F402B9FCAD300F37DE2 /* Satoshi-Medium.otf */; };
 		2769090E2AAFD8030075B2D6 /* TransferInstanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090D2AAFD8030075B2D6 /* TransferInstanceViewModel.swift */; };
 		276909102AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */; };
@@ -539,6 +540,7 @@
 		272030172A7812B900D233B9 /* UINavigationController+SwipeBackNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+SwipeBackNavigation.swift"; sourceTree = "<group>"; };
 		2728CE1A2BBCD2AB004C9323 /* dydxGainLossInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxGainLossInputViewModel.swift; sourceTree = "<group>"; };
 		273F50152B7C3F120034792A /* SignedAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedAmountView.swift; sourceTree = "<group>"; };
+		2742C04D2BF6897A00E13C09 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27685F402B9FCAD300F37DE2 /* Satoshi-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Medium.otf"; sourceTree = "<group>"; };
 		2769090D2AAFD8030075B2D6 /* TransferInstanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferInstanceViewModel.swift; sourceTree = "<group>"; };
 		2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewModel.swift; sourceTree = "<group>"; };
@@ -606,6 +608,7 @@
 				027C379F29AEC11000381B00 /* Introspect in Frameworks */,
 				024B7B4E28B7F82400F7C386 /* Utilities.framework in Frameworks */,
 				27289B172BC9AA44009D21AD /* KeyboardObserving in Frameworks */,
+				2742C04E2BF6897A00E13C09 /* dydxAnalytics.framework in Frameworks */,
 				024B7B4C28B7F80F00F7C386 /* PlatformParticles.framework in Frameworks */,
 				024B7B4D28B7F80F00F7C386 /* PlatformUI.framework in Frameworks */,
 				D389C2240B81C64330A95B2D /* Pods_iOS_dydxViews.framework in Frameworks */,
@@ -1608,6 +1611,7 @@
 		ED13AE6112472E95629FA451 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2742C04D2BF6897A00E13C09 /* dydxAnalytics.framework */,
 				74994AC06F1817485230EDBE /* Pods_iOS_dydxViews.framework */,
 				59AC3A07F2D40D434FF03B00 /* Pods_iOS_dydxViewsTests.framework */,
 			);

@@ -26,18 +26,6 @@ open class TransformerTracker: NSObject & TrackingProtocol {
         }
     }
 
-    open func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?, contextViewController: UIViewController?) {
-        if !excluded {
-            if let path = transform(path: path)?.trim() {
-                if let action = action {
-                    log(event: "\(path)_\(action)", data: data, revenue: revenue)
-                } else {
-                    log(event: path, data: data, revenue: revenue)
-                }
-            }
-        }
-    }
-
     open func leave(_ path: String?) {
     }
 
