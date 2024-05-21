@@ -30,10 +30,6 @@ public class AppsFlyerTracking: TransformerTracker {
         }
     }
 
-    override open func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?, contextViewController: UIViewController?) {
-        // Only track the ones required by growth
-    }
-
     override public func log(event: String, data: [String: Any]?, revenue: NSNumber?) {
         if !excluded {
             var data = data

@@ -85,38 +85,6 @@ public class dydxCompositeTracking: CompositeTracking {
             .store(in: &subscriptions)
     }
 
-
-    
-
-    override public func view(_ path: String?, action: String?, data: [String: Any]?, from: String?, time: Date?, revenue: NSNumber?, contextViewController: UIViewController?) {
-        if let transformed = transform(events: viewEvents, path: path), let event = parser.asString(transformed["event"]) {
-            super.view(path, action: action, data: data, from: from, time: time, revenue: nil, contextViewController: contextViewController)
-            let info = parser.asDictionary(transformed["info"]) ?? data ?? [String: Any]()
-            log(event: event, data: info, revenue: revenue)
-        } else {
-            super.view(path, action: action, data: data, from: from, time: time, revenue: revenue, contextViewController: contextViewController)
-        }
-        if let contextViewController {
-            
-            log(event: AnalyticsEventScreenView,
-                data: [
-                    AnalyticsParameterScreenName: path as Any,
-                    AnalyticsParameterScreenClass: String(describing: type(of: contextViewController))
-                ])
-        }
-        if let transformed = transform(events: onboardingEvents, path: path), let event = parser.asString(transformed["event"]) {
-            var info = parser.asDictionary(transformed["info"]) ?? data ?? [String: Any]()
-            if event == "OnboardingStepChanged" {
-                if let time = time, let previous = transform(events: onboardingEvents, path: from), parser.asString(transformed["event"]) == "OnboardingStepChanged" {
-                    let seconds = Int(Date().timeIntervalSince(time))
-                    info["secondsOnPreviousStep"] = NSNumber(value: seconds)
-                    info["previousStep"] = (previous["info"] as? [String: Any])?["currentStep"]
-                }
-            }
-            log(event: event, data: info, revenue: revenue)
-        }
-    }
-
     override public func leave(_ path: String?) {
         super.leave(path)
         if let transformed = transform(events: viewEvents, path: path), let event = parser.asString(transformed["event"]) {

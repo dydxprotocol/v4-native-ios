@@ -20,6 +20,7 @@ import AppsFlyerStaticInjections
 import FirebaseStaticInjections
 import dydxStateManager
 import dydxViews
+import dydxAnalytics
 
 open class CommonAppDelegate: ParticlesAppDelegate {
     open var notificationTag: String {
@@ -169,7 +170,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     
     open override func applicationDidBecomeActive(_ application: UIApplication) {
         super.applicationDidBecomeActive(application)
-        Tracking.shared?.log(event: "AppStart", data: nil)
+        Tracking.shared?.log(event: AnalyticsEventV2.AppStart())
         dydxRatingService.shared?.launchedApp()
     }
 

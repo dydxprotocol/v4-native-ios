@@ -21,6 +21,7 @@ import RoutingKit
 import UIAppToolkits
 import UIToolkits
 import Utilities
+import dydxAnalytics
 
 #if _iOS
     import FirebaseStaticInjections
@@ -143,15 +144,7 @@ class AppDelegate: CommonAppDelegate {
     }
 
     override func deepLinkHandled(deeplink: URL, successful: Bool) {
-        let data = ["url": deeplink.absoluteString]
-        if successful {
-            if let type = deeplink.params?["notification_type"] {
-                Tracking.shared?.view("/notification/deeplink/" + type, data: data)
-            }
-            Tracking.shared?.view("/notification/deeplink/success", data: data)
-        } else {
-            Tracking.shared?.view("/notification/deeplink/failure", data: data)
-        }
+        Tracking.shared?.log(event: AnalyticsEventV2.DeepLinkHandled(url: deeplink.absoluteString, succeeded: successful))
     }
 
     /// Prioritized CoinbaseWalletSDK handling of the deeplink
