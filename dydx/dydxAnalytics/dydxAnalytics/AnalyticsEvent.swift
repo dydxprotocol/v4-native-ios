@@ -67,76 +67,85 @@ public extension AnalyticsEventV2 {
     }
 }
 
-public enum AnalyticsEventV2: TrackableEvent, CustomDebugStringConvertible {
-    // TODO: add and replace all events
-    case appStart
-    case navigatePage(screen: ScreenIdentifiable)
-    case deepLinkHandled(url: String, succeeded: Bool)
-    case notificationPermissionsChanged(isAuthorized: Bool)
-    case onboardingStepChanged(step: OnboardingStep, state: OnboardingState)
+public enum AnalyticsEventV2 {
+    public struct AppStart: TrackableEvent {
+        public var name: String { "AppStart" }
+        public var customParameters: [String: Any] { [:] }
 
-    public var name: String {
-        switch self {
-        case .navigatePage:
-            return "NavigatePage"
-        case .deepLinkHandled:
-            return "DeeplinkHandled"
-        case .appStart:
-            return "AppStart"
-        case .onboardingStepChanged:
-            return "OnboardingStepChanged"
-        case .notificationPermissionsChanged:
-            return "NotificationPermissionsChanged"
+        public init() {}
+    }
+
+    public struct NavigatePage: TrackableEvent {
+        public let screen: ScreenIdentifiable
+
+        public var name: String { "NavigatePage" }
+        public var customParameters: [String: Any] {[
+            "mobile_path": screen.mobilePath,
+            "path": screen.correspondingWebPath as Any,
+            // for firebase auto-generated dashboard(s)
+            "\(AnalyticsParameterScreenClass)": screen.screenClass,
+            "\(AnalyticsParameterScreenName)": screen.mobilePath
+        ]}
+
+        public init(screen: ScreenIdentifiable) {
+            self.screen = screen
         }
     }
 
-    public var customParameters: [String: Any] {
-        switch self {
-        case .appStart:
-            return [:]
-        case .navigatePage(let screen):
-            return [
-                "mobile_path": screen.mobilePath,
-                "path": screen.correspondingWebPath as Any,
-                // for firebase auto-generated dashboard(s)
-                "\(AnalyticsParameterScreenClass)": screen.screenClass,
-                "\(AnalyticsParameterScreenName)": screen.mobilePath
-            ]
-        case .deepLinkHandled(let url, let succeeded):
-            return [
-                "successfully_handled": succeeded,
-                "url": url
-            ]
-        case .onboardingStepChanged(let step, let state):
-            return [
-                "step": step.rawValue,
-                "state": state.rawValue
-            ]
-        case .notificationPermissionsChanged(let isAuthorized):
-            return [
-                "is_authorized": isAuthorized
-            ]
+    public struct DeepLinkHandled: TrackableEvent {
+        let url: String
+        let succeeded: Bool
+
+        public var name: String { "DeeplinkHandled" }
+        public var customParameters: [String: Any] {[
+            "url": url,
+            "succeeded": succeeded
+        ]}
+
+        public init(url: String, succeeded: Bool) {
+            self.url = url
+            self.succeeded = succeeded
         }
     }
 
-    public var debugDescription: String {
-        let sorted = customParameters.sorted { $0.key < $1.key }
-        return "dydxAnalytics event \(name) with data: \(sorted)"
+    public struct NotificationPermissionsChanged: TrackableEvent {
+        let isAuthorized: Bool
+
+        public var name: String { "NotificationPermissionsChanged" }
+        public var customParameters: [String: Any] {[
+            "is_authorized": isAuthorized
+        ]}
+
+        public init(isAuthorized: Bool) {
+            self.isAuthorized = isAuthorized
+        }
+    }
+
+    public struct OnboardingStepChanged: TrackableEvent {
+        let step: OnboardingStep
+        let state: OnboardingState
+
+        public var name: String { "OnboardingStepChanged" }
+        public var customParameters: [String: Any] {[
+            "step": step.rawValue,
+            "state": state.rawValue
+        ]}
+
+        public init(step: OnboardingStep, state: OnboardingState) {
+            self.step = step
+            self.state = state
+        }
     }
 }
 
 public extension TrackingProtocol {
-    func log(event: AnalyticsEventV2) {
-        log(event: event.name, data: event.customParameters)
-        switch event {
-        case .navigatePage:
-            // for firebase auto-generated dashboard(s)
+    func log(event: TrackableEvent) {
+        if let event = event as? AnalyticsEventV2.NavigatePage {
             log(event: AnalyticsEventScreenView, data: event.customParameters)
-        default:
-            break
         }
+        log(event: event.name, data: event.customParameters)
         #if DEBUG
-        Console.shared.log(event.debugDescription)
+        Console.shared.log(event.description)
         #endif
     }
 }

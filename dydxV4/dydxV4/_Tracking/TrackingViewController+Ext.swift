@@ -9,6 +9,7 @@
 import Utilities
 import PlatformParticles
 import dydxPresenters
+import dydxAnalytics
 
 extension TrackingViewController: ScreenIdentifiable, TrackingViewProtocol {
     public var mobilePath: String {
@@ -38,7 +39,7 @@ extension TrackingViewController: ScreenIdentifiable, TrackingViewProtocol {
     }
 
     public func logScreenView() {
-        Tracking.shared?.log(event: .navigatePage(screen: self))
+        Tracking.shared?.log(event: AnalyticsEventV2.NavigatePage(screen: self))
     }
     
 }

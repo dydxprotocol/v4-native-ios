@@ -144,7 +144,7 @@ class AppDelegate: CommonAppDelegate {
     }
 
     override func deepLinkHandled(deeplink: URL, successful: Bool) {
-        Tracking.shared?.log(event: .deepLinkHandled(url: deeplink.absoluteString, succeeded: successful))
+        Tracking.shared?.log(event: AnalyticsEventV2.DeepLinkHandled(url: deeplink.absoluteString, succeeded: successful))
     }
 
     /// Prioritized CoinbaseWalletSDK handling of the deeplink

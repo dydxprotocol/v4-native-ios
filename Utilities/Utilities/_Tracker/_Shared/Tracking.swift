@@ -19,9 +19,9 @@ public extension TrackingProtocol {
     func log(event: String, data: [String: Any]?) {
         log(event: event, data: data, revenue: nil)
     }
-    func log(trackableEvent: TrackableEvent) {
-        log(event: trackableEvent.name, data: trackableEvent.customParameters, revenue: nil)
-    }
+//    func log(trackableEvent: TrackableEvent) {
+//        log(event: trackableEvent.name, data: trackableEvent.customParameters, revenue: nil)
+//    }
     
     func setUserInfo(key: String, value: String?) {
         var userInfo = userInfo ?? [String: String?]()
@@ -34,9 +34,16 @@ public class Tracking {
     public static var shared: TrackingProtocol?
 }
 
-public protocol TrackableEvent {
+public protocol TrackableEvent: CustomStringConvertible {
     var name: String { get }
     var customParameters: [String: Any] { get }
+}
+
+public extension TrackableEvent {
+    var description: String {
+        let sorted = customParameters.sorted { $0.key < $1.key }
+        return "dydxAnalytics event \(name) with data: \(sorted)"
+    }
 }
 
 public protocol TrackingViewProtocol: ScreenIdentifiable {

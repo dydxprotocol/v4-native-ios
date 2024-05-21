@@ -28,7 +28,7 @@ public final class OnboardingAnalytics {
                 } else {
                     state = .walletConnected
                 }
-                Tracking.shared?.log(event: .onboardingStepChanged(step: step, state: state))
+                Tracking.shared?.log(event: AnalyticsEventV2.OnboardingStepChanged(step: step, state: state))
             }
             .store(in: &subscriptions)
     }
