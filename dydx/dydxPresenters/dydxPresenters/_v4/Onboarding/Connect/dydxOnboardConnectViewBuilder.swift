@@ -13,6 +13,7 @@ import RoutingKit
 import ParticlesKit
 import PlatformUI
 import dydxCartera
+import dydxAnalytics
 
 public class dydxOnboardConnectViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {

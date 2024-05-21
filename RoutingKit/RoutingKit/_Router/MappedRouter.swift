@@ -271,10 +271,6 @@ open class MappedRouter: NSObject, RouterProtocol, ParsingProtocol, CombineObser
         }
     }
 
-    open func previousTracking() -> TrackingData? {
-        return nil
-    }
-
     open func reallyNavigate(to request: RoutingRequest, presentation: RoutingPresentation?, animated: Bool, completion: RoutingCompletionBlock?) {
         if let path = request.path {
             Console.shared.log("Route to \(path)")
@@ -284,20 +280,13 @@ open class MappedRouter: NSObject, RouterProtocol, ParsingProtocol, CombineObser
         } else {
             let transformed = transform(request: request)
             if let map = self.map(for: transformed) {
-                let previousTracking = previousTracking()
                 backtrack(request: transformed, animated: animated) { [weak self] data, completed in
                     if completed {
-                        if let viewController = data as? TrackingViewProtocol {
-                            viewController.logView(path: transformed.path, data: nil, from: previousTracking?.path, time: previousTracking?.startTime)
-                        }
                         completion?(nil, true)
                     } else {
                         self?.route(dependencies: map, request: transformed, completion: { [weak self] _, successful in
                             if successful {
                                 self?.navigate(to: map, request: transformed, presentation: presentation ?? transformed.presentation, animated: animated, completion: { /* [weak self] */ data, successful in
-                                    if successful, let viewController = data as? TrackingViewProtocol {
-                                        viewController.logView(path: transformed.path, data: nil, from: previousTracking?.path, time: previousTracking?.startTime)
-                                    }
                                     completion?(data, successful)
                                 })
                             } else {

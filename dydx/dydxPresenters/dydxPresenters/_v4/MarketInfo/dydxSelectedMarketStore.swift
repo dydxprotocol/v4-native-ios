@@ -8,11 +8,11 @@
 import Foundation
 import Utilities
 
-final class dydxSelectedMarketsStore {
+public final class dydxSelectedMarketsStore {
     private let storeKey = "last_selected_market"
-    static let shared = dydxSelectedMarketsStore()
+    public static let shared = dydxSelectedMarketsStore()
 
-    var lastSelectedMarket: String {
+    public var lastSelectedMarket: String {
         get { SettingsStore.shared?.value(forKey: storeKey) as? String ?? "ETH-USD" }
         set { SettingsStore.shared?.setValue(newValue, forKey: storeKey) }
     }

@@ -281,6 +281,13 @@ abstract_target 'iOS' do
     ios_ui_pods
     swifiui_pods
   end
+
+  target 'dydxAnalytics' do
+    project '../dydx/dydxAnalytics/dydxAnalytics'
+    firebase_core_pods
+    ios_util_pods
+    abacus_pods
+  end
   
   target 'dydxPresenters' do
     project '../dydx/dydxPresenters/dydxPresenters'

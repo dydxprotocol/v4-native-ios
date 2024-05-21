@@ -62,9 +62,6 @@
 		025D22D628F65E1B00C4ADAE /* dydxMarketStatsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D22D528F65E1B00C4ADAE /* dydxMarketStatsViewPresenter.swift */; };
 		0262EFA629D79EE4009889E2 /* Wallets2ViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262EF9929D79EE4009889E2 /* Wallets2ViewBuilder.swift */; };
 		0262F2D529DB4891009889E2 /* WalletAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262F2D429DB4891009889E2 /* WalletAction.swift */; };
-		026388D82BB34B7A006DD6E8 /* OnboardingAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026388D72BB34B7A006DD6E8 /* OnboardingAnalytics.swift */; };
-		026388DA2BB34C17006DD6E8 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026388D92BB34C17006DD6E8 /* AnalyticsEvent.swift */; };
-		026388DC2BB36142006DD6E8 /* TransferAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026388DB2BB36142006DD6E8 /* TransferAnalytics.swift */; };
 		02669B7C2AD8661F00A756AA /* dydxCarteraConfigWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02669B7B2AD8661F00A756AA /* dydxCarteraConfigWorker.swift */; };
 		02669B952AD87A9D00A756AA /* dydxGlobalWorkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02669B942AD87A9D00A756AA /* dydxGlobalWorkers.swift */; };
 		0268BBFB2A8BE27800D0C59B /* dydxTransferOutViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268BBFA2A8BE27800D0C59B /* dydxTransferOutViewPresenter.swift */; };
@@ -137,6 +134,7 @@
 		27351D452AC4A67900E4A563 /* dydxRestrictionsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27351D442AC4A67900E4A563 /* dydxRestrictionsWorker.swift */; };
 		2741E3702A68787A000FA190 /* settings_direction_color_preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 2741E3632A68787A000FA190 /* settings_direction_color_preference.json */; };
 		2741E3732A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */; };
+		2742C05E2BF6898500E13C09 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C05D2BF6898500E13C09 /* dydxAnalytics.framework */; };
 		2749F8FF2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */; };
 		276908FF2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */; };
 		277987512BA33F15006DC5CD /* dydxSelectedMarketStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */; };
@@ -422,9 +420,6 @@
 		025D22D528F65E1B00C4ADAE /* dydxMarketStatsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketStatsViewPresenter.swift; sourceTree = "<group>"; };
 		0262EF9929D79EE4009889E2 /* Wallets2ViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallets2ViewBuilder.swift; sourceTree = "<group>"; };
 		0262F2D429DB4891009889E2 /* WalletAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAction.swift; sourceTree = "<group>"; };
-		026388D72BB34B7A006DD6E8 /* OnboardingAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnalytics.swift; sourceTree = "<group>"; };
-		026388D92BB34C17006DD6E8 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
-		026388DB2BB36142006DD6E8 /* TransferAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAnalytics.swift; sourceTree = "<group>"; };
 		02669B7B2AD8661F00A756AA /* dydxCarteraConfigWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCarteraConfigWorker.swift; sourceTree = "<group>"; };
 		02669B942AD87A9D00A756AA /* dydxGlobalWorkers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxGlobalWorkers.swift; sourceTree = "<group>"; };
 		0268BBFA2A8BE27800D0C59B /* dydxTransferOutViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferOutViewPresenter.swift; sourceTree = "<group>"; };
@@ -497,6 +492,7 @@
 		27351D442AC4A67900E4A563 /* dydxRestrictionsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRestrictionsWorker.swift; sourceTree = "<group>"; };
 		2741E3632A68787A000FA190 /* settings_direction_color_preference.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings_direction_color_preference.json; sourceTree = "<group>"; };
 		2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxDirectionColorPreferenceViewBuilder.swift; sourceTree = "<group>"; };
+		2742C05D2BF6898500E13C09 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsLaunchIncentivesPresenter.swift; sourceTree = "<group>"; };
 		276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewPresenter.swift; sourceTree = "<group>"; };
 		277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSelectedMarketStore.swift; sourceTree = "<group>"; };
@@ -546,6 +542,7 @@
 				025315BA29BFF18700D6CC9B /* CameraParticles.framework in Frameworks */,
 				02439CCB29B03EEE00A083FE /* dydxCartera.framework in Frameworks */,
 				029E11A029ADB77E00FE271C /* dydxChart.framework in Frameworks */,
+				2742C05E2BF6898500E13C09 /* dydxAnalytics.framework in Frameworks */,
 				029E0E8729AD9BA500FE271C /* PlatformParticles.framework in Frameworks */,
 				0284202F29AD727200C0E7CC /* dydxViews.framework in Frameworks */,
 				02A8980628E76175006F1658 /* dydxStateManager.framework in Frameworks */,
@@ -624,7 +621,6 @@
 		0230376A28C11B0300412B72 /* _v4 */ = {
 			isa = PBXGroup;
 			children = (
-				026388D62BB34B38006DD6E8 /* Analytics */,
 				278A4D912B8FA5C1003898EB /* Rating */,
 				021B68A32AD9B86600C5C3BF /* Auth */,
 				0243A75529BE568600A083FE /* Actions */,
@@ -948,16 +944,6 @@
 				0262EF9929D79EE4009889E2 /* Wallets2ViewBuilder.swift */,
 			);
 			path = Wallet;
-			sourceTree = "<group>";
-		};
-		026388D62BB34B38006DD6E8 /* Analytics */ = {
-			isa = PBXGroup;
-			children = (
-				026388D72BB34B7A006DD6E8 /* OnboardingAnalytics.swift */,
-				026388DB2BB36142006DD6E8 /* TransferAnalytics.swift */,
-				026388D92BB34C17006DD6E8 /* AnalyticsEvent.swift */,
-			);
-			path = Analytics;
 			sourceTree = "<group>";
 		};
 		02669B962AD87AA200A756AA /* Workers */ = {
@@ -1414,6 +1400,7 @@
 		51E65BFD078A26FDF0980B06 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2742C05D2BF6898500E13C09 /* dydxAnalytics.framework */,
 				F1551C00FFF41C29CFC5BD94 /* Pods_iOS_dydxPresenters.framework */,
 				F6C6D464ED8DEF5D8CC88A87 /* Pods_iOS_dydxPresentersTests.framework */,
 			);
@@ -1904,7 +1891,6 @@
 				023848C22A9E637C00B1A673 /* SettingsLandingViewPresenter.swift in Sources */,
 				0258BA23299294BF0098E1BE /* dydxProfileViewBuilder.swift in Sources */,
 				0208631028F5186E00C9D3A0 /* OrderbookLineDataPoint.swift in Sources */,
-				026388DA2BB34C17006DD6E8 /* AnalyticsEvent.swift in Sources */,
 				023AB3C82BEAD5F3005230B2 /* dydxTargetLeverageViewBuilder.swift in Sources */,
 				278A4D932B8FA5E8003898EB /* dydxRateAppViewBuilder.swift in Sources */,
 				0276FA992A0DB8FD000BDF0B /* Model+Ext.swift in Sources */,
@@ -1918,7 +1904,6 @@
 				0243A76129BE572C00A083FE /* dydxCancelOrderActionBuilder.swift in Sources */,
 				0279DE482BEBE76900F9ECF8 /* dydxTargetLeverageCtaButtonViewPresenter.swift in Sources */,
 				023AB3B22BEACE14005230B2 /* dydxTradeInputMarginViewPresenter.swift in Sources */,
-				026388D82BB34B7A006DD6E8 /* OnboardingAnalytics.swift in Sources */,
 				64A4DB9929664818008D8E20 /* dydxTradeReceiptPresenter.swift in Sources */,
 				0236F0CB2968793A00EB995F /* dydxPortfolioFillsViewPresenter.swift in Sources */,
 				02A565AF2A5E310B0035469F /* dydxAlertsProvider.swift in Sources */,
@@ -1951,7 +1936,6 @@
 				64A4DB9B2966490C008D8E20 /* dydxTradeInputOrderTypePresenter.swift in Sources */,
 				0236F118296ABEF500EB995F /* dydxPortfolioPositionsViewPresenter.swift in Sources */,
 				02282E752AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift in Sources */,
-				026388DC2BB36142006DD6E8 /* TransferAnalytics.swift in Sources */,
 				024F488729657FE600E40247 /* dydxUserFavoriteViewPresenter.swift in Sources */,
 				029CBE7428F6032C00259C1D /* HistoricalFundingDataPoint.swift in Sources */,
 				0274B34828F1140D005AF69E /* dydxMarketPriceCandlesViewPresenter.swift in Sources */,
