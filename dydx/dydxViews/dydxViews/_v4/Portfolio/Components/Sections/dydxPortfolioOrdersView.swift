@@ -197,6 +197,7 @@ public class dydxPortfolioOrdersViewModel: PlatformListViewModel {
                    contentChanged: contentChanged)
         self.placeholder = _placeholder
         self.header = createHeader().wrappedViewModel
+        self.footer = createFooter().wrappedViewModel
         self.width = UIScreen.main.bounds.width - 16
     }
 
@@ -219,6 +220,15 @@ public class dydxPortfolioOrdersViewModel: PlatformListViewModel {
         .padding(.bottom, 16)
         .themeFont(fontSize: .small)
         .themeColor(foreground: .textTertiary)
+    }
+
+    private func createFooter() -> some View {
+        Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITION_ORDERS_COMING_SOON")
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 16)
+                .themeFont(fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+                .padding(.top, 24)
     }
 }
 

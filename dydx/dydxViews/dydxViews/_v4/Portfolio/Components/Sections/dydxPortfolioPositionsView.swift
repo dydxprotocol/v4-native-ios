@@ -10,6 +10,7 @@ import SwiftUI
 import PlatformUI
 import Utilities
 import dydxFormatter
+import dydxStateManager
 
 public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     public struct Handler: Hashable {
@@ -334,6 +335,7 @@ public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
         if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == false {
             self.header = createHeader().wrappedViewModel
         }
+        self.footer = createFooter().wrappedViewModel
         self.width = UIScreen.main.bounds.width - 32
     }
 
@@ -361,6 +363,15 @@ public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
         .padding(.horizontal, 16)
         .themeFont(fontSize: .small)
         .themeColor(foreground: .textTertiary)
+    }
+
+    private func createFooter() -> some View {
+        Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITIONS_COMING_SOON")
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 16)
+            .themeFont(fontSize: .small)
+            .themeColor(foreground: .textTertiary)
+            .padding(.top, 24)
     }
 }
 

@@ -24,6 +24,13 @@ open class PlatformListViewModel: PlatformViewModeling {
             contentChanged?()
         }
     }
+    
+    public var footer: PlatformViewModel? {
+        didSet {
+            contentChanged?()
+        }
+    }
+    
     public var placeholder: PlatformViewModel? {
         didSet {
             contentChanged?()
@@ -75,8 +82,12 @@ open class PlatformListViewModel: PlatformViewModeling {
         }
         
         let list: [PlatformViewModel]
-        if header != nil {
-            list = [PlatformViewModel()] + items
+        if let header, let footer {
+            list = [header] + items + [footer]
+        } else if let header {
+            list = [header] + items
+        } else if let footer {
+            list = items + [footer]
         } else {
             list = items
         }
@@ -87,8 +98,8 @@ open class PlatformListViewModel: PlatformViewModeling {
                     Group {
                         let cell =
                         Group {
-                            if item === list.first, let header = self?.header {
-                                header.createView(parentStyle: parentStyle)
+                            if item === list.first && self?.header != nil || item === list.last && self?.footer != nil  {
+                                item.createView(parentStyle: parentStyle)
                             } else {
                                 VStack(alignment: .leading, spacing: 0) {
                                     if self?.intraItemSeparator == true {
