@@ -371,7 +371,8 @@ public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
             .padding(.horizontal, 16)
             .themeFont(fontSize: .small)
             .themeColor(foreground: .textTertiary)
-            .padding(.top, 24)
+            .padding(.top, 12)
+            .padding(.bottom, 16)
     }
 }
 
