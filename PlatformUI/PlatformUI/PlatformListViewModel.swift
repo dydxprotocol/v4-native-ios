@@ -98,7 +98,8 @@ open class PlatformListViewModel: PlatformViewModeling {
                     Group {
                         let cell =
                         Group {
-                            if item === list.first && self?.header != nil || item === list.last && self?.footer != nil  {
+                            // render the item if it is a header or a footer and the index is first or last
+                            if (item === list.first && self?.header != nil) || (item === list.last && self?.footer != nil)  {
                                 item.createView(parentStyle: parentStyle)
                             } else {
                                 VStack(alignment: .leading, spacing: 0) {
