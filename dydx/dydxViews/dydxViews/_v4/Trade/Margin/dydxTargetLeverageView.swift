@@ -12,8 +12,8 @@ import Utilities
 
 public class dydxTargetLeverageViewModel: PlatformViewModel {
     public struct LeverageTextAndValue {
-        let text: String
-        let value: Double
+        public let text: String
+        public let value: Double
 
         public init(text: String, value: Double) {
             self.text = text

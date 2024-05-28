@@ -59,6 +59,8 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     public var entryPrice: String?
     public var unrealizedPnl: SignedAmountViewModel?
     public var unrealizedPnlPercent: SignedAmountViewModel?
+    public var marginValue: String = "--"
+    public var marginMode: String = "--"
     public var logoUrl: URL?
     public var gradientType: GradientType
     public var handler: Handler?
@@ -161,18 +163,12 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
 
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
-                            /*
-                             TODO: Get from Abacus
-                             */
-                            Text("$??.??")
+                            Text(self.marginValue)
                                 .themeFont(fontSize: .small)
                                 .themeColor(foreground: .textPrimary)
                                 .minimumScaleFactor(0.5)
 
-                            /*
-                             TODO: Get from Abacus
-                             */
-                            Text("isolated")
+                            Text(self.marginMode)
                                 .themeFont(fontSize: .smaller)
                                 .themeColor(foreground: .textTertiary)
                                 .minimumScaleFactor(0.5)

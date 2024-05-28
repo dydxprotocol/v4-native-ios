@@ -11,6 +11,8 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import dydxStateManager
+import Abacus
 
 protocol dydxTradeInputMarginViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxTradeInputMarginViewModel? { get }
@@ -26,9 +28,13 @@ class dydxTradeInputMarginViewPresenter: HostedViewPresenter<dydxTradeInputMargi
     override func start() {
         super.start()
 
-        // TODO: Fetch from Abacus
-        viewModel?.marginMode = DataLocalizer.localize(path: "APP.GENERAL.ISOLATED")
-        viewModel?.marginLeverage = "2x"
+        AbacusStateManager.shared.state.tradeInput
+            .compactMap { $0 }
+            .sink {[weak self] tradeInput in
+                self?.viewModel?.marginMode = DataLocalizer.localize(path: "APP.GENERAL.\(tradeInput.marginMode.rawValue)")
+                self?.viewModel?.marginLeverage = "\(tradeInput.targetLeverage)×"
+            }
+            .store(in: &subscriptions)
 
         viewModel?.marginModeAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/trade/margin_type"), animated: true, completion: nil)
@@ -36,5 +42,9 @@ class dydxTradeInputMarginViewPresenter: HostedViewPresenter<dydxTradeInputMargi
         viewModel?.marginLeverageAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/trade/target_leverage"), animated: true, completion: nil)
         }
+    }
+
+    private func updateMarginMode(mode: MarginMode) {
+
     }
 }
