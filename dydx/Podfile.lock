@@ -1,5 +1,5 @@
 PODS:
-  - Abacus (1.7.18)
+  - Abacus (1.7.32)
   - Amplitude-iOS (4.10.0)
   - AppsFlyerFramework (6.14.3):
     - AppsFlyerFramework/Main (= 6.14.3)
@@ -257,7 +257,7 @@ PODS:
   - PromisesSwift (2.4.0):
     - PromisesObjC (= 2.4.0)
   - RDHCollectionViewGridLayout (1.2.5)
-  - ReachabilitySwift (5.2.2)
+  - ReachabilitySwift (5.2.3)
   - SDWebImage (5.19.2):
     - SDWebImage/Core (= 5.19.2)
   - SDWebImage/Core (5.19.2)
@@ -386,7 +386,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  Abacus: b7d8f0a7ec39f401c7b46682fe40259d8db3971d
+  Abacus: 05f9335fa592fc7df2afdd58f716b75719ef6290
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   AppsFlyerFramework: 0a68f5b72bbbadfa71d4ae3eaf040e82d62e8518
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
@@ -433,7 +433,7 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   RDHCollectionViewGridLayout: 4b4229212ed8c136aa70101d92ecd43742ca62b6
-  ReachabilitySwift: 2128f3a8c9107e1ad33574c6e58e8285d460b149
+  ReachabilitySwift: 7f151ff156cea1481a8411701195ac6a984f4979
   SDWebImage: dfe95b2466a9823cf9f0c6d01217c06550d7b29a
   SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
   SDWebImageSwiftUI: 824628d8220906aa101f62b39a7492edd138449d
