@@ -121,13 +121,12 @@ public class dydxPortfolioFeesListViewModel: PlatformListViewModel {
 
     public init() {
         super.init()
-        self.placeholder = PlatformView.nilViewModel
-        self.header = createHeader().wrappedViewModel
         self.width = UIScreen.main.bounds.width - 16
     }
 
-    private func createHeader() -> some View {
-        HStack {
+    public override var header: PlatformViewModel? {
+        guard items.count > 0 else { return nil }
+        return HStack {
             Text(DataLocalizer.localize(path: "APP.GENERAL.TIER"))
                 .leftAligned()
                 .frame(width: 70)
@@ -142,6 +141,7 @@ public class dydxPortfolioFeesListViewModel: PlatformListViewModel {
         .padding(.horizontal, 8)
         .themeFont(fontSize: .smaller)
         .themeColor(foreground: .textTertiary)
+        .wrappedViewModel
     }
 }
 

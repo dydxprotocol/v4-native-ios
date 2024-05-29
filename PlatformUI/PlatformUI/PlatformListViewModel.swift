@@ -19,23 +19,6 @@ open class PlatformListViewModel: PlatformViewModeling {
             contentChanged?()
         }
     }
-    public var header: PlatformViewModel? {
-        didSet {
-            contentChanged?()
-        }
-    }
-    
-    public var footer: PlatformViewModel? {
-        didSet {
-            contentChanged?()
-        }
-    }
-    
-    public var placeholder: PlatformViewModel? {
-        didSet {
-            contentChanged?()
-        }
-    }
 
     
     public var width: CGFloat? {
@@ -53,43 +36,33 @@ open class PlatformListViewModel: PlatformViewModeling {
     public var contentChanged: (() -> Void)?
 
     public init(items: [PlatformViewModel] = [], 
-                header: PlatformViewModel? = nil,
-                placeholder: PlatformViewModel? = nil,
                 intraItemSeparator: Bool = true,
                 firstListItemTopSeparator: Bool = false,
                 lastListItemBottomSeparator: Bool = false,
                 contentChanged: (() -> Void)? = nil) {
         self.items = items
-        self.header = header
-        self.placeholder = placeholder
         self.intraItemSeparator = intraItemSeparator
         self.firstListItemTopSeparator = firstListItemTopSeparator
         self.lastListItemBottomSeparator = lastListItemBottomSeparator
         self.contentChanged = contentChanged
     }
     
+    open var header: PlatformViewModel? { nil }
+    open var footer: PlatformViewModel? { nil }
+    open var placeholder: PlatformViewModel? { nil }
+    
     open func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView {
-        guard items.count > 0 else {
-            let cell = Group {
-                    if let placeholder = self.placeholder {
-                        placeholder.createView(parentStyle: parentStyle)
-                    } else {
-                        PlatformView.nilView
-                    }
-                }
-                .frame(width: width)
-            return AnyView(cell)
-        }
         
+        let itemsOrPlaceholder = items.count > 0 ? items : [placeholder ?? .init(bodyBuilder: nil)]
         let list: [PlatformViewModel]
         if let header, let footer {
-            list = [header] + items + [footer]
+            list = [header] + itemsOrPlaceholder + [footer]
         } else if let header {
-            list = [header] + items
+            list = [header] + itemsOrPlaceholder
         } else if let footer {
-            list = items + [footer]
+            list = itemsOrPlaceholder + [footer]
         } else {
-            list = items
+            list = itemsOrPlaceholder
         }
         
         return AnyView(
@@ -99,7 +72,8 @@ open class PlatformListViewModel: PlatformViewModeling {
                         let cell =
                         Group {
                             // render the item if it is a header or a footer and the index is first or last
-                            if (item === list.first && self?.header != nil) || (item === list.last && self?.footer != nil)  {
+                            // or if items is empty (and placeholder is being displayed)
+                            if (item === list.first && self?.header != nil) || (item === list.last && self?.footer != nil) || self?.items.isEmpty != false {
                                 item.createView(parentStyle: parentStyle)
                             } else {
                                 VStack(alignment: .leading, spacing: 0) {
