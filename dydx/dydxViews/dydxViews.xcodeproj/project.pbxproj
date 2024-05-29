@@ -373,27 +373,6 @@
 			remoteGlobalIDString = 02841E2829AD6E5500C0E7CC;
 			remoteInfo = dydxFormatter;
 		};
-		271493592BFD2AF600D5E25A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 271493542BFD2AF600D5E25A /* dydxAnalytics.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2742BEAD2BF6860100E13C09;
-			remoteInfo = dydxAnalytics;
-		};
-		2714935B2BFD2AF600D5E25A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 271493542BFD2AF600D5E25A /* dydxAnalytics.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2742BEB72BF6860100E13C09;
-			remoteInfo = dydxAnalyticsTests;
-		};
-		2714935D2BFD2B1000D5E25A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 271493542BFD2AF600D5E25A /* dydxAnalytics.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2742BEAC2BF6860100E13C09;
-			remoteInfo = dydxAnalytics;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -557,7 +536,6 @@
 		270BA8CE2A6F1470009212EA /* dydxDebugThemeViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxDebugThemeViewerView.swift; sourceTree = "<group>"; };
 		270E7E332A5F700B00136793 /* dydxOrderbookManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOrderbookManagerView.swift; sourceTree = "<group>"; };
 		271010462BC7454B0037091A /* dydxCustomAmountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxCustomAmountViewModel.swift; sourceTree = "<group>"; };
-		271493542BFD2AF600D5E25A /* dydxAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxAnalytics.xcodeproj; path = ../dydxAnalytics/dydxAnalytics.xcodeproj; sourceTree = "<group>"; };
 		272030172A7812B900D233B9 /* UINavigationController+SwipeBackNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+SwipeBackNavigation.swift"; sourceTree = "<group>"; };
 		2728CE1A2BBCD2AB004C9323 /* dydxGainLossInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxGainLossInputViewModel.swift; sourceTree = "<group>"; };
 		273F50152B7C3F120034792A /* SignedAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedAmountView.swift; sourceTree = "<group>"; };
@@ -1167,7 +1145,6 @@
 		02684E0628BD40BE0007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				271493542BFD2AF600D5E25A /* dydxAnalytics.xcodeproj */,
 				0284200929AD704E00C0E7CC /* dydxFormatter.xcodeproj */,
 				024B7B1F28B7F7C200F7C386 /* PlatformUI.xcodeproj */,
 				024B7B2828B7F7C200F7C386 /* PlatformParticles.xcodeproj */,
@@ -1482,15 +1459,6 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		271493552BFD2AF600D5E25A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2714935A2BFD2AF600D5E25A /* dydxAnalytics.framework */,
-				2714935C2BFD2AF600D5E25A /* dydxAnalyticsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		277E8FF82B1EA083005CCBCB /* TradingRewards */ = {
 			isa = PBXGroup;
 			children = (
@@ -1675,7 +1643,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				2714935E2BFD2B1000D5E25A /* PBXTargetDependency */,
 				0284201329AD705400C0E7CC /* PBXTargetDependency */,
 				024B7B4128B7F7F900F7C386 /* PBXTargetDependency */,
 				024B7B4328B7F7F900F7C386 /* PBXTargetDependency */,
@@ -1744,10 +1711,6 @@
 			productRefGroup = 024B79BB28B7F53800F7C386 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 271493552BFD2AF600D5E25A /* Products */;
-					ProjectRef = 271493542BFD2AF600D5E25A /* dydxAnalytics.xcodeproj */;
-				},
 				{
 					ProductGroup = 0284200A29AD704E00C0E7CC /* Products */;
 					ProjectRef = 0284200929AD704E00C0E7CC /* dydxFormatter.xcodeproj */;
@@ -1884,20 +1847,6 @@
 			fileType = wrapper.cfbundle;
 			path = dydxFormatterTests.xctest;
 			remoteRef = 0284201029AD704E00C0E7CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2714935A2BFD2AF600D5E25A /* dydxAnalytics.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = dydxAnalytics.framework;
-			remoteRef = 271493592BFD2AF600D5E25A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2714935C2BFD2AF600D5E25A /* dydxAnalyticsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = dydxAnalyticsTests.xctest;
-			remoteRef = 2714935B2BFD2AF600D5E25A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2231,11 +2180,6 @@
 			isa = PBXTargetDependency;
 			name = dydxFormatter;
 			targetProxy = 0284201229AD705400C0E7CC /* PBXContainerItemProxy */;
-		};
-		2714935E2BFD2B1000D5E25A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = dydxAnalytics;
-			targetProxy = 2714935D2BFD2B1000D5E25A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
