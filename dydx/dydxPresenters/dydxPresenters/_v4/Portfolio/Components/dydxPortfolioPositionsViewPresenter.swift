@@ -34,6 +34,8 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
 
         AbacusStateManager.shared.state.onboarded
             .sink { [weak self] onboarded in
+                // TODO: remove once isolated markets is supported and force released
+                self?.viewModel?.shouldDisplayIsolatedPositionsWarning = onboarded
                 if onboarded {
                     self?.viewModel?.placeholderText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS")
                 } else {
