@@ -110,9 +110,9 @@ public final class AbacusState {
     }
 
     // protocol v5.0 and up
-    public var complianceStatus: AnyPublisher<ComplianceStatus, Never> {
+    public var compliance: AnyPublisher<Compliance, Never> {
         statePublisher
-            .compactMap { $0?.compliance?.status }
+            .compactMap { $0?.compliance }
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
