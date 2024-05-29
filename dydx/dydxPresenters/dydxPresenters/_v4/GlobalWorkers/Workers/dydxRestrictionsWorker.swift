@@ -24,42 +24,38 @@ public final class dydxRestrictionsWorker: BaseWorker {
             }
             .store(in: &subscriptions)
 
-        // used in protocol 4.0
-        AbacusStateManager.shared.state.complianceStatus
-            .sink { complianceStatus in
-                Self.handle(complianceStatus: complianceStatus)
+        // used in protocol 5.0
+        AbacusStateManager.shared.state.compliance
+            .sink { compliance in
+                Self.handle(compliance: compliance)
             }
             .store(in: &subscriptions)
     }
 
-    public static func handle(complianceStatus: ComplianceStatus) {
+    public static func handle(compliance: Compliance) {
         let title: String?
         let body: String?
-        switch complianceStatus {
+        switch compliance.status {
         case .compliant:
             return
         case .firstStrike, .firstStrikeCloseOnly, .closeOnly:
-            // TODO: add DATE & EMAIL
-            // [MOB-478 : update copy params for new compliance status strings](https://linear.app/dydx/issue/MOB-478/update-copy-params-for-new-compliance-status-strings)
             title = DataLocalizer.shared?.localize(
                 path: "APP.COMPLIANCE.CLOSE_ONLY_TITLE",
                 params: nil) ?? ""
             body = DataLocalizer.shared?.localize(
                 path: "APP.COMPLIANCE.CLOSE_ONLY_BODY",
                 params: [
-                    "DATE": "--",
-                    "EMAIL": "--"
+                    "DATE": compliance.expiresAt ?? "--",
+                    "EMAIL": AbacusStateManager.shared.environment?.links?.complianceSupportEmail ?? "--"
                 ]) ?? ""
         case .blocked:
-            // TODO: add DATE & EMAIL
-            // [MOB-478 : update copy params for new compliance status strings](https://linear.app/dydx/issue/MOB-478/update-copy-params-for-new-compliance-status-strings)
             title = DataLocalizer.shared?.localize(
                 path: "APP.COMPLIANCE.PERMANENTLY_BLOCKED_TITLE",
                 params: nil) ?? ""
             body = DataLocalizer.shared?.localize(
                 path: "APP.COMPLIANCE.PERMANENTLY_BLOCKED_BODY",
                 params: [
-                    "EMAIL": "--"
+                    "EMAIL": AbacusStateManager.shared.environment?.links?.complianceSupportEmail ?? "--"
                 ]) ?? ""
         default:
             return
