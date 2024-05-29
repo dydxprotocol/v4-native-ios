@@ -108,7 +108,6 @@
 		0279DE8F2BED532200F9ECF8 /* dydxAdjustMarginLiquidationPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE8E2BED532200F9ECF8 /* dydxAdjustMarginLiquidationPriceView.swift */; };
 		0279DE912BED610400F9ECF8 /* dydxAdjustMarginPositionReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE902BED610400F9ECF8 /* dydxAdjustMarginPositionReceiptView.swift */; };
 		0279DE932BED63D000F9ECF8 /* dydxAdjustMarginCtaButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE922BED63D000F9ECF8 /* dydxAdjustMarginCtaButtonView.swift */; };
-		027C379F29AEC11000381B00 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 027C379E29AEC11000381B00 /* Introspect */; };
 		027CB28529EEFF760069781A /* dydxTransferStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027CB28429EEFF760069781A /* dydxTransferStatusView.swift */; };
 		027F3EF72AB93ADC00602E5B /* dydxProfileBalancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F3EF62AB93ADC00602E5B /* dydxProfileBalancesViewModel.swift */; };
 		0280B39729CB63C70017D64A /* dydxOnboardWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0280B39629CB63C70017D64A /* dydxOnboardWelcomeView.swift */; };
@@ -168,10 +167,10 @@
 		270E7E342A5F700B00136793 /* dydxOrderbookManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270E7E332A5F700B00136793 /* dydxOrderbookManagerView.swift */; };
 		271010472BC7454B0037091A /* dydxCustomAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271010462BC7454B0037091A /* dydxCustomAmountViewModel.swift */; };
 		272030182A7812B900D233B9 /* UINavigationController+SwipeBackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272030172A7812B900D233B9 /* UINavigationController+SwipeBackNavigation.swift */; };
-		27289B172BC9AA44009D21AD /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 27289B162BC9AA44009D21AD /* KeyboardObserving */; };
 		2728CE1B2BBCD2AB004C9323 /* dydxGainLossInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2728CE1A2BBCD2AB004C9323 /* dydxGainLossInputViewModel.swift */; };
+		2729123E2C06A775003F3EA0 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 2729123D2C06A775003F3EA0 /* Introspect */; };
+		272912402C06A780003F3EA0 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 2729123F2C06A780003F3EA0 /* KeyboardObserving */; };
 		273F50162B7C3F120034792A /* SignedAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F50152B7C3F120034792A /* SignedAmountView.swift */; };
-		2742C04E2BF6897A00E13C09 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C04D2BF6897A00E13C09 /* dydxAnalytics.framework */; };
 		27685F4D2B9FCAE200F37DE2 /* Satoshi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27685F402B9FCAD300F37DE2 /* Satoshi-Medium.otf */; };
 		2769090E2AAFD8030075B2D6 /* TransferInstanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090D2AAFD8030075B2D6 /* TransferInstanceViewModel.swift */; };
 		276909102AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */; };
@@ -605,11 +604,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0284201429AD705B00C0E7CC /* dydxFormatter.framework in Frameworks */,
-				027C379F29AEC11000381B00 /* Introspect in Frameworks */,
 				024B7B4E28B7F82400F7C386 /* Utilities.framework in Frameworks */,
-				27289B172BC9AA44009D21AD /* KeyboardObserving in Frameworks */,
-				2742C04E2BF6897A00E13C09 /* dydxAnalytics.framework in Frameworks */,
 				024B7B4C28B7F80F00F7C386 /* PlatformParticles.framework in Frameworks */,
+				272912402C06A780003F3EA0 /* KeyboardObserving in Frameworks */,
+				2729123E2C06A775003F3EA0 /* Introspect in Frameworks */,
 				024B7B4D28B7F80F00F7C386 /* PlatformUI.framework in Frameworks */,
 				D389C2240B81C64330A95B2D /* Pods_iOS_dydxViews.framework in Frameworks */,
 			);
@@ -1652,8 +1650,8 @@
 			);
 			name = dydxViews;
 			packageProductDependencies = (
-				027C379E29AEC11000381B00 /* Introspect */,
-				27289B162BC9AA44009D21AD /* KeyboardObserving */,
+				2729123D2C06A775003F3EA0 /* Introspect */,
+				2729123F2C06A780003F3EA0 /* KeyboardObserving */,
 			);
 			productName = dydxViews;
 			productReference = 024B79BA28B7F53800F7C386 /* dydxViews.framework */;
@@ -2556,12 +2554,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		027C379E29AEC11000381B00 /* Introspect */ = {
+		2729123D2C06A775003F3EA0 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 027C379D29AEC11000381B00 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
 		};
-		27289B162BC9AA44009D21AD /* KeyboardObserving */ = {
+		2729123F2C06A780003F3EA0 /* KeyboardObserving */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 27289B152BC9AA44009D21AD /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
 			productName = KeyboardObserving;

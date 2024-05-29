@@ -9,6 +9,7 @@ import Foundation
 import Utilities
 import dydxStateManager
 import Combine
+import dydxAnalytics
 
 public final class OnboardingAnalytics {
 
