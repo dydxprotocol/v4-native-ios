@@ -320,21 +320,26 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
 }
 
 public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
-    @Published public var placeholderText: String? {
-        didSet {
-            _placeholder.text = placeholderText
-        }
+    // TODO: remove once isolated markets is supported and force released
+    @Published public var shouldDisplayIsolatedPositionsWarning: Bool = false
+    @Published public var placeholderText: String?
+
+    public override var placeholder: PlatformViewModel? {
+        let vm = PlaceholderViewModel()
+        vm.text = placeholderText
+        return vm
     }
 
-    private let _placeholder = PlaceholderViewModel()
-
-    public override init(items: [PlatformViewModel] = [], header: PlatformViewModel? = nil, placeholder: PlatformViewModel? = nil, intraItemSeparator: Bool = false, firstListItemTopSeparator: Bool = false, lastListItemBottomSeparator: Bool = false, contentChanged: (() -> Void)? = nil) {
-        super.init(items: items, header: header, placeholder: placeholder, intraItemSeparator: intraItemSeparator, firstListItemTopSeparator: firstListItemTopSeparator, lastListItemBottomSeparator: lastListItemBottomSeparator, contentChanged: contentChanged)
-        self.placeholder = _placeholder
-        if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == false {
-            self.header = createHeader().wrappedViewModel
-        }
-        self.footer = createFooter().wrappedViewModel
+    public override init(items: [PlatformViewModel] = [],
+                         intraItemSeparator: Bool = false,
+                         firstListItemTopSeparator: Bool = false,
+                         lastListItemBottomSeparator: Bool = false,
+                         contentChanged: (() -> Void)? = nil) {
+        super.init(items: items,
+                   intraItemSeparator: intraItemSeparator,
+                   firstListItemTopSeparator: firstListItemTopSeparator,
+                   lastListItemBottomSeparator: lastListItemBottomSeparator,
+                   contentChanged: contentChanged)
         self.width = UIScreen.main.bounds.width - 32
     }
 
@@ -347,8 +352,9 @@ public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
         return vm
     }
 
-    private func createHeader() -> some View {
-        HStack {
+    public override var header: PlatformViewModel? {
+        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == false, !items.isEmpty else { return nil }
+        return HStack {
             Text(DataLocalizer.localize(path: "APP.GENERAL.DETAILS"))
             Spacer()
             Text(DataLocalizer.localize(path: "APP.GENERAL.INDEX_ENTRY"))
@@ -362,16 +368,19 @@ public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
         .padding(.horizontal, 16)
         .themeFont(fontSize: .small)
         .themeColor(foreground: .textTertiary)
+        .wrappedViewModel
     }
 
-    private func createFooter() -> some View {
-        Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITIONS_COMING_SOON")
+    public override var footer: PlatformViewModel? {
+        guard shouldDisplayIsolatedPositionsWarning else { return nil }
+        return Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITIONS_COMING_SOON")
             .multilineTextAlignment(.center)
             .padding(.horizontal, 16)
             .themeFont(fontSize: .small)
             .themeColor(foreground: .textTertiary)
             .padding(.top, 12)
             .padding(.bottom, 16)
+            .wrappedViewModel
     }
 }
 

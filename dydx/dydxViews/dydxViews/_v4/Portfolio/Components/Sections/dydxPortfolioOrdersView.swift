@@ -181,13 +181,14 @@ public class dydxPortfolioOrderItemViewModel: PlatformViewModel {
 }
 
 public class dydxPortfolioOrdersViewModel: PlatformListViewModel {
-    @Published public var placeholderText: String? {
-        didSet {
-            _placeholder.text = placeholderText
-        }
-    }
+    @Published public var shouldDisplayIsolatedOrdersWarning: Bool = false
+    @Published public var placeholderText: String?
 
-    private let _placeholder = PlaceholderViewModel()
+    public override var placeholder: PlatformViewModel? {
+        let vm = PlaceholderViewModel()
+        vm.text = placeholderText
+        return vm
+    }
 
     public init(items: [PlatformViewModel] = [], contentChanged: (() -> Void)? = nil) {
         super.init(items: items,
@@ -195,10 +196,6 @@ public class dydxPortfolioOrdersViewModel: PlatformListViewModel {
                    firstListItemTopSeparator: true,
                    lastListItemBottomSeparator: true,
                    contentChanged: contentChanged)
-        self.placeholder = _placeholder
-        self.header = createHeader().wrappedViewModel
-        self.footer = createFooter().wrappedViewModel
-        self.width = UIScreen.main.bounds.width - 16
     }
 
     public static var previewValue: dydxPortfolioOrdersViewModel {
@@ -210,8 +207,9 @@ public class dydxPortfolioOrdersViewModel: PlatformListViewModel {
         return vm
     }
 
-    private func createHeader() -> some View {
-        HStack {
+    public override var header: PlatformViewModel? {
+        guard items.count > 0 else { return nil }
+        return HStack {
             Text(DataLocalizer.localize(path: "APP.GENERAL.STATUS_FILL"))
             Spacer()
             Text(DataLocalizer.localize(path: "APP.GENERAL.PRICE_TYPE"))
@@ -220,16 +218,19 @@ public class dydxPortfolioOrdersViewModel: PlatformListViewModel {
         .padding(.bottom, 16)
         .themeFont(fontSize: .small)
         .themeColor(foreground: .textTertiary)
+        .wrappedViewModel
     }
 
-    private func createFooter() -> some View {
-        Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITION_ORDERS_COMING_SOON")
+    public override var footer: PlatformViewModel? {
+        guard shouldDisplayIsolatedOrdersWarning else { return nil }
+        return Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITION_ORDERS_COMING_SOON")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 16)
                 .themeFont(fontSize: .small)
                 .themeColor(foreground: .textTertiary)
                 .padding(.top, 12)
                 .padding(.bottom, 16)
+                .wrappedViewModel
     }
 }
 

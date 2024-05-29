@@ -10,17 +10,16 @@ import PlatformUI
 import Utilities
 
 public class dydxPortfolioTransfersViewModel: PlatformListViewModel {
-    @Published public var placeholderText: String? {
-        didSet {
-            _placeholder.text = placeholderText
-        }
-    }
+    @Published public var placeholderText: String?
 
-    private let _placeholder = PlaceholderViewModel()
+    public override var placeholder: PlatformViewModel? {
+        let vm = PlaceholderViewModel()
+        vm.text = placeholderText
+        return vm
+    }
 
     public init(items: [PlatformViewModel] = [], contentChanged: (() -> Void)? = nil) {
         super.init(items: items,
-                   placeholder: _placeholder,
                    intraItemSeparator: true,
                    firstListItemTopSeparator: true,
                    lastListItemBottomSeparator: true,
