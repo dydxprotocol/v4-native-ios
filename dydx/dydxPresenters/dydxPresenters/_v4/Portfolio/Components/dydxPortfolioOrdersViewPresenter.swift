@@ -99,8 +99,10 @@ class dydxPortfolioOrdersViewPresenter: HostedViewPresenter<dydxPortfolioOrdersV
         item.filledSize = dydxFormatter.shared.localFormatted(number: filledSize, digits: configs.displayStepSizeDecimals?.intValue ?? 1)
         if let tickSize = configs.displayTickSizeDecimals?.intValue {
             switch order.type {
-            case .market, .stopmarket, .takeprofitmarket:
+            case .market:
                 item.price = DataLocalizer.localize(path: "APP.GENERAL.MARKET")
+            case .stopmarket, .takeprofitmarket:
+                item.price = dydxFormatter.shared.dollar(number: order.triggerPrice?.doubleValue, digits: tickSize)
             default:
                 item.price = dydxFormatter.shared.dollar(number: order.price, digits: tickSize)
             }
