@@ -8,6 +8,7 @@
 import Foundation
 import Abacus
 import Utilities
+import dydxAnalytics
 
 public final class TransferAnalytics {
 
@@ -21,7 +22,7 @@ public final class TransferAnalytics {
         log(event: .transferWithdraw, transferInput: transferInput)
     }
 
-    private func log(event: AnalyticsEvent, transferInput: TransferInput) {
+    private func log(event: dydxAnalytics.AnalyticsEvent, transferInput: TransferInput) {
         let data = [
             "chainId": Parser.standard.asString(transferInput.chainResource?.chainId),
             "tokenAddress": transferInput.tokenResource?.address,

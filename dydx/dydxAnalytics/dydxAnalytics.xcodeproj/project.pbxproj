@@ -13,10 +13,7 @@
 		2742BEBE2BF6860100E13C09 /* dydxAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 2742BEB02BF6860100E13C09 /* dydxAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2742C0312BF6887100E13C09 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0302BF6887100E13C09 /* Utilities.framework */; platformFilter = ios; };
 		2742C0352BF6888500E13C09 /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0342BF6888500E13C09 /* PlatformParticles.framework */; };
-		2742C0382BF6888A00E13C09 /* dydxStateManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0372BF6888A00E13C09 /* dydxStateManager.framework */; platformFilter = ios; };
 		2742C04A2BF688BD00E13C09 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */; };
-		2742C04B2BF688BD00E13C09 /* OnboardingAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742C03A2BF688B400E13C09 /* OnboardingAnalytics.swift */; };
-		2742C04C2BF688BD00E13C09 /* TransferAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742C03B2BF688B400E13C09 /* TransferAnalytics.swift */; };
 		B0A26DA7EA1E90F936ECE27B /* Pods_iOS_dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCEC9737902553D7EB58EF0 /* Pods_iOS_dydxAnalytics.framework */; };
 /* End PBXBuildFile section */
 
@@ -112,19 +109,19 @@
 			remoteGlobalIDString = 313A536D21B9805F00A92D62;
 			remoteInfo = UtilitiesAppleTVTests;
 		};
-		275C16FB2BF7D723009313EC /* PBXContainerItemProxy */ = {
+		277754362C069FAC00E3E985 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 275C16F62BF7D723009313EC /* dydxStateManager.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 02E7DC5E28CFAF5C00727949;
-			remoteInfo = dydxStateManager;
+			containerPortal = 275C16E42BF7D723009313EC /* Utilities.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E65AB8216BC9C9008ABEE9;
+			remoteInfo = Utilities;
 		};
-		275C16FD2BF7D723009313EC /* PBXContainerItemProxy */ = {
+		277754382C069FBB00E3E985 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 275C16F62BF7D723009313EC /* dydxStateManager.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 02E7DC6828CFAF5C00727949;
-			remoteInfo = dydxStateManagerTests;
+			containerPortal = 275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31ACB72821B0EE2D00391ADF;
+			remoteInfo = PlatformParticles;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -138,12 +135,9 @@
 		2742C0302BF6887100E13C09 /* Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742C0342BF6888500E13C09 /* PlatformParticles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PlatformParticles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742C0372BF6888A00E13C09 /* dydxStateManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxStateManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2742C03A2BF688B400E13C09 /* OnboardingAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnalytics.swift; sourceTree = "<group>"; };
-		2742C03B2BF688B400E13C09 /* TransferAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAnalytics.swift; sourceTree = "<group>"; };
 		2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformParticles.xcodeproj; path = ../../../PlatformParticles/PlatformParticles.xcodeproj; sourceTree = "<group>"; };
 		275C16E42BF7D723009313EC /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
-		275C16F62BF7D723009313EC /* dydxStateManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxStateManager.xcodeproj; path = ../../dydxStateManager/dydxStateManager.xcodeproj; sourceTree = "<group>"; };
 		2FCEC9737902553D7EB58EF0 /* Pods_iOS_dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0A5DAA1E87EA50A32BE597 /* Pods-iOS-dydxAnalytics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxAnalytics.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxAnalytics/Pods-iOS-dydxAnalytics.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,7 +150,6 @@
 				B0A26DA7EA1E90F936ECE27B /* Pods_iOS_dydxAnalytics.framework in Frameworks */,
 				2742C0352BF6888500E13C09 /* PlatformParticles.framework in Frameworks */,
 				2742C0312BF6887100E13C09 /* Utilities.framework in Frameworks */,
-				2742C0382BF6888A00E13C09 /* dydxStateManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,8 +209,6 @@
 		2742BEAF2BF6860100E13C09 /* dydxAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				2742C03A2BF688B400E13C09 /* OnboardingAnalytics.swift */,
-				2742C03B2BF688B400E13C09 /* TransferAnalytics.swift */,
 				2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */,
 				2742BEB02BF6860100E13C09 /* dydxAnalytics.h */,
 				2742BEB12BF6860100E13C09 /* dydxAnalytics.docc */,
@@ -236,7 +227,6 @@
 		275C16CB2BF7D70C009313EC /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				275C16F62BF7D723009313EC /* dydxStateManager.xcodeproj */,
 				275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */,
 				275C16E42BF7D723009313EC /* Utilities.xcodeproj */,
 			);
@@ -269,15 +259,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		275C16F72BF7D723009313EC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				275C16FC2BF7D723009313EC /* dydxStateManager.framework */,
-				275C16FE2BF7D723009313EC /* dydxStateManagerTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -305,6 +286,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				277754392C069FBB00E3E985 /* PBXTargetDependency */,
+				277754372C069FAC00E3E985 /* PBXTargetDependency */,
 			);
 			name = dydxAnalytics;
 			productName = dydxAnalytics;
@@ -359,10 +342,6 @@
 			productRefGroup = 2742BEAE2BF6860100E13C09 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 275C16F72BF7D723009313EC /* Products */;
-					ProjectRef = 275C16F62BF7D723009313EC /* dydxStateManager.xcodeproj */;
-				},
 				{
 					ProductGroup = 275C16CD2BF7D723009313EC /* Products */;
 					ProjectRef = 275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */;
@@ -465,20 +444,6 @@
 			remoteRef = 275C16F42BF7D723009313EC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16FC2BF7D723009313EC /* dydxStateManager.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = dydxStateManager.framework;
-			remoteRef = 275C16FB2BF7D723009313EC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		275C16FE2BF7D723009313EC /* dydxStateManagerTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = dydxStateManagerTests.xctest;
-			remoteRef = 275C16FD2BF7D723009313EC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -528,10 +493,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2742C04B2BF688BD00E13C09 /* OnboardingAnalytics.swift in Sources */,
 				2742BEB22BF6860100E13C09 /* dydxAnalytics.docc in Sources */,
 				2742C04A2BF688BD00E13C09 /* AnalyticsEvent.swift in Sources */,
-				2742C04C2BF688BD00E13C09 /* TransferAnalytics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +513,16 @@
 			isa = PBXTargetDependency;
 			target = 2742BEAC2BF6860100E13C09 /* dydxAnalytics */;
 			targetProxy = 2742BEB92BF6860100E13C09 /* PBXContainerItemProxy */;
+		};
+		277754372C069FAC00E3E985 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Utilities;
+			targetProxy = 277754362C069FAC00E3E985 /* PBXContainerItemProxy */;
+		};
+		277754392C069FBB00E3E985 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PlatformParticles;
+			targetProxy = 277754382C069FBB00E3E985 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

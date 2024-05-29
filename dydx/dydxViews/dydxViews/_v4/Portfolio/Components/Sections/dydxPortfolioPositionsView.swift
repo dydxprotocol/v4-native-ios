@@ -10,7 +10,6 @@ import SwiftUI
 import PlatformUI
 import Utilities
 import dydxFormatter
-import dydxStateManager
 
 public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     public struct Handler: Hashable {
