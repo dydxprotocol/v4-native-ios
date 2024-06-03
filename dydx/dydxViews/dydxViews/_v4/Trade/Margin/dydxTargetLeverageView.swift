@@ -75,38 +75,45 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
     }
 
     private func createOptionsGroup(parentStyle: ThemeStyle) -> some View {
-        let items = self.leverageOptions.compactMap {
-            Text($0.text)
-                .themeFont(fontType: .plus, fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-                .padding(8)
-                .frame(minWidth: 60)
-                .themeColor(background: .layer5)
-                .border(borderWidth: 1, cornerRadius: 8, borderColor: ThemeColor.SemanticColor.layer5.color)
-                .wrappedViewModel
-        }
-        let selectedItems = self.leverageOptions.compactMap {
-            Text($0.text)
-                .themeFont(fontType: .plus, fontSize: .small)
-                .themeColor(foreground: .textPrimary)
-                .padding(8)
-                .frame(minWidth: 60)
-                .themeColor(background: .layer1)
-                .border(borderWidth: 1, cornerRadius: 8, borderColor: ThemeColor.SemanticColor.layer5.color)
-                .wrappedViewModel
-        }
+        let spacing: CGFloat = 8
+        let maxItemsToDisplay = CGFloat(max(5, leverageOptions.count))
 
-        return
-            ScrollView(.horizontal, showsIndicators: false) {
+        return GeometryReader { geometry in
+            let width = (geometry.size.width + spacing) / maxItemsToDisplay - spacing
+            let items = self.leverageOptions.compactMap {
+                Text($0.text)
+                    .themeFont(fontType: .plus, fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
+                    .padding(8)
+                    .frame(minWidth: width)
+                    .themeColor(background: .layer5)
+                    .borderAndClip(style: .cornerRadius(8), borderColor: ThemeColor.SemanticColor.layer5)
+                    .wrappedViewModel
+            }
+
+            let selectedItems = self.leverageOptions.compactMap {
+                Text($0.text)
+                    .themeFont(fontType: .plus, fontSize: .small)
+                    .themeColor(foreground: .textPrimary)
+                    .padding(8)
+                    .frame(minWidth: width)
+                    .themeColor(background: .layer1)
+                    .borderAndClip(style: .cornerRadius(8), borderColor: ThemeColor.SemanticColor.layer5)
+                    .wrappedViewModel
+            }
+
+            return ScrollView(.horizontal, showsIndicators: false) {
                 TabGroupModel(items: items,
-                          selectedItems: selectedItems,
-                          currentSelection: self.selectedOptionIndex,
-                          onSelectionChanged: { index in
+                              selectedItems: selectedItems,
+                              currentSelection: self.selectedOptionIndex,
+                              onSelectionChanged: { index in
                     self.optionSelectedAction?(self.leverageOptions[index])
-                })
+                },
+                              spacing: spacing)
                 .createView(parentStyle: parentStyle)
             }
         }
+    }
 }
 
 #if DEBUG
