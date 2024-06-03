@@ -61,6 +61,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     public var unrealizedPnlPercent: SignedAmountViewModel?
     public var marginValue: String = "--"
     public var marginMode: String = "--"
+    public var isMarginAdjustable: Bool = false
     public var logoUrl: URL?
     public var gradientType: GradientType
     public var handler: Handler?
@@ -174,19 +175,21 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                                 .minimumScaleFactor(0.5)
                         }
 
-                        Spacer()
+                        if self.isMarginAdjustable {
+                            Spacer()
 
-                        let buttonContent = PlatformIconViewModel(type: .asset(name: "icon_edit", bundle: Bundle.dydxView),
-                                                                  size: CGSize(width: 12, height: 12),
-                                                                  templateColor: .textSecondary)
-                        PlatformButtonViewModel(content: buttonContent,
-                                                type: PlatformButtonType.iconType) { [weak self] in
-                            self?.handler?.onMarginEditAction?()
+                            let buttonContent = PlatformIconViewModel(type: .asset(name: "icon_edit", bundle: Bundle.dydxView),
+                                                                      size: CGSize(width: 20, height: 20),
+                                                                      templateColor: .textSecondary)
+                            PlatformButtonViewModel(content: buttonContent,
+                                                    type: PlatformButtonType.iconType) { [weak self] in
+                                self?.handler?.onMarginEditAction?()
+                            }
+                                .createView(parentStyle: parentStyle)
+                                .frame(width: 32, height: 32)
+                                .themeColor(background: .layer6)
+                                .border(borderWidth: 1, cornerRadius: 7, borderColor: ThemeColor.SemanticColor.layer7.color)
                         }
-                            .createView(parentStyle: parentStyle)
-                            .frame(width: 32, height: 32)
-                            .themeColor(background: .layer6)
-                            .border(borderWidth: 1, cornerRadius: 7, borderColor: ThemeColor.SemanticColor.layer7.color)
                     }
                 }
                 .leftAligned()
