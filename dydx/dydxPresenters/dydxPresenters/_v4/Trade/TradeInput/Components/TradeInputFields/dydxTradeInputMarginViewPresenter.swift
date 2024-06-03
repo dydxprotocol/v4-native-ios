@@ -31,8 +31,7 @@ class dydxTradeInputMarginViewPresenter: HostedViewPresenter<dydxTradeInputMargi
         AbacusStateManager.shared.state.tradeInput
             .compactMap { $0 }
             .sink {[weak self] tradeInput in
-                self?.viewModel?.marginMode = DataLocalizer.localize(path: "APP.GENERAL.\(tradeInput.marginMode.rawValue)")
-                self?.viewModel?.marginLeverage = "\(tradeInput.targetLeverage)×"
+                self?.update(withTradeInput: tradeInput)
             }
             .store(in: &subscriptions)
 
@@ -44,7 +43,8 @@ class dydxTradeInputMarginViewPresenter: HostedViewPresenter<dydxTradeInputMargi
         }
     }
 
-    private func updateMarginMode(mode: MarginMode) {
-
+    private func update(withTradeInput tradeInput: Abacus.TradeInput) {
+        viewModel?.marginMode = DataLocalizer.localize(path: "APP.GENERAL.\(tradeInput.marginMode.rawValue)")
+        viewModel?.marginLeverage = "\(tradeInput.targetLeverage)×"
     }
 }

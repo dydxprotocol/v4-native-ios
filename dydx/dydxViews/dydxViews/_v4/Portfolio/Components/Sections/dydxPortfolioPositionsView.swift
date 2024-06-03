@@ -175,8 +175,9 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                                 .minimumScaleFactor(0.5)
                         }
 
+                        Spacer()
+
                         if self.isMarginAdjustable {
-                            Spacer()
 
                             let buttonContent = PlatformIconViewModel(type: .asset(name: "icon_edit", bundle: Bundle.dydxView),
                                                                       size: CGSize(width: 20, height: 20),
