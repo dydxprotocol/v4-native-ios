@@ -82,7 +82,7 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         } else {
             item.sideText.side = .short
             item.gradientType = .minus
-       }
+        }
 
         item.leverage = dydxFormatter.shared.leverage(number: NSNumber(value: position.leverage.current?.doubleValue ?? 0))
         if let leverage = position.leverage.current?.doubleValue, let maxLeverage = position.maxLeverage.current?.doubleValue, maxLeverage > 0 {
@@ -94,6 +94,27 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
 
         item.unrealizedPnl = SignedAmountViewModel(amount: position.unrealizedPnl.current?.doubleValue ?? 0, displayType: .dollar, coloringOption: .signOnly)
         item.unrealizedPnlPercent = SignedAmountViewModel(amount: position.unrealizedPnlPercent.current?.doubleValue, displayType: .percent, coloringOption: .allText)
+
+        if let marginMode = position.marginMode {
+            item.marginMode = DataLocalizer.shared?.localize(path: "APP.GENERAL.\(marginMode.rawValue)", params: nil) ?? "--"
+            item.isMarginAdjustable = marginMode == .isolated
+            // TODO: move calculation logic to abacus
+            switch marginMode {
+            case .cross:
+                item.isMarginAdjustable = false
+                if let marginValue = position.notionalTotal.current?.doubleValue, let marginMaintenanceFraction = configs.maintenanceMarginFraction?.doubleValue {
+                    item.marginValue = dydxFormatter.shared.dollar(number: marginValue * marginMaintenanceFraction) ?? "--"
+                }
+            case .isolated:
+                item.isMarginAdjustable = true
+                if let marginValue = position.equity.current?.doubleValue {
+                    item.marginValue = dydxFormatter.shared.dollar(number: marginValue) ?? "--"
+                }
+            default:
+                assertionFailure("no margin mode")
+                break
+            }
+        }
 
         if let url = asset.resources?.imageUrl {
             item.logoUrl = URL(string: url)

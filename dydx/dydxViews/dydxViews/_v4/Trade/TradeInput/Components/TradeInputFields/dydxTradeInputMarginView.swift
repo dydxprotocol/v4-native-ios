@@ -20,7 +20,7 @@ public class dydxTradeInputMarginViewModel: PlatformViewModel {
 
     public static var previewValue: dydxTradeInputMarginViewModel {
         let vm = dydxTradeInputMarginViewModel()
-        vm.marginLeverage = "2x"
+        vm.marginLeverage = "2×"
         return vm
     }
 
