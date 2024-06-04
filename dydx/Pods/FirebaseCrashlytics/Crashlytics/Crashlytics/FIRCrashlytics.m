@@ -29,6 +29,7 @@
 #import "Crashlytics/Crashlytics/FIRCLSUserDefaults/FIRCLSUserDefaults.h"
 #include "Crashlytics/Crashlytics/Handlers/FIRCLSException.h"
 #import "Crashlytics/Crashlytics/Helpers/FIRCLSDefines.h"
+#include "Crashlytics/Crashlytics/Helpers/FIRCLSProfiling.h"
 #include "Crashlytics/Crashlytics/Helpers/FIRCLSUtility.h"
 #import "Crashlytics/Crashlytics/Models/FIRCLSExecutionIdentifierModel.h"
 #import "Crashlytics/Crashlytics/Models/FIRCLSFileManager.h"
@@ -62,14 +63,9 @@
 @import FirebaseRemoteConfigInterop;
 #if SWIFT_PACKAGE
 @import FirebaseCrashlyticsSwift;
-#elif __has_include(<FirebaseCrashlytics/FirebaseCrashlytics-Swift.h>)
+#else  // Swift Package Manager
 #import <FirebaseCrashlytics/FirebaseCrashlytics-Swift.h>
-#elif __has_include("FirebaseCrashlytics-Swift.h")
-// If frameworks are not available, fall back to importing the header as it
-// should be findable from a header search path pointing to the build
-// directory. See #12611 for more context.
-#import "FirebaseCrashlytics-Swift.h"
-#endif
+#endif  // CocoaPods
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -131,6 +127,8 @@ NSString *const FIRCLSGoogleTransportMappingID = @"1206";
       FIRCLSErrorLog(@"Cannot instantiate more than one instance of Crashlytics.");
       return nil;
     }
+
+    FIRCLSProfileMark mark = FIRCLSProfilingStart();
 
     NSLog(@"[Firebase/Crashlytics] Version %@", FIRCLSSDKVersion());
 
@@ -197,7 +195,7 @@ NSString *const FIRCLSGoogleTransportMappingID = @"1206";
       });
     }
 
-    [[[_reportManager startWithProfiling] then:^id _Nullable(NSNumber *_Nullable value) {
+    [[[_reportManager startWithProfilingMark:mark] then:^id _Nullable(NSNumber *_Nullable value) {
       if (![value boolValue]) {
         FIRCLSErrorLog(@"Crash reporting could not be initialized");
       }
