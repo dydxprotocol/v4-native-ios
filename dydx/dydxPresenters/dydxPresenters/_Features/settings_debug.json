@@ -46,7 +46,7 @@
                     "text" : "Feature Flag Overrides"
                 },
                 "link" : {
-                    "text" : "/features"
+                    "text" : "/settings/feature_flag_overrides"
                 }
             },
             {

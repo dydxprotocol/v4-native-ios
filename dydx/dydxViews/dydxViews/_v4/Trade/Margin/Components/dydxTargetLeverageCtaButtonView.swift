@@ -46,7 +46,7 @@ public class dydxTargetLeverageCtaButtonViewModel: PlatformViewModel {
             buttonTitle = title ?? DataLocalizer.localize(path: "APP.TRADE.CONFIRM_LEVERAGE")
             state = .primary
         case .disabled(let title):
-            buttonTitle = title ?? DataLocalizer.localize(path: "APP.TRADE.ADJUST_LEVERAGE")
+            buttonTitle = title ?? DataLocalizer.localize(path: "APP.TRADE.CONFIRM_LEVERAGE")
             state = .disabled
         case .thinking:
             buttonTitle = DataLocalizer.localize(path: "APP.V4.CALCULATING")

@@ -53,28 +53,56 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
 
         viewModel.description = DataLocalizer.localize(path: "APP.TRADE.ADJUST_TARGET_LEVERAGE_DESCRIPTION")
 
-        viewModel.leverageOptions = [
-            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "1x", value: 1.0),
-            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "2x", value: 2.0),
-            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "5x", value: 5.0),
-            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "10.0", value: 10.0),
-            dydxTargetLeverageViewModel.LeverageTextAndValue(text: "Max", value: 20.0)
-        ]
-
         self.viewModel = viewModel
 
+        self.viewModel?.optionSelectedAction = {[weak self] value in
+            self?.update(value: "\(value.value)")
+        }
+        self.ctaButtonPresenter.viewModel?.ctaAction = {
+            guard let value = viewModel.leverageInput?.value else { return }
+            AbacusStateManager.shared.trade(input: "\(value)", type: .targetleverage)
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        }
+        self.viewModel?.leverageInput?.onEdited = {[weak self] value in
+            self?.update(value: value)
+        }
+
         attachChildren(workers: childPresenters)
+    }
+
+    private func update(value: String?) {
+        let valueAsDouble = Double(value ?? "") ?? 0
+        viewModel?.leverageInput?.value = value
+        viewModel?.selectedOptionIndex = viewModel?.leverageOptions.firstIndex(where: { option in
+            option.value == valueAsDouble
+        })
+        if valueAsDouble > 0 {
+            viewModel?.ctaButton?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.TRADE.CONFIRM_LEVERAGE"))
+        } else {
+            viewModel?.ctaButton?.ctaButtonState = .disabled(DataLocalizer.localize(path: "APP.TRADE.CONFIRM_LEVERAGE"))
+        }
     }
 
     override func start() {
         super.start()
 
-        // TODO: Fix... tradeInput?.targetLeverage is nil for now
+        // TODO: Fix...? tradeInput?.targetLeverage is nil for now
 
-        AbacusStateManager.shared.state.tradeInput
-            .sink { [weak self] tradeInput in
+        Publishers.CombineLatest(AbacusStateManager.shared.state.configsAndAssetMap,
+                       AbacusStateManager.shared.state.tradeInput)
+            .compactMap { $0 }
+            .sink { [weak self] configsAndAssetMap, tradeInput in
+                guard let viewModel = self?.viewModel, let marketId = tradeInput?.marketId, let market = configsAndAssetMap[marketId] else { return }
+                if let imf = market.configs?.initialMarginFraction?.doubleValue, imf > 0 {
+                    let maxLeverage = 1.0 / imf
+                    viewModel.leverageOptions = [1, 2, 5, 10]
+                        .filter { $0 < maxLeverage }
+                        .map { .init(text: "\($0)×", value: $0) }
+                    viewModel.leverageOptions.append(.init(text: DataLocalizer.localize(path: "APP.GENERAL.MAX"), value: maxLeverage))
+                }
+
                 let value = dydxFormatter.shared.localFormatted(number: tradeInput?.targetLeverage ?? 1, digits: 1)
-                self?.viewModel?.leverageInput?.value = value
+                self?.update(value: value)
             }
             .store(in: &subscriptions)
     }

@@ -81,7 +81,7 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
             viewModel?.errorType = .error
             if let hyperlinkText = firstBlockingError.linkText,
                 let link = firstBlockingError.link {
-                viewModel?.hyperlinkText = firstBlockingError.linkText
+                viewModel?.hyperlinkText = hyperlinkText
                 viewModel?.validationViewDescriptionHyperlinkAction = {
                     Router.shared?.navigate(to: URL(string: link), completion: nil)
                 }
@@ -96,7 +96,7 @@ class dydxValidationViewPresenter: HostedViewPresenter<dydxValidationViewModel>,
             viewModel?.hyperlinkText = firstWarning.linkText
             if let hyperlinkText = firstWarning.linkText,
                 let link = firstWarning.link {
-                viewModel?.hyperlinkText = firstWarning.linkText
+                viewModel?.hyperlinkText = hyperlinkText
                 viewModel?.validationViewDescriptionHyperlinkAction = {
                     Router.shared?.navigate(to: URL(string: link), completion: nil)
                 }
