@@ -11,6 +11,8 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import dydxStateManager
+import Abacus
 
 public class dydxMarginModeViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -34,24 +36,52 @@ private protocol dydxMarginModeViewPresenterProtocol: HostedViewPresenterProtoco
 }
 
 private class dydxMarginModeViewPresenter: HostedViewPresenter<dydxMarginModeViewModel>, dydxMarginModeViewPresenterProtocol {
+    private let crossItemViewModel = dydxMarginModeItemViewModel(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN"),
+                                                                 detail: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN_DESCRIPTION"),
+                                                                 isSelected: true,
+                                                                 selectedAction: {
+                                                                     AbacusStateManager.shared.trade(input: MarginMode.cross.rawValue, type: .marginmode)
+                                                                     Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+                                                                 })
+
+    private let isolatedItemViewModel = dydxMarginModeItemViewModel(title: DataLocalizer.localize(path: "APP.GENERAL.ISOLATED_MARGIN"),
+                                                                    detail: DataLocalizer.localize(path: "APP.GENERAL.ISOLATED_MARGIN_DESCRIPTION"),
+                                                                    isSelected: false,
+                                                                    selectedAction: {
+                                                                        AbacusStateManager.shared.trade(input: MarginMode.isolated.rawValue, type: .marginmode)
+                                                                        Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+                                                                    })
+
     override init() {
         super.init()
 
         viewModel = dydxMarginModeViewModel()
         viewModel?.market = "BTC-USD"
-        viewModel?.items = [
-            dydxMarginModeItemViewModel(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN"),
-                                        detail: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN_DESCRIPTION"),
-                                        isSelected: true,
-                                        selectedAction: {
-                                            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
-                                        }),
-            dydxMarginModeItemViewModel(title: DataLocalizer.localize(path: "APP.GENERAL.ISOLATED_MARGIN"),
-                                        detail: DataLocalizer.localize(path: "APP.GENERAL.ISOLATED_MARGIN_DESCRIPTION"),
-                                        isSelected: false,
-                                        selectedAction: {
-                                            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
-                                        })
-        ]
+        viewModel?.items = [crossItemViewModel, isolatedItemViewModel]
+    }
+
+    override func start() {
+        super.start()
+
+        AbacusStateManager.shared.state.tradeInput
+            .compactMap(\.?.marginMode)
+            .sink {[weak self] mode in
+                self?.updateMarginMode(mode: mode)
+            }
+            .store(in: &subscriptions)
+    }
+
+    private func updateMarginMode(mode: MarginMode) {
+        switch mode {
+        case .cross:
+            crossItemViewModel.isSelected = true
+            isolatedItemViewModel.isSelected = false
+        case .isolated:
+            crossItemViewModel.isSelected = false
+            isolatedItemViewModel.isSelected = true
+        default:
+            assertionFailure("should have margin mode")
+            return
+        }
     }
 }
