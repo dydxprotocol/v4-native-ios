@@ -32,7 +32,7 @@ public class MemoBoxModel: PlatformTextInputViewModel {
     }
 
     private var memoInputAccessory: AnyView? {
-        ZStack {
+        ZStack(alignment: .trailing) {
             let shouldShowCancel = value?.isEmpty == false
             if shouldShowCancel {
                 let content = Image("icon_cancel", bundle: .dydxView)
