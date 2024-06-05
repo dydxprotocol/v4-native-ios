@@ -13,7 +13,7 @@ public enum PlatformButtonState {
 }
 
 public enum PlatformButtonType {
-    case defaultType(fillWidth: Bool), iconType, pill, small
+    case defaultType(fillWidth: Bool = true, padding: EdgeInsets = .init(all: 14)), iconType, pill, small
 }
 
 public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformViewModel {
@@ -21,15 +21,15 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
     @Published public var content: Content
     @Published public var type: PlatformButtonType
     @Published public var state: PlatformButtonState
-    
+
     public init(content: Content,
-                type: PlatformButtonType = .defaultType(fillWidth: true),
+                type: PlatformButtonType = .defaultType(),
                 state: PlatformButtonState = .primary,
                 action: @escaping () -> ()) {
-        self.action = action
         self.content = content
         self.type = type
         self.state = state
+        self.action = action
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
@@ -40,7 +40,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
             return AnyView(
                 Group {
                     switch self.type {
-                    case .defaultType(let fillWidth):
+                    case .defaultType(let fillWidth, let padding):
                        let button = Button(action: self.action) {
                             HStack {
                                 if fillWidth {
@@ -55,7 +55,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         .disabled(disabled)
-                        .padding(.all, 14)
+                        .padding(padding)
                         .if(fillWidth) { view in
                             view.frame(maxWidth: .infinity)
                         }
