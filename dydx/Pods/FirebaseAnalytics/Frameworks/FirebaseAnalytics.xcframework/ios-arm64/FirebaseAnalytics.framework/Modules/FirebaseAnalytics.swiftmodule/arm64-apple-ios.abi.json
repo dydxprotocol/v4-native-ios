@@ -133,22 +133,16 @@
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "ModifiedContent",
-                "printedName": "SwiftUI.ModifiedContent<τ_0_0, FirebaseAnalytics.LoggedAnalyticsModifier>",
+                "name": "OpaqueTypeArchetype",
+                "printedName": "some SwiftUI.View",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "GenericTypeParam",
-                    "printedName": "τ_0_0"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "LoggedAnalyticsModifier",
-                    "printedName": "FirebaseAnalytics.LoggedAnalyticsModifier",
-                    "usr": "s:17FirebaseAnalytics06LoggedB8ModifierV"
+                    "name": "View",
+                    "printedName": "SwiftUI.View",
+                    "usr": "s:7SwiftUI4ViewP"
                   }
-                ],
-                "usr": "s:7SwiftUI15ModifiedContentV"
+                ]
               },
               {
                 "kind": "TypeNominal",
@@ -222,14 +216,14 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/tsunghung\/release\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m145\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
       "kind": "StringLiteral",
       "offset": 2555,
       "length": 6,
       "value": "\"View\""
     },
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/tsunghung\/release\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m145\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
       "kind": "Dictionary",
       "offset": 2602,
       "length": 3,
