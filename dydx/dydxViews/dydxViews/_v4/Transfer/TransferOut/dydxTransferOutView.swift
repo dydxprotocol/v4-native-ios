@@ -26,6 +26,7 @@ public class dydxTransferOutViewModel: PlatformViewModel {
                             text: DataLocalizer.localize(path: "APP.GENERAL.DYDX_CHAIN"))
     @Published public var tokensComboBox: TokensComboBoxModel? =
         TokensComboBoxModel(label: DataLocalizer.localize(path: "APP.GENERAL.ASSET"))
+    @Published public var memoBox: MemoBoxModel?
 
     @Published public var ctaButton: dydxTradeInputCtaButtonViewModel? = dydxTradeInputCtaButtonViewModel()
     @Published public var validationViewModel: dydxValidationViewModel? = dydxValidationViewModel()
@@ -42,16 +43,18 @@ public class dydxTransferOutViewModel: PlatformViewModel {
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-
             return AnyView(
                 VStack {
                     Group {
                         VStack(spacing: 12) {
-                            self.chainsComboBox?.createView(parentStyle: style)
-                            self.addressInput?.createView(parentStyle: style)
-                                .makeInput()
+                            HStack(spacing: 12) {
+                                self.addressInput?.createView(parentStyle: style)
+                                    .makeInput()
+                                self.chainsComboBox?.createView(parentStyle: style)
+                            }
                             self.tokensComboBox?.createView(parentStyle: style)
                             self.amountBox?.createView(parentStyle: style)
+                            self.memoBox?.createView(parentStyle: style)
                         }
                     }
 

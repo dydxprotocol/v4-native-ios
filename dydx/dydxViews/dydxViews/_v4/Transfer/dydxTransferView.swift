@@ -9,6 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import KeyboardObserving
 
 public class dydxTransferViewModel: PlatformViewModel {
     @Published public var sections = dydxTransferSectionsViewModel()
@@ -62,6 +63,7 @@ public class dydxTransferViewModel: PlatformViewModel {
                     }
                     .frame(minHeight: UIScreen.main.bounds.size.height - topPadding - (self.safeAreaInsets?.top ?? 0) - (self.safeAreaInsets?.bottom ?? 0))
                 }
+                .keyboardObserving()
                 .keyboardAccessory(background: .layer3, parentStyle: style)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .padding([.leading, .trailing])
