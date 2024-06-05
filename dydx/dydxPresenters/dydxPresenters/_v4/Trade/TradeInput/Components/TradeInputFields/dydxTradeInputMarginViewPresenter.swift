@@ -44,7 +44,8 @@ class dydxTradeInputMarginViewPresenter: HostedViewPresenter<dydxTradeInputMargi
     }
 
     private func update(withTradeInput tradeInput: Abacus.TradeInput) {
+        viewModel?.shouldDisplayTargetLeverage = tradeInput.marginMode == MarginMode.isolated
         viewModel?.marginMode = DataLocalizer.localize(path: "APP.GENERAL.\(tradeInput.marginMode.rawValue)")
-        viewModel?.marginLeverage = "\(tradeInput.targetLeverage)×"
+        viewModel?.targetLeverage = "\(tradeInput.targetLeverage)"
     }
 }
