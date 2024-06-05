@@ -36,7 +36,7 @@ import Utilities
     public func refresh(completion: @escaping () -> Void) {
         activate(completion: completion)
     }
-    
+
     public func activate(completion: @escaping () -> Void) {
         if let remoteConfig = remoteConfig {
             remoteConfig.fetchAndActivate(completionHandler: { [weak self] status, _ in
@@ -44,13 +44,12 @@ import Utilities
                     if status == .successFetchedFromRemote || status == .successUsingPreFetchedData {
                         self?.updateFlags()
                     }
+                    completion()
                 }
             })
+        } else {
+            completion()
         }
-        // note we may eventually want to move this completion back into the `fetchAndActivate` completion
-        // but currently with firebase lib ~v10.24ish, there is an issue where the callback is not guaranteed
-        // to get called. see https://github.com/firebase/firebase-ios-sdk/issues/11770. issue is closed, but perhaps not fixed.
-        completion()
     }
 
     public func updateFlags() {
