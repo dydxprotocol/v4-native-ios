@@ -22,7 +22,12 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
         if FeatureService.shared == nil {
             Console.shared.log("WARNING: FeatureService not yet set up.")
         }
-        return Self.obj.parser.asBoolean(FeatureService.shared?.flag(feature: rawValue))?.boolValue ?? false
+        switch self {
+        case .enable_app_rating:
+            return Self.obj.parser.asBoolean(FeatureService.shared?.flag(feature: rawValue))?.boolValue ?? true
+        case .push_notification, .force_mainnet, .enable_trading_rewards, .enable_isolated_margins:
+            return Self.obj.parser.asBoolean(FeatureService.shared?.flag(feature: rawValue))?.boolValue ?? false
+        }
     }
 
     public static var enabledFlags: [String] {
