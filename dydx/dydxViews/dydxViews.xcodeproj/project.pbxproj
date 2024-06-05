@@ -171,6 +171,7 @@
 		2729123E2C06A775003F3EA0 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 2729123D2C06A775003F3EA0 /* Introspect */; };
 		272912402C06A780003F3EA0 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 2729123F2C06A780003F3EA0 /* KeyboardObserving */; };
 		273F50162B7C3F120034792A /* SignedAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F50152B7C3F120034792A /* SignedAmountView.swift */; };
+		274C47F02C0FC9A4000212C3 /* MemoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C47EF2C0FC9A4000212C3 /* MemoBox.swift */; };
 		27685F4D2B9FCAE200F37DE2 /* Satoshi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27685F402B9FCAD300F37DE2 /* Satoshi-Medium.otf */; };
 		2769090E2AAFD8030075B2D6 /* TransferInstanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090D2AAFD8030075B2D6 /* TransferInstanceViewModel.swift */; };
 		276909102AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */; };
@@ -540,6 +541,7 @@
 		2728CE1A2BBCD2AB004C9323 /* dydxGainLossInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxGainLossInputViewModel.swift; sourceTree = "<group>"; };
 		273F50152B7C3F120034792A /* SignedAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedAmountView.swift; sourceTree = "<group>"; };
 		2742C04D2BF6897A00E13C09 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		274C47EF2C0FC9A4000212C3 /* MemoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBox.swift; sourceTree = "<group>"; };
 		27685F402B9FCAD300F37DE2 /* Satoshi-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Medium.otf"; sourceTree = "<group>"; };
 		2769090D2AAFD8030075B2D6 /* TransferInstanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferInstanceViewModel.swift; sourceTree = "<group>"; };
 		2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewModel.swift; sourceTree = "<group>"; };
@@ -641,6 +643,7 @@
 				02714C9C29E0C78600CC1C44 /* ChainsComboBox.swift */,
 				02714C9E29E0C7C500CC1C44 /* TokensComboBox.swift */,
 				02F99D1429E0CC9D0009B3E8 /* TransferAmountBox.swift */,
+				274C47EF2C0FC9A4000212C3 /* MemoBox.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1997,6 +2000,7 @@
 				02428C192962E219000D7929 /* dydxMarketFundingDurationsView.swift in Sources */,
 				023AB3B42BEAD53D005230B2 /* dydxMarginModeView.swift in Sources */,
 				02860A9129C15E670079E644 /* dydxOnboardScanView.swift in Sources */,
+				274C47F02C0FC9A4000212C3 /* MemoBox.swift in Sources */,
 				02F99F4029E50D3A0009B3E8 /* ChevronBackButton.swift in Sources */,
 				02F6E7112A8292FC0018F00C /* dydxProfileFeesView.swift in Sources */,
 				27F624132BBDB4D400AB6D1A /* dydxTakeProfitStopLossInputAreaViewModel.swift in Sources */,
