@@ -12,6 +12,7 @@ import dydxFormatter
 
 public class MemoBoxModel: PlatformTextInputViewModel {
     @Published public var pasteAction: (() -> Void)?
+    @Published public var shouldDisplayWarningWhenEmpty: Bool = false
 
     public init(onEdited: ((String?) -> Void)?) {
         super.init(label: DataLocalizer.localize(path: "APP.GENERAL.MEMO"),
@@ -20,7 +21,7 @@ public class MemoBoxModel: PlatformTextInputViewModel {
     }
 
     private var memoWarning: InlineAlertViewModel? {
-        guard value?.isEmpty != false else { return nil }
+        guard value?.isEmpty != false && shouldDisplayWarningWhenEmpty else { return nil }
         return InlineAlertViewModel(.init(title: nil,
                                    body: DataLocalizer.localize(path: "ERRORS.TRANSFER_MODAL.TRANSFER_WITHOUT_MEMO"),
                                    level: .warning))

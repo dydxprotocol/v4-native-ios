@@ -159,6 +159,7 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
 
         viewModel?.addressInput?.value = transferInput.address
 
+        viewModel?.memoBox?.shouldDisplayWarningWhenEmpty = transferInput.token != dydxTokenConstants.usdcTokenKey
         viewModel?.memoBox?.value = transferInput.memo
     }
 
