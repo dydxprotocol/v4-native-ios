@@ -36,6 +36,17 @@ public class dydxRewardsHistoryViewPresenter: HostedViewPresenter<dydxRewardsHis
             }
         }
 
+        var abacusPeriod: Abacus.HistoricalTradingRewardsPeriod {
+            switch self {
+            case .monthly:
+                return .monthly
+            case .weekly:
+                return .weekly
+            case .daily:
+                return .daily
+            }
+        }
+
         var text: String? {
             switch self {
             case .monthly: return DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.MONTHLY", params: nil)
@@ -45,7 +56,8 @@ public class dydxRewardsHistoryViewPresenter: HostedViewPresenter<dydxRewardsHis
         }
     }
 
-    @Published private var selectedPeriodIndex: Int = 0
+    @Published private var selectedPeriodIndex: Int = 1
+    private var period: Period { Period.allCases[selectedPeriodIndex] }
 
     override init() {
 
@@ -65,12 +77,15 @@ public class dydxRewardsHistoryViewPresenter: HostedViewPresenter<dydxRewardsHis
     public override func start() {
         super.start()
 
+        AbacusStateManager.shared.setHistoricalTradingRewardPeriod(period: self.period.abacusPeriod)
         AbacusStateManager.shared.state.account
             .map(\.?.tradingRewards?.historical)
             .sink { [weak self] historicalRewards in
                 self?.viewModel?.onSelectionChanged = {[weak self] index in
-                    self?.selectedPeriodIndex = index
-                    self?.updateItems(from: historicalRewards)
+                    guard let self = self else { return }
+                    self.selectedPeriodIndex = index
+                    AbacusStateManager.shared.setHistoricalTradingRewardPeriod(period: self.period.abacusPeriod)
+                    self.updateItems(from: historicalRewards)
                 }
                 self?.updateItems(from: historicalRewards)
             }
@@ -78,7 +93,6 @@ public class dydxRewardsHistoryViewPresenter: HostedViewPresenter<dydxRewardsHis
     }
 
     private func updateItems(from historicalRewards: [String: [HistoricalTradingReward]]?) {
-        let period = Period.allCases[selectedPeriodIndex]
         viewModel?.items = historicalRewards?[period.historicalMapKey]?
             .map { reward in
                 let startedAt = dydxFormatter.shared.millisecondsToDate(reward.startedAtInMilliseconds, format: .MMM_d_yyyy)
