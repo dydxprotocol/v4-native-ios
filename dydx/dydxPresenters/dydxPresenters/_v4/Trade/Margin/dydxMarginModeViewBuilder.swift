@@ -76,8 +76,10 @@ private class dydxMarginModeViewPresenter: HostedViewPresenter<dydxMarginModeVie
         case .cross:
             crossItemViewModel.isSelected = true
             isolatedItemViewModel.isSelected = false
+            isolatedItemViewModel.isDisabled = tradeInput.options?.marginModeOptions == nil
         case .isolated:
             crossItemViewModel.isSelected = false
+            crossItemViewModel.isDisabled = tradeInput.options?.marginModeOptions == nil
             isolatedItemViewModel.isSelected = true
         default:
             assertionFailure("should have margin mode")
