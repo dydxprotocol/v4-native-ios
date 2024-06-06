@@ -12,7 +12,7 @@ import Utilities
 
 public class dydxTransferSearchItemViewModel: PlatformViewModel {
     @Published public var onTapAction: (() -> Void)?
-    @Published public var icon: PlatformIconViewModel?
+    @Published public var icon: PlatformViewModel?
     @Published public var text: String?
     @Published public var tokenText: TokenTextViewModel?
     @Published public var isSelected: Bool = false

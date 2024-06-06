@@ -269,6 +269,10 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.historicalPnlPeriod = period
     }
 
+    public func setHistoricalTradingRewardPeriod(period: HistoricalTradingRewardsPeriod) {
+        asyncStateManager.historicalTradingRewardPeriod = period
+    }
+
     public func startTrade() {
         asyncStateManager.trade(data: nil, type: nil)
     }
