@@ -36,7 +36,7 @@ class dydxTradeInputMarginViewPresenter: HostedViewPresenter<dydxTradeInputMargi
             .store(in: &subscriptions)
 
         viewModel?.marginModeAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/trade/margin_type"), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/margin_mode"), animated: true, completion: nil)
         }
         viewModel?.marginLeverageAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/trade/target_leverage"), animated: true, completion: nil)
@@ -44,7 +44,7 @@ class dydxTradeInputMarginViewPresenter: HostedViewPresenter<dydxTradeInputMargi
     }
 
     private func update(withTradeInput tradeInput: Abacus.TradeInput) {
-        viewModel?.shouldDisplayTargetLeverage = tradeInput.marginMode == MarginMode.isolated
+        viewModel?.shouldDisplayTargetLeverage = tradeInput.options?.needsTargetLeverage == true
         viewModel?.marginMode = DataLocalizer.localize(path: "APP.GENERAL.\(tradeInput.marginMode.rawValue)")
         viewModel?.targetLeverage = "\(tradeInput.targetLeverage)"
     }

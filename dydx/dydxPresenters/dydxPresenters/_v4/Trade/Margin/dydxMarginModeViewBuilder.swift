@@ -24,7 +24,7 @@ public class dydxMarginModeViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxMarginModeViewController: HostingViewController<PlatformView, dydxMarginModeViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if request?.path == "/trade/margin_type" {
+        if request?.path == "/trade/margin_mode" {
             return true
         }
         return false
@@ -64,15 +64,15 @@ private class dydxMarginModeViewPresenter: HostedViewPresenter<dydxMarginModeVie
         super.start()
 
         AbacusStateManager.shared.state.tradeInput
-            .compactMap(\.?.marginMode)
-            .sink {[weak self] mode in
-                self?.updateMarginMode(mode: mode)
+            .compactMap { $0 }
+            .sink {[weak self] input in
+                self?.update(tradeInput: input)
             }
             .store(in: &subscriptions)
     }
 
-    private func updateMarginMode(mode: MarginMode) {
-        switch mode {
+    private func update(tradeInput: Abacus.TradeInput) {
+        switch tradeInput.marginMode {
         case .cross:
             crossItemViewModel.isSelected = true
             isolatedItemViewModel.isSelected = false
