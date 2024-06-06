@@ -112,16 +112,21 @@ private extension dydxTransferSearchItemViewModel {
         }
         self.isSelected = selected
         if let iconUrl = option.iconUrl, let url = URL(string: iconUrl) {
-            self.icon = PlatformIconViewModel(
-                type: .url(url: url, placeholderContent: {
-                    Text(option.localizedString?.prefix(1) ?? "")
-                        .frame(width: 32, height: 32)
-                        .themeColor(foreground: .textTertiary)
-                        .themeColor(background: .layer5)
-                        .borderAndClip(style: .circle, borderColor: .layer7, lineWidth: 1)
-                        .wrappedInAnyView()
-                }),
-                size: CGSize(width: 32, height: 32))
+            let type: PlatformIconViewModel.IconType
+            let placeholderText = Text(option.localizedString?.prefix(1) ?? "")
+                .frame(width: 32, height: 32)
+                .themeColor(foreground: .textTertiary)
+                .themeColor(background: .layer5)
+                .borderAndClip(style: .circle, borderColor: .layer7, lineWidth: 1)
+                .wrappedInAnyView()
+            // SwiftUI does not process svgs well
+            if url.absoluteString.ends(with: ".svg") {
+                self.icon = placeholderText.wrappedViewModel
+            } else {
+                self.icon = PlatformIconViewModel(
+                    type: .url(url: url, placeholderContent: { placeholderText }),
+                    size: CGSize(width: 32, height: 32))
+            }
         }
         self.onTapAction = onTapAction
     }
