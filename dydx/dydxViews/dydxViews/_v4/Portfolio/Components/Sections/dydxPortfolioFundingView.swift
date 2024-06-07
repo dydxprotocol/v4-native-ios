@@ -141,13 +141,13 @@ public class dydxPortfolioFundingItemViewModel: PlatformViewModel {
 }
 
 public class dydxPortfolioFundingViewModel: PlatformListViewModel {
-    @Published public var placeholderText: String? {
-        didSet {
-            _placeholder.text = placeholderText
-        }
-    }
+    @Published public var placeholderText: String?
 
-    private let _placeholder = PlaceholderViewModel()
+    public override var placeholder: PlatformViewModel? {
+        let vm = PlaceholderViewModel()
+        vm.text = placeholderText
+        return vm
+    }
 
     public init(items: [PlatformViewModel] = [], contentChanged: (() -> Void)? = nil) {
         super.init(items: items,
@@ -155,8 +155,6 @@ public class dydxPortfolioFundingViewModel: PlatformListViewModel {
                    firstListItemTopSeparator: true,
                    lastListItemBottomSeparator: true,
                    contentChanged: contentChanged)
-        self.placeholder = _placeholder
-        self.header = createHeader().wrappedViewModel
         self.width = UIScreen.main.bounds.width - 16
     }
 
@@ -169,8 +167,9 @@ public class dydxPortfolioFundingViewModel: PlatformListViewModel {
         return vm
     }
 
-    private func createHeader() -> some View {
-        HStack {
+    public override var header: PlatformViewModel? {
+        guard items.count > 0 else { return nil }
+        return HStack {
             HStack {
                 Text(DataLocalizer.localize(path: "APP.GENERAL.TIME"))
                 Spacer()
@@ -184,6 +183,7 @@ public class dydxPortfolioFundingViewModel: PlatformListViewModel {
         .padding(.bottom, 16)
         .themeFont(fontSize: .small)
         .themeColor(foreground: .textTertiary)
+        .wrappedViewModel
     }
 }
 

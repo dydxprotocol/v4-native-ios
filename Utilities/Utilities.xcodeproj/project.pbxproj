@@ -16,6 +16,7 @@
 		0253CEC42AA009D70033F064 /* DebugEnabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253CEC32AA009D70033F064 /* DebugEnabled.swift */; };
 		025B752B28A703E800A4AC98 /* ObjectLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025B752A28A703E800A4AC98 /* ObjectLoader.swift */; };
 		025B752D28A7041600A4AC98 /* ClassLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025B752C28A7041600A4AC98 /* ClassLoader.swift */; };
+		026734EC2BF2B6BB00DBF51A /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026734EB2BF2B6BB00DBF51A /* Logging.swift */; };
 		027E1EE329CA0F790098666F /* KeyValueStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027E1EE229CA0F790098666F /* KeyValueStoreProtocol.swift */; };
 		027E1EE529CA100B0098666F /* UserDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027E1EE429CA100B0098666F /* UserDefaultsStore.swift */; };
 		027E1EE929CA1E7A0098666F /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027E1EE829CA1E7A0098666F /* SettingsStore.swift */; };
@@ -287,6 +288,7 @@
 		0253CEC32AA009D70033F064 /* DebugEnabled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugEnabled.swift; sourceTree = "<group>"; };
 		025B752A28A703E800A4AC98 /* ObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectLoader.swift; sourceTree = "<group>"; };
 		025B752C28A7041600A4AC98 /* ClassLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassLoader.swift; sourceTree = "<group>"; };
+		026734EB2BF2B6BB00DBF51A /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		027E1EE229CA0F790098666F /* KeyValueStoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStoreProtocol.swift; sourceTree = "<group>"; };
 		027E1EE429CA100B0098666F /* UserDefaultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
 		027E1EE829CA1E7A0098666F /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
@@ -467,6 +469,14 @@
 			path = _AsyncStep;
 			sourceTree = "<group>";
 		};
+		026734EA2BF2B69E00DBF51A /* _Logging */ = {
+			isa = PBXGroup;
+			children = (
+				026734EB2BF2B6BB00DBF51A /* Logging.swift */,
+			);
+			path = _Logging;
+			sourceTree = "<group>";
+		};
 		027E1EE129CA0F630098666F /* _Store */ = {
 			isa = PBXGroup;
 			children = (
@@ -643,6 +653,7 @@
 				025B752C28A7041600A4AC98 /* ClassLoader.swift */,
 				0253CEC12A9FFF8D0033F064 /* CachedFileLoader.swift */,
 				648327432AF5665600012B75 /* NumericUtils.swift */,
+				27E31E5A2BE40E4000580E59 /* SynchronizedLock.swift */,
 			);
 			path = _Utils;
 			sourceTree = "<group>";
@@ -846,6 +857,7 @@
 				312CE38A2630A37400C519C0 /* _Javascript */,
 				314B63D623DCCF0100139EB3 /* _Localization */,
 				314B639D23DCCF0100139EB3 /* _Location */,
+				026734EA2BF2B69E00DBF51A /* _Logging */,
 				314B638E23DCCF0100139EB3 /* _Map */,
 				3162C02624C378FD00DE648C /* _Notification */,
 				3162C00D24C3781D00DE648C /* _Permissions */,
@@ -1372,6 +1384,7 @@
 				314B63FC23DCCF0200139EB3 /* MapPoint.swift in Sources */,
 				314B64DC23DCCF0200139EB3 /* CompositeTracking.swift in Sources */,
 				3101F94A25112C5900AC4010 /* AuthService.swift in Sources */,
+				026734EC2BF2B6BB00DBF51A /* Logging.swift in Sources */,
 				020F758E2988072800DA2D87 /* Combine+Ext.swift in Sources */,
 				3162C00624C377E000DE648C /* PrompterProtocol.swift in Sources */,
 				3162C01324C3784800DE648C /* PhotoAlbumsPermission.swift in Sources */,
@@ -1380,6 +1393,7 @@
 				314B640023DCCF0200139EB3 /* MapArea.swift in Sources */,
 				6476164127E23FBC008ACFD9 /* LocalAuthenticator.swift in Sources */,
 				314B644823DCCF0200139EB3 /* NotificationToken.swift in Sources */,
+				27E31E5B2BE40E4000580E59 /* SynchronizedLock.swift in Sources */,
 				3162C00A24C377EF00DE648C /* PrompterFactory.swift in Sources */,
 				314B646C23DCCF0200139EB3 /* XibLoader.swift in Sources */,
 				279B879A2B97CD4C00466392 /* RatingService.swift in Sources */,

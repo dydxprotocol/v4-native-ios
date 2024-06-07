@@ -30,6 +30,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
         self.content = content
         self.type = type
         self.state = state
+        self.action = action
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {

@@ -9,6 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import dydxFormatter
 
 public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     public struct Handler: Hashable {
@@ -20,6 +21,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
 
         public var onTapAction: (() -> Void)?
         public var onCloseAction: (() -> Void)?
+        public var onMarginEditAction: (() -> Void)?
     }
 
     public init(size: String? = nil,
@@ -44,7 +46,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         self.unrealizedPnlPercent = unrealizedPnlPercent
         self.gradientType = gradientType
         self.logoUrl = logoUrl
-        self.handler = Handler(onTapAction: onTapAction)
+        self.handler = Handler(onTapAction: onTapAction, onMarginEditAction: onMarginEditAction)
     }
 
     public var size: String?
@@ -76,12 +78,131 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
+        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled else {
+            return createView_Deprecated(parentStyle: parentStyle, styleKey: styleKey)
+        }
+
+        return PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+            guard let self = self else { return AnyView(PlatformView.nilView) }
+
+            let rightCellSwipeAccessoryView = PlatformIconViewModel(type: .asset(name: "action_cancel", bundle: Bundle.dydxView), size: .init(width: 16, height: 16))
+                .createView(parentStyle: style, styleKey: styleKey)
+                .tint(ThemeColor.SemanticColor.layer2.color)
+
+            let rightCellSwipeAccessory = CellSwipeAccessory(accessoryView: AnyView(rightCellSwipeAccessoryView)) {
+                self.handler?.onCloseAction?()
+            }
+
+            return AnyView(
+                VStack {
+                    self.createTopView(parentStyle: style)
+                    self.createBottomView(parentStyle: style)
+                }
+                    .frame(height: 120)
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 8)
+                    .themeGradient(background: .layer3, gradientType: self.gradientType)
+                    .cornerRadius(16)
+                    .onTapGesture { [weak self] in
+                        self?.handler?.onTapAction?()
+                    }
+                    .swipeActions(leftCellSwipeAccessory: nil, rightCellSwipeAccessory: rightCellSwipeAccessory)
+            )
+        }
+    }
+
+    private func createTopView(parentStyle: ThemeStyle) -> some View {
+        let icon = self.createLogo(parentStyle: parentStyle)
+        let main = self.createMain(parentStyle: parentStyle)
+
+        return PlatformTableViewCellViewModel(logo: icon.wrappedViewModel,
+                                              main: main.wrappedViewModel)
+        .createView(parentStyle: parentStyle)
+    }
+
+    private func createBottomView(parentStyle: ThemeStyle) -> some View {
+        GeometryReader { geo in
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.INDEX_ENTRY"))
+                        .themeFont(fontSize: .smaller)
+                        .themeColor(foreground: .textTertiary)
+
+                    Text(self.indexPrice ?? "")
+                        .themeFont(fontSize: .small)
+                        .themeColor(foreground: .textPrimary)
+                        .minimumScaleFactor(0.5)
+
+                    Text(self.entryPrice ?? "")
+                        .themeFont(fontSize: .smaller)
+                        .themeColor(foreground: .textTertiary)
+                        .minimumScaleFactor(0.5)
+                }
+                .leftAligned()
+                .frame(width: geo.size.width / 3)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.PROFIT_AND_LOSS"))
+                        .themeFont(fontSize: .smaller)
+                        .themeColor(foreground: .textTertiary)
+
+                    self.unrealizedPnlPercent?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .small))
+
+                    self.unrealizedPnl?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .smaller).themeColor(foreground: .textTertiary))
+                }
+                .leftAligned()
+                .frame(width: geo.size.width / 3)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.MARGIN"))
+                        .themeFont(fontSize: .smaller)
+                        .themeColor(foreground: .textTertiary)
+
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(self.marginValue)
+                                .themeFont(fontSize: .small)
+                                .themeColor(foreground: .textPrimary)
+                                .minimumScaleFactor(0.5)
+
+                            Text(self.marginMode)
+                                .themeFont(fontSize: .smaller)
+                                .themeColor(foreground: .textTertiary)
+                                .minimumScaleFactor(0.5)
+                        }
+
+                        Spacer()
+
+                        if self.isMarginAdjustable {
+
+                            let buttonContent = PlatformIconViewModel(type: .asset(name: "icon_edit", bundle: Bundle.dydxView),
+                                                                      size: CGSize(width: 20, height: 20),
+                                                                      templateColor: .textSecondary)
+                            PlatformButtonViewModel(content: buttonContent,
+                                                    type: PlatformButtonType.iconType) { [weak self] in
+                                self?.handler?.onMarginEditAction?()
+                            }
+                                .createView(parentStyle: parentStyle)
+                                .frame(width: 32, height: 32)
+                                .themeColor(background: .layer6)
+                                .border(borderWidth: 1, cornerRadius: 7, borderColor: ThemeColor.SemanticColor.layer7.color)
+                        }
+                    }
+                }
+                .leftAligned()
+                .frame(width: geo.size.width / 3)
+            }
+        }
+        .padding(.horizontal, 16)
+    }
+
+    private func createView_Deprecated(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let icon = self.createLogo(parentStyle: style)
 
-            let main = self.createMain(parentStyle: style)
+            let main = self.createMain_Deprecated(parentStyle: style)
 
             let trailing = self.createTrailing(parentStyle: style)
 
@@ -120,6 +241,30 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     }
 
     private func createMain(parentStyle: ThemeStyle) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(spacing: 2) {
+                Text(size ?? "")
+                    .themeFont(fontType: .number, fontSize: .small)
+
+                token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
+            }
+
+            HStack(spacing: 2) {
+                sideText
+                    .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))
+                Text("@")
+                    .themeFont(fontSize: .smaller)
+                    .themeColor(foreground: .textTertiary)
+
+                Text(leverage ?? "")
+                    .themeFont(fontType: .number, fontSize: .smaller)
+            }
+        }
+        .leftAligned()
+        .minimumScaleFactor(0.5)
+    }
+
+    private func createMain_Deprecated(parentStyle: ThemeStyle) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(spacing: 2) {
@@ -173,18 +318,26 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
 }
 
 public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
-    @Published public var placeholderText: String? {
-        didSet {
-            _placeholder.text = placeholderText
-        }
+    // TODO: remove once isolated markets is supported and force released
+    @Published public var shouldDisplayIsolatedPositionsWarning: Bool = false
+    @Published public var placeholderText: String?
+
+    public override var placeholder: PlatformViewModel? {
+        let vm = PlaceholderViewModel()
+        vm.text = placeholderText
+        return vm
     }
 
-    private let _placeholder = PlaceholderViewModel()
-
-    public override init(items: [PlatformViewModel] = [], header: PlatformViewModel? = nil, placeholder: PlatformViewModel? = nil, intraItemSeparator: Bool = false, firstListItemTopSeparator: Bool = false, lastListItemBottomSeparator: Bool = false, contentChanged: (() -> Void)? = nil) {
-        super.init(items: items, header: header, placeholder: placeholder, intraItemSeparator: intraItemSeparator, firstListItemTopSeparator: firstListItemTopSeparator, lastListItemBottomSeparator: lastListItemBottomSeparator, contentChanged: contentChanged)
-        self.placeholder = _placeholder
-        self.header = createHeader().wrappedViewModel
+    public override init(items: [PlatformViewModel] = [],
+                         intraItemSeparator: Bool = false,
+                         firstListItemTopSeparator: Bool = false,
+                         lastListItemBottomSeparator: Bool = false,
+                         contentChanged: (() -> Void)? = nil) {
+        super.init(items: items,
+                   intraItemSeparator: intraItemSeparator,
+                   firstListItemTopSeparator: firstListItemTopSeparator,
+                   lastListItemBottomSeparator: lastListItemBottomSeparator,
+                   contentChanged: contentChanged)
         self.width = UIScreen.main.bounds.width - 32
     }
 
@@ -197,8 +350,9 @@ public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
         return vm
     }
 
-    private func createHeader() -> some View {
-        HStack {
+    public override var header: PlatformViewModel? {
+        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == false, !items.isEmpty else { return nil }
+        return HStack {
             Text(DataLocalizer.localize(path: "APP.GENERAL.DETAILS"))
             Spacer()
             Text(DataLocalizer.localize(path: "APP.GENERAL.INDEX_ENTRY"))
@@ -212,6 +366,19 @@ public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
         .padding(.horizontal, 16)
         .themeFont(fontSize: .small)
         .themeColor(foreground: .textTertiary)
+        .wrappedViewModel
+    }
+
+    public override var footer: PlatformViewModel? {
+        guard shouldDisplayIsolatedPositionsWarning else { return nil }
+        return Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITIONS_COMING_SOON")
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 16)
+            .themeFont(fontSize: .small)
+            .themeColor(foreground: .textTertiary)
+            .padding(.top, 12)
+            .padding(.bottom, 16)
+            .wrappedViewModel
     }
 }
 

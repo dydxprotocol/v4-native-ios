@@ -268,6 +268,10 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.historicalPnlPeriod = period
     }
 
+    public func setHistoricalTradingRewardPeriod(period: HistoricalTradingRewardsPeriod) {
+        asyncStateManager.historicalTradingRewardPeriod = period
+    }
+
     public func startTrade() {
         asyncStateManager.trade(data: nil, type: nil)
     }
@@ -426,6 +430,21 @@ extension AbacusStateManager {
     public enum SubmissionStatus {
         case success
         case failed(Abacus.ParsingError?)
+    }
+
+    /// places the currently drafted trigger order(s)
+    /// - Returns: the number of resulting cancel orders + place order requests
+    public func placeTriggerOrders(callback: @escaping ((SubmissionStatus) -> Void)) -> Int? {
+        let payload = asyncStateManager.commitTriggerOrders { successful, error, _ in
+            if successful.boolValue {
+                callback(.success)
+            } else {
+                callback(.failed(error))
+            }
+        }
+        let placeOrderPayloads = payload?.placeOrderPayloads ?? []
+        let cancelPayloads = payload?.cancelOrderPayloads ?? []
+        return placeOrderPayloads.count + cancelPayloads.count
     }
 
     public func placeOrder(callback: @escaping ((SubmissionStatus) -> Void)) {

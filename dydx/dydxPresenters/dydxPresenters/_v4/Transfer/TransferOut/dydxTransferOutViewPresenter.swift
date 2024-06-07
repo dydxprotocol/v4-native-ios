@@ -15,6 +15,7 @@ import Abacus
 import dydxStateManager
 import dydxFormatter
 import Combine
+import KeyboardObserving
 
 protocol dydxTransferOutViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxTransferOutViewModel? { get }
@@ -74,6 +75,10 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
 
         viewModel.addressInput?.onEdited = { address in
             AbacusStateManager.shared.transfer(input: address, type: .address)
+        }
+
+        viewModel.memoBox = .init { value in
+            AbacusStateManager.shared.transfer(input: value, type: .memo)
         }
 
         self.viewModel = viewModel
@@ -153,6 +158,9 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
         viewModel?.amountBox?.objectWillChange.send()
 
         viewModel?.addressInput?.value = transferInput.address
+
+        viewModel?.memoBox?.shouldDisplayWarningWhenEmpty = transferInput.token != dydxTokenConstants.usdcTokenKey
+        viewModel?.memoBox?.value = transferInput.memo
     }
 
     private func updateChainsTokensViewModel() {

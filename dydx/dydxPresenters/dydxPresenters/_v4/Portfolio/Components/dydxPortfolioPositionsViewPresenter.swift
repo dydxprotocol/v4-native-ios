@@ -34,6 +34,8 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
 
         AbacusStateManager.shared.state.onboarded
             .sink { [weak self] onboarded in
+                // TODO: remove once isolated markets is supported and force released
+                self?.viewModel?.shouldDisplayIsolatedPositionsWarning = onboarded
                 if onboarded {
                     self?.viewModel?.placeholderText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS")
                 } else {
@@ -64,13 +66,13 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
 
     static func createViewModelItem(position: SubaccountPosition, marketMap: [String: PerpetualMarket], assetMap: [String: Asset], cache: [String: dydxPortfolioPositionItemViewModel]? = nil) -> dydxPortfolioPositionItemViewModel? {
         guard let market = marketMap[position.id], let configs = market.configs, let asset = assetMap[position.assetId],
-              (position.size?.current?.doubleValue ?? 0) != 0 else {
+              (position.size.current?.doubleValue ?? 0) != 0 else {
             return nil
         }
 
         let item = cache?[position.assetId] ?? dydxPortfolioPositionItemViewModel()
 
-        let positionSize = abs(position.size?.current?.doubleValue ?? 0)
+        let positionSize = abs(position.size.current?.doubleValue ?? 0)
         item.size = dydxFormatter.shared.localFormatted(number: positionSize, digits: configs.displayStepSizeDecimals?.intValue ?? 1)
         item.token?.symbol = asset.id
 
@@ -80,15 +82,15 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         } else {
             item.sideText.side = .short
             item.gradientType = .minus
-       }
+        }
 
-        item.leverage = dydxFormatter.shared.leverage(number: NSNumber(value: position.leverage?.current?.doubleValue ?? 0))
-        if let leverage = position.leverage?.current?.doubleValue, let maxLeverage = position.maxLeverage?.current?.doubleValue, maxLeverage > 0 {
+        item.leverage = dydxFormatter.shared.leverage(number: NSNumber(value: position.leverage.current?.doubleValue ?? 0))
+        if let leverage = position.leverage.current?.doubleValue, let maxLeverage = position.maxLeverage.current?.doubleValue, maxLeverage > 0 {
             item.leverageIcon = LeverageRiskModel(level: LeverageRiskModel.Level(marginUsage: leverage / maxLeverage), viewSize: 16, displayOption: .iconOnly)
         }
 
         item.indexPrice = dydxFormatter.shared.dollar(number: market.oraclePrice, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
-        item.entryPrice = dydxFormatter.shared.dollar(number: position.entryPrice?.current, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
+        item.entryPrice = dydxFormatter.shared.dollar(number: position.entryPrice.current, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
         item.unrealizedPnl = SignedAmountViewModel(amount: position.unrealizedPnl?.current?.doubleValue ?? 0, displayType: .dollar, coloringOption: .allText)
         item.unrealizedPnlPercent = dydxFormatter.shared.percent(number: position.unrealizedPnlPercent?.current?.doubleValue ?? 0, digits: 2)
@@ -101,7 +103,10 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
             Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["market": market.id]), animated: true, completion: nil)
         }
         item.handler?.onCloseAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/trade/close", params: ["marketId": "\(position.assetId)-USD"]), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/close", params: ["marketId": market.id]), animated: true, completion: nil)
+        }
+        item.handler?.onMarginEditAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/adjust_margin", params: ["marketId": market.id]), animated: true, completion: nil)
         }
 
         return item

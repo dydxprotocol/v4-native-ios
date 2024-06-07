@@ -12,7 +12,6 @@
 		022F35CD28D39304000BCA41 /* dydxPresenters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02439D1129B03F6700A083FE /* dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; };
 		02439D1229B03F7B00A083FE /* dydxCartera.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		024B7A9528B7F6CC00F7C386 /* dydxViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 024B7A9428B7F6CC00F7C386 /* dydxViews.framework */; };
 		024B7A9628B7F6CC00F7C386 /* dydxViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 024B7A9428B7F6CC00F7C386 /* dydxViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		025B83FF28AAAB270037FF7C /* PlatformUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 025B83EB28AAAB120037FF7C /* PlatformUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02756A6A287CA33E00803741 /* dydxNotificationHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02756A69287CA33E00803741 /* dydxNotificationHandlerDelegate.swift */; };
@@ -253,6 +252,34 @@
 			proxyType = 1;
 			remoteGlobalIDString = 02E7DC5D28CFAF5C00727949;
 			remoteInfo = dydxStateManager;
+		};
+		275956052BF7D1FD008C77EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E65AB8216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		275C17042BF7D730009313EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2742BEAD2BF6860100E13C09;
+			remoteInfo = dydxAnalytics;
+		};
+		275C17062BF7D730009313EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2742BEB72BF6860100E13C09;
+			remoteInfo = dydxAnalyticsTests;
+		};
+		275C17082BF7D737009313EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2742BEAC2BF6860100E13C09;
+			remoteInfo = dydxAnalytics;
 		};
 		3112F476216BBF8600708927 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -639,13 +666,6 @@
 			remoteGlobalIDString = 31E65B00216BCA10008ABEE9;
 			remoteInfo = RoutingKit;
 		};
-		31B77BB722DAD077004F9B21 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 31E65AB8216BC9C9008ABEE9;
-			remoteInfo = Utilities;
-		};
 		31B77BBB22DAD077004F9B21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */;
@@ -859,6 +879,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2741B25E2C06A0F900693B17 /* dydxViews.framework in Frameworks */,
+				2741B25D2C06A0F600693B17 /* dydxAnalytics.framework in Frameworks */,
 				027E1E1329C912660098666F /* PlatformUIJedio.framework in Frameworks */,
 				02439D1129B03F6700A083FE /* dydxCartera.framework in Frameworks */,
 				02FF093029ADBDA300781EDA /* dydxPresenters.framework in Frameworks */,
@@ -876,7 +898,6 @@
 				6466E116280F664900B8791B /* AmplitudeInjections.framework in Frameworks */,
 				31B77C2622DAD0B3004F9B21 /* JedioKit.framework in Frameworks */,
 				31B77C2522DAD0B3004F9B21 /* libFirebaseStaticInjections.a in Frameworks */,
-				024B7A9528B7F6CC00F7C386 /* dydxViews.framework in Frameworks */,
 				31F761C924BA3E98001EA293 /* WebParticles.framework in Frameworks */,
 				31B77C3422DAD0B3004F9B21 /* PlatformRouting.framework in Frameworks */,
 				01EEEC77C8B7F3846916AF28 /* Pods_iOS_dydxV4.framework in Frameworks */,
@@ -940,7 +961,10 @@
 		02684D6028BD40830007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */,
+				6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */,
+				314B726523DD124E00139EB3 /* AppsFlyerStaticInjections.xcodeproj */,
+				31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */,
+				275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */,
 				02439CCC29B03F4C00A083FE /* dydxCartera.xcodeproj */,
 				029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */,
 				028420C729AD77F400C0E7CC /* dydxFormatter.xcodeproj */,
@@ -948,19 +972,18 @@
 				6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */,
 				31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */,
 				024B7AC928B7F73700F7C386 /* dydxViews.xcodeproj */,
-				314B726523DD124E00139EB3 /* AppsFlyerStaticInjections.xcodeproj */,
 				31B779F822DAD020004F9B21 /* FirebaseStaticInjections.xcodeproj */,
 				31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */,
 				31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */,
 				31B77A6D22DAD022004F9B21 /* ParticlesKit.xcodeproj */,
 				31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */,
 				31B77A9722DAD022004F9B21 /* PlatformRouting.xcodeproj */,
+				025B83C328AAAB120037FF7C /* PlatformUI.xcodeproj */,
+				027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */,
 				31B77A2222DAD021004F9B21 /* RoutingKit.xcodeproj */,
 				31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */,
 				31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */,
 				31F7618424BA3E7A001EA293 /* WebParticles.xcodeproj */,
-				02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */,
-				02684CE428BD3CD50007CEFF /* dydxPresenters.xcodeproj */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
@@ -1292,6 +1315,7 @@
 			children = (
 				64AF4810281880B100EBFDC6 /* dydxAmplitudeTracking.swift */,
 				02C7262A29D793C90098AFBC /* dydxCompositeTracking.swift */,
+				27968BA82BF7AC7A002F2C34 /* TrackingViewController+Ext.swift */,
 			);
 			path = _Tracking;
 			sourceTree = "<group>";
@@ -1348,17 +1372,21 @@
 				020F66C02858F29300E2D072 /* Embed Foundation Extensions */,
 				16DEFDB1896BDF443F34E3AC /* [CP] Embed Pods Frameworks */,
 				026FC4232AFAD3EB00C52F20 /* Run Script (unset_scheme.sh) */,
+				52574510D5C216006099A2F7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				027E1E1229C9125C0098666F /* PBXTargetDependency */,
+				275C17092BF7D737009313EC /* PBXTargetDependency */,
+				275956062BF7D1FD008C77EE /* PBXTargetDependency */,
+				31B77BC422DAD077004F9B21 /* PBXTargetDependency */,
 				02439D1029B03F5D00A083FE /* PBXTargetDependency */,
 				029E11EF29ADB9BF00FE271C /* PBXTargetDependency */,
 				0284210829AD77FF00C0E7CC /* PBXTargetDependency */,
 				022F358F28D392CF000BCA41 /* PBXTargetDependency */,
 				022F35CB28D392D6000BCA41 /* PBXTargetDependency */,
 				02E7DDDE28CFB32D00727949 /* PBXTargetDependency */,
+				027E1E1229C9125C0098666F /* PBXTargetDependency */,
 				025B83FE28AAAB1F0037FF7C /* PBXTargetDependency */,
 				6466E115280F663000B8791B /* PBXTargetDependency */,
 				31AB94D226DEE82A00DB42B9 /* PBXTargetDependency */,
@@ -1367,12 +1395,10 @@
 				31B77BB222DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BB422DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BB622DAD077004F9B21 /* PBXTargetDependency */,
-				31B77BB822DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BBC22DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BBE22DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BC022DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BC222DAD077004F9B21 /* PBXTargetDependency */,
-				31B77BC422DAD077004F9B21 /* PBXTargetDependency */,
 				31B77BCA22DAD077004F9B21 /* PBXTargetDependency */,
 			);
 			name = dydxV4;
@@ -1391,6 +1417,7 @@
 				3112F472216BBF8600708927 /* Frameworks */,
 				3112F473216BBF8600708927 /* Resources */,
 				5BD099095C70B5B9617985A5 /* [CP] Embed Pods Frameworks */,
+				0EDD4459F9EEEA64AF8E4A1F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1476,6 +1503,10 @@
 				{
 					ProductGroup = 31AB94C926DEE81000DB42B9 /* Products */;
 					ProjectRef = 31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */;
+				},
+				{
+					ProductGroup = 275C17002BF7D730009313EC /* Products */;
+					ProjectRef = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
 				},
 				{
 					ProductGroup = 02439CCD29B03F4C00A083FE /* Products */;
@@ -1670,6 +1701,20 @@
 			fileType = wrapper.cfbundle;
 			path = dydxStateManagerTests.xctest;
 			remoteRef = 02E7DDA928CFB31000727949 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		275C17052BF7D730009313EC /* dydxAnalytics.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxAnalytics.framework;
+			remoteRef = 275C17042BF7D730009313EC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		275C17072BF7D730009313EC /* dydxAnalyticsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = dydxAnalyticsTests.xctest;
+			remoteRef = 275C17062BF7D730009313EC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		314B726A23DD124E00139EB3 /* libAppsFlyerStaticInjections.a */ = {
@@ -2165,6 +2210,23 @@
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\n\n# Path to the secrets directory\nSET_SECRETS_PATH=\"${PROJECT_DIR}/../scripts/set_secrets.sh\"\n\n# Check if the set_secrets script is available\nif [ ! -f \"$SET_SECRETS_PATH\" ]; then\n  echo \"Error: set_secrets.sh not found at $SET_SECRETS_PATH\"\n  exit 1\nfi\n\n# Execute the set_secrets script with the shouldUseEmptySecrets argument\nset_secrets_output=$(bash \"$SET_SECRETS_PATH\")\n\n# Echo the captured output (xcode does not automatically mirror it in build log)\necho \"Output from set_secrets was:\\n$set_secrets_output\"\n";
 		};
+		0EDD4459F9EEEA64AF8E4A1F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		16DEFDB1896BDF443F34E3AC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2223,6 +2285,23 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		52574510D5C216006099A2F7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		5BD099095C70B5B9617985A5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2347,6 +2426,16 @@
 			name = dydxStateManager;
 			targetProxy = 02E7DDDD28CFB32D00727949 /* PBXContainerItemProxy */;
 		};
+		275956062BF7D1FD008C77EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Utilities;
+			targetProxy = 275956052BF7D1FD008C77EE /* PBXContainerItemProxy */;
+		};
+		275C17092BF7D737009313EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxAnalytics;
+			targetProxy = 275C17082BF7D737009313EC /* PBXContainerItemProxy */;
+		};
 		3112F477216BBF8600708927 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3112F45E216BBF8400708927 /* dydxV4 */;
@@ -2376,11 +2465,6 @@
 			isa = PBXTargetDependency;
 			name = RoutingKit;
 			targetProxy = 31B77BB522DAD077004F9B21 /* PBXContainerItemProxy */;
-		};
-		31B77BB822DAD077004F9B21 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Utilities;
-			targetProxy = 31B77BB722DAD077004F9B21 /* PBXContainerItemProxy */;
 		};
 		31B77BBC22DAD077004F9B21 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

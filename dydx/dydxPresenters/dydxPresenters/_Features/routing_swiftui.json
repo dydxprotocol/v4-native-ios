@@ -133,7 +133,7 @@
                     "destination":"AccountFailure.storyboard",
                     "presentation":"half"
                 },
-                "/features":{
+                "/settings/feature_flag_overrides":{
                     "destination":"dydxPresenters.dydxFeatureFlagsViewBuilder",
                     "presentation":"push"
                 },

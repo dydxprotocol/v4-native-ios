@@ -451,9 +451,6 @@ open class MappedUIKitRouter: MappedRouter {
                     self?.actions.removeAll(where: { (actionInList) -> Bool in
                         actionReference === actionInList
                     })
-                    if success, request.path?.hasPrefix("/action") ?? false {
-                        Tracking.shared?.view(request.path, data: request.params, from: nil, time: nil)
-                    }
                     completion?(data, success)
                 }
             } else {
@@ -469,14 +466,6 @@ open class MappedUIKitRouter: MappedRouter {
             loadViewController(from: map, completion: completion)
         } else {
             completion(nil)
-        }
-    }
-
-    override open func previousTracking() -> TrackingData? {
-        if let vc = UIViewController.topmost() as? TrackingViewProtocol {
-            return vc.trackingData
-        } else {
-            return nil
         }
     }
     

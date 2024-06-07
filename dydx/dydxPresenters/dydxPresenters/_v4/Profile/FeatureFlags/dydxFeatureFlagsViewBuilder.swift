@@ -20,7 +20,7 @@ public class dydxFeatureFlagsViewBuilder: NSObject, ObjectBuilderProtocol {
         let presenter = dydxFeatureFlagsViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
         let viewController = SettingsViewController(presenter: presenter, view: view, configuration: .default)
-        viewController.requestPath = "/settings/debug"
+        viewController.requestPath = "/settings/feature_flag_overrides"
         return viewController as? T
     }
 }

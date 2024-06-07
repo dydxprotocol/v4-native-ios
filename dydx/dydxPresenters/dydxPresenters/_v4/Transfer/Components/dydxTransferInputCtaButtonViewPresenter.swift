@@ -14,6 +14,7 @@ import PlatformParticles
 import PlatformUI
 import RoutingKit
 import Utilities
+import dydxAnalytics
 
 protocol dydxTransferInputCtaButtonViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxTradeInputCtaButtonViewModel? { get }

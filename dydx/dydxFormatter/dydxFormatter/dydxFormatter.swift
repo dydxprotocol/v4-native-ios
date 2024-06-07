@@ -368,6 +368,8 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
 
     /*
      xxxxxx,yyyyy or xxxxx.yyyyy
+     will take the number and round it to the closest step size
+     e.g. if number is 1021 and step size is "100" then output is "1000"
      */
     public func raw(number: NSNumber?, size: String?, locale: Locale = Locale.current) -> String? {
         if let number = number {
@@ -378,6 +380,16 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
         } else {
             return nil
         }
+    }
+
+    /*
+     xxxxxx,yyyyy or xxxxx.yyyyy
+     will take the number and round it to the closest step size
+     e.g. if number is 1021 and step size is "100" then output is "1000"
+     */
+    public func raw(number: Double?, size: String?, locale: Locale = Locale.current) -> String? {
+        guard let number = number else { return nil }
+        return raw(number: NSNumber(value: number), size: size, locale: locale)
     }
 
     /*
@@ -466,8 +478,8 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
                 let double = number.doubleValue
                 let reversed = digits * -1
                 let divideBy = pow(10, UInt(reversed))
-                let roundedUp = Int(double / Double(divideBy)) * divideBy
-                return NSNumber(value: roundedUp)
+                let roundedDown = Int(double / Double(divideBy)) * divideBy
+                return NSNumber(value: roundedDown)
             }
         } else {
             return number

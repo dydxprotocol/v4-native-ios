@@ -102,7 +102,7 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
                         return nil
                     }
                     let position: SubaccountPosition? = positions.first { $0.id == marketId }
-                    return position?.leverage?.current?.doubleValue
+                    return position?.leverage.current?.doubleValue
                 }
                 .removeDuplicates()
                 .eraseToAnyPublisher()
@@ -139,9 +139,11 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
 
         var visible = [PlatformValueInputViewModel]()
 
-        sizeViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
-        limitPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
-        triggerPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
+        sizeViewModel.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
+        limitPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
+        triggerPriceViewModel.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 0)
+
+        updateOrderTypeRequiresLimitPrice(forOrderType: tradeInput.type)
 
         updateOrderTypeRequiresLimitPrice(forOrderType: tradeInput.type)
 
@@ -230,7 +232,7 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
             visible.append(executionViewModel)
         }
 
-        if dydxBoolFeatureFlag.enable_reduce_only.isEnabled {
+        if AbacusStateManager.shared.environment?.featureFlags.reduceOnlySupported == true {
             if tradeInput.options?.needsReduceOnly == true {
                 let vm = reduceOnlyViewModel()
                 vm.isEnabled = tradeInput.options?.needsReduceOnly == true

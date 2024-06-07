@@ -100,6 +100,7 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
+    /// protocol pre v5.0
     public var restriction: AnyPublisher<Restriction, Never> {
         statePublisher
             .compactMap { $0?.restriction?.restriction ?? .noRestriction }
@@ -195,6 +196,18 @@ public final class AbacusState {
                 subaccount?.orders
             }
             .prepend([])
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
+    public var selectedSubaccountTriggerOrders: AnyPublisher<[SubaccountOrder], Never> {
+        selectedSubaccountOrders
+            .map { orders in
+                orders.filter { order in
+                    order.status == .untriggered
+                }
+            }
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()

@@ -212,6 +212,17 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
 
     private var inputType: InputType
     
+    /// Prefer to set `value` directly if forcing is not needed
+    /// - Parameters:
+    ///   - value: value to set
+    ///   - shouldForce: whether setting shoudl happen even if input is focused
+    /// we need to refactor how we do inputs to be more flexible
+    public final func programmaticallySet(value: String) {
+        input = value
+        self.valueChanged(value: self.input)
+        updateView()
+    }
+    
     override open var value: String? {
         didSet {
             if !focused {
@@ -524,7 +535,7 @@ open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
         if let label = label, label.length > 0 {
             return Text(label)
                 .themeColor(foreground: isEnabled ? .textSecondary : .textTertiary)
-                        .themeFont(fontSize: .smaller)
+                        .themeFont(fontSize: .medium)
                         .wrappedViewModel
     
         }

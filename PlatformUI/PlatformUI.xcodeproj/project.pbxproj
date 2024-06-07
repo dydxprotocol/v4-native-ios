@@ -205,6 +205,7 @@
 			children = (
 				024B794F28B6D95D00F7C386 /* SignedAmount.swift */,
 				027A7B44291E090F00DF402D /* ColoredText.swift */,
+				277E7AC52BBF3BE8009F95DE /* InlineAlert.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -639,6 +640,7 @@
 				6488BBDC296F6AEA0096502F /* TabItemViewModel.swift in Sources */,
 				27044F882BBB2ADF004C750D /* Text+Ext.swift in Sources */,
 				0258B9EE2991C9FF0098E1BE /* PlatformWebView.swift in Sources */,
+				274C47EA2C0FC6CF000212C3 /* EdgeInsets+Ext.swift in Sources */,
 				02F38BF22A9AAE3700969E06 /* CircularProgressView.swift in Sources */,
 				02E2C93028A1C8A400F7C3BE /* PlatformUI.docc in Sources */,
 				02B120B528A430DF00281498 /* ThemeViewModifiers.swift in Sources */,
@@ -654,6 +656,7 @@
 				023788F528B9924D00F212E1 /* PlatformButton.swift in Sources */,
 				02E2C9C128A2C22B00F7C3BE /* SampleThemeLabel.swift in Sources */,
 				0243A73729BB8DBB00A083FE /* PlatformListViewModel.swift in Sources */,
+				277E7AC62BBF3BE8009F95DE /* InlineAlert.swift in Sources */,
 				02F16FDB28B491EE0085DC58 /* PlatformUI.swift in Sources */,
 				64A4DC5F29677BCB008D8E20 /* PlatformOutput.swift in Sources */,
 				0243A73E29BE2D7C00A083FE /* Divider.swift in Sources */,

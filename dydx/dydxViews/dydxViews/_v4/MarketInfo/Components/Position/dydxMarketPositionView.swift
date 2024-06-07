@@ -31,11 +31,13 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     @Published public var closePrice: String?
     @Published public var funding: SignedAmountViewModel?
 
+    @Published public var takeProfitStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
+    @Published public var stopLossStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
+
     public init() { }
 
     public static var previewValue: dydxMarketPositionViewModel {
         let vm = dydxMarketPositionViewModel()
-        vm.shareAction = {}
         vm.closeAction = {}
         vm.unrealizedPNLAmount = .previewValue
         vm.unrealizedPNLPercent = "0.00%"
@@ -154,8 +156,8 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                         token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
                     }
                     Text(amount ?? "")
-                        .themeColor(foreground: .textTertiary)
                         .themeFont(fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                 }
@@ -197,21 +199,16 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     }
 
     private func createButtons(parentStyle: ThemeStyle) -> some View {
-        HStack {
-            if let shareAction = self.shareAction {
-                let content = AnyView(
-                    HStack {
-                        Spacer()
-                        Text(DataLocalizer.localize(path: "APP.GENERAL.SHARE"))
-                            .themeFont(fontSize: .medium)
-                        Spacer()
-                    }
-                )
+        var closePositionButton: AnyView?
+        var addTakeProfitStopLossButton: AnyView?
 
-                PlatformButtonViewModel(content: content.wrappedViewModel, state: .disabled) {
-                    shareAction()
-                }
-                .createView(parentStyle: parentStyle)
+        if let closeAction = self.closeAction {
+            let content = HStack {
+                Spacer()
+                Text(DataLocalizer.localize(path: "APP.TRADE.CLOSE_POSITION"))
+                    .themeFont(fontSize: .medium)
+                    .themeColor(foreground: ThemeSettings.negativeColor)
+                Spacer()
             }
 
             if let takeProfitStopLossAction = self.takeProfitStopLossAction {
@@ -241,10 +238,39 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                     }
                 )
 
-                PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
-                    closeAction()
+        if let takeProfitStopLossAction = self.takeProfitStopLossAction {
+            let content = AnyView(
+                HStack {
+                    Spacer()
+                    Text(DataLocalizer.localize(path: "APP.TRADE.ADD_TP_SL"))
+                        .themeFont(fontSize: .medium)
+                        .themeColor(foreground: .textSecondary)
+                    Spacer()
                 }
-                .createView(parentStyle: parentStyle)
+            )
+
+            addTakeProfitStopLossButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+                takeProfitStopLossAction()
+            }
+            .createView(parentStyle: parentStyle)
+            .wrappedInAnyView()
+        }
+
+        return VStack(spacing: 10) {
+            if takeProfitStatusViewModel != nil || stopLossStatusViewModel != nil {
+                HStack(spacing: 10) {
+                    Group {
+                        takeProfitStatusViewModel?.createView(parentStyle: parentStyle)
+                        stopLossStatusViewModel?.createView(parentStyle: parentStyle)
+                    }
+                    .frame(maxHeight: .infinity)
+                }
+                closePositionButton
+            } else {
+                HStack(spacing: 10) {
+                    addTakeProfitStopLossButton
+                    closePositionButton
+                }
             }
         }
         .padding(.bottom, 16)
@@ -261,6 +287,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 
                 Text(openPrice ?? "-")
                     .themeFont(fontSize: .medium)
+                    .themeColor(foreground: .textSecondary)
             }
 
             DividerModel().createView(parentStyle: parentStyle)
@@ -274,6 +301,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 
                 Text(closePrice ?? "-")
                     .themeFont(fontSize: .medium)
+                    .themeColor(foreground: .textSecondary)
             }
 
             DividerModel().createView(parentStyle: parentStyle)

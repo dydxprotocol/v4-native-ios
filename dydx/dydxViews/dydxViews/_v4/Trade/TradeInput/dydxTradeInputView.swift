@@ -8,6 +8,7 @@
 import PlatformUI
 import SwiftUI
 import Utilities
+import dydxFormatter
 
 public class dydxTradeInputViewModel: PlatformViewModel {
     public enum DisplayState {
@@ -29,8 +30,9 @@ public class dydxTradeInputViewModel: PlatformViewModel {
     @Published public var orderbookViewModel: dydxOrderbookViewModel? = dydxOrderbookViewModel()
     @Published public var ctaButtonViewModel: dydxTradeInputCtaButtonViewModel? = dydxTradeInputCtaButtonViewModel()
     @Published public var validationViewModel: dydxValidationViewModel? = dydxValidationViewModel()
-    @Published public var tipBuySellViewModel: dydxTradeSheetTipBuySellViewModel? =  dydxTradeSheetTipBuySellViewModel()
-    @Published public var tipDraftViewModel: dydxTradeSheetTipDraftViewModel? =  dydxTradeSheetTipDraftViewModel()
+    @Published public var tipBuySellViewModel: dydxTradeSheetTipBuySellViewModel? = dydxTradeSheetTipBuySellViewModel()
+    @Published public var tipDraftViewModel: dydxTradeSheetTipDraftViewModel? = dydxTradeSheetTipDraftViewModel()
+    @Published public var marginViewModel: dydxTradeInputMarginViewModel? = dydxTradeInputMarginViewModel()
 
     public override init(bodyBuilder: ((ThemeStyle) -> AnyView)? = nil) {
         super.init(bodyBuilder: bodyBuilder)
@@ -53,6 +55,7 @@ public class dydxTradeInputViewModel: PlatformViewModel {
         vm.validationViewModel = .previewValue
         vm.tipBuySellViewModel = .previewValue
         vm.tipDraftViewModel = .previewValue
+        vm.marginViewModel = .previewValue
         return vm
     }
 
@@ -73,16 +76,39 @@ public class dydxTradeInputViewModel: PlatformViewModel {
                         self.createSwipeUpView(parentStyle: style)
                     }
 
-                    self.orderTypeViewModel?.createView(parentStyle: style)
-                        .frame(height: 64)
-                        .padding(.top, 32)
-                        .padding(.horizontal, -spacing)
+                    if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
+                        HStack(spacing: spacing) {
+                            self.marginViewModel?.createView(parentStyle: style)
+                                .frame(maxWidth: .infinity)
+                            self.sideViewModel?.createView(parentStyle: style)
+                                .frame(maxWidth: .infinity)
+                        }
+                            .padding(.top, 48)
+                            .frame(height: 64)
 
-                    HStack(spacing: spacing) {
-                        self.orderbookManagerViewModel?.createView(parentStyle: style)
-                            .frame(width: orderbookWdith)
-                        self.sideViewModel?.createView(parentStyle: style)
-                            .frame(width: editViewWidth)
+                        Spacer(minLength: 16)
+
+                        HStack(spacing: spacing) {
+                            self.orderbookManagerViewModel?.createView(parentStyle: style)
+                                .frame(width: orderbookWdith)
+                            self.orderTypeViewModel?.createView(parentStyle: style)
+                                .frame(width: editViewWidth)
+                        }
+                            .frame(height: 64)
+
+                    } else {
+
+                        self.orderTypeViewModel?.createView(parentStyle: style)
+                            .frame(height: 64)
+                            .padding(.top, 32)
+                            .padding(.horizontal, -spacing)
+
+                        HStack(spacing: spacing) {
+                            self.orderbookManagerViewModel?.createView(parentStyle: style)
+                                .frame(width: orderbookWdith)
+                            self.sideViewModel?.createView(parentStyle: style)
+                                .frame(width: editViewWidth)
+                        }
                     }
 
                     Spacer(minLength: 8)

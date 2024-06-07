@@ -22,7 +22,7 @@ public class dydxTradingRewardsViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxTradingRewardsViewController: HostingViewController<PlatformView, dydxTradingRewardsViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if request?.path == "/trading-rewards" {
+        if request?.path == "/profile/trading-rewards" {
             return true
         }
         return false

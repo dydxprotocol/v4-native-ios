@@ -78,14 +78,14 @@ class dydxClosePositionInputEditViewPresenter: HostedViewPresenter<dydxClosePosi
 
         var visible = [PlatformValueInputViewModel]()
 
-        sizeViewModel.placeHolder = dydxFormatter.shared.raw(number: 0, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
+        sizeViewModel.placeHolder = dydxFormatter.shared.raw(number: .zero, size: marketConfigs?.stepSize?.stringValue)
         if let size = closePositionInput.size?.size {
-            sizeViewModel.size = dydxFormatter.shared.raw(number: size, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
+            sizeViewModel.size = dydxFormatter.shared.raw(number: size, size: marketConfigs?.stepSize?.stringValue)
         } else {
             sizeViewModel.size = nil
         }
         if let usdcSize = closePositionInput.size?.usdcSize {
-            sizeViewModel.usdcSize = dydxFormatter.shared.raw(number: usdcSize, digits: 2)
+            sizeViewModel.usdcSize = dydxFormatter.shared.raw(number: usdcSize, size: "0.01")
         } else {
             sizeViewModel.usdcSize = nil
         }

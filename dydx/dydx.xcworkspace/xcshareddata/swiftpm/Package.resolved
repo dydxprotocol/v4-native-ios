@@ -38,6 +38,24 @@
       }
     },
     {
+      "identity" : "keyboardobserving",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nickffox/KeyboardObserving",
+      "state" : {
+        "branch" : "master",
+        "revision" : "48134b5460435cc9d048223ad7560ee2e40f3d4a"
+      }
+    },
+    {
+      "identity" : "percy-xcui-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/percy/percy-xcui-swift",
+      "state" : {
+        "revision" : "a2e9a86dfc3f5b69ef53cbda28a0ea71098c9f77",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "qrcode",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WalletConnect/QRCode",

@@ -66,14 +66,8 @@ cd dydx
 pod update
 
 echo "Xcode build... (ignoring error)"
-xcodebuild -workspace dydx.xcworkspace -scheme dydxV4 build -destination generic/platform=iOS || true
-
-pod install
-
-echo "Xcode build... (this time it should build)"
-xcodebuild -workspace dydx.xcworkspace -scheme dydxV4 build -destination generic/platform=iOS || true
-
-pod install
+# run xcode build twice if necessary 
+xcodebuild -workspace dydx.xcworkspace -scheme dydxV4 build -destination generic/platform=iOS || pod install; echo "Xcode build... (this time it should build)"; xcodebuild -workspace dydx.xcworkspace -scheme dydxV4 build -destination generic/platform=iOS || true
 
 echo "=================================="
 echo "Done.. Please create a PR with the change."

@@ -15,14 +15,14 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
     }
     
     public enum TabItemContent: Equatable {
-        case text(String)
+        case text(String, EdgeInsets = EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
         case icon(UIImage)
         case bar(PlatformViewModel)
         
         public static func ==(lhs: TabItemContent, rhs: TabItemContent) -> Bool {
             switch (lhs, rhs) {
-            case let (.text(leftText), .text(rightText)):
-                return leftText == rightText
+            case let (.text(leftText, leftInsets), .text(rightText, rightInsets)):
+                return leftText == rightText && leftInsets == rightInsets
             case let (.icon(leftImage), .icon(rightImage)):
                 return leftImage.isEqual(rightImage)
             default:
@@ -53,8 +53,9 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
             let templateColor: ThemeColor.SemanticColor = self.isSelected ? .textPrimary: .textTertiary
             let borderWidth: CGFloat = 1
             switch value {
-            case .text(let value):
+            case .text(let value, let edgeInsets):
                 return Text(value)
+                    .frame(maxHeight: .infinity)
                     .themeFont(fontSize: .small)
                     .padding([.bottom, .top], 6)
                     .padding([.leading, .trailing], 8)

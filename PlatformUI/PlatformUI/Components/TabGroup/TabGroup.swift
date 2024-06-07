@@ -34,6 +34,7 @@ private struct TabGroupView<ItemContent: PlatformViewModeling>: View {
                 }
             }
         }
+        .fixedSize(horizontal: false, vertical: true)
         .animation(selectionAnimation, value: model.currentSelection)
     }
 

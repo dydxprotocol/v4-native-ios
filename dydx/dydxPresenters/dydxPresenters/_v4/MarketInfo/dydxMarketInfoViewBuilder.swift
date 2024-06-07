@@ -113,8 +113,6 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
                 self?.resetPresentersForVisibilityChange()
             }
         }
-        viewModel.sectionSelection = .positions
-        viewModel.sections.sectionIndex = 0
 
         self.viewModel = viewModel
 

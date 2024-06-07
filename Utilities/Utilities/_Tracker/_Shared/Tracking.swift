@@ -47,19 +47,26 @@ public class Tracking {
     public static var shared: TrackingProtocol?
 }
 
-public class TrackingData {
-    public var path: String
-    public var data: [String: Any]?
-    public var startTime: Date
+public protocol TrackableEvent: CustomStringConvertible {
+    var name: String { get }
+    var customParameters: [String: Any] { get }
+}
 
-    public init(path: String, data: [String: Any]?) {
-        self.path = path
-        self.data = data
-        startTime = Date()
+public extension TrackableEvent {
+    var description: String {
+        let sorted = customParameters.sorted { $0.key < $1.key }
+        return "dydxAnalytics event \(name) with data: \(sorted)"
     }
 }
 
-public protocol TrackingViewProtocol {
-    var trackingData: TrackingData? { get }
-    func logView(path: String?, data: [String: Any]?, from: String?, time: Date?)
+public protocol TrackingViewProtocol: ScreenIdentifiable {
+    func logScreenView()
+}
+
+public protocol ScreenIdentifiable {
+    /// the path identifier specific to mobile
+    var mobilePath: String { get }
+    /// the web path identifier which corresponds to the mobile screen
+    var correspondingWebPath: String? { get }
+    var screenClass: String { get }
 }

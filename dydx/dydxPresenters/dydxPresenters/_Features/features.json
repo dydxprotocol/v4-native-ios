@@ -35,46 +35,6 @@
             },
             {
                 "title":{
-                    "text":"Enable Trading Rewards"
-                },
-                "field":{
-                    "field":"enable_trading_rewards",
-                    "optional":true,
-                    "type" : "text",
-                    "options" : [
-                        {
-                            "text": "yes",
-                            "value" : "1"
-                        },
-                        {
-                            "text": "no",
-                            "value" : "0"
-                        }
-                    ]
-                }
-            },
-            {
-                "title":{
-                    "text":"Enable Reduce-only"
-                },
-                "field":{
-                    "field":"enable_reduce_only",
-                    "optional":true,
-                    "type" : "text",
-                    "options" : [
-                        {
-                            "text": "yes",
-                            "value" : "1"
-                        },
-                        {
-                            "text": "no",
-                            "value" : "0"
-                        }
-                    ]
-                }
-            },
-            {
-                "title":{
                     "text":"Push Notification"
                 },
                 "field":{

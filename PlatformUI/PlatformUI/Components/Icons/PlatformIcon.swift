@@ -11,8 +11,7 @@ import SDWebImageSwiftUI
 public class PlatformIconViewModel: PlatformViewModel {
     public enum IconType {
         case asset(name: String?, bundle: Bundle?)
-        case url(url: URL?)
-        case urlWithPlaceholder(url: URL?, placeholderContent: () -> AnyView)
+        case url(url: URL?, placeholderContent: (() -> AnyView)? = nil)
         case system(name: String)
         case uiImage(image: UIImage)
         case any(viewModel: PlatformViewModel)
@@ -62,14 +61,12 @@ public class PlatformIconViewModel: PlatformViewModel {
                     } else {
                         PlatformView.nilView
                     }
-                case .url(let url):
-                    WebImage (url: url)
-                        .resizable()
-                        .templateColor(self.templateColor)
-                        .scaledToFit()
-                case .urlWithPlaceholder(let url, let placeholderContent):
-                    WebImage (url: url)
-                        .placeholder(content: placeholderContent)
+                case .url(let url, let placeholderContent):
+                    WebImage(url: url) { image in
+                        image.resizable() // Control layout like SwiftUI.AsyncImage, you must use this modifier or the view will use the image bitmap size
+                    } placeholder: {
+                        placeholderContent?()
+                    }
                         .resizable()
                         .templateColor(self.templateColor)
                         .scaledToFit()
@@ -103,18 +100,20 @@ public class PlatformIconViewModel: PlatformViewModel {
                     )
                 } else {
                     let clippedView = Group {
+                   
                         ZStack {
-                            ZStack {
-                                view
-                                    .frame(width: size.width - spacing, height: size.height - spacing)
-                                    .clipped()
-                            }
-                            .frame(width: size.width, height: size.height)
-                            .themeColor(background: background)
-                            .clipShape(Circle())
-                            .overlay(
-                                Circle().stroke(borderColor?.color ?? .clear, lineWidth: 1)
-                            )
+                            Circle()
+                                .fill(background.color)
+                                .frame(width: size.width, height: size.height)
+                                .themeColor(background: background)
+                                .clipShape(Circle())
+                                .overlay(
+                                    Circle().stroke(borderColor?.color ?? .clear, lineWidth: 1)
+                                )
+                            
+                            view
+                                .frame(width: size.width - spacing, height: size.height - spacing)
+                                .clipped()
                         }
                         .themeStyle(style: style)
                     }
