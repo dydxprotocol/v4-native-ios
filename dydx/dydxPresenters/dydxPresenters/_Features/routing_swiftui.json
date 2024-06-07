@@ -307,7 +307,7 @@
                     "destination":"dydxPresenters.dydxTakeProfitStopLossViewBuilder",
                     "presentation":"prompt"
                 },
-                "/trade/margin_type":{
+                "/trade/margin_mode":{
                     "destination":"dydxPresenters.dydxMarginModeViewBuilder",
                     "presentation":"half"
                 },
