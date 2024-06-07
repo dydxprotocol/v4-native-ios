@@ -153,7 +153,7 @@ public final class AbacusStateManager: NSObject {
                 // For debugging only
                 deployment = "DEV"
                 appConfigs = AppConfigs.companion.forAppDebug
-                appConfigsV2 = AppConfigsV2.companion.forAppDebug
+                appConfigsV2 = dydxBoolFeatureFlag.enable_isolated_margins.isEnabled ? AppConfigsV2.companion.forAppWithIsolatedMargins : AppConfigsV2.companion.forAppDebug
             case .jailBroken:
                 deployment = "TESTNET"
                 appConfigs = AppConfigs.companion.forApp
