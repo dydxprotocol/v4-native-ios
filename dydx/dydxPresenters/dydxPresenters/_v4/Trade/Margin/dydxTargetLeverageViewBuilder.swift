@@ -86,8 +86,6 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
     override func start() {
         super.start()
 
-        // TODO: Fix...? tradeInput?.targetLeverage is nil for now
-
         Publishers.CombineLatest(AbacusStateManager.shared.state.configsAndAssetMap,
                        AbacusStateManager.shared.state.tradeInput)
             .compactMap { $0 }

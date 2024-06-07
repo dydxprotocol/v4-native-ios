@@ -9,6 +9,7 @@ import Utilities
 import Abacus
 import Combine
 import CombineExt
+import dydxFormatter
 
 public final class AbacusState {
     private let parser = Utilities.Parser()
@@ -142,24 +143,45 @@ public final class AbacusState {
      Subaccount
      **/
     public func subaccount(of subaccountNumber: String) -> AnyPublisher<Subaccount?, Never> {
-        account
-            .compactMap(\.?.subaccounts?[subaccountNumber])
-            .removeDuplicates()
-            .share()
-            .eraseToAnyPublisher()
+        if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
+            account
+                .compactMap(\.?.groupedSubaccounts?[subaccountNumber])
+                .removeDuplicates()
+                .share()
+                .eraseToAnyPublisher()
+        } else {
+            account
+                .compactMap(\.?.subaccounts?[subaccountNumber])
+                .removeDuplicates()
+                .share()
+                .eraseToAnyPublisher()
+        }
     }
 
     public var selectedSubaccount: AnyPublisher<Subaccount?, Never> {
-        statePublisher
-            .map { [weak self] (state: PerpetualState?) in
-                if let key = self?.subaccountNumber, let subaccounts = state?.account?.subaccounts {
-                    return subaccounts[key]
+        if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
+            statePublisher
+                .map { [weak self] (state: PerpetualState?) in
+                    if let key = self?.subaccountNumber, let subaccounts = state?.account?.groupedSubaccounts {
+                        return subaccounts[key]
+                    }
+                    return nil
                 }
-                return nil
-            }
-            .removeDuplicates()
-            .share()
-            .eraseToAnyPublisher()
+                .removeDuplicates()
+                .share()
+                .eraseToAnyPublisher()
+        } else {
+            statePublisher
+                .map { [weak self] (state: PerpetualState?) in
+                    if let key = self?.subaccountNumber, let subaccounts = state?.account?.subaccounts {
+                        return subaccounts[key]
+                    }
+                    return nil
+                }
+                .removeDuplicates()
+                .share()
+                .eraseToAnyPublisher()
+        }
     }
 
     public var selectedSubaccountFills: AnyPublisher<[SubaccountFill], Never> {

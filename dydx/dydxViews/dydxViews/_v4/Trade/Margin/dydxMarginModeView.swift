@@ -13,6 +13,7 @@ import Utilities
 public class dydxMarginModeItemViewModel: PlatformViewModel {
     @Published public var title: String?
     @Published public var detail: String?
+    @Published public var isDisabled: Bool = false
     @Published public var isSelected: Bool = false
     @Published public var selectedAction: (() -> Void)?
 
@@ -33,14 +34,16 @@ public class dydxMarginModeItemViewModel: PlatformViewModel {
                 HStack {
                     Text(self.title ?? "")
                         .themeFont(fontSize: .medium)
-                        .themeColor(foreground: .textPrimary)
+                        .themeColor(foreground: self.isDisabled ? .textTertiary : .textPrimary)
 
                     Spacer()
 
-                    if self.isSelected {
-                        self.createSelectedCheckmark(parentStyle: style)
-                    } else {
-                        self.createUnselectedCheckmark(parentStyle: style)
+                    if !self.isDisabled {
+                        if self.isSelected {
+                            self.createSelectedCheckmark(parentStyle: style)
+                        } else {
+                            self.createUnselectedCheckmark(parentStyle: style)
+                        }
                     }
                 }
 
@@ -52,11 +55,9 @@ public class dydxMarginModeItemViewModel: PlatformViewModel {
                 .padding(16)
                 .leftAligned()
                 .themeColor(background: self.isSelected ? ThemeColor.SemanticColor.layer1 : ThemeColor.SemanticColor.layer3)
-                .overlay(
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .strokeBorder(self.isSelected ? ThemeColor.SemanticColor.colorPurple.color : ThemeColor.SemanticColor.textTertiary.color, lineWidth: 1)
-                )
-                .contentShape(RoundedRectangle(cornerRadius: cornerRadius))
+                .borderAndClip(style: .cornerRadius(8),
+                               borderColor: isSelected ? .colorPurple : isDisabled ? .textTertiary : .layer7,
+                               lineWidth: isSelected ? 2 : 1)
                 .wrappedViewModel
 
             return AnyView(
@@ -64,6 +65,7 @@ public class dydxMarginModeItemViewModel: PlatformViewModel {
                                         type: PlatformButtonType.iconType,
                                         action: self.selectedAction ?? {})
                     .createView(parentStyle: style)
+                    .disabled(isDisabled)
             )
         }
     }
