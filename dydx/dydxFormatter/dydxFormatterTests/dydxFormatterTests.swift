@@ -18,6 +18,54 @@ final class dydxFormatterTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testDecimalLocaleAgnostic() {
+        struct TestCase {
+            let number: NSNumber
+            let digits: Int
+            let expected: String
+        }
+
+        let testCases: [TestCase] = [
+            .init(number: 1, digits: 2, expected: "1.00"),
+            .init(number: -0.001, digits: 0, expected: "0"),
+            .init(number: -0.001, digits: 3, expected: "-0.001"),
+            .init(number: -0.001, digits: 2, expected: "0.00"),
+            .init(number: 0.001, digits: 2, expected: "0.00"),
+            .init(number: -0.005, digits: 2, expected: "-0.01"),
+            .init(number: -0.0051, digits: 2, expected: "-0.01")
+        ]
+
+        for testCase in testCases {
+            let formatted = dydxFormatter.shared.decimalLocaleAgnostic(number: testCase.number, digits: testCase.digits)
+            XCTAssertEqual(formatted, testCase.expected, "Test case: \(testCase)")
+        }
+    }
+
+    func testRaw() {
+        struct TestCase {
+            let number: NSNumber
+            let digits: Int
+            let expected: String
+            var locale: Locale = Locale(identifier: "en_US")
+        }
+
+        let testCases: [TestCase] = [
+            .init(number: 1, digits: 2, expected: "1.00"),
+            .init(number: -0.001, digits: 0, expected: "0"),
+            .init(number: -0.001, digits: 3, expected: "-0.001"),
+            .init(number: -0.001, digits: 2, expected: "0.00"),
+            .init(number: 0.001, digits: 2, expected: "0.00"),
+            .init(number: -0.005, digits: 2, expected: "-0.01"),
+            .init(number: -0.0051, digits: 2, expected: "-0.01"),
+            .init(number: 1123345.123, digits: 2, expected: "1123345,12", locale: Locale(identifier: "fr_FR"))
+        ]
+
+        for testCase in testCases {
+            let formatted = dydxFormatter.shared.raw(number: testCase.number, digits: testCase.digits, locale: testCase.locale)
+            XCTAssertEqual(formatted, testCase.expected, "Test case: \(testCase)")
+        }
+    }
+
     func testDollarFormatting() throws {
         struct TestCase {
             let number: Double

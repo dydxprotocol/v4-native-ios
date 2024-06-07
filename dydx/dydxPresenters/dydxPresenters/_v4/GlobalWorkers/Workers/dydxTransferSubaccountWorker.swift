@@ -40,8 +40,8 @@ final class dydxTransferSubaccountWorker: BaseWorker {
                     subaccountNumber = 0
                 }
                 let depositAmount = (balance ?? 0) - dydxTransferSubaccountWorker.balanceRetainAmount
-                let amountString = dydxFormatter.shared.raw(number: NSNumber(value: depositAmount),
-                                                            digits: dydxTokenConstants.usdcTokenDecimal)
+                let amountString = dydxFormatter.shared.decimalLocaleAgnostic(number: NSNumber(value: depositAmount),
+                                                                              digits: dydxTokenConstants.usdcTokenDecimal)
                 if let amountString = amountString {
                     self?.depositToSubaccount(amount: amountString,
                                               subaccount: subaccountNumber,
@@ -55,7 +55,7 @@ final class dydxTransferSubaccountWorker: BaseWorker {
 
     private func depositToSubaccount(amount: String, subaccount: Int, walletState: dydxWalletState) {
         CosmoJavascript.shared.depositToSubaccount(subaccount: subaccount, amount: amount) { result in
-            let trackingData = [
+            var trackingData = [
                 "amount": "\(amount)",
                 "address": "\(String(describing: walletState.currentWallet?.cosmoAddress))"
             ]
@@ -65,6 +65,9 @@ final class dydxTransferSubaccountWorker: BaseWorker {
                 Tracking.shared?.log(event: "SubaccountDeposit", data: trackingData)
             } else {
                 Console.shared.log("Deposit to subaccount failed")
+                if let resultString = result as? String {
+                    trackingData["error"] = resultString
+                }
                 Tracking.shared?.log(event: "SubaccountDeposit_Failed", data: trackingData)
             }
         }
