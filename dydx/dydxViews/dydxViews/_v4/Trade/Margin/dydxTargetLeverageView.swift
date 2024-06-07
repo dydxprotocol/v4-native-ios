@@ -76,7 +76,7 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
 
     private func createOptionsGroup(parentStyle: ThemeStyle) -> some View {
         let spacing: CGFloat = 8
-        let maxItemsToDisplay = CGFloat(max(5, leverageOptions.count))
+        let maxItemsToDisplay = CGFloat(min(5, leverageOptions.count))
 
         return GeometryReader { geometry in
             let width = (geometry.size.width + spacing) / maxItemsToDisplay - spacing

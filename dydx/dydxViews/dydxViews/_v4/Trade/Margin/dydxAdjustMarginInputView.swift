@@ -13,7 +13,7 @@ import Utilities
 public class dydxAdjustMarginInputViewModel: PlatformViewModel {
     @Published public var sharedMarketViewModel: SharedMarketViewModel? = SharedMarketViewModel()
     @Published public var marginDirection: dydxAdjustMarginDirectionViewModel? = dydxAdjustMarginDirectionViewModel()
-    @Published public var marginPercentage: dydxAdjustMarginPercentagViewModel? = dydxAdjustMarginPercentagViewModel()
+    @Published public var marginPercentage: dydxAdjustMarginPercentageViewModel? = dydxAdjustMarginPercentageViewModel()
     @Published public var amount: dydxAdjustMarginAmountViewModel? = dydxAdjustMarginAmountViewModel()
     @Published public var subaccountReceipt: dydxAdjustMarginSubaccountReceiptViewModel? = dydxAdjustMarginSubaccountReceiptViewModel()
     @Published public var liquidationPrice: dydxAdjustMarginLiquidationPriceViewModel? = dydxAdjustMarginLiquidationPriceViewModel()

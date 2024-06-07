@@ -57,10 +57,11 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         super.init()
 
         viewModel.marginPercentage?.percentageOptions = [
-            dydxAdjustMarginPercentagViewModel.PercentageOption(text: "10%", percentage: 0.1),
-            dydxAdjustMarginPercentagViewModel.PercentageOption(text: "25%", percentage: 0.25),
-            dydxAdjustMarginPercentagViewModel.PercentageOption(text: "50%", percentage: 0.5),
-            dydxAdjustMarginPercentagViewModel.PercentageOption(text: "75%", percentage: 0.75)
+            dydxAdjustMarginPercentageViewModel.PercentageOption(text: "5%", percentage: 0.05),
+            dydxAdjustMarginPercentageViewModel.PercentageOption(text: "10%", percentage: 0.10),
+            dydxAdjustMarginPercentageViewModel.PercentageOption(text: "25%", percentage: 0.25),
+            dydxAdjustMarginPercentageViewModel.PercentageOption(text: "50%", percentage: 0.50),
+            dydxAdjustMarginPercentageViewModel.PercentageOption(text: "75%", percentage: 0.75)
         ]
 
         viewModel.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT")
