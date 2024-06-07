@@ -43,7 +43,9 @@ open class CommonAppDelegate: ParticlesAppDelegate {
 
     override open func injectFeatures(completion: @escaping () -> Void) {
         Console.shared.log("injectFeatures")
+        // these two injections need to happen before app start
         injectFirebase()
+        injectRating()
         let compositeFeatureFlags = CompositeFeatureFlagsProvider()
         switch  Installation.source {
         case .debug, .testFlight:
@@ -67,7 +69,6 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         injectAmplitude()
         injectAttribution()
         injectLocalNotifications()
-        injectRating()
         injectAppearances()
         injectWebview()
 
@@ -137,7 +138,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
 
     open func injectRating() {
         Console.shared.log("injectRating")
-        RatingService.shared = AppStoreRating(threshold: 20)
+        dydxRatingService.shared = dydxPointsRating()
     }
 
     open func injectAppearances() {
@@ -168,6 +169,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     open override func applicationDidBecomeActive(_ application: UIApplication) {
         super.applicationDidBecomeActive(application)
         Tracking.shared?.log(event: "AppStart", data: nil)
+        dydxRatingService.shared?.launchedApp()
     }
 
     open func injectNotification() {

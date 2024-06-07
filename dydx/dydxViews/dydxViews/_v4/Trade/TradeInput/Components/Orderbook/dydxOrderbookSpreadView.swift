@@ -32,7 +32,7 @@ public class dydxOrderbookSpreadViewModel: PlatformValueOutputViewModel {
                     Spacer()
                     Text(DataLocalizer.localize(path: "APP.TRADE.ORDERBOOK_SPREAD"))
                         .themeColor(foreground: .textTertiary)
-                        .themeFont(fontType: .text, fontSize: .smaller)
+                        .themeFont(fontType: .base, fontSize: .smaller)
                     Text(text)
                         .themeFont(fontType: .number, fontSize: .smaller)
                         .themeColor(foreground: .textPrimary)

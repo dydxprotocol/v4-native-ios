@@ -218,7 +218,7 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.accountAddress = ethereumAddress
     }
 
-    public func setV4(ethereumAddress: String, walletId: String?, cosmoAddress: String, mnemonic: String) {
+    public func setV4(ethereumAddress: String?, walletId: String?, cosmoAddress: String, mnemonic: String) {
         CosmoJavascript.shared.connectWallet(mnemonic: mnemonic) { [weak self] _ in
             if let self = self {
                 let wallet = dydxWalletInstance.V4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic)
@@ -354,8 +354,16 @@ public final class AbacusStateManager: NSObject {
         transferStateManager.remove(transfer: transfer)
     }
 
-    public func transferStatus(hash: String, fromChainId: String?, toChainId: String?, isCctp: Bool) {
-        asyncStateManager.transferStatus(hash: hash, fromChainId: fromChainId, toChainId: toChainId, isCctp: isCctp)
+    public func transferStatus(hash: String,
+                               fromChainId: String?,
+                               toChainId: String?,
+                               isCctp: Bool,
+                               requestId: String?) {
+        asyncStateManager.transferStatus(hash: hash,
+                                         fromChainId: fromChainId,
+                                         toChainId: toChainId,
+                                         isCctp: isCctp,
+                                         requestId: requestId)
     }
 
     private static let storeKey = "AbacusStateManager.EnvState"

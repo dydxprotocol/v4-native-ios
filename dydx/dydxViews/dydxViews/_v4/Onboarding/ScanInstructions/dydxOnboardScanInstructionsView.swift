@@ -34,7 +34,7 @@ public class dydxOnboardScanInstructionsViewModel: PlatformViewModel {
                     .createView(parentStyle: style)
 
                     Text(DataLocalizer.localize(path: "APP.ONBOARDING.OPEN_QR_CODE"))
-                        .themeFont(fontType: .bold, fontSize: .largest)
+                        .themeFont(fontType: .plus, fontSize: .largest)
                 }
                 .leftAligned()
 
@@ -49,7 +49,7 @@ public class dydxOnboardScanInstructionsViewModel: PlatformViewModel {
                 let buttonContent =
                     Text(DataLocalizer.localize(path: "APP.ONBOARDING.OPEN_QR_CODE_NEXT"))
                         .wrappedViewModel
-                PlatformButtonViewModel(content: buttonContent, type: .defaultType) { [weak self] in
+                PlatformButtonViewModel(content: buttonContent, type: .defaultType(fillWidth: true)) { [weak self] in
                     self?.ctaAction?()
                 }
                 .createView(parentStyle: style)

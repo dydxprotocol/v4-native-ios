@@ -34,7 +34,7 @@ public class dydxKeyExportViewModel: PlatformViewModel {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading, spacing: 12) {
                         Text(DataLocalizer.localize(path: "APP.MNEMONIC_EXPORT.REVEAL_SECRET_PHRASE"))
-                            .themeFont(fontType: .bold, fontSize: .largest)
+                            .themeFont(fontType: .plus, fontSize: .largest)
                             .themeColor(foreground: .textPrimary)
 
                         Text(DataLocalizer.localize(path: "APP.MNEMONIC_EXPORT.REVEAL_SECRET_PHRASE_DESCRIPTION"))

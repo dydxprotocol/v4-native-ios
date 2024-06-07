@@ -1,4 +1,5 @@
 {
+    "id": "sample",
     "themeColor": {
         "layer": {
             "lowest": "#000000",
@@ -67,17 +68,17 @@
             "smallest": "11"
         },
         "type": {
-            "bold": {
-                "name": "Satoshi-Bold",
-                "weight": 0.45
+            "minus": {
+                "name": "Satoshi-Regular"
             },
-            "text": {
-                "name": "Satoshi-Regular",
-                "weight": 0.45
+            "base": {
+                "name": "Satoshi-Medium"
+            },
+            "plus": {
+                "name": "Satoshi-Bold"
             },
             "number": {
-                "name": "",
-                "weight": 0.45
+                "name": ".AppleSystemUIFontMonospaced-Medium"
             }
         }
     }

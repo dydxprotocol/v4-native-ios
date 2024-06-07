@@ -67,7 +67,7 @@ public class dydxTitledCardViewModel: PlatformViewModel {
                     Text(tooltip)
                         .padding(.vertical, 10)
                         .padding(.horizontal, 12)
-                        .themeFont(fontType: .text, fontSize: .small)
+                        .themeFont(fontType: .base, fontSize: .small)
                         .themeColor(foreground: .textSecondary)
                         .themeColor(background: .layer5)
                         .borderAndClip(style: .cornerRadius(8), borderColor: .layer6, lineWidth: 1)

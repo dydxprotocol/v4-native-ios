@@ -29,7 +29,7 @@ public class dydxRewardsHelpViewModel: dydxTitledCardViewModel {
         HStack {
             Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.LEARN_MORE", params: nil) ?? "")
                     .themeColor(foreground: .textSecondary)
-                    .themeFont(fontType: .text, fontSize: .small)
+                    .themeFont(fontType: .base, fontSize: .small)
             PlatformIconViewModel(type: .asset(name: "icon_link", bundle: .dydxView),
                                   clip: .noClip,
                                   size: .init(width: 16, height: 16),

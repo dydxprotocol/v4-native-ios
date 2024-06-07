@@ -1,4 +1,13 @@
-# Background
+<div align="center">
+  <img src='https://github.com/dydxprotocol/v4-native-ios/blob/develop/dydxV4/dydxV4/Assets.xcassets/AppIcon.appiconset/AppIcon-180x180.png' alt='icon' />
+</div>
+<h1 align="center">v4-native-ios</h1>
+
+<div align="center">
+  <a href='https://github.com/dydxprotocol/v4-native-ios/blob/main/LICENSE'>
+    <img src='https://img.shields.io/badge/License-AGPL_v3-blue.svg' alt='License' />
+  </a>
+</div>
 
 This is the native iOS app for dYdX v4.
 

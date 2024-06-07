@@ -111,13 +111,13 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
                 if let sourceAddress = self.sourceAddress {
                     HStack(spacing: 0) {
                         Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.SOURCE_ADDRESS", params: nil) ?? "")
-                            .themeFont(fontType: .text, fontSize: .small)
+                            .themeFont(fontType: .base, fontSize: .small)
                             .themeColor(foreground: .textTertiary)
                         Spacer(minLength: 64)
                         Text(sourceAddress)
                             .truncationMode(.middle)
                             .lineLimit(1)
-                            .themeFont(fontType: .text, fontSize: .small)
+                            .themeFont(fontType: .base, fontSize: .small)
                             .themeColor(foreground: .textSecondary)
                     }
                         .padding(.horizontal, 20)

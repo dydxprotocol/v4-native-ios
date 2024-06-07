@@ -230,30 +230,30 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                       let amount = transferInput.size?.usdcSize, (self.parser.asDecimal(amount)?.doubleValue ?? 0) > 0.0 else {
                     return
                 }
-                let gasFee = transferInput.summary?.gasFee?.doubleValue ?? 0
-                let usdcBalanceInWallet = usdcBalanceInWallet ?? 0
-                if usdcBalanceInWallet >= gasFee {
-                    if transferInput.isCctp {
-                        AbacusStateManager.shared.commitCCTPWithdraw { [weak self] success, error, result in
-                            if success {
-                                self?.postTransaction(result: result, transferInput: transferInput)
-                            } else {
-                                ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
-                                                       message: error?.localizedDescription,
-                                                       type: .error,
-                                                       error: nil, time: nil)
-                            }
-                            self?.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
+                if transferInput.isCctp {
+                    AbacusStateManager.shared.commitCCTPWithdraw { [weak self] success, error, result in
+                        if success {
+                            self?.postTransaction(result: result, transferInput: transferInput)
+                        } else {
+                            ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
+                                                   message: error?.localizedDescription,
+                                                   type: .error,
+                                                   error: nil, time: nil)
                         }
-                    } else {
+                        self?.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
+                    }
+                } else {
+                    let gasFee = transferInput.summary?.gasFee?.doubleValue ?? 0
+                    let usdcBalanceInWallet = usdcBalanceInWallet ?? 0
+                    if usdcBalanceInWallet >= gasFee {
                         CosmoJavascript.shared.withdrawToIBC(subaccount: Int(selectedSubaccount.subaccountNumber), amount: amount, payload: data) { [weak self] result in
                             self?.postTransaction(result: result, transferInput: transferInput)
                             self?.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
                         }
+                    } else {
+                        self.showNoGas()
+                        self.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
                     }
-                } else {
-                    self.showNoGas()
-                    self.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
                 }
             }
         }
@@ -424,7 +424,8 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                                             date: Date(),
                                             usdcSize: parser.asDecimal(transferInput.size?.usdcSize)?.doubleValue,
                                             size: parser.asDecimal(transferInput.size?.size)?.doubleValue,
-                                            isCctp: transferInput.isCctp)
+                                            isCctp: transferInput.isCctp,
+                                            requestId: transferInput.requestPayload?.requestId)
         AbacusStateManager.shared.addTransferInstance(transfer: transfer)
     }
 }

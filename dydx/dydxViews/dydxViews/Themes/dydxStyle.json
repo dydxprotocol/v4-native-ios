@@ -1,20 +1,20 @@
 {
     "default-style": {
         "_fontSize": "large",
-        "_fontType": "text",
+        "_fontType": "base",
         "_layerColor": "transparent",
         "_textColor": "text_secondary"
     },
     "table-cell-title-style": {
         "comment": "table view cell leading title",
         "_fontSize": "large",
-        "_fontType": "text",
+        "_fontType": "base",
         "_textColor": "text_secondary"
     },
     "table-cell-subtitle-style": {
         "comment": "table view cell trailing title",
         "_fontSize": "small",
-        "_fontType": "text",
+        "_fontType": "base",
         "_textColor": "text_tertiary"
     },
     "signed-plus": {
@@ -53,7 +53,7 @@
     },
     "asset_list_item_24h_volume": {
         "_fontSize": "small",
-        "_fontType": "text"
+        "_fontType": "base"
     },
     "text_tab_group_unselected_item": {
         "_textColor": "text_tertiary"

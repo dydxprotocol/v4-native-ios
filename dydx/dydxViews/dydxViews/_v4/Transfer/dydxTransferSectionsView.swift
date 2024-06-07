@@ -33,13 +33,13 @@ public class dydxTransferSectionsViewModel: PlatformViewModel {
 
             let items = self.itemTitles?.compactMap {
                 Text($0)
-                    .themeFont(fontType: .bold, fontSize: .largest)
+                    .themeFont(fontType: .plus, fontSize: .largest)
                     .themeColor(foreground: .textTertiary)
                     .wrappedViewModel
             }
             let selectedItems = self.itemTitles?.compactMap {
                 Text(" \($0) ")
-                    .themeFont(fontType: .bold, fontSize: .largest)
+                    .themeFont(fontType: .plus, fontSize: .largest)
                     .padding([.bottom, .top], 6)
                     .padding([.leading, .trailing], 8)
                     .themeColor(foreground: .textPrimary)

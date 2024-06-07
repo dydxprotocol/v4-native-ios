@@ -18,11 +18,7 @@ public final class AbacusState {
     public var onboarded: AnyPublisher<Bool, Never> {
         walletState
             .map { walletState in
-                if let currentWallet = walletState.currentWallet,
-                   currentWallet.ethereumAddress.length > 0 {
-                    return (currentWallet.cosmoAddress?.length ?? 0) > 0
-                }
-                return false
+                (walletState.currentWallet?.cosmoAddress?.length ?? 0) > 0
             }
             .removeDuplicates()
             .share()
@@ -122,10 +118,10 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
-    public func stakingBalance(of tokenDenom: String) -> AnyPublisher<Double?, Never> {
+    public func stakingBalance(of tokenDenom: String?) -> AnyPublisher<Double?, Never> {
         account
             .map { account in
-                self.parser.asDecimal(account?.stakingBalances?[tokenDenom]?.amount)?.doubleValue
+                self.parser.asDecimal(account?.stakingBalances?[tokenDenom ?? ""]?.amount)?.doubleValue
             }
             .removeDuplicates()
             .share()

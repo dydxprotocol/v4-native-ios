@@ -26,12 +26,18 @@ public class dydxMarketsSearchViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxMarketsSearchViewController: HostingViewController<PlatformView, dydxSearchViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        request?.path == "/markets/search"
+        guard request?.path == "/markets/search" else { return false }
+        if let presenter = presenter as? dydxMarketsSearchViewPresenter {
+            presenter.shouldShowResultsForEmptySearch = parser.asBoolean(request?.params?["shouldShowResultsForEmptySearch"])?.boolValue ?? false
+        }
+        return true
     }
 }
 
 private class dydxMarketsSearchViewPresenter: dydxSearchViewPresenter {
     private var chartPresenterMap = [String: dydxAssetItemChartViewPresenter]()
+
+    fileprivate var shouldShowResultsForEmptySearch: Bool = false
 
     override init() {
         super.init()
@@ -40,7 +46,7 @@ private class dydxMarketsSearchViewPresenter: dydxSearchViewPresenter {
     override func start() {
         super.start()
 
-        guard let searchTextPublisher = viewModel?.$searchText else {
+        guard let searchTextPublisher = viewModel?.$searchText.map({ $0.lowercased() }) else {
             return
         }
 
@@ -49,15 +55,19 @@ private class dydxMarketsSearchViewPresenter: dydxSearchViewPresenter {
                             AbacusStateManager.shared.state.candlesMap,
                             AbacusStateManager.shared.state.assetMap,
                             searchTextPublisher.removeDuplicates())
-            .sink { [weak self] (markets: [PerpetualMarket], candlesMap: [String: MarketCandles], assetMap: [String: Asset], searchText: String?) in
-                let filterMarkets = markets.filter { market in
+            .sink { [weak self] (markets: [PerpetualMarket], candlesMap: [String: MarketCandles], assetMap: [String: Asset], searchText: String) in
+                var filterMarkets = markets.filter { market in
                     guard market.status?.canTrade == true,
-                            let searchText = searchText?.lowercased(), searchText.length > 0,
-                            let asset = assetMap[market.assetId] else {
+                        searchText.isNotEmpty || self?.shouldShowResultsForEmptySearch == true,
+                        let asset = assetMap[market.assetId] else {
                         return false
                     }
                     return asset.id.lowercased().starts(with: searchText) ||
                         asset.name?.lowercased().starts(with: searchText) ?? false
+                }
+                // sort by volume if showing empty search string results and search text is empty
+                if searchText.isEmpty && self?.shouldShowResultsForEmptySearch == true {
+                    filterMarkets.sort { ($0.perpetual?.volume24H?.doubleValue ?? 0) > $1.perpetual?.volume24H?.doubleValue  ?? 0 }
                 }
                 self?.updateAssetList(markets: filterMarkets, candlesMap: candlesMap, assetMap: assetMap)
             }

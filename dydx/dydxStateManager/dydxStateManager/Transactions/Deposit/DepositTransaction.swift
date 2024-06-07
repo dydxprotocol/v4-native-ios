@@ -18,15 +18,16 @@ public struct DepositTransaction: AsyncStep {
     private let depositTransactionV4: DepositTransactionV4?
 
     public let transferInput: TransferInput
-    public let walletAddress: String
+    public let walletAddress: String?
     public let walletId: String?
 
-    public init(transferInput: TransferInput, walletAddress: String, walletId: String?) {
+    public init(transferInput: TransferInput, walletAddress: String?, walletId: String?) {
         self.transferInput = transferInput
         self.walletAddress = walletAddress
         self.walletId = walletId
 
-        if let chain = transferInput.chain, let token = transferInput.token,
+        if let walletAddress = walletAddress,
+            let chain = transferInput.chain, let token = transferInput.token,
            let chainRpc = transferInput.resources?.chainResources?[chain]?.rpc,
            let tokenAddress = transferInput.resources?.tokenResources?[token]?.address {
             depositTransactionV4 = DepositTransactionV4(transferInput: transferInput,
