@@ -26,8 +26,11 @@ public class dydxAdjustMarginInputViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxAdjustMarginInputViewController: HostingViewController<PlatformView, dydxAdjustMarginInputViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if request?.path == "/trade/adjust_margin", let marketId = parser.asString(request?.params?["marketId"]) {
+        if request?.path == "/trade/adjust_margin",
+            let marketId = parser.asString(request?.params?["marketId"]),
+            let childSubaccountNumber = parser.asString(request?.params?["childSubaccountNumber"]) {
             let presenter = presenter as? dydxAdjustMarginInputViewPresenterProtocol
+            presenter?.childSubaccountNumber = childSubaccountNumber
             presenter?.marketId = marketId
             return true
         }
@@ -38,6 +41,7 @@ private class dydxAdjustMarginInputViewController: HostingViewController<Platfor
 private protocol dydxAdjustMarginInputViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxAdjustMarginInputViewModel? { get }
     var marketId: String? { get set }
+    var childSubaccountNumber: String? { get set }
 }
 
 private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjustMarginInputViewModel>, dydxAdjustMarginInputViewPresenterProtocol {
@@ -48,6 +52,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
     ]
 
     var marketId: String?
+    var childSubaccountNumber: String?
 
     private let percentageOptions: [dydxAdjustMarginPercentageViewModel.PercentageOption] = [
         .init(text: "5%", percentage: 0.05),
