@@ -12,13 +12,11 @@ import Utilities
 
 public class dydxAdjustMarginAmountViewModel: PlatformTextInputViewModel {
     @Published public var maxAction: (() -> Void)?
-    @Published public var maxAmount: Double?
 
     public init() { }
 
     public static var previewValue: dydxAdjustMarginAmountViewModel {
         let vm = dydxAdjustMarginAmountViewModel()
-        vm.maxAmount = 1000
         vm.label = "Amount"
         vm.placeHolder = "0.0"
         return vm
@@ -37,13 +35,8 @@ public class dydxAdjustMarginAmountViewModel: PlatformTextInputViewModel {
                 PlatformButtonViewModel(content: buttonContent, type: .pill, state: .secondary, action: { [weak self] in
 
                     PlatformView.hideKeyboard()
+                    self?.maxAction?()
 
-                    let amount = self?.maxAmount ?? 0
-                    if amount > 0 {
-                        self?.value = "\(amount)"
-                        self?.valueChanged(value: self?.value)
-                        self?.maxAction?()
-                    }
                 })
                 .createView(parentStyle: style)
                 .padding(.trailing, 8)

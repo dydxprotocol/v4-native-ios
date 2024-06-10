@@ -49,6 +49,14 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
 
     var marketId: String?
 
+    private let percentageOptions: [dydxAdjustMarginPercentageViewModel.PercentageOption] = [
+        .init(text: "5%", percentage: 0.05),
+        .init(text: "10%", percentage: 0.10),
+        .init(text: "25%", percentage: 0.25),
+        .init(text: "50%", percentage: 0.50),
+        .init(text: "75%", percentage: 0.75)
+    ]
+
     override init() {
         let viewModel = dydxAdjustMarginInputViewModel()
 
@@ -56,13 +64,16 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
 
         super.init()
 
-        viewModel.marginPercentage?.percentageOptions = [
-            dydxAdjustMarginPercentageViewModel.PercentageOption(text: "5%", percentage: 0.05),
-            dydxAdjustMarginPercentageViewModel.PercentageOption(text: "10%", percentage: 0.10),
-            dydxAdjustMarginPercentageViewModel.PercentageOption(text: "25%", percentage: 0.25),
-            dydxAdjustMarginPercentageViewModel.PercentageOption(text: "50%", percentage: 0.50),
-            dydxAdjustMarginPercentageViewModel.PercentageOption(text: "75%", percentage: 0.75)
-        ]
+        viewModel.marginPercentage?.percentageOptions = percentageOptions
+        viewModel.marginPercentage?.percentageOptionSelectedAction = { option in
+            AbacusStateManager.shared.adjustIsolatedMargin(input: option.percentage.stringValue, type: .amountpercent)
+        }
+        viewModel.amount?.onEdited = { amount in
+            AbacusStateManager.shared.adjustIsolatedMargin(input: amount, type: .amount)
+        }
+        viewModel.amount?.maxAction = {
+            AbacusStateManager.shared.adjustIsolatedMargin(input: "100", type: .amountpercent)
+        }
 
         viewModel.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT")
         viewModel.amount?.placeHolder = "0.00"
@@ -86,11 +97,24 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                     self?.updateState(market: market, assetMap: assetMap)
                 }
                 .store(in: &subscriptions)
+
+            AbacusStateManager.shared.state.adjustIsolatedMarginInput
+                .compactMap { $0 }
+                .sink(receiveValue: { [weak self] input in
+                    self?.updateFields(input: input)
+                })
+                .store(in: &subscriptions)
         }
     }
 
     private func updateState(market: PerpetualMarket, assetMap: [String: Asset]) {
         let asset = assetMap[market.assetId]
         viewModel?.sharedMarketViewModel = SharedMarketPresenter.createViewModel(market: market, asset: asset)
+    }
+
+    private func updateFields(input: AdjustIsolatedMarginInput) {
+        viewModel?.amount?.value = dydxFormatter.shared.dollar(number: parser.asNumber(input.amount))
+        let selectedIndex = percentageOptions.firstIndex(where: { $0.percentage.stringValue == input.amountPercent })
+        viewModel?.marginPercentage?.selectedPercentageOptionIndex = selectedIndex
     }
 }

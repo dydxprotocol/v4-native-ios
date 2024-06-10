@@ -13,7 +13,7 @@ import Utilities
 public class dydxAdjustMarginPercentageViewModel: PlatformViewModel {
     public struct PercentageOption {
         let text: String
-        let percentage: Double
+        public let percentage: Double
 
         public init(text: String, percentage: Double) {
             self.text = text
