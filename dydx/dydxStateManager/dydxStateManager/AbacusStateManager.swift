@@ -395,6 +395,10 @@ public final class AbacusStateManager: NSObject {
                                          requestId: requestId)
     }
 
+    public func setGasToken(token: GasToken) {
+        asyncStateManager.gasToken = token
+    }
+
     private static let storeKey = "AbacusStateManager.EnvState"
 }
 
@@ -494,7 +498,7 @@ public extension V4Environment {
         tokens["usdc"]
     }
 
-    var dydxTokenInfo: TokenInfo? {
+    var nativeTokenInfo: TokenInfo? {
         tokens["chain"]
     }
 }
