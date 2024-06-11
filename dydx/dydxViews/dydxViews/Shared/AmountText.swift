@@ -12,14 +12,20 @@ import Utilities
 import dydxFormatter
 
 public class AmountTextModel: PlatformViewModel, Equatable {
+    public enum Unit: Int, Equatable {
+        case dollar, percentage, multiplier
+    }
+
+    @Published public var unit: Unit
     @Published public var amount: NSNumber?
     @Published public var tickSize: NSNumber?
     @Published public var requiresPositive: Bool = false
 
-    public init(amount: NSNumber? = nil, tickSize: NSNumber? = nil, requiresPositive: Bool = false) {
+    public init(amount: NSNumber? = nil, tickSize: NSNumber? = nil, requiresPositive: Bool = false, unit: Unit = .dollar) {
         self.amount = amount
         self.tickSize = tickSize
         self.requiresPositive = requiresPositive
+        self.unit = unit
     }
 
     public static var previewValue: AmountTextModel {
@@ -31,8 +37,21 @@ public class AmountTextModel: PlatformViewModel, Equatable {
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
-            var amount = self?.amount?.filter(filter: self?.requiresPositive == true ? .notNegative : nil)
-            let amountText = dydxFormatter.shared.dollar(number: amount, size: self?.tickSize?.stringValue)
+            guard let self = self else { return PlatformView.emptyView.wrappedInAnyView() }
+            var amount = self.amount?.filter(filter: self.requiresPositive == true ? .notNegative : nil)
+            let amountText: String?
+            switch self.unit {
+            case .dollar:
+                amountText = dydxFormatter.shared.dollar(number: amount, size: self.tickSize?.stringValue)
+            case .percentage:
+                amountText = dydxFormatter.shared.percent(number: amount, digits: 2)
+            case .multiplier:
+                if let formattedText = dydxFormatter.shared.raw(number: amount, size: self.tickSize?.stringValue) {
+                    amountText = "\(formattedText)×"
+                } else {
+                    amountText = nil
+                }
+            }
             return AnyView(
                 Text(amountText ?? "-")
                     .themeFont(fontType: .number, fontSize: .small)
@@ -42,7 +61,8 @@ public class AmountTextModel: PlatformViewModel, Equatable {
 
     public static func == (lhs: AmountTextModel, rhs: AmountTextModel) -> Bool {
         lhs.amount == rhs.amount &&
-        lhs.tickSize == rhs.tickSize
+        lhs.tickSize == rhs.tickSize &&
+        lhs.unit == rhs.unit
     }
 }
 

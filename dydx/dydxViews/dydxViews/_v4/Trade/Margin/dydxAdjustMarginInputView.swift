@@ -17,7 +17,7 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
     @Published public var amount: dydxAdjustMarginAmountViewModel? = dydxAdjustMarginAmountViewModel()
     @Published public var subaccountReceipt: dydxAdjustMarginSubaccountReceiptViewModel? = dydxAdjustMarginSubaccountReceiptViewModel()
     @Published public var liquidationPrice: dydxAdjustMarginLiquidationPriceViewModel? = dydxAdjustMarginLiquidationPriceViewModel()
-    @Published public var positionReceipot: dydxAdjustMarginPositionReceiptViewModel? = dydxAdjustMarginPositionReceiptViewModel()
+    @Published public var positionReceipt: dydxAdjustMarginPositionReceiptViewModel? = dydxAdjustMarginPositionReceiptViewModel()
     @Published public var ctaButton: dydxAdjustMarginCtaButtonViewModel? = dydxAdjustMarginCtaButtonViewModel()
 
     public init() { }
@@ -29,7 +29,7 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
         vm.amount = .previewValue
         vm.subaccountReceipt = .previewValue
         vm.liquidationPrice = .previewValue
-        vm.positionReceipot = .previewValue
+        vm.positionReceipt = .previewValue
         vm.ctaButton = .previewValue
         return vm
     }
@@ -60,7 +60,7 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
 
                 VStack {
 
-                    self.positionReceipot?.createView(parentStyle: style)
+                    self.positionReceipt?.createView(parentStyle: style)
 
                     self.ctaButton?.createView(parentStyle: style)
                         .padding(.top, -24)

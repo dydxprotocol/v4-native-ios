@@ -20,8 +20,14 @@ public extension View {
         modifier(BackgroundColorModifier(layerColor: background))
     }
     
-    func themeGradient(background: ThemeColor.SemanticColor, gradientColor: Color) -> some View {
-        modifier(GradientColorModifier(layerColor: background, gradientColor: gradientColor))
+    func themeGradient(background: ThemeColor.SemanticColor, 
+                       gradientColor: Color, 
+                       intensityLayerColor: Double = 0.95,
+                       intensityGradientColor: Double = 0.05) -> some View {
+        modifier(GradientColorModifier(layerColor: background,
+                                       gradientColor: gradientColor,
+                                       intensityLayerColor: intensityLayerColor,
+                                       intensityGradientColor: intensityGradientColor))
     }
 }
 
@@ -58,10 +64,19 @@ private struct GradientColorModifier: ViewModifier {
     
     let layerColor: ThemeColor.SemanticColor
     let gradientColor: Color
+    let intensityLayerColor: Double
+    let intensityGradientColor: Double
+    
+    fileprivate init(layerColor: ThemeColor.SemanticColor, gradientColor: Color, intensityLayerColor: Double = 0.95, intensityGradientColor: Double = 0.05) {
+        self.layerColor = layerColor
+        self.gradientColor = gradientColor
+        self.intensityLayerColor = intensityLayerColor
+        self.intensityGradientColor = intensityGradientColor
+    }
     
     func body(content: Content) -> some View {
         let layerColor = themeSettings.themeConfig.themeColor.color(of: layerColor)
-        let blendedColor = Color(UIColor.blend(color1: UIColor(layerColor), intensity1: 0.95, color2: UIColor(gradientColor), intensity2: 0.05))
+        let blendedColor = Color(UIColor.blend(color1: UIColor(layerColor), intensity1: intensityLayerColor, color2: UIColor(gradientColor), intensity2: intensityGradientColor))
         
         let gradient = LinearGradient(
             gradient: Gradient(colors: [
