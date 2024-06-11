@@ -84,6 +84,16 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
             AbacusStateManager.shared.adjustIsolatedMargin(input: "1", type: .amountpercent)
         }
 
+        ctaButtonPresenter.viewModel?.ctaAction = {
+            AbacusStateManager.shared.commitAdjustIsolatedMargin { [weak self] (_, error, _) in
+                if let error = error {
+                    self?.viewModel?.submissionError = InlineAlertViewModel(.init(title: nil, body: error.message, level: .error))
+                } else {
+                    self?.viewModel?.submissionError = nil
+                }
+            }
+        }
+
         viewModel.amount?.placeHolder = "0.00"
 
         self.viewModel = viewModel
@@ -192,10 +202,15 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 viewModel?.liquidationPrice?.direction = .none
             }
         }
+
+        if parser.asNumber(input.amount)?.doubleValue ?? 0 > 0 {
+            self.ctaButtonPresenter.viewModel?.ctaButtonState = .enabled()
+        } else {
+            self.ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
+        }
     }
 
     private func updateFields(input: AdjustIsolatedMarginInput) {
         viewModel?.amount?.value = dydxFormatter.shared.raw(number: parser.asNumber(input.amount), digits: 2)
-        let selectedIndex = percentageOptions.firstIndex(where: { $0.percentage.stringValue == input.amountPercent })
     }
 }

@@ -18,6 +18,7 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
     @Published public var amount: dydxAdjustMarginAmountViewModel? = dydxAdjustMarginAmountViewModel()
     @Published public var subaccountReceipt: dydxAdjustMarginSubaccountReceiptViewModel? = dydxAdjustMarginSubaccountReceiptViewModel()
     @Published public var liquidationPrice: dydxAdjustMarginLiquidationPriceViewModel? = dydxAdjustMarginLiquidationPriceViewModel()
+    @Published public var submissionError: InlineAlertViewModel?
     @Published public var positionReceipt: dydxAdjustMarginPositionReceiptViewModel? = dydxAdjustMarginPositionReceiptViewModel()
     @Published public var ctaButton: dydxAdjustMarginCtaButtonViewModel? = dydxAdjustMarginCtaButtonViewModel()
 
@@ -58,6 +59,7 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
                         .frame(height: 140)
 
                         self.liquidationPrice?.createView(parentStyle: style)
+                        self.submissionError?.createView(parentStyle: style)
                     }
                 }
                 .keyboardObserving()

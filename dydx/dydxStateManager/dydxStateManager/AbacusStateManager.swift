@@ -305,6 +305,12 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.adjustIsolatedMargin(data: input, type: type)
     }
 
+    public func commitAdjustIsolatedMargin(completion: @escaping (Bool, ParsingError?, Any?) -> Void) {
+        asyncStateManager.commitAdjustIsolatedMargin { success, error, data in
+            completion(success.boolValue, error, data)
+        }
+    }
+
     public func triggerOrders(input: String?, type: TriggerOrdersInputField?) {
         asyncStateManager.triggerOrders(data: input, type: type)
     }
