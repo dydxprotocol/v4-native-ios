@@ -117,6 +117,9 @@
 		02E7B3B129D79A4400D6626D /* v4-native-client.js in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B38729D79A4400D6626D /* v4-native-client.js */; };
 		02E90C5A29D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90C5929D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift */; };
 		02EF485629F732C600C97746 /* dydxFavoriteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF485529F732C600C97746 /* dydxFavoriteStore.swift */; };
+		02F543B22C17ABBB000924E4 /* dydxGasTokenViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F543B12C17ABBB000924E4 /* dydxGasTokenViewBuilder.swift */; };
+		02F543B42C17AD6A000924E4 /* settings_gas_token.json in Resources */ = {isa = PBXBuildFile; fileRef = 02F543B32C17AD6A000924E4 /* settings_gas_token.json */; };
+		02F543B62C17B792000924E4 /* dydxGasTokenWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F543B52C17B792000924E4 /* dydxGasTokenWorker.swift */; };
 		02F6E71F2A8293270018F00C /* dydxProfileFeesViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F6E71E2A8293270018F00C /* dydxProfileFeesViewPresenter.swift */; };
 		02F700FE29EA0FD9004DEB5E /* dydxReceiptPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F700FD29EA0FD9004DEB5E /* dydxReceiptPresenter.swift */; };
 		02F7010029EA165F004DEB5E /* dydxTransferReceiptViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F700FF29EA165F004DEB5E /* dydxTransferReceiptViewPresenter.swift */; };
@@ -498,6 +501,9 @@
 		02E7DD9128CFB30000727949 /* dydxStateManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxStateManager.xcodeproj; path = ../dydxStateManager/dydxStateManager.xcodeproj; sourceTree = "<group>"; };
 		02E90C5929D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxFeatureFlagsViewBuilder.swift; sourceTree = "<group>"; };
 		02EF485529F732C600C97746 /* dydxFavoriteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxFavoriteStore.swift; sourceTree = "<group>"; };
+		02F543B12C17ABBB000924E4 /* dydxGasTokenViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxGasTokenViewBuilder.swift; sourceTree = "<group>"; };
+		02F543B32C17AD6A000924E4 /* settings_gas_token.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = settings_gas_token.json; sourceTree = "<group>"; };
+		02F543B52C17B792000924E4 /* dydxGasTokenWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxGasTokenWorker.swift; sourceTree = "<group>"; };
 		02F6E71E2A8293270018F00C /* dydxProfileFeesViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileFeesViewPresenter.swift; sourceTree = "<group>"; };
 		02F700FD29EA0FD9004DEB5E /* dydxReceiptPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxReceiptPresenter.swift; sourceTree = "<group>"; };
 		02F700FF29EA165F004DEB5E /* dydxTransferReceiptViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferReceiptViewPresenter.swift; sourceTree = "<group>"; };
@@ -930,6 +936,7 @@
 		0258BA1E299294A90098E1BE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				02F543B02C17AAD7000924E4 /* GasToken */,
 				278EA5622BB61094007A0E17 /* Notifications */,
 				277E90052B1EA093005CCBCB /* TradingRewards */,
 				02B27A3B2AE8BC6B00A995EC /* Help */,
@@ -976,6 +983,7 @@
 			isa = PBXGroup;
 			children = (
 				64487FFE2AA248340068DD87 /* dydxAlertsWorker.swift */,
+				02F543B52C17B792000924E4 /* dydxGasTokenWorker.swift */,
 				020EB696299D36AD00E8026B /* dydxApiStatusWorker.swift */,
 				02B6CE742A7087A700C5F088 /* dydxTransferSubaccountWorker.swift */,
 				27351D442AC4A67900E4A563 /* dydxRestrictionsWorker.swift */,
@@ -1275,6 +1283,7 @@
 				02E7B37C29D79A4400D6626D /* settings_notifications.json */,
 				0295392629FB28B7009026E3 /* settings_theme.json */,
 				2741E3632A68787A000FA190 /* settings_direction_color_preference.json */,
+				02F543B32C17AD6A000924E4 /* settings_gas_token.json */,
 				0279656929D795E7004DEB20 /* routing_swiftui.json */,
 				0279655B29D795E7004DEB20 /* tabs_v4.json */,
 				02E7B38729D79A4400D6626D /* v4-native-client.js */,
@@ -1300,6 +1309,14 @@
 				02E90C5929D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift */,
 			);
 			path = FeatureFlags;
+			sourceTree = "<group>";
+		};
+		02F543B02C17AAD7000924E4 /* GasToken */ = {
+			isa = PBXGroup;
+			children = (
+				02F543B12C17ABBB000924E4 /* dydxGasTokenViewBuilder.swift */,
+			);
+			path = GasToken;
 			sourceTree = "<group>";
 		};
 		02F958152A1BDEEF00828F9A /* KeyExport */ = {
@@ -1807,6 +1824,7 @@
 				02E7B3A729D79A4400D6626D /* debug_default.json in Resources */,
 				02E7B39929D79A4400D6626D /* test.js in Resources */,
 				02E7B39A29D79A4400D6626D /* settings.json in Resources */,
+				02F543B42C17AD6A000924E4 /* settings_gas_token.json in Resources */,
 				0279656A29D795E8004DEB20 /* tabs_v4.json in Resources */,
 				02E7B3A629D79A4400D6626D /* settings_notifications.json in Resources */,
 				02E7B39C29D79A4400D6626D /* debug.json in Resources */,
@@ -1970,6 +1988,7 @@
 				02860A9F29C15E760079E644 /* dydxOnboardScanViewBuilder.swift in Sources */,
 				277E90332B1FAE9A005CCBCB /* dydxRewardsHelpViewPresenter.swift in Sources */,
 				02FAFA5C29D4E08E001A0903 /* dydxDebugViewBuilder.swift in Sources */,
+				02F543B22C17ABBB000924E4 /* dydxGasTokenViewBuilder.swift in Sources */,
 				02F700FE29EA0FD9004DEB5E /* dydxReceiptPresenter.swift in Sources */,
 				027E1EF829CA27CD0098666F /* dydxSettingsLandingViewBuilder.swift in Sources */,
 				020DBF1E29E092C00068AAA6 /* dydxTransferDepositViewPresenter.swift in Sources */,
@@ -1978,6 +1997,7 @@
 				021B68B12AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift in Sources */,
 				024B43A229812DC700E35D54 /* dydxValidationViewPresenter.swift in Sources */,
 				024B44D42982D24A00E35D54 /* dydxTradeStatusViewBuilder.swift in Sources */,
+				02F543B62C17B792000924E4 /* dydxGasTokenWorker.swift in Sources */,
 				0279DE792BEC472600F9ECF8 /* dydxAdjustMarginInputViewBuilder.swift in Sources */,
 				6496DC3E295E122B00174CE7 /* dydxTradeInputViewBuilder.swift in Sources */,
 				64A4DB9529664803008D8E20 /* dydxTradeInputEditPresenter.swift in Sources */,

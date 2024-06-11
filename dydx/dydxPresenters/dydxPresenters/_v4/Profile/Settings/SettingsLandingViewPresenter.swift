@@ -15,6 +15,21 @@ import PlatformUIJedio
 import JedioKit
 import dydxStateManager
 
+protocol SettingsOptionTransformProtocol {
+    func textForOption(option: [String: Any]) -> String?
+    func valueForOption(option: [String: Any]) -> String?
+}
+
+extension SettingsOptionTransformProtocol {
+    func textForOption(option: [String: Any]) -> String? {
+        nil
+    }
+
+    func valueForOption(option: [String: Any]) -> String? {
+        nil
+    }
+}
+
 class SettingsLandingViewPresenter: SettingsViewPresenter {
 
     private enum DeepLink: String {
@@ -23,6 +38,7 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
         case env = "/settings/env"
         case colorPreference = "/settings/direction_color_preference"
         case notifications = "/settings/notifications"
+        case gas_token = "/settings/gas_token"
 
         var settingsStoreKey: String {
             switch self {
@@ -31,32 +47,42 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
             case .env: return "AbacusStateManager.EnvState"
             case .colorPreference: return dydxSettingsStoreKey.directionColorPreference.rawValue
             case .notifications: return dydxSettingsStoreKey.shouldDisplayInAppNotifications.rawValue
+            case .gas_token: return dydxSettingsStoreKey.gasToken.rawValue
             }
         }
 
         var localizerKeyLookup: [String: String]? {
             switch self {
-            // extracting the localizer key lookup from the definition file reduces sources of truth for the key value mapping
-            case .language: return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "settings_language.json")
-            case .theme: return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "settings_theme.json")
-            // this one is hardcoded for now, there is no field input definition file for environment selection yet
-            case .env: return nil
-            case .colorPreference: return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "settings_direction_color_preference.json")
-            case .notifications: return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "notifications.json")
+                // extracting the localizer key lookup from the definition file reduces sources of truth for the key value mapping
+            case .language:
+                return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "settings_language.json")
+            case .theme:
+                return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "settings_theme.json")
+                // this one is hardcoded for now, there is no field input definition file for environment selection yet
+            case .env:
+                return nil
+            case .colorPreference:
+                return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "settings_direction_color_preference.json")
+            case .notifications:
+                return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "notifications.json")
+            case .gas_token:
+                return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "settings_gas_token.json",
+                                                                              transformer: GasTokenOptionTransformer())
             }
         }
     }
 
     /// given a field input definition file, this will extract the dictionary of text/value pairs from the first field options list
-    private static func extractLocalizerKeyLookup(fromDefinitionFile definitionFile: String ) -> [String: String] {
+    private static func extractLocalizerKeyLookup(fromDefinitionFile definitionFile: String,
+                                                  transformer: SettingsOptionTransformProtocol? = nil) -> [String: String] {
         let languageFieldsEntity = newFieldsEntity(forDefinitionFile: definitionFile)
 
         let fieldsListInteractor = languageFieldsEntity.list?.list?.first as? FieldListInteractor
         let field = fieldsListInteractor?.list?.first as? FieldInput
         var dictionary = [String: String]()
         field?.options?.forEach({ option in
-            guard let key = option["value"] as? String else { return }
-            guard let value = option["text"] as? String else { return }
+            guard let key = transformer?.valueForOption(option: option) ?? option["value"] as? String else { return }
+            guard let value = transformer?.textForOption(option: option) ?? option["text"] as? String else { return }
             dictionary[key] = value
         })
         return dictionary

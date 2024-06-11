@@ -14,6 +14,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
     case v4Theme = "v4_theme"
     case directionColorPreference = "direction_color_preference"
     case shouldDisplayInAppNotifications = "should_display_in_app_notifications"
+    case gasToken = "gas_token"
 
     public var defaultValue: Any? {
         switch self {
@@ -21,6 +22,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
         case .v4Theme: return dydxThemeType.classicDark.rawValue
         case .directionColorPreference: return "green_is_up"
         case .shouldDisplayInAppNotifications: return true
+        case .gasToken: return "USDC"
         }
     }
 }
@@ -49,5 +51,9 @@ extension KeyValueStoreProtocol {
         SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.shouldDisplayInAppNotifications.rawValue) as? Bool
         ?? dydxSettingsStoreKey.shouldDisplayInAppNotifications.defaultValue as? Bool
         ?? true
+    }
+
+    var gasToken: String? {
+        SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.gasToken.rawValue) as? String ?? "USDC"
     }
 }

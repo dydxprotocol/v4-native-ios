@@ -33,11 +33,11 @@ public class dydxProfileBalancesViewPresenter: HostedViewPresenter<dydxProfileBa
         super.start()
 
         let decimal = 4
-        let dydxTokenDenom = AbacusStateManager.shared.environment?.dydxTokenInfo?.denom
+        let nativeTokenDenom = AbacusStateManager.shared.environment?.nativeTokenInfo?.denom
         Publishers
             .CombineLatest(
-                AbacusStateManager.shared.state.accountBalance(of: dydxTokenDenom),
-                AbacusStateManager.shared.state.stakingBalance(of: dydxTokenDenom)
+                AbacusStateManager.shared.state.accountBalance(of: nativeTokenDenom),
+                AbacusStateManager.shared.state.stakingBalance(of: nativeTokenDenom)
             )
             .sink { [weak self] accountBalance, stakingBalance in
                 if let accountBalance = accountBalance {

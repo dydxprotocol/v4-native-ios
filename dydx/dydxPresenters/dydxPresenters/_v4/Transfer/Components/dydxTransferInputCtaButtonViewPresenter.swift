@@ -272,7 +272,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
             AbacusStateManager.shared.state.transferInput,
             AbacusStateManager.shared.state.currentWallet,
             AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.usdcTokenInfo?.denom),
-            AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.dydxTokenInfo?.denom)
+            AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.nativeTokenInfo?.denom)
         )
         .prefix(1)
         .map {
