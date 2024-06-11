@@ -1,0 +1,26 @@
+[
+    {
+        "input":"1",
+        "fields":[
+            {
+                "title":{
+                    "text":"APP.GENERAL.PAY_GAS_WITH"
+                },
+                "field":{
+                    "field":"gas_token",
+                    "type":"text",
+                    "options":[
+                        {
+                            "text":"USDC",
+                            "value":"USDC"
+                        },
+                        {
+                            "text":"NATIVE",
+                            "value":"NATIVE"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+]

@@ -38,3 +38,13 @@ public extension OrderSide {
         }
     }
 }
+
+public extension GasToken {
+    static func from(tokenName: String) -> GasToken? {
+        switch tokenName {
+        case "USDC": return GasToken.usdc
+        case "NATIVE": return GasToken.native
+        default: return nil
+        }
+    }
+}
