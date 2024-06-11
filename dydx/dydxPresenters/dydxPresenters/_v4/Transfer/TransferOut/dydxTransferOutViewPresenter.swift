@@ -111,15 +111,15 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
             AbacusStateManager.shared.state.selectedSubaccount
                 .map(\.?.freeCollateral?.current)
                 .removeDuplicates(),
-            AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.dydxTokenInfo?.denom)
+            AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.nativeTokenInfo?.denom)
         )
-            .sink { [weak self] selectedToken, freeCollateral, dydxTokenAmount in
+            .sink { [weak self] selectedToken, freeCollateral, nativeTokenAmount in
                 if selectedToken?.type == dydxTokenConstants.usdcTokenKey {
                     self?.viewModel?.amountBox?.maxAmount = freeCollateral?.doubleValue ?? 0
                     self?.viewModel?.amountBox?.tokenText = TokenTextViewModel(symbol: selectedToken?.localizedString ?? "")
                     self?.viewModel?.objectWillChange.send()
                 } else if selectedToken?.type == dydxTokenConstants.nativeTokenKey {
-                    self?.viewModel?.amountBox?.maxAmount = dydxTokenAmount ?? 0
+                    self?.viewModel?.amountBox?.maxAmount = nativeTokenAmount ?? 0
                     self?.viewModel?.amountBox?.tokenText = TokenTextViewModel(symbol: selectedToken?.localizedString ?? "")
                     self?.viewModel?.objectWillChange.send()
                 }

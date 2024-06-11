@@ -33,8 +33,8 @@ open class FieldSettingsViewPresenter: BaseSettingsViewPresenter {
         listModel.width = UIScreen.main.bounds.width - 16
         let options: [[String: Any]]? = fieldInput?.options
         listModel.items = (options ?? []).compactMap { option in
-            guard let text = parser.asString(option["text"]),
-                  let value = parser.asString(option["value"]) else {
+            guard let text = textForOption(option: option),
+                  let value = valueForOption(option: option) else {
                 return nil
             }
             
@@ -62,6 +62,14 @@ open class FieldSettingsViewPresenter: BaseSettingsViewPresenter {
     }
     
     open func onOptionSelected(option: [String: Any], changed: Bool) {
+    }
+    
+    open func textForOption(option:  [String: Any]) -> String? {
+        parser.asString(option["text"])
+    }
+    
+    open func valueForOption(option:  [String: Any]) -> String? {
+        parser.asString(option["value"])
     }
 
     private func findInput(fieldName: String) -> FieldInput? {

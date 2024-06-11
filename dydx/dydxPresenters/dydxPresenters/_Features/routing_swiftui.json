@@ -280,6 +280,9 @@
                 "/settings/direction_color_preference":{
                     "destination":"dydxPresenters.dydxDirectionColorPreferenceViewBuilder"
                 },
+                "/settings/gas_token":{
+                    "destination":"dydxPresenters.dydxGasTokenViewBuilder"
+                },
                 "/settings/status": {
                     "destination":"dydxPresenters.dydxSystemStatusBuilder"
                 },

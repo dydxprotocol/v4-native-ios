@@ -67,6 +67,14 @@
             },
             {
                 "title" : {
+                    "text" : "APP.GENERAL.PAY_GAS_WITH"
+                },
+                "link" : {
+                    "text" : "/settings/gas_token"
+                }
+            },
+            {
+                "title" : {
                     "text" : "Debug Theme Viewer"
                 },
                 "link" : {
