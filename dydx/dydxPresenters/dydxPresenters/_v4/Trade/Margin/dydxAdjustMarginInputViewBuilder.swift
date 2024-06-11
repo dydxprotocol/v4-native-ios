@@ -84,7 +84,6 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
             AbacusStateManager.shared.adjustIsolatedMargin(input: "1", type: .amountpercent)
         }
 
-        viewModel.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT")
         viewModel.amount?.placeHolder = "0.00"
 
         self.viewModel = viewModel
@@ -118,50 +117,77 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
     }
 
     private func updateCalculatedValues(input: AdjustIsolatedMarginInput, market: PerpetualMarket) {
-        viewModel?.subaccountReceipt?.freeCollateral = nil
-        viewModel?.subaccountReceipt?.marginUsage = nil
-        viewModel?.positionReceipt?.marginUsage = nil
-        viewModel?.positionReceipt?.leverage = nil
-        viewModel?.liquidationPrice = nil
-
-        if let before = input.summary?.crossFreeCollateral,
-           let after = input.summary?.crossFreeCollateralUpdated {
-            viewModel?.subaccountReceipt?.freeCollateral = AmountChangeModel(
-                before: AmountTextModel(amount: NSNumber(value: before.doubleValue), tickSize: 0.01, unit: .dollar),
-                after: AmountTextModel(amount: NSNumber(value: after.doubleValue), tickSize: 0.01, unit: .dollar))
-        }
-        if let before = input.summary?.crossMarginUsage,
-           let after = input.summary?.crossMarginUsageUpdated {
-            viewModel?.subaccountReceipt?.marginUsage = AmountChangeModel(
-                before: AmountTextModel(amount: NSNumber(value: before.doubleValue), tickSize: 0.01, unit: .percentage),
-                after: AmountTextModel(amount: NSNumber(value: after.doubleValue), tickSize: 0.01, unit: .percentage))
+        switch input.type {
+        case IsolatedMarginAdjustmentType.add:
+            viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT_TO_ADD")
+        case IsolatedMarginAdjustmentType.remove:
+            viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT_TO_REMOVE")
+        default:
+            viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT")
         }
 
-        if let before = input.summary?.positionMargin,
-           let after = input.summary?.positionMarginUpdated {
-            viewModel?.positionReceipt?.marginUsage = AmountChangeModel(
-                before: AmountTextModel(amount: NSNumber(value: before.doubleValue), tickSize: 0.01, unit: .dollar),
-                after: AmountTextModel(amount: NSNumber(value: after.doubleValue), tickSize: 0.01, unit: .dollar))
-        }
+        var crossFreeCollateralBefore: AmountTextModel?
+        var crossFreeCollateralAfter: AmountTextModel?
+        var crossMarginUsageBefore: AmountTextModel?
+        var crossMarginUsageAfter: AmountTextModel?
+        var positionMarginBefore: AmountTextModel?
+        var positionMarginAfter: AmountTextModel?
+        var positionLeverageBefore: AmountTextModel?
+        var positionLeverageAfter: AmountTextModel?
 
-        if let before = input.summary?.positionLeverage,
-           let after = input.summary?.positionLeverageUpdated {
-            viewModel?.positionReceipt?.leverage = AmountChangeModel(
-                before: AmountTextModel(amount: NSNumber(value: before.doubleValue), tickSize: 0.01, unit: .multiplier),
-                after: AmountTextModel(amount: NSNumber(value: after.doubleValue), tickSize: 0.01, unit: .multiplier))
+        if let value = input.summary?.crossFreeCollateral {
+            crossFreeCollateralBefore = .init(amount: value, unit: .dollar)
         }
+        if let value = input.summary?.crossFreeCollateralUpdated {
+            crossFreeCollateralAfter = .init(amount: value, unit: .dollar)
+        }
+        if let value = input.summary?.crossMarginUsage {
+            crossMarginUsageBefore = .init(amount: value, unit: .percentage)
+        }
+        if let value = input.summary?.crossMarginUsageUpdated {
+            crossMarginUsageAfter = .init(amount: value, unit: .percentage)
+        }
+        if let value = input.summary?.positionMargin {
+            positionMarginBefore = .init(amount: value, unit: .dollar)
+        }
+        if let value = input.summary?.positionMarginUpdated {
+            positionMarginAfter = .init(amount: value, unit: .dollar)
+        }
+        if let value = input.summary?.positionLeverage {
+            positionLeverageBefore = .init(amount: value, unit: .multiplier)
+        }
+        if let value = input.summary?.positionLeverageUpdated {
+            positionLeverageAfter = .init(amount: value, unit: .multiplier)
+        }
+        viewModel?.subaccountReceipt?.freeCollateral = AmountChangeModel(
+            before: crossFreeCollateralBefore,
+            after: crossFreeCollateralAfter)
+        viewModel?.subaccountReceipt?.marginUsage = AmountChangeModel(
+            before: crossMarginUsageBefore,
+            after: crossMarginUsageAfter)
+        viewModel?.positionReceipt?.marginUsage = AmountChangeModel(
+            before: positionMarginBefore,
+            after: positionMarginAfter)
+        viewModel?.positionReceipt?.leverage = AmountChangeModel(
+            before: positionLeverageBefore,
+            after: positionLeverageAfter)
 
-        if let before = input.summary?.liquidationPrice,
-           let after = input.summary?.liquidationPriceUpdated,
-           let displayTickSizeDecimals = market.configs?.displayTickSizeDecimals?.intValue {
+        if let displayTickSizeDecimals = market.configs?.displayTickSizeDecimals?.intValue {
+            let before = input.summary?.liquidationPrice
+            // the non-zero check here is a band-aid for an abacus bug where there is a pre- and post- state even on empty input
+            let after = parser.asNumber(input.amount)?.doubleValue ?? 0 > 0 ? input.summary?.liquidationPriceUpdated : nil
             viewModel?.liquidationPrice = dydxAdjustMarginLiquidationPriceViewModel()
             viewModel?.liquidationPrice?.before = dydxFormatter.shared.dollar(number: before, digits: displayTickSizeDecimals)
-            viewModel?.liquidationPrice?.after = dydxFormatter.shared.dollar(number: after, digits: displayTickSizeDecimals)
-            if before > after {
-                // lowering liquidation price is "safer" so increase is the "positive" direction
-                viewModel?.liquidationPrice?.direction = .increase
-            } else if before < after {
-                viewModel?.liquidationPrice?.direction = .decrease
+            viewModel?.liquidationPrice?.after = after != nil ? dydxFormatter.shared.dollar(number: after, digits: displayTickSizeDecimals) : nil
+            if let before, let after {
+                if before > after {
+                    // lowering liquidation price is "safer" so increase is the "positive" direction
+                    viewModel?.liquidationPrice?.direction = .increase
+                } else if before < after {
+                    viewModel?.liquidationPrice?.direction = .decrease
+                } else {
+                    viewModel?.liquidationPrice?.direction = .none
+                }
             } else {
                 viewModel?.liquidationPrice?.direction = .none
             }
@@ -171,6 +197,5 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
     private func updateFields(input: AdjustIsolatedMarginInput) {
         viewModel?.amount?.value = dydxFormatter.shared.raw(number: parser.asNumber(input.amount), digits: 2)
         let selectedIndex = percentageOptions.firstIndex(where: { $0.percentage.stringValue == input.amountPercent })
-        viewModel?.marginPercentage?.selectedPercentageOptionIndex = selectedIndex
     }
 }

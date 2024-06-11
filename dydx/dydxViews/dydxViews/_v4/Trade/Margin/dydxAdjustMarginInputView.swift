@@ -9,6 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import KeyboardObserving
 
 public class dydxAdjustMarginInputViewModel: PlatformViewModel {
     @Published public var sharedMarketViewModel: SharedMarketViewModel? = SharedMarketViewModel()
@@ -38,25 +39,30 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack(alignment: .leading, spacing: 20) {
-                self.createHeader(parentStyle: style)
+            let view = VStack(alignment: .leading, spacing: 0) {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        self.createHeader(parentStyle: style)
 
-                self.marginDirection?.createView(parentStyle: style)
+                        self.marginDirection?.createView(parentStyle: style)
 
-                self.marginPercentage?.createView(parentStyle: style)
+                        self.marginPercentage?.createView(parentStyle: style)
 
-                ZStack {
-                    self.subaccountReceipt?.createView(parentStyle: style)
-                        .padding(.top, 44)
-                    self.amount?.createView(parentStyle: style)
-                        .frame(height: 64)
-                        .topAligned()
+                        ZStack {
+                            self.subaccountReceipt?.createView(parentStyle: style)
+                                .padding(.top, 44)
+                            self.amount?.createView(parentStyle: style)
+                                .frame(height: 64)
+                                .topAligned()
+                        }
+                        .frame(height: 140)
+
+                        self.liquidationPrice?.createView(parentStyle: style)
+                    }
                 }
-                .frame(height: 140)
+                .keyboardObserving()
 
-                self.liquidationPrice?.createView(parentStyle: style)
-
-                Spacer()
+                Spacer(minLength: 20)
 
                 VStack {
 
@@ -72,6 +78,9 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
                 .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)
                 .makeSheet()
+                .onTapGesture {
+                    PlatformView.hideKeyboard()
+                }
 
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }

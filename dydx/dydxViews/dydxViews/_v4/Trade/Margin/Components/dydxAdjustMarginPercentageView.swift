@@ -22,7 +22,6 @@ public class dydxAdjustMarginPercentageViewModel: PlatformViewModel {
     }
 
     @Published public var percentageOptions: [PercentageOption] = []
-    @Published public var selectedPercentageOptionIndex: Int?
     @Published public var percentageOptionSelectedAction: ((PercentageOption) -> Void)?
 
     public init() { }
@@ -60,25 +59,16 @@ public class dydxAdjustMarginPercentageViewModel: PlatformViewModel {
                         .fixedSize(horizontal: false, vertical: true)
                         .wrappedViewModel
                 }
-                let selectedItems = self.percentageOptions.compactMap {
-                    Text($0.text)
-                        .themeFont(fontSize: .medium)
-                        .themeColor(foreground: .textPrimary)
-                        .padding(itemPadding)
-                        .frame(minWidth: width)
-                        .themeColor(background: .layer1)
-                        .borderAndClip(style: .cornerRadius(8), borderColor: .layer5)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .wrappedViewModel
+                return HStack(spacing: spacing) {
+                    ForEach(items.indices, id: \.self) { index in
+                        PlatformButtonViewModel(content: items[index], type: .iconType, state: .secondary) { [weak self] in
+                            guard let option = self?.percentageOptions[index] else { return }
+                            PlatformView.hideKeyboard()
+                            self?.percentageOptionSelectedAction?(option)
+                        }
+                        .createView()
+                    }
                 }
-
-                return TabGroupModel(items: items,
-                              selectedItems: selectedItems,
-                              currentSelection: self.selectedPercentageOptionIndex,
-                              onSelectionChanged: { index in
-                    self.percentageOptionSelectedAction?(self.percentageOptions[index])
-                })
-                .createView(parentStyle: parentStyle)
             }
             .wrappedInAnyView()
         }

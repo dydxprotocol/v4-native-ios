@@ -13,7 +13,7 @@ import Utilities
 public class dydxAdjustMarginAmountViewModel: PlatformTextInputViewModel {
     @Published public var maxAction: (() -> Void)?
 
-    public init() { }
+    public override var inputType: PlatformTextInputViewModel.InputType { .decimalDigits }
 
     public static var previewValue: dydxAdjustMarginAmountViewModel {
         let vm = dydxAdjustMarginAmountViewModel()
