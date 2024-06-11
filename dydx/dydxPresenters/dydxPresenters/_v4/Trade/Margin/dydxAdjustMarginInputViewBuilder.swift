@@ -94,7 +94,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
             }
         }
 
-        viewModel.amount?.placeHolder = "0.00"
+        viewModel.amount?.placeHolder = dydxFormatter.shared.dollar(number: 0.0, digits: 2)
 
         self.viewModel = viewModel
 
@@ -116,7 +116,10 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
             .sink { [weak self] market, assetMap, input in
                 self?.updateState(market: market, assetMap: assetMap)
                 self?.updateFields(input: input)
-                self?.updateCalculatedValues(input: input, market: market)
+                self?.updateAmountLabel(input: input)
+                self?.updatePrePostValues(input: input)
+                self?.updateLiquidationPrice(input: input, market: market)
+                self?.updateButtonState(input: input)
             }
             .store(in: &subscriptions)
     }
@@ -126,7 +129,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         viewModel?.sharedMarketViewModel = SharedMarketPresenter.createViewModel(market: market, asset: asset)
     }
 
-    private func updateCalculatedValues(input: AdjustIsolatedMarginInput, market: PerpetualMarket) {
+    private func updateAmountLabel(input: AdjustIsolatedMarginInput) {
         switch input.type {
         case IsolatedMarginAdjustmentType.add:
             viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT_TO_ADD")
@@ -135,7 +138,9 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         default:
             viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT")
         }
+    }
 
+    private func updatePrePostValues(input: AdjustIsolatedMarginInput) {
         var crossFreeCollateralBefore: AmountTextModel?
         var crossFreeCollateralAfter: AmountTextModel?
         var crossMarginUsageBefore: AmountTextModel?
@@ -181,7 +186,9 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         viewModel?.positionReceipt?.leverage = AmountChangeModel(
             before: positionLeverageBefore,
             after: positionLeverageAfter)
+    }
 
+    private func updateLiquidationPrice(input: AdjustIsolatedMarginInput, market: PerpetualMarket) {
         if let displayTickSizeDecimals = market.configs?.displayTickSizeDecimals?.intValue {
             let before = input.summary?.liquidationPrice
             // the non-zero check here is a band-aid for an abacus bug where there is a pre- and post- state even on empty input
@@ -202,7 +209,9 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 viewModel?.liquidationPrice?.direction = .none
             }
         }
+    }
 
+    private func updateButtonState(input: AdjustIsolatedMarginInput) {
         if parser.asNumber(input.amount)?.doubleValue ?? 0 > 0 {
             self.ctaButtonPresenter.viewModel?.ctaButtonState = .enabled()
         } else {
