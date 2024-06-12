@@ -12,7 +12,7 @@ import Utilities
 
 public class dydxAdjustMarginDirectionViewModel: PlatformViewModel {
     public enum MarginDirection: String {
-        case add, remove
+        case add = "Add", remove = "Remove"
 
         var index: Int {
             switch self {

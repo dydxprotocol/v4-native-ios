@@ -210,7 +210,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     
     private var debouncer = Debouncer()
 
-    private var inputType: InputType
+    open private (set) var inputType: InputType
     
     /// Prefer to set `value` directly if forcing is not needed
     /// - Parameters:
