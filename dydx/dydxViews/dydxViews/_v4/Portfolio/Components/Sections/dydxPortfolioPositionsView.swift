@@ -319,41 +319,47 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     }
 }
 
-public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
+public class dydxPortfolioPositionsViewModel: PlatformViewModel {
     // TODO: remove once isolated markets is supported and force released
     @Published public var shouldDisplayIsolatedPositionsWarning: Bool = false
-    @Published public var placeholderText: String?
-
-    public override var placeholder: PlatformViewModel? {
-        let vm = PlaceholderViewModel()
-        vm.text = placeholderText
-        return vm
+    @Published public var emptyText: String?
+    @Published public var positionItems: [dydxPortfolioPositionItemViewModel] {
+        didSet {
+            contentChanged?()
+        }
+    }
+    @Published public var unopenedIsolatedPositionItems: [dydxPortfolioUnopenedIsolatedPositionsItemViewModel] {
+        didSet {
+            contentChanged?()
+        }
     }
 
-    public override init(items: [PlatformViewModel] = [],
-                         intraItemSeparator: Bool = false,
-                         firstListItemTopSeparator: Bool = false,
-                         lastListItemBottomSeparator: Bool = false,
-                         contentChanged: (() -> Void)? = nil) {
-        super.init(items: items,
-                   intraItemSeparator: intraItemSeparator,
-                   firstListItemTopSeparator: firstListItemTopSeparator,
-                   lastListItemBottomSeparator: lastListItemBottomSeparator,
-                   contentChanged: contentChanged)
-        self.width = UIScreen.main.bounds.width - 32
+    public var contentChanged: (() -> Void)?
+
+    init(
+        positionItems: [dydxPortfolioPositionItemViewModel] = [],
+        unopenedIsolatedPositionItems: [dydxPortfolioUnopenedIsolatedPositionsItemViewModel] = [],
+        emptyText: String? = nil
+    ) {
+        self.positionItems = positionItems
+        self.unopenedIsolatedPositionItems = unopenedIsolatedPositionItems
+        self.emptyText = emptyText
     }
 
     public static var previewValue: dydxPortfolioPositionsViewModel {
-        let vm = dydxPortfolioPositionsViewModel {}
-        vm.items = [
-            dydxPortfolioPositionItemViewModel.previewValue,
-            dydxPortfolioPositionItemViewModel.previewValue
-        ]
-        return vm
+        dydxPortfolioPositionsViewModel(
+            positionItems: [
+                .previewValue,
+                .previewValue
+            ],
+            unopenedIsolatedPositionItems: [
+                .previewValue
+            ],
+            emptyText: "empty")
     }
 
-    public override var header: PlatformViewModel? {
-        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == false, !items.isEmpty else { return nil }
+    public var positionsHeader: PlatformViewModel? {
+        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == false, !positionItems.isEmpty else { return nil }
         return HStack {
             Text(DataLocalizer.localize(path: "APP.GENERAL.DETAILS"))
             Spacer()
@@ -371,7 +377,7 @@ public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
         .wrappedViewModel
     }
 
-    public override var footer: PlatformViewModel? {
+    public var positionsFooter: PlatformViewModel? {
         guard shouldDisplayIsolatedPositionsWarning && !dydxBoolFeatureFlag.enable_isolated_margins.isEnabled else { return nil }
         return Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITIONS_COMING_SOON")
             .multilineTextAlignment(.center)
@@ -381,6 +387,59 @@ public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
             .padding(.top, 12)
             .padding(.bottom, 16)
             .wrappedViewModel
+    }
+
+    public var unopenedIsolatedPositionsHeader: PlatformViewModel? {
+        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == true, !unopenedIsolatedPositionItems.isEmpty else { return nil }
+        return HStack(spacing: 8) {
+            Text(localizerPathKey: "APP.TRADE.UNOPENED_ISOLATED_POSITIONS")
+                .themeFont(fontSize: .larger)
+                .themeColor(foreground: .textPrimary)
+                .fixedSize()
+            Text("\(unopenedIsolatedPositionItems.count)")
+                .frame(width: 28, height: 28)
+                .borderAndClip(style: .circle, borderColor: .borderDefault)
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .themeFont(fontSize: .small)
+        .themeColor(foreground: .textTertiary)
+        .wrappedViewModel
+    }
+
+    public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+            guard let self = self else { return AnyView(PlatformView.nilView) }
+
+            if let emptyText = self.emptyText, positionItems.isEmpty, unopenedIsolatedPositionItems.isEmpty {
+                return AnyView(
+                    PlaceholderViewModel(text: emptyText)
+                        .createView(parentStyle: style)
+                )
+            }
+
+            let items = self.positionItems.map { $0.createView(parentStyle: style) }
+            let unopenedItems = self.unopenedIsolatedPositionItems.map { $0.createView(parentStyle: style) }
+
+            return AnyView(
+                ScrollView {
+                    LazyVStack {
+                        self.positionsHeader?.createView(parentStyle: style)
+
+                        ForEach(items.indices, id: \.self) { index in
+                            items[index]
+                        }
+
+                        self.positionsFooter?.createView(parentStyle: style)
+                        self.unopenedIsolatedPositionsHeader?.createView(parentStyle: style)
+
+                        ForEach(unopenedItems.indices, id: \.self) { index in
+                            unopenedItems[index]
+                        }
+                    }
+                }
+            )
+        }
     }
 }
 

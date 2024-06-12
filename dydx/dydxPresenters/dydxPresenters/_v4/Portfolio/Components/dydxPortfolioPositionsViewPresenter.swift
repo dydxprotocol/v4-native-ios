@@ -37,9 +37,9 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
                 // TODO: remove once isolated markets is supported and force released
                 self?.viewModel?.shouldDisplayIsolatedPositionsWarning = onboarded
                 if onboarded {
-                    self?.viewModel?.placeholderText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS")
+                    self?.viewModel?.emptyText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS")
                 } else {
-                    self?.viewModel?.placeholderText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS_LOG_IN")
+                    self?.viewModel?.emptyText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS_LOG_IN")
                 }
             }
             .store(in: &subscriptions)
@@ -61,7 +61,8 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
             return item
         }
 
-        self.viewModel?.items = items
+        self.viewModel?.positionItems = items
+        self.viewModel?.unopenedIsolatedPositionItems = [.previewValue, .previewValue, .previewValue]
     }
 
     static func createViewModelItem(position: SubaccountPosition, marketMap: [String: PerpetualMarket], assetMap: [String: Asset], cache: [String: dydxPortfolioPositionItemViewModel]? = nil) -> dydxPortfolioPositionItemViewModel? {
