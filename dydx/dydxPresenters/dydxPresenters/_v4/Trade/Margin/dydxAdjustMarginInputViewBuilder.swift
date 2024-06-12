@@ -84,12 +84,15 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
             AbacusStateManager.shared.adjustIsolatedMargin(input: "1", type: .amountpercent)
         }
 
-        ctaButtonPresenter.viewModel?.ctaAction = {
+        ctaButtonPresenter.viewModel?.ctaAction = { [weak self] in
+            self?.ctaButtonPresenter.viewModel?.ctaButtonState = .thinking
             AbacusStateManager.shared.commitAdjustIsolatedMargin { [weak self] (_, error, _) in
+                self?.ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
                 if let error = error {
                     self?.viewModel?.submissionError = InlineAlertViewModel(.init(title: nil, body: error.message, level: .error))
+                    return
                 } else {
-                    self?.viewModel?.submissionError = nil
+                    Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
                 }
             }
         }
@@ -120,6 +123,12 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 self?.updatePrePostValues(input: input)
                 self?.updateLiquidationPrice(input: input, market: market)
                 self?.updateButtonState(input: input)
+            }
+            .store(in: &subscriptions)
+
+        AbacusStateManager.shared.state.adjustIsolatedMarginInput
+            .sink { [weak self] _ in
+                self?.viewModel?.submissionError = nil
             }
             .store(in: &subscriptions)
     }
