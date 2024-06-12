@@ -465,6 +465,15 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
+    public var adjustIsolatedMarginInput: AnyPublisher<AdjustIsolatedMarginInput?, Never> {
+        statePublisher
+            .map(\.?.input?.adjustIsolatedMargin)
+            .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
     public var triggerOrdersInput: AnyPublisher<TriggerOrdersInput?, Never> {
         statePublisher
             .map(\.?.input?.triggerOrders)

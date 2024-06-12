@@ -26,8 +26,11 @@ public class dydxAdjustMarginInputViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxAdjustMarginInputViewController: HostingViewController<PlatformView, dydxAdjustMarginInputViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if request?.path == "/trade/adjust_margin", let marketId = parser.asString(request?.params?["marketId"]) {
+        if request?.path == "/trade/adjust_margin",
+            let marketId = parser.asString(request?.params?["marketId"]),
+            let childSubaccountNumber = parser.asString(request?.params?["childSubaccountNumber"]) {
             let presenter = presenter as? dydxAdjustMarginInputViewPresenterProtocol
+            presenter?.childSubaccountNumber = childSubaccountNumber
             presenter?.marketId = marketId
             return true
         }
@@ -38,6 +41,7 @@ private class dydxAdjustMarginInputViewController: HostingViewController<Platfor
 private protocol dydxAdjustMarginInputViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxAdjustMarginInputViewModel? { get }
     var marketId: String? { get set }
+    var childSubaccountNumber: String? { get set }
 }
 
 private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjustMarginInputViewModel>, dydxAdjustMarginInputViewPresenterProtocol {
@@ -48,6 +52,15 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
     ]
 
     var marketId: String?
+    var childSubaccountNumber: String?
+
+    private let percentageOptions: [dydxAdjustMarginPercentageViewModel.PercentageOption] = [
+        .init(text: "5%", percentage: 0.05),
+        .init(text: "10%", percentage: 0.10),
+        .init(text: "25%", percentage: 0.25),
+        .init(text: "50%", percentage: 0.50),
+        .init(text: "75%", percentage: 0.75)
+    ]
 
     override init() {
         let viewModel = dydxAdjustMarginInputViewModel()
@@ -56,17 +69,35 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
 
         super.init()
 
-        viewModel.marginPercentage?.percentageOptions = [
-            dydxAdjustMarginPercentagViewModel.PercentageOption(text: "10%", percentage: 0.1),
-            dydxAdjustMarginPercentagViewModel.PercentageOption(text: "25%", percentage: 0.25),
-            dydxAdjustMarginPercentagViewModel.PercentageOption(text: "50%", percentage: 0.5),
-            dydxAdjustMarginPercentagViewModel.PercentageOption(text: "75%", percentage: 0.75)
-        ]
+        viewModel.marginDirection?.marginDirectionAction = { direction in
+            AbacusStateManager.shared.adjustIsolatedMargin(input: direction.rawValue, type: .type)
+        }
 
-        viewModel.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT")
-        viewModel.amount?.placeHolder = "0.00"
+        viewModel.marginPercentage?.percentageOptions = percentageOptions
+        viewModel.marginPercentage?.percentageOptionSelectedAction = { option in
+            AbacusStateManager.shared.adjustIsolatedMargin(input: option.percentage.stringValue, type: .amountpercent)
+        }
+        viewModel.amount?.onEdited = { amount in
+            AbacusStateManager.shared.adjustIsolatedMargin(input: amount, type: .amount)
+        }
+        viewModel.amount?.maxAction = {
+            AbacusStateManager.shared.adjustIsolatedMargin(input: "1", type: .amountpercent)
+        }
 
-        viewModel.liquidationPrice?.before = dydxFormatter.shared.dollar(number: 1234.56, digits: 2)
+        ctaButtonPresenter.viewModel?.ctaAction = { [weak self] in
+            self?.ctaButtonPresenter.viewModel?.ctaButtonState = .thinking
+            AbacusStateManager.shared.commitAdjustIsolatedMargin { [weak self] (_, error, _) in
+                self?.ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
+                if let error = error {
+                    self?.viewModel?.submissionError = InlineAlertViewModel(.init(title: nil, body: error.message, level: .error))
+                    return
+                } else {
+                    Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+                }
+            }
+        }
+
+        viewModel.amount?.placeHolder = dydxFormatter.shared.dollar(number: 0.0, digits: 2)
 
         self.viewModel = viewModel
 
@@ -75,21 +106,134 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
 
     override func start() {
         super.start()
+        guard let marketId, let childSubaccountNumber else { return }
 
-        if let marketId = marketId {
-            Publishers
-                .CombineLatest(
-                    AbacusStateManager.shared.state.market(of: marketId).compactMap { $0 },
-                    AbacusStateManager.shared.state.assetMap)
-                .sink { [weak self] market, assetMap in
-                    self?.updateState(market: market, assetMap: assetMap)
-                }
-                .store(in: &subscriptions)
-        }
+        AbacusStateManager.shared.adjustIsolatedMargin(input: childSubaccountNumber, type: .childsubaccountnumber)
+
+        Publishers
+            .CombineLatest3(
+                AbacusStateManager.shared.state.market(of: marketId).compactMap { $0 },
+                AbacusStateManager.shared.state.assetMap,
+                AbacusStateManager.shared.state.adjustIsolatedMarginInput.compactMap { $0 }
+            )
+            .sink { [weak self] market, assetMap, input in
+                self?.updateState(market: market, assetMap: assetMap)
+                self?.updateFields(input: input)
+                self?.updateForMarginDirection(input: input)
+                self?.updatePrePostValues(input: input)
+                self?.updateLiquidationPrice(input: input, market: market)
+                self?.updateButtonState(input: input)
+            }
+            .store(in: &subscriptions)
+
+        AbacusStateManager.shared.state.adjustIsolatedMarginInput
+            .sink { [weak self] _ in
+                self?.viewModel?.submissionError = nil
+            }
+            .store(in: &subscriptions)
     }
 
     private func updateState(market: PerpetualMarket, assetMap: [String: Asset]) {
         let asset = assetMap[market.assetId]
         viewModel?.sharedMarketViewModel = SharedMarketPresenter.createViewModel(market: market, asset: asset)
+    }
+
+    private func updateForMarginDirection(input: AdjustIsolatedMarginInput) {
+        switch input.type {
+        case IsolatedMarginAdjustmentType.add:
+            viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT_TO_ADD")
+        case IsolatedMarginAdjustmentType.remove:
+            viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT_TO_REMOVE")
+        default:
+            viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT")
+        }
+    }
+
+    private func updatePrePostValues(input: AdjustIsolatedMarginInput) {
+        var crossReceiptItems = [dydxReceiptChangeItemView]()
+        var positionReceiptItems = [dydxReceiptChangeItemView]()
+
+        let crossFreeCollateral: AmountTextModel = .init(amount: input.summary?.crossFreeCollateral, unit: .dollar)
+        let crossFreeCollateralUpdated: AmountTextModel = .init(amount: input.summary?.crossFreeCollateralUpdated, unit: .dollar)
+        let crossFreeCollateralChange: AmountChangeModel = .init(
+            before: crossFreeCollateral.amount != nil ? crossFreeCollateral : nil,
+            after: crossFreeCollateralUpdated.amount != nil ? crossFreeCollateralUpdated : nil)
+        crossReceiptItems.append(
+            dydxReceiptChangeItemView(
+                title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
+                value: crossFreeCollateralChange))
+
+        let crossMarginUsage: AmountTextModel = .init(amount: input.summary?.crossMarginUsage, unit: .dollar)
+        let crossMarginUsageUpdated: AmountTextModel = .init(amount: input.summary?.crossMarginUsageUpdated, unit: .dollar)
+        let crossMarginUsageChange: AmountChangeModel = .init(
+            before: crossMarginUsage.amount != nil ? crossMarginUsage : nil,
+            after: crossMarginUsageUpdated.amount != nil ? crossMarginUsageUpdated : nil)
+        crossReceiptItems.append(
+            dydxReceiptChangeItemView(
+                title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN_USAGE"),
+                value: crossMarginUsageChange))
+
+        let positionMargin: AmountTextModel = .init(amount: input.summary?.positionMargin, unit: .dollar)
+        let positionMarginUpdated: AmountTextModel = .init(amount: input.summary?.positionMarginUpdated, unit: .dollar)
+        let positionMarginChange: AmountChangeModel = .init(
+            before: positionMargin.amount != nil ? positionMargin : nil,
+            after: positionMarginUpdated.amount != nil ? positionMarginUpdated : nil)
+        positionReceiptItems.append(
+            dydxReceiptChangeItemView(
+                title: DataLocalizer.localize(path: "APP.TRADE.POSITION_MARGIN"),
+                value: positionMarginChange))
+
+        let positionLeverage: AmountTextModel = .init(amount: input.summary?.positionLeverage, unit: .multiplier)
+        let positionLeverageUpdated: AmountTextModel = .init(amount: input.summary?.positionLeverageUpdated, unit: .multiplier)
+        let positionLeverageChange: AmountChangeModel = .init(
+            before: positionLeverage.amount != nil ? positionLeverage : nil,
+            after: positionLeverageUpdated.amount != nil ? positionLeverageUpdated : nil)
+        positionReceiptItems.append(
+            dydxReceiptChangeItemView(
+                title: DataLocalizer.localize(path: "APP.TRADE.POSITION_LEVERAGE"),
+                value: positionLeverageChange))
+
+        if input.type == IsolatedMarginAdjustmentType.add {
+            viewModel?.amountReceipt?.receiptChangeItems = crossReceiptItems
+            viewModel?.buttonReceipt?.receiptChangeItems = positionReceiptItems
+        } else {
+            viewModel?.amountReceipt?.receiptChangeItems = positionReceiptItems
+            viewModel?.buttonReceipt?.receiptChangeItems = crossReceiptItems
+        }
+    }
+
+    private func updateLiquidationPrice(input: AdjustIsolatedMarginInput, market: PerpetualMarket) {
+        if let displayTickSizeDecimals = market.configs?.displayTickSizeDecimals?.intValue {
+            let before = input.summary?.liquidationPrice
+            // the non-zero check here is a band-aid for an abacus bug where there is a pre- and post- state even on empty input
+            let after = parser.asNumber(input.amount)?.doubleValue ?? 0 > 0 ? input.summary?.liquidationPriceUpdated : nil
+            viewModel?.liquidationPrice = dydxAdjustMarginLiquidationPriceViewModel()
+            viewModel?.liquidationPrice?.before = dydxFormatter.shared.dollar(number: before, digits: displayTickSizeDecimals)
+            viewModel?.liquidationPrice?.after = after != nil ? dydxFormatter.shared.dollar(number: after, digits: displayTickSizeDecimals) : nil
+            if let before, let after {
+                if before > after {
+                    // lowering liquidation price is "safer" so increase is the "positive" direction
+                    viewModel?.liquidationPrice?.direction = .increase
+                } else if before < after {
+                    viewModel?.liquidationPrice?.direction = .decrease
+                } else {
+                    viewModel?.liquidationPrice?.direction = .none
+                }
+            } else {
+                viewModel?.liquidationPrice?.direction = .none
+            }
+        }
+    }
+
+    private func updateButtonState(input: AdjustIsolatedMarginInput) {
+        if parser.asNumber(input.amount)?.doubleValue ?? 0 > 0 {
+            self.ctaButtonPresenter.viewModel?.ctaButtonState = .enabled()
+        } else {
+            self.ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
+        }
+    }
+
+    private func updateFields(input: AdjustIsolatedMarginInput) {
+        viewModel?.amount?.value = dydxFormatter.shared.raw(number: parser.asNumber(input.amount), digits: 2)
     }
 }

@@ -372,7 +372,7 @@ public class dydxPortfolioPositionsViewModel: PlatformListViewModel {
     }
 
     public override var footer: PlatformViewModel? {
-        guard shouldDisplayIsolatedPositionsWarning else { return nil }
+        guard shouldDisplayIsolatedPositionsWarning && !dydxBoolFeatureFlag.enable_isolated_margins.isEnabled else { return nil }
         return Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITIONS_COMING_SOON")
             .multilineTextAlignment(.center)
             .padding(.horizontal, 16)

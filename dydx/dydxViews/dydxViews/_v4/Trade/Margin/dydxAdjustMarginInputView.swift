@@ -9,27 +9,34 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import KeyboardObserving
 
 public class dydxAdjustMarginInputViewModel: PlatformViewModel {
     @Published public var sharedMarketViewModel: SharedMarketViewModel? = SharedMarketViewModel()
     @Published public var marginDirection: dydxAdjustMarginDirectionViewModel? = dydxAdjustMarginDirectionViewModel()
-    @Published public var marginPercentage: dydxAdjustMarginPercentagViewModel? = dydxAdjustMarginPercentagViewModel()
+    @Published public var marginPercentage: dydxAdjustMarginPercentageViewModel? = dydxAdjustMarginPercentageViewModel()
     @Published public var amount: dydxAdjustMarginAmountViewModel? = dydxAdjustMarginAmountViewModel()
-    @Published public var subaccountReceipt: dydxAdjustMarginSubaccountReceiptViewModel? = dydxAdjustMarginSubaccountReceiptViewModel()
+    @Published public var amountReceipt: dydxAdjustMarginReceiptViewModel? = dydxAdjustMarginReceiptViewModel()
     @Published public var liquidationPrice: dydxAdjustMarginLiquidationPriceViewModel? = dydxAdjustMarginLiquidationPriceViewModel()
-    @Published public var positionReceipot: dydxAdjustMarginPositionReceiptViewModel? = dydxAdjustMarginPositionReceiptViewModel()
+    @Published public var submissionError: InlineAlertViewModel?
+    @Published public var buttonReceipt: dydxAdjustMarginReceiptViewModel? = dydxAdjustMarginReceiptViewModel()
     @Published public var ctaButton: dydxAdjustMarginCtaButtonViewModel? = dydxAdjustMarginCtaButtonViewModel()
+    @Published public var shouldDisplayCrossFirst: Bool = true
 
-    public init() { }
+    public init() {
+        super.init()
+        amountReceipt?.padding = EdgeInsets(top: 80, leading: 16, bottom: 16, trailing: 16)
+        buttonReceipt?.padding = EdgeInsets(top: 16, leading: 16, bottom: 64, trailing: 16)
+    }
 
     public static var previewValue: dydxAdjustMarginInputViewModel {
         let vm = dydxAdjustMarginInputViewModel()
         vm.marginPercentage = .previewValue
         vm.marginDirection = .previewValue
         vm.amount = .previewValue
-        vm.subaccountReceipt = .previewValue
+        vm.amountReceipt = .previewValue
         vm.liquidationPrice = .previewValue
-        vm.positionReceipot = .previewValue
+        vm.buttonReceipt = .previewValue
         vm.ctaButton = .previewValue
         return vm
     }
@@ -38,40 +45,46 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack(alignment: .leading, spacing: 20) {
-                self.createHeader(parentStyle: style)
+            let view = VStack(alignment: .leading, spacing: 0) {
+                ScrollView(.vertical) {
+                    VStack(alignment: .leading, spacing: 20) {
+                        self.createHeader(parentStyle: style)
 
-                self.marginDirection?.createView(parentStyle: style)
+                        self.marginDirection?.createView(parentStyle: style)
 
-                self.marginPercentage?.createView(parentStyle: style)
+                        self.marginPercentage?.createView(parentStyle: style)
 
-                ZStack {
-                    self.subaccountReceipt?.createView(parentStyle: style)
-                        .padding(.top, 44)
-                    self.amount?.createView(parentStyle: style)
-                        .frame(height: 64)
-                        .topAligned()
+                        ZStack(alignment: .top) {
+                            self.amountReceipt?.createView(parentStyle: style)
+                            self.amount?.createView(parentStyle: style)
+                                .frame(height: 64)
+                        }
+
+                        self.liquidationPrice?.createView(parentStyle: style)
+                        self.submissionError?.createView(parentStyle: style)
+
+                        Spacer()
+                    }
                 }
-                .frame(height: 140)
-
-                self.liquidationPrice?.createView(parentStyle: style)
+                .keyboardObserving()
 
                 Spacer()
 
-                VStack {
-
-                    self.positionReceipot?.createView(parentStyle: style)
+                ZStack(alignment: .bottom) {
+                    self.buttonReceipt?.createView(parentStyle: style)
 
                     self.ctaButton?.createView(parentStyle: style)
-                        .padding(.top, -24)
                 }
-                .frame(height: 140)
+                .fixedSize(horizontal: false, vertical: true)
 
             }
                 .padding(.horizontal)
                 .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)
                 .makeSheet()
+                .onTapGesture {
+                    PlatformView.hideKeyboard()
+                }
 
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
