@@ -328,7 +328,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             contentChanged?()
         }
     }
-    @Published public var pendingPositionItems: [dydxPortfolioPendingPositionsItemViewModel] {
+    @Published public var unopenedIsolatedPositionItems: [dydxPortfolioUnopenedIsolatedPositionsItemViewModel] {
         didSet {
             contentChanged?()
         }
@@ -338,11 +338,11 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
 
     init(
         positionItems: [dydxPortfolioPositionItemViewModel] = [],
-        pendingPositionItems: [dydxPortfolioPendingPositionsItemViewModel] = [],
+        unopenedIsolatedPositionItems: [dydxPortfolioUnopenedIsolatedPositionsItemViewModel] = [],
         emptyText: String? = nil
     ) {
         self.positionItems = positionItems
-        self.pendingPositionItems = pendingPositionItems
+        self.unopenedIsolatedPositionItems = unopenedIsolatedPositionItems
         self.emptyText = emptyText
     }
 
@@ -352,7 +352,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
                 .previewValue,
                 .previewValue
             ],
-            pendingPositionItems: [
+            unopenedIsolatedPositionItems: [
                 .previewValue
             ],
             emptyText: "empty")
@@ -389,17 +389,15 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             .wrappedViewModel
     }
 
-    public var pendingPositionsHeader: PlatformViewModel? {
-        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == true, !pendingPositionItems.isEmpty else { return nil }
+    public var unopenedIsolatedPositionsHeader: PlatformViewModel? {
+        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == true, !unopenedIsolatedPositionItems.isEmpty else { return nil }
         return HStack(spacing: 8) {
             Text(localizerPathKey: "APP.TRADE.UNOPENED_ISOLATED_POSITIONS")
                 .themeFont(fontSize: .larger)
                 .themeColor(foreground: .textPrimary)
                 .fixedSize()
-            Text("\(pendingPositionItems.count)")
+            Text("\(unopenedIsolatedPositionItems.count)")
                 .frame(width: 28, height: 28)
-                .themeColor(background: .layer3)
-                .themeColor(foreground: .textSecondary)
                 .borderAndClip(style: .circle, borderColor: .borderDefault)
             Spacer()
         }
@@ -409,48 +407,35 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
         .wrappedViewModel
     }
 
-    private var openPositionsView: some View {
-        LazyVStack {
-            let items = self.positionItems.map { $0.createView() }
-            self.positionsHeader?.createView()
-
-            ForEach(items.indices, id: \.self) { index in
-                items[index]
-            }
-
-            self.positionsFooter?.createView()
-        }
-    }
-
-    private var pendingPositionsView: AnyView? {
-        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled else { return nil }
-        let unopenedItems = self.pendingPositionItems.map { $0.createView() }
-        return LazyVStack {
-            self.pendingPositionsHeader?.createView()
-
-            ForEach(unopenedItems.indices, id: \.self) { index in
-                unopenedItems[index]
-            }
-        }
-        .wrappedInAnyView()
-    }
-
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            if let emptyText = self.emptyText, positionItems.isEmpty, pendingPositionItems.isEmpty {
+            if let emptyText = self.emptyText, positionItems.isEmpty, unopenedIsolatedPositionItems.isEmpty {
                 return AnyView(
                     PlaceholderViewModel(text: emptyText)
                         .createView(parentStyle: style)
                 )
             }
 
+            let items = self.positionItems.map { $0.createView(parentStyle: style) }
+            let unopenedItems = self.unopenedIsolatedPositionItems.map { $0.createView(parentStyle: style) }
+
             return AnyView(
                 ScrollView {
-                    VStack(spacing: 24) {
-                        self.openPositionsView
-                        self.pendingPositionsView
+                    LazyVStack {
+                        self.positionsHeader?.createView(parentStyle: style)
+
+                        ForEach(items.indices, id: \.self) { index in
+                            items[index]
+                        }
+
+                        self.positionsFooter?.createView(parentStyle: style)
+                        self.unopenedIsolatedPositionsHeader?.createView(parentStyle: style)
+
+                        ForEach(unopenedItems.indices, id: \.self) { index in
+                            unopenedItems[index]
+                        }
                     }
                 }
             )
