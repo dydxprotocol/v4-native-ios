@@ -89,7 +89,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
             AbacusStateManager.shared.commitAdjustIsolatedMargin { [weak self] (_, error, _) in
                 self?.ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
                 if let error = error {
-                    self?.viewModel?.submissionError = InlineAlertViewModel(.init(title: nil, body: error.message, level: .error))
+                    self?.viewModel?.submissionError = InlineAlertViewModel(.init(title: nil, body: error.localizedMessage, level: .error))
                     return
                 } else {
                     Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)

@@ -10,7 +10,7 @@ import Abacus
 import Utilities
 
 extension ParsingError: Error {
-    var localizedDescription: String? {
+    public var localizedMessage: String? {
         if let stringKey = stringKey {
             return DataLocalizer.localize(path: stringKey)
         }
