@@ -9,6 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import dydxFormatter
 
 public class dydxPortfolioOrderItemViewModel: PlatformViewModel {
 
@@ -222,7 +223,7 @@ public class dydxPortfolioOrdersViewModel: PlatformListViewModel {
     }
 
     public override var footer: PlatformViewModel? {
-        guard shouldDisplayIsolatedOrdersWarning else { return nil }
+        guard shouldDisplayIsolatedOrdersWarning && !dydxBoolFeatureFlag.enable_isolated_margins.isEnabled else { return nil }
         return Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITION_ORDERS_COMING_SOON")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 16)

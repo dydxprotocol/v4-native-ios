@@ -69,6 +69,9 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
                 .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)
                 .makeSheet()
+                .onTapGesture {
+                    PlatformView.hideKeyboard()
+                }
 
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
@@ -76,10 +79,10 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
 
     private func createOptionsGroup(parentStyle: ThemeStyle) -> some View {
         let spacing: CGFloat = 8
-        let maxItemsToDisplay = CGFloat(max(5, leverageOptions.count))
+        let maxItemsToDisplay = CGFloat(min(5, leverageOptions.count))
 
-        return GeometryReader { geometry in
-            let width = (geometry.size.width + spacing) / maxItemsToDisplay - spacing
+        return SingleAxisGeometryReader { width in
+            let width = (width + spacing) / maxItemsToDisplay - spacing
             let items = self.leverageOptions.compactMap {
                 Text($0.text)
                     .themeFont(fontType: .plus, fontSize: .small)
@@ -91,26 +94,15 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
                     .wrappedViewModel
             }
 
-            let selectedItems = self.leverageOptions.compactMap {
-                Text($0.text)
-                    .themeFont(fontType: .plus, fontSize: .small)
-                    .themeColor(foreground: .textPrimary)
-                    .padding(8)
-                    .frame(minWidth: width)
-                    .themeColor(background: .layer1)
-                    .borderAndClip(style: .cornerRadius(8), borderColor: ThemeColor.SemanticColor.layer5)
-                    .wrappedViewModel
-            }
-
-            return ScrollView(.horizontal, showsIndicators: false) {
-                TabGroupModel(items: items,
-                              selectedItems: selectedItems,
-                              currentSelection: self.selectedOptionIndex,
-                              onSelectionChanged: { index in
-                    self.optionSelectedAction?(self.leverageOptions[index])
-                },
-                              spacing: spacing)
-                .createView(parentStyle: parentStyle)
+            return HStack(spacing: spacing) {
+                ForEach(items.indices, id: \.self) { index in
+                    PlatformButtonViewModel(content: items[index], type: .iconType, state: .secondary) { [weak self] in
+                        guard let option = self?.leverageOptions[index] else { return }
+                        PlatformView.hideKeyboard()
+                        self?.optionSelectedAction?(option)
+                    }
+                    .createView()
+                }
             }
         }
     }

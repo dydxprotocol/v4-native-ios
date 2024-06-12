@@ -76,7 +76,7 @@ public class dydxAdjustMarginLiquidationPriceViewModel: PlatformViewModel {
                 }
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
-                    .themeGradient(background: .layer5, gradientType: self.direction.gradientType)
+                    .themeGradient(background: .layer5, gradientType: self.direction.gradientType, intensityGradientColor: 0.15)
                     .cornerRadius(8)
                     .frame(height: 64)
             )

@@ -11,6 +11,7 @@ import PlatformUI
 import Utilities
 
 public class AmountChangeModel: BeforeArrowAfterModel<AmountTextModel> {
+
     public convenience init(before: AmountTextModel?, after: AmountTextModel?) {
         self.init()
 
@@ -18,11 +19,11 @@ public class AmountChangeModel: BeforeArrowAfterModel<AmountTextModel> {
         self.after = after
     }
 
-    public override init() {
+    public required init(unit: AmountTextModel.Unit = .dollar) {
         super.init()
 
-        before = AmountTextModel()
-        after = AmountTextModel()
+        before = AmountTextModel(unit: unit)
+        after = AmountTextModel(unit: unit)
 
         changeDirection = { [weak self] in
             guard let beforeAmount = self?.before?.amount, let afterAmount = self?.after?.amount else {

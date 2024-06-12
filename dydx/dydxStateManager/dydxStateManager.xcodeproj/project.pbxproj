@@ -35,6 +35,7 @@
 		02E7DD7F28CFAFF000727949 /* AbacusStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E7DD7E28CFAFF000727949 /* AbacusStateManager.swift */; };
 		02E7DD8C28CFB1C600727949 /* HttpCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E7DD8628CFB1C600727949 /* HttpCall.swift */; };
 		02E7DD8D28CFB1C600727949 /* ParamsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E7DD8728CFB1C600727949 /* ParamsHelper.swift */; };
+		278765A42C17C529000119D2 /* Kotlin+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278765A32C17C529000119D2 /* Kotlin+Ext.swift */; };
 		27B957EE2B97C11200EF9304 /* dydxPointsRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B957C62B97BE3700EF9304 /* dydxPointsRating.swift */; };
 		27B957EF2B97C11400EF9304 /* dydxRatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B957C72B97BE3700EF9304 /* dydxRatingService.swift */; };
 		27B957F12B97C38100EF9304 /* dydxPointsRatingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B957F02B97C38100EF9304 /* dydxPointsRatingTests.swift */; };
@@ -157,6 +158,7 @@
 		02E7DD8628CFB1C600727949 /* HttpCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpCall.swift; sourceTree = "<group>"; };
 		02E7DD8728CFB1C600727949 /* ParamsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParamsHelper.swift; sourceTree = "<group>"; };
 		1B98F46FECD9489BD361B435 /* Pods_iOS_dydxStateManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxStateManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		278765A32C17C529000119D2 /* Kotlin+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kotlin+Ext.swift"; sourceTree = "<group>"; };
 		27B957C62B97BE3700EF9304 /* dydxPointsRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxPointsRating.swift; sourceTree = "<group>"; };
 		27B957C72B97BE3700EF9304 /* dydxRatingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxRatingService.swift; sourceTree = "<group>"; };
 		27B957F02B97C38100EF9304 /* dydxPointsRatingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPointsRatingTests.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				021385C028DBD74700A9BCA5 /* Utils.swift */,
 				02A8962028E65FBD006F1658 /* AbacusState+Combine.swift */,
 				022E928728EA4FD80096CDA9 /* Models+Ext.swift */,
+				278765A32C17C529000119D2 /* Kotlin+Ext.swift */,
 			);
 			path = dydxStateManager;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				022A81042BE18C51000BF2DD /* AbacusPresentationImp.swift in Sources */,
 				023BFFD02ABBB25300D3ED5C /* ERC20AllowanceStep.swift in Sources */,
 				021385BD28DBD21600A9BCA5 /* ThreadRunner.swift in Sources */,
+				278765A42C17C529000119D2 /* Kotlin+Ext.swift in Sources */,
 				021385C128DBD74700A9BCA5 /* Utils.swift in Sources */,
 				02A8962128E65FBD006F1658 /* AbacusState+Combine.swift in Sources */,
 				023BFFDD2ABBEEFA00D3ED5C /* EthGetGasPriceStep.swift in Sources */,

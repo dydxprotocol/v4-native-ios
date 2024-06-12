@@ -121,8 +121,14 @@ public enum GradientType {
 }
 
 public extension View {
-    func themeGradient(background: ThemeColor.SemanticColor, gradientType: GradientType) -> some View {
-        modifier(GradientTypeModifier(layerColor: background, gradientType: gradientType))
+    func themeGradient(background: ThemeColor.SemanticColor,
+                       gradientType: GradientType,
+                       intensityLayerColor: Double = 0.95,
+                       intensityGradientColor: Double = 0.05) -> some View {
+        modifier(GradientTypeModifier(layerColor: background,
+                                      gradientType: gradientType,
+                                      intensityLayerColor: intensityLayerColor,
+                                      intensityGradientColor: intensityGradientColor))
     }
 }
 
@@ -131,6 +137,8 @@ struct GradientTypeModifier: ViewModifier {
 
     let layerColor: ThemeColor.SemanticColor
     let gradientType: GradientType
+    let intensityLayerColor: Double
+    let intensityGradientColor: Double
 
     func body(content: Content) -> some View {
         switch gradientType {
@@ -141,7 +149,10 @@ struct GradientTypeModifier: ViewModifier {
             content.themeGradient(background: layerColor, gradientColor: Color(uicolor))
         case .minus:
             let uicolor = ThemeSettings.negativeColor.uiColor
-            content.themeGradient(background: layerColor, gradientColor: Color(uicolor))
+            content.themeGradient(background: layerColor,
+                                  gradientColor: Color(uicolor),
+                                  intensityLayerColor: intensityLayerColor,
+                                  intensityGradientColor: intensityGradientColor)
         }
     }
 }
