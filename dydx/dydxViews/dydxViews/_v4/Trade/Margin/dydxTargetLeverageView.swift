@@ -69,6 +69,9 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
                 .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)
                 .makeSheet()
+                .onTapGesture {
+                    PlatformView.hideKeyboard()
+                }
 
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }

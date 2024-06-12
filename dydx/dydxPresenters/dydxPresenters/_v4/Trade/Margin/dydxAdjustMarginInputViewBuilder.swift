@@ -116,7 +116,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
             .sink { [weak self] market, assetMap, input in
                 self?.updateState(market: market, assetMap: assetMap)
                 self?.updateFields(input: input)
-                self?.updateAmountLabel(input: input)
+                self?.updateForMarginDirection(input: input)
                 self?.updatePrePostValues(input: input)
                 self?.updateLiquidationPrice(input: input, market: market)
                 self?.updateButtonState(input: input)
@@ -129,7 +129,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         viewModel?.sharedMarketViewModel = SharedMarketPresenter.createViewModel(market: market, asset: asset)
     }
 
-    private func updateAmountLabel(input: AdjustIsolatedMarginInput) {
+    private func updateForMarginDirection(input: AdjustIsolatedMarginInput) {
         switch input.type {
         case IsolatedMarginAdjustmentType.add:
             viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT_TO_ADD")
@@ -141,51 +141,56 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
     }
 
     private func updatePrePostValues(input: AdjustIsolatedMarginInput) {
-        var crossFreeCollateralBefore: AmountTextModel?
-        var crossFreeCollateralAfter: AmountTextModel?
-        var crossMarginUsageBefore: AmountTextModel?
-        var crossMarginUsageAfter: AmountTextModel?
-        var positionMarginBefore: AmountTextModel?
-        var positionMarginAfter: AmountTextModel?
-        var positionLeverageBefore: AmountTextModel?
-        var positionLeverageAfter: AmountTextModel?
+        var crossReceiptItems = [dydxReceiptChangeItemView]()
+        var positionReceiptItems = [dydxReceiptChangeItemView]()
 
-        if let value = input.summary?.crossFreeCollateral {
-            crossFreeCollateralBefore = .init(amount: value, unit: .dollar)
+        let crossFreeCollateral: AmountTextModel = .init(amount: input.summary?.crossFreeCollateral, unit: .dollar)
+        let crossFreeCollateralUpdated: AmountTextModel = .init(amount: input.summary?.crossFreeCollateralUpdated, unit: .dollar)
+        let crossFreeCollateralChange: AmountChangeModel = .init(
+            before: crossFreeCollateral.amount != nil ? crossFreeCollateral : nil,
+            after: crossFreeCollateralUpdated.amount != nil ? crossFreeCollateralUpdated : nil)
+        crossReceiptItems.append(
+            dydxReceiptChangeItemView(
+                title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
+                value: crossFreeCollateralChange))
+
+        let crossMarginUsage: AmountTextModel = .init(amount: input.summary?.crossMarginUsage, unit: .dollar)
+        let crossMarginUsageUpdated: AmountTextModel = .init(amount: input.summary?.crossMarginUsageUpdated, unit: .dollar)
+        let crossMarginUsageChange: AmountChangeModel = .init(
+            before: crossMarginUsage.amount != nil ? crossMarginUsage : nil,
+            after: crossMarginUsageUpdated.amount != nil ? crossMarginUsageUpdated : nil)
+        crossReceiptItems.append(
+            dydxReceiptChangeItemView(
+                title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN_USAGE"),
+                value: crossMarginUsageChange))
+
+        let positionMargin: AmountTextModel = .init(amount: input.summary?.positionMargin, unit: .dollar)
+        let positionMarginUpdated: AmountTextModel = .init(amount: input.summary?.positionMarginUpdated, unit: .dollar)
+        let positionMarginChange: AmountChangeModel = .init(
+            before: positionMargin.amount != nil ? positionMargin : nil,
+            after: positionMarginUpdated.amount != nil ? positionMarginUpdated : nil)
+        positionReceiptItems.append(
+            dydxReceiptChangeItemView(
+                title: DataLocalizer.localize(path: "APP.TRADE.POSITION_MARGIN"),
+                value: positionMarginChange))
+
+        let positionLeverage: AmountTextModel = .init(amount: input.summary?.positionLeverage, unit: .multiplier)
+        let positionLeverageUpdated: AmountTextModel = .init(amount: input.summary?.positionLeverageUpdated, unit: .multiplier)
+        let positionLeverageChange: AmountChangeModel = .init(
+            before: positionLeverage.amount != nil ? positionLeverage : nil,
+            after: positionLeverageUpdated.amount != nil ? positionLeverageUpdated : nil)
+        positionReceiptItems.append(
+            dydxReceiptChangeItemView(
+                title: DataLocalizer.localize(path: "APP.TRADE.POSITION_LEVERAGE"),
+                value: positionLeverageChange))
+
+        if input.type == IsolatedMarginAdjustmentType.add {
+            viewModel?.amountReceipt?.receiptChangeItems = crossReceiptItems
+            viewModel?.buttonReceipt?.receiptChangeItems = positionReceiptItems
+        } else {
+            viewModel?.amountReceipt?.receiptChangeItems = positionReceiptItems
+            viewModel?.buttonReceipt?.receiptChangeItems = crossReceiptItems
         }
-        if let value = input.summary?.crossFreeCollateralUpdated {
-            crossFreeCollateralAfter = .init(amount: value, unit: .dollar)
-        }
-        if let value = input.summary?.crossMarginUsage {
-            crossMarginUsageBefore = .init(amount: value, unit: .percentage)
-        }
-        if let value = input.summary?.crossMarginUsageUpdated {
-            crossMarginUsageAfter = .init(amount: value, unit: .percentage)
-        }
-        if let value = input.summary?.positionMargin {
-            positionMarginBefore = .init(amount: value, unit: .dollar)
-        }
-        if let value = input.summary?.positionMarginUpdated {
-            positionMarginAfter = .init(amount: value, unit: .dollar)
-        }
-        if let value = input.summary?.positionLeverage {
-            positionLeverageBefore = .init(amount: value, unit: .multiplier)
-        }
-        if let value = input.summary?.positionLeverageUpdated {
-            positionLeverageAfter = .init(amount: value, unit: .multiplier)
-        }
-        viewModel?.subaccountReceipt?.freeCollateral = AmountChangeModel(
-            before: crossFreeCollateralBefore,
-            after: crossFreeCollateralAfter)
-        viewModel?.subaccountReceipt?.marginUsage = AmountChangeModel(
-            before: crossMarginUsageBefore,
-            after: crossMarginUsageAfter)
-        viewModel?.positionReceipt?.marginUsage = AmountChangeModel(
-            before: positionMarginBefore,
-            after: positionMarginAfter)
-        viewModel?.positionReceipt?.leverage = AmountChangeModel(
-            before: positionLeverageBefore,
-            after: positionLeverageAfter)
     }
 
     private func updateLiquidationPrice(input: AdjustIsolatedMarginInput, market: PerpetualMarket) {

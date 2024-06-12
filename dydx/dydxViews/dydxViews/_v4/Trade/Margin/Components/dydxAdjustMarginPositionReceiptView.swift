@@ -1,5 +1,5 @@
 //
-//  dydxAdjustMarginPositionReceiptView.swift
+//  dydxAdjustMarginReceiptViewModel.swift
 //  dydxUI
 //
 //  Created by Rui Huang on 09/05/2024.
@@ -10,16 +10,16 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxAdjustMarginPositionReceiptViewModel: PlatformViewModel {
-    @Published public var leverage: AmountChangeModel?
-    @Published public var marginUsage: AmountChangeModel?
+public class dydxAdjustMarginReceiptViewModel: PlatformViewModel {
+
+    @Published public var padding: EdgeInsets = EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+    @Published public var receiptChangeItems: [dydxReceiptChangeItemView] = []
 
     public init() { }
 
-    public static var previewValue: dydxAdjustMarginPositionReceiptViewModel {
-        let vm = dydxAdjustMarginPositionReceiptViewModel()
-        vm.leverage = .previewValue
-        vm.marginUsage = .previewValue
+    public static var previewValue: dydxAdjustMarginReceiptViewModel {
+        let vm = dydxAdjustMarginReceiptViewModel()
+        vm.receiptChangeItems = [.previewValue, .previewValue]
         return vm
     }
 
@@ -28,29 +28,16 @@ public class dydxAdjustMarginPositionReceiptViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack(spacing: 8) {
-                self.createLine(title: DataLocalizer.localize(path: "APP.TRADE.POSITION_MARGIN"),
-                                amount: self.marginUsage,
-                                parentStyle: style)
-                self.createLine(title: DataLocalizer.localize(path: "APP.TRADE.POSITION_LEVERAGE"),
-                                amount: self.leverage,
-                                parentStyle: style)
+                ForEach(self.receiptChangeItems.indices, id: \.self) { index in
+                    self.receiptChangeItems[index]
+                        .createView(parentStyle: style)
+                }
             }
-                .padding(.bottom, 12)
-                .padding(16)
+                .padding(padding)
                 .themeColor(background: .layer2)
-                .cornerRadius(8, corners: [.topLeft, .topRight])
+                .clipShape(.rect(cornerRadius: 10))
 
             return AnyView(view)
-        }
-    }
-
-    private func createLine(title: String, amount: AmountChangeModel?, parentStyle: ThemeStyle) -> some View {
-        HStack {
-            Text(title)
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-            Spacer()
-            amount?.createView(parentStyle: parentStyle)
         }
     }
 }
@@ -62,7 +49,7 @@ struct dydxAdjustMarginPositionReceiptView_Previews_Dark: PreviewProvider {
     static var previews: some View {
         ThemeSettings.applyDarkTheme()
         ThemeSettings.applyStyles()
-        return dydxAdjustMarginPositionReceiptViewModel.previewValue
+        return dydxAdjustMarginReceiptViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)
@@ -77,7 +64,7 @@ struct dydxAdjustMarginPositionReceiptView_Previews_Light: PreviewProvider {
     static var previews: some View {
         ThemeSettings.applyLightTheme()
         ThemeSettings.applyStyles()
-        return dydxAdjustMarginPositionReceiptViewModel.previewValue
+        return dydxAdjustMarginReceiptViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)
