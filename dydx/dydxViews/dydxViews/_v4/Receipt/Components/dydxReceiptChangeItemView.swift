@@ -29,13 +29,13 @@ public class dydxReceiptChangeItemView: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
-                HStack {
+                HStack(alignment: .top) {
                     Text(self.title)
                         .themeFont(fontSize: .small)
                         .themeColor(foreground: .textTertiary)
-                        .lineLimit(1)
                     Spacer()
                     self.value.createView(parentStyle: parentStyle)
+                        .fixedSize(horizontal: true, vertical: false)
                 }
             )
         }
