@@ -104,9 +104,8 @@
 		0279DE872BED3F5400F9ECF8 /* dydxAdjustMarginDirectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE862BED3F5400F9ECF8 /* dydxAdjustMarginDirectionView.swift */; };
 		0279DE892BED402C00F9ECF8 /* dydxAdjustMarginPercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE882BED402C00F9ECF8 /* dydxAdjustMarginPercentageView.swift */; };
 		0279DE8B2BED412F00F9ECF8 /* dydxAdjustMarginAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE8A2BED412F00F9ECF8 /* dydxAdjustMarginAmountView.swift */; };
-		0279DE8D2BED47E800F9ECF8 /* dydxAdjustMarginSubaccountReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE8C2BED47E800F9ECF8 /* dydxAdjustMarginSubaccountReceiptView.swift */; };
 		0279DE8F2BED532200F9ECF8 /* dydxAdjustMarginLiquidationPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE8E2BED532200F9ECF8 /* dydxAdjustMarginLiquidationPriceView.swift */; };
-		0279DE912BED610400F9ECF8 /* dydxAdjustMarginPositionReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE902BED610400F9ECF8 /* dydxAdjustMarginPositionReceiptView.swift */; };
+		0279DE912BED610400F9ECF8 /* dydxAdjustMarginReceiptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE902BED610400F9ECF8 /* dydxAdjustMarginReceiptViewModel.swift */; };
 		0279DE932BED63D000F9ECF8 /* dydxAdjustMarginCtaButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE922BED63D000F9ECF8 /* dydxAdjustMarginCtaButtonView.swift */; };
 		027CB28529EEFF760069781A /* dydxTransferStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027CB28429EEFF760069781A /* dydxTransferStatusView.swift */; };
 		027F3EF72AB93ADC00602E5B /* dydxProfileBalancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027F3EF62AB93ADC00602E5B /* dydxProfileBalancesViewModel.swift */; };
@@ -476,9 +475,8 @@
 		0279DE862BED3F5400F9ECF8 /* dydxAdjustMarginDirectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginDirectionView.swift; sourceTree = "<group>"; };
 		0279DE882BED402C00F9ECF8 /* dydxAdjustMarginPercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginPercentageView.swift; sourceTree = "<group>"; };
 		0279DE8A2BED412F00F9ECF8 /* dydxAdjustMarginAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginAmountView.swift; sourceTree = "<group>"; };
-		0279DE8C2BED47E800F9ECF8 /* dydxAdjustMarginSubaccountReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginSubaccountReceiptView.swift; sourceTree = "<group>"; };
 		0279DE8E2BED532200F9ECF8 /* dydxAdjustMarginLiquidationPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginLiquidationPriceView.swift; sourceTree = "<group>"; };
-		0279DE902BED610400F9ECF8 /* dydxAdjustMarginPositionReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginPositionReceiptView.swift; sourceTree = "<group>"; };
+		0279DE902BED610400F9ECF8 /* dydxAdjustMarginReceiptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginReceiptViewModel.swift; sourceTree = "<group>"; };
 		0279DE922BED63D000F9ECF8 /* dydxAdjustMarginCtaButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginCtaButtonView.swift; sourceTree = "<group>"; };
 		027CB28429EEFF760069781A /* dydxTransferStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferStatusView.swift; sourceTree = "<group>"; };
 		027F3EF62AB93ADC00602E5B /* dydxProfileBalancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileBalancesViewModel.swift; sourceTree = "<group>"; };
@@ -1189,9 +1187,8 @@
 				0279DE862BED3F5400F9ECF8 /* dydxAdjustMarginDirectionView.swift */,
 				0279DE882BED402C00F9ECF8 /* dydxAdjustMarginPercentageView.swift */,
 				0279DE8A2BED412F00F9ECF8 /* dydxAdjustMarginAmountView.swift */,
-				0279DE8C2BED47E800F9ECF8 /* dydxAdjustMarginSubaccountReceiptView.swift */,
 				0279DE8E2BED532200F9ECF8 /* dydxAdjustMarginLiquidationPriceView.swift */,
-				0279DE902BED610400F9ECF8 /* dydxAdjustMarginPositionReceiptView.swift */,
+				0279DE902BED610400F9ECF8 /* dydxAdjustMarginReceiptViewModel.swift */,
 				0279DE922BED63D000F9ECF8 /* dydxAdjustMarginCtaButtonView.swift */,
 			);
 			path = Components;
@@ -1995,7 +1992,7 @@
 				277E90412B1FAEAF005CCBCB /* dydxRewardsHelpView.swift in Sources */,
 				02714C9F29E0C7C500CC1C44 /* TokensComboBox.swift in Sources */,
 				64A4DC652968A17C008D8E20 /* dydxTradeInputSideView.swift in Sources */,
-				0279DE912BED610400F9ECF8 /* dydxAdjustMarginPositionReceiptView.swift in Sources */,
+				0279DE912BED610400F9ECF8 /* dydxAdjustMarginReceiptViewModel.swift in Sources */,
 				024FEB7E2ACB82A10087A55E /* NavHeader.swift in Sources */,
 				64A4DB6729662134008D8E20 /* dydxOrderbookGroupView.swift in Sources */,
 				0208627828F4C5EE00C9D3A0 /* dydxMarketTilesView.swift in Sources */,
@@ -2061,7 +2058,6 @@
 				277E8F9F2B1A847D005CCBCB /* dydxTitledCardView.swift in Sources */,
 				0279DE8F2BED532200F9ECF8 /* dydxAdjustMarginLiquidationPriceView.swift in Sources */,
 				024B44F129834D1F00E35D54 /* dydxTradeStatusCtaButtonView.swift in Sources */,
-				0279DE8D2BED47E800F9ECF8 /* dydxAdjustMarginSubaccountReceiptView.swift in Sources */,
 				0230A2A228B84A140036DDF3 /* UIHostingController+Ext.swift in Sources */,
 				02E5997628FF4F5800F62F28 /* BeforeArrowAfter.swift in Sources */,
 				64A4DB5729662090008D8E20 /* dydxTradeInputReduceOnlyView.swift in Sources */,

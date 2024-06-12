@@ -2,7 +2,7 @@
 //  dydxAdjustMarginReceiptViewModel.swift
 //  dydxUI
 //
-//  Created by Rui Huang on 09/05/2024.
+//  Created by Mike Maguire on 06/11/2024.
 //  Copyright © 2024 dYdX Trading Inc. All rights reserved.
 //
 
