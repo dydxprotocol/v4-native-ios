@@ -332,30 +332,11 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
                 )
             }
 
-            let items = self.positionItems.map { $0.createView(parentStyle: style) }
-            let unopenedItems = self.pendingPositionItems.map { $0.createView(parentStyle: style) }
-
             return AnyView(
                 ScrollView {
                     VStack(spacing: 24) {
-                        LazyVStack {
-                            self.positionsHeader?.createView(parentStyle: style)
-
-                            ForEach(items.indices, id: \.self) { index in
-                                items[index]
-                            }
-
-                            self.positionsFooter?.createView(parentStyle: style)
-                        }
-                        if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
-                            LazyVStack {
-                                self.pendingPositionsHeader?.createView(parentStyle: style)
-
-                                ForEach(unopenedItems.indices, id: \.self) { index in
-                                    unopenedItems[index]
-                                }
-                            }
-                        }
+                        self.openPositionsView
+                        self.pendingPositionsView
                     }
                 }
             )
