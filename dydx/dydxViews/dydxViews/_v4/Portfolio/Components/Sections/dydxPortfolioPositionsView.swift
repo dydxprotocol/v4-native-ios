@@ -408,6 +408,32 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
         .wrappedViewModel
     }
 
+    private var openPositionsView: some View {
+        LazyVStack {
+            let items = self.positionItems.map { $0.createView() }
+            self.positionsHeader?.createView()
+
+            ForEach(items.indices, id: \.self) { index in
+                items[index]
+            }
+
+            self.positionsFooter?.createView()
+        }
+    }
+
+    private var pendingPositionsView: AnyView? {
+        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled else { return nil }
+        let unopenedItems = self.pendingPositionItems.map { $0.createView() }
+        return LazyVStack {
+            self.pendingPositionsHeader?.createView()
+
+            ForEach(unopenedItems.indices, id: \.self) { index in
+                unopenedItems[index]
+            }
+        }
+        .wrappedInAnyView()
+    }
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
@@ -419,30 +445,11 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
                 )
             }
 
-            let items = self.positionItems.map { $0.createView(parentStyle: style) }
-            let unopenedItems = self.pendingPositionItems.map { $0.createView(parentStyle: style) }
-
             return AnyView(
                 ScrollView {
                     VStack(spacing: 24) {
-                        LazyVStack {
-                            self.positionsHeader?.createView(parentStyle: style)
-
-                            ForEach(items.indices, id: \.self) { index in
-                                items[index]
-                            }
-
-                            self.positionsFooter?.createView(parentStyle: style)
-                        }
-                        if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
-                            LazyVStack {
-                                self.pendingPositionsHeader?.createView(parentStyle: style)
-
-                                ForEach(unopenedItems.indices, id: \.self) { index in
-                                    unopenedItems[index]
-                                }
-                            }
-                        }
+                        self.openPositionsView
+                        self.pendingPositionsView
                     }
                 }
             )
