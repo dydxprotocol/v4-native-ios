@@ -1,5 +1,5 @@
 //
-//  dydxPortfolioUnopenedIsolatedPositionsItemViewModel.swift
+//  dydxPortfolioPendingPositionsItemViewModel.swift
 //  dydxUI
 //
 //  Created by Michael Maguire on 6/12/24.
@@ -8,30 +8,35 @@
 
 import PlatformUI
 import SwiftUI
+import Utilities
 
-public class dydxPortfolioUnopenedIsolatedPositionsItemViewModel: PlatformViewModel {
+public class dydxPortfolioPendingPositionsItemViewModel: PlatformViewModel {
     @Published public var marketLogoUrl: URL?
     @Published public var marketName: String
     @Published public var margin: String
+    @Published public var orderCount: Int32
     @Published public var viewOrdersAction: (() -> Void)
     @Published public var cancelOrdersAction: (() -> Void)
 
-    public init(marketLogoUrl: URL? = nil,
+    public init(marketLogoUrl: URL?,
          marketName: String,
          margin: String,
+         orderCount: Int32,
          viewOrdersAction: @escaping () -> Void,
          cancelOrdersAction: @escaping () -> Void) {
         self.marketLogoUrl = marketLogoUrl
         self.marketName = marketName
         self.margin = margin
+        self.orderCount = orderCount
         self.viewOrdersAction = viewOrdersAction
         self.cancelOrdersAction = cancelOrdersAction
     }
 
-    public static var previewValue: dydxPortfolioUnopenedIsolatedPositionsItemViewModel = {
+    public static var previewValue: dydxPortfolioPendingPositionsItemViewModel = {
         .init(marketLogoUrl: URL(string: "https://v4.testnet.dydx.exchange/currencies/eth.png"),
               marketName: "ETH-USD",
               margin: "$1000.00",
+              orderCount: 2,
               viewOrdersAction: {},
               cancelOrdersAction: {}
         )
@@ -63,12 +68,22 @@ public class dydxPortfolioUnopenedIsolatedPositionsItemViewModel: PlatformViewMo
     }
 
     private var divider: some View {
-        Divider()
+        Spacer(minLength: 1)
             .overlay(ThemeColor.SemanticColor.borderDefault.color)
     }
 
     private var bottomContent: some View {
-        let viewOrders = Text(localizerPathKey: "APP.CLOSE_POSITIONS_CONFIRMATION_TOAST.VIEW_ORDERS")
+        let viewOrdersStringKey: String
+        let viewOrdersStringParams: [String: String]?
+        if orderCount > 1 {
+            viewOrdersStringKey = "APP.GENERAL.VIEW_ORDER"
+            viewOrdersStringParams = nil
+        } else {
+            viewOrdersStringKey = "APP.GENERAL.VIEW_ORDERS_COUNT"
+            viewOrdersStringParams = ["NUM_ORDERS": "\(orderCount)"]
+        }
+
+        let viewOrders = Text(localizerPathKey: viewOrdersStringKey, params: viewOrdersStringParams)
             .themeFont(fontSize: .smaller)
             .themeColor(foreground: .colorPurple)
             .padding(.vertical, 8)
@@ -101,12 +116,12 @@ public class dydxPortfolioUnopenedIsolatedPositionsItemViewModel: PlatformViewMo
 }
 
 #if DEBUG
-struct dydxPortfolioUnopenedIsolatedPositionsItemView_Previews: PreviewProvider {
+struct dydxPortfolioPendingPositionsItemView_Previews: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         Group {
-            dydxPortfolioUnopenedIsolatedPositionsItemViewModel.previewValue
+            dydxPortfolioPendingPositionsItemViewModel.previewValue
                 .createView()
                 .environmentObject(themeSettings)
                 .previewLayout(.sizeThatFits)

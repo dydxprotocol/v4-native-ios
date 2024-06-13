@@ -328,7 +328,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             contentChanged?()
         }
     }
-    @Published public var unopenedIsolatedPositionItems: [dydxPortfolioUnopenedIsolatedPositionsItemViewModel] {
+    @Published public var pendingPositionItems: [dydxPortfolioPendingPositionsItemViewModel] {
         didSet {
             contentChanged?()
         }
@@ -338,11 +338,11 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
 
     init(
         positionItems: [dydxPortfolioPositionItemViewModel] = [],
-        unopenedIsolatedPositionItems: [dydxPortfolioUnopenedIsolatedPositionsItemViewModel] = [],
+        pendingPositionItems: [dydxPortfolioPendingPositionsItemViewModel] = [],
         emptyText: String? = nil
     ) {
         self.positionItems = positionItems
-        self.unopenedIsolatedPositionItems = unopenedIsolatedPositionItems
+        self.pendingPositionItems = pendingPositionItems
         self.emptyText = emptyText
     }
 
@@ -352,7 +352,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
                 .previewValue,
                 .previewValue
             ],
-            unopenedIsolatedPositionItems: [
+            pendingPositionItems: [
                 .previewValue
             ],
             emptyText: "empty")
@@ -389,15 +389,16 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             .wrappedViewModel
     }
 
-    public var unopenedIsolatedPositionsHeader: PlatformViewModel? {
-        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == true, !unopenedIsolatedPositionItems.isEmpty else { return nil }
+    public var pendingPositionsHeader: PlatformViewModel? {
+        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == true, !pendingPositionItems.isEmpty else { return nil }
         return HStack(spacing: 8) {
             Text(localizerPathKey: "APP.TRADE.UNOPENED_ISOLATED_POSITIONS")
                 .themeFont(fontSize: .larger)
                 .themeColor(foreground: .textPrimary)
                 .fixedSize()
-            Text("\(unopenedIsolatedPositionItems.count)")
+            Text("\(pendingPositionItems.count)")
                 .frame(width: 28, height: 28)
+                .themeColor(background: .layer6)
                 .borderAndClip(style: .circle, borderColor: .borderDefault)
             Spacer()
         }
@@ -411,7 +412,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            if let emptyText = self.emptyText, positionItems.isEmpty, unopenedIsolatedPositionItems.isEmpty {
+            if let emptyText = self.emptyText, positionItems.isEmpty, pendingPositionItems.isEmpty {
                 return AnyView(
                     PlaceholderViewModel(text: emptyText)
                         .createView(parentStyle: style)
@@ -419,22 +420,28 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             }
 
             let items = self.positionItems.map { $0.createView(parentStyle: style) }
-            let unopenedItems = self.unopenedIsolatedPositionItems.map { $0.createView(parentStyle: style) }
+            let unopenedItems = self.pendingPositionItems.map { $0.createView(parentStyle: style) }
 
             return AnyView(
                 ScrollView {
-                    LazyVStack {
-                        self.positionsHeader?.createView(parentStyle: style)
+                    VStack(spacing: 24) {
+                        LazyVStack {
+                            self.positionsHeader?.createView(parentStyle: style)
 
-                        ForEach(items.indices, id: \.self) { index in
-                            items[index]
+                            ForEach(items.indices, id: \.self) { index in
+                                items[index]
+                            }
+
+                            self.positionsFooter?.createView(parentStyle: style)
                         }
+                        if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
+                            LazyVStack {
+                                self.pendingPositionsHeader?.createView(parentStyle: style)
 
-                        self.positionsFooter?.createView(parentStyle: style)
-                        self.unopenedIsolatedPositionsHeader?.createView(parentStyle: style)
-
-                        ForEach(unopenedItems.indices, id: \.self) { index in
-                            unopenedItems[index]
+                                ForEach(unopenedItems.indices, id: \.self) { index in
+                                    unopenedItems[index]
+                                }
+                            }
                         }
                     }
                 }

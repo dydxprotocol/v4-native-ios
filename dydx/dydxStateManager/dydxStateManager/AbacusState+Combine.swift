@@ -221,6 +221,17 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
+    public var selectedSubaccountPendingPositions: AnyPublisher<[SubaccountPendingPosition], Never> {
+        selectedSubaccount
+            .compactMap { subaccount in
+                subaccount?.pendingPositions
+            }
+            .prepend([])
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
     public var selectedSubaccountOrders: AnyPublisher<[SubaccountOrder], Never> {
         selectedSubaccount
             .compactMap { subaccount in
