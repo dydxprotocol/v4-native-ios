@@ -68,15 +68,14 @@ public class dydxPortfolioPendingPositionsItemViewModel: PlatformViewModel {
     }
 
     private var divider: some View {
-        Rectangle()
-            .frame(height: 1)
+        Spacer(minLength: 1)
             .overlay(ThemeColor.SemanticColor.borderDefault.color)
     }
 
     private var bottomContent: some View {
         let viewOrdersStringKey: String
         let viewOrdersStringParams: [String: String]?
-        if orderCount == 1 {
+        if orderCount > 1 {
             viewOrdersStringKey = "APP.GENERAL.VIEW_ORDER"
             viewOrdersStringParams = nil
         } else {
@@ -103,14 +102,12 @@ public class dydxPortfolioPendingPositionsItemViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let horizontalPadding: CGFloat = 12
             return VStack(spacing: 0) {
                 self.topContent
                 self.divider
-                    .padding(.horizontal, -horizontalPadding)
                 self.bottomContent
             }
-            .padding(.horizontal, horizontalPadding)
+            .padding(.horizontal, 12)
             .themeColor(background: .layer3)
             .clipShape(.rect(cornerRadius: 10))
             .wrappedInAnyView()
