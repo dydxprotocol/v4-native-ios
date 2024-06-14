@@ -119,7 +119,6 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 self?.updateForMarginDirection(input: input)
                 self?.updatePrePostValues(input: input, market: market)
                 self?.updateLiquidationPrice(input: input, market: market)
-                self?.updateButtonState(input: input)
             }
             .store(in: &subscriptions)
     }
@@ -192,10 +191,12 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 title: nil,
                 body: DataLocalizer.localize(path: errorStringKey),
                 level: .error))
+            ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
             return
+        } else {
+            ctaButtonPresenter.viewModel?.ctaButtonState = .enabled()
+            viewModel?.inlineAlert = nil
         }
-
-        viewModel?.inlineAlert = nil
 
         let crossFreeCollateral: AmountTextModel = .init(amount: input.summary?.crossFreeCollateral, unit: .dollar)
         let crossFreeCollateralUpdated: AmountTextModel = .init(amount: input.summary?.crossFreeCollateralUpdated, unit: .dollar)
@@ -271,14 +272,6 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
             } else {
                 viewModel?.liquidationPrice?.direction = .none
             }
-        }
-    }
-
-    private func updateButtonState(input: AdjustIsolatedMarginInput) {
-        if parser.asNumber(input.amount)?.doubleValue ?? 0 > 0 {
-            self.ctaButtonPresenter.viewModel?.ctaButtonState = .enabled()
-        } else {
-            self.ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
         }
     }
 
