@@ -202,8 +202,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         let crossFreeCollateralUpdated: AmountTextModel = .init(amount: input.summary?.crossFreeCollateralUpdated, unit: .dollar)
         let crossFreeCollateralChange: AmountChangeModel = .init(
             before: crossFreeCollateral.amount != nil ? crossFreeCollateral : nil,
-            // client-side validation, cross free collateral should never be negative
-            after: crossFreeCollateralUpdated.amount?.doubleValue ?? 0 > 0 ? crossFreeCollateralUpdated : nil)
+            after: crossFreeCollateralUpdated.amount != nil ? crossFreeCollateralUpdated : nil)
         crossReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
@@ -213,8 +212,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         let crossMarginUsageUpdated: AmountTextModel = .init(amount: input.summary?.crossMarginUsageUpdated, unit: .dollar)
         let crossMarginUsageChange: AmountChangeModel = .init(
             before: crossMarginUsage.amount != nil ? crossMarginUsage : nil,
-            // client-side validation, cross margin should never be negative
-            after: crossMarginUsageUpdated.amount?.doubleValue ?? 0 > 0 ? crossMarginUsageUpdated : nil)
+            after: crossMarginUsageUpdated.amount != nil ? crossMarginUsageUpdated : nil)
         crossReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN_USAGE"),
@@ -224,8 +222,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         let positionMarginUpdated: AmountTextModel = .init(amount: input.summary?.positionMarginUpdated, unit: .dollar)
         let positionMarginChange: AmountChangeModel = .init(
             before: positionMargin.amount != nil ? positionMargin : nil,
-            // client-side validation, position margin should never be negative
-            after: positionMarginUpdated.amount?.doubleValue ?? 0 > 0 ? positionMarginUpdated : nil)
+            after: positionMarginUpdated.amount != nil ? positionMarginUpdated : nil)
         positionReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.TRADE.POSITION_MARGIN"),
@@ -233,11 +230,9 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
 
         let positionLeverage: AmountTextModel = .init(amount: input.summary?.positionLeverage, unit: .multiplier)
         let positionLeverageUpdated: AmountTextModel = .init(amount: input.summary?.positionLeverageUpdated, unit: .multiplier)
-        let positionLeverageUpdatedDouble = positionLeverageUpdated.amount?.doubleValue ?? 0
         let positionLeverageChange: AmountChangeModel = .init(
             before: positionLeverage.amount != nil ? positionLeverage : nil,
-            // 1000 is just a hacky bandaid local validation
-            after: positionLeverageUpdatedDouble > 0 && positionLeverageUpdatedDouble < 1000 ? positionLeverageUpdated : nil)
+            after: positionLeverageUpdated.amount != nil ? positionLeverageUpdated : nil)
         positionReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.TRADE.POSITION_LEVERAGE"),
