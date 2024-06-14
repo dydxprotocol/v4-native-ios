@@ -80,9 +80,6 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         viewModel.amount?.onEdited = { amount in
             AbacusStateManager.shared.adjustIsolatedMargin(input: amount, type: .amount)
         }
-        viewModel.amount?.maxAction = {
-            AbacusStateManager.shared.adjustIsolatedMargin(input: "1", type: .amountpercent)
-        }
 
         ctaButtonPresenter.viewModel?.ctaAction = { [weak self] in
             self?.ctaButtonPresenter.viewModel?.ctaButtonState = .thinking
