@@ -65,7 +65,8 @@ public class dydxAdjustMarginDirectionViewModel: PlatformViewModel {
                               selectedItems: selectedItems,
                               currentSelection: self.marginDirection.index,
                               onSelectionChanged: { index in
-                     self.marginDirectionAction?(MarginDirection(index: index))
+                    PlatformView.hideKeyboard()
+                    self.marginDirectionAction?(MarginDirection(index: index))
                 })
                 .createView(parentStyle: style)
             }
