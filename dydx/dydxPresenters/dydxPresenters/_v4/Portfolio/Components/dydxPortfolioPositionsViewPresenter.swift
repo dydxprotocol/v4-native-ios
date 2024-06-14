@@ -91,7 +91,6 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
     ) -> dydxPortfolioPendingPositionsItemViewModel? {
 
         guard let market = marketMap[pendingPosition.marketId],
-              let configs = market.configs,
               let asset = assetMap[pendingPosition.assetId],
               let margin = pendingPosition.equity?.current?.doubleValue,
               margin != 0,
@@ -101,12 +100,15 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         }
 
         let viewOrdersAction: () -> Void = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/market",
-                                                       params: ["market": market.id,
-                                                                "currentSection": "positions"]),
+            let routingRequest = RoutingRequest(
+                path: "/market",
+                params: ["market": market.id,
+                         "currentSection": "orders"])
+            Router.shared?.navigate(to: routingRequest,
                                     animated: true,
                                     completion: nil)
         }
+
         let cancelOrdersAction: () -> Void = {
             Router.shared?.navigate(to: RoutingRequest(path: "/trade/markets", params: ["market": market.id]), animated: true, completion: nil)
         }

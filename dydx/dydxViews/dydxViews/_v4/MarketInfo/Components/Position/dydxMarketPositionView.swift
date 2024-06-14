@@ -33,6 +33,8 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     @Published public var takeProfitStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
     @Published public var stopLossStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
 
+    @Published public var pendingPosition: dydxPortfolioPendingPositionsItemViewModel?
+
     public init() { }
 
     public static var previewValue: dydxMarketPositionViewModel {
@@ -61,14 +63,20 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
-                VStack {
-                    self.createCollection(parentStyle: style)
+                Group {
+                    if let pendingPosition = self.pendingPosition {
+                        pendingPosition.createView(parentStyle: style)
+                    } else {
+                        VStack {
+                            self.createCollection(parentStyle: style)
 
-                    self.createButtons(parentStyle: style)
+                            self.createButtons(parentStyle: style)
 
-                    self.createList(parentStyle: style)
+                            self.createList(parentStyle: style)
+                        }
+                        .themeColor(background: .layer2)
+                    }
                 }
-                .themeColor(background: .layer2)
                 .frame(width: UIScreen.main.bounds.width - 16)
             )
         }
