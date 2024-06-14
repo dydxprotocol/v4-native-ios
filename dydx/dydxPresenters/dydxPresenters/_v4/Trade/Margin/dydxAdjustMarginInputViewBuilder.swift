@@ -86,7 +86,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
             AbacusStateManager.shared.commitAdjustIsolatedMargin { [weak self] (_, error, _) in
                 self?.ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
                 if let error = error {
-                    self?.viewModel?.submissionError = InlineAlertViewModel(.init(title: nil, body: error.localizedMessage, level: .error))
+                    self?.viewModel?.inlineAlert = InlineAlertViewModel(.init(title: nil, body: error.localizedMessage, level: .error))
                     return
                 } else {
                     Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
@@ -117,15 +117,9 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 self?.updateState(market: market, assetMap: assetMap)
                 self?.updateFields(input: input)
                 self?.updateForMarginDirection(input: input)
-                self?.updatePrePostValues(input: input)
+                self?.updatePrePostValues(input: input, market: market)
                 self?.updateLiquidationPrice(input: input, market: market)
                 self?.updateButtonState(input: input)
-            }
-            .store(in: &subscriptions)
-
-        AbacusStateManager.shared.state.adjustIsolatedMarginInput
-            .sink { [weak self] _ in
-                self?.viewModel?.submissionError = nil
             }
             .store(in: &subscriptions)
     }
@@ -146,15 +140,69 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         }
     }
 
-    private func updatePrePostValues(input: AdjustIsolatedMarginInput) {
+    // TODO: move this to abacus
+    /// locally validates the input
+    /// - Parameter input: input to validate
+    /// - Returns: the localization error string key if invalid input
+    private func validate(input: AdjustIsolatedMarginInput, market: PerpetualMarket) -> String? {
+        guard let amount = parser.asNumber(input.amount)?.doubleValue else { return nil }
+        switch input.type {
+        case IsolatedMarginAdjustmentType.add:
+            if let crossFreeCollateral = input.summary?.crossFreeCollateral?.doubleValue, amount >= crossFreeCollateral {
+                return "ERRORS.TRANSFER_MODAL.TRANSFER_MORE_THAN_FREE"
+            }
+            if let crossMarginUsageUpdated = input.summary?.crossMarginUsageUpdated?.doubleValue, crossMarginUsageUpdated > 1 {
+                return "ERRORS.TRADE_BOX.INVALID_NEW_ACCOUNT_MARGIN_USAGE"
+            }
+        case IsolatedMarginAdjustmentType.remove:
+            if let freeCollateral = input.summary?.crossFreeCollateral?.doubleValue, amount >= freeCollateral {
+                return "ERRORS.TRANSFER_MODAL.TRANSFER_MORE_THAN_FREE"
+            }
+            if let positionMarginUpdated = input.summary?.positionMarginUpdated?.doubleValue, positionMarginUpdated < 0 {
+                return "ERRORS.TRADE_BOX.INVALID_NEW_ACCOUNT_MARGIN_USAGE"
+            }
+            if let effectiveInitialMarginFraction = market.configs?.effectiveInitialMarginFraction?.doubleValue, effectiveInitialMarginFraction > 0 {
+                let marketMaxLeverage = 1 / effectiveInitialMarginFraction
+                if let positionLeverageUpdated = input.summary?.positionLeverageUpdated?.doubleValue, positionLeverageUpdated > marketMaxLeverage {
+                    return "ERRORS.TRADE_BOX_TITLE.INVALID_NEW_POSITION_LEVERAGE"
+                }
+            }
+        default:
+            break
+        }
+
+        return nil
+    }
+
+    private func clearPostValues() {
+        for receipt in [viewModel?.amountReceipt, viewModel?.buttonReceipt] {
+            for item in receipt?.receiptChangeItems ?? [] {
+                item.value.after = nil
+            }
+        }
+    }
+
+    private func updatePrePostValues(input: AdjustIsolatedMarginInput, market: PerpetualMarket) {
         var crossReceiptItems = [dydxReceiptChangeItemView]()
         var positionReceiptItems = [dydxReceiptChangeItemView]()
+
+        if let errorStringKey = validate(input: input, market: market) {
+            clearPostValues()
+            viewModel?.inlineAlert = InlineAlertViewModel(InlineAlertViewModel.Config(
+                title: nil,
+                body: DataLocalizer.localize(path: errorStringKey),
+                level: .error))
+            return
+        }
+
+        viewModel?.inlineAlert = nil
 
         let crossFreeCollateral: AmountTextModel = .init(amount: input.summary?.crossFreeCollateral, unit: .dollar)
         let crossFreeCollateralUpdated: AmountTextModel = .init(amount: input.summary?.crossFreeCollateralUpdated, unit: .dollar)
         let crossFreeCollateralChange: AmountChangeModel = .init(
             before: crossFreeCollateral.amount != nil ? crossFreeCollateral : nil,
-            after: crossFreeCollateralUpdated.amount != nil ? crossFreeCollateralUpdated : nil)
+            // client-side validation, cross free collateral should never be negative
+            after: crossFreeCollateralUpdated.amount?.doubleValue ?? 0 > 0 ? crossFreeCollateralUpdated : nil)
         crossReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
@@ -164,7 +212,8 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         let crossMarginUsageUpdated: AmountTextModel = .init(amount: input.summary?.crossMarginUsageUpdated, unit: .dollar)
         let crossMarginUsageChange: AmountChangeModel = .init(
             before: crossMarginUsage.amount != nil ? crossMarginUsage : nil,
-            after: crossMarginUsageUpdated.amount != nil ? crossMarginUsageUpdated : nil)
+            // client-side validation, cross margin should never be negative
+            after: crossMarginUsageUpdated.amount?.doubleValue ?? 0 > 0 ? crossMarginUsageUpdated : nil)
         crossReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN_USAGE"),
@@ -174,7 +223,8 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         let positionMarginUpdated: AmountTextModel = .init(amount: input.summary?.positionMarginUpdated, unit: .dollar)
         let positionMarginChange: AmountChangeModel = .init(
             before: positionMargin.amount != nil ? positionMargin : nil,
-            after: positionMarginUpdated.amount != nil ? positionMarginUpdated : nil)
+            // client-side validation, position margin should never be negative
+            after: positionMarginUpdated.amount?.doubleValue ?? 0 > 0 ? positionMarginUpdated : nil)
         positionReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.TRADE.POSITION_MARGIN"),
@@ -182,9 +232,11 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
 
         let positionLeverage: AmountTextModel = .init(amount: input.summary?.positionLeverage, unit: .multiplier)
         let positionLeverageUpdated: AmountTextModel = .init(amount: input.summary?.positionLeverageUpdated, unit: .multiplier)
+        let positionLeverageUpdatedDouble = positionLeverageUpdated.amount?.doubleValue ?? 0
         let positionLeverageChange: AmountChangeModel = .init(
             before: positionLeverage.amount != nil ? positionLeverage : nil,
-            after: positionLeverageUpdated.amount != nil ? positionLeverageUpdated : nil)
+            // 1000 is just a hacky bandaid local validation
+            after: positionLeverageUpdatedDouble > 0 && positionLeverageUpdatedDouble < 1000 ? positionLeverageUpdated : nil)
         positionReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.TRADE.POSITION_LEVERAGE"),
