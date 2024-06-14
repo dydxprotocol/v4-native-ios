@@ -55,7 +55,7 @@ public class BeforeArrowAfterModel<VM: PlatformViewModeling>: PlatformViewModel,
                             .createView(parentStyle: style.themeColor(foreground: .textPrimary), styleKey: nil)
                     }
                 }
-                    .fixedSize()
+                .fixedSize()
             )
         }
     }
