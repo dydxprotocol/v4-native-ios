@@ -15,10 +15,10 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
     @Published public var sharedMarketViewModel: SharedMarketViewModel? = SharedMarketViewModel()
     @Published public var marginDirection: dydxAdjustMarginDirectionViewModel? = dydxAdjustMarginDirectionViewModel()
     @Published public var marginPercentage: dydxAdjustMarginPercentageViewModel? = dydxAdjustMarginPercentageViewModel()
-    @Published public var amount: dydxAdjustMarginAmountViewModel? = dydxAdjustMarginAmountViewModel()
+    @Published public var amount: PlatformTextInputViewModel? = PlatformTextInputViewModel(inputType: .decimalDigits)
     @Published public var amountReceipt: dydxAdjustMarginReceiptViewModel? = dydxAdjustMarginReceiptViewModel()
     @Published public var liquidationPrice: dydxAdjustMarginLiquidationPriceViewModel? = dydxAdjustMarginLiquidationPriceViewModel()
-    @Published public var submissionError: InlineAlertViewModel?
+    @Published public var inlineAlert: InlineAlertViewModel?
     @Published public var buttonReceipt: dydxAdjustMarginReceiptViewModel? = dydxAdjustMarginReceiptViewModel()
     @Published public var ctaButton: dydxAdjustMarginCtaButtonViewModel? = dydxAdjustMarginCtaButtonViewModel()
     @Published public var shouldDisplayCrossFirst: Bool = true
@@ -33,7 +33,7 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
         let vm = dydxAdjustMarginInputViewModel()
         vm.marginPercentage = .previewValue
         vm.marginDirection = .previewValue
-        vm.amount = .previewValue
+        vm.amount = .init()
         vm.amountReceipt = .previewValue
         vm.liquidationPrice = .previewValue
         vm.buttonReceipt = .previewValue
@@ -57,11 +57,12 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
                         ZStack(alignment: .top) {
                             self.amountReceipt?.createView(parentStyle: style)
                             self.amount?.createView(parentStyle: style)
+                                .makeInput()
                                 .frame(height: 64)
                         }
 
                         self.liquidationPrice?.createView(parentStyle: style)
-                        self.submissionError?.createView(parentStyle: style)
+                        self.inlineAlert?.createView(parentStyle: style)
 
                         Spacer()
                     }
