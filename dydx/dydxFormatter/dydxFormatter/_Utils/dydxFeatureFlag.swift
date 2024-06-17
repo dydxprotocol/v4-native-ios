@@ -13,7 +13,6 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     case push_notification
     case force_mainnet
     case enable_app_rating
-    case enable_isolated_margins
 
     private static let obj = NSObject()
 
@@ -24,7 +23,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
         switch self {
         case .enable_app_rating:
             return Self.obj.parser.asBoolean(FeatureService.shared?.flag(feature: rawValue))?.boolValue ?? true
-        case .push_notification, .force_mainnet, .enable_isolated_margins:
+        case .push_notification, .force_mainnet:
             return Self.obj.parser.asBoolean(FeatureService.shared?.flag(feature: rawValue))?.boolValue ?? false
         }
     }

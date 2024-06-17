@@ -221,18 +221,6 @@ public class dydxPortfolioOrdersViewModel: PlatformListViewModel {
         .themeColor(foreground: .textTertiary)
         .wrappedViewModel
     }
-
-    public override var footer: PlatformViewModel? {
-        guard shouldDisplayIsolatedOrdersWarning && !dydxBoolFeatureFlag.enable_isolated_margins.isEnabled else { return nil }
-        return Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITION_ORDERS_COMING_SOON")
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 16)
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-                .padding(.top, 12)
-                .padding(.bottom, 16)
-                .wrappedViewModel
-    }
 }
 
 #if DEBUG

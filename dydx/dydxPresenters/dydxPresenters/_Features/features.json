@@ -52,26 +52,6 @@
                         }
                     ]
                 }
-            },
-            {
-                "title":{
-                    "text":"Enabled Isolated Margins"
-                },
-                "field":{
-                    "field":"enable_isolated_margins",
-                    "optional":true,
-                    "type" : "text",
-                    "options" : [
-                        {
-                            "text": "yes",
-                            "value" : "1"
-                        },
-                        {
-                            "text": "no",
-                            "value" : "0"
-                        }
-                    ]
-                }
             }
         ]
     }

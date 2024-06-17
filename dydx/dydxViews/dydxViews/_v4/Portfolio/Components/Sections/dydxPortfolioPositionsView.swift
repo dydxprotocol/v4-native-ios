@@ -82,11 +82,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled else {
-            return createView_Deprecated(parentStyle: parentStyle, styleKey: styleKey)
-        }
-
-        return PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let rightCellSwipeAccessoryView = PlatformIconViewModel(type: .asset(name: "action_cancel", bundle: Bundle.dydxView), size: .init(width: 16, height: 16))
@@ -200,41 +196,6 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         .padding(.horizontal, 16)
     }
 
-    private func createView_Deprecated(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
-            guard let self = self else { return AnyView(PlatformView.nilView) }
-
-            let icon = self.createLogo(parentStyle: style)
-
-            let main = self.createMain_Deprecated(parentStyle: style)
-
-            let trailing = self.createTrailing(parentStyle: style)
-
-            let cell = PlatformTableViewCellViewModel(logo: icon.wrappedViewModel,
-                                                      main: main.wrappedViewModel,
-                                                      trailing: trailing.wrappedViewModel)
-                .createView(parentStyle: parentStyle)
-                .frame(height: 64)
-                .themeGradient(background: .layer3, gradientType: self.gradientType)
-                .cornerRadius(16)
-                .onTapGesture { [weak self] in
-                    self?.handler?.onTapAction?()
-                }
-
-            let rightCellSwipeAccessoryView = PlatformIconViewModel(type: .asset(name: "action_cancel", bundle: Bundle.dydxView), size: .init(width: 16, height: 16))
-                .createView(parentStyle: style, styleKey: styleKey)
-                .tint(ThemeColor.SemanticColor.layer2.color)
-
-            let rightCellSwipeAccessory = CellSwipeAccessory(accessoryView: AnyView(rightCellSwipeAccessoryView)) {
-                self.handler?.onCloseAction?()
-            }
-
-            return AnyView(
-                cell.swipeActions(leftCellSwipeAccessory: nil, rightCellSwipeAccessory: rightCellSwipeAccessory)
-            )
-        }
-    }
-
     private func createLogo( parentStyle: ThemeStyle) -> some View {
         HStack {
             PlatformIconViewModel(type: .url(url: logoUrl),
@@ -265,44 +226,6 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             }
         }
         .leftAligned()
-        .minimumScaleFactor(0.5)
-    }
-
-    private func createMain_Deprecated(parentStyle: ThemeStyle) -> some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 0) {
-                HStack(spacing: 2) {
-                    Text(size ?? "")
-                        .themeFont(fontType: .number, fontSize: .small)
-
-                    token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
-                }
-
-                HStack(spacing: 2) {
-                    sideText
-                        .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))
-                    Text("@")
-                        .themeFont(fontSize: .smaller)
-                        .themeColor(foreground: .textTertiary)
-
-                    Text(leverage ?? "")
-                        .themeFont(fontType: .number, fontSize: .smaller)
-                }
-            }
-
-            Spacer()
-
-            VStack(alignment: .trailing) {
-                Text(indexPrice ?? "")
-                    .themeFont(fontType: .number, fontSize: .small)
-                    .lineLimit(1)
-
-                Text(entryPrice ?? "")
-                    .themeFont(fontType: .number, fontSize: .smaller)
-                    .themeColor(foreground: .textTertiary)
-                    .lineLimit(1)
-            }
-        }
         .minimumScaleFactor(0.5)
     }
 
@@ -358,39 +281,8 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             emptyText: "empty")
     }
 
-    public var positionsHeader: PlatformViewModel? {
-        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == false, !positionItems.isEmpty else { return nil }
-        return HStack {
-            Text(DataLocalizer.localize(path: "APP.GENERAL.DETAILS"))
-            Spacer()
-            Text(DataLocalizer.localize(path: "APP.GENERAL.INDEX_ENTRY"))
-
-            HStack {
-                Spacer()
-                Text(DataLocalizer.localize(path: "APP.GENERAL.PROFIT_AND_LOSS"))
-            }
-            .frame(maxWidth: 80)
-        }
-        .padding(.horizontal, 16)
-        .themeFont(fontSize: .small)
-        .themeColor(foreground: .textTertiary)
-        .wrappedViewModel
-    }
-
-    public var positionsFooter: PlatformViewModel? {
-        guard shouldDisplayIsolatedPositionsWarning && !dydxBoolFeatureFlag.enable_isolated_margins.isEnabled else { return nil }
-        return Text(localizerPathKey: "APP.GENERAL.ISOLATED_POSITIONS_COMING_SOON")
-            .multilineTextAlignment(.center)
-            .padding(.horizontal, 16)
-            .themeFont(fontSize: .small)
-            .themeColor(foreground: .textTertiary)
-            .padding(.top, 12)
-            .padding(.bottom, 16)
-            .wrappedViewModel
-    }
-
     public var pendingPositionsHeader: PlatformViewModel? {
-        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled == true, !pendingPositionItems.isEmpty else { return nil }
+        guard !pendingPositionItems.isEmpty else { return nil }
         return HStack(spacing: 8) {
             Text(localizerPathKey: "APP.TRADE.UNOPENED_ISOLATED_POSITIONS")
                 .themeFont(fontSize: .larger)
@@ -412,18 +304,13 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
     private var openPositionsView: some View {
         LazyVStack {
             let items = self.positionItems.map { $0.createView() }
-            self.positionsHeader?.createView()
-
             ForEach(items.indices, id: \.self) { index in
                 items[index]
             }
-
-            self.positionsFooter?.createView()
         }
     }
 
     private var pendingPositionsView: AnyView? {
-        guard dydxBoolFeatureFlag.enable_isolated_margins.isEnabled else { return nil }
         let unopenedItems = self.pendingPositionItems.map { $0.createView() }
         return LazyVStack {
             self.pendingPositionsHeader?.createView()
