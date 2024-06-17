@@ -290,7 +290,8 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
                 .fixedSize()
             Text("\(pendingPositionItems.count)")
                 .frame(width: 28, height: 28)
-                .themeColor(background: .layer6)
+                .themeColor(background: .layer3)
+                .themeColor(foreground: .textSecondary)
                 .borderAndClip(style: .circle, borderColor: .borderDefault)
             Spacer()
         }
