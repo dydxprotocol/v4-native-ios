@@ -33,7 +33,13 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     @Published public var takeProfitStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
     @Published public var stopLossStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
 
-    @Published public var pendingPosition: dydxPortfolioPendingPositionsItemViewModel?
+    @Published public var pendingPosition: dydxPortfolioPendingPositionsItemViewModel? {
+        didSet {
+            contentChanged?()
+        }
+    }
+
+    @Published public var contentChanged: (() -> Void)?
 
     public init() { }
 
