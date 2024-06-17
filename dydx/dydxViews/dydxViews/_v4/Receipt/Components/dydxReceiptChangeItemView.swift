@@ -33,9 +33,9 @@ public class dydxReceiptChangeItemView: PlatformViewModel {
                     Text(self.title)
                         .themeFont(fontSize: .small)
                         .themeColor(foreground: .textTertiary)
+                        .lineLimit(2)
                     Spacer()
                     self.value.createView(parentStyle: parentStyle)
-                        .fixedSize(horizontal: true, vertical: false)
                 }
             )
         }

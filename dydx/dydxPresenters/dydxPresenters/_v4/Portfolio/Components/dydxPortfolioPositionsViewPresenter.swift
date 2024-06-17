@@ -21,7 +21,8 @@ protocol dydxPortfolioPositionsViewPresenterProtocol: HostedViewPresenterProtoco
 }
 
 class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPositionsViewModel>, dydxPortfolioPositionsViewPresenterProtocol {
-    private var cache = [String: dydxPortfolioPositionItemViewModel]()
+    private var positionsCache = [String: dydxPortfolioPositionItemViewModel]()
+    private var pendingPositionsCache = [String: dydxPortfolioPendingPositionsItemViewModel]()
 
     init(viewModel: dydxPortfolioPositionsViewModel?) {
         super.init()
@@ -37,40 +38,94 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
                 // TODO: remove once isolated markets is supported and force released
                 self?.viewModel?.shouldDisplayIsolatedPositionsWarning = onboarded
                 if onboarded {
-                    self?.viewModel?.placeholderText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS")
+                    self?.viewModel?.emptyText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS")
                 } else {
-                    self?.viewModel?.placeholderText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS_LOG_IN")
+                    self?.viewModel?.emptyText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS_LOG_IN")
                 }
             }
             .store(in: &subscriptions)
 
         Publishers
-            .CombineLatest3(AbacusStateManager.shared.state.selectedSubaccountPositions,
+            .CombineLatest4(AbacusStateManager.shared.state.selectedSubaccountPositions,
+                            AbacusStateManager.shared.state.selectedSubaccountPendingPositions,
                             AbacusStateManager.shared.state.marketMap,
                             AbacusStateManager.shared.state.assetMap)
-            .sink { [weak self] positions, marketMap, assetMap in
+            .sink { [weak self] positions, pendingPositions, marketMap, assetMap in
                 self?.updatePositions(positions: positions, marketMap: marketMap, assetMap: assetMap)
+                self?.updatePendingPositions(pendingPositions: pendingPositions, marketMap: marketMap, assetMap: assetMap)
             }
             .store(in: &subscriptions)
     }
 
     private func updatePositions(positions: [SubaccountPosition], marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
         let items: [dydxPortfolioPositionItemViewModel] = positions.compactMap { position -> dydxPortfolioPositionItemViewModel? in
-            let item = Self.createViewModelItem(position: position, marketMap: marketMap, assetMap: assetMap, cache: cache)
-            cache[position.assetId] = item
+            let item = Self.createPositionViewModelItem(position: position,
+                                                        marketMap: marketMap,
+                                                        assetMap: assetMap,
+                                                        positionsCache: positionsCache)
+            positionsCache[position.assetId] = item
             return item
         }
 
-        self.viewModel?.items = items
+        self.viewModel?.positionItems = items
     }
 
-    static func createViewModelItem(position: SubaccountPosition, marketMap: [String: PerpetualMarket], assetMap: [String: Asset], cache: [String: dydxPortfolioPositionItemViewModel]? = nil) -> dydxPortfolioPositionItemViewModel? {
+    private func updatePendingPositions(pendingPositions: [SubaccountPendingPosition], marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
+        let items: [dydxPortfolioPendingPositionsItemViewModel] = pendingPositions.compactMap { pendingPosition -> dydxPortfolioPendingPositionsItemViewModel? in
+            let item = Self.createPendingPositionsViewModelItem(pendingPosition: pendingPosition,
+                                                                marketMap: marketMap,
+                                                                assetMap: assetMap,
+                                                                pendingPositionsCache: pendingPositionsCache)
+            pendingPositionsCache[pendingPosition.assetId] = item
+            return item
+        }
+
+        self.viewModel?.pendingPositionItems = items
+    }
+
+    static func createPendingPositionsViewModelItem(
+        pendingPosition: SubaccountPendingPosition,
+        marketMap: [String: PerpetualMarket],
+        assetMap: [String: Asset],
+        pendingPositionsCache: [String: dydxPortfolioPendingPositionsItemViewModel]? = nil
+    ) -> dydxPortfolioPendingPositionsItemViewModel? {
+
+        guard let market = marketMap[pendingPosition.marketId],
+              let configs = market.configs,
+              let asset = assetMap[pendingPosition.assetId],
+              let margin = pendingPosition.equity?.current?.doubleValue,
+              margin != 0,
+              let marginFormatted = dydxFormatter.shared.dollar(number: margin, digits: 2)
+        else {
+            return nil
+        }
+
+        let viewOrdersAction: () -> Void = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/market",
+                                                       params: ["market": market.id,
+                                                                "currentSection": "positions"]),
+                                    animated: true,
+                                    completion: nil)
+        }
+        let cancelOrdersAction: () -> Void = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/markets", params: ["market": market.id]), animated: true, completion: nil)
+        }
+
+        return dydxPortfolioPendingPositionsItemViewModel(marketLogoUrl: URL(string: asset.resources?.imageUrl ?? ""),
+                                                          marketName: asset.name!,
+                                                          margin: marginFormatted,
+                                                          orderCount: pendingPosition.orderCount,
+                                                          viewOrdersAction: viewOrdersAction,
+                                                          cancelOrdersAction: cancelOrdersAction)
+    }
+
+    static func createPositionViewModelItem(position: SubaccountPosition, marketMap: [String: PerpetualMarket], assetMap: [String: Asset], positionsCache: [String: dydxPortfolioPositionItemViewModel]? = nil) -> dydxPortfolioPositionItemViewModel? {
         guard let market = marketMap[position.id], let configs = market.configs, let asset = assetMap[position.assetId],
               (position.size.current?.doubleValue ?? 0) != 0 else {
             return nil
         }
 
-        let item = cache?[position.assetId] ?? dydxPortfolioPositionItemViewModel()
+        let item = positionsCache?[position.assetId] ?? dydxPortfolioPositionItemViewModel()
 
         let positionSize = abs(position.size.current?.doubleValue ?? 0)
         item.size = dydxFormatter.shared.localFormatted(number: positionSize, digits: configs.displayStepSizeDecimals?.intValue ?? 1)
