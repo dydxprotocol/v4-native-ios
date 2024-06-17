@@ -80,16 +80,13 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         viewModel.amount?.onEdited = { amount in
             AbacusStateManager.shared.adjustIsolatedMargin(input: amount, type: .amount)
         }
-        viewModel.amount?.maxAction = {
-            AbacusStateManager.shared.adjustIsolatedMargin(input: "1", type: .amountpercent)
-        }
 
         ctaButtonPresenter.viewModel?.ctaAction = { [weak self] in
             self?.ctaButtonPresenter.viewModel?.ctaButtonState = .thinking
             AbacusStateManager.shared.commitAdjustIsolatedMargin { [weak self] (_, error, _) in
                 self?.ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
                 if let error = error {
-                    self?.viewModel?.submissionError = InlineAlertViewModel(.init(title: nil, body: error.message, level: .error))
+                    self?.viewModel?.inlineAlert = InlineAlertViewModel(.init(title: nil, body: error.localizedMessage, level: .error))
                     return
                 } else {
                     Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
@@ -120,15 +117,8 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 self?.updateState(market: market, assetMap: assetMap)
                 self?.updateFields(input: input)
                 self?.updateForMarginDirection(input: input)
-                self?.updatePrePostValues(input: input)
+                self?.updatePrePostValues(input: input, market: market)
                 self?.updateLiquidationPrice(input: input, market: market)
-                self?.updateButtonState(input: input)
-            }
-            .store(in: &subscriptions)
-
-        AbacusStateManager.shared.state.adjustIsolatedMarginInput
-            .sink { [weak self] _ in
-                self?.viewModel?.submissionError = nil
             }
             .store(in: &subscriptions)
     }
@@ -149,9 +139,64 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         }
     }
 
-    private func updatePrePostValues(input: AdjustIsolatedMarginInput) {
+    // TODO: move this to abacus
+    /// locally validates the input
+    /// - Parameter input: input to validate
+    /// - Returns: the localization error string key if invalid input
+    private func validate(input: AdjustIsolatedMarginInput, market: PerpetualMarket) -> String? {
+        guard let amount = parser.asNumber(input.amount)?.doubleValue else { return nil }
+        switch input.type {
+        case IsolatedMarginAdjustmentType.add:
+            if let crossFreeCollateral = input.summary?.crossFreeCollateral?.doubleValue, amount >= crossFreeCollateral {
+                return "ERRORS.TRANSFER_MODAL.TRANSFER_MORE_THAN_FREE"
+            }
+            if let crossMarginUsageUpdated = input.summary?.crossMarginUsageUpdated?.doubleValue, crossMarginUsageUpdated > 1 {
+                return "ERRORS.TRADE_BOX.INVALID_NEW_ACCOUNT_MARGIN_USAGE"
+            }
+        case IsolatedMarginAdjustmentType.remove:
+            if let freeCollateral = input.summary?.crossFreeCollateral?.doubleValue, amount >= freeCollateral {
+                return "ERRORS.TRANSFER_MODAL.TRANSFER_MORE_THAN_FREE"
+            }
+            if let positionMarginUpdated = input.summary?.positionMarginUpdated?.doubleValue, positionMarginUpdated < 0 {
+                return "ERRORS.TRADE_BOX.INVALID_NEW_ACCOUNT_MARGIN_USAGE"
+            }
+            if let effectiveInitialMarginFraction = market.configs?.effectiveInitialMarginFraction?.doubleValue, effectiveInitialMarginFraction > 0 {
+                let marketMaxLeverage = 1 / effectiveInitialMarginFraction
+                if let positionLeverageUpdated = input.summary?.positionLeverageUpdated?.doubleValue, positionLeverageUpdated > marketMaxLeverage {
+                    return "ERRORS.TRADE_BOX_TITLE.INVALID_NEW_POSITION_LEVERAGE"
+                }
+            }
+        default:
+            break
+        }
+
+        return nil
+    }
+
+    private func clearPostValues() {
+        for receipt in [viewModel?.amountReceipt, viewModel?.buttonReceipt] {
+            for item in receipt?.receiptChangeItems ?? [] {
+                item.value.after = nil
+            }
+        }
+    }
+
+    private func updatePrePostValues(input: AdjustIsolatedMarginInput, market: PerpetualMarket) {
         var crossReceiptItems = [dydxReceiptChangeItemView]()
         var positionReceiptItems = [dydxReceiptChangeItemView]()
+
+        if let errorStringKey = validate(input: input, market: market) {
+            clearPostValues()
+            viewModel?.inlineAlert = InlineAlertViewModel(InlineAlertViewModel.Config(
+                title: nil,
+                body: DataLocalizer.localize(path: errorStringKey),
+                level: .error))
+            ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
+            return
+        } else {
+            ctaButtonPresenter.viewModel?.ctaButtonState = .enabled()
+            viewModel?.inlineAlert = nil
+        }
 
         let crossFreeCollateral: AmountTextModel = .init(amount: input.summary?.crossFreeCollateral, unit: .dollar)
         let crossFreeCollateralUpdated: AmountTextModel = .init(amount: input.summary?.crossFreeCollateralUpdated, unit: .dollar)
@@ -222,14 +267,6 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
             } else {
                 viewModel?.liquidationPrice?.direction = .none
             }
-        }
-    }
-
-    private func updateButtonState(input: AdjustIsolatedMarginInput) {
-        if parser.asNumber(input.amount)?.doubleValue ?? 0 > 0 {
-            self.ctaButtonPresenter.viewModel?.ctaButtonState = .enabled()
-        } else {
-            self.ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
         }
     }
 

@@ -50,7 +50,7 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
     }
 
     private func updatePosition(position: SubaccountPosition, triggerOrders: [SubaccountOrder], marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
-        guard let sharedOrderViewModel = dydxPortfolioPositionsViewPresenter.createViewModelItem(position: position, marketMap: marketMap, assetMap: assetMap) else {
+        guard let sharedOrderViewModel = dydxPortfolioPositionsViewPresenter.createPositionViewModelItem(position: position, marketMap: marketMap, assetMap: assetMap) else {
             return
         }
 
