@@ -143,45 +143,24 @@ public final class AbacusState {
      Subaccount
      **/
     public func subaccount(of subaccountNumber: String) -> AnyPublisher<Subaccount?, Never> {
-        if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
-            account
-                .compactMap(\.?.groupedSubaccounts?[subaccountNumber])
-                .removeDuplicates()
-                .share()
-                .eraseToAnyPublisher()
-        } else {
-            account
-                .compactMap(\.?.subaccounts?[subaccountNumber])
-                .removeDuplicates()
-                .share()
-                .eraseToAnyPublisher()
-        }
+        account
+            .compactMap(\.?.groupedSubaccounts?[subaccountNumber])
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
     }
 
     public var selectedSubaccount: AnyPublisher<Subaccount?, Never> {
-        if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
-            statePublisher
-                .map { [weak self] (state: PerpetualState?) in
-                    if let key = self?.subaccountNumber, let subaccounts = state?.account?.groupedSubaccounts {
-                        return subaccounts[key]
-                    }
-                    return nil
+        statePublisher
+            .map { [weak self] (state: PerpetualState?) in
+                if let key = self?.subaccountNumber, let subaccounts = state?.account?.groupedSubaccounts {
+                    return subaccounts[key]
                 }
-                .removeDuplicates()
-                .share()
-                .eraseToAnyPublisher()
-        } else {
-            statePublisher
-                .map { [weak self] (state: PerpetualState?) in
-                    if let key = self?.subaccountNumber, let subaccounts = state?.account?.subaccounts {
-                        return subaccounts[key]
-                    }
-                    return nil
-                }
-                .removeDuplicates()
-                .share()
-                .eraseToAnyPublisher()
-        }
+                return nil
+            }
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
     }
 
     public var selectedSubaccountFills: AnyPublisher<[SubaccountFill], Never> {
