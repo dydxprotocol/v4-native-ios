@@ -279,7 +279,7 @@ private class dydxTradeStatusViewPresenter: HostedViewPresenter<dydxTradeStatusV
     }
 }
 
-private extension OrderStatus {
+private extension Abacus.OrderStatus {
     var statusIcon: dydxTradeStatusLogoViewModel.StatusIcon? {
         switch self {
         case .canceled: return .failed
