@@ -282,7 +282,7 @@ private class dydxTradeStatusViewPresenter: HostedViewPresenter<dydxTradeStatusV
 private extension OrderStatus {
     var statusIcon: dydxTradeStatusLogoViewModel.StatusIcon? {
         switch self {
-        case .cancelled: return .failed
+        case .canceled: return .failed
         case .canceling, .pending, .partiallyfilled: return .pending
         case .filled: return .filled
         case .open, .untriggered: return .open
@@ -292,7 +292,7 @@ private extension OrderStatus {
 
     var detailKey: String? {
         switch self {
-        case .cancelled: return "APP.TRADE.ORDER_CANCELED_DESC"
+        case .canceled: return "APP.TRADE.ORDER_CANCELED_DESC"
         case .canceling, .pending, .partiallyfilled: return "APP.TRADE.ORDER_PENDING_DESC"
         case .filled: return "APP.TRADE.ORDER_FILLED_DESC"
         case .open: return "APP.TRADE.ORDER_PLACED_DESC"

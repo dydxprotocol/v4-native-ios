@@ -13,7 +13,7 @@ extension OrderStatusModel {
 
     convenience init(order: Abacus.SubaccountOrder) {
         switch order.status {
-        case .cancelled, .canceling:
+        case .canceled, .canceling:
             self.init(status: .red)
         case .filled:
             self.init(status: .green)
