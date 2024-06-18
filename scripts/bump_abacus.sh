@@ -52,7 +52,7 @@ echo "Updating iOS repo at $`pwd`"
 
 echo "Updating Abacus.podspec..."
 replace_line podspecs/Abacus.podspec "spec.version" "spec.version = '$version'"
-replace_line podspecs/Abacus.podspec ":commit =>" "spec.source = { :git => 'git@github.com:dydxprotocol/v4-abacus.git', :commit => '$commitHash' }"
+replace_line podspecs/Abacus.podspec ":git" "spec.source = { :git => 'git@github.com:dydxprotocol/v4-abacus.git', :commit => '$commitHash' }"
 
 echo "Pod update..."
 cd dydx

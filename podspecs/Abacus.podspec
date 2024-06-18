@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'Abacus'
-spec.version = '1.7.84'
+spec.version = '1.7.85'
     spec.homepage                 = 'https://github.com/dydxprotocol/v4-abacus'
-    spec.source                   = { :git => "git@github.com:dydxprotocol/v4-abacus.git", :tag => "v#{spec.version}" }
+spec.source = { :git => 'git@github.com:dydxprotocol/v4-abacus.git', :commit => '12b2d068aeb98a0489e81f0a746ba981b4debd34' }
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Shared front-end and mobile logic written in Kotlin'
