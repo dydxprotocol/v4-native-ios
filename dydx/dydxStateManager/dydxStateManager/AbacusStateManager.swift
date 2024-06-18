@@ -136,61 +136,41 @@ public final class AbacusStateManager: NSObject {
         UIImplementations.reset(language: nil)
 
         let deployment: String
-        let appConfigs: AppConfigs
         let appConfigsV2: AppConfigsV2
         if dydxBoolFeatureFlag.force_mainnet.isEnabled {
             deployment = "MAINNET"
-            appConfigs = AppConfigs.companion.forApp
             appConfigsV2 = AppConfigsV2.companion.forApp
         } else {
             // Expose more options for Testflight build
             switch Installation.source {
             case .appStore:
                 deployment = "MAINNET"
-                appConfigs = AppConfigs.companion.forApp
                 appConfigsV2 = AppConfigsV2.companion.forApp
             case .debug:
                 // For debugging only
                 deployment = "DEV"
-                appConfigs = AppConfigs.companion.forAppDebug
-                appConfigsV2 = dydxBoolFeatureFlag.enable_isolated_margins.isEnabled ? AppConfigsV2.companion.forAppWithIsolatedMargins : AppConfigsV2.companion.forAppDebug
+                appConfigsV2 = AppConfigsV2.companion.forAppWithIsolatedMargins
             case .jailBroken:
                 deployment = "TESTNET"
-                appConfigs = AppConfigs.companion.forApp
                 appConfigsV2 = AppConfigsV2.companion.forApp
             case .testFlight:
                 deployment = "TESTFLIGHT"
-                appConfigs = AppConfigs.companion.forApp
                 appConfigsV2 = AppConfigsV2.companion.forApp
             }
         }
 
-        appConfigs.squidVersion = AppConfigs.SquidVersion.v2
         appConfigsV2.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
 
-        if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
-            return AsyncAbacusStateManagerV2(
-                deploymentUri: deploymentUri,
-                deployment: deployment,
-                appConfigs: appConfigsV2,
-                ioImplementations: IOImplementations.shared,
-                uiImplementations: UIImplementations.shared!,
-                stateNotification: self,
-                dataNotification: nil,
-                presentationProtocol: AbacusPresentationImp()
-            )
-        } else {
-            return AsyncAbacusStateManager(
-                deploymentUri: deploymentUri,
-                deployment: deployment,
-                appConfigs: appConfigs,
-                ioImplementations: IOImplementations.shared,
-                uiImplementations: UIImplementations.shared!,
-                stateNotification: self,
-                dataNotification: nil
-            )
-
-        }
+        return AsyncAbacusStateManagerV2(
+            deploymentUri: deploymentUri,
+            deployment: deployment,
+            appConfigs: appConfigsV2,
+            ioImplementations: IOImplementations.shared,
+            uiImplementations: UIImplementations.shared!,
+            stateNotification: self,
+            dataNotification: nil,
+            presentationProtocol: AbacusPresentationImp()
+        )
     }()
 
     override private init() {

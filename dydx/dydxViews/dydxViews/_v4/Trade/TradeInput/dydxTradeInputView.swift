@@ -76,40 +76,24 @@ public class dydxTradeInputViewModel: PlatformViewModel {
                         self.createSwipeUpView(parentStyle: style)
                     }
 
-                    if dydxBoolFeatureFlag.enable_isolated_margins.isEnabled {
-                        HStack(spacing: spacing) {
-                            self.marginViewModel?.createView(parentStyle: style)
-                                .frame(maxWidth: .infinity)
-                            self.sideViewModel?.createView(parentStyle: style)
-                                .frame(maxWidth: .infinity)
-                        }
-                            .padding(.top, 48)
-                            .frame(height: 64)
-
-                        Spacer(minLength: 16)
-
-                        HStack(spacing: spacing) {
-                            self.orderbookManagerViewModel?.createView(parentStyle: style)
-                                .frame(width: orderbookWdith)
-                            self.orderTypeViewModel?.createView(parentStyle: style)
-                                .frame(width: editViewWidth)
-                        }
-                            .frame(height: 64)
-
-                    } else {
-
-                        self.orderTypeViewModel?.createView(parentStyle: style)
-                            .frame(height: 64)
-                            .padding(.top, 32)
-                            .padding(.horizontal, -spacing)
-
-                        HStack(spacing: spacing) {
-                            self.orderbookManagerViewModel?.createView(parentStyle: style)
-                                .frame(width: orderbookWdith)
-                            self.sideViewModel?.createView(parentStyle: style)
-                                .frame(width: editViewWidth)
-                        }
+                    HStack(spacing: spacing) {
+                        self.marginViewModel?.createView(parentStyle: style)
+                            .frame(maxWidth: .infinity)
+                        self.sideViewModel?.createView(parentStyle: style)
+                            .frame(maxWidth: .infinity)
                     }
+                        .padding(.top, 48)
+                        .frame(height: 64)
+
+                    Spacer(minLength: 16)
+
+                    HStack(spacing: spacing) {
+                        self.orderbookManagerViewModel?.createView(parentStyle: style)
+                            .frame(width: orderbookWdith)
+                        self.orderTypeViewModel?.createView(parentStyle: style)
+                            .frame(width: editViewWidth)
+                    }
+                        .frame(height: 64)
 
                     Spacer(minLength: 8)
 
