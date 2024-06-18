@@ -31,25 +31,17 @@ scriptDir=`pwd`
 cd /tmp
 rm -rf abacus
 gh repo clone git@github.com:dydxprotocol/v4-abacus.git abacus
-version=`cat abacus/v4_abacus.podspec | grep spec.version | grep -o '[0-9]*\.[0-9]*\.[0-9]*'`
+version=$(grep "^version = " abacus/build.gradle.kts | sed -n 's/version = "\(.*\)"/\1/p')
 echo "=================================="
 echo "Bumping to $version.... hang on..."
 
 
 
 echo "=================================="
-echo "Checking git tag v$version"
+echo "Getting latest commit sha"
 
 cd abacus
-exist=`git tag | grep "v$version" || true`
-if [ ! -z "$exist" ]; then
-  echo "v$version exists"
-else
-  echo "Creating git tag v$version"
-  username=$(git config user.name)
-  git tag -a "v$version" -m "v$version created by $username"
-  git push --tags origin main
-fi
+commitHash=$(git rev-parse HEAD)
 
 
 cd $scriptDir/..
@@ -60,6 +52,7 @@ echo "Updating iOS repo at $`pwd`"
 
 echo "Updating Abacus.podspec..."
 replace_line podspecs/Abacus.podspec "spec.version" "spec.version = '$version'"
+replace_line podspecs/Abacus.podspec ":commit =>" "spec.source = { :git => 'git@github.com:dydxprotocol/v4-abacus.git', :commit => '$commitHash' }"
 
 echo "Pod update..."
 cd dydx
