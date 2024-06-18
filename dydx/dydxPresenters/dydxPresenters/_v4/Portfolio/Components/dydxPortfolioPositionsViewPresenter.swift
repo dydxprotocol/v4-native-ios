@@ -110,7 +110,7 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         }
 
         let cancelOrdersAction: () -> Void = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/trade/markets", params: ["market": market.id]), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/portfolio/cancel_pending_position/\(market.id)"), animated: true, completion: nil)
         }
 
         return dydxPortfolioPendingPositionsItemViewModel(marketLogoUrl: URL(string: asset.resources?.imageUrl ?? ""),
