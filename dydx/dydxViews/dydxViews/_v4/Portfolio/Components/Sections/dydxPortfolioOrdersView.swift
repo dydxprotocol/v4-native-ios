@@ -182,7 +182,6 @@ public class dydxPortfolioOrderItemViewModel: PlatformViewModel {
 }
 
 public class dydxPortfolioOrdersViewModel: PlatformListViewModel {
-    @Published public var shouldDisplayIsolatedOrdersWarning: Bool = false
     @Published public var placeholderText: String?
 
     public override var placeholder: PlatformViewModel? {

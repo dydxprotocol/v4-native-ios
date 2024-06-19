@@ -243,8 +243,6 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
 }
 
 public class dydxPortfolioPositionsViewModel: PlatformViewModel {
-    // TODO: remove once isolated markets is supported and force released
-    @Published public var shouldDisplayIsolatedPositionsWarning: Bool = false
     @Published public var emptyText: String?
     @Published public var positionItems: [dydxPortfolioPositionItemViewModel] {
         didSet {
