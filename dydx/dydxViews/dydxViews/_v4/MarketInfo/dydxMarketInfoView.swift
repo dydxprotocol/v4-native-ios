@@ -17,7 +17,6 @@ public class dydxMarketInfoViewModel: PlatformViewModel {
     @Published public var resources = dydxMarketResourcesViewModel()
     @Published public var configs: dydxMarketConfigsViewModel? = dydxMarketConfigsViewModel()
 
-    @Published public var showPositionSection: Bool = false
     @Published public var sections = dydxPortfolioSectionsViewModel()
     @Published public var fills = dydxPortfolioFillsViewModel()
     @Published public var position = dydxMarketPositionViewModel()
@@ -48,7 +47,6 @@ public class dydxMarketInfoViewModel: PlatformViewModel {
         vm.stats = .previewValue
         vm.resources = .previewValue
         vm.configs = .previewValue
-        vm.showPositionSection = true
         vm.sections = .previewValue
         vm.position = .previewValue
         vm.orders = .previewValue
@@ -70,10 +68,8 @@ public class dydxMarketInfoViewModel: PlatformViewModel {
                     LazyVStack(pinnedViews: [.sectionHeaders]) {
                         self.createChartPagesSection(parentStyle: style)
 
-                        if self.showPositionSection {
-                            self.createPositionSection(parentStyle: style)
-                            Spacer(minLength: 24)
-                        }
+                        self.createPositionSection(parentStyle: style)
+                        Spacer(minLength: 24)
 
                         self.createStatsSection(parentStyle: style)
 
