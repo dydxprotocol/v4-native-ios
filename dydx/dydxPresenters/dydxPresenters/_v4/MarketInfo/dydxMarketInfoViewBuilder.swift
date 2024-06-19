@@ -144,15 +144,15 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
             .store(in: &subscriptions)
 
         Publishers
-            .CombineLatest(AbacusStateManager.shared.state.selectedSubaccountPositions,
+            .CombineLatest3(AbacusStateManager.shared.state.selectedSubaccountPositions,
+                            AbacusStateManager.shared.state.selectedSubaccountPendingPositions,
                            $marketId
                             .compactMap { $0 }
                             .removeDuplicates())
-            .sink { [weak self] subaccountPositions, marketId in
-                let position = subaccountPositions.first { (subaccountPosition: SubaccountPosition) in
-                    subaccountPosition.id == marketId
-                }
-                self?.updatePositionSection(position: position)
+            .sink { [weak self] subaccountPositions, subaccountPendingPositions, marketId in
+                let position = subaccountPositions.first { $0.id == marketId }
+                let pendingPosition = subaccountPendingPositions.first { $0.marketId == marketId }
+                self?.updatePositionSection(position: position, pendingPosition: pendingPosition)
             }
             .store(in: &subscriptions)
     }
@@ -170,13 +170,22 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
         //        AbacusStateManager.shared.setMarket(market: nil)
     }
 
-    private func updatePositionSection(position: SubaccountPosition?) {
-        if let position = position, position.side.current != PositionSide.none, let viewModel = viewModel {
+    private func updatePositionSection(position: SubaccountPosition?, pendingPosition: SubaccountPendingPosition?) {
+        if let position, position.side.current != PositionSide.none, let viewModel = viewModel {
             viewModel.showPositionSection = true
             fillsPresenter.filterByMarketId = position.id
             fundingPresenter.filterByMarketId = position.id
             ordersPresenter.filterByMarketId = position.id
             positionPresenter.position = position
+            positionPresenter.pendingPosition = nil
+            resetPresentersForVisibilityChange()
+        } else if let pendingPosition, pendingPosition.orderCount > 0, let viewModel = viewModel {
+            viewModel.showPositionSection = true
+            fillsPresenter.filterByMarketId = pendingPosition.marketId
+            fundingPresenter.filterByMarketId = pendingPosition.marketId
+            ordersPresenter.filterByMarketId = pendingPosition.marketId
+            positionPresenter.position = nil
+            positionPresenter.pendingPosition = pendingPosition
             resetPresentersForVisibilityChange()
         } else {
             viewModel?.showPositionSection = false

@@ -47,15 +47,17 @@ class dydxPortfolioOrdersViewPresenter: HostedViewPresenter<dydxPortfolioOrdersV
             .store(in: &subscriptions)
 
         Publishers
-            .CombineLatest(AbacusStateManager.shared.state.selectedSubaccountOrders,
-                           AbacusStateManager.shared.state.configsAndAssetMap)
-            .sink { [weak self] positions, configsAndAssetMap in
-                self?.updateOrders(orders: positions, configsAndAssetMap: configsAndAssetMap)
+            .CombineLatest3(
+                $filterByMarketId.removeDuplicates(),
+                AbacusStateManager.shared.state.selectedSubaccountOrders,
+                AbacusStateManager.shared.state.configsAndAssetMap)
+            .sink { [weak self] filterByMarketId, positions, configsAndAssetMap in
+                self?.updateOrders(filterByMarketId: filterByMarketId, orders: positions, configsAndAssetMap: configsAndAssetMap)
             }
             .store(in: &subscriptions)
     }
 
-    private func updateOrders(orders: [SubaccountOrder], configsAndAssetMap: [String: MarketConfigsAndAsset]) {
+    private func updateOrders(filterByMarketId: String?, orders: [SubaccountOrder], configsAndAssetMap: [String: MarketConfigsAndAsset]) {
         let items: [dydxPortfolioOrderItemViewModel] = orders.compactMap { order -> dydxPortfolioOrderItemViewModel? in
             if let filterByMarketId = filterByMarketId, filterByMarketId != order.marketId {
                 return nil

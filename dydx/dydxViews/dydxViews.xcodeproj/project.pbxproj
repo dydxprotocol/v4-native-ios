@@ -195,6 +195,7 @@
 		27C6E4C92BC8C30E00ED892A /* dydxCustomLimitPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6E4BC2BC8C30E00ED892A /* dydxCustomLimitPriceViewModel.swift */; };
 		27CDA3D42BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CDA3D32BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift */; };
 		27E072D22C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E072D12C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift */; };
+		27E0736B2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E0736A2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift */; };
 		27ED340C2AD47CB100C159F5 /* dydxBannerErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */; };
 		27ED365C2AD735A800C159F5 /* dydxSecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED365B2AD735A800C159F5 /* dydxSecurityView.swift */; };
 		27F624112BBD9FEB00AB6D1A /* dydxPriceInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F624042BBD9FEB00AB6D1A /* dydxPriceInputViewModel.swift */; };
@@ -565,6 +566,7 @@
 		27C6E4BC2BC8C30E00ED892A /* dydxCustomLimitPriceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxCustomLimitPriceViewModel.swift; sourceTree = "<group>"; };
 		27CDA3D32BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMultipleOrdersExistViewModel.swift; sourceTree = "<group>"; };
 		27E072D12C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioPendingPositionsItemViewModel.swift; sourceTree = "<group>"; };
+		27E0736A2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCancelPendingIsolatedOrdersView.swift; sourceTree = "<group>"; };
 		27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxBannerErrorAlert.swift; sourceTree = "<group>"; };
 		27ED365B2AD735A800C159F5 /* dydxSecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSecurityView.swift; sourceTree = "<group>"; };
 		27F624042BBD9FEB00AB6D1A /* dydxPriceInputViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxPriceInputViewModel.swift; sourceTree = "<group>"; };
@@ -696,6 +698,7 @@
 		0230375D28C11AFA00412B72 /* _v4 */ = {
 			isa = PBXGroup;
 			children = (
+				27E0735D2C20D2680034B963 /* CancelOrders */,
 				278A4D942B8FA5F5003898EB /* Rating */,
 				27ED364E2AD7358C00C159F5 /* Auth */,
 				27AAA9782ACE34B600AF3C56 /* Banner */,
@@ -1502,6 +1505,14 @@
 			path = Banner;
 			sourceTree = "<group>";
 		};
+		27E0735D2C20D2680034B963 /* CancelOrders */ = {
+			isa = PBXGroup;
+			children = (
+				27E0736A2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift */,
+			);
+			path = CancelOrders;
+			sourceTree = "<group>";
+		};
 		27ED364E2AD7358C00C159F5 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -1958,6 +1969,7 @@
 				277E901B2B1EA4F9005CCBCB /* dydxRewardsSummaryView.swift in Sources */,
 				02084B2D297FC2CD00CF9522 /* dydxTransferFaucetView.swift in Sources */,
 				022EDC8E29A048B3003D59A7 /* dydxClosePositionHeaderView.swift in Sources */,
+				27E0736B2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift in Sources */,
 				02F1D3882BEAA6CA00A9376C /* dydxTradeInputMarginView.swift in Sources */,
 				0256F53629AFFC9800A083C0 /* dydxOnboardConnectView.swift in Sources */,
 				024F48902965CE9200E40247 /* dydxPortfolioDetailsView.swift in Sources */,
