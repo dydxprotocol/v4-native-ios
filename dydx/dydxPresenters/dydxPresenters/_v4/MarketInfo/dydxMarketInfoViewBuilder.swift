@@ -171,28 +171,20 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
     }
 
     private func updatePositionSection(position: SubaccountPosition?, pendingPosition: SubaccountPendingPosition?) {
-        if let position, position.side.current != PositionSide.none, let viewModel = viewModel {
-            viewModel.showPositionSection = true
+        if let position, position.side.current != PositionSide.none {
             fillsPresenter.filterByMarketId = position.id
             fundingPresenter.filterByMarketId = position.id
             ordersPresenter.filterByMarketId = position.id
             positionPresenter.position = position
             positionPresenter.pendingPosition = nil
-            resetPresentersForVisibilityChange()
-        } else if let pendingPosition, pendingPosition.orderCount > 0, let viewModel = viewModel {
-            viewModel.showPositionSection = true
+        } else if let pendingPosition, pendingPosition.orderCount > 0 {
             fillsPresenter.filterByMarketId = pendingPosition.marketId
             fundingPresenter.filterByMarketId = pendingPosition.marketId
             ordersPresenter.filterByMarketId = pendingPosition.marketId
             positionPresenter.position = nil
             positionPresenter.pendingPosition = pendingPosition
-            resetPresentersForVisibilityChange()
-        } else {
-            viewModel?.showPositionSection = false
-            for (_, presenter) in selectionPresenters {
-                presenter.stop()
-            }
         }
+        resetPresentersForVisibilityChange()
     }
 
     private func resetPresentersForVisibilityChange() {

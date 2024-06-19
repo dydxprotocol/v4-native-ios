@@ -43,28 +43,27 @@ public class dydxPortfolioPendingPositionsItemViewModel: PlatformViewModel {
     }()
 
     private var topContent: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 12) {
             HStack(spacing: 8) {
                 PlatformIconViewModel(type: .url(url: marketLogoUrl),
                                       clip: .defaultCircle,
                                       size: CGSize(width: 20, height: 20))
                 .createView()
                 Text(marketName)
-                    .themeFont(fontSize: .small)
+                    .themeFont(fontSize: .large)
                     .themeColor(foreground: .textSecondary)
                 Spacer()
             }
             HStack(spacing: 0) {
                 Text(localizerPathKey: "APP.GENERAL.MARGIN")
-                    .themeFont(fontSize: .smaller)
+                    .themeFont(fontSize: .medium)
                     .themeColor(foreground: .textTertiary)
                 Spacer()
                 Text(margin)
-                    .themeFont(fontSize: .smaller)
+                    .themeFont(fontSize: .medium)
                     .themeColor(foreground: .textSecondary)
             }
         }
-        .padding(.vertical, 10)
     }
 
     private var divider: some View {
@@ -85,13 +84,11 @@ public class dydxPortfolioPendingPositionsItemViewModel: PlatformViewModel {
         }
 
         let viewOrders = Text(localizerPathKey: viewOrdersStringKey, params: viewOrdersStringParams)
-            .themeFont(fontSize: .smaller)
+            .themeFont(fontSize: .medium)
             .themeColor(foreground: .colorPurple)
-            .padding(.vertical, 8)
         let cancel = Text(localizerPathKey: "APP.GENERAL.CANCEL")
-            .themeFont(fontSize: .smaller)
+            .themeFont(fontSize: .medium)
             .themeColor(foreground: .colorRed)
-            .padding(.vertical, 8)
         return HStack(spacing: 0) {
             Button(action: viewOrdersAction, label: { viewOrders })
             Spacer()
@@ -103,14 +100,16 @@ public class dydxPortfolioPendingPositionsItemViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let horizontalPadding: CGFloat = 12
-            return VStack(spacing: 0) {
+            let verticalPadding: CGFloat = 16
+            let horizontalPadding: CGFloat = 20
+            return VStack(spacing: 12) {
                 self.topContent
                 self.divider
                     .padding(.horizontal, -horizontalPadding)
                 self.bottomContent
             }
             .padding(.horizontal, horizontalPadding)
+            .padding(.vertical, verticalPadding)
             .themeColor(background: .layer3)
             .clipShape(.rect(cornerRadius: 10))
             .wrappedInAnyView()
