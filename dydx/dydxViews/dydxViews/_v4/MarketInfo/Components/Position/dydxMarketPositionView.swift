@@ -11,6 +11,8 @@ import PlatformUI
 import Utilities
 
 public class dydxMarketPositionViewModel: PlatformViewModel {
+    @Published public var emptyText: String?
+
     @Published public var takeProfitStopLossAction: (() -> Void)?
     @Published public var closeAction: (() -> Void)?
     @Published public var unrealizedPNLAmount: SignedAmountViewModel?
@@ -69,20 +71,28 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
-                Group {
-                    if let pendingPosition = self.pendingPosition {
-                        pendingPosition.createView(parentStyle: style)
-                    } else {
-                        VStack {
+                VStack(spacing: 24) {
+                    // check size to determine if there is current position data to display
+                    VStack {
+                        if let emptyText = self.emptyText {
+                            PlaceholderViewModel(text: emptyText)
+                                .createView()
+                        } else {
                             self.createCollection(parentStyle: style)
-
                             self.createButtons(parentStyle: style)
-
                             self.createList(parentStyle: style)
                         }
-                        .themeColor(background: .layer2)
+                    }
+
+                    if let pendingPosition = self.pendingPosition {
+                        VStack(spacing: 16) {
+                            self.createPendingPositionsHeader(parentStyle: style)
+                            pendingPosition.createView(parentStyle: style)
+                        }
+                        .frame(width: UIScreen.main.bounds.width - 32)
                     }
                 }
+                .themeColor(background: .layer2)
                 .frame(width: UIScreen.main.bounds.width - 16)
             )
         }
@@ -309,6 +319,13 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
             }
         }
         .padding(.horizontal, 8)
+    }
+
+    private func createPendingPositionsHeader(parentStyle: ThemeStyle) -> some View {
+        Text(localizerPathKey: "APP.TRADE.UNOPENED_ISOLATED_POSITIONS")
+            .themeFont(fontSize: .larger)
+            .themeColor(foreground: .textSecondary)
+            .leftAligned()
     }
 }
 

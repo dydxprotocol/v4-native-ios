@@ -294,6 +294,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             Spacer()
         }
         .padding(.horizontal, 16)
+        .frame(width: UIScreen.main.bounds.width - 32)
         .themeFont(fontSize: .small)
         .themeColor(foreground: .textTertiary)
         .wrappedViewModel
@@ -301,9 +302,16 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
 
     private var openPositionsView: some View {
         LazyVStack {
-            let items = self.positionItems.map { $0.createView() }
-            ForEach(items.indices, id: \.self) { index in
-                items[index]
+            if let emptyText = self.emptyText, positionItems.isEmpty {
+                AnyView(
+                    PlaceholderViewModel(text: emptyText)
+                        .createView()
+                )
+            } else {
+                let items = self.positionItems.map { $0.createView() }
+                ForEach(items.indices, id: \.self) { index in
+                    items[index]
+                }
             }
         }
     }
@@ -321,15 +329,8 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-
-            if let emptyText = self.emptyText, positionItems.isEmpty, pendingPositionItems.isEmpty {
-                return AnyView(
-                    PlaceholderViewModel(text: emptyText)
-                        .createView(parentStyle: style)
-                )
-            }
 
             return AnyView(
                 ScrollView {
