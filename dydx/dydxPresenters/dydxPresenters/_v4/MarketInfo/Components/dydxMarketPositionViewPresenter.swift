@@ -56,6 +56,20 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
             .store(in: &subscriptions)
 
         Publishers
+            .CombineLatest(AbacusStateManager.shared.state.onboarded,
+                            $position.removeDuplicates())
+            .sink { [weak self] (onboarded, position) in
+                if !onboarded {
+                    self?.viewModel?.emptyText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS_LOG_IN")
+                } else if position == nil {
+                    self?.viewModel?.emptyText = DataLocalizer.localize(path: "APP.GENERAL.PLACEHOLDER_NO_POSITIONS")
+                } else {
+                    self?.viewModel?.emptyText = nil
+                }
+            }
+            .store(in: &subscriptions)
+
+        Publishers
             .CombineLatest4($position.compactMap { $0 }.removeDuplicates(),
                             AbacusStateManager.shared.state.selectedSubaccountTriggerOrders,
                             AbacusStateManager.shared.state.marketMap,
