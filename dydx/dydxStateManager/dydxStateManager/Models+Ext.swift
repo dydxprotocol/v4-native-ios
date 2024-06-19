@@ -16,6 +16,8 @@ extension ParsingError: Error {
         }
         return message
     }
+
+    public static let unknown = ParsingError(type: .unhandled, message: "", stringKey: "APP.GENERAL.UNKNOWN_ERROR", stackTrace: nil, codespace: nil)
 }
 
 public extension TradeInput {

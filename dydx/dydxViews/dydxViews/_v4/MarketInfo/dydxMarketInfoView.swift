@@ -27,6 +27,9 @@ public class dydxMarketInfoViewModel: PlatformViewModel {
 
     public init() {
         super.init()
+        position.contentChanged = { [weak self] in
+            self?.objectWillChange.send()
+        }
         orders.contentChanged = { [weak self] in
             self?.objectWillChange.send()
         }
