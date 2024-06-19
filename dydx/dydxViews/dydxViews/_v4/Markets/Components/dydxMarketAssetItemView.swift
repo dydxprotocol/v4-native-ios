@@ -91,10 +91,6 @@ open class dydxMarketAssetItemViewModel: PlatformViewModel {
                             .themeColor(foreground: .textPrimary)
                             .themeFont(fontType: .plus, fontSize: .medium)
                             .layoutPriority(1)
-                        Text("USD")
-                            .themeColor(foreground: .textSecondary)
-                            .themeFont(fontType: .plus, fontSize: .medium)
-                            .minimumScaleFactor(0.5)
                     }
                     Text(sharedMarketViewModel?.volume24H ?? "")
                         .themeFont(fontType: .base, fontSize: .small)
