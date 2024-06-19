@@ -22,6 +22,7 @@ protocol dydxMarketPositionViewPresenterProtocol: HostedViewPresenterProtocol {
 
 class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionViewModel>, dydxMarketPositionViewPresenterProtocol {
     @Published var position: SubaccountPosition?
+    @Published var pendingPosition: SubaccountPendingPosition?
 
     init(viewModel: dydxMarketPositionViewModel?) {
         super.init()
@@ -37,6 +38,22 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
 
     override func start() {
         super.start()
+
+        Publishers
+            .CombineLatest3($pendingPosition,
+                            AbacusStateManager.shared.state.marketMap,
+                            AbacusStateManager.shared.state.assetMap)
+            .sink { [weak self] pendingPosition, marketMap, assetMap in
+                if let pendingPosition {
+                    self?.viewModel?.pendingPosition = dydxPortfolioPositionsViewPresenter.createPendingPositionsViewModelItem(
+                        pendingPosition: pendingPosition,
+                        marketMap: marketMap,
+                        assetMap: assetMap)
+                } else {
+                    self?.viewModel?.pendingPosition = nil
+                }
+            }
+            .store(in: &subscriptions)
 
         Publishers
             .CombineLatest4($position.compactMap { $0 }.removeDuplicates(),

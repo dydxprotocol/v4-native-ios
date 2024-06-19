@@ -481,7 +481,22 @@ extension AbacusStateManager {
             }
         }
     }
-}
+
+    public func cancelOrder(orderId: String) async throws -> SubmissionStatus {
+        try await withCheckedThrowingContinuation { continuation in
+            asyncStateManager.cancelOrder(orderId: orderId) { successful, error, _ in
+                if successful.boolValue {
+                    continuation.resume(returning: .success)
+                } else {
+                    if let error = error {
+                        continuation.resume(throwing: error)
+                    } else {
+                        continuation.resume(throwing: ParsingError.unknown)
+                    }
+                }
+            }
+        }
+    }}
 
 public extension V4Environment {
     var usdcTokenInfo: TokenInfo? {
