@@ -15,6 +15,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 
     @Published public var takeProfitStopLossAction: (() -> Void)?
     @Published public var closeAction: (() -> Void)?
+    @Published public var editMarginAction: (() -> Void)?
     @Published public var unrealizedPNLAmount: SignedAmountViewModel?
     @Published public var unrealizedPNLPercent: SignedAmountViewModel?
     @Published public var realizedPNLAmount: SignedAmountViewModel?
@@ -223,6 +224,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     private func createButtons(parentStyle: ThemeStyle) -> some View {
         var closePositionButton: AnyView?
         var addTakeProfitStopLossButton: AnyView?
+        var editMarginButton: AnyView?
 
         if let closeAction = self.closeAction {
             let content = HStack {
@@ -233,7 +235,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                 Spacer()
             }
 
-            closePositionButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+            closePositionButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .destructive) {
                 closeAction()
             }
             .createView(parentStyle: parentStyle)
@@ -258,6 +260,30 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
             .wrappedInAnyView()
         }
 
+        if let editMarginAction = self.editMarginAction {
+            let content = AnyView(
+                HStack(spacing: 0) {
+                    Spacer()
+                    HStack(spacing: 8) {
+                        PlatformIconViewModel(type: .asset(name: "icon_edit", bundle: Bundle.dydxView),
+                                              size: CGSize(width: 20, height: 20),
+                                              templateColor: .textSecondary)
+                        .createView()
+                        Text(DataLocalizer.localize(path: "APP.TRADE.EDIT_MARGIN"))
+                            .themeFont(fontSize: .medium)
+                            .themeColor(foreground: .textSecondary)
+                    }
+                    Spacer()
+                }
+            )
+
+            editMarginButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+                editMarginAction()
+            }
+            .createView(parentStyle: parentStyle)
+            .wrappedInAnyView()
+        }
+
         return VStack(spacing: 10) {
             if takeProfitStatusViewModel != nil || stopLossStatusViewModel != nil {
                 HStack(spacing: 10) {
@@ -267,12 +293,16 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                     }
                     .frame(maxHeight: .infinity)
                 }
-                closePositionButton
+                HStack(spacing: 10) {
+                    closePositionButton
+                    editMarginButton
+                }
             } else {
                 HStack(spacing: 10) {
                     addTakeProfitStopLossButton
-                    closePositionButton
+                    editMarginButton
                 }
+                closePositionButton
             }
         }
         .padding(.bottom, 16)
