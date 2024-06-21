@@ -40,10 +40,6 @@ echo "Bumping to $version.... hang on..."
 echo "=================================="
 echo "Getting latest commit sha"
 
-cd abacus
-commitHash=$(git rev-parse HEAD)
-
-
 cd $scriptDir/..
 
 echo "=================================="
@@ -52,7 +48,6 @@ echo "Updating iOS repo at $`pwd`"
 
 echo "Updating Abacus.podspec..."
 replace_line podspecs/Abacus.podspec "spec.version" "spec.version = '$version'"
-replace_line podspecs/Abacus.podspec ":git" "spec.source = { :git => 'git@github.com:dydxprotocol/v4-abacus.git', :commit => '$commitHash' }"
 
 echo "Pod update..."
 cd dydx
