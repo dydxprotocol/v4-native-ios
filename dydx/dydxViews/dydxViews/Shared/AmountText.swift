@@ -38,7 +38,7 @@ public class AmountTextModel: PlatformViewModel, Equatable {
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return PlatformView.emptyView.wrappedInAnyView() }
-            var amount = self.amount?.filter(filter: self.requiresPositive == true ? .notNegative : nil)
+            let amount = self.amount?.filter(filter: self.requiresPositive == true ? .notNegative : nil)
             let amountText: String?
             switch self.unit {
             case .dollar:
@@ -46,11 +46,7 @@ public class AmountTextModel: PlatformViewModel, Equatable {
             case .percentage:
                 amountText = dydxFormatter.shared.percent(number: amount, digits: 2)
             case .multiplier:
-                if let formattedText = dydxFormatter.shared.raw(number: amount, size: self.tickSize?.stringValue) {
-                    amountText = "\(formattedText)×"
-                } else {
-                    amountText = nil
-                }
+                amountText = dydxFormatter.shared.multiplier(number: amount?.doubleValue)
             }
             return AnyView(
                 Text(amountText ?? "-")

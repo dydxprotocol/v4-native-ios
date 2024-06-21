@@ -38,13 +38,21 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
         super.start()
 
         Publishers
-            .CombineLatest(
+            .CombineLatest3(
                 tradeSummaryPublisher,
+                AbacusStateManager.shared.state.selectedSubaccountPositions,
                 AbacusStateManager.shared.state.marketMap)
-            .sink { [weak self] input, marketMap in
-                if let tradeSummary = input.summary, let marketId = input.marketId, let market = marketMap[marketId] {
-                    self?.updateTradingFee(tradeSummary: tradeSummary)
+            .sink { [weak self] input, positions, marketMap in
+                let marketId = input.marketId
+                if let tradeSummary = input.summary,
+                    let marketId = input.marketId,
+                    let market = marketMap[marketId],
+                    let position = positions.first(where: { $0.id == marketId }) {
                     self?.updateExpectedPrice(tradeSummary: tradeSummary, market: market)
+                    self?.updateLiquidationPrice(position: position, market: market)
+                    self?.updatePositionMargin(position: position)
+                    self?.updatePositionLeverage(position: position)
+                    self?.updateTradingFee(tradeSummary: tradeSummary)
                     self?.updateTradingRewards(tradeSummary: tradeSummary)
                 }
             }
@@ -80,8 +88,26 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
 
     private func updateExpectedPrice(tradeSummary: TradeInputSummary?, market: PerpetualMarket) {
         let value = dydxFormatter.shared.dollar(number: tradeSummary?.price?.doubleValue, digits: market.configs?.displayTickSizeDecimals?.intValue ?? 0)
-        expectedPriceViewModel.title = DataLocalizer.localize(path: "APP.GENERAL.PRICE")
+        expectedPriceViewModel.title = DataLocalizer.localize(path: "APP.TRADE.EXPECTED_PRICE")
         expectedPriceViewModel.value = value
+    }
+
+    private func updateLiquidationPrice(position: SubaccountPosition?, market: PerpetualMarket) {
+        let value = dydxFormatter.shared.dollar(number: position?.liquidationPrice.postOrder?.doubleValue, digits: market.configs?.displayTickSizeDecimals?.intValue ?? 0)
+        liquidationPriceViewModel.title = DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE")
+        liquidationPriceViewModel.value = value
+    }
+
+    private func updatePositionMargin(position: SubaccountPosition?) {
+        let value = dydxFormatter.shared.dollar(number: position?.marginUsage.postOrder?.doubleValue, digits: 2)
+        positionMarginViewModel.title = DataLocalizer.localize(path: "APP.TRADE.POSITION_MARGIN")
+        positionMarginViewModel.value = value
+    }
+
+    private func updatePositionLeverage(position: SubaccountPosition?) {
+        let value = dydxFormatter.shared.multiplier(number: position?.leverage.postOrder?.doubleValue)
+        positionLeverageViewModel.title = DataLocalizer.localize(path: "APP.TRADE.POSITION_LEVERAGE")
+        positionLeverageViewModel.value = value
     }
 
     private func updateTradingRewards(tradeSummary: TradeInputSummary?) {
