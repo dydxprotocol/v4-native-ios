@@ -43,14 +43,10 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
                 AbacusStateManager.shared.state.selectedSubaccountPositions,
                 AbacusStateManager.shared.state.marketMap)
             .sink { [weak self] input, positions, marketMap in
-                let marketId = input.marketId
                 if let tradeSummary = input.summary,
                     let marketId = input.marketId,
                     let market = marketMap[marketId],
                     let position = positions.first(where: { $0.id == marketId }) {
-                    print("mmm: input size is \(input.summary?.size)")
-                    print("mmm: position liq pre  \(position.liquidationPrice.current?.doubleValue)")
-                    print("mmm: position liq post \(position.liquidationPrice.postOrder?.doubleValue)")
                     self?.updateExpectedPrice(tradeSummary: tradeSummary, market: market)
                     self?.updateLiquidationPrice(position: position, market: market)
                     self?.updatePositionMargin(position: position)
@@ -96,7 +92,7 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
     }
 
     private func updateLiquidationPrice(position: SubaccountPosition?, market: PerpetualMarket) {
-        let title = DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE")
+        let title = DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE_SHORT")
         let unit = AmountTextModel.Unit.dollar
         let tickSize = market.configs?.displayTickSizeDecimals?.intValue.asNsNumber
         liquidationPriceViewModel.title = title
