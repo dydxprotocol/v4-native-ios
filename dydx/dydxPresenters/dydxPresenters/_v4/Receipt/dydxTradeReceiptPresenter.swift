@@ -48,6 +48,9 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
                     let marketId = input.marketId,
                     let market = marketMap[marketId],
                     let position = positions.first(where: { $0.id == marketId }) {
+                    print("mmm: input size is \(input.summary?.size)")
+                    print("mmm: position liq pre  \(position.liquidationPrice.current?.doubleValue)")
+                    print("mmm: position liq post \(position.liquidationPrice.postOrder?.doubleValue)")
                     self?.updateExpectedPrice(tradeSummary: tradeSummary, market: market)
                     self?.updateLiquidationPrice(position: position, market: market)
                     self?.updatePositionMargin(position: position)
@@ -93,21 +96,36 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
     }
 
     private func updateLiquidationPrice(position: SubaccountPosition?, market: PerpetualMarket) {
-        let value = dydxFormatter.shared.dollar(number: position?.liquidationPrice.postOrder?.doubleValue, digits: market.configs?.displayTickSizeDecimals?.intValue ?? 0)
-        liquidationPriceViewModel.title = DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE")
-        liquidationPriceViewModel.value = value
+        let title = DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE")
+        let unit = AmountTextModel.Unit.dollar
+        let tickSize = market.configs?.displayTickSizeDecimals?.intValue.asNsNumber
+        liquidationPriceViewModel.title = title
+        liquidationPriceViewModel.value = createAmountChangeViewModel(title: title, tradeState: position?.liquidationPrice, tickSize: tickSize, unit: unit)
     }
 
     private func updatePositionMargin(position: SubaccountPosition?) {
-        let value = dydxFormatter.shared.dollar(number: position?.marginUsage.postOrder?.doubleValue, digits: 2)
-        positionMarginViewModel.title = DataLocalizer.localize(path: "APP.TRADE.POSITION_MARGIN")
-        positionMarginViewModel.value = value
+        let title = DataLocalizer.localize(path: "APP.TRADE.POSITION_MARGIN")
+        let unit = AmountTextModel.Unit.percentage
+        positionMarginViewModel.title = title
+        positionMarginViewModel.value = createAmountChangeViewModel(title: title, tradeState: position?.marginUsage, tickSize: 2, unit: unit)
     }
 
     private func updatePositionLeverage(position: SubaccountPosition?) {
-        let value = dydxFormatter.shared.multiplier(number: position?.leverage.postOrder?.doubleValue)
-        positionLeverageViewModel.title = DataLocalizer.localize(path: "APP.TRADE.POSITION_LEVERAGE")
-        positionLeverageViewModel.value = value
+        let title = DataLocalizer.localize(path: "APP.TRADE.POSITION_LEVERAGE")
+        let unit = AmountTextModel.Unit.multiplier
+        positionLeverageViewModel.title = title
+        positionLeverageViewModel.value = createAmountChangeViewModel(title: title, tradeState: position?.leverage, tickSize: 2, unit: unit)
+    }
+
+    private func createAmountChangeViewModel(title: String,
+                                           tradeState: TradeStatesWithDoubleValues?,
+                                           tickSize: NSNumber?,
+                                           unit: AmountTextModel.Unit) -> AmountChangeModel {
+        let currentValue = tradeState?.current?.doubleValue.asNsNumber
+        let postValue = tradeState?.postOrder?.doubleValue.asNsNumber
+        let currentViewModel = currentValue == nil ? nil : AmountTextModel(amount: currentValue, unit: unit)
+        let postViewModel = postValue == nil ? nil : AmountTextModel(amount: postValue, unit: unit)
+        return AmountChangeModel(before: currentViewModel, after: postViewModel)
     }
 
     private func updateTradingRewards(tradeSummary: TradeInputSummary?) {
