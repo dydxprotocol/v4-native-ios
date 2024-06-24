@@ -15,9 +15,12 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 
     @Published public var takeProfitStopLossAction: (() -> Void)?
     @Published public var closeAction: (() -> Void)?
+    @Published public var editMarginAction: (() -> Void)?
     @Published public var unrealizedPNLAmount: SignedAmountViewModel?
     @Published public var unrealizedPNLPercent: SignedAmountViewModel?
     @Published public var realizedPNLAmount: SignedAmountViewModel?
+    @Published public var marginMode: String?
+    @Published public var margin: String?
     @Published public var leverage: String?
     @Published public var leverageIcon: LeverageRiskModel?
     @Published public var liquidationPrice: String?
@@ -51,6 +54,8 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
         vm.unrealizedPNLAmount = .previewValue
         vm.unrealizedPNLPercent = .previewValue
         vm.realizedPNLAmount = .previewValue
+        vm.marginMode = "Cross"
+        vm.margin = "$10"
         vm.leverage = "$12.00"
         vm.leverageIcon = .previewValue
         vm.liquidationPrice = "$12.00"
@@ -98,8 +103,84 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
         }
     }
 
+    private var unrealizedView: AnyView {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(DataLocalizer.localize(path: "APP.TRADE.UNREALIZED_PNL"))
+                .themeFont(fontType: .plus, fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+            self.unrealizedPNLAmount?
+                .createView(parentStyle: .defaultStyle.themeFont(fontSize: .large))
+            self.unrealizedPNLPercent?
+                .createView(parentStyle: .defaultStyle.themeFont(fontSize: .smaller).themeColor(foreground: .textTertiary))
+        }
+        .wrappedInAnyView()
+    }
+
+    private var realizedView: AnyView {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(DataLocalizer.localize(path: "APP.TRADE.REALIZED_PNL"))
+                .themeFont(fontType: .plus, fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+            realizedPNLAmount?
+                .createView(parentStyle: .defaultStyle.themeFont(fontSize: .large))
+        }
+        .wrappedInAnyView()
+    }
+
+    private var marginView: AnyView? {
+        guard let marginMode = marginMode, let margin = margin else { return nil }
+        return VStack(alignment: .leading, spacing: 6) {
+            Text(DataLocalizer.localize(path: "APP.GENERAL.MARGIN_WITH_MODE", params: ["MODE": marginMode]))
+                .themeFont(fontType: .plus, fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+            Text(margin)
+                .themeFont(fontSize: .medium)
+                .themeColor(foreground: .textSecondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+            Spacer(minLength: 0)
+        }
+        .wrappedInAnyView()
+    }
+
+    private var statsRow: some View {
+        let views = [unrealizedView, realizedView, marginView].compactMap { $0 }
+        return Group {
+            // left aligned
+            if views.count == 2 {
+                HStack(alignment: .top, spacing: 12) {
+                    ForEach(views.indices, id: \.self) { index in
+                        views[index]
+                            .fixedSize(horizontal: true, vertical: false)
+                            .padding(.vertical, 8)
+                        if index < views.count - 1 {
+                            DividerModel().createView()
+                        }
+                    }
+                    Spacer()
+                }
+            } else {
+                // even spacing
+                HStack(alignment: .top, spacing: 0) {
+                    ForEach(views.indices, id: \.self) { index in
+                        Spacer()
+                        views[index]
+                            .fixedSize(horizontal: true, vertical: false)
+                            .padding(.vertical, 8)
+                        Spacer()
+                        if index < views.count - 1 {
+                            DividerModel().createView()
+                        }
+                    }
+                }
+            }
+        }
+        .padding(.horizontal, 8)
+        .wrappedInAnyView()
+    }
+
     private func createCollection(parentStyle: ThemeStyle) -> some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 12) {
             HStack {
                 createPositionTab(parentStyle: parentStyle)
 
@@ -120,38 +201,11 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
             }
-            .padding(.vertical, 8)
 
-            DividerModel().createView(parentStyle: parentStyle)
-                .padding(.top, 8)
-
-            HStack(alignment: .top, spacing: 0) {
-                let unrealizedValue = VStack(alignment: .leading) {
-                    unrealizedPNLAmount?
-                        .createView(parentStyle: parentStyle.themeFont(fontSize: .large))
-
-                    unrealizedPNLPercent?
-                        .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller).themeColor(foreground: .textTertiary))
-                }.wrappedViewModel
-
-                let realizedValue = VStack(alignment: .leading) {
-                    realizedPNLAmount?
-                        .createView(parentStyle: parentStyle.themeFont(fontSize: .large))
-                    Spacer()
-                }.wrappedViewModel
-
-                self.createCollectionItem(parentStyle: parentStyle, title: DataLocalizer.localize(path: "APP.TRADE.UNREALIZED_PNL"), valueViewModel: unrealizedValue)
-                    .padding(.vertical, 16)
-                    .frame(height: 96)
-
-                DividerModel().createView(parentStyle: parentStyle)
-                    .frame(height: 82)
-
-                self.createCollectionItem(parentStyle: parentStyle, title: DataLocalizer.localize(path: "APP.TRADE.REALIZED_PNL"), valueViewModel: realizedValue)
-                    .padding(.vertical, 16)
-                    .frame(height: 96)
-            }
+            statsRow
         }
+        .padding(.bottom, 8)
+
     }
 
     private func createPositionTab(parentStyle: ThemeStyle) -> some View {
@@ -193,47 +247,57 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     }
 
     private func createCollectionItem(parentStyle: ThemeStyle, title: String?, stringValue: String?) -> some View {
-        VStack(alignment: .leading) {
-            Text(title ?? "")
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-                .leftAligned()
+        VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(title ?? "")
+                    .themeFont(fontType: .plus, fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
+                    .fixedSize(horizontal: true, vertical: false)
+                    .leftAligned()
+                Text(stringValue ?? "-")
+                    .themeFont(fontSize: .medium)
+                    .themeColor(foreground: .textSecondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+            }
             Spacer()
-            Text(stringValue ?? "-")
-                .leftAligned()
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
         }
         .padding(.horizontal, 8)
     }
 
     private func createCollectionItem(parentStyle: ThemeStyle, title: String?, valueViewModel: PlatformViewModel?) -> some View {
-        VStack(alignment: .leading) {
-            Text(title ?? "")
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-                .leftAligned()
+        VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(title ?? "")
+                    .themeFont(fontType: .plus, fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
+                    .fixedSize(horizontal: true, vertical: false)
+                    .leftAligned()
+                valueViewModel?.createView(parentStyle: parentStyle, styleKey: nil)
+                    .fixedSize(horizontal: true, vertical: false)
+                    .leftAligned()
+            }
             Spacer()
-            valueViewModel?.createView(parentStyle: parentStyle, styleKey: nil)
-                .leftAligned()
         }
+
         .padding(.horizontal, 8)
     }
 
     private func createButtons(parentStyle: ThemeStyle) -> some View {
         var closePositionButton: AnyView?
         var addTakeProfitStopLossButton: AnyView?
+        var editMarginButton: AnyView?
 
         if let closeAction = self.closeAction {
             let content = HStack {
                 Spacer()
                 Text(DataLocalizer.localize(path: "APP.TRADE.CLOSE_POSITION"))
-                    .themeFont(fontSize: .medium)
+                    .themeFont(fontType: .plus, fontSize: .medium)
                     .themeColor(foreground: ThemeSettings.negativeColor)
                 Spacer()
             }
 
-            closePositionButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+            closePositionButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .destructive) {
                 closeAction()
             }
             .createView(parentStyle: parentStyle)
@@ -258,6 +322,30 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
             .wrappedInAnyView()
         }
 
+        if let editMarginAction = self.editMarginAction {
+            let content = AnyView(
+                HStack(spacing: 0) {
+                    Spacer()
+                    HStack(spacing: 8) {
+                        PlatformIconViewModel(type: .asset(name: "icon_edit", bundle: Bundle.dydxView),
+                                              size: CGSize(width: 20, height: 20),
+                                              templateColor: .textSecondary)
+                        .createView()
+                        Text(DataLocalizer.localize(path: "APP.TRADE.EDIT_MARGIN"))
+                            .themeFont(fontSize: .medium)
+                            .themeColor(foreground: .textSecondary)
+                    }
+                    Spacer()
+                }
+            )
+
+            editMarginButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+                editMarginAction()
+            }
+            .createView(parentStyle: parentStyle)
+            .wrappedInAnyView()
+        }
+
         return VStack(spacing: 10) {
             if takeProfitStatusViewModel != nil || stopLossStatusViewModel != nil {
                 HStack(spacing: 10) {
@@ -267,12 +355,16 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                     }
                     .frame(maxHeight: .infinity)
                 }
-                closePositionButton
+                HStack(spacing: 10) {
+                    closePositionButton
+                    editMarginButton
+                }
             } else {
                 HStack(spacing: 10) {
                     addTakeProfitStopLossButton
-                    closePositionButton
+                    editMarginButton
                 }
+                closePositionButton
             }
         }
         .padding(.bottom, 16)
