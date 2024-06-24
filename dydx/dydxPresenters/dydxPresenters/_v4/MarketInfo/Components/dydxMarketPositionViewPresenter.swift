@@ -107,6 +107,12 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         viewModel?.unrealizedPNLAmount = sharedOrderViewModel.unrealizedPnl
         viewModel?.unrealizedPNLPercent = sharedOrderViewModel.unrealizedPnlPercent
         viewModel?.realizedPNLAmount = SignedAmountViewModel(amount: position.realizedPnl.current?.doubleValue, displayType: .dollar, coloringOption: .allText)
+
+        if let margin = position.equity.current?.doubleValue, let marginMode = position.marginMode {
+            viewModel?.marginMode = DataLocalizer.shared?.localize(path: "APP.GENERAL.\(marginMode.rawValue.uppercased())", params: nil)
+            viewModel?.margin = dydxFormatter.shared.dollar(number: NSNumber(value: margin), digits: 2)
+        }
+
         viewModel?.liquidationPrice = dydxFormatter.shared.dollar(number: position.liquidationPrice.current?.doubleValue, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
         viewModel?.leverage = sharedOrderViewModel.leverage
