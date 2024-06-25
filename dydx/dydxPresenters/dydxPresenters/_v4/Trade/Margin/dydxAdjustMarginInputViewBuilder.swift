@@ -176,7 +176,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
     private func clearPostValues() {
         for receipt in [viewModel?.amountReceipt, viewModel?.buttonReceipt] {
             for item in receipt?.receiptChangeItems ?? [] {
-                item.value.after = nil
+                item.value?.after = nil
             }
         }
     }

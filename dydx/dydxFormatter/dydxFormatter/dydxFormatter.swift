@@ -371,6 +371,19 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
      will take the number and round it to the closest step size
      e.g. if number is 1021 and step size is "100" then output is "1000"
      */
+    public func multiplier(number: Double?) -> String? {
+        if let formattedText = dydxFormatter.shared.raw(number: number, digits: 2) {
+            return "\(formattedText)×"
+        } else {
+            return nil
+        }
+    }
+
+    /*
+     xxxxxx,yyyyy or xxxxx.yyyyy
+     will take the number and round it to the closest step size
+     e.g. if number is 1021 and step size is "100" then output is "1000"
+     */
     public func raw(number: NSNumber?, size: String?, locale: Locale = Locale.current) -> String? {
         if let number = number {
             let size = size ?? "0.01"

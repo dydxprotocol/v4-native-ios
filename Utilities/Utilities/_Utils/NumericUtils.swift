@@ -39,3 +39,15 @@ public extension NSNumber {
         }
     }
 }
+
+public extension Double {
+     var asNsNumber: NSNumber {
+         NSNumber(value: self)
+     }
+ }
+                                                       
+public extension Int {
+    var asNsNumber: NSNumber {
+        NSNumber(value: self)
+    }
+}
