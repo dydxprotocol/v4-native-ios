@@ -28,7 +28,7 @@ public class dydxReceiptRewardsViewModel: PlatformViewModel {
 
             return AnyView(
                 HStack(spacing: 4) {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.MAXIMUM_REWARDS"))
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.EST_REWARDS"))
                         .themeFont(fontSize: .small)
                         .themeColor(foreground: .textTertiary)
                         .lineLimit(1)

@@ -13,6 +13,7 @@ import ParticlesKit
 import PlatformUI
 import dydxStateManager
 import Abacus
+import dydxFormatter
 
 protocol dydxTradeInputMarginViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxTradeInputMarginViewModel? { get }
@@ -46,6 +47,6 @@ class dydxTradeInputMarginViewPresenter: HostedViewPresenter<dydxTradeInputMargi
     private func update(withTradeInput tradeInput: Abacus.TradeInput) {
         viewModel?.shouldDisplayTargetLeverage = tradeInput.options?.needsTargetLeverage == true
         viewModel?.marginMode = DataLocalizer.localize(path: "APP.GENERAL.\(tradeInput.marginMode.rawValue)")
-        viewModel?.targetLeverage = "\(tradeInput.targetLeverage)"
+        viewModel?.targetLeverage = dydxFormatter.shared.raw(number: tradeInput.targetLeverage, digits: 2)
     }
 }
