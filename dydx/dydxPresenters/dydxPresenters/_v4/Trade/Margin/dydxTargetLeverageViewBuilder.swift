@@ -95,8 +95,8 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
                     let maxLeverage = 1.0 / imf
                     viewModel.leverageOptions = [1, 2, 5, 10]
                         .filter { $0 < maxLeverage }
-                        .map { .init(text: "\($0)×", value: $0) }
-                    viewModel.leverageOptions.append(.init(text: DataLocalizer.localize(path: "APP.GENERAL.MAX"), value: maxLeverage))
+                        .map { dydxTargetLeverageViewModel.LeverageTextAndValue(text: dydxFormatter.shared.multiplier(number: Double($0)) ?? "", value: $0) }
+                    viewModel.leverageOptions.append(dydxTargetLeverageViewModel.LeverageTextAndValue(text: DataLocalizer.localize(path: "APP.GENERAL.MAX"), value: maxLeverage))
                 }
 
                 let value = dydxFormatter.shared.localFormatted(number: tradeInput?.targetLeverage ?? 1, digits: 1)

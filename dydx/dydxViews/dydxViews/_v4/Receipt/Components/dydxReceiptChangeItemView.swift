@@ -12,9 +12,9 @@ import Utilities
 
 public class dydxReceiptChangeItemView: PlatformViewModel {
     @Published public var title: String
-    @Published public var value: AmountChangeModel
+    @Published public var value: AmountChangeModel?
 
-    public init(title: String, value: AmountChangeModel) {
+    public init(title: String = "", value: AmountChangeModel? = nil) {
         self.title = title
         self.value = value
     }
@@ -35,7 +35,7 @@ public class dydxReceiptChangeItemView: PlatformViewModel {
                         .themeColor(foreground: .textTertiary)
                         .lineLimit(2)
                     Spacer()
-                    self.value.createView(parentStyle: parentStyle)
+                    self.value?.createView(parentStyle: parentStyle)
                 }
             )
         }

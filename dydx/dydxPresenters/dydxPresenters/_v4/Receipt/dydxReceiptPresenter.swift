@@ -26,6 +26,9 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
     let marginUsageViewModel = dydxReceiptMarginUsageViewModel()
     let feeViewModel = dydxReceiptFeeViewModel()
     let expectedPriceViewModel = dydxReceiptItemViewModel()
+    let liquidationPriceViewModel = dydxReceiptChangeItemView()
+    let positionMarginViewModel = dydxReceiptChangeItemView()
+    let positionLeverageViewModel = dydxReceiptChangeItemView()
     let bridgefeeViewModel = dydxReceiptFeeViewModel()
     let exchangeRateViewModel = dydxReceiptItemViewModel()
     let exchangeReceivedViewModel = dydxReceiptItemViewModel()
@@ -62,7 +65,7 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
     }
 
     private func updateLines(lines: [ReceiptLine]) {
-        viewModel?.children = lines.compactMap { line -> PlatformViewModel? in
+        viewModel?.children = lines.compactMap { (line: Abacus.ReceiptLine) -> PlatformViewModel? in
             switch line {
             case .buyingpower:
                 return buyingPowerViewModel
@@ -72,6 +75,12 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
                 return feeViewModel
             case .expectedprice:
                 return expectedPriceViewModel
+            case .liquidationprice:
+                return liquidationPriceViewModel
+            case .positionmargin:
+                return positionMarginViewModel
+            case .positionleverage:
+                return positionLeverageViewModel
             case .equity:
                 return equlityViewModel
             case .exchangerate:
