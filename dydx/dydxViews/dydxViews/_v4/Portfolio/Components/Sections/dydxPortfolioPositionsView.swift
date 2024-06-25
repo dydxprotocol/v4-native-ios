@@ -44,7 +44,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         self.leverageIcon = leverageIcon
         self.indexPrice = indexPrice
         self.entryPrice = entryPrice
-        self.unrealizedPnlPercent = unrealizedPnlPercent
+        self.unrealizedPnlPercent = "10%"
         self.gradientType = gradientType
         self.logoUrl = logoUrl
         self.handler = Handler(onTapAction: onTapAction, onMarginEditAction: onMarginEditAction)
@@ -58,7 +58,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     public var indexPrice: String?
     public var entryPrice: String?
     public var unrealizedPnl: SignedAmountViewModel?
-    public var unrealizedPnlPercent: SignedAmountViewModel?
+    public var unrealizedPnlPercent: String = ""
     public var marginValue: String = "--"
     public var marginMode: String = "--"
     public var isMarginAdjustable: Bool = false
@@ -146,9 +146,10 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                         .themeFont(fontSize: .smaller)
                         .themeColor(foreground: .textTertiary)
 
-                    self.unrealizedPnlPercent?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .small))
-
-                    self.unrealizedPnl?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .smaller).themeColor(foreground: .textTertiary))
+                    self.unrealizedPnl?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .small))
+                    Text(self.unrealizedPnlPercent)
+                        .themeFont(fontSize: .smaller)
+                        .themeColor(foreground: .textTertiary)
                 }
                 .leftAligned()
                 .frame(width: geo.size.width / 3)
@@ -227,18 +228,6 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         }
         .leftAligned()
         .minimumScaleFactor(0.5)
-    }
-
-    private func createTrailing(parentStyle: ThemeStyle) -> some View {
-        HStack {
-            Spacer()
-            VStack(alignment: .trailing) {
-                unrealizedPnl?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .small))
-
-                unrealizedPnlPercent?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .smaller))
-            }
-        }
-        .frame(maxWidth: 80)
     }
 }
 
