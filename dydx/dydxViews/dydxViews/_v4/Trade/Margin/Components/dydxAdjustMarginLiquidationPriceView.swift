@@ -46,7 +46,7 @@ public class dydxAdjustMarginLiquidationPriceViewModel: PlatformViewModel {
 
             return AnyView(
                 HStack {
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 0) {
                         Text(DataLocalizer.localize(path: "APP.GENERAL.ESTIMATED"))
                             .themeColor(foreground: .textTertiary)
                             .themeFont(fontSize: .small)
@@ -58,19 +58,23 @@ public class dydxAdjustMarginLiquidationPriceViewModel: PlatformViewModel {
 
                     Spacer()
 
-                    VStack(alignment: .trailing, spacing: 8) {
+                    VStack(alignment: .trailing, spacing: 0) {
                         if self.after == nil {
                             Text(self.before ?? "")
                                 .themeFont(fontSize: .large)
                                 .themeColor(foreground: .textPrimary)
                         } else {
                             Text(self.before ?? "")
-                                .themeFont(fontSize: .medium)
-                                .themeColor(foreground: .textSecondary)
-
-                            Text(self.after ?? "")
-                                .themeFont(fontSize: .large)
-                                .themeColor(foreground: .textPrimary)
+                                .themeFont(fontSize: .small)
+                                .themeColor(foreground: .textTertiary)
+                            HStack(spacing: 4) {
+                                Text("→")
+                                    .themeFont(fontSize: .large)
+                                    .themeColor(foreground: self.direction == .riskier ? ThemeSettings.negativeColor : ThemeSettings.positiveColor)
+                                Text(self.after ?? "")
+                                    .themeFont(fontSize: .large)
+                                    .themeColor(foreground: .textPrimary)
+                            }
                         }
                     }
                 }
