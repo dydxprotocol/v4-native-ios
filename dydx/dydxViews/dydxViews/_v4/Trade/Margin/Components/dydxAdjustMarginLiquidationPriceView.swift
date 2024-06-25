@@ -12,13 +12,13 @@ import Utilities
 
 public class dydxAdjustMarginLiquidationPriceViewModel: PlatformViewModel {
     public enum Direction {
-        case increase, decrease, none
+        case safer, riskier, none
 
         var gradientType: GradientType {
             switch self {
-            case .increase:
+            case .safer:
                 return .plus
-            case .decrease:
+            case .riskier:
                 return .minus
             case .none:
                 return .none
@@ -34,7 +34,7 @@ public class dydxAdjustMarginLiquidationPriceViewModel: PlatformViewModel {
 
     public static var previewValue: dydxAdjustMarginLiquidationPriceViewModel {
         let vm = dydxAdjustMarginLiquidationPriceViewModel()
-        vm.direction = .increase
+        vm.direction = .riskier
         vm.before = "$12,000.0"
         vm.before = "$12,300.0"
         return vm
