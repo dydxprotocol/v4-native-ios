@@ -17,7 +17,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
     @Published public var closeAction: (() -> Void)?
     @Published public var editMarginAction: (() -> Void)?
     @Published public var unrealizedPNLAmount: SignedAmountViewModel?
-    @Published public var unrealizedPNLPercent: SignedAmountViewModel?
+    @Published public var unrealizedPNLPercent: String = ""
     @Published public var realizedPNLAmount: SignedAmountViewModel?
     @Published public var marginMode: String?
     @Published public var margin: String?
@@ -52,7 +52,7 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
         let vm = dydxMarketPositionViewModel()
         vm.closeAction = {}
         vm.unrealizedPNLAmount = .previewValue
-        vm.unrealizedPNLPercent = .previewValue
+        vm.unrealizedPNLPercent = "10%"
         vm.realizedPNLAmount = .previewValue
         vm.marginMode = "Cross"
         vm.margin = "$10"
@@ -108,10 +108,13 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
             Text(DataLocalizer.localize(path: "APP.TRADE.UNREALIZED_PNL"))
                 .themeFont(fontType: .plus, fontSize: .small)
                 .themeColor(foreground: .textTertiary)
-            self.unrealizedPNLAmount?
-                .createView(parentStyle: .defaultStyle.themeFont(fontSize: .large))
-            self.unrealizedPNLPercent?
-                .createView(parentStyle: .defaultStyle.themeFont(fontSize: .smaller).themeColor(foreground: .textTertiary))
+            VStack(alignment: .leading, spacing: 2) {
+                self.unrealizedPNLAmount?
+                    .createView(parentStyle: .defaultStyle.themeFont(fontSize: .large))
+                Text(self.unrealizedPNLPercent)
+                    .themeFont(fontSize: .smaller)
+                    .themeColor(foreground: .textSecondary)
+            }
         }
         .wrappedInAnyView()
     }
