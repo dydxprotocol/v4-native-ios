@@ -139,23 +139,23 @@ public final class AbacusStateManager: NSObject {
         let appConfigsV2: AppConfigsV2
         if dydxBoolFeatureFlag.force_mainnet.isEnabled {
             deployment = "MAINNET"
-            appConfigsV2 = AppConfigsV2.companion.forApp
+            appConfigsV2 = AppConfigsV2.companion.forAppWithIsolatedMargins
         } else {
             // Expose more options for Testflight build
             switch Installation.source {
             case .appStore:
                 deployment = "MAINNET"
-                appConfigsV2 = AppConfigsV2.companion.forApp
+                appConfigsV2 = AppConfigsV2.companion.forAppWithIsolatedMargins
             case .debug:
                 // For debugging only
                 deployment = "DEV"
                 appConfigsV2 = AppConfigsV2.companion.forAppWithIsolatedMargins
             case .jailBroken:
                 deployment = "TESTNET"
-                appConfigsV2 = AppConfigsV2.companion.forApp
+                appConfigsV2 = AppConfigsV2.companion.forAppWithIsolatedMargins
             case .testFlight:
                 deployment = "TESTFLIGHT"
-                appConfigsV2 = AppConfigsV2.companion.forApp
+                appConfigsV2 = AppConfigsV2.companion.forAppWithIsolatedMargins
             }
         }
 
