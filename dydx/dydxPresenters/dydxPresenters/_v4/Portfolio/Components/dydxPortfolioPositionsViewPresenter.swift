@@ -147,8 +147,8 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         item.indexPrice = dydxFormatter.shared.dollar(number: market.oraclePrice, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
         item.entryPrice = dydxFormatter.shared.dollar(number: position.entryPrice.current, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
-        item.unrealizedPnl = SignedAmountViewModel(amount: position.unrealizedPnl.current?.doubleValue ?? 0, displayType: .dollar, coloringOption: .signOnly)
-        item.unrealizedPnlPercent = SignedAmountViewModel(amount: position.unrealizedPnlPercent.current?.doubleValue, displayType: .percent, coloringOption: .allText)
+        item.unrealizedPnl = SignedAmountViewModel(amount: position.unrealizedPnl.current?.doubleValue ?? 0, displayType: .dollar, coloringOption: .allText)
+        item.unrealizedPnlPercent = dydxFormatter.shared.percent(number: position.unrealizedPnlPercent.current?.doubleValue, digits: 2) ?? ""
 
         if let marginMode = position.marginMode {
             item.marginMode = DataLocalizer.shared?.localize(path: "APP.GENERAL.\(marginMode.rawValue)", params: nil) ?? "--"

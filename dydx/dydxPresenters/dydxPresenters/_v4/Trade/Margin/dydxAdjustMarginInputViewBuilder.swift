@@ -249,23 +249,24 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
 
     private func updateLiquidationPrice(input: AdjustIsolatedMarginInput, market: PerpetualMarket) {
         if let displayTickSizeDecimals = market.configs?.displayTickSizeDecimals?.intValue {
-            let before = input.summary?.liquidationPrice
-            // the non-zero check here is a band-aid for an abacus bug where there is a pre- and post- state even on empty input
-            let after = parser.asNumber(input.amount)?.doubleValue ?? 0 > 0 ? input.summary?.liquidationPriceUpdated : nil
+            let curLiquidationPrice = input.summary?.liquidationPrice
+            let postLiquidationPrice = input.summary?.liquidationPriceUpdated
             viewModel?.liquidationPrice = dydxAdjustMarginLiquidationPriceViewModel()
-            viewModel?.liquidationPrice?.before = dydxFormatter.shared.dollar(number: before, digits: displayTickSizeDecimals)
-            viewModel?.liquidationPrice?.after = after != nil ? dydxFormatter.shared.dollar(number: after, digits: displayTickSizeDecimals) : nil
-            if let before, let after {
-                if before > after {
-                    // lowering liquidation price is "safer" so increase is the "positive" direction
-                    viewModel?.liquidationPrice?.direction = .increase
-                } else if before < after {
-                    viewModel?.liquidationPrice?.direction = .decrease
-                } else {
+            viewModel?.liquidationPrice?.before = dydxFormatter.shared.dollar(number: curLiquidationPrice, digits: displayTickSizeDecimals)
+            viewModel?.liquidationPrice?.after = input.summary?.positionLeverageUpdated == nil ? nil : dydxFormatter.shared.dollar(number: postLiquidationPrice, digits: displayTickSizeDecimals)
+            if input.summary?.positionLeverageUpdated == nil {
+                viewModel?.liquidationPrice?.direction = .none
+            } else {
+                switch input.type {
+                case .add:
+                    // liquidation price is moving further from oracle price with less leverage
+                    viewModel?.liquidationPrice?.direction = .safer
+                case .remove:
+                    // liquidation price is moving closer to oracle price with more leverage
+                    viewModel?.liquidationPrice?.direction = .riskier
+                default:
                     viewModel?.liquidationPrice?.direction = .none
                 }
-            } else {
-                viewModel?.liquidationPrice?.direction = .none
             }
         }
     }

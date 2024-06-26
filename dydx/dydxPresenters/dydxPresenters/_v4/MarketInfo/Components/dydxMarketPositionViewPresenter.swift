@@ -105,7 +105,7 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         }
 
         viewModel?.unrealizedPNLAmount = sharedOrderViewModel.unrealizedPnl
-        viewModel?.unrealizedPNLPercent = sharedOrderViewModel.unrealizedPnlPercent
+        viewModel?.unrealizedPNLPercent =  dydxFormatter.shared.percent(number: position.unrealizedPnlPercent.current?.doubleValue, digits: 2) ?? ""
         viewModel?.realizedPNLAmount = SignedAmountViewModel(amount: position.realizedPnl.current?.doubleValue, displayType: .dollar, coloringOption: .allText)
 
         if let margin = position.equity.current?.doubleValue, let marginMode = position.marginMode {
