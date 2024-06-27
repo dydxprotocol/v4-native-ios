@@ -56,7 +56,6 @@ private class dydxMarginModeViewPresenter: HostedViewPresenter<dydxMarginModeVie
         super.init()
 
         viewModel = dydxMarginModeViewModel()
-        viewModel?.market = "BTC-USD"
         viewModel?.items = [crossItemViewModel, isolatedItemViewModel]
     }
 
@@ -72,6 +71,7 @@ private class dydxMarginModeViewPresenter: HostedViewPresenter<dydxMarginModeVie
     }
 
     private func update(tradeInput: Abacus.TradeInput) {
+        viewModel?.market = tradeInput.marketId
         switch tradeInput.marginMode {
         case .cross:
             crossItemViewModel.isSelected = true

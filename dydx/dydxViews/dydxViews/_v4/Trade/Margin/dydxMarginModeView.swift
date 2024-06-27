@@ -125,6 +125,8 @@ public class dydxMarginModeViewModel: PlatformViewModel {
                     }
                 }
 
+                InlineAlertViewModel(.init(title: nil, body: DataLocalizer.localize(path: "WARNINGS.TRADE_BOX.UNABLE_TO_CHANGE_MARGIN_MODE", params: ["MARKET": self.market ?? "--"]), level: .warning))
+                    .createView()
                 Spacer()
             }
                 .padding(.horizontal)
