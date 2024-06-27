@@ -48,7 +48,7 @@ extension TrackingViewController: ScreenIdentifiable, TrackingViewProtocol {
 private extension TrackingViewController {
     private var path: String {
         guard let path = history?.path else {
-            assertionFailure("no path for \(screenClass)")
+//            assertionFailure("no path for \(screenClass)")
             return ""
         }
         return path
