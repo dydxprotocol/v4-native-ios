@@ -212,7 +212,8 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         let crossMarginUsageUpdated: AmountTextModel = .init(amount: input.summary?.crossMarginUsageUpdated, unit: .percentage)
         let crossMarginUsageChange: AmountChangeModel = .init(
             before: crossMarginUsage.amount != nil ? crossMarginUsage : nil,
-            after: crossMarginUsageUpdated.amount != nil ? crossMarginUsageUpdated : nil)
+            after: crossMarginUsageUpdated.amount != nil ? crossMarginUsageUpdated : nil,
+            increasingIsPositiveDirection: false)
         crossReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN_USAGE"),
@@ -232,7 +233,9 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         let positionLeverageUpdated: AmountTextModel = .init(amount: input.summary?.positionLeverageUpdated, unit: .multiplier)
         let positionLeverageChange: AmountChangeModel = .init(
             before: positionLeverage.amount != nil ? positionLeverage : nil,
-            after: positionLeverageUpdated.amount != nil ? positionLeverageUpdated : nil)
+            after: positionLeverageUpdated.amount != nil ? positionLeverageUpdated : nil,
+            increasingIsPositiveDirection: false
+        )
         positionReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.TRADE.POSITION_LEVERAGE"),
