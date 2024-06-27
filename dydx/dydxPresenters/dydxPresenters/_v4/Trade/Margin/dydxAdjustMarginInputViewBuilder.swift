@@ -229,8 +229,8 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 title: DataLocalizer.localize(path: "APP.TRADE.POSITION_MARGIN"),
                 value: positionMarginChange))
 
-        let positionLeverage: AmountTextModel = .init(amount: input.summary?.positionLeverage, unit: .multiplier)
-        let positionLeverageUpdated: AmountTextModel = .init(amount: input.summary?.positionLeverageUpdated, unit: .multiplier)
+        let positionLeverage: AmountTextModel = .init(amount: input.summary?.positionLeverage?.abs(), unit: .multiplier)
+        let positionLeverageUpdated: AmountTextModel = .init(amount: input.summary?.positionLeverageUpdated?.abs(), unit: .multiplier)
         let positionLeverageChange: AmountChangeModel = .init(
             before: positionLeverage.amount != nil ? positionLeverage : nil,
             after: positionLeverageUpdated.amount != nil ? positionLeverageUpdated : nil,
