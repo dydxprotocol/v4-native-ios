@@ -93,6 +93,7 @@ public class dydxMarginModeItemViewModel: PlatformViewModel {
 public class dydxMarginModeViewModel: PlatformViewModel {
     @Published public var market: String?
     @Published public var items: [dydxMarginModeItemViewModel] = []
+    @Published public var isDisabled: Bool = false
 
     public init() { }
 
@@ -125,11 +126,14 @@ public class dydxMarginModeViewModel: PlatformViewModel {
                     }
                 }
 
-                InlineAlertViewModel(.init(title: nil, body: DataLocalizer.localize(path: "WARNINGS.TRADE_BOX.UNABLE_TO_CHANGE_MARGIN_MODE", params: ["MARKET": self.market ?? "--"]), level: .warning))
-                    .createView()
+                if self.isDisabled {
+                    InlineAlertViewModel(.init(title: nil, body: DataLocalizer.localize(path: "WARNINGS.TRADE_BOX.UNABLE_TO_CHANGE_MARGIN_MODE", params: ["MARKET": self.market ?? "--"]), level: .warning))
+                        .createView()
+                }
                 Spacer()
             }
                 .padding(.horizontal)
+                .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)
                 .makeSheet(sheetStyle: .fitSize)
 

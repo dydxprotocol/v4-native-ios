@@ -72,6 +72,8 @@ private class dydxMarginModeViewPresenter: HostedViewPresenter<dydxMarginModeVie
 
     private func update(tradeInput: Abacus.TradeInput) {
         viewModel?.market = tradeInput.marketId
+        let isSelectionDisabled = tradeInput.options?.marginModeOptions == nil
+        viewModel?.isDisabled = isSelectionDisabled
         switch tradeInput.marginMode {
         case .cross:
             crossItemViewModel.isSelected = true
