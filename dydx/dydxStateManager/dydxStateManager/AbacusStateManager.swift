@@ -136,35 +136,30 @@ public final class AbacusStateManager: NSObject {
         UIImplementations.reset(language: nil)
 
         let deployment: String
-        let appConfigsV2: AppConfigsV2
+        let appConfigs = AppConfigsV2.companion.forAppWithIsolatedMargins
         if dydxBoolFeatureFlag.force_mainnet.isEnabled {
             deployment = "MAINNET"
-            appConfigsV2 = AppConfigsV2.companion.forAppWithIsolatedMargins
         } else {
             // Expose more options for Testflight build
             switch Installation.source {
             case .appStore:
                 deployment = "MAINNET"
-                appConfigsV2 = AppConfigsV2.companion.forAppWithIsolatedMargins
             case .debug:
                 // For debugging only
                 deployment = "DEV"
-                appConfigsV2 = AppConfigsV2.companion.forAppWithIsolatedMargins
             case .jailBroken:
                 deployment = "TESTNET"
-                appConfigsV2 = AppConfigsV2.companion.forAppWithIsolatedMargins
             case .testFlight:
                 deployment = "TESTFLIGHT"
-                appConfigsV2 = AppConfigsV2.companion.forAppWithIsolatedMargins
             }
         }
 
-        appConfigsV2.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
+        appConfigs.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
 
         return AsyncAbacusStateManagerV2(
             deploymentUri: deploymentUri,
             deployment: deployment,
-            appConfigs: appConfigsV2,
+            appConfigs: appConfigs,
             ioImplementations: IOImplementations.shared,
             uiImplementations: UIImplementations.shared!,
             stateNotification: self,
