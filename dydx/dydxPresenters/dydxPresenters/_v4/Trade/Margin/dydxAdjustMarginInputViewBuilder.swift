@@ -154,17 +154,17 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 return "ERRORS.TRADE_BOX.INVALID_NEW_ACCOUNT_MARGIN_USAGE"
             }
         case IsolatedMarginAdjustmentType.remove:
-            if let freeCollateral = input.summary?.crossFreeCollateral?.doubleValue, amount >= freeCollateral {
-                return "ERRORS.TRANSFER_MODAL.TRANSFER_MORE_THAN_FREE"
-            }
-            if let positionMarginUpdated = input.summary?.positionMarginUpdated?.doubleValue, positionMarginUpdated < 0 {
-                return "ERRORS.TRADE_BOX.INVALID_NEW_ACCOUNT_MARGIN_USAGE"
-            }
             if let effectiveInitialMarginFraction = market.configs?.effectiveInitialMarginFraction?.doubleValue, effectiveInitialMarginFraction > 0 {
                 let marketMaxLeverage = 1 / effectiveInitialMarginFraction
                 if let positionLeverageUpdated = input.summary?.positionLeverageUpdated?.doubleValue, positionLeverageUpdated > marketMaxLeverage {
                     return "ERRORS.TRADE_BOX_TITLE.INVALID_NEW_POSITION_LEVERAGE"
                 }
+            }
+            if let positionMarginUpdated = input.summary?.positionMarginUpdated?.doubleValue, positionMarginUpdated < 0 {
+                return "ERRORS.TRADE_BOX.INVALID_NEW_ACCOUNT_MARGIN_USAGE"
+            }
+            if let freeCollateral = input.summary?.crossFreeCollateral?.doubleValue, amount >= freeCollateral {
+                return "ERRORS.TRANSFER_MODAL.TRANSFER_MORE_THAN_FREE"
             }
         default:
             break
@@ -208,11 +208,12 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
                 value: crossFreeCollateralChange))
 
-        let crossMarginUsage: AmountTextModel = .init(amount: input.summary?.crossMarginUsage, unit: .dollar)
-        let crossMarginUsageUpdated: AmountTextModel = .init(amount: input.summary?.crossMarginUsageUpdated, unit: .dollar)
+        let crossMarginUsage: AmountTextModel = .init(amount: input.summary?.crossMarginUsage, unit: .percentage)
+        let crossMarginUsageUpdated: AmountTextModel = .init(amount: input.summary?.crossMarginUsageUpdated, unit: .percentage)
         let crossMarginUsageChange: AmountChangeModel = .init(
             before: crossMarginUsage.amount != nil ? crossMarginUsage : nil,
-            after: crossMarginUsageUpdated.amount != nil ? crossMarginUsageUpdated : nil)
+            after: crossMarginUsageUpdated.amount != nil ? crossMarginUsageUpdated : nil,
+            increasingIsPositiveDirection: false)
         crossReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN_USAGE"),
@@ -228,11 +229,13 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 title: DataLocalizer.localize(path: "APP.TRADE.POSITION_MARGIN"),
                 value: positionMarginChange))
 
-        let positionLeverage: AmountTextModel = .init(amount: input.summary?.positionLeverage, unit: .multiplier)
-        let positionLeverageUpdated: AmountTextModel = .init(amount: input.summary?.positionLeverageUpdated, unit: .multiplier)
+        let positionLeverage: AmountTextModel = .init(amount: input.summary?.positionLeverage?.abs(), unit: .multiplier)
+        let positionLeverageUpdated: AmountTextModel = .init(amount: input.summary?.positionLeverageUpdated?.abs(), unit: .multiplier)
         let positionLeverageChange: AmountChangeModel = .init(
             before: positionLeverage.amount != nil ? positionLeverage : nil,
-            after: positionLeverageUpdated.amount != nil ? positionLeverageUpdated : nil)
+            after: positionLeverageUpdated.amount != nil ? positionLeverageUpdated : nil,
+            increasingIsPositiveDirection: false
+        )
         positionReceiptItems.append(
             dydxReceiptChangeItemView(
                 title: DataLocalizer.localize(path: "APP.TRADE.POSITION_LEVERAGE"),

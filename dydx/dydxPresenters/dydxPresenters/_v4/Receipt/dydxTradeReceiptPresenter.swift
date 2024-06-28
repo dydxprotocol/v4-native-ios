@@ -110,15 +110,16 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
         let title = DataLocalizer.localize(path: "APP.TRADE.POSITION_LEVERAGE")
         let unit = AmountTextModel.Unit.multiplier
         positionLeverageViewModel.title = title
-        positionLeverageViewModel.value = createAmountChangeViewModel(title: title, tradeState: position?.leverage, tickSize: 2, unit: unit)
+        positionLeverageViewModel.value = createAmountChangeViewModel(title: title, tradeState: position?.leverage, tickSize: 2, unit: unit, shouldUseAbsoluteValues: true)
     }
 
     private func createAmountChangeViewModel(title: String,
-                                           tradeState: TradeStatesWithDoubleValues?,
-                                           tickSize: NSNumber?,
-                                           unit: AmountTextModel.Unit) -> AmountChangeModel {
-        let currentValue = tradeState?.current?.doubleValue.asNsNumber
-        let postValue = tradeState?.postOrder?.doubleValue.asNsNumber
+                                             tradeState: TradeStatesWithDoubleValues?,
+                                             tickSize: NSNumber?,
+                                             unit: AmountTextModel.Unit,
+                                             shouldUseAbsoluteValues: Bool = false) -> AmountChangeModel {
+        let currentValue = shouldUseAbsoluteValues ? tradeState?.current?.doubleValue.asNsNumber.abs() : tradeState?.current?.doubleValue.asNsNumber
+        let postValue = shouldUseAbsoluteValues ? tradeState?.postOrder?.doubleValue.asNsNumber.abs() : tradeState?.postOrder?.doubleValue.asNsNumber
         let currentViewModel = currentValue == nil ? nil : AmountTextModel(amount: currentValue, unit: unit)
         let postViewModel = postValue == nil ? nil : AmountTextModel(amount: postValue, unit: unit)
         return AmountChangeModel(before: currentViewModel, after: postViewModel)
