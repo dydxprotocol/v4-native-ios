@@ -79,7 +79,7 @@ public class dydxRewardsHistoryViewPresenter: HostedViewPresenter<dydxRewardsHis
 
         AbacusStateManager.shared.setHistoricalTradingRewardPeriod(period: self.period.abacusPeriod)
         AbacusStateManager.shared.state.account
-            .map(\.?.tradingRewards?.historical)
+            .map(\.?.tradingRewards?.filledHistory)
             .sink { [weak self] historicalRewards in
                 self?.viewModel?.onSelectionChanged = {[weak self] index in
                     guard let self = self else { return }

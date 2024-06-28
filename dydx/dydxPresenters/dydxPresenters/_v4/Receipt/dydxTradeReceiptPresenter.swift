@@ -101,9 +101,9 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
 
     private func updatePositionMargin(position: SubaccountPosition?) {
         let title = DataLocalizer.localize(path: "APP.TRADE.POSITION_MARGIN")
-        let unit = AmountTextModel.Unit.percentage
+        let unit = AmountTextModel.Unit.dollar
         positionMarginViewModel.title = title
-        positionMarginViewModel.value = createAmountChangeViewModel(title: title, tradeState: position?.marginUsage, tickSize: 2, unit: unit)
+        positionMarginViewModel.value = createAmountChangeViewModel(title: title, tradeState: position?.marginValue, tickSize: 2, unit: unit)
     }
 
     private func updatePositionLeverage(position: SubaccountPosition?) {
