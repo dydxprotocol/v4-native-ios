@@ -367,12 +367,12 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
     }
 
     /*
-     xxxxxx,yyyyy or xxxxx.yyyyy
-     will take the number and round it to the closest step size
-     e.g. if number is 1021 and step size is "100" then output is "1000"
+     converts number in multiplier, e.g.
+     1.20 -> 1.2x
+     removes trailing 0s as well
      */
-    public func multiplier(number: Double?) -> String? {
-        if let formattedText = dydxFormatter.shared.raw(number: number, digits: 2) {
+    public func multiplier(number: Double?, maxPrecision: Int = 2) -> String? {
+        if let formattedText = dydxFormatter.shared.raw(number: number, minDigits: 0, maxDigits: maxPrecision) {
             return "\(formattedText)×"
         } else {
             return nil
@@ -421,19 +421,26 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
 
     public func raw(number: Double?, digits: Int, locale: Locale = Locale.current) -> String? {
         guard let number = number else { return nil }
-        return raw(number: NSNumber(value: number), digits: digits, locale: locale)
+        return raw(number: NSNumber(value: number), minDigits: digits, maxDigits: digits, locale: locale)
     }
 
-    /*
-     xxxxxx,yyyyy or xxxxx.yyyyy
-     */
+    public func raw(number: Double?, minDigits: Int, maxDigits: Int, locale: Locale = Locale.current) -> String? {
+        guard let number = number else { return nil }
+        return raw(number: NSNumber(value: number), minDigits: minDigits, maxDigits: maxDigits, locale: locale)
+    }
+
     public func raw(number: NSNumber?, digits: Int, locale: Locale = Locale.current) -> String? {
+        guard let number = number else { return nil }
+        return raw(number: number, minDigits: digits, maxDigits: digits, locale: locale)
+    }
+
+    public func raw(number: NSNumber?, minDigits: Int, maxDigits: Int, locale: Locale = Locale.current) -> String? {
         if let value = number?.doubleValue {
             if value.isFinite {
                 if let number = number {
                     rawFormatter.locale = locale
-                    rawFormatter.minimumFractionDigits = max(digits, 0)
-                    rawFormatter.maximumFractionDigits = max(digits, 0)
+                    rawFormatter.minimumFractionDigits = max(minDigits, 0)
+                    rawFormatter.maximumFractionDigits = max(maxDigits, 0)
                     rawFormatter.roundingMode = .halfUp
 
                     let formatted = rawFormatter.string(from: number)

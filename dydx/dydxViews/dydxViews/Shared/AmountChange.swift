@@ -12,11 +12,22 @@ import Utilities
 
 public class AmountChangeModel: BeforeArrowAfterModel<AmountTextModel> {
 
-    public convenience init(before: AmountTextModel?, after: AmountTextModel?) {
+    public convenience init(before: AmountTextModel?, after: AmountTextModel?, increasingIsPositiveDirection: Bool = true) {
         self.init()
 
         self.before = before
         self.after = after
+
+        changeDirection = { [weak self] in
+            guard let beforeAmount = self?.before?.amount, let afterAmount = self?.after?.amount else {
+                return .orderedSame
+            }
+            if increasingIsPositiveDirection {
+                return beforeAmount.compare(afterAmount)
+            } else {
+                return afterAmount.compare(beforeAmount)
+            }
+        }
     }
 
     public required init(unit: AmountTextModel.Unit = .dollar) {
