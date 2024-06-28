@@ -153,18 +153,12 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         if let marginMode = position.marginMode {
             item.marginMode = DataLocalizer.shared?.localize(path: "APP.GENERAL.\(marginMode.rawValue)", params: nil) ?? "--"
             item.isMarginAdjustable = marginMode == .isolated
-            // TODO: move calculation logic to abacus
+            item.marginValue = dydxFormatter.shared.dollar(number: position.marginValue.current?.doubleValue, digits: 2) ?? "--"
             switch marginMode {
             case .cross:
                 item.isMarginAdjustable = false
-                if let marginValue = position.notionalTotal.current?.doubleValue, let marginMaintenanceFraction = configs.maintenanceMarginFraction?.doubleValue {
-                    item.marginValue = dydxFormatter.shared.dollar(number: marginValue * marginMaintenanceFraction) ?? "--"
-                }
             case .isolated:
                 item.isMarginAdjustable = true
-                if let marginValue = position.equity.current?.doubleValue {
-                    item.marginValue = dydxFormatter.shared.dollar(number: marginValue) ?? "--"
-                }
             default:
                 assertionFailure("no margin mode")
                 break

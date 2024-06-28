@@ -32,7 +32,7 @@ public class dydxRewardsSummaryViewPresenter: HostedViewPresenter<dydxRewardsSum
                 // allTimeRewardsAmount is commented out because we do not have historical data accurate for "all time"
                 // see thread: https://dydx-team.slack.com/archives/C066T2L1HM4/p1703107669507409
                 // self?.viewModel?.allTimeRewardsAmount = dydxFormatter.shared.format(decimal: account?.tradingRewards?.total?.decimalValue)
-                if let thisWeekRewards = account?.tradingRewards?.historical?["WEEKLY"]?.first {
+                if let thisWeekRewards = account?.tradingRewards?.filledHistory?["WEEKLY"]?.first {
                     self?.viewModel?.last7DaysRewardsAmount = dydxFormatter.shared.raw(number: NSNumber(value: thisWeekRewards.amount), digits: 4)
                     let startedAt = dydxFormatter.shared.millisecondsToDate(thisWeekRewards.startedAtInMilliseconds, format: .MMM_d)
                     let endedAt = dydxFormatter.shared.millisecondsToDate(thisWeekRewards.endedAtInMilliseconds, format: .MMM_d)

@@ -118,7 +118,7 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
         viewModel?.leverage = sharedOrderViewModel.leverage
         viewModel?.leverageIcon = sharedOrderViewModel.leverageIcon
         viewModel?.size = sharedOrderViewModel.size
-        viewModel?.side = sharedOrderViewModel.sideText
+        viewModel?.side = SideTextViewModel(side: sharedOrderViewModel.sideText.side, coloringOption: .withBackground)
         viewModel?.token = sharedOrderViewModel.token
         viewModel?.logoUrl = sharedOrderViewModel.logoUrl
         viewModel?.gradientType = sharedOrderViewModel.gradientType
