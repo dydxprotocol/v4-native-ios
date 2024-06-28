@@ -47,7 +47,7 @@ public enum WebImagePhase {
 }
 
 /// Data Binding Object, only properties in this object can support changes from user with @State and refresh
-@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 final class WebImageModel : ObservableObject {
     /// URL image
     @Published var url: URL?
@@ -56,7 +56,7 @@ final class WebImageModel : ObservableObject {
 }
 
 /// Completion Handler Binding Object, supports dynamic @State changes
-@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 final class WebImageHandler: ObservableObject {
     // Completion Handler
     @Published var successBlock: ((PlatformImage, Data?, SDImageCacheType) -> Void)?
@@ -65,7 +65,7 @@ final class WebImageHandler: ObservableObject {
 }
 
 /// Configuration Binding Object, supports dynamic @State changes
-@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 final class WebImageConfiguration: ObservableObject {
     var retryOnAppear: Bool = true
     var cancelOnDisappear: Bool = true
@@ -79,7 +79,7 @@ final class WebImageConfiguration: ObservableObject {
 }
 
 /// A Image View type to load image from url. Supports static/animated image format.
-@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct WebImage<Content> : View where Content: View {
     var transaction: Transaction
     
@@ -108,16 +108,17 @@ public struct WebImage<Content> : View where Content: View {
     
     /// Create a web image with url, placeholder, custom options and context. Optional can support animated image using Binding.
     /// - Parameter url: The image url
+    /// - Parameter scale: The scale to use for the image. The default is 1. Set a different value when loading images designed for higher resolution displays. For example, set a value of 2 for an image that you would name with the @2x suffix if stored in a file on disk.
     /// - Parameter options: The options to use when downloading the image. See `SDWebImageOptions` for the possible values.
     /// - Parameter context: A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
     /// - Parameter isAnimating: The binding for animation control. The binding value should be `true` when initialized to setup the correct animated image class. If not, you must provide the `.animatedImageClass` explicitly. When the animation started, this binding can been used to start / stop the animation.
-    public init(url: URL?, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true)) where Content == Image {
+    public init(url: URL?, scale: CGFloat = 1, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true)) where Content == Image {
         self.init(url: url, options: options, context: context, isAnimating: isAnimating) { phase in
             phase.image ?? Image(platformImage: .empty)
         }
     }
 
-    public init<I, P>(url: URL?, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true), @ViewBuilder content: @escaping (Image) -> I, @ViewBuilder placeholder: @escaping () -> P) where Content == _ConditionalContent<I, P>, I: View, P: View {
+    public init<I, P>(url: URL?, scale: CGFloat = 1, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true), @ViewBuilder content: @escaping (Image) -> I, @ViewBuilder placeholder: @escaping () -> P) where Content == _ConditionalContent<I, P>, I: View, P: View {
         self.init(url: url, options: options, context: context, isAnimating: isAnimating) { phase in
             if let i = phase.image {
                 content(i)
@@ -127,9 +128,12 @@ public struct WebImage<Content> : View where Content: View {
         }
     }
 
-    public init(url: URL?, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true), transaction: Transaction = Transaction(), @ViewBuilder content: @escaping (WebImagePhase) -> Content) {
+    public init(url: URL?, scale: CGFloat = 1, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true), transaction: Transaction = Transaction(), @ViewBuilder content: @escaping (WebImagePhase) -> Content) {
         self._isAnimating = isAnimating
         var context = context ?? [:]
+        if context[.imageScaleFactor] == nil {
+            context[.imageScaleFactor] = scale
+        }
         // provide animated image class if the initialized `isAnimating` is true, user can still custom the image class if they want
         if isAnimating.wrappedValue {
             if context[.animatedImageClass] == nil {
@@ -344,7 +348,7 @@ public struct WebImage<Content> : View where Content: View {
 }
 
 // Layout
-@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
     func configure(_ block: @escaping (Image) -> Image) -> WebImage {
         var result = self
@@ -382,7 +386,7 @@ extension WebImage {
 }
 
 // Completion Handler
-@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
     
     /// Provide the action when image load fails.
@@ -414,7 +418,7 @@ extension WebImage {
 }
 
 // WebImage Modifier
-@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
     /// Control the behavior to retry the failed loading when view become appears again
     /// - Parameter flag: Whether or not to retry the failed loading
@@ -432,7 +436,7 @@ extension WebImage {
 }
 
 // Indicator
-@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
     
     /// Associate a indicator when loading image with url
@@ -449,7 +453,7 @@ extension WebImage {
 }
 
 // Animated Image
-@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
     
     /// Total loop count for animated image rendering. Defaults to nil.
@@ -517,7 +521,7 @@ extension WebImage {
 }
 
 #if DEBUG
-@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 struct WebImage_Previews : PreviewProvider {
     static var previews: some View {
         Group {
