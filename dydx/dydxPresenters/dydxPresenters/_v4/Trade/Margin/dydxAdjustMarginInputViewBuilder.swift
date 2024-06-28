@@ -89,6 +89,7 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                     self?.viewModel?.inlineAlert = InlineAlertViewModel(.init(title: nil, body: error.localizedMessage, level: .error))
                     return
                 } else {
+                    self?.resetInputAmount()
                     Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
                 }
             }
@@ -99,6 +100,10 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         self.viewModel = viewModel
 
         attachChildren(workers: childPresenters)
+    }
+
+    private func resetInputAmount() {
+        AbacusStateManager.shared.adjustIsolatedMargin(input: nil, type: .amount)
     }
 
     override func start() {
@@ -129,12 +134,16 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
     }
 
     private func updateForMarginDirection(input: AdjustIsolatedMarginInput) {
+
         switch input.type {
         case IsolatedMarginAdjustmentType.add:
+            viewModel?.marginDirection?.marginDirection = .add
             viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT_TO_ADD")
         case IsolatedMarginAdjustmentType.remove:
+            viewModel?.marginDirection?.marginDirection = .remove
             viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT_TO_REMOVE")
         default:
+            viewModel?.marginDirection?.marginDirection = .add
             viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT")
         }
     }
@@ -194,7 +203,15 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
             ctaButtonPresenter.viewModel?.ctaButtonState = .disabled()
             return
         } else {
-            ctaButtonPresenter.viewModel?.ctaButtonState = .enabled()
+            switch input.type {
+            case .add:
+                ctaButtonPresenter.viewModel?.ctaButtonState = .enabled(DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_MARGIN", params: nil) ?? "")
+            case .remove:
+                ctaButtonPresenter.viewModel?.ctaButtonState = .enabled(DataLocalizer.shared?.localize(path: "APP.TRADE.REMOVE_MARGIN", params: nil) ?? "")
+            default:
+                assertionFailure("no margin direction")
+                break
+            }
             viewModel?.inlineAlert = nil
         }
 
@@ -252,21 +269,44 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
 
     private func updateLiquidationPrice(input: AdjustIsolatedMarginInput, market: PerpetualMarket) {
         if let displayTickSizeDecimals = market.configs?.displayTickSizeDecimals?.intValue {
-            let curLiquidationPrice = input.summary?.liquidationPrice
-            let postLiquidationPrice = input.summary?.liquidationPriceUpdated
+            let curLiquidationPrice = input.summary?.liquidationPrice ?? 0
+            let postLiquidationPrice = input.summary?.liquidationPriceUpdated ?? 0
+            let currentLeverage = input.summary?.positionLeverage?.doubleValue ?? 0
+            let postLeverage = input.summary?.positionLeverageUpdated?.doubleValue ?? 0
+
             viewModel?.liquidationPrice = dydxAdjustMarginLiquidationPriceViewModel()
-            viewModel?.liquidationPrice?.before = dydxFormatter.shared.dollar(number: curLiquidationPrice, digits: displayTickSizeDecimals)
-            viewModel?.liquidationPrice?.after = input.summary?.positionLeverageUpdated == nil ? nil : dydxFormatter.shared.dollar(number: postLiquidationPrice, digits: displayTickSizeDecimals)
+
             if input.summary?.positionLeverageUpdated == nil {
                 viewModel?.liquidationPrice?.direction = .none
+                if currentLeverage <= 1 {
+                    viewModel?.liquidationPrice?.before = DataLocalizer.shared?.localize(path: "APP.GENERAL.NONE", params: nil)
+                } else {
+                    viewModel?.liquidationPrice?.before = dydxFormatter.shared.dollar(number: curLiquidationPrice, digits: displayTickSizeDecimals)
+                }
+                viewModel?.liquidationPrice?.after = nil
             } else {
+                switch (currentLeverage <= 1, postLeverage <= 1) {
+                    case (true, true):
+                    viewModel?.liquidationPrice?.before = DataLocalizer.shared?.localize(path: "APP.GENERAL.NONE", params: nil)
+                    viewModel?.liquidationPrice?.after = nil
+                    case (true, false):
+                    viewModel?.liquidationPrice?.before = DataLocalizer.shared?.localize(path: "APP.GENERAL.NONE", params: nil)
+                    viewModel?.liquidationPrice?.after = dydxFormatter.shared.dollar(number: postLiquidationPrice, digits: displayTickSizeDecimals)
+                    case (false, true):
+                    viewModel?.liquidationPrice?.before = dydxFormatter.shared.dollar(number: curLiquidationPrice, digits: displayTickSizeDecimals)
+                    viewModel?.liquidationPrice?.after = DataLocalizer.shared?.localize(path: "APP.GENERAL.NONE", params: nil)
+                    case (false, false):
+                    viewModel?.liquidationPrice?.before = dydxFormatter.shared.dollar(number: curLiquidationPrice, digits: displayTickSizeDecimals)
+                    viewModel?.liquidationPrice?.after = dydxFormatter.shared.dollar(number: postLiquidationPrice, digits: displayTickSizeDecimals)
+                }
+
                 switch input.type {
                 case .add:
                     // liquidation price is moving further from oracle price with less leverage
-                    viewModel?.liquidationPrice?.direction = .safer
+                    viewModel?.liquidationPrice?.direction = currentLeverage <= 1 && postLeverage <= 1 ? .none : .safer
                 case .remove:
                     // liquidation price is moving closer to oracle price with more leverage
-                    viewModel?.liquidationPrice?.direction = .riskier
+                    viewModel?.liquidationPrice?.direction = currentLeverage <= 1 && postLeverage <= 1 ? .none : .riskier
                 default:
                     viewModel?.liquidationPrice?.direction = .none
                 }

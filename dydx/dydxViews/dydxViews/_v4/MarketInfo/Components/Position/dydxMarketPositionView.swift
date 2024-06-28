@@ -94,11 +94,10 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                             self.createPendingPositionsHeader(parentStyle: style)
                             pendingPosition.createView(parentStyle: style)
                         }
-                        .frame(width: UIScreen.main.bounds.width - 32)
                     }
                 }
                 .themeColor(background: .layer2)
-                .frame(width: UIScreen.main.bounds.width - 16)
+                .frame(width: UIScreen.main.bounds.width - 32)
             )
         }
     }
@@ -213,40 +212,46 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 
     private func createPositionTab(parentStyle: ThemeStyle) -> some View {
         Group {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     PlatformIconViewModel(type: .url(url: logoUrl),
                                           clip: .defaultCircle,
-                                          size: CGSize(width: 32, height: 32))
+                                          size: CGSize(width: 36, height: 36))
                         .createView(parentStyle: parentStyle)
 
-                    Spacer()
+                    Spacer(minLength: 4)
 
-                    side?.createView(parentStyle: parentStyle.themeFont(fontSize: .small))
+                    VStack(alignment: .trailing, spacing: 2) {
+                        Text(size ?? "")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                        Text(amount ?? "")
+                            .themeFont(fontSize: .small)
+                            .themeColor(foreground: .textTertiary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                    }
                 }
 
                 Spacer()
 
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack {
-                        Text(size ?? "")
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.5)
-                        token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
-                    }
-                    Text(amount ?? "")
+                HStack(spacing: 0) {
+                    side?.createView(parentStyle: parentStyle.themeFont(fontSize: .small))
+                    Spacer(minLength: 4)
+                    Text(marginMode ?? "")
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 4)
                         .themeFont(fontSize: .small)
-                        .themeColor(foreground: .textTertiary)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
+                        .themeColor(foreground: .textSecondary)
+                        .themeColor(background: .layer7)
+                        .clipShape(.rect(cornerRadius: 4))
                 }
             }
-            .padding(20)
+            .padding(16)
         }
-        .frame(minWidth: 0, maxWidth: .infinity)
-        .frame(height: 152)
+        .frame(width: 162, height: 142)
         .themeGradient(background: .layer3, gradientType: gradientType)
-        .cornerRadius(16)
+        .cornerRadius(12)
     }
 
     private func createCollectionItem(parentStyle: ThemeStyle, title: String?, stringValue: String?) -> some View {

@@ -62,7 +62,7 @@ public class dydxAdjustMarginLiquidationPriceViewModel: PlatformViewModel {
                         if self.after == nil {
                             Text(self.before ?? "")
                                 .themeFont(fontSize: .large)
-                                .themeColor(foreground: .textPrimary)
+                                .themeColor(foreground: .textSecondary)
                         } else {
                             Text(self.before ?? "")
                                 .themeFont(fontSize: .small)
