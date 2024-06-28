@@ -35,7 +35,7 @@ public class dydxAdjustMarginDirectionViewModel: PlatformViewModel {
         }
     }
 
-    @Published public var marginDirection: MarginDirection = .add
+    @Published public var marginDirection: MarginDirection?
     @Published public var marginDirectionAction: ((MarginDirection) -> Void)?
 
     public init() { }
@@ -63,7 +63,7 @@ public class dydxAdjustMarginDirectionViewModel: PlatformViewModel {
             let view = ScrollView(.horizontal, showsIndicators: false) {
                 TabGroupModel(items: items,
                               selectedItems: selectedItems,
-                              currentSelection: self.marginDirection.index,
+                              currentSelection: self.marginDirection?.index,
                               onSelectionChanged: { index in
                     PlatformView.hideKeyboard()
                     self.marginDirectionAction?(MarginDirection(index: index))

@@ -129,12 +129,16 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
     }
 
     private func updateForMarginDirection(input: AdjustIsolatedMarginInput) {
+
         switch input.type {
         case IsolatedMarginAdjustmentType.add:
+            viewModel?.marginDirection?.marginDirection = .add
             viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT_TO_ADD")
         case IsolatedMarginAdjustmentType.remove:
+            viewModel?.marginDirection?.marginDirection = .remove
             viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT_TO_REMOVE")
         default:
+            viewModel?.marginDirection?.marginDirection = .add
             viewModel?.amount?.label = DataLocalizer.localize(path: "APP.GENERAL.AMOUNT")
         }
     }
