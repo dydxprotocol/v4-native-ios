@@ -91,9 +91,9 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
             .compactMap { $0 }
             .sink { [weak self] configsAndAssetMap, tradeInput in
                 guard let viewModel = self?.viewModel, let marketId = tradeInput?.marketId, let market = configsAndAssetMap[marketId] else { return }
-                if let imf = market.configs?.initialMarginFraction?.doubleValue, imf > 0 {
+                if let imf = market.configs?.effectiveInitialMarginFraction?.doubleValue, imf > 0 {
                     let maxLeverage = 1.0 / imf
-                    viewModel.leverageOptions = [1, 2, 5, 10]
+                    viewModel.leverageOptions = [1, 2, 3, 5, 10]
                         .filter { $0 < maxLeverage }
                         .map { dydxTargetLeverageViewModel.LeverageTextAndValue(text: dydxFormatter.shared.multiplier(number: Double($0)) ?? "", value: $0) }
                     viewModel.leverageOptions.append(dydxTargetLeverageViewModel.LeverageTextAndValue(text: DataLocalizer.localize(path: "APP.GENERAL.MAX"), value: maxLeverage))

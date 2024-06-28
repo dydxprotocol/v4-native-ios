@@ -145,6 +145,32 @@ final class dydxFormatterTests: XCTestCase {
         }
     }
 
+    func testMultiplierFormatting() throws {
+        struct TestCase {
+            let number: Double
+            let maxPrecision: Int
+            let expected: String
+        }
+
+        let testCases: [TestCase] = [
+            .init(number: 0.01, maxPrecision: 2, expected: "0.01×"),
+            .init(number: -0.01, maxPrecision: 2, expected: "-0.01×"),
+            .init(number: 0.01, maxPrecision: 3, expected: "0.01×"),
+            .init(number: -0.01, maxPrecision: 3, expected: "-0.01×"),
+            .init(number: 0.01, maxPrecision: 1, expected: "0×"),
+            .init(number: -0.01, maxPrecision: 1, expected: "0×"),
+            .init(number: 10, maxPrecision: 3, expected: "10×"),
+            .init(number: -10, maxPrecision: 3, expected: "-10×")
+        ]
+
+        for testCase in testCases {
+            let formatted = dydxFormatter.shared.multiplier(number: testCase.number, maxPrecision: testCase.maxPrecision)
+            print(testCase)
+            XCTAssertEqual(formatted, testCase.expected)
+            print()
+        }
+    }
+
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
