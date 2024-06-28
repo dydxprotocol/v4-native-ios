@@ -12,7 +12,7 @@ import Utilities
 
 public class dydxAdjustMarginCtaButtonViewModel: PlatformViewModel {
     public enum State {
-        case enabled(String? = nil)
+        case enabled(String)
         case disabled(String? = nil)
         case thinking
     }
@@ -43,7 +43,7 @@ public class dydxAdjustMarginCtaButtonViewModel: PlatformViewModel {
         let state: PlatformButtonState
         switch ctaButtonState {
         case .enabled(let title):
-            buttonTitle = title ?? DataLocalizer.localize(path: "APP.TRADE.ADD_MARGIN")
+            buttonTitle = title
             state = .primary
         case .disabled(let title):
             buttonTitle = title ?? DataLocalizer.localize(path: "APP.TRADE.ENTER_AMOUNT")
