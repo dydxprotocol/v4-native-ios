@@ -21,9 +21,6 @@ protocol dydxPortfolioPositionsViewPresenterProtocol: HostedViewPresenterProtoco
 }
 
 class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPositionsViewModel>, dydxPortfolioPositionsViewPresenterProtocol {
-    private var positionsCache = [String: dydxPortfolioPositionItemViewModel]()
-    private var pendingPositionsCache = [String: dydxPortfolioPendingPositionsItemViewModel]()
-
     init(viewModel: dydxPortfolioPositionsViewModel?) {
         super.init()
 
@@ -57,12 +54,9 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
 
     private func updatePositions(positions: [SubaccountPosition], marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
         let items: [dydxPortfolioPositionItemViewModel] = positions.compactMap { position -> dydxPortfolioPositionItemViewModel? in
-            let item = Self.createPositionViewModelItem(position: position,
+            Self.createPositionViewModelItem(position: position,
                                                         marketMap: marketMap,
-                                                        assetMap: assetMap,
-                                                        positionsCache: positionsCache)
-            positionsCache[position.assetId] = item
-            return item
+                                                        assetMap: assetMap)
         }
 
         self.viewModel?.positionItems = items
@@ -70,12 +64,9 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
 
     private func updatePendingPositions(pendingPositions: [SubaccountPendingPosition], marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
         let items: [dydxPortfolioPendingPositionsItemViewModel] = pendingPositions.compactMap { pendingPosition -> dydxPortfolioPendingPositionsItemViewModel? in
-            let item = Self.createPendingPositionsViewModelItem(pendingPosition: pendingPosition,
+            Self.createPendingPositionsViewModelItem(pendingPosition: pendingPosition,
                                                                 marketMap: marketMap,
-                                                                assetMap: assetMap,
-                                                                pendingPositionsCache: pendingPositionsCache)
-            pendingPositionsCache[pendingPosition.assetId] = item
-            return item
+                                                                assetMap: assetMap)
         }
 
         self.viewModel?.pendingPositionItems = items
