@@ -113,17 +113,19 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         AbacusStateManager.shared.adjustIsolatedMargin(input: childSubaccountNumber, type: .childsubaccountnumber)
 
         Publishers
-            .CombineLatest3(
+            .CombineLatest4(
                 AbacusStateManager.shared.state.market(of: marketId).compactMap { $0 },
                 AbacusStateManager.shared.state.assetMap,
-                AbacusStateManager.shared.state.adjustIsolatedMarginInput.compactMap { $0 }
+                AbacusStateManager.shared.state.adjustIsolatedMarginInput.compactMap { $0 },
+                AbacusStateManager.shared.state.selectedSubaccountPositions.compactMap { $0.first(where: { $0.id == marketId }) }
             )
-            .sink { [weak self] market, assetMap, input in
+            .sink { [weak self] market, assetMap, input, position in
                 self?.updateState(market: market, assetMap: assetMap)
                 self?.updateFields(input: input)
                 self?.updateForMarginDirection(input: input)
                 self?.updatePrePostValues(input: input, market: market)
-                self?.updateLiquidationPrice(input: input, market: market)
+                guard let side = position.side.current else { return }
+                self?.updateLiquidationPrice(input: input, side: side, market: market)
             }
             .store(in: &subscriptions)
     }
@@ -267,24 +269,32 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         }
     }
 
-    private func updateLiquidationPrice(input: AdjustIsolatedMarginInput, market: PerpetualMarket) {
+    private func updateLiquidationPrice(input: AdjustIsolatedMarginInput, side: Abacus.PositionSide, market: PerpetualMarket) {
         if let displayTickSizeDecimals = market.configs?.displayTickSizeDecimals?.intValue {
-            let curLiquidationPrice = input.summary?.liquidationPrice ?? 0
-            let postLiquidationPrice = input.summary?.liquidationPriceUpdated ?? 0
+            let curLiquidationPrice = input.summary?.liquidationPrice
+            let postLiquidationPrice = input.summary?.liquidationPriceUpdated
             let currentLeverage = input.summary?.positionLeverage?.doubleValue ?? 0
             let postLeverage = input.summary?.positionLeverageUpdated?.doubleValue ?? 0
 
             viewModel?.liquidationPrice = dydxAdjustMarginLiquidationPriceViewModel()
 
-            if input.summary?.positionLeverageUpdated == nil {
+            let hasNoInput = input.summary?.positionLeverageUpdated == nil
+
+            if hasNoInput {
+                // no input, no change, update accordingly
                 viewModel?.liquidationPrice?.direction = .none
-                if currentLeverage <= 1 {
+                if currentLeverage <= 1 && side == Abacus.PositionSide.long_ {
                     viewModel?.liquidationPrice?.before = DataLocalizer.shared?.localize(path: "APP.GENERAL.NONE", params: nil)
                 } else {
                     viewModel?.liquidationPrice?.before = dydxFormatter.shared.dollar(number: curLiquidationPrice, digits: displayTickSizeDecimals)
                 }
                 viewModel?.liquidationPrice?.after = nil
+            } else if side == Abacus.PositionSide.short_ {
+                // else there is input, handle short positions which always have a liquidation price
+                viewModel?.liquidationPrice?.before = dydxFormatter.shared.dollar(number: curLiquidationPrice, digits: displayTickSizeDecimals)
+                viewModel?.liquidationPrice?.after = dydxFormatter.shared.dollar(number: postLiquidationPrice, digits: displayTickSizeDecimals)
             } else {
+                // else there is input, handle long positions which sometimes have a liquidation price
                 switch (currentLeverage <= 1, postLeverage <= 1) {
                     case (true, true):
                     viewModel?.liquidationPrice?.before = DataLocalizer.shared?.localize(path: "APP.GENERAL.NONE", params: nil)
@@ -299,17 +309,17 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                     viewModel?.liquidationPrice?.before = dydxFormatter.shared.dollar(number: curLiquidationPrice, digits: displayTickSizeDecimals)
                     viewModel?.liquidationPrice?.after = dydxFormatter.shared.dollar(number: postLiquidationPrice, digits: displayTickSizeDecimals)
                 }
+            }
 
-                switch input.type {
-                case .add:
-                    // liquidation price is moving further from oracle price with less leverage
-                    viewModel?.liquidationPrice?.direction = currentLeverage <= 1 && postLeverage <= 1 ? .none : .safer
-                case .remove:
-                    // liquidation price is moving closer to oracle price with more leverage
-                    viewModel?.liquidationPrice?.direction = currentLeverage <= 1 && postLeverage <= 1 ? .none : .riskier
-                default:
-                    viewModel?.liquidationPrice?.direction = .none
-                }
+            switch input.type {
+            case .add:
+                // liquidation price is moving further from oracle price with less leverage
+                viewModel?.liquidationPrice?.direction = hasNoInput ? .none : .safer
+            case .remove:
+                // liquidation price is moving closer to oracle price with more leverage
+                viewModel?.liquidationPrice?.direction = hasNoInput ? .none : .riskier
+            default:
+                viewModel?.liquidationPrice?.direction = .none
             }
         }
     }

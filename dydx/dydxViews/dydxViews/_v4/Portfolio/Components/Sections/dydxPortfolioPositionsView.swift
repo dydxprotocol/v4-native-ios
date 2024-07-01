@@ -50,21 +50,21 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         self.handler = Handler(onTapAction: onTapAction, onMarginEditAction: onMarginEditAction)
     }
 
-    public var size: String?
-    public var token: TokenTextViewModel?
-    public var sideText = SideTextViewModel()
-    public var leverage: String?
-    public var leverageIcon: LeverageRiskModel?
-    public var indexPrice: String?
-    public var entryPrice: String?
-    public var unrealizedPnl: SignedAmountViewModel?
-    public var unrealizedPnlPercent: String = ""
-    public var marginValue: String = "--"
-    public var marginMode: String = "--"
-    public var isMarginAdjustable: Bool = false
-    public var logoUrl: URL?
-    public var gradientType: GradientType
-    public var handler: Handler?
+    @Published public var size: String?
+    @Published public var token: TokenTextViewModel?
+    @Published public var sideText = SideTextViewModel()
+    @Published public var leverage: String?
+    @Published public var leverageIcon: LeverageRiskModel?
+    @Published public var indexPrice: String?
+    @Published public var entryPrice: String?
+    @Published public var unrealizedPnl: SignedAmountViewModel?
+    @Published public var unrealizedPnlPercent: String = ""
+    @Published public var marginValue: String = "--"
+    @Published public var marginMode: String = "--"
+    @Published public var isMarginAdjustable: Bool = false
+    @Published public var logoUrl: URL?
+    @Published public var gradientType: GradientType
+    @Published public var handler: Handler?
 
     public static var previewValue: dydxPortfolioPositionItemViewModel {
         let item = dydxPortfolioPositionItemViewModel(
