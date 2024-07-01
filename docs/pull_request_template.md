@@ -20,7 +20,11 @@ _Provide a clear and concise description of the fix(es) or change(s) you made. I
 
 | Before | After |
 |--------|-------|
-| <img src=""> | <img src=""> |
+| <img src=""> | <img src="" width=60%> |
+| <img src=""> | <img src="" width=60%> |
+| <img src=""> | <img src="" width=60%> |
+| <img src=""> | <img src="" width=60%> |
+| <img src=""> | <img src="" width=60%> |
 | <video src=""> | <video src=""> |
 
 
