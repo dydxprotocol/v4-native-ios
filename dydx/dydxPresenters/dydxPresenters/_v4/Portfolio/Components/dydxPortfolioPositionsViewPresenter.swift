@@ -119,7 +119,9 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         let item = positionsCache?[position.assetId] ?? dydxPortfolioPositionItemViewModel()
 
         let positionSize = abs(position.size.current?.doubleValue ?? 0)
+        let notionalValue = abs(position.valueTotal.current?.doubleValue ?? 0)
         item.size = dydxFormatter.shared.localFormatted(number: positionSize, digits: configs.displayStepSizeDecimals?.intValue ?? 1)
+        item.notionalValue = dydxFormatter.shared.dollar(number: notionalValue, digits: 2) ?? "--"
         item.token?.symbol = asset.id
 
         if position.resources.indicator.current == "long" {
