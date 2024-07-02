@@ -119,7 +119,9 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         let item = positionsCache?[position.assetId] ?? dydxPortfolioPositionItemViewModel()
 
         let positionSize = abs(position.size.current?.doubleValue ?? 0)
+        let notionalValue = abs(position.notionalTotal.current?.doubleValue ?? 0)
         item.size = dydxFormatter.shared.localFormatted(number: positionSize, digits: configs.displayStepSizeDecimals?.intValue ?? 1)
+        item.notionalValue = dydxFormatter.shared.dollar(number: notionalValue, digits: 2) ?? "--"
         item.token?.symbol = asset.id
 
         if position.resources.indicator.current == "long" {
@@ -136,7 +138,11 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         }
 
         item.indexPrice = dydxFormatter.shared.dollar(number: market.oraclePrice, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
-        item.entryPrice = dydxFormatter.shared.dollar(number: position.entryPrice.current, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
+        if let liquidationPrice = position.liquidationPrice.current {
+            item.liquidationPrice = dydxFormatter.shared.dollar(number: liquidationPrice, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
+        } else {
+            item.liquidationPrice = DataLocalizer.localize(path: "APP.GENERAL.NONE")
+        }
 
         item.unrealizedPnl = SignedAmountViewModel(amount: position.unrealizedPnl.current?.doubleValue ?? 0, displayType: .dollar, coloringOption: .allText)
         item.unrealizedPnlPercent = dydxFormatter.shared.percent(number: position.unrealizedPnlPercent.current?.doubleValue, digits: 2) ?? ""
