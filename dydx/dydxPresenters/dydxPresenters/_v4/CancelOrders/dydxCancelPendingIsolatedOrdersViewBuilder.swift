@@ -51,24 +51,28 @@ private class dydxCancelPendingIsolatedOrdersViewBuilderPresenter: HostedViewPre
     override func start() {
         super.start()
 
+        let pendingOrdersPublisher = AbacusStateManager.shared.state.selectedSubaccountOrders
+            .filterMany { [weak self] order in
+                order.marketId == self?.marketId && order.status == .open
+            }
+
         Publishers.CombineLatest(
             AbacusStateManager.shared.state.configsAndAssetMap,
-            AbacusStateManager.shared.state.selectedSubaccountOrders
+            pendingOrdersPublisher
         )
         .receive(on: RunLoop.main)
-        .sink { [weak self] configsAndAssetMap, orders in
+        .sink { [weak self] configsAndAssetMap, pendingOrders in
             guard let self = self,
                   let marketId = self.marketId,
                   let asset = configsAndAssetMap[marketId]?.asset
             else { return }
-            let pendingOrders = orders.filter { $0.marketId == marketId && $0.status == .open }
             self.viewModel?.marketLogoUrl = URL(string: asset.resources?.imageUrl ?? "")
             self.viewModel?.marketName = asset.name ?? "--"
             self.viewModel?.marketId = asset.id
             self.viewModel?.orderCount = pendingOrders.count
             self.viewModel?.failureCount = self.viewModel?.failureCount
             self.viewModel?.cancelAction = { [weak self] in
-                self?.tryCancelOrders(orderIds: orders.map(\.id))
+                self?.tryCancelOrders(orderIds: pendingOrders.map(\.id))
             }
         }
         .store(in: &subscriptions)
