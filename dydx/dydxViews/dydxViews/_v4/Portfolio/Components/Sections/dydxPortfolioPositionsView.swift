@@ -30,6 +30,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                 sideText: SideTextViewModel = SideTextViewModel(),
                 leverage: String? = nil,
                 leverageIcon: LeverageRiskModel? = nil,
+                liquidationPrice: String? = nil,
                 indexPrice: String? = nil,
                 entryPrice: String? = nil,
                 unrealizedPnl: SignedAmountViewModel? = nil,
@@ -44,8 +45,8 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         self.sideText = sideText
         self.leverage = leverage
         self.leverageIcon = leverageIcon
+        self.liquidationPrice = liquidationPrice
         self.indexPrice = indexPrice
-        self.entryPrice = entryPrice
         self.unrealizedPnlPercent = "10%"
         self.gradientType = gradientType
         self.logoUrl = logoUrl
@@ -58,8 +59,8 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     @Published public var sideText = SideTextViewModel()
     @Published public var leverage: String?
     @Published public var leverageIcon: LeverageRiskModel?
+    @Published public var liquidationPrice: String?
     @Published public var indexPrice: String?
-    @Published public var entryPrice: String?
     @Published public var unrealizedPnl: SignedAmountViewModel?
     @Published public var unrealizedPnlPercent: String = ""
     @Published public var marginValue: String = "--"
@@ -130,15 +131,15 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             return HStack(alignment: .top, spacing: 8) {
                 VStack(alignment: .leading, spacing: 4) {
                     Group {
-                        Text(DataLocalizer.localize(path: "APP.GENERAL.INDEX_ENTRY"))
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.LIQ_ORACLE"))
                             .themeFont(fontSize: .smaller)
                             .themeColor(foreground: .textTertiary)
 
-                        Text(self.indexPrice ?? "")
+                        Text(self.liquidationPrice ?? "")
                             .themeFont(fontSize: .small)
                             .themeColor(foreground: .textPrimary)
 
-                        Text(self.entryPrice ?? "")
+                        Text(self.indexPrice ?? "")
                             .themeFont(fontSize: .smaller)
                             .themeColor(foreground: .textTertiary)
                     }
