@@ -25,10 +25,12 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     }
 
     public init(size: String? = nil,
+                notionalValue: String? = nil,
                 token: TokenTextViewModel? = TokenTextViewModel(),
                 sideText: SideTextViewModel = SideTextViewModel(),
                 leverage: String? = nil,
                 leverageIcon: LeverageRiskModel? = nil,
+                liquidationPrice: String? = nil,
                 indexPrice: String? = nil,
                 entryPrice: String? = nil,
                 unrealizedPnl: SignedAmountViewModel? = nil,
@@ -38,12 +40,13 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                 onTapAction: (() -> Void)? = nil,
                 onMarginEditAction: (() -> Void)? = nil) {
         self.size = size
+        self.notionalValue = notionalValue
         self.token = token
         self.sideText = sideText
         self.leverage = leverage
         self.leverageIcon = leverageIcon
+        self.liquidationPrice = liquidationPrice
         self.indexPrice = indexPrice
-        self.entryPrice = entryPrice
         self.unrealizedPnlPercent = "10%"
         self.gradientType = gradientType
         self.logoUrl = logoUrl
@@ -51,12 +54,13 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     }
 
     @Published public var size: String?
+    @Published public var notionalValue: String?
     @Published public var token: TokenTextViewModel?
     @Published public var sideText = SideTextViewModel()
     @Published public var leverage: String?
     @Published public var leverageIcon: LeverageRiskModel?
+    @Published public var liquidationPrice: String?
     @Published public var indexPrice: String?
-    @Published public var entryPrice: String?
     @Published public var unrealizedPnl: SignedAmountViewModel?
     @Published public var unrealizedPnlPercent: String = ""
     @Published public var marginValue: String = "--"
@@ -69,6 +73,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     public static var previewValue: dydxPortfolioPositionItemViewModel {
         let item = dydxPortfolioPositionItemViewModel(
             size: "299",
+            notionalValue: "$420.69",
             token: .previewValue,
             sideText: .previewValue,
             leverage: "0.01x",
@@ -94,13 +99,12 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             }
 
             return AnyView(
-                VStack {
+                VStack(spacing: 20) {
                     self.createTopView(parentStyle: style)
                     self.createBottomView(parentStyle: style)
                 }
-                    .frame(height: 120)
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 8)
+                    .padding(.vertical, 16)
+                    .padding(.horizontal, 20)
                     .themeGradient(background: .layer3, gradientType: self.gradientType)
                     .cornerRadius(16)
                     .onTapGesture { [weak self] in
@@ -112,89 +116,90 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     }
 
     private func createTopView(parentStyle: ThemeStyle) -> some View {
-        let icon = self.createLogo(parentStyle: parentStyle)
-        let main = self.createMain(parentStyle: parentStyle)
-
-        return PlatformTableViewCellViewModel(logo: icon.wrappedViewModel,
-                                              main: main.wrappedViewModel)
-        .createView(parentStyle: parentStyle)
+        HStack(spacing: 0) {
+            createLogo(parentStyle: parentStyle)
+            Spacer(minLength: 8)
+            createTopRowStats(parentStyle: parentStyle)
+        }
     }
 
     private func createBottomView(parentStyle: ThemeStyle) -> some View {
-        GeometryReader { geo in
-            HStack(alignment: .top) {
+        SingleAxisGeometryReader(axis: .horizontal, alignment: .center) { width in
+            let numElements: CGFloat = 3.0
+            let spacing: CGFloat = 8
+            let elementWidth = max(0, (width - (numElements - 1) * spacing) / numElements)
+            return HStack(alignment: .top, spacing: 8) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.INDEX_ENTRY"))
-                        .themeFont(fontSize: .smaller)
-                        .themeColor(foreground: .textTertiary)
+                    Group {
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.LIQ_ORACLE"))
+                            .themeFont(fontSize: .smaller)
+                            .themeColor(foreground: .textTertiary)
 
-                    Text(self.indexPrice ?? "")
-                        .themeFont(fontSize: .small)
-                        .themeColor(foreground: .textPrimary)
-                        .minimumScaleFactor(0.5)
+                        Text(self.liquidationPrice ?? "")
+                            .themeFont(fontSize: .small)
+                            .themeColor(foreground: .textPrimary)
 
-                    Text(self.entryPrice ?? "")
-                        .themeFont(fontSize: .smaller)
-                        .themeColor(foreground: .textTertiary)
-                        .minimumScaleFactor(0.5)
+                        Text(self.indexPrice ?? "")
+                            .themeFont(fontSize: .smaller)
+                            .themeColor(foreground: .textTertiary)
+                    }
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                    .frame(width: elementWidth, alignment: .leading)
                 }
-                .leftAligned()
-                .frame(width: geo.size.width / 3)
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.PROFIT_AND_LOSS"))
-                        .themeFont(fontSize: .smaller)
-                        .themeColor(foreground: .textTertiary)
+                    Group {
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.PROFIT_AND_LOSS"))
+                            .themeFont(fontSize: .smaller)
+                            .themeColor(foreground: .textTertiary)
 
-                    self.unrealizedPnl?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .small))
-                    Text(self.unrealizedPnlPercent)
-                        .themeFont(fontSize: .smaller)
-                        .themeColor(foreground: .textTertiary)
+                        self.unrealizedPnl?.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .small))
+                        Text(self.unrealizedPnlPercent)
+                            .themeFont(fontSize: .smaller)
+                            .themeColor(foreground: .textTertiary)
+                    }
+                    .frame(width: elementWidth, alignment: .leading)
                 }
-                .leftAligned()
-                .frame(width: geo.size.width / 3)
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.MARGIN"))
-                        .themeFont(fontSize: .smaller)
-                        .themeColor(foreground: .textTertiary)
+                    Group {
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.MARGIN"))
+                            .themeFont(fontSize: .smaller)
+                            .themeColor(foreground: .textTertiary)
 
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(self.marginValue)
-                                .themeFont(fontSize: .small)
-                                .themeColor(foreground: .textPrimary)
-                                .minimumScaleFactor(0.5)
+                        HStack(spacing: 8) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(self.marginValue)
+                                    .themeFont(fontSize: .small)
+                                    .themeColor(foreground: .textPrimary)
 
-                            Text(self.marginMode)
-                                .themeFont(fontSize: .smaller)
-                                .themeColor(foreground: .textTertiary)
-                                .minimumScaleFactor(0.5)
-                        }
-
-                        Spacer()
-
-                        if self.isMarginAdjustable {
-
-                            let buttonContent = PlatformIconViewModel(type: .asset(name: "icon_edit", bundle: Bundle.dydxView),
-                                                                      size: CGSize(width: 20, height: 20),
-                                                                      templateColor: .textSecondary)
-                            PlatformButtonViewModel(content: buttonContent,
-                                                    type: PlatformButtonType.iconType) { [weak self] in
-                                self?.handler?.onMarginEditAction?()
+                                Text(self.marginMode)
+                                    .themeFont(fontSize: .smaller)
+                                    .themeColor(foreground: .textTertiary)
                             }
-                                .createView(parentStyle: parentStyle)
-                                .frame(width: 32, height: 32)
-                                .themeColor(background: .layer6)
-                                .border(borderWidth: 1, cornerRadius: 7, borderColor: ThemeColor.SemanticColor.layer7.color)
+
+                            if self.isMarginAdjustable {
+
+                                let buttonContent = PlatformIconViewModel(type: .asset(name: "icon_edit", bundle: Bundle.dydxView),
+                                                                          size: CGSize(width: 20, height: 20),
+                                                                          templateColor: .textSecondary)
+                                PlatformButtonViewModel(content: buttonContent,
+                                                        type: PlatformButtonType.iconType) { [weak self] in
+                                    self?.handler?.onMarginEditAction?()
+                                }
+                                                        .createView(parentStyle: parentStyle)
+                                                        .frame(width: 32, height: 32)
+                                                        .themeColor(background: .layer6)
+                                                        .border(borderWidth: 1, cornerRadius: 7, borderColor: ThemeColor.SemanticColor.layer7.color)
+                            }
                         }
                     }
+                    .frame(width: elementWidth, alignment: .leading)
                 }
-                .leftAligned()
-                .frame(width: geo.size.width / 3)
             }
+
         }
-        .padding(.horizontal, 16)
     }
 
     private func createLogo( parentStyle: ThemeStyle) -> some View {
@@ -206,16 +211,22 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         }
     }
 
-    private func createMain(parentStyle: ThemeStyle) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack(spacing: 2) {
-                Text(size ?? "")
-                    .themeFont(fontType: .number, fontSize: .small)
-
-                token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
+    private func createTopRowStats(parentStyle: ThemeStyle) -> some View {
+        HStack(alignment: .top, spacing: 0) {
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 4) {
+                    Text(size ?? "")
+                        .themeFont(fontType: .base, fontSize: .small)
+                        .themeColor(foreground: .textPrimary)
+                    token?.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
+                }
+                Text(notionalValue ?? "")
+                    .themeFont(fontSize: .smaller)
+                    .themeColor(foreground: .textTertiary)
             }
 
-            HStack(spacing: 2) {
+            Spacer(minLength: 8)
+            HStack(alignment: .top, spacing: 2) {
                 sideText
                     .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))
                 Text("@")
@@ -223,11 +234,10 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                     .themeColor(foreground: .textTertiary)
 
                 Text(leverage ?? "")
-                    .themeFont(fontType: .number, fontSize: .smaller)
+                    .themeFont(fontType: .base, fontSize: .smaller)
+                    .themeColor(foreground: .textPrimary)
             }
         }
-        .leftAligned()
-        .minimumScaleFactor(0.5)
     }
 }
 
@@ -282,7 +292,6 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
                 .borderAndClip(style: .circle, borderColor: .borderDefault)
             Spacer()
         }
-        .padding(.horizontal, 16)
         .frame(width: UIScreen.main.bounds.width - 32)
         .themeFont(fontSize: .small)
         .themeColor(foreground: .textTertiary)

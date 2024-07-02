@@ -43,17 +43,16 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
                 AbacusStateManager.shared.state.selectedSubaccountPositions,
                 AbacusStateManager.shared.state.marketMap)
             .sink { [weak self] input, positions, marketMap in
-                if let tradeSummary = input.summary,
-                    let marketId = input.marketId,
-                    let market = marketMap[marketId],
-                    let position = positions.first(where: { $0.id == marketId }) {
-                    self?.updateExpectedPrice(tradeSummary: tradeSummary, market: market)
-                    self?.updateLiquidationPrice(position: position, market: market)
-                    self?.updatePositionMargin(position: position)
-                    self?.updatePositionLeverage(position: position)
-                    self?.updateTradingFee(tradeSummary: tradeSummary)
-                    self?.updateTradingRewards(tradeSummary: tradeSummary)
-                }
+                let tradeSummary = input.summary
+                let marketId = input.marketId
+                let market = marketMap[marketId ?? ""]
+                let position = positions.first(where: { $0.id == marketId })
+                self?.updateExpectedPrice(tradeSummary: tradeSummary, market: market)
+                self?.updateLiquidationPrice(position: position, market: market)
+                self?.updatePositionMargin(position: position)
+                self?.updatePositionLeverage(position: position)
+                self?.updateTradingFee(tradeSummary: tradeSummary)
+                self?.updateTradingRewards(tradeSummary: tradeSummary)
             }
             .store(in: &subscriptions)
 
@@ -85,16 +84,16 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
         }
     }
 
-    private func updateExpectedPrice(tradeSummary: TradeInputSummary?, market: PerpetualMarket) {
-        let value = dydxFormatter.shared.dollar(number: tradeSummary?.price?.doubleValue, digits: market.configs?.displayTickSizeDecimals?.intValue ?? 0)
+    private func updateExpectedPrice(tradeSummary: TradeInputSummary?, market: PerpetualMarket?) {
+        let value = dydxFormatter.shared.dollar(number: tradeSummary?.price?.doubleValue, digits: market?.configs?.displayTickSizeDecimals?.intValue ?? 2)
         expectedPriceViewModel.title = DataLocalizer.localize(path: "APP.TRADE.EXPECTED_PRICE")
         expectedPriceViewModel.value = value
     }
 
-    private func updateLiquidationPrice(position: SubaccountPosition?, market: PerpetualMarket) {
+    private func updateLiquidationPrice(position: SubaccountPosition?, market: PerpetualMarket?) {
         let title = DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE_SHORT")
         let unit = AmountTextModel.Unit.dollar
-        let tickSize = market.configs?.displayTickSizeDecimals?.intValue.asNsNumber
+        let tickSize = market?.configs?.displayTickSizeDecimals?.intValue.asNsNumber ?? 2
         liquidationPriceViewModel.title = title
         liquidationPriceViewModel.value = createAmountChangeViewModel(title: title, tradeState: position?.liquidationPrice, tickSize: tickSize, unit: unit)
     }
