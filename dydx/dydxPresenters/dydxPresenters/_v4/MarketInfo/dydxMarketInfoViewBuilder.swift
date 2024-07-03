@@ -128,6 +128,11 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
         super.start()
 
         guard let marketId = marketId else { return }
+
+        fillsPresenter.filterByMarketId = marketId
+        fundingPresenter.filterByMarketId = marketId
+        ordersPresenter.filterByMarketId = marketId
+
         AbacusStateManager.shared.setMarket(market: marketId)
 
         $marketId
@@ -172,17 +177,14 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
 
     private func updatePositionSection(position: SubaccountPosition?, pendingPosition: SubaccountPendingPosition?) {
         if let position, position.side.current != PositionSide.none {
-            fillsPresenter.filterByMarketId = position.id
-            fundingPresenter.filterByMarketId = position.id
-            ordersPresenter.filterByMarketId = position.id
             positionPresenter.position = position
             positionPresenter.pendingPosition = nil
         } else if let pendingPosition, pendingPosition.orderCount > 0 {
-            fillsPresenter.filterByMarketId = pendingPosition.marketId
-            fundingPresenter.filterByMarketId = pendingPosition.marketId
-            ordersPresenter.filterByMarketId = pendingPosition.marketId
             positionPresenter.position = nil
             positionPresenter.pendingPosition = pendingPosition
+        } else {
+            positionPresenter.position = nil
+            positionPresenter.pendingPosition = nil
         }
         resetPresentersForVisibilityChange()
     }
