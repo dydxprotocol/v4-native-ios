@@ -93,9 +93,9 @@ open class GraphingPresenter: NSObject {
     }
 
     open func displayGraphing(animated: Bool) {
-        let dataSets = graphingDataSets()
-        apply(datasets: dataSets)
-        Console.shared.log("Graphing: Applying Data")
+//        let dataSets = graphingDataSets()
+//        apply(datasets: dataSets)
+//        Console.shared.log("Graphing: Applying Data")
 
 //        throttle.debounce()?.run({[weak self] in
 //            if let dataSets = self?.graphingDataSets() {

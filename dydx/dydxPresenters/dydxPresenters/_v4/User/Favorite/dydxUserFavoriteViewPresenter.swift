@@ -36,18 +36,4 @@ class dydxUserFavoriteViewPresenter: HostedViewPresenter<dydxUserFavoriteViewMod
             }
         }
     }
-
-    override func start() {
-        super.start()
-
-        /* Add observation and update viewModel */
-        $marketId
-            .compactMap { $0 }
-            .removeDuplicates()
-            .sink { [weak self] marketId in
-                guard let self = self, let viewModel = self.viewModel else { return }
-                viewModel.isFavorited = self.favoriteStore.isFavorite(marketId: marketId)
-            }
-            .store(in: &subscriptions)
-    }
 }

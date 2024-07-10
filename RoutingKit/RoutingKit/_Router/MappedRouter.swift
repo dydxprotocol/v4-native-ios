@@ -270,10 +270,17 @@ open class MappedRouter: NSObject, RouterProtocol, ParsingProtocol, CombineObser
             pendingCompletion = completion
         }
     }
+    
+    private let dateFormatter = { () -> DateFormatter in
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss.SSS'Z'"
+        return formatter
+    }()
 
     open func reallyNavigate(to request: RoutingRequest, presentation: RoutingPresentation?, animated: Bool, completion: RoutingCompletionBlock?) {
+        print("mmm: \(dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
         if let path = request.path {
-            Console.shared.log("Route to \(path)")
+            Console.shared.log("mmm: Route to \(path)")
         }
         if disabled {
             completion?(nil, false)

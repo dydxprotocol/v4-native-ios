@@ -41,27 +41,6 @@ class dydxAssetItemChartViewPresenter: HostedViewPresenter<dydxChartViewModel>, 
         lineGraphingPresenter.presenters = [listPresenter]
     }
 
-    override func start() {
-        super.start()
-
-        Publishers
-            .CombineLatest(
-                $sparklines
-                    .compactMap { $0 }
-                    .removeDuplicates(),
-                $priceChange24HPercent
-                    .compactMap {
-                        ($0 ?? 0) < 0 ? ThemeSettings.negativeColor.uiColor : ThemeSettings.positiveColor.uiColor
-                    }
-                    .removeDuplicates()
-            )
-            .sink { (sparklines: [Double], color: UIColor?) in
-                self.listPresenter.color = color
-                self.updateGraphData(sparklines: sparklines)
-            }
-            .store(in: &subscriptions)
-    }
-
     private func updateGraphData(sparklines: [Double]) {
         let dataPoints = sparklines.enumerated()
             .map { (index, line) in

@@ -23,6 +23,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -34,6 +38,10 @@ public final class AbacusState {
             .map(\.currentWallet)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -51,6 +59,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -58,6 +70,10 @@ public final class AbacusState {
         transferState
             .map { $0.transfers.first { $0.transactionHash == transactionHash } }
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -69,6 +85,10 @@ public final class AbacusState {
             .map(\.?.transferStatuses)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -80,6 +100,10 @@ public final class AbacusState {
             .map(\.?.account)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -88,6 +112,10 @@ public final class AbacusState {
             .map(\.?.launchIncentive)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -98,6 +126,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -107,6 +139,10 @@ public final class AbacusState {
             .compactMap { $0?.restriction?.restriction ?? .noRestriction }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -116,6 +152,10 @@ public final class AbacusState {
             .compactMap { $0?.compliance }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -126,6 +166,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -136,6 +180,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -147,6 +195,10 @@ public final class AbacusState {
             .compactMap(\.?.groupedSubaccounts?[subaccountNumber])
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -160,6 +212,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -173,6 +229,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -186,6 +246,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -197,6 +261,10 @@ public final class AbacusState {
             .prepend([])
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -208,6 +276,10 @@ public final class AbacusState {
             .prepend([])
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -219,6 +291,10 @@ public final class AbacusState {
             .prepend([])
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -231,6 +307,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -244,6 +324,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -255,6 +339,10 @@ public final class AbacusState {
             .compactMap(\.?.historicalFundings)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -266,8 +354,18 @@ public final class AbacusState {
             .compactMap { $0[marketId] }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
+
+    private let dateFormatter = { () -> DateFormatter in
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss.SSS'Z'"
+        return formatter
+    }()
 
     /**
      Market Summary
@@ -275,9 +373,14 @@ public final class AbacusState {
     public var marketSummary: AnyPublisher<PerpetualMarketSummary, Never> {
         statePublisher
             .compactMap(\.?.marketsSummary)
+            .prefix(10)
             .removeDuplicates()
             .throttle(for: .milliseconds(1000), scheduler: DispatchQueue.main, latest: true)
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -290,6 +393,10 @@ public final class AbacusState {
             .prepend([:])
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -301,6 +408,10 @@ public final class AbacusState {
             .compactMap { $0[marketId] }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -311,9 +422,14 @@ public final class AbacusState {
         statePublisher
             .compactMap(\.?.orderbooks)
             .prepend([:])
-            .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
+            .first()
+            .throttle(for: .milliseconds(1000), scheduler: DispatchQueue.main, latest: true)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -322,9 +438,16 @@ public final class AbacusState {
      **/
     public func orderbook(of marketId: String) -> AnyPublisher<MarketOrderbook?, Never> {
         orderbooksMap
+            .first()
+            .throttle(for: .milliseconds(1000), scheduler: DispatchQueue.main, latest: true)
+
             .compactMap { $0[marketId] }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -337,6 +460,10 @@ public final class AbacusState {
             .prepend([:])
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -348,6 +475,10 @@ public final class AbacusState {
             .compactMap { $0[marketId] }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -359,6 +490,10 @@ public final class AbacusState {
             .compactMap { $0.marketIds() }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -371,9 +506,14 @@ public final class AbacusState {
             .prepend([:])
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
+//    private var count: Int
     /**
      List Market ordrered by market IDs
      **/
@@ -388,6 +528,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: {[weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -399,6 +543,10 @@ public final class AbacusState {
             .compactMap { $0[marketId] }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -411,6 +559,10 @@ public final class AbacusState {
             .throttle(for: .milliseconds(1000), scheduler: DispatchQueue.main, latest: true)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -422,6 +574,10 @@ public final class AbacusState {
             .compactMap(\.[assetId])
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -443,6 +599,10 @@ public final class AbacusState {
             }
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -452,6 +612,10 @@ public final class AbacusState {
             .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -461,6 +625,10 @@ public final class AbacusState {
             .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -470,6 +638,10 @@ public final class AbacusState {
             .removeDuplicates()
             .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -479,6 +651,10 @@ public final class AbacusState {
             .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -492,6 +668,10 @@ public final class AbacusState {
             .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -510,6 +690,10 @@ public final class AbacusState {
             .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -528,6 +712,10 @@ public final class AbacusState {
             .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 
@@ -568,6 +756,10 @@ public final class AbacusState {
             .map(\.?.wallet?.user)
             .removeDuplicates()
             .share()
+            .breakpoint(receiveOutput: { [weak self] _ in
+                print("mmm: \(self?.dateFormatter.string(from: Date()) ?? "N/A") \(#line) | \(#file)")
+                return false
+            })
             .eraseToAnyPublisher()
     }
 

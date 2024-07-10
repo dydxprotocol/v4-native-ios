@@ -90,7 +90,7 @@ final class dydxMarketAssetListViewPresenter: HostedViewPresenter<dydxMarketAsse
     private func updateAssetList(markets: [PerpetualMarket], candlesMap: [String: MarketCandles], assetMap: [String: Asset]) {
         var allAssetIds = Set<String>()
 
-        viewModel?.items = markets.compactMap { (market: PerpetualMarket) -> dydxMarketAssetItemViewModel in
+        viewModel?.items = markets.prefix(2).compactMap { (market: PerpetualMarket) -> dydxMarketAssetItemViewModel in
             allAssetIds.insert(market.assetId)
 
             let vm = viewModelMap[market.id] ?? dydxMarketAssetItemViewModel()

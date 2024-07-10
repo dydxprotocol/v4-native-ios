@@ -36,13 +36,13 @@ private class dydxMarketInfoViewController: HostingViewController<PlatformView, 
                 let preselectedSection = Section.allSections.map(\.key).firstIndex(of: section) ?? 0
                 presenter.viewModel?.sections.onSelectionChanged?(preselectedSection)
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                if request?.path == "/trade" {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["full": "true"]), animated: true, completion: nil)
-                } else {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/input"), animated: true, completion: nil)
-                }
-            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                if request?.path == "/trade" {
+//                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["full": "true"]), animated: true, completion: nil)
+//                } else {
+//                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/input"), animated: true, completion: nil)
+//                }
+//            }
             return true
         }
         return false
