@@ -154,7 +154,8 @@ public final class AbacusStateManager: NSObject {
             }
         }
 
-        appConfigs.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
+//        appConfigs.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
+        StatsigConfig.shared.useSkip = true
 
         return AsyncAbacusStateManagerV2(
             deploymentUri: deploymentUri,
