@@ -155,6 +155,7 @@ public final class AbacusStateManager: NSObject {
         }
 
         appConfigs.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
+        appConfigs.onboardingConfigs.alchemyApiKey = CredientialConfig.shared.key(for: "alchemyApiKey")
         StatsigConfig.shared.useSkip = true
 
         return AsyncAbacusStateManagerV2(
