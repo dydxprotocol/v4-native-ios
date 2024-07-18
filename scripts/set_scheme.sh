@@ -52,7 +52,7 @@ WEB_APP_URL=${WEB_APP_URL%/}
 echo "Web App URL after cleaning: $WEB_APP_URL"
 
 echo "Fetching env.json from $WEB_APP_URL"
-ENV_JSON=$(curl -X GET "$WEB_APP_URL/configs/env.json")
+ENV_JSON=$(curl -X GET "$WEB_APP_URL/configs/v1/env.json")
 if [ $? -ne 0 ]; then
   echo "Failed to fetch env.json from $WEB_APP_URL"
   exit 1
