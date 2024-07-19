@@ -59,20 +59,25 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
             self?.update(value: "\(value.value)")
         }
         self.ctaButtonPresenter.viewModel?.ctaAction = {
-            guard let value = viewModel.leverageInput?.value else { return }
+            let value = viewModel.sliderTextInput.value
             AbacusStateManager.shared.trade(input: "\(value)", type: .targetleverage)
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
-        self.viewModel?.leverageInput?.onEdited = {[weak self] value in
-            self?.update(value: value)
-        }
+
+        self.viewModel?.sliderTextInput.$value
+            .removeDuplicates()
+            .map { "\($0)" }
+            .sink(receiveValue: { [weak self] value in
+                self?.update(value: value)
+            })
+            .store(in: &subscriptions)
 
         attachChildren(workers: childPresenters)
     }
 
     private func update(value: String?) {
         let valueAsDouble = Double(value ?? "") ?? 0
-        viewModel?.leverageInput?.value = value
+        viewModel?.sliderTextInput.value = valueAsDouble.round(to: 2)
         viewModel?.selectedOptionIndex = viewModel?.leverageOptions.firstIndex(where: { option in
             option.value == valueAsDouble
         })
@@ -93,6 +98,7 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
                 guard let viewModel = self?.viewModel, let marketId = tradeInput?.marketId, let market = configsAndAssetMap[marketId] else { return }
                 if let effectiveInitialMarginFraction = market.configs?.effectiveInitialMarginFraction?.doubleValue, effectiveInitialMarginFraction > 0 {
                     let maxLeverage = 1.0 / effectiveInitialMarginFraction
+                    viewModel.sliderTextInput.maxValue = maxLeverage
                     viewModel.leverageOptions = [1, 2, 3, 5, 10]
                         .filter { $0 < maxLeverage }
                         .map { dydxTargetLeverageViewModel.LeverageTextAndValue(text: dydxFormatter.shared.multiplier(number: Double($0)) ?? "", value: $0) }
