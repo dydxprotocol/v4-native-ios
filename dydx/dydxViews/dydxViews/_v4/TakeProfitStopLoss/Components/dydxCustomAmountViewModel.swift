@@ -10,11 +10,20 @@ import SwiftUI
 import PlatformUI
 import dydxFormatter
 import Utilities
+import Combine
 
 public class dydxCustomAmountViewModel: PlatformViewModel {
 
-    @Published private (set) public var isOn: Bool = false
+    @Published public var isOn: Bool = false
     @Published public var toggleAction: ((Bool) -> Void)?
+
+    public var valuePublisher: AnyPublisher<String?, Never> {
+        Publishers.CombineLatest($isOn, sliderTextInput.valueAsString)
+            .map { isOn, value in
+                isOn ? value : nil
+            }
+            .eraseToAnyPublisher()
+    }
 
     @Published public var sliderTextInput = dydxSliderInputViewModel(
         title: DataLocalizer.localize(path: "APP.GENERAL.AMOUNT"),
