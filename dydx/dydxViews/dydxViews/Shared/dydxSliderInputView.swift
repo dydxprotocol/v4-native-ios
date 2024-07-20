@@ -9,25 +9,37 @@ import SwiftUI
 import PlatformUI
 import dydxFormatter
 import Utilities
+import Combine
 
 public class dydxSliderInputViewModel: PlatformViewModel {
-    let title: String?
+    public let title: String?
+    @Published public var accessoryTitle: String?
     @Published public var minValue: Double = 0
     @Published public var maxValue: Double = 0
-    let formatter: dydxNumberInputFormatter
+    public let formatter: dydxNumberInputFormatter
     @Published public var value: Double = 0 {
         didSet {
-            guard value != oldValue else { return }
-            value = max(minValue, min(value, maxValue))
+            let roundedValue = value.round(to: formatter.fractionDigits)
+            guard roundedValue != value else { return }
+            value = min(maxValue, max(minValue, roundedValue))
         }
+    }
+
+    public var valueAsString: AnyPublisher<String, Never> {
+        $value
+            .map { [weak self] value in
+                return self?.formatter.string(for: value) ?? ""
+            }
+            .eraseToAnyPublisher()
     }
 
     var placeholder: String {
         formatter.string(for: Double.zero) ?? ""
     }
 
-    init(title: String?, formatter: dydxNumberInputFormatter) {
+    init(title: String?, accessoryTitle: String? = nil, formatter: dydxNumberInputFormatter) {
         self.title = title
+        self.accessoryTitle = accessoryTitle
         self.formatter = formatter
     }
 
@@ -50,6 +62,7 @@ private struct dydxSliderTextInput: View {
 
     var textInput: some View {
         dydxNumberField(title: viewModel.title,
+                        accessoryTitle: viewModel.accessoryTitle,
                         placeholder: viewModel.placeholder,
                         formatter: viewModel.formatter,
                         value: $viewModel.value)

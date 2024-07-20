@@ -10,7 +10,7 @@ import Foundation
 /// a number formatter that also supports rounding to nearest 10/100/1000/etc
 /// formatter is intended for user inputs, so group separator is omitted, i.e. the "," in "1,000"
 public class dydxNumberInputFormatter: Formatter {
-    public private(set) var fractionDigits: Int
+    public var fractionDigits: Int
     public let shouldIncludeInsignificantZeros: Bool
 
     /// - Parameter fractionDigits: if greater than 0, numbers will be rounded to nearest 10, 100, 1000, etc. If less than 0 numbers will be rounded to nearest 0.1, 0.01, .001
@@ -19,6 +19,13 @@ public class dydxNumberInputFormatter: Formatter {
         self.fractionDigits = fractionDigits
         self.shouldIncludeInsignificantZeros = shouldIncludeInsignificantZeros
         super.init()
+    }
+
+    /// - Parameter precisionString: should be in the format "10" or "1" or "0.1" etc. A precision for fraction digits will be extracted from the number
+    /// - Parameter shouldIncludeInsignificantZeros: If fractionDigits is less than 0, trailing zeros will be truncated
+    public convenience init(precisionString: String, shouldIncludeInsignificantZeros: Bool = false) {
+        let fractionDigits = dydxFormatter.shared.digits(size: precisionString)
+        self.init(fractionDigits: fractionDigits, shouldIncludeInsignificantZeros: shouldIncludeInsignificantZeros)
     }
 
     required init?(coder: NSCoder) {
@@ -38,14 +45,14 @@ public class dydxNumberInputFormatter: Formatter {
         return String(Int(roundedValue))
     }
 
-    private lazy var numberFormatter: NumberFormatter = {
+    private var numberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = shouldIncludeInsignificantZeros ? fractionDigits : 0
         formatter.maximumFractionDigits = fractionDigits
         formatter.numberStyle = .decimal
         formatter.usesGroupingSeparator = false
         return formatter
-    }()
+    }
 
     private func roundToFractionDigits(number: Double) -> String {
         numberFormatter.string(from: NSNumber(value: number)) ?? "\(number)"

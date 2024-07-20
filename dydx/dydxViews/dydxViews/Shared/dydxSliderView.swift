@@ -20,22 +20,27 @@ struct dydxSlider: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 track(width: geometry.size.width)
-                Rectangle()
-                    .fill(ThemeColor.SemanticColor.layer7.color)
-                    .frame(width: thumbRadius * 2, height: thumbRadius * 2)
-                    .borderAndClip(style: .circle, borderColor: .textTertiary)
-                    .offset(x: CGFloat(value/(maxValue - minValue)) * (geometry.size.width - thumbRadius * 2))
-
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged({ gesture in
-                                updateValue(with: gesture, in: geometry)
-                            })
-                    )
-
+                cursor(geometry: geometry)
             }
         }
         .frame(height: thumbRadius * 2)
+    }
+
+    private func cursor(geometry: GeometryProxy) -> some View {
+        let draggableLength = (geometry.size.width - thumbRadius * 2)
+        let dragPortion = (value - minValue)/(maxValue - minValue) * draggableLength
+        let xOffset = min(max(0, dragPortion), draggableLength)
+        return Rectangle()
+            .fill(ThemeColor.SemanticColor.layer7.color)
+            .frame(width: thumbRadius * 2, height: thumbRadius * 2)
+            .borderAndClip(style: .circle, borderColor: .textTertiary)
+            .offset(x: xOffset)
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged({ gesture in
+                        updateValue(with: gesture, geometry: geometry)
+                    })
+            )
     }
 
     private func track(width: Double) -> some View {
@@ -64,7 +69,7 @@ struct dydxSlider: View {
         .frame(height: 8)
     }
 
-    private func updateValue(with gesture: DragGesture.Value, in geometry: GeometryProxy) {
+    private func updateValue(with gesture: DragGesture.Value, geometry: GeometryProxy) {
         // makes a subtle difference to move the slider constant with user gesture rather than with a multiplier speed
         // otherwise slider jumps on initial tap as well
         let dragTouchLocationCentered = gesture.location.x - thumbRadius
@@ -74,7 +79,7 @@ struct dydxSlider: View {
             value = maxValue
         } else {
             let dragPortion = dragTouchLocationCentered / (geometry.size.width - thumbRadius * 2)
-            let newValue = (maxValue - minValue) * dragPortion
+            let newValue = (maxValue - minValue) * dragPortion + minValue
             value = min(max(newValue, minValue), maxValue)
         }
     }

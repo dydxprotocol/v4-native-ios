@@ -77,7 +77,7 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
 
     private func update(value: String?) {
         let valueAsDouble = Double(value ?? "") ?? 0
-        viewModel?.sliderTextInput.value = valueAsDouble.round(to: 2)
+        viewModel?.sliderTextInput.value = valueAsDouble
         viewModel?.selectedOptionIndex = viewModel?.leverageOptions.firstIndex(where: { option in
             option.value == valueAsDouble
         })

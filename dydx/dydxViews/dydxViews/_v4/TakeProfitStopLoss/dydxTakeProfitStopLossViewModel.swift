@@ -153,7 +153,6 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
                         }
                     }
                     .keyboardObserving()
-                    .keyboardAccessory(background: .layer3, parentStyle: parentStyle)
                     Spacer(minLength: 18)
                     self.createCta(parentStyle: parentStyle, styleKey: styleKey)
                 }
