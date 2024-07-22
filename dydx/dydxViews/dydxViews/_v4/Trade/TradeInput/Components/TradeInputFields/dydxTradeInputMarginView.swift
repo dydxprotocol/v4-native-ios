@@ -39,6 +39,7 @@ public class dydxTradeInputMarginViewModel: PlatformViewModel {
                     .themeFont(fontSize: .smaller)
                     .themeColor(foreground: .textTertiary)
             }
+                .lineLimit(1)
             Spacer()
         }
             .wrappedViewModel
@@ -62,6 +63,7 @@ public class dydxTradeInputMarginViewModel: PlatformViewModel {
                 .themeFont(fontType: .plus, fontSize: .smaller)
                 .themeColor(foreground: .textTertiary)
         }
+            .lineLimit(1)
             .padding(.horizontal, 16)
             .wrappedViewModel
 
