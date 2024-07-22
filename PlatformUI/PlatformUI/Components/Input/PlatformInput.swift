@@ -12,20 +12,20 @@ import Introspect
 import Popovers
 
 // a View is required here since programmatically focusing a textView requires a @FocusState property wrapper
-public struct PlatformInputView: View {
+private struct PlatformInputView: View {
     @ObservedObject private var model: PlatformInputModel
     @FocusState private var isFocused: Bool
 
     private var parentStyle: ThemeStyle
     private var styleKey: String?
 
-    public init(model: PlatformInputModel, parentStyle: ThemeStyle = .defaultStyle, styleKey: String? = nil) {
+    init(model: PlatformInputModel, parentStyle: ThemeStyle, styleKey: String?) {
         self.model = model
         self.parentStyle = parentStyle
         self.styleKey = styleKey
     }
     
-    public var body: some View {
+    var body: some View {
         return HStack(alignment: .center, spacing: 4) {
             VStack(alignment: .leading, spacing: 4) {
                 header
