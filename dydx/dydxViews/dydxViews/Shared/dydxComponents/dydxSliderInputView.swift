@@ -16,29 +16,17 @@ public class dydxSliderInputViewModel: PlatformViewModel {
     @Published public var accessoryTitle: String?
     @Published public var minValue: Double = 0
     @Published public var maxValue: Double = 0
+    /// number of decimals after the decimal place to display
     @Published public var precision: Int = 0
+    @Published public private(set) var valueAsString: String = ""
     @Published public var value: Double? {
         didSet {
             valueAsString = value.map { numberFormatter.string(from: $0 as NSNumber) ?? "" } ?? ""
         }
     }
 
-    public func setPrecision(_ stepSize: Double) {
-        guard stepSize > 0 else {
-            assertionFailure("Step size must be greater than 0")
-            return
-        }
-        precision = Int(-log10(stepSize))
-    }
-
     var numberFormatter: dydxNumberInputFormatter {
         dydxNumberInputFormatter(fractionDigits: precision)
-    }
-
-    @Published public private(set) var valueAsString: String = ""
-
-    var placeholder: String {
-        numberFormatter.string(for: Double.zero) ?? ""
     }
 
     init(title: String?, accessoryTitle: String? = nil, precision: Int) {
@@ -68,7 +56,6 @@ private struct dydxSliderTextInput: View {
     var textInput: some View {
         dydxTitledNumberField(title: viewModel.title,
                         accessoryTitle: viewModel.accessoryTitle,
-                        placeholder: viewModel.placeholder,
                         precision: viewModel.precision,
                         minValue: viewModel.minValue,
                         maxValue: viewModel.maxValue,

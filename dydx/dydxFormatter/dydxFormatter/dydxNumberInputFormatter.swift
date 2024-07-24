@@ -28,6 +28,7 @@ public class dydxNumberInputFormatter: NumberFormatter {
         self.init()
         self.maximumFractionDigits = fractionDigits
         self.minimumFractionDigits = fractionDigits
+        self.numberStyle = .decimal
         self.usesGroupingSeparator = false
     }
 

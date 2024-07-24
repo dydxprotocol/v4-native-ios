@@ -10,10 +10,10 @@ import dydxFormatter
 import PlatformUI
 
 /// Effectively a TextField which forces its input as a number
+/// Supports dydx-style title and title accesory view
 struct dydxTitledNumberField: View {
     let title: String?
     let accessoryTitle: String?
-    let placeholder: String?
     let precision: Int
     let minValue: Double
     let maxValue: Double
@@ -126,7 +126,6 @@ private struct NumberTextField: View {
         Binding<String>(
             get: {
                 if let value = actualValue {
-                    print("mmm: numberFormatter.string(from: NSNumber(value: value)): \(numberFormatter.string(from: NSNumber(value: value)))")
                     return numberFormatter.string(from: NSNumber(value: value)) ?? ""
                 } else {
                     return ""
@@ -134,7 +133,6 @@ private struct NumberTextField: View {
             },
             set: { newValue in
                 if let doubleValue = Double(newValue) {
-                    print("mmm: formatValue(clamp(doubleValue): \(formatValue(clamp(doubleValue)))")
                     actualValue = formatValue(clamp(doubleValue))
                 } else {
                     actualValue = nil

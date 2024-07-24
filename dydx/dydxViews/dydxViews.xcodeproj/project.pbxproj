@@ -196,7 +196,7 @@
 		27C027452AFD734800E92CCB /* dydxSettingsHelpRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */; };
 		27C6E4C92BC8C30E00ED892A /* dydxCustomLimitPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6E4BC2BC8C30E00ED892A /* dydxCustomLimitPriceViewModel.swift */; };
 		27CDA3D42BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CDA3D32BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift */; };
-		27DBF3C92C4A05B9009EB2D6 /* dydxNumberFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DBF3C82C4A05B9009EB2D6 /* dydxNumberFieldView.swift */; };
+		27DBF3C92C4A05B9009EB2D6 /* dydxTitledNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DBF3C82C4A05B9009EB2D6 /* dydxTitledNumberField.swift */; };
 		27E072D22C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E072D12C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift */; };
 		27E0736B2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E0736A2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift */; };
 		27ED340C2AD47CB100C159F5 /* dydxBannerErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */; };
@@ -570,7 +570,7 @@
 		27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsHelpRowView.swift; sourceTree = "<group>"; };
 		27C6E4BC2BC8C30E00ED892A /* dydxCustomLimitPriceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxCustomLimitPriceViewModel.swift; sourceTree = "<group>"; };
 		27CDA3D32BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMultipleOrdersExistViewModel.swift; sourceTree = "<group>"; };
-		27DBF3C82C4A05B9009EB2D6 /* dydxNumberFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNumberFieldView.swift; sourceTree = "<group>"; };
+		27DBF3C82C4A05B9009EB2D6 /* dydxTitledNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTitledNumberField.swift; sourceTree = "<group>"; };
 		27E072D12C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioPendingPositionsItemViewModel.swift; sourceTree = "<group>"; };
 		27E0736A2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCancelPendingIsolatedOrdersView.swift; sourceTree = "<group>"; };
 		27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxBannerErrorAlert.swift; sourceTree = "<group>"; };
@@ -925,9 +925,7 @@
 				024FEB7D2ACB82A10087A55E /* NavHeader.swift */,
 				0273A15E2ACCDDB1001B89F5 /* SelectionBar.swift */,
 				273F50152B7C3F120034792A /* SignedAmountView.swift */,
-				27DBF3C82C4A05B9009EB2D6 /* dydxNumberFieldView.swift */,
-				273C2F372C496F4F00F8391F /* dydxSliderInputView.swift */,
-				276AF8C62C4AE85A001DD695 /* dydxSliderView.swift */,
+				27D276222C519C98002775F2 /* dydxComponents */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1515,6 +1513,16 @@
 			path = Banner;
 			sourceTree = "<group>";
 		};
+		27D276222C519C98002775F2 /* dydxComponents */ = {
+			isa = PBXGroup;
+			children = (
+				27DBF3C82C4A05B9009EB2D6 /* dydxTitledNumberField.swift */,
+				273C2F372C496F4F00F8391F /* dydxSliderInputView.swift */,
+				276AF8C62C4AE85A001DD695 /* dydxSliderView.swift */,
+			);
+			path = dydxComponents;
+			sourceTree = "<group>";
+		};
 		27E0735D2C20D2680034B963 /* CancelOrders */ = {
 			isa = PBXGroup;
 			children = (
@@ -2008,7 +2016,7 @@
 				0279DE892BED402C00F9ECF8 /* dydxAdjustMarginPercentageView.swift in Sources */,
 				026382EB28F0EF0000F766FA /* dydxMarketPriceCandlesResolutionsView.swift in Sources */,
 				02F99F3E29E4D5750009B3E8 /* dydxTransferSearchItemView.swift in Sources */,
-				27DBF3C92C4A05B9009EB2D6 /* dydxNumberFieldView.swift in Sources */,
+				27DBF3C92C4A05B9009EB2D6 /* dydxTitledNumberField.swift in Sources */,
 				0284201629AD71B600C0E7CC /* Enums.swift in Sources */,
 				02678FA629666BE600EE346B /* dydxPortfolioOrdersView.swift in Sources */,
 				273C2F382C496F4F00F8391F /* dydxSliderInputView.swift in Sources */,
