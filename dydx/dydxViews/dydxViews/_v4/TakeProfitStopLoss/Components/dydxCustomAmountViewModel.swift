@@ -26,8 +26,7 @@ public class dydxCustomAmountViewModel: PlatformViewModel {
     }
 
     @Published public var sliderTextInput = dydxSliderInputViewModel(
-        title: DataLocalizer.localize(path: "APP.GENERAL.AMOUNT"),
-        precision: 2
+        title: DataLocalizer.localize(path: "APP.GENERAL.AMOUNT")
     )
 
     private var onOffSwitch: some View {
@@ -44,8 +43,7 @@ public class dydxCustomAmountViewModel: PlatformViewModel {
         let vm = dydxCustomAmountViewModel()
         vm.isOn = true
         vm.sliderTextInput = dydxSliderInputViewModel(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.AMOUNT", params: nil) ?? "",
-                                                      accessoryTitle: "ETH",
-                                                      precision: 2)
+                                                      accessoryTitle: "ETH")
         return vm
     }()
 

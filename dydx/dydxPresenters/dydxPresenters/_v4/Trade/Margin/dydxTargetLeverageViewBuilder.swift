@@ -63,6 +63,7 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
 
+        self.viewModel?.sliderTextInput.numberFormatter.fractionDigits = 2
         self.viewModel?.sliderTextInput.$value
             .removeDuplicates()
             .sink(receiveValue: { [weak self] value in

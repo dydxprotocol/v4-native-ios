@@ -9,9 +9,9 @@ import SwiftUI
 import PlatformUI
 
 struct dydxSlider: View {
-    @Binding var minValue: Double
-    @Binding var maxValue: Double
-    @Binding var precision: Int
+    var minValue: Double
+    var maxValue: Double
+    var precision: Int
     @Binding var value: Double?
 
     private let thumbRadius: CGFloat = 11

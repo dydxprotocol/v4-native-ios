@@ -16,8 +16,6 @@ public class dydxSliderInputViewModel: PlatformViewModel {
     @Published public var accessoryTitle: String?
     @Published public var minValue: Double = 0
     @Published public var maxValue: Double = 0
-    /// number of decimals after the decimal place to display
-    @Published public var precision: Int = 0
     @Published public private(set) var valueAsString: String = ""
     @Published public var value: Double? {
         didSet {
@@ -25,14 +23,11 @@ public class dydxSliderInputViewModel: PlatformViewModel {
         }
     }
 
-    var numberFormatter: dydxNumberInputFormatter {
-        dydxNumberInputFormatter(fractionDigits: precision)
-    }
+    @Published public private(set) var numberFormatter = dydxNumberInputFormatter()
 
-    init(title: String?, accessoryTitle: String? = nil, precision: Int) {
+    init(title: String?, accessoryTitle: String? = nil) {
         self.title = title
         self.accessoryTitle = accessoryTitle
-        self.precision = precision
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
@@ -47,16 +42,16 @@ private struct dydxSliderTextInput: View {
     @ObservedObject var viewModel: dydxSliderInputViewModel
 
     var slider: some View {
-        dydxSlider(minValue: $viewModel.minValue,
-                   maxValue: $viewModel.maxValue,
-                   precision: $viewModel.precision,
+        dydxSlider(minValue: viewModel.minValue,
+                   maxValue: viewModel.maxValue,
+                   precision: viewModel.numberFormatter.fractionDigits,
                    value: $viewModel.value)
     }
 
     var textInput: some View {
         dydxTitledNumberField(title: viewModel.title,
                         accessoryTitle: viewModel.accessoryTitle,
-                        precision: viewModel.precision,
+                        numberFormatter: viewModel.numberFormatter,
                         minValue: viewModel.minValue,
                         maxValue: viewModel.maxValue,
                         value: $viewModel.value)

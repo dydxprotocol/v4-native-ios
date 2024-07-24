@@ -9,16 +9,19 @@ import Foundation
 
 /// a number formatter that also supports rounding to nearest 10/100/1000/etc
 /// formatter is intended for user inputs, so group separator is omitted, i.e. the "," in "1,000"
-public class dydxNumberInputFormatter: NumberFormatter {
+public class dydxNumberInputFormatter: NumberFormatter, ObservableObject {
 
     /// if greater than 0, numbers will be rounded to nearest 10, 100, 1000, etc. If less than 0 numbers will be rounded to nearest 0.1, 0.01, .001
-    var fractionDigits: Int {
+    public var fractionDigits: Int {
         get {
             maximumFractionDigits
         }
         set {
-            maximumFractionDigits = newValue
-            minimumFractionDigits = newValue
+            if maximumFractionDigits != newValue || minimumFractionDigits != newValue {
+                maximumFractionDigits = newValue
+                minimumFractionDigits = newValue
+                objectWillChange.send()
+            }
         }
     }
 

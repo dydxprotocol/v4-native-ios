@@ -14,7 +14,7 @@ import PlatformUI
 struct dydxTitledNumberField: View {
     let title: String?
     let accessoryTitle: String?
-    let precision: Int
+    let numberFormatter: dydxNumberInputFormatter
     let minValue: Double
     let maxValue: Double
     @Binding var value: Double?
@@ -54,7 +54,7 @@ struct dydxTitledNumberField: View {
             actualValue: $value,
             minValue: minValue,
             maxValue: maxValue,
-            precision: precision)
+            numberFormatter: numberFormatter)
         .themeColor(foreground: .textPrimary)
         .themeFont(fontType: .base, fontSize: .medium)
         .truncationMode(.middle)
@@ -82,14 +82,10 @@ private struct NumberTextField: View {
 
     let minValue: Double
     let maxValue: Double
-    let precision: Int
-
-    private var numberFormatter: dydxNumberInputFormatter {
-        dydxNumberInputFormatter(fractionDigits: precision)
-    }
+    let numberFormatter: dydxNumberInputFormatter
 
     private var keyboardType: UIKeyboardType {
-        precision > 0 ? .decimalPad : .numberPad
+        numberFormatter.fractionDigits > 0 ? .decimalPad : .numberPad
     }
 
     @ViewBuilder
@@ -117,7 +113,7 @@ private struct NumberTextField: View {
         guard let value = value else {
             return nil
         }
-        let multiplier = pow(10.0, Double(precision))
+        let multiplier = pow(10.0, Double(numberFormatter.fractionDigits))
         let formattedValue = (value * multiplier).rounded() / multiplier
         return formattedValue
     }
@@ -143,11 +139,5 @@ private struct NumberTextField: View {
 
     private func clamp(_ value: Double) -> Double {
         min(max(value, minValue), maxValue)
-    }
-
-    private func formatNumber(_ value: Double) -> Double {
-        let multiplier = pow(10.0, Double(precision))
-        let formattedValue = (value * multiplier).rounded() / multiplier
-        return formattedValue
     }
 }

@@ -128,7 +128,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel?.customAmountViewModel?.sliderTextInput.minValue = market?.configs?.minOrderSize?.doubleValue.magnitude ?? 0
         // abacus stepSizeDecimals is not accurate for 10/100/1000 precision
         if let stepSize = market?.configs?.stepSize?.doubleValue, stepSize > 0 {
-            viewModel?.customAmountViewModel?.sliderTextInput.precision = Int(-log10(stepSize))
+            viewModel?.customAmountViewModel?.sliderTextInput.numberFormatter.fractionDigits = Int(-log10(stepSize))
         }
     }
 
