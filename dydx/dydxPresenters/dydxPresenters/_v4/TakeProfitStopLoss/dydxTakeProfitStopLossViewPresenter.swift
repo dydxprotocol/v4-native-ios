@@ -125,7 +125,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
     private func update(market: PerpetualMarket?) {
         viewModel?.oraclePrice = dydxFormatter.shared.dollar(number: market?.oraclePrice?.doubleValue, digits: market?.configs?.displayTickSizeDecimals?.intValue ?? 2)
         viewModel?.customAmountViewModel?.sliderTextInput.accessoryTitle = market?.assetId
-        viewModel?.customAmountViewModel?.sliderTextInput.formatter.fractionDigits = market?.configs?.stepSizeDecimals?.intValue ?? 2
+        viewModel?.customAmountViewModel?.sliderTextInput.precision = market?.configs?.stepSizeDecimals?.intValue ?? 2
         viewModel?.customAmountViewModel?.sliderTextInput.minValue = market?.configs?.minOrderSize?.doubleValue.magnitude ?? 0
     }
 

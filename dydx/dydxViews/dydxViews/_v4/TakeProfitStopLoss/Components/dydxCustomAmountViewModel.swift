@@ -18,7 +18,7 @@ public class dydxCustomAmountViewModel: PlatformViewModel {
     @Published public var toggleAction: ((Bool) -> Void)?
 
     public var valuePublisher: AnyPublisher<String?, Never> {
-        Publishers.CombineLatest($isOn, sliderTextInput.valueAsString)
+        Publishers.CombineLatest($isOn, sliderTextInput.$valueAsString)
             .map { isOn, value in
                 isOn ? value : nil
             }
@@ -27,7 +27,7 @@ public class dydxCustomAmountViewModel: PlatformViewModel {
 
     @Published public var sliderTextInput = dydxSliderInputViewModel(
         title: DataLocalizer.localize(path: "APP.GENERAL.AMOUNT"),
-        formatter: dydxNumberInputFormatter(fractionDigits: 2, shouldIncludeInsignificantZeros: true)
+        precision: 2
     )
 
     private var onOffSwitch: some View {
@@ -43,7 +43,9 @@ public class dydxCustomAmountViewModel: PlatformViewModel {
     public static var previewValue: dydxCustomAmountViewModel = {
         let vm = dydxCustomAmountViewModel()
         vm.isOn = true
-        vm.sliderTextInput = dydxSliderInputViewModel(title: "amount", accessoryTitle: "ETH", formatter: dydxNumberInputFormatter(fractionDigits: 2))
+        vm.sliderTextInput = dydxSliderInputViewModel(title: DataLocalizer.shared?.localize(path: "APP.GENERAL.AMOUNT", params: nil) ?? "",
+                                                      accessoryTitle: "ETH",
+                                                      precision: 2)
         return vm
     }()
 

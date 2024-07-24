@@ -18,7 +18,6 @@
 		02841E3A29AD6E5500C0E7CC /* dydxFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 02841E2C29AD6E5500C0E7CC /* dydxFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		02841ECB29AD6E8D00C0E7CC /* dydxFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02841ECA29AD6E8D00C0E7CC /* dydxFormatter.swift */; };
 		02841F6529AD6F1100C0E7CC /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02841F5A29AD6EF100C0E7CC /* Utilities.framework */; platformFilter = ios; };
-		276AF8DB2C4AEE66001DD695 /* dydxNumberInputFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276AF8DA2C4AEE66001DD695 /* dydxNumberInputFormatterTests.swift */; };
 		27DBF3CB2C4AAC8A009EB2D6 /* dydxNumberInputFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DBF3CA2C4AAC8A009EB2D6 /* dydxNumberInputFormatter.swift */; };
 		D50ABD228F90F45E822E160E /* Pods_iOS_dydxFormatterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B6B79D7CF404CE544872C5 /* Pods_iOS_dydxFormatterTests.framework */; };
 		E16B15943DC7937C8F9D87D6 /* Pods_iOS_dydxFormatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2782DAD1615D2E23FD387E79 /* Pods_iOS_dydxFormatter.framework */; };
@@ -132,7 +131,6 @@
 		02841ECA29AD6E8D00C0E7CC /* dydxFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxFormatter.swift; sourceTree = "<group>"; };
 		02841F5129AD6EF100C0E7CC /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
 		177FCA2765FA7FAE4B4AF56F /* Pods-iOS-dydxFormatterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxFormatterTests.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxFormatterTests/Pods-iOS-dydxFormatterTests.debug.xcconfig"; sourceTree = "<group>"; };
-		276AF8DA2C4AEE66001DD695 /* dydxNumberInputFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNumberInputFormatterTests.swift; sourceTree = "<group>"; };
 		2782DAD1615D2E23FD387E79 /* Pods_iOS_dydxFormatter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxFormatter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27DBF3CA2C4AAC8A009EB2D6 /* dydxNumberInputFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNumberInputFormatter.swift; sourceTree = "<group>"; };
 		46DBD879AB8325C51F5F9732 /* Pods-iOS-dydxFormatterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxFormatterTests.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxFormatterTests/Pods-iOS-dydxFormatterTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -233,7 +231,6 @@
 			isa = PBXGroup;
 			children = (
 				02841E3829AD6E5500C0E7CC /* dydxFormatterTests.swift */,
-				276AF8DA2C4AEE66001DD695 /* dydxNumberInputFormatterTests.swift */,
 			);
 			path = dydxFormatterTests;
 			sourceTree = "<group>";
@@ -550,7 +547,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				276AF8DB2C4AEE66001DD695 /* dydxNumberInputFormatterTests.swift in Sources */,
 				02841E3929AD6E5500C0E7CC /* dydxFormatterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

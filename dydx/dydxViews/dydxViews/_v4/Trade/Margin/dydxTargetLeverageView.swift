@@ -28,7 +28,7 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
     @Published public var optionSelectedAction: ((LeverageTextAndValue) -> Void)?
     @Published public var sliderTextInput = dydxSliderInputViewModel(
         title: DataLocalizer.localize(path: "APP.TRADE.TARGET_LEVERAGE"),
-        formatter: dydxNumberInputFormatter(fractionDigits: 2, shouldIncludeInsignificantZeros: true)
+        precision: 2
     )
     @Published public var ctaButton: dydxTargetLeverageCtaButtonViewModel? = dydxTargetLeverageCtaButtonViewModel()
 

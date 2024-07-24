@@ -9,69 +9,33 @@ import Foundation
 
 /// a number formatter that also supports rounding to nearest 10/100/1000/etc
 /// formatter is intended for user inputs, so group separator is omitted, i.e. the "," in "1,000"
-public class dydxNumberInputFormatter: Formatter {
-    public var fractionDigits: Int
-    public let shouldIncludeInsignificantZeros: Bool
+public class dydxNumberInputFormatter: NumberFormatter {
 
+    /// if greater than 0, numbers will be rounded to nearest 10, 100, 1000, etc. If less than 0 numbers will be rounded to nearest 0.1, 0.01, .001
+    var fractionDigits: Int {
+        get {
+            maximumFractionDigits
+        }
+        set {
+            maximumFractionDigits = newValue
+            minimumFractionDigits = newValue
+        }
+    }
+
+    /// Use this initializer
     /// - Parameter fractionDigits: if greater than 0, numbers will be rounded to nearest 10, 100, 1000, etc. If less than 0 numbers will be rounded to nearest 0.1, 0.01, .001
-    /// - Parameter shouldIncludeInsignificantZeros: If fractionDigits is less than 0, trailing zeros will be truncated
-    public init(fractionDigits: Int, shouldIncludeInsignificantZeros: Bool = false) {
-        self.fractionDigits = fractionDigits
-        self.shouldIncludeInsignificantZeros = shouldIncludeInsignificantZeros
-        super.init()
+    public convenience init(fractionDigits: Int = 2) {
+        self.init()
+        self.maximumFractionDigits = fractionDigits
+        self.minimumFractionDigits = fractionDigits
+        self.usesGroupingSeparator = false
     }
 
-    /// - Parameter precisionString: should be in the format "10" or "1" or "0.1" etc. A precision for fraction digits will be extracted from the number
-    /// - Parameter shouldIncludeInsignificantZeros: If fractionDigits is less than 0, trailing zeros will be truncated
-    public convenience init(precisionString: String, shouldIncludeInsignificantZeros: Bool = false) {
-        let fractionDigits = dydxFormatter.shared.digits(size: precisionString)
-        self.init(fractionDigits: fractionDigits, shouldIncludeInsignificantZeros: shouldIncludeInsignificantZeros)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func format(_ number: Double) -> String {
-        if fractionDigits < 0 {
-            return roundToNearestMultiple(number: number, multiple: pow(10, Double(-fractionDigits)))
+    public override func string(from number: NSNumber) -> String? {
+        if maximumFractionDigits < 0 {
+            return String(Int(number.doubleValue.round(to: maximumFractionDigits)))
         } else {
-            return roundToFractionDigits(number: number)
-        }
-    }
-
-    private func roundToNearestMultiple(number: Double, multiple: Double) -> String {
-        let roundedValue = (number / multiple).rounded() * multiple
-        return String(Int(roundedValue))
-    }
-
-    private var numberFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = shouldIncludeInsignificantZeros ? fractionDigits : 0
-        formatter.maximumFractionDigits = fractionDigits
-        formatter.numberStyle = .decimal
-        formatter.usesGroupingSeparator = false
-        return formatter
-    }
-
-    private func roundToFractionDigits(number: Double) -> String {
-        numberFormatter.string(from: NSNumber(value: number)) ?? "\(number)"
-    }
-
-    override public func string(for obj: Any?) -> String? {
-        guard let number = obj as? Double else {
-            return nil
-        }
-        return format(number)
-    }
-
-    public override func getObjectValue(_ obj: AutoreleasingUnsafeMutablePointer<AnyObject?>?, for string: String, errorDescription: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
-        if let number = numberFormatter.number(from: string) {
-            obj?.pointee = number
-            return true
-        } else {
-            errorDescription?.pointee = "Could not convert string to number" as NSString
-            return false
+            return super.string(from: number)
         }
     }
 }

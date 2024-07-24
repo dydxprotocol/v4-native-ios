@@ -11,7 +11,7 @@ import PlatformUI
 struct dydxSlider: View {
     @Binding var minValue: Double
     @Binding var maxValue: Double
-    @Binding var value: Double
+    @Binding var value: Double?
 
     private let thumbRadius: CGFloat = 11
 
@@ -28,7 +28,10 @@ struct dydxSlider: View {
 
     private func cursor(geometry: GeometryProxy) -> some View {
         let draggableLength = (geometry.size.width - thumbRadius * 2)
-        let dragPortion = (value - minValue)/(maxValue - minValue) * draggableLength
+        var dragPortion: Double = 0
+        if let value = value {
+            dragPortion = (value - minValue)/(maxValue - minValue) * draggableLength
+        }
         let xOffset = min(max(0, dragPortion), draggableLength)
         return Rectangle()
             .fill(ThemeColor.SemanticColor.layer7.color)

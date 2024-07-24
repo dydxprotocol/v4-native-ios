@@ -16,31 +16,27 @@ public class dydxSliderInputViewModel: PlatformViewModel {
     @Published public var accessoryTitle: String?
     @Published public var minValue: Double = 0
     @Published public var maxValue: Double = 0
-    public let formatter: dydxNumberInputFormatter
-    @Published public var value: Double = 0 {
+    @Published public var precision: Int = 0
+    @Published public var value: Double? {
         didSet {
-            let roundedValue = value.round(to: formatter.fractionDigits)
-            guard roundedValue != value else { return }
-            value = min(maxValue, max(minValue, roundedValue))
+            valueAsString = value.map { numberFormatter.string(from: $0 as NSNumber) ?? "" } ?? ""
         }
     }
 
-    public var valueAsString: AnyPublisher<String, Never> {
-        $value
-            .map { [weak self] value in
-                return self?.formatter.string(for: value) ?? ""
-            }
-            .eraseToAnyPublisher()
+    var numberFormatter: dydxNumberInputFormatter {
+        dydxNumberInputFormatter(fractionDigits: precision)
     }
+
+    @Published public private(set) var valueAsString: String = ""
 
     var placeholder: String {
-        formatter.string(for: Double.zero) ?? ""
+        numberFormatter.string(for: Double.zero) ?? ""
     }
 
-    init(title: String?, accessoryTitle: String? = nil, formatter: dydxNumberInputFormatter) {
+    init(title: String?, accessoryTitle: String? = nil, precision: Int) {
         self.title = title
         self.accessoryTitle = accessoryTitle
-        self.formatter = formatter
+        self.precision = precision
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
@@ -61,10 +57,12 @@ private struct dydxSliderTextInput: View {
     }
 
     var textInput: some View {
-        dydxNumberField(title: viewModel.title,
+        dydxTitledNumberField(title: viewModel.title,
                         accessoryTitle: viewModel.accessoryTitle,
                         placeholder: viewModel.placeholder,
-                        formatter: viewModel.formatter,
+                        precision: viewModel.precision,
+                        minValue: viewModel.minValue,
+                        maxValue: viewModel.maxValue,
                         value: $viewModel.value)
     }
 

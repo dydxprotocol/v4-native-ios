@@ -10,19 +10,17 @@ import dydxFormatter
 import PlatformUI
 
 /// Effectively a TextField which forces its input as a number
-struct dydxNumberField: View {
+struct dydxTitledNumberField: View {
     let title: String?
     let accessoryTitle: String?
     let placeholder: String?
-    let formatter: dydxNumberInputFormatter
-    @Binding var value: Double
+    let precision: Int
+    let minValue: Double
+    let maxValue: Double
+    @Binding var value: Double?
     @State private var textWidth: CGFloat = 0
 
     let minWidth: CGFloat = 100
-
-    private var keyboardType: UIKeyboardType {
-        formatter.fractionDigits > 0 ? .decimalPad : .numberPad
-    }
 
     @ViewBuilder
     private var accessoryTitleView: some View {
@@ -52,15 +50,13 @@ struct dydxNumberField: View {
     }
 
     private var textFieldView: some View {
-        return TextField(
-            "",
-            value: $value,
-            formatter: formatter
-        )
+        NumberTextField(
+            actualValue: $value,
+            minValue: minValue,
+            maxValue: maxValue,
+            precision: precision)
         .themeColor(foreground: .textPrimary)
         .themeFont(fontType: .base, fontSize: .medium)
-        .keyboardType(keyboardType)
-        .keyboardAccessory(parentStyle: .defaultStyle)
         .truncationMode(.middle)
         .frame(width: textWidth)
     }
@@ -76,5 +72,87 @@ struct dydxNumberField: View {
         .padding(.vertical, 8)
         .padding(.horizontal, 12)
         .makeInput()
+    }
+}
+
+/// formats input as it is received
+private struct NumberTextField: View {
+    @Binding var actualValue: Double?
+    @FocusState private var isFocused: Bool
+
+    let minValue: Double
+    let maxValue: Double
+    let precision: Int
+
+    @ViewBuilder
+    private var placeholder: some View {
+        Text(numberFormatter.string(for: Double.zero) ?? "")
+            .themeFont(fontType: .base, fontSize: .medium)
+            .themeColor(foreground: .textTertiary)
+    }
+
+    private var numberFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = precision
+        formatter.maximumFractionDigits = precision
+        formatter.numberStyle = .decimal
+        formatter.usesGroupingSeparator = false
+        return formatter
+    }
+
+    private var keyboardType: UIKeyboardType {
+        precision > 0 ? .decimalPad : .numberPad
+    }
+
+    var body: some View {
+        TextField(text: filteredTextBinding) {
+            placeholder
+        }
+        .keyboardType(keyboardType)
+        .focused($isFocused)
+        .onChange(of: isFocused) { _ in
+            if !isFocused, let value = Double(filteredTextBinding.wrappedValue) {
+                actualValue = formatValue(value)
+            }
+        }
+        .keyboardAccessory(parentStyle: .defaultStyle)
+    }
+
+    private func formatValue(_ value: Double?) -> Double? {
+        guard let value = value else {
+            return nil
+        }
+        let multiplier = pow(10.0, Double(precision))
+        let formattedValue = (value * multiplier).rounded() / multiplier
+        return formattedValue
+    }
+
+    private var filteredTextBinding: Binding<String> {
+        Binding<String>(
+            get: {
+                if let value = actualValue {
+                    return numberFormatter.string(from: NSNumber(value: value)) ?? ""
+                } else {
+                    return ""
+                }
+            },
+            set: { newValue in
+                if let doubleValue = Double(newValue) {
+                    actualValue = formatValue(clamp(doubleValue))
+                } else {
+                    actualValue = nil
+                }
+            }
+        )
+    }
+
+    private func clamp(_ value: Double) -> Double {
+        min(max(value, minValue), maxValue)
+    }
+
+    private func formatNumber(_ value: Double) -> Double {
+        let multiplier = pow(10.0, Double(precision))
+        let formattedValue = (value * multiplier).rounded() / multiplier
+        return formattedValue
     }
 }
