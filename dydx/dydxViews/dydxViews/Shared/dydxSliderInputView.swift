@@ -23,6 +23,14 @@ public class dydxSliderInputViewModel: PlatformViewModel {
         }
     }
 
+    public func setPrecision(_ stepSize: Double) {
+        guard stepSize > 0 else {
+            assertionFailure("Step size must be greater than 0")
+            return
+        }
+        precision = Int(-log10(stepSize))
+    }
+
     var numberFormatter: dydxNumberInputFormatter {
         dydxNumberInputFormatter(fractionDigits: precision)
     }
