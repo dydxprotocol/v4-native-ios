@@ -84,24 +84,19 @@ private struct NumberTextField: View {
     let maxValue: Double
     let precision: Int
 
+    private var numberFormatter: dydxNumberInputFormatter {
+        dydxNumberInputFormatter(fractionDigits: precision)
+    }
+
+    private var keyboardType: UIKeyboardType {
+        precision > 0 ? .decimalPad : .numberPad
+    }
+
     @ViewBuilder
     private var placeholder: some View {
         Text(numberFormatter.string(for: Double.zero) ?? "")
             .themeFont(fontType: .base, fontSize: .medium)
             .themeColor(foreground: .textTertiary)
-    }
-
-    private var numberFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = precision
-        formatter.maximumFractionDigits = precision
-        formatter.numberStyle = .decimal
-        formatter.usesGroupingSeparator = false
-        return formatter
-    }
-
-    private var keyboardType: UIKeyboardType {
-        precision > 0 ? .decimalPad : .numberPad
     }
 
     var body: some View {
@@ -131,6 +126,7 @@ private struct NumberTextField: View {
         Binding<String>(
             get: {
                 if let value = actualValue {
+                    print("mmm: numberFormatter.string(from: NSNumber(value: value)): \(numberFormatter.string(from: NSNumber(value: value)))")
                     return numberFormatter.string(from: NSNumber(value: value)) ?? ""
                 } else {
                     return ""
@@ -138,6 +134,7 @@ private struct NumberTextField: View {
             },
             set: { newValue in
                 if let doubleValue = Double(newValue) {
+                    print("mmm: formatValue(clamp(doubleValue): \(formatValue(clamp(doubleValue)))")
                     actualValue = formatValue(clamp(doubleValue))
                 } else {
                     actualValue = nil

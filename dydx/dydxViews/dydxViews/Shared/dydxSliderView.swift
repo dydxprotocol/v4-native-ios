@@ -11,6 +11,7 @@ import PlatformUI
 struct dydxSlider: View {
     @Binding var minValue: Double
     @Binding var maxValue: Double
+    @Binding var precision: Int
     @Binding var value: Double?
 
     private let thumbRadius: CGFloat = 11
@@ -78,12 +79,15 @@ struct dydxSlider: View {
         let dragTouchLocationCentered = gesture.location.x - thumbRadius
         if dragTouchLocationCentered < 0 {
             value = minValue
+            print("value minValue: \(value!)")
         } else if dragTouchLocationCentered > geometry.size.width - thumbRadius * 2 {
             value = maxValue
+            print("value maxValue: \(value!)")
         } else {
             let dragPortion = dragTouchLocationCentered / (geometry.size.width - thumbRadius * 2)
             let newValue = (maxValue - minValue) * dragPortion + minValue
-            value = min(max(newValue, minValue), maxValue)
+            value = min(max(newValue, minValue), maxValue).round(to: precision)
+            print("value: \(value!)")
         }
     }
 }

@@ -61,6 +61,7 @@ private struct dydxSliderTextInput: View {
     var slider: some View {
         dydxSlider(minValue: $viewModel.minValue,
                    maxValue: $viewModel.maxValue,
+                   precision: $viewModel.precision,
                    value: $viewModel.value)
     }
 
