@@ -30,7 +30,7 @@
 		</data>
 		<key>Headers/AppsFlyerLib.h</key>
 		<data>
-		/6RKC6fZrGo34BcJYIKixS1Bya0=
+		8bnTBusNgxVyE2uLEg87S5K/Yhs=
 		</data>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		aZJA5e4fnorJHEQjLjlQkodvZnA=
+		gKwf1WCGhi9EwguQsXHoOlVSMHU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -125,11 +125,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/6RKC6fZrGo34BcJYIKixS1Bya0=
+			8bnTBusNgxVyE2uLEg87S5K/Yhs=
 			</data>
 			<key>hash2</key>
 			<data>
-			4aDaAj8KHR2B2HJQhRZYfJ8l4jKVnDpvEQ3Qn1Wo4do=
+			DrYeKZegj0Zf5gJJNAiP9eeLRVUZxKVv0y0nAX+w2tk=
 			</data>
 		</dict>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>
