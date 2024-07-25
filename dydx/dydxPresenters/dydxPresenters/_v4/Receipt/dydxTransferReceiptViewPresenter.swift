@@ -134,7 +134,8 @@ final class dydxTransferReceiptViewPresenter: dydxReceiptPresenter {
             let minutesLocalized = DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.X_MINUTES", params: ["X": minutes])
             transferDurationViewModel.value = minutesLocalized
         } else {
-            transferDurationViewModel.value = nil
+            // hard coding this because web has it hard coded
+            transferDurationViewModel.value = DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.X_MINUTES_LOWERCASED", params: ["X": "< 30"])
         }
     }
 }

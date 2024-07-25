@@ -8,6 +8,15 @@
 
 import Foundation
 import Utilities
+import Statsig
+
+public enum dydxStatsigFeatureFlags: String {
+    case useSkip = "ff_skip_migration"
+
+    public var isEnabled: Bool {
+        Statsig.checkGate(self.rawValue)
+    }
+}
 
 public enum dydxBoolFeatureFlag: String, CaseIterable {
     case push_notification

@@ -44,6 +44,10 @@ def amplitude_pods
   pod 'Amplitude-iOS'
 end
 
+def statsig_pods
+  pod 'Statsig', '~>1.0'
+end 
+
 def abacus_pods
   #pod 'abacus', :path => '~/v4-abacus'
   pod 'Abacus', :podspec => '../podspecs/Abacus.podspec'
@@ -317,6 +321,7 @@ abstract_target 'iOS' do
   target 'dydxFormatter' do
     project '../dydx/dydxFormatter/dydxFormatter'
     ios_ui_pods
+    statsig_pods
   end
   
   target 'dydxFormatterTests' do
@@ -352,6 +357,7 @@ abstract_target 'iOS' do
     crashlytics_pods
     appsflyer_pods
     amplitude_pods
+    statsig_pods
     abacus_pods
   end
   
@@ -363,6 +369,7 @@ abstract_target 'iOS' do
     crashlytics_pods
     appsflyer_pods
     amplitude_pods
+    statsig_pods
     abacus_pods
   end
   

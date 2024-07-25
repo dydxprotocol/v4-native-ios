@@ -21,6 +21,7 @@ import FirebaseStaticInjections
 import dydxStateManager
 import dydxViews
 import dydxAnalytics
+import Statsig
 
 open class CommonAppDelegate: ParticlesAppDelegate {
     open var notificationTag: String {
@@ -45,9 +46,10 @@ open class CommonAppDelegate: ParticlesAppDelegate {
 
     override open func injectFeatures(completion: @escaping () -> Void) {
         Console.shared.log("injectFeatures")
-        // these two injections need to happen before app start
+        // these three injections need to happen before app start
         injectFirebase()
         injectRating()
+        injectStatsig()
         let compositeFeatureFlags = CompositeFeatureFlagsProvider()
         switch  Installation.source {
         case .debug, .testFlight:
@@ -99,6 +101,17 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         if FirebaseRunner.shared.enabled {
             add(tracking: FirebaseTracking())
             add(errorLogging: CrashlyticsErrorLogging())
+        }
+    }
+    
+    open func injectStatsig() {
+        Console.shared.log("injectStatsig")
+        if let apiKey = CredientialConfig.shared.key(for: "statsigApiKey"), apiKey.isNotEmpty {
+            #if DEBUG
+            Statsig.start(sdkKey: apiKey, user: StatsigUser(userID: "test-id"))
+            #else
+            Statsig.start(sdkKey: apiKey, user: StatsigUser(userID: Statsig.getStableID()))
+            #endif
         }
     }
 

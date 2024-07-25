@@ -28,3 +28,4 @@ ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/ZSWTappableLabel/ZSWTappableLabel.framework
 ${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework
 ${BUILT_PRODUCTS_DIR}/pop/pop.framework
+${BUILT_PRODUCTS_DIR}/Statsig/Statsig.framework

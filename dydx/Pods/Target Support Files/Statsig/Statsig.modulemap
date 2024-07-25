@@ -1,0 +1,6 @@
+framework module Statsig {
+  umbrella header "Statsig-umbrella.h"
+
+  export *
+  module * { export * }
+}
