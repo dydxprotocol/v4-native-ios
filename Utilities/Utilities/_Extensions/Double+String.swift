@@ -35,37 +35,6 @@ extension Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
     }
-
-    public func round(size: Double) -> Double {
-        return round(to: places(size: size))
-    }
-
-    private func places(size: Double) -> Int {
-        switch size {
-        case 1000.0:
-            return -3
-        case 100.0:
-            return -2
-        case 10.0:
-            return -1
-        case 1.0:
-            return 0
-        case 0.1:
-            return 1
-        case 0.01:
-            return 2
-        case 0.001:
-            return 3
-        case 0.0001:
-            return 4
-        case 0.00001:
-            return 5
-        case 0.000001:
-            return 6
-        default:
-            return 0
-        }
-    }
     
     public var stringValue: String? { "\(self)" }
 }
