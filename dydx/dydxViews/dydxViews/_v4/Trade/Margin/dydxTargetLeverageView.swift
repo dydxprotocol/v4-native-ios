@@ -9,6 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import dydxFormatter
 
 public class dydxTargetLeverageViewModel: PlatformViewModel {
     public struct LeverageTextAndValue {
@@ -25,10 +26,9 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
     @Published public var leverageOptions: [LeverageTextAndValue] = []
     @Published public var selectedOptionIndex: Int?
     @Published public var optionSelectedAction: ((LeverageTextAndValue) -> Void)?
-    @Published public var leverageInput: PlatformTextInputViewModel? =
-        PlatformTextInputViewModel(label: DataLocalizer.localize(path: "APP.TRADE.TARGET_LEVERAGE"),
-                                   placeHolder: "0.0",
-                                   inputType: PlatformTextInputViewModel.InputType.decimalDigits)
+    @Published public var sliderTextInput = dydxSliderInputViewModel(
+        title: DataLocalizer.localize(path: "APP.TRADE.TARGET_LEVERAGE")
+    )
     @Published public var ctaButton: dydxTargetLeverageCtaButtonViewModel? = dydxTargetLeverageCtaButtonViewModel()
 
     public init() { }
@@ -55,9 +55,8 @@ public class dydxTargetLeverageViewModel: PlatformViewModel {
                     .leftAligned()
                     .themeFont(fontSize: .medium)
 
-                self.leverageInput?
+                self.sliderTextInput
                     .createView(parentStyle: style)
-                    .makeInput()
 
                 self.createOptionsGroup(parentStyle: style)
 

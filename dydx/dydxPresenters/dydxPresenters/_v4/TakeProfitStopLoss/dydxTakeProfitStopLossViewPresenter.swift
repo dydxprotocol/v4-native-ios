@@ -53,13 +53,24 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         super.start()
 
         guard let marketId = marketId else { return }
+        AbacusStateManager.shared.triggerOrders(input: marketId, type: .marketid)
 
         Publishers
-            .CombineLatest3(AbacusStateManager.shared.state.selectedSubaccountPositions,
-                           AbacusStateManager.shared.state.selectedSubaccountTriggerOrders,
+            // note we use a zip here intentionally so that the user input is not overwritten unless triggerOrders updates
+            // which should not really happen unless the active trigger order(s) get triggered or they are placed simultaneously
+            // on another platform
+            .Zip(AbacusStateManager.shared.state.selectedSubaccountPositions,
+                 AbacusStateManager.shared.state.selectedSubaccountTriggerOrders)
+            .sink { [weak self] subaccountPositions, triggerOrders in
+                self?.update(subaccountPositions: subaccountPositions, triggerOrders: triggerOrders)
+            }
+            .store(in: &subscriptions)
+
+        Publishers
+            .CombineLatest(AbacusStateManager.shared.state.selectedSubaccountPositions,
                            AbacusStateManager.shared.state.configsAndAssetMap)
-            .sink { [weak self] subaccountPositions, triggerOrders, configsMap in
-                self?.update(subaccountPositions: subaccountPositions, triggerOrders: triggerOrders, configsMap: configsMap)
+            .sink { [weak self] subaccountPositions, configsMap in
+                self?.update(subaccountPositions: subaccountPositions, configsMap: configsMap)
             }
             .store(in: &subscriptions)
 
@@ -113,9 +124,12 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
     private func update(market: PerpetualMarket?) {
         viewModel?.oraclePrice = dydxFormatter.shared.dollar(number: market?.oraclePrice?.doubleValue, digits: market?.configs?.displayTickSizeDecimals?.intValue ?? 2)
-        viewModel?.customAmountViewModel?.assetId = market?.assetId
-        viewModel?.customAmountViewModel?.stepSize = market?.configs?.stepSize?.stringValue
-        viewModel?.customAmountViewModel?.minimumValue = market?.configs?.minOrderSize?.floatValue
+        viewModel?.customAmountViewModel?.sliderTextInput.accessoryTitle = market?.assetId
+        viewModel?.customAmountViewModel?.sliderTextInput.minValue = market?.configs?.minOrderSize?.doubleValue.magnitude ?? 0
+        // abacus stepSizeDecimals is not accurate for 10/100/1000 precision
+        if let stepSize = market?.configs?.stepSize?.doubleValue, stepSize > 0 {
+            viewModel?.customAmountViewModel?.sliderTextInput.numberFormatter.fractionDigits = Int(-log10(stepSize))
+        }
     }
 
     private func update(subaccountPositions: [SubaccountPosition], triggerOrdersInput: TriggerOrdersInput?, errors: [ValidationError], configsMap: [String: MarketConfigsAndAsset]) {
@@ -169,8 +183,8 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         // logic primarily to pre-populate custom amount.
         // we do not want to turn on custom amount if it is not already on and the order size is the same amount as the position size. The custom amount may already be on if user manually turned it on, or a pre-existing custom amount exists that is less than the position size
         if let customSize = triggerOrdersInput?.size?.doubleValue.magnitude, customSize != position?.size.current?.doubleValue.magnitude || viewModel?.customAmountViewModel?.isOn == true {
-            let formattedSize = dydxFormatter.shared.raw(number: customSize, digits: marketConfig.displayStepSizeDecimals?.intValue ?? 2)
-            viewModel?.customAmountViewModel?.programmaticallySet(newValue: formattedSize)
+            viewModel?.customAmountViewModel?.isOn = true
+            viewModel?.customAmountViewModel?.sliderTextInput.value = customSize
         }
 
         viewModel?.customLimitPriceViewModel?.takeProfitPriceInputViewModel?.value = triggerOrdersInput?.takeProfitOrder?.price?.limitPrice?.stringValue
@@ -189,7 +203,11 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
 
         if let error = errors.first {
-            viewModel?.submissionReadiness = .fixErrors(cta: error.resources.action?.localizedString)
+            if let actionText = error.resources.action?.localizedString {
+                viewModel?.submissionReadiness = .fixErrors(cta: actionText)
+            } else {
+                viewModel?.submissionReadiness = .needsInput
+            }
         } else if triggerOrdersInput?.takeProfitOrder?.price?.triggerPrice?.doubleValue == nil
             && triggerOrdersInput?.takeProfitOrder?.orderId == nil
             && triggerOrdersInput?.stopLossOrder?.price?.triggerPrice?.doubleValue == nil
@@ -202,8 +220,27 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
     }
 
-    private func update(subaccountPositions: [SubaccountPosition], triggerOrders: [SubaccountOrder], configsMap: [String: MarketConfigsAndAsset]) {
+    private func update(subaccountPositions: [SubaccountPosition], configsMap: [String: MarketConfigsAndAsset]) {
         guard let marketConfig = configsMap[marketId ?? ""]?.configs else { return }
+        let position = subaccountPositions.first { subaccountPosition in
+            subaccountPosition.id == marketId
+        }
+        viewModel?.entryPrice = dydxFormatter.shared.dollar(number: position?.entryPrice.current?.doubleValue,
+                                                         digits: marketConfig.displayTickSizeDecimals?.intValue ?? 2)
+        viewModel?.customAmountViewModel?.sliderTextInput.maxValue = position?.size.current?.doubleValue.magnitude ?? 0
+
+        // update toggle interaction, must do it within position listener update method since it depends on market config min order size
+        viewModel?.customAmountViewModel?.toggleAction = { isOn in
+            if isOn {
+                // start at min amount
+                AbacusStateManager.shared.triggerOrders(input: marketConfig.minOrderSize?.stringValue, type: .size)
+            } else {
+                AbacusStateManager.shared.triggerOrders(input: position?.size.current?.doubleValue.magnitude.stringValue, type: .size)
+            }
+        }
+    }
+
+    private func update(subaccountPositions: [SubaccountPosition], triggerOrders: [SubaccountOrder]) {
         let position = subaccountPositions.first { subaccountPosition in
             subaccountPosition.id == marketId
         }
@@ -218,13 +255,8 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             && order.side.opposite == position?.side.current
         }
 
-        viewModel?.entryPrice = dydxFormatter.shared.dollar(number: position?.entryPrice.current?.doubleValue,
-                                                         digits: marketConfig.displayTickSizeDecimals?.intValue ?? 2)
-
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenTakeProfitOrders = takeProfitOrders.count
         viewModel?.takeProfitStopLossInputAreaViewModel?.numOpenStopLossOrders = stopLossOrders.count
-
-        viewModel?.customAmountViewModel?.maximumValue = position?.size.current?.floatValue.magnitude
 
         if takeProfitOrders.count == 1, stopLossOrders.count == 1,
             let takeProfitOrder = takeProfitOrders.first, let stopLossOrder = stopLossOrders.first {
@@ -249,18 +281,6 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         } else {
             AbacusStateManager.shared.triggerOrders(input: position?.size.current?.doubleValue.magnitude.stringValue, type: .takeprofitordersize)
             AbacusStateManager.shared.triggerOrders(input: position?.size.current?.doubleValue.magnitude.stringValue, type: .stoplossordersize)
-        }
-
-        AbacusStateManager.shared.triggerOrders(input: marketId, type: .marketid)
-
-        // update toggle interaction, must do it within position listener update method since it depends on market config min order size
-        viewModel?.customAmountViewModel?.toggleAction = { isOn in
-            if isOn {
-                // start at min amount
-                AbacusStateManager.shared.triggerOrders(input: marketConfig.minOrderSize?.stringValue, type: .size)
-            } else {
-                AbacusStateManager.shared.triggerOrders(input: position?.size.current?.doubleValue.magnitude.stringValue, type: .size)
-            }
         }
     }
 
@@ -318,9 +338,13 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         viewModel.takeProfitStopLossInputAreaViewModel?.stopLossPriceInputViewModel?.onEdited = {
             AbacusStateManager.shared.triggerOrders(input: $0, type: .stoplossprice)
         }
-        viewModel.customAmountViewModel?.onEdited = {
-            AbacusStateManager.shared.triggerOrders(input: $0, type: .size)
-        }
+        viewModel.customAmountViewModel?.valuePublisher
+            .removeDuplicates()
+            .sink(receiveValue: { value in
+                AbacusStateManager.shared.triggerOrders(input: value, type: .size)
+            })
+            .store(in: &subscriptions)
+
         viewModel.customLimitPriceViewModel?.takeProfitPriceInputViewModel?.onEdited = {
             AbacusStateManager.shared.triggerOrders(input: $0, type: .takeprofitlimitprice)
         }

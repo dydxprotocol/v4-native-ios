@@ -56,27 +56,31 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
         self.viewModel = viewModel
 
         self.viewModel?.optionSelectedAction = {[weak self] value in
-            self?.update(value: "\(value.value)")
+            self?.update(value: value.value)
         }
         self.ctaButtonPresenter.viewModel?.ctaAction = {
-            guard let value = viewModel.leverageInput?.value else { return }
-            AbacusStateManager.shared.trade(input: "\(value)", type: .targetleverage)
+            AbacusStateManager.shared.trade(input: viewModel.sliderTextInput.valueAsString, type: .targetleverage)
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
-        self.viewModel?.leverageInput?.onEdited = {[weak self] value in
-            self?.update(value: value)
-        }
+
+        self.viewModel?.sliderTextInput.numberFormatter.fractionDigits = 2
+        self.viewModel?.sliderTextInput.$value
+            .removeDuplicates()
+            .sink(receiveValue: { [weak self] value in
+                self?.update(value: value)
+            })
+            .store(in: &subscriptions)
 
         attachChildren(workers: childPresenters)
     }
 
-    private func update(value: String?) {
-        let valueAsDouble = Double(value ?? "") ?? 0
-        viewModel?.leverageInput?.value = value
+    private func update(value: Double?) {
+        let value = value ?? 0
+        viewModel?.sliderTextInput.value = value
         viewModel?.selectedOptionIndex = viewModel?.leverageOptions.firstIndex(where: { option in
-            option.value == valueAsDouble
+            option.value == value
         })
-        if valueAsDouble > 0 {
+        if value > 0 {
             viewModel?.ctaButton?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.TRADE.CONFIRM_LEVERAGE"))
         } else {
             viewModel?.ctaButton?.ctaButtonState = .disabled(DataLocalizer.localize(path: "APP.TRADE.CONFIRM_LEVERAGE"))
@@ -93,14 +97,14 @@ private class dydxTargetLeverageViewPresenter: HostedViewPresenter<dydxTargetLev
                 guard let viewModel = self?.viewModel, let marketId = tradeInput?.marketId, let market = configsAndAssetMap[marketId] else { return }
                 if let effectiveInitialMarginFraction = market.configs?.effectiveInitialMarginFraction?.doubleValue, effectiveInitialMarginFraction > 0 {
                     let maxLeverage = 1.0 / effectiveInitialMarginFraction
+                    viewModel.sliderTextInput.maxValue = maxLeverage
                     viewModel.leverageOptions = [1, 2, 3, 5, 10]
                         .filter { $0 < maxLeverage }
                         .map { dydxTargetLeverageViewModel.LeverageTextAndValue(text: dydxFormatter.shared.multiplier(number: Double($0)) ?? "", value: $0) }
                     viewModel.leverageOptions.append(dydxTargetLeverageViewModel.LeverageTextAndValue(text: DataLocalizer.localize(path: "APP.GENERAL.MAX"), value: maxLeverage))
                 }
 
-                let value = dydxFormatter.shared.localFormatted(number: tradeInput?.targetLeverage ?? 1, digits: 1)
-                self?.update(value: value)
+                self?.update(value: tradeInput?.targetLeverage ?? 1)
             }
             .store(in: &subscriptions)
     }
