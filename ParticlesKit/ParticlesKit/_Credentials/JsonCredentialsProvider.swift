@@ -17,7 +17,7 @@ open class JsonCredentialsProvider: NSObject {
 
     private var entity: DictionaryEntity?
 
-    public func key(for lookupKey: String) -> String? {
+    public func credential(for lookupKey: String) -> String? {
         let content = entity?.data?[lookupKey]
         if let contentDict = parser.asDictionary(content) {
             let value = parser.asString(contentDict["value"])

@@ -7,15 +7,24 @@
 //
 
 import Foundation
+import Combine
 
 public protocol FeatureFlagsProtocol {
-    var featureFlags: [String: Any]? { get }
-
+    
     func refresh(completion: @escaping () -> Void)
     func activate(completion: @escaping () -> Void)
-    func flag(feature: String?) -> Any?
-    
+    func value(feature: String) -> String?
+    func isOn(feature: String) -> Bool?
+
     func customized() -> Bool
+    
+    var newValuesAvailablePublisher: AnyPublisher<Void, Never> { get }
+}
+
+extension FeatureFlagsProtocol {
+    public var newValuesAvailablePublisher: AnyPublisher<Void, Never> {
+        return Just(()).eraseToAnyPublisher()
+    }
 }
 
 public class FeatureService {

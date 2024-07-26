@@ -236,6 +236,12 @@ abstract_target 'iOS' do
     appsflyer_pods
   end
   
+  target 'StatsigInjections' do
+    project '../StatsigInjections/StatsigInjections'
+    ios_util_pods
+    statsig_pods
+  end
+
   target 'FirebaseStaticInjections' do
     project '../FirebaseStaticInjections/FirebaseStaticInjections'
     ios_util_pods

@@ -40,13 +40,24 @@ import Utilities
         completion()
     }
 
-    public func flag(feature: String?) -> Any? {
+    public func isOn(feature: String) -> Bool? {
+        featureFlags?[feature] as? Bool
+    }
+    
+    public func value(feature: String) -> String? {
+        if let value = featureFlags?[feature] as? String {
+            return value
+        }
+        return nil
+    }
+    
+    public func flag<T>(feature: String?) -> T? {
         if let feature = feature {
             if let value = featureFlags?[feature] {
                 if (value as? String) == "<null>" {
                     return nil
                 }
-                return value
+                return value as? T
             }
         }
         return nil

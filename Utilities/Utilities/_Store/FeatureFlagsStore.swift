@@ -28,14 +28,16 @@ public class FeatureFlagsStore: UserDefaultsStore, FeatureFlagsProtocol {
         completion()
     }
     
-    public func flag(feature: String?) -> Any? {
-        if let feature = feature {
-            if let value = featureFlags?[feature] {
-                if (value as? String) == "<null>" {
-                    return nil
-                }
-                return value
-            }
+    public func isOn(feature: String) -> Bool? {
+        if let value = featureFlags?[feature] as? Bool {
+            return value
+        }
+        return nil
+    }
+    
+    public func value(feature: String) -> String? {
+        if let value = featureFlags?[feature] as? String {
+            return value
         }
         return nil
     }
