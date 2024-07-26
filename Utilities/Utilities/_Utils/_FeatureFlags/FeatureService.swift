@@ -21,6 +21,7 @@ public protocol FeatureFlagsProtocol {
     var newValuesAvailablePublisher: AnyPublisher<Void, Never> { get }
 }
 
+// default impl
 extension FeatureFlagsProtocol {
     public var newValuesAvailablePublisher: AnyPublisher<Void, Never> {
         return Just(()).eraseToAnyPublisher()
