@@ -50,18 +50,6 @@ import Utilities
         }
         return nil
     }
-    
-    public func flag<T>(feature: String?) -> T? {
-        if let feature = feature {
-            if let value = featureFlags?[feature] {
-                if (value as? String) == "<null>" {
-                    return nil
-                }
-                return value as? T
-            }
-        }
-        return nil
-    }
 
     public func customized() -> Bool {
         #if DEBUG
