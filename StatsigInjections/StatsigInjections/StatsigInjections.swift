@@ -68,7 +68,9 @@ import Combine
                         assertionFailure("Statsig failed to initialize: \(error)")
                     }
                     self?.newValuesSubject.send()
-                    completion()
+                    // intentionally not calling completion here since we do not want ff init to be blocking startup
+                    // this may change if we need FF pre-launch
+//                    completion()
                 }
         }
         completion()
