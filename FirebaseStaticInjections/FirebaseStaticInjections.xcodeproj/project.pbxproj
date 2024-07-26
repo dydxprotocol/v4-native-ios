@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		314B5E4723DCCD6800139EB3 /* FirebaseRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B5E3823DCCD6700139EB3 /* FirebaseRunner.swift */; };
-		314B5E4823DCCD6800139EB3 /* FirebaseFeatureFlagsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B5E3A23DCCD6700139EB3 /* FirebaseFeatureFlagsProvider.swift */; };
 		314B5E4923DCCD6800139EB3 /* CrashlyticsErrorLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B5E3C23DCCD6700139EB3 /* CrashlyticsErrorLogging.swift */; };
 		314B5E4A23DCCD6800139EB3 /* FirebaseTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B5E3E23DCCD6700139EB3 /* FirebaseTracking.swift */; };
 		314B5E4B23DCCD6800139EB3 /* FirebaseNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B5E4023DCCD6800139EB3 /* FirebaseNotification.swift */; };
@@ -227,7 +226,6 @@
 		2AC82E9412F0658CCD3B5F99 /* Pods-iOS-FirebaseStaticInjectionsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-FirebaseStaticInjectionsTests.debug.xcconfig"; path = "Target Support Files/Pods-iOS-FirebaseStaticInjectionsTests/Pods-iOS-FirebaseStaticInjectionsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3101FAF82511444A00AC4010 /* GoogleLogin.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoogleLogin.xib; sourceTree = "<group>"; };
 		314B5E3823DCCD6700139EB3 /* FirebaseRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseRunner.swift; sourceTree = "<group>"; };
-		314B5E3A23DCCD6700139EB3 /* FirebaseFeatureFlagsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseFeatureFlagsProvider.swift; sourceTree = "<group>"; };
 		314B5E3C23DCCD6700139EB3 /* CrashlyticsErrorLogging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashlyticsErrorLogging.swift; sourceTree = "<group>"; };
 		314B5E3E23DCCD6700139EB3 /* FirebaseTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTracking.swift; sourceTree = "<group>"; };
 		314B5E4023DCCD6800139EB3 /* FirebaseNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseNotification.swift; sourceTree = "<group>"; };
@@ -291,7 +289,6 @@
 		314B5E3923DCCD6700139EB3 /* _FeatureFlags */ = {
 			isa = PBXGroup;
 			children = (
-				314B5E3A23DCCD6700139EB3 /* FirebaseFeatureFlagsProvider.swift */,
 			);
 			path = _FeatureFlags;
 			sourceTree = "<group>";
@@ -805,7 +802,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				314B5E4823DCCD6800139EB3 /* FirebaseFeatureFlagsProvider.swift in Sources */,
 				314B5E4723DCCD6800139EB3 /* FirebaseRunner.swift in Sources */,
 				314B5E4923DCCD6800139EB3 /* CrashlyticsErrorLogging.swift in Sources */,
 				31B3E3C122763B19009E8FEF /* FirebaseStaticInjections.swift in Sources */,
