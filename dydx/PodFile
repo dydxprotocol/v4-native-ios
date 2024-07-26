@@ -16,7 +16,6 @@ def firebase_core_pods
   pod 'Firebase/AnalyticsWithoutAdIdSupport'
   pod 'Firebase/Core'
   pod 'Firebase/Performance'
-  pod 'Firebase/RemoteConfig'
 end
 
 def firebase_pods
@@ -28,7 +27,6 @@ def firebase_pods_extension
   firebase_dependency_pods
   pod 'Firebase/AnalyticsWithoutAdIdSupport'
   pod 'Firebase/Core'
-  pod 'Firebase/RemoteConfig'
   pod 'Firebase/Messaging'
 end
 
@@ -50,7 +48,7 @@ end
 
 def abacus_pods
   #pod 'abacus', :path => '~/v4-abacus'
-  pod 'Abacus', :podspec => '../podspecs/Abacus.podspec'
+  pod 'abacus', :path => '~/v4-abacus'
 end
 
 def util_pods

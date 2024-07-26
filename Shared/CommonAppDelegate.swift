@@ -57,7 +57,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         case .appStore, .jailBroken:
             break
         }
-        compositeFeatureFlags.remote = FirebaseRunner.shared.enabled ? FirebaseFeatureFlagsProvider() : nil
+//        compositeFeatureFlags.remote = FirebaseRunner.shared.enabled ? FirebaseFeatureFlagsProvider() : nil
         FeatureService.shared = compositeFeatureFlags
         FeatureService.shared?.activate { /* [weak self] in */
             Injection.shared?.injectFeatured(completion: completion)

@@ -12,7 +12,7 @@ import Statsig
 
 public enum dydxStatsigFeatureFlags: String {
     case useSkip = "ff_skip_migration"
-    
+
     /// note this is always defaults to false if the feature flag does not exist in stat sig
     /// see https://docs.statsig.com/client/iosClientSDK#checking-a-gate
     public var isEnabled: Bool {
