@@ -1,5 +1,5 @@
 PODS:
-  - Abacus (1.8.59)
+  - Abacus (1.8.67)
   - Amplitude-iOS (4.10.0)
   - AppsFlyerFramework (6.14.6):
     - AppsFlyerFramework/Main (= 6.14.6)
@@ -386,7 +386,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  Abacus: 0491343822e32560fde36144e676539447d205c1
+  Abacus: 8d45a9a836b3b153c856998b3f7b7128b217e972
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   AppsFlyerFramework: bef4087719ce689835bbf408c61e2bcc5d4b8bd8
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
