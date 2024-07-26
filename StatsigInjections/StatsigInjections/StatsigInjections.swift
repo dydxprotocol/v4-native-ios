@@ -65,7 +65,7 @@ import Combine
                 urlSession: nil)) {[weak self] error in
                     Console.shared.log("Statsig feature flags initialized")
                     if let error {
-                        assertionFailure("Statsig failed to initialize: \(error)")
+                        Console.shared.log("Statsig feature flags failed to initialize: \(error)")
                     }
                     self?.newValuesSubject.send()
                     // intentionally not calling completion here since we do not want ff init to be blocking startup
