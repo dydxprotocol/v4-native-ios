@@ -41,10 +41,6 @@ public class WebCookieDomain: NSObject, WebCookieDomainProtocol, WKScriptMessage
 
         super.init()
 
-        if parser.asBoolean(FeatureService.shared?.flag(feature: "webview_popup"))?.boolValue ?? false {
-            configuration.preferences.javaScriptEnabled = true
-            configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
-        }
         if let userAgent = userAgent {
             configuration.applicationNameForUserAgent = userAgent
         }

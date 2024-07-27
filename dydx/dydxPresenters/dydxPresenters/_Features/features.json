@@ -10,7 +10,7 @@
                 "field":{
                     "field":"deployment_url",
                     "optional":true,
-                    "type" : "text"
+                    "type" : "bool"
                 }
             },
             {
@@ -20,15 +20,35 @@
                 "field":{
                     "field":"force_mainnet",
                     "optional":true,
-                    "type" : "text",
+                    "type" : "bool",
                     "options" : [
                         {
                             "text": "yes",
-                            "value" : "1"
+                            "value" : 1
                         },
                         {
                             "text": "no",
                             "value" : "0"
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Use skip"
+                },
+                "field":{
+                    "field":"ff_skip_migration",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : 1
+                        },
+                        {
+                            "text": "no",
+                            "value" : 0
                         }
                     ]
                 }
@@ -44,11 +64,11 @@
                     "options" : [
                         {
                             "text": "yes",
-                            "value" : "1"
+                            "value" : 1
                         },
                         {
                             "text": "no",
-                            "value" : "0"
+                            "value" : 0
                         }
                     ]
                 }

@@ -14,9 +14,11 @@ import dydxFormatter
 public final class AbacusStateManager: NSObject {
     public static let shared = AbacusStateManager()
 
+    private var cancellables = Set<AnyCancellable>()
+
     public lazy var deploymentUri: String = {
         // "lazy var" because FeatureService.shared needs be assigned first
-        let url = dydxStringFeatureFlag.deployment_url.string ?? (CredientialConfig.shared.key(for: "webAppUrl"))!
+        let url = dydxStringFeatureFlag.deployment_url.string ?? (CredientialConfig.shared.credential(for: "webAppUrl"))!
         return url.last == "/" ? url : url + "/"
     }()
 
@@ -155,8 +157,7 @@ public final class AbacusStateManager: NSObject {
         }
 
         appConfigs.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
-        appConfigs.onboardingConfigs.alchemyApiKey = CredientialConfig.shared.key(for: "alchemyApiKey")
-        StatsigConfig.shared.useSkip = true
+        appConfigs.onboardingConfigs.alchemyApiKey = CredientialConfig.shared.credential(for: "alchemyApiKey")
 
         return AsyncAbacusStateManagerV2(
             deploymentUri: deploymentUri,
@@ -177,7 +178,7 @@ public final class AbacusStateManager: NSObject {
         _ = foregroundToken
         _ = backgroundToken
 
-        //        Abacus.ProtocolNativeImpFactory.companion.setStateNotification(stateNotification: self)
+        startListeningForFeatureFlagChanges()
     }
 
     private func start() {
@@ -204,6 +205,14 @@ public final class AbacusStateManager: NSObject {
         }
         asyncStateManager.readyToConnect = true
         isStarted = true
+    }
+
+    private func startListeningForFeatureFlagChanges() {
+        FeatureService.shared?.newValuesAvailablePublisher
+            .sink {
+                StatsigConfig.shared.useSkip = dydxBoolFeatureFlag.shouldUseSkip.isEnabled
+            }
+            .store(in: &cancellables)
     }
 
     public func setMarket(market: String?) {

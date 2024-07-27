@@ -26,7 +26,7 @@ open class ParticlesPlatformInjection: ParticlesInjection {
         
         HapticFeedback.shared = MotionHapticFeedback()
         SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
-        RoutingTabBarController.parserOverwrite = Parser.featureFlagged
+        RoutingTabBarController.parserOverwrite = Parser.standard
         PrompterFactory.shared = UIKitPrompterFactory()
     }
 }

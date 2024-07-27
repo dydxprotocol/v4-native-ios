@@ -7,25 +7,16 @@
 //
 
 import Foundation
+import Combine
 
 public class CompositeFeatureFlagsProvider: NSObject & FeatureFlagsProtocol {
     public var local: FeatureFlagsProtocol?
     public var remote: FeatureFlagsProtocol?
-
-    public var featureFlags: [String: Any]? {
-        let localFlags = local?.featureFlags
-        let remoteFlags = remote?.featureFlags
-        if let localFlags = localFlags {
-            if let remoteFlags = remoteFlags {
-                return remoteFlags.merging(localFlags) { (_, local) -> Any in
-                    local
-                }
-            } else {
-                return localFlags
-            }
-        } else {
-            return remoteFlags
-        }
+    
+    public var newValuesAvailablePublisher: AnyPublisher<Void, Never> {
+        Publishers.Merge(local?.newValuesAvailablePublisher ?? Just(()).eraseToAnyPublisher(),
+                         remote?.newValuesAvailablePublisher ?? Just(()).eraseToAnyPublisher())
+            .eraseToAnyPublisher()
     }
 
     public func refresh(completion: @escaping () -> Void) {
@@ -56,16 +47,25 @@ public class CompositeFeatureFlagsProvider: NSObject & FeatureFlagsProtocol {
         }
     }
 
-    public func flag(feature: String?) -> Any? {
+    public func value(feature: String) -> String? {
         switch Installation.source {
         case .appStore, .jailBroken:
-            return remote?.flag(feature: feature)
+            return remote?.value(feature: feature)
         case .debug, .testFlight:
-            if let localFlag = local?.flag(feature: feature) {
+            if let localFlag = local?.value(feature: feature) {
                 return localFlag
             } else {
-                return remote?.flag(feature: feature)
+                return remote?.value(feature: feature)
             }
+        }
+    }
+    
+    public func isOn(feature: String) -> Bool? {
+        switch Installation.source {
+        case .appStore, .jailBroken:
+            return remote?.isOn(feature: feature) == true
+        case .debug, .testFlight:
+            return local?.isOn(feature: feature) ?? remote?.isOn(feature: feature) ?? false
         }
     }
 

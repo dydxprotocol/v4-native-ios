@@ -21,7 +21,6 @@
 		3101F98D25112EBE00AC4010 /* LocatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101F98A25112EBE00AC4010 /* LocatorService.swift */; };
 		3101F99325112F2600AC4010 /* Login.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3101F99125112F2500AC4010 /* Login.xib */; };
 		3101F99425112F2600AC4010 /* Logout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3101F99225112F2600AC4010 /* Logout.xib */; };
-		3102D3052720C622000E7B3A /* FeaturesConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3102D3042720C622000E7B3A /* FeaturesConfig.swift */; };
 		310C4F742533B57700DF1D62 /* StreamApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C4F732533B57700DF1D62 /* StreamApi.swift */; };
 		310C4F752533B57700DF1D62 /* StreamApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C4F732533B57700DF1D62 /* StreamApi.swift */; };
 		310C4F762533B57700DF1D62 /* StreamApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C4F732533B57700DF1D62 /* StreamApi.swift */; };
@@ -414,7 +413,6 @@
 		3101F98A25112EBE00AC4010 /* LocatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocatorService.swift; sourceTree = "<group>"; };
 		3101F99125112F2500AC4010 /* Login.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Login.xib; sourceTree = "<group>"; };
 		3101F99225112F2600AC4010 /* Logout.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Logout.xib; sourceTree = "<group>"; };
-		3102D3042720C622000E7B3A /* FeaturesConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesConfig.swift; sourceTree = "<group>"; };
 		310C4F732533B57700DF1D62 /* StreamApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamApi.swift; sourceTree = "<group>"; };
 		311C0FDA21B0E9C4001775BA /* ParticlesKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ParticlesKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		311C0FDD21B0E9C4001775BA /* ParticlesKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticlesKit.h; sourceTree = "<group>"; };
@@ -630,7 +628,6 @@
 		3102D2FF2720C5DD000E7B3A /* _Features */ = {
 			isa = PBXGroup;
 			children = (
-				3102D3042720C622000E7B3A /* FeaturesConfig.swift */,
 			);
 			path = _Features;
 			sourceTree = "<group>";
@@ -1558,7 +1555,6 @@
 				314B61DD23DCCE6200139EB3 /* ErrorLogging.swift in Sources */,
 				314B620523DCCE6200139EB3 /* InteractorProtocol.swift in Sources */,
 				314B618D23DCCE6100139EB3 /* XibProviderProtocol.swift in Sources */,
-				3102D3052720C622000E7B3A /* FeaturesConfig.swift in Sources */,
 				314B623123DCCE6200139EB3 /* GridInteractor.swift in Sources */,
 				314B61C123DCCE6200139EB3 /* TimeCounter+Particle.swift in Sources */,
 				314B61D123DCCE6200139EB3 /* LoaderProtocol.swift in Sources */,

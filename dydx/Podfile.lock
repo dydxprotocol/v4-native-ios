@@ -33,9 +33,6 @@ PODS:
   - Firebase/Performance (10.29.0):
     - Firebase/CoreOnly
     - FirebasePerformance (~> 10.29.0)
-  - Firebase/RemoteConfig (10.29.0):
-    - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 10.29.0)
   - FirebaseABTesting (10.29.0):
     - FirebaseCore (~> 10.0)
   - FirebaseAnalytics (10.29.0):
@@ -267,6 +264,9 @@ PODS:
     - SDWebImage (~> 5.10)
   - SimpleKeychain (0.12.5)
   - SnapKit (5.7.1)
+  - Statsig (1.46.0):
+    - Statsig/StatsigInternalObjC (= 1.46.0)
+  - Statsig/StatsigInternalObjC (1.46.0)
   - SVGKit (3.0.0):
     - CocoaLumberjack (~> 3.0)
   - Validator (3.2.1)
@@ -289,7 +289,6 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - Firebase/Performance
-  - Firebase/RemoteConfig
   - FirebaseCrashlytics
   - FloatingPanel (= 2.7.0)
   - GoogleToolboxForMac
@@ -312,6 +311,7 @@ DEPENDENCIES:
   - SDWebImageSwiftUI
   - SimpleKeychain (~> 0.12.5)
   - SnapKit
+  - Statsig (~> 1.0)
   - SVGKit
   - Validator
   - ZSWTappableLabel
@@ -369,6 +369,7 @@ SPEC REPOS:
     - SDWebImageSwiftUI
     - SimpleKeychain
     - SnapKit
+    - Statsig
     - SVGKit
     - Validator
     - ZSWTappableLabel
@@ -439,10 +440,11 @@ SPEC CHECKSUMS:
   SDWebImageSwiftUI: dcff3d05fd0579ff280221ae8856c34ac3b67f25
   SimpleKeychain: 8193a9e40967eccac933c1fde82de46c07a5ae26
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  Statsig: 7144f10980f98c88993c168a506fef4fc4ba9268
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: 2a032d64e6c7c3b1839673950b828c8fa7caffa9
+PODFILE CHECKSUM: fcf94c2340844ef3d27b238c954292a27141fab4
 
 COCOAPODS: 1.15.2
