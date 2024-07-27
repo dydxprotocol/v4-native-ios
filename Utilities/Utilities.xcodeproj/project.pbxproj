@@ -103,9 +103,6 @@
 		314B645423DCCF0200139EB3 /* DebugParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B63AD23DCCF0100139EB3 /* DebugParser.swift */; };
 		314B645523DCCF0200139EB3 /* DebugParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B63AD23DCCF0100139EB3 /* DebugParser.swift */; };
 		314B645623DCCF0200139EB3 /* DebugParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B63AD23DCCF0100139EB3 /* DebugParser.swift */; };
-		314B645823DCCF0200139EB3 /* FeatureFlaggedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B63AE23DCCF0100139EB3 /* FeatureFlaggedParser.swift */; };
-		314B645923DCCF0200139EB3 /* FeatureFlaggedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B63AE23DCCF0100139EB3 /* FeatureFlaggedParser.swift */; };
-		314B645A23DCCF0200139EB3 /* FeatureFlaggedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B63AE23DCCF0100139EB3 /* FeatureFlaggedParser.swift */; };
 		314B645C23DCCF0200139EB3 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B63AF23DCCF0100139EB3 /* Debouncer.swift */; };
 		314B645D23DCCF0200139EB3 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B63AF23DCCF0100139EB3 /* Debouncer.swift */; };
 		314B645E23DCCF0200139EB3 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B63AF23DCCF0100139EB3 /* Debouncer.swift */; };
@@ -339,7 +336,6 @@
 		314B63A923DCCF0100139EB3 /* NotificationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationToken.swift; sourceTree = "<group>"; };
 		314B63AC23DCCF0100139EB3 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		314B63AD23DCCF0100139EB3 /* DebugParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugParser.swift; sourceTree = "<group>"; };
-		314B63AE23DCCF0100139EB3 /* FeatureFlaggedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureFlaggedParser.swift; sourceTree = "<group>"; };
 		314B63AF23DCCF0100139EB3 /* Debouncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		314B63B023DCCF0100139EB3 /* JsonWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonWriter.swift; sourceTree = "<group>"; };
 		314B63B123DCCF0100139EB3 /* Installation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Installation.swift; sourceTree = "<group>"; };
@@ -674,7 +670,6 @@
 			children = (
 				319BB727242928D700DC9E97 /* ConditionalParser.swift */,
 				314B63AD23DCCF0100139EB3 /* DebugParser.swift */,
-				314B63AE23DCCF0100139EB3 /* FeatureFlaggedParser.swift */,
 				314B63AC23DCCF0100139EB3 /* Parser.swift */,
 				317F16CD2572CE2800D178B8 /* AppConfiguration.swift */,
 			);
@@ -1198,7 +1193,6 @@
 				314B64B223DCCF0200139EB3 /* NSObject+Class.m in Sources */,
 				314B645E23DCCF0200139EB3 /* Debouncer.swift in Sources */,
 				317F16D92572CEC500D178B8 /* ImageUploaderProtocol.swift in Sources */,
-				314B645A23DCCF0200139EB3 /* FeatureFlaggedParser.swift in Sources */,
 				31471F7224BA2F1E00057221 /* UserAgent.swift in Sources */,
 				314B64E223DCCF0200139EB3 /* DebugTracking.swift in Sources */,
 				317F16D02572CE2800D178B8 /* AppConfiguration.swift in Sources */,
@@ -1276,7 +1270,6 @@
 			files = (
 				314B64B123DCCF0200139EB3 /* NSObject+Class.m in Sources */,
 				314B645D23DCCF0200139EB3 /* Debouncer.swift in Sources */,
-				314B645923DCCF0200139EB3 /* FeatureFlaggedParser.swift in Sources */,
 				314B64E123DCCF0200139EB3 /* DebugTracking.swift in Sources */,
 				31471F7124BA2F1E00057221 /* UserAgent.swift in Sources */,
 				317F16D82572CEC500D178B8 /* ImageUploaderProtocol.swift in Sources */,
@@ -1350,7 +1343,6 @@
 				314B64D023DCCF0200139EB3 /* TimeCounter.swift in Sources */,
 				314B64B023DCCF0200139EB3 /* NSObject+Class.m in Sources */,
 				314B645C23DCCF0200139EB3 /* Debouncer.swift in Sources */,
-				314B645823DCCF0200139EB3 /* FeatureFlaggedParser.swift in Sources */,
 				314B64E023DCCF0200139EB3 /* DebugTracking.swift in Sources */,
 				314B643423DCCF0200139EB3 /* JsonLoader.swift in Sources */,
 				314B648423DCCF0200139EB3 /* TimeIntervale+String.swift in Sources */,

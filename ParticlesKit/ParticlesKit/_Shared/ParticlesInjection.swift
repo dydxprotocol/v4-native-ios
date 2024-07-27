@@ -90,9 +90,8 @@ open class ParticlesInjection: NSObject, InjectionProtocol {
 
     open func injectParsers() {
         Console.shared.log("injectParsers")
-        // Router and Xib loader supports Feature flagging
-        MappedRouter.parserOverwrite = Parser.featureFlagged
-        XibJsonFile.parserOverwrite = Parser.featureFlagged
+        MappedRouter.parserOverwrite = Parser.standard
+        XibJsonFile.parserOverwrite = Parser.standard
         JsonEndpointResolver.parserOverwrite = Parser.debug
         JsonCredentialsProvider.parserOverwrite = Parser.debug
     }

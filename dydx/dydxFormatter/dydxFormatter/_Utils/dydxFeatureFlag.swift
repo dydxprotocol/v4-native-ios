@@ -13,6 +13,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     case push_notification
     case force_mainnet
     case enable_app_rating
+    case shouldUseSkip = "ff_skip_migration"
 
     private static let obj = NSObject()
 
@@ -20,12 +21,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
         if FeatureService.shared == nil {
             Console.shared.log("WARNING: FeatureService not yet set up.")
         }
-        switch self {
-        case .enable_app_rating:
-            return Self.obj.parser.asBoolean(FeatureService.shared?.flag(feature: rawValue))?.boolValue ?? true
-        case .push_notification, .force_mainnet:
-            return Self.obj.parser.asBoolean(FeatureService.shared?.flag(feature: rawValue))?.boolValue ?? false
-        }
+        return FeatureService.shared?.isOn(feature: rawValue) == true
     }
 
     public static var enabledFlags: [String] {
@@ -44,19 +40,6 @@ public enum dydxStringFeatureFlag: String {
         if FeatureService.shared == nil {
             Console.shared.log("WARNING: FeatureService not yet set up.")
         }
-        return Self.obj.parser.asString(FeatureService.shared?.flag(feature: rawValue))
-    }
-}
-
-public enum dydxNumberFeatureFlag: String {
-    case _place_holder
-
-    private static let obj = NSObject()
-
-    public var number: NSNumber? {
-        if FeatureService.shared == nil {
-            Console.shared.log("WARNING: FeatureService not yet set up.")
-        }
-        return Self.obj.parser.asNumber(FeatureService.shared?.flag(feature: rawValue))
+        return FeatureService.shared?.value(feature: rawValue)
     }
 }

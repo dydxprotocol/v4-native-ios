@@ -182,4 +182,7 @@
          location = "group:update_marketing_version.sh">
       </FileRef>
    </Group>
+   <FileRef
+      location = "group:../StatsigInjections/StatsigInjections.xcodeproj">
+   </FileRef>
 </Workspace>
