@@ -11,7 +11,7 @@ import Utilities
 
 @objc open class FieldDefinitionGroup: DictionaryEntity {
     override open var parser: Parser {
-        return Parser.featureFlagged
+        return Parser.standard
     }
 
     public var input: Bool {

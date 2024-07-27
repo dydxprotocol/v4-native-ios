@@ -16,7 +16,6 @@ def firebase_core_pods
   pod 'Firebase/AnalyticsWithoutAdIdSupport'
   pod 'Firebase/Core'
   pod 'Firebase/Performance'
-  pod 'Firebase/RemoteConfig'
 end
 
 def firebase_pods
@@ -28,7 +27,6 @@ def firebase_pods_extension
   firebase_dependency_pods
   pod 'Firebase/AnalyticsWithoutAdIdSupport'
   pod 'Firebase/Core'
-  pod 'Firebase/RemoteConfig'
   pod 'Firebase/Messaging'
 end
 
@@ -43,6 +41,10 @@ end
 def amplitude_pods
   pod 'Amplitude-iOS'
 end
+
+def statsig_pods
+  pod 'Statsig', '~>1.0'
+end 
 
 def abacus_pods
   #pod 'abacus', :path => '~/v4-abacus'
@@ -234,6 +236,12 @@ abstract_target 'iOS' do
     appsflyer_pods
   end
   
+  target 'StatsigInjections' do
+    project '../StatsigInjections/StatsigInjections'
+    ios_util_pods
+    statsig_pods
+  end
+
   target 'FirebaseStaticInjections' do
     project '../FirebaseStaticInjections/FirebaseStaticInjections'
     ios_util_pods
@@ -317,6 +325,7 @@ abstract_target 'iOS' do
   target 'dydxFormatter' do
     project '../dydx/dydxFormatter/dydxFormatter'
     ios_ui_pods
+    statsig_pods
   end
   
   target 'dydxFormatterTests' do
@@ -352,6 +361,7 @@ abstract_target 'iOS' do
     crashlytics_pods
     appsflyer_pods
     amplitude_pods
+    statsig_pods
     abacus_pods
   end
   
@@ -363,6 +373,7 @@ abstract_target 'iOS' do
     crashlytics_pods
     appsflyer_pods
     amplitude_pods
+    statsig_pods
     abacus_pods
   end
   

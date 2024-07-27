@@ -37,6 +37,6 @@ import Utilities
     }
 
     override open var parser: Parser {
-        return Parser.featureFlagged
+        return Parser.standard
     }
 }

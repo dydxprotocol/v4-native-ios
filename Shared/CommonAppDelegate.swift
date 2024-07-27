@@ -21,6 +21,7 @@ import FirebaseStaticInjections
 import dydxStateManager
 import dydxViews
 import dydxAnalytics
+import StatsigInjections
 
 open class CommonAppDelegate: ParticlesAppDelegate {
     open var notificationTag: String {
@@ -45,9 +46,10 @@ open class CommonAppDelegate: ParticlesAppDelegate {
 
     override open func injectFeatures(completion: @escaping () -> Void) {
         Console.shared.log("injectFeatures")
-        // these two injections need to happen before app start
+        // these three injections need to happen before app start
         injectFirebase()
         injectRating()
+        injectStatsigApiKey()
         let compositeFeatureFlags = CompositeFeatureFlagsProvider()
         switch  Installation.source {
         case .debug, .testFlight:
@@ -55,7 +57,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         case .appStore, .jailBroken:
             break
         }
-        compositeFeatureFlags.remote = FirebaseRunner.shared.enabled ? FirebaseFeatureFlagsProvider() : nil
+        compositeFeatureFlags.remote = StatsigFeatureFlagsProvider.shared
         FeatureService.shared = compositeFeatureFlags
         FeatureService.shared?.activate { /* [weak self] in */
             Injection.shared?.injectFeatured(completion: completion)
@@ -101,15 +103,15 @@ open class CommonAppDelegate: ParticlesAppDelegate {
             add(errorLogging: CrashlyticsErrorLogging())
         }
     }
-
+    
     open func injectAmplitude() {
         Console.shared.log("injectAmplitude")
         let apiKey: String?
         switch Installation.source {
         case .jailBroken, .debug, .testFlight:
-            apiKey = CredientialConfig.shared.key(for: "amplitudeStagingApiKey")
+            apiKey = CredientialConfig.shared.credential(for: "amplitudeStagingApiKey")
         case .appStore:
-            apiKey = CredientialConfig.shared.key(for: "amplitudeApiKey")
+            apiKey = CredientialConfig.shared.credential(for: "amplitudeApiKey")
         }
         if let apiKey = apiKey, apiKey.isNotEmpty {
             AmplitudeRunner.shared.apiKey = apiKey
@@ -117,10 +119,26 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         }
     }
     
+    open func injectStatsigApiKey() {
+        Console.shared.log("injectStatsig")
+        let environment: StatsigFeatureFlagsProvider.Environment
+        switch  Installation.source {
+        case .debug, .testFlight:
+            environment = .development
+        case .appStore, .jailBroken:
+            environment = .production
+        }
+        guard let apiKey = CredientialConfig.shared.credential(for: "statsigApiKey") else {
+            assertionFailure("Statsig API key is missing")
+            return
+        }
+        StatsigFeatureFlagsProvider.shared = StatsigFeatureFlagsProvider(apiKey: apiKey, environment: environment)
+    }
+    
     open func injectAttribution() {
         Console.shared.log("injectAttribution")
-        if let devKey = CredientialConfig.shared.key(for: "appsFlyerDevKey"), devKey.isNotEmpty,
-           let appId = CredientialConfig.shared.key(for: "appsFlyerAppId"), appId.isNotEmpty {
+        if let devKey = CredientialConfig.shared.credential(for: "appsFlyerDevKey"), devKey.isNotEmpty,
+           let appId = CredientialConfig.shared.credential(for: "appsFlyerAppId"), appId.isNotEmpty {
             AppsFlyerRunner.shared.devKey = devKey
             AppsFlyerRunner.shared.appId = appId
             Attributer.shared = AppsFlyerAttributor()
@@ -155,7 +173,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     }
 
     open func injectWebview() {
-        ParticlesWebView.setup(urlString: CredientialConfig.shared.key(for: "webAppUrl"))
+        ParticlesWebView.setup(urlString: CredientialConfig.shared.credential(for: "webAppUrl"))
     }
 
     override open func startup(completion: @escaping () -> Void) {
