@@ -33,9 +33,6 @@ PODS:
   - Firebase/Performance (10.29.0):
     - Firebase/CoreOnly
     - FirebasePerformance (~> 10.29.0)
-  - Firebase/RemoteConfig (10.29.0):
-    - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 10.29.0)
   - FirebaseABTesting (10.29.0):
     - FirebaseCore (~> 10.0)
   - FirebaseAnalytics (10.29.0):
@@ -292,7 +289,6 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - Firebase/Performance
-  - Firebase/RemoteConfig
   - FirebaseCrashlytics
   - FloatingPanel (= 2.7.0)
   - GoogleToolboxForMac
@@ -449,6 +445,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: bd668d0b6b9c3bd50d628dd8ea1ab4ad62f53a42
+PODFILE CHECKSUM: fcf94c2340844ef3d27b238c954292a27141fab4
 
 COCOAPODS: 1.15.2
