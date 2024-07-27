@@ -8,7 +8,6 @@
 
 import Foundation
 import Utilities
-import Statsig
 
 public enum dydxBoolFeatureFlag: String, CaseIterable {
     case push_notification
