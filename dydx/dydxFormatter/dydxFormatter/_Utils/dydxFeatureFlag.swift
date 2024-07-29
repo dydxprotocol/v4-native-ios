@@ -10,6 +10,7 @@ import Foundation
 import Utilities
 
 public enum dydxBoolFeatureFlag: String, CaseIterable {
+    case push_notification
     case force_mainnet
     case enable_app_rating
     case shouldUseSkip = "ff_skip_migration"
@@ -19,20 +20,8 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     public var isEnabled: Bool {
         if FeatureService.shared == nil {
             Console.shared.log("WARNING: FeatureService not yet set up.")
-            assertionFailure("FeatureService not yet set up.")
         }
-        if let isEnabled = FeatureService.shared?.isOn(feature: rawValue) {
-            return isEnabled
-        } else {
-            // default values when Statsig is not initialized yet (fresh installs)
-            switch self {
-            case .force_mainnet:
-                return false
-            case .enable_app_rating, .shouldUseSkip:
-                return true
-            }
-        }
-
+        return FeatureService.shared?.isOn(feature: rawValue) == true
     }
 
     public static var enabledFlags: [String] {
