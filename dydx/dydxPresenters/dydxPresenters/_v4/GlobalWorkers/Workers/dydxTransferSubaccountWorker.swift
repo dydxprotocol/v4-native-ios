@@ -15,7 +15,7 @@ import dydxFormatter
 
 final class dydxTransferSubaccountWorker: BaseWorker {
 
-    private static let balanceRetainAmount = 0.25
+    private static let balanceRetainAmount = 0.5
 
     override func start() {
         super.start()
