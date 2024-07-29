@@ -12,12 +12,6 @@ import Combine
 public class CompositeFeatureFlagsProvider: NSObject & FeatureFlagsProtocol {
     public var local: FeatureFlagsProtocol?
     public var remote: FeatureFlagsProtocol?
-    
-    public var newValuesAvailablePublisher: AnyPublisher<Void, Never> {
-        Publishers.Merge(local?.newValuesAvailablePublisher ?? Just(()).eraseToAnyPublisher(),
-                         remote?.newValuesAvailablePublisher ?? Just(()).eraseToAnyPublisher())
-            .eraseToAnyPublisher()
-    }
 
     public func refresh(completion: @escaping () -> Void) {
         if let local = local {

@@ -17,15 +17,6 @@ public protocol FeatureFlagsProtocol {
     func isOn(feature: String) -> Bool?
 
     func customized() -> Bool
-    
-    var newValuesAvailablePublisher: AnyPublisher<Void, Never> { get }
-}
-
-// default impl
-extension FeatureFlagsProtocol {
-    public var newValuesAvailablePublisher: AnyPublisher<Void, Never> {
-        return Just(()).eraseToAnyPublisher()
-    }
 }
 
 public class FeatureService {
