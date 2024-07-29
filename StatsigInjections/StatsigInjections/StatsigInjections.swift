@@ -82,7 +82,10 @@ import Combine
     }
 
     public func isOn(feature: String) -> Bool? {
-        Statsig.checkGate(feature)
+        if Statsig.isInitialized() {
+            return Statsig.checkGate(feature)
+        }
+        return nil
     }
     
     public func value(feature: String) -> String? {

@@ -52,26 +52,6 @@
                         }
                     ]
                 }
-            },
-            {
-                "title":{
-                    "text":"Push Notification"
-                },
-                "field":{
-                    "field":"push_notification",
-                    "optional":true,
-                    "type" : "text",
-                    "options" : [
-                        {
-                            "text": "yes",
-                            "value" : 1
-                        },
-                        {
-                            "text": "no",
-                            "value" : 0
-                        }
-                    ]
-                }
             }
         ]
     }
