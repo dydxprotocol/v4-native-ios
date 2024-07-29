@@ -10,10 +10,20 @@ import Foundation
 import Utilities
 
 public enum dydxBoolFeatureFlag: String, CaseIterable {
-    case push_notification
     case force_mainnet
     case enable_app_rating
     case shouldUseSkip = "ff_skip_migration"
+
+    var defaultValue: Bool {
+        switch self {
+        case .force_mainnet:
+            return false
+        case .enable_app_rating:
+            return true
+        case .shouldUseSkip:
+            return true
+        }
+    }
 
     private static let obj = NSObject()
 
@@ -21,7 +31,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
         if FeatureService.shared == nil {
             Console.shared.log("WARNING: FeatureService not yet set up.")
         }
-        return FeatureService.shared?.isOn(feature: rawValue) == true
+        return FeatureService.shared?.isOn(feature: rawValue) ?? defaultValue
     }
 
     public static var enabledFlags: [String] {
