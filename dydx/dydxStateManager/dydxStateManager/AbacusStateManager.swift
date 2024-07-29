@@ -158,6 +158,7 @@ public final class AbacusStateManager: NSObject {
 
         appConfigs.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
         appConfigs.onboardingConfigs.alchemyApiKey = CredientialConfig.shared.credential(for: "alchemyApiKey")
+        StatsigConfig.shared.useSkip = dydxBoolFeatureFlag.shouldUseSkip.isEnabled
 
         return AsyncAbacusStateManagerV2(
             deploymentUri: deploymentUri,
@@ -177,8 +178,6 @@ public final class AbacusStateManager: NSObject {
         _ = CosmoJavascript.shared
         _ = foregroundToken
         _ = backgroundToken
-
-        startListeningForFeatureFlagChanges()
     }
 
     private func start() {
@@ -205,14 +204,6 @@ public final class AbacusStateManager: NSObject {
         }
         asyncStateManager.readyToConnect = true
         isStarted = true
-    }
-
-    private func startListeningForFeatureFlagChanges() {
-        FeatureService.shared?.newValuesAvailablePublisher
-            .sink {
-                StatsigConfig.shared.useSkip = dydxBoolFeatureFlag.shouldUseSkip.isEnabled
-            }
-            .store(in: &cancellables)
     }
 
     public func setMarket(market: String?) {
