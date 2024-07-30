@@ -171,6 +171,7 @@
 		273C2F382C496F4F00F8391F /* dydxSliderInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273C2F372C496F4F00F8391F /* dydxSliderInputView.swift */; };
 		273F50162B7C3F120034792A /* SignedAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F50152B7C3F120034792A /* SignedAmountView.swift */; };
 		274C47F02C0FC9A4000212C3 /* MemoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C47EF2C0FC9A4000212C3 /* MemoBox.swift */; };
+		2751D6552C59646700B36F95 /* dydxVaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2751D6542C59646700B36F95 /* dydxVaultViewModel.swift */; };
 		27685F4D2B9FCAE200F37DE2 /* Satoshi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27685F402B9FCAD300F37DE2 /* Satoshi-Medium.otf */; };
 		2769090E2AAFD8030075B2D6 /* TransferInstanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090D2AAFD8030075B2D6 /* TransferInstanceViewModel.swift */; };
 		276909102AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */; };
@@ -545,6 +546,7 @@
 		273F50152B7C3F120034792A /* SignedAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedAmountView.swift; sourceTree = "<group>"; };
 		2742C04D2BF6897A00E13C09 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		274C47EF2C0FC9A4000212C3 /* MemoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBox.swift; sourceTree = "<group>"; };
+		2751D6542C59646700B36F95 /* dydxVaultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultViewModel.swift; sourceTree = "<group>"; };
 		27685F402B9FCAD300F37DE2 /* Satoshi-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Medium.otf"; sourceTree = "<group>"; };
 		2769090D2AAFD8030075B2D6 /* TransferInstanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferInstanceViewModel.swift; sourceTree = "<group>"; };
 		2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewModel.swift; sourceTree = "<group>"; };
@@ -704,25 +706,26 @@
 		0230375D28C11AFA00412B72 /* _v4 */ = {
 			isa = PBXGroup;
 			children = (
-				27E0735D2C20D2680034B963 /* CancelOrders */,
-				278A4D942B8FA5F5003898EB /* Rating */,
 				27ED364E2AD7358C00C159F5 /* Auth */,
 				27AAA9782ACE34B600AF3C56 /* Banner */,
+				27E0735D2C20D2680034B963 /* CancelOrders */,
 				6453A7AD299C26B60041A0C4 /* ClosePosition */,
-				0230376B28C11B0E00412B72 /* Markets */,
 				02B8419B28EF67B300C4D25B /* MarketInfo */,
+				0230376B28C11B0E00412B72 /* Markets */,
 				0258B9D62991BC5C0098E1BE /* NewsAlerts */,
 				02FF0BBF29AE924300781EDA /* Onboarding */,
 				0238FC31296DA527002E1C1A /* OrderDetails */,
 				024F488329657F0400E40247 /* Portfolio */,
 				0258BA0F2992947E0098E1BE /* Profile */,
+				278A4D942B8FA5F5003898EB /* Rating */,
 				02107A72297A2CCB000D75E1 /* Receipt */,
 				02F99F1B29E4BF720009B3E8 /* Search */,
 				024F488029657E3900E40247 /* Trade */,
 				02A5C84A297FBCAA00FFE1F9 /* Transfer */,
-				020DBF0129E0900F0068AAA6 /* Wallet */,
 				645299F02AE86FC3000810E6 /* Update */,
 				024F4864296579D100E40247 /* User */,
+				2751D6472C59645000B36F95 /* Vault */,
+				020DBF0129E0900F0068AAA6 /* Wallet */,
 			);
 			path = _v4;
 			sourceTree = "<group>";
@@ -1472,6 +1475,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		2751D6472C59645000B36F95 /* Vault */ = {
+			isa = PBXGroup;
+			children = (
+				2751D6542C59646700B36F95 /* dydxVaultViewModel.swift */,
+			);
+			path = Vault;
+			sourceTree = "<group>";
+		};
 		277E8FF82B1EA083005CCBCB /* TradingRewards */ = {
 			isa = PBXGroup;
 			children = (
@@ -2138,6 +2149,7 @@
 				024B7B5628B7F8AB00F7C386 /* dydxThemes.swift in Sources */,
 				27C6E4C92BC8C30E00ED892A /* dydxCustomLimitPriceViewModel.swift in Sources */,
 				277E8FCB2B1E5798005CCBCB /* dydxProfileRewardsViewModel.swift in Sources */,
+				2751D6552C59646700B36F95 /* dydxVaultViewModel.swift in Sources */,
 				02DDAD3C2925859D00CC7531 /* QRCodeDisplay.swift in Sources */,
 				0276FA7C2A0DB515000BDF0B /* OrderStatus.swift in Sources */,
 				024B7B4F28B7F85100F7C386 /* SideText.swift in Sources */,

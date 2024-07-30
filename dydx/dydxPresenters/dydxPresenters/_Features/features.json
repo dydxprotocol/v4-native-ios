@@ -55,12 +55,12 @@
             },
             {
                 "title":{
-                    "text":"Push Notification"
+                    "text":"Vault"
                 },
                 "field":{
-                    "field":"push_notification",
+                    "field":"ff_vault_enabled",
                     "optional":true,
-                    "type" : "text",
+                    "type" : "bool",
                     "options" : [
                         {
                             "text": "yes",
