@@ -10,7 +10,7 @@
                 "field":{
                     "field":"deployment_url",
                     "optional":true,
-                    "type" : "bool"
+                    "type" : "text"
                 }
             },
             {

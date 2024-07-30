@@ -1478,9 +1478,25 @@
 		2751D6472C59645000B36F95 /* Vault */ = {
 			isa = PBXGroup;
 			children = (
-				2751D6542C59646700B36F95 /* dydxVaultViewModel.swift */,
+				2751D6772C597BFC00B36F95 /* DepositsAndWithdrawals */,
+				2751D6762C597BEC00B36F95 /* Landing */,
 			);
 			path = Vault;
+			sourceTree = "<group>";
+		};
+		2751D6762C597BEC00B36F95 /* Landing */ = {
+			isa = PBXGroup;
+			children = (
+				2751D6542C59646700B36F95 /* dydxVaultViewModel.swift */,
+			);
+			path = Landing;
+			sourceTree = "<group>";
+		};
+		2751D6772C597BFC00B36F95 /* DepositsAndWithdrawals */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DepositsAndWithdrawals;
 			sourceTree = "<group>";
 		};
 		277E8FF82B1EA083005CCBCB /* TradingRewards */ = {
