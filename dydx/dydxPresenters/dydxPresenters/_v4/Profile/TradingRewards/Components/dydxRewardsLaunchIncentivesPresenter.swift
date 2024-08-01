@@ -40,7 +40,7 @@ public class dydxRewardsLaunchIncentivesPresenter: HostedViewPresenter<dydxRewar
         .store(in: &subscriptions)
 
         viewModel?.aboutAction = {
-            Router.shared?.navigate(to: URL(string: "https://dydx.exchange/blog/v4-full-trading"), completion: nil)
+            Router.shared?.navigate(to: URL(string: "https://dydx.forum/t/launch-of-season-5-of-the-launch-incentive-program/2725"), completion: nil)
         }
 
         viewModel?.leaderboardAction = {
