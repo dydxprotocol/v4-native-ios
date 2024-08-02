@@ -15,6 +15,7 @@ import Combine
 import dydxViews
 import PlatformUI
 import ParticlesKit
+import dydxFormatter
 
 public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -44,7 +45,7 @@ public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
         super.viewDidLoad()
 
         createCenterButton()
-        routingMap = "tabs_v4.json"
+        routingMap = dydxBoolFeatureFlag.isVaultEnabled.isEnabled ? "tabs_v4_vault.json" : "tabs_v4.json"
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -95,7 +96,7 @@ public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
         }
     }
 
-    private func update(item: UITabBarItem, index: Int, selected: Bool) {
+     private func update(item: UITabBarItem, index: Int, selected: Bool) {
         item.title = selected ? "●" : " "
 //        if selected, [0, 3, 4].contains(index), wallet === nil {
 //            promptLogin()

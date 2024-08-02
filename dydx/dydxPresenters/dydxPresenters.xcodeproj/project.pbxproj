@@ -140,6 +140,8 @@
 		2741E3702A68787A000FA190 /* settings_direction_color_preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 2741E3632A68787A000FA190 /* settings_direction_color_preference.json */; };
 		2741E3732A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */; };
 		2749F8FF2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */; };
+		2751D6432C59614C00B36F95 /* tabs_v4_vault.json in Resources */ = {isa = PBXBuildFile; fileRef = 2751D6352C59614C00B36F95 /* tabs_v4_vault.json */; };
+		2751D6462C59643800B36F95 /* dydxVaultViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2751D6452C59643800B36F95 /* dydxVaultViewBuilder.swift */; };
 		276908FF2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */; };
 		277754352C069F8600E3E985 /* OnboardingAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277754282C069F8600E3E985 /* OnboardingAnalytics.swift */; };
 		277987512BA33F15006DC5CD /* dydxSelectedMarketStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */; };
@@ -526,6 +528,8 @@
 		2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxDirectionColorPreferenceViewBuilder.swift; sourceTree = "<group>"; };
 		2742C05D2BF6898500E13C09 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsLaunchIncentivesPresenter.swift; sourceTree = "<group>"; };
+		2751D6352C59614C00B36F95 /* tabs_v4_vault.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabs_v4_vault.json; sourceTree = "<group>"; };
+		2751D6452C59643800B36F95 /* dydxVaultViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultViewBuilder.swift; sourceTree = "<group>"; };
 		276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewPresenter.swift; sourceTree = "<group>"; };
 		277754282C069F8600E3E985 /* OnboardingAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingAnalytics.swift; sourceTree = "<group>"; };
 		277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSelectedMarketStore.swift; sourceTree = "<group>"; };
@@ -655,33 +659,34 @@
 		0230376A28C11B0300412B72 /* _v4 */ = {
 			isa = PBXGroup;
 			children = (
-				27E0735A2C20D1F80034B963 /* CancelOrders */,
-				278A4D912B8FA5C1003898EB /* Rating */,
-				021B68A32AD9B86600C5C3BF /* Auth */,
 				0243A75529BE568600A083FE /* Actions */,
+				021B68A32AD9B86600C5C3BF /* Auth */,
+				27E0735A2C20D1F80034B963 /* CancelOrders */,
 				6453A7CC299C55F90041A0C4 /* ClosePosition */,
 				27DB2E932AC1E7040047BC39 /* Error */,
 				02B6CE0A2A7071CB00C5F088 /* GlobalWorkers */,
-				0230375A28C1176100412B72 /* Markets */,
+				278EA5652BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift */,
+				026FC3F12AFACA5700C52F20 /* Marker */,
 				02B8419F28EF68E400C4D25B /* MarketInfo */,
+				0230375A28C1176100412B72 /* Markets */,
+				0276FA982A0DB8FD000BDF0B /* Model+Ext.swift */,
 				0258B9E52991BC880098E1BE /* NewsAlerts */,
 				02FF0BCF29AE92EE00781EDA /* Onboarding */,
 				0238FC47296DA54A002E1C1A /* OrderDetails */,
-				0258BA1E299294A90098E1BE /* Profile */,
 				6496DC31295E05E000174CE7 /* Portfolio */,
+				0258BA1E299294A90098E1BE /* Profile */,
+				278A4D912B8FA5C1003898EB /* Rating */,
 				02550F5029EA0E7500C00CE4 /* Receipt */,
 				0252A39528C10A5500C8E2C9 /* RootTab */,
 				02F99F2A29E4BFF90009B3E8 /* Search */,
 				02D1342328EB56B900B46941 /* Shared */,
 				27044F6D2BBB1CB0004C750D /* TakeProfitStopLoss */,
-				02A5C859297FBCCB00FFE1F9 /* Transfer */,
 				6496DC3C295E121000174CE7 /* Trade */,
-				0262EFA729D79EF3009889E2 /* Wallet */,
+				02A5C859297FBCCB00FFE1F9 /* Transfer */,
 				645299E12AE86FB1000810E6 /* Update */,
 				024F487B29657DFC00E40247 /* User */,
-				026FC3F12AFACA5700C52F20 /* Marker */,
-				0276FA982A0DB8FD000BDF0B /* Model+Ext.swift */,
-				278EA5652BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift */,
+				2751D6442C59642000B36F95 /* Vault */,
+				0262EFA729D79EF3009889E2 /* Wallet */,
 			);
 			path = _v4;
 			sourceTree = "<group>";
@@ -1289,6 +1294,7 @@
 				02F543B32C17AD6A000924E4 /* settings_gas_token.json */,
 				0279656929D795E7004DEB20 /* routing_swiftui.json */,
 				0279655B29D795E7004DEB20 /* tabs_v4.json */,
+				2751D6352C59614C00B36F95 /* tabs_v4_vault.json */,
 				02E7B38729D79A4400D6626D /* v4-native-client.js */,
 				02E7B36F29D79A4400D6626D /* test.js */,
 				02DA6E0C2AD897EE0048126C /* starkex-eth.js */,
@@ -1409,6 +1415,14 @@
 				2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */,
 			);
 			path = DirectionColorPreference;
+			sourceTree = "<group>";
+		};
+		2751D6442C59642000B36F95 /* Vault */ = {
+			isa = PBXGroup;
+			children = (
+				2751D6452C59643800B36F95 /* dydxVaultViewBuilder.swift */,
+			);
+			path = Vault;
 			sourceTree = "<group>";
 		};
 		277E90052B1EA093005CCBCB /* TradingRewards */ = {
@@ -1841,6 +1855,7 @@
 				02E7B39C29D79A4400D6626D /* debug.json in Resources */,
 				0295392729FB28B7009026E3 /* settings_theme.json in Resources */,
 				02DA6E0D2AD897EE0048126C /* starkex-lib.js in Resources */,
+				2751D6432C59614C00B36F95 /* tabs_v4_vault.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1946,6 +1961,7 @@
 				0262F2D529DB4891009889E2 /* WalletAction.swift in Sources */,
 				023789ED28BD381C00F212E1 /* dydxPresenters.docc in Sources */,
 				0258B9E72991BC900098E1BE /* dydxNewsAlertsViewBuilder.swift in Sources */,
+				2751D6462C59643800B36F95 /* dydxVaultViewBuilder.swift in Sources */,
 				277E908B2B2118AE005CCBCB /* dydxRewardsHistoryViewPresenter.swift in Sources */,
 				0279DE952BED63E100F9ECF8 /* dydxAdjustMarginCtaButtonViewPresenter.swift in Sources */,
 				0230376F28C11BE600412B72 /* dydxMarketsViewBuilder.swift in Sources */,
