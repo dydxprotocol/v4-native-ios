@@ -6,11 +6,11 @@
 //  Copyright © 2021 dYdX Trading Inc. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import dydxFormatter
 import Foundation
 
-@objc open class PercentAxisFormatter: NSObject, IAxisValueFormatter {
+@objc open class PercentAxisFormatter: NSObject, AxisValueFormatter {
     open func stringForValue(_ value: Double, axis _: AxisBase?) -> String {
         return dydxFormatter.shared.percent(number: NSNumber(value: value), digits: 4) ?? ""
     }

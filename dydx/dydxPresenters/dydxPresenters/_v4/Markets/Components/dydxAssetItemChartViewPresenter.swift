@@ -12,7 +12,7 @@ import ParticlesKit
 import Abacus
 import dydxStateManager
 import Combine
-import Charts
+import DGCharts
 import PlatformUI
 import dydxChart
 

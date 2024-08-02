@@ -6,10 +6,10 @@
 //  Copyright © 2021 dYdX Trading Inc. All rights reserved.
 //
 
-import Charts
-
-public extension BarLineChartViewBase {
-    func scale() {
-        autoScale()
-    }
-}
+//import DGCharts
+//
+//public extension BarLineChartViewBase {
+//    func scale() {
+//        autoScale()
+//    }
+//}

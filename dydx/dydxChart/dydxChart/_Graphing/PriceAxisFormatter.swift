@@ -6,11 +6,11 @@
 //  Copyright © 2021 dYdX Trading Inc. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import Foundation
 import dydxFormatter
 
-@objc open class PriceAxisFormatter: NSObject, IAxisValueFormatter {
+@objc open class PriceAxisFormatter: NSObject, AxisValueFormatter {
     @objc public var tickSize: String?
 
     open func stringForValue(_ value: Double, axis _: AxisBase?) -> String {

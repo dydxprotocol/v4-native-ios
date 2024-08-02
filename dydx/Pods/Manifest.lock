@@ -6,14 +6,14 @@ PODS:
   - AppsFlyerFramework/Main (6.14.6)
   - Atributika (5.0.5)
   - BigInt (5.2.0)
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
   - CocoaLumberjack (3.8.5):
     - CocoaLumberjack/Core (= 3.8.5)
   - CocoaLumberjack/Core (3.8.5)
   - CombineExt (1.8.0)
   - COSTouchVisualizer (1.0.6)
+  - DGCharts (5.1.0):
+    - DGCharts/Core (= 5.1.0)
+  - DGCharts/Core (5.1.0)
   - Differ (1.4.5)
   - DrawerMenu (1.0.1)
   - EasyTipView (2.1.0)
@@ -272,9 +272,9 @@ DEPENDENCIES:
   - AppsFlyerFramework
   - Atributika
   - BigInt
-  - Charts (from `https://github.com/dydxprotocol/Charts.git`, branch `releases/3.6.0.3`)
   - CombineExt
   - COSTouchVisualizer
+  - DGCharts (from `https://github.com/dydxprotocol/Charts.git`, branch `releases/5.1.0`)
   - Differ
   - DrawerMenu
   - EasyTipView
@@ -371,13 +371,13 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Abacus:
     :podspec: "../podspecs/Abacus.podspec"
-  Charts:
-    :branch: releases/3.6.0.3
+  DGCharts:
+    :branch: releases/5.1.0
     :git: https://github.com/dydxprotocol/Charts.git
 
 CHECKOUT OPTIONS:
-  Charts:
-    :commit: 62e38eb96692b9c3bf15ac7d7812910bf62c6827
+  DGCharts:
+    :commit: 7de1c379f0d599879f0064e152d7426e1f2d7b54
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
@@ -386,10 +386,10 @@ SPEC CHECKSUMS:
   AppsFlyerFramework: bef4087719ce689835bbf408c61e2bcc5d4b8bd8
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
   BigInt: f668a80089607f521586bbe29513d708491ef2f7
-  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaLumberjack: 6a459bc897d6d80bd1b8c78482ec7ad05dffc3f0
   CombineExt: c4daa97ef75754d8ef319bd79edeef82652f3eea
   COSTouchVisualizer: a398089327a6c02897823614d7447ccc97198997
+  DGCharts: 1c6daf585b6cfc78807af44ea690d357c410627f
   Differ: 3b6bd78e2b20cc795d9a86f7641d087524e4273e
   DrawerMenu: f6ca91901e2b21086e3c19bcca278d3d3127e85f
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
@@ -439,6 +439,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: fcf94c2340844ef3d27b238c954292a27141fab4
+PODFILE CHECKSUM: fb80d7f53d2159177eaf19887cca82d8b9bf282d
 
 COCOAPODS: 1.15.2

@@ -6,7 +6,7 @@
 //  Copyright © 2021 dYdX. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import Differ
 import ParticlesKit
 import UIToolkits
@@ -65,7 +65,7 @@ open class LineGraphingPresenter: GraphingPresenter {
         rightAxis?.enabled = false
     }
 
-    override open func didSetYAxisFormatter(oldValue: IAxisValueFormatter?) {
+    override open func didSetYAxisFormatter(oldValue: AxisValueFormatter?) {
         if yAxisFormatter !== oldValue {
             lineChartView?.leftAxis.valueFormatter = yAxisFormatter
         }

@@ -6,7 +6,7 @@
 //  Copyright © 2021 dYdX. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import Differ
 import ParticlesKit
 import UIToolkits
@@ -128,7 +128,7 @@ open class CombinedGraphingPresenter: GraphingPresenter {
             combinedChartView?.setVisibleXRange(minXRange: 8, maxXRange: 40)
             combinedChartView?.moveViewToX(10000)
             combinedChartView?.setVisibleXRange(minXRange: 8, maxXRange: 160)
-            combinedChartView?.scale()
+            combinedChartView?.autoScaleMinMaxEnabled = true
         } else {
             chartView?.clear()
         }

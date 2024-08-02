@@ -6,7 +6,7 @@
 //  Copyright © 2021 dYdX. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import Differ
 import ParticlesKit
 import UIKit
@@ -26,13 +26,13 @@ open class GraphingPresenter: NSObject {
 
     @IBOutlet public weak var graphingDelegate: GraphingDelegate? = nil
 
-    @IBOutlet public var xAxisFormatter: IAxisValueFormatter? {
+    @IBOutlet public var xAxisFormatter: AxisValueFormatter? {
         didSet {
             didSetXAxisFormatter(oldValue: oldValue)
         }
     }
 
-    @IBOutlet public var yAxisFormatter: IAxisValueFormatter? {
+    @IBOutlet public var yAxisFormatter: AxisValueFormatter? {
         didSet {
             didSetYAxisFormatter(oldValue: oldValue)
         }
@@ -83,13 +83,13 @@ open class GraphingPresenter: NSObject {
         }
     }
 
-    open func didSetXAxisFormatter(oldValue: IAxisValueFormatter?) {
+    open func didSetXAxisFormatter(oldValue: AxisValueFormatter?) {
         if xAxisFormatter !== oldValue {
             chartView?.xAxis.valueFormatter = xAxisFormatter
         }
     }
 
-    open func didSetYAxisFormatter(oldValue: IAxisValueFormatter?) {
+    open func didSetYAxisFormatter(oldValue: AxisValueFormatter?) {
     }
 
     open func displayGraphing(animated: Bool) {
@@ -183,7 +183,7 @@ open class GraphingPresenter: NSObject {
 
     open func setupChart(chartView: ChartViewBase?) {
         chartView?.noDataText = ""
-        chartView?.chartDescription?.enabled = false
+        chartView?.chartDescription.enabled = false
         chartView?.drawMarkers = false
         chartView?.highlightPerTapEnabled = false
         chartView?.maxHighlightDistance = highlightDistance

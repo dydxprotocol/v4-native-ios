@@ -11,7 +11,7 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
-import Charts
+import DGCharts
 import Combine
 import dydxStateManager
 import Abacus
@@ -142,7 +142,7 @@ class dydxMarketFundingChartViewPresenter: HostedViewPresenter<dydxMarketFunding
 
     // MARK: GraphingDelegate
 
-    func didLoad(presenter: PlatformParticles.GraphingPresenter, view: Charts.ChartViewBase?, data: Charts.ChartData?) {
+    func didLoad(presenter: PlatformParticles.GraphingPresenter, view: DGCharts.ChartViewBase?, data: DGCharts.ChartData?) {
     }
 
     // MARK: ChartViewDelegate

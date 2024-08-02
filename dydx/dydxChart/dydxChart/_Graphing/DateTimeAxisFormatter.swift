@@ -6,7 +6,7 @@
 //  Copyright © 2021 dYdX Trading Inc. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import dydxFormatter
 import Utilities
 import Foundation
@@ -17,7 +17,7 @@ import Foundation
     case day
 }
 
-@objc open class DateTimeAxisFormatter: NSObject, IAxisValueFormatter {
+@objc open class DateTimeAxisFormatter: NSObject, AxisValueFormatter {
     static var timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current

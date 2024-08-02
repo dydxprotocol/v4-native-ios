@@ -67,7 +67,7 @@ def ios_util_pods
 end
 
 def uikit_pods
-  pod 'Charts', :git => 'https://github.com/dydxprotocol/Charts.git', :branch => 'releases/3.6.0.3'
+  pod 'DGCharts', :git => 'https://github.com/dydxprotocol/Charts.git', :branch => 'releases/5.1.0'
   
   pod 'Differ'
   pod 'SnapKit'

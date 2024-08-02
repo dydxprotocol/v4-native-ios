@@ -6,7 +6,7 @@
 //  Copyright © 2020 dYdX. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import ParticlesKit
 import UIToolkits
 
@@ -121,7 +121,7 @@ open class ColoredClusterPresenter: ObjectPresenter {
                     segments.append(color)
                 }
             }
-            let set = PieChartDataSet(entries: pieEntries, label: nil)
+            let set = PieChartDataSet(entries: pieEntries)
             set.colors = segments
             set.drawIconsEnabled = false
             set.drawValuesEnabled = false

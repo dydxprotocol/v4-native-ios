@@ -6,7 +6,7 @@
 //  Copyright © 2021 dYdX Trading Inc. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import CoreVideo
 import ObjectiveC
 import ParticlesKit
@@ -43,7 +43,7 @@ public extension ParticlesChartDataSetProtocol {
         if !syncing {
             // Console.shared.log("Graphing: Syncing Data")
             presenter.object?.chartView?.notifyDataSetChanged()
-            (presenter.object?.chartView as? BarLineChartViewBase)?.scale()
+            (presenter.object?.chartView as? BarLineChartViewBase)?.autoScaleMinMaxEnabled = true
         }
     }
 

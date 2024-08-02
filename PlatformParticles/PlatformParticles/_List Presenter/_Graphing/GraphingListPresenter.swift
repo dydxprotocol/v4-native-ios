@@ -6,7 +6,7 @@
 //  Copyright © 2021 dYdX. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import Differ
 import ParticlesKit
 import UIKit
@@ -116,7 +116,7 @@ open class GraphingListPresenter: NativeListPresenter {
         dataSet.circleHoleRadius = circleHoleRadius
         if let color = self.color ?? UIColor(named: "Light Text") {
             dataSet.setColor(color)
-            dataSet.fill = .fillWithCGColor(color.cgColor)
+            dataSet.fillColor = color
         }
 
         dataSet.drawFilledEnabled = drawFilled

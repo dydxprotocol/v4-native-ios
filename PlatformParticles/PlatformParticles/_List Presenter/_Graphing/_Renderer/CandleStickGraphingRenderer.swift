@@ -6,7 +6,7 @@
 //  Copyright © 2021 dYdX. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import Foundation
 
 class CandleStickGraphingRenderer: CandleStickChartRenderer {
@@ -39,7 +39,7 @@ class CandleStickGraphingRenderer: CandleStickChartRenderer {
         var pt = CGPoint()
 
         for i in 0 ..< dataSets.count {
-            guard let dataSet = dataSets[i] as? IBarLineScatterCandleBubbleChartDataSet
+            guard let dataSet = dataSets[i] as? BarLineScatterCandleBubbleChartDataSet
             else { continue }
 
             let valueFont = dataSet.valueFont
@@ -87,10 +87,9 @@ class CandleStickGraphingRenderer: CandleStickChartRenderer {
                     }
 
                     if let textValue = textValue {
-                        ChartUtils.drawText(
-                            context: context,
-                            text: textValue,
-                            point: CGPoint(
+                        context.drawText(
+                            textValue,
+                            at: CGPoint(
                                 x: pt.x,
                                 y: pt.y),
                             align: align,
