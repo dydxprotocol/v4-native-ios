@@ -385,7 +385,7 @@ public extension View {
 
 private struct LeftAlignedModifier: ViewModifier {
     func body(content: Content) -> some View {
-        HStack {
+        HStack(spacing: 0) {
             content
             Spacer()
         }
