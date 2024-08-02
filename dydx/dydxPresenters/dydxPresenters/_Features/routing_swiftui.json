@@ -345,6 +345,10 @@
                     "destination":"dydxPresenters.dydxUpdateViewBuilder",
                     "presentation":"root"
                 },
+                "/vault":{
+                    "destination":"dydxPresenters.dydxVaultViewBuilder",
+                    "presentation":"root"
+                },
                 "/wallets":{
                     "destination":"dydxPresenters.Wallets2ViewBuilder",
                     "presentation":"half"
