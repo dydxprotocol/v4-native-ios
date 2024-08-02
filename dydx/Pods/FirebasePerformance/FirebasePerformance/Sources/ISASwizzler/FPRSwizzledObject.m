@@ -14,18 +14,18 @@
 
 #import <objc/runtime.h>
 
-#import "GoogleUtilities/ISASwizzler/GULObjectSwizzler+Internal.h"
-#import "GoogleUtilities/ISASwizzler/Public/GoogleUtilities/GULSwizzledObject.h"
+#import "FirebasePerformance/Sources/ISASwizzler/FPRObjectSwizzler+Internal.h"
+#import "FirebasePerformance/Sources/ISASwizzler/FPRSwizzledObject.h"
 
-NSString *kGULSwizzlerAssociatedObjectKey = @"gul_objectSwizzler";
+const NSString *const kGULSwizzlerAssociatedObjectKey = @"gul_objectSwizzler";
 
-@interface GULSwizzledObject ()
+@interface FPRSwizzledObject ()
 
 @end
 
-@implementation GULSwizzledObject
+@implementation FPRSwizzledObject
 
-+ (void)copyDonorSelectorsUsingObjectSwizzler:(GULObjectSwizzler *)objectSwizzler {
++ (void)copyDonorSelectorsUsingObjectSwizzler:(FPRObjectSwizzler *)objectSwizzler {
   [objectSwizzler copySelector:@selector(gul_objectSwizzler) fromClass:self isClassSelector:NO];
   [objectSwizzler copySelector:@selector(gul_class) fromClass:self isClassSelector:NO];
 
@@ -45,8 +45,8 @@ NSString *kGULSwizzlerAssociatedObjectKey = @"gul_objectSwizzler";
   return nil;
 }
 
-- (GULObjectSwizzler *)gul_objectSwizzler {
-  return [GULObjectSwizzler getAssociatedObject:self key:kGULSwizzlerAssociatedObjectKey];
+- (FPRObjectSwizzler *)gul_objectSwizzler {
+  return [FPRObjectSwizzler getAssociatedObject:self key:&kGULSwizzlerAssociatedObjectKey];
 }
 
 #pragma mark - Donor methods

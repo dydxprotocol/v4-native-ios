@@ -16,12 +16,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class GULObjectSwizzler;
+NS_ASSUME_NONNULL_BEGIN
+
+@class FPRObjectSwizzler;
 
 /** This class exists as a method donor. These methods will be added to all objects that are
  *  swizzled by the object swizzler. This class should not be instantiated.
  */
-@interface GULSwizzledObject : NSObject
+@interface FPRSwizzledObject : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -29,7 +31,7 @@
  *
  *  @param objectSwizzler The swizzler to use when adding the methods below.
  */
-+ (void)copyDonorSelectorsUsingObjectSwizzler:(GULObjectSwizzler *)objectSwizzler;
++ (void)copyDonorSelectorsUsingObjectSwizzler:(FPRObjectSwizzler *)objectSwizzler;
 
 #pragma mark - Donor methods.
 
@@ -37,6 +39,8 @@
 - (Class)gul_class;
 
 /** @return The object swizzler that manages this object. */
-- (GULObjectSwizzler *)gul_objectSwizzler;
+- (FPRObjectSwizzler *)gul_objectSwizzler;
 
 @end
+
+NS_ASSUME_NONNULL_END

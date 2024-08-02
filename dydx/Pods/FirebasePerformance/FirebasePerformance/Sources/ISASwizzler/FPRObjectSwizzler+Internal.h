@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "GoogleUtilities/ISASwizzler/Public/GoogleUtilities/GULObjectSwizzler.h"
+#import "FirebasePerformance/Sources/ISASwizzler/FPRObjectSwizzler.h"
 
-FOUNDATION_EXPORT NSString *kGULSwizzlerAssociatedObjectKey;
+FOUNDATION_EXPORT const NSString *const kGULSwizzlerAssociatedObjectKey;
 
-@interface GULObjectSwizzler (Internal)
+@interface FPRObjectSwizzler (Internal)
 
 - (void)swizzledObjectHasBeenDeallocatedWithGeneratedSubclass:(BOOL)isInstanceOfGeneratedSubclass;
 

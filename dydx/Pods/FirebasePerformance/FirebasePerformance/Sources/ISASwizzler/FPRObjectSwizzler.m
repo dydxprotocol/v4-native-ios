@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "GoogleUtilities/ISASwizzler/Public/GoogleUtilities/GULObjectSwizzler.h"
+#import "FirebasePerformance/Sources/ISASwizzler/FPRObjectSwizzler.h"
 
 #import <objc/runtime.h>
 
-#import "GoogleUtilities/ISASwizzler/GULObjectSwizzler+Internal.h"
-#import "GoogleUtilities/ISASwizzler/Public/GoogleUtilities/GULSwizzledObject.h"
+#import "FirebasePerformance/Sources/ISASwizzler/FPRObjectSwizzler+Internal.h"
+#import "FirebasePerformance/Sources/ISASwizzler/FPRSwizzledObject.h"
 
-@implementation GULObjectSwizzler {
+@implementation FPRObjectSwizzler {
   // The swizzled object.
   __weak id _swizzledObject;
 
@@ -33,7 +33,7 @@
 #pragma mark - Class methods
 
 + (void)setAssociatedObject:(id)object
-                        key:(NSString *)key
+                        key:(const void *)key
                       value:(nullable id)value
                 association:(GUL_ASSOCIATION)association {
   objc_AssociationPolicy resolvedAssociation;
@@ -61,11 +61,11 @@
     default:
       break;
   }
-  objc_setAssociatedObject(object, key.UTF8String, value, resolvedAssociation);
+  objc_setAssociatedObject(object, key, value, resolvedAssociation);
 }
 
-+ (nullable id)getAssociatedObject:(id)object key:(NSString *)key {
-  return objc_getAssociatedObject(object, key.UTF8String);
++ (nullable id)getAssociatedObject:(id)object key:(const void *)key {
+  return objc_getAssociatedObject(object, key);
 }
 
 #pragma mark - Instance methods
@@ -80,9 +80,9 @@
     return nil;
   }
 
-  GULObjectSwizzler *existingSwizzler =
-      [[self class] getAssociatedObject:object key:kGULSwizzlerAssociatedObjectKey];
-  if ([existingSwizzler isKindOfClass:[GULObjectSwizzler class]]) {
+  FPRObjectSwizzler *existingSwizzler =
+      [[self class] getAssociatedObject:object key:&kGULSwizzlerAssociatedObjectKey];
+  if ([existingSwizzler isKindOfClass:[FPRObjectSwizzler class]]) {
     // The object has been swizzled already, no need to swizzle again.
     return existingSwizzler;
   }
@@ -110,7 +110,7 @@
   class_replaceMethod(targetClass, selector, implementation, typeEncoding);
 }
 
-- (void)setAssociatedObjectWithKey:(NSString *)key
+- (void)setAssociatedObjectWithKey:(const void *)key
                              value:(id)value
                        association:(GUL_ASSOCIATION)association {
   __strong id swizzledObject = _swizzledObject;
@@ -119,7 +119,7 @@
   }
 }
 
-- (nullable id)getAssociatedObjectForKey:(NSString *)key {
+- (nullable id)getAssociatedObjectForKey:(const void *)key {
   __strong id swizzledObject = _swizzledObject;
   if (swizzledObject) {
     return [[self class] getAssociatedObject:swizzledObject key:key];
@@ -129,9 +129,8 @@
 
 - (void)swizzle {
   __strong id swizzledObject = _swizzledObject;
-
-  GULObjectSwizzler *existingSwizzler =
-      [[self class] getAssociatedObject:swizzledObject key:kGULSwizzlerAssociatedObjectKey];
+  FPRObjectSwizzler *existingSwizzler =
+      [[self class] getAssociatedObject:swizzledObject key:&kGULSwizzlerAssociatedObjectKey];
   if (existingSwizzler != nil) {
     NSAssert(existingSwizzler == self, @"The swizzled object has a different swizzler.");
     // The object has been swizzled already.
@@ -139,12 +138,12 @@
   }
 
   if (swizzledObject) {
-    [GULObjectSwizzler setAssociatedObject:swizzledObject
-                                       key:kGULSwizzlerAssociatedObjectKey
+    [FPRObjectSwizzler setAssociatedObject:swizzledObject
+                                       key:&kGULSwizzlerAssociatedObjectKey
                                      value:self
                                association:GUL_ASSOCIATION_RETAIN];
 
-    [GULSwizzledObject copyDonorSelectorsUsingObjectSwizzler:self];
+    [FPRSwizzledObject copyDonorSelectorsUsingObjectSwizzler:self];
 
     NSAssert(_originalClass == object_getClass(swizzledObject),
              @"The original class is not the reported class now.");
@@ -182,7 +181,7 @@
       return;
     }
 
-    // GULSwizzledObject is retained by the swizzled object which means that the swizzled object is
+    // FPRSwizzledObject is retained by the swizzled object which means that the swizzled object is
     // being deallocated now. Let's see if we should schedule the generated class disposal.
 
     // If the swizzled object has a different class, it most likely indicates that the object was

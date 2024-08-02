@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2018 Google
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,22 @@
  * limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
+#import "FirebaseCore/Sources/Public/FirebaseCore/FIRTimestamp.h"
 
-/** An example NSProxy that could be used to wrap an object that we have to ISA Swizzle. */
-@interface GULProxy : NSProxy
+NS_ASSUME_NONNULL_BEGIN
 
-+ (instancetype)proxyWithDelegate:(id)delegate;
+/** Internal FIRTimestamp API we don't want exposed in our public header files. */
+@interface FIRTimestamp (Internal)
+
+/**
+ * Converts the given date to an ISO 8601 timestamp string, useful for rendering in JSON.
+ *
+ * ISO 8601 dates times in UTC look like this: "1912-04-14T23:40:00.000000000Z".
+ *
+ * @see http://www.ecma-international.org/ecma-262/6.0/#sec-date-time-string-format
+ */
+- (NSString *)ISO8601String;
 
 @end
+
+NS_ASSUME_NONNULL_END
