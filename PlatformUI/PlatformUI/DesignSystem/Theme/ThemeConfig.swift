@@ -381,7 +381,7 @@ public struct FontTypeDetail: Codable, Equatable {
 
 public extension ThemeFont {
      
-    private func uiFont(of fontType: FontType, fontSize: FontSize) -> UIFont? {
+    func uiFont(of fontType: FontType, fontSize: FontSize) -> UIFont? {
         let sizeValue: Float
         switch fontSize {
         case .custom(size: let size):

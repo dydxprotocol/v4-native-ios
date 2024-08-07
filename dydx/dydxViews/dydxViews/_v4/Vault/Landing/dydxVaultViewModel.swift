@@ -180,5 +180,6 @@ private struct dydxVaultView: View {
     var chart: some View {
         dydxVaultChartViewModel()
             .createView()
+            .frame(height: 174)
     }
 }
