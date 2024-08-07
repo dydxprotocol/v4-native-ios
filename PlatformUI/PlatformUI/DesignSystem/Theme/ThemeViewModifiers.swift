@@ -453,7 +453,7 @@ public extension View {
 
 private struct CenterAlignedModifier: ViewModifier {
     func body(content: Content) -> some View {
-        // forcing minLength to 0 does make a difference, default behavior is black box
+        // forcing minLength to 0 does make a difference, default behavior is black box behavior which seems to vary
         HStack(spacing: 0) {
             Spacer(minLength: 0)
             VStack(spacing: 0) {
