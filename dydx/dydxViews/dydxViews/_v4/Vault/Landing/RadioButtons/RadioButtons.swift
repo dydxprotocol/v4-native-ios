@@ -13,7 +13,8 @@ protocol RadioButtonContentDisplayable: Equatable {
     var displayText: String { get }
 }
 
-/// A simplified version 2 of TabGroup. Use TabGroup when the radio buttons are not displaying exclusively Text.
+/// A simplified version of TabGroup which supports binding for the selected option and does not require a view builder for each item.
+/// Use TabGroup when the radio buttons are not displaying exclusively Text.
 struct RadioButtonGroup<ButtonItem: RadioButtonContentDisplayable>: View {
     
     @Binding var selected: ButtonItem
