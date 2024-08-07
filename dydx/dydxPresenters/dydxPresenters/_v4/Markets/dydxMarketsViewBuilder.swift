@@ -47,6 +47,15 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
         viewModel?.header = dydxMarketsHeaderViewModel(searchAction: {
             Router.shared?.navigate(to: RoutingRequest(path: "/markets/search"), animated: true, completion: nil)
         })
+        
+        // Nov 6 12am ET https://currentmillis.com/?1730869200010
+        let electionDate = Date(timeIntervalSince1970: 1730869200)
+        if Date.now <= electionDate && dydxBoolFeatureFlag.showPredictionMarketsUI.isEnabled {
+            viewModel?.banner = dydxMarketsBannerViewModel(navigationAction: {
+                Router.shared?.navigate(to: RoutingRequest(path: "/trade/TRUMP-USD"), animated: true, completion: nil)
+            })
+        }
+        
         viewModel?.summary = dydxMarketSummaryViewModel()
         viewModel?.filter = dydxMarketAssetFilterViewModel(contents: FilterAction.actions.map(\.content),
                                                            onSelectionChanged: { [weak self] selectedIdx in

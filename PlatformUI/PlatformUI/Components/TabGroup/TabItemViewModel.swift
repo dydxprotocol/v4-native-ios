@@ -85,7 +85,7 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
                         .padding(.vertical, 2)
                         .themeColor(foreground: pillConfig.textColor)
                         .themeColor(background: pillConfig.backgroundColor)
-                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                        .clipShape(.rect(cornerRadius: 6))
                 }
                 .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
                 .themeStyle(styleKey: styleKey, parentStyle: style)
