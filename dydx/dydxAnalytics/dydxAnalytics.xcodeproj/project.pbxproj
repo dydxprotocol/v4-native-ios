@@ -14,6 +14,7 @@
 		2742C0312BF6887100E13C09 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0302BF6887100E13C09 /* Utilities.framework */; platformFilter = ios; };
 		2742C0352BF6888500E13C09 /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0342BF6888500E13C09 /* PlatformParticles.framework */; };
 		2742C04A2BF688BD00E13C09 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */; };
+		27600EEE2C65133B00DBB570 /* UserProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27600EED2C65133B00DBB570 /* UserProperty.swift */; };
 		B0A26DA7EA1E90F936ECE27B /* Pods_iOS_dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCEC9737902553D7EB58EF0 /* Pods_iOS_dydxAnalytics.framework */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +139,7 @@
 		2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformParticles.xcodeproj; path = ../../../PlatformParticles/PlatformParticles.xcodeproj; sourceTree = "<group>"; };
 		275C16E42BF7D723009313EC /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
+		27600EED2C65133B00DBB570 /* UserProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProperty.swift; sourceTree = "<group>"; };
 		2FCEC9737902553D7EB58EF0 /* Pods_iOS_dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0A5DAA1E87EA50A32BE597 /* Pods-iOS-dydxAnalytics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxAnalytics.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxAnalytics/Pods-iOS-dydxAnalytics.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -212,6 +214,7 @@
 				2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */,
 				2742BEB02BF6860100E13C09 /* dydxAnalytics.h */,
 				2742BEB12BF6860100E13C09 /* dydxAnalytics.docc */,
+				27600EED2C65133B00DBB570 /* UserProperty.swift */,
 			);
 			path = dydxAnalytics;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2742BEB22BF6860100E13C09 /* dydxAnalytics.docc in Sources */,
+				27600EEE2C65133B00DBB570 /* UserProperty.swift in Sources */,
 				2742C04A2BF688BD00E13C09 /* AnalyticsEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

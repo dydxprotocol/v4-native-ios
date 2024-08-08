@@ -1,6 +1,8 @@
 PODS:
   - Abacus (1.8.82)
-  - Amplitude-iOS (4.10.0)
+  - AmplitudeSwift (1.7.0):
+    - AnalyticsConnector (~> 1.0.1)
+  - AnalyticsConnector (1.0.3)
   - AppsFlyerFramework (6.15.0):
     - AppsFlyerFramework/Main (= 6.15.0)
   - AppsFlyerFramework/Main (6.15.0)
@@ -268,7 +270,7 @@ PODS:
 
 DEPENDENCIES:
   - Abacus (from `../podspecs/Abacus.podspec`)
-  - Amplitude-iOS
+  - AmplitudeSwift (~> 1.0)
   - AppsFlyerFramework
   - Atributika
   - BigInt
@@ -312,7 +314,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - Amplitude-iOS
+    - AmplitudeSwift
+    - AnalyticsConnector
     - AppsFlyerFramework
     - Atributika
     - BigInt
@@ -382,7 +385,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Abacus: f122956cf9591e057f2fab77d566795598cfcaa9
-  Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
+  AmplitudeSwift: b2b89b3656a2b4e387f8dec2b8e85ced149ebac1
+  AnalyticsConnector: a53214d38ae22734c6266106c0492b37832633a9
   AppsFlyerFramework: c3bf4222ded7c528294d191b3eacea4cdd49154f
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
   BigInt: f668a80089607f521586bbe29513d708491ef2f7
@@ -439,6 +443,6 @@ SPEC CHECKSUMS:
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: fcf94c2340844ef3d27b238c954292a27141fab4
+PODFILE CHECKSUM: 7ef1b46a038f23ee266d1f2cf916db378acf5f81
 
 COCOAPODS: 1.15.2

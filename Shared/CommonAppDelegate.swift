@@ -114,8 +114,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
             apiKey = CredientialConfig.shared.credential(for: "amplitudeApiKey")
         }
         if let apiKey = apiKey, apiKey.isNotEmpty {
-            AmplitudeRunner.shared.apiKey = apiKey
-            add(tracking: dydxAmplitudeTracking())
+            add(tracking: dydxAmplitudeTracking(apiKey))
         }
     }
     

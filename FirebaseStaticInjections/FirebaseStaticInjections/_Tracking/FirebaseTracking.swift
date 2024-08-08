@@ -12,17 +12,10 @@ import PlatformParticles
 import Utilities
 
 public class FirebaseTracking: TransformerTracker {
-    override public var userInfo: [String: Any]? {
-        didSet {
-            if let userInfo = userInfo {
-                for (key, value) in userInfo {
-                    Analytics.setUserProperty(parseAnyToString(value), forName: key)
-                }
-            }
+    private func parseAnyToString(_ value: Any?) -> String? {
+        guard let value = value else {
+            return nil
         }
-    }
-    
-    private func parseAnyToString(_ value: Any) -> String {
         switch value {
         case let stringValue as String:
             return stringValue
@@ -33,11 +26,11 @@ public class FirebaseTracking: TransformerTracker {
         case let boolValue as Bool:
             return String(boolValue)
         case let arrayValue as [Any]:
-            if let jsonString = parseAsJsonString(value) {
+            if let jsonString = parseAsJsonString(arrayValue) {
                 return jsonString
             }
         case let dictValue as [String: Any]:
-            if let jsonString = parseAsJsonString(value) {
+            if let jsonString = parseAsJsonString(dictValue) {
                 return jsonString
             }
         default:
@@ -58,6 +51,15 @@ public class FirebaseTracking: TransformerTracker {
         super.init()
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         Analytics.setUserProperty(String(format: "%.4f", UIDevice.current.systemVersionAsFloat), forName: "os_version")
+    }
+    
+    override public func setUserId(_ userId: String?) {
+        Console.shared.log("analytics log | Firebase: User ID set to: \(userId ?? "nil")")
+        Analytics.setUserID(userId)
+    }
+    
+    override public func setUserProperty(_ value: Any?, forName: String) {
+        Analytics.setUserProperty(parseAnyToString(value), forName: forName)
     }
 
     override public func log(event: String, data: [String: Any]?, revenue: NSNumber?) {

@@ -286,13 +286,6 @@
 			path = _Configure;
 			sourceTree = "<group>";
 		};
-		314B5E3923DCCD6700139EB3 /* _FeatureFlags */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = _FeatureFlags;
-			sourceTree = "<group>";
-		};
 		314B5E3B23DCCD6700139EB3 /* _ErrorLogging */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,7 +384,6 @@
 				31B3E3C022763B19009E8FEF /* FirebaseStaticInjections.swift */,
 				314B5E3723DCCD6700139EB3 /* _Configure */,
 				314B5E3B23DCCD6700139EB3 /* _ErrorLogging */,
-				314B5E3923DCCD6700139EB3 /* _FeatureFlags */,
 				314B5E3F23DCCD6800139EB3 /* _Notification */,
 				314B5E3D23DCCD6700139EB3 /* _Tracking */,
 				314C363924C7C74800695F7E /* Resources */,

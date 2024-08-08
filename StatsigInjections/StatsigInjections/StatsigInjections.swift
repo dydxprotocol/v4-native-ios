@@ -14,7 +14,11 @@ import Combine
     private let apiKey: String
     private let environment: StatsigEnvironment
     // ensures feature flag values stay constant throughout the app session after they are used the first time, even if they are initialized to null
-    private var sessionValues = [String: Availabilty]()
+    private var sessionValues = [String: Availabilty]() {
+        didSet {
+            print("mmm: \(sessionValues)")
+        }
+    }
     
     private enum Availabilty {
         case available(Bool)

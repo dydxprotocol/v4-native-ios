@@ -39,7 +39,7 @@ def appsflyer_pods
 end
 
 def amplitude_pods
-  pod 'Amplitude-iOS'
+  pod 'AmplitudeSwift', '~> 1.0'
 end
 
 def statsig_pods

@@ -12,23 +12,11 @@ import dydxStateManager
 import Combine
 import Cartera
 import FirebaseAnalytics
+import dydxAnalytics
 
-enum UserProperty: String {
-    case walletAddress
-    case walletType
-    case network
-    case selectedLocale
-    case dydxAddress
-    case subaccountNumber
-}
-
-extension TrackingProtocol {
-    fileprivate func set(userId: String?) {
-        self.set(userProperty: .walletAddress, toValue: userId)
-    }
-    
+extension TrackingProtocol {    
     func set(userProperty: UserProperty, toValue value: String?) {
-        self.setUserInfo(key: userProperty.rawValue, value: value)
+        self.setUserProperty(value, forName: userProperty.rawValue)
     }
 }
 
@@ -59,7 +47,9 @@ public class dydxCompositeTracking: CompositeTracking {
             .sink { [weak self] walletState in
                 guard let self = self else { return }
                 let wallet = CarteraConfig.shared.wallets.first { $0.id == walletState?.walletId }
-                self.set(userId: walletState?.ethereumAddress ?? walletState?.cosmoAddress)
+                let walletAddress = walletState?.ethereumAddress ?? walletState?.cosmoAddress
+                self.setUserId(walletAddress)
+                self.set(userProperty: .walletAddress, toValue: walletAddress)
                 //TODO: might have to change this to match https://www.notion.so/dydx/V4-Web-Analytics-Events-d12c9dd791ee4c5d89e48588bb3ef702?pvs=4, but first this linear task needs to finish https://linear.app/dydx/issue/TRCL-2473/create-wallettype-user-property-field-value-in-cartera-wallets-json
                 self.set(userProperty: .walletType, toValue: wallet?.userFields?["analyticEvent"])
                 self.set(userProperty: .dydxAddress, toValue: walletState?.cosmoAddress)

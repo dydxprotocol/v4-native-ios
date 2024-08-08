@@ -10,9 +10,6 @@ import ParticlesKit
 import Utilities
 
 open class TransformerTracker: NSObject & TrackingProtocol {
-    
-    open var userInfo: [String: Any]?
-
     public var excluded: Bool = false
 
     private var entity: DictionaryEntity?
@@ -26,6 +23,15 @@ open class TransformerTracker: NSObject & TrackingProtocol {
         }
     }
 
+    
+    open func setUserId(_ userId: String?) {
+        assertionFailure("TransformerTracker does not support setUserId, should override")
+    }
+    
+    open func setUserProperty(_ value: Any?, forName: String) {
+        assertionFailure("TransformerTracker does not support setUserProperty, should override")
+    }
+    
     open func leave(_ path: String?) {
     }
 
