@@ -12,13 +12,9 @@ public class DebugTracking: NSObject & TrackingProtocol {
 
     public var excluded: Bool = false
     
-    public func setUserId(_ userId: String?) {
-        assertionFailure("DebugTracking does not support setUserId")
-    }
+    public func setUserId(_ userId: String?) {}
     
-    public func setUserProperty(_ value: Any?, forName: String) {
-        assertionFailure("DebugTracking does not support setUserProperty")
-    }
+    public func setUserProperty(_ value: Any?, forName: String) {}
     
     public func leave(_ path: String?) {
         if let path = path {

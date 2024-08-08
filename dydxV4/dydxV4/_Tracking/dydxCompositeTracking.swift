@@ -13,9 +13,11 @@ import Combine
 import Cartera
 import FirebaseAnalytics
 import dydxAnalytics
+import StatsigInjections
+import dydxFormatter
 
-extension TrackingProtocol {    
-    func set(userProperty: UserProperty, toValue value: String?) {
+extension TrackingProtocol {
+    func setUserProperty(_ value: Any?, forUserProperty userProperty: UserProperty) {
         self.setUserProperty(value, forName: userProperty.rawValue)
     }
 }
@@ -49,10 +51,10 @@ public class dydxCompositeTracking: CompositeTracking {
                 let wallet = CarteraConfig.shared.wallets.first { $0.id == walletState?.walletId }
                 let walletAddress = walletState?.ethereumAddress ?? walletState?.cosmoAddress
                 self.setUserId(walletAddress)
-                self.set(userProperty: .walletAddress, toValue: walletAddress)
+                self.setUserProperty(walletAddress, forUserProperty: .walletAddress)
                 //TODO: might have to change this to match https://www.notion.so/dydx/V4-Web-Analytics-Events-d12c9dd791ee4c5d89e48588bb3ef702?pvs=4, but first this linear task needs to finish https://linear.app/dydx/issue/TRCL-2473/create-wallettype-user-property-field-value-in-cartera-wallets-json
-                self.set(userProperty: .walletType, toValue: wallet?.userFields?["analyticEvent"])
-                self.set(userProperty: .dydxAddress, toValue: walletState?.cosmoAddress)
+                self.setUserProperty(wallet?.userFields?["analyticEvent"], forUserProperty: .walletType)
+                self.setUserProperty(walletState?.cosmoAddress, forUserProperty: .dydxAddress)
             }
             .store(in: &subscriptions)
         
@@ -61,7 +63,29 @@ public class dydxCompositeTracking: CompositeTracking {
             .removeDuplicates()
             .sink { [weak self] subaccountNumber in
                 guard let self = self else { return }
-                self.set(userProperty: .subaccountNumber, toValue: self.parser.asString(subaccountNumber))
+                self.setUserProperty(subaccountNumber, forUserProperty: .subaccountNumber)
+            }
+            .store(in: &subscriptions)
+        
+        // set user property for feature flags once statsig sdk is initialized.
+        // Note, this will almost always, if not always, be `initializedRemoteLoading` since `initializedRemoteLoaded` requires round trip
+        StatsigFeatureFlagsProvider.shared?.$initializationState
+            .filter {
+                switch $0 {
+                case .initializedRemoteLoaded:
+                    return true
+                case .initializedRemoteLoading:
+                    return true
+                case .uninitialized:
+                    return false
+                }
+            }
+        // only need first since feature flags remain constant throughout session after first access.
+        // See `sessionValues` in StatsigFeatureFlagsProvider
+            .first()
+            .sink { [weak self] _ in
+                self?.setUserProperty(dydxBoolFeatureFlag.remoteState, forUserProperty: .statsigFlags)
+                Console.shared.log("analytics log | dydxCompositeTracking: User Property feature flags initialized to \(dydxBoolFeatureFlag.remoteState)")
             }
             .store(in: &subscriptions)
     }
@@ -70,7 +94,7 @@ public class dydxCompositeTracking: CompositeTracking {
         AbacusStateManager.shared.$currentEnvironment
             .sink { [weak self] environment in
                 guard let self = self else { return }
-                self.set(userProperty: .network, toValue: environment)
+                self.setUserProperty(environment, forUserProperty: .network)
             }
             .store(in: &subscriptions)
     }
