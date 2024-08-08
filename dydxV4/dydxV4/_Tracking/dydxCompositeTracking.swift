@@ -16,7 +16,7 @@ import dydxAnalytics
 import StatsigInjections
 import dydxFormatter
 
-extension TrackingProtocol {
+private extension TrackingProtocol {
     func setUserProperty(_ value: Any?, forUserProperty userProperty: UserProperty) {
         self.setUserProperty(value, forName: userProperty.rawValue)
     }

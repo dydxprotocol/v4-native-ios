@@ -46,8 +46,6 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
         return isEnabledOnRemote ?? defaultValue
     }
 
-    private static let obj = NSObject()
-
     public static var enabledFlags: [String] {
         Self.allCases.compactMap { flag in
             flag.isEnabled ? flag.rawValue : nil
