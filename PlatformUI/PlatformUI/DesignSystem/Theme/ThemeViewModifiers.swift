@@ -291,13 +291,13 @@ public extension View {
         modifier(BorderModifier(cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor))
     }
     
-    func borderAndClip(style: BorderAndClipStyle, borderColor: ThemeColor.SemanticColor, lineWidth: CGFloat = 1) -> some View {
+    func borderAndClip(style: ClipStyle, borderColor: ThemeColor.SemanticColor, lineWidth: CGFloat = 1) -> some View {
         modifier(BorderAndClipModifier(style: style, borderColor: borderColor, lineWidth: lineWidth))
     }
 }
 
 /// The clip shape/style
-public enum BorderAndClipStyle {
+public enum ClipStyle {
     /// A rectangular shape with rounded corners with specified corner radius, aligned inside the frame of the view containing it.
     case cornerRadius(CGFloat)
     /// A capsule shape is equivalent to a rounded rectangle where the corner radius is chosen as half the length of the rectangle’s smallest edge.
@@ -306,7 +306,7 @@ public enum BorderAndClipStyle {
 }
 
 private struct BorderAndClipModifier: ViewModifier {
-    let style: BorderAndClipStyle
+    let style: ClipStyle
     let borderColor: ThemeColor.SemanticColor
     let lineWidth: CGFloat
 
@@ -453,14 +453,15 @@ public extension View {
 
 private struct CenterAlignedModifier: ViewModifier {
     func body(content: Content) -> some View {
-        HStack {
-            Spacer()
-            VStack {
-                Spacer()
+        // forcing minLength to 0 does make a difference, default behavior is black box behavior which seems to vary
+        HStack(spacing: 0) {
+            Spacer(minLength: 0)
+            VStack(spacing: 0) {
+                Spacer(minLength: 0)
                 content
-                Spacer()
+                Spacer(minLength: 0)
             }
-            Spacer()
+            Spacer(minLength: 0)
         }
     }
 }

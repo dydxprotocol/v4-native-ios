@@ -42,6 +42,8 @@ private struct dydxVaultView: View {
             aprTvlRow
             Spacer().frame(height: 16)
             div
+            Spacer().frame(height: 16)
+            chart
             Spacer()
 
         }
@@ -175,5 +177,9 @@ private struct dydxVaultView: View {
     }
 
     // MARK: - Section 3 - graph
-
+    var chart: some View {
+        dydxVaultChartViewModel()
+            .createView()
+            .frame(height: 174)
+    }
 }
