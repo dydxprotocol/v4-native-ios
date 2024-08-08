@@ -48,6 +48,8 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
             Router.shared?.navigate(to: RoutingRequest(path: "/markets/search"), animated: true, completion: nil)
         })
         
+        // TODO: remove after election day
+        // logic here turns this banner display off after election day
         // Nov 6 12am ET https://currentmillis.com/?1730869200010
         let electionDate = Date(timeIntervalSince1970: 1730869200)
         if Date.now <= electionDate && dydxBoolFeatureFlag.showPredictionMarketsUI.isEnabled {
