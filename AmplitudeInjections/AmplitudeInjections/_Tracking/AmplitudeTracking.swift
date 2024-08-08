@@ -10,11 +10,11 @@ import PlatformParticles
 import Utilities
 
 open class AmplitudeTracking: TransformerTracker {
-    override public var userInfo: [String: String?]? {
+    override public var userInfo: [String: Any]? {
         didSet {
             let userIdKey = "walletAddress"
             if let userInfo = userInfo {
-                if let userId = userInfo[userIdKey] {
+                if let userId = userInfo[userIdKey] as? String {
                     Console.shared.log("Amplitude: User ID set to walletAddress: \(userId ?? "nil")")
                     Amplitude.instance().setUserId(userId)
                 }

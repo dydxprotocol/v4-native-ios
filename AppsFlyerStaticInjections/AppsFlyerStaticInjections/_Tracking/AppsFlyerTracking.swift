@@ -11,11 +11,11 @@ import PlatformParticles
 import Utilities
 
 public class AppsFlyerTracking: TransformerTracker {
-    override public var userInfo: [String: String?]? {
+    override public var userInfo: [String: Any]? {
         didSet {
             let userIdKey = "User ID"
             if let userInfo = userInfo {
-                if let userId = userInfo[userIdKey] {
+                if let userId = userInfo[userIdKey] as? String {
                     AppsFlyerLib.shared().customerUserID = userId
                 }
             }

@@ -34,6 +34,10 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
         if FeatureService.shared == nil {
             Console.shared.log("WARNING: FeatureService not yet set up.")
         }
+//        if let statsigValue = FeatureService.shared?.isOn(feature: rawValue) {
+//            Tracking.shared?.setUserInfo(key: self.rawValue, value: statsigValue)
+//            return isEnabled
+//        }
         return FeatureService.shared?.isOn(feature: rawValue) ?? defaultValue
     }
 
@@ -56,3 +60,18 @@ public enum dydxStringFeatureFlag: String {
         return FeatureService.shared?.value(feature: rawValue)
     }
 }
+
+//public extension TrackingProtocol {
+//    func set(userProperty: UserProperty, toValue value: Any) {
+//        switch userProperty {
+//        case .walletAddress, .walletType, .network, .selectedLocale, .dydxAddress, .subaccountNumber:
+//            userInfo?[userProperty.key] = value
+//        case .statsigConfig(let flag):
+//            if let existingInfo = userInfo?[userProperty.key] as? [String: Any] {
+//                userInfo?[flag.rawValue] = value
+//            } else {
+//                userInfo?[userProperty.key] = [flag.rawValue: value]
+//            }
+//        }
+//    }
+//}

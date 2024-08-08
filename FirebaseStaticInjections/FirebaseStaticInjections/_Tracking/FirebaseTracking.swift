@@ -12,14 +12,46 @@ import PlatformParticles
 import Utilities
 
 public class FirebaseTracking: TransformerTracker {
-    override public var userInfo: [String: String?]? {
+    override public var userInfo: [String: Any]? {
         didSet {
             if let userInfo = userInfo {
                 for (key, value) in userInfo {
-                    Analytics.setUserProperty(value, forName: key)
+                    Analytics.setUserProperty(parseAnyToString(value), forName: key)
                 }
             }
         }
+    }
+    
+    private func parseAnyToString(_ value: Any) -> String {
+        switch value {
+        case let stringValue as String:
+            return stringValue
+        case let intValue as Int:
+            return String(intValue)
+        case let doubleValue as Double:
+            return String(doubleValue)
+        case let boolValue as Bool:
+            return String(boolValue)
+        case let arrayValue as [Any]:
+            if let jsonString = parseAsJsonString(value) {
+                return jsonString
+            }
+        case let dictValue as [String: Any]:
+            if let jsonString = parseAsJsonString(value) {
+                return jsonString
+            }
+        default:
+            return "\(value)"
+        }
+        return "\(value)"
+    }
+    
+    private func parseAsJsonString(_ value: Any) -> String? {
+        if let jsonData = try? JSONSerialization.data(withJSONObject: value, options: .prettyPrinted),
+            let jsonString = String(data: jsonData, encoding: .utf8) {
+            return jsonString
+        }
+        return nil
     }
 
     override public init() {

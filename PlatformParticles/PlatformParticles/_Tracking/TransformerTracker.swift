@@ -11,7 +11,7 @@ import Utilities
 
 open class TransformerTracker: NSObject & TrackingProtocol {
     
-    open var userInfo: [String: String?]?
+    open var userInfo: [String: Any]?
 
     public var excluded: Bool = false
 

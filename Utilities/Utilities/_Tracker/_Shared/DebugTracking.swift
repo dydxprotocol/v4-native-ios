@@ -9,7 +9,7 @@
 import Foundation
 
 public class DebugTracking: NSObject & TrackingProtocol {
-    public var userInfo: [String: String?]?
+    public var userInfo: [String: Any]?
 
     public var excluded: Bool = false
     

@@ -9,7 +9,7 @@
 import Foundation
 
 open class CompositeTracking: NSObject & TrackingProtocol {
-    public var userInfo: [String: String?]? {
+    public var userInfo: [String: Any]? {
         get {
             return trackings.first?.userInfo
         }
