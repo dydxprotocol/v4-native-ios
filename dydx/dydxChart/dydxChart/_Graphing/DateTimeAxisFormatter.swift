@@ -120,6 +120,7 @@ import Foundation
     open func stringForValue(_ value: Double, axis _: AxisBase?) -> String {
         var result: String = ""
         if let anchor = GraphingAnchor.shared?.date {
+            // what is 2500 here?
             let time = anchor.addingTimeInterval(unitInterval() * (Double(Int(value)) - 2500.0))
             switch resolution {
             case .unknown:
