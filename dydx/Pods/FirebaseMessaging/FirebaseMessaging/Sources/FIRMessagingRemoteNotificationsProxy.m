@@ -353,7 +353,7 @@ static NSString *kUserNotificationDidReceiveResponseSelectorString =
 
 // This is useful to generate from a stable, "known missing" selector, as the IMP can be compared
 // in case we are setting an implementation for a class that was previously "unswizzled" into a
-// non-existant implementation.
+// non-existent implementation.
 - (IMP)nonExistantMethodImplementationForClass:(Class)klass {
   SEL nonExistantSelector = NSSelectorFromString(@"aNonExistantMethod");
   IMP nonExistantMethodImplementation = class_getMethodImplementation(klass, nonExistantSelector);
@@ -384,13 +384,6 @@ id FIRMessagingPropertyNameFromObject(id object, NSString *propertyName, Class k
 }
 
 #pragma mark - GULApplicationDelegate
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-implementations"
-- (void)application:(GULApplication *)application
-    didReceiveRemoteNotification:(NSDictionary *)userInfo {
-  [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
-}
-#pragma clang diagnostic pop
 
 #if TARGET_OS_IOS || TARGET_OS_TV || TARGET_OS_VISION
 - (void)application:(UIApplication *)application
