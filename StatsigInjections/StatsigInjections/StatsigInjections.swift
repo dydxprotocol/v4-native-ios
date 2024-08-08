@@ -78,8 +78,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
                 userValidationCallback: nil,
                 customCacheKey: nil,
                 urlSession: nil)) {[weak self] error in
-                    Con
-                    sole.shared.log("Statsig feature flags initialized")
+                    Console.shared.log("Statsig feature flags initialized")
                     if let error {
                         Console.shared.log("Statsig feature flags failed to initialize: \(error)")
                         return

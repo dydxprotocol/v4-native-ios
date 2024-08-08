@@ -1,6 +1,6 @@
 PODS:
   - Abacus (1.8.82)
-  - AmplitudeSwift (1.7.0):
+  - AmplitudeSwift (1.8.0):
     - AnalyticsConnector (~> 1.0.1)
   - AnalyticsConnector (1.0.3)
   - AppsFlyerFramework (6.15.0):
@@ -385,7 +385,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Abacus: f122956cf9591e057f2fab77d566795598cfcaa9
-  AmplitudeSwift: b2b89b3656a2b4e387f8dec2b8e85ced149ebac1
+  AmplitudeSwift: 9e37f08d5f3ca68e99f3fae82e9b21b913b6b309
   AnalyticsConnector: a53214d38ae22734c6266106c0492b37832633a9
   AppsFlyerFramework: c3bf4222ded7c528294d191b3eacea4cdd49154f
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
