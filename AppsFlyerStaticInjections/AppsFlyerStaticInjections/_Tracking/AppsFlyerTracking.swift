@@ -11,25 +11,6 @@ import PlatformParticles
 import Utilities
 
 public class AppsFlyerTracking: TransformerTracker {
-    override public var userInfo: [String: String?]? {
-        didSet {
-            let userIdKey = "User ID"
-            if let userInfo = userInfo {
-                if let userId = userInfo[userIdKey] {
-                    AppsFlyerLib.shared().customerUserID = userId
-                }
-            }
-            if var thinned = userInfo?.compactMapValues({ value in
-                value
-            }) {
-                thinned.removeValue(forKey: userIdKey)
-                AppsFlyerLib.shared().customData = thinned
-            } else {
-                AppsFlyerLib.shared().customData = nil
-            }
-        }
-    }
-
     override public func log(event: String, data: [String: Any]?, revenue: NSNumber?) {
         if !excluded {
             var data = data
@@ -41,5 +22,16 @@ public class AppsFlyerTracking: TransformerTracker {
             }
             AppsFlyerLib.shared().logEvent(event, withValues: data)
         }
+    }
+    
+    public override func setUserId(_ userId: String?) {
+        AppsFlyerLib.shared().customerUserID = userId
+    }
+    
+    public override func setValue(_ value: Any?, forUserProperty userProperty: String) {
+        if AppsFlyerLib.shared().customData == nil {
+            AppsFlyerLib.shared().customData = [String: Any]()
+        }
+        AppsFlyerLib.shared().customData?[userProperty] = value
     }
 }

@@ -9,8 +9,9 @@
 import Foundation
 
 public protocol TrackingProtocol: NSObjectProtocol {
-    var userInfo: [String: String?]? { get set }
     var excluded: Bool { get set }
+    func setUserId(_ userId: String?)
+    func setValue(_ value: Any?, forUserProperty userProperty: String)
     func leave(_ path: String?)
     func log(event: String, data: [String: Any]?, revenue: NSNumber?)
 }
@@ -18,12 +19,6 @@ public protocol TrackingProtocol: NSObjectProtocol {
 public extension TrackingProtocol {
     func log(event: String, data: [String: Any]?) {
         log(event: event, data: data, revenue: nil)
-    }
-    
-    func setUserInfo(key: String, value: String?) {
-        var userInfo = userInfo ?? [String: String?]()
-        userInfo[key] = value
-        self.userInfo = userInfo
     }
 }
 

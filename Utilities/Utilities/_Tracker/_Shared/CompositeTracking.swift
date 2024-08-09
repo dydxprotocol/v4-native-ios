@@ -9,17 +9,6 @@
 import Foundation
 
 open class CompositeTracking: NSObject & TrackingProtocol {
-    public var userInfo: [String: String?]? {
-        get {
-            return trackings.first?.userInfo
-        }
-        set {
-            for tracking in trackings {
-                tracking.userInfo = newValue
-            }
-        }
-    }
-
     public var excluded: Bool = false {
         didSet {
             if excluded != oldValue {
@@ -36,6 +25,18 @@ open class CompositeTracking: NSObject & TrackingProtocol {
         if let aTracking = tracking {
             aTracking.excluded = excluded
             trackings.append(aTracking)
+        }
+    }
+    
+    open func setUserId(_ userId: String?) {
+        for tracking: TrackingProtocol in trackings {
+            tracking.setUserId(userId)
+        }
+    }
+    
+    open func setValue(_ value: Any?, forUserProperty userProperty: String) {
+        for tracking: TrackingProtocol in trackings {
+            tracking.setValue(value, forUserProperty: userProperty)
         }
     }
 

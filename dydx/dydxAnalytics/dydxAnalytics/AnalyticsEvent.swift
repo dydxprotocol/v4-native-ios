@@ -8,7 +8,6 @@
 import Foundation
 import PlatformParticles
 import Utilities
-import FirebaseAnalytics
 
 //
 // Events defined in the v4-web repo.  Ideally, we should keep this in-sync with v4-web
@@ -83,8 +82,9 @@ public enum AnalyticsEventV2 {
             "mobile_path": screen.mobilePath,
             "path": screen.correspondingWebPath as Any,
             // for firebase auto-generated dashboard(s)
-            "\(AnalyticsParameterScreenClass)": screen.screenClass,
-            "\(AnalyticsParameterScreenName)": screen.mobilePath
+            // see comment below for screen_view
+            "screen_class": screen.screenClass,
+            "screen_name": screen.mobilePath
         ]}
 
         public init(screen: ScreenIdentifiable) {
@@ -141,8 +141,10 @@ public enum AnalyticsEventV2 {
 public extension TrackingProtocol {
     func log(event: TrackableEvent) {
         if let event = event as? AnalyticsEventV2.NavigatePage {
-            // for firebase auto-generated dashboard(s)
-            log(event: AnalyticsEventScreenView, data: event.customParameters)
+            // for firebase auto-generated dashboard(s). Cannot import firebase analytics to use the event `AnalyticsEventScreenView` here because
+            // Firebase's binary distributions, including Firebase Analytics, are build as static xcframeworks and do not support being linked into dynamic frameworks
+            // https://github.com/firebase/firebase-ios-sdk/issues/12618#issuecomment-2016507842
+            log(event: "screen_view", data: event.customParameters)
         }
         log(event: event.name, data: event.customParameters)
         #if DEBUG
