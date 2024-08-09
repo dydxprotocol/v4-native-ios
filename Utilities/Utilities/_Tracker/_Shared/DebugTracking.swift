@@ -9,9 +9,12 @@
 import Foundation
 
 public class DebugTracking: NSObject & TrackingProtocol {
-    public var userInfo: [String: String?]?
 
     public var excluded: Bool = false
+    
+    public func setUserId(_ userId: String?) {}
+    
+    public func setValue(_ value: Any?, forUserProperty userProperty: String) {}
     
     public func leave(_ path: String?) {
         if let path = path {
