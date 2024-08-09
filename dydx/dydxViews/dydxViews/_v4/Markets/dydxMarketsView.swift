@@ -19,6 +19,7 @@ public class dydxMarketsViewModel: PlatformViewModel {
     private static let topId = UUID().uuidString
 
     @Published public var header = dydxMarketsHeaderViewModel()
+    @Published public var banner: dydxMarketsBannerViewModel?
     @Published public var summary = dydxMarketSummaryViewModel()
     @Published public var filter = dydxMarketAssetFilterViewModel()
     @Published public var sort = dydxMarketAssetSortViewModel()
@@ -30,6 +31,7 @@ public class dydxMarketsViewModel: PlatformViewModel {
     public static var previewValue: dydxMarketsViewModel = {
         let vm = dydxMarketsViewModel()
         vm.header = .previewValue
+        vm.banner = .previewValue
         vm.summary = .previewValue
         vm.filter = .previewValue
         vm.sort = .previewValue
@@ -39,24 +41,33 @@ public class dydxMarketsViewModel: PlatformViewModel {
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+            guard let self = self else { return AnyView(PlatformView.nilView) }
             let view = VStack(spacing: 0) {
-                self?.header.createView(parentStyle: style)
+                self.header.createView(parentStyle: style)
                     .padding(.horizontal, 16)
 
                 ScrollViewReader { proxy in
                     ScrollView(showsIndicators: false) {
                         LazyVStack(pinnedViews: [.sectionHeaders]) {
-                             self?.summary.createView(parentStyle: style)
+                            
+                            if let banner = self.banner {
+                                banner
+                                    .createView()
+                                    .padding(.horizontal, 16)
+                                    .padding(.top, 12)
+                            }
+                            
+                             self.summary.createView(parentStyle: style)
                                  .themeColor(background: .layer2)
                                  .zIndex(.greatestFiniteMagnitude)
                                  .padding(.horizontal, 16)
 
                              let header =
                              VStack(spacing: 0) {
-                                 self?.filter.createView(parentStyle: style)
+                                 self.filter.createView(parentStyle: style)
                                      .padding(.horizontal, 16)
                                  Spacer()
-                                 self?.sort.createView(parentStyle: style)
+                                 self.sort.createView(parentStyle: style)
                                      .padding(.leading, 16)
                                  Spacer(minLength: 12)
                              }
@@ -66,23 +77,23 @@ public class dydxMarketsViewModel: PlatformViewModel {
 
                              Section(header: header) {
                                  VStack(spacing: 12) {
-                                     self?.assetList?
+                                     self.assetList?
                                          .createView(parentStyle: style)
                                      Spacer(minLength: 64)
                                  }
                                  .padding(.horizontal, 16)
                                  .animation(.default)
                              }
-                             .onChange(of: self?.scrollAction) { newValue in
+                             .onChange(of: self.scrollAction) { newValue in
                                  if newValue == .toTop {
                                      withAnimation {
                                          proxy.scrollTo(Self.topId)
                                      }
                                  }
-                                 self?.scrollAction = .none
+                                 self.scrollAction = .none
                              }
                              .onAppear {
-                                 self?.scrollAction = .none
+                                 self.scrollAction = .none
                              }
 
                              // account for scrolling behind tab bar

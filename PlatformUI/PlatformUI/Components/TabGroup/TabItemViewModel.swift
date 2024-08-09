@@ -15,7 +15,20 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
     }
     
     public enum TabItemContent: Equatable {
+        public struct PillConfig {
+            var text: String
+            var textColor: ThemeColor.SemanticColor
+            var backgroundColor: ThemeColor.SemanticColor
+            
+            public init(text: String, textColor: ThemeColor.SemanticColor, backgroundColor: ThemeColor.SemanticColor) {
+                self.text = text
+                self.textColor = textColor
+                self.backgroundColor = backgroundColor
+            }
+        }
+        
         case text(String, EdgeInsets = EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+        case textWithPillAccessory(text: String, pillConfig: PillConfig)
         case icon(UIImage)
         case bar(PlatformViewModel)
         
@@ -51,23 +64,41 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
 
             let styleKey = self.isSelected ? "pill_tab_group_selected_item" : "pill_tab_group_unselected_item"
             let templateColor: ThemeColor.SemanticColor = self.isSelected ? .textPrimary: .textTertiary
+            let textFontSize = ThemeFont.FontSize.small
             let borderWidth: CGFloat = 1
             switch value {
             case .text(let value, let edgeInsets):
                 return Text(value)
-                    .frame(maxHeight: .infinity)
-                    .themeFont(fontSize: .small)
+                    .themeFont(fontSize: textFontSize)
                     .padding(edgeInsets)
                     .themeStyle(styleKey: styleKey, parentStyle: style)
                     .borderAndClip(style: .capsule, borderColor: .layer6, lineWidth: borderWidth)
                     .wrappedInAnyView()
+            case .textWithPillAccessory(let text, let pillConfig):
+                return HStack(alignment: .center, spacing: 4) {
+                    Text(text)
+                        .themeFont(fontSize: textFontSize)
+                        .themeColor(foreground: .textSecondary)
+                    Text(pillConfig.text)
+                        .themeFont(fontSize: .smaller)
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 2)
+                        .themeColor(foreground: pillConfig.textColor)
+                        .themeColor(background: pillConfig.backgroundColor)
+                        .clipShape(.rect(cornerRadius: 6))
+                }
+                .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+                .themeStyle(styleKey: styleKey, parentStyle: style)
+                .borderAndClip(style: .capsule, borderColor: .layer6, lineWidth: borderWidth)
+                .wrappedInAnyView()
             case .icon(let image):
+                let height = ThemeSettings.shared.themeConfig.themeFont.uiFont(of: .base, fontSize: textFontSize)?.lineHeight ?? 14
                 return PlatformIconViewModel(type: .uiImage(image: image),
-                                                    size: CGSize(width: 18, height: 18),
+                                                    size: CGSize(width: height, height: height),
                                                     templateColor: templateColor)
                     .createView(parentStyle: parentStyle)
-                    .padding([.bottom, .top], 8)
-                    .padding([.leading, .trailing], 12)
+                    .padding(.vertical, 6)
+                    .padding(.horizontal, 8)
                     .themeStyle(styleKey: styleKey, parentStyle: style)
                     .borderAndClip(style: .capsule, borderColor: .layer6, lineWidth: borderWidth)
                     .wrappedInAnyView()
