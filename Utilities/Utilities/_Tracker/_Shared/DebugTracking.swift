@@ -14,7 +14,7 @@ public class DebugTracking: NSObject & TrackingProtocol {
     
     public func setUserId(_ userId: String?) {}
     
-    public func setUserProperty(_ value: Any?, forName: String) {}
+    public func setValue(_ value: Any?, forUserProperty userProperty: String) {}
     
     public func leave(_ path: String?) {
         if let path = path {

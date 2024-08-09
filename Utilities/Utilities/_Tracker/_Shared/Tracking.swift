@@ -11,7 +11,7 @@ import Foundation
 public protocol TrackingProtocol: NSObjectProtocol {
     var excluded: Bool { get set }
     func setUserId(_ userId: String?)
-    func setUserProperty(_ value: Any?, forName: String)
+    func setValue(_ value: Any?, forUserProperty userProperty: String)
     func leave(_ path: String?)
     func log(event: String, data: [String: Any]?, revenue: NSNumber?)
 }

@@ -18,7 +18,7 @@ import dydxFormatter
 
 private extension TrackingProtocol {
     func setUserProperty(_ value: Any?, forUserProperty userProperty: UserProperty) {
-        self.setUserProperty(value, forName: userProperty.rawValue)
+        self.setValue(value, forUserProperty: userProperty.rawValue)
     }
 }
 
@@ -27,6 +27,21 @@ public class dydxCompositeTracking: CompositeTracking {
     private var onboardingEvents: DictionaryEntity?
 
     private var subscriptions = Set<AnyCancellable>()
+    
+    /// and id that is the same session-to-session
+    public static func getStableId() -> String {
+        let key = "dydxStableId"
+        if let id = UserDefaults.standard.string(forKey: key) {
+            return id
+        } else {
+            let id = UUID().uuidString
+                .filter { $0.isLetter || $0.isNumber }
+                //firebase max lenght for user properties is 36
+                .prefix(36)
+            UserDefaults.standard.set(String(id), forKey: key)
+            return String(id)
+        }
+    }
     
     override public init() {
         super.init()
@@ -85,6 +100,7 @@ public class dydxCompositeTracking: CompositeTracking {
             .first()
             .sink { [weak self] _ in
                 self?.setUserProperty(dydxBoolFeatureFlag.remoteState, forUserProperty: .statsigFlags)
+                self?.setUserProperty(Self.getStableId(), forUserProperty: .statsigStableId)
                 Console.shared.log("analytics log | dydxCompositeTracking: User Property feature flags initialized to \(dydxBoolFeatureFlag.remoteState)")
             }
             .store(in: &subscriptions)

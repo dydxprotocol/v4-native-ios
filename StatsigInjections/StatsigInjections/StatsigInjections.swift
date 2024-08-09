@@ -10,7 +10,6 @@ import Utilities
 import Combine
 
 public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
-    
     public enum InitializationState {
         case uninitialized
         case initializedRemoteLoading
@@ -18,6 +17,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
     }
     
     private let apiKey: String
+    private let userId: String
     private let environment: StatsigEnvironment
     // ensures feature flag values stay constant throughout the app session after they are used the first time, even if they are initialized to null
     private var sessionValues = [String: Availabilty]()
@@ -42,8 +42,9 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
         }
     }
     
-    public init(apiKey: String, environment: Environment) {
+    public init(apiKey: String, userId: String, environment: Environment) {
         self.apiKey = apiKey
+        self.userId = userId
         self.environment = environment.statsigEnvironemnt
     }
     
@@ -60,7 +61,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
             initializationState = .initializedRemoteLoaded
             completion()
         } else {
-            Statsig.start(sdkKey: apiKey, user: StatsigUser(userID: Statsig.getStableID()), options: StatsigOptions(
+            Statsig.start(sdkKey: apiKey, user: StatsigUser(userID: userId), options: StatsigOptions(
                 initTimeout: nil,
                 disableCurrentVCLogging: true,
                 environment: environment,

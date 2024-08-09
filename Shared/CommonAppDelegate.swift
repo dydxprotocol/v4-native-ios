@@ -47,9 +47,10 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     override open func injectFeatures(completion: @escaping () -> Void) {
         Console.shared.log("injectFeatures")
         // these three injections need to happen before app start
+        injectStatsigApiKey()
         injectFirebase()
         injectRating()
-        injectStatsigApiKey()
+        injectAmplitude()
         let compositeFeatureFlags = CompositeFeatureFlagsProvider()
         switch  Installation.source {
         case .debug, .testFlight:
@@ -70,7 +71,6 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     open func injectUX(completion: @escaping () -> Void) {
         injectGraphingAnchor()
         injectErrorInfo()
-        injectAmplitude()
         injectAttribution()
         injectLocalNotifications()
         injectAppearances()
@@ -131,7 +131,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
             assertionFailure("Statsig API key is missing")
             return
         }
-        StatsigFeatureFlagsProvider.shared = StatsigFeatureFlagsProvider(apiKey: apiKey, environment: environment)
+        StatsigFeatureFlagsProvider.shared = StatsigFeatureFlagsProvider(apiKey: apiKey, userId: dydxCompositeTracking.getStableId(), environment: environment)
     }
     
     open func injectAttribution() {

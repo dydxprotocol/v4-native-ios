@@ -28,10 +28,10 @@ public class AppsFlyerTracking: TransformerTracker {
         AppsFlyerLib.shared().customerUserID = userId
     }
     
-    public override func setUserProperty(_ value: Any?, forName name: String) {
+    public override func setValue(_ value: Any?, forUserProperty userProperty: String) {
         if AppsFlyerLib.shared().customData == nil {
             AppsFlyerLib.shared().customData = [String: Any]()
         }
-        AppsFlyerLib.shared().customData?[name] = value
+        AppsFlyerLib.shared().customData?[userProperty] = value
     }
 }

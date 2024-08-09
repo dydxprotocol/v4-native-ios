@@ -54,12 +54,18 @@ public class FirebaseTracking: TransformerTracker {
     }
     
     override public func setUserId(_ userId: String?) {
-        Console.shared.log("analytics log | Firebase: User ID set to: \(userId ?? "nil")")
+        Console.shared.log("analytics log | Firebase: User ID set to: `\(userId ?? "nil")`")
         Analytics.setUserID(userId)
     }
     
-    override public func setUserProperty(_ value: Any?, forName: String) {
-        Analytics.setUserProperty(parseAnyToString(value), forName: forName)
+    override public func setValue(_ value: Any?, forUserProperty userProperty: String) {
+        Console.shared.log("analytics log | Firebase: User Property `\(userProperty)` set to: \(value ?? "nil")")
+        // firebase max supported length is 36, this is best effort
+        if let valueString = parseAnyToString(value) {
+            Analytics.setUserProperty(String(valueString.prefix(36)), forName: userProperty)
+        } else {
+            Analytics.setUserProperty(nil, forName: userProperty)
+        }
     }
 
     override public func log(event: String, data: [String: Any]?, revenue: NSNumber?) {

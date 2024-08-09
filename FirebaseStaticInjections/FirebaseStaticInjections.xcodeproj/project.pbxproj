@@ -11,7 +11,6 @@
 		314B5E4923DCCD6800139EB3 /* CrashlyticsErrorLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B5E3C23DCCD6700139EB3 /* CrashlyticsErrorLogging.swift */; };
 		314B5E4A23DCCD6800139EB3 /* FirebaseTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B5E3E23DCCD6700139EB3 /* FirebaseTracking.swift */; };
 		314B5E4B23DCCD6800139EB3 /* FirebaseNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B5E4023DCCD6800139EB3 /* FirebaseNotification.swift */; };
-		31B3E3C122763B19009E8FEF /* FirebaseStaticInjections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B3E3C022763B19009E8FEF /* FirebaseStaticInjections.swift */; };
 		31B3E52F22763ED5009E8FEF /* FirebaseStaticInjectionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B3E52E22763ED5009E8FEF /* FirebaseStaticInjectionsTests.swift */; };
 		31B3E53122763ED5009E8FEF /* libFirebaseStaticInjections.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B3E3BD22763B19009E8FEF /* libFirebaseStaticInjections.a */; };
 		462A35FDB56C49B164E4A815 /* Pods_iOS_FirebaseStaticInjections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98711AA66CE5F7FF3B89CC71 /* Pods_iOS_FirebaseStaticInjections.framework */; };
@@ -232,7 +231,6 @@
 		314C365024C7C77100695F7E /* FirebaseLogin.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirebaseLogin.xib; sourceTree = "<group>"; };
 		31A85F9F22E3C5080055DA3F /* PlatformParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformParticles.xcodeproj; path = ../PlatformParticles/PlatformParticles.xcodeproj; sourceTree = "<group>"; };
 		31B3E3BD22763B19009E8FEF /* libFirebaseStaticInjections.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFirebaseStaticInjections.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		31B3E3C022763B19009E8FEF /* FirebaseStaticInjections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStaticInjections.swift; sourceTree = "<group>"; };
 		31B3E40D22763B59009E8FEF /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
 		31B3E42522763B59009E8FEF /* PlatformRouting.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformRouting.xcodeproj; path = ../PlatformRouting/PlatformRouting.xcodeproj; sourceTree = "<group>"; };
 		31B3E43D22763B59009E8FEF /* ParticlesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticlesKit.xcodeproj; path = ../ParticlesKit/ParticlesKit.xcodeproj; sourceTree = "<group>"; };
@@ -381,7 +379,6 @@
 		31B3E3BF22763B19009E8FEF /* FirebaseStaticInjections */ = {
 			isa = PBXGroup;
 			children = (
-				31B3E3C022763B19009E8FEF /* FirebaseStaticInjections.swift */,
 				314B5E3723DCCD6700139EB3 /* _Configure */,
 				314B5E3B23DCCD6700139EB3 /* _ErrorLogging */,
 				314B5E3F23DCCD6800139EB3 /* _Notification */,
@@ -796,7 +793,6 @@
 			files = (
 				314B5E4723DCCD6800139EB3 /* FirebaseRunner.swift in Sources */,
 				314B5E4923DCCD6800139EB3 /* CrashlyticsErrorLogging.swift in Sources */,
-				31B3E3C122763B19009E8FEF /* FirebaseStaticInjections.swift in Sources */,
 				314B5E4A23DCCD6800139EB3 /* FirebaseTracking.swift in Sources */,
 				314B5E4B23DCCD6800139EB3 /* FirebaseNotification.swift in Sources */,
 			);

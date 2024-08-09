@@ -34,9 +34,9 @@ open class CompositeTracking: NSObject & TrackingProtocol {
         }
     }
     
-    open func setUserProperty(_ value: Any?, forName: String) {
+    open func setValue(_ value: Any?, forUserProperty userProperty: String) {
         for tracking: TrackingProtocol in trackings {
-            tracking.setUserProperty(value, forName: forName)
+            tracking.setValue(value, forUserProperty: userProperty)
         }
     }
 
