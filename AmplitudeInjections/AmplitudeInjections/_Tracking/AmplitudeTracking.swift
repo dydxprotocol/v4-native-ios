@@ -5,30 +5,17 @@
 //  Created by John Huang on 4/19/22.
 //
 
-import Amplitude_iOS
+import AmplitudeSwift
 import PlatformParticles
 import Utilities
 
 open class AmplitudeTracking: TransformerTracker {
-    override public var userInfo: [String: String?]? {
-        didSet {
-            let userIdKey = "walletAddress"
-            if let userInfo = userInfo {
-                if let userId = userInfo[userIdKey] {
-                    Console.shared.log("Amplitude: User ID set to walletAddress: \(userId ?? "nil")")
-                    Amplitude.instance().setUserId(userId)
-                }
-            }
-            if var thinned = userInfo?.compactMapValues({ value in
-                value
-            }) {
-                thinned.removeValue(forKey: userIdKey)
-                Amplitude.instance().setUserProperties(thinned)
-            } else {
-                Amplitude.instance().setUserProperties(nil)
-            }
-            Console.shared.log("Amplitude: user properties were set to: \((userInfo ?? [:]).description)")
-        }
+    
+    private let amplitude: Amplitude
+    
+    public init(_ apiKey: String) {
+        self.amplitude = Amplitude.init(configuration: .init(apiKey: apiKey))
+        super.init()
     }
     
     override open func log(event: String, data: [String: Any]?, revenue: NSNumber?) {
@@ -40,8 +27,26 @@ open class AmplitudeTracking: TransformerTracker {
                 }
                 data?["$revenue"] = revenue
             }
-            Console.shared.log("Amplitude: logging event \(event) with data: \((data ?? [:]).description)")
-            Amplitude.instance().logEvent(event, withEventProperties: data)
+            Console.shared.log("analytics log | Amplitude: logging event \(event) with data: \((data ?? [:]).description)")
+            let event = BaseEvent(eventType: event, eventProperties: data)
+            amplitude.track(event: event)
         }
+    }
+    
+    override public func setUserId(_ userId: String?) {
+        Console.shared.log("analytics log | Amplitude: User ID set to: `\(userId ?? "nil")`")
+        amplitude.setUserId(userId: userId)
+    }
+    
+    // https://amplitude.com/docs/sdks/analytics/ios/ios-swift-sdk#identify
+    override public func setValue(_ value: Any?, forUserProperty userProperty: String) {
+        Console.shared.log("analytics log | Amplitude: User Property `\(userProperty)` set to: \(value ?? "nil")")
+        let identify = Identify()
+        if value != nil {
+            identify.set(property: userProperty, value: value)
+        } else {
+            identify.unset(property: userProperty)
+        }
+        amplitude.identify(identify: identify)
     }
 }

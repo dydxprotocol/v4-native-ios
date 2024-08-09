@@ -13,7 +13,6 @@
 		6466E0D2280F65FC00B8791B /* AmplitudeInjectionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466E0D1280F65FC00B8791B /* AmplitudeInjectionsTests.swift */; };
 		6466E0D3280F65FC00B8791B /* AmplitudeInjections.h in Headers */ = {isa = PBXBuildFile; fileRef = 6466E0C5280F65FC00B8791B /* AmplitudeInjections.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6466E184280F676600B8791B /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6466E179280F675300B8791B /* Utilities.framework */; platformFilter = ios; };
-		6466E18A280F764900B8791B /* AmplitudeRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466E189280F764900B8791B /* AmplitudeRunner.swift */; };
 		6466E18C280F776F00B8791B /* AmplitudeTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466E18B280F776F00B8791B /* AmplitudeTracking.swift */; };
 		6466E1BB280F79F700B8791B /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6466E198280F79D800B8791B /* PlatformParticles.framework */; };
 		6466E1BE280F7A0000B8791B /* ParticlesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6466E1AE280F79D800B8791B /* ParticlesKit.framework */; platformFilter = ios; };
@@ -180,7 +179,6 @@
 		6466E0CC280F65FC00B8791B /* AmplitudeInjectionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmplitudeInjectionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6466E0D1280F65FC00B8791B /* AmplitudeInjectionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeInjectionsTests.swift; sourceTree = "<group>"; };
 		6466E170280F675300B8791B /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
-		6466E189280F764900B8791B /* AmplitudeRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeRunner.swift; sourceTree = "<group>"; };
 		6466E18B280F776F00B8791B /* AmplitudeTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeTracking.swift; sourceTree = "<group>"; };
 		6466E18D280F79D800B8791B /* PlatformParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformParticles.xcodeproj; path = ../PlatformParticles/PlatformParticles.xcodeproj; sourceTree = "<group>"; };
 		6466E1A5280F79D800B8791B /* ParticlesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticlesKit.xcodeproj; path = ../ParticlesKit/ParticlesKit.xcodeproj; sourceTree = "<group>"; };
@@ -278,7 +276,6 @@
 		6466E187280F760000B8791B /* _Configure */ = {
 			isa = PBXGroup;
 			children = (
-				6466E189280F764900B8791B /* AmplitudeRunner.swift */,
 			);
 			path = _Configure;
 			sourceTree = "<group>";
@@ -655,7 +652,6 @@
 			files = (
 				6466E0C7280F65FC00B8791B /* AmplitudeInjections.docc in Sources */,
 				6466E18C280F776F00B8791B /* AmplitudeTracking.swift in Sources */,
-				6466E18A280F764900B8791B /* AmplitudeRunner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

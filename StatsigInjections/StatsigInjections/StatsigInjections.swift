@@ -9,9 +9,15 @@ import Statsig
 import Utilities
 import Combine
 
-@objc public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
-
+public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
+    public enum InitializationState {
+        case uninitialized
+        case initializedRemoteLoading
+        case initializedRemoteLoaded
+    }
+    
     private let apiKey: String
+    private let userId: String
     private let environment: StatsigEnvironment
     // ensures feature flag values stay constant throughout the app session after they are used the first time, even if they are initialized to null
     private var sessionValues = [String: Availabilty]()
@@ -36,8 +42,9 @@ import Combine
         }
     }
     
-    public init(apiKey: String, environment: Environment) {
+    public init(apiKey: String, userId: String, environment: Environment) {
         self.apiKey = apiKey
+        self.userId = userId
         self.environment = environment.statsigEnvironemnt
     }
     
@@ -51,9 +58,10 @@ import Combine
 
     public func activate(completion: @escaping () -> Void) {
         if Statsig.isInitialized() {
+            initializationState = .initializedRemoteLoaded
             completion()
         } else {
-            Statsig.start(sdkKey: apiKey, user: StatsigUser(userID: Statsig.getStableID()), options: StatsigOptions(
+            Statsig.start(sdkKey: apiKey, user: StatsigUser(userID: userId), options: StatsigOptions(
                 initTimeout: nil,
                 disableCurrentVCLogging: true,
                 environment: environment,
@@ -74,14 +82,19 @@ import Combine
                     Console.shared.log("Statsig feature flags initialized")
                     if let error {
                         Console.shared.log("Statsig feature flags failed to initialize: \(error)")
+                        return
                     }
+                    self?.initializationState = .initializedRemoteLoaded
                     // intentionally not calling completion here since we do not want ff init to be blocking startup
                     // this may change if we need FF pre-launch
 //                    completion()
                 }
+            initializationState = .initializedRemoteLoading
         }
         completion()
     }
+    
+    @Published private(set) public var initializationState = InitializationState.uninitialized
 
     // https://docs.statsig.com/sdk/debugging
     public func isOn(feature: String) -> Bool? {
@@ -98,6 +111,7 @@ import Combine
             availability = .unavailable
         }
         sessionValues[feature] = availability
+        Console.shared.log("analytics log | Statsig feature flag \(feature) is \(availability) for the session")
         
         switch availability {
         case .available(let bool):

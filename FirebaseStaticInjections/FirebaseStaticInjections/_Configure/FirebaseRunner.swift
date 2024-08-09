@@ -30,6 +30,7 @@ public final class FirebaseRunner: NSObject, SingletonProtocol {
            !options.googleAppID.isEmpty {
             //do not configure firebase if using placeholder config file, otherwise app will crash due to startup runtime exception
             FirebaseApp.configure(options: options)
+            Console.shared.log("analytics log | Firebase initialized")
             FirebaseConfiguration.shared.setLoggerLevel(.min)
             enabled = true
         } else {
