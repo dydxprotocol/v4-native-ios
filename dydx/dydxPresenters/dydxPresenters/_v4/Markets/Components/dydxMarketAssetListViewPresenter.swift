@@ -14,6 +14,7 @@ import PlatformUI
 import Abacus
 import dydxStateManager
 import Combine
+import dydxFormatter
 
 // MARK: AssetList
 
@@ -217,7 +218,7 @@ struct SortAction {
 
 struct FilterAction {
     static var actions: [FilterAction] {
-        [
+        var actions = [
             FilterAction(type: .all,
                          content: .text(DataLocalizer.localize(path: "APP.GENERAL.ALL")),
                          action: { _, _ in
@@ -242,6 +243,21 @@ struct FilterAction {
                          assetMap[market.assetId]?.tags?.contains("Defi") ?? false
                          })
         ]
+        if dydxBoolFeatureFlag.showPredictionMarketsUI.isEnabled {
+            let predictionMarketText = DataLocalizer.localize(path: "APP.GENERAL.PREDICTION_MARKET")
+            let newPillConfig = TabItemViewModel.TabItemContent.PillConfig(text: DataLocalizer.localize(path: "APP.GENERAL.NEW"),
+                                                                           textColor: .colorPurple,
+                                                                           backgroundColor: .colorFadedPurple)
+            let content = TabItemViewModel.TabItemContent.textWithPillAccessory(text: predictionMarketText,
+                                                                                pillConfig: newPillConfig)
+            let predictionMarketsAction = FilterAction(type: .predictionMarkets,
+                                                       content: content,
+                                                       action: { market, assetMap in
+                                                            assetMap[market.assetId]?.tags?.contains("Prediction Market") ?? false
+                                                       })
+            actions.insert(predictionMarketsAction, at: 2)
+        }
+        return actions
     }
 
     let type: MarketFiltering
@@ -264,6 +280,7 @@ enum MarketSorting {
 enum MarketFiltering {
     case all
     case favorited
+    case predictionMarkets
     case layer1
     case layer2
     case defi
