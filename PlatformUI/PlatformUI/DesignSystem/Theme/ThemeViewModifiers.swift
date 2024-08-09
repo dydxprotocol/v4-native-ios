@@ -320,7 +320,7 @@ private struct BorderAndClipModifier: ViewModifier {
 
         case .cornerRadius(let cornerRadius):
             content
-                .clipShape(RoundedRectangle(cornerSize: .init(width: cornerRadius, height: cornerRadius)))
+                .clipShape(.rect(cornerRadius: cornerRadius))
                 .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                     .strokeBorder(borderColor.color, lineWidth: lineWidth))
 
@@ -343,7 +343,7 @@ private struct BorderModifier: ViewModifier {
      
     func body(content: Content) -> some View {
         content
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+            .clipShape(.rect(cornerRadius: cornerRadius))
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(borderColor ?? .clear, lineWidth: borderWidth)

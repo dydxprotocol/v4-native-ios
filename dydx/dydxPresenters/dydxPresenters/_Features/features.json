@@ -72,6 +72,26 @@
                         }
                     ]
                 }
+            },
+            {
+                "title":{
+                    "text":"Prediction Marktes"
+                },
+                "field":{
+                    "field":"ff_show_prediction_markets_ui",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : 1
+                        },
+                        {
+                            "text": "no",
+                            "value" : 0
+                        }
+                    ]
+                }
             }
         ]
     }
