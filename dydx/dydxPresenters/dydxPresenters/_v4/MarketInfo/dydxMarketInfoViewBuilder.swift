@@ -26,6 +26,10 @@ public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
 }
 
 private class dydxMarketInfoViewController: HostingViewController<PlatformView, dydxMarketInfoViewModel> {
+    private var hidePredictionMarketsNotice: Bool {
+        SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.hidePredictionMarketsNoticeKey.rawValue) as? Bool ?? false
+    }
+    
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade" || request?.path == "/market", let presenter = presenter as? dydxMarketInfoViewPresenter {
             let selectedMarketId = request?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
@@ -38,9 +42,9 @@ private class dydxMarketInfoViewController: HostingViewController<PlatformView, 
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if request?.path == "/trade" {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["full": "true"]), animated: true, completion: nil)
+                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["full": "true", "market": selectedMarketId]), animated: true, completion: nil)
                 } else {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/input"), animated: true, completion: nil)
+                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["market": selectedMarketId]), animated: true, completion: nil)
                 }
             }
             return true

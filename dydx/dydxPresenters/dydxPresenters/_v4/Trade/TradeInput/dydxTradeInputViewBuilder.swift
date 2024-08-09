@@ -30,17 +30,20 @@ public class dydxTradeInputViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxTradeInputViewController: HostingViewController<PlatformView, dydxTradeInputViewModel>, FloatingInsetProvider, FloatedDelegate, dydxTradeInputViewPresenterDelegate {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if request?.path == "/trade/input" {
+        if request?.path == "/trade/input", let presenter = presenter as? dydxTradeInputViewPresenter {
+            let selectedMarketId = request?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
+            dydxSelectedMarketsStore.shared.lastSelectedMarket = selectedMarketId
+            presenter.marketId = selectedMarketId
             AbacusStateManager.shared.startTrade()
             if request?.params?["full"] as? String == "true" {
-                (presenter as? dydxTradeInputViewPresenterProtocol)?.updateViewControllerPosition(position: .half)
+                presenter.updateViewControllerPosition(position: .half)
                 move(to: .half)
             } else {
-                (presenter as? dydxTradeInputViewPresenterProtocol)?.updateViewControllerPosition(position: .tip)
+                presenter.updateViewControllerPosition(position: .tip)
                 move(to: .tip)
             }
 
-            presenter?.viewModel?.editViewModel?.onScrollViewCreated  = { [weak self] scrollView in
+            presenter.viewModel?.editViewModel?.onScrollViewCreated  = { [weak self] scrollView in
                 self?.floatTracking = scrollView
             }
             return true
@@ -105,6 +108,7 @@ private protocol dydxTradeInputViewPresenterProtocol: HostedViewPresenterProtoco
 }
 
 private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputViewModel>, dydxTradeInputViewPresenterProtocol, dydxTradeSheetTipBuySellViewPresenterDelegate {
+    fileprivate var marketId: String?
     weak var delegate: dydxTradeInputViewPresenterDelegate?
 
     // MARK: dydxTradeInputViewPresenterProtocol
@@ -205,5 +209,22 @@ private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputVie
                 self?.viewModel?.tipState = size > 0 ? .draft : .buySell
             }
             .store(in: &subscriptions)
+        
+        Publishers.CombineLatest(
+            AbacusStateManager.shared.state.marketMap,
+            AbacusStateManager.shared.state.assetMap
+        )
+            .first()
+            .sink {[weak self] marketMap, assetMap in
+                guard let marketId = self?.marketId,
+                      let assetId = marketMap[marketId]?.assetId,
+                      let asset = assetMap[assetId] else { return }
+                //TODO change != true, only for testing
+                if asset.tags?.contains("Prediction Market") != true {
+                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/prediction_markets_notice"), animated: true, completion: nil)
+                }
+            }
+            .store(in: &subscriptions)
+
     }
 }
