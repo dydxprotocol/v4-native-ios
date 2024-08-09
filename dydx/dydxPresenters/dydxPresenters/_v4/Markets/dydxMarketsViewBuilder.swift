@@ -62,6 +62,11 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
         viewModel?.filter = dydxMarketAssetFilterViewModel(contents: FilterAction.actions.map(\.content),
                                                            onSelectionChanged: { [weak self] selectedIdx in
             self?.selectedFilterAction = FilterAction.actions[selectedIdx]
+            if FilterAction.actions[selectedIdx].type == .predictionMarkets {
+                self?.viewModel?.filterFooterText = DataLocalizer.localize(path: "APP.PREDICTION_MARKET.PREDICTION_MARKETS_SETTLEMENT_DESCRIPTION")
+            } else {
+                self?.viewModel?.filterFooterText = nil
+            }
         })
         viewModel?.sort = dydxMarketAssetSortViewModel(contents: SortAction.actions.map(\.text)) { [weak self] selectedIdx in
             self?.selectedSortAction = SortAction.actions[selectedIdx]
