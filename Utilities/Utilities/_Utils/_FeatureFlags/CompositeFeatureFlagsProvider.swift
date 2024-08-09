@@ -57,9 +57,9 @@ public class CompositeFeatureFlagsProvider: NSObject & FeatureFlagsProtocol {
     public func isOn(feature: String) -> Bool? {
         switch Installation.source {
         case .appStore, .jailBroken:
-            return remote?.isOn(feature: feature) == true
+            return remote?.isOn(feature: feature)
         case .debug, .testFlight:
-            return local?.isOn(feature: feature) ?? remote?.isOn(feature: feature) ?? false
+            return local?.isOn(feature: feature) ?? remote?.isOn(feature: feature)
         }
     }
 
