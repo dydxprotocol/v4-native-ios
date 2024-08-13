@@ -145,6 +145,7 @@
 		276908FF2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */; };
 		277754352C069F8600E3E985 /* OnboardingAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277754282C069F8600E3E985 /* OnboardingAnalytics.swift */; };
 		277987512BA33F15006DC5CD /* dydxSelectedMarketStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */; };
+		277DB22F2C669A6800964F9B /* dydxPredictionMarketsNoticeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DB22E2C669A6800964F9B /* dydxPredictionMarketsNoticeViewBuilder.swift */; };
 		277E8FC92B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E8FC82B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift */; };
 		277E90152B1EA0E3005CCBCB /* dydxTradingRewardsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E90142B1EA0E3005CCBCB /* dydxTradingRewardsViewPresenter.swift */; };
 		277E90192B1EA3C3005CCBCB /* dydxRewardsSummaryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E90182B1EA3C3005CCBCB /* dydxRewardsSummaryPresenter.swift */; };
@@ -533,6 +534,7 @@
 		276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewPresenter.swift; sourceTree = "<group>"; };
 		277754282C069F8600E3E985 /* OnboardingAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingAnalytics.swift; sourceTree = "<group>"; };
 		277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSelectedMarketStore.swift; sourceTree = "<group>"; };
+		277DB22E2C669A6800964F9B /* dydxPredictionMarketsNoticeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPredictionMarketsNoticeViewBuilder.swift; sourceTree = "<group>"; };
 		277E8FC82B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxProfileRewardsViewPresenter.swift; sourceTree = "<group>"; };
 		277E90142B1EA0E3005CCBCB /* dydxTradingRewardsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradingRewardsViewPresenter.swift; sourceTree = "<group>"; };
 		277E90182B1EA3C3005CCBCB /* dydxRewardsSummaryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsSummaryPresenter.swift; sourceTree = "<group>"; };
@@ -1222,6 +1224,7 @@
 				277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */,
 				0274B34328F113FD005AF69E /* Components */,
 				02B841B128EF6C6400C4D25B /* dydxMarketInfoViewBuilder.swift */,
+				277DB22E2C669A6800964F9B /* dydxPredictionMarketsNoticeViewBuilder.swift */,
 			);
 			path = MarketInfo;
 			sourceTree = "<group>";
@@ -2066,6 +2069,7 @@
 				647D0F152A9FB1C600DA7815 /* dydxFrontendAlertsProvider.swift in Sources */,
 				02D1345828ECF30000B46941 /* dydxMarketsSearchViewBuilder.swift in Sources */,
 				27044F702BBB1CDF004C750D /* dydxTakeProfitStopLossViewPresenter.swift in Sources */,
+				277DB22F2C669A6800964F9B /* dydxPredictionMarketsNoticeViewBuilder.swift in Sources */,
 				64529A4C2AE8705E000810E6 /* dydxUpdateWorker.swift in Sources */,
 				278A4DA42B8FDD9D003898EB /* dydxRatingsWorker.swift in Sources */,
 				02DDAD55292587C600CC7531 /* QRCodeDisplayBuilder.swift in Sources */,

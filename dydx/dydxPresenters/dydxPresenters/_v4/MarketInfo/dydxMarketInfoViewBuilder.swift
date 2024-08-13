@@ -26,22 +26,20 @@ public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
 }
 
 private class dydxMarketInfoViewController: HostingViewController<PlatformView, dydxMarketInfoViewModel> {
+    private var hidePredictionMarketsNotice: Bool {
+        SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.hidePredictionMarketsNoticeKey.rawValue) as? Bool ?? false
+    }
+    
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade" || request?.path == "/market", let presenter = presenter as? dydxMarketInfoViewPresenter {
             let selectedMarketId = request?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
             dydxSelectedMarketsStore.shared.lastSelectedMarket = selectedMarketId
             presenter.marketId = selectedMarketId
+            presenter.shouldDisplayFullTradeInputOnAppear = request?.path == "/trade"
             if let sectionRaw = request?.params?["currentSection"] as? String {
                 let section = PortfolioSection(rawValue: sectionRaw) ?? .positions
                 let preselectedSection = Section.allSections.map(\.key).firstIndex(of: section) ?? 0
                 presenter.viewModel?.sections.onSelectionChanged?(preselectedSection)
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                if request?.path == "/trade" {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["full": "true"]), animated: true, completion: nil)
-                } else {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/input"), animated: true, completion: nil)
-                }
             }
             return true
         }
@@ -55,6 +53,7 @@ private protocol dydxMarketInfoViewPresenterProtocol: HostedViewPresenterProtoco
 
 private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoViewModel>, dydxMarketInfoViewPresenterProtocol {
     @Published var marketId: String?
+    var shouldDisplayFullTradeInputOnAppear: Bool = false
 
     private let pagingPresenter = dydxMarketInfoPagingViewPresenter()
     private let statsPresenter = dydxMarketStatsViewPresenter()
@@ -80,6 +79,10 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
         .trades: fillsPresenter,
         .funding: fundingPresenter
     ]
+    
+    fileprivate static var hidePredictionMarketsNotice: Bool {
+        get { SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.hidePredictionMarketsNoticeKey.rawValue) as? Bool ?? false }
+    }
 
     override init() {
         let viewModel = dydxMarketInfoViewModel()
@@ -126,9 +129,9 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
 
     override func start() {
         super.start()
-
+        
         guard let marketId = marketId else { return }
-
+        
         fillsPresenter.filterByMarketId = marketId
         fundingPresenter.filterByMarketId = marketId
         ordersPresenter.filterByMarketId = marketId
@@ -160,6 +163,22 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
                 self?.updatePositionSection(position: position, pendingPosition: pendingPosition)
             }
             .store(in: &subscriptions)
+        
+    floatTradeInput()
+    Publishers.CombineLatest(
+        AbacusStateManager.shared.state.marketMap,
+        AbacusStateManager.shared.state.assetMap
+    )
+        .first()
+        .sink {[weak self] marketMap, assetMap in
+            guard let marketId = self?.marketId,
+                  let assetId = marketMap[marketId]?.assetId,
+                  let asset = assetMap[assetId] else { return }
+            if asset.tags?.contains("Prediction Market") != true && !Self.hidePredictionMarketsNotice {
+                Router.shared?.navigate(to: RoutingRequest(path: "/trade/prediction_markets_notice"), animated: true, completion: nil)
+            }
+        }
+        .store(in: &subscriptions)
     }
 
     override func stop() {
@@ -173,6 +192,14 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
          Comment out for now. Close Position would cause this to trigger and stops orderbook
          */
         //        AbacusStateManager.shared.setMarket(market: nil)
+    }
+    
+    private func floatTradeInput() {
+        if shouldDisplayFullTradeInputOnAppear {
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["full": "true", "market": marketId ?? ""]), animated: true, completion: nil)
+        } else {
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["market": marketId ?? ""]), animated: true, completion: nil)
+        }
     }
 
     private func updatePositionSection(position: SubaccountPosition?, pendingPosition: SubaccountPendingPosition?) {

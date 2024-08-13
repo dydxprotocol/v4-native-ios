@@ -192,6 +192,10 @@ private struct StyleKeyModifier: ViewModifier {
 
 public enum MakeSheetStyle {
     case fullScreen, fitSize
+    /// note this style behaves significantly different. It takes content and rounds the corners, adds insets and safe area ignore.
+    /// only use on views presented with presentOverFullSreen presentation style
+    /// these sheets are not drag-to-dismiss
+    case forPresentedOverCurrentScreen
 }
 
 public extension View {
@@ -213,7 +217,8 @@ private struct SheetViewModifier: ViewModifier {
             .clipShape(Capsule())
             .padding(.top, topPadding)
         
-        if sheetStyle == .fullScreen {
+        switch sheetStyle {
+        case .fullScreen:
             return AnyView(
                 ZStack(alignment: .top) {
                     content
@@ -223,26 +228,41 @@ private struct SheetViewModifier: ViewModifier {
                         Spacer()
                     }
                 }
-                .environmentObject(themeSettings)
+                    .environmentObject(themeSettings)
             )
-        } else {
+        case .fitSize:
             return AnyView(
-                VStack(spacing: 0) {
-                    Spacer()
-                    ZStack(alignment: .top) {
-                        content
-                            .cornerRadius(36, corners: [.topLeft, .topRight])
-                        VStack {
-                            dragIndicator
+                ZStack(alignment: .bottom) {
+                    VStack(spacing: 0) {
+                        Spacer()
+                        ZStack(alignment: .top) {
+                            content
+                                .cornerRadius(36, corners: [.topLeft, .topRight])
+                            VStack {
+                                dragIndicator
+                            }
                         }
                     }
+                    .environmentObject(themeSettings)
                 }
-                .environmentObject(themeSettings)
             )
+            
+        case .forPresentedOverCurrentScreen:
+            return ZStack(alignment: .bottom) {
+                ThemeColor.SemanticColor.layer0.color
+                    .opacity(0.8)
+                content
+                .padding(.top, 24)
+                .padding(.bottom, max((content.safeAreaInsets?.bottom ?? 0), 16))
+                .padding(.horizontal, 24)
+                .themeColor(background: .layer3)
+                .cornerRadius(36, corners: [.topLeft, .topRight])
+            }
+            .ignoresSafeArea(edges: [.all])
+            .wrappedInAnyView()
         }
     }
 }
-
 // MARK: Make any view a button
 
 public extension View {
@@ -387,7 +407,7 @@ private struct LeftAlignedModifier: ViewModifier {
     func body(content: Content) -> some View {
         HStack(spacing: 0) {
             content
-            Spacer()
+            Spacer(minLength: 0)
         }
     }
 }
@@ -419,9 +439,9 @@ public extension View {
 
 private struct TopAlignedModifier: ViewModifier {
     func body(content: Content) -> some View {
-        VStack {
+        VStack(spacing: 0) {
             content
-            Spacer()
+            Spacer(minLength: 0)
         }
     }
 }
@@ -436,8 +456,8 @@ public extension View {
 
 private struct BottomAlignedModifier: ViewModifier {
     func body(content: Content) -> some View {
-        VStack {
-            Spacer()
+        VStack(spacing: 0) {
+            Spacer(minLength: 0)
             content
         }
     }

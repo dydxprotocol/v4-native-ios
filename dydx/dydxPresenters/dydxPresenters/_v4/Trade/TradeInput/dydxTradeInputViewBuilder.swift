@@ -30,17 +30,17 @@ public class dydxTradeInputViewBuilder: NSObject, ObjectBuilderProtocol {
 
 private class dydxTradeInputViewController: HostingViewController<PlatformView, dydxTradeInputViewModel>, FloatingInsetProvider, FloatedDelegate, dydxTradeInputViewPresenterDelegate {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if request?.path == "/trade/input" {
+        if request?.path == "/trade/input", let presenter = presenter as? dydxTradeInputViewPresenter {
             AbacusStateManager.shared.startTrade()
             if request?.params?["full"] as? String == "true" {
-                (presenter as? dydxTradeInputViewPresenterProtocol)?.updateViewControllerPosition(position: .half)
+                presenter.updateViewControllerPosition(position: .half)
                 move(to: .half)
             } else {
-                (presenter as? dydxTradeInputViewPresenterProtocol)?.updateViewControllerPosition(position: .tip)
+                presenter.updateViewControllerPosition(position: .tip)
                 move(to: .tip)
             }
 
-            presenter?.viewModel?.editViewModel?.onScrollViewCreated  = { [weak self] scrollView in
+            presenter.viewModel?.editViewModel?.onScrollViewCreated  = { [weak self] scrollView in
                 self?.floatTracking = scrollView
             }
             return true
@@ -205,5 +205,6 @@ private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputVie
                 self?.viewModel?.tipState = size > 0 ? .draft : .buySell
             }
             .store(in: &subscriptions)
+
     }
 }
