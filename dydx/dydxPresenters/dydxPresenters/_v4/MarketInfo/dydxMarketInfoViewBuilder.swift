@@ -170,8 +170,7 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
             guard let marketId = self?.marketId,
                   let assetId = marketMap[marketId]?.assetId,
                   let asset = assetMap[assetId] else { return }
-            //TODO change != true, only for testing
-            if asset.tags?.contains("Prediction Market") != true {
+            if asset.tags?.contains("Prediction Market") == true {
                 Router.shared?.navigate(to: RoutingRequest(path: "/trade/prediction_markets_notice"), animated: true, completion: nil)
             }
         }
