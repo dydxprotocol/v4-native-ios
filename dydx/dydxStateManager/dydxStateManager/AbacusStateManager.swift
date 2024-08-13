@@ -41,6 +41,10 @@ public final class AbacusStateManager: NSObject {
     public var environment: V4Environment? {
         asyncStateManager.environment
     }
+    
+    public var selectedSubaccountNumber: Int {
+       Int(asyncStateManager.subaccountNumber)
+    }
 
     public var appSetting: AppSetting? {
         asyncStateManager.appSettings?.ios
@@ -134,7 +138,7 @@ public final class AbacusStateManager: NSObject {
 
     private var isStarted = false
 
-    private lazy var asyncStateManager: AsyncAbacusStateManagerProtocol & AsyncAbacusStateManagerSingletonProtocol = {
+    private lazy var asyncStateManager: SingletonAsyncAbacusStateManagerProtocol = {
         UIImplementations.reset(language: nil)
 
         let deployment: String
