@@ -50,6 +50,29 @@ private struct dydxPredictionMarketsNoticeView: View {
         .wrappedInAnyView()
     }
     
+    var checkboxRow: some View {
+        HStack(spacing: 8) {
+            ZStack(alignment: .center) {
+                ThemeColor.SemanticColor.layer0.color
+                PlatformIconViewModel(type: .asset(name: "icon_checked", bundle: .dydxView), 
+                                      clip: .noClip,
+                                      size: .init(width: 15, height: 15),
+                                      templateColor: .textPrimary)
+                    .createView()
+                    .opacity(viewModel.hidePredictionMarketsNotice ? 1 : 0)
+            }
+            .frame(width: 20, height: 20)
+            .borderAndClip(style: .cornerRadius(6), borderColor: .borderDefault)
+            .onTapGesture {
+                viewModel.hidePredictionMarketsNotice.toggle()
+            }
+            Text(localizerPathKey: "APP.GENERAL.DONT_SHOW_AGAIN")
+                .themeFont(fontSize: .medium)
+                .themeColor(foreground: .textSecondary)
+        }
+        .leftAligned()
+    }
+    
     func infoRow(imageName: String, titlePathKey: String, descriptionPathKey: String) -> some View {
         HStack(alignment: .center, spacing: 8) {
             PlatformIconViewModel(type: .asset(name: imageName, bundle: .dydxView),
@@ -89,6 +112,7 @@ private struct dydxPredictionMarketsNoticeView: View {
                     infoRow(imageName: "icon_prediction_event",
                             titlePathKey: "APP.PREDICTION_MARKET.SETTLEMENT_OUTCOMES_TITLE",
                             descriptionPathKey: "APP.PREDICTION_MARKET.SETTLEMENT_OUTCOMES_DESCRIPTION")
+                    checkboxRow
                     continueButton
                 }
             }
