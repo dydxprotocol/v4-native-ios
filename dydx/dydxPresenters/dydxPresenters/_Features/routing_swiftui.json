@@ -303,7 +303,7 @@
                 },
                 "/trade/prediction_markets_notice": {
                     "destination":"dydxPresenters.dydxPredictionMarketsNoticeViewBuilder",
-                    "presentation":"half"
+                    "presentation":"present_over_full_screen"
                 },
                 "/trade/status":{
                     "destination":"dydxPresenters.dydxTradeStatusViewBuilder",

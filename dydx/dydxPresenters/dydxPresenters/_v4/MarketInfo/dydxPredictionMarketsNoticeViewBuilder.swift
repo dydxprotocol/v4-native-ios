@@ -19,7 +19,7 @@ public class dydxPredictionMarketsNoticeViewBuilder: NSObject, ObjectBuilderProt
     public func build<T>() -> T? {
         let presenter = dydxPredictionMarketsNoticeViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxPredictionMarketsNoticeViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
+        return dydxPredictionMarketsNoticeViewController(presenter: presenter, view: view, configuration: .default) as? T
     }
 }
 

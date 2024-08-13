@@ -8,6 +8,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import Popovers
 
 public class dydxPredictionMarketsNoticeViewModel: PlatformViewModel {
     @Published public var hidePredictionMarketsNotice = false
@@ -45,6 +46,7 @@ private struct dydxPredictionMarketsNoticeView: View {
                 .themeColor(background: .colorFadedPurple)
                 .clipShape(.rect(cornerRadius: 4))
         }
+        .leftAligned()
         .wrappedInAnyView()
     }
     
@@ -64,6 +66,7 @@ private struct dydxPredictionMarketsNoticeView: View {
                     .themeColor(foreground: .textTertiary)
             }
         }
+        .leftAligned()
     }
     
     var continueButton: some View {
@@ -77,17 +80,18 @@ private struct dydxPredictionMarketsNoticeView: View {
     }
     
     var body: some View {
-        VStack(spacing: 16) {
-            title
-            VStack(spacing: 24) {
-                infoRow(imageName: "icon_settlement_cash",
-                        titlePathKey: "APP.PREDICTION_MARKET.LEVERAGE_TRADE_EVENT_OUTCOMES_TITLE",
-                        descriptionPathKey: "APP.PREDICTION_MARKET.LEVERAGE_TRADE_EVENT_OUTCOMES_DESCRIPTION")
-                infoRow(imageName: "icon_prediction_event",
-                        titlePathKey: "APP.PREDICTION_MARKET.SETTLEMENT_OUTCOMES_TITLE",
-                        descriptionPathKey: "APP.PREDICTION_MARKET.SETTLEMENT_OUTCOMES_DESCRIPTION")
-                continueButton
+            VStack(spacing: 16) {
+                title
+                VStack(spacing: 24) {
+                    infoRow(imageName: "icon_settlement_cash",
+                            titlePathKey: "APP.PREDICTION_MARKET.LEVERAGE_TRADE_EVENT_OUTCOMES_TITLE",
+                            descriptionPathKey: "APP.PREDICTION_MARKET.LEVERAGE_TRADE_EVENT_OUTCOMES_TITLE")
+                    infoRow(imageName: "icon_prediction_event",
+                            titlePathKey: "APP.PREDICTION_MARKET.SETTLEMENT_OUTCOMES_TITLE",
+                            descriptionPathKey: "APP.PREDICTION_MARKET.SETTLEMENT_OUTCOMES_DESCRIPTION")
+                    continueButton
+                }
             }
-        }
+            .makeSheet(sheetStyle: .forPresentedOverCurrentScreen)
     }
 }
