@@ -15,6 +15,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
     case directionColorPreference = "direction_color_preference"
     case shouldDisplayInAppNotifications = "should_display_in_app_notifications"
     case gasToken = "gas_token"
+    case hidePredictionMarketsNoticeKey = "hide_prediction_markets_notice"
 
     public var defaultValue: Any? {
         switch self {
@@ -23,6 +24,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
         case .directionColorPreference: return "green_is_up"
         case .shouldDisplayInAppNotifications: return true
         case .gasToken: return "USDC"
+        case .hidePredictionMarketsNoticeKey: return false
         }
     }
 }

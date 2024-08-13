@@ -256,6 +256,8 @@ open class MappedUIKitRouter: MappedRouter {
         case .popup: 
             popup(viewController, animated: animated, completion: completion)
 
+        case .presentOverFullScreen:
+            presentOverFullScreen(viewController, animated: animated, completion: completion)
         }
     }
 
@@ -367,6 +369,20 @@ open class MappedUIKitRouter: MappedRouter {
             // Present the wrapper UIViewController
             root.present(wrapperViewController, animated: true, completion: nil)
 
+            completion?(viewController, true)
+        } else {
+            completion?(nil, false)
+        }
+    }
+    
+    private func presentOverFullScreen(_ viewController: UIViewController, animated: Bool, completion: RoutingCompletionBlock?) {
+        if let topmost = ViewControllerStack.shared?.topParent() {
+            let navigationController = UIViewController.navigation(with: viewController)
+            navigationController.modalPresentationStyle = .overFullScreen
+            //speeds up the animation by 2x
+            navigationController.view.layer.speed = 2
+            topmost.present(navigationController, animated: animated) {
+            }
             completion?(viewController, true)
         } else {
             completion?(nil, false)
