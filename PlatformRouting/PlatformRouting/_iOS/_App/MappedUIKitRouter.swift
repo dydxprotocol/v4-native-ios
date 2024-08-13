@@ -379,6 +379,7 @@ open class MappedUIKitRouter: MappedRouter {
         if let topmost = ViewControllerStack.shared?.topParent() {
             let navigationController = UIViewController.navigation(with: viewController)
             navigationController.modalPresentationStyle = .overFullScreen
+            navigationController.view.layer.speed = 2
             topmost.present(navigationController, animated: animated) {
             }
             completion?(viewController, true)

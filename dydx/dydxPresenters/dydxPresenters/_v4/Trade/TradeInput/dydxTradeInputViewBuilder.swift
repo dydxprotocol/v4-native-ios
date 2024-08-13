@@ -209,22 +209,6 @@ private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputVie
                 self?.viewModel?.tipState = size > 0 ? .draft : .buySell
             }
             .store(in: &subscriptions)
-        
-        Publishers.CombineLatest(
-            AbacusStateManager.shared.state.marketMap,
-            AbacusStateManager.shared.state.assetMap
-        )
-            .first()
-            .sink {[weak self] marketMap, assetMap in
-                guard let marketId = self?.marketId,
-                      let assetId = marketMap[marketId]?.assetId,
-                      let asset = assetMap[assetId] else { return }
-                //TODO change != true, only for testing
-                if asset.tags?.contains("Prediction Market") != true {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/trade/prediction_markets_notice"), animated: true, completion: nil)
-                }
-            }
-            .store(in: &subscriptions)
 
     }
 }
