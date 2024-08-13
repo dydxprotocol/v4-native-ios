@@ -23,7 +23,7 @@ public class dydxPredictionMarketsNoticeViewBuilder: NSObject, ObjectBuilderProt
 private class dydxPredictionMarketsNoticeViewController: HostingViewController<PlatformView, dydxPredictionMarketsNoticeViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade/prediction_markets_notice" {
-            return !dydxPredictionMarketsNoticeViewPresenter.hidePredictionMarketsNotice
+            return true
         }
         return false
     }

@@ -79,6 +79,10 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
         .trades: fillsPresenter,
         .funding: fundingPresenter
     ]
+    
+    fileprivate static var hidePredictionMarketsNotice: Bool {
+        get { SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.hidePredictionMarketsNoticeKey.rawValue) as? Bool ?? false }
+    }
 
     override init() {
         let viewModel = dydxMarketInfoViewModel()
@@ -170,7 +174,7 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
             guard let marketId = self?.marketId,
                   let assetId = marketMap[marketId]?.assetId,
                   let asset = assetMap[assetId] else { return }
-            if asset.tags?.contains("Prediction Market") == true {
+            if asset.tags?.contains("Prediction Market") != true && !Self.hidePredictionMarketsNotice {
                 Router.shared?.navigate(to: RoutingRequest(path: "/trade/prediction_markets_notice"), animated: true, completion: nil)
             }
         }
