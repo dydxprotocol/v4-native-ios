@@ -23,7 +23,6 @@ final class dydxTransferSubaccountWorker: BaseWorker {
         AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.usdcTokenInfo?.denom)
             .withLatestFrom(
                 AbacusStateManager.shared.state.walletState
-                .eraseToAnyPublisher()
             )
             .sink { [weak self] balance, walletState in
                 guard let balance, balance > dydxTransferSubaccountWorker.balanceRetainAmount else { return }
