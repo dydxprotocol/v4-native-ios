@@ -21,31 +21,18 @@ final class dydxTransferSubaccountWorker: BaseWorker {
         super.start()
 
         AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.usdcTokenInfo?.denom)
-            .filter { value in
-                (value ?? 0) > dydxTransferSubaccountWorker.balanceRetainAmount
-            }
             .withLatestFrom(
-                Publishers.CombineLatest(
-                    AbacusStateManager.shared.state.walletState,
-                    AbacusStateManager.shared.state.selectedSubaccount
-                )
-                .map { (walletState: $0, subaccount: $1) }
-                .eraseToAnyPublisher()
+                AbacusStateManager.shared.state.walletState
             )
-            .sink { [weak self] balance, state in
-                let subaccountNumber: Int
-                if let subaccount = state.subaccount {
-                    subaccountNumber = Int(subaccount.subaccountNumber)
-                } else {
-                    subaccountNumber = 0
-                }
-                let depositAmount = (balance ?? 0) - dydxTransferSubaccountWorker.balanceRetainAmount
+            .sink { [weak self] balance, walletState in
+                guard let balance, balance > dydxTransferSubaccountWorker.balanceRetainAmount else { return }
+                let depositAmount = balance - dydxTransferSubaccountWorker.balanceRetainAmount
                 let amountString = dydxFormatter.shared.decimalLocaleAgnostic(number: NSNumber(value: depositAmount),
                                                                               digits: dydxTokenConstants.usdcTokenDecimal)
                 if let amountString = amountString {
                     self?.depositToSubaccount(amount: amountString,
-                                              subaccount: subaccountNumber,
-                                              walletState: state.walletState)
+                                              subaccount: AbacusStateManager.shared.selectedSubaccountNumber,
+                                              walletState: walletState)
                 } else {
                     Console.shared.log("dydxTransferSubaccountWorker: Invalid amount")
                 }
