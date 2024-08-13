@@ -108,7 +108,7 @@ private struct dydxPredictionMarketsNoticeView: View {
                 VStack(spacing: 24) {
                     infoRow(imageName: "icon_settlement_cash",
                             titlePathKey: "APP.PREDICTION_MARKET.LEVERAGE_TRADE_EVENT_OUTCOMES_TITLE",
-                            descriptionPathKey: "APP.PREDICTION_MARKET.LEVERAGE_TRADE_EVENT_OUTCOMES_TITLE")
+                            descriptionPathKey: "APP.PREDICTION_MARKET.LEVERAGE_TRADE_EVENT_OUTCOMES_DESCRIPTION")
                     infoRow(imageName: "icon_prediction_event",
                             titlePathKey: "APP.PREDICTION_MARKET.SETTLEMENT_OUTCOMES_TITLE",
                             descriptionPathKey: "APP.PREDICTION_MARKET.SETTLEMENT_OUTCOMES_DESCRIPTION")

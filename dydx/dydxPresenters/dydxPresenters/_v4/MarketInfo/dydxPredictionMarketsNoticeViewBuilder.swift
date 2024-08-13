@@ -11,9 +11,6 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
-import Abacus
-import dydxStateManager
-import dydxAnalytics
 
 public class dydxPredictionMarketsNoticeViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {

@@ -31,9 +31,6 @@ public class dydxTradeInputViewBuilder: NSObject, ObjectBuilderProtocol {
 private class dydxTradeInputViewController: HostingViewController<PlatformView, dydxTradeInputViewModel>, FloatingInsetProvider, FloatedDelegate, dydxTradeInputViewPresenterDelegate {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade/input", let presenter = presenter as? dydxTradeInputViewPresenter {
-            let selectedMarketId = request?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
-            dydxSelectedMarketsStore.shared.lastSelectedMarket = selectedMarketId
-            presenter.marketId = selectedMarketId
             AbacusStateManager.shared.startTrade()
             if request?.params?["full"] as? String == "true" {
                 presenter.updateViewControllerPosition(position: .half)
@@ -108,7 +105,6 @@ private protocol dydxTradeInputViewPresenterProtocol: HostedViewPresenterProtoco
 }
 
 private class dydxTradeInputViewPresenter: HostedViewPresenter<dydxTradeInputViewModel>, dydxTradeInputViewPresenterProtocol, dydxTradeSheetTipBuySellViewPresenterDelegate {
-    fileprivate var marketId: String?
     weak var delegate: dydxTradeInputViewPresenterDelegate?
 
     // MARK: dydxTradeInputViewPresenterProtocol
