@@ -22,6 +22,7 @@ public class dydxMarketsViewModel: PlatformViewModel {
     @Published public var banner: dydxMarketsBannerViewModel?
     @Published public var summary = dydxMarketSummaryViewModel()
     @Published public var filter = dydxMarketAssetFilterViewModel()
+    @Published public var filterFooterText: String?
     @Published public var sort = dydxMarketAssetSortViewModel()
     @Published public var assetList: dydxMarketAssetListViewModel? = dydxMarketAssetListViewModel()
     @Published public var scrollAction: ScrollAction = .none
@@ -64,9 +65,16 @@ public class dydxMarketsViewModel: PlatformViewModel {
 
                              let header =
                              VStack(spacing: 0) {
-                                 self.filter.createView(parentStyle: style)
-                                     .padding(.horizontal, 16)
-                                 Spacer()
+                                 VStack(spacing: 8) {
+                                     self.filter.createView(parentStyle: style)
+                                         .padding(.horizontal, 16)
+                                     if let filterFooterText = self.filterFooterText {
+                                         Text(filterFooterText)
+                                             .themeFont(fontType: .base, fontSize: .small)
+                                             .themeColor(foreground: .textTertiary)
+                                     }
+                                 }
+                                 Spacer(minLength: 16)
                                  self.sort.createView(parentStyle: style)
                                      .padding(.leading, 16)
                                  Spacer(minLength: 12)

@@ -22,6 +22,7 @@ public enum RoutingPresentation: Int {
     case drawer
     /// center-screen popup which dims the background
     case popup
+    case presentOverFullScreen
 }
 
 private struct PathTuple {
@@ -77,6 +78,9 @@ public class RoutingMap: NSObject, ParsingProtocol {
             
         case "popup":
             presentation = .popup
+            
+        case "present_over_full_screen":
+            presentation = .presentOverFullScreen
 
         default:
             presentation = nil
