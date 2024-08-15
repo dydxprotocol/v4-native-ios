@@ -15,10 +15,9 @@ public class dydxVaultViewModel: PlatformViewModel {
     @Published public var vaultBalance: Double?
     @Published public var profitDollars: Double?
     @Published public var profitPercentage: Double?
+    @Published public var positions: [dydxVaultPositionViewModel]?
     @Published public var cancelAction: (() -> Void)?
     @Published public var learnMoreAction: (() -> Void)?
-
-    public init() { }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
@@ -32,20 +31,36 @@ private struct dydxVaultView: View {
     @ObservedObject var viewModel: dydxVaultViewModel
 
     var body: some View {
-        VStack(spacing: 0) {
-            titleRow
-            Spacer().frame(height: 28)
-            vaultPnlRow
-            Spacer().frame(height: 16)
-            div
-            Spacer().frame(height: 16)
-            aprTvlRow
-            Spacer().frame(height: 16)
-            div
-            Spacer().frame(height: 16)
-            chart
-            Spacer()
-
+        ScrollView {
+            LazyVStack(pinnedViews: [.sectionHeaders]) {
+                VStack(spacing: 0) {
+                    titleRow
+                    Spacer().frame(height: 28)
+                    vaultPnlRow
+                    Spacer().frame(height: 16)
+                    div
+                    Spacer().frame(height: 16)
+                    aprTvlRow
+                    Spacer().frame(height: 16)
+                    div
+                    Spacer().frame(height: 16)
+                    chart
+                    Spacer().frame(height: 16)
+                    div
+                }
+                Section {
+                    VStack(spacing: 0) {
+                        Spacer().frame(height: 16)
+                        openPositionsHeader
+                        Spacer().frame(height: 8)
+                        div
+                        Spacer().frame(height: 16)
+                    }
+                }
+                positionsListHeader
+                Spacer().frame(height: 16)
+                positionsList
+            }
         }
         .frame(maxWidth: .infinity)
         .themeColor(background: .layer2)
@@ -60,18 +75,12 @@ private struct dydxVaultView: View {
     // MARK: - Header
     var titleRow: some View {
         HStack(spacing: 16) {
-            backButton
             titleImage
             titleText
             Spacer()
             learnMore
         }
-        .padding(.horizontal, 12)
-    }
-
-    var backButton: some View {
-        ChevronBackButtonModel(onBackButtonTap: viewModel.cancelAction ?? {})
-            .createView()
+        .padding(.horizontal, 16)
     }
 
     var titleImage: some View {
@@ -151,7 +160,6 @@ private struct dydxVaultView: View {
             tvlTitleValue
         }
         .leftAligned()
-        .padding(.horizontal, 16)
     }
 
     var aprTitleValue: some View {
@@ -181,5 +189,58 @@ private struct dydxVaultView: View {
         dydxVaultChartViewModel()
             .createView()
             .frame(height: 174)
+    }
+    
+    // MARK: - Section 4 - positions
+    var openPositionsHeader: some View {
+        HStack(spacing: 8) {
+            Text(DataLocalizer.shared?.localize(path: "APP.TRADE.OPEN_POSITIONS", params: nil) ?? "")
+                .themeColor(foreground: .textSecondary)
+                .themeFont(fontType: .base, fontSize: .larger)
+            Text("\(viewModel.positions?.count ?? 0)")
+                .themeColor(foreground: .textSecondary)
+                .themeFont(fontType: .base, fontSize: .small)
+                .padding(.vertical, 2.5)
+                .padding(.horizontal, 6.5)
+                .themeColor(background: .layer6)
+                .clipShape(RoundedRectangle(cornerRadius: 4))
+        }
+        .leftAligned()
+        .padding(.horizontal, 16)
+    }
+    
+    var positionsListHeader: some View {
+        HStack(spacing: dydxVaultPositionViewModel.interSectionPadding) {
+            Group {
+                Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.MARKET", params: nil) ?? "")
+                    .themeColor(foreground: .textTertiary)
+                    .themeFont(fontType: .base, fontSize: .small)
+                    .leftAligned()
+                    .frame(width: dydxVaultPositionViewModel.marketSectionWidth)
+                    .lineLimit(1)
+                Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.SIZE", params: nil) ?? "")
+                    .themeColor(foreground: .textTertiary)
+                    .themeFont(fontType: .base, fontSize: .small)
+                    .lineLimit(1)
+                Spacer()
+                Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.VAULT_THIRTY_DAY_PNL", params: nil) ?? "")
+                    .themeColor(foreground: .textTertiary)
+                    .themeFont(fontType: .base, fontSize: .small)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
+                    .padding(.trailing, dydxVaultPositionViewModel.pnlSpacing + dydxVaultPositionViewModel.sparklineWidth)
+            }
+        }
+        .padding(.horizontal, 16)
+    }
+    
+    var positionsList: some View {
+        ForEach(viewModel.positions ?? [], id: \.id) { position in
+            position.createView()
+                .centerAligned()
+                .frame(height: 53)
+            div
+        }
+        .padding(.horizontal, 16)
     }
 }
