@@ -18,7 +18,7 @@ public class dydxVaultViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxVaultViewBuilderPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxVaultViewController(presenter: presenter, view: view, configuration: .default) as? T
+        return dydxVaultViewController(presenter: presenter, view: view, configuration: .tabbarItemView) as? T
         // return HostingViewController(presenter: presenter, view: view) as? T
     }
 }
@@ -46,7 +46,17 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
         Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
             self?.viewModel?.positions = [
                 dydxVaultPositionViewModel(assetName: "logo_bitcoin", market: "BTC", side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, token: "BTC", tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-                dydxVaultPositionViewModel(assetName: "logo_ethereum", market: "ETH", side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, token: "ETH", tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) })
+                dydxVaultPositionViewModel(assetName: "logo_ethereum", market: "ETH", side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, token: "ETH", tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
+                dydxVaultPositionViewModel(assetName: "logo_bitcoin", market: "BTC", side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, token: "BTC", tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
+                dydxVaultPositionViewModel(assetName: "logo_ethereum", market: "ETH", side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, token: "ETH", tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
+                dydxVaultPositionViewModel(assetName: "logo_bitcoin", market: "BTC", side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, token: "BTC", tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
+                dydxVaultPositionViewModel(assetName: "logo_ethereum", market: "ETH", side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, token: "ETH", tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
+                dydxVaultPositionViewModel(assetName: "logo_bitcoin", market: "BTC", side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, token: "BTC", tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
+                dydxVaultPositionViewModel(assetName: "logo_ethereum", market: "ETH", side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, token: "ETH", tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
+                dydxVaultPositionViewModel(assetName: "logo_bitcoin", market: "BTC", side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, token: "BTC", tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
+                dydxVaultPositionViewModel(assetName: "logo_ethereum", market: "ETH", side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, token: "ETH", tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
+                dydxVaultPositionViewModel(assetName: "logo_bitcoin", market: "BTC", side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, token: "BTC", tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
+                dydxVaultPositionViewModel(assetName: "logo_ethereum", market: "ETH", side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, token: "ETH", tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
             ]
         }
     }
