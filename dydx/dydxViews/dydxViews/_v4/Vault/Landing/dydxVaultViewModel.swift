@@ -15,6 +15,7 @@ public class dydxVaultViewModel: PlatformViewModel {
     @Published public var vaultBalance: Double?
     @Published public var profitDollars: Double?
     @Published public var profitPercentage: Double?
+    @Published public var vaultChart: dydxVaultChartViewModel?
     @Published public var positions: [dydxVaultPositionViewModel]?
     @Published public var cancelAction: (() -> Void)?
     @Published public var learnMoreAction: (() -> Void)?
@@ -182,7 +183,7 @@ private struct dydxVaultView: View {
 
     // MARK: - Section 3 - graph
     var chart: some View {
-        dydxVaultChartViewModel()
+        viewModel.vaultChart?
             .createView()
             .frame(height: 174)
     }
