@@ -26,6 +26,8 @@ public class TokenTextViewModel: PlatformViewModel, Hashable {
             return AnyView(
                 Group {
                     Text(self.symbol)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                         .padding(.vertical, 1)
                         .padding(.horizontal, 3)
                 }
