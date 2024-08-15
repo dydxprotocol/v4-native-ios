@@ -22,44 +22,40 @@ public class dydxVaultViewModel: PlatformViewModel {
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            return AnyView(dydxVaultView(viewModel: self)).wrappedInAnyView()
+            return AnyView(dydxVaultView(viewModel: self))
+                .wrappedInAnyView()
         }
     }
 }
 
 private struct dydxVaultView: View {
     @ObservedObject var viewModel: dydxVaultViewModel
-
+    
     var body: some View {
-        ScrollView {
-            LazyVStack(pinnedViews: [.sectionHeaders]) {
-                VStack(spacing: 0) {
-                    titleRow
-                    Spacer().frame(height: 28)
-                    vaultPnlRow
-                    Spacer().frame(height: 16)
-                    div
-                    Spacer().frame(height: 16)
-                    aprTvlRow
-                    Spacer().frame(height: 16)
-                    div
-                    Spacer().frame(height: 16)
-                    chart
-                    Spacer().frame(height: 16)
-                    div
-                }
-                Section {
+        VStack {
+            Spacer().frame(height: 12)
+            titleRow
+            Spacer().frame(height: 20)
+            ScrollView {
+                LazyVStack(pinnedViews: [.sectionHeaders]) {
                     VStack(spacing: 0) {
+                        vaultPnlRow
                         Spacer().frame(height: 16)
-                        openPositionsHeader
-                        Spacer().frame(height: 8)
+                        div
+                        Spacer().frame(height: 16)
+                        aprTvlRow
+                        Spacer().frame(height: 16)
+                        div
+                        Spacer().frame(height: 16)
+                        chart
+                        Spacer().frame(height: 16)
                         div
                         Spacer().frame(height: 16)
                     }
+                    Section(header: positionsStickyHeader) {
+                        positionsList
+                    }
                 }
-                positionsListHeader
-                Spacer().frame(height: 16)
-                positionsList
             }
         }
         .frame(maxWidth: .infinity)
@@ -208,8 +204,20 @@ private struct dydxVaultView: View {
         .leftAligned()
         .padding(.horizontal, 16)
     }
+
+    private var positionsStickyHeader: some View {
+        VStack(spacing: 0) {
+            openPositionsHeader
+            Spacer().frame(height: 8)
+            div
+            Spacer().frame(height: 16)
+            positionsColumnsHeader
+            Spacer().frame(height: 8)
+        }
+        .themeColor(background: .layer2)
+    }
     
-    var positionsListHeader: some View {
+    var positionsColumnsHeader: some View {
         HStack(spacing: dydxVaultPositionViewModel.interSectionPadding) {
             Group {
                 Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.MARKET", params: nil) ?? "")
