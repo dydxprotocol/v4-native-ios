@@ -21,22 +21,22 @@ public class dydxCancelPendingIsolatedOrdersViewModel: PlatformViewModel {
     @Published public var state: State = .readyToSubmit
 
     @Published public var marketLogoUrl: URL?
-    @Published public var marketName: String
-    @Published public var marketId: String
+    @Published public var assetName: String
+    @Published public var assetId: String
     @Published public var orderCount: Int
     @Published public var failureCount: Int?
     @Published public var cancelAction: (() -> Void)
 
     public init(marketLogoUrl: URL?,
-                marketName: String,
-                marketId: String,
+                assetName: String,
+                assetId: String,
                 orderCount: Int,
                 failureCount: Int? = nil,
                 cancelAction: @escaping (() -> Void)
     ) {
         self.marketLogoUrl = marketLogoUrl
-        self.marketName = marketName
-        self.marketId = marketId
+        self.assetName = assetName
+        self.assetId = assetId
         self.orderCount = orderCount
         self.failureCount = failureCount
         self.cancelAction = cancelAction
@@ -44,8 +44,8 @@ public class dydxCancelPendingIsolatedOrdersViewModel: PlatformViewModel {
 
     public static var previewValue: dydxCancelPendingIsolatedOrdersViewModel {
         .init(marketLogoUrl: URL(string: "https://v4.testnet.dydx.exchange/currencies/eth.png"),
-              marketName: "Ethereum",
-              marketId: "ETH-USDC",
+              assetName: "Ethereum",
+              assetId: "ETH",
               orderCount: 1,
               failureCount: nil,
               cancelAction: {}
@@ -149,16 +149,16 @@ private struct CancelView: View {
             : DataLocalizer.shared?.localize(path: "APP.CANCEL_ORDERS_MODAL.N_OPEN_ORDERS", params: ["COUNT": "\(viewModel.orderCount)"])) ?? ""
 
         let localizedString = DataLocalizer.shared?.localize(path: "APP.CANCEL_ORDERS_MODAL.CANCEL_ORDERS_CONFIRMATION", params: ["OPEN_ORDERS_TEXT": openOrdersText,
-                                                                                                                                  "ASSET": viewModel.marketName,
-                                                                                                                                  "MARKET": viewModel.marketId]) ?? ""
+                                                                                                                                  "ASSET": viewModel.assetName,
+                                                                                                                                  "MARKET": viewModel.assetId]) ?? ""
         var attributedString = AttributedString(localizedString)
             .themeFont(fontType: .base, fontSize: .small)
             .themeColor(foreground: .textTertiary, to: nil)
 
         let replacementTexts = [
             openOrdersText,
-            viewModel.marketName,
-            viewModel.marketId
+            viewModel.assetName,
+            viewModel.assetId
         ]
         for replacementText in replacementTexts {
             if let range = attributedString.range(of: replacementText) {

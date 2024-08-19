@@ -45,7 +45,7 @@ private class dydxCancelPendingIsolatedOrdersViewBuilderPresenter: HostedViewPre
     override init() {
         super.init()
 
-        self.viewModel = .init(marketLogoUrl: nil, marketName: "", marketId: "", orderCount: 0, cancelAction: {})
+        self.viewModel = .init(marketLogoUrl: nil, assetName: "Ethereum", assetId: "ETH", orderCount: 0, cancelAction: {})
     }
 
     override func start() {
@@ -67,8 +67,8 @@ private class dydxCancelPendingIsolatedOrdersViewBuilderPresenter: HostedViewPre
                   let asset = configsAndAssetMap[marketId]?.asset
             else { return }
             self.viewModel?.marketLogoUrl = URL(string: asset.resources?.imageUrl ?? "")
-            self.viewModel?.marketName = asset.name ?? "--"
-            self.viewModel?.marketId = asset.id
+            self.viewModel?.assetName = asset.name ?? "--"
+            self.viewModel?.assetId = asset.id
             self.viewModel?.orderCount = pendingOrders.count
             self.viewModel?.failureCount = self.viewModel?.failureCount
             self.viewModel?.cancelAction = { [weak self] in
