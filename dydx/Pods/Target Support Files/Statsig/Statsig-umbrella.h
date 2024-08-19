@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "ErrorBoundary.h"
 
 FOUNDATION_EXPORT double StatsigVersionNumber;
 FOUNDATION_EXPORT const unsigned char StatsigVersionString[];

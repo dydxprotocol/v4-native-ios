@@ -38,7 +38,7 @@
 		</data>
 		<key>Headers/AppsFlyerLib.h</key>
 		<data>
-		SsGxgy1+GbjijOYxtTu8kU14j2E=
+		0nmzbJUYI6XRn+AH+RNwtIO05sA=
 		</data>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		/U1U2x78VIu+A3TOFll3sEAjYJ0=
+		R1HkFJpIbi3chDScxpiSYpL4nMw=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		42NXAc/vKXTDMeZFQe0n/60LpdE=
+		TfS7gFh/R+l98E5e3VBcTi9V0Bw=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -90,7 +90,7 @@
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		zsqIT+a+bOaVkcT2n5Y6evAU3vw=
+		shPGS7aB96GLhioV1kHCBMgFXus=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -195,11 +195,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SsGxgy1+GbjijOYxtTu8kU14j2E=
+			0nmzbJUYI6XRn+AH+RNwtIO05sA=
 			</data>
 			<key>hash2</key>
 			<data>
-			XtT6M9tcT1uvmjxnkENvIXzA7mbF6qGZ8bAf7ssnlfk=
+			SQsJwXrqFChMPzjRNaG0wtOfEV17jrTEH4mn18wQQDY=
 			</data>
 		</dict>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>
@@ -272,11 +272,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			42NXAc/vKXTDMeZFQe0n/60LpdE=
+			TfS7gFh/R+l98E5e3VBcTi9V0Bw=
 			</data>
 			<key>hash2</key>
 			<data>
-			iff2Aeg76zGof7Ty0co2duOcPlPBcYLau536EAaedHw=
+			lz2UIsN1MWeodrXz8Y1oXulkIwwSZSM2u1HgBjg0+cQ=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -327,11 +327,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zsqIT+a+bOaVkcT2n5Y6evAU3vw=
+			shPGS7aB96GLhioV1kHCBMgFXus=
 			</data>
 			<key>hash2</key>
 			<data>
-			Zf+pmaUe3FoQ959g770FftYmh3jmNE1/RbFRqx+XZag=
+			zMBGGO3w1ky/RjqHqFjq8qM8oEHUL5FcW4miZv34ROU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -87,7 +87,7 @@ open class dydxMarketAssetItemViewModel: PlatformViewModel {
             HStack {
                 VStack(alignment: .leading) {
                     HStack(spacing: 4) {
-                        Text(sharedMarketViewModel?.tokenSymbol ?? "")
+                        Text(sharedMarketViewModel?.assetId ?? "")
                             .themeColor(foreground: .textPrimary)
                             .themeFont(fontType: .plus, fontSize: .medium)
                             .layoutPriority(1)

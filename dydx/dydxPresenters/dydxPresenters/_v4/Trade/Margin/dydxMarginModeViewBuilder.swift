@@ -13,6 +13,7 @@ import ParticlesKit
 import PlatformUI
 import dydxStateManager
 import Abacus
+import Combine
 
 public class dydxMarginModeViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -62,16 +63,31 @@ private class dydxMarginModeViewPresenter: HostedViewPresenter<dydxMarginModeVie
     override func start() {
         super.start()
 
+        Publishers
+            .CombineLatest(
+                AbacusStateManager.shared.state.tradeInput,
+                AbacusStateManager.shared.state.marketMap
+            )
+            .sink { [weak self] tradeInput, marketMap in
+                self?.updateMarketDisplayId(tradeInput: tradeInput, marketMap: marketMap)
+            }
+            .store(in: &subscriptions)
+        
         AbacusStateManager.shared.state.tradeInput
             .compactMap { $0 }
             .sink {[weak self] input in
+                // call this in separate publisher so that market maps do not overwrite trade input
                 self?.update(tradeInput: input)
             }
             .store(in: &subscriptions)
     }
+    
+    private func updateMarketDisplayId(tradeInput: Abacus.TradeInput?, marketMap: [String: PerpetualMarket]?) {
+        guard let marketDisplayId = marketMap?[tradeInput?.marketId ?? ""]?.displayId else { return }
+        viewModel?.marketDisplayId = marketDisplayId
+    }
 
     private func update(tradeInput: Abacus.TradeInput) {
-        viewModel?.market = tradeInput.marketId
         let isSelectionDisabled = tradeInput.options?.marginModeOptions == nil
         viewModel?.isDisabled = isSelectionDisabled
         switch tradeInput.marginMode {
