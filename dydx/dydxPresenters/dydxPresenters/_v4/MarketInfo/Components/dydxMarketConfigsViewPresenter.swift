@@ -55,7 +55,7 @@ class dydxMarketConfigsViewPresenter: HostedViewPresenter<dydxMarketConfigsViewM
         let tickSize = dydxFormatter.shared.format(decimal: marketConfigs?.tickSize?.decimalValue)
         viewModel?.items = [
             dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.MARKET_NAME"),
-                                            value: marketId ?? "-"),
+                                            value: market.displayId ?? "-"),
             dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.TICK_SIZE"),
                                             value: tickSize != nil ? "$" + (tickSize ?? "") : "-"),
             dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.STEP_SIZE"),

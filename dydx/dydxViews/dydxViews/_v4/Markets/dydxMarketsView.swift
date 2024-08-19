@@ -65,13 +65,14 @@ public class dydxMarketsViewModel: PlatformViewModel {
 
                              let header =
                              VStack(spacing: 0) {
-                                 VStack(spacing: 8) {
+                                 VStack(alignment: .leading, spacing: 8) {
                                      self.filter.createView(parentStyle: style)
-                                         .padding(.horizontal, 16)
+                                         .padding(.leading, 16)
                                      if let filterFooterText = self.filterFooterText {
                                          Text(filterFooterText)
                                              .themeFont(fontType: .base, fontSize: .small)
                                              .themeColor(foreground: .textTertiary)
+                                             .padding(.horizontal, 16)
                                      }
                                  }
                                  Spacer(minLength: 16)

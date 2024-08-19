@@ -24,9 +24,6 @@ public class dydxMarketAssetListViewModel: PlatformListViewModel {
             dydxMarketAssetItemViewModel.previewValue,
             dydxMarketAssetItemViewModel.previewValue
         ]
-        for item in vm.items {
-            (item as? dydxMarketAssetItemViewModel)?.sharedMarketViewModel?.id = UUID().uuidString
-        }
         return vm
     }()
 }
