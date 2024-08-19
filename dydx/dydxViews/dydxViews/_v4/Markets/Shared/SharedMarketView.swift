@@ -10,7 +10,6 @@ import PlatformUI
 import Utilities
 
 public final class SharedMarketViewModel: PlatformViewModel, Equatable {
-    @Published public var id: String?
     @Published public var tokenSymbol: String?
     @Published public var tokenFullName: String?
     @Published public var logoUrl: URL?
@@ -28,7 +27,6 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
 
     public static var previewValue: SharedMarketViewModel = {
         let vm = SharedMarketViewModel()
-        vm.id = UUID().uuidString
         vm.tokenSymbol = "ETH"
         vm.tokenFullName = "Ethereum"
         vm.logoUrl = URL(string: "https://media.dydx.exchange/currencies/eth.png")
