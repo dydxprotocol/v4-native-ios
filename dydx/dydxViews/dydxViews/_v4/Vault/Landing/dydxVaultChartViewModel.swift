@@ -82,8 +82,6 @@ public class dydxVaultChartViewModel: PlatformViewModel {
         lineChart.xAxis.valueFormatter = selectedValueTime.valueFormatter
         
         lineChart.data = LineChartData(dataSet: dataSet)
-        lineChart.notifyDataSetChanged()
-        objectWillChange.send()
     }
     
     public enum ValueTypeOption: CaseIterable, RadioButtonContentDisplayable {
