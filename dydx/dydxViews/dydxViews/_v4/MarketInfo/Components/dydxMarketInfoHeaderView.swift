@@ -34,10 +34,10 @@ public class dydxMarketInfoHeaderViewModel: PlatformViewModel {
                 .createView(parentStyle: parentStyle, styleKey: styleKey)
                 VStack(alignment: .leading, spacing: 0) {
                     HStack(spacing: 4) {
-                        Text(sharedMarketViewModel?.tokenFullName ?? "")
+                        Text(sharedMarketViewModel?.assetName ?? "")
                             .themeColor(foreground: .textSecondary)
                             .themeFont(fontType: .base, fontSize: .large)
-                        TokenTextViewModel(symbol: sharedMarketViewModel?.tokenSymbol ?? "")
+                        TokenTextViewModel(symbol: sharedMarketViewModel?.assetId ?? "")
                             .createView(parentStyle: parentStyle.themeFont(fontSize: .smallest), styleKey: styleKey)
                     }
                     HStack(alignment: .center, spacing: 4) {
