@@ -10,8 +10,8 @@ import PlatformUI
 import Utilities
 
 public final class SharedMarketViewModel: PlatformViewModel, Equatable {
-    @Published public var tokenSymbol: String?
-    @Published public var tokenFullName: String?
+    @Published public var assetId: String?
+    @Published public var assetName: String?
     @Published public var logoUrl: URL?
     @Published public var volume24H: String?
     @Published public var indexPrice: String?
@@ -27,8 +27,8 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
 
     public static var previewValue: SharedMarketViewModel = {
         let vm = SharedMarketViewModel()
-        vm.tokenSymbol = "ETH"
-        vm.tokenFullName = "Ethereum"
+        vm.assetId = "ETH"
+        vm.assetName = "Ethereum"
         vm.logoUrl = URL(string: "https://media.dydx.exchange/currencies/eth.png")
         vm.volume24H = "$223M"
         vm.indexPrice = "$1.00"
@@ -45,8 +45,8 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
 
     public static func == (lhs: SharedMarketViewModel, rhs: SharedMarketViewModel) -> Bool {
         lhs.id == rhs.id &&
-        lhs.tokenSymbol == rhs.tokenSymbol &&
-        lhs.tokenFullName == rhs.tokenFullName &&
+        lhs.assetId == rhs.assetId &&
+        lhs.assetName == rhs.assetName &&
         lhs.logoUrl == rhs.logoUrl &&
         lhs.volume24H == rhs.volume24H &&
         lhs.indexPrice == rhs.indexPrice &&

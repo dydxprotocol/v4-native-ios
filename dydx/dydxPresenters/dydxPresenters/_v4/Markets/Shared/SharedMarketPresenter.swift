@@ -49,8 +49,8 @@ class SharedMarketPresenter: HostedViewPresenter<SharedMarketViewModel>, SharedM
 
     static func createViewModel(market: PerpetualMarket, asset: Asset?) -> SharedMarketViewModel {
         let viewModel = SharedMarketViewModel()
-        viewModel.tokenSymbol = asset?.id ?? market.assetId
-        viewModel.tokenFullName = asset?.name ?? market.assetId
+        viewModel.assetId = asset?.id ?? market.assetId
+        viewModel.assetName = asset?.name ?? market.displayId
         if let imageUrl = asset?.resources?.imageUrl {
             viewModel.logoUrl = URL(string: imageUrl)
         }
