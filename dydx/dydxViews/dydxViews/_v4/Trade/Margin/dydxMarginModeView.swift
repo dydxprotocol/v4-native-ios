@@ -91,7 +91,7 @@ public class dydxMarginModeItemViewModel: PlatformViewModel {
 }
 
 public class dydxMarginModeViewModel: PlatformViewModel {
-    @Published public var market: String?
+    @Published public var marketDisplayId: String?
     @Published public var items: [dydxMarginModeItemViewModel] = []
     @Published public var isDisabled: Bool = false
 
@@ -99,7 +99,7 @@ public class dydxMarginModeViewModel: PlatformViewModel {
 
     public static var previewValue: dydxMarginModeViewModel {
         let vm = dydxMarginModeViewModel()
-        vm.market = "ETH-USD"
+        vm.marketDisplayId = "ETH-USD"
         return vm
     }
 
@@ -112,7 +112,7 @@ public class dydxMarginModeViewModel: PlatformViewModel {
                     Text(DataLocalizer.localize(path: "APP.GENERAL.MARGIN_MODE"))
                         .themeColor(foreground: .textPrimary)
 
-                    Text(self.market ?? "")
+                    Text(self.marketDisplayId ?? "")
                         .themeColor(foreground: .textSecondary)
 
                     Spacer()
@@ -127,7 +127,7 @@ public class dydxMarginModeViewModel: PlatformViewModel {
                 }
 
                 if self.isDisabled {
-                    InlineAlertViewModel(.init(title: nil, body: DataLocalizer.localize(path: "WARNINGS.TRADE_BOX.UNABLE_TO_CHANGE_MARGIN_MODE", params: ["MARKET": self.market ?? "--"]), level: .warning))
+                    InlineAlertViewModel(.init(title: nil, body: DataLocalizer.localize(path: "WARNINGS.TRADE_BOX.UNABLE_TO_CHANGE_MARGIN_MODE", params: ["MARKET": self.marketDisplayId ?? "--"]), level: .warning))
                         .createView()
                 }
                 Spacer()
