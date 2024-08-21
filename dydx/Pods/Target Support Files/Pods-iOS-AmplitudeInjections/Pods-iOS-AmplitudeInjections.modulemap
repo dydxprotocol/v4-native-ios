@@ -1,0 +1,6 @@
+framework module Pods_iOS_AmplitudeInjections {
+  umbrella header "Pods-iOS-AmplitudeInjections-umbrella.h"
+
+  export *
+  module * { export * }
+}

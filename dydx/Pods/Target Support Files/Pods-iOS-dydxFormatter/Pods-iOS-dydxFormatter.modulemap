@@ -1,0 +1,6 @@
+framework module Pods_iOS_dydxFormatter {
+  umbrella header "Pods-iOS-dydxFormatter-umbrella.h"
+
+  export *
+  module * { export * }
+}

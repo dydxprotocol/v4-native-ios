@@ -1,0 +1,7 @@
+# fastlane/Deliverfile
+
+app_identifier "#{ENV["BUNDLE_ID"]}"
+
+# if you are not including screenshots or binary, set below to false
+# skip_screenshots true 
+# skip_binary_upload true 

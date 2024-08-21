@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4KB-c2-Wuh">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        
+    </dependencies>
+    <scenes>
+        <!--Auth Login Primer View Controller-->
+        <scene sceneID="84S-QI-2JM">
+            <objects>
+                <viewController id="4KB-c2-Wuh" customClass="AuthLoginPrimerViewController" customModule="PlatformParticles" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Iuj-Sj-YzN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginprimer_lock" translatesAutoresizingMaskIntoConstraints="NO" id="shR-oT-qb4">
+                                <rect key="frame" x="167" y="44" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="PnT-fG-JeM"/>
+                                    <constraint firstAttribute="width" constant="80" id="aRc-tt-x7c"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" insetsLayoutMarginsFromSafeArea="NO" text="Sign in to Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="062-KE-mvS">
+                                <rect key="frame" x="36" y="184" width="342" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To use the app you have to sign-in with your gmail account." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQh-a4-N5f">
+                                <rect key="frame" x="36" y="210.5" width="342" height="499.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="w1c-i8-Yzx">
+                                <rect key="frame" x="48" y="770" width="318" height="44"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rB9-Jq-1M2">
+                                        <rect key="frame" x="0.0" y="0.0" width="318" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="DIB-gA-Us2"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kNC-vL-zmR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="shR-oT-qb4" firstAttribute="centerX" secondItem="kNC-vL-zmR" secondAttribute="centerX" id="FMm-mt-Wqx"/>
+                            <constraint firstItem="MQh-a4-N5f" firstAttribute="top" secondItem="062-KE-mvS" secondAttribute="bottom" id="Fea-vr-pCu"/>
+                            <constraint firstItem="shR-oT-qb4" firstAttribute="top" secondItem="Iuj-Sj-YzN" secondAttribute="top" constant="44" id="Hyf-vz-ePZ"/>
+                            <constraint firstAttribute="trailing" secondItem="w1c-i8-Yzx" secondAttribute="trailing" constant="48" id="Jqv-EU-8RN"/>
+                            <constraint firstItem="MQh-a4-N5f" firstAttribute="leading" secondItem="062-KE-mvS" secondAttribute="leading" id="Kjq-m1-Qey"/>
+                            <constraint firstItem="062-KE-mvS" firstAttribute="leading" secondItem="kNC-vL-zmR" secondAttribute="leading" constant="36" id="SNL-6U-vgZ"/>
+                            <constraint firstItem="kNC-vL-zmR" firstAttribute="trailing" secondItem="062-KE-mvS" secondAttribute="trailing" constant="36" id="Trs-N6-Xq9"/>
+                            <constraint firstItem="kNC-vL-zmR" firstAttribute="bottom" secondItem="w1c-i8-Yzx" secondAttribute="bottom" constant="48" id="YCx-hG-DMe"/>
+                            <constraint firstItem="MQh-a4-N5f" firstAttribute="trailing" secondItem="062-KE-mvS" secondAttribute="trailing" id="blW-ag-O0Z"/>
+                            <constraint firstItem="w1c-i8-Yzx" firstAttribute="leading" secondItem="Iuj-Sj-YzN" secondAttribute="leading" constant="48" id="gvc-Nf-ZvU"/>
+                            <constraint firstItem="062-KE-mvS" firstAttribute="top" secondItem="shR-oT-qb4" secondAttribute="bottom" constant="60" id="s3J-zi-MDc"/>
+                            <constraint firstItem="w1c-i8-Yzx" firstAttribute="top" secondItem="MQh-a4-N5f" secondAttribute="bottom" constant="60" id="vc4-O9-hBm"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="896"/>
+                    <connections>
+                        <outlet property="presenter" destination="tQp-E6-IyG" id="kJn-bH-C1k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Vy-1i-gpm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="tQp-E6-IyG" customClass="AuthLoginPresenter" customModule="PlatformParticles" customModuleProvider="target">
+                    <connections>
+                        <outlet property="view" destination="rB9-Jq-1M2" id="ZxI-ef-CgA"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="52.5" y="90.845070422535215"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="loginprimer_lock" width="85" height="84"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

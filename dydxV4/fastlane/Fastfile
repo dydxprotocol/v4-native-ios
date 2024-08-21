@@ -1,0 +1,202 @@
+# fastlane/Fastfile
+
+require 'xcodeproj'
+
+xcode_select "/Applications/Xcode.app"
+
+default_platform(:ios)
+# Path to your Xcode project
+project_path_from_root = "./dydxV4.xcodeproj"
+project_path_from_fastlane_dir = "../dydxV4.xcodeproj"
+plist_path = "./dydxV4/Info.plist"
+project = Xcodeproj::Project.open(project_path_from_fastlane_dir)
+workspace_path = "../dydx/dydx.xcworkspace"
+target_name = "dydxV4"
+scheme_name = "dydxV4"
+
+platform :ios do
+  
+  desc "Update PRODUCT_BUNDLE_IDENTIFIER in Xcode project with the app_identifier from the Appfile"
+  lane :update_bundle_identifier do
+    
+    # Get the app_identifier from the Appfile
+    app_id = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    
+    # Verify we got a valid app_identifier
+    if app_id.nil? || app_id.empty?
+      UI.user_error!("No app_identifier found in the Appfile")
+    end
+    
+    # Iterate through all configurations for a specified target
+    project.targets.each do |target|
+      if target.name == target_name
+        target.build_configurations.each do |config|
+          # Update the PRODUCT_BUNDLE_IDENTIFIER
+          config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = app_id
+        end
+      end
+    end
+    
+    # Save the project file
+    project.save
+    
+    UI.success("Updated PRODUCT_BUNDLE_IDENTIFIER to #{app_id}")
+  end
+
+
+
+  
+  desc "Increments the build number based on last build submitted to testflight"
+  lane :dydx_increment_build_number do
+
+    # Fetch the most recent build number from App Store Connect
+    begin
+      cur_build_number = app_store_build_number(live: false)  
+    rescue => ex
+      UI.important("Couldn't find a build number because of: #{ex}")
+      cur_build_number = nil
+    end
+
+    if cur_build_number.nil? || cur_build_number.to_s.empty?
+      # If there's no previous version, we default to 1.0.0
+      next_build_number = 1
+      UI.message("No previous version found. Starting at #{next_build_number}")
+    else
+      next_build_number = cur_build_number + 1
+    end
+
+    increment_build_number(
+      build_number: next_build_number, # set a specific number
+      xcodeproj: project_path_from_root
+    )
+    
+    UI.message("New build number to release is #{next_build_number}")
+
+  end
+
+  desc "Update the marketing version in the Xcode project"
+  lane :update_marketing_version do
+  
+    # Ask the user what kind of release they want to do
+    current_marketing_version = get_version_number(xcodeproj:project_path_from_root)
+    UI.important("Current Local Marketing Version: #{current_marketing_version}")
+    release_type = UI.select("How would you like to update the marketing version?", ["none", "major", "minor", "patch", "custom"])
+
+    # Breakdown the last version into its numeric components
+    market_version_components = current_marketing_version.split(".").map(&:to_i)
+
+    # Ensure there are exactly three components, assuming "0" where components may be missing
+    while market_version_components.length < 3
+      market_version_components.push(0)
+    end
+
+    # Extract the major, minor, and patch versions safely after ensuring no component is missing
+    major, minor, patch = market_version_components
+
+    # ... [rest of your lane logic]
+
+    # Increment version numbers based on the release type
+    case release_type
+    when "major"
+      major += 1
+      minor = 0  # Reset minor and patch for a major release
+      patch = 0
+    when "minor"
+      minor += 1
+      patch = 0  # Reset patch for a minor release
+    when "patch"
+      patch += 1
+    when "custom"
+      # Ask the user what the custom version should be
+      next_marketing_version = UI.input("\nCurrent Marketing Version: #{current_marketing_version}\nWhat would you like to update the version to?")
+    when "none"
+      UI.message("Keeping marketing version the same")
+    else
+      UI.user_error!("Invalid selection.")
+    end
+
+  
+    # Construct the next version string if not custom
+    next_marketing_version ||= [major, minor, patch].join(".")  # This creates a version string unless 'next_marketing_version' was already set in 'custom'
+
+    # Fetch the 'MARKETING_VERSION' and update it with the new version number
+    project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['MARKETING_VERSION'] = next_marketing_version
+      end
+    end
+
+    # Save the project file with updated settings
+    project.save
+
+    UI.success("Updated MARKETING_VERSION to #{next_marketing_version}}")
+  end
+
+  lane :dydx_update_url_schemes do
+    # Accessing environment variable
+    url_scheme = ENV["URL_SCHEME"]
+  
+    update_url_schemes(
+      path: plist_path,
+      url_schemes: url_scheme
+    )
+  
+    # ... rest of your build script ...
+  end
+
+  
+  desc "Generate app icons"
+  lane :generate_app_icons do
+    appicon(
+      appicon_image_file: "./fastlane/resources/AppIcon.png",
+      appicon_devices: [:ipad, :iphone, :ios_marketing],
+      appicon_path: "../dydxV4/dydxV4/Assets.xcassets/"
+
+    )
+    UI.success("Generated app icons and placed them in the Asset Catalog!")
+  end
+
+  lane :enable_associated_domains do
+    produce(
+      enable_services: {
+        associated_domains: true # Enable associated domains
+      }
+    )
+    get_certificates
+    get_provisioning_profile
+  end
+
+
+  platform :ios do
+    desc "Submit a new build for review"
+    lane :create_build_and_submit_for_review do
+      update_bundle_identifier
+      dydx_increment_build_number
+      update_marketing_version
+      generate_app_icons
+      # Build your app first (optional, if you haven't done this already)
+      get_certificates
+      get_provisioning_profile
+      build_app(
+        scheme: scheme_name,
+        workspace: workspace_path
+      )
+  
+      # Upload the build to TestFlight/App Store Connect
+      upload_to_testflight(
+        skip_waiting_for_build_processing: false, # Change to false if running on CI. If true, distribute_external option won't work and no build will be distributed to testers
+        # Add more parameters here if needed, depending on your setup
+      )
+  
+      # Submit the build for review
+      deliver(
+        submit_for_review: true,  # Set to true if you want to automatically submit for App Store review.
+        force: false, # Skip HTMl report verification. Change to true if running on CI.
+        automatic_release: false, # Set to true if you want to automatically release to the App Store once the app review is done
+        # If you have more options for the review process or metadata, specify them here
+        # ...
+      )
+    end
+  end
+
+end

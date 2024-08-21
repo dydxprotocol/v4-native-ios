@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16097.2"/>
+        
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXQ-Um-q9p">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpH-QL-qHu" customClass="GIDSignInButton">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="bpH-QL-qHu" secondAttribute="trailing" id="PN6-q3-obF"/>
+                        <constraint firstAttribute="bottom" secondItem="bpH-QL-qHu" secondAttribute="bottom" id="PR9-t2-ODC"/>
+                        <constraint firstItem="bpH-QL-qHu" firstAttribute="leading" secondItem="mXQ-Um-q9p" secondAttribute="leading" id="rTQ-da-AY5"/>
+                        <constraint firstItem="bpH-QL-qHu" firstAttribute="top" secondItem="mXQ-Um-q9p" secondAttribute="top" id="xdu-Gs-hFl"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="mXQ-Um-q9p" secondAttribute="trailing" id="9gj-1r-g4H"/>
+                <constraint firstItem="mXQ-Um-q9p" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EKu-ZK-2oG"/>
+                <constraint firstItem="mXQ-Um-q9p" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Shv-Oy-9Ul"/>
+                <constraint firstAttribute="bottom" secondItem="mXQ-Um-q9p" secondAttribute="bottom" id="TB5-q7-A5J"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="137.68115942028987" y="-168.08035714285714"/>
+        </view>
+    </objects>
+</document>
