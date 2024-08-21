@@ -50,6 +50,17 @@ public class SideTextViewModel: PlatformViewModel, Hashable {
                 return ""
             }
         }
+        
+        var color: ThemeColor.SemanticColor {
+            switch self {
+            case .long, .buy:
+                return ThemeSettings.positiveColor
+            case .short, .sell:
+                return ThemeSettings.negativeColor
+            case .custom, .none:
+                return ThemeColor.SemanticColor.textPrimary
+            }
+        }
 
         public init(positionSide: PositionSide) {
             switch positionSide {

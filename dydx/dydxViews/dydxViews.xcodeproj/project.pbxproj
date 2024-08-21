@@ -204,6 +204,8 @@
 		27DBF3C92C4A05B9009EB2D6 /* dydxTitledNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DBF3C82C4A05B9009EB2D6 /* dydxTitledNumberField.swift */; };
 		27E072D22C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E072D12C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift */; };
 		27E0736B2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E0736A2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift */; };
+		27EB25832C6D1E5E008C187B /* dydxVaultPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EB25822C6D1E5E008C187B /* dydxVaultPositionView.swift */; };
+		27EB25852C6D28BF008C187B /* SparklineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EB25842C6D28BF008C187B /* SparklineChart.swift */; };
 		27ED340C2AD47CB100C159F5 /* dydxBannerErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */; };
 		27ED365C2AD735A800C159F5 /* dydxSecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED365B2AD735A800C159F5 /* dydxSecurityView.swift */; };
 		27F624112BBD9FEB00AB6D1A /* dydxPriceInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F624042BBD9FEB00AB6D1A /* dydxPriceInputViewModel.swift */; };
@@ -583,6 +585,8 @@
 		27DBF3C82C4A05B9009EB2D6 /* dydxTitledNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTitledNumberField.swift; sourceTree = "<group>"; };
 		27E072D12C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioPendingPositionsItemViewModel.swift; sourceTree = "<group>"; };
 		27E0736A2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCancelPendingIsolatedOrdersView.swift; sourceTree = "<group>"; };
+		27EB25822C6D1E5E008C187B /* dydxVaultPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultPositionView.swift; sourceTree = "<group>"; };
+		27EB25842C6D28BF008C187B /* SparklineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineChart.swift; sourceTree = "<group>"; };
 		27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxBannerErrorAlert.swift; sourceTree = "<group>"; };
 		27ED365B2AD735A800C159F5 /* dydxSecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSecurityView.swift; sourceTree = "<group>"; };
 		27F624042BBD9FEB00AB6D1A /* dydxPriceInputViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxPriceInputViewModel.swift; sourceTree = "<group>"; };
@@ -938,6 +942,7 @@
 				0273A15E2ACCDDB1001B89F5 /* SelectionBar.swift */,
 				273F50152B7C3F120034792A /* SignedAmountView.swift */,
 				27D276222C519C98002775F2 /* dydxComponents */,
+				27EB25842C6D28BF008C187B /* SparklineChart.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1500,6 +1505,7 @@
 				27C6AE0A2C618044005517B5 /* RadioButtons */,
 				2751D6542C59646700B36F95 /* dydxVaultViewModel.swift */,
 				2700A3162C5D72BB00880AFA /* dydxVaultChartViewModel.swift */,
+				27EB25822C6D1E5E008C187B /* dydxVaultPositionView.swift */,
 			);
 			path = Landing;
 			sourceTree = "<group>";
@@ -2066,6 +2072,7 @@
 				0279DE892BED402C00F9ECF8 /* dydxAdjustMarginPercentageView.swift in Sources */,
 				026382EB28F0EF0000F766FA /* dydxMarketPriceCandlesResolutionsView.swift in Sources */,
 				02F99F3E29E4D5750009B3E8 /* dydxTransferSearchItemView.swift in Sources */,
+				27EB25832C6D1E5E008C187B /* dydxVaultPositionView.swift in Sources */,
 				27DBF3C92C4A05B9009EB2D6 /* dydxTitledNumberField.swift in Sources */,
 				0284201629AD71B600C0E7CC /* Enums.swift in Sources */,
 				02678FA629666BE600EE346B /* dydxPortfolioOrdersView.swift in Sources */,
@@ -2098,6 +2105,7 @@
 				277E918B2B27762F005CCBCB /* dydxRewardsLaunchIncentivesView.swift in Sources */,
 				0268BBF92A8BE08C00D0C59B /* dydxTransferOutView.swift in Sources */,
 				0279DE452BEBE75100F9ECF8 /* dydxTargetLeverageCtaButtonView.swift in Sources */,
+				27EB25852C6D28BF008C187B /* SparklineChart.swift in Sources */,
 				0208627A28F4D95F00C9D3A0 /* dydxMarketInfoPagingView.swift in Sources */,
 				027F3EF72AB93ADC00602E5B /* dydxProfileBalancesViewModel.swift in Sources */,
 				024B44F52983E38D00E35D54 /* dydxTradeStatusLogoView.swift in Sources */,
