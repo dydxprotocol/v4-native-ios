@@ -4,7 +4,25 @@
 dydx/fastlane
 dydx/Pods/abacus/.gradle
 dydx/Pods/abacus/build
+dydx/Pods/Abacus
 dydxV4/dydxV4/_Configurations/credentials.json
 dydxV4/dydxV4/_Configurations/GoogleService-Info-Staging.plist
 dydxV4/dydxV4/_Configurations/GoogleService-Info.plist
 scripts/secrets
+scripts/percy_test.sh
+
+# fastlane specific
+**/fastlane/report.xml
+
+# deliver temporary files
+**/fastlane/Preview.html
+
+# scan temporary files
+**/fastlane/test_output
+
+*.p12
+*.certSigningRequest
+*.cer
+*.mobileprovision
+*.ipa
+*.dSYM.*

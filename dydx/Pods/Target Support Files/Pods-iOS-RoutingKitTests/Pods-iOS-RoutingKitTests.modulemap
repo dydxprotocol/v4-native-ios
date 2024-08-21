@@ -1,0 +1,6 @@
+framework module Pods_iOS_RoutingKitTests {
+  umbrella header "Pods-iOS-RoutingKitTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

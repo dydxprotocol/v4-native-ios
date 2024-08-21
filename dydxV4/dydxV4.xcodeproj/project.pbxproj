@@ -1,0 +1,2906 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01EEEC77C8B7F3846916AF28 /* Pods_iOS_dydxV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 171807B0CCAE5C86B5D65793 /* Pods_iOS_dydxV4.framework */; };
+		0217A0A129D78BD5007F31C5 /* dydxBiometricsLocalAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */; };
+		022F35CD28D39304000BCA41 /* dydxPresenters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		02439D1129B03F6700A083FE /* dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; };
+		02439D1229B03F7B00A083FE /* dydxCartera.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		024B7A9628B7F6CC00F7C386 /* dydxViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 024B7A9428B7F6CC00F7C386 /* dydxViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		025B83FF28AAAB270037FF7C /* PlatformUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 025B83EB28AAAB120037FF7C /* PlatformUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		02756A6A287CA33E00803741 /* dydxNotificationHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02756A69287CA33E00803741 /* dydxNotificationHandlerDelegate.swift */; };
+		027B7CA62AD5E559005A8288 /* configs in Resources */ = {isa = PBXBuildFile; fileRef = 027B7CA52AD5E559005A8288 /* configs */; };
+		027E1E1329C912660098666F /* PlatformUIJedio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 027E1DFF29C912510098666F /* PlatformUIJedio.framework */; };
+		027E1E1429C912AC0098666F /* PlatformUIJedio.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 027E1DFF29C912510098666F /* PlatformUIJedio.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0284210929AD780600C0E7CC /* dydxFormatter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 028420CF29AD77F400C0E7CC /* dydxFormatter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		029E11F029ADB9C600FE271C /* dydxChart.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 029E11EB29ADB9BC00FE271C /* dydxChart.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		02A5BB9F2A04617800BEE77E /* dydxAbacusDataLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5BB9E2A04617800BEE77E /* dydxAbacusDataLocalizer.swift */; };
+		02C7262B29D793C90098AFBC /* dydxCompositeTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C7262A29D793C90098AFBC /* dydxCompositeTracking.swift */; };
+		02DA0AFA2B57609100BFA975 /* dydxV4UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA0AF92B57609100BFA975 /* dydxV4UITests.swift */; };
+		02DA0AFC2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA0AFB2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift */; };
+		02DA0B062B57633E00BFA975 /* PercyXcui in Frameworks */ = {isa = PBXBuildFile; productRef = 02DA0B052B57633E00BFA975 /* PercyXcui */; };
+		02E7DDDF28CFB33B00727949 /* dydxStateManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DDA828CFB31000727949 /* dydxStateManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		02FF092E29ADBD9900781EDA /* dydxFormatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028420CF29AD77F400C0E7CC /* dydxFormatter.framework */; };
+		02FF092F29ADBD9F00781EDA /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E11EB29ADB9BC00FE271C /* dydxChart.framework */; };
+		02FF093029ADBDA300781EDA /* dydxPresenters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; };
+		2741B25D2C06A0F600693B17 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275C17052BF7D730009313EC /* dydxAnalytics.framework */; };
+		2741B25E2C06A0F900693B17 /* dydxViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B69B28CE94E200DDB103 /* dydxViews.framework */; };
+		27491E312C5406900014A574 /* libAppsFlyerStaticInjections.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 314B726A23DD124E00139EB3 /* libAppsFlyerStaticInjections.a */; };
+		27491E322C54069C0014A574 /* libStatsigInjections.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27491E302C5406680014A574 /* libStatsigInjections.a */; };
+		274F43062BA4C0B400645059 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 274F43052BA4C0B400645059 /* PrivacyInfo.xcprivacy */; };
+		27968BA92BF7AC7A002F2C34 /* TrackingViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27968BA82BF7AC7A002F2C34 /* TrackingViewController+Ext.swift */; };
+		27ADEE6C2BC4A23400B8F1DB /* dydxSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ADEE6B2BC4A23400B8F1DB /* dydxSettingsStore.swift */; };
+		27B7B9892BF7C6DC00BB0114 /* dydxAnalytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27B7B9872BF7C6DC00BB0114 /* dydxAnalytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		27D41AF12A8E9214009A2F37 /* UIApplication+URLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D41AF02A8E9214009A2F37 /* UIApplication+URLHandler.swift */; };
+		27DBDD222A8FF5B2002383C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27DBDCED2A8FF5B2002383C6 /* GoogleService-Info.plist */; };
+		27DBDD232A8FF5B2002383C6 /* GoogleService-Info-Staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27DBDD202A8FF5B2002383C6 /* GoogleService-Info-Staging.plist */; };
+		27DBDD242A8FF5B2002383C6 /* credentials.json in Resources */ = {isa = PBXBuildFile; fileRef = 27DBDD212A8FF5B2002383C6 /* credentials.json */; };
+		3101FC582511508800AC4010 /* CommonAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101FC572511508800AC4010 /* CommonAppDelegate.swift */; };
+		3112F463216BBF8400708927 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112F462216BBF8400708927 /* AppDelegate.swift */; };
+		3112F46C216BBF8500708927 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3112F46B216BBF8500708927 /* Assets.xcassets */; };
+		3112F46F216BBF8500708927 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3112F46D216BBF8500708927 /* LaunchScreen.storyboard */; };
+		3112F47A216BBF8600708927 /* dydxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112F479216BBF8600708927 /* dydxTests.swift */; };
+		314B729C23DD126F00139EB3 /* libAppsFlyerStaticInjections.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 314B726A23DD124E00139EB3 /* libAppsFlyerStaticInjections.a */; };
+		314C368524C7CC7600695F7E /* ui.json in Resources */ = {isa = PBXBuildFile; fileRef = 314C368424C7CC7600695F7E /* ui.json */; };
+		3162B58226E181BB000209E1 /* WebCrypto.js in Resources */ = {isa = PBXBuildFile; fileRef = 3162B55226E181BB000209E1 /* WebCrypto.js */; };
+		31659016227D55CD00BAF133 /* Design.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31659015227D55CD00BAF133 /* Design.txt */; };
+		31AB94D326DEE83700DB42B9 /* CameraParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31AB94CE26DEE81000DB42B9 /* CameraParticles.framework */; platformFilter = ios; };
+		31AB94D426DEE83700DB42B9 /* CameraParticles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31AB94CE26DEE81000DB42B9 /* CameraParticles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31B77C2522DAD0B3004F9B21 /* libFirebaseStaticInjections.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B779FE22DAD020004F9B21 /* libFirebaseStaticInjections.a */; };
+		31B77C2622DAD0B3004F9B21 /* JedioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A4E22DAD021004F9B21 /* JedioKit.framework */; };
+		31B77C2722DAD0B3004F9B21 /* JedioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A4E22DAD021004F9B21 /* JedioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31B77C2822DAD0B3004F9B21 /* ParticlesCommonModels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AF622DAD023004F9B21 /* ParticlesCommonModels.framework */; };
+		31B77C2922DAD0B3004F9B21 /* ParticlesCommonModels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AF622DAD023004F9B21 /* ParticlesCommonModels.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31B77C2A22DAD0B3004F9B21 /* ParticlesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A7822DAD022004F9B21 /* ParticlesKit.framework */; };
+		31B77C2B22DAD0B3004F9B21 /* ParticlesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A7822DAD022004F9B21 /* ParticlesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31B77C3222DAD0B3004F9B21 /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77ADA22DAD022004F9B21 /* PlatformParticles.framework */; };
+		31B77C3322DAD0B3004F9B21 /* PlatformParticles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77ADA22DAD022004F9B21 /* PlatformParticles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31B77C3422DAD0B3004F9B21 /* PlatformRouting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AA222DAD022004F9B21 /* PlatformRouting.framework */; };
+		31B77C3522DAD0B3004F9B21 /* PlatformRouting.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AA222DAD022004F9B21 /* PlatformRouting.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31B77C3622DAD0B3004F9B21 /* RoutingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A2D22DAD021004F9B21 /* RoutingKit.framework */; };
+		31B77C3722DAD0B3004F9B21 /* RoutingKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A2D22DAD021004F9B21 /* RoutingKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31B77C4022DAD0B3004F9B21 /* UIAppToolkits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AC422DAD022004F9B21 /* UIAppToolkits.framework */; };
+		31B77C4122DAD0B3004F9B21 /* UIAppToolkits.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AC422DAD022004F9B21 /* UIAppToolkits.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31B77C4222DAD0B4004F9B21 /* UIToolkits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77ABC22DAD022004F9B21 /* UIToolkits.framework */; };
+		31B77C4322DAD0B4004F9B21 /* UIToolkits.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77ABC22DAD022004F9B21 /* UIToolkits.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31B77C4822DAD0B4004F9B21 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A0C22DAD020004F9B21 /* Utilities.framework */; };
+		31B77C4922DAD0B4004F9B21 /* Utilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A0C22DAD020004F9B21 /* Utilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31F761C924BA3E98001EA293 /* WebParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F761B924BA3E7A001EA293 /* WebParticles.framework */; };
+		31F761CA24BA3E98001EA293 /* WebParticles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31F761B924BA3E7A001EA293 /* WebParticles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6466E116280F664900B8791B /* AmplitudeInjections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6466E0E2280F662600B8791B /* AmplitudeInjections.framework */; };
+		6466E117280F664900B8791B /* AmplitudeInjections.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6466E0E2280F662600B8791B /* AmplitudeInjections.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		64AEE63E27B2F74C0038C791 /* config in Resources */ = {isa = PBXBuildFile; fileRef = 64AEE63D27B2F74C0038C791 /* config */; };
+		64AF47B72817400100EBFDC6 /* events.json in Resources */ = {isa = PBXBuildFile; fileRef = 64AF47B62817400100EBFDC6 /* events.json */; };
+		64AF480E28186EE500EBFDC6 /* dydxevents.json in Resources */ = {isa = PBXBuildFile; fileRef = 64AF480D28186EE500EBFDC6 /* dydxevents.json */; };
+		64AF4811281880B100EBFDC6 /* dydxAmplitudeTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AF4810281880B100EBFDC6 /* dydxAmplitudeTracking.swift */; };
+		64E39E5A281B3DD300F8ADC7 /* onboardingevents.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E39E29281B3DD300F8ADC7 /* onboardingevents.json */; };
+		B9522364B513316410922110 /* Pods_iOS_dydxV4Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E0C92C7C4A09FD5F8E76A6 /* Pods_iOS_dydxV4Tests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		022F358E28D392CF000BCA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02684CE428BD3CD50007CEFF /* dydxPresenters.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 023789E728BD381C00F212E1;
+			remoteInfo = dydxPresenters;
+		};
+		022F35CA28D392D6000BCA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 024B7AC928B7F73700F7C386 /* dydxViews.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 024B79B928B7F53800F7C386;
+			remoteInfo = dydxViews;
+		};
+		02439CD329B03F4C00A083FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02439CCC29B03F4C00A083FE /* dydxCartera.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02439C8B29B03E8A00A083FE;
+			remoteInfo = dydxCartera;
+		};
+		02439CD529B03F4C00A083FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02439CCC29B03F4C00A083FE /* dydxCartera.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02439C9529B03E8A00A083FE;
+			remoteInfo = dydxCarteraTests;
+		};
+		02439D0F29B03F5D00A083FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02439CCC29B03F4C00A083FE /* dydxCartera.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02439C8A29B03E8A00A083FE;
+			remoteInfo = dydxCartera;
+		};
+		025B83EA28AAAB120037FF7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 025B83C328AAAB120037FF7C /* PlatformUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02E2C92B28A1C8A400F7C3BE;
+			remoteInfo = PlatformUI;
+		};
+		025B83EC28AAAB120037FF7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 025B83C328AAAB120037FF7C /* PlatformUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02E2C93528A1C8A400F7C3BE;
+			remoteInfo = PlatformUITests;
+		};
+		025B83FD28AAAB1F0037FF7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 025B83C328AAAB120037FF7C /* PlatformUI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02E2C92A28A1C8A400F7C3BE;
+			remoteInfo = PlatformUI;
+		};
+		027E1DFE29C912510098666F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02D1CD9129C8D274009ADF9A;
+			remoteInfo = PlatformUIJedio;
+		};
+		027E1E0029C912510098666F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02D1CD9B29C8D274009ADF9A;
+			remoteInfo = PlatformUIJedioTests;
+		};
+		027E1E1129C9125C0098666F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02D1CD9029C8D274009ADF9A;
+			remoteInfo = PlatformUIJedio;
+		};
+		028420CE29AD77F400C0E7CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 028420C729AD77F400C0E7CC /* dydxFormatter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02841E2929AD6E5500C0E7CC;
+			remoteInfo = dydxFormatter;
+		};
+		028420D029AD77F400C0E7CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 028420C729AD77F400C0E7CC /* dydxFormatter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02841E3329AD6E5500C0E7CC;
+			remoteInfo = dydxFormatterTests;
+		};
+		0284210729AD77FF00C0E7CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 028420C729AD77F400C0E7CC /* dydxFormatter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02841E2829AD6E5500C0E7CC;
+			remoteInfo = dydxFormatter;
+		};
+		0293B66428CE94E200DDB103 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02684CE428BD3CD50007CEFF /* dydxPresenters.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 023789E828BD381C00F212E1;
+			remoteInfo = dydxPresenters;
+		};
+		0293B66628CE94E200DDB103 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02684CE428BD3CD50007CEFF /* dydxPresenters.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 023789F228BD381C00F212E1;
+			remoteInfo = dydxPresentersTests;
+		};
+		0293B69A28CE94E200DDB103 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 024B7AC928B7F73700F7C386 /* dydxViews.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 024B79BA28B7F53800F7C386;
+			remoteInfo = dydxViews;
+		};
+		0293B69C28CE94E200DDB103 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 024B7AC928B7F73700F7C386 /* dydxViews.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 024B79C428B7F53800F7C386;
+			remoteInfo = dydxViewsTests;
+		};
+		029E11EA29ADB9BC00FE271C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 029E0FD529ADB41400FE271C;
+			remoteInfo = dydxChart;
+		};
+		029E11EC29ADB9BC00FE271C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 029E0FDF29ADB41400FE271C;
+			remoteInfo = dydxChartTests;
+		};
+		029E11EE29ADB9BF00FE271C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 029E0FD429ADB41400FE271C;
+			remoteInfo = dydxChart;
+		};
+		02DA0AFD2B57609100BFA975 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3112F457216BBF8400708927 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3112F45E216BBF8400708927;
+			remoteInfo = dydxV4;
+		};
+		02E7DDA728CFB31000727949 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02E7DC5E28CFAF5C00727949;
+			remoteInfo = dydxStateManager;
+		};
+		02E7DDA928CFB31000727949 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02E7DC6828CFAF5C00727949;
+			remoteInfo = dydxStateManagerTests;
+		};
+		02E7DDDD28CFB32D00727949 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02E7DC5D28CFAF5C00727949;
+			remoteInfo = dydxStateManager;
+		};
+		27491E2F2C5406680014A574 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27491E2B2C5406680014A574 /* StatsigInjections.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2795C88E2C53FF8B00155009;
+			remoteInfo = StatsigInjections;
+		};
+		27491E332C5406DD0014A574 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27491E2B2C5406680014A574 /* StatsigInjections.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2795C88D2C53FF8B00155009;
+			remoteInfo = StatsigInjections;
+		};
+		275956052BF7D1FD008C77EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E65AB8216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		275C17042BF7D730009313EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2742BEAD2BF6860100E13C09;
+			remoteInfo = dydxAnalytics;
+		};
+		275C17062BF7D730009313EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2742BEB72BF6860100E13C09;
+			remoteInfo = dydxAnalyticsTests;
+		};
+		275C17082BF7D737009313EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2742BEAC2BF6860100E13C09;
+			remoteInfo = dydxAnalytics;
+		};
+		3112F476216BBF8600708927 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3112F457216BBF8400708927 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3112F45E216BBF8400708927;
+			remoteInfo = dydx;
+		};
+		314B726923DD124E00139EB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 314B726523DD124E00139EB3 /* AppsFlyerStaticInjections.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 314B5D0623DCC9F400139EB3;
+			remoteInfo = AppsFlyerStaticInjections;
+		};
+		314B729A23DD125E00139EB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 314B726523DD124E00139EB3 /* AppsFlyerStaticInjections.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 314B5D0523DCC9F400139EB3;
+			remoteInfo = AppsFlyerStaticInjections;
+		};
+		31AB94CD26DEE81000DB42B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 319ACD08249404A800DB66F1;
+			remoteInfo = CameraParticles;
+		};
+		31AB94CF26DEE81000DB42B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 319ACD11249404A800DB66F1;
+			remoteInfo = CameraParticlesTests;
+		};
+		31AB94D126DEE82A00DB42B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 319ACD07249404A800DB66F1;
+			remoteInfo = CameraParticles;
+		};
+		31B779FD22DAD020004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B779F822DAD020004F9B21 /* FirebaseStaticInjections.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31B3E3BD22763B19009E8FEF;
+			remoteInfo = FirebaseStaticInjections;
+		};
+		31B779FF22DAD020004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B779F822DAD020004F9B21 /* FirebaseStaticInjections.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31B3E52C22763ED5009E8FEF;
+			remoteInfo = FirebaseStaticInjectionsTests;
+		};
+		31B77A0B22DAD020004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AB9216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		31B77A0D22DAD020004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3196823721B791CF00AE0F28;
+			remoteInfo = UtilitiesAppleWatch;
+		};
+		31B77A0F22DAD020004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536521B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTV;
+		};
+		31B77A1322DAD020004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AC2216BC9C9008ABEE9;
+			remoteInfo = UtilitiesTests;
+		};
+		31B77A1522DAD020004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536D21B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTVTests;
+		};
+		31B77A2C22DAD021004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A2222DAD021004F9B21 /* RoutingKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65B01216BCA10008ABEE9;
+			remoteInfo = RoutingKit;
+		};
+		31B77A2E22DAD021004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A2222DAD021004F9B21 /* RoutingKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3196825B21B7947600AE0F28;
+			remoteInfo = RoutingKitAppleWatch;
+		};
+		31B77A3022DAD021004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A2222DAD021004F9B21 /* RoutingKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB22321BA26D700BEF926;
+			remoteInfo = RoutingKitAppleTV;
+		};
+		31B77A3422DAD021004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A2222DAD021004F9B21 /* RoutingKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65B0A216BCA10008ABEE9;
+			remoteInfo = RoutingKitTests;
+		};
+		31B77A3622DAD021004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A2222DAD021004F9B21 /* RoutingKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB22B21BA26D800BEF926;
+			remoteInfo = RoutingKitAppleTVTests;
+		};
+		31B77A4D22DAD021004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31ACB84B21B0F3F500391ADF;
+			remoteInfo = JedioKit;
+		};
+		31B77A4F22DAD021004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBA9821BB791800BEF926;
+			remoteInfo = JedioKitAppleWatch;
+		};
+		31B77A5122DAD021004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBAA521BB792600BEF926;
+			remoteInfo = JedioKitAppleTV;
+		};
+		31B77A5522DAD021004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31ACB85421B0F3F500391ADF;
+			remoteInfo = JedioKitTests;
+		};
+		31B77A5722DAD021004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBAAD21BB792600BEF926;
+			remoteInfo = JedioKitAppleTVTests;
+		};
+		31B77A7722DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A6D22DAD022004F9B21 /* ParticlesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 311C0FDA21B0E9C4001775BA;
+			remoteInfo = ParticlesKit;
+		};
+		31B77A7922DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A6D22DAD022004F9B21 /* ParticlesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 319682B421B7967B00AE0F28;
+			remoteInfo = ParticlesKitAppleWatch;
+		};
+		31B77A7B22DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A6D22DAD022004F9B21 /* ParticlesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB16121BA246A00BEF926;
+			remoteInfo = ParticlesKitAppleTV;
+		};
+		31B77A7F22DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A6D22DAD022004F9B21 /* ParticlesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 311C0FE321B0E9C4001775BA;
+			remoteInfo = ParticlesKitTests;
+		};
+		31B77A8122DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A6D22DAD022004F9B21 /* ParticlesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB16921BA246A00BEF926;
+			remoteInfo = ParticlesKitAppleTVTests;
+		};
+		31B77AA122DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A9722DAD022004F9B21 /* PlatformRouting.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31CEE9B52170FA2700DC61DA;
+			remoteInfo = PlatformRouting;
+		};
+		31B77AA322DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A9722DAD022004F9B21 /* PlatformRouting.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB75F21BB4CA300BEF926;
+			remoteInfo = PlatformRoutingAppleWatch;
+		};
+		31B77AA522DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A9722DAD022004F9B21 /* PlatformRouting.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBBE521BB7B7D00BEF926;
+			remoteInfo = PlatformRoutingAppleTV;
+		};
+		31B77AA922DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A9722DAD022004F9B21 /* PlatformRouting.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31CEE9BE2170FA2700DC61DA;
+			remoteInfo = PlatformRoutingTests;
+		};
+		31B77AAB22DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A9722DAD022004F9B21 /* PlatformRouting.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBBED21BB7B7D00BEF926;
+			remoteInfo = PlatformRoutingAppleTVTests;
+		};
+		31B77ABB22DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65ADD216BC9E1008ABEE9;
+			remoteInfo = UIToolkits;
+		};
+		31B77ABD22DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB85D21BB730700BEF926;
+			remoteInfo = UIToolkitsAppleWatch;
+		};
+		31B77ABF22DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBB0421BB79AD00BEF926;
+			remoteInfo = UIToolkitsAppleTV;
+		};
+		31B77AC322DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 310C3A0B21D9623E0081E56D;
+			remoteInfo = UIAppToolkits;
+		};
+		31B77AC522DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AE6216BC9E1008ABEE9;
+			remoteInfo = UIToolkitsTests;
+		};
+		31B77AC722DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBB0C21BB79AD00BEF926;
+			remoteInfo = UIToolkitsAppleTVTests;
+		};
+		31B77ACB22DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 310C3A1321D9623F0081E56D;
+			remoteInfo = UIAppToolkitsTests;
+		};
+		31B77AD922DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31ACB72921B0EE2D00391ADF;
+			remoteInfo = PlatformParticles;
+		};
+		31B77ADB22DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB7C621BB592E00BEF926;
+			remoteInfo = PlatformParticlesAppleWatch;
+		};
+		31B77ADD22DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBB4321BB7A4B00BEF926;
+			remoteInfo = PlatformParticlesAppleTV;
+		};
+		31B77AE122DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31CFF7C121D7D1F200DE7A79;
+			remoteInfo = MessageParticles;
+		};
+		31B77AE322DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31ACB73221B0EE2D00391ADF;
+			remoteInfo = PlatformParticlesTests;
+		};
+		31B77AE522DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBB4B21BB7A4B00BEF926;
+			remoteInfo = PlatformParticlesAppleTVTests;
+		};
+		31B77AE922DAD022004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31CFF7C921D7D1F300DE7A79;
+			remoteInfo = MessageParticlesTests;
+		};
+		31B77AF522DAD023004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 310CDE5221C8C133009665CF;
+			remoteInfo = ParticlesCommonModels;
+		};
+		31B77AF722DAD023004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 310CDF1A21C8C3DC009665CF;
+			remoteInfo = ParticlesCommonModelsAppleWatch;
+		};
+		31B77AF922DAD023004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 310CDF2721C8C3F0009665CF;
+			remoteInfo = ParticlesCommonModelsAppleTV;
+		};
+		31B77AFD22DAD023004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 310CDE5B21C8C133009665CF;
+			remoteInfo = ParticlesCommonModelsTests;
+		};
+		31B77AFF22DAD023004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 310CDF2F21C8C3F0009665CF;
+			remoteInfo = ParticlesCommonModelsAppleTVTests;
+		};
+		31B77BB122DAD077004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31ACB84A21B0F3F500391ADF;
+			remoteInfo = JedioKit;
+		};
+		31B77BB322DAD077004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A6D22DAD022004F9B21 /* ParticlesKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 311C0FD921B0E9C4001775BA;
+			remoteInfo = ParticlesKit;
+		};
+		31B77BB522DAD077004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A2222DAD021004F9B21 /* RoutingKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E65B00216BCA10008ABEE9;
+			remoteInfo = RoutingKit;
+		};
+		31B77BBB22DAD077004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 310CDE5121C8C133009665CF;
+			remoteInfo = ParticlesCommonModels;
+		};
+		31B77BBD22DAD077004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B779F822DAD020004F9B21 /* FirebaseStaticInjections.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31B3E3BC22763B19009E8FEF;
+			remoteInfo = FirebaseStaticInjections;
+		};
+		31B77BBF22DAD077004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77A9722DAD022004F9B21 /* PlatformRouting.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31CEE9B42170FA2700DC61DA;
+			remoteInfo = PlatformRouting;
+		};
+		31B77BC122DAD077004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 310C3A0A21D9623E0081E56D;
+			remoteInfo = UIAppToolkits;
+		};
+		31B77BC322DAD077004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E65ADC216BC9E1008ABEE9;
+			remoteInfo = UIToolkits;
+		};
+		31B77BC922DAD077004F9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31ACB72821B0EE2D00391ADF;
+			remoteInfo = PlatformParticles;
+		};
+		31F761B824BA3E7A001EA293 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31F7618424BA3E7A001EA293 /* WebParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31471FD624BA392E00057221;
+			remoteInfo = WebParticles;
+		};
+		31F761BA24BA3E7A001EA293 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31F7618424BA3E7A001EA293 /* WebParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31471FDF24BA392E00057221;
+			remoteInfo = WebParticlesTests;
+		};
+		31F761C724BA3E90001EA293 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31F7618424BA3E7A001EA293 /* WebParticles.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31471FD524BA392E00057221;
+			remoteInfo = WebParticles;
+		};
+		6466E0E1280F662600B8791B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6466E0C2280F65FC00B8791B;
+			remoteInfo = AmplitudeInjections;
+		};
+		6466E0E3280F662600B8791B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6466E0CC280F65FC00B8791B;
+			remoteInfo = AmplitudeInjectionsTests;
+		};
+		6466E114280F663000B8791B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6466E0C1280F65FC00B8791B;
+			remoteInfo = AmplitudeInjections;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		020F66C02858F29300E2D072 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		312C8BC921F9878D00142C7A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				027E1E1429C912AC0098666F /* PlatformUIJedio.framework in Embed Frameworks */,
+				02439D1229B03F7B00A083FE /* dydxCartera.framework in Embed Frameworks */,
+				029E11F029ADB9C600FE271C /* dydxChart.framework in Embed Frameworks */,
+				0284210929AD780600C0E7CC /* dydxFormatter.framework in Embed Frameworks */,
+				022F35CD28D39304000BCA41 /* dydxPresenters.framework in Embed Frameworks */,
+				02E7DDDF28CFB33B00727949 /* dydxStateManager.framework in Embed Frameworks */,
+				025B83FF28AAAB270037FF7C /* PlatformUI.framework in Embed Frameworks */,
+				27B7B9892BF7C6DC00BB0114 /* dydxAnalytics.framework in Embed Frameworks */,
+				31B77C2722DAD0B3004F9B21 /* JedioKit.framework in Embed Frameworks */,
+				31B77C4922DAD0B4004F9B21 /* Utilities.framework in Embed Frameworks */,
+				31B77C4322DAD0B4004F9B21 /* UIToolkits.framework in Embed Frameworks */,
+				31B77C3522DAD0B3004F9B21 /* PlatformRouting.framework in Embed Frameworks */,
+				31B77C3722DAD0B3004F9B21 /* RoutingKit.framework in Embed Frameworks */,
+				31F761CA24BA3E98001EA293 /* WebParticles.framework in Embed Frameworks */,
+				31B77C2922DAD0B3004F9B21 /* ParticlesCommonModels.framework in Embed Frameworks */,
+				31B77C3322DAD0B3004F9B21 /* PlatformParticles.framework in Embed Frameworks */,
+				024B7A9628B7F6CC00F7C386 /* dydxViews.framework in Embed Frameworks */,
+				31B77C2B22DAD0B3004F9B21 /* ParticlesKit.framework in Embed Frameworks */,
+				31B77C4122DAD0B3004F9B21 /* UIAppToolkits.framework in Embed Frameworks */,
+				31AB94D426DEE83700DB42B9 /* CameraParticles.framework in Embed Frameworks */,
+				6466E117280F664900B8791B /* AmplitudeInjections.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		020F66BA2858F29300E2D072 /* dydxNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNotificationService.swift; sourceTree = "<group>"; };
+		020F66BC2858F29300E2D072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxBiometricsLocalAuthenticator.swift; sourceTree = "<group>"; };
+		02439CCC29B03F4C00A083FE /* dydxCartera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxCartera.xcodeproj; path = ../dydx/dydxCartera/dydxCartera.xcodeproj; sourceTree = "<group>"; };
+		024B7A9428B7F6CC00F7C386 /* dydxViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		024B7AC928B7F73700F7C386 /* dydxViews.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxViews.xcodeproj; path = ../dydx/dydxViews/dydxViews.xcodeproj; sourceTree = "<group>"; };
+		025B83C328AAAB120037FF7C /* PlatformUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformUI.xcodeproj; path = ../PlatformUI/PlatformUI.xcodeproj; sourceTree = "<group>"; };
+		02684CE428BD3CD50007CEFF /* dydxPresenters.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxPresenters.xcodeproj; path = ../dydx/dydxPresenters/dydxPresenters.xcodeproj; sourceTree = "<group>"; };
+		02756A69287CA33E00803741 /* dydxNotificationHandlerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNotificationHandlerDelegate.swift; sourceTree = "<group>"; };
+		027B7CA52AD5E559005A8288 /* configs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = configs; path = "../../../v4-web/public/configs"; sourceTree = "<group>"; };
+		027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformUIJedio.xcodeproj; path = ../PlatformUIJedio/PlatformUIJedio.xcodeproj; sourceTree = "<group>"; };
+		028420C729AD77F400C0E7CC /* dydxFormatter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFormatter.xcodeproj; path = ../dydx/dydxFormatter/dydxFormatter.xcodeproj; sourceTree = "<group>"; };
+		029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxChart.xcodeproj; path = ../dydx/dydxChart/dydxChart.xcodeproj; sourceTree = "<group>"; };
+		02A5BB9E2A04617800BEE77E /* dydxAbacusDataLocalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAbacusDataLocalizer.swift; sourceTree = "<group>"; };
+		02C7262A29D793C90098AFBC /* dydxCompositeTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCompositeTracking.swift; sourceTree = "<group>"; };
+		02DA0AF72B57609100BFA975 /* dydxV4UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dydxV4UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		02DA0AF92B57609100BFA975 /* dydxV4UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxV4UITests.swift; sourceTree = "<group>"; };
+		02DA0AFB2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxV4UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		02DA0B022B57622B00BFA975 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxStateManager.xcodeproj; path = ../dydx/dydxStateManager/dydxStateManager.xcodeproj; sourceTree = "<group>"; };
+		171807B0CCAE5C86B5D65793 /* Pods_iOS_dydxV4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxV4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2729BA102BF7C93100729A85 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27491E2B2C5406680014A574 /* StatsigInjections.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StatsigInjections.xcodeproj; path = ../StatsigInjections/StatsigInjections.xcodeproj; sourceTree = "<group>"; };
+		274F43052BA4C0B400645059 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxAnalytics.xcodeproj; path = ../dydx/dydxAnalytics/dydxAnalytics.xcodeproj; sourceTree = "<group>"; };
+		27968BA82BF7AC7A002F2C34 /* TrackingViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackingViewController+Ext.swift"; sourceTree = "<group>"; };
+		27ADEE6B2BC4A23400B8F1DB /* dydxSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsStore.swift; sourceTree = "<group>"; };
+		27B7B9872BF7C6DC00BB0114 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27D41AF02A8E9214009A2F37 /* UIApplication+URLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+URLHandler.swift"; sourceTree = "<group>"; };
+		27DBDCED2A8FF5B2002383C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		27DBDD202A8FF5B2002383C6 /* GoogleService-Info-Staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Staging.plist"; sourceTree = "<group>"; };
+		27DBDD212A8FF5B2002383C6 /* credentials.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = credentials.json; sourceTree = "<group>"; };
+		3101FC572511508800AC4010 /* CommonAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonAppDelegate.swift; sourceTree = "<group>"; };
+		310273EC25F0728700DA70A4 /* dydx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = dydx.entitlements; sourceTree = "<group>"; };
+		3112F45F216BBF8400708927 /* dydxV4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dydxV4.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3112F462216BBF8400708927 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3112F46B216BBF8500708927 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3112F46E216BBF8500708927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3112F470216BBF8500708927 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3112F475216BBF8600708927 /* dydxV4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dydxV4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3112F479216BBF8600708927 /* dydxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTests.swift; sourceTree = "<group>"; };
+		3112F47B216BBF8600708927 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		314B726523DD124E00139EB3 /* AppsFlyerStaticInjections.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AppsFlyerStaticInjections.xcodeproj; path = ../AppsFlyerStaticInjections/AppsFlyerStaticInjections.xcodeproj; sourceTree = "<group>"; };
+		314C368424C7CC7600695F7E /* ui.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ui.json; sourceTree = "<group>"; };
+		3162B55226E181BB000209E1 /* WebCrypto.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = WebCrypto.js; sourceTree = "<group>"; };
+		31659015227D55CD00BAF133 /* Design.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Design.txt; sourceTree = "<group>"; };
+		31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CameraParticles.xcodeproj; path = ../CameraParticles/CameraParticles.xcodeproj; sourceTree = "<group>"; };
+		31B779F822DAD020004F9B21 /* FirebaseStaticInjections.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FirebaseStaticInjections.xcodeproj; path = ../FirebaseStaticInjections/FirebaseStaticInjections.xcodeproj; sourceTree = "<group>"; };
+		31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
+		31B77A2222DAD021004F9B21 /* RoutingKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RoutingKit.xcodeproj; path = ../RoutingKit/RoutingKit.xcodeproj; sourceTree = "<group>"; };
+		31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JedioKit.xcodeproj; path = ../JedioKit/JedioKit.xcodeproj; sourceTree = "<group>"; };
+		31B77A6D22DAD022004F9B21 /* ParticlesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticlesKit.xcodeproj; path = ../ParticlesKit/ParticlesKit.xcodeproj; sourceTree = "<group>"; };
+		31B77A9722DAD022004F9B21 /* PlatformRouting.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformRouting.xcodeproj; path = ../PlatformRouting/PlatformRouting.xcodeproj; sourceTree = "<group>"; };
+		31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UIToolkits.xcodeproj; path = ../UIToolkits/UIToolkits.xcodeproj; sourceTree = "<group>"; };
+		31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformParticles.xcodeproj; path = ../PlatformParticles/PlatformParticles.xcodeproj; sourceTree = "<group>"; };
+		31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticlesCommonModels.xcodeproj; path = ../ParticlesCommonModels/ParticlesCommonModels.xcodeproj; sourceTree = "<group>"; };
+		31B77C2422DAD0B3004F9B21 /* dydxUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31E65C02216BCB01008ABEE9 /* RoutingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RoutingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31E65C05216BCB01008ABEE9 /* UIToolkits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UIToolkits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31E65C08216BCB01008ABEE9 /* Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31F7618424BA3E7A001EA293 /* WebParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WebParticles.xcodeproj; path = ../WebParticles/WebParticles.xcodeproj; sourceTree = "<group>"; };
+		4CA3E661F388FD1F860FDCC6 /* Pods-iOS-dydxV4.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxV4.debug.xcconfig"; path = "../../dydx/Pods/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4.debug.xcconfig"; sourceTree = "<group>"; };
+		6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AmplitudeInjections.xcodeproj; path = ../AmplitudeInjections/AmplitudeInjections.xcodeproj; sourceTree = "<group>"; };
+		646D73AB2A4F434300EDF2E5 /* dydxAbacusBridging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAbacusBridging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		64AEE63D27B2F74C0038C791 /* config */ = {isa = PBXFileReference; lastKnownFileType = folder; name = config; path = "../../../v4-localization/config"; sourceTree = "<group>"; };
+		64AF47B62817400100EBFDC6 /* events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = events.json; sourceTree = "<group>"; };
+		64AF480D28186EE500EBFDC6 /* dydxevents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dydxevents.json; sourceTree = "<group>"; };
+		64AF4810281880B100EBFDC6 /* dydxAmplitudeTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAmplitudeTracking.swift; sourceTree = "<group>"; };
+		64E39E29281B3DD300F8ADC7 /* onboardingevents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboardingevents.json; sourceTree = "<group>"; };
+		79E0C92C7C4A09FD5F8E76A6 /* Pods_iOS_dydxV4Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxV4Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		930BA4E7AF034E657D571B06 /* Pods-iOS-dydxV4Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxV4Tests.release.xcconfig"; path = "../../dydx/Pods/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests.release.xcconfig"; sourceTree = "<group>"; };
+		9A272731AB9E7D334C507723 /* Pods-iOS-dydxV4Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxV4Tests.debug.xcconfig"; path = "../../dydx/Pods/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		A7579EE7C41F2F8512489E50 /* Pods-iOS-dydxV4.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxV4.release.xcconfig"; path = "../../dydx/Pods/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		02DA0AF42B57609100BFA975 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02DA0B062B57633E00BFA975 /* PercyXcui in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3112F45C216BBF8400708927 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2741B25E2C06A0F900693B17 /* dydxViews.framework in Frameworks */,
+				2741B25D2C06A0F600693B17 /* dydxAnalytics.framework in Frameworks */,
+				027E1E1329C912660098666F /* PlatformUIJedio.framework in Frameworks */,
+				02439D1129B03F6700A083FE /* dydxCartera.framework in Frameworks */,
+				02FF093029ADBDA300781EDA /* dydxPresenters.framework in Frameworks */,
+				02FF092F29ADBD9F00781EDA /* dydxChart.framework in Frameworks */,
+				02FF092E29ADBD9900781EDA /* dydxFormatter.framework in Frameworks */,
+				31B77C2822DAD0B3004F9B21 /* ParticlesCommonModels.framework in Frameworks */,
+				31B77C2A22DAD0B3004F9B21 /* ParticlesKit.framework in Frameworks */,
+				31B77C3222DAD0B3004F9B21 /* PlatformParticles.framework in Frameworks */,
+				27491E312C5406900014A574 /* libAppsFlyerStaticInjections.a in Frameworks */,
+				31B77C4022DAD0B3004F9B21 /* UIAppToolkits.framework in Frameworks */,
+				31AB94D326DEE83700DB42B9 /* CameraParticles.framework in Frameworks */,
+				31B77C4822DAD0B4004F9B21 /* Utilities.framework in Frameworks */,
+				314B729C23DD126F00139EB3 /* libAppsFlyerStaticInjections.a in Frameworks */,
+				31B77C3622DAD0B3004F9B21 /* RoutingKit.framework in Frameworks */,
+				31B77C4222DAD0B4004F9B21 /* UIToolkits.framework in Frameworks */,
+				27491E322C54069C0014A574 /* libStatsigInjections.a in Frameworks */,
+				6466E116280F664900B8791B /* AmplitudeInjections.framework in Frameworks */,
+				31B77C2622DAD0B3004F9B21 /* JedioKit.framework in Frameworks */,
+				31B77C2522DAD0B3004F9B21 /* libFirebaseStaticInjections.a in Frameworks */,
+				31F761C924BA3E98001EA293 /* WebParticles.framework in Frameworks */,
+				31B77C3422DAD0B3004F9B21 /* PlatformRouting.framework in Frameworks */,
+				01EEEC77C8B7F3846916AF28 /* Pods_iOS_dydxV4.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3112F472216BBF8600708927 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9522364B513316410922110 /* Pods_iOS_dydxV4Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		020F66B92858F29300E2D072 /* NotificationExtension */ = {
+			isa = PBXGroup;
+			children = (
+				020F66BA2858F29300E2D072 /* dydxNotificationService.swift */,
+				020F66BC2858F29300E2D072 /* Info.plist */,
+			);
+			path = NotificationExtension;
+			sourceTree = "<group>";
+		};
+		0217A07D29D78B10007F31C5 /* _Security */ = {
+			isa = PBXGroup;
+			children = (
+				0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */,
+			);
+			path = _Security;
+			sourceTree = "<group>";
+		};
+		02439CCD29B03F4C00A083FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02439CD429B03F4C00A083FE /* dydxCartera.framework */,
+				02439CD629B03F4C00A083FE /* dydxCarteraTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		025B83C428AAAB120037FF7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				025B83EB28AAAB120037FF7C /* PlatformUI.framework */,
+				025B83ED28AAAB120037FF7C /* PlatformUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0262F07429DB3989009889E2 /* _Localizer */ = {
+			isa = PBXGroup;
+			children = (
+				02A5BB9E2A04617800BEE77E /* dydxAbacusDataLocalizer.swift */,
+			);
+			path = _Localizer;
+			sourceTree = "<group>";
+		};
+		02684D6028BD40830007CEFF /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				27491E2B2C5406680014A574 /* StatsigInjections.xcodeproj */,
+				6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */,
+				314B726523DD124E00139EB3 /* AppsFlyerStaticInjections.xcodeproj */,
+				31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */,
+				275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */,
+				02439CCC29B03F4C00A083FE /* dydxCartera.xcodeproj */,
+				029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */,
+				028420C729AD77F400C0E7CC /* dydxFormatter.xcodeproj */,
+				02684CE428BD3CD50007CEFF /* dydxPresenters.xcodeproj */,
+				02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */,
+				024B7AC928B7F73700F7C386 /* dydxViews.xcodeproj */,
+				31B779F822DAD020004F9B21 /* FirebaseStaticInjections.xcodeproj */,
+				31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */,
+				31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */,
+				31B77A6D22DAD022004F9B21 /* ParticlesKit.xcodeproj */,
+				31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */,
+				31B77A9722DAD022004F9B21 /* PlatformRouting.xcodeproj */,
+				025B83C328AAAB120037FF7C /* PlatformUI.xcodeproj */,
+				027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */,
+				31B77A2222DAD021004F9B21 /* RoutingKit.xcodeproj */,
+				31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */,
+				31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */,
+				31F7618424BA3E7A001EA293 /* WebParticles.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		02756A38287CA32B00803741 /* _Notification */ = {
+			isa = PBXGroup;
+			children = (
+				02756A69287CA33E00803741 /* dydxNotificationHandlerDelegate.swift */,
+			);
+			path = _Notification;
+			sourceTree = "<group>";
+		};
+		027E1DCE29C912510098666F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				027E1DFF29C912510098666F /* PlatformUIJedio.framework */,
+				027E1E0129C912510098666F /* PlatformUIJedioTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		028420C829AD77F400C0E7CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				028420CF29AD77F400C0E7CC /* dydxFormatter.framework */,
+				028420D129AD77F400C0E7CC /* dydxFormatterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0293B65E28CE94E200DDB103 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0293B66528CE94E200DDB103 /* dydxPresenters.framework */,
+				0293B66728CE94E200DDB103 /* dydxPresentersTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0293B69628CE94E200DDB103 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0293B69B28CE94E200DDB103 /* dydxViews.framework */,
+				0293B69D28CE94E200DDB103 /* dydxViewsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		029E11E629ADB9BC00FE271C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				029E11EB29ADB9BC00FE271C /* dydxChart.framework */,
+				029E11ED29ADB9BC00FE271C /* dydxChartTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02DA0AF82B57609100BFA975 /* dydxV4UITests */ = {
+			isa = PBXGroup;
+			children = (
+				02DA0AF92B57609100BFA975 /* dydxV4UITests.swift */,
+				02DA0AFB2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift */,
+			);
+			path = dydxV4UITests;
+			sourceTree = "<group>";
+		};
+		02E7DD9B28CFB31000727949 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02E7DDA828CFB31000727949 /* dydxStateManager.framework */,
+				02E7DDAA28CFB31000727949 /* dydxStateManagerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0904864F08DCEDE87F5B4956 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2729BA102BF7C93100729A85 /* dydxAnalytics.framework */,
+				27B7B9872BF7C6DC00BB0114 /* dydxAnalytics.framework */,
+				02DA0B022B57622B00BFA975 /* XCTest.framework */,
+				646D73AB2A4F434300EDF2E5 /* dydxAbacusBridging.framework */,
+				31B77C2422DAD0B3004F9B21 /* dydxUI.framework */,
+				31E65C08216BCB01008ABEE9 /* Utilities.framework */,
+				31E65C02216BCB01008ABEE9 /* RoutingKit.framework */,
+				31E65C05216BCB01008ABEE9 /* UIToolkits.framework */,
+				024B7A9428B7F6CC00F7C386 /* dydxViews.framework */,
+				171807B0CCAE5C86B5D65793 /* Pods_iOS_dydxV4.framework */,
+				79E0C92C7C4A09FD5F8E76A6 /* Pods_iOS_dydxV4Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		27491E2C2C5406680014A574 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				27491E302C5406680014A574 /* libStatsigInjections.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		275C17002BF7D730009313EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				275C17052BF7D730009313EC /* dydxAnalytics.framework */,
+				275C17072BF7D730009313EC /* dydxAnalyticsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		27ADEE6D2BC4A23B00B8F1DB /* _Settings */ = {
+			isa = PBXGroup;
+			children = (
+				27ADEE6B2BC4A23400B8F1DB /* dydxSettingsStore.swift */,
+			);
+			path = _Settings;
+			sourceTree = "<group>";
+		};
+		3112F456216BBF8400708927 = {
+			isa = PBXGroup;
+			children = (
+				02684D6028BD40830007CEFF /* Dependencies */,
+				020F66B92858F29300E2D072 /* NotificationExtension */,
+				0904864F08DCEDE87F5B4956 /* Frameworks */,
+				7D6D18505A107F7D13057B9B /* Pods */,
+				3112F460216BBF8400708927 /* Products */,
+				31C138BF23DE044C0064B5F5 /* Shared */,
+				3112F461216BBF8400708927 /* dydx */,
+				3112F478216BBF8600708927 /* dydxTests */,
+				02DA0AF82B57609100BFA975 /* dydxV4UITests */,
+			);
+			sourceTree = "<group>";
+		};
+		3112F460216BBF8400708927 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3112F45F216BBF8400708927 /* dydxV4.app */,
+				3112F475216BBF8600708927 /* dydxV4Tests.xctest */,
+				02DA0AF72B57609100BFA975 /* dydxV4UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3112F461216BBF8400708927 /* dydx */ = {
+			isa = PBXGroup;
+			children = (
+				0262F07429DB3989009889E2 /* _Localizer */,
+				0217A07D29D78B10007F31C5 /* _Security */,
+				314C365224C7CC5100695F7E /* _Configurations */,
+				02756A38287CA32B00803741 /* _Notification */,
+				27ADEE6D2BC4A23B00B8F1DB /* _Settings */,
+				64AF480F281880A300EBFDC6 /* _Tracking */,
+				3112F462216BBF8400708927 /* AppDelegate.swift */,
+				3112F46B216BBF8500708927 /* Assets.xcassets */,
+				027B7CA52AD5E559005A8288 /* configs */,
+				64AEE63D27B2F74C0038C791 /* config */,
+				31659015227D55CD00BAF133 /* Design.txt */,
+				310273EC25F0728700DA70A4 /* dydx.entitlements */,
+				3112F470216BBF8500708927 /* Info.plist */,
+				3112F46D216BBF8500708927 /* LaunchScreen.storyboard */,
+				3162B55226E181BB000209E1 /* WebCrypto.js */,
+				274F43052BA4C0B400645059 /* PrivacyInfo.xcprivacy */,
+			);
+			name = dydx;
+			path = dydxV4;
+			sourceTree = "<group>";
+		};
+		3112F478216BBF8600708927 /* dydxTests */ = {
+			isa = PBXGroup;
+			children = (
+				3112F479216BBF8600708927 /* dydxTests.swift */,
+				3112F47B216BBF8600708927 /* Info.plist */,
+			);
+			name = dydxTests;
+			path = dydxV4Tests;
+			sourceTree = "<group>";
+		};
+		314B726623DD124E00139EB3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				314B726A23DD124E00139EB3 /* libAppsFlyerStaticInjections.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		314C365224C7CC5100695F7E /* _Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				27DBDD212A8FF5B2002383C6 /* credentials.json */,
+				27DBDD202A8FF5B2002383C6 /* GoogleService-Info-Staging.plist */,
+				27DBDCED2A8FF5B2002383C6 /* GoogleService-Info.plist */,
+				314C368424C7CC7600695F7E /* ui.json */,
+				64AF480D28186EE500EBFDC6 /* dydxevents.json */,
+				64E39E29281B3DD300F8ADC7 /* onboardingevents.json */,
+				64AF47B62817400100EBFDC6 /* events.json */,
+			);
+			path = _Configurations;
+			sourceTree = "<group>";
+		};
+		31AB94C926DEE81000DB42B9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31AB94CE26DEE81000DB42B9 /* CameraParticles.framework */,
+				31AB94D026DEE81000DB42B9 /* CameraParticlesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31B779F922DAD020004F9B21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31B779FE22DAD020004F9B21 /* libFirebaseStaticInjections.a */,
+				31B77A0022DAD020004F9B21 /* FirebaseStaticInjectionsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31B77A0222DAD020004F9B21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31B77A0C22DAD020004F9B21 /* Utilities.framework */,
+				31B77A0E22DAD020004F9B21 /* Utilities.framework */,
+				31B77A1022DAD020004F9B21 /* Utilities.framework */,
+				31B77A1422DAD020004F9B21 /* UtilitiesTests.xctest */,
+				31B77A1622DAD020004F9B21 /* UtilitiesAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31B77A2322DAD021004F9B21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31B77A2D22DAD021004F9B21 /* RoutingKit.framework */,
+				31B77A2F22DAD021004F9B21 /* RoutingKit.framework */,
+				31B77A3122DAD021004F9B21 /* RoutingKit.framework */,
+				31B77A3522DAD021004F9B21 /* RoutingKitTests.xctest */,
+				31B77A3722DAD021004F9B21 /* RoutingKitAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31B77A4422DAD021004F9B21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31B77A4E22DAD021004F9B21 /* JedioKit.framework */,
+				31B77A5022DAD021004F9B21 /* JedioKit.framework */,
+				31B77A5222DAD021004F9B21 /* JedioKit.framework */,
+				31B77A5622DAD021004F9B21 /* JedioKitTests.xctest */,
+				31B77A5822DAD021004F9B21 /* JedioKitAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31B77A6E22DAD022004F9B21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31B77A7822DAD022004F9B21 /* ParticlesKit.framework */,
+				31B77A7A22DAD022004F9B21 /* ParticlesKit.framework */,
+				31B77A7C22DAD022004F9B21 /* ParticlesKit.framework */,
+				31B77A8022DAD022004F9B21 /* ParticlesKitTests.xctest */,
+				31B77A8222DAD022004F9B21 /* ParticlesKitAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31B77A9822DAD022004F9B21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31B77AA222DAD022004F9B21 /* PlatformRouting.framework */,
+				31B77AA422DAD022004F9B21 /* PlatformRouting.framework */,
+				31B77AA622DAD022004F9B21 /* PlatformRouting.framework */,
+				31B77AAA22DAD022004F9B21 /* PlatformRoutingTests.xctest */,
+				31B77AAC22DAD022004F9B21 /* PlatformRoutingAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31B77AB022DAD022004F9B21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31B77ABC22DAD022004F9B21 /* UIToolkits.framework */,
+				31B77ABE22DAD022004F9B21 /* UIToolkits.framework */,
+				31B77AC022DAD022004F9B21 /* UIToolkits.framework */,
+				31B77AC422DAD022004F9B21 /* UIAppToolkits.framework */,
+				31B77AC622DAD022004F9B21 /* UIToolkitsTests.xctest */,
+				31B77AC822DAD022004F9B21 /* UIToolkitsAppleTVTests.xctest */,
+				31B77ACC22DAD022004F9B21 /* UIAppToolkitsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31B77ACE22DAD022004F9B21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31B77ADA22DAD022004F9B21 /* PlatformParticles.framework */,
+				31B77ADC22DAD022004F9B21 /* PlatformParticles.framework */,
+				31B77ADE22DAD022004F9B21 /* PlatformParticles.framework */,
+				31B77AE222DAD022004F9B21 /* MessageParticles.framework */,
+				31B77AE422DAD022004F9B21 /* PlatformParticlesTests.xctest */,
+				31B77AE622DAD022004F9B21 /* PlatformParticlesAppleTVTests.xctest */,
+				31B77AEA22DAD022004F9B21 /* MessageParticlesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31B77AEC22DAD023004F9B21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31B77AF622DAD023004F9B21 /* ParticlesCommonModels.framework */,
+				31B77AF822DAD023004F9B21 /* ParticlesCommonModels.framework */,
+				31B77AFA22DAD023004F9B21 /* ParticlesCommonModels.framework */,
+				31B77AFE22DAD023004F9B21 /* ParticlesCommonModelsTests.xctest */,
+				31B77B0022DAD023004F9B21 /* ParticlesCommonModelsAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31C138BF23DE044C0064B5F5 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				3101FC572511508800AC4010 /* CommonAppDelegate.swift */,
+				27D41AF02A8E9214009A2F37 /* UIApplication+URLHandler.swift */,
+			);
+			name = Shared;
+			path = ../Shared;
+			sourceTree = "<group>";
+		};
+		31F7618524BA3E7A001EA293 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31F761B924BA3E7A001EA293 /* WebParticles.framework */,
+				31F761BB24BA3E7A001EA293 /* WebParticlesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6466E0DD280F662600B8791B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6466E0E2280F662600B8791B /* AmplitudeInjections.framework */,
+				6466E0E4280F662600B8791B /* AmplitudeInjectionsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64AF480F281880A300EBFDC6 /* _Tracking */ = {
+			isa = PBXGroup;
+			children = (
+				64AF4810281880B100EBFDC6 /* dydxAmplitudeTracking.swift */,
+				02C7262A29D793C90098AFBC /* dydxCompositeTracking.swift */,
+				27968BA82BF7AC7A002F2C34 /* TrackingViewController+Ext.swift */,
+			);
+			path = _Tracking;
+			sourceTree = "<group>";
+		};
+		7D6D18505A107F7D13057B9B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4CA3E661F388FD1F860FDCC6 /* Pods-iOS-dydxV4.debug.xcconfig */,
+				A7579EE7C41F2F8512489E50 /* Pods-iOS-dydxV4.release.xcconfig */,
+				9A272731AB9E7D334C507723 /* Pods-iOS-dydxV4Tests.debug.xcconfig */,
+				930BA4E7AF034E657D571B06 /* Pods-iOS-dydxV4Tests.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../dydx/Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		02DA0AF62B57609100BFA975 /* dydxV4UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02DA0AFF2B57609100BFA975 /* Build configuration list for PBXNativeTarget "dydxV4UITests" */;
+			buildPhases = (
+				02DA0AF32B57609100BFA975 /* Sources */,
+				02DA0AF42B57609100BFA975 /* Frameworks */,
+				02DA0AF52B57609100BFA975 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				02DA0AFE2B57609100BFA975 /* PBXTargetDependency */,
+			);
+			name = dydxV4UITests;
+			packageProductDependencies = (
+				02DA0B052B57633E00BFA975 /* PercyXcui */,
+			);
+			productName = dydxV4UITests;
+			productReference = 02DA0AF72B57609100BFA975 /* dydxV4UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		3112F45E216BBF8400708927 /* dydxV4 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3112F489216BBF8600708927 /* Build configuration list for PBXNativeTarget "dydxV4" */;
+			buildPhases = (
+				7BA92DF4D740E1A995F10DA9 /* [CP] Check Pods Manifest.lock */,
+				02C19F3D29DDD79300F77028 /* Run Script (Set Secrets) */,
+				026FC3F22AFAD39800C52F20 /* Run Script (set_scheme.sh) */,
+				026F2E9E28230DBD00DF3EB5 /* Run Script (Swiftlint --fix) */,
+				3112F45B216BBF8400708927 /* Sources */,
+				3112F45C216BBF8400708927 /* Frameworks */,
+				3112F45D216BBF8400708927 /* Resources */,
+				312C8BC921F9878D00142C7A /* Embed Frameworks */,
+				3165906D227F532B00BAF133 /* Run Script (Firebase) */,
+				020F66C02858F29300E2D072 /* Embed Foundation Extensions */,
+				16DEFDB1896BDF443F34E3AC /* [CP] Embed Pods Frameworks */,
+				026FC4232AFAD3EB00C52F20 /* Run Script (unset_scheme.sh) */,
+				52574510D5C216006099A2F7 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				275C17092BF7D737009313EC /* PBXTargetDependency */,
+				275956062BF7D1FD008C77EE /* PBXTargetDependency */,
+				31B77BC422DAD077004F9B21 /* PBXTargetDependency */,
+				02439D1029B03F5D00A083FE /* PBXTargetDependency */,
+				029E11EF29ADB9BF00FE271C /* PBXTargetDependency */,
+				0284210829AD77FF00C0E7CC /* PBXTargetDependency */,
+				022F358F28D392CF000BCA41 /* PBXTargetDependency */,
+				022F35CB28D392D6000BCA41 /* PBXTargetDependency */,
+				02E7DDDE28CFB32D00727949 /* PBXTargetDependency */,
+				027E1E1229C9125C0098666F /* PBXTargetDependency */,
+				025B83FE28AAAB1F0037FF7C /* PBXTargetDependency */,
+				6466E115280F663000B8791B /* PBXTargetDependency */,
+				31AB94D226DEE82A00DB42B9 /* PBXTargetDependency */,
+				31F761C824BA3E90001EA293 /* PBXTargetDependency */,
+				27491E342C5406DD0014A574 /* PBXTargetDependency */,
+				314B729B23DD125E00139EB3 /* PBXTargetDependency */,
+				31B77BBE22DAD077004F9B21 /* PBXTargetDependency */,
+				31B77BB222DAD077004F9B21 /* PBXTargetDependency */,
+				31B77BB422DAD077004F9B21 /* PBXTargetDependency */,
+				31B77BB622DAD077004F9B21 /* PBXTargetDependency */,
+				31B77BBC22DAD077004F9B21 /* PBXTargetDependency */,
+				31B77BC022DAD077004F9B21 /* PBXTargetDependency */,
+				31B77BC222DAD077004F9B21 /* PBXTargetDependency */,
+				31B77BCA22DAD077004F9B21 /* PBXTargetDependency */,
+			);
+			name = dydxV4;
+			productName = dydx;
+			productReference = 3112F45F216BBF8400708927 /* dydxV4.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3112F474216BBF8600708927 /* dydxV4Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3112F48C216BBF8600708927 /* Build configuration list for PBXNativeTarget "dydxV4Tests" */;
+			buildPhases = (
+				1BB4784D1077A2438C300ED1 /* [CP] Check Pods Manifest.lock */,
+				3112F471216BBF8600708927 /* Sources */,
+				3112F472216BBF8600708927 /* Frameworks */,
+				3112F473216BBF8600708927 /* Resources */,
+				5BD099095C70B5B9617985A5 /* [CP] Embed Pods Frameworks */,
+				0EDD4459F9EEEA64AF8E4A1F /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3112F477216BBF8600708927 /* PBXTargetDependency */,
+			);
+			name = dydxV4Tests;
+			productName = dydxTests;
+			productReference = 3112F475216BBF8600708927 /* dydxV4Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3112F457216BBF8400708927 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1510;
+				LastUpgradeCheck = 1400;
+				ORGANIZATIONNAME = "dYdX Trading Inc";
+				TargetAttributes = {
+					02DA0AF62B57609100BFA975 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 3112F45E216BBF8400708927;
+					};
+					3112F45E216BBF8400708927 = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
+						SystemCapabilities = {
+							com.apple.ApplePay = {
+								enabled = 0;
+							};
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.GameCenter.iOS = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
+							};
+							com.apple.Siri = {
+								enabled = 0;
+							};
+						};
+					};
+					3112F474216BBF8600708927 = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
+					};
+				};
+			};
+			buildConfigurationList = 3112F45A216BBF8400708927 /* Build configuration list for PBXProject "dydxV4" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = 3112F456216BBF8400708927;
+			packageReferences = (
+				02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */,
+			);
+			productRefGroup = 3112F460216BBF8400708927 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6466E0DD280F662600B8791B /* Products */;
+					ProjectRef = 6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */;
+				},
+				{
+					ProductGroup = 314B726623DD124E00139EB3 /* Products */;
+					ProjectRef = 314B726523DD124E00139EB3 /* AppsFlyerStaticInjections.xcodeproj */;
+				},
+				{
+					ProductGroup = 31AB94C926DEE81000DB42B9 /* Products */;
+					ProjectRef = 31AB94C826DEE81000DB42B9 /* CameraParticles.xcodeproj */;
+				},
+				{
+					ProductGroup = 275C17002BF7D730009313EC /* Products */;
+					ProjectRef = 275C16FF2BF7D730009313EC /* dydxAnalytics.xcodeproj */;
+				},
+				{
+					ProductGroup = 02439CCD29B03F4C00A083FE /* Products */;
+					ProjectRef = 02439CCC29B03F4C00A083FE /* dydxCartera.xcodeproj */;
+				},
+				{
+					ProductGroup = 029E11E629ADB9BC00FE271C /* Products */;
+					ProjectRef = 029E11E529ADB9BC00FE271C /* dydxChart.xcodeproj */;
+				},
+				{
+					ProductGroup = 028420C829AD77F400C0E7CC /* Products */;
+					ProjectRef = 028420C729AD77F400C0E7CC /* dydxFormatter.xcodeproj */;
+				},
+				{
+					ProductGroup = 0293B65E28CE94E200DDB103 /* Products */;
+					ProjectRef = 02684CE428BD3CD50007CEFF /* dydxPresenters.xcodeproj */;
+				},
+				{
+					ProductGroup = 02E7DD9B28CFB31000727949 /* Products */;
+					ProjectRef = 02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */;
+				},
+				{
+					ProductGroup = 0293B69628CE94E200DDB103 /* Products */;
+					ProjectRef = 024B7AC928B7F73700F7C386 /* dydxViews.xcodeproj */;
+				},
+				{
+					ProductGroup = 31B779F922DAD020004F9B21 /* Products */;
+					ProjectRef = 31B779F822DAD020004F9B21 /* FirebaseStaticInjections.xcodeproj */;
+				},
+				{
+					ProductGroup = 31B77A4422DAD021004F9B21 /* Products */;
+					ProjectRef = 31B77A4322DAD021004F9B21 /* JedioKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 31B77AEC22DAD023004F9B21 /* Products */;
+					ProjectRef = 31B77AEB22DAD023004F9B21 /* ParticlesCommonModels.xcodeproj */;
+				},
+				{
+					ProductGroup = 31B77A6E22DAD022004F9B21 /* Products */;
+					ProjectRef = 31B77A6D22DAD022004F9B21 /* ParticlesKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 31B77ACE22DAD022004F9B21 /* Products */;
+					ProjectRef = 31B77ACD22DAD022004F9B21 /* PlatformParticles.xcodeproj */;
+				},
+				{
+					ProductGroup = 31B77A9822DAD022004F9B21 /* Products */;
+					ProjectRef = 31B77A9722DAD022004F9B21 /* PlatformRouting.xcodeproj */;
+				},
+				{
+					ProductGroup = 025B83C428AAAB120037FF7C /* Products */;
+					ProjectRef = 025B83C328AAAB120037FF7C /* PlatformUI.xcodeproj */;
+				},
+				{
+					ProductGroup = 027E1DCE29C912510098666F /* Products */;
+					ProjectRef = 027E1DCD29C912510098666F /* PlatformUIJedio.xcodeproj */;
+				},
+				{
+					ProductGroup = 31B77A2322DAD021004F9B21 /* Products */;
+					ProjectRef = 31B77A2222DAD021004F9B21 /* RoutingKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 27491E2C2C5406680014A574 /* Products */;
+					ProjectRef = 27491E2B2C5406680014A574 /* StatsigInjections.xcodeproj */;
+				},
+				{
+					ProductGroup = 31B77AB022DAD022004F9B21 /* Products */;
+					ProjectRef = 31B77AAF22DAD022004F9B21 /* UIToolkits.xcodeproj */;
+				},
+				{
+					ProductGroup = 31B77A0222DAD020004F9B21 /* Products */;
+					ProjectRef = 31B77A0122DAD020004F9B21 /* Utilities.xcodeproj */;
+				},
+				{
+					ProductGroup = 31F7618524BA3E7A001EA293 /* Products */;
+					ProjectRef = 31F7618424BA3E7A001EA293 /* WebParticles.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				3112F45E216BBF8400708927 /* dydxV4 */,
+				3112F474216BBF8600708927 /* dydxV4Tests */,
+				02DA0AF62B57609100BFA975 /* dydxV4UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		02439CD429B03F4C00A083FE /* dydxCartera.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxCartera.framework;
+			remoteRef = 02439CD329B03F4C00A083FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02439CD629B03F4C00A083FE /* dydxCarteraTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = dydxCarteraTests.xctest;
+			remoteRef = 02439CD529B03F4C00A083FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		025B83EB28AAAB120037FF7C /* PlatformUI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformUI.framework;
+			remoteRef = 025B83EA28AAAB120037FF7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		025B83ED28AAAB120037FF7C /* PlatformUITests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PlatformUITests.xctest;
+			remoteRef = 025B83EC28AAAB120037FF7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		027E1DFF29C912510098666F /* PlatformUIJedio.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformUIJedio.framework;
+			remoteRef = 027E1DFE29C912510098666F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		027E1E0129C912510098666F /* PlatformUIJedioTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PlatformUIJedioTests.xctest;
+			remoteRef = 027E1E0029C912510098666F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		028420CF29AD77F400C0E7CC /* dydxFormatter.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxFormatter.framework;
+			remoteRef = 028420CE29AD77F400C0E7CC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		028420D129AD77F400C0E7CC /* dydxFormatterTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = dydxFormatterTests.xctest;
+			remoteRef = 028420D029AD77F400C0E7CC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0293B66528CE94E200DDB103 /* dydxPresenters.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxPresenters.framework;
+			remoteRef = 0293B66428CE94E200DDB103 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0293B66728CE94E200DDB103 /* dydxPresentersTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = dydxPresentersTests.xctest;
+			remoteRef = 0293B66628CE94E200DDB103 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0293B69B28CE94E200DDB103 /* dydxViews.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxViews.framework;
+			remoteRef = 0293B69A28CE94E200DDB103 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0293B69D28CE94E200DDB103 /* dydxViewsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = dydxViewsTests.xctest;
+			remoteRef = 0293B69C28CE94E200DDB103 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		029E11EB29ADB9BC00FE271C /* dydxChart.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxChart.framework;
+			remoteRef = 029E11EA29ADB9BC00FE271C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		029E11ED29ADB9BC00FE271C /* dydxChartTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = dydxChartTests.xctest;
+			remoteRef = 029E11EC29ADB9BC00FE271C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02E7DDA828CFB31000727949 /* dydxStateManager.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxStateManager.framework;
+			remoteRef = 02E7DDA728CFB31000727949 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02E7DDAA28CFB31000727949 /* dydxStateManagerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = dydxStateManagerTests.xctest;
+			remoteRef = 02E7DDA928CFB31000727949 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27491E302C5406680014A574 /* libStatsigInjections.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libStatsigInjections.a;
+			remoteRef = 27491E2F2C5406680014A574 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		275C17052BF7D730009313EC /* dydxAnalytics.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxAnalytics.framework;
+			remoteRef = 275C17042BF7D730009313EC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		275C17072BF7D730009313EC /* dydxAnalyticsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = dydxAnalyticsTests.xctest;
+			remoteRef = 275C17062BF7D730009313EC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		314B726A23DD124E00139EB3 /* libAppsFlyerStaticInjections.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAppsFlyerStaticInjections.a;
+			remoteRef = 314B726923DD124E00139EB3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31AB94CE26DEE81000DB42B9 /* CameraParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CameraParticles.framework;
+			remoteRef = 31AB94CD26DEE81000DB42B9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31AB94D026DEE81000DB42B9 /* CameraParticlesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CameraParticlesTests.xctest;
+			remoteRef = 31AB94CF26DEE81000DB42B9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B779FE22DAD020004F9B21 /* libFirebaseStaticInjections.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFirebaseStaticInjections.a;
+			remoteRef = 31B779FD22DAD020004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A0022DAD020004F9B21 /* FirebaseStaticInjectionsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = FirebaseStaticInjectionsTests.xctest;
+			remoteRef = 31B779FF22DAD020004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A0C22DAD020004F9B21 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 31B77A0B22DAD020004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A0E22DAD020004F9B21 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 31B77A0D22DAD020004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A1022DAD020004F9B21 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 31B77A0F22DAD020004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A1422DAD020004F9B21 /* UtilitiesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UtilitiesTests.xctest;
+			remoteRef = 31B77A1322DAD020004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A1622DAD020004F9B21 /* UtilitiesAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UtilitiesAppleTVTests.xctest;
+			remoteRef = 31B77A1522DAD020004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A2D22DAD021004F9B21 /* RoutingKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RoutingKit.framework;
+			remoteRef = 31B77A2C22DAD021004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A2F22DAD021004F9B21 /* RoutingKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RoutingKit.framework;
+			remoteRef = 31B77A2E22DAD021004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A3122DAD021004F9B21 /* RoutingKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RoutingKit.framework;
+			remoteRef = 31B77A3022DAD021004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A3522DAD021004F9B21 /* RoutingKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RoutingKitTests.xctest;
+			remoteRef = 31B77A3422DAD021004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A3722DAD021004F9B21 /* RoutingKitAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RoutingKitAppleTVTests.xctest;
+			remoteRef = 31B77A3622DAD021004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A4E22DAD021004F9B21 /* JedioKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JedioKit.framework;
+			remoteRef = 31B77A4D22DAD021004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A5022DAD021004F9B21 /* JedioKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JedioKit.framework;
+			remoteRef = 31B77A4F22DAD021004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A5222DAD021004F9B21 /* JedioKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JedioKit.framework;
+			remoteRef = 31B77A5122DAD021004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A5622DAD021004F9B21 /* JedioKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JedioKitTests.xctest;
+			remoteRef = 31B77A5522DAD021004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A5822DAD021004F9B21 /* JedioKitAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JedioKitAppleTVTests.xctest;
+			remoteRef = 31B77A5722DAD021004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A7822DAD022004F9B21 /* ParticlesKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticlesKit.framework;
+			remoteRef = 31B77A7722DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A7A22DAD022004F9B21 /* ParticlesKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticlesKit.framework;
+			remoteRef = 31B77A7922DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A7C22DAD022004F9B21 /* ParticlesKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticlesKit.framework;
+			remoteRef = 31B77A7B22DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A8022DAD022004F9B21 /* ParticlesKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ParticlesKitTests.xctest;
+			remoteRef = 31B77A7F22DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77A8222DAD022004F9B21 /* ParticlesKitAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ParticlesKitAppleTVTests.xctest;
+			remoteRef = 31B77A8122DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AA222DAD022004F9B21 /* PlatformRouting.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformRouting.framework;
+			remoteRef = 31B77AA122DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AA422DAD022004F9B21 /* PlatformRouting.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformRouting.framework;
+			remoteRef = 31B77AA322DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AA622DAD022004F9B21 /* PlatformRouting.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformRouting.framework;
+			remoteRef = 31B77AA522DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AAA22DAD022004F9B21 /* PlatformRoutingTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PlatformRoutingTests.xctest;
+			remoteRef = 31B77AA922DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AAC22DAD022004F9B21 /* PlatformRoutingAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PlatformRoutingAppleTVTests.xctest;
+			remoteRef = 31B77AAB22DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77ABC22DAD022004F9B21 /* UIToolkits.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = UIToolkits.framework;
+			remoteRef = 31B77ABB22DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77ABE22DAD022004F9B21 /* UIToolkits.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = UIToolkits.framework;
+			remoteRef = 31B77ABD22DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AC022DAD022004F9B21 /* UIToolkits.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = UIToolkits.framework;
+			remoteRef = 31B77ABF22DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AC422DAD022004F9B21 /* UIAppToolkits.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = UIAppToolkits.framework;
+			remoteRef = 31B77AC322DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AC622DAD022004F9B21 /* UIToolkitsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UIToolkitsTests.xctest;
+			remoteRef = 31B77AC522DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AC822DAD022004F9B21 /* UIToolkitsAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UIToolkitsAppleTVTests.xctest;
+			remoteRef = 31B77AC722DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77ACC22DAD022004F9B21 /* UIAppToolkitsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UIAppToolkitsTests.xctest;
+			remoteRef = 31B77ACB22DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77ADA22DAD022004F9B21 /* PlatformParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformParticles.framework;
+			remoteRef = 31B77AD922DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77ADC22DAD022004F9B21 /* PlatformParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformParticles.framework;
+			remoteRef = 31B77ADB22DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77ADE22DAD022004F9B21 /* PlatformParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformParticles.framework;
+			remoteRef = 31B77ADD22DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AE222DAD022004F9B21 /* MessageParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MessageParticles.framework;
+			remoteRef = 31B77AE122DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AE422DAD022004F9B21 /* PlatformParticlesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PlatformParticlesTests.xctest;
+			remoteRef = 31B77AE322DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AE622DAD022004F9B21 /* PlatformParticlesAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PlatformParticlesAppleTVTests.xctest;
+			remoteRef = 31B77AE522DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AEA22DAD022004F9B21 /* MessageParticlesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MessageParticlesTests.xctest;
+			remoteRef = 31B77AE922DAD022004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AF622DAD023004F9B21 /* ParticlesCommonModels.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticlesCommonModels.framework;
+			remoteRef = 31B77AF522DAD023004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AF822DAD023004F9B21 /* ParticlesCommonModels.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticlesCommonModels.framework;
+			remoteRef = 31B77AF722DAD023004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AFA22DAD023004F9B21 /* ParticlesCommonModels.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticlesCommonModels.framework;
+			remoteRef = 31B77AF922DAD023004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77AFE22DAD023004F9B21 /* ParticlesCommonModelsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ParticlesCommonModelsTests.xctest;
+			remoteRef = 31B77AFD22DAD023004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31B77B0022DAD023004F9B21 /* ParticlesCommonModelsAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ParticlesCommonModelsAppleTVTests.xctest;
+			remoteRef = 31B77AFF22DAD023004F9B21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31F761B924BA3E7A001EA293 /* WebParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WebParticles.framework;
+			remoteRef = 31F761B824BA3E7A001EA293 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31F761BB24BA3E7A001EA293 /* WebParticlesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = WebParticlesTests.xctest;
+			remoteRef = 31F761BA24BA3E7A001EA293 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6466E0E2280F662600B8791B /* AmplitudeInjections.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AmplitudeInjections.framework;
+			remoteRef = 6466E0E1280F662600B8791B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6466E0E4280F662600B8791B /* AmplitudeInjectionsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AmplitudeInjectionsTests.xctest;
+			remoteRef = 6466E0E3280F662600B8791B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		02DA0AF52B57609100BFA975 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3112F45D216BBF8400708927 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				027B7CA62AD5E559005A8288 /* configs in Resources */,
+				3112F46F216BBF8500708927 /* LaunchScreen.storyboard in Resources */,
+				3162B58226E181BB000209E1 /* WebCrypto.js in Resources */,
+				3112F46C216BBF8500708927 /* Assets.xcassets in Resources */,
+				31659016227D55CD00BAF133 /* Design.txt in Resources */,
+				64AEE63E27B2F74C0038C791 /* config in Resources */,
+				27DBDD232A8FF5B2002383C6 /* GoogleService-Info-Staging.plist in Resources */,
+				314C368524C7CC7600695F7E /* ui.json in Resources */,
+				274F43062BA4C0B400645059 /* PrivacyInfo.xcprivacy in Resources */,
+				64AF47B72817400100EBFDC6 /* events.json in Resources */,
+				27DBDD222A8FF5B2002383C6 /* GoogleService-Info.plist in Resources */,
+				64E39E5A281B3DD300F8ADC7 /* onboardingevents.json in Resources */,
+				64AF480E28186EE500EBFDC6 /* dydxevents.json in Resources */,
+				27DBDD242A8FF5B2002383C6 /* credentials.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3112F473216BBF8600708927 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		026F2E9E28230DBD00DF3EB5 /* Run Script (Swiftlint --fix) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (Swiftlint --fix)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  cd ../dydx\n  swiftlint --fix \nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		026FC3F22AFAD39800C52F20 /* Run Script (set_scheme.sh) */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (set_scheme.sh)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_DIR=${PROJECT_DIR}/../scripts/\n\nif [ $ENABLE_PREVIEWS == \"NO\" ]\nthen\n    OUTPUT=$(bash \"${SCRIPT_DIR}/set_scheme.sh\")\n\n    # Echo the captured output (xcode does not automatically mirror it in build log)\n    echo \"$OUTPUT\"\nfi\n\n";
+		};
+		026FC4232AFAD3EB00C52F20 /* Run Script (unset_scheme.sh) */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (unset_scheme.sh)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_DIR=${PROJECT_DIR}/../scripts/\n\nif [ $ENABLE_PREVIEWS == \"NO\" ]\nthen\n    OUTPUT=$(bash \"${SCRIPT_DIR}/unset_scheme.sh\")\n\n# Echo the captured output (xcode does not automatically mirror it in build log)\n    echo \"$OUTPUT\"\nfi\n\n";
+		};
+		02C19F3D29DDD79300F77028 /* Run Script (Set Secrets) */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+				"",
+			);
+			inputPaths = (
+			);
+			name = "Run Script (Set Secrets)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"",
+				"",
+				"${PROJECT_DIR}/../dydxV4/dydxV4/_Configurations/credentials.json",
+				"${PROJECT_DIR}/../dydxV4/dydxV4/_Configurations/GoogleService-Info-Staging.plist",
+				"${PROJECT_DIR}/../dydxV4/dydxV4/_Configurations/GoogleService-Info.plist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\n# Path to the secrets directory\nSET_SECRETS_PATH=\"${PROJECT_DIR}/../scripts/set_secrets.sh\"\n\n# Check if the set_secrets script is available\nif [ ! -f \"$SET_SECRETS_PATH\" ]; then\n  echo \"Error: set_secrets.sh not found at $SET_SECRETS_PATH\"\n  exit 1\nfi\n\n# Execute the set_secrets script with the shouldUseEmptySecrets argument\nset_secrets_output=$(bash \"$SET_SECRETS_PATH\")\n\n# Echo the captured output (xcode does not automatically mirror it in build log)\necho \"Output from set_secrets was:\\n$set_secrets_output\"\n";
+		};
+		0EDD4459F9EEEA64AF8E4A1F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		16DEFDB1896BDF443F34E3AC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1BB4784D1077A2438C300ED1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxV4Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3165906D227F532B00BAF133 /* Run Script (Firebase) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Run Script (Firebase)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		52574510D5C216006099A2F7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5BD099095C70B5B9617985A5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7BA92DF4D740E1A995F10DA9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxV4-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		02DA0AF32B57609100BFA975 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02DA0AFA2B57609100BFA975 /* dydxV4UITests.swift in Sources */,
+				02DA0AFC2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3112F45B216BBF8400708927 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02C7262B29D793C90098AFBC /* dydxCompositeTracking.swift in Sources */,
+				27D41AF12A8E9214009A2F37 /* UIApplication+URLHandler.swift in Sources */,
+				02756A6A287CA33E00803741 /* dydxNotificationHandlerDelegate.swift in Sources */,
+				3112F463216BBF8400708927 /* AppDelegate.swift in Sources */,
+				27968BA92BF7AC7A002F2C34 /* TrackingViewController+Ext.swift in Sources */,
+				27ADEE6C2BC4A23400B8F1DB /* dydxSettingsStore.swift in Sources */,
+				3101FC582511508800AC4010 /* CommonAppDelegate.swift in Sources */,
+				0217A0A129D78BD5007F31C5 /* dydxBiometricsLocalAuthenticator.swift in Sources */,
+				64AF4811281880B100EBFDC6 /* dydxAmplitudeTracking.swift in Sources */,
+				02A5BB9F2A04617800BEE77E /* dydxAbacusDataLocalizer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3112F471216BBF8600708927 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3112F47A216BBF8600708927 /* dydxTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		022F358F28D392CF000BCA41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxPresenters;
+			targetProxy = 022F358E28D392CF000BCA41 /* PBXContainerItemProxy */;
+		};
+		022F35CB28D392D6000BCA41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxViews;
+			targetProxy = 022F35CA28D392D6000BCA41 /* PBXContainerItemProxy */;
+		};
+		02439D1029B03F5D00A083FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxCartera;
+			targetProxy = 02439D0F29B03F5D00A083FE /* PBXContainerItemProxy */;
+		};
+		025B83FE28AAAB1F0037FF7C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PlatformUI;
+			targetProxy = 025B83FD28AAAB1F0037FF7C /* PBXContainerItemProxy */;
+		};
+		027E1E1229C9125C0098666F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PlatformUIJedio;
+			targetProxy = 027E1E1129C9125C0098666F /* PBXContainerItemProxy */;
+		};
+		0284210829AD77FF00C0E7CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxFormatter;
+			targetProxy = 0284210729AD77FF00C0E7CC /* PBXContainerItemProxy */;
+		};
+		029E11EF29ADB9BF00FE271C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxChart;
+			targetProxy = 029E11EE29ADB9BF00FE271C /* PBXContainerItemProxy */;
+		};
+		02DA0AFE2B57609100BFA975 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3112F45E216BBF8400708927 /* dydxV4 */;
+			targetProxy = 02DA0AFD2B57609100BFA975 /* PBXContainerItemProxy */;
+		};
+		02E7DDDE28CFB32D00727949 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxStateManager;
+			targetProxy = 02E7DDDD28CFB32D00727949 /* PBXContainerItemProxy */;
+		};
+		27491E342C5406DD0014A574 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = StatsigInjections;
+			targetProxy = 27491E332C5406DD0014A574 /* PBXContainerItemProxy */;
+		};
+		275956062BF7D1FD008C77EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Utilities;
+			targetProxy = 275956052BF7D1FD008C77EE /* PBXContainerItemProxy */;
+		};
+		275C17092BF7D737009313EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxAnalytics;
+			targetProxy = 275C17082BF7D737009313EC /* PBXContainerItemProxy */;
+		};
+		3112F477216BBF8600708927 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3112F45E216BBF8400708927 /* dydxV4 */;
+			targetProxy = 3112F476216BBF8600708927 /* PBXContainerItemProxy */;
+		};
+		314B729B23DD125E00139EB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AppsFlyerStaticInjections;
+			targetProxy = 314B729A23DD125E00139EB3 /* PBXContainerItemProxy */;
+		};
+		31AB94D226DEE82A00DB42B9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CameraParticles;
+			targetProxy = 31AB94D126DEE82A00DB42B9 /* PBXContainerItemProxy */;
+		};
+		31B77BB222DAD077004F9B21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JedioKit;
+			targetProxy = 31B77BB122DAD077004F9B21 /* PBXContainerItemProxy */;
+		};
+		31B77BB422DAD077004F9B21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ParticlesKit;
+			targetProxy = 31B77BB322DAD077004F9B21 /* PBXContainerItemProxy */;
+		};
+		31B77BB622DAD077004F9B21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RoutingKit;
+			targetProxy = 31B77BB522DAD077004F9B21 /* PBXContainerItemProxy */;
+		};
+		31B77BBC22DAD077004F9B21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ParticlesCommonModels;
+			targetProxy = 31B77BBB22DAD077004F9B21 /* PBXContainerItemProxy */;
+		};
+		31B77BBE22DAD077004F9B21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FirebaseStaticInjections;
+			targetProxy = 31B77BBD22DAD077004F9B21 /* PBXContainerItemProxy */;
+		};
+		31B77BC022DAD077004F9B21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PlatformRouting;
+			targetProxy = 31B77BBF22DAD077004F9B21 /* PBXContainerItemProxy */;
+		};
+		31B77BC222DAD077004F9B21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UIAppToolkits;
+			targetProxy = 31B77BC122DAD077004F9B21 /* PBXContainerItemProxy */;
+		};
+		31B77BC422DAD077004F9B21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UIToolkits;
+			targetProxy = 31B77BC322DAD077004F9B21 /* PBXContainerItemProxy */;
+		};
+		31B77BCA22DAD077004F9B21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PlatformParticles;
+			targetProxy = 31B77BC922DAD077004F9B21 /* PBXContainerItemProxy */;
+		};
+		31F761C824BA3E90001EA293 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WebParticles;
+			targetProxy = 31F761C724BA3E90001EA293 /* PBXContainerItemProxy */;
+		};
+		6466E115280F663000B8791B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AmplitudeInjections;
+			targetProxy = 6466E114280F663000B8791B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3112F46D216BBF8500708927 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3112F46E216BBF8500708927 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		02DA0B002B57609100BFA975 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxV4UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = dydxV4;
+			};
+			name = Debug;
+		};
+		02DA0B012B57609100BFA975 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxV4UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = dydxV4;
+			};
+			name = Release;
+		};
+		3112F487216BBF8600708927 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = exchangeV4.dydx.trading;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		3112F488216BBF8600708927 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = exchangeV4.dydx.trading;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3112F48A216BBF8600708927 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CA3E661F388FD1F860FDCC6 /* Pods-iOS-dydxV4.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = dydxV4/dydx.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 999999999;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				INFOPLIST_FILE = dydxV4/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) _iOS";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		3112F48B216BBF8600708927 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7579EE7C41F2F8512489E50 /* Pods-iOS-dydxV4.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = dydxV4/dydx.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 999999999;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				INFOPLIST_FILE = dydxV4/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) _iOS";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		3112F48D216BBF8600708927 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A272731AB9E7D334C507723 /* Pods-iOS-dydxV4Tests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				INFOPLIST_FILE = dydxV4Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = www.craziapps.dydxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3112F48E216BBF8600708927 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 930BA4E7AF034E657D571B06 /* Pods-iOS-dydxV4Tests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				INFOPLIST_FILE = dydxV4Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = www.craziapps.dydxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		02DA0AFF2B57609100BFA975 /* Build configuration list for PBXNativeTarget "dydxV4UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02DA0B002B57609100BFA975 /* Debug */,
+				02DA0B012B57609100BFA975 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3112F45A216BBF8400708927 /* Build configuration list for PBXProject "dydxV4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3112F487216BBF8600708927 /* Debug */,
+				3112F488216BBF8600708927 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3112F489216BBF8600708927 /* Build configuration list for PBXNativeTarget "dydxV4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3112F48A216BBF8600708927 /* Debug */,
+				3112F48B216BBF8600708927 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3112F48C216BBF8600708927 /* Build configuration list for PBXNativeTarget "dydxV4Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3112F48D216BBF8600708927 /* Debug */,
+				3112F48E216BBF8600708927 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/percy/percy-xcui-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		02DA0B052B57633E00BFA975 /* PercyXcui */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */;
+			productName = PercyXcui;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3112F457216BBF8400708927 /* Project object */;
+}

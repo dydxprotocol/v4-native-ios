@@ -1,0 +1,416 @@
+source 'https://github.com/CocoaPods/Specs.git'
+workspace 'dydx'
+use_frameworks!
+inhibit_all_warnings!
+
+project 'dydx.xcodeproj'
+
+def firebase_dependency_pods
+  pod 'GTMSessionFetcher'
+  pod 'GoogleToolboxForMac'
+  pod 'GoogleUtilities'
+end
+
+def firebase_core_pods
+  firebase_dependency_pods
+  pod 'Firebase/AnalyticsWithoutAdIdSupport'
+  pod 'Firebase/Core'
+  pod 'Firebase/Performance'
+end
+
+def firebase_pods
+  firebase_core_pods
+  pod 'Firebase/Messaging'
+end
+
+def firebase_pods_extension
+  firebase_dependency_pods
+  pod 'Firebase/AnalyticsWithoutAdIdSupport'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+end
+
+def crashlytics_pods
+  pod 'FirebaseCrashlytics'
+end
+
+def appsflyer_pods
+  pod 'AppsFlyerFramework'
+end
+
+def amplitude_pods
+  pod 'AmplitudeSwift', '~> 1.0'
+end
+
+def statsig_pods
+  pod 'Statsig', '~>1.0'
+end 
+
+def abacus_pods
+  #pod 'abacus', :path => '~/v4-abacus'
+  pod 'Abacus', :podspec => '../podspecs/Abacus.podspec'
+end
+
+def util_pods
+  pod 'BigInt'
+  #pod 'CryptoSwift', '1.5.1'
+  pod 'libPhoneNumber-iOS'
+  pod 'KVOController'
+  pod 'SimpleKeychain', '~> 0.12.5'
+  pod 'CombineExt'
+end
+
+def ios_util_pods
+  util_pods
+  pod 'ReachabilitySwift'
+  pod 'Validator'
+end
+
+def uikit_pods
+  pod 'Charts', :git => 'https://github.com/dydxprotocol/Charts.git', :branch => 'releases/3.6.0.3'
+  
+  pod 'Differ'
+  pod 'SnapKit'
+  pod 'pop'
+  pod 'RDHCollectionViewGridLayout'
+  pod 'SDWebImage'
+  pod 'SDWebImageSVGCoder'
+  pod 'SVGKit'
+end
+
+def swifiui_pods
+  pod 'SDWebImage'
+  pod 'SDWebImageSVGCoder'
+  pod 'SDWebImageSwiftUI'
+  pod 'Popovers'
+end
+
+def ios_ui_pods
+  ios_util_pods
+  uikit_pods
+  pod 'Atributika'
+  pod 'COSTouchVisualizer'
+  pod 'DrawerMenu'
+  pod 'EasyTipView'
+  pod 'EFQRCode'
+  pod 'FloatingPanel', '2.7.0'
+  pod 'HMSegmentedControl'
+  pod 'iCarousel'
+  pod 'JTCalendar'
+  pod 'MaterialActivityIndicator'
+  pod 'NVActivityIndicatorView'
+  pod 'PanModal'
+  pod 'ZSWTappableLabel'
+end
+
+abstract_target 'iOS' do
+  platform:ios, '15.0'
+  
+  target 'PlatformUI' do
+    project '../PlatformUI/PlatformUI'
+    ios_util_pods
+    swifiui_pods
+  end
+  
+  target 'PlatformUITests' do
+    project '../PlatformUI/PlatformUI'
+    ios_util_pods
+    swifiui_pods
+  end
+  
+  target 'PlatformUIJedio' do
+    project '../PlatformUIJedio/PlatformUIJedio'
+    ios_util_pods
+    swifiui_pods
+  end
+  
+  target 'PlatformUIJedioTests' do
+    project '../PlatformUIJedio/PlatformUIJedio'
+    ios_util_pods
+    swifiui_pods
+  end
+  
+  target 'Utilities' do
+    project '../Utilities/Utilities'
+    ios_util_pods
+  end
+  
+  target 'UtilitiesTests' do
+    project '../Utilities/Utilities'
+    ios_util_pods
+  end
+  
+  target 'UIToolkits' do
+    project '../UIToolkits/UIToolkits'
+    ios_ui_pods
+  end
+  
+  target 'UIToolkitsTests' do
+    project '../UIToolkits/UIToolkits'
+    ios_ui_pods
+  end
+  
+  target 'UIAppToolkits' do
+    project '../UIToolkits/UIToolkits'
+    ios_ui_pods
+  end
+  
+  target 'UIAppToolkitsTests' do
+    project '../UIToolkits/UIToolkits'
+    ios_ui_pods
+  end
+  
+  target 'RoutingKit' do
+    project '../RoutingKit/RoutingKit'
+    ios_util_pods
+  end
+  
+  target 'RoutingKitTests' do
+    project '../RoutingKit/RoutingKit'
+    ios_util_pods
+  end
+  
+  target 'PlatformRouting' do
+    project '../PlatformRouting/PlatformRouting'
+    ios_ui_pods
+  end
+  
+  target 'PlatformRoutingTests' do
+    project '../PlatformRouting/PlatformRouting'
+    ios_ui_pods
+  end
+  
+  target 'ParticlesKit' do
+    project '../ParticlesKit/ParticlesKit'
+    ios_util_pods
+  end
+  
+  target 'ParticlesKitTests' do
+    project '../ParticlesKit/ParticlesKit'
+    ios_util_pods
+  end
+  
+  target 'ParticlesCommonModels' do
+    project '../ParticlesCommonModels/ParticlesCommonModels'
+    ios_util_pods
+  end
+  
+  target 'ParticlesCommonModelsTests' do
+    project '../ParticlesCommonModels/ParticlesCommonModels'
+    ios_util_pods
+  end
+  
+  target 'PlatformParticles' do
+    project '../PlatformParticles/PlatformParticles'
+    ios_ui_pods
+  end
+  
+  target 'PlatformParticlesTests' do
+    project '../PlatformParticles/PlatformParticles'
+    ios_ui_pods
+  end
+  
+  target 'WebParticles' do
+    project '../WebParticles/WebParticles'
+    ios_ui_pods
+  end
+
+  target 'WebParticlesTests' do
+    project '../WebParticles/WebParticles'
+    ios_ui_pods
+  end
+
+  target 'JedioKit' do
+    project '../JedioKit/JedioKit'
+    ios_util_pods
+  end
+  
+  target 'JedioKitTests' do
+    project '../JedioKit/JedioKit'
+    ios_util_pods
+  end
+  
+  target 'AppsFlyerStaticInjections' do
+    project '../AppsFlyerStaticInjections/AppsFlyerStaticInjections'
+    util_pods
+    appsflyer_pods
+  end
+  
+  target 'StatsigInjections' do
+    project '../StatsigInjections/StatsigInjections'
+    ios_util_pods
+    statsig_pods
+  end
+
+  target 'FirebaseStaticInjections' do
+    project '../FirebaseStaticInjections/FirebaseStaticInjections'
+    ios_util_pods
+    firebase_pods
+    crashlytics_pods
+  end
+  
+  target 'FirebaseStaticInjectionsTests' do
+    project '../FirebaseStaticInjections/FirebaseStaticInjections'
+    ios_util_pods
+    firebase_pods
+    crashlytics_pods
+  end
+  
+  target 'AmplitudeInjections' do
+    project '../AmplitudeInjections/AmplitudeInjections'
+    ios_util_pods
+    amplitude_pods
+  end
+  
+  target 'AmplitudeInjectionsTests' do
+    project '../AmplitudeInjections/AmplitudeInjections'
+    ios_util_pods
+    amplitude_pods
+  end
+  
+  target 'CameraParticles' do
+    project '../CameraParticles/CameraParticles'
+    ios_ui_pods
+  end
+  
+  target 'CameraParticlesTests' do
+    project '../CameraParticles/CameraParticles'
+    ios_ui_pods
+  end
+  
+  target 'dydxViews' do
+    project '../dydx/dydxViews/dydxViews'
+    ios_ui_pods
+    swifiui_pods
+  end
+  
+  target 'dydxViewsTests' do
+    project '../dydx/dydxViews/dydxViews'
+    ios_ui_pods
+    swifiui_pods
+  end
+
+  target 'dydxAnalytics' do
+    project '../dydx/dydxAnalytics/dydxAnalytics'
+    ios_util_pods
+  end
+  
+  target 'dydxPresenters' do
+    project '../dydx/dydxPresenters/dydxPresenters'
+    ios_util_pods
+    ios_ui_pods
+    abacus_pods
+  end
+  
+  target 'dydxPresentersTests' do
+    project '../dydx/dydxPresenters/dydxPresenters'
+    ios_util_pods
+    ios_ui_pods
+    abacus_pods
+  end
+  
+  target 'dydxStateManager' do
+    project '../dydx/dydxStateManager/dydxStateManager'
+    ios_util_pods
+    abacus_pods
+  end
+  
+  target 'dydxStateManagerTests' do
+    project '../dydx/dydxStateManager/dydxStateManager'
+    ios_util_pods
+    abacus_pods
+  end
+  
+  target 'dydxFormatter' do
+    project '../dydx/dydxFormatter/dydxFormatter'
+    ios_ui_pods
+    statsig_pods
+  end
+  
+  target 'dydxFormatterTests' do
+    project '../dydx/dydxFormatter/dydxFormatter'
+    ios_ui_pods
+  end
+  
+  target 'dydxChart' do
+    project '../dydx/dydxChart/dydxChart'
+    ios_ui_pods
+  end
+  
+  target 'dydxChartTests' do
+    project '../dydx/dydxChart/dydxChart'
+    ios_ui_pods
+  end
+  
+  target 'dydxCartera' do
+    project '../dydx/dydxCartera/dydxCartera'
+    ios_ui_pods
+  end
+  
+  target 'dydxCarteraTests' do
+    project '../dydx/dydxCartera/dydxCartera'
+    ios_ui_pods
+  end
+
+  target 'dydxV4' do
+    project '../dydxV4/dydxV4'
+    ios_ui_pods
+    swifiui_pods
+    firebase_pods
+    crashlytics_pods
+    appsflyer_pods
+    amplitude_pods
+    statsig_pods
+    abacus_pods
+  end
+  
+  target 'dydxV4Tests' do
+    project '../dydxV4/dydxV4'
+    ios_ui_pods
+    swifiui_pods
+    firebase_pods
+    crashlytics_pods
+    appsflyer_pods
+    amplitude_pods
+    statsig_pods
+    abacus_pods
+  end
+  
+#  target 'NotificationExtensionV4' do
+#    project '../dydxV4/dydxV4'
+#    firebase_pods_extension
+#  end
+  
+  
+  post_install do |installer|
+      installer.pods_project.targets.each do |target|
+          target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+            config.build_settings['SWIFT_VERSION'] = '5.0'
+            if config.base_configuration_reference
+              xcconfig_path = config.base_configuration_reference.real_path
+              xcconfig = File.read(xcconfig_path)
+              xcconfig_mod = xcconfig.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR")
+              File.open(xcconfig_path, "w") { |file| file << xcconfig_mod }
+            end
+          end
+      end
+  end
+end
+
+class Pod::Target::BuildSettings::AggregateTargetSettings
+    alias_method :ld_runpath_search_paths_original, :ld_runpath_search_paths
+
+    def ld_runpath_search_paths
+        return ld_runpath_search_paths_original unless configuration_name == "Debug"
+        return (ld_runpath_search_paths_original || []) + (framework_search_paths || [])
+    end
+end
+
+class Pod::Target::BuildSettings::PodTargetSettings
+    alias_method :ld_runpath_search_paths_original, :ld_runpath_search_paths
+
+    def ld_runpath_search_paths
+        return (ld_runpath_search_paths_original || []) + (framework_search_paths || [])
+    end
+end

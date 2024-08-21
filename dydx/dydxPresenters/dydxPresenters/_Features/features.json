@@ -1,0 +1,98 @@
+[
+    {
+        "title":"Dev Testing",
+        "input":"1",
+        "fields":[
+            {
+                "title":{
+                    "text":"Deployment Config"
+                },
+                "field":{
+                    "field":"deployment_url",
+                    "optional":true,
+                    "type" : "text"
+                }
+            },
+            {
+                "title":{
+                    "text":"Force Mainnet"
+                },
+                "field":{
+                    "field":"force_mainnet",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : 1
+                        },
+                        {
+                            "text": "no",
+                            "value" : "0"
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Use skip"
+                },
+                "field":{
+                    "field":"ff_skip_migration",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : 1
+                        },
+                        {
+                            "text": "no",
+                            "value" : 0
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Vault"
+                },
+                "field":{
+                    "field":"ff_vault_enabled",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : 1
+                        },
+                        {
+                            "text": "no",
+                            "value" : 0
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Prediction Marktes"
+                },
+                "field":{
+                    "field":"ff_show_prediction_markets_ui",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : 1
+                        },
+                        {
+                            "text": "no",
+                            "value" : 0
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+]

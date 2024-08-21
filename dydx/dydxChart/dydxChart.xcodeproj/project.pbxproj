@@ -1,0 +1,658 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		029E0FDA29ADB41400FE271C /* dydxChart.docc in Sources */ = {isa = PBXBuildFile; fileRef = 029E0FD929ADB41400FE271C /* dydxChart.docc */; };
+		029E0FE029ADB41400FE271C /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E0FD529ADB41400FE271C /* dydxChart.framework */; };
+		029E0FE529ADB41400FE271C /* dydxChartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E0FE429ADB41400FE271C /* dydxChartTests.swift */; };
+		029E0FE629ADB41400FE271C /* dydxChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 029E0FD829ADB41400FE271C /* dydxChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		029E10BE29ADB44C00FE271C /* PercentAxisFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E109829ADB43E00FE271C /* PercentAxisFormatter.swift */; };
+		029E10BF29ADB44C00FE271C /* FundingRatePercentAxisFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E109929ADB43E00FE271C /* FundingRatePercentAxisFormatter.swift */; };
+		029E10C029ADB44C00FE271C /* DateTimeAxisFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E109729ADB43E00FE271C /* DateTimeAxisFormatter.swift */; };
+		029E10C129ADB44C00FE271C /* PriceAxisFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E109629ADB43E00FE271C /* PriceAxisFormatter.swift */; };
+		02FF09D329AE70B500781EDA /* dydxFormatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FF09CE29AE708D00781EDA /* dydxFormatter.framework */; };
+		07EC1644BC532870854819C0 /* Pods_iOS_dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF050BD70FA637BB206B06D /* Pods_iOS_dydxChart.framework */; };
+		AB18C20F80CC942AC19B9BA1 /* Pods_iOS_dydxChartTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16D65AC601DBEAB95CFAD807 /* Pods_iOS_dydxChartTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		029E0FE129ADB41400FE271C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 029E0FCC29ADB41400FE271C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 029E0FD429ADB41400FE271C;
+			remoteInfo = dydxChart;
+		};
+		02FF09CD29AE708D00781EDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02FF09C829AE708D00781EDA /* dydxFormatter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02841E2929AD6E5500C0E7CC;
+			remoteInfo = dydxFormatter;
+		};
+		02FF09CF29AE708D00781EDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02FF09C829AE708D00781EDA /* dydxFormatter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02841E3329AD6E5500C0E7CC;
+			remoteInfo = dydxFormatterTests;
+		};
+		02FF09D129AE70AC00781EDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02FF09C829AE708D00781EDA /* dydxFormatter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02841E2829AD6E5500C0E7CC;
+			remoteInfo = dydxFormatter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		029E0FD529ADB41400FE271C /* dydxChart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxChart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		029E0FD829ADB41400FE271C /* dydxChart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dydxChart.h; sourceTree = "<group>"; };
+		029E0FD929ADB41400FE271C /* dydxChart.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = dydxChart.docc; sourceTree = "<group>"; };
+		029E0FDF29ADB41400FE271C /* dydxChartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dydxChartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		029E0FE429ADB41400FE271C /* dydxChartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxChartTests.swift; sourceTree = "<group>"; };
+		029E109629ADB43E00FE271C /* PriceAxisFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceAxisFormatter.swift; sourceTree = "<group>"; };
+		029E109729ADB43E00FE271C /* DateTimeAxisFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeAxisFormatter.swift; sourceTree = "<group>"; };
+		029E109829ADB43E00FE271C /* PercentAxisFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentAxisFormatter.swift; sourceTree = "<group>"; };
+		029E109929ADB43E00FE271C /* FundingRatePercentAxisFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundingRatePercentAxisFormatter.swift; sourceTree = "<group>"; };
+		02FF09C829AE708D00781EDA /* dydxFormatter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFormatter.xcodeproj; path = ../dydxFormatter/dydxFormatter.xcodeproj; sourceTree = "<group>"; };
+		16D65AC601DBEAB95CFAD807 /* Pods_iOS_dydxChartTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxChartTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FF050BD70FA637BB206B06D /* Pods_iOS_dydxChart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxChart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BBB5D3F0189D156906DF9E3 /* Pods-iOS-dydxChart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxChart.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxChart/Pods-iOS-dydxChart.debug.xcconfig"; sourceTree = "<group>"; };
+		8F5B0E4DA8C1D9C579D6FE21 /* Pods-iOS-dydxChartTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxChartTests.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxChartTests/Pods-iOS-dydxChartTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C67106170F4DAA9D868F1D6A /* Pods-iOS-dydxChartTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxChartTests.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxChartTests/Pods-iOS-dydxChartTests.release.xcconfig"; sourceTree = "<group>"; };
+		D2E8352D11B60C09AD54A4F5 /* Pods-iOS-dydxChart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxChart.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxChart/Pods-iOS-dydxChart.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		029E0FD229ADB41400FE271C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02FF09D329AE70B500781EDA /* dydxFormatter.framework in Frameworks */,
+				07EC1644BC532870854819C0 /* Pods_iOS_dydxChart.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		029E0FDC29ADB41400FE271C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				029E0FE029ADB41400FE271C /* dydxChart.framework in Frameworks */,
+				AB18C20F80CC942AC19B9BA1 /* Pods_iOS_dydxChartTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		029E0FCB29ADB41400FE271C = {
+			isa = PBXGroup;
+			children = (
+				02FF09C829AE708D00781EDA /* dydxFormatter.xcodeproj */,
+				029E0FD729ADB41400FE271C /* dydxChart */,
+				029E0FE329ADB41400FE271C /* dydxChartTests */,
+				029E0FD629ADB41400FE271C /* Products */,
+				EA7A95521EECECD03C458733 /* Pods */,
+				13829D76DEE643D478CAE08E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		029E0FD629ADB41400FE271C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				029E0FD529ADB41400FE271C /* dydxChart.framework */,
+				029E0FDF29ADB41400FE271C /* dydxChartTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		029E0FD729ADB41400FE271C /* dydxChart */ = {
+			isa = PBXGroup;
+			children = (
+				029E109A29ADB43E00FE271C /* _Graphing */,
+				029E0FD829ADB41400FE271C /* dydxChart.h */,
+				029E0FD929ADB41400FE271C /* dydxChart.docc */,
+			);
+			path = dydxChart;
+			sourceTree = "<group>";
+		};
+		029E0FE329ADB41400FE271C /* dydxChartTests */ = {
+			isa = PBXGroup;
+			children = (
+				029E0FE429ADB41400FE271C /* dydxChartTests.swift */,
+			);
+			path = dydxChartTests;
+			sourceTree = "<group>";
+		};
+		029E109A29ADB43E00FE271C /* _Graphing */ = {
+			isa = PBXGroup;
+			children = (
+				029E109629ADB43E00FE271C /* PriceAxisFormatter.swift */,
+				029E109729ADB43E00FE271C /* DateTimeAxisFormatter.swift */,
+				029E109829ADB43E00FE271C /* PercentAxisFormatter.swift */,
+				029E109929ADB43E00FE271C /* FundingRatePercentAxisFormatter.swift */,
+			);
+			path = _Graphing;
+			sourceTree = "<group>";
+		};
+		02FF09C929AE708D00781EDA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02FF09CE29AE708D00781EDA /* dydxFormatter.framework */,
+				02FF09D029AE708D00781EDA /* dydxFormatterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		13829D76DEE643D478CAE08E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2FF050BD70FA637BB206B06D /* Pods_iOS_dydxChart.framework */,
+				16D65AC601DBEAB95CFAD807 /* Pods_iOS_dydxChartTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA7A95521EECECD03C458733 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7BBB5D3F0189D156906DF9E3 /* Pods-iOS-dydxChart.debug.xcconfig */,
+				D2E8352D11B60C09AD54A4F5 /* Pods-iOS-dydxChart.release.xcconfig */,
+				8F5B0E4DA8C1D9C579D6FE21 /* Pods-iOS-dydxChartTests.debug.xcconfig */,
+				C67106170F4DAA9D868F1D6A /* Pods-iOS-dydxChartTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		029E0FD029ADB41400FE271C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				029E0FE629ADB41400FE271C /* dydxChart.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		029E0FD429ADB41400FE271C /* dydxChart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 029E0FE929ADB41400FE271C /* Build configuration list for PBXNativeTarget "dydxChart" */;
+			buildPhases = (
+				B3A05317961A5FCB006401BA /* [CP] Check Pods Manifest.lock */,
+				029E0FD029ADB41400FE271C /* Headers */,
+				029E0FD129ADB41400FE271C /* Sources */,
+				029E0FD229ADB41400FE271C /* Frameworks */,
+				029E0FD329ADB41400FE271C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				02FF09D229AE70AC00781EDA /* PBXTargetDependency */,
+			);
+			name = dydxChart;
+			productName = dydxChart;
+			productReference = 029E0FD529ADB41400FE271C /* dydxChart.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		029E0FDE29ADB41400FE271C /* dydxChartTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 029E0FEC29ADB41400FE271C /* Build configuration list for PBXNativeTarget "dydxChartTests" */;
+			buildPhases = (
+				B71D1D2134B10BCE888B6686 /* [CP] Check Pods Manifest.lock */,
+				029E0FDB29ADB41400FE271C /* Sources */,
+				029E0FDC29ADB41400FE271C /* Frameworks */,
+				029E0FDD29ADB41400FE271C /* Resources */,
+				A8CAB2DD5605C20453ED8183 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				029E0FE229ADB41400FE271C /* PBXTargetDependency */,
+			);
+			name = dydxChartTests;
+			productName = dydxChartTests;
+			productReference = 029E0FDF29ADB41400FE271C /* dydxChartTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		029E0FCC29ADB41400FE271C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					029E0FD429ADB41400FE271C = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					029E0FDE29ADB41400FE271C = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 029E0FCF29ADB41400FE271C /* Build configuration list for PBXProject "dydxChart" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 029E0FCB29ADB41400FE271C;
+			productRefGroup = 029E0FD629ADB41400FE271C /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 02FF09C929AE708D00781EDA /* Products */;
+					ProjectRef = 02FF09C829AE708D00781EDA /* dydxFormatter.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				029E0FD429ADB41400FE271C /* dydxChart */,
+				029E0FDE29ADB41400FE271C /* dydxChartTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		02FF09CE29AE708D00781EDA /* dydxFormatter.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxFormatter.framework;
+			remoteRef = 02FF09CD29AE708D00781EDA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02FF09D029AE708D00781EDA /* dydxFormatterTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = dydxFormatterTests.xctest;
+			remoteRef = 02FF09CF29AE708D00781EDA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		029E0FD329ADB41400FE271C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		029E0FDD29ADB41400FE271C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A8CAB2DD5605C20453ED8183 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxChartTests/Pods-iOS-dydxChartTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxChartTests/Pods-iOS-dydxChartTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxChartTests/Pods-iOS-dydxChartTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3A05317961A5FCB006401BA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxChart-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B71D1D2134B10BCE888B6686 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxChartTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		029E0FD129ADB41400FE271C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				029E10C029ADB44C00FE271C /* DateTimeAxisFormatter.swift in Sources */,
+				029E0FDA29ADB41400FE271C /* dydxChart.docc in Sources */,
+				029E10BE29ADB44C00FE271C /* PercentAxisFormatter.swift in Sources */,
+				029E10BF29ADB44C00FE271C /* FundingRatePercentAxisFormatter.swift in Sources */,
+				029E10C129ADB44C00FE271C /* PriceAxisFormatter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		029E0FDB29ADB41400FE271C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				029E0FE529ADB41400FE271C /* dydxChartTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		029E0FE229ADB41400FE271C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 029E0FD429ADB41400FE271C /* dydxChart */;
+			targetProxy = 029E0FE129ADB41400FE271C /* PBXContainerItemProxy */;
+		};
+		02FF09D229AE70AC00781EDA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxFormatter;
+			targetProxy = 02FF09D129AE70AC00781EDA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		029E0FE729ADB41400FE271C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		029E0FE829ADB41400FE271C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		029E0FEA29ADB41400FE271C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BBB5D3F0189D156906DF9E3 /* Pods-iOS-dydxChart.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxChart;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		029E0FEB29ADB41400FE271C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2E8352D11B60C09AD54A4F5 /* Pods-iOS-dydxChart.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxChart;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		029E0FED29ADB41400FE271C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F5B0E4DA8C1D9C579D6FE21 /* Pods-iOS-dydxChartTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxChartTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		029E0FEE29ADB41400FE271C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C67106170F4DAA9D868F1D6A /* Pods-iOS-dydxChartTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75C6UARB5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxChartTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		029E0FCF29ADB41400FE271C /* Build configuration list for PBXProject "dydxChart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				029E0FE729ADB41400FE271C /* Debug */,
+				029E0FE829ADB41400FE271C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		029E0FE929ADB41400FE271C /* Build configuration list for PBXNativeTarget "dydxChart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				029E0FEA29ADB41400FE271C /* Debug */,
+				029E0FEB29ADB41400FE271C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		029E0FEC29ADB41400FE271C /* Build configuration list for PBXNativeTarget "dydxChartTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				029E0FED29ADB41400FE271C /* Debug */,
+				029E0FEE29ADB41400FE271C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 029E0FCC29ADB41400FE271C /* Project object */;
+}
