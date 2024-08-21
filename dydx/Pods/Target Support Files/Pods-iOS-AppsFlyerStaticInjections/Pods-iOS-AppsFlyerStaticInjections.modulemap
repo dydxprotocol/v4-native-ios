@@ -1,0 +1,6 @@
+framework module Pods_iOS_AppsFlyerStaticInjections {
+  umbrella header "Pods-iOS-AppsFlyerStaticInjections-umbrella.h"
+
+  export *
+  module * { export * }
+}

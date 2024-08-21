@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Redirect output to stderr.
+exec 1>&2
+
+# Stash any unstaged changes
+git stash -q --keep-index
+
+# Run SwiftLint only on staged files
+git diff --cached --name-only --diff-filter=ACM | grep "\.swift$" | grep --exclude="dydx/Pods" | while read file; do
+  swiftlint --fix --format "$file" 2>/dev/null
+done
+
+# Stash the unstaged changes that were stashed previously
+git stash pop -q
+
+exit 0
