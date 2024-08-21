@@ -15,18 +15,12 @@ import dydxChart
 
 
 public class dydxVaultChartViewModel: PlatformViewModel {
-    @Published var selectedValueType: ValueTypeOption = .pnl
-    @Published var selectedValueTime: ValueTimeOption = .oneDay {
-        didSet {
-            //TODO: remove, just for testing
-            guard oldValue != selectedValueTime else { return }
-            setEntries(selectedValueTime: selectedValueTime, selectedValueType: selectedValueType)
-        }
-    }
+    @Published public var selectedValueType: ValueTypeOption = .pnl
+    @Published public var selectedValueTime: ValueTimeOption = .oneDay
     
     fileprivate let valueTypeOptions = ValueTypeOption.allCases
     fileprivate let valueTimeOptions = ValueTimeOption.allCases
-
+    
     fileprivate let lineChart = {
         let lineChart = LineChartView()
         lineChart.data = LineChartData()
@@ -55,23 +49,10 @@ public class dydxVaultChartViewModel: PlatformViewModel {
         return lineChart
     }()
     
-    // TODO: replace with actual data, delete cancellables
-    public func setEntries(entries: [ChartDataEntry] = [], selectedValueTime newSelectedValueTime: ValueTimeOption? = nil, selectedValueType newSelectedValueType: ValueTypeOption? = nil) {
-        if let newSelectedValueType {
-            selectedValueType = newSelectedValueType
-        }
-        if let newSelectedValueTime {
-            selectedValueTime = newSelectedValueTime
-        }
-        //TODO: remove
-        // this is just for testing
-        let now = Date().timeIntervalSince1970
-        let finalTimeSecondsAway = selectedValueTime == .oneDay ? 3600.0*24.0 : selectedValueTime == .sevenDays ? 3600.0*24.0*7.0 : 3600.0*24.0*30.0
-        let numEntries = Int.random(in: 0..<100)
-        let entries = (0..<numEntries).map { i in
-            ChartDataEntry(x: now + Double(i)/Double(numEntries) * finalTimeSecondsAway, y: Double.random(in: 0..<100))
-        }
-
+    public init() {}
+    
+    // TODO: replace with actual data
+    public func setEntries(entries: [ChartDataEntry] = []) {
         let dataSet = LineChartDataSet(entries: entries)
         let isPositive = (entries.last?.y ?? -Double.infinity) >= (entries.first?.y ?? -Double.infinity)
         let color = isPositive ? ThemeSettings.positiveColor.uiColor : ThemeSettings.negativeColor.uiColor
@@ -101,17 +82,6 @@ public class dydxVaultChartViewModel: PlatformViewModel {
         lineChart.xAxis.valueFormatter = selectedValueTime.valueFormatter
         
         lineChart.data = LineChartData(dataSet: dataSet)
-    }
-
-    // TODO: delete and replace with real data
-    private var cancellables = Set<AnyCancellable>()
-    init() {
-        super.init()
-        Timer.publish(every: 1, triggerNow: true)
-            .sink { [weak self] _ in
-                self?.setEntries()
-            }
-            .store(in: &cancellables)
     }
     
     public enum ValueTypeOption: CaseIterable, RadioButtonContentDisplayable {
