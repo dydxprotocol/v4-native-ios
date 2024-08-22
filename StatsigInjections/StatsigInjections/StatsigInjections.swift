@@ -98,7 +98,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
                     // this may change if we need FF pre-launch
 //                    completion()
                 }
-            Console.shared.log("analytics log | Statsig initialized (local only, async feature flags fetch ongoing)")
+            Console.shared.log("analytics log | Statsig initialized (local only, async feature flags fetch ongoing) | env: \(environment.debugDescription) | userId: \(userId)")
             initializationState = .initializedRemoteLoading
         }
         completion()
