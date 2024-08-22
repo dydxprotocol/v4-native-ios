@@ -98,7 +98,7 @@ private struct dydxVaultView: View {
     private var titleText: some View {
         Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.VAULT", params: nil) ?? "")
             .themeColor(foreground: .textPrimary)
-            .themeFont(fontType: .base, fontSize: .large)
+            .themeFont(fontType: .plus, fontSize: .largest)
     }
 
     private var learnMore: some View {
