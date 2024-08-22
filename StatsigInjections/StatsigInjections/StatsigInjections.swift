@@ -18,7 +18,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
     
     private let apiKey: String
     private let userId: String
-    private let environment: StatsigEnvironment
+    private let environment: Environment
     // ensures feature flag values stay constant throughout the app session after they are used the first time, even if they are initialized to null
     private var sessionValues = [String: Availabilty]()
     
@@ -28,7 +28,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
         case unavailable
     }
     
-    public enum Environment {
+    public enum Environment: CustomDebugStringConvertible {
         case production
         case development
         
@@ -40,12 +40,21 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
                 return StatsigEnvironment(tier: .Development)
             }
         }
+        
+        public var debugDescription: String {
+            switch self {
+            case .production:
+                return "production"
+            case .development:
+                return "development"
+            }
+        }
     }
     
     public init(apiKey: String, userId: String, environment: Environment) {
         self.apiKey = apiKey
         self.userId = userId
-        self.environment = environment.statsigEnvironemnt
+        self.environment = environment
     }
     
     static public var shared: StatsigFeatureFlagsProvider?
@@ -64,7 +73,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
             Statsig.start(sdkKey: apiKey, user: StatsigUser(userID: userId), options: StatsigOptions(
                 initTimeout: nil,
                 disableCurrentVCLogging: true,
-                environment: environment,
+                environment: environment.statsigEnvironemnt,
                 enableAutoValueUpdate: true,
                 autoValueUpdateIntervalSec: nil,
                 overrideStableID: nil,
@@ -79,9 +88,9 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
                 userValidationCallback: nil,
                 customCacheKey: nil,
                 urlSession: nil)) {[weak self] error in
-                    Console.shared.log("Statsig feature flags initialized")
+                    Console.shared.log("analytics log | Statsig feature flags finished initial fetch")
                     if let error {
-                        Console.shared.log("Statsig feature flags failed to initialize: \(error)")
+                        Console.shared.log("analytics log | Statsig feature flags finished initial fetch with error: \(error)")
                         return
                     }
                     self?.initializationState = .initializedRemoteLoaded
@@ -89,6 +98,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
                     // this may change if we need FF pre-launch
 //                    completion()
                 }
+            Console.shared.log("analytics log | Statsig initialized (local only, async feature flags fetch ongoing) | env: \(environment.debugDescription) | userId: \(userId)")
             initializationState = .initializedRemoteLoading
         }
         completion()
