@@ -19,6 +19,8 @@ public class dydxVaultViewModel: PlatformViewModel {
     @Published public var positions: [dydxVaultPositionViewModel]?
     @Published public var cancelAction: (() -> Void)?
     @Published public var learnMoreAction: (() -> Void)?
+    @Published public var withdrawAction: (() -> Void)?
+    @Published public var depositAction: (() -> Void)?
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
@@ -33,44 +35,49 @@ private struct dydxVaultView: View {
     @ObservedObject var viewModel: dydxVaultViewModel
 
     var body: some View {
-        VStack {
-            Spacer().frame(height: 12)
-            titleRow
-            Spacer().frame(height: 20)
-            ScrollView {
-                LazyVStack(pinnedViews: [.sectionHeaders]) {
-                    VStack(spacing: 0) {
-                        vaultPnlRow
-                        Spacer().frame(height: 16)
-                        div
-                        Spacer().frame(height: 16)
-                        aprTvlRow
-                        Spacer().frame(height: 16)
-                        div
-                        Spacer().frame(height: 16)
-                        chart
-                        Spacer().frame(height: 16)
-                        div
-                        Spacer().frame(height: 16)
-                    }
-                    Section(header: positionsStickyHeader) {
-                        positionsList
+        ZStack(alignment: .bottom) {
+            VStack {
+                Spacer().frame(height: 12)
+                titleRow
+                Spacer().frame(height: 20)
+                ScrollView {
+                    LazyVStack(pinnedViews: [.sectionHeaders]) {
+                        VStack(spacing: 0) {
+                            vaultPnlRow
+                            Spacer().frame(height: 16)
+                            div
+                            Spacer().frame(height: 16)
+                            aprTvlRow
+                            Spacer().frame(height: 16)
+                            div
+                            Spacer().frame(height: 16)
+                            chart
+                            Spacer().frame(height: 16)
+                            div
+                            Spacer().frame(height: 16)
+                        }
+                        Section(header: positionsStickyHeader) {
+                            positionsList
+                            Spacer().frame(height: 96)
+                        }
                     }
                 }
             }
+            buttonStack
+                .padding(.bottom, 32)
         }
         .frame(maxWidth: .infinity)
         .themeColor(background: .layer2)
     }
 
-    var div: some View {
+    private var div: some View {
         Rectangle()
             .themeColor(foreground: .borderDefault)
             .frame(height: 1)
     }
 
     // MARK: - Header
-    var titleRow: some View {
+    private var titleRow: some View {
         HStack(spacing: 16) {
             titleImage
             titleText
@@ -80,7 +87,7 @@ private struct dydxVaultView: View {
         .padding(.horizontal, 16)
     }
 
-    var titleImage: some View {
+    private var titleImage: some View {
         PlatformIconViewModel(type: .asset(name: "icon_token", bundle: .dydxView),
                               clip: .noClip,
                               size: .init(width: 40, height: 40),
@@ -88,13 +95,13 @@ private struct dydxVaultView: View {
         .createView()
     }
 
-    var titleText: some View {
+    private var titleText: some View {
         Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.VAULT", params: nil) ?? "")
             .themeColor(foreground: .textPrimary)
             .themeFont(fontType: .base, fontSize: .large)
     }
 
-    var learnMore: some View {
+    private var learnMore: some View {
         let image = Image("icon_external_link", bundle: .dydxView)
         return (Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.LEARN_MORE", params: nil) ?? "") + Text(" ") + Text(image))
             .themeColor(foreground: .textSecondary)
@@ -102,8 +109,8 @@ private struct dydxVaultView: View {
             .padding(.trailing, 12)
     }
 
-    // MARK: - Section 1
-    var vaultPnlRow: some View {
+    // MARK: - Section 1 - PNL
+    private var vaultPnlRow: some View {
         HStack(spacing: 15) {
             vaultBalanceView
             pnlView
@@ -112,7 +119,7 @@ private struct dydxVaultView: View {
         .padding(.horizontal, 16)
     }
 
-    var vaultBalanceView: some View {
+    private var vaultBalanceView: some View {
         VStack(spacing: 4) {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.YOUR_VAULT_BALANCE", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
@@ -127,7 +134,7 @@ private struct dydxVaultView: View {
         .borderAndClip(style: .cornerRadius(10), borderColor: .borderDefault)
     }
 
-    var pnlView: some View {
+    private var pnlView: some View {
         VStack(spacing: 4) {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.YOUR_ALL_TIME_PNL", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
@@ -150,8 +157,8 @@ private struct dydxVaultView: View {
         .borderAndClip(style: .cornerRadius(10), borderColor: .borderDefault)
     }
 
-    // MARK: - Section 2
-    var aprTvlRow: some View {
+    // MARK: - Section 2 - APR/TVL
+    private var aprTvlRow: some View {
         HStack(spacing: 32) {
             aprTitleValue
             tvlTitleValue
@@ -159,7 +166,7 @@ private struct dydxVaultView: View {
         .leftAligned()
     }
 
-    var aprTitleValue: some View {
+    private var aprTitleValue: some View {
         VStack(spacing: 4) {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.VAULT_THIRTY_DAY_APR", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
@@ -170,7 +177,7 @@ private struct dydxVaultView: View {
         }
     }
 
-    var tvlTitleValue: some View {
+    private var tvlTitleValue: some View {
         VStack(spacing: 4) {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.TVL", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
@@ -182,14 +189,14 @@ private struct dydxVaultView: View {
     }
 
     // MARK: - Section 3 - graph
-    var chart: some View {
+    private var chart: some View {
         viewModel.vaultChart?
             .createView()
             .frame(height: 174)
     }
 
     // MARK: - Section 4 - positions
-    var openPositionsHeader: some View {
+    private var openPositionsHeader: some View {
         HStack(spacing: 8) {
             Text(DataLocalizer.shared?.localize(path: "APP.TRADE.OPEN_POSITIONS", params: nil) ?? "")
                 .themeColor(foreground: .textSecondary)
@@ -217,8 +224,8 @@ private struct dydxVaultView: View {
         }
         .themeColor(background: .layer2)
     }
-
-    var positionsColumnsHeader: some View {
+    
+    private var positionsColumnsHeader: some View {
         HStack(spacing: dydxVaultPositionViewModel.interSectionPadding) {
             Group {
                 Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.MARKET", params: nil) ?? "")
@@ -242,13 +249,54 @@ private struct dydxVaultView: View {
         }
         .padding(.horizontal, 16)
     }
-
-    var positionsList: some View {
+    
+    private var positionsList: some View {
         ForEach(viewModel.positions ?? [], id: \.id) { position in
             position.createView()
                 .centerAligned()
                 .frame(height: 53)
             div
+        }
+        .padding(.horizontal, 16)
+    }
+    
+    // MARK: Floating Buttons
+    @ViewBuilder
+    private var withdrawButton: some View {
+        if let withdrawAction = viewModel.withdrawAction {
+            let content = Text(localizerPathKey: "APP.GENERAL.WITHDRAW")
+                .themeFont(fontType: .plus, fontSize: .medium)
+                .themeColor(foreground: .textPrimary)
+                .wrappedViewModel
+            
+            PlatformButtonViewModel(content: content,
+                                    type: .defaultType(),
+                                    state: .secondary,
+                                    action: withdrawAction)
+            .createView()
+        }
+    }
+    
+    @ViewBuilder
+    private var depositButton: some View {
+        if let depositAction = viewModel.depositAction {
+            let content = Text(localizerPathKey: "APP.GENERAL.DEPOSIT")
+                .themeFont(fontType: .plus, fontSize: .medium)
+                .themeColor(foreground: .textPrimary)
+                .wrappedViewModel
+            
+            PlatformButtonViewModel(content: content,
+                                    type: .defaultType(),
+                                    state: .primary,
+                                    action: depositAction)
+            .createView()
+        }
+    }
+    
+    private var buttonStack: some View {
+        HStack(spacing: 12) {
+            withdrawButton
+            depositButton
         }
         .padding(.horizontal, 16)
     }
