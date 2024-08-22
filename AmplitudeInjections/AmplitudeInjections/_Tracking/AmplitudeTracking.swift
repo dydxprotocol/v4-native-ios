@@ -15,6 +15,7 @@ open class AmplitudeTracking: TransformerTracker {
     
     public init(_ apiKey: String) {
         self.amplitude = Amplitude.init(configuration: .init(apiKey: apiKey))
+        Console.shared.log("analytics log | Amplitude initialized")
         super.init()
     }
     
