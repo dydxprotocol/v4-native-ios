@@ -46,11 +46,11 @@ open class CommonAppDelegate: ParticlesAppDelegate {
 
     override open func injectFeatures(completion: @escaping () -> Void) {
         Console.shared.log("injectFeatures")
-        // these three injections need to happen before app start
-        injectStatsigApiKey()
-        injectFirebase()
-        injectRating()
-        injectAmplitude()
+        
+        // statsig needs to be initialized before FeatureService is initialized
+        // because FeatureService sets remote to be StatsigFeatureFlagsProvider.shared
+        // TODO: remove the ordering dependency
+        injectStatsig()
         let compositeFeatureFlags = CompositeFeatureFlagsProvider()
         switch  Installation.source {
         case .debug, .testFlight:
@@ -60,6 +60,12 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         }
         compositeFeatureFlags.remote = StatsigFeatureFlagsProvider.shared
         FeatureService.shared = compositeFeatureFlags
+        // at least the amplitude injection needs to happen before app start and after FeatureService is initialized because
+        // injectAmplitude triggers abacus initialization which looks at dydxBoolFeatureFlags.force_mainnet
+        // TODO: remove the ordering dependency
+        injectFirebase()
+        injectRating()
+        injectAmplitude()
         FeatureService.shared?.activate { /* [weak self] in */
             Injection.shared?.injectFeatured(completion: completion)
         }
@@ -118,7 +124,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         }
     }
     
-    open func injectStatsigApiKey() {
+    open func injectStatsig() {
         Console.shared.log("injectStatsig")
         let environment: StatsigFeatureFlagsProvider.Environment
         switch  Installation.source {
