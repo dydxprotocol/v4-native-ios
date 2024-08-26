@@ -38,7 +38,8 @@ class dydxClosePositionInputEditViewPresenter: HostedViewPresenter<dydxClosePosi
         options.append(InputSelectOption(value: "0.25", string: "25%"))
         options.append(InputSelectOption(value: "0.50", string: "50%"))
         options.append(InputSelectOption(value: "0.75", string: "75%"))
-        options.append(InputSelectOption(value: "1", string: "100%"))
+        // must be 1.0 so that when double value is parsed as string, it matches for 1
+        options.append(InputSelectOption(value: "1.0", string: "100%"))
         return options
     }()
 
