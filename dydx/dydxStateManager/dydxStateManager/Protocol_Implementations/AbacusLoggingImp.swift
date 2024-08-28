@@ -10,6 +10,14 @@ import Abacus
 import ParticlesKit
 
 final public class AbacusLoggingImp: NSObject, Abacus.LoggingProtocol {
+    public func ddInfo(tag: String, message: String, context: [String: Any]?) {
+        // TODO:
+    }
+
+    public func e(tag: String, message: String, context: [String: Any]?, error: KotlinError?) {
+        ErrorLogging.shared?.e(tag: tag, message: message)
+    }
+
     public func e(tag: String, message: String) {
         ErrorLogging.shared?.e(tag: tag, message: message)
     }

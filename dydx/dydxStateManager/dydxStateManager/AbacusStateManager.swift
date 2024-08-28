@@ -41,7 +41,7 @@ public final class AbacusStateManager: NSObject {
     public var environment: V4Environment? {
         asyncStateManager.environment
     }
-    
+
     public var selectedSubaccountNumber: Int {
        Int(asyncStateManager.subaccountNumber)
     }

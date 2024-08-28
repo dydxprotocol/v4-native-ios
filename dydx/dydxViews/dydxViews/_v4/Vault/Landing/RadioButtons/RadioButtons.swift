@@ -16,7 +16,7 @@ protocol RadioButtonContentDisplayable: Equatable {
 /// A simplified version of TabGroup which supports binding for the selected option and does not require a view builder for each item.
 /// Use TabGroup when the radio buttons are not displaying exclusively Text.
 struct RadioButtonGroup<ButtonItem: RadioButtonContentDisplayable>: View {
-    
+
     @Binding var selected: ButtonItem
 
     let options: [ButtonItem]
@@ -55,11 +55,11 @@ struct RadioButton: View {
     private var verticalSpacer: some View {
         Spacer(minLength: 11)
     }
-    
+
     private var horizontalSpacer: some View {
         Spacer(minLength: 8)
     }
-    
+
     var body: some View {
         Text(displayText)
             .lineLimit(1)

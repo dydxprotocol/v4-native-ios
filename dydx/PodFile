@@ -54,7 +54,7 @@ end
 def util_pods
   pod 'BigInt'
   #pod 'CryptoSwift', '1.5.1'
-  pod 'libPhoneNumber-iOS'
+  pod 'libPhoneNumber-iOS', '~> 0.9.15'
   pod 'KVOController'
   pod 'SimpleKeychain', '~> 0.12.5'
   pod 'CombineExt'
