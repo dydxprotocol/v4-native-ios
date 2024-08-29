@@ -31,7 +31,7 @@ public class dydxVaultViewModel: PlatformViewModel {
 
 private struct dydxVaultView: View {
     @ObservedObject var viewModel: dydxVaultViewModel
-    
+
     var body: some View {
         VStack {
             Spacer().frame(height: 12)
@@ -187,7 +187,7 @@ private struct dydxVaultView: View {
             .createView()
             .frame(height: 174)
     }
-    
+
     // MARK: - Section 4 - positions
     var openPositionsHeader: some View {
         HStack(spacing: 8) {
@@ -217,7 +217,7 @@ private struct dydxVaultView: View {
         }
         .themeColor(background: .layer2)
     }
-    
+
     var positionsColumnsHeader: some View {
         HStack(spacing: dydxVaultPositionViewModel.interSectionPadding) {
             Group {
@@ -242,7 +242,7 @@ private struct dydxVaultView: View {
         }
         .padding(.horizontal, 16)
     }
-    
+
     var positionsList: some View {
         ForEach(viewModel.positions ?? [], id: \.id) { position in
             position.createView()

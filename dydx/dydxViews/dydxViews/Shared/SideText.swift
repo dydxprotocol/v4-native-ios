@@ -50,7 +50,7 @@ public class SideTextViewModel: PlatformViewModel, Hashable {
                 return ""
             }
         }
-        
+
         var color: ThemeColor.SemanticColor {
             switch self {
             case .long, .buy:

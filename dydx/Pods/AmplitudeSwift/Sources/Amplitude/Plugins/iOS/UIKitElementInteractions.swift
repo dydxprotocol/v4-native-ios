@@ -121,21 +121,38 @@ extension UIGestureRecognizer {
         guard state == .ended, let view else { return }
 
         // Block scroll and zoom events for `UIScrollView`.
-        if let scrollView = view as? UIScrollView, self === scrollView.panGestureRecognizer || self === scrollView.pinchGestureRecognizer {
-            return
+        if let scrollView = view as? UIScrollView {
+            if self === scrollView.panGestureRecognizer {
+                return
+            }
+
+#if !os(tvOS)
+            if self === scrollView.pinchGestureRecognizer {
+                return
+            }
+#endif
         }
 
-        let gestureAction: String? = switch self {
-        case is UITapGestureRecognizer: "tap"
-        case is UISwipeGestureRecognizer: "swipe"
-        case is UIPanGestureRecognizer: "pan"
-        case is UILongPressGestureRecognizer: "longPress"
+        let gestureAction: String?
+        switch self {
+        case is UITapGestureRecognizer:
+            gestureAction = "tap"
+        case is UISwipeGestureRecognizer:
+            gestureAction = "swipe"
+        case is UIPanGestureRecognizer:
+            gestureAction = "pan"
+        case is UILongPressGestureRecognizer:
+            gestureAction = "longPress"
 #if !os(tvOS)
-        case is UIPinchGestureRecognizer: "pinch"
-        case is UIRotationGestureRecognizer: "rotation"
-        case is UIScreenEdgePanGestureRecognizer: "screenEdgePan"
+        case is UIPinchGestureRecognizer:
+            gestureAction = "pinch"
+        case is UIRotationGestureRecognizer:
+            gestureAction = "rotation"
+        case is UIScreenEdgePanGestureRecognizer:
+            gestureAction = "screenEdgePan"
 #endif
-        default: nil
+        default:
+            gestureAction = nil
         }
 
         guard let gestureAction else { return }
