@@ -29,7 +29,7 @@ private class dydxMarketInfoViewController: HostingViewController<PlatformView, 
     private var hidePredictionMarketsNotice: Bool {
         SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.hidePredictionMarketsNoticeKey.rawValue) as? Bool ?? false
     }
-    
+
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade" || request?.path == "/market", let presenter = presenter as? dydxMarketInfoViewPresenter {
             let selectedMarketId = request?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
@@ -79,7 +79,7 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
         .trades: fillsPresenter,
         .funding: fundingPresenter
     ]
-    
+
     fileprivate static var hidePredictionMarketsNotice: Bool {
         get { SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.hidePredictionMarketsNoticeKey.rawValue) as? Bool ?? false }
     }
@@ -129,9 +129,9 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
 
     override func start() {
         super.start()
-        
+
         guard let marketId = marketId else { return }
-        
+
         fillsPresenter.filterByMarketId = marketId
         fundingPresenter.filterByMarketId = marketId
         ordersPresenter.filterByMarketId = marketId
@@ -163,7 +163,7 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
                 self?.updatePositionSection(position: position, pendingPosition: pendingPosition)
             }
             .store(in: &subscriptions)
-        
+
     floatTradeInput()
     Publishers.CombineLatest(
         AbacusStateManager.shared.state.marketMap,
@@ -193,7 +193,7 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
          */
         //        AbacusStateManager.shared.setMarket(market: nil)
     }
-    
+
     private func floatTradeInput() {
         if shouldDisplayFullTradeInputOnAppear {
             Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["full": "true", "market": marketId ?? ""]), animated: true, completion: nil)

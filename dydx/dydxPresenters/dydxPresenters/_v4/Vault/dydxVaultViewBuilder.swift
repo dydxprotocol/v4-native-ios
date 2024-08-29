@@ -43,15 +43,15 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
 
         viewModel = dydxVaultViewModel()
         viewModel?.vaultChart = dydxVaultChartViewModel()
-        
-        //TODO: remove & replace, test only
+
+        // TODO: remove & replace, test only
         Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             self.viewModel?.vaultChart?.setEntries(entries: self.generateEntries())
             self.viewModel?.positions = self.generatePositions()
         }
     }
-    
+
     // TODO: remove, just for testing
     private func generateEntries() -> [ChartDataEntry] {
         let selectedValueTime = viewModel?.vaultChart?.selectedValueTime ?? .oneDay
@@ -63,8 +63,8 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
         }
         return entries
     }
-    
-    //TODO: remove
+
+    // TODO: remove
     // this is just for testing
     private func generatePositions() -> [dydxVaultPositionViewModel] {
         return [
@@ -79,7 +79,7 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
             dydxVaultPositionViewModel(assetName: "logo_bitcoin", market: "BTC", side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, token: "BTC", tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
             dydxVaultPositionViewModel(assetName: "logo_ethereum", market: "ETH", side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, token: "ETH", tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
             dydxVaultPositionViewModel(assetName: "logo_bitcoin", market: "BTC", side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, token: "BTC", tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetName: "logo_ethereum", market: "ETH", side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, token: "ETH", tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
+            dydxVaultPositionViewModel(assetName: "logo_ethereum", market: "ETH", side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, token: "ETH", tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) })
         ]
 
     }

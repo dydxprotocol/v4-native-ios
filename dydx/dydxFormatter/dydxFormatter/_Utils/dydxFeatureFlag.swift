@@ -30,18 +30,18 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
             return false
         }
     }
-    
+
     /// dumps the state of remote as local currently knows it to be.
     public static var remoteState: [String: Bool] {
         allCases.reduce(into: [String: Bool]()) { result, flag in
             result[flag.rawValue] = flag.isEnabledOnRemote
         }
     }
-    
+
     private var isEnabledOnRemote: Bool? {
         FeatureService.shared?.isOn(feature: rawValue)
     }
-    
+
     public var isEnabled: Bool {
         if FeatureService.shared == nil {
             Console.shared.log("WARNING: FeatureService not yet set up.")

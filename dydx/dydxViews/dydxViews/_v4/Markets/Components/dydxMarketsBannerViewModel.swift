@@ -12,18 +12,18 @@ import Utilities
 
 public class dydxMarketsBannerViewModel: PlatformViewModel {
     public var navigationAction: (() -> Void)
-    
+
     static var previewValue: dydxMarketsBannerViewModel = {
         let vm = dydxMarketsBannerViewModel(navigationAction: {})
         return vm
     }()
-    
+
     public init(navigationAction: @escaping (() -> Void)) {
         self.navigationAction = navigationAction
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
             return dydxMarketsBannerView(viewModel: self)
                 .wrappedInAnyView()
@@ -33,7 +33,7 @@ public class dydxMarketsBannerViewModel: PlatformViewModel {
 
 private struct dydxMarketsBannerView: View {
     var viewModel: dydxMarketsBannerViewModel
-    
+
     var textStack: some View {
         HStack(alignment: .top, spacing: 6) {
             Text("🇺🇸")
@@ -48,7 +48,7 @@ private struct dydxMarketsBannerView: View {
             }
         }
     }
-    
+
     var navButton: some View {
         Button(action: viewModel.navigationAction) {
             Text("→")
@@ -60,7 +60,7 @@ private struct dydxMarketsBannerView: View {
         .themeColor(background: .layer6)
         .borderAndClip(style: .circle, borderColor: .layer6)
     }
-    
+
     var body: some View {
         HStack(spacing: 0) {
             textStack
