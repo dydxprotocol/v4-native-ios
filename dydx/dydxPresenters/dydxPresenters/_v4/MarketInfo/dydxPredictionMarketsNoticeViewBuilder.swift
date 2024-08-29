@@ -34,12 +34,12 @@ private protocol dydxPredictionMarketsNoticeViewPresenterProtocol: HostedViewPre
 }
 
 private class dydxPredictionMarketsNoticeViewPresenter: HostedViewPresenter<dydxPredictionMarketsNoticeViewModel>, dydxPredictionMarketsNoticeViewPresenterProtocol {
-    
+
     fileprivate static var hidePredictionMarketsNotice: Bool {
         get { SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.hidePredictionMarketsNoticeKey.rawValue) as? Bool ?? false }
         set { SettingsStore.shared?.setValue(newValue, forKey: dydxSettingsStoreKey.hidePredictionMarketsNoticeKey.rawValue) }
     }
-    
+
     override init() {
         super.init()
 
@@ -47,7 +47,7 @@ private class dydxPredictionMarketsNoticeViewPresenter: HostedViewPresenter<dydx
         viewModel?.continueAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
-        
+
         viewModel?.hidePredictionMarketsNotice = Self.hidePredictionMarketsNotice
         viewModel?.$hidePredictionMarketsNotice
             .sink { Self.hidePredictionMarketsNotice = $0 }

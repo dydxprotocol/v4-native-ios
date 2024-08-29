@@ -72,7 +72,7 @@ private class dydxMarginModeViewPresenter: HostedViewPresenter<dydxMarginModeVie
                 self?.updateMarketDisplayId(tradeInput: tradeInput, marketMap: marketMap)
             }
             .store(in: &subscriptions)
-        
+
         AbacusStateManager.shared.state.tradeInput
             .compactMap { $0 }
             .sink {[weak self] input in
@@ -81,7 +81,7 @@ private class dydxMarginModeViewPresenter: HostedViewPresenter<dydxMarginModeVie
             }
             .store(in: &subscriptions)
     }
-    
+
     private func updateMarketDisplayId(tradeInput: Abacus.TradeInput?, marketMap: [String: PerpetualMarket]?) {
         guard let marketDisplayId = marketMap?[tradeInput?.marketId ?? ""]?.displayId else { return }
         viewModel?.marketDisplayId = marketDisplayId

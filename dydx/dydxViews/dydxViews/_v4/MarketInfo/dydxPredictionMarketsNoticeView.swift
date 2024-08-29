@@ -22,7 +22,7 @@ public class dydxPredictionMarketsNoticeViewModel: PlatformViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
             return dydxPredictionMarketsNoticeView(viewModel: self)
                 .wrappedInAnyView()
@@ -49,12 +49,12 @@ private struct dydxPredictionMarketsNoticeView: View {
         .leftAligned()
         .wrappedInAnyView()
     }
-    
+
     var checkboxRow: some View {
         HStack(spacing: 8) {
             ZStack(alignment: .center) {
                 ThemeColor.SemanticColor.layer0.color
-                PlatformIconViewModel(type: .asset(name: "icon_checked", bundle: .dydxView), 
+                PlatformIconViewModel(type: .asset(name: "icon_checked", bundle: .dydxView),
                                       clip: .noClip,
                                       size: .init(width: 15, height: 15),
                                       templateColor: .textPrimary)
@@ -72,7 +72,7 @@ private struct dydxPredictionMarketsNoticeView: View {
         }
         .leftAligned()
     }
-    
+
     func infoRow(imageName: String, titlePathKey: String, descriptionPathKey: String) -> some View {
         HStack(alignment: .center, spacing: 8) {
             PlatformIconViewModel(type: .asset(name: imageName, bundle: .dydxView),
@@ -91,7 +91,7 @@ private struct dydxPredictionMarketsNoticeView: View {
         }
         .leftAligned()
     }
-    
+
     var continueButton: some View {
         let buttonContent =
             Text(DataLocalizer.localize(path: "APP.COMPLIANCE_MODAL.CONTINUE"))
@@ -101,7 +101,7 @@ private struct dydxPredictionMarketsNoticeView: View {
         }
         .createView()
     }
-    
+
     var body: some View {
             VStack(spacing: 16) {
                 title
