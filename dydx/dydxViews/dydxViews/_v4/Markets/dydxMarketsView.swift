@@ -50,14 +50,14 @@ public class dydxMarketsViewModel: PlatformViewModel {
                 ScrollViewReader { proxy in
                     ScrollView(showsIndicators: false) {
                         LazyVStack(pinnedViews: [.sectionHeaders]) {
-                            
+
                             if let banner = self.banner {
                                 banner
                                     .createView()
                                     .padding(.horizontal, 16)
                                     .padding(.top, 12)
                             }
-                            
+
                              self.summary.createView(parentStyle: style)
                                  .themeColor(background: .layer2)
                                  .zIndex(.greatestFiniteMagnitude)

@@ -65,13 +65,11 @@ class SharedMarketPresenter: HostedViewPresenter<SharedMarketViewModel>, SharedM
         }
         // sometimes the descriptions are unavailable, need to check localized output to ensure availability
         if let key = asset?.resources?.primaryDescriptionKey,
-           DataLocalizer.localize(path: "APP.\(key)") != "APP.\(key)"
-        {
+           DataLocalizer.localize(path: "APP.\(key)") != "APP.\(key)" {
             viewModel.primaryDescription = DataLocalizer.localize(path: "APP.\(key)")
         }
         if let key = asset?.resources?.secondaryDescriptionKey,
-           DataLocalizer.localize(path: "APP.\(key)") != "APP.\(key)"
-        {
+           DataLocalizer.localize(path: "APP.\(key)") != "APP.\(key)" {
             viewModel.secondaryDescription = DataLocalizer.localize(path: "APP.\(key)")
         }
         if let websiteLink = asset?.resources?.websiteLink {

@@ -29,7 +29,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     @Published public var pnlAmount: Double
     @Published public var pnlPercentage: Double
     @Published public var sparklineValues: [Double]
-    
+
     fileprivate var sideLeverageAttributedText: AttributedString {
         let attributedSideText = AttributedString(text: side.text, urlString: nil)
             .themeColor(foreground: side.color)
@@ -39,27 +39,27 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
         return (attributedSideText + attributedLeverageText)
                 .themeFont(fontType: .base, fontSize: .smaller)
     }
-    
+
     fileprivate var notionalValueText: String {
         dydxFormatter.shared.dollar(number: notionalValue) ?? "--"
     }
-    
+
     fileprivate var positionSizeText: String {
         dydxFormatter.shared.localFormatted(number: positionSize, digits: tokenUnitPrecision) ?? "--"
     }
-    
+
     fileprivate var pnlColor: ThemeColor.SemanticColor {
         pnlAmount >= 0 ? ThemeSettings.positiveColor : ThemeSettings.negativeColor
     }
-    
+
     fileprivate var pnlAmountText: String {
         dydxFormatter.shared.dollar(number: pnlAmount) ?? "--"
     }
-    
+
     fileprivate var pnlPercentageText: String {
         dydxFormatter.shared.percent(number: pnlPercentage, digits: 2) ?? "--"
     }
-    
+
     public init(
         assetName: String,
         market: String,
@@ -84,9 +84,9 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
             self.pnlPercentage = pnlPercentage
             self.sparklineValues = sparklineValues
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
             return VaultPositionView(viewModel: self)
                 .wrappedInAnyView()
@@ -96,7 +96,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
 
 private struct VaultPositionView: View {
     @ObservedObject var viewModel: dydxVaultPositionViewModel
-    
+
     var marketSection: some View {
         HStack(spacing: 8) {
             PlatformIconViewModel(type: .asset(name: viewModel.assetName, bundle: .dydxView),
@@ -117,7 +117,7 @@ private struct VaultPositionView: View {
         }
         .leftAligned()
     }
-    
+
     var sizeSection: some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(viewModel.notionalValueText)
@@ -137,7 +137,7 @@ private struct VaultPositionView: View {
         }
         .leftAligned()
     }
-    
+
     var pnlSection: some View {
         HStack(alignment: .center, spacing: dydxVaultPositionViewModel.pnlSpacing) {
             VStack(alignment: .trailing, spacing: 2) {
@@ -156,7 +156,7 @@ private struct VaultPositionView: View {
                 .frame(width: dydxVaultPositionViewModel.sparklineWidth, height: 24)
         }
     }
-    
+
     var body: some View {
         HStack(spacing: dydxVaultPositionViewModel.interSectionPadding) {
                 marketSection
@@ -166,4 +166,3 @@ private struct VaultPositionView: View {
             }
     }
 }
-

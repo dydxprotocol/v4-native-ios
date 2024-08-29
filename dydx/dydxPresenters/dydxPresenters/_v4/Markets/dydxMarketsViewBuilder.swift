@@ -47,7 +47,7 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
         viewModel?.header = dydxMarketsHeaderViewModel(searchAction: {
             Router.shared?.navigate(to: RoutingRequest(path: "/markets/search"), animated: true, completion: nil)
         })
-        
+
         // TODO: remove after election day
         // logic here turns this banner display off after election day
         // Nov 6 12am ET https://currentmillis.com/?1730869200010
@@ -57,7 +57,7 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
                 Router.shared?.navigate(to: RoutingRequest(path: "/trade/TRUMP-USD"), animated: true, completion: nil)
             })
         }
-        
+
         viewModel?.summary = dydxMarketSummaryViewModel()
         viewModel?.filter = dydxMarketAssetFilterViewModel(contents: FilterAction.actions.map(\.content),
                                                            onSelectionChanged: { [weak self] selectedIdx in
