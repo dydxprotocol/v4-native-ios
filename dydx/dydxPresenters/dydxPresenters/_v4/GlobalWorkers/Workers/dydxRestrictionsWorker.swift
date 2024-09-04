@@ -46,7 +46,7 @@ public final class dydxRestrictionsWorker: BaseWorker {
                 path: "APP.COMPLIANCE.CLOSE_ONLY_BODY",
                 params: [
                     "DATE": compliance.expiresAt ?? "--",
-                    "EMAIL": AbacusStateManager.shared.environment?.links?.complianceSupportEmail ?? "--"
+                    "HELP_LINK": AbacusStateManager.shared.environment?.links?.help ?? "--"
                 ]) ?? ""
         case .blocked:
             title = DataLocalizer.shared?.localize(
@@ -55,7 +55,7 @@ public final class dydxRestrictionsWorker: BaseWorker {
             body = DataLocalizer.shared?.localize(
                 path: "APP.COMPLIANCE.PERMANENTLY_BLOCKED_BODY",
                 params: [
-                    "EMAIL": AbacusStateManager.shared.environment?.links?.complianceSupportEmail ?? "--"
+                    "HELP_LINK": AbacusStateManager.shared.environment?.links?.help ?? "--"
                 ]) ?? ""
         default:
             return
