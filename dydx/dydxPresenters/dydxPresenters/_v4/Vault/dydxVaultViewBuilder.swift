@@ -49,12 +49,12 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
         AbacusStateManager.shared.state.accountBalance(of: usdcToken)
             .sink {[weak self] usdcBalance in
                 if usdcBalance ?? 0 > 0 {
-                    self?.viewModel?.withdrawAction = {}
+                    self?.viewModel?.depositAction = { Router.shared?.navigate(to: RoutingRequest(path: "/vault/withdraw"), animated: true, completion: nil) }
                 }
             }
             .store(in: &subscriptions)
-        viewModel?.depositAction = {}
-        
+        viewModel?.depositAction = { Router.shared?.navigate(to: RoutingRequest(path: "/vault/deposit"), animated: true, completion: nil) }
+
         //TODO: remove & replace, test only
         Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
             guard let self = self else { return }

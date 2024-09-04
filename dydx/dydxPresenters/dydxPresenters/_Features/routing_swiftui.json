@@ -353,6 +353,14 @@
                     "destination":"dydxPresenters.dydxVaultViewBuilder",
                     "presentation":"root"
                 },
+                "/vault/deposit":{
+                    "destination":"dydxPresenters.dydxVaultDepositWithdrawViewBuilder",
+                    "presentation":"prompt"
+                },
+                "/vault/withdraw":{
+                    "destination":"dydxPresenters.dydxVaultDepositWithdrawViewBuilder",
+                    "presentation":"prompt"
+                },
                 "/wallets":{
                     "destination":"dydxPresenters.Wallets2ViewBuilder",
                     "presentation":"half"

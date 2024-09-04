@@ -192,6 +192,7 @@
 		277E91082B2241C1005CCBCB /* dydxRewardsRewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E91072B2241C1005CCBCB /* dydxRewardsRewardView.swift */; };
 		277E914A2B23BB74005CCBCB /* dydxRewardsLearnMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E91492B23BB74005CCBCB /* dydxRewardsLearnMoreView.swift */; };
 		277E918B2B27762F005CCBCB /* dydxRewardsLaunchIncentivesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E918A2B27762F005CCBCB /* dydxRewardsLaunchIncentivesView.swift */; };
+		27823D132C77E38C009BCD51 /* dydxVaultDepositWithdrawViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27823D122C77E38C009BCD51 /* dydxVaultDepositWithdrawViewModel.swift */; };
 		278A4DA22B8FA609003898EB /* dydxRateAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4DA12B8FA609003898EB /* dydxRateAppView.swift */; };
 		27A799B92A66EC2D007C3D04 /* ThemeClassicDark.json in Resources */ = {isa = PBXBuildFile; fileRef = 27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */; };
 		27AAA9862ACE34C800AF3C56 /* SwiftMessages+Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */; };
@@ -573,6 +574,7 @@
 		277E91072B2241C1005CCBCB /* dydxRewardsRewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsRewardView.swift; sourceTree = "<group>"; };
 		277E91492B23BB74005CCBCB /* dydxRewardsLearnMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsLearnMoreView.swift; sourceTree = "<group>"; };
 		277E918A2B27762F005CCBCB /* dydxRewardsLaunchIncentivesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsLaunchIncentivesView.swift; sourceTree = "<group>"; };
+		27823D122C77E38C009BCD51 /* dydxVaultDepositWithdrawViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultDepositWithdrawViewModel.swift; sourceTree = "<group>"; };
 		278A4DA12B8FA609003898EB /* dydxRateAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRateAppView.swift; sourceTree = "<group>"; };
 		27A799B82A66EC2D007C3D04 /* ThemeClassicDark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ThemeClassicDark.json; sourceTree = "<group>"; };
 		27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMessages+Banner.swift"; sourceTree = "<group>"; };
@@ -1493,7 +1495,7 @@
 		2751D6472C59645000B36F95 /* Vault */ = {
 			isa = PBXGroup;
 			children = (
-				2751D6772C597BFC00B36F95 /* DepositsAndWithdrawals */,
+				27823D112C77E370009BCD51 /* DepositAndWithdrawal */,
 				2751D6762C597BEC00B36F95 /* Landing */,
 			);
 			path = Vault;
@@ -1508,13 +1510,6 @@
 				27EB25822C6D1E5E008C187B /* dydxVaultPositionView.swift */,
 			);
 			path = Landing;
-			sourceTree = "<group>";
-		};
-		2751D6772C597BFC00B36F95 /* DepositsAndWithdrawals */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DepositsAndWithdrawals;
 			sourceTree = "<group>";
 		};
 		277E8FF82B1EA083005CCBCB /* TradingRewards */ = {
@@ -1539,6 +1534,14 @@
 				27759F5B2B89125F002865A9 /* dydxInlineShareView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		27823D112C77E370009BCD51 /* DepositAndWithdrawal */ = {
+			isa = PBXGroup;
+			children = (
+				27823D122C77E38C009BCD51 /* dydxVaultDepositWithdrawViewModel.swift */,
+			);
+			path = DepositAndWithdrawal;
 			sourceTree = "<group>";
 		};
 		278A4D942B8FA5F5003898EB /* Rating */ = {
@@ -2059,6 +2062,7 @@
 				0253155129BFA62700D6CC9B /* dydxOnboardScanInstructionsView.swift in Sources */,
 				27CDA3D42BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift in Sources */,
 				024B7B5C28B7F90100F7C386 /* dydxViewBundleClass.swift in Sources */,
+				27823D132C77E38C009BCD51 /* dydxVaultDepositWithdrawViewModel.swift in Sources */,
 				02A9B60C29005A3F00AE1516 /* AmountChange.swift in Sources */,
 				64A4DB5329662070008D8E20 /* dydxTradeInputSizeView.swift in Sources */,
 				02E318A82AB231FA0074DA98 /* PlaceholderView.swift in Sources */,
