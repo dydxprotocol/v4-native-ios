@@ -41,9 +41,7 @@ struct ERC20ApprovalStep: AsyncStep {
     }
 
     func run() -> AnyPublisher<AsyncEvent<ProgressType, ResultType>, Never> {
-        let function = ERC20ApproveFunction(gasPrice: nil,
-                                            gasLimit: nil,
-                                            contract: EthereumAddress(tokenAddress),
+        let function = ERC20ApproveFunction(contract: EthereumAddress(tokenAddress),
                                             from: EthereumAddress(ethereumAddress),
                                             spender: EthereumAddress(spenderAddress),
                                             amount: amount)
@@ -51,38 +49,14 @@ struct ERC20ApprovalStep: AsyncStep {
             return Just(AsyncEvent.result(false, nil)).eraseToAnyPublisher()
         }
 
-        // Run in parallel 
-        return Publishers.Zip3(
-            EthGetGasPriceStep(chainRpc: chainRpc).run(),
-            EthEstimateGasStep(chainRpc: chainRpc, transaction: transaction).run(),
-            EthGetNonceStep(chainRpc: chainRpc, address: EthereumAddress(ethereumAddress)).run()
-        )
-        .flatMap { (gasPriceEvent, estimateGasEvent, nonceEvent) -> AnyPublisher<AsyncEvent<Void, String>, Never> in
-            if case .result(let gasPrice, let gasPriceError) = gasPriceEvent,
-               case .result(let gas, let gasError) = estimateGasEvent,
-               case .result(let nonce, let nonceError) = nonceEvent {
-                if let gasPrice = gasPrice, let gas = gas, let nonce = nonce {
-                    let ethereumTransactionRequest = EthereumTransactionRequest(transaction: transaction, gasPrice: gasPrice, gas: gas, nonce: nonce)
-
-                    return WalletSendTransactionStep(transaction: ethereumTransactionRequest,
-                                                     chainIdInt: chainIdInt,
-                                                     provider: provider,
-                                                     walletAddress: ethereumAddress,
-                                                     walletId: walletId)
-                        .run()
-                } else {
-                    if let gasPriceError = gasPriceError {
-                        return Just(AsyncEvent.result(nil, gasPriceError)).eraseToAnyPublisher()
-                    } else if let gasError = gasError {
-                        return Just(AsyncEvent.result(nil, gasError)).eraseToAnyPublisher()
-                    } else if let nonceError = nonceError {
-                        return Just(AsyncEvent.result(nil, nonceError)).eraseToAnyPublisher()
-                    }
-                }
-            }
-            let error = NSError(domain: "", code: -1, userInfo: [ NSLocalizedDescriptionKey: "Invalid gas or gasPrice"])
-            return Just(AsyncEvent.result(nil, error)).eraseToAnyPublisher()
-        }
+        let ethereumTransactionRequest = EthereumTransactionRequest(transaction: transaction)
+        
+        return WalletSendTransactionStep(transaction: ethereumTransactionRequest,
+                                         chainIdInt: chainIdInt,
+                                         provider: provider,
+                                         walletAddress: ethereumAddress,
+                                         walletId: walletId)
+        .run()
         .flatMap { event -> AnyPublisher<AsyncEvent<Void, Bool>, Never> in
             if case .result(let value, let error) = event {
                 if let amount = Parser.standard.asUInt256(value), amount > BigInt.zero {
