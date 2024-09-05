@@ -61,38 +61,16 @@ struct DepositTransactionV4: AsyncStep {
                 }
                 return Empty<AsyncEvent<Void, Bool>, Never>().eraseToAnyPublisher()
             }
-            .flatMap { event -> AnyPublisher<AsyncEvent<Void, Int>, Never> in
+            .flatMap { event -> AnyPublisher<AsyncEvent<Void, String>, Never> in
                 if case let .result(enabled, error) = event {
                     if enabled == true {
-                        return EthGetNonceStep(chainRpc: chainRpc,
-                                               address: EthereumAddress(walletAddress))
-                            .run()
-
-                    } else if let error = error {
-                        return Just(AsyncEvent.result(nil, error)).eraseToAnyPublisher()
-                    } else {
-                        let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Token not enabled"])
-                        return Just(AsyncEvent.result(nil, error)).eraseToAnyPublisher()
-                    }
-                }
-                return Empty<AsyncEvent<Void, Int>, Never>().eraseToAnyPublisher()
-            }
-            .flatMap { event -> AnyPublisher<AsyncEvent<Void, String>, Never> in
-                if case let .result(nonce, error) = event {
-                    if nonce != nil {
-                        let transaction = EthereumTransactionRequest(transaction: ethereumTransactionRequest.transaction,
-                                                                     gasPrice: ethereumTransactionRequest.gasPrice,
-                                                                     gas: ethereumTransactionRequest.gas,
-                                                                     nonce: nonce,
-                                                                     maxPriorityFeePerGas: ethereumTransactionRequest.maxPriorityFeePerGas,
-                                                                     maxFeePerGas: ethereumTransactionRequest.maxFeePerGas)
+                        let transaction = EthereumTransactionRequest(transaction: ethereumTransactionRequest.transaction)
                         return WalletSendTransactionStep(transaction: transaction,
                                                          chainIdInt: chainIdInt,
                                                          provider: provider,
                                                          walletAddress: walletAddress,
                                                          walletId: walletId)
                             .run()
-
                     } else if let error = error {
                         return Just(AsyncEvent.result(nil, error)).eraseToAnyPublisher()
                     } else {
@@ -138,16 +116,11 @@ private extension EthereumTransactionRequest {
                                               value: requestPayload.value?.asBigUInt,
                                               data: data.web3.hexData,
                                               nonce: nil,
-                                              gasPrice: requestPayload.gasPrice?.asBigUInt,
-                                              gasLimit: requestPayload.gasLimit?.asBigUInt,
+                                              gasPrice: nil,
+                                              gasLimit: nil,
                                               chainId: chainId)
 
-        self.init(transaction: transaction,
-                  gasPrice: requestPayload.gasPrice?.asBigUInt,
-                  gas: requestPayload.gasLimit?.asBigUInt,
-                  nonce: nil,
-                  maxPriorityFeePerGas: requestPayload.maxPriorityFeePerGas?.asBigUInt,
-                  maxFeePerGas: requestPayload.maxFeePerGas?.asBigUInt)
+        self.init(transaction: transaction)
     }
 }
 
