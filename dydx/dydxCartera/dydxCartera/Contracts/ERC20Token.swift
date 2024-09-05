@@ -18,8 +18,8 @@ public struct ERC20AllowanceFunction: ContractFunction {
     }
 
     public static let name = "allowance"
-    public let gasPrice: BigUInt? = BigUInt(0)
-    public let gasLimit: BigUInt? = BigUInt(0)
+    public let gasPrice: BigUInt? = nil
+    public let gasLimit: BigUInt? = nil
     public let contract: EthereumAddress
     public let from: EthereumAddress?
 
@@ -32,9 +32,7 @@ public struct ERC20AllowanceFunction: ContractFunction {
 }
 
 public struct ERC20ApproveFunction: ContractFunction {
-    public init(gasPrice: BigUInt? = nil, gasLimit: BigUInt? = nil, contract: EthereumAddress, from: EthereumAddress? = nil, spender: EthereumAddress, amount: BigUInt = BigUInt("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", radix: 16)!) {
-        self.gasPrice = gasPrice
-        self.gasLimit = gasLimit
+    public init(contract: EthereumAddress, from: EthereumAddress? = nil, spender: EthereumAddress, amount: BigUInt = BigUInt("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", radix: 16)!) {
         self.contract = contract
         self.from = from
         self.spender = spender
@@ -42,8 +40,8 @@ public struct ERC20ApproveFunction: ContractFunction {
     }
 
     public static let name = "approve"
-    public let gasPrice: BigUInt?
-    public let gasLimit: BigUInt?
+    public let gasPrice: BigUInt? = nil
+    public let gasLimit: BigUInt? = nil
     public let contract: EthereumAddress
     public let from: EthereumAddress?
 
@@ -58,8 +56,8 @@ public struct ERC20ApproveFunction: ContractFunction {
 
 public struct ERC20BalanceOfFunction: ContractFunction {
     public static let name = "balanceOf"
-    public let gasPrice: BigUInt? = BigUInt(0)
-    public let gasLimit: BigUInt? = BigUInt(0)
+    public let gasPrice: BigUInt? = nil
+    public let gasLimit: BigUInt? = nil
     public let contract: EthereumAddress
     public let from: EthereumAddress?
 

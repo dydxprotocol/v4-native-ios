@@ -10,15 +10,12 @@
 		021385BD28DBD21600A9BCA5 /* ThreadRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021385BC28DBD21600A9BCA5 /* ThreadRunner.swift */; };
 		021385BF28DBD22100A9BCA5 /* WebsocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021385BE28DBD22100A9BCA5 /* WebsocketConnection.swift */; };
 		021385C128DBD74700A9BCA5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021385C028DBD74700A9BCA5 /* Utils.swift */; };
-		0219D8C82AD36CD700EF31EF /* EthGetNonceStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0219D8C72AD36CD700EF31EF /* EthGetNonceStep.swift */; };
 		022A81042BE18C51000BF2DD /* AbacusPresentationImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022A81032BE18C51000BF2DD /* AbacusPresentationImp.swift */; };
 		022E928828EA4FD80096CDA9 /* Models+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E928728EA4FD80096CDA9 /* Models+Ext.swift */; };
 		022EDB70299EF054003D59A7 /* dydxWalletState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EDB6F299EF054003D59A7 /* dydxWalletState.swift */; };
 		023BFFD02ABBB25300D3ED5C /* ERC20AllowanceStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BFFCF2ABBB25300D3ED5C /* ERC20AllowanceStep.swift */; };
 		023BFFD72ABBBAA900D3ED5C /* EnableERC20TokenStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BFFD62ABBBAA900D3ED5C /* EnableERC20TokenStep.swift */; };
 		023BFFD92ABBC4C000D3ED5C /* ERC20ApprovalStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BFFD82ABBC4C000D3ED5C /* ERC20ApprovalStep.swift */; };
-		023BFFDB2ABBECB100D3ED5C /* EthEstimateGasStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BFFDA2ABBECB100D3ED5C /* EthEstimateGasStep.swift */; };
-		023BFFDD2ABBEEFA00D3ED5C /* EthGetGasPriceStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BFFDC2ABBEEFA00D3ED5C /* EthGetGasPriceStep.swift */; };
 		0260350929EF30EE00DFFD11 /* WalletSwitchChainStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0260350829EF30EE00DFFD11 /* WalletSwitchChainStep.swift */; };
 		0260351029EF3C2E00DFFD11 /* WalletSendTransactionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0260350F29EF3C2E00DFFD11 /* WalletSendTransactionStep.swift */; };
 		02603B9129F1A95E00DFFD11 /* dydxClientState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02603B9029F1A95E00DFFD11 /* dydxClientState.swift */; };
@@ -131,15 +128,12 @@
 		021385BC28DBD21600A9BCA5 /* ThreadRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadRunner.swift; sourceTree = "<group>"; };
 		021385BE28DBD22100A9BCA5 /* WebsocketConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebsocketConnection.swift; sourceTree = "<group>"; };
 		021385C028DBD74700A9BCA5 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		0219D8C72AD36CD700EF31EF /* EthGetNonceStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthGetNonceStep.swift; sourceTree = "<group>"; };
 		022A81032BE18C51000BF2DD /* AbacusPresentationImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbacusPresentationImp.swift; sourceTree = "<group>"; };
 		022E928728EA4FD80096CDA9 /* Models+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models+Ext.swift"; sourceTree = "<group>"; };
 		022EDB6F299EF054003D59A7 /* dydxWalletState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWalletState.swift; sourceTree = "<group>"; };
 		023BFFCF2ABBB25300D3ED5C /* ERC20AllowanceStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20AllowanceStep.swift; sourceTree = "<group>"; };
 		023BFFD62ABBBAA900D3ED5C /* EnableERC20TokenStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableERC20TokenStep.swift; sourceTree = "<group>"; };
 		023BFFD82ABBC4C000D3ED5C /* ERC20ApprovalStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20ApprovalStep.swift; sourceTree = "<group>"; };
-		023BFFDA2ABBECB100D3ED5C /* EthEstimateGasStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthEstimateGasStep.swift; sourceTree = "<group>"; };
-		023BFFDC2ABBEEFA00D3ED5C /* EthGetGasPriceStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthGetGasPriceStep.swift; sourceTree = "<group>"; };
 		0260350829EF30EE00DFFD11 /* WalletSwitchChainStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSwitchChainStep.swift; sourceTree = "<group>"; };
 		0260350F29EF3C2E00DFFD11 /* WalletSendTransactionStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSendTransactionStep.swift; sourceTree = "<group>"; };
 		02603B9029F1A95E00DFFD11 /* dydxClientState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxClientState.swift; sourceTree = "<group>"; };
@@ -217,9 +211,6 @@
 			children = (
 				0260350829EF30EE00DFFD11 /* WalletSwitchChainStep.swift */,
 				0260350F29EF3C2E00DFFD11 /* WalletSendTransactionStep.swift */,
-				023BFFDA2ABBECB100D3ED5C /* EthEstimateGasStep.swift */,
-				0219D8C72AD36CD700EF31EF /* EthGetNonceStep.swift */,
-				023BFFDC2ABBEEFA00D3ED5C /* EthGetGasPriceStep.swift */,
 				023BFFCF2ABBB25300D3ED5C /* ERC20AllowanceStep.swift */,
 				023BFFD82ABBC4C000D3ED5C /* ERC20ApprovalStep.swift */,
 			);
@@ -649,7 +640,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0219D8C82AD36CD700EF31EF /* EthGetNonceStep.swift in Sources */,
 				27B957EF2B97C11400EF9304 /* dydxRatingService.swift in Sources */,
 				6473ACB42A65B18B00BBC01F /* AbacusRestImp.swift in Sources */,
 				023BFFD72ABBBAA900D3ED5C /* EnableERC20TokenStep.swift in Sources */,
@@ -665,7 +655,6 @@
 				6473AE412A65D3E700BBC01F /* AbacusChainImp.swift in Sources */,
 				02E7DD7F28CFAFF000727949 /* AbacusStateManager.swift in Sources */,
 				6473ACC02A65B1FD00BBC01F /* AbacusFormatterImp.swift in Sources */,
-				023BFFDB2ABBECB100D3ED5C /* EthEstimateGasStep.swift in Sources */,
 				6473ACBC2A65B1D300BBC01F /* AbacusWebSocketImp.swift in Sources */,
 				022A81042BE18C51000BF2DD /* AbacusPresentationImp.swift in Sources */,
 				023BFFD02ABBB25300D3ED5C /* ERC20AllowanceStep.swift in Sources */,
@@ -673,7 +662,6 @@
 				278765A42C17C529000119D2 /* Kotlin+Ext.swift in Sources */,
 				021385C128DBD74700A9BCA5 /* Utils.swift in Sources */,
 				02A8962128E65FBD006F1658 /* AbacusState+Combine.swift in Sources */,
-				023BFFDD2ABBEEFA00D3ED5C /* EthGetGasPriceStep.swift in Sources */,
 				02E7DD8C28CFB1C600727949 /* HttpCall.swift in Sources */,
 				027CB28E29EF02C50069781A /* DepositTransaction.swift in Sources */,
 				0260351029EF3C2E00DFFD11 /* WalletSendTransactionStep.swift in Sources */,

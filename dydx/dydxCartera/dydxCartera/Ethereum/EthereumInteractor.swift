@@ -53,21 +53,6 @@ public final class EthereumInteractor {
         }
     }
 
-    public func eth_gasPrice(completion: @escaping EthereumBigUIntCompletion) {
-        queue.async { [weak self] in
-            self?.client?.eth_gasPrice { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let value):
-                        completion(nil, value)
-                    case .failure(let error):
-                        completion(error, nil)
-                    }
-                }
-            }
-        }
-    }
-
     public func eth_blockNumber(completion: @escaping EthereumIntCompletion) {
         queue.async { [weak self] in
             self?.client?.eth_blockNumber { result in
