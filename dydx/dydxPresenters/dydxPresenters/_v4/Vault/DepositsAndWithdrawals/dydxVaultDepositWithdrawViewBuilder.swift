@@ -50,7 +50,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     var transferType: VaultTransferType = .deposit
 
     override init() {
-        let viewModel = dydxVaultDepositWithdrawViewModel(initialSelection: transferType, submitState: .disabled("placeholder"))
+        let viewModel = dydxVaultDepositWithdrawViewModel(selectedTransferType: transferType, submitState: .disabled)
 
         super.init()
 
@@ -59,7 +59,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     
     override func start() {
         super.start()
-        
+                
         //TODO: replace with real hooks from abacus
         update()
     }

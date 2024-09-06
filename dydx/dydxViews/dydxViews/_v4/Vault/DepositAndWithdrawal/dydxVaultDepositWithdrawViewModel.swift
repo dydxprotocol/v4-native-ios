@@ -12,8 +12,8 @@ import dydxFormatter
 
 public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
     public enum State {
-        case enabled(String)
-        case disabled(String)
+        case enabled
+        case disabled
     }
     
     public let submitState: State
@@ -21,7 +21,7 @@ public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
     
     @Published public private(set) var numberFormatter = dydxNumberInputFormatter()
     
-    @Published fileprivate var selected: VaultTransferType
+    @Published fileprivate var selectedTransferType: VaultTransferType
     @Published fileprivate var amount: Double?
     fileprivate var maxAmount: Double = 0
     
@@ -29,8 +29,8 @@ public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
     public var inputInlineAlert: InlineAlertViewModel?
     public var buttonReceiptChangeItems: [dydxReceiptChangeItemView]?
     
-    public init(initialSelection: VaultTransferType, submitState: State) {
-        self.selected = initialSelection
+    public init(selectedTransferType: VaultTransferType, submitState: State) {
+        self.selectedTransferType = selectedTransferType
         self.submitState = submitState
     }
     
@@ -60,6 +60,20 @@ public enum VaultTransferType: CaseIterable, RadioButtonContentDisplayable {
         case .withdraw: return DataLocalizer.localize(path: "APP.VAULTS.ENTER_AMOUNT_TO_WITHDRAW")
         }
     }
+    
+    fileprivate var enabledText: String {
+        switch self {
+        case .deposit: return DataLocalizer.localize(path: "APP.VAULTS.PREVIEW_DEPOSIT")
+        case .withdraw: return DataLocalizer.localize(path: "APP.VAULTS.PREVIEW_WITHDRAW")
+        }
+    }
+    
+    fileprivate var disabledText: String {
+        switch self {
+        case .deposit: return DataLocalizer.localize(path: "APP.VAULTS.ENTER_AMOUNT_TO_DEPOSIT")
+        case .withdraw: return DataLocalizer.localize(path: "APP.VAULTS.ENTER_AMOUNT_TO_WITHDRAW")
+        }
+    }
 }
 
 fileprivate struct VaultDepositWithdrawView: View {
@@ -68,7 +82,7 @@ fileprivate struct VaultDepositWithdrawView: View {
     var options = VaultTransferType.allCases
     
     private var radioButtonSelector: some View {
-        RadioButtonGroup(selected: $viewModel.selected,
+        RadioButtonGroup(selected: $viewModel.selectedTransferType,
                          options: options,
                          buttonClipStyle: .capsule,
                          fontType: .plus,
@@ -98,11 +112,14 @@ fileprivate struct VaultDepositWithdrawView: View {
         .frame(maxWidth: .infinity)
         .themeColor(background: .layer3)
         .ignoresSafeArea(edges: [.bottom])
+        .onTapGesture {
+            PlatformView.hideKeyboard()
+        }
     }
     
     private var inputArea: some View {
         VStack(spacing: 16) {
-            dydxTitledNumberField(title: viewModel.selected.inputFieldTitle,
+            dydxTitledNumberField(title: viewModel.selectedTransferType.inputFieldTitle,
                                   accessoryTitle: nil,
                                   numberFormatter: viewModel.numberFormatter,
                                   minValue: 0,
@@ -123,14 +140,14 @@ fileprivate struct VaultDepositWithdrawView: View {
         let content: Text
         let state: PlatformButtonState
         switch viewModel.submitState {
-        case .enabled(let text):
+        case .enabled:
             state = .primary
-            content = Text(text)
+            content = Text(viewModel.selectedTransferType.enabledText)
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontType: .base, fontSize: .large)
-        case .disabled(let text):
+        case .disabled:
             state = .disabled
-            content = Text(text)
+            content = Text(viewModel.selectedTransferType.disabledText)
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .large)
         }
