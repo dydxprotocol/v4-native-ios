@@ -22,6 +22,8 @@ struct RadioButtonGroup<ButtonItem: RadioButtonContentDisplayable>: View {
     let options: [ButtonItem]
 
     let buttonClipStyle: ClipStyle
+    let fontType: ThemeFont.FontType
+    let fontSize: ThemeFont.FontSize
     /// when not specified, width will be natural. When specified, width will be forced
     let itemWidth: CGFloat?
     /// when not specified, height will be natural. When specified, height will be forced
@@ -34,6 +36,8 @@ struct RadioButtonGroup<ButtonItem: RadioButtonContentDisplayable>: View {
                 RadioButton(displayText: option.displayText,
                             isSelected: selected == option,
                             clipStyle: buttonClipStyle,
+                            fontType: fontType,
+                            fontSize: fontSize,
                             width: itemWidth,
                             height: itemHeight
                 ) {
@@ -48,6 +52,8 @@ struct RadioButton: View {
     let displayText: String
     let isSelected: Bool
     let clipStyle: ClipStyle
+    let fontType: ThemeFont.FontType
+    let fontSize: ThemeFont.FontSize
     let width: CGFloat?
     let height: CGFloat?
     let selectionAction: () -> Void
@@ -64,7 +70,7 @@ struct RadioButton: View {
         Text(displayText)
             .lineLimit(1)
             .themeColor(foreground: isSelected ? .textPrimary : .textTertiary)
-            .themeFont(fontType: .base, fontSize: .smaller)
+            .themeFont(fontType: fontType, fontSize: fontSize)
             // if width is specified, i.e. non-nil, setting horizontal inset to 0 will allow entire space to be used horizontally
             .padding(.horizontal, width == nil ? 8 : 0)
             // if height is specified, i.e. non-nil, setting vertical inset to 0 will allow entire space to be used horizontally

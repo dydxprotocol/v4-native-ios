@@ -54,6 +54,7 @@ private struct dydxSliderTextInput: View {
                         numberFormatter: viewModel.numberFormatter,
                         minValue: viewModel.minValue,
                         maxValue: viewModel.maxValue,
+                        isMaxButtonVisible: false,
                         value: $viewModel.value)
     }
 
