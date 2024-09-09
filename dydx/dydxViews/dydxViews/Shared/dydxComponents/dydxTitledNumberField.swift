@@ -8,6 +8,7 @@
 import SwiftUI
 import dydxFormatter
 import PlatformUI
+import Utilities
 
 /// Effectively a TextField which forces its input as a number
 /// Supports dydx-style title and title accesory view
@@ -17,6 +18,7 @@ struct dydxTitledNumberField: View {
     let numberFormatter: dydxNumberInputFormatter
     let minValue: Double
     let maxValue: Double
+    let isMaxButtonVisible: Bool
     @Binding var value: Double?
     @State private var textWidth: CGFloat = 0
 
@@ -60,17 +62,36 @@ struct dydxTitledNumberField: View {
         .truncationMode(.middle)
         .frame(width: textWidth)
     }
+    
+    private var maxButton: some View {
+        let buttonContent = Text(DataLocalizer.localize(path: "APP.GENERAL.MAX"))
+            .themeFont(fontSize: .small)
+            .wrappedViewModel
+
+        return PlatformButtonViewModel(content: buttonContent, type: .pill, state: .secondary, action: {
+            PlatformView.hideKeyboard()
+            self.value = maxValue
+        })
+            .createView()
+
+    }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            HStack(spacing: 5) {
-                titleView
-                accessoryTitleView
+        HStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 5) {
+                HStack(spacing: 5) {
+                    titleView
+                    accessoryTitleView
+                }
+                textFieldView
             }
-            textFieldView
+            if isMaxButtonVisible {
+                Spacer()
+                maxButton
+            }
         }
-        .padding(.vertical, 8)
-        .padding(.horizontal, 12)
+        .padding(.vertical, 12)
+        .padding(.horizontal, 16)
         .makeInput()
     }
 }

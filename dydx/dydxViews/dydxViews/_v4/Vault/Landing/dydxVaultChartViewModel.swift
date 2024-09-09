@@ -145,6 +145,8 @@ private struct dydxVaultChartView: View {
             RadioButtonGroup(selected: $viewModel.selectedValueType,
                              options: viewModel.valueTypeOptions,
                              buttonClipStyle: .capsule,
+                             fontType: .base,
+                             fontSize: .smaller,
                              itemWidth: nil,
                              itemHeight: 40
             )
@@ -152,6 +154,8 @@ private struct dydxVaultChartView: View {
             RadioButtonGroup(selected: $viewModel.selectedValueTime,
                              options: viewModel.valueTimeOptions,
                              buttonClipStyle: .circle,
+                             fontType: .base,
+                             fontSize: .smaller,
                              itemWidth: 40,
                              itemHeight: 40
             )
