@@ -139,6 +139,7 @@
 		2741B25C2C06A0E100693B17 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2741B2572C06A0CC00693B17 /* dydxAnalytics.framework */; };
 		2741E3702A68787A000FA190 /* settings_direction_color_preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 2741E3632A68787A000FA190 /* settings_direction_color_preference.json */; };
 		2741E3732A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */; };
+		27457F5B2C8AC8B700873640 /* dydxVaultDepositWithdrawConfirmationViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27457F5A2C8AC8B700873640 /* dydxVaultDepositWithdrawConfirmationViewBuilder.swift */; };
 		2749F8FF2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */; };
 		2751D6432C59614C00B36F95 /* tabs_v4_vault.json in Resources */ = {isa = PBXBuildFile; fileRef = 2751D6352C59614C00B36F95 /* tabs_v4_vault.json */; };
 		2751D6462C59643800B36F95 /* dydxVaultViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2751D6452C59643800B36F95 /* dydxVaultViewBuilder.swift */; };
@@ -529,6 +530,7 @@
 		2741E3632A68787A000FA190 /* settings_direction_color_preference.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings_direction_color_preference.json; sourceTree = "<group>"; };
 		2741E3722A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxDirectionColorPreferenceViewBuilder.swift; sourceTree = "<group>"; };
 		2742C05D2BF6898500E13C09 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27457F5A2C8AC8B700873640 /* dydxVaultDepositWithdrawConfirmationViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultDepositWithdrawConfirmationViewBuilder.swift; sourceTree = "<group>"; };
 		2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsLaunchIncentivesPresenter.swift; sourceTree = "<group>"; };
 		2751D6352C59614C00B36F95 /* tabs_v4_vault.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabs_v4_vault.json; sourceTree = "<group>"; };
 		2751D6452C59643800B36F95 /* dydxVaultViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultViewBuilder.swift; sourceTree = "<group>"; };
@@ -1422,11 +1424,19 @@
 			path = DirectionColorPreference;
 			sourceTree = "<group>";
 		};
+		27457F4C2C8AC89800873640 /* Landing */ = {
+			isa = PBXGroup;
+			children = (
+				2751D6452C59643800B36F95 /* dydxVaultViewBuilder.swift */,
+			);
+			path = Landing;
+			sourceTree = "<group>";
+		};
 		2751D6442C59642000B36F95 /* Vault */ = {
 			isa = PBXGroup;
 			children = (
+				27457F4C2C8AC89800873640 /* Landing */,
 				27823D022C77E30F009BCD51 /* DepositsAndWithdrawals */,
-				2751D6452C59643800B36F95 /* dydxVaultViewBuilder.swift */,
 			);
 			path = Vault;
 			sourceTree = "<group>";
@@ -1455,6 +1465,7 @@
 			isa = PBXGroup;
 			children = (
 				27823CF32C77E21A009BCD51 /* dydxVaultDepositWithdrawViewBuilder.swift */,
+				27457F5A2C8AC8B700873640 /* dydxVaultDepositWithdrawConfirmationViewBuilder.swift */,
 			);
 			path = DepositsAndWithdrawals;
 			sourceTree = "<group>";
@@ -2032,6 +2043,7 @@
 				02FAFA5C29D4E08E001A0903 /* dydxDebugViewBuilder.swift in Sources */,
 				02F543B22C17ABBB000924E4 /* dydxGasTokenViewBuilder.swift in Sources */,
 				02F700FE29EA0FD9004DEB5E /* dydxReceiptPresenter.swift in Sources */,
+				27457F5B2C8AC8B700873640 /* dydxVaultDepositWithdrawConfirmationViewBuilder.swift in Sources */,
 				027E1EF829CA27CD0098666F /* dydxSettingsLandingViewBuilder.swift in Sources */,
 				020DBF1E29E092C00068AAA6 /* dydxTransferDepositViewPresenter.swift in Sources */,
 				277987512BA33F15006DC5CD /* dydxSelectedMarketStore.swift in Sources */,

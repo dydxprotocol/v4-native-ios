@@ -50,9 +50,18 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     var transferType: VaultTransferType = .deposit
 
     override init() {
-        let viewModel = dydxVaultDepositWithdrawViewModel(selectedTransferType: transferType, submitState: .disabled)
-
         super.init()
+
+        let viewModel = dydxVaultDepositWithdrawViewModel(selectedTransferType: transferType, submitState: .enabled)
+        viewModel.submitAction = { [weak self] in
+            guard let selectedTransferType = self?.viewModel?.selectedTransferType else { return }
+            switch selectedTransferType {
+            case .deposit:
+                Router.shared?.navigate(to: RoutingRequest(path: "/vault/deposit_confirm"), animated: true, completion: nil)
+            case .withdraw:
+                Router.shared?.navigate(to: RoutingRequest(path: "/vault/withdraw_confirm"), animated: true, completion: nil)
+            }
+        }
 
         self.viewModel = viewModel
     }
@@ -73,15 +82,15 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
                                                          value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
                                                                       after: AmountTextModel(amount: 30.02))))
         
-        newButtonReceiptChangeItems.append(.init(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
+        newButtonReceiptChangeItems.append(dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
                                                          value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
                                                                       after: AmountTextModel(amount: 30.02))))
         
-        newButtonReceiptChangeItems.append(.init(title: DataLocalizer.localize(path: "APP.VAULTS.EST_SLIPPAGE"),
+        newButtonReceiptChangeItems.append(dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.EST_SLIPPAGE"),
                                                          value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
                                                                       after: AmountTextModel(amount: 30.02))))
         
-        newButtonReceiptChangeItems.append(.init(title: DataLocalizer.localize(path: "APP.WITHDRAW_MODAL.EXPECTED_AMOUNT_RECEIVED"),
+        newButtonReceiptChangeItems.append(dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.WITHDRAW_MODAL.EXPECTED_AMOUNT_RECEIVED"),
                                                          value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
                                                                       after: AmountTextModel(amount: 30.02))))
         

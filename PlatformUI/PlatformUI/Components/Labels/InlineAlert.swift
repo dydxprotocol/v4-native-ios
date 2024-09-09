@@ -24,7 +24,6 @@ public class InlineAlertViewModel: PlatformViewModel {
     private var title: AnyView? {
         guard let titleText = config.title else { return nil }
         return Text(titleText)
-            .themeColor(foreground: .textPrimary)
             .themeFont(fontType: .plus, fontSize: .medium)
             .wrappedInAnyView()
     }
@@ -32,7 +31,6 @@ public class InlineAlertViewModel: PlatformViewModel {
     private var body: AnyView? {
         guard let bodyText = config.body else { return nil }
         return Text(bodyText)
-            .themeColor(foreground: .textPrimary)
             .themeFont(fontType: .base, fontSize: .small)
             .wrappedInAnyView()
     }
@@ -66,11 +64,21 @@ public class InlineAlertViewModel: PlatformViewModel {
 
 public extension InlineAlertViewModel {
     struct Config {
-        public var title: String?
-        public var body: String?
+        public var title: AttributedString? = nil
+        public var body: AttributedString? = nil
         public var level: Level
         
         public init(title: String?, body: String?, level: Level) {
+            if let title = title {
+                self.title = AttributedString(title)
+            }
+            if let body = body {
+                self.body = AttributedString(body)
+            }
+            self.level = level
+        }
+        
+        public init(title: AttributedString?, body: AttributedString?, level: Level) {
             self.title = title
             self.body = body
             self.level = level
