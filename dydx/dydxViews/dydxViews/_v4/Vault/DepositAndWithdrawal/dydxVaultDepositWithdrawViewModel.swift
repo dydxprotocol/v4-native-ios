@@ -21,7 +21,7 @@ public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
     
     @Published public private(set) var numberFormatter = dydxNumberInputFormatter()
     
-    @Published fileprivate var selectedTransferType: VaultTransferType
+    @Published public fileprivate(set) var selectedTransferType: VaultTransferType
     @Published fileprivate var amount: Double?
     fileprivate var maxAmount: Double = 0
     
@@ -39,39 +39,6 @@ public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
             return VaultDepositWithdrawView(viewModel: self)
                 .wrappedInAnyView()
-        }
-    }
-}
-
-public enum VaultTransferType: CaseIterable, RadioButtonContentDisplayable {
-    case deposit
-    case withdraw
-    
-    var displayText: String {
-        switch self {
-        case .deposit: return DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT")
-        case .withdraw: return DataLocalizer.localize(path: "APP.GENERAL.WITHDRAW")
-        }
-    }
-    
-    public var inputFieldTitle: String {
-        switch self {
-        case .deposit: return DataLocalizer.localize(path: "APP.VAULTS.ENTER_AMOUNT_TO_DEPOSIT")
-        case .withdraw: return DataLocalizer.localize(path: "APP.VAULTS.ENTER_AMOUNT_TO_WITHDRAW")
-        }
-    }
-    
-    fileprivate var enabledText: String {
-        switch self {
-        case .deposit: return DataLocalizer.localize(path: "APP.VAULTS.PREVIEW_DEPOSIT")
-        case .withdraw: return DataLocalizer.localize(path: "APP.VAULTS.PREVIEW_WITHDRAW")
-        }
-    }
-    
-    fileprivate var disabledText: String {
-        switch self {
-        case .deposit: return DataLocalizer.localize(path: "APP.VAULTS.ENTER_AMOUNT_TO_DEPOSIT")
-        case .withdraw: return DataLocalizer.localize(path: "APP.VAULTS.ENTER_AMOUNT_TO_WITHDRAW")
         }
     }
 }
@@ -142,12 +109,12 @@ fileprivate struct VaultDepositWithdrawView: View {
         switch viewModel.submitState {
         case .enabled:
             state = .primary
-            content = Text(viewModel.selectedTransferType.enabledText)
+            content = Text(viewModel.selectedTransferType.previewTransferText)
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontType: .base, fontSize: .large)
         case .disabled:
             state = .disabled
-            content = Text(viewModel.selectedTransferType.disabledText)
+            content = Text(viewModel.selectedTransferType.needsAmountText)
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .large)
         }
