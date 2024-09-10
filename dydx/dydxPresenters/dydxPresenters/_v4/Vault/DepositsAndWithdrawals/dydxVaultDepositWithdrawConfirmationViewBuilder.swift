@@ -61,23 +61,23 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
 
         viewModel.cancelAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
-        }  
-        
-        //TODO: replace
+        }
+
+        // TODO: replace
         viewModel.elevatedSlippageAmount = 4.20
         viewModel.requiresAcknowledgeHighSlippage = true
-        
+
         self.viewModel = viewModel
     }
-    
+
     override func start() {
         super.start()
-                
-        //TODO: replace with real hooks from abacus
+
+        // TODO: replace with real hooks from abacus
         update()
     }
-    
-    //TODO: replace with real data from abacus
+
+    // TODO: replace with real data from abacus
     func update() {
         let crossFreeCollateralReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
                                                                       value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
@@ -94,7 +94,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         let crossMarginUsageItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN_USAGE"),
                                                              value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
                                                                                       after: AmountTextModel(amount: 30.02)))
-        
+
         switch transferType {
             case .deposit:
                 viewModel?.receiptItems = [crossFreeCollateralReceiptItem, crossMarginUsageItem, yourVaultBalanceReceiptItem]
