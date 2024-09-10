@@ -67,6 +67,9 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         switch self.state {
                         case .primary:
                             button
+                                // adding invisible border ensures different states have equal heights/widths,
+                                // otherwise, no border buttons are slightly shorter than border buttons
+                                .border(borderWidth: borderWidth, cornerRadius: cornerRadius, borderColor: ThemeColor.SemanticColor.transparent.color)
                         case .destructive:
                             button
                                 .border(borderWidth: borderWidth, cornerRadius: cornerRadius, borderColor: ThemeColor.SemanticColor.colorFadedRed.color)

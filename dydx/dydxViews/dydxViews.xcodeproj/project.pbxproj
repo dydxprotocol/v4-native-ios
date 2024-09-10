@@ -172,8 +172,11 @@
 		2729F9E92C64093700769BA4 /* dydxMarketsBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2729F9E82C64093700769BA4 /* dydxMarketsBannerViewModel.swift */; };
 		273C2F382C496F4F00F8391F /* dydxSliderInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273C2F372C496F4F00F8391F /* dydxSliderInputView.swift */; };
 		273F50162B7C3F120034792A /* SignedAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F50152B7C3F120034792A /* SignedAmountView.swift */; };
+		27457F3F2C8AC87F00873640 /* dydxVaultDepositWithdrawConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27457F3E2C8AC87F00873640 /* dydxVaultDepositWithdrawConfirmationViewModel.swift */; };
+		274580002C8B876800873640 /* VaultTransferType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27457FFF2C8B876800873640 /* VaultTransferType.swift */; };
 		274C47F02C0FC9A4000212C3 /* MemoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C47EF2C0FC9A4000212C3 /* MemoBox.swift */; };
 		2751D6552C59646700B36F95 /* dydxVaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2751D6542C59646700B36F95 /* dydxVaultViewModel.swift */; };
+		27673BB02C8F971900689E3F /* dydxCheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27673BAF2C8F971900689E3F /* dydxCheckboxView.swift */; };
 		27685F4D2B9FCAE200F37DE2 /* Satoshi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27685F402B9FCAD300F37DE2 /* Satoshi-Medium.otf */; };
 		2769090E2AAFD8030075B2D6 /* TransferInstanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090D2AAFD8030075B2D6 /* TransferInstanceViewModel.swift */; };
 		276909102AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */; };
@@ -554,8 +557,11 @@
 		273C2F372C496F4F00F8391F /* dydxSliderInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSliderInputView.swift; sourceTree = "<group>"; };
 		273F50152B7C3F120034792A /* SignedAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedAmountView.swift; sourceTree = "<group>"; };
 		2742C04D2BF6897A00E13C09 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27457F3E2C8AC87F00873640 /* dydxVaultDepositWithdrawConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultDepositWithdrawConfirmationViewModel.swift; sourceTree = "<group>"; };
+		27457FFF2C8B876800873640 /* VaultTransferType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultTransferType.swift; sourceTree = "<group>"; };
 		274C47EF2C0FC9A4000212C3 /* MemoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBox.swift; sourceTree = "<group>"; };
 		2751D6542C59646700B36F95 /* dydxVaultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultViewModel.swift; sourceTree = "<group>"; };
+		27673BAF2C8F971900689E3F /* dydxCheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCheckboxView.swift; sourceTree = "<group>"; };
 		27685F402B9FCAD300F37DE2 /* Satoshi-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Medium.otf"; sourceTree = "<group>"; };
 		2769090D2AAFD8030075B2D6 /* TransferInstanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferInstanceViewModel.swift; sourceTree = "<group>"; };
 		2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewModel.swift; sourceTree = "<group>"; };
@@ -1540,6 +1546,8 @@
 			isa = PBXGroup;
 			children = (
 				27823D122C77E38C009BCD51 /* dydxVaultDepositWithdrawViewModel.swift */,
+				27457F3E2C8AC87F00873640 /* dydxVaultDepositWithdrawConfirmationViewModel.swift */,
+				27457FFF2C8B876800873640 /* VaultTransferType.swift */,
 			);
 			path = DepositAndWithdrawal;
 			sourceTree = "<group>";
@@ -1575,6 +1583,7 @@
 				27DBF3C82C4A05B9009EB2D6 /* dydxTitledNumberField.swift */,
 				273C2F372C496F4F00F8391F /* dydxSliderInputView.swift */,
 				276AF8C62C4AE85A001DD695 /* dydxSliderView.swift */,
+				27673BAF2C8F971900689E3F /* dydxCheckboxView.swift */,
 			);
 			path = dydxComponents;
 			sourceTree = "<group>";
@@ -2116,6 +2125,7 @@
 				02AEE4BC28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift in Sources */,
 				0297A0F72A6109E500619181 /* ProgressStepView.swift in Sources */,
 				023848D52A9E784800B1A673 /* dydxTosView.swift in Sources */,
+				27457F3F2C8AC87F00873640 /* dydxVaultDepositWithdrawConfirmationViewModel.swift in Sources */,
 				022A24442A030831003A385E /* dydxAlertsView.swift in Sources */,
 				02D1344F28ECA75C00B46941 /* dydxMarketAssetFilterView.swift in Sources */,
 				64A4DB5529662083008D8E20 /* dydxTradeInputLimitPriceView.swift in Sources */,
@@ -2164,6 +2174,7 @@
 				277E90132B1EA0D3005CCBCB /* dydxTradingRewardsView.swift in Sources */,
 				02678F5B2965DEAD00EE346B /* dydxPortfolioSectionsView.swift in Sources */,
 				64A4DB762966276B008D8E20 /* dydxTradeInputTriggerPriceView.swift in Sources */,
+				274580002C8B876800873640 /* VaultTransferType.swift in Sources */,
 				0238FEBF2970CBEF002E1C1A /* dydxMarketAccountView.swift in Sources */,
 				02E5996128FF46B500F62F28 /* MarginUsageChange.swift in Sources */,
 				6453A7BB299C26DE0041A0C4 /* dydxClosePositionInputView.swift in Sources */,
@@ -2176,6 +2187,7 @@
 				025BA65A290100CD00CDAE99 /* LeverageRisk.swift in Sources */,
 				024F487A29657D7900E40247 /* dydxUserFavoriteView.swift in Sources */,
 				02B27A3A2AE8BC5A00A995EC /* dydxHelpView.swift in Sources */,
+				27673BB02C8F971900689E3F /* dydxCheckboxView.swift in Sources */,
 				02678FAA29666C0E00EE346B /* dydxPortfolioFundingView.swift in Sources */,
 				0273A15F2ACCDDB1001B89F5 /* SelectionBar.swift in Sources */,
 				02031F032AC36CE60069E00D /* BuySellButton.swift in Sources */,

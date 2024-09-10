@@ -43,6 +43,7 @@
 		27044F882BBB2ADF004C750D /* Text+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27044F872BBB2ADF004C750D /* Text+Ext.swift */; };
 		274C47EA2C0FC6CF000212C3 /* EdgeInsets+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C47E92C0FC6CF000212C3 /* EdgeInsets+Ext.swift */; };
 		276581F82C139F36009E072A /* SingleAxisGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276581F72C139F36009E072A /* SingleAxisGeometryReader.swift */; };
+		27673BBE2C8FD24400689E3F /* AttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27673BBD2C8FD24400689E3F /* AttributedString+Ext.swift */; };
 		277E7AC62BBF3BE8009F95DE /* InlineAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277E7AC52BBF3BE8009F95DE /* InlineAlert.swift */; };
 		27E6A7322AB8D5F600026CB5 /* SwipeActionsViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E6A7312AB8D5F600026CB5 /* SwipeActionsViewModifier.swift */; };
 		6488BBDC296F6AEA0096502F /* TabItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6488BBDB296F6AEA0096502F /* TabItemViewModel.swift */; };
@@ -139,6 +140,7 @@
 		27044F872BBB2ADF004C750D /* Text+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Ext.swift"; sourceTree = "<group>"; };
 		274C47E92C0FC6CF000212C3 /* EdgeInsets+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets+Ext.swift"; sourceTree = "<group>"; };
 		276581F72C139F36009E072A /* SingleAxisGeometryReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAxisGeometryReader.swift; sourceTree = "<group>"; };
+		27673BBD2C8FD24400689E3F /* AttributedString+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+Ext.swift"; sourceTree = "<group>"; };
 		277E7AC52BBF3BE8009F95DE /* InlineAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineAlert.swift; sourceTree = "<group>"; };
 		27E6A7312AB8D5F600026CB5 /* SwipeActionsViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionsViewModifier.swift; sourceTree = "<group>"; };
 		366BD14FE1ED4F2AF21D924E /* Pods-iOS-PlatformUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-PlatformUI.release.xcconfig"; path = "Target Support Files/Pods-iOS-PlatformUI/Pods-iOS-PlatformUI.release.xcconfig"; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 			children = (
 				27044F872BBB2ADF004C750D /* Text+Ext.swift */,
 				274C47E92C0FC6CF000212C3 /* EdgeInsets+Ext.swift */,
+				27673BBD2C8FD24400689E3F /* AttributedString+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				02DE88F828A2DB9C00728FF3 /* PlatformUIBundleClass.swift in Sources */,
 				02F16FD928B47E2D0085DC58 /* PlatformTableViewCell.swift in Sources */,
 				024B794528B6A6A200F7C386 /* PlatformIcon.swift in Sources */,
+				27673BBE2C8FD24400689E3F /* AttributedString+Ext.swift in Sources */,
 				0230377828C15C0E00412B72 /* PlatformViewModel.swift in Sources */,
 				276581F82C139F36009E072A /* SingleAxisGeometryReader.swift in Sources */,
 				0278DD0E2A7C7A1400FE6ABE /* PlatformViewModel+Ext.swift in Sources */,
