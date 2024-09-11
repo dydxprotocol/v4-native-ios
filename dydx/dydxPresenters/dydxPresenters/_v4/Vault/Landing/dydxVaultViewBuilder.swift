@@ -41,10 +41,10 @@ private protocol dydxVaultViewBuilderPresenterProtocol: HostedViewPresenterProto
 private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewModel>, dydxVaultViewBuilderPresenterProtocol {
     override init() {
         super.init()
-        
+
         viewModel = dydxVaultViewModel()
         viewModel?.vaultChart = dydxVaultChartViewModel()
-        
+
         let usdcToken = AbacusStateManager.shared.environment?.usdcTokenInfo?.denom
         AbacusStateManager.shared.state.accountBalance(of: usdcToken)
             .sink {[weak self] usdcBalance in
@@ -55,7 +55,7 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
             .store(in: &subscriptions)
         viewModel?.depositAction = { Router.shared?.navigate(to: RoutingRequest(path: "/vault/deposit"), animated: true, completion: nil) }
 
-        //TODO: remove & replace, test only
+        // TODO: remove & replace, test only
         Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             self.viewModel?.vaultChart?.setEntries(entries: self.generateEntries())

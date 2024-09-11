@@ -224,7 +224,7 @@ private struct dydxVaultView: View {
         }
         .themeColor(background: .layer2)
     }
-    
+
     private var positionsColumnsHeader: some View {
         HStack(spacing: dydxVaultPositionViewModel.interSectionPadding) {
             Group {
@@ -249,7 +249,7 @@ private struct dydxVaultView: View {
         }
         .padding(.horizontal, 16)
     }
-    
+
     private var positionsList: some View {
         ForEach(viewModel.positions ?? [], id: \.id) { position in
             position.createView()
@@ -259,7 +259,7 @@ private struct dydxVaultView: View {
         }
         .padding(.horizontal, 16)
     }
-    
+
     // MARK: Floating Buttons
     @ViewBuilder
     private var withdrawButton: some View {
@@ -268,7 +268,7 @@ private struct dydxVaultView: View {
                 .themeFont(fontType: .plus, fontSize: .medium)
                 .themeColor(foreground: .textPrimary)
                 .wrappedViewModel
-            
+
             PlatformButtonViewModel(content: content,
                                     type: .defaultType(),
                                     state: .secondary,
@@ -276,7 +276,7 @@ private struct dydxVaultView: View {
             .createView()
         }
     }
-    
+
     @ViewBuilder
     private var depositButton: some View {
         if let depositAction = viewModel.depositAction {
@@ -284,7 +284,7 @@ private struct dydxVaultView: View {
                 .themeFont(fontType: .plus, fontSize: .medium)
                 .themeColor(foreground: .textPrimary)
                 .wrappedViewModel
-            
+
             PlatformButtonViewModel(content: content,
                                     type: .defaultType(),
                                     state: .primary,
@@ -292,7 +292,7 @@ private struct dydxVaultView: View {
             .createView()
         }
     }
-    
+
     private var buttonStack: some View {
         HStack(spacing: 12) {
             withdrawButton
