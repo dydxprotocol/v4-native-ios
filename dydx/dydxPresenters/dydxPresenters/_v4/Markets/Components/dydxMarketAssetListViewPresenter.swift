@@ -249,7 +249,7 @@ struct FilterAction {
                                                        action: { market, assetMap in
                                                             assetMap[market.assetId]?.tags?.contains("Prediction Market") ?? false
                                                        })
-            actions.insert(predictionMarketsAction, at: 2)
+            actions.append(predictionMarketsAction)
         }
         actions.append(contentsOf: [
             FilterAction(type: .layer1,
