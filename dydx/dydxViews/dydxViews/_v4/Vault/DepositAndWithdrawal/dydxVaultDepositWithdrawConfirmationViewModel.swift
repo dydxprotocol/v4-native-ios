@@ -19,26 +19,25 @@ public class dydxVaultDepositWithdrawConfirmationViewModel: PlatformViewModel {
     fileprivate var submitState: State {
         hasAcknowledgedHighSlippage ? .enabled : .disabled
     }
-    
+
     public var submitAction: (() -> Void)?
     public var cancelAction: (() -> Void)?
     public var elevatedSlippageAmount: Double?
     public var receiptItems: [dydxReceiptChangeItemView]?
-    
+
     @Published public var transferType: VaultTransferType
     @Published public var requiresAcknowledgeHighSlippage: Bool = false
-    
+
     @Published fileprivate var amount: Double?
     @Published fileprivate var hasAcknowledgedHighSlippage: Bool = false
 
     public init(transferType: VaultTransferType) {
         self.transferType = transferType
-        
-        
+
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
             return VaultDepositWithdrawConfirmationView(viewModel: self)
                 .wrappedInAnyView()
@@ -46,13 +45,13 @@ public class dydxVaultDepositWithdrawConfirmationViewModel: PlatformViewModel {
     }
 }
 
-fileprivate struct VaultDepositWithdrawConfirmationView: View {
+private struct VaultDepositWithdrawConfirmationView: View {
     @ObservedObject var viewModel: dydxVaultDepositWithdrawConfirmationViewModel
-    
+
     var options = VaultTransferType.allCases
-    
+
     var body: some View {
-        
+
         VStack(spacing: 24) {
             titleRow
             transferVisualization
@@ -70,7 +69,7 @@ fileprivate struct VaultDepositWithdrawConfirmationView: View {
         .themeColor(background: .layer3)
         .ignoresSafeArea(edges: [.bottom])
     }
-    
+
     private var titleRow: some View {
         HStack(spacing: 16) {
             backButton
@@ -79,18 +78,18 @@ fileprivate struct VaultDepositWithdrawConfirmationView: View {
         }
         .padding(.horizontal, 8)
     }
-    
+
     private var titleText: some View {
         Text(viewModel.transferType.confirmTransferText)
             .themeColor(foreground: .textPrimary)
             .themeFont(fontType: .plus, fontSize: .largest)
     }
-    
+
     private var backButton: some View {
         ChevronBackButtonModel(onBackButtonTap: viewModel.cancelAction ?? {})
             .createView()
     }
-    
+
     private var transferVisualization: some View {
         return HStack(alignment: .center, spacing: 16) {
             generationTransferStep(title: viewModel.transferType.transferOriginTitleText, thumbnail: viewModel.transferType.transferOriginImage, subtitle: "placeholder")
@@ -104,8 +103,7 @@ fileprivate struct VaultDepositWithdrawConfirmationView: View {
         .fixedSize(horizontal: false, vertical: true)
 
     }
-    
-    
+
     private func generationTransferStep(title: String, thumbnail: Image?, subtitle: String) -> some View {
         VStack(spacing: 8) {
             Text(title)
@@ -139,7 +137,7 @@ fileprivate struct VaultDepositWithdrawConfirmationView: View {
             .clipShape(.rect(cornerRadius: 10))
         }
     }
-    
+
     @ViewBuilder
     private var receipts: some View {
         if viewModel.receiptItems?.count ?? 0 > 0 {
@@ -151,14 +149,14 @@ fileprivate struct VaultDepositWithdrawConfirmationView: View {
             .clipShape(.rect(cornerRadius: 10))
         }
     }
-    
+
     @ViewBuilder
     private var withdrawalSlippageInlineAlert: some View {
         if let elevatedSlippageAmount = viewModel.elevatedSlippageAmount {
             let withdrawalSlippageInlineAlertAttributedText = AttributedString(localizerPathKey: "APP.VAULTS.SLIPPAGE_WARNING",
                                                                                params: ["LINK": DataLocalizer.localize(path: "APP.VAULTS.VAULT_FAQS"),
                                                                                         "AMOUNT": dydxFormatter.shared.percent(number: elevatedSlippageAmount, digits: 2) ?? "--"],
-                                                                               //TODO: Replace
+                                                                               // TODO: Replace
                                                                                hyperlinks: ["withdraw": "https://test.com",
                                                                                             "APP.VAULTS.VAULT_FAQS": "https://purple.com"],
                                                                                foreground: .textPrimary)
@@ -168,16 +166,16 @@ fileprivate struct VaultDepositWithdrawConfirmationView: View {
             .createView()
         }
     }
-    
+
     @ViewBuilder
     private var checkboxRow: some View {
         if viewModel.requiresAcknowledgeHighSlippage {
-            dydxCheckboxView(isChecked: $viewModel.hasAcknowledgedHighSlippage, 
+            dydxCheckboxView(isChecked: $viewModel.hasAcknowledgedHighSlippage,
                              text: DataLocalizer.localize(path: "APP.VAULTS.SLIPPAGE_ACK",
                                                           params: ["AMOUNT": dydxFormatter.shared.percent(number: viewModel.elevatedSlippageAmount, digits: 2) ?? "--"]))
         }
     }
-    
+
     private var submitButton: some View {
         let content: Text
         let state: PlatformButtonState

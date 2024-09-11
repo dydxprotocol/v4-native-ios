@@ -1,5 +1,5 @@
 {
-  "originHash" : "3cd7346cace16cf660f9c22302c5ca6770335c67902f3fd155011356a9d43929",
+  "originHash" : "975d00e29efb8d2ca017c5e61df90418ac01f7d7143e85a3f9ddb4eb982154e4",
   "pins" : [
     {
       "identity" : "bigint",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "0a06575f4038b504e78ac330913d920f1630f510",
         "version" : "2.0.2"
+      }
+    },
+    {
+      "identity" : "keyboardobserving",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nickffox/KeyboardObserving",
+      "state" : {
+        "branch" : "master",
+        "revision" : "48134b5460435cc9d048223ad7560ee2e40f3d4a"
       }
     },
     {
@@ -188,6 +197,15 @@
       "state" : {
         "revision" : "62e12e138fc3eedf88c7553dd5d98712aa119f40",
         "version" : "9.0.9"
+      }
+    },
+    {
+      "identity" : "swiftui-introspect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
+      "state" : {
+        "revision" : "121c146fe591b1320238d054ae35c81ffa45f45a",
+        "version" : "0.12.0"
       }
     },
     {

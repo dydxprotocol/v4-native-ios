@@ -15,27 +15,27 @@ public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
         case enabled
         case disabled
     }
-    
+
     public let submitState: State
     public var submitAction: (() -> Void)?
-    
+
     @Published public private(set) var numberFormatter = dydxNumberInputFormatter()
-    
+
     @Published public fileprivate(set) var selectedTransferType: VaultTransferType
     @Published fileprivate var amount: Double?
     fileprivate var maxAmount: Double = 0
-    
+
     public var inputReceiptChangeItems: [dydxReceiptChangeItemView]?
     public var inputInlineAlert: InlineAlertViewModel?
     public var buttonReceiptChangeItems: [dydxReceiptChangeItemView]?
-    
+
     public init(selectedTransferType: VaultTransferType, submitState: State) {
         self.selectedTransferType = selectedTransferType
         self.submitState = submitState
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
             return VaultDepositWithdrawView(viewModel: self)
                 .wrappedInAnyView()
@@ -43,11 +43,11 @@ public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
     }
 }
 
-fileprivate struct VaultDepositWithdrawView: View {
+private struct VaultDepositWithdrawView: View {
     @ObservedObject var viewModel: dydxVaultDepositWithdrawViewModel
-    
+
     var options = VaultTransferType.allCases
-    
+
     private var radioButtonSelector: some View {
         RadioButtonGroup(selected: $viewModel.selectedTransferType,
                          options: options,
@@ -58,9 +58,9 @@ fileprivate struct VaultDepositWithdrawView: View {
                          itemHeight: 44)
         .leftAligned()
     }
-    
+
     var body: some View {
-        
+
         VStack(spacing: 0) {
             radioButtonSelector
             Color.clear.frame(height: 24)
@@ -83,7 +83,7 @@ fileprivate struct VaultDepositWithdrawView: View {
             PlatformView.hideKeyboard()
         }
     }
-    
+
     private var inputArea: some View {
         VStack(spacing: 16) {
             dydxTitledNumberField(title: viewModel.selectedTransferType.inputFieldTitle,
@@ -102,7 +102,7 @@ fileprivate struct VaultDepositWithdrawView: View {
         .themeColor(background: .layer2)
         .clipShape(.rect(cornerRadius: 10))
     }
-    
+
     private var submitButton: some View {
         let content: Text
         let state: PlatformButtonState
@@ -121,7 +121,7 @@ fileprivate struct VaultDepositWithdrawView: View {
         return PlatformButtonViewModel(content: content.wrappedViewModel, state: state, action: viewModel.submitAction ?? {})
             .createView()
     }
-    
+
     private var buttonArea: some View {
         VStack(spacing: 16) {
             VStack(spacing: 8) {

@@ -62,7 +62,7 @@ struct dydxTitledNumberField: View {
         .truncationMode(.middle)
         .frame(width: textWidth)
     }
-    
+
     private var maxButton: some View {
         let buttonContent = Text(DataLocalizer.localize(path: "APP.GENERAL.MAX"))
             .themeFont(fontSize: .small)
