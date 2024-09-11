@@ -65,38 +65,38 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
 
         self.viewModel = viewModel
     }
-    
+
     override func start() {
         super.start()
-                
-        //TODO: replace with real hooks from abacus
+
+        // TODO: replace with real hooks from abacus
         update()
     }
-    
-    //TODO: replace with real data from abacus
+
+    // TODO: replace with real data from abacus
     func update() {
         var newInputReceiptChangeItems = [dydxReceiptChangeItemView]()
         var newButtonReceiptChangeItems = [dydxReceiptChangeItemView]()
-        
+
         newInputReceiptChangeItems.append(dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.YOUR_VAULT_BALANCE"),
                                                          value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
                                                                       after: AmountTextModel(amount: 30.02))))
-        
+
         newButtonReceiptChangeItems.append(dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
                                                          value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
                                                                       after: AmountTextModel(amount: 30.02))))
-        
+
         newButtonReceiptChangeItems.append(dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.EST_SLIPPAGE"),
                                                          value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
                                                                       after: AmountTextModel(amount: 30.02))))
-        
+
         newButtonReceiptChangeItems.append(dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.WITHDRAW_MODAL.EXPECTED_AMOUNT_RECEIVED"),
                                                          value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
                                                                       after: AmountTextModel(amount: 30.02))))
-        
+
         viewModel?.inputReceiptChangeItems = newInputReceiptChangeItems
         viewModel?.buttonReceiptChangeItems = newButtonReceiptChangeItems
-        
+
         viewModel?.inputInlineAlert = InlineAlertViewModel(InlineAlertViewModel.Config.init(title: "test alert",
                                                                                             body: "test bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest body",
                                                                                             level: .error))
