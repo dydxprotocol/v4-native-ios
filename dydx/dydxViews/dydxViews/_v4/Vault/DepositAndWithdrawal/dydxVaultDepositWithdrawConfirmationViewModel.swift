@@ -13,27 +13,29 @@ import dydxFormatter
 public class dydxVaultDepositWithdrawConfirmationViewModel: PlatformViewModel {
     public enum State {
         case enabled
+        case submitting
+        case loading
         case disabled
     }
 
-    fileprivate var submitState: State {
-        hasAcknowledgedHighSlippage ? .enabled : .disabled
-    }
+    public var submitState: State
 
     public var submitAction: (() -> Void)?
     public var cancelAction: (() -> Void)?
     public var elevatedSlippageAmount: Double?
     public var receiptItems: [dydxReceiptChangeItemView]?
 
+    
     @Published public var transferType: VaultTransferType
     @Published public var requiresAcknowledgeHighSlippage: Bool = false
+    @Published public var isFirstSubmission: Bool = true
 
     @Published fileprivate var amount: Double?
-    @Published fileprivate var hasAcknowledgedHighSlippage: Bool = false
+    @Published fileprivate(set) public var hasAcknowledgedHighSlippage: Bool = false
 
     public init(transferType: VaultTransferType) {
         self.transferType = transferType
-
+        self.submitState = .disabled
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
@@ -173,25 +175,49 @@ private struct VaultDepositWithdrawConfirmationView: View {
             dydxCheckboxView(isChecked: $viewModel.hasAcknowledgedHighSlippage,
                              text: DataLocalizer.localize(path: "APP.VAULTS.SLIPPAGE_ACK",
                                                           params: ["AMOUNT": dydxFormatter.shared.percent(number: viewModel.elevatedSlippageAmount, digits: 2) ?? "--"]))
+            .disabled(viewModel.submitState == .submitting)
+        }
+    }
+    
+    @ViewBuilder
+    private var spinner: some View {
+        ProgressView()
+            .progressViewStyle(.circular)
+            .tint(ThemeColor.SemanticColor.textSecondary.color)
+    }
+    
+    @ViewBuilder
+    public var buttonContent: some View {
+        switch viewModel.submitState {
+        case .enabled:
+            Text(viewModel.isFirstSubmission ? viewModel.transferType.confirmTransferText : DataLocalizer.localize(path: "APP.GENERAL.TRY_AGAIN"))
+                .themeColor(foreground: .textPrimary)
+                .themeFont(fontType: .base, fontSize: .large)
+        case .submitting:
+            HStack {
+                Text(DataLocalizer.localize(path: "APP.GENERAL.SUBMITTING"))
+                    .themeColor(foreground: .textTertiary)
+                    .themeFont(fontType: .base, fontSize: .large)
+                spinner
+            }
+        case .loading:
+            spinner
+        case .disabled:
+            if viewModel.requiresAcknowledgeHighSlippage && !viewModel.hasAcknowledgedHighSlippage {
+                Text(DataLocalizer.localize(path: "APP.VAULTS.SLIPPAGE_ACK_REQUIRED"))
+                    .themeColor(foreground: .textTertiary)
+                    .themeFont(fontType: .base, fontSize: .large)
+            } else {
+                Text(viewModel.transferType.confirmTransferText)
+                    .themeColor(foreground: .textTertiary)
+                    .themeFont(fontType: .base, fontSize: .large)
+            }
         }
     }
 
     private var submitButton: some View {
-        let content: Text
-        let state: PlatformButtonState
-        switch viewModel.submitState {
-        case .enabled:
-            state = .primary
-            content = Text(viewModel.transferType.confirmTransferText)
-                .themeColor(foreground: .textPrimary)
-                .themeFont(fontType: .base, fontSize: .large)
-        case .disabled:
-            state = .disabled
-            content = Text(DataLocalizer.localize(path: "APP.VAULTS.ACKNOWLEDGE_HIGH_SLIPPAGE"))
-                .themeColor(foreground: .textTertiary)
-                .themeFont(fontType: .base, fontSize: .large)
-        }
-        return PlatformButtonViewModel(content: content.wrappedViewModel, state: state, action: viewModel.submitAction ?? {})
+        let state: PlatformButtonState = viewModel.submitState == .enabled ? .primary : .disabled
+        return PlatformButtonViewModel(content: buttonContent.wrappedViewModel, state: state, action: viewModel.submitAction ?? {})
             .createView()
     }
 }

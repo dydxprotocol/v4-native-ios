@@ -53,17 +53,67 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         }
     }
 
+    static let slippageAcknowledgementThreshold = 1
+    
     override init() {
 
         super.init()
 
         let viewModel = dydxVaultDepositWithdrawConfirmationViewModel(transferType: transferType)
+        
+        if transferType == .deposit {
+            viewModel.submitState = .enabled
+        } else {
+            viewModel.submitState = .loading
+            //TO-DO replace fetch slippage and update view model
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                guard let self = self else { return }
+                let requiresAcknowledgeHighSlippage = transferType == .withdraw && Double.random(in: 0...1.5) > Self.slippageAcknowledgementThreshold // replace random with actual slippage
+                viewModel.requiresAcknowledgeHighSlippage = requiresAcknowledgeHighSlippage
+                if requiresAcknowledgeHighSlippage && !viewModel.hasAcknowledgedHighSlippage {
+                    self.viewModel?.submitState = .disabled
+                } else {
+                    self.viewModel?.submitState = .enabled
+                }
+            }
+        }
+        
+        // handle slippage toggling
+        viewModel.$hasAcknowledgedHighSlippage
+            .sink {[weak self] hasAcknowledged in
+                guard let self = self else { return }
+                switch self.viewModel.submitState {
+                case .enabled, .disabled:
+                    self.viewModel?.submitState = hasAcknowledged ? .enabled : .disabled
+                    self.viewModel?.submitState = hasAcknowledged ? .enabled : .disabled
+                case .submitting, .loading:
+                    return
+                }
+            }
+            .store(in: &subscriptions)
+        
+        
 
         viewModel.cancelAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
+        
+        viewModel.submitAction = { [weak self] in
+            //TO-DO replace with v4-clients call to submit deposit, this just simulates it
+            self?.viewModel?.submitState = .submitting
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                if Int.random(in: 1...6) == 1 {
+                    // success
+                    Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+                } else {
+                    // failure
+                    self?.viewModel?.isFirstSubmission = false
+                    self?.viewModel?.submitState = .enabled
+                }
+            }
+        }
 
-        // TODO: replace
+         TODO: replace
         viewModel.elevatedSlippageAmount = 4.20
         viewModel.requiresAcknowledgeHighSlippage = true
 
