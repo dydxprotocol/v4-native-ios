@@ -12,7 +12,6 @@ import Utilities
 public enum dydxBoolFeatureFlag: String, CaseIterable {
     case force_mainnet
     case enable_app_rating
-    case shouldUseSkip = "ff_skip_migration"
     case isVaultEnabled = "ff_vault_enabled"
     case showPredictionMarketsUI = "ff_show_prediction_markets_ui"
     case abacus_static_typing
@@ -23,14 +22,12 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
             return false
         case .enable_app_rating:
             return true
-        case .shouldUseSkip:
-            return true
         case .isVaultEnabled:
             return false
         case .showPredictionMarketsUI:
             return false
         case .abacus_static_typing:
-            return false
+            return Installation.source == .debug
         }
     }
 
