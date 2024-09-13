@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0271236928E545A50015D39F /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 0271236828E545A50015D39F /* SwiftMessages */; };
+		27897DA02C93EA2800196F21 /* DismissPresentedAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27897D922C93EA2800196F21 /* DismissPresentedAction.swift */; };
 		27ED353A2AD5BD0900C159F5 /* BannerErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED35392AD5BD0900C159F5 /* BannerErrorAlert.swift */; };
 		3101F9C52511303E00AC4010 /* ConfirmAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101F9C42511303E00AC4010 /* ConfirmAction.swift */; };
 		3101F9C62511303E00AC4010 /* ConfirmAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101F9C42511303E00AC4010 /* ConfirmAction.swift */; };
@@ -634,6 +635,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27897D922C93EA2800196F21 /* DismissPresentedAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissPresentedAction.swift; sourceTree = "<group>"; };
 		27ED35392AD5BD0900C159F5 /* BannerErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerErrorAlert.swift; sourceTree = "<group>"; };
 		3101F9C42511303E00AC4010 /* ConfirmAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAction.swift; sourceTree = "<group>"; };
 		3101F9C92511308E00AC4010 /* AuthLoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLoginPresenter.swift; sourceTree = "<group>"; };
@@ -1168,6 +1170,7 @@
 				314B5FA223DCCE2800139EB3 /* ConfirmationAction.swift */,
 				3101F9C42511303E00AC4010 /* ConfirmAction.swift */,
 				3180B04E272B509400CCAB67 /* DismissAction.swift */,
+				27897D922C93EA2800196F21 /* DismissPresentedAction.swift */,
 				64AF47822817123C00EBFDC6 /* SafariAction.swift */,
 			);
 			path = _Actions;
@@ -2346,6 +2349,7 @@
 				3128DDF026B89CE80099B62E /* LikedTableViewListPresenter.swift in Sources */,
 				314B604D23DCCE2900139EB3 /* ListPresenterManager.swift in Sources */,
 				314B5FD123DCCE2900139EB3 /* PrivacyPermissionPresenter.swift in Sources */,
+				27897DA02C93EA2800196F21 /* DismissPresentedAction.swift in Sources */,
 				314B5FE323DCCE2900139EB3 /* ObjectPresenterCollectionViewCell.swift in Sources */,
 				314B5FE123DCCE2900139EB3 /* UIView+Xib.swift in Sources */,
 				3101F9C52511303E00AC4010 /* ConfirmAction.swift in Sources */,
