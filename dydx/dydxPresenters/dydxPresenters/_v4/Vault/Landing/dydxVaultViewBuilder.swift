@@ -45,15 +45,7 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
         viewModel = dydxVaultViewModel()
         viewModel?.vaultChart = dydxVaultChartViewModel()
 
-        let usdcToken = AbacusStateManager.shared.environment?.usdcTokenInfo?.denom
-        AbacusStateManager.shared.state.accountBalance(of: usdcToken)
-            .sink {[weak self] usdcBalance in
-                if usdcBalance ?? 0 > 0 {
-                    self?.viewModel?.depositAction = { Router.shared?.navigate(to: RoutingRequest(path: "/vault/deposit"), animated: true, completion: nil) }
-                }
-            }
-            .store(in: &subscriptions)
-        // TODO: check if vault balance is > 0 and set up withdraw action
+        viewModel?.depositAction = { Router.shared?.navigate(to: RoutingRequest(path: "/vault/deposit"), animated: true, completion: nil) }
         viewModel?.withdrawAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/vault/withdraw"), animated: true, completion: nil)
         }

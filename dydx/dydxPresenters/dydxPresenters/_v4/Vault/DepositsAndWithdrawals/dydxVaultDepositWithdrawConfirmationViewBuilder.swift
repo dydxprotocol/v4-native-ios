@@ -15,6 +15,8 @@ import dydxStateManager
 import FloatingPanel
 import PlatformRouting
 import dydxFormatter
+import Combine
+import class Abacus.Subaccount
 
 public class dydxVaultDepositWithdrawConfirmationViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -29,12 +31,12 @@ private class dydxVaultDepositWithdrawConfirmationViewController: HostingViewCon
 
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         let presenter = presenter as? dydxVaultDepositWithdrawConfirmationViewPresenterProtocol
-        presenter?.viewModel?.amount = request?.params?["amount"] as? Double
+        presenter?.amount = request?.params?["amount"] as? Double
         if request?.path == "/vault/deposit_confirm" {
-            presenter?.viewModel?.transferType = .deposit
+            presenter?.transferType = .deposit
             return true
         } else if request?.path == "/vault/withdraw_confirm" {
-            presenter?.viewModel?.transferType = .withdraw
+            presenter?.transferType = .withdraw
             return true
         } else {
             return false
@@ -44,59 +46,32 @@ private class dydxVaultDepositWithdrawConfirmationViewController: HostingViewCon
 
 private protocol dydxVaultDepositWithdrawConfirmationViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxVaultDepositWithdrawConfirmationViewModel? { get }
+    var transferType: VaultTransferType? { get set }
+    var amount: Double? { get set }
 }
 
 private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPresenter<dydxVaultDepositWithdrawConfirmationViewModel>, dydxVaultDepositWithdrawConfirmationViewPresenterProtocol {
-    static let slippageAcknowledgementThreshold = 1.0
+    static let slippageAcknowledgementThreshold = 0.01
+
+    var transferType: VaultTransferType?
+    var amount: Double?
     
     override init() {
         super.init()
-        self.viewModel = dydxVaultDepositWithdrawConfirmationViewModel(faqUrl: AbacusStateManager.shared.environment?.links?.vaultLearnMore ?? "")
+        
+        viewModel = dydxVaultDepositWithdrawConfirmationViewModel()
     }
 
     override func start() {
         super.start()
 
-        guard let viewModel = viewModel else { return }
-
-        viewModel.slippage = 4.20
+        guard let viewModel else { return }
         
-        viewModel.$transferType
-            .sink {[weak self] transferType in
-                switch transferType {
-                case .deposit:
-                    viewModel.submitState = .enabled
-                case .withdraw:
-                    viewModel.submitState = .loading
-                    //TO-DO replace fetch slippage and update view model
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                        guard let self = self else { return }
-                        let requiresAcknowledgeHighSlippage = transferType == .withdraw && Double.random(in: 0...1.5) > Self.slippageAcknowledgementThreshold // replace random with actual slippage
-                        viewModel.requiresAcknowledgeHighSlippage = requiresAcknowledgeHighSlippage
-                        if requiresAcknowledgeHighSlippage && !viewModel.hasAcknowledgedHighSlippage {
-                            self.viewModel?.submitState = .disabled
-                        } else {
-                            self.viewModel?.submitState = .enabled
-                        }
-                    }
-                }
-            }
-            .store(in: &subscriptions)
+        viewModel.amount = amount
+        viewModel.faqUrl = AbacusStateManager.shared.environment?.links?.vaultLearnMore ?? ""
+        viewModel.transferType = transferType
         
-        // handle slippage toggling
-        viewModel.$hasAcknowledgedHighSlippage
-            .sink {[weak self] hasAcknowledged in
-                guard let viewModel = self?.viewModel, viewModel.requiresAcknowledgeHighSlippage else { return }
-                switch viewModel.submitState {
-                case .enabled, .disabled:
-                    viewModel.submitState = hasAcknowledged ? .enabled : .disabled
-                case .submitting, .loading:
-                    return
-                }
-            }
-            .store(in: &subscriptions)
-        
-        
+        initializeSubmitState()
 
         viewModel.cancelAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
@@ -116,35 +91,93 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
                 }
             }
         }
+
+        // handle slippage toggling
+        viewModel.$hasAcknowledgedHighSlippage
+            .sink {[weak self] hasAcknowledged in
+                self?.update(newHasAcknowledged: hasAcknowledged)
+            }
+            .store(in: &subscriptions)
         
-        // TODO: replace with real hooks from abacus
-        update()
+        AbacusStateManager.shared.state.selectedSubaccount
+            .sink { [weak self] selectedSubaccount in
+                self?.update(subaccount: selectedSubaccount)
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func initializeSubmitState() {
+        guard let viewModel, let transferType else { return }
+        switch transferType {
+        case .deposit:
+            viewModel.submitState = .enabled
+        case .withdraw:
+            viewModel.submitState = .loading
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                //TO-DO replace fetch actual slippage and update view model
+                let slippage = Double.random(in: 0...0.02) // replace random with actual slippage
+                let requiresAcknowledgeHighSlippage = transferType == .withdraw && slippage >= Self.slippageAcknowledgementThreshold
+                viewModel.requiresAcknowledgeHighSlippage = requiresAcknowledgeHighSlippage
+                viewModel.slippage = slippage
+                if requiresAcknowledgeHighSlippage && !viewModel.hasAcknowledgedHighSlippage {
+                    self.viewModel?.submitState = .disabled
+                } else {
+                    self.viewModel?.submitState = .enabled
+                }
+            }
+        }
     }
 
     // TODO: replace with real data from abacus
-    func update() {
-        guard let viewModel = viewModel else { return }
-        let crossFreeCollateralReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
-                                                                      value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
-                                                                                               after: AmountTextModel(amount: 30.02)))
-        let yourVaultBalanceReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.YOUR_VAULT_BALANCE"),
-                                                                    value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
-                                                                                             after: AmountTextModel(amount: 30.02)))
-        let estSlippageReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.EST_SLIPPAGE"),
-                                                              value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
-                                                                                       after: AmountTextModel(amount: 30.02)))
-        let expectedAmountReceivedItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.WITHDRAW_MODAL.EXPECTED_AMOUNT_RECEIVED"),
-                                                                   value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
-                                                                                            after: AmountTextModel(amount: 30.02)))
-        let crossMarginUsageItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_MARGIN_USAGE"),
-                                                             value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
-                                                                                      after: AmountTextModel(amount: 30.02)))
-
-        switch viewModel.transferType {
-            case .deposit:
-                viewModel.receiptItems = [crossFreeCollateralReceiptItem, crossMarginUsageItem, yourVaultBalanceReceiptItem]
-            case .withdraw:
-                viewModel.receiptItems = [crossFreeCollateralReceiptItem, yourVaultBalanceReceiptItem, estSlippageReceiptItem, expectedAmountReceivedItem]
+    func update(subaccount: Subaccount?) {
+        guard let amount,
+              let transferType,
+              amount > 0,
+              // TODO: replace
+              let curVaultBalance = Optional(420.0),
+              let curFreeCollateral = subaccount?.freeCollateral?.current?.doubleValue,
+              let curMarginUsage = subaccount?.marginUsage?.current?.doubleValue
+        else {
+            assertionFailure()
+            return
+        }
+        
+        viewModel?.curMarginUsage = curMarginUsage
+        viewModel?.curFreeCollateral = curFreeCollateral
+        viewModel?.curVaultBalance = curVaultBalance
+        
+        switch transferType {
+        case .deposit:
+            viewModel?.postVaultBalance = curVaultBalance + amount
+            viewModel?.postFreeCollateral = curFreeCollateral - amount
+            viewModel?.postMarginUsage = curMarginUsage - amount
+        case .withdraw:
+            viewModel?.postVaultBalance = curVaultBalance - amount
+            viewModel?.postFreeCollateral = curFreeCollateral + amount
+            viewModel?.postMarginUsage = curMarginUsage + amount
+        }
+    }
+    
+    private func update(newHasAcknowledged: Bool) {
+        guard let viewModel, newHasAcknowledged else { return }
+        switch viewModel.submitState {
+        case .enabled, .disabled:
+            viewModel.submitState = newHasAcknowledged ? .enabled : .disabled
+        case .submitting, .loading:
+            return
+        }
+    }
+    
+    private func updateSubmitState(slippage: Double?, transferType: VaultTransferType) {
+        switch transferType {
+        case .deposit:
+            viewModel?.submitState = .enabled
+        case .withdraw:
+            if let slippage = slippage, viewModel?.requiresAcknowledgeHighSlippage == false || viewModel?.hasAcknowledgedHighSlippage == true {
+                viewModel?.submitState = .enabled
+            } else {
+                viewModel?.submitState = .disabled
+            }
         }
     }
 }
