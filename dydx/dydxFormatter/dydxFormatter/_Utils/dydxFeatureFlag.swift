@@ -27,7 +27,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
         case .showPredictionMarketsUI:
             return false
         case .abacus_static_typing:
-            return false
+            return Installation.source == .debug
         }
     }
 
