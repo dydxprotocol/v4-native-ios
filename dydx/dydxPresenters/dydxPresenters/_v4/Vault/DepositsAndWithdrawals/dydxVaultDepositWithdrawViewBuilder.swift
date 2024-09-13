@@ -16,6 +16,7 @@ import FloatingPanel
 import PlatformRouting
 import dydxFormatter
 import Combine
+// import single class due to VaultTransferType collision
 import class Abacus.Subaccount
 
 public class dydxVaultDepositWithdrawViewBuilder: NSObject, ObjectBuilderProtocol {

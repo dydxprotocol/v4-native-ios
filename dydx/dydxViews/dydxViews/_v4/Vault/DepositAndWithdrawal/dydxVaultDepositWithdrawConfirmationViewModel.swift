@@ -239,25 +239,24 @@ private struct VaultDepositWithdrawConfirmationView: View {
     @ViewBuilder
     public var buttonContent: some View {
         if let transferType = viewModel.transferType {
-            switch viewModel.submitState {
-            case .enabled, .loading:
-                Text(viewModel.isFirstSubmission ? transferType.confirmTransferText : DataLocalizer.localize(path: "APP.ONBOARDING.TRY_AGAIN"))
-                    .themeFont(fontType: .base, fontSize: .large)
-            case .submitting:
-                HStack {
-                    Text(DataLocalizer.localize(path: "APP.TRADE.SUBMITTING"))
-                        .themeFont(fontType: .base, fontSize: .large)
-                    spinner
-                }
-            case .disabled:
-                if viewModel.requiresAcknowledgeHighSlippage && !viewModel.hasAcknowledgedHighSlippage {
-                    Text(DataLocalizer.localize(path: "APP.VAULTS.ACKNOWLEDGE_HIGH_SLIPPAGE"))
-                        .themeFont(fontType: .base, fontSize: .large)
-                } else {
-                    Text(transferType.confirmTransferText)
-                        .themeFont(fontType: .base, fontSize: .large)
+            Group {
+                switch viewModel.submitState {
+                case .enabled, .loading:
+                    Text(viewModel.isFirstSubmission ? transferType.confirmTransferText : DataLocalizer.localize(path: "APP.ONBOARDING.TRY_AGAIN"))
+                case .submitting:
+                    HStack {
+                        Text(DataLocalizer.localize(path: "APP.TRADE.SUBMITTING"))
+                        spinner
+                    }
+                case .disabled:
+                    if viewModel.requiresAcknowledgeHighSlippage && !viewModel.hasAcknowledgedHighSlippage {
+                        Text(DataLocalizer.localize(path: "APP.VAULTS.ACKNOWLEDGE_HIGH_SLIPPAGE"))
+                    } else {
+                        Text(transferType.confirmTransferText)
+                    }
                 }
             }
+            .themeFont(fontType: .base, fontSize: .large)
         }
     }
 
