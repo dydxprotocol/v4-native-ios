@@ -47,7 +47,7 @@
       "destination":"LocationPermissionAction.xib"
    },
    "/authorization/notification":{
-      "destination":"NotificationPermissionAction.xib"
+      "destination":"PlatformParticles.NotificationPermissionActionBuilder"
    },
    "/authorization/photoalbum":{
       "destination":"PhotoAlbumsPermissionAction.xib"
@@ -89,7 +89,7 @@
       "presentation":"half"
    },
    "/primer/notification":{
-      "destination":"PrimerNotification.storyboard",
+      "destination":"dydxPresenters.dydxShareActionBuilder",
       "presentation":"prompt"
    },
    "/primer/photoalbum":{

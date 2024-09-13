@@ -50,7 +50,7 @@ private class dydxUpdateViewPresenter: HostedViewPresenter<dydxUpdateViewModel>,
             viewModel?.title = DataLocalizer.localize(path: ios.title ?? "FORCED_UPDATE.TITLE")
             viewModel?.text = DataLocalizer.localize(path: ios.text ?? "FORCED_UPDATE.TEXT")
             viewModel?.action = DataLocalizer.localize(path: ios.action ?? "FORCED_UPDATE.ACTION")
-            viewModel?.updateTapped = { [weak self] in
+            viewModel?.updateTapped = {
                 if let url = URL(string: ios.url) {
                     Router.shared?.navigate(to: url, completion: nil)
                 }

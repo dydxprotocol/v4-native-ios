@@ -22,14 +22,14 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
         case .language: return DataLocalizer.shared?.language
         case .v4Theme: return dydxThemeType.classicDark.rawValue
         case .directionColorPreference: return "green_is_up"
-        case .shouldDisplayInAppNotifications: return true
+        case .shouldDisplayInAppNotifications: return false
         case .gasToken: return "USDC"
         case .hidePredictionMarketsNoticeKey: return false
         }
     }
 }
 
-extension KeyValueStoreProtocol {
+public extension KeyValueStoreProtocol {
 
     var language: Bool {
         SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.language.rawValue) as? Bool
@@ -52,7 +52,7 @@ extension KeyValueStoreProtocol {
     var shouldDisplayInAppNotifications: Bool {
         SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.shouldDisplayInAppNotifications.rawValue) as? Bool
         ?? dydxSettingsStoreKey.shouldDisplayInAppNotifications.defaultValue as? Bool
-        ?? true
+        ?? false
     }
 
     var gasToken: String? {

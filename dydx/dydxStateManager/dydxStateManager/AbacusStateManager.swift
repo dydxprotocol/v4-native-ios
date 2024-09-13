@@ -315,6 +315,10 @@ public final class AbacusStateManager: NSObject {
         }
     }
 
+    public func registerPushNotification(token: String, languageCode: String?) {
+        asyncStateManager.registerPushNotification(token: token, languageCode: languageCode)
+    }
+
     /// batch parallel address screening
     /// - Parameters:
     ///   - addresses: the addresses to scan

@@ -68,6 +68,7 @@ open class SettingsViewPresenter: BaseSettingsViewPresenter {
                 self?.keyValueStore?.setValue(value, forKey: fieldName)
             }
             self?.loadSettings()
+            self?.onInputValueChanged(input: input)
         }
 
         if let xib = fieldInputDefinition.xib {
@@ -156,5 +157,9 @@ open class SettingsViewPresenter: BaseSettingsViewPresenter {
             }
         }
         return textViewModel
+    }
+    
+    open func onInputValueChanged(input: FieldInput) {
+        
     }
 }

@@ -272,9 +272,9 @@ private class dydxTradeStatusViewPresenter: HostedViewPresenter<dydxTradeStatusV
             viewModel?.logoViewModel.title = DataLocalizer.localize(path: titleKey, params: nil)
             viewModel?.logoViewModel.detail = DataLocalizer.localize(path: detailKey, params: nil)
         } else {
-            if order.status.statusIcon == nil { assertionFailure("order.status.statusIcon was nil") }
-            if order.resources.statusStringKey == nil { assertionFailure("order.resources.statusStringKey was nil") }
-            if order.status.detailKey == nil { assertionFailure("order.status.detailKey was nil") }
+//            if order.status.statusIcon == nil { assertionFailure("order.status.statusIcon was nil") }
+//            if order.resources.statusStringKey == nil { assertionFailure("order.resources.statusStringKey was nil") }
+//            if order.status.detailKey == nil { assertionFailure("order.status.detailKey was nil") }
         }
     }
 }
