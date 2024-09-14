@@ -27,9 +27,6 @@ public class dydxNotificationsSettingsViewBuilder: NSObject, ObjectBuilderProtoc
 }
 
 private class dydxNotificationsSettingsViewPresenter: SettingsViewPresenter {
-
-    private let notificationPermission = NotificationService.shared?.authorization
-
     init() {
         super.init(definitionFile: "notifications.json",
                    keyValueStore: SettingsStore.shared,
@@ -45,17 +42,15 @@ private class dydxNotificationsSettingsViewPresenter: SettingsViewPresenter {
 
     override func onInputValueChanged(input: FieldInput) {
         if input.fieldName == "should_display_in_app_notifications" {
-            if input.checked ?? false {
-                promptToEnable()
-            }
-
+           promptToToggleNotification()
         }
     }
 
-    private func promptToEnable() {
+    private func promptToToggleNotification() {
+        let notificationPermission = NotificationService.shared?.authorization
         if notificationPermission?.authorization == .notDetermined {
             Router.shared?.navigate(to: RoutingRequest(path: "/authorization/notification", params: nil), animated: true, completion: nil)
-        } else if notificationPermission?.authorization != .authorized {
+        } else {
             notificationPermission?.promptToSettings(requestTitle: nil,
                                                      requestMessage: DataLocalizer.shared?.localize(path: "APP.PUSH_NOTIFICATIONS.UPDATE_SETTINGS_MESSAGE", params: nil),
                                                      requestCTA: DataLocalizer.shared?.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS", params: nil) ?? "Settings",

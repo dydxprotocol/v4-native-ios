@@ -10,17 +10,25 @@ import Utilities
 import FirebaseMessaging
 import dydxAnalytics
 import dydxStateManager
+import Combine
 
 final class dydxNotificationHandlerDelegate: NSObject, NotificationHandlerDelegate {
 
     private let userPermissionTag = "NotificationHandler.permission"
+    private var subscriptions = Set<AnyCancellable>()
 
     private var token: String? {
         didSet {
             sendTokenUpdate()
         }
     }
-
+    
+    private var languageCode: String? {
+        didSet {
+            sendTokenUpdate()
+        }
+    }
+    
     private var permission: EPrivacyPermission? {
         didSet {
             didSetPermission()
@@ -29,6 +37,12 @@ final class dydxNotificationHandlerDelegate: NSObject, NotificationHandlerDelega
 
     override init() {
         super.init()
+        
+        DataLocalizer.shared?.languagePublisher
+            .sink { [weak self] languageCode in
+                self?.languageCode = languageCode
+            }
+            .store(in: &subscriptions)
     }
 
     // MARK: NotificationHandlerDelegate
@@ -71,8 +85,8 @@ final class dydxNotificationHandlerDelegate: NSObject, NotificationHandlerDelega
     }
 
     private func sendTokenUpdate() {
-        if let token = token, permission == .authorized, SettingsStore.shared?.shouldDisplayInAppNotifications ?? false {
-            AbacusStateManager.shared.registerPushNotification(token: token, languageCode: nil)
+        if let token = token, permission == .authorized {
+            AbacusStateManager.shared.registerPushNotification(token: token, languageCode: languageCode)
         }
     }
 

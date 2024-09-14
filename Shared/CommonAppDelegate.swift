@@ -28,12 +28,10 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         return "firebase"
     }
  
-    private lazy var firebaseNotification: FirebaseNotificationHandler = {
+    open lazy var firebaseNotification: FirebaseNotificationHandler = {
         return FirebaseNotificationHandler(tag: notificationTag)
     }()
     
-    private let notificationHandlerDelegate = dydxNotificationHandlerDelegate()
-
     override open func inject(completion: @escaping () -> Void) {
         super.inject { [weak self] in
             self?.injectUX(completion: completion)
@@ -186,7 +184,6 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         injectURLHandler()
         super.startup { [weak self] in
             self?.injectNotification()
-            self?.firebaseNotification.delegate = self?.notificationHandlerDelegate
             completion()
         }
     }

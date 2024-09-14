@@ -18,7 +18,8 @@ public final class dydxGlobalWorkers: BaseWorker {
         dydxCarteraConfigWorker(),
         dydxUpdateWorker(),
         dydxRatingsWorker(),
-        dydxGasTokenWorker()
+        dydxGasTokenWorker(),
+        dydxPushNotifcationToggleWorker()
     ]
 
     override public func start() {
