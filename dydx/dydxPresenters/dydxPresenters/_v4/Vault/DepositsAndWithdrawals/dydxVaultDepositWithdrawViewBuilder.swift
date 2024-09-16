@@ -60,7 +60,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     override func start() {
         super.start()
         guard let viewModel = viewModel else { return }
-        
+
         Publishers.CombineLatest3(AbacusStateManager.shared.state.selectedSubaccount, viewModel.$amount, viewModel.$selectedTransferType)
             .sink { [weak self] selectedSubaccount, amount, transferType in
                 self?.update(subaccount: selectedSubaccount, amount: amount ?? 0, transferType: transferType)
@@ -80,7 +80,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
                                                                                             body: "test bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest body",
                                                                                             level: .error))
     }
-    
+
     private func updateSubmitState(amount: Double) {
         if amount > 0 {
             viewModel?.submitState = .enabled
@@ -88,35 +88,35 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
             viewModel?.submitState = .disabled
         }
     }
-    
+
     private func updateReceiptItems(subaccount: Subaccount?, amount: Double, transferType: VaultTransferType) {
         guard let curVaultBalance = Optional(420.0),
               let curFreeCollateral = subaccount?.freeCollateral?.current?.doubleValue,
               let curMarginUsage = subaccount?.marginUsage?.current?.doubleValue
         else { return }
-        
+
         var newInputReceiptChangeItems = [dydxReceiptChangeItemView]()
         var newButtonReceiptChangeItems = [dydxReceiptChangeItemView]()
 
         let preTransferVaultBalance = AmountTextModel(amount: curVaultBalance.asNsNumber)
         let preTransferFreeCollateral = AmountTextModel(amount: curFreeCollateral.asNsNumber)
         let preTransferMarginUsage = AmountTextModel(amount: curMarginUsage.asNsNumber)
-        
+
         let postTransferVaultBalance: AmountTextModel?
         let postTransferFreeCollateral: AmountTextModel?
         let postTransferMarginUsage: AmountTextModel?
-        
+
         if amount > 0 {
             switch transferType {
             case .deposit:
                 postTransferVaultBalance = AmountTextModel(amount: (curVaultBalance + amount).asNsNumber)
                 postTransferFreeCollateral = AmountTextModel(amount: (curFreeCollateral - amount).asNsNumber)
-                //TODO: this is wrong calculation
+                // TODO: this is wrong calculation
                 postTransferMarginUsage = AmountTextModel(amount: (curMarginUsage - amount).asNsNumber)
             case .withdraw:
                 postTransferVaultBalance = AmountTextModel(amount: (curVaultBalance - amount).asNsNumber)
                 postTransferFreeCollateral = AmountTextModel(amount: (curFreeCollateral + amount).asNsNumber)
-                //TODO: this is wrong calculation
+                // TODO: this is wrong calculation
                 postTransferMarginUsage = AmountTextModel(amount: (curMarginUsage + amount).asNsNumber)
             }
         } else {
@@ -124,14 +124,14 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
             postTransferFreeCollateral = nil
             postTransferMarginUsage = nil
         }
-        
+
         let vaultBalanceReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.YOUR_VAULT_BALANCE"),
                                                                     value: AmountChangeModel(before: preTransferVaultBalance, after: postTransferVaultBalance))
         let freeCollateralReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.FREE_COLLATERAL"),
                                                                     value: AmountChangeModel(before: preTransferFreeCollateral, after: postTransferFreeCollateral))
         let marginUsageReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.MARGIN_USAGE"),
                                                                     value: AmountChangeModel(before: preTransferMarginUsage, after: postTransferMarginUsage))
-        
+
         switch transferType {
         case .deposit:
             newInputReceiptChangeItems.append(freeCollateralReceiptItem)
@@ -154,7 +154,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
         viewModel?.inputReceiptChangeItems = newInputReceiptChangeItems
         viewModel?.buttonReceiptChangeItems = newButtonReceiptChangeItems
     }
-        
+
     private func updateSubmitAction(amount: Double, transferType: VaultTransferType) {
         viewModel?.submitAction = {
             Router.shared?.navigate(to: RoutingRequest(path: transferType.confirmScreenPath, params: ["amount": amount]), animated: true, completion: nil)
@@ -162,7 +162,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     }
 }
 
-private extension VaultTransferType {    
+private extension VaultTransferType {
     var confirmScreenPath: String {
         switch self {
         case .deposit: return "/vault/deposit_confirm"

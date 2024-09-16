@@ -55,10 +55,10 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
 
     var transferType: VaultTransferType?
     var amount: Double?
-    
+
     override init() {
         super.init()
-        
+
         viewModel = dydxVaultDepositWithdrawConfirmationViewModel()
     }
 
@@ -66,19 +66,19 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         super.start()
 
         guard let viewModel else { return }
-        
+
         viewModel.amount = amount
         viewModel.faqUrl = AbacusStateManager.shared.environment?.links?.vaultLearnMore ?? ""
         viewModel.transferType = transferType
-        
+
         initializeSubmitState()
 
         viewModel.cancelAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
-        
+
         viewModel.submitAction = { [weak self] in
-            //TO-DO replace with v4-clients call to submit deposit, this just simulates it
+            // TO-DO replace with v4-clients call to submit deposit, this just simulates it
             self?.viewModel?.submitState = .submitting
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 if Int.random(in: 1...6) == 1 {
@@ -98,14 +98,14 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
                 self?.update(newHasAcknowledged: hasAcknowledged)
             }
             .store(in: &subscriptions)
-        
+
         AbacusStateManager.shared.state.selectedSubaccount
             .sink { [weak self] selectedSubaccount in
                 self?.update(subaccount: selectedSubaccount)
             }
             .store(in: &subscriptions)
     }
-    
+
     private func initializeSubmitState() {
         guard let viewModel, let transferType else { return }
         switch transferType {
@@ -114,7 +114,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         case .withdraw:
             viewModel.submitState = .loading
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                //TO-DO replace fetch actual slippage and update view model
+                // TO-DO replace fetch actual slippage and update view model
                 let slippage = Double.random(in: 0...0.02) // replace random with actual slippage
                 let requiresAcknowledgeHighSlippage = transferType == .withdraw && slippage >= Self.slippageAcknowledgementThreshold
                 viewModel.requiresAcknowledgeHighSlippage = requiresAcknowledgeHighSlippage
@@ -141,11 +141,11 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
 //            assertionFailure()
             return
         }
-        
+
         viewModel?.curMarginUsage = curMarginUsage
         viewModel?.curFreeCollateral = curFreeCollateral
         viewModel?.curVaultBalance = curVaultBalance
-        
+
         switch transferType {
         case .deposit:
             viewModel?.postVaultBalance = curVaultBalance + amount
@@ -157,7 +157,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
             viewModel?.postMarginUsage = curMarginUsage + amount
         }
     }
-    
+
     private func update(newHasAcknowledged: Bool) {
         guard let viewModel, newHasAcknowledged else { return }
         switch viewModel.submitState {
@@ -167,7 +167,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
             return
         }
     }
-    
+
     private func updateSubmitState(slippage: Double?, transferType: VaultTransferType) {
         switch transferType {
         case .deposit:
