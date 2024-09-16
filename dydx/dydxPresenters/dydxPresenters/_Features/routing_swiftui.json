@@ -60,9 +60,6 @@
                 "/action/dismiss": {
                     "destination":"PlatformParticles.DismissActionBuilder"
                 },
-                "/action/dismiss_presented": {
-                    "destination":"PlatformParticles.DismissPresentedActionBuilder"
-                },
                 "/action/order/cancel": {
                     "destination":"dydxPresenters.dydxCancelOrderActionBuilder"
                 },

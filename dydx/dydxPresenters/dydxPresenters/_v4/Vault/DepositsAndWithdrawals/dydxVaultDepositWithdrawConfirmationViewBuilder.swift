@@ -83,7 +83,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 if Int.random(in: 1...6) == 1 {
                     // success
-                    Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss_presented"), animated: true, completion: nil)
+                    Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: ["shouldPrioritizeDismiss": true]), animated: true, completion: nil)
                 } else {
                     // failure
                     self?.viewModel?.isFirstSubmission = false
@@ -138,7 +138,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
               let curFreeCollateral = subaccount?.freeCollateral?.current?.doubleValue,
               let curMarginUsage = subaccount?.marginUsage?.current?.doubleValue
         else {
-            assertionFailure()
+//            assertionFailure()
             return
         }
         
