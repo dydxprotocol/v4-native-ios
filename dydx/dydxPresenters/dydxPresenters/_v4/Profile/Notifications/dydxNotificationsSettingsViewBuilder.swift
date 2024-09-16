@@ -54,7 +54,12 @@ private class dydxNotificationsSettingsViewPresenter: SettingsViewPresenter {
             notificationPermission?.promptToSettings(requestTitle: nil,
                                                      requestMessage: DataLocalizer.shared?.localize(path: "APP.PUSH_NOTIFICATIONS.UPDATE_SETTINGS_MESSAGE", params: nil),
                                                      requestCTA: DataLocalizer.shared?.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS", params: nil) ?? "Settings",
-                                                     cancelTitle: DataLocalizer.shared?.localize(path: "APP.GENERAL.CANCEL", params: nil) ?? "Cancel")
+                                                     cancelTitle: DataLocalizer.shared?.localize(path: "APP.GENERAL.CANCEL", params: nil) ?? "Cancel"
+            )
+            // sync the settings with the system permission
+            let pushNotificationEnabled = NotificationService.shared?.permission == .authorized
+            SettingsStore.shared?.setValue(pushNotificationEnabled, forKey: dydxSettingsStoreKey.shouldDisplayInAppNotifications.rawValue)
+            loadSettings()
         }
     }
 }

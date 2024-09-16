@@ -29,7 +29,7 @@ open class SettingsViewPresenter: BaseSettingsViewPresenter {
         loadSettings()
     }
 
-    private func loadSettings() {
+    public func loadSettings() {
         var sections = [SettingsViewModel.SectionViewModel]()
         for fieldList in fieldLists ?? [] {
             sections.append(createSection(group: fieldList))
