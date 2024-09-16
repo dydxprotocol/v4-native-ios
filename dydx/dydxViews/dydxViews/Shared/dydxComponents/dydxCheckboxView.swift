@@ -26,13 +26,13 @@ struct dydxCheckboxView: View {
             }
             .frame(width: 20, height: 20)
             .borderAndClip(style: .cornerRadius(6), borderColor: .borderDefault)
-            .onTapGesture {
-                isChecked.toggle()
-            }
             Text(text)
                 .themeFont(fontSize: .medium)
                 .themeColor(foreground: .textSecondary)
         }
         .leftAligned()
+        .onTapGesture {
+            isChecked.toggle()
+        }
     }
 }

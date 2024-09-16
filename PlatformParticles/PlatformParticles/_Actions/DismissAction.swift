@@ -21,7 +21,12 @@ private class DismissAction: NSObject, NavigableProtocol {
     @objc open func navigate(to request: RoutingRequest?, animated: Bool, completion: RoutingCompletionBlock?) {
         if request?.path == "/action/dismiss" {
             let viewController = UIViewController.topmost()
-            if viewController?.navigationController?.topViewController == viewController,
+            if let shouldPrioritizeDismiss = request?.params?["shouldPrioritizeDismiss"] as? Bool,
+               shouldPrioritizeDismiss && viewController?.presentingViewController !== nil {
+                viewController?.dismiss(animated: animated, completion: {
+                    completion?(nil, true)
+                })
+            } else if viewController?.navigationController?.topViewController == viewController,
                viewController?.navigationController?.viewControllers.count ?? 0 > 1 {
                 viewController?.navigationController?.popViewController(animated: animated)
             } else if viewController?.presentingViewController !== nil {

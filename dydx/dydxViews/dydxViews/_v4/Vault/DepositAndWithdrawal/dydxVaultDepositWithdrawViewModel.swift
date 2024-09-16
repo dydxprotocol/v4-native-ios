@@ -16,23 +16,18 @@ public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
         case disabled
     }
 
-    public let submitState: State
-    public var submitAction: (() -> Void)?
+    @Published public var submitState: State = .disabled
+    @Published public var submitAction: (() -> Void)?
 
     @Published public private(set) var numberFormatter = dydxNumberInputFormatter()
 
-    @Published public fileprivate(set) var selectedTransferType: VaultTransferType
-    @Published fileprivate var amount: Double?
-    fileprivate var maxAmount: Double = 0
+    @Published public var selectedTransferType: VaultTransferType = .deposit
+    @Published public fileprivate(set) var amount: Double?
+    @Published public var maxAmount: Double = 0
 
-    public var inputReceiptChangeItems: [dydxReceiptChangeItemView]?
-    public var inputInlineAlert: InlineAlertViewModel?
-    public var buttonReceiptChangeItems: [dydxReceiptChangeItemView]?
-
-    public init(selectedTransferType: VaultTransferType, submitState: State) {
-        self.selectedTransferType = selectedTransferType
-        self.submitState = submitState
-    }
+    @Published public var inputReceiptChangeItems: [dydxReceiptChangeItemView]?
+    @Published public var inputInlineAlert: InlineAlertViewModel?
+    @Published public var buttonReceiptChangeItems: [dydxReceiptChangeItemView]?
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
