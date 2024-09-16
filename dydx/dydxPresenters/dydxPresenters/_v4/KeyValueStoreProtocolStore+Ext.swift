@@ -52,7 +52,7 @@ public extension KeyValueStoreProtocol {
     var shouldDisplayInAppNotifications: Bool {
         SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.shouldDisplayInAppNotifications.rawValue) as? Bool
         ?? dydxSettingsStoreKey.shouldDisplayInAppNotifications.defaultValue as? Bool
-        ?? false
+        ?? true
     }
 
     var gasToken: String? {

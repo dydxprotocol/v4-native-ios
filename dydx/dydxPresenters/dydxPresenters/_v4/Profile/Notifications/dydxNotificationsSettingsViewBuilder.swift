@@ -56,10 +56,10 @@ private class dydxNotificationsSettingsViewPresenter: SettingsViewPresenter {
                                                      requestCTA: DataLocalizer.shared?.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS", params: nil) ?? "Settings",
                                                      cancelTitle: DataLocalizer.shared?.localize(path: "APP.GENERAL.CANCEL", params: nil) ?? "Cancel"
             )
-            // sync the settings with the system permission
-            let pushNotificationEnabled = NotificationService.shared?.permission == .authorized
-            SettingsStore.shared?.setValue(pushNotificationEnabled, forKey: dydxSettingsStoreKey.shouldDisplayInAppNotifications.rawValue)
-            loadSettings()
         }
+        // sync the settings with the system permission
+        let pushNotificationEnabled = NotificationService.shared?.permission == .authorized
+        SettingsStore.shared?.setValue(pushNotificationEnabled, forKey: dydxSettingsStoreKey.shouldDisplayInAppNotifications.rawValue)
+        loadSettings()
     }
 }
