@@ -17,7 +17,7 @@ public class dydxVaultDepositWithdrawConfirmationViewModel: PlatformViewModel {
         case loading
         case disabled
     }
-    
+
     @Published public var amount: Double?
     @Published public var transferType: VaultTransferType?
     @Published public var faqUrl: String?
@@ -42,7 +42,7 @@ public class dydxVaultDepositWithdrawConfirmationViewModel: PlatformViewModel {
     @Published public var isFirstSubmission: Bool = true
 
     @Published fileprivate(set) public var hasAcknowledgedHighSlippage: Bool = false
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
@@ -156,18 +156,18 @@ private struct VaultDepositWithdrawConfirmationView: View {
         if let transferType = viewModel.transferType {
             let slippageTitle = DataLocalizer.localize(path: "APP.VAULTS.EST_SLIPPAGE")
             let expectedAmountTitle = DataLocalizer.localize(path: "APP.WITHDRAW_MODAL.EXPECTED_AMOUNT_RECEIVED")
-            
+
             let preTransferVaultBalance = AmountTextModel(amount: viewModel.curVaultBalance?.asNsNumber)
             let preTransferFreeCollateral = AmountTextModel(amount: viewModel.curFreeCollateral?.asNsNumber)
             let preTransferMarginUsage = AmountTextModel(amount: viewModel.curMarginUsage?.asNsNumber)
-            
+
             let postTransferVaultBalance = AmountTextModel(amount: viewModel.postVaultBalance?.asNsNumber)
             let postTransferFreeCollateral = AmountTextModel(amount: viewModel.postFreeCollateral?.asNsNumber)
             let postTransferMarginUsage = AmountTextModel(amount: viewModel.postMarginUsage?.asNsNumber)
-            
+
             let estSlippage = AmountTextModel(amount: viewModel.slippage?.asNsNumber, unit: .percentage)
             let expectedAmount = AmountTextModel(amount: viewModel.expectedAmount?.asNsNumber)
-            
+
             let vaultBalanceReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.YOUR_VAULT_BALANCE"),
                                                                         value: AmountChangeModel(before: preTransferVaultBalance, after: postTransferVaultBalance))
             let freeCollateralReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.FREE_COLLATERAL"),
@@ -228,14 +228,14 @@ private struct VaultDepositWithdrawConfirmationView: View {
             .disabled(viewModel.submitState == .submitting)
         }
     }
-    
+
     @ViewBuilder
     private var spinner: some View {
         ProgressView()
             .progressViewStyle(.circular)
             .tint(ThemeColor.SemanticColor.textSecondary.color)
     }
-    
+
     @ViewBuilder
     public var buttonContent: some View {
         if let transferType = viewModel.transferType {

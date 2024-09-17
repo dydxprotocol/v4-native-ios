@@ -29,7 +29,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
     }
 }
 
-extension KeyValueStoreProtocol {
+public extension KeyValueStoreProtocol {
 
     var language: Bool {
         SettingsStore.shared?.value(forKey: dydxSettingsStoreKey.language.rawValue) as? Bool

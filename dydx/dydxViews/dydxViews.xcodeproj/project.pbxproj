@@ -137,6 +137,7 @@
 		02D1379D28EE452200B46941 /* UIView+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D1379C28EE452200B46941 /* UIView+SwiftUI.swift */; };
 		02D1379F28EE968000B46941 /* dydxChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D1379E28EE968000B46941 /* dydxChartView.swift */; };
 		02D3C46E28F74F5400683843 /* dydxMarketResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3C46D28F74F5400683843 /* dydxMarketResourcesView.swift */; };
+		02D9518A2C926B8E007BB2B4 /* dydxNotificationPrimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D951892C926B8E007BB2B4 /* dydxNotificationPrimerView.swift */; };
 		02DDAD3C2925859D00CC7531 /* QRCodeDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDAD3B2925859D00CC7531 /* QRCodeDisplay.swift */; };
 		02DDE09F28F37D4200945990 /* dydxMarketPriceCandlesHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDE09E28F37D4200945990 /* dydxMarketPriceCandlesHighlightView.swift */; };
 		02E318A82AB231FA0074DA98 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E318A72AB231FA0074DA98 /* PlaceholderView.swift */; };
@@ -524,6 +525,7 @@
 		02D1379C28EE452200B46941 /* UIView+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SwiftUI.swift"; sourceTree = "<group>"; };
 		02D1379E28EE968000B46941 /* dydxChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxChartView.swift; sourceTree = "<group>"; };
 		02D3C46D28F74F5400683843 /* dydxMarketResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketResourcesView.swift; sourceTree = "<group>"; };
+		02D951892C926B8E007BB2B4 /* dydxNotificationPrimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNotificationPrimerView.swift; sourceTree = "<group>"; };
 		02DDAD3B2925859D00CC7531 /* QRCodeDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeDisplay.swift; sourceTree = "<group>"; };
 		02DDE09E28F37D4200945990 /* dydxMarketPriceCandlesHighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketPriceCandlesHighlightView.swift; sourceTree = "<group>"; };
 		02E318A72AB231FA0074DA98 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
@@ -737,6 +739,7 @@
 				0258B9D62991BC5C0098E1BE /* NewsAlerts */,
 				02FF0BBF29AE924300781EDA /* Onboarding */,
 				0238FC31296DA527002E1C1A /* OrderDetails */,
+				02D9516D2C926A7D007BB2B4 /* Primers */,
 				024F488329657F0400E40247 /* Portfolio */,
 				0258BA0F2992947E0098E1BE /* Profile */,
 				278A4D942B8FA5F5003898EB /* Rating */,
@@ -1384,6 +1387,14 @@
 				02D3C46D28F74F5400683843 /* dydxMarketResourcesView.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		02D9516D2C926A7D007BB2B4 /* Primers */ = {
+			isa = PBXGroup;
+			children = (
+				02D951892C926B8E007BB2B4 /* dydxNotificationPrimerView.swift */,
+			);
+			path = Primers;
 			sourceTree = "<group>";
 		};
 		02E430CC2A03031B00A648CD /* Components */ = {
@@ -2171,6 +2182,7 @@
 				02E5997628FF4F5800F62F28 /* BeforeArrowAfter.swift in Sources */,
 				64A4DB5729662090008D8E20 /* dydxTradeInputReduceOnlyView.swift in Sources */,
 				0253178A29C126EE00D6CC9B /* dydxTradingNetworkView.swift in Sources */,
+				02D9518A2C926B8E007BB2B4 /* dydxNotificationPrimerView.swift in Sources */,
 				0279DE6B2BEC471700F9ECF8 /* dydxAdjustMarginInputView.swift in Sources */,
 				02DDE09F28F37D4200945990 /* dydxMarketPriceCandlesHighlightView.swift in Sources */,
 				02A9B6102900605400AE1516 /* SizeText.swift in Sources */,
