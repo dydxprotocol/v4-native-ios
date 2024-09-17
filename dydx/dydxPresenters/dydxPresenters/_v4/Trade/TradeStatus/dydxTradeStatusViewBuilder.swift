@@ -58,7 +58,14 @@ private class dydxTradeStatusViewPresenter: HostedViewPresenter<dydxTradeStatusV
     }()
 
     private let doneAction: (() -> Void) = {
-        Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        let notificationPermission = NotificationService.shared?.authorization
+        if notificationPermission?.authorization == .notDetermined {
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: { _, _ in
+                Router.shared?.navigate(to: RoutingRequest(path: "/authorization/notification", params: nil), animated: true, completion: nil)
+            })
+        } else {
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        }
     }
 
     private lazy var tryAgainAction: (() -> Void) = { [weak self] in

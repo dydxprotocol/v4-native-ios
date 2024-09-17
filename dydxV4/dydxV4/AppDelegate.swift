@@ -41,6 +41,8 @@ class AppDelegate: CommonAppDelegate {
     private var subscriptions = Set<AnyCancellable>()
     private let workers = dydxGlobalWorkers()
 
+    private lazy var notificationHandlerDelegate = dydxNotificationHandlerDelegate()
+
     override public init() {
         super.init()
         LocalAuthenticator.shared = dydxBiometricsLocalAuthenticator()
@@ -77,6 +79,7 @@ class AppDelegate: CommonAppDelegate {
 
     override public func routeToStart(completion: @escaping () -> Void) {
         DataLocalizer.shared = dydxAbacusDataLocalizer(keyValueStore: SettingsStore.shared)
+        firebaseNotification.delegate = notificationHandlerDelegate
         workers.start()
 
         let localCompletion = { [weak self] in

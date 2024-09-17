@@ -9,6 +9,13 @@
 import ParticlesKit
 import Utilities
 
+public class NotificationPermissionActionBuilder: NSObject, ObjectBuilderProtocol {
+    public func build<T>() -> T? {
+        let action = NotificationPermissionAction()
+        return action as? T
+    }
+}
+
 public class NotificationPermissionAction: PrivacyPermissionAction {
     override public var primer: String? {
         return "/primer/notification"

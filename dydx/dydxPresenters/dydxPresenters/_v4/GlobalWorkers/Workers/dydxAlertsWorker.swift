@@ -57,7 +57,7 @@ final class dydxAlertsWorker: BaseWorker {
                 let actions = (link != nil) ? [ErrorAction(text: DataLocalizer.localize(path: "APP.GENERAL.VIEW")) {
                     Router.shared?.navigate(to: RoutingRequest(path: link!), animated: true, completion: nil)
                 }] : nil
-                if SettingsStore.shared?.shouldDisplayInAppNotifications != false {
+                if SettingsStore.shared?.shouldDisplayInAppNotifications ?? true {
                     ErrorInfo.shared?.info(title: alert.title,
                                            message: alert.text,
                                            type: alert.type.infoType,

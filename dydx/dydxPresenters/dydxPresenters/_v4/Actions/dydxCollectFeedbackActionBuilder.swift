@@ -19,9 +19,10 @@ public class dydxCollectFeedbackActionBuilder: NSObject, ObjectBuilderProtocol {
 
 open class dydxCollectFeedbackAction: NSObject, NavigableProtocol {
     private var completion: RoutingCompletionBlock?
+
     open func navigate(to request: RoutingRequest?, animated: Bool, completion: RoutingCompletionBlock?) {
         switch request?.path {
-    case "/action/collect_feedback":
+        case "/action/collect_feedback":
             if let feedbackUrl = URL(string: AbacusStateManager.shared.environment?.links?.feedback ?? "") {
                 Router.shared?.navigate(to: feedbackUrl, completion: { _, success in
                     completion?(nil, success)

@@ -384,7 +384,11 @@
                 "/withdraw/confirm":{
                     "destination":"WithdrawalConfirmation.storyboard",
                     "presentation":"half"
-                }
+                },
+                "/primer/notification":{
+                   "destination":"dydxPresenters.dydxNotificationPrimerViewBuilder",
+                   "presentation":"half"
+                },
             }
         }
     }

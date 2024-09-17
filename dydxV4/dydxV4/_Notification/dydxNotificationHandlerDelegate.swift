@@ -9,25 +9,26 @@
 import Utilities
 import FirebaseMessaging
 import dydxAnalytics
+import dydxStateManager
+import Combine
 
 final class dydxNotificationHandlerDelegate: NSObject, NotificationHandlerDelegate {
 
     private let userPermissionTag = "NotificationHandler.permission"
-//
-//    private let walletConnections = dydxWalletConnectionsInteractor.shared
-//
-//    private var walletConnectionInteractor: dydxWalletConnectionInteractor? {
-//        didSet {
-//            didSetWalletConnectionInteractor(oldValue: oldValue)
-//        }
-//    }
+    private var subscriptions = Set<AnyCancellable>()
 
     private var token: String? {
         didSet {
-            // sendTokenUpdate()
+            sendTokenUpdate()
         }
     }
-
+    
+    private var languageCode: String? {
+        didSet {
+            sendTokenUpdate()
+        }
+    }
+    
     private var permission: EPrivacyPermission? {
         didSet {
             didSetPermission()
@@ -36,10 +37,12 @@ final class dydxNotificationHandlerDelegate: NSObject, NotificationHandlerDelega
 
     override init() {
         super.init()
-
-//        changeObservation(from: nil, to: walletConnections, keyPath: #keyPath(dydxWalletConnectionsInteractor.current)) { [weak self] _, _, _, _ in
-//            self?.walletConnectionInteractor = self?.walletConnections.current
-//        }
+        
+        DataLocalizer.shared?.languagePublisher
+            .sink { [weak self] languageCode in
+                self?.languageCode = languageCode
+            }
+            .store(in: &subscriptions)
     }
 
     // MARK: NotificationHandlerDelegate
@@ -66,71 +69,30 @@ final class dydxNotificationHandlerDelegate: NSObject, NotificationHandlerDelega
                     Tracking.shared?.log(event: AnalyticsEventV2.NotificationPermissionsChanged(isAuthorized: false))
                 }
                 if lastPermission == .authorized {
-                    // sendTokenDeletion()
+                    sendTokenDeletion()
                 }
             } else if permission == .authorized {
                 if lastPermission == .notDetermined || lastPermission == .denied {
                     Tracking.shared?.log(event: AnalyticsEventV2.NotificationPermissionsChanged(isAuthorized: true))
                 }
-                // sendTokenUpdate()
+                sendTokenUpdate()
             }
             UserDefaults.standard.set(permission?.rawValue, forKey: userPermissionTag)
             UserDefaults.standard.synchronize()
+        } else if (permission == .authorized) {
+            sendTokenUpdate()
         }
     }
 
-//    private func sendTokenUpdate() {
-//        if let token = token, let ethereumAddress = walletConnectionInteractor?.walletConnection?.ethereumAddress,
-//           permission == .authorized {
-//            sendNotificationTokenUpdate(token: token, ethereumAddress: ethereumAddress)
-//        }
-//    }
-//
-//    private func sendTokenDeletion() {
-//        if let token = token, let ethereumAddress = walletConnectionInteractor?.walletConnection?.ethereumAddress {
-//            sendNotificationTokenDeletion(token: token, ethereumAddress: ethereumAddress)
-//        }
-//    }
-//
-//    private func didSetWalletConnectionInteractor(oldValue: dydxWalletConnectionInteractor?) {
-//        // send token update or deletion when user sign-in or sign-out
-//        if let token = token {
-//            if let ethereumAddress = walletConnectionInteractor?.walletConnection?.ethereumAddress, permission == .authorized {
-//                sendNotificationTokenUpdate(token: token, ethereumAddress: ethereumAddress)
-//            } else if let ethereumAddress = oldValue?.walletConnection?.ethereumAddress {
-//                sendNotificationTokenDeletion(token: token, ethereumAddress: ethereumAddress)
-//            }
-//        }
-//    }
-//
-//    private var tokenApi: dydxPrivateApi?
-//
-//    private func sendNotificationTokenUpdate(token: String, ethereumAddress: String) {
-//        if dydxBoolFeatureFlag.push_notification.isEnabled,
-//           let path = dydxPrivateApi.endpointResolver.path(for: "registration-tokens") {
-//            let api = dydxPrivateApi(ethereumAddress: ethereumAddress)
-//            api.post(path: path, params: nil, data: ["token": token]) { [weak self] _, error in
-//                if let error = error {
-//                    Console.shared.log("Firebase token registration failed: \(error.localizedDescription)")
-//                }
-//                self?.tokenApi = nil
-//            }
-//            tokenApi = api
-//        }
-//    }
-//
-//    private func sendNotificationTokenDeletion(token: String, ethereumAddress: String) {
-//        if dydxBoolFeatureFlag.push_notification.isEnabled,
-//           let path = dydxPrivateApi.endpointResolver.path(for: "registration-tokens"),
-//           let encodedToken = token.encodeBase64() {
-//            let api = dydxPrivateApi(ethereumAddress: ethereumAddress)
-//            api.delete(path: path + "/" + encodedToken, params: nil) { [weak self] _, error in
-//                if let error = error {
-//                    Console.shared.log("Firebase token deletion failed: \(error.localizedDescription)")
-//                }
-//                self?.tokenApi = nil
-//            }
-//            tokenApi = api
-//        }
-//    }
+    private func sendTokenUpdate() {
+        if let token = token, permission == .authorized {
+            AbacusStateManager.shared.registerPushNotification(token: token, languageCode: languageCode)
+        }
+    }
+
+    private func sendTokenDeletion() {
+        if let token = token {
+            // Not supported yet
+        }
+    }
 }
