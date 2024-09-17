@@ -40,7 +40,7 @@
 		023AB3C42BEAD56A005230B2 /* dydxMarginModeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023AB3C32BEAD56A005230B2 /* dydxMarginModeViewBuilder.swift */; };
 		023AB3C82BEAD5F3005230B2 /* dydxTargetLeverageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023AB3C72BEAD5F3005230B2 /* dydxTargetLeverageViewBuilder.swift */; };
 		023DC88029CCBD21000DD920 /* dydxOnboardQRCodeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DC87329CCBD21000DD920 /* dydxOnboardQRCodeViewBuilder.swift */; };
-		023FC7E32C94DCBF003D77A6 /* dydxPushNotifcationToggleWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023FC7E22C94DCBF003D77A6 /* dydxPushNotifcationToggleWorker.swift */; };
+		023FC7E32C94DCBF003D77A6 /* dydxPushNotificationToggleWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023FC7E22C94DCBF003D77A6 /* dydxPushNotificationToggleWorker.swift */; };
 		02439CCB29B03EEE00A083FE /* dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CC629B03ECD00A083FE /* dydxCartera.framework */; };
 		0243A76129BE572C00A083FE /* dydxCancelOrderActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243A76029BE572C00A083FE /* dydxCancelOrderActionBuilder.swift */; };
 		02465B96297F6E2E00A4CA55 /* dydxPortfolioHeaderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02465B95297F6E2E00A4CA55 /* dydxPortfolioHeaderPresenter.swift */; };
@@ -432,7 +432,7 @@
 		023AB3C32BEAD56A005230B2 /* dydxMarginModeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarginModeViewBuilder.swift; sourceTree = "<group>"; };
 		023AB3C72BEAD5F3005230B2 /* dydxTargetLeverageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTargetLeverageViewBuilder.swift; sourceTree = "<group>"; };
 		023DC87329CCBD21000DD920 /* dydxOnboardQRCodeViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxOnboardQRCodeViewBuilder.swift; sourceTree = "<group>"; };
-		023FC7E22C94DCBF003D77A6 /* dydxPushNotifcationToggleWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPushNotifcationToggleWorker.swift; sourceTree = "<group>"; };
+		023FC7E22C94DCBF003D77A6 /* dydxPushNotificationToggleWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPushNotificationToggleWorker.swift; sourceTree = "<group>"; };
 		02439CC029B03ECD00A083FE /* dydxCartera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxCartera.xcodeproj; path = ../dydxCartera/dydxCartera.xcodeproj; sourceTree = "<group>"; };
 		0243A76029BE572C00A083FE /* dydxCancelOrderActionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCancelOrderActionBuilder.swift; sourceTree = "<group>"; };
 		02465B95297F6E2E00A4CA55 /* dydxPortfolioHeaderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioHeaderPresenter.swift; sourceTree = "<group>"; };
@@ -1009,7 +1009,7 @@
 				02669B7B2AD8661F00A756AA /* dydxCarteraConfigWorker.swift */,
 				64529A4B2AE8705E000810E6 /* dydxUpdateWorker.swift */,
 				278A4DA32B8FDD9D003898EB /* dydxRatingsWorker.swift */,
-				023FC7E22C94DCBF003D77A6 /* dydxPushNotifcationToggleWorker.swift */,
+				023FC7E22C94DCBF003D77A6 /* dydxPushNotificationToggleWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -2113,7 +2113,7 @@
 				278A4DA42B8FDD9D003898EB /* dydxRatingsWorker.swift in Sources */,
 				02DDAD55292587C600CC7531 /* QRCodeDisplayBuilder.swift in Sources */,
 				0268BBFB2A8BE27800D0C59B /* dydxTransferOutViewPresenter.swift in Sources */,
-				023FC7E32C94DCBF003D77A6 /* dydxPushNotifcationToggleWorker.swift in Sources */,
+				023FC7E32C94DCBF003D77A6 /* dydxPushNotificationToggleWorker.swift in Sources */,
 				2749F8FF2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift in Sources */,
 				027CA87229EDFC990069781A /* dydxTransferInputCtaButtonViewPresenter.swift in Sources */,
 				02D1CEE129C8DEA7009ADF9A /* dydxLanguageViewBuilder.swift in Sources */,
