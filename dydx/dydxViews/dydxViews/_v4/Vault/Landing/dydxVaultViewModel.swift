@@ -88,7 +88,7 @@ private struct dydxVaultView: View {
     }
 
     private var titleImage: some View {
-        PlatformIconViewModel(type: .asset(name: "icon_token", bundle: .dydxView),
+        PlatformIconViewModel(type: .asset(name: "icon_chain", bundle: .dydxView),
                               clip: .noClip,
                               size: .init(width: 40, height: 40),
                               templateColor: nil)
@@ -96,7 +96,7 @@ private struct dydxVaultView: View {
     }
 
     private var titleText: some View {
-        Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.VAULT", params: nil) ?? "")
+        Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.MEGAVAULT", params: nil) ?? "")
             .themeColor(foreground: .textPrimary)
             .themeFont(fontType: .plus, fontSize: .largest)
     }

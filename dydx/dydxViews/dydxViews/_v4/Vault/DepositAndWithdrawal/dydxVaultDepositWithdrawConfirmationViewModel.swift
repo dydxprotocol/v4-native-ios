@@ -208,9 +208,9 @@ private struct VaultDepositWithdrawConfirmationView: View {
         if let faqUrl = viewModel.faqUrl,
             let slippage = viewModel.slippage, viewModel.requiresAcknowledgeHighSlippage {
             let withdrawalSlippageInlineAlertAttributedText = AttributedString(localizerPathKey: "APP.VAULTS.SLIPPAGE_WARNING",
-                                                                               params: ["LINK": DataLocalizer.localize(path: "APP.VAULTS.VAULT_FAQS"),
+                                                                               params: ["LINK": DataLocalizer.localize(path: "APP.VAULTS.MEGAVAULT_FAQS"),
                                                                                         "AMOUNT": dydxFormatter.shared.percent(number: slippage, digits: 2) ?? "--"],
-                                                                               hyperlinks: ["APP.VAULTS.VAULT_FAQS": faqUrl],
+                                                                               hyperlinks: ["APP.VAULTS.MEGAVAULT_FAQS": faqUrl],
                                                                                foreground: .textPrimary)
             InlineAlertViewModel(.init(title: nil,
                                        body: withdrawalSlippageInlineAlertAttributedText,
