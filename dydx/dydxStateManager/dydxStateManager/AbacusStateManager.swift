@@ -160,7 +160,6 @@ public final class AbacusStateManager: NSObject {
             }
         }
 
-        appConfigs.onboardingConfigs.squidVersion = OnboardingConfigs.SquidVersion.v2
         appConfigs.onboardingConfigs.alchemyApiKey = CredientialConfig.shared.credential(for: "alchemyApiKey")
         appConfigs.staticTyping = dydxBoolFeatureFlag.abacus_static_typing.isEnabled
 
