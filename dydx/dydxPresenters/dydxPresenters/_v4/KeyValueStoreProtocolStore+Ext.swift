@@ -22,9 +22,9 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
         case .language: return DataLocalizer.shared?.language
         case .v4Theme: return dydxThemeType.classicDark.rawValue
         case .directionColorPreference: return "green_is_up"
-        case .shouldDisplayInAppNotifications: return false
+        case .shouldDisplayInAppNotifications: return true
         case .gasToken: return "USDC"
-        case .hidePredictionMarketsNoticeKey: return true
+        case .hidePredictionMarketsNoticeKey: return false
         }
     }
 }
