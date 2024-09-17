@@ -24,7 +24,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
         case .directionColorPreference: return "green_is_up"
         case .shouldDisplayInAppNotifications: return false
         case .gasToken: return "USDC"
-        case .hidePredictionMarketsNoticeKey: return false
+        case .hidePredictionMarketsNoticeKey: return true
         }
     }
 }

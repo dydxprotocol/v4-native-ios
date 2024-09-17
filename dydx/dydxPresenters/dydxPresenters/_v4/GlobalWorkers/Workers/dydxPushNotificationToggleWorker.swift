@@ -1,5 +1,5 @@
 //
-//  dydxPushNotifcationToggleWorker.swift
+//  dydxPushNotificationToggleWorker.swift
 //  dydxPresenters
 //
 //  Created by Rui Huang on 13/09/2024.
@@ -12,7 +12,7 @@ import ParticlesKit
 import RoutingKit
 import Utilities
 
-public final class dydxPushNotifcationToggleWorker: BaseWorker {
+public final class dydxPushNotificationToggleWorker: BaseWorker {
 
     public override func start() {
         super.start()
