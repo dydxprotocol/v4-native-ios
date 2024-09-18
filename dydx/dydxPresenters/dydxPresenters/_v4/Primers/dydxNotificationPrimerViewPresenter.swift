@@ -46,5 +46,8 @@ private class dydxNotificationPrimerViewPresenter: HostedViewPresenter<dydxNotif
                 }
             }
         }
+        viewModel?.cancelAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: nil), animated: true, completion: nil)
+        }
     }
 }

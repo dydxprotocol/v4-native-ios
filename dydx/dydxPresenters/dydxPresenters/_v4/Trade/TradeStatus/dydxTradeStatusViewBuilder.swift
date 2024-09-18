@@ -290,7 +290,7 @@ private extension Abacus.OrderStatus {
     var statusIcon: dydxTradeStatusLogoViewModel.StatusIcon? {
         switch self {
         case .canceled: return .failed
-        case .canceling, .pending, .partiallyfilled: return .pending
+        case .canceling, .pending, .partiallyfilled, .partiallycanceled: return .pending
         case .filled: return .filled
         case .open, .untriggered: return .open
         default: return nil

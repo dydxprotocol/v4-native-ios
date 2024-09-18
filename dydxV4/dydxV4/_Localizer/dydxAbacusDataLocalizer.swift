@@ -36,7 +36,10 @@ public class dydxAbacusDataLocalizer: DataLocalizerProtocol, AbacusLocalizerProt
         let language = keyValueStore?.value(forKey: _languageTag) as? String
         UIImplementations.reset(language: language)
         if let language = language {
-            setLanguage(language: language) { _ in
+            setLanguage(language: language) { success in
+                if !success {
+                    Console.shared.log("dydxAbacusDataLocalizer setLanguage failed")
+                }
             }
         }
     }
@@ -49,21 +52,25 @@ public class dydxAbacusDataLocalizer: DataLocalizerProtocol, AbacusLocalizerProt
     
     public func setLanguage(language: String, callback: @escaping (KotlinBoolean, ParsingError?) -> Void) {
         if let code = language.components(separatedBy: "-").first {
-            (UIImplementations.shared?.localizer as? DynamicLocalizer)?.setLanguage(language: code, callback: { [weak self] successful, error in
-                self?.language = (UIImplementations.shared?.localizer as? DynamicLocalizer)?.language
-                if successful.boolValue {
-                    if let self = self {
-                        self.keyValueStore?.setValue(code, forKey: self._languageTag)
+            let localizer = UIImplementations.shared?.localizer as? DynamicLocalizer
+            if let localizer = localizer {
+                localizer.setLanguage(language: code, callback: { [weak self] successful, error in
+                    self?.language = localizer.language
+                    if successful.boolValue {
+                        if let self = self {
+                            self.keyValueStore?.setValue(code, forKey: self._languageTag)
+                        }
                     }
-                }
-                callback(successful, error)
-            })
+                    callback(successful, error)
+                })
+            } else {
+                callback(false, nil)
+            }
         } else {
             callback(false, nil)
         }
     }
     
-
     private func json(params: [String: String]?) -> String? {
         if let params = params {
             if let data = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted) {

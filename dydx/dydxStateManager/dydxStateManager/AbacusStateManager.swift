@@ -160,6 +160,9 @@ public final class AbacusStateManager: NSObject {
             }
         }
 
+        appConfigs.accountConfigs.subaccountConfigs.notifications = [
+            NotificationProviderType.blockreward, NotificationProviderType.positions
+        ]
         appConfigs.onboardingConfigs.alchemyApiKey = CredientialConfig.shared.credential(for: "alchemyApiKey")
         appConfigs.staticTyping = dydxBoolFeatureFlag.abacus_static_typing.isEnabled
 
