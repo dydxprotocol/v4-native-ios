@@ -14,7 +14,7 @@ import dydxFormatter
 public class dydxProfileViewModel: PlatformViewModel {
     @Published public var header = dydxProfileHeaderViewModel()
     @Published public var buttons = dydxProfileButtonsViewModel()
-    @Published public var settingsHelp = dydxSettingsSecondaryActionsViewModel()
+    @Published public var secondaryActions = dydxSettingsSecondaryActionsViewModel()
     @Published public var history: dydxProfileHistoryViewModel? = dydxProfileHistoryViewModel()
     @Published public var fees: dydxProfileFeesViewModel? = dydxProfileFeesViewModel()
     @Published public var balances: dydxProfileBalancesViewModel? = dydxProfileBalancesViewModel()
@@ -40,7 +40,7 @@ public class dydxProfileViewModel: PlatformViewModel {
                     self.buttons
                         .createView(parentStyle: style)
 
-                    self.settingsHelp
+                    self.secondaryActions
                         .createView(parentStyle: style)
                         .padding(.top, 8)
 
