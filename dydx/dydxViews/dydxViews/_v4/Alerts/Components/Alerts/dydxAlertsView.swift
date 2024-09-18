@@ -12,6 +12,7 @@ import Utilities
 
 public class dydxAlertsViewModel: PlatformViewModel {
     @Published public var listViewModel: PlatformListViewModel
+    @Published public var backAction: (() -> Void)?
     
     public init() {
         self.listViewModel = .init()
@@ -37,9 +38,18 @@ public class dydxAlertsViewModel: PlatformViewModel {
     }
 
     private func createHeader(parentStyle: ThemeStyle) -> some View {
-        Text(DataLocalizer.localize(path: "APP.GENERAL.ALERTS", params: nil))
-            .themeFont(fontType: .plus, fontSize: .largest)
-            .leftAligned()
+        HStack(spacing: 16) {
+            let buttonContent = PlatformIconViewModel(type: .system(name: "chevron.left"), size: CGSize(width: 16, height: 16), templateColor: .textTertiary)
+                PlatformButtonViewModel(content: buttonContent, type: .iconType) {[weak self] in
+                    self?.backAction?()
+                }
+                .createView()
+                .padding([.leading, .vertical], 8)
+            Text(DataLocalizer.localize(path: "APP.GENERAL.ALERTS", params: nil))
+                .themeFont(fontType: .base, fontSize: .largest)
+                .themeColor(foreground: .textPrimary)
+            Spacer()
+        }
     }
     
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {

@@ -144,7 +144,6 @@
 		27592DF92C9A54D6002FBD4B /* dydxSystemAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592DEF2C9A54D6002FBD4B /* dydxSystemAlertsProvider.swift */; };
 		27592DFA2C9A54D6002FBD4B /* dydxTransferAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592DF02C9A54D6002FBD4B /* dydxTransferAlertsProvider.swift */; };
 		27592DFB2C9A54D6002FBD4B /* dydxAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592DF22C9A54D6002FBD4B /* dydxAlertsProvider.swift */; };
-		27592DFC2C9A54D6002FBD4B /* dydxAlertsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592DF42C9A54D6002FBD4B /* dydxAlertsViewPresenter.swift */; };
 		27592E052C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592E042C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift */; };
 		276908FF2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */; };
 		277754352C069F8600E3E985 /* OnboardingAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277754282C069F8600E3E985 /* OnboardingAnalytics.swift */; };
@@ -537,7 +536,6 @@
 		27592DEF2C9A54D6002FBD4B /* dydxSystemAlertsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxSystemAlertsProvider.swift; sourceTree = "<group>"; };
 		27592DF02C9A54D6002FBD4B /* dydxTransferAlertsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxTransferAlertsProvider.swift; sourceTree = "<group>"; };
 		27592DF22C9A54D6002FBD4B /* dydxAlertsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxAlertsProvider.swift; sourceTree = "<group>"; };
-		27592DF42C9A54D6002FBD4B /* dydxAlertsViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxAlertsViewPresenter.swift; sourceTree = "<group>"; };
 		27592E042C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAlertsViewBuilder.swift; sourceTree = "<group>"; };
 		276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewPresenter.swift; sourceTree = "<group>"; };
 		277754282C069F8600E3E985 /* OnboardingAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingAnalytics.swift; sourceTree = "<group>"; };
@@ -698,7 +696,6 @@
 				024F487B29657DFC00E40247 /* User */,
 				2751D6442C59642000B36F95 /* Vault */,
 				0262EFA729D79EF3009889E2 /* Wallet */,
-				27592E042C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift */,
 			);
 			path = _v4;
 			sourceTree = "<group>";
@@ -1438,19 +1435,11 @@
 			path = AlertProvider;
 			sourceTree = "<group>";
 		};
-		27592DF52C9A54D6002FBD4B /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				27592DF42C9A54D6002FBD4B /* dydxAlertsViewPresenter.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		27592DF72C9A54D6002FBD4B /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
+				27592E042C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift */,
 				27592DF32C9A54D6002FBD4B /* AlertProvider */,
-				27592DF52C9A54D6002FBD4B /* Components */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -2040,7 +2029,6 @@
 				6488BBC7296F2CD50096502F /* AbacusUtils.swift in Sources */,
 				277E90192B1EA3C3005CCBCB /* dydxRewardsSummaryPresenter.swift in Sources */,
 				026FC3E42AFACA3300C52F20 /* dydxPresentersBundleClass.swift in Sources */,
-				27592DFC2C9A54D6002FBD4B /* dydxAlertsViewPresenter.swift in Sources */,
 				025841F228EE9D7C007338D3 /* dydxMarketAssetListViewPresenter.swift in Sources */,
 				02F95A8E2A1D6AAD00828F9A /* dydxProfileHistoryViewPresenter.swift in Sources */,
 				02E90C5A29D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift in Sources */,
