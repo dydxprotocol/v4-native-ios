@@ -253,12 +253,17 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             contentChanged?()
         }
     }
-
+    @Published public var vaultBalance: String?
+    @Published public var vaultApy: Double?
+    @Published public var vaultTapAction: (() -> Void)?
+    
     public var contentChanged: (() -> Void)?
 
     init(
         positionItems: [dydxPortfolioPositionItemViewModel] = [],
         pendingPositionItems: [dydxPortfolioPendingPositionsItemViewModel] = [],
+        vaultBalance: String? = nil,
+        vaultApy: String? = nil,
         emptyText: String? = nil
     ) {
         self.positionItems = positionItems
@@ -275,6 +280,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             pendingPositionItems: [
                 .previewValue
             ],
+            vaultBalance: "324.320",
             emptyText: "empty")
     }
 
@@ -314,16 +320,91 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
         }
     }
 
+    @ViewBuilder
     private var pendingPositionsView: AnyView? {
-        let unopenedItems = self.pendingPositionItems.map { $0.createView() }
-        return LazyVStack {
-            self.pendingPositionsHeader?.createView()
+        if !pendingPositionItems.isEmpty {
+            let unopenedItems = self.pendingPositionItems.map { $0.createView() }
+            LazyVStack {
+                self.pendingPositionsHeader?.createView()
 
-            ForEach(unopenedItems.indices, id: \.self) { index in
-                unopenedItems[index]
+                ForEach(unopenedItems.indices, id: \.self) { index in
+                    unopenedItems[index]
+                }
+            }
+            .wrappedInAnyView()
+        }
+    }
+    
+    @ViewBuilder
+    public var apyAccessory: some View {
+        if let vaultApy, let vaultApyText = dydxFormatter.shared.percent(number: vaultApy, digits: 2) {
+            Text(vaultApyText)
+                .themeFont(fontSize: .smaller)
+                .padding(.horizontal, 4)
+                .padding(.vertical, 2)
+                .themeColor(foreground: vaultApy < 0 ? ThemeSettings.negativeColor : ThemeSettings.positiveColor)
+                .themeColor(background: vaultApy < 0 ? ThemeSettings.negativeColorLayer : ThemeSettings.positiveColorLayer)
+                .cornerRadius(4)
+        }
+    }
+    
+    public var megaVaultBalanceRowHeader: some View {
+        HStack(spacing: 0) {
+            Text(localizerPathKey: "APP.GENERAL.DETAILS")
+                .themeFont(fontType: .plus, fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+            Spacer()
+            Text(localizerPathKey: "APP.VAULTS.YOUR_VAULT_BALANCE")
+                .themeFont(fontType: .plus, fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+        }
+        .padding(.horizontal, 16)
+    }
+    
+    @ViewBuilder
+    public var megaVaultBalanceRow: some View {
+        if let vaultBalance {
+            HStack(spacing: 0) {
+                PlatformIconViewModel(type: .asset(name: "icon_chain", bundle: .dydxView),
+                                      clip: .noClip,
+                                      size: .init(width: 32, height: 32),
+                                      templateColor: nil)
+                .createView()
+                Color.clear.frame(width: 16)
+                Text(localizerPathKey: "APP.VAULTS.MEGAVAULT")
+                    .themeFont(fontSize: .medium)
+                    .themeColor(foreground: .textSecondary)
+                Color.clear.frame(width: 6)
+                apyAccessory
+                Spacer()
+                Text(vaultBalance)
+                    .themeFont(fontSize: .small)
+                    .themeColor(foreground: .textPrimary)
+            }
+            .padding(.all, 16)
+            .themeColor(background: .layer3)
+            .cornerRadius(16)
+        }
+    }
+    
+    @ViewBuilder
+    public var megaVaultSection: some View {
+        if dydxBoolFeatureFlag.isVaultEnabled.isEnabled {
+            VStack(spacing: 16) {
+                Text(localizerPathKey: "APP.VAULTS.MEGAVAULT")
+                    .themeFont(fontType: .plus, fontSize: .larger)
+                    .themeColor(foreground: .textPrimary)
+                    .fixedSize()
+                    .leftAligned()
+                VStack(spacing: 8) {
+                    megaVaultBalanceRowHeader
+                    megaVaultBalanceRow
+                }
+            }
+            .onTapGesture { [weak self] in
+                self?.vaultTapAction?()
             }
         }
-        .wrappedInAnyView()
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
@@ -335,6 +416,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
                     VStack(spacing: 24) {
                         self.openPositionsView
                         self.pendingPositionsView
+                        self.megaVaultSection
                     }
                 }
             )
