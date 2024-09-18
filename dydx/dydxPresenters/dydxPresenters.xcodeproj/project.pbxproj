@@ -162,7 +162,7 @@
 		278EA5642BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278EA5632BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift */; };
 		278EA5662BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278EA5652BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift */; };
 		27B957ED2B97C07400EF9304 /* dydxShareActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B957EC2B97C07400EF9304 /* dydxShareActionBuilder.swift */; };
-		27C027532AFD761300E92CCB /* dydxSettingsSecondaryActionsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027522AFD761300E92CCB /* dydxSettingsSecondaryActionsViewPresenter.swift */; };
+		27C027532AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027522AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift */; };
 		27DB2EA32AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DB2EA22AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift */; };
 		27E0735C2C20D2470034B963 /* dydxCancelPendingIsolatedOrdersViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E0735B2C20D2470034B963 /* dydxCancelPendingIsolatedOrdersViewBuilder.swift */; };
 		314BBDE9F332ECA910BC414E /* Pods_iOS_dydxPresenters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1551C00FFF41C29CFC5BD94 /* Pods_iOS_dydxPresenters.framework */; };
@@ -554,7 +554,7 @@
 		278EA5632BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNotificationsSettingsViewBuilder.swift; sourceTree = "<group>"; };
 		278EA5652BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyValueStoreProtocolStore+Ext.swift"; sourceTree = "<group>"; };
 		27B957EC2B97C07400EF9304 /* dydxShareActionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxShareActionBuilder.swift; sourceTree = "<group>"; };
-		27C027522AFD761300E92CCB /* dydxSettingsSecondaryActionsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsSecondaryActionsViewPresenter.swift; sourceTree = "<group>"; };
+		27C027522AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileSecondaryButtonsViewPresenter.swift; sourceTree = "<group>"; };
 		27DB2EA22AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradeRestrictedViewPresenter.swift; sourceTree = "<group>"; };
 		27E0735B2C20D2470034B963 /* dydxCancelPendingIsolatedOrdersViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCancelPendingIsolatedOrdersViewBuilder.swift; sourceTree = "<group>"; };
 		64487FFE2AA248340068DD87 /* dydxAlertsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxAlertsWorker.swift; sourceTree = "<group>"; };
@@ -973,7 +973,7 @@
 				028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */,
 				02F95A8D2A1D6AAD00828F9A /* dydxProfileHistoryViewPresenter.swift */,
 				02F6E71E2A8293270018F00C /* dydxProfileFeesViewPresenter.swift */,
-				27C027522AFD761300E92CCB /* dydxSettingsSecondaryActionsViewPresenter.swift */,
+				27C027522AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -2001,7 +2001,7 @@
 				272911D62C06A628003F3EA0 /* TransferAnalytics.swift in Sources */,
 				0257C78E2A00485500F6160B /* SparklineDataPoint.swift in Sources */,
 				028DB3402A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift in Sources */,
-				27C027532AFD761300E92CCB /* dydxSettingsSecondaryActionsViewPresenter.swift in Sources */,
+				27C027532AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift in Sources */,
 				02EF485629F732C600C97746 /* dydxFavoriteStore.swift in Sources */,
 				0208627C28F4DAC000C9D3A0 /* dydxMarketInfoPagingViewPresenter.swift in Sources */,
 				0238FECB2970D681002E1C1A /* SharedAccountPresenter.swift in Sources */,

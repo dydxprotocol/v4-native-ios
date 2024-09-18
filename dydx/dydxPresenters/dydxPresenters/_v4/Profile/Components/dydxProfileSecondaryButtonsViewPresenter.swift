@@ -1,5 +1,5 @@
 //
-//  dydxSettingsHelpRowViewPresenter.swift
+//  dydxProfileSecondaryButtonsViewPresenter.swift
 //  dydxPresenters
 //
 //  Created by Michael Maguire on 11/9/23.
@@ -14,12 +14,12 @@ import PlatformUI
 import dydxStateManager
 import dydxFormatter
 
-protocol dydxSettingsHelpRowViewPresenterProtocol: HostedViewPresenterProtocol {
-    var viewModel: dydxSettingsSecondaryActionsViewModel? { get }
+protocol dydxProfileSecondaryButtonsViewPresenterProtocol: HostedViewPresenterProtocol {
+    var viewModel: dydxProfileSecondaryButtonsViewModel? { get }
 }
 
-class dydxSettingsHelpRowViewPresenter: HostedViewPresenter<dydxSettingsSecondaryActionsViewModel>, dydxSettingsHelpRowViewPresenterProtocol {
-    init(viewModel: dydxSettingsSecondaryActionsViewModel) {
+class dydxProfileSecondaryButtonsViewPresenter: HostedViewPresenter<dydxProfileSecondaryButtonsViewModel>, dydxProfileSecondaryButtonsViewPresenterProtocol {
+    init(viewModel: dydxProfileSecondaryButtonsViewModel) {
         super.init()
 
         self.viewModel = viewModel

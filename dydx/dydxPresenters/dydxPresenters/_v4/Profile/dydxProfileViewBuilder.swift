@@ -41,7 +41,7 @@ private protocol dydxProfileViewPresenterProtocol: HostedViewPresenterProtocol {
 
 private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel>, dydxProfileViewPresenterProtocol {
     private let buttonsPresenter: dydxProfileButtonsViewPresenter
-    private let settingsHelpRowPresenter: dydxSettingsHelpRowViewPresenter
+    private let secondaryButtonsPresenter: dydxProfileSecondaryButtonsViewPresenter
     private let headerPresenter: dydxProfileHeaderViewPresenter
     private let historyPresenter: dydxProfileHistoryViewPresenter
     private let feesPresenter: dydxProfileFeesViewPresenter
@@ -50,7 +50,7 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         buttonsPresenter,
-        settingsHelpRowPresenter,
+        secondaryButtonsPresenter,
         headerPresenter,
         historyPresenter,
         feesPresenter,
@@ -61,7 +61,7 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
     override init() {
         let viewModel = dydxProfileViewModel()
         headerPresenter = .init(viewModel: viewModel.header)
-        settingsHelpRowPresenter = .init(viewModel: viewModel.settingsHelp)
+        secondaryButtonsPresenter = .init(viewModel: viewModel.secondaryButtons)
         buttonsPresenter = .init(viewModel: viewModel.buttons)
         historyPresenter = .init()
         feesPresenter = .init()

@@ -1,5 +1,5 @@
 //
-//  dydxSettingsHelpRowView.swift
+//  dydxProfileSecondaryButtonsView.swift
 //  dydxViews
 //
 //  Created by Michael Maguire on 11/9/23.
@@ -9,15 +9,15 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxSettingsSecondaryActionsViewModel: PlatformViewModel {
+public class dydxProfileSecondaryButtonsViewModel: PlatformViewModel {
     @Published public var settingsAction: (() -> Void)?
     @Published public var helpAction: (() -> Void)?
     @Published public var alertsAction: (() -> Void)?
 
     public init() { }
 
-    public static var previewValue: dydxSettingsSecondaryActionsViewModel {
-        let vm = dydxSettingsSecondaryActionsViewModel()
+    public static var previewValue: dydxProfileSecondaryButtonsViewModel {
+        let vm = dydxProfileSecondaryButtonsViewModel()
         return vm
     }
     
@@ -41,7 +41,7 @@ public class dydxSettingsSecondaryActionsViewModel: PlatformViewModel {
         if let alertsAction {
             self.createButton(imageName: "icon_alerts",
                               title: DataLocalizer.localize(path: "APP.GENERAL.ALERTS"),
-                              action: self.alertsAction)
+                              action: alertsAction)
         }
     }
     
@@ -84,26 +84,26 @@ public class dydxSettingsSecondaryActionsViewModel: PlatformViewModel {
 }
 
 #if DEBUG
-struct dydxSettingsSecondaryActionsViewModel_Previews_Dark: PreviewProvider {
+struct dydxProfileSecondaryButtonsViewModel_Previews_Dark: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyDarkTheme()
         ThemeSettings.applyStyles()
-        return dydxSettingsSecondaryActionsViewModel.previewValue
+        return dydxProfileSecondaryButtonsViewModel.previewValue
             .createView()
             // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
     }
 }
 
-struct dydxSettingsSecondaryActionsViewModel_Previews_Light: PreviewProvider {
+struct dydxProfileSecondaryButtonsViewModel_Previews_Light: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyLightTheme()
         ThemeSettings.applyStyles()
-        return dydxSettingsSecondaryActionsViewModel.previewValue
+        return dydxProfileSecondaryButtonsViewModel.previewValue
             .createView()
         // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
