@@ -25,6 +25,10 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         super.init()
 
         self.viewModel = viewModel
+
+        viewModel?.vaultTapAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/vault"), animated: true, completion: nil)
+        }
     }
 
     override func start() {
@@ -50,6 +54,22 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
                 self?.updatePendingPositions(pendingPositions: pendingPositions, marketMap: marketMap, assetMap: assetMap)
             }
             .store(in: &subscriptions)
+
+        Publishers.CombineLatest(
+            AbacusStateManager.shared.state.onboarded,
+            // TODO: replace with actual vault info from abacus
+            AbacusStateManager.shared.state.onboarded
+        ).sink { [weak self] onboarded, _ in
+            if onboarded,
+                let viewModel = self?.viewModel,
+               // TODO: replace with actual vault info from abacus
+                let vaultBalance = Double?(420.42),
+                let vaultApy = Double?(Double.random(in: -30...30)) {
+                viewModel.vaultBalance = dydxFormatter.shared.dollar(number: vaultBalance, digits: 2)
+                viewModel.vaultApy = vaultApy
+            }
+        }
+        .store(in: &subscriptions)
     }
 
     private func updatePositions(positions: [SubaccountPosition], marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {

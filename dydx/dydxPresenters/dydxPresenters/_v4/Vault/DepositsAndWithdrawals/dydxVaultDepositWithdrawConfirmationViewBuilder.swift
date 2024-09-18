@@ -68,7 +68,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         guard let viewModel else { return }
 
         viewModel.amount = amount
-        viewModel.faqUrl = AbacusStateManager.shared.environment?.links?.vaultLearnMore ?? ""
+        viewModel.faqUrl = AbacusStateManager.shared.environment?.links?.vaultLearnMore
         viewModel.transferType = transferType
 
         initializeSubmitState()
