@@ -24,10 +24,10 @@
         "_textColor": "color_red"
     },
     "signed-plus-layer": {
-        "_layerColor": "#3ED9A433"
+        "_layerColor": "color_faded_green"
     },
     "signed-minus-layer": {
-        "_layerColor": "#E4555533"
+        "_layerColor": "color_faded_red"
     },
     "side-plus": {
         "_textColor": "color_green"

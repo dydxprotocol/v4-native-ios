@@ -42,8 +42,8 @@ public enum VaultTransferType: CaseIterable, RadioButtonContentDisplayable {
 
     var confirmTransferText: String {
         switch self {
-        case .deposit: return DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_DEPOSIT")
-        case .withdraw: return DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW")
+        case .deposit: return DataLocalizer.localize(path: "APP.VAULTS.CONFIRM_DEPOSIT_CTA")
+        case .withdraw: return DataLocalizer.localize(path: "APP.VAULTS.CONFIRM_WITHDRAW_CTA")
         }
     }
 
@@ -60,7 +60,7 @@ public enum VaultTransferType: CaseIterable, RadioButtonContentDisplayable {
 
     var transferDestinationImage: Image? {
         switch self {
-        case .deposit: return Image("icon_token", bundle: .dydxView)
+        case .deposit: return Image("icon_chain", bundle: .dydxView)
         case .withdraw: return nil
         }
     }
