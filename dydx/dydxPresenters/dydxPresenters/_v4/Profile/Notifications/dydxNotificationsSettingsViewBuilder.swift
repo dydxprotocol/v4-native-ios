@@ -40,6 +40,14 @@ private class dydxNotificationsSettingsViewPresenter: SettingsViewPresenter {
         viewModel?.headerViewModel = header
     }
 
+    override func start() {
+        super.start()
+
+        changeObservation(from: nil, to: NotificationService.shared, keyPath: #keyPath(NotificationHandler.permission)) { [weak self] _, _, _, _ in
+            self?.reloadSettings()
+        }
+    }
+
     override func onInputValueChanged(input: FieldInput) {
         if input.fieldName == "should_display_in_app_notifications" {
            promptToToggleNotification()
@@ -57,7 +65,10 @@ private class dydxNotificationsSettingsViewPresenter: SettingsViewPresenter {
                                                      cancelTitle: DataLocalizer.shared?.localize(path: "APP.GENERAL.CANCEL", params: nil) ?? "Cancel"
             )
         }
-        // sync the settings with the system permission
+        reloadSettings()
+    }
+
+    private func reloadSettings() {
         let pushNotificationEnabled = NotificationService.shared?.permission == .authorized
         SettingsStore.shared?.setValue(pushNotificationEnabled, forKey: dydxSettingsStoreKey.shouldDisplayInAppNotifications.rawValue)
         loadSettings()

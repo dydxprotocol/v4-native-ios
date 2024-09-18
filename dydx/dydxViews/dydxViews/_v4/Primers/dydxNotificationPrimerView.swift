@@ -12,6 +12,7 @@ import Utilities
 
 public class dydxNotificationPrimerViewModel: PlatformViewModel {
     @Published public var ctaAction: (() -> Void)?
+    @Published public var cancelAction: (() -> Void)?
 
     public init() { }
 
@@ -36,6 +37,12 @@ public class dydxNotificationPrimerViewModel: PlatformViewModel {
                     let buttonText = Text(DataLocalizer.localize(path: "APP.GENERAL.OK", params: nil))
                     PlatformButtonViewModel(content: buttonText.wrappedViewModel) { [weak self] in
                         self?.ctaAction?()
+                    }
+                    .createView(parentStyle: style)
+
+                    let cancelText = Text(DataLocalizer.localize(path: "APP.GENERAL.CANCEL", params: nil))
+                    PlatformButtonViewModel(content: cancelText.wrappedViewModel, state: .secondary) { [weak self] in
+                        self?.cancelAction?()
                     }
                     .createView(parentStyle: style)
                 }

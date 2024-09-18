@@ -17,7 +17,7 @@ public extension MessageView {
         let iconImage: UIImage?
         switch type {
         case .info, .wait, .success:
-            backgroundColor = UIColor { _ in ThemeColor.SemanticColor.colorPurple.uiColor }
+            backgroundColor = UIColor { _ in ThemeColor.SemanticColor.layer5.uiColor }
             foregroundColor = UIColor { _ in ThemeColor.SemanticColor.colorWhite.uiColor }
             iconImage = IconStyle.default.image(theme: .info)
         case .warning:
