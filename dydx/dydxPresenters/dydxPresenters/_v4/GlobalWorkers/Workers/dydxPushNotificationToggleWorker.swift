@@ -11,16 +11,20 @@ import dydxStateManager
 import ParticlesKit
 import RoutingKit
 import Utilities
+import dydxAnalytics
 
 public final class dydxPushNotificationToggleWorker: BaseWorker {
 
     public override func start() {
         super.start()
 
-        // Sync the app settings value to the system notification settings
+        // Sync the app settings value to the system notification settings and log user property
         changeObservation(from: nil, to: NotificationService.shared, keyPath: #keyPath(NotificationHandler.permission)) {  _, _, _, _ in
+            
             let pushNotificationEnabled = NotificationService.shared?.permission == .authorized
             SettingsStore.shared?.setValue(pushNotificationEnabled, forKey: dydxSettingsStoreKey.shouldDisplayInAppNotifications.rawValue)
+
+            Tracking.shared?.setUserProperty(pushNotificationEnabled, forUserProperty: .pushNotificationsEnabled)
         }
     }
 }
