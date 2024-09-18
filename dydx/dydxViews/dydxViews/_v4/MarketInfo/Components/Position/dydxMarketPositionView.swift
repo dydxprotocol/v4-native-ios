@@ -153,7 +153,6 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                 HStack(alignment: .top, spacing: 12) {
                     ForEach(views.indices, id: \.self) { index in
                         views[index]
-                            .fixedSize(horizontal: true, vertical: false)
                             .padding(.vertical, 8)
                         if index < views.count - 1 {
                             DividerModel().createView()
@@ -167,7 +166,6 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                     ForEach(views.indices, id: \.self) { index in
                         Spacer()
                         views[index]
-                            .fixedSize(horizontal: true, vertical: false)
                             .padding(.vertical, 8)
                         Spacer()
                         if index < views.count - 1 {

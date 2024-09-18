@@ -563,7 +563,6 @@ open class PlatformBooleanInputViewModel: PlatformValueInputViewModel {
             return AnyView(
                 HStack(spacing: 0) {
                     self.header.createView(parentStyle: style)
-                        .fixedSize()
                     Spacer()
                     Toggle("", isOn: self.inputBinding)
                         .toggleStyle(SwitchToggleStyle(tint: ThemeColor.SemanticColor.colorPurple.color))
