@@ -9,44 +9,56 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxSettingsHelpRowViewModel: PlatformViewModel {
+public class dydxSettingsSecondaryActionsViewModel: PlatformViewModel {
     @Published public var settingsAction: (() -> Void)?
     @Published public var helpAction: (() -> Void)?
+    @Published public var alertsAction: (() -> Void)?
 
     public init() { }
 
-    public static var previewValue: dydxSettingsHelpRowViewModel {
-        let vm = dydxSettingsHelpRowViewModel()
+    public static var previewValue: dydxSettingsSecondaryActionsViewModel {
+        let vm = dydxSettingsSecondaryActionsViewModel()
         return vm
     }
-
+    
+    private var settingsHelpRow: some View {
+        HStack(spacing: 16) {
+            self.createButton(imageName: "icon_settings",
+                              title: DataLocalizer.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS"),
+                              action: self.settingsAction)
+            
+            self.createButton(imageName: "icon_tutorial",
+                              title: DataLocalizer.localize(path: "APP.HEADER.HELP"),
+                              action: self.helpAction)
+        }
+    }
+    
+    private var alertsRow: some View {
+        self.createButton(imageName: "icon_alerts",
+                          title: DataLocalizer.localize(path: "APP.GENERAL.ALERTS"),
+                          action: self.alertsAction)
+    }
+    
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
-                HStack(spacing: 16) {
-                    self.createButton(parentStyle: style,
-                                      imageName: "icon_settings",
-                                      title: DataLocalizer.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS"),
-                                      action: self.settingsAction)
-
-                    self.createButton(parentStyle: style,
-                                      imageName: "icon_tutorial",
-                                      title: DataLocalizer.localize(path: "APP.HEADER.HELP"),
-                                      action: self.helpAction)
+                VStack(spacing: 16) {
+                    self.settingsHelpRow
+                    self.alertsRow
                 }
             )
         }
     }
 
-    private func createButton(parentStyle: ThemeStyle, imageName: String, title: String, action: (() -> Void)?) -> some View {
+    private func createButton(imageName: String, title: String, action: (() -> Void)?) -> some View {
         HStack(spacing: 8) {
             PlatformIconViewModel(type: .asset(name: imageName, bundle: Bundle.dydxView),
                                   clip: .noClip,
                                   size: CGSize(width: 24, height: 24),
                                   templateColor: .textTertiary)
-            .createView(parentStyle: parentStyle)
+            .createView()
 
             Text(title)
                 .themeFont(fontSize: .medium)
@@ -66,26 +78,26 @@ public class dydxSettingsHelpRowViewModel: PlatformViewModel {
 }
 
 #if DEBUG
-struct dydxSettingsHelpRowView_Previews_Dark: PreviewProvider {
+struct dydxSettingsSecondaryActionsViewModel_Previews_Dark: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyDarkTheme()
         ThemeSettings.applyStyles()
-        return dydxSettingsHelpRowViewModel.previewValue
+        return dydxSettingsSecondaryActionsViewModel.previewValue
             .createView()
             // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
     }
 }
 
-struct dydxSettingsHelpRowView_Previews_Light: PreviewProvider {
+struct dydxSettingsSecondaryActionsViewModel_Previews_Light: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyLightTheme()
         ThemeSettings.applyStyles()
-        return dydxSettingsHelpRowViewModel.previewValue
+        return dydxSettingsSecondaryActionsViewModel.previewValue
             .createView()
         // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)

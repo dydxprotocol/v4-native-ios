@@ -14,11 +14,11 @@ import PlatformUI
 import dydxStateManager
 
 protocol dydxSettingsHelpRowViewPresenterProtocol: HostedViewPresenterProtocol {
-    var viewModel: dydxSettingsHelpRowViewModel? { get }
+    var viewModel: dydxSettingsSecondaryActionsViewModel? { get }
 }
 
-class dydxSettingsHelpRowViewPresenter: HostedViewPresenter<dydxSettingsHelpRowViewModel>, dydxSettingsHelpRowViewPresenterProtocol {
-    init(viewModel: dydxSettingsHelpRowViewModel) {
+class dydxSettingsHelpRowViewPresenter: HostedViewPresenter<dydxSettingsSecondaryActionsViewModel>, dydxSettingsHelpRowViewPresenterProtocol {
+    init(viewModel: dydxSettingsSecondaryActionsViewModel) {
         super.init()
 
         self.viewModel = viewModel
@@ -29,6 +29,10 @@ class dydxSettingsHelpRowViewPresenter: HostedViewPresenter<dydxSettingsHelpRowV
 
         viewModel.helpAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/help"), animated: true, completion: nil)
+        }
+        
+        viewModel.alertsAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/alerts"), animated: true, completion: nil)
         }
     }
 }

@@ -14,7 +14,7 @@ import dydxFormatter
 public class dydxProfileViewModel: PlatformViewModel {
     @Published public var header = dydxProfileHeaderViewModel()
     @Published public var buttons = dydxProfileButtonsViewModel()
-    @Published public var settingsHelp = dydxSettingsHelpRowViewModel()
+    @Published public var settingsHelp = dydxSettingsSecondaryActionsViewModel()
     @Published public var history: dydxProfileHistoryViewModel? = dydxProfileHistoryViewModel()
     @Published public var fees: dydxProfileFeesViewModel? = dydxProfileFeesViewModel()
     @Published public var balances: dydxProfileBalancesViewModel? = dydxProfileBalancesViewModel()

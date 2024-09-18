@@ -1,7 +1,7 @@
 [
     
     {
-        "path":"/vault",
+        "path":"/portfolio",
         "title":"",
         "image":"icon_alerts",
         "split":true
@@ -17,9 +17,9 @@
         "path":"/trade"
     },
     {
-        "path":"/portfolio",
+        "path":"/vault",
         "title":"",
-        "image":"icon_wallet",
+        "image":"icon_earn",
         "split":true
     },
     {

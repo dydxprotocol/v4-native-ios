@@ -98,7 +98,7 @@
                     "destination":"AffiliateEntity.storyboard"
                 },
                 "/alerts":{
-                    "destination":"dydxPresenters.dydxNewsAlertsViewBuilder",
+                    "destination":"dydxPresenters.dydxAlertsViewBuilder",
                     "presentation":"prompt"
                 },
                 "/closePosition/status":{
