@@ -256,7 +256,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
     @Published public var vaultBalance: String?
     @Published public var vaultApy: Double?
     @Published public var vaultTapAction: (() -> Void)?
-    
+
     public var contentChanged: (() -> Void)?
 
     init(
@@ -334,7 +334,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             .wrappedInAnyView()
         }
     }
-    
+
     @ViewBuilder
     public var apyAccessory: some View {
         if let vaultApy, let vaultApyText = dydxFormatter.shared.percent(number: vaultApy, digits: 2) {
@@ -347,7 +347,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
                 .cornerRadius(4)
         }
     }
-    
+
     public var megaVaultBalanceRowHeader: some View {
         HStack(spacing: 0) {
             Text(localizerPathKey: "APP.GENERAL.DETAILS")
@@ -360,7 +360,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
         }
         .padding(.horizontal, 16)
     }
-    
+
     @ViewBuilder
     public var megaVaultBalanceRow: some View {
         if let vaultBalance {
@@ -386,7 +386,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             .cornerRadius(16)
         }
     }
-    
+
     @ViewBuilder
     public var megaVaultSection: some View {
         if dydxBoolFeatureFlag.isVaultEnabled.isEnabled {
