@@ -15,7 +15,7 @@ public class dydxAlertsViewModel: PlatformViewModel {
     @Published public var backAction: (() -> Void)?
     
     public init() {
-        self.listViewModel = .init()
+        self.listViewModel = PlatformListViewModel(intraItemSeparator: false)
     }
 
     public static var previewValue: dydxAlertsViewModel {
@@ -32,7 +32,6 @@ public class dydxAlertsViewModel: PlatformViewModel {
             LazyVStack(pinnedViews: [.sectionHeaders]) {
                 self.listViewModel.createView(parentStyle: parentStyle)
                     .padding(.horizontal, 8)
-                Spacer(minLength: 80)
             }
         }
     }
@@ -56,13 +55,15 @@ public class dydxAlertsViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
             
-            return VStack {
+            return VStack(spacing: 20) {
                 self.createHeader(parentStyle: style)
                     .frame(height: 48)
                     .padding([.leading, .trailing])
 
                 self.createAlertsView(parentStyle: style)
             }
+            // offset for tab bar. comes from dydxV4TabBarBuilder's center button height
+                .padding(.bottom, 30)
                 .themeColor(background: .layer2)
                 .wrappedInAnyView()
         }

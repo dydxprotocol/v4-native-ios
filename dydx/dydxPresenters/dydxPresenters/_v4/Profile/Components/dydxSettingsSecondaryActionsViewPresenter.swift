@@ -12,6 +12,7 @@ import RoutingKit
 import ParticlesKit
 import PlatformUI
 import dydxStateManager
+import dydxFormatter
 
 protocol dydxSettingsHelpRowViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxSettingsSecondaryActionsViewModel? { get }
@@ -31,8 +32,16 @@ class dydxSettingsHelpRowViewPresenter: HostedViewPresenter<dydxSettingsSecondar
             Router.shared?.navigate(to: RoutingRequest(path: "/help"), animated: true, completion: nil)
         }
         
-        viewModel.alertsAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/alerts"), animated: true, completion: nil)
-        }
+        AbacusStateManager.shared.state.onboarded
+            .sink { [weak self] onboarded in
+                // do not show alerts if wallet not connected
+                if onboarded && dydxBoolFeatureFlag.isVaultEnabled.isEnabled {
+                    self?.viewModel?.alertsAction = {
+                        Router.shared?.navigate(to: RoutingRequest(path: "/alerts"), animated: true, completion: nil)
+                    }
+                }
+                
+            }
+            .store(in: &self.subscriptions)
     }
 }

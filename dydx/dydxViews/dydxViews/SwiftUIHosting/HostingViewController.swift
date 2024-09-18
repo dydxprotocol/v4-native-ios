@@ -33,7 +33,6 @@ public struct HostingViewControllerConfiguration {
     public static let `default` = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: false)
     public static let ignoreSafeArea = HostingViewControllerConfiguration(ignoreSafeArea: true)
     public static let tabbarItemView = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: true)
-    public static let nav = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: false, disableNavigationController: false)
 }
 
 open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol {

@@ -21,22 +21,28 @@ public class dydxSettingsSecondaryActionsViewModel: PlatformViewModel {
         return vm
     }
     
+    @ViewBuilder
     private var settingsHelpRow: some View {
-        HStack(spacing: 16) {
-            self.createButton(imageName: "icon_settings",
-                              title: DataLocalizer.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS"),
-                              action: self.settingsAction)
-            
-            self.createButton(imageName: "icon_tutorial",
-                              title: DataLocalizer.localize(path: "APP.HEADER.HELP"),
-                              action: self.helpAction)
+        if let settingsAction, let helpAction {
+            HStack(spacing: 16) {
+                self.createButton(imageName: "icon_settings",
+                                  title: DataLocalizer.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS"),
+                                  action: settingsAction)
+                
+                self.createButton(imageName: "icon_tutorial",
+                                  title: DataLocalizer.localize(path: "APP.HEADER.HELP"),
+                                  action: helpAction)
+            }
         }
     }
     
+    @ViewBuilder
     private var alertsRow: some View {
-        self.createButton(imageName: "icon_alerts",
-                          title: DataLocalizer.localize(path: "APP.GENERAL.ALERTS"),
-                          action: self.alertsAction)
+        if let alertsAction {
+            self.createButton(imageName: "icon_alerts",
+                              title: DataLocalizer.localize(path: "APP.GENERAL.ALERTS"),
+                              action: self.alertsAction)
+        }
     }
     
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
