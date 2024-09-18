@@ -99,7 +99,7 @@
                 },
                 "/alerts":{
                     "destination":"dydxPresenters.dydxAlertsViewBuilder",
-                    "presentation":"prompt"
+                    "presentation":"push"
                 },
                 "/closePosition/status":{
                     "destination":"dydxPresenters.dydxTradeStatusViewBuilder",

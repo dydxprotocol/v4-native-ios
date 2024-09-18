@@ -10,18 +10,52 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxAlertsViewModel: PlatformListViewModel {
+public class dydxAlertsViewModel: PlatformViewModel {
+    @Published public var listViewModel: PlatformListViewModel
+    
     public init() {
-        super.init(intraItemSeparator: false)
+        self.listViewModel = .init()
     }
 
     public static var previewValue: dydxAlertsViewModel {
         let vm = dydxAlertsViewModel()
-        vm.items = [
+        vm.listViewModel = .init(items: [
             dydxAlertItemModel.previewValue,
             dydxAlertItemModel.previewValue
-        ]
+        ])
         return vm
+    }
+
+    private func createAlertsView(parentStyle: ThemeStyle) -> some View {
+        ScrollView(showsIndicators: false) {
+            LazyVStack(pinnedViews: [.sectionHeaders]) {
+                self.listViewModel.createView(parentStyle: parentStyle)
+                    .padding(.horizontal, 8)
+                Spacer(minLength: 80)
+            }
+        }
+    }
+
+    private func createHeader(parentStyle: ThemeStyle) -> some View {
+        Text(DataLocalizer.localize(path: "APP.GENERAL.ALERTS", params: nil))
+            .themeFont(fontType: .plus, fontSize: .largest)
+            .leftAligned()
+    }
+    
+    public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+            guard let self = self else { return AnyView(PlatformView.nilView) }
+            
+            return VStack {
+                self.createHeader(parentStyle: style)
+                    .frame(height: 48)
+                    .padding([.leading, .trailing])
+
+                self.createAlertsView(parentStyle: style)
+            }
+                .themeColor(background: .layer2)
+                .wrappedInAnyView()
+        }
     }
 }
 
