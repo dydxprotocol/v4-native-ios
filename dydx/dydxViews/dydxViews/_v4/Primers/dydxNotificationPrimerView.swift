@@ -40,7 +40,7 @@ public class dydxNotificationPrimerViewModel: PlatformViewModel {
                     }
                     .createView(parentStyle: style)
 
-                    let cancelText = Text(DataLocalizer.localize(path: "APP.GENERAL.CANCEL", params: nil))
+                    let cancelText = Text(DataLocalizer.localize(path: "APP.GENERAL.NOT_NOW", params: nil))
                     PlatformButtonViewModel(content: cancelText.wrappedViewModel, state: .secondary) { [weak self] in
                         self?.cancelAction?()
                     }

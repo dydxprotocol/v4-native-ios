@@ -5,6 +5,8 @@
 //  Created by Michael Maguire on 8/8/24.
 //
 
+import Utilities
+
 // these should be added in firebase as user properties custom definitions https://firebase.google.com/docs/analytics/user-properties?platform=ios
 public enum UserProperty: String {
     case walletAddress
@@ -15,4 +17,11 @@ public enum UserProperty: String {
     case subaccountNumber
     case statsigFlags
     case statsigStableId
+    case pushNotificationsEnabled
+}
+
+public extension TrackingProtocol {
+    func setUserProperty(_ value: Any?, forUserProperty userProperty: UserProperty) {
+        self.setValue(value, forUserProperty: userProperty.rawValue)
+    }
 }
