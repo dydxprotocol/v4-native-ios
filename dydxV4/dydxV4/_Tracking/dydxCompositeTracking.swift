@@ -16,12 +16,6 @@ import dydxAnalytics
 import StatsigInjections
 import dydxFormatter
 
-private extension TrackingProtocol {
-    func setUserProperty(_ value: Any?, forUserProperty userProperty: UserProperty) {
-        self.setValue(value, forUserProperty: userProperty.rawValue)
-    }
-}
-
 public class dydxCompositeTracking: CompositeTracking {
     private var viewEvents: DictionaryEntity?
     private var onboardingEvents: DictionaryEntity?
