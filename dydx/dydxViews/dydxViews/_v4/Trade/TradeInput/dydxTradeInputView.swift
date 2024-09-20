@@ -105,7 +105,7 @@ public class dydxTradeInputViewModel: PlatformViewModel {
                                 .topAligned()
                         }
                         self.editViewModel?.createView(parentStyle: style)
-                            .frame(width: self.isOrderbookCollapsed ? fullWidth: editViewWidth)
+                            .frame(width: self.isOrderbookCollapsed ? fullWidth : editViewWidth)
                     }
 
                     VStack(spacing: -8) {

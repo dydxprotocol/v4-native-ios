@@ -42,7 +42,6 @@ public class FieldInputSwitchViewModel: FieldInputBaseViewModel {
                                 .themeFont(fontSize: .small)
                         }
                     }
-                    .fixedSize()
                     Spacer()
                     Toggle("", isOn: self.inputBinding)
                 }
