@@ -17,7 +17,6 @@
 		0216441128F36FBE00C7093E /* CandleDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0216441028F36FBE00C7093E /* CandleDataPoint.swift */; };
 		021B68B12AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B68A42AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift */; };
 		02282E752AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02282E742AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift */; };
-		022A24522A03088B003A385E /* dydxAlertsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022A24512A03088B003A385E /* dydxAlertsViewPresenter.swift */; };
 		0230376F28C11BE600412B72 /* dydxMarketsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230376E28C11BE600412B72 /* dydxMarketsViewBuilder.swift */; };
 		0236F0CB2968793A00EB995F /* dydxPortfolioFillsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0236F0CA2968793A00EB995F /* dydxPortfolioFillsViewPresenter.swift */; };
 		0236F113296A9D7A00EB995F /* dydxPortfolioFundingViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0236F112296A9D7A00EB995F /* dydxPortfolioFundingViewPresenter.swift */; };
@@ -57,7 +56,6 @@
 		0257C78E2A00485500F6160B /* SparklineDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0257C78D2A00485500F6160B /* SparklineDataPoint.swift */; };
 		025841F228EE9D7C007338D3 /* dydxMarketAssetListViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025841F128EE9D7C007338D3 /* dydxMarketAssetListViewPresenter.swift */; };
 		025841F428EE9DE8007338D3 /* dydxAssetItemChartViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025841F328EE9DE8007338D3 /* dydxAssetItemChartViewPresenter.swift */; };
-		0258B9E72991BC900098E1BE /* dydxNewsAlertsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258B9E62991BC900098E1BE /* dydxNewsAlertsViewBuilder.swift */; };
 		0258BA23299294BF0098E1BE /* dydxProfileViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258BA22299294BF0098E1BE /* dydxProfileViewBuilder.swift */; };
 		0258BA2929929E870098E1BE /* dydxProfileButtonsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258BA2829929E870098E1BE /* dydxProfileButtonsViewPresenter.swift */; };
 		025D22D628F65E1B00C4ADAE /* dydxMarketStatsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D22D528F65E1B00C4ADAE /* dydxMarketStatsViewPresenter.swift */; };
@@ -82,7 +80,6 @@
 		0280B3A629CB63E10017D64A /* dydxOnboardWelcomeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0280B3A529CB63E10017D64A /* dydxOnboardWelcomeViewBuilder.swift */; };
 		0284202F29AD727200C0E7CC /* dydxViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0284201F29AD725000C0E7CC /* dydxViews.framework */; };
 		02860A9F29C15E760079E644 /* dydxOnboardScanViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02860A9329C15E760079E644 /* dydxOnboardScanViewBuilder.swift */; };
-		028AC6A42A5E564B00FE0891 /* dydxTransferAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028AC6A32A5E564B00FE0891 /* dydxTransferAlertsProvider.swift */; };
 		028DB3402A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */; };
 		028FB3EC2AD642B30013136C /* dydxTokenConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FB3EB2AD642B30013136C /* dydxTokenConstants.swift */; };
 		0295392329FB256E009026E3 /* dydxThemeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295392229FB256E009026E3 /* dydxThemeViewBuilder.swift */; };
@@ -93,8 +90,6 @@
 		029E0E8729AD9BA500FE271C /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E0E7829AD9B8700FE271C /* PlatformParticles.framework */; };
 		029E11A029ADB77E00FE271C /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E119329ADB77300FE271C /* dydxChart.framework */; };
 		02A134C129A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A134C029A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift */; };
-		02A565AF2A5E310B0035469F /* dydxAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A565AE2A5E310B0035469F /* dydxAlertsProvider.swift */; };
-		02A565B22A5E32790035469F /* dydxSystemAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A565B12A5E32790035469F /* dydxSystemAlertsProvider.swift */; };
 		02A5C85E297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5C85D297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift */; };
 		02A8980628E76175006F1658 /* dydxStateManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DD9728CFB30000727949 /* dydxStateManager.framework */; platformFilter = ios; };
 		02B27A492AE8BC7600A995EC /* dydxHelpViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B27A482AE8BC7600A995EC /* dydxHelpViewPresenter.swift */; };
@@ -145,6 +140,11 @@
 		2749F8FF2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */; };
 		2751D6432C59614C00B36F95 /* tabs_v4_vault.json in Resources */ = {isa = PBXBuildFile; fileRef = 2751D6352C59614C00B36F95 /* tabs_v4_vault.json */; };
 		2751D6462C59643800B36F95 /* dydxVaultViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2751D6452C59643800B36F95 /* dydxVaultViewBuilder.swift */; };
+		27592DF82C9A54D6002FBD4B /* dydxFrontendAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592DEE2C9A54D6002FBD4B /* dydxFrontendAlertsProvider.swift */; };
+		27592DF92C9A54D6002FBD4B /* dydxSystemAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592DEF2C9A54D6002FBD4B /* dydxSystemAlertsProvider.swift */; };
+		27592DFA2C9A54D6002FBD4B /* dydxTransferAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592DF02C9A54D6002FBD4B /* dydxTransferAlertsProvider.swift */; };
+		27592DFB2C9A54D6002FBD4B /* dydxAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592DF22C9A54D6002FBD4B /* dydxAlertsProvider.swift */; };
+		27592E052C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592E042C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift */; };
 		276908FF2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */; };
 		277754352C069F8600E3E985 /* OnboardingAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277754282C069F8600E3E985 /* OnboardingAnalytics.swift */; };
 		277987512BA33F15006DC5CD /* dydxSelectedMarketStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */; };
@@ -162,7 +162,7 @@
 		278EA5642BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278EA5632BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift */; };
 		278EA5662BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278EA5652BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift */; };
 		27B957ED2B97C07400EF9304 /* dydxShareActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B957EC2B97C07400EF9304 /* dydxShareActionBuilder.swift */; };
-		27C027532AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027522AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift */; };
+		27C027532AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027522AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift */; };
 		27DB2EA32AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DB2EA22AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift */; };
 		27E0735C2C20D2470034B963 /* dydxCancelPendingIsolatedOrdersViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E0735B2C20D2470034B963 /* dydxCancelPendingIsolatedOrdersViewBuilder.swift */; };
 		314BBDE9F332ECA910BC414E /* Pods_iOS_dydxPresenters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1551C00FFF41C29CFC5BD94 /* Pods_iOS_dydxPresenters.framework */; };
@@ -172,7 +172,6 @@
 		6453A7D2299C563F0041A0C4 /* dydxClosePositionInputViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6453A7D1299C563F0041A0C4 /* dydxClosePositionInputViewBuilder.swift */; };
 		6453AB26299D98110041A0C4 /* dydxClosePositionInputEditPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6453AB25299D98110041A0C4 /* dydxClosePositionInputEditPresenter.swift */; };
 		6453AB2B299EA4380041A0C4 /* dydxClosePositionInputCtaButtonViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6453AB2A299EA4380041A0C4 /* dydxClosePositionInputCtaButtonViewPresenter.swift */; };
-		647D0F152A9FB1C600DA7815 /* dydxFrontendAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647D0F142A9FB1C600DA7815 /* dydxFrontendAlertsProvider.swift */; };
 		6488BBC7296F2CD50096502F /* AbacusUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6488BBC6296F2CD50096502F /* AbacusUtils.swift */; };
 		6496DBC9295CBBDD00174CE7 /* dydxV4TabBarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6496DBC8295CBBDD00174CE7 /* dydxV4TabBarBuilder.swift */; };
 		6496DC39295E081300174CE7 /* dydxPortfolioViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6496DC38295E081300174CE7 /* dydxPortfolioViewBuilder.swift */; };
@@ -408,7 +407,6 @@
 		0216441028F36FBE00C7093E /* CandleDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleDataPoint.swift; sourceTree = "<group>"; };
 		021B68A42AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxSecurityViewPresenter.swift; sourceTree = "<group>"; };
 		02282E742AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOrderbookGroupViewPresenter.swift; sourceTree = "<group>"; };
-		022A24512A03088B003A385E /* dydxAlertsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAlertsViewPresenter.swift; sourceTree = "<group>"; };
 		0230376E28C11BE600412B72 /* dydxMarketsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketsViewBuilder.swift; sourceTree = "<group>"; };
 		0236F0CA2968793A00EB995F /* dydxPortfolioFillsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioFillsViewPresenter.swift; sourceTree = "<group>"; };
 		0236F112296A9D7A00EB995F /* dydxPortfolioFundingViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioFundingViewPresenter.swift; sourceTree = "<group>"; };
@@ -449,7 +447,6 @@
 		0257C78D2A00485500F6160B /* SparklineDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineDataPoint.swift; sourceTree = "<group>"; };
 		025841F128EE9D7C007338D3 /* dydxMarketAssetListViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketAssetListViewPresenter.swift; sourceTree = "<group>"; };
 		025841F328EE9DE8007338D3 /* dydxAssetItemChartViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAssetItemChartViewPresenter.swift; sourceTree = "<group>"; };
-		0258B9E62991BC900098E1BE /* dydxNewsAlertsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNewsAlertsViewBuilder.swift; sourceTree = "<group>"; };
 		0258BA22299294BF0098E1BE /* dydxProfileViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileViewBuilder.swift; sourceTree = "<group>"; };
 		0258BA2829929E870098E1BE /* dydxProfileButtonsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileButtonsViewPresenter.swift; sourceTree = "<group>"; };
 		025D22D528F65E1B00C4ADAE /* dydxMarketStatsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketStatsViewPresenter.swift; sourceTree = "<group>"; };
@@ -474,7 +471,6 @@
 		0280B3A529CB63E10017D64A /* dydxOnboardWelcomeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOnboardWelcomeViewBuilder.swift; sourceTree = "<group>"; };
 		0284201929AD725000C0E7CC /* dydxViews.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxViews.xcodeproj; path = ../dydxViews/dydxViews.xcodeproj; sourceTree = "<group>"; };
 		02860A9329C15E760079E644 /* dydxOnboardScanViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxOnboardScanViewBuilder.swift; sourceTree = "<group>"; };
-		028AC6A32A5E564B00FE0891 /* dydxTransferAlertsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferAlertsProvider.swift; sourceTree = "<group>"; };
 		028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileHeaderViewPresenter.swift; sourceTree = "<group>"; };
 		028FB3EB2AD642B30013136C /* dydxTokenConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTokenConstants.swift; sourceTree = "<group>"; };
 		0295392229FB256E009026E3 /* dydxThemeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxThemeViewBuilder.swift; sourceTree = "<group>"; };
@@ -485,8 +481,6 @@
 		029E0E6D29AD9B8600FE271C /* PlatformParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformParticles.xcodeproj; path = ../../PlatformParticles/PlatformParticles.xcodeproj; sourceTree = "<group>"; };
 		029E118D29ADB77300FE271C /* dydxChart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxChart.xcodeproj; path = ../dydxChart/dydxChart.xcodeproj; sourceTree = "<group>"; };
 		02A134C029A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxClosePositionHeaderViewPresenter.swift; sourceTree = "<group>"; };
-		02A565AE2A5E310B0035469F /* dydxAlertsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAlertsProvider.swift; sourceTree = "<group>"; };
-		02A565B12A5E32790035469F /* dydxSystemAlertsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSystemAlertsProvider.swift; sourceTree = "<group>"; };
 		02A5C85D297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferViewBuilder.swift; sourceTree = "<group>"; };
 		02B27A482AE8BC7600A995EC /* dydxHelpViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxHelpViewPresenter.swift; sourceTree = "<group>"; };
 		02B6CE742A7087A700C5F088 /* dydxTransferSubaccountWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferSubaccountWorker.swift; sourceTree = "<group>"; };
@@ -538,6 +532,11 @@
 		2749F8FE2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRewardsLaunchIncentivesPresenter.swift; sourceTree = "<group>"; };
 		2751D6352C59614C00B36F95 /* tabs_v4_vault.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabs_v4_vault.json; sourceTree = "<group>"; };
 		2751D6452C59643800B36F95 /* dydxVaultViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultViewBuilder.swift; sourceTree = "<group>"; };
+		27592DEE2C9A54D6002FBD4B /* dydxFrontendAlertsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxFrontendAlertsProvider.swift; sourceTree = "<group>"; };
+		27592DEF2C9A54D6002FBD4B /* dydxSystemAlertsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxSystemAlertsProvider.swift; sourceTree = "<group>"; };
+		27592DF02C9A54D6002FBD4B /* dydxTransferAlertsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxTransferAlertsProvider.swift; sourceTree = "<group>"; };
+		27592DF22C9A54D6002FBD4B /* dydxAlertsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxAlertsProvider.swift; sourceTree = "<group>"; };
+		27592E042C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAlertsViewBuilder.swift; sourceTree = "<group>"; };
 		276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewPresenter.swift; sourceTree = "<group>"; };
 		277754282C069F8600E3E985 /* OnboardingAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingAnalytics.swift; sourceTree = "<group>"; };
 		277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSelectedMarketStore.swift; sourceTree = "<group>"; };
@@ -555,7 +554,7 @@
 		278EA5632BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNotificationsSettingsViewBuilder.swift; sourceTree = "<group>"; };
 		278EA5652BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyValueStoreProtocolStore+Ext.swift"; sourceTree = "<group>"; };
 		27B957EC2B97C07400EF9304 /* dydxShareActionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxShareActionBuilder.swift; sourceTree = "<group>"; };
-		27C027522AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsHelpRowViewPresenter.swift; sourceTree = "<group>"; };
+		27C027522AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileSecondaryButtonsViewPresenter.swift; sourceTree = "<group>"; };
 		27DB2EA22AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradeRestrictedViewPresenter.swift; sourceTree = "<group>"; };
 		27E0735B2C20D2470034B963 /* dydxCancelPendingIsolatedOrdersViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCancelPendingIsolatedOrdersViewBuilder.swift; sourceTree = "<group>"; };
 		64487FFE2AA248340068DD87 /* dydxAlertsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxAlertsWorker.swift; sourceTree = "<group>"; };
@@ -564,7 +563,6 @@
 		6453A7D1299C563F0041A0C4 /* dydxClosePositionInputViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxClosePositionInputViewBuilder.swift; sourceTree = "<group>"; };
 		6453AB25299D98110041A0C4 /* dydxClosePositionInputEditPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxClosePositionInputEditPresenter.swift; sourceTree = "<group>"; };
 		6453AB2A299EA4380041A0C4 /* dydxClosePositionInputCtaButtonViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxClosePositionInputCtaButtonViewPresenter.swift; sourceTree = "<group>"; };
-		647D0F142A9FB1C600DA7815 /* dydxFrontendAlertsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxFrontendAlertsProvider.swift; sourceTree = "<group>"; };
 		6488BBC6296F2CD50096502F /* AbacusUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbacusUtils.swift; sourceTree = "<group>"; };
 		6496DBC8295CBBDD00174CE7 /* dydxV4TabBarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxV4TabBarBuilder.swift; sourceTree = "<group>"; };
 		6496DC38295E081300174CE7 /* dydxPortfolioViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioViewBuilder.swift; sourceTree = "<group>"; };
@@ -669,6 +667,7 @@
 		0230376A28C11B0300412B72 /* _v4 */ = {
 			isa = PBXGroup;
 			children = (
+				27592DF72C9A54D6002FBD4B /* Alerts */,
 				0243A75529BE568600A083FE /* Actions */,
 				021B68A32AD9B86600C5C3BF /* Auth */,
 				27E0735A2C20D1F80034B963 /* CancelOrders */,
@@ -680,7 +679,6 @@
 				02B8419F28EF68E400C4D25B /* MarketInfo */,
 				0230375A28C1176100412B72 /* Markets */,
 				0276FA982A0DB8FD000BDF0B /* Model+Ext.swift */,
-				0258B9E52991BC880098E1BE /* NewsAlerts */,
 				02FF0BCF29AE92EE00781EDA /* Onboarding */,
 				0238FC47296DA54A002E1C1A /* OrderDetails */,
 				6496DC31295E05E000174CE7 /* Portfolio */,
@@ -942,16 +940,6 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		0258B9E52991BC880098E1BE /* NewsAlerts */ = {
-			isa = PBXGroup;
-			children = (
-				02A565A12A5E2FFC0035469F /* AlertProvider */,
-				02E430CF2A03035000A648CD /* Components */,
-				0258B9E62991BC900098E1BE /* dydxNewsAlertsViewBuilder.swift */,
-			);
-			path = NewsAlerts;
-			sourceTree = "<group>";
-		};
 		0258BA1E299294A90098E1BE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -985,7 +973,7 @@
 				028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */,
 				02F95A8D2A1D6AAD00828F9A /* dydxProfileHistoryViewPresenter.swift */,
 				02F6E71E2A8293270018F00C /* dydxProfileFeesViewPresenter.swift */,
-				27C027522AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift */,
+				27C027522AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1176,25 +1164,6 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		02A565A12A5E2FFC0035469F /* AlertProvider */ = {
-			isa = PBXGroup;
-			children = (
-				02A565B02A5E31580035469F /* Providers */,
-				02A565AE2A5E310B0035469F /* dydxAlertsProvider.swift */,
-			);
-			path = AlertProvider;
-			sourceTree = "<group>";
-		};
-		02A565B02A5E31580035469F /* Providers */ = {
-			isa = PBXGroup;
-			children = (
-				02A565B12A5E32790035469F /* dydxSystemAlertsProvider.swift */,
-				028AC6A32A5E564B00FE0891 /* dydxTransferAlertsProvider.swift */,
-				647D0F142A9FB1C600DA7815 /* dydxFrontendAlertsProvider.swift */,
-			);
-			path = Providers;
-			sourceTree = "<group>";
-		};
 		02A5C859297FBCCB00FFE1F9 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1282,14 +1251,6 @@
 				02D1CEEA29C8DFFC009ADF9A /* PlatformUIJedioTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		02E430CF2A03035000A648CD /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				022A24512A03088B003A385E /* dydxAlertsViewPresenter.swift */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		02E7B36B29D79A4400D6626D /* _Features */ = {
@@ -1453,6 +1414,34 @@
 				27823D022C77E30F009BCD51 /* DepositsAndWithdrawals */,
 			);
 			path = Vault;
+			sourceTree = "<group>";
+		};
+		27592DF12C9A54D6002FBD4B /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				27592DEE2C9A54D6002FBD4B /* dydxFrontendAlertsProvider.swift */,
+				27592DEF2C9A54D6002FBD4B /* dydxSystemAlertsProvider.swift */,
+				27592DF02C9A54D6002FBD4B /* dydxTransferAlertsProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		27592DF32C9A54D6002FBD4B /* AlertProvider */ = {
+			isa = PBXGroup;
+			children = (
+				27592DF12C9A54D6002FBD4B /* Providers */,
+				27592DF22C9A54D6002FBD4B /* dydxAlertsProvider.swift */,
+			);
+			path = AlertProvider;
+			sourceTree = "<group>";
+		};
+		27592DF72C9A54D6002FBD4B /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				27592E042C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift */,
+				27592DF32C9A54D6002FBD4B /* AlertProvider */,
+			);
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 		277E90052B1EA093005CCBCB /* TradingRewards */ = {
@@ -1989,6 +1978,7 @@
 				6496DC39295E081300174CE7 /* dydxPortfolioViewBuilder.swift in Sources */,
 				02465B96297F6E2E00A4CA55 /* dydxPortfolioHeaderPresenter.swift in Sources */,
 				0238FE0A296EF91D002E1C1A /* dydxMarketPositionViewPresenter.swift in Sources */,
+				27592E052C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift in Sources */,
 				645299EF2AE86FB1000810E6 /* dydxUpdateViewPresenter.swift in Sources */,
 				02CA62872A7EBE08006067DB /* dydxPortfolioFeesViewPresenter.swift in Sources */,
 				0208632528F51EC400C9D3A0 /* dydxMarketDepthChartViewPresenter.swift in Sources */,
@@ -1998,8 +1988,8 @@
 				024F47922964A83700E40247 /* dydxMarketConfigsViewPresenter.swift in Sources */,
 				6448800B2AA248340068DD87 /* dydxAlertsWorker.swift in Sources */,
 				0262F2D529DB4891009889E2 /* WalletAction.swift in Sources */,
+				27592DF82C9A54D6002FBD4B /* dydxFrontendAlertsProvider.swift in Sources */,
 				023789ED28BD381C00F212E1 /* dydxPresenters.docc in Sources */,
-				0258B9E72991BC900098E1BE /* dydxNewsAlertsViewBuilder.swift in Sources */,
 				2751D6462C59643800B36F95 /* dydxVaultViewBuilder.swift in Sources */,
 				277E908B2B2118AE005CCBCB /* dydxRewardsHistoryViewPresenter.swift in Sources */,
 				0279DE952BED63E100F9ECF8 /* dydxAdjustMarginCtaButtonViewPresenter.swift in Sources */,
@@ -2011,13 +2001,13 @@
 				272911D62C06A628003F3EA0 /* TransferAnalytics.swift in Sources */,
 				0257C78E2A00485500F6160B /* SparklineDataPoint.swift in Sources */,
 				028DB3402A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift in Sources */,
-				27C027532AFD761300E92CCB /* dydxSettingsHelpRowViewPresenter.swift in Sources */,
+				27C027532AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift in Sources */,
 				02EF485629F732C600C97746 /* dydxFavoriteStore.swift in Sources */,
 				0208627C28F4DAC000C9D3A0 /* dydxMarketInfoPagingViewPresenter.swift in Sources */,
 				0238FECB2970D681002E1C1A /* SharedAccountPresenter.swift in Sources */,
+				27592DF92C9A54D6002FBD4B /* dydxSystemAlertsProvider.swift in Sources */,
 				02A134C129A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift in Sources */,
 				02FA5B7E2A12FB280045F2F5 /* dydxTransferWithdrawalViewPresenter.swift in Sources */,
-				02A565B22A5E32790035469F /* dydxSystemAlertsProvider.swift in Sources */,
 				27B957ED2B97C07400EF9304 /* dydxShareActionBuilder.swift in Sources */,
 				024FEB412ACB60690087A55E /* dydxMarketOrderbookPresenter.swift in Sources */,
 				270E7E242A5F6B1B00136793 /* dydxTradeInputSideViewPresenter.swift in Sources */,
@@ -2049,13 +2039,13 @@
 				27823CF42C77E21A009BCD51 /* dydxVaultDepositWithdrawViewBuilder.swift in Sources */,
 				64A4DB9929664818008D8E20 /* dydxTradeReceiptPresenter.swift in Sources */,
 				0236F0CB2968793A00EB995F /* dydxPortfolioFillsViewPresenter.swift in Sources */,
-				02A565AF2A5E310B0035469F /* dydxAlertsProvider.swift in Sources */,
 				025841F428EE9DE8007338D3 /* dydxAssetItemChartViewPresenter.swift in Sources */,
 				278EA5662BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift in Sources */,
 				02860A9F29C15E760079E644 /* dydxOnboardScanViewBuilder.swift in Sources */,
 				277E90332B1FAE9A005CCBCB /* dydxRewardsHelpViewPresenter.swift in Sources */,
 				02FAFA5C29D4E08E001A0903 /* dydxDebugViewBuilder.swift in Sources */,
 				02F543B22C17ABBB000924E4 /* dydxGasTokenViewBuilder.swift in Sources */,
+				27592DFA2C9A54D6002FBD4B /* dydxTransferAlertsProvider.swift in Sources */,
 				02F700FE29EA0FD9004DEB5E /* dydxReceiptPresenter.swift in Sources */,
 				27457F5B2C8AC8B700873640 /* dydxVaultDepositWithdrawConfirmationViewBuilder.swift in Sources */,
 				027E1EF829CA27CD0098666F /* dydxSettingsLandingViewBuilder.swift in Sources */,
@@ -2072,11 +2062,11 @@
 				0238FB6D296BD4E0002E1C1A /* dydxPortfolioChartViewPresenter.swift in Sources */,
 				029CBE7128F5FDF600259C1D /* dydxMarketFundingChartViewPresenter.swift in Sources */,
 				0236F113296A9D7A00EB995F /* dydxPortfolioFundingViewPresenter.swift in Sources */,
-				022A24522A03088B003A385E /* dydxAlertsViewPresenter.swift in Sources */,
 				029CBE7928F6092400259C1D /* dydxMarketTradesViewPresenter.swift in Sources */,
 				0295392329FB256E009026E3 /* dydxThemeViewBuilder.swift in Sources */,
 				02669B7C2AD8661F00A756AA /* dydxCarteraConfigWorker.swift in Sources */,
 				02B841B228EF6C6400C4D25B /* dydxMarketInfoViewBuilder.swift in Sources */,
+				27592DFB2C9A54D6002FBD4B /* dydxAlertsProvider.swift in Sources */,
 				02031F1C2AC3A7130069E00D /* dydxTradeSheetTipDraftViewPresenter.swift in Sources */,
 				02D9518C2C926B9C007BB2B4 /* dydxNotificationPrimerViewPresenter.swift in Sources */,
 				277E8FC92B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift in Sources */,
@@ -2087,7 +2077,6 @@
 				029CBE7428F6032C00259C1D /* HistoricalFundingDataPoint.swift in Sources */,
 				0274B34828F1140D005AF69E /* dydxMarketPriceCandlesViewPresenter.swift in Sources */,
 				0253179729C1270700D6CC9B /* dydxTradingNetworkViewBuilder.swift in Sources */,
-				028AC6A42A5E564B00FE0891 /* dydxTransferAlertsProvider.swift in Sources */,
 				02B27A492AE8BC7600A995EC /* dydxHelpViewPresenter.swift in Sources */,
 				0258BA2929929E870098E1BE /* dydxProfileButtonsViewPresenter.swift in Sources */,
 				278EA5642BB610AC007A0E17 /* dydxNotificationsSettingsViewBuilder.swift in Sources */,
@@ -2105,7 +2094,6 @@
 				02FF0BD229AE92FE00781EDA /* dydxWalletListViewBuilder.swift in Sources */,
 				027F3F062AB93B3700602E5B /* dydxProfileBalancesViewPresenter.swift in Sources */,
 				02F6E71F2A8293270018F00C /* dydxProfileFeesViewPresenter.swift in Sources */,
-				647D0F152A9FB1C600DA7815 /* dydxFrontendAlertsProvider.swift in Sources */,
 				02D1345828ECF30000B46941 /* dydxMarketsSearchViewBuilder.swift in Sources */,
 				27044F702BBB1CDF004C750D /* dydxTakeProfitStopLossViewPresenter.swift in Sources */,
 				277DB22F2C669A6800964F9B /* dydxPredictionMarketsNoticeViewBuilder.swift in Sources */,

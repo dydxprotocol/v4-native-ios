@@ -2,45 +2,58 @@
 //  GradientView.swift
 //  UIToolkits
 //
-//  Created by Qiang Huang on 9/6/21.
-//  Copyright © 2021 dYdX. All rights reserved.
+//  Created by Mike Maguire on 9/20/24.
+//  Copyright © 2024 dYdX. All rights reserved.
 //
 
 import UIKit
 
-@objc public class GradientView: UIView {
-    override open class var layerClass: AnyClass {
-       return CAGradientLayer.classForCoder()
+public class GradientView: UIView {
+
+    // Configurable properties
+    public var gradientColors: [UIColor] {
+        didSet {
+            gradientLayer.colors = gradientColors.map { $0.cgColor }
+        }
     }
-    @IBInspectable var startColor: UIColor?
-    @IBInspectable var endColor: UIColor?
-    
-    private var gradientLayer: CAGradientLayer? {
-        return layer as? CAGradientLayer
+    private let startPoint: CGPoint
+    private let endPoint: CGPoint
+    private let gradientLayer = CAGradientLayer()
+
+    // Initializers
+    public init(gradientColors: [UIColor],
+         startPoint: CGPoint = CGPoint(x: 0.5, y: 0),
+         endPoint: CGPoint = CGPoint(x: 0.5, y: 1)) {
+        self.gradientColors = gradientColors
+        self.startPoint = startPoint
+        self.endPoint = endPoint
+        super.init(frame: .zero)
+        setupGradientLayer()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // Setup gradient layer
+    private func setupGradientLayer() {
+        gradientLayer.colors = gradientColors.map { $0.cgColor }
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+
+    // Adjust gradient layer's frame when the view's bounds change
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = bounds
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-        gradientLayer?.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradientLayer?.endPoint = CGPoint(x: 1.0, y: 0.5)
-        setupLayer()
-    }
-    
-    public func set(startColor: UIColor?, endColor: UIColor?) {
-        self.startColor = startColor
-        self.endColor = endColor
-        setupLayer()
-    }
-    
-    private func setupLayer() {
-        if let startColor = startColor, let endColor = endColor {
-            gradientLayer?.colors = [startColor.cgColor, endColor.cgColor]
-        } else {
-            gradientLayer?.colors = nil
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            setupGradientLayer()
         }
     }
 }
+

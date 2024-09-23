@@ -75,7 +75,6 @@
 		0253178A29C126EE00D6CC9B /* dydxTradingNetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253178929C126EE00D6CC9B /* dydxTradingNetworkView.swift */; };
 		0256F53629AFFC9800A083C0 /* dydxOnboardConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0256F53529AFFC9800A083C0 /* dydxOnboardConnectView.swift */; };
 		025892C728BE82B900AAABF5 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 024B7BE328B80C2A00F7C386 /* Media.xcassets */; };
-		0258B9E42991BC7A0098E1BE /* dydxNewsAlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258B9E32991BC7A0098E1BE /* dydxNewsAlertsView.swift */; };
 		0258BA1D2992949D0098E1BE /* dydxProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258BA1C2992949D0098E1BE /* dydxProfileView.swift */; };
 		0258BA2629929D1B0098E1BE /* dydxProfileButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258BA2529929D1B0098E1BE /* dydxProfileButtonsView.swift */; };
 		025BA65A290100CD00CDAE99 /* LeverageRisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BA659290100CD00CDAE99 /* LeverageRisk.swift */; };
@@ -203,7 +202,7 @@
 		27AAA9862ACE34C800AF3C56 /* SwiftMessages+Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */; };
 		27AFE4EA2C1902BF00168B0B /* dydxReceiptChangeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFE4DD2C1902BF00168B0B /* dydxReceiptChangeItemView.swift */; };
 		27BAAF112BD851B500F650C3 /* dydxTakeProfitStopLossStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BAAF102BD851B500F650C3 /* dydxTakeProfitStopLossStatusViewModel.swift */; };
-		27C027452AFD734800E92CCB /* dydxSettingsHelpRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */; };
+		27C027452AFD734800E92CCB /* dydxProfileSecondaryButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C027442AFD734800E92CCB /* dydxProfileSecondaryButtonsView.swift */; };
 		27C6AE182C618055005517B5 /* RadioButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6AE172C618055005517B5 /* RadioButtons.swift */; };
 		27C6E4C92BC8C30E00ED892A /* dydxCustomLimitPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6E4BC2BC8C30E00ED892A /* dydxCustomLimitPriceViewModel.swift */; };
 		27CDA3D42BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CDA3D32BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift */; };
@@ -465,7 +464,6 @@
 		0253155029BFA62700D6CC9B /* dydxOnboardScanInstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOnboardScanInstructionsView.swift; sourceTree = "<group>"; };
 		0253178929C126EE00D6CC9B /* dydxTradingNetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradingNetworkView.swift; sourceTree = "<group>"; };
 		0256F53529AFFC9800A083C0 /* dydxOnboardConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOnboardConnectView.swift; sourceTree = "<group>"; };
-		0258B9E32991BC7A0098E1BE /* dydxNewsAlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNewsAlertsView.swift; sourceTree = "<group>"; };
 		0258BA1C2992949D0098E1BE /* dydxProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileView.swift; sourceTree = "<group>"; };
 		0258BA2529929D1B0098E1BE /* dydxProfileButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileButtonsView.swift; sourceTree = "<group>"; };
 		025BA659290100CD00CDAE99 /* LeverageRisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeverageRisk.swift; sourceTree = "<group>"; };
@@ -590,7 +588,7 @@
 		27AAA9852ACE34C800AF3C56 /* SwiftMessages+Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMessages+Banner.swift"; sourceTree = "<group>"; };
 		27AFE4DD2C1902BF00168B0B /* dydxReceiptChangeItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxReceiptChangeItemView.swift; sourceTree = "<group>"; };
 		27BAAF102BD851B500F650C3 /* dydxTakeProfitStopLossStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTakeProfitStopLossStatusViewModel.swift; sourceTree = "<group>"; };
-		27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSettingsHelpRowView.swift; sourceTree = "<group>"; };
+		27C027442AFD734800E92CCB /* dydxProfileSecondaryButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileSecondaryButtonsView.swift; sourceTree = "<group>"; };
 		27C6AE172C618055005517B5 /* RadioButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtons.swift; sourceTree = "<group>"; };
 		27C6E4BC2BC8C30E00ED892A /* dydxCustomLimitPriceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxCustomLimitPriceViewModel.swift; sourceTree = "<group>"; };
 		27CDA3D32BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMultipleOrdersExistViewModel.swift; sourceTree = "<group>"; };
@@ -736,7 +734,7 @@
 				6453A7AD299C26B60041A0C4 /* ClosePosition */,
 				02B8419B28EF67B300C4D25B /* MarketInfo */,
 				0230376B28C11B0E00412B72 /* Markets */,
-				0258B9D62991BC5C0098E1BE /* NewsAlerts */,
+				0258B9D62991BC5C0098E1BE /* Alerts */,
 				02FF0BBF29AE924300781EDA /* Onboarding */,
 				0238FC31296DA527002E1C1A /* OrderDetails */,
 				02D9516D2C926A7D007BB2B4 /* Primers */,
@@ -1115,13 +1113,12 @@
 			path = Connect;
 			sourceTree = "<group>";
 		};
-		0258B9D62991BC5C0098E1BE /* NewsAlerts */ = {
+		0258B9D62991BC5C0098E1BE /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
 				02E430CC2A03031B00A648CD /* Components */,
-				0258B9E32991BC7A0098E1BE /* dydxNewsAlertsView.swift */,
 			);
-			path = NewsAlerts;
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 		0258BA0F2992947E0098E1BE /* Profile */ = {
@@ -1149,7 +1146,7 @@
 				028DB33D2A0589270090BE58 /* dydxProfileHeaderView.swift */,
 				02F95A8B2A1D6A9200828F9A /* dydxProfileHistoryView.swift */,
 				02F6E7102A8292FC0018F00C /* dydxProfileFeesView.swift */,
-				27C027442AFD734800E92CCB /* dydxSettingsHelpRowView.swift */,
+				27C027442AFD734800E92CCB /* dydxProfileSecondaryButtonsView.swift */,
 				277E8F9E2B1A847D005CCBCB /* dydxTitledCardView.swift */,
 			);
 			path = Components;
@@ -2081,7 +2078,7 @@
 				0273A1382ACCC49C001B89F5 /* dydxHistoryView.swift in Sources */,
 				0246DE5E28B984C700A7FF1F /* Wallets2View.swift in Sources */,
 				023AB3C62BEAD5E9005230B2 /* dydxTargetLeverageView.swift in Sources */,
-				27C027452AFD734800E92CCB /* dydxSettingsHelpRowView.swift in Sources */,
+				27C027452AFD734800E92CCB /* dydxProfileSecondaryButtonsView.swift in Sources */,
 				0253155129BFA62700D6CC9B /* dydxOnboardScanInstructionsView.swift in Sources */,
 				27CDA3D42BBF1AD700FEAFFE /* dydxMultipleOrdersExistViewModel.swift in Sources */,
 				024B7B5C28B7F90100F7C386 /* dydxViewBundleClass.swift in Sources */,
@@ -2265,7 +2262,6 @@
 				0276B9C828E6477500101791 /* dydxMarketSummaryView.swift in Sources */,
 				024B44F32983D57200E35D54 /* SharedFillView.swift in Sources */,
 				0238FEC72970D26C002E1C1A /* SharedAccountView.swift in Sources */,
-				0258B9E42991BC7A0098E1BE /* dydxNewsAlertsView.swift in Sources */,
 				64A4DB7A296635BE008D8E20 /* dydxReceiptBuyingPowerView.swift in Sources */,
 				028DB33E2A0589270090BE58 /* dydxProfileHeaderView.swift in Sources */,
 				0232C03229AEF583006B2C51 /* dydxSyncDesktopView.swift in Sources */,

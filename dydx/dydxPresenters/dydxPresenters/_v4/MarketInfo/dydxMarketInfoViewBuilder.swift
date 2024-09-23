@@ -19,7 +19,7 @@ public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxMarketInfoViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        let viewController = dydxMarketInfoViewController(presenter: presenter, view: view, configuration: .nav)
+        let viewController = dydxMarketInfoViewController(presenter: presenter, view: view, configuration: .default)
         viewController.hidesBottomBarWhenPushed = true
         return viewController as? T
     }

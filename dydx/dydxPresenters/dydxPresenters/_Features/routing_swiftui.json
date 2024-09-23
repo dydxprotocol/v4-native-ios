@@ -98,8 +98,8 @@
                     "destination":"AffiliateEntity.storyboard"
                 },
                 "/alerts":{
-                    "destination":"dydxPresenters.dydxNewsAlertsViewBuilder",
-                    "presentation":"prompt"
+                    "destination":"dydxPresenters.dydxAlertsViewBuilder",
+                    "presentation":"push"
                 },
                 "/closePosition/status":{
                     "destination":"dydxPresenters.dydxTradeStatusViewBuilder",

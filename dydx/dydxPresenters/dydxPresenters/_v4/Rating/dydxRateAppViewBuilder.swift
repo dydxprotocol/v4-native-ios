@@ -19,11 +19,11 @@ public class dydxRateAppViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxRateAppViewBuilderPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxRateAppViewBuilderController(presenter: presenter, view: view, configuration: .default) as? T
+        return dydxRateAppViewController(presenter: presenter, view: view, configuration: .default) as? T
     }
 }
 
-private class dydxRateAppViewBuilderController: HostingViewController<PlatformView, dydxRateAppViewModel> {
+private class dydxRateAppViewController: HostingViewController<PlatformView, dydxRateAppViewModel> {
 
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/rate_app" {

@@ -52,16 +52,6 @@ open class RoutingTabBarController: UITabBarController, ParsingProtocol {
 
     private var actionPath: String?
 
-    @IBInspectable open var routingMap: String? {
-        didSet {
-            if routingMap != oldValue {
-                if let destinations = parser.asArray(JsonLoader.load(bundles: Bundle.particles, fileName: routingMap)) {
-                    parse(array: destinations)
-                }
-            }
-        }
-    }
-
     var previousController: UIViewController?
 
     override open func viewDidLoad() {
@@ -101,18 +91,6 @@ open class RoutingTabBarController: UITabBarController, ParsingProtocol {
         if centerButton !== oldValue {
             oldValue?.removeTarget()
             centerButton?.addTarget(self, action: #selector(action(_:)))
-        }
-    }
-
-    public func parse(array: [Any]) {
-        if let data = array as? [[String: Any]] {
-            var maps = [TabbarItemInfo]()
-            for dictionary in data {
-                let routing = TabbarItemInfo()
-                routing.parse(dictionary: dictionary)
-                maps.append(routing)
-            }
-            self.maps = maps
         }
     }
 
@@ -160,8 +138,8 @@ open class RoutingTabBarController: UITabBarController, ParsingProtocol {
     }
 
     private func path(info: TabbarItemInfo) -> String? {
-        if let router = Router.shared as? MappedUIKitRouter, let path = info.path {
-            let request = RoutingRequest(path: path)
+        if let router = Router.shared as? MappedUIKitRouter {
+            let request = RoutingRequest(path: info.path)
             return router.transform(request: request).path
         } else {
             return nil
@@ -225,13 +203,11 @@ open class RoutingTabBarController: UITabBarController, ParsingProtocol {
 
     private func setup(viewController: UIViewController, info: TabbarItemInfo) {
         let tabbarItem = UITabBarItem()
-        tabbarItem.title = info.title?.localized ?? " "
-        if let image = info.image {
-            tabbarItem.image = UIImage.named(image, bundles: Bundle.particles)
-        }
-        if let selected = info.selected {
-            tabbarItem.selectedImage = UIImage.named(selected, bundles: Bundle.particles)
-        }
+        tabbarItem.title = info.title
+        tabbarItem.image = UIImage.named(info.image, bundles: Bundle.particles)
+//        if let selected = info.selected {
+//            tabbarItem.selectedImage = UIImage.named(selected, bundles: Bundle.particles)
+//        }
         viewController.tabBarItem = tabbarItem
     }
 
@@ -241,11 +217,7 @@ open class RoutingTabBarController: UITabBarController, ParsingProtocol {
                 let viewController = viewControllers[i]
                 if let tabbarItem = viewController.tabBarItem {
                     let map = maps[i]
-                    if let path = map.path {
-                        tabbarItem.badgeValue = badging?.badge(for: path)
-                    } else {
-                        tabbarItem.badgeValue = nil
-                    }
+                    tabbarItem.badgeValue = badging?.badge(for: map.path)
                 }
             }
         }
@@ -276,24 +248,21 @@ open class RoutingTabBarController: UITabBarController, ParsingProtocol {
     }
 }
 
-public class TabbarItemInfo: NSObject, ParsingProtocol {
-    override open var parser: Parser {
-        return RoutingTabBarController.parserOverwrite ?? super.parser
+public struct TabbarItemInfo: Equatable {
+    public init(path: String,
+                title: String?,
+                image: String,
+                split: Bool) {
+        self.path = path
+        self.title = title
+        self.image = image
+        self.split = split
     }
-
-    public var path: String?
+    
+    public var path: String
     public var title: String?
-    public var image: String?
-    public var selected: String?
-    public var split: Bool?
-
-    public func parse(dictionary: [String: Any]) {
-        path = parser.asString(dictionary["path"])
-        title = parser.asString(dictionary["title"])
-        image = parser.asString(dictionary["image"])
-        selected = parser.asString(dictionary["selected"])
-        split = parser.asBoolean(dictionary["split"])?.boolValue
-    }
+    public var image: String
+    public var split: Bool
 }
 
 extension RoutingTabBarController: UITabBarControllerDelegate {
