@@ -32,20 +32,11 @@ public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
         }
     }
 
-    override public var selectedIndex: Int {
-        didSet {
-            if selectedIndex != oldValue {
-                update(index: oldValue, selected: false)
-                update(index: selectedIndex, selected: true)
-            }
-        }
-    }
-
     public override func viewDidLoad() {
         super.viewDidLoad()
 
         createCenterButton()
-        routingMap = dydxBoolFeatureFlag.isVaultEnabled.isEnabled ? "tabs_v4_vault.json" : "tabs_v4.json"
+        maps = dydxBoolFeatureFlag.isVaultEnabled.isEnabled ? Self.tabBarItemInfosV2 : Self.tabBarItemInfos
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -87,28 +78,53 @@ public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
     private func updateCenterButton() {
         centerButton?.buttonImage = UIImage.named("icon_trade", bundles: Bundle.particles)
     }
-
-    private func update(index: Int, selected: Bool) {
-        if index != NSNotFound {
-            if let item = tabBar.items?[index] {
-                update(item: item, index: index, selected: selected)
-            }
-        }
-    }
-
-     private func update(item: UITabBarItem, index: Int, selected: Bool) {
-        item.title = selected ? "●" : " "
-//        if selected, [0, 3, 4].contains(index), wallet === nil {
-//            promptLogin()
-//        }
-    }
-
-    override public func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if let items = tabBar.items {
-            for index in 0 ..< items.count {
-                let tab = items[index]
-                update(item: tab, index: index, selected: tab === item)
-            }
-        }
-    }
 }
+
+private extension dydxV4TabBarController {
+    static let tabBarItemInfos: [TabbarItemInfo] = [
+        .init(path: "/portfolio",
+              title: DataLocalizer.localize(path: "APP.PORTFOLIO.PORTFOLIO"),
+              image: "icon_portfolio",
+              split: true),
+        .init(path: "/markets",
+                title: DataLocalizer.localize(path: "APP.GENERAL.MARKETS"),
+                image: "icon_market",
+                split: true),
+        .init(path: "/trade",
+              title: DataLocalizer.localize(path: "APP.GENERAL.TRADE"),
+              image: "icon_trade",
+              split: true),
+        .init(path: "/alerts",
+              title: DataLocalizer.localize(path: "APP.GENERAL.ALERTS"),
+              image: "icon_alerts",
+              split: true),
+        .init(path: "/my-profile",
+              title: DataLocalizer.localize(path: "APP.GENERAL.PROFILE"),
+              image: "icon_profile",
+              split: true)
+    ]
+    
+    static let tabBarItemInfosV2: [TabbarItemInfo] = [
+        .init(path: "/portfolio",
+              title: DataLocalizer.localize(path: "APP.PORTFOLIO.PORTFOLIO"),
+              image: "icon_portfolio",
+              split: true),
+        .init(path: "/markets",
+                title: DataLocalizer.localize(path: "APP.GENERAL.MARKETS"),
+                image: "icon_market",
+                split: true),
+        .init(path: "/trade",
+              title: DataLocalizer.localize(path: "APP.GENERAL.TRADE"),
+              image: "icon_trade",
+              split: true),
+        .init(path: "/vault",
+              title: DataLocalizer.localize(path: "APP.VAULTS.EARN"),
+              image: "icon_earn",
+              split: true),
+        .init(path: "/my-profile",
+              title: DataLocalizer.localize(path: "APP.GENERAL.PROFILE"),
+              image: "icon_profile",
+              split: true)
+    ]
+}
+

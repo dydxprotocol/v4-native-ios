@@ -18,11 +18,11 @@ public class dydxCancelPendingIsolatedOrdersViewBuilder: NSObject, ObjectBuilder
     public func build<T>() -> T? {
         let presenter = dydxCancelPendingIsolatedOrdersViewBuilderPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxCancelPendingIsolatedOrdersViewBuilderController(presenter: presenter, view: view, configuration: .default) as? T
+        return dydxCancelPendingIsolatedOrdersViewController(presenter: presenter, view: view, configuration: .default) as? T
     }
 }
 
-private class dydxCancelPendingIsolatedOrdersViewBuilderController: HostingViewController<PlatformView, dydxCancelPendingIsolatedOrdersViewModel> {
+private class dydxCancelPendingIsolatedOrdersViewController: HostingViewController<PlatformView, dydxCancelPendingIsolatedOrdersViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if let marketId = request?.params?["market"] as? String,
             request?.path == "/portfolio/cancel_pending_position",

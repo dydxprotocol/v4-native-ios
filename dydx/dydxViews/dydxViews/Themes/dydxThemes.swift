@@ -13,6 +13,11 @@ import UIKit
 import SwiftUI
 import Utilities
 
+class dydxThemeSettings {
+    static let shared = dydxThemeSettings()
+    @Published fileprivate(set) var currentThemeType: dydxThemeType = .dark
+}
+
 public enum dydxThemeType: String {
     case dark
     case classicDark = "classic_dark"
@@ -34,7 +39,6 @@ public enum dydxThemeType: String {
     }
 }
 
-public var currentThemeType = dydxThemeType.dark
 
 private var loadFontOnce: Void = {
     let fonts = Bundle(for: dydxViewBundleClass.self).urls(forResourcesWithExtension: "otf", subdirectory: nil)
@@ -86,7 +90,7 @@ public extension ThemeSettings {
         case .classicDark, .dark, .light:
             if let config = theme.config {
                 shared.themeConfig = config
-                currentThemeType = theme
+                dydxThemeSettings.shared.currentThemeType = theme
             } else {
                 assertionFailure("\(theme.configFileName ?? "theme config file") not found")
             }
