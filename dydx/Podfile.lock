@@ -1,11 +1,11 @@
 PODS:
-  - Abacus (1.11.10)
+  - Abacus (1.11.15)
   - AmplitudeSwift (1.9.2):
     - AnalyticsConnector (~> 1.0.1)
   - AnalyticsConnector (1.0.3)
-  - AppsFlyerFramework (6.15.2):
-    - AppsFlyerFramework/Main (= 6.15.2)
-  - AppsFlyerFramework/Main (6.15.2)
+  - AppsFlyerFramework (6.15.3):
+    - AppsFlyerFramework/Main (= 6.15.3)
+  - AppsFlyerFramework/Main (6.15.3)
   - Atributika (5.0.5)
   - BigInt (5.2.0)
   - Charts (3.6.0):
@@ -19,8 +19,8 @@ PODS:
   - Differ (1.4.5)
   - DrawerMenu (1.0.1)
   - EasyTipView (2.1.0)
-  - EFQRCode (6.2.1):
-    - swift_qrcodejs (~> 2.2.2)
+  - EFQRCode (6.2.2):
+    - ef_swift_qrcodejs (~> 2.3.0)
   - Firebase/AnalyticsWithoutAdIdSupport (11.2.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics/WithoutAdIdSupport (~> 11.2.0)
@@ -382,10 +382,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  Abacus: 8c4072d2e5baa9f48abe95684ac854eaf37ab3d8
+  Abacus: fb4153b99342402d11e57bdd5564f54717306d56
   AmplitudeSwift: 6c2c689f7dc83e6d9d90b7f53b93433c1436196a
   AnalyticsConnector: a53214d38ae22734c6266106c0492b37832633a9
-  AppsFlyerFramework: 3c6c50b7b3f0f37f648a5b23114940e0766e65e8
+  AppsFlyerFramework: ad7ff0d22aa36c7f8cc4f71a5424e19b89ccb8ae
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
   BigInt: f668a80089607f521586bbe29513d708491ef2f7
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
@@ -395,7 +395,7 @@ SPEC CHECKSUMS:
   Differ: 3b6bd78e2b20cc795d9a86f7641d087524e4273e
   DrawerMenu: f6ca91901e2b21086e3c19bcca278d3d3127e85f
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
-  EFQRCode: a4d39ec3466b68dffa71de3b5caef7c9ceefdc53
+  EFQRCode: 3d3cb93a31339639b244f6d4da151099ef4d9e6e
   Firebase: 98e6bf5278170668a7983e12971a66b2cd57fc8c
   FirebaseABTesting: 2104d957ce33888a3d6f3bde298cdee376dde8f1
   FirebaseAnalytics: c36efd5710c60c17558650fa58c2066eca7e9265
