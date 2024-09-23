@@ -16,6 +16,7 @@ import UIToolkits
 import PlatformRouting
 import FloatingPanel
 import Utilities
+import Combine
 
 public struct HostingViewControllerConfiguration {
     public init(ignoreSafeArea: Bool = true, fixedHeight: CGFloat? = nil, gradientTabbar: Bool = false, disableNavigationController: Bool = false) {
@@ -36,12 +37,17 @@ public struct HostingViewControllerConfiguration {
 }
 
 open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol {
-
+    
     private var hostingController: UIHostingController<AnyView>?
     private let presenterView = ObjectPresenterView()
     private var configuration: HostingViewControllerConfiguration = .default
-
-    private let gradientView = UIImageView()
+    private var subscriptions = Set<AnyCancellable>()
+    
+    static private var gradientColors: [UIColor] { [ThemeColor.SemanticColor.layer2.uiColor.withAlphaComponent(0.01),
+                                                     ThemeColor.SemanticColor.layer2.uiColor.withAlphaComponent(0.90)] }
+    private let gradientView = GradientView(gradientColors: HostingViewController.gradientColors,
+                                                          startPoint: CGPoint(x: 0.5, y: 0),
+                                                          endPoint: CGPoint(x: 0.5, y: 0.25))
 
     public private(set) var presenter: HostedViewPresenter<VM>?
 
@@ -97,14 +103,16 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
             tabBarController?.tabBar.shadowImage = UIImage()
             tabBarController?.tabBar.backgroundImage = UIImage()
 
-            gradientView.backgroundColor = .clear
-            gradientView.contentMode = .scaleToFill
             view.addSubview(gradientView)
             gradientView.snp.updateConstraints { make in
                 make.leading.trailing.bottom.equalToSuperview()
-                make.height.equalTo(83)
+                make.height.equalTo(96)
             }
         }
+        
+        dydxThemeSettings.shared.$currentThemeType.sink { [weak self] _ in
+            self?.updateTabItemGradient()
+        }.store(in: &subscriptions)
     }
 
     open override func viewWillAppear(_ animated: Bool) {
@@ -143,7 +151,7 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
     }
 
     override public var preferredStatusBarStyle: UIStatusBarStyle {
-        switch currentThemeType {
+        switch dydxThemeSettings.shared.currentThemeType {
         case .dark, .system, .classicDark:
             return .lightContent
         case .light:
@@ -155,9 +163,9 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
         super.traitCollectionDidChange(previousTraitCollection)
 
         if ThemeSettings.respondsToSystemTheme {
-            if UITraitCollection.current.userInterfaceStyle == .dark, currentThemeType != .dark {
+            if UITraitCollection.current.userInterfaceStyle == .dark, dydxThemeSettings.shared.currentThemeType != .dark {
                 ThemeSettings.applyDarkTheme()
-            } else if UITraitCollection.current.userInterfaceStyle == .light, currentThemeType != .light {
+            } else if UITraitCollection.current.userInterfaceStyle == .light, dydxThemeSettings.shared.currentThemeType != .light {
                 ThemeSettings.applyLightTheme()
             }
             updateTabItemGradient()
@@ -205,8 +213,7 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
     }
 
     private func updateTabItemGradient() {
-        let gradientImage = UIImage.named("gradient_tabbar", bundles: Bundle.particles)
-        gradientView.image = gradientImage?.withTintColor(ThemeColor.SemanticColor.layer2.uiColor)
+        gradientView.gradientColors = HostingViewController.gradientColors
     }
 }
 

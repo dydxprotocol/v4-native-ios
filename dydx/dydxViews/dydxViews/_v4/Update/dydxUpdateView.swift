@@ -85,7 +85,7 @@ public class dydxUpdateViewModel: PlatformViewModel {
 
     private func logoImage(parentStyle: ThemeStyle, styleKey: String?) -> PlatformView {
         let imageName: String
-        if currentThemeType == .light {
+        if dydxThemeSettings.shared.currentThemeType == .light {
             imageName = "brand_light"
         } else {
             imageName = "brand_dark"
