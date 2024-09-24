@@ -6,7 +6,7 @@
 //  Copyright © 2020 dYdX. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import ParticlesKit
 import UIToolkits
 

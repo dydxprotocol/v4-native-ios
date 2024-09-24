@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double ChartsVersionNumber;
-FOUNDATION_EXPORT const unsigned char ChartsVersionString[];
+FOUNDATION_EXPORT double DGChartsVersionNumber;
+FOUNDATION_EXPORT const unsigned char DGChartsVersionString[];
 
