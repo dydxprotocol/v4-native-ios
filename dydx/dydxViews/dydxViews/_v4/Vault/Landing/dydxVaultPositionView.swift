@@ -9,7 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
-import Charts
+import DGCharts
 import dydxFormatter
 
 public class dydxVaultPositionViewModel: PlatformViewModel {

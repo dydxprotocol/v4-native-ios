@@ -11,7 +11,7 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
-import Charts
+import DGCharts
 import Combine
 import dydxStateManager
 import Abacus
@@ -152,7 +152,7 @@ class dydxMarketDepthChartViewPresenter: HostedViewPresenter<dydxMarketDepthChar
 
     // MARK: GraphingDelegate
 
-    func didLoad(presenter: PlatformParticles.GraphingPresenter, view: Charts.ChartViewBase?, data: Charts.ChartData?) {
+    func didLoad(presenter: PlatformParticles.GraphingPresenter, view: DGCharts.ChartViewBase?, data: DGCharts.ChartData?) {
         if let dataSet = data?.dataSets, dataSet.count == 2, let entries1 = (dataSet[0] as? ParticlesLineChartDataSet)?.entries.reversed(), let entries2 = (dataSet[1] as? ParticlesLineChartDataSet)?.entries {
             if var highestBid = entries1.first as? ParticlesLineChartDataEntry, var lowestAsk = entries2.first as? ParticlesLineChartDataEntry {
                 var highestBidValue = highestBid.x
