@@ -14,7 +14,7 @@ import PlatformUI
 import Abacus
 import dydxStateManager
 import Combine
-import Charts
+import DGCharts
 import dydxFormatter
 
 public class dydxMarketsViewBuilder: NSObject, ObjectBuilderProtocol {

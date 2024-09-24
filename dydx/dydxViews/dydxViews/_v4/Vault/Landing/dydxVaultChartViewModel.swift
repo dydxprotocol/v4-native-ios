@@ -9,7 +9,7 @@ import Foundation
 import PlatformUI
 import SwiftUI
 import Utilities
-import Charts
+import DGCharts
 import Combine
 import dydxChart
 

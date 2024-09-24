@@ -6,7 +6,7 @@
 //  Copyright © 2021 dYdX Trading Inc. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import ObjectiveC
 import ParticlesKit
 import UIKit

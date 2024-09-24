@@ -10,7 +10,7 @@ import SwiftUI
 import PlatformUI
 import Utilities
 import PlatformParticles
-import Charts
+import DGCharts
 
 // TODO: Add swipe gestures to lazyvstack :/ https://stackoverflow.com/questions/64103113/deleting-rows-inside-lazyvstack-and-foreach-in-swiftui
 

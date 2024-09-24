@@ -7,8 +7,9 @@
 
 import Foundation
 import SwiftUI
-import Charts
+import DGCharts
 import PlatformUI
+//import S
 
 struct SparklineView: View {
     @State var values: [Double]

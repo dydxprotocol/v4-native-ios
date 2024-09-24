@@ -6,7 +6,7 @@
 //  Copyright © 2021 dYdX. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import Foundation
 
 @objc open class GraphingAxisFormater: NSObject, IAxisValueFormatter {

@@ -13,7 +13,7 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
-import Charts
+import DGCharts
 import dydxStateManager
 
 public class dydxVaultViewBuilder: NSObject, ObjectBuilderProtocol {

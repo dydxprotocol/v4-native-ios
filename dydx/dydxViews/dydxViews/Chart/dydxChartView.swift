@@ -9,7 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
-import Charts
+import DGCharts
 
 public class dydxChartViewModel: PlatformViewModel {
     public let chartView: ChartViewBase
