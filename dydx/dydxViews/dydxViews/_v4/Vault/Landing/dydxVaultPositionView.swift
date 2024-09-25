@@ -16,7 +16,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     static var marketSectionWidth: CGFloat = 130
     static var interSectionPadding: CGFloat = 12
     static var sparklineWidth: CGFloat = 24
-    static var pnlSpacing: CGFloat = 3
+    static var pnlSpacing: CGFloat = 6
 
     @Published public var assetName: String
     @Published public var market: String
