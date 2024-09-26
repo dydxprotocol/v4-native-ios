@@ -69,6 +69,17 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
         viewModel.sort = dydxMarketAssetSortViewModel(contents: SortAction.actions.map(\.text)) { [weak self] selectedIdx in
             self?.selectedSortAction = SortAction.actions[selectedIdx]
         }
+        
+        viewModel.marketsListViewModel?.onTap = { marketViewModel in
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/\(marketViewModel.marketId)"), animated: true, completion: nil)
+        }
+        
+        viewModel.marketsListViewModel?.onFavoriteTap = { marketViewModel in
+            dydxFavoriteStore.shared.toggleFavorite(marketId: marketViewModel.marketId)
+            marketViewModel.isFavorite = dydxFavoriteStore.shared.isFavorite(marketId: marketViewModel.marketId)
+            // send this notification, otherwise, the favorite change has to bubble up to the marketsListViewModel which is slower. Adding this signal accelerates the propagation
+            viewModel.marketsListViewModel?.objectWillChange.send()
+        }
     }
 
     override func start() {
@@ -109,17 +120,20 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
     
     private func updateAssetList(markets: [PerpetualMarket], assetMap: [String: Asset], sort: SortAction?, filter: FilterAction?) {
         let markets = markets.filter { $0.status?.canTrade == true }
-        viewModel?.marketsList?.markets = markets
+        viewModel?.marketsListViewModel?.markets = markets
             .filter { filter?.action($0, assetMap) ?? true }
             .sorted { sort?.action($0, $1) ?? false }
             .map { market in
                 let asset = assetMap[market.assetId]
-                let market = dydxMarketViewModel(symbol: market.assetId,
+                let market = dydxMarketViewModel(marketId: market.id,
+                                                 assetId: market.assetId,
                                                  iconUrl: asset?.resources?.imageUrl,
                                                  volume24H: market.perpetual?.volume24H?.doubleValue ?? 0,
                                                  sparkline: market.perpetual?.line?.map(\.doubleValue) ?? [],
                                                  price: market.oraclePrice?.doubleValue ?? 0,
-                                                 change: market.priceChange24HPercent?.doubleValue ?? 0)
+                                                 change: market.priceChange24HPercent?.doubleValue ?? 0,
+                                                 isFavorite: dydxFavoriteStore.shared.isFavorite(marketId: market.id)
+                )
                 return market
             }
             .compactMap { $0 }

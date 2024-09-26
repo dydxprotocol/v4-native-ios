@@ -24,7 +24,7 @@ public class dydxMarketsViewModel: PlatformViewModel {
     @Published public var filter = dydxMarketAssetFilterViewModel()
     @Published public var filterFooterText: String?
     @Published public var sort = dydxMarketAssetSortViewModel()
-    @Published public var marketsList: dydxMarketListViewModel? = dydxMarketListViewModel()
+    @Published public var marketsListViewModel: dydxMarketListViewModel? = dydxMarketListViewModel()
     @Published public var scrollAction: ScrollAction = .none
 
     public init() { }
@@ -36,7 +36,7 @@ public class dydxMarketsViewModel: PlatformViewModel {
         vm.summary = .previewValue
         vm.filter = .previewValue
         vm.sort = .previewValue
-        vm.marketsList = .previewValue
+        vm.marketsListViewModel = .previewValue
         return vm
     }()
 
@@ -48,7 +48,7 @@ public class dydxMarketsViewModel: PlatformViewModel {
                     .padding(.horizontal, 16)
 
                 ScrollViewReader { proxy in
-                    ScrollView(showsIndicators: false) {
+                    ScrollView(.vertical, showsIndicators: false) {
                         LazyVStack(pinnedViews: [.sectionHeaders]) {
 
                             if let banner = self.banner {
@@ -85,7 +85,7 @@ public class dydxMarketsViewModel: PlatformViewModel {
                              .zIndex(.greatestFiniteMagnitude)
 
                              Section(header: header) {
-                                 self.marketsList?
+                                 self.marketsListViewModel?
                                      .createView()
                                      .padding(.horizontal, 16)
                              }
