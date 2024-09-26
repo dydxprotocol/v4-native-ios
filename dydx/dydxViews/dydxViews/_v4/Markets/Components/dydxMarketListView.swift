@@ -63,8 +63,8 @@ private struct dydxMarketListView: View {
                 .onTapGesture {
                     viewModel.onTap?(market)
                 }
-//            .swipeActions(leftCellSwipeAccessory: leftCellSwipeAccessory(forMarketViewModel: market),
-//                          rightCellSwipeAccessory: nil)
+            .swipeActions(leftCellSwipeAccessory: leftCellSwipeAccessory(forMarketViewModel: market),
+                          rightCellSwipeAccessory: nil)
         }
     }
 }
