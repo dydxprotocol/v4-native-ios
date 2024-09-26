@@ -129,7 +129,7 @@ struct dydxMarketView: View {
     
     var body: some View {
         HStack(spacing: 20) {
-            HStack(spacing: 8) {
+            HStack(spacing: 12) {
                 icon
                 nameVolumeVStack
             }
