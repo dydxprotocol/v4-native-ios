@@ -16,6 +16,7 @@ struct SparklineView: View {
     let values: [Double]
     
     let isIncreasingPositive = true
+    private let lineWidth = 1.5
     
     private var isIncreasing: Bool { (values.last ?? -Double.infinity) >= (values.first ?? -Double.infinity) }
     private var isPositive: Bool { isIncreasingPositive && isIncreasing || !isIncreasingPositive && !isIncreasing }
@@ -35,6 +36,8 @@ struct SparklineView: View {
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
         .chartYScale(domain: valuesDomain)
+        // the lines can extend outside of chart
+        .padding(.all, lineWidth/2)
     }
 
     var body: some View {
