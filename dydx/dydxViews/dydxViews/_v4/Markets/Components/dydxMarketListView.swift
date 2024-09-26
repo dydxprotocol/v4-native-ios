@@ -109,21 +109,21 @@ struct dydxMarketView: View {
     var nameVolumeVStack: some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(viewModel.symbol)
-                .themeFont(fontType: .plus, fontSize: .small)
+                .themeFont(fontType: .plus, fontSize: .medium)
                 .themeColor(foreground: .textPrimary)
             Text(dydxFormatter.shared.dollarVolume(number: viewModel.volume24H) ?? "--")
-                .themeFont(fontType: .base, fontSize: .smaller)
-                .themeColor(foreground: .textPrimary)
+                .themeFont(fontType: .base, fontSize: .small)
+                .themeColor(foreground: .textSecondary)
         }
     }
     
     var priceChangeVStack: some View {
         VStack(alignment: .trailing, spacing: 2) {
             Text(dydxFormatter.shared.dollar(number: viewModel.price) ?? "--")
-                .themeFont(fontType: .plus, fontSize: .small)
+                .themeFont(fontType: .plus, fontSize: .medium)
                 .themeColor(foreground: .textPrimary)
             SignedAmountViewModel(amount: viewModel.change, displayType: .percent, coloringOption: .allText)
-                .createView(parentStyle: ThemeStyle.defaultStyle.themeFont(fontSize: .smaller))
+                .createView(parentStyle: ThemeStyle.defaultStyle.themeFont(fontSize: .small))
         }
     }
     
@@ -142,8 +142,8 @@ struct dydxMarketView: View {
         }
         .lineLimit(1)
         .minimumScaleFactor(0.5)
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
         .themeGradient(background: .layer3, gradientType: viewModel.isPositive ? .plus : .minus)
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
