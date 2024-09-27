@@ -55,8 +55,6 @@ public class dydxVaultDepositWithdrawConfirmationViewModel: PlatformViewModel {
 private struct VaultDepositWithdrawConfirmationView: View {
     @ObservedObject var viewModel: dydxVaultDepositWithdrawConfirmationViewModel
 
-    var options = VaultTransferType.allCases
-
     var body: some View {
 
         VStack(spacing: 24) {

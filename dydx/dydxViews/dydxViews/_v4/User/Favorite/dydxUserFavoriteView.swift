@@ -19,6 +19,15 @@ public class dydxUserFavoriteViewModel: PlatformViewModel {
     public init(size: CGSize = .init(width: 16, height: 16)) {
         self.size = size
     }
+    
+    public convenience init(isFavorited: Bool = false,
+                            size: CGSize = .init(width: 16, height: 16),
+                            onTapped: (() -> Void)? = nil) {
+        self.init()
+        self.isFavorited = isFavorited
+        self.size = size
+        self.onTapped = onTapped
+    }
 
     public static var previewValue: dydxUserFavoriteViewModel {
         let vm = dydxUserFavoriteViewModel()

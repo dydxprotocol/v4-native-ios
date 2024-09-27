@@ -168,15 +168,18 @@ final class dydxMarketAssetListViewPresenter: HostedViewPresenter<dydxMarketAsse
 
 // MARK: Sorting
 
-struct SortAction {
+struct SortAction: Equatable {
+    static var defaultAction: SortAction {
+        SortAction(type: .volume24h,
+                   text: DataLocalizer.localize(path: "APP.TRADE.VOLUME"),
+                   action: { first, second  in
+                       first.perpetual?.volume24H?.doubleValue ?? 0 > second.perpetual?.volume24H?.doubleValue ?? 0
+                   })
+    }
+    
     static var actions: [SortAction] {
         [
-            SortAction(type: .volume24h,
-                       text: DataLocalizer.localize(path: "APP.TRADE.VOLUME"),
-                       action: { first, second  in
-                           first.perpetual?.volume24H?.doubleValue ?? 0 > second.perpetual?.volume24H?.doubleValue ?? 0
-                       }),
-
+            .defaultAction,
             SortAction(type: .gainers,
                        text: DataLocalizer.localize(path: "APP.GENERAL.GAINERS"),
                        action: { first, second  in
@@ -209,21 +212,29 @@ struct SortAction {
         ]
     }
 
-    let type: MarketSorting
+    private let type: MarketSorting
     let text: String
     let action: ((PerpetualMarket, PerpetualMarket) -> Bool)
+    
+    static func == (lhs: SortAction, rhs: SortAction) -> Bool {
+        lhs.type == rhs.type
+    }
 }
 
 // MARK: Filter
 
-struct FilterAction {
+struct FilterAction: Equatable {
+    static var defaultAction: FilterAction {
+        FilterAction(type: .all,
+                     content: .text(DataLocalizer.localize(path: "APP.GENERAL.ALL")),
+                     action: { _, _ in
+                         true       // included
+                     })
+    }
+    
     static var actions: [FilterAction] {
         var actions = [
-            FilterAction(type: .all,
-                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.ALL")),
-                         action: { _, _ in
-                             true       // included
-                         }),
+            .defaultAction,
 
             FilterAction(type: .favorited,
                          content: .icon(UIImage.named("action_like_unselected", bundles: Bundle.particles) ?? UIImage()),
@@ -315,9 +326,13 @@ struct FilterAction {
     let type: MarketFiltering
     let content: TabItemViewModel.TabItemContent
     let action: ((PerpetualMarket, [String: Asset]) -> Bool)
+    
+    static func == (lhs: FilterAction, rhs: FilterAction) -> Bool {
+        lhs.type == rhs.type
+    }
 }
 
-enum MarketSorting {
+enum MarketSorting: Equatable {
     case name
     case marketCap
     case volume24h
@@ -329,7 +344,7 @@ enum MarketSorting {
     case losers
 }
 
-enum MarketFiltering {
+enum MarketFiltering: Equatable {
     case all
     case favorited
     case predictionMarkets

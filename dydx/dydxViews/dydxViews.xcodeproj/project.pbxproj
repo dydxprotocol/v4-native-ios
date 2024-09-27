@@ -209,6 +209,7 @@
 		27DBF3C92C4A05B9009EB2D6 /* dydxTitledNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DBF3C82C4A05B9009EB2D6 /* dydxTitledNumberField.swift */; };
 		27E072D22C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E072D12C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift */; };
 		27E0736B2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E0736A2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift */; };
+		27E3C3E82CA33673009AEFEC /* dydxMarketListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E3C3E72CA33673009AEFEC /* dydxMarketListView.swift */; };
 		27EB25832C6D1E5E008C187B /* dydxVaultPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EB25822C6D1E5E008C187B /* dydxVaultPositionView.swift */; };
 		27EB25852C6D28BF008C187B /* SparklineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EB25842C6D28BF008C187B /* SparklineChart.swift */; };
 		27ED340C2AD47CB100C159F5 /* dydxBannerErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */; };
@@ -595,6 +596,7 @@
 		27DBF3C82C4A05B9009EB2D6 /* dydxTitledNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTitledNumberField.swift; sourceTree = "<group>"; };
 		27E072D12C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioPendingPositionsItemViewModel.swift; sourceTree = "<group>"; };
 		27E0736A2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCancelPendingIsolatedOrdersView.swift; sourceTree = "<group>"; };
+		27E3C3E72CA33673009AEFEC /* dydxMarketListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketListView.swift; sourceTree = "<group>"; };
 		27EB25822C6D1E5E008C187B /* dydxVaultPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultPositionView.swift; sourceTree = "<group>"; };
 		27EB25842C6D28BF008C187B /* SparklineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineChart.swift; sourceTree = "<group>"; };
 		27ED340B2AD47CB100C159F5 /* dydxBannerErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxBannerErrorAlert.swift; sourceTree = "<group>"; };
@@ -770,6 +772,7 @@
 				0276B9C728E6477500101791 /* dydxMarketSummaryView.swift */,
 				02A8975D28E6A941006F1658 /* dydxMarketAssetItemView.swift */,
 				02A8975F28E6A962006F1658 /* dydxMarketAssetListView.swift */,
+				27E3C3E72CA33673009AEFEC /* dydxMarketListView.swift */,
 				02D1344028EBA86200B46941 /* dydxMarketAssetSortView.swift */,
 				02D1344E28ECA75C00B46941 /* dydxMarketAssetFilterView.swift */,
 				2729F9E82C64093700769BA4 /* dydxMarketsBannerViewModel.swift */,
@@ -2075,6 +2078,7 @@
 				024F465929646BF000E40247 /* dydxMarketDepthHightlightView.swift in Sources */,
 				02D1342228EB564900B46941 /* SharedMarketView.swift in Sources */,
 				270BA8CF2A6F1470009212EA /* dydxDebugThemeViewerView.swift in Sources */,
+				27E3C3E82CA33673009AEFEC /* dydxMarketListView.swift in Sources */,
 				0273A1382ACCC49C001B89F5 /* dydxHistoryView.swift in Sources */,
 				0246DE5E28B984C700A7FF1F /* Wallets2View.swift in Sources */,
 				023AB3C62BEAD5E9005230B2 /* dydxTargetLeverageView.swift in Sources */,
