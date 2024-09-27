@@ -36,8 +36,8 @@ public struct HostingViewControllerConfiguration {
     public static let tabbarItemView = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: true)
 }
 
-open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol {
-    
+open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol, UITabBarControllerDelegate {
+
     private var hostingController: UIHostingController<AnyView>?
     private let presenterView = ObjectPresenterView()
     private var configuration: HostingViewControllerConfiguration = .default
@@ -80,6 +80,8 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
 
     open override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tabBarController?.delegate = self
 
         if let hostingController = hostingController {
             addChild(hostingController)
@@ -96,7 +98,7 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
 
             hostingController.view.backgroundColor = .clear
         }
-
+        
         if configuration.gradientTabbar {
             tabBarController?.tabBar.backgroundColor = .clear
             tabBarController?.tabBar.isTranslucent = true
@@ -138,7 +140,17 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
 
         presenter?.stop()
     }
+    
+    // https://stackoverflow.com/a/79006732
+    public func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        UIView.setAnimationsEnabled(false)
+        return true
+    }
 
+    // https://stackoverflow.com/a/79006732
+    public func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        UIView.setAnimationsEnabled(true)
+    }
     /// The hosting controller may in some cases want to make the navigation bar be not hidden.
     /// Restrict the access to the outside world, by setting the navigation controller to nil when internally accessed.
     open override var navigationController: UINavigationController? {

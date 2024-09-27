@@ -7,52 +7,40 @@
 
 import Foundation
 import SwiftUI
+import Charts
 import DGCharts
 import PlatformUI
 //import S
 
 struct SparklineView: View {
-    @State var values: [Double]
-
-    private var lineChart: some View {
-        let chart = LineChartView()
-        chart.data = LineChartData()
-        chart.xAxis.drawGridLinesEnabled = false
-        chart.leftAxis.enabled = false
-        chart.rightAxis.enabled = false
-        chart.xAxis.enabled = false
-        chart.setViewPortOffsets(left: 0, top: 0, right: 0, bottom: 0)
-        chart.pinchZoomEnabled = false
-        chart.doubleTapToZoomEnabled = false
-        // enables dragging the highlighted value indicator
-        chart.dragEnabled = false
-        chart.legend.enabled = false
-
-        let entries = (0..<values.count).map { ChartDataEntry(x: Double($0), y: values[$0]) }
-        let dataSet = LineChartDataSet(entries: entries)
-        let isPositive = (entries.last?.y ?? -Double.infinity) >= (entries.first?.y ?? -Double.infinity)
-        let color = isPositive ? ThemeSettings.positiveColor.uiColor : ThemeSettings.negativeColor.uiColor
-
-        // colors
-        dataSet.setColor(color)
-
-        // shapes
-        dataSet.lineWidth = 1.5
-        dataSet.lineCapType = .round
-        dataSet.mode = .linear
-        dataSet.label = nil
-        dataSet.drawCirclesEnabled = false
-        dataSet.drawValuesEnabled = false
-
-        // interactions
-        dataSet.highlightEnabled = false
-        dataSet.drawHorizontalHighlightIndicatorEnabled = false
-
-        chart.data = LineChartData(dataSet: dataSet)
-        return chart.swiftUIView
+    let values: [Double]
+    
+    let isIncreasingPositive = true
+    private let lineWidth = 1.5
+    
+    private var isIncreasing: Bool { (values.last ?? -Double.infinity) >= (values.first ?? -Double.infinity) }
+    private var isPositive: Bool { isIncreasingPositive && isIncreasing || !isIncreasingPositive && !isIncreasing }
+    private var color: ThemeColor.SemanticColor { isPositive ? ThemeSettings.positiveColor : ThemeSettings.negativeColor }
+    
+    private var valuesDomain: ClosedRange<Double> { (values.min() ?? 0)...(values.max() ?? 0) }
+    
+    var chart: some View {
+        Chart(Array(values.enumerated()), id: \.offset) { (offset, element) in
+            LineMark(x: .value("", offset),
+                     y: .value("", element))
+            .lineStyle(StrokeStyle(lineWidth: 1.5))
+            .foregroundStyle(color.color.gradient)
+            .interpolationMethod(.cardinal)
+            .symbolSize(0)
+        }
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        .chartYScale(domain: valuesDomain)
+        // the lines can extend outside of chart
+        .padding(.all, lineWidth/2)
     }
 
     var body: some View {
-        lineChart
+        chart
     }
 }

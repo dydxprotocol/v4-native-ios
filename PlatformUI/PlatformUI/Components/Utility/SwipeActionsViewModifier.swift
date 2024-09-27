@@ -228,7 +228,14 @@ struct SwipeActionsModifier: ViewModifier {
     }
     
     func getGesture() -> _EndedGesture<_ChangedGesture<DragGesture>> {
-        return DragGesture(minimumDistance: 0)
+        let minimumDistance: CGFloat
+        if #available(iOS 18.0, *) {
+            // 0 feels bad on iOS 18.0
+            minimumDistance = 35
+        } else {
+            minimumDistance = 0
+        }
+        return DragGesture(minimumDistance: minimumDistance)
         .onChanged { value in
             var dragWidth = value.translation.width
 

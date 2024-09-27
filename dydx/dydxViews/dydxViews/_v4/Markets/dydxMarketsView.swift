@@ -24,7 +24,7 @@ public class dydxMarketsViewModel: PlatformViewModel {
     @Published public var filter = dydxMarketAssetFilterViewModel()
     @Published public var filterFooterText: String?
     @Published public var sort = dydxMarketAssetSortViewModel()
-    @Published public var assetList: dydxMarketAssetListViewModel? = dydxMarketAssetListViewModel()
+    @Published public var marketsListViewModel: dydxMarketListViewModel? = dydxMarketListViewModel()
     @Published public var scrollAction: ScrollAction = .none
 
     public init() { }
@@ -36,7 +36,7 @@ public class dydxMarketsViewModel: PlatformViewModel {
         vm.summary = .previewValue
         vm.filter = .previewValue
         vm.sort = .previewValue
-        vm.assetList = .previewValue
+        vm.marketsListViewModel = .previewValue
         return vm
     }()
 
@@ -48,7 +48,7 @@ public class dydxMarketsViewModel: PlatformViewModel {
                     .padding(.horizontal, 16)
 
                 ScrollViewReader { proxy in
-                    ScrollView(showsIndicators: false) {
+                    ScrollView(.vertical, showsIndicators: false) {
                         LazyVStack(pinnedViews: [.sectionHeaders]) {
 
                             if let banner = self.banner {
@@ -85,13 +85,9 @@ public class dydxMarketsViewModel: PlatformViewModel {
                              .zIndex(.greatestFiniteMagnitude)
 
                              Section(header: header) {
-                                 VStack(spacing: 12) {
-                                     self.assetList?
-                                         .createView(parentStyle: style)
-                                     Spacer(minLength: 64)
-                                 }
-                                 .padding(.horizontal, 16)
-                                 .animation(.default)
+                                 self.marketsListViewModel?
+                                     .createView()
+                                     .padding(.horizontal, 16)
                              }
                              .onChange(of: self.scrollAction) { newValue in
                                  if newValue == .toTop {
@@ -106,7 +102,7 @@ public class dydxMarketsViewModel: PlatformViewModel {
                              }
 
                              // account for scrolling behind tab bar
-                             Spacer(minLength: 40)
+                             Spacer(minLength: 100)
                          }
                      }
                 }
