@@ -97,42 +97,6 @@ NS_ASSUME_NONNULL_END
 #define GTM_TARGET_SUPPORTS_APP_TRANSPORT_SECURITY 1
 #endif
 
-#if ((defined(TARGET_OS_MACCATALYST) && TARGET_OS_MACCATALYST) ||                                 \
-     (TARGET_OS_OSX && defined(__MAC_10_15) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_15) || \
-     (TARGET_OS_IOS && defined(__IPHONE_13_0) &&                                                  \
-      __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_13_0) ||                                       \
-     (TARGET_OS_WATCH && defined(__WATCHOS_6_0) &&                                                \
-      __WATCH_OS_VERSION_MIN_REQUIRED >= __WATCHOS_6_0) ||                                        \
-     (TARGET_OS_TV && defined(__TVOS_13_0) && __TVOS_VERSION_MIN_REQUIRED >= __TVOS_13_0) ||      \
-     (defined(TARGET_OS_VISION) && TARGET_OS_VISION))
-#define GTM_SDK_REQUIRES_TLSMINIMUMSUPPORTEDPROTOCOLVERSION 1
-#define GTM_SDK_SUPPORTS_TLSMINIMUMSUPPORTEDPROTOCOLVERSION 1
-#elif ((TARGET_OS_OSX && defined(__MAC_10_15) && __MAC_OS_X_VERSION_MAX_ALLOWED >= __MAC_10_15) || \
-       (TARGET_OS_IOS && defined(__IPHONE_13_0) &&                                                 \
-        __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0) ||                                       \
-       (TARGET_OS_WATCH && defined(__WATCHOS_6_0) &&                                               \
-        __WATCH_OS_VERSION_MAX_ALLOWED >= __WATCHOS_6_0) ||                                        \
-       (TARGET_OS_TV && defined(__TVOS_13_0) && __TVOS_VERSION_MAX_ALLOWED >= __TVOS_13_0))
-#define GTM_SDK_REQUIRES_TLSMINIMUMSUPPORTEDPROTOCOLVERSION 0
-#define GTM_SDK_SUPPORTS_TLSMINIMUMSUPPORTEDPROTOCOLVERSION 1
-#else
-#define GTM_SDK_REQUIRES_TLSMINIMUMSUPPORTEDPROTOCOLVERSION 0
-#define GTM_SDK_SUPPORTS_TLSMINIMUMSUPPORTEDPROTOCOLVERSION 0
-#endif
-
-#if ((defined(TARGET_OS_MACCATALYST) && TARGET_OS_MACCATALYST) ||                                 \
-     (TARGET_OS_OSX && defined(__MAC_10_15) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_15) || \
-     (TARGET_OS_IOS && defined(__IPHONE_13_0) &&                                                  \
-      __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_13_0) ||                                       \
-     (TARGET_OS_WATCH && defined(__WATCHOS_6_0) &&                                                \
-      __WATCH_OS_VERSION_MIN_REQUIRED >= __WATCHOS_6_0) ||                                        \
-     (TARGET_OS_TV && defined(__TVOS_13_0) && __TVOS_VERSION_MIN_REQUIRED >= __TVOS_13_0) ||      \
-     (defined(TARGET_OS_VISION) && TARGET_OS_VISION))
-#define GTM_SDK_REQUIRES_SECTRUSTEVALUATEWITHERROR 1
-#else
-#define GTM_SDK_REQUIRES_SECTRUSTEVALUATEWITHERROR 0
-#endif
-
 #if __has_attribute(swift_async)
 // Once Clang 13/Xcode 13 can be assumed, can switch to NS_SWIFT_DISABLE_ASYNC.
 #define GTM_SWIFT_DISABLE_ASYNC __attribute__((swift_async(none)))
@@ -982,17 +946,7 @@ static GTMSessionFetcherTestBlock _Nullable gGlobalTestBlock;
       _configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     }
 #if !GTM_ALLOW_INSECURE_REQUESTS
-#if GTM_SDK_REQUIRES_TLSMINIMUMSUPPORTEDPROTOCOLVERSION
     _configuration.TLSMinimumSupportedProtocolVersion = tls_protocol_version_TLSv12;
-#elif GTM_SDK_SUPPORTS_TLSMINIMUMSUPPORTEDPROTOCOLVERSION
-    if (@available(iOS 13, tvOS 13, macOS 10.15, *)) {
-      _configuration.TLSMinimumSupportedProtocolVersion = tls_protocol_version_TLSv12;
-    } else {
-      _configuration.TLSMinimumSupportedProtocol = kTLSProtocol12;
-    }
-#else
-    _configuration.TLSMinimumSupportedProtocol = kTLSProtocol12;
-#endif  // GTM_SDK_REQUIRES_TLSMINIMUMSUPPORTEDPROTOCOLVERSION
 #endif
   }  // !_configuration
   _configuration.HTTPCookieStorage = self.cookieStorage;
@@ -2611,7 +2565,6 @@ static _Nullable id<GTMUIApplicationProtocol> gSubstituteUIApp;
     // so it may be redundant for us to also lock, but it's easy to synchronize here
     // anyway.
     BOOL shouldAllow;
-#if GTM_SDK_REQUIRES_SECTRUSTEVALUATEWITHERROR
     CFErrorRef errorRef = NULL;
     @synchronized([GTMSessionFetcher class]) {
       GTMSessionMonitorSynchronized([GTMSessionFetcher class]);
@@ -2626,32 +2579,6 @@ static _Nullable id<GTMUIApplicationProtocol> gSubstituteUIApp;
                            request);
       CFRelease(errorRef);
     }
-#else
-    SecTrustResultType trustEval = kSecTrustResultInvalid;
-    OSStatus trustError;
-    @synchronized([GTMSessionFetcher class]) {
-      GTMSessionMonitorSynchronized([GTMSessionFetcher class]);
-
-      trustError = SecTrustEvaluate(serverTrust, &trustEval);
-    }
-    if (trustError != errSecSuccess) {
-      GTMSESSION_LOG_DEBUG(@"Error %d evaluating trust for %@",
-                           (int)trustError, request);
-      shouldAllow = NO;
-    } else {
-      // Having a trust level "unspecified" by the user is the usual result, described at
-      //   https://developer.apple.com/library/mac/qa/qa1360
-      if (trustEval == kSecTrustResultUnspecified
-          || trustEval == kSecTrustResultProceed) {
-        shouldAllow = YES;
-      } else {
-        shouldAllow = NO;
-        GTMSESSION_LOG_DEBUG(@"Challenge SecTrustResultType %u for %@, properties: %@",
-                             trustEval, request.URL.host,
-                             CFBridgingRelease(SecTrustCopyProperties(serverTrust)));
-      }
-    }
-#endif  // GTM_SDK_REQUIRES_SECTRUSTEVALUATEWITHERROR
     handler(serverTrust, shouldAllow);
 
     CFRelease(serverTrust);

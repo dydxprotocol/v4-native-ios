@@ -1,5 +1,5 @@
 PODS:
-  - Abacus (1.11.15)
+  - Abacus (1.12.6)
   - AmplitudeSwift (1.9.2):
     - AnalyticsConnector (~> 1.0.1)
   - AnalyticsConnector (1.0.3)
@@ -148,42 +148,42 @@ PODS:
   - GoogleDataTransport (10.1.0):
     - nanopb (~> 3.30910.0)
     - PromisesObjC (~> 2.4)
-  - GoogleToolboxForMac (4.2.1):
-    - GoogleToolboxForMac/Core (= 4.2.1)
-    - GoogleToolboxForMac/Defines (= 4.2.1)
-    - GoogleToolboxForMac/GeometryUtils (= 4.2.1)
-    - GoogleToolboxForMac/KVO (= 4.2.1)
-    - GoogleToolboxForMac/Logger (= 4.2.1)
-    - "GoogleToolboxForMac/NSData+zlib (= 4.2.1)"
-    - "GoogleToolboxForMac/NSFileHandle+UniqueName (= 4.2.1)"
-    - "GoogleToolboxForMac/NSString+HTML (= 4.2.1)"
-    - "GoogleToolboxForMac/NSString+XML (= 4.2.1)"
-    - "GoogleToolboxForMac/NSThread+Blocks (= 4.2.1)"
-    - GoogleToolboxForMac/StringEncoding (= 4.2.1)
-  - GoogleToolboxForMac/Core (4.2.1):
-    - GoogleToolboxForMac/Defines (= 4.2.1)
-  - GoogleToolboxForMac/DebugUtils (4.2.1):
-    - GoogleToolboxForMac/Defines (= 4.2.1)
-  - GoogleToolboxForMac/Defines (4.2.1)
-  - GoogleToolboxForMac/GeometryUtils (4.2.1):
-    - GoogleToolboxForMac/Defines (= 4.2.1)
-  - GoogleToolboxForMac/KVO (4.2.1):
-    - GoogleToolboxForMac/Core (= 4.2.1)
-    - GoogleToolboxForMac/DebugUtils (= 4.2.1)
-  - GoogleToolboxForMac/Logger (4.2.1):
-    - GoogleToolboxForMac/Defines (= 4.2.1)
-  - "GoogleToolboxForMac/NSData+zlib (4.2.1)":
-    - GoogleToolboxForMac/Defines (= 4.2.1)
-  - "GoogleToolboxForMac/NSFileHandle+UniqueName (4.2.1)":
-    - GoogleToolboxForMac/Defines (= 4.2.1)
-  - "GoogleToolboxForMac/NSString+HTML (4.2.1)":
-    - GoogleToolboxForMac/Core (= 4.2.1)
-  - "GoogleToolboxForMac/NSString+XML (4.2.1)":
-    - GoogleToolboxForMac/Defines (= 4.2.1)
-  - "GoogleToolboxForMac/NSThread+Blocks (4.2.1)":
-    - GoogleToolboxForMac/Defines (= 4.2.1)
-  - GoogleToolboxForMac/StringEncoding (4.2.1):
-    - GoogleToolboxForMac/Defines (= 4.2.1)
+  - GoogleToolboxForMac (5.0.0):
+    - GoogleToolboxForMac/Core (= 5.0.0)
+    - GoogleToolboxForMac/Defines (= 5.0.0)
+    - GoogleToolboxForMac/GeometryUtils (= 5.0.0)
+    - GoogleToolboxForMac/KVO (= 5.0.0)
+    - GoogleToolboxForMac/Logger (= 5.0.0)
+    - "GoogleToolboxForMac/NSData+zlib (= 5.0.0)"
+    - "GoogleToolboxForMac/NSFileHandle+UniqueName (= 5.0.0)"
+    - "GoogleToolboxForMac/NSString+HTML (= 5.0.0)"
+    - "GoogleToolboxForMac/NSString+XML (= 5.0.0)"
+    - "GoogleToolboxForMac/NSThread+Blocks (= 5.0.0)"
+    - GoogleToolboxForMac/StringEncoding (= 5.0.0)
+  - GoogleToolboxForMac/Core (5.0.0):
+    - GoogleToolboxForMac/Defines (= 5.0.0)
+  - GoogleToolboxForMac/DebugUtils (5.0.0):
+    - GoogleToolboxForMac/Defines (= 5.0.0)
+  - GoogleToolboxForMac/Defines (5.0.0)
+  - GoogleToolboxForMac/GeometryUtils (5.0.0):
+    - GoogleToolboxForMac/Defines (= 5.0.0)
+  - GoogleToolboxForMac/KVO (5.0.0):
+    - GoogleToolboxForMac/Core (= 5.0.0)
+    - GoogleToolboxForMac/DebugUtils (= 5.0.0)
+  - GoogleToolboxForMac/Logger (5.0.0):
+    - GoogleToolboxForMac/Defines (= 5.0.0)
+  - "GoogleToolboxForMac/NSData+zlib (5.0.0)":
+    - GoogleToolboxForMac/Defines (= 5.0.0)
+  - "GoogleToolboxForMac/NSFileHandle+UniqueName (5.0.0)":
+    - GoogleToolboxForMac/Defines (= 5.0.0)
+  - "GoogleToolboxForMac/NSString+HTML (5.0.0)":
+    - GoogleToolboxForMac/Core (= 5.0.0)
+  - "GoogleToolboxForMac/NSString+XML (5.0.0)":
+    - GoogleToolboxForMac/Defines (= 5.0.0)
+  - "GoogleToolboxForMac/NSThread+Blocks (5.0.0)":
+    - GoogleToolboxForMac/Defines (= 5.0.0)
+  - GoogleToolboxForMac/StringEncoding (5.0.0):
+    - GoogleToolboxForMac/Defines (= 5.0.0)
   - GoogleUtilities (8.0.2):
     - GoogleUtilities/AppDelegateSwizzler (= 8.0.2)
     - GoogleUtilities/Environment (= 8.0.2)
@@ -224,10 +224,10 @@ PODS:
   - GoogleUtilities/UserDefaults (8.0.2):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - GTMSessionFetcher (3.5.0):
-    - GTMSessionFetcher/Full (= 3.5.0)
-  - GTMSessionFetcher/Core (3.5.0)
-  - GTMSessionFetcher/Full (3.5.0):
+  - GTMSessionFetcher (4.0.0):
+    - GTMSessionFetcher/Full (= 4.0.0)
+  - GTMSessionFetcher/Core (4.0.0)
+  - GTMSessionFetcher/Full (4.0.0):
     - GTMSessionFetcher/Core
   - HMSegmentedControl (1.5.6)
   - iCarousel (1.8.3)
@@ -382,7 +382,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  Abacus: fb4153b99342402d11e57bdd5564f54717306d56
+  Abacus: 129b6e7acd46793fbbad5c4ed4feccf11f946949
   AmplitudeSwift: 6c2c689f7dc83e6d9d90b7f53b93433c1436196a
   AnalyticsConnector: a53214d38ae22734c6266106c0492b37832633a9
   AppsFlyerFramework: ad7ff0d22aa36c7f8cc4f71a5424e19b89ccb8ae
@@ -413,9 +413,9 @@ SPEC CHECKSUMS:
   FloatingPanel: c88e3fd981b7a74121ff48746fb14d496f5fd553
   GoogleAppMeasurement: 76d4f8b36b03bd8381fa9a7fe2cc7f99c0a2e93a
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
-  GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
+  GoogleToolboxForMac: d0a675de27cb3e7fbf157925680ac8421d86c257
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
-  GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
+  GTMSessionFetcher: 4e28ef1d6434633476ab4328d438d78713fff396
   HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   JTCalendar: 1b326e0d59dd1855b52c5f3feb059d2ff953805d
