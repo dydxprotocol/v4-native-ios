@@ -15,6 +15,7 @@ import ParticlesKit
 import PlatformUI
 import DGCharts
 import dydxStateManager
+import Abacus
 
 public class dydxVaultViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -50,12 +51,52 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
             Router.shared?.navigate(to: RoutingRequest(path: "/vault/withdraw"), animated: true, completion: nil)
         }
 
+        AbacusStateManager.shared.state.vault
+            .compactMap { $0 }
+            .sink(receiveValue: { [weak self] vault in
+                self?.updateState(vault: vault)
+            })
+            .store(in: &subscriptions)
+        
+        
         // TODO: remove & replace, test only
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
-            guard let self = self else { return }
-            self.viewModel?.vaultChart?.setEntries(entries: self.generateEntries())
-            self.viewModel?.positions = self.generatePositions()
+//        Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
+//            guard let self = self else { return }
+//            self.viewModel?.vaultChart?.setEntries(entries: self.generateEntries())
+//            self.viewModel?.positions = self.generatePositions()
+//        }
+    }
+    
+    private func updateState(vault: Abacus.Vault) {
+        viewModel?.totalValueLocked = vault.details?.totalValue?.doubleValue ?? Double.random(in: -10000000..<10000000)
+        viewModel?.thirtyDayReturnPercent = vault.details?.thirtyDayReturnPercent?.doubleValue ?? Double.random(in: -100..<100)
+        viewModel?.vaultBalance = vault.account?.balanceUsdc?.doubleValue ?? Double.random(in: -100..<100)
+        viewModel?.allTimeReturnUsdc = vault.account?.allTimeReturnUsdc?.doubleValue ?? Double.random(in: -100..<100)
+        //TODO: add to abacus
+        viewModel?.allTimeReturnPercentage = Double.random(in: -100..<100)
+        
+        viewModel?.positions = vault.positions?.positions?.map { (position) -> dydxVaultPositionViewModel? in
+            guard let assetName = position.marketId,
+                  let market = position.marketId,
+                  //TODO:
+                  let leverage = position.currentLeverageMultiple?.doubleValue,
+                  let notionalValue = position.currentPosition?.usdc?.doubleValue,
+                  let positionSize = position.currentPosition?.asset?.doubleValue,
+                  let token = position.marketId
+            else { return nil }
+            return dydxVaultPositionViewModel(assetName: assetName,
+                                       market: market,
+                                        side: positionSize > 0 ? .long : .short,
+                                       leverage: leverage,
+                                       notionalValue: notionalValue,
+                                              positionSize: positionSize.magnitude,
+                                       token: token,
+                                       tokenUnitPrecision: 2,
+                                       pnlAmount: position.thirtyDayPnl?.absolute?.doubleValue,
+                                       pnlPercentage: position.thirtyDayPnl?.percent?.doubleValue,
+                                       sparklineValues: position.thirtyDayPnl?.sparklinePoints?.map({ $0.doubleValue }))
         }
+        .compactMap { $0 }
     }
 
     // TODO: remove, just for testing

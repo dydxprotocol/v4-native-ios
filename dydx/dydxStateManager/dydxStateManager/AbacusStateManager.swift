@@ -165,6 +165,7 @@ public final class AbacusStateManager: NSObject {
         ]
         appConfigs.onboardingConfigs.alchemyApiKey = CredientialConfig.shared.credential(for: "alchemyApiKey")
         appConfigs.staticTyping = dydxBoolFeatureFlag.abacus_static_typing.isEnabled
+        appConfigs.vaultConfigs = VaultConfigs.companion.forApp
 
         return AsyncAbacusStateManagerV2(
             deploymentUri: deploymentUri,

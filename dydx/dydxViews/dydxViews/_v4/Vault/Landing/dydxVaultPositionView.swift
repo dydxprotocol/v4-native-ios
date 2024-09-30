@@ -26,9 +26,9 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     @Published public var positionSize: Double
     @Published public var tokenUnitPrecision: Int
     @Published public var token: String
-    @Published public var pnlAmount: Double
-    @Published public var pnlPercentage: Double
-    @Published public var sparklineValues: [Double]
+    @Published public var pnlAmount: Double?
+    @Published public var pnlPercentage: Double?
+    @Published public var sparklineValues: [Double]?
 
     fileprivate var sideLeverageAttributedText: AttributedString {
         let attributedSideText = AttributedString(text: side.text, urlString: nil)
@@ -49,7 +49,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     fileprivate var pnlColor: ThemeColor.SemanticColor {
-        pnlAmount >= 0 ? ThemeSettings.positiveColor : ThemeSettings.negativeColor
+        pnlAmount ?? 0 >= 0 ? ThemeSettings.positiveColor : ThemeSettings.negativeColor
     }
 
     fileprivate var pnlAmountText: String {
@@ -69,9 +69,9 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
         positionSize: Double,
         token: String,
         tokenUnitPrecision: Int,
-        pnlAmount: Double,
-        pnlPercentage: Double,
-        sparklineValues: [Double]) {
+        pnlAmount: Double?,
+        pnlPercentage: Double?,
+        sparklineValues: [Double]?) {
             self.assetName = assetName
             self.market = market
             self.side = side
@@ -152,7 +152,7 @@ private struct VaultPositionView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
             }
-            SparklineView(values: viewModel.sparklineValues)
+            SparklineView(values: viewModel.sparklineValues ?? [])
                 .frame(width: dydxVaultPositionViewModel.sparklineWidth, height: 24)
         }
     }

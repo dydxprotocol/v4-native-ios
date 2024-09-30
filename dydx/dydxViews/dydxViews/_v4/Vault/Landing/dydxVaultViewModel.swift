@@ -13,8 +13,10 @@ import Utilities
 
 public class dydxVaultViewModel: PlatformViewModel {
     @Published public var vaultBalance: Double?
-    @Published public var profitDollars: Double?
-    @Published public var profitPercentage: Double?
+    @Published public var allTimeReturnUsdc: Double?
+    @Published public var allTimeReturnPercentage: Double?
+    @Published public var thirtyDayReturnPercent: Double?
+    @Published public var totalValueLocked: Double?
     @Published public var vaultChart: dydxVaultChartViewModel?
     @Published public var positions: [dydxVaultPositionViewModel]?
     @Published public var cancelAction: (() -> Void)?
@@ -141,9 +143,9 @@ private struct dydxVaultView: View {
                 .themeFont(fontType: .base, fontSize: .small)
             VStack {
                 VStack(spacing: 2) {
-                    SignedAmountViewModel(text: dydxFormatter.shared.dollar(number: viewModel.profitDollars) ?? "--", sign: .none, coloringOption: .allText)
+                    SignedAmountViewModel(text: dydxFormatter.shared.dollar(number: viewModel.allTimeReturnUsdc) ?? "--", sign: .none, coloringOption: .allText)
                         .createView()
-                    if let profitPercentage = viewModel.profitPercentage {
+                    if let profitPercentage = viewModel.allTimeReturnPercentage {
                         Text(dydxFormatter.shared.percent(number: profitPercentage, digits: 2) ?? "")
                             .themeColor(foreground: .textPrimary)
                             .themeFont(fontType: .base, fontSize: .smaller)
@@ -171,7 +173,7 @@ private struct dydxVaultView: View {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.VAULT_THIRTY_DAY_APR", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
-            Text("--")
+            Text(dydxFormatter.shared.percent(number: viewModel.thirtyDayReturnPercent, digits: 2) ?? "")
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontType: .base, fontSize: .medium)
         }
@@ -182,7 +184,7 @@ private struct dydxVaultView: View {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.TVL", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
-            Text("--")
+            Text(dydxFormatter.shared.percent(number: viewModel.totalValueLocked, digits: 2) ?? "")
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontType: .base, fontSize: .medium)
         }
