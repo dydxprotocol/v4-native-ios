@@ -31,7 +31,7 @@ public final class TransferAnalytics {
             "gasFee": Parser.standard.asString(transferInput.summary?.gasFee),
             "bridgeFee": Parser.standard.asString(transferInput.summary?.bridgeFee),
             "exchangeRate": Parser.standard.asString(transferInput.summary?.exchangeRate),
-            "estimatedRouteDuration": Parser.standard.asString(transferInput.summary?.estimatedRouteDuration),
+            "estimatedRouteDuration": Parser.standard.asString(transferInput.summary?.estimatedRouteDurationSeconds),
             "toAmount": Parser.standard.asString(transferInput.summary?.toAmount),
             "toAmountMin": Parser.standard.asString(transferInput.summary?.toAmountMin)
         ].filterNils() as? [String: String]
