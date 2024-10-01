@@ -129,8 +129,8 @@ final class dydxTransferReceiptViewPresenter: dydxReceiptPresenter {
         }
 
         transferDurationViewModel.title = DataLocalizer.localize(path: "APP.DEPOSIT_MODAL.ESTIMATED_TIME")
-        if let estimatedRouteDuration = transferSummary?.estimatedRouteDuration?.doubleValue,
-           let minutes = parser.asString(Int(ceil(estimatedRouteDuration / 60))) {
+        if let estimatedRouteDurationSeconds = transferSummary?.estimatedRouteDurationSeconds?.doubleValue,
+           let minutes = parser.asString(Int(ceil(estimatedRouteDurationSeconds / 60))) {
             let minutesLocalized = DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.X_MINUTES", params: ["X": minutes])
             transferDurationViewModel.value = minutesLocalized
         } else {
