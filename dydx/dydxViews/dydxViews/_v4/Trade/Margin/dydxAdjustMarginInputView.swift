@@ -94,9 +94,9 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
     private func createHeader(parentStyle: ThemeStyle) -> some View {
         HStack(spacing: 12) {
             if let marketIconUrlString = self.sharedMarketViewModel?.logoUrl {
-                PlatformIconViewModel(type: .url(url: marketIconUrlString, placeholderContent: nil),
-                                      size: CGSize(width: 32, height: 32))
-                .createView(parentStyle: parentStyle)
+                let placeholderText = self.sharedMarketViewModel?.assetName?.prefix(1).uppercased()
+                PlatformIconViewModel(url: marketIconUrlString, placeholderText: placeholderText)
+                    .createView()
             }
             Text(DataLocalizer.localize(path: "APP.TRADE.ADJUST_ISOLATED_MARGIN"))
                 .themeColor(foreground: .textPrimary)
