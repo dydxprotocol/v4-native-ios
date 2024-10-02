@@ -9,6 +9,7 @@ import PlatformUI
 import SwiftUI
 
 extension PlatformIconViewModel {
+    /// creates a PlatformIconViewModel with a URL and placeholder Text element if the URL is unavailable
     public convenience init(url: URL?, placeholderText: String?) {
         if let placeholderText {
             let placeholderContent = { Text(placeholderText)
