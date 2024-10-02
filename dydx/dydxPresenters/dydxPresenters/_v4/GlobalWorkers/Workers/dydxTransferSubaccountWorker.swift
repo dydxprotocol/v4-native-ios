@@ -28,7 +28,7 @@ final class dydxTransferSubaccountWorker: BaseWorker {
             .sink { [weak self] balance, walletState in
                 guard let balance else { return }
 
-                if balance > balanceRetainAmount {
+                if balance > dydxTransferSubaccountWorker.balanceRetainAmount {
                     let depositAmount = balance - dydxTransferSubaccountWorker.balanceRetainAmount
                     let amountString = dydxFormatter.shared.decimalLocaleAgnostic(number: NSNumber(value: depositAmount),
                                                                                 digits: dydxTokenConstants.usdcTokenDecimal)
