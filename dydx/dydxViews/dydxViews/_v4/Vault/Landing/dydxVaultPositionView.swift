@@ -94,7 +94,13 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 }
 
-private struct VaultPositionView: View {
+struct VaultPositionView: View {
+    
+    static let marketSectionWidth: CGFloat = 130
+    static let interSectionPadding: CGFloat = 12
+    static let sparklineWidth: CGFloat = 24
+    static let pnlSpacing: CGFloat = 6
+    
     @ObservedObject var viewModel: dydxVaultPositionViewModel
 
     var marketSection: some View {
@@ -139,7 +145,7 @@ private struct VaultPositionView: View {
     }
 
     var pnlSection: some View {
-        HStack(alignment: .center, spacing: dydxVaultPositionViewModel.pnlSpacing) {
+        HStack(alignment: .center, spacing: Self.pnlSpacing) {
             VStack(alignment: .trailing, spacing: 2) {
                 Text(viewModel.pnlAmountText)
                     .themeFont(fontType: .base, fontSize: .small)
@@ -153,14 +159,14 @@ private struct VaultPositionView: View {
                     .minimumScaleFactor(0.5)
             }
             SparklineView(values: viewModel.sparklineValues ?? [])
-                .frame(width: dydxVaultPositionViewModel.sparklineWidth, height: 24)
+                .frame(width: Self.sparklineWidth, height: 24)
         }
     }
 
     var body: some View {
-        HStack(spacing: dydxVaultPositionViewModel.interSectionPadding) {
+        HStack(spacing: Self.interSectionPadding) {
                 marketSection
-                    .frame(width: dydxVaultPositionViewModel.marketSectionWidth)
+                    .frame(width: Self.marketSectionWidth)
                 sizeSection
                 pnlSection
             }

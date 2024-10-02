@@ -228,13 +228,13 @@ private struct dydxVaultView: View {
     }
 
     private var positionsColumnsHeader: some View {
-        HStack(spacing: dydxVaultPositionViewModel.interSectionPadding) {
+        HStack(spacing: VaultPositionView.interSectionPadding) {
             Group {
                 Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.MARKET", params: nil) ?? "")
                     .themeColor(foreground: .textTertiary)
                     .themeFont(fontType: .base, fontSize: .small)
                     .leftAligned()
-                    .frame(width: dydxVaultPositionViewModel.marketSectionWidth)
+                    .frame(width: VaultPositionView.marketSectionWidth)
                     .lineLimit(1)
                 Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.SIZE", params: nil) ?? "")
                     .themeColor(foreground: .textTertiary)
@@ -246,7 +246,7 @@ private struct dydxVaultView: View {
                     .themeFont(fontType: .base, fontSize: .small)
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: false)
-                    .padding(.trailing, dydxVaultPositionViewModel.pnlSpacing + dydxVaultPositionViewModel.sparklineWidth)
+                    .padding(.trailing, VaultPositionView.pnlSpacing + VaultPositionView.sparklineWidth)
             }
         }
         .padding(.horizontal, 16)
