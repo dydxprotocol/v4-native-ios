@@ -138,7 +138,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
               let curFreeCollateral = subaccount?.freeCollateral?.current?.doubleValue,
               let curMarginUsage = subaccount?.marginUsage?.current?.doubleValue
         else {
-//            assertionFailure()
+            assertionFailure()
             return
         }
 
@@ -168,11 +168,13 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         }
     }
 
-    private func updateSubmitState(slippage: Double?, transferType: VaultTransferType) {
+    private func updateSubmitState(slippage: Double?, expectedAmountReceived: Double?, transferType: VaultTransferType) {
         switch transferType {
         case .deposit:
             viewModel?.submitState = .enabled
         case .withdraw:
+            viewModel?.slippage = slippage
+            viewModel?.expectedAmountReceived = expectedAmountReceived
             if let slippage = slippage, viewModel?.requiresAcknowledgeHighSlippage == false || viewModel?.hasAcknowledgedHighSlippage == true {
                 viewModel?.submitState = .enabled
             } else {

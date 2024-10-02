@@ -32,7 +32,10 @@ public class dydxVaultDepositWithdrawConfirmationViewModel: PlatformViewModel {
     @Published public var postVaultBalance: Double?
     @Published public var postFreeCollateral: Double?
     @Published public var postMarginUsage: Double?
+    
     @Published public var slippage: Double?
+    @Published public var expectedAmountReceived: Double?
+    
     public var expectedAmount: Double? {
         guard let slippage = slippage, let amount = amount else { return nil }
         return amount * slippage
@@ -168,7 +171,7 @@ private struct VaultDepositWithdrawConfirmationView: View {
 
             let vaultBalanceReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.YOUR_VAULT_BALANCE"),
                                                                         value: AmountChangeModel(before: preTransferVaultBalance, after: postTransferVaultBalance))
-            let freeCollateralReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.FREE_COLLATERAL"),
+            let freeCollateralReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
                                                                         value: AmountChangeModel(before: preTransferFreeCollateral, after: postTransferFreeCollateral))
             let marginUsageReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.MARGIN_USAGE"),
                                                                         value: AmountChangeModel(before: preTransferMarginUsage, after: postTransferMarginUsage))

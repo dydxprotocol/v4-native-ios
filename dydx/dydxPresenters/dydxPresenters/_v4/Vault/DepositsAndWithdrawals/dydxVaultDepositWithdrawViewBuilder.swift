@@ -133,6 +133,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
                                         amount: Double,
                                         transferType: dydxViews.VaultTransferType
     ) {
+        viewModel?.submitState = .loading
         formValidationRequest = Task {
             let sharesToWithdraw = Abacus.VaultDepositWithdrawFormValidator.shared.calculateSharesToWithdraw(vaultAccount: vault.account, amount: amount)
             let slippageApiResponse = await CosmoJavascript.shared.getMegavaultWithdrawalInfo(sharesToWithdraw: sharesToWithdraw)
@@ -144,7 +145,6 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
                 slippageResponse: slippageResponseParsed)
             
             DispatchQueue.main.async { [weak self] in
-                print()
                 guard let self = self else { return }
                 self.update(subaccount: subaccount,
                             vault: vault,
@@ -194,6 +194,9 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
         viewModel?.postVaultBalance = viewModel?.curVaultBalance == form.summaryData.vaultBalance?.doubleValue ? nil : form.summaryData.vaultBalance?.doubleValue
         viewModel?.postFreeCollateral = viewModel?.curFreeCollateral == form.summaryData.freeCollateral?.doubleValue ? nil : form.summaryData.freeCollateral?.doubleValue
         viewModel?.postMarginUsage = viewModel?.curMarginUsage == form.summaryData.marginUsage?.doubleValue ? nil : form.summaryData.marginUsage?.doubleValue
+        
+        viewModel?.slippage = form.summaryData.estimatedSlippage?.doubleValue
+        viewModel?.expectedAmountReceived = form.summaryData.estimatedAmountReceived?.doubleValue
     }
     
     private func updateSubmitAction(amount: Double, transferType: dydxViews.VaultTransferType) {
