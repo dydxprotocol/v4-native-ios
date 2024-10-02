@@ -26,35 +26,30 @@ final class dydxTransferSubaccountWorker: BaseWorker {
                 AbacusStateManager.shared.state.walletState
             )
             .sink { [weak self] balance, walletState in
-                guard let balance, balance > dydxTransferSubaccountWorker.balanceRetainAmount else { return }
-                let depositAmount = balance - dydxTransferSubaccountWorker.balanceRetainAmount
-                let amountString = dydxFormatter.shared.decimalLocaleAgnostic(number: NSNumber(value: depositAmount),
-                                                                              digits: dydxTokenConstants.usdcTokenDecimal)
-                if let amountString = amountString {
-                    self?.depositToSubaccount(amount: amountString,
-                                              subaccount: AbacusStateManager.shared.selectedSubaccountNumber,
-                                              walletState: walletState)
-                } else {
-                    Console.shared.log("dydxTransferSubaccountWorker: Invalid amount")
-                }
-            }
-            .store(in: &subscriptions)
+                guard let balance else { return }
 
-        AbacusStateManager.shared.state.accountBalance(of: AbacusStateManager.shared.environment?.usdcTokenInfo?.denom)
-            .withLatestFrom(
-                AbacusStateManager.shared.state.walletState
-            )
-            .sink { [weak self] balance, walletState in
-                guard let balance, balance < dydxTransferSubaccountWorker.rebalanceThreshold else { return }
-                let depositAmount = dydxTransferSubaccountWorker.rebalanceThreshold - balance
-                let amountString = dydxFormatter.shared.decimalLocaleAgnostic(number: NSNumber(value: depositAmount),
-                                                                              digits: dydxTokenConstants.usdcTokenDecimal)
-                if let amountString = amountString {
-                    self?.depositToSubaccount(amount: amountString,
-                                              subaccount: AbacusStateManager.shared.selectedSubaccountNumber,
-                                              walletState: walletState)
-                } else {
-                    Console.shared.log("dydxTransferSubaccountWorker: Invalid amount")
+                if balance > balanceRetainAmount {
+                    let depositAmount = balance - dydxTransferSubaccountWorker.balanceRetainAmount
+                    let amountString = dydxFormatter.shared.decimalLocaleAgnostic(number: NSNumber(value: depositAmount),
+                                                                                digits: dydxTokenConstants.usdcTokenDecimal)
+                    if let amountString = amountString {
+                        self?.depositToSubaccount(amount: amountString,
+                                                subaccount: AbacusStateManager.shared.selectedSubaccountNumber,
+                                                walletState: walletState)
+                    } else {
+                        Console.shared.log("dydxTransferSubaccountWorker: Invalid amount")
+                    }
+                } else if balance < dydxTransferSubaccountWorker.rebalanceThreshold {
+                    let withdrawAmount = dydxTransferSubaccountWorker.balanceRetainAmount - balance
+                    let amountString = dydxFormatter.shared.decimalLocaleAgnostic(number: NSNumber(value: withdrawAmount),
+                                                                                digits: dydxTokenConstants.usdcTokenDecimal)
+                    if let amountString = amountString {
+                        self?.withdrawFromSubaccount(amount: amountString,
+                                                subaccount: AbacusStateManager.shared.selectedSubaccountNumber,
+                                                walletState: walletState)
+                    } else {
+                        Console.shared.log("dydxTransferSubaccountWorker: Invalid amount")
+                    }
                 }
             }
             .store(in: &subscriptions)
@@ -80,8 +75,8 @@ final class dydxTransferSubaccountWorker: BaseWorker {
         }
     }
 
-    private func withdrawToSubaccount(amount: String, subaccount: Int, walletState: dydxWalletState) {
-        CosmoJavascript.shared.withdrawToSubaccount(subaccount: subaccount, amount: amount) { result in
+    private func withdrawFromSubaccount(amount: String, subaccount: Int, walletState: dydxWalletState) {
+        CosmoJavascript.shared.withdrawFromSubaccount(subaccount: subaccount, amount: amount) { result in
             var trackingData = [
                 "amount": "\(amount)",
                 "address": "\(String(describing: walletState.currentWallet?.cosmoAddress))"

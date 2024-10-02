@@ -60,7 +60,7 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
         callNativeClient(functionName: "deposit", params: [json], completion: completion)
     }
 
-    public func withdrawToSubaccount(subaccount: Int,
+    public func withdrawFromSubaccount(subaccount: Int,
                                     amount: String,
                                     completion: @escaping JavascriptCompletion) {
         let json = "{\"subaccountNumber\": \(subaccount),\"amount\": \"\(amount)\"}"
