@@ -72,6 +72,15 @@ public extension ThemeSettings {
     static var negativeColorLayer: ThemeColor.SemanticColor {
         shared.styleConfig.styles[negativeLayerStyleKey]?.layerColor ?? .colorRed
     }
+    
+    static func directionalColor(forValue value: Double?, isIncreasingPositive: Bool = true) -> ThemeColor.SemanticColor {
+        let value = value ?? 0
+        if isIncreasingPositive {
+            return value >= 0 ? positiveColor : negativeColor
+        } else {
+            return value > 0 ? negativeColor : positiveColor
+        }
+    }
 
 //    @available(*, deprecated, message: "use apply(theme: ThemeSettings.dydxThemeType) instead")
     static func applyLightTheme() {

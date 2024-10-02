@@ -46,7 +46,6 @@ private struct VaultDepositWithdrawView: View {
     private var radioButtonSelector: some View {
         RadioButtonGroup(selected: $viewModel.selectedTransferType,
                          options: options,
-                         buttonClipStyle: .capsule,
                          fontType: .plus,
                          fontSize: .larger,
                          itemWidth: nil,
