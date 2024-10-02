@@ -114,6 +114,30 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
             completion(result)
         }
     }
+    
+    public func getMegavaulOwnerShares(payload: String) async -> String? {
+        return await call(functionName: "getMegavaultOwnerShares", params: [payload])
+    }
+    
+    public func getMegavaultWithdrawalInfo(sharesToWithdraw: Double) async -> String? {
+        return await call(functionName: "getMegavaultWithdrawalInfo", params: [sharesToWithdraw])
+    }
+    
+    public func depositToMegavaulut(subaccountNumber: Double, amountUsdc: Double) async -> String? {
+        return await call(functionName: "depositToMegavault", params: [subaccountNumber, amountUsdc])
+    }
+    
+    public func withdrawFromMegavault(subaccountNumber: Double, shares: Double, minAmount: Double) async -> String? {
+        return await call(functionName: "withdrawFromMegavault", params: [subaccountNumber, shares, minAmount])
+    }
+    
+    public func call(functionName: String, params: [Any?]) async -> String? {
+        return await withCheckedContinuation { continuation in
+            self.callNativeClient(functionName: functionName, params: params) { result in
+                continuation.resume(returning: result as? String)
+            }
+        }
+    }
 
     public func getMegavaulOwnerShares(payload: String) async -> String? {
         return await call(functionName: "getMegavaultOwnerShares", params: [payload])
