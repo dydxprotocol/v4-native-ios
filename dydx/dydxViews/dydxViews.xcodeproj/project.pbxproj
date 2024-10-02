@@ -181,6 +181,7 @@
 		2769090E2AAFD8030075B2D6 /* TransferInstanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090D2AAFD8030075B2D6 /* TransferInstanceViewModel.swift */; };
 		276909102AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */; };
 		276AF8C72C4AE85A001DD695 /* dydxSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276AF8C62C4AE85A001DD695 /* dydxSliderView.swift */; };
+		277437792CACCA6A00F9A6B9 /* PlatformUI+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2774376C2CACCA6500F9A6B9 /* PlatformUI+Ext.swift */; };
 		277442972AD88C4900C91357 /* Satoshi-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 277442952AD88C4900C91357 /* Satoshi-Bold.otf */; };
 		277442982AD88C4900C91357 /* Satoshi-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 277442962AD88C4900C91357 /* Satoshi-Regular.otf */; };
 		27759F5C2B89125F002865A9 /* dydxInlineShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27759F5B2B89125F002865A9 /* dydxInlineShareView.swift */; };
@@ -568,6 +569,7 @@
 		2769090D2AAFD8030075B2D6 /* TransferInstanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferInstanceViewModel.swift; sourceTree = "<group>"; };
 		2769090F2AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewModel.swift; sourceTree = "<group>"; };
 		276AF8C62C4AE85A001DD695 /* dydxSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSliderView.swift; sourceTree = "<group>"; };
+		2774376C2CACCA6500F9A6B9 /* PlatformUI+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlatformUI+Ext.swift"; sourceTree = "<group>"; };
 		277442952AD88C4900C91357 /* Satoshi-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Bold.otf"; sourceTree = "<group>"; };
 		277442962AD88C4900C91357 /* Satoshi-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Regular.otf"; sourceTree = "<group>"; };
 		27759F5B2B89125F002865A9 /* dydxInlineShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxInlineShareView.swift; sourceTree = "<group>"; };
@@ -957,6 +959,7 @@
 				273F50152B7C3F120034792A /* SignedAmountView.swift */,
 				27D276222C519C98002775F2 /* dydxComponents */,
 				27EB25842C6D28BF008C187B /* SparklineChart.swift */,
+				2774376C2CACCA6500F9A6B9 /* PlatformUI+Ext.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -2242,6 +2245,7 @@
 				027CB28529EEFF760069781A /* dydxTransferStatusView.swift in Sources */,
 				026382E928F0EE6B00F766FA /* dydxMarketPriceCandlesTypesView.swift in Sources */,
 				0238FF162976432D002E1C1A /* TradeInputViewModifier.swift in Sources */,
+				277437792CACCA6A00F9A6B9 /* PlatformUI+Ext.swift in Sources */,
 				02FF0BCE29AE928700781EDA /* dydxWalletListView.swift in Sources */,
 				64A4DB61296620FF008D8E20 /* dydxTradeInputEditView.swift in Sources */,
 				02107A6B2979F4F5000D75E1 /* dydxReceiptMarginUsageView.swift in Sources */,
