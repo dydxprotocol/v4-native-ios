@@ -17,7 +17,7 @@ import PlatformRouting
 import dydxFormatter
 import Combine
 // import single class due to VaultTransferType collision
-import class Abacus.Subaccount
+import Abacus
 
 public class dydxVaultDepositWithdrawViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -49,6 +49,9 @@ private protocol dydxVaultDepositWithdrawViewPresenterProtocol: HostedViewPresen
 }
 
 private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVaultDepositWithdrawViewModel>, dydxVaultDepositWithdrawViewPresenterProtocol {
+    fileprivate var input = VaultTransferInput()
+    private var formValidationRequest: Task<Void, Never>?
+    
     override init() {
         super.init()
 
@@ -61,112 +64,193 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
         super.start()
         guard let viewModel = viewModel else { return }
 
-        Publishers.CombineLatest3(AbacusStateManager.shared.state.selectedSubaccount, viewModel.$amount, viewModel.$selectedTransferType)
-            .sink { [weak self] selectedSubaccount, amount, transferType in
-                self?.update(subaccount: selectedSubaccount, amount: amount ?? 0, transferType: transferType)
+        let inputPublisher = Publishers.CombineLatest(viewModel.$amount.removeDuplicates().debounce(for: 0.5, scheduler: RunLoop.main),
+                                                      viewModel.$selectedTransferType.compactMap({ $0 }).removeDuplicates())
+            .map({(amount: $0.0, transferType: $0.1)})
+        Publishers.CombineLatest4(AbacusStateManager.shared.state.selectedSubaccount,
+                                  AbacusStateManager.shared.state.vault.compactMap({ $0 }),
+                                  AbacusStateManager.shared.state.onboarded,
+                                  inputPublisher)
+            .sink { [weak self] (selectedSubaccount, vault, onboarded, input) in
+                self?.update(subaccount: selectedSubaccount, vault: vault, hasOnboarded: onboarded, amount: input.amount ?? 0, transferType: input.transferType)
             }
             .store(in: &subscriptions)
     }
 
     // TODO: replace with real data from abacus
-    func update(subaccount: Subaccount?, amount: Double, transferType: VaultTransferType) {
-        viewModel?.maxAmount = subaccount?.freeCollateral?.current?.doubleValue ?? 0
-
-        updateSubmitState(amount: amount)
-        updateReceiptItems(subaccount: subaccount, amount: amount, transferType: transferType)
-        updateSubmitAction(amount: amount, transferType: transferType)
-
-        viewModel?.inputInlineAlert = InlineAlertViewModel(InlineAlertViewModel.Config.init(title: "test alert",
-                                                                                            body: "test bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest bodytest body",
-                                                                                            level: .error))
-    }
-
-    private func updateSubmitState(amount: Double) {
-        if amount > 0 {
-            viewModel?.submitState = .enabled
-        } else {
-            viewModel?.submitState = .disabled
+    func update(subaccount: Subaccount?, vault: Abacus.Vault, hasOnboarded: Bool, amount: Double, transferType: dydxViews.VaultTransferType) {
+        guard let subaccount = subaccount else {
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+            return
         }
-    }
-
-    private func updateReceiptItems(subaccount: Subaccount?, amount: Double, transferType: VaultTransferType) {
-        guard let curVaultBalance = Optional(420.0),
-              let curFreeCollateral = subaccount?.freeCollateral?.current?.doubleValue,
-              let curMarginUsage = subaccount?.marginUsage?.current?.doubleValue
-        else { return }
-
-        var newInputReceiptChangeItems = [dydxReceiptChangeItemView]()
-        var newButtonReceiptChangeItems = [dydxReceiptChangeItemView]()
-
-        let preTransferVaultBalance = AmountTextModel(amount: curVaultBalance.asNsNumber)
-        let preTransferFreeCollateral = AmountTextModel(amount: curFreeCollateral.asNsNumber)
-        let preTransferMarginUsage = AmountTextModel(amount: curMarginUsage.asNsNumber)
-
-        let postTransferVaultBalance: AmountTextModel?
-        let postTransferFreeCollateral: AmountTextModel?
-        let postTransferMarginUsage: AmountTextModel?
-
-        if amount > 0 {
-            switch transferType {
-            case .deposit:
-                postTransferVaultBalance = AmountTextModel(amount: (curVaultBalance + amount).asNsNumber)
-                postTransferFreeCollateral = AmountTextModel(amount: (curFreeCollateral - amount).asNsNumber)
-                // TODO: this is wrong calculation
-                postTransferMarginUsage = AmountTextModel(amount: (curMarginUsage - amount).asNsNumber)
-            case .withdraw:
-                postTransferVaultBalance = AmountTextModel(amount: (curVaultBalance - amount).asNsNumber)
-                postTransferFreeCollateral = AmountTextModel(amount: (curFreeCollateral + amount).asNsNumber)
-                // TODO: this is wrong calculation
-                postTransferMarginUsage = AmountTextModel(amount: (curMarginUsage + amount).asNsNumber)
-            }
-        } else {
-            postTransferVaultBalance = nil
-            postTransferFreeCollateral = nil
-            postTransferMarginUsage = nil
-        }
-
-        let vaultBalanceReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.YOUR_VAULT_BALANCE"),
-                                                                    value: AmountChangeModel(before: preTransferVaultBalance, after: postTransferVaultBalance))
-        let freeCollateralReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.FREE_COLLATERAL"),
-                                                                    value: AmountChangeModel(before: preTransferFreeCollateral, after: postTransferFreeCollateral))
-        let marginUsageReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.MARGIN_USAGE"),
-                                                                    value: AmountChangeModel(before: preTransferMarginUsage, after: postTransferMarginUsage))
-
+        input.amount = amount
+        input.transferType = transferType
+        
         switch transferType {
         case .deposit:
-            newInputReceiptChangeItems.append(freeCollateralReceiptItem)
-            newButtonReceiptChangeItems.append(marginUsageReceiptItem)
-            newButtonReceiptChangeItems.append(vaultBalanceReceiptItem)
+            if let roundedFreeCollateral = subaccount.freeCollateral?.current?.doubleValue.round(to: 2) {
+                viewModel?.maxAmount = roundedFreeCollateral
+            }
         case .withdraw:
-            newInputReceiptChangeItems.append(vaultBalanceReceiptItem)
-            newButtonReceiptChangeItems.append(freeCollateralReceiptItem)
-            newButtonReceiptChangeItems.append(marginUsageReceiptItem)
+            if let roundedBalance = vault.account?.balanceUsdc?.doubleValue.round(to: 2) {
+                viewModel?.maxAmount = roundedBalance
+            }
         }
 
-//        newButtonReceiptChangeItems.append(dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.EST_SLIPPAGE"),
-//                                                         value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
-//                                                                      after: AmountTextModel(amount: 30.02))))
-
-//        newButtonReceiptChangeItems.append(dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.WITHDRAW_MODAL.EXPECTED_AMOUNT_RECEIVED"),
-//                                                         value: AmountChangeModel(before: AmountTextModel(amount: 30.01),
-//                                                                      after: AmountTextModel(amount: 30.02))))
-
-        viewModel?.inputReceiptChangeItems = newInputReceiptChangeItems
-        viewModel?.buttonReceiptChangeItems = newButtonReceiptChangeItems
+        formValidationRequest?.cancel()
+        formValidationRequest = Task {
+            let slippageResponseParsed: Abacus.OnChainVaultDepositWithdrawSlippageResponse?
+            
+            let accountData = Abacus.VaultFormAccountData(marginUsage: subaccount.marginUsage?.current,
+                                                          freeCollateral: subaccount.freeCollateral?.current,
+                                                          canViewAccount: hasOnboarded.asKotlinBoolean)
+            
+            let formData = VaultFormData(action: transferType.formAction,
+                                         amount: KotlinDouble(value: amount),
+                                         acknowledgedSlippage: false,
+                                         inConfirmationStep: false)
+            
+            let preSlippageDataForm = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(
+                formData: formData,
+                accountData: accountData,
+                vaultAccount: vault.account,
+                slippageResponse: nil)
+            
+            DispatchQueue.main.async { [weak self] in
+                print()
+                guard let self = self else { return }
+                self.update(subaccount: subaccount,
+                       vault: vault,
+                       hasOnboarded: hasOnboarded,
+                       amount: amount,
+                       transferType: transferType,
+                       form: preSlippageDataForm)
+            }
+            
+            fetchSlippageAndUpdateIfNecessary(formData: formData,
+                                              accountData: accountData,
+                                              subaccount: subaccount,
+                                              hasOnboarded: hasOnboarded,
+                                              vault: vault,
+                                              amount: amount,
+                                              transferType: transferType)
+        }
+    }
+    
+    private func fetchSlippageAndUpdateIfNecessary(formData: Abacus.VaultFormData,
+                                                   accountData: Abacus.VaultFormAccountData,
+                                                   subaccount: Abacus.Subaccount,
+                                                   hasOnboarded: Bool,
+                                                   vault: Abacus.Vault,
+                                                   amount: Double,
+                                                   transferType: dydxViews.VaultTransferType) {
+        formValidationRequest?.cancel()
+        guard transferType == .withdraw else { return }
+        formValidationRequest = Task {
+            let sharesToWithdraw = Abacus.VaultDepositWithdrawFormValidator.shared.calculateSharesToWithdraw(vaultAccount: vault.account, amount: amount)
+            let slippageApiResponse = await CosmoJavascript.shared.getMegavaultWithdrawalInfo(sharesToWithdraw: sharesToWithdraw)
+            let slippageResponseParsed = Abacus.VaultDepositWithdrawFormValidator.shared.getVaultDepositWithdrawSlippageResponse(apiResponse: slippageApiResponse ?? "")
+            let form = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(
+                formData: input.formData,
+                accountData: accountData,
+                vaultAccount: vault.account,
+                slippageResponse: slippageResponseParsed)
+            
+            DispatchQueue.main.async { [weak self] in
+                print()
+                guard let self = self else { return }
+                self.update(subaccount: subaccount,
+                       vault: vault,
+                       hasOnboarded: hasOnboarded,
+                       amount: amount,
+                       transferType: transferType,
+                       form: form)
+            }
+        }
+    }
+    
+    private func update(subaccount: Subaccount?, vault: Abacus.Vault, hasOnboarded: Bool, amount: Double, transferType: dydxViews.VaultTransferType, form: VaultFormValidationResult) {
+        guard let subaccount = subaccount else {
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+            return
+        }
+        updateMaxAmount(subaccount: subaccount, vault: vault, transferType: transferType)
+        updateSubmitState(form: form)
+        updateReceiptItems(form: form, subaccount: subaccount, vault: vault, amount: amount, transferType: transferType)
+        updateSubmitAction(amount: amount, transferType: transferType)
+        updateErrorAlert(form: form)
+    }
+    
+    private func updateMaxAmount(subaccount: Abacus.Subaccount, vault: Abacus.Vault?, transferType: dydxViews.VaultTransferType) {
+        switch transferType {
+        case .deposit:
+            if let roundedFreeCollateral = subaccount.freeCollateral?.current?.doubleValue.round(to: 2) {
+                viewModel?.maxAmount = roundedFreeCollateral
+            }
+        case .withdraw:
+            if let roundedBalance = vault?.account?.balanceUsdc?.doubleValue.round(to: 2) {
+                viewModel?.maxAmount = roundedBalance
+            }
+        }
     }
 
-    private func updateSubmitAction(amount: Double, transferType: VaultTransferType) {
+    private func updateSubmitState(form: VaultFormValidationResult) {
+        form.errors.forEach { print($0) }
+        viewModel?.submitState = form.errors.isEmpty ? .enabled : .disabled
+    }
+
+    private func updateReceiptItems(form: VaultFormValidationResult, subaccount: Abacus.Subaccount, vault: Abacus.Vault, amount: Double, transferType: dydxViews.VaultTransferType) {
+        viewModel?.curVaultBalance = vault.account?.balanceUsdc?.doubleValue ?? 0
+        viewModel?.curFreeCollateral = subaccount.freeCollateral?.current?.doubleValue ?? 0
+        viewModel?.curMarginUsage = subaccount.marginUsage?.current?.doubleValue ?? 0
+        
+        viewModel?.postVaultBalance = viewModel?.curVaultBalance == form.summaryData.vaultBalance?.doubleValue ? nil : form.summaryData.vaultBalance?.doubleValue
+        viewModel?.postFreeCollateral = viewModel?.curFreeCollateral == form.summaryData.freeCollateral?.doubleValue ? nil : form.summaryData.freeCollateral?.doubleValue
+        viewModel?.postMarginUsage = viewModel?.curMarginUsage == form.summaryData.marginUsage?.doubleValue ? nil : form.summaryData.marginUsage?.doubleValue
+    }
+
+    private func updateSubmitAction(amount: Double, transferType: dydxViews.VaultTransferType) {
         viewModel?.submitAction = {
             Router.shared?.navigate(to: RoutingRequest(path: transferType.confirmScreenPath, params: ["amount": amount]), animated: true, completion: nil)
         }
     }
+    
+    private func updateErrorAlert(form: VaultFormValidationResult) {
+        guard let error = form.errors.first else {
+            viewModel?.inputInlineAlert = nil
+            return
+        }
+        viewModel?.inputInlineAlert = InlineAlertViewModel(.init(title: error.resources.title?.localizedString, body: error.resources.text?.localizedString, level: .error))
+    }
 }
 
-private extension VaultTransferType {
+private extension dydxViews.VaultTransferType {
     var confirmScreenPath: String {
         switch self {
         case .deposit: return "/vault/deposit_confirm"
         case .withdraw: return "/vault/withdraw_confirm"
         }
+    }
+    
+    var formAction: Abacus.VaultFormAction {
+        switch self {
+        case .deposit: return .deposit
+        case .withdraw: return .withdraw
+        }
+    }
+}
+
+// wrapper of Abacus.VaultFormData
+private class VaultTransferInput {
+    var transferType: dydxViews.VaultTransferType = .deposit
+    var amount: Double = 0
+    let acknowledgedSlippage: Bool = false
+    let inConfirmationStep: Bool = false
+    
+    var formData: Abacus.VaultFormData {
+        VaultFormData(action: transferType.formAction,
+                        amount: KotlinDouble(value: amount),
+                        acknowledgedSlippage: acknowledgedSlippage,
+                        inConfirmationStep: inConfirmationStep)
     }
 }
