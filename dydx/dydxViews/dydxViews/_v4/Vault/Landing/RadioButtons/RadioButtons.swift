@@ -54,6 +54,11 @@ struct RadioButton: View {
     let width: CGFloat?
     let height: CGFloat?
     let selectionAction: () -> Void
+    
+    var padding: CGFloat {
+        let lineHeight = ThemeSettings.shared.themeConfig.themeFont.uiFont(of: fontType, fontSize: fontSize)?.lineHeight ?? 0
+        return lineHeight / 2.0
+    }
 
     private var verticalSpacer: some View {
         Spacer(minLength: 11)
@@ -68,12 +73,12 @@ struct RadioButton: View {
             .lineLimit(1)
             .themeColor(foreground: isSelected ? .textPrimary : .textTertiary)
             .themeFont(fontType: fontType, fontSize: fontSize)
+            .frame(width: width, height: height)
             .fixedSize(horizontal: true, vertical: false)
-            .frame(minWidth: width, maxWidth: width ?? .infinity, minHeight: height, maxHeight: height ?? .infinity)
             // if width is specified, i.e. non-nil, setting horizontal inset to 0 will allow entire space to be used horizontally
-            .padding(.horizontal, width == nil ? 8 : 0)
+            .padding(.horizontal, width == nil ? padding : 0)
             // if height is specified, i.e. non-nil, setting vertical inset to 0 will allow entire space to be used horizontally
-            .padding(.vertical, height == nil ? 8 : 0)
+            .padding(.vertical, height == nil ? padding : 0)
             .themeColor(background: isSelected ? .layer1 : .layer3)
             .borderAndClip(style: .capsule, borderColor: .borderDefault)
             .onTapGesture {
