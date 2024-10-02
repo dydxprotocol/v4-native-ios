@@ -29,7 +29,7 @@ public class dydxVaultDepositWithdrawViewBuilder: NSObject, ObjectBuilderProtoco
 }
 
 private class dydxVaultDepositWithdrawViewController: HostingViewController<PlatformView, dydxVaultDepositWithdrawViewModel> {
-
+    
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         let presenter = presenter as? dydxVaultDepositWithdrawViewPresenterProtocol
         if request?.path == "/vault/deposit" {
@@ -49,21 +49,20 @@ private protocol dydxVaultDepositWithdrawViewPresenterProtocol: HostedViewPresen
 }
 
 private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVaultDepositWithdrawViewModel>, dydxVaultDepositWithdrawViewPresenterProtocol {
-    fileprivate var input = VaultTransferInput()
     private var formValidationRequest: Task<Void, Never>?
     
     override init() {
         super.init()
-
+        
         let viewModel = dydxVaultDepositWithdrawViewModel()
-
+        
         self.viewModel = viewModel
     }
-
+    
     override func start() {
         super.start()
         guard let viewModel = viewModel else { return }
-
+        
         let inputPublisher = Publishers.CombineLatest(viewModel.$amount.removeDuplicates().debounce(for: 0.5, scheduler: RunLoop.main),
                                                       viewModel.$selectedTransferType.compactMap({ $0 }).removeDuplicates())
             .map({(amount: $0.0, transferType: $0.1)})
@@ -71,87 +70,75 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
                                   AbacusStateManager.shared.state.vault.compactMap({ $0 }),
                                   AbacusStateManager.shared.state.onboarded,
                                   inputPublisher)
-            .sink { [weak self] (selectedSubaccount, vault, onboarded, input) in
-                self?.update(subaccount: selectedSubaccount, vault: vault, hasOnboarded: onboarded, amount: input.amount ?? 0, transferType: input.transferType)
-            }
-            .store(in: &subscriptions)
+        .throttle(for: 1, scheduler: RunLoop.main, latest: true)
+        .sink { [weak self] (selectedSubaccount, vault, onboarded, input) in
+            self?.update(subaccount: selectedSubaccount, vault: vault, hasOnboarded: onboarded, amount: input.amount ?? 0, transferType: input.transferType)
+        }
+        .store(in: &subscriptions)
     }
-
-    // TODO: replace with real data from abacus
+    
     func update(subaccount: Subaccount?, vault: Abacus.Vault, hasOnboarded: Bool, amount: Double, transferType: dydxViews.VaultTransferType) {
+        formValidationRequest?.cancel()
+        
         guard let subaccount = subaccount else {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
             return
         }
-        input.amount = amount
-        input.transferType = transferType
+                
+        let accountData = Abacus.VaultFormAccountData(marginUsage: subaccount.marginUsage?.current,
+                                                      freeCollateral: subaccount.freeCollateral?.current,
+                                                      canViewAccount: hasOnboarded.asKotlinBoolean)
         
-        switch transferType {
-        case .deposit:
-            if let roundedFreeCollateral = subaccount.freeCollateral?.current?.doubleValue.round(to: 2) {
-                viewModel?.maxAmount = roundedFreeCollateral
-            }
-        case .withdraw:
-            if let roundedBalance = vault.account?.balanceUsdc?.doubleValue.round(to: 2) {
-                viewModel?.maxAmount = roundedBalance
+        let formData = VaultFormData(action: transferType.formAction,
+                                     amount: KotlinDouble(value: amount),
+                                     acknowledgedSlippage: false,
+                                     inConfirmationStep: false)
+        
+        let preSlippageDataForm = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(
+            formData: formData,
+            accountData: accountData,
+            vaultAccount: vault.account,
+            slippageResponse: nil)
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.update(subaccount: subaccount,
+                        vault: vault,
+                        hasOnboarded: hasOnboarded,
+                        amount: amount,
+                        transferType: transferType,
+                        form: preSlippageDataForm)
+            if transferType == .withdraw {
+                formValidationRequest = Task {
+                    self.fetchSlippageAndUpdate(formData: formData,
+                                                accountData: accountData,
+                                                subaccount: subaccount,
+                                                hasOnboarded: hasOnboarded,
+                                                vault: vault,
+                                                amount: amount,
+                                                transferType: transferType
+                    )
+                }
             }
         }
-
-        formValidationRequest?.cancel()
-        formValidationRequest = Task {
-            let slippageResponseParsed: Abacus.OnChainVaultDepositWithdrawSlippageResponse?
-            
-            let accountData = Abacus.VaultFormAccountData(marginUsage: subaccount.marginUsage?.current,
-                                                          freeCollateral: subaccount.freeCollateral?.current,
-                                                          canViewAccount: hasOnboarded.asKotlinBoolean)
-            
-            let formData = VaultFormData(action: transferType.formAction,
-                                         amount: KotlinDouble(value: amount),
-                                         acknowledgedSlippage: false,
-                                         inConfirmationStep: false)
-            
-            let preSlippageDataForm = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(
-                formData: formData,
-                accountData: accountData,
-                vaultAccount: vault.account,
-                slippageResponse: nil)
-            
-            DispatchQueue.main.async { [weak self] in
-                print()
-                guard let self = self else { return }
-                self.update(subaccount: subaccount,
-                       vault: vault,
-                       hasOnboarded: hasOnboarded,
-                       amount: amount,
-                       transferType: transferType,
-                       form: preSlippageDataForm)
-            }
-            
-            fetchSlippageAndUpdateIfNecessary(formData: formData,
-                                              accountData: accountData,
-                                              subaccount: subaccount,
-                                              hasOnboarded: hasOnboarded,
-                                              vault: vault,
-                                              amount: amount,
-                                              transferType: transferType)
-        }
+        
     }
     
-    private func fetchSlippageAndUpdateIfNecessary(formData: Abacus.VaultFormData,
-                                                   accountData: Abacus.VaultFormAccountData,
-                                                   subaccount: Abacus.Subaccount,
-                                                   hasOnboarded: Bool,
-                                                   vault: Abacus.Vault,
-                                                   amount: Double,
-                                                   transferType: dydxViews.VaultTransferType) {
-        formValidationRequest?.cancel()
-        guard transferType == .withdraw else { return }
+    /// only necessary for withdrawals
+    private func fetchSlippageAndUpdate(formData: Abacus.VaultFormData,
+                                        accountData: Abacus.VaultFormAccountData,
+                                        subaccount: Abacus.Subaccount,
+                                        hasOnboarded: Bool,
+                                        vault: Abacus.Vault,
+                                        amount: Double,
+                                        transferType: dydxViews.VaultTransferType
+    ) {
         formValidationRequest = Task {
             let sharesToWithdraw = Abacus.VaultDepositWithdrawFormValidator.shared.calculateSharesToWithdraw(vaultAccount: vault.account, amount: amount)
             let slippageApiResponse = await CosmoJavascript.shared.getMegavaultWithdrawalInfo(sharesToWithdraw: sharesToWithdraw)
             let slippageResponseParsed = Abacus.VaultDepositWithdrawFormValidator.shared.getVaultDepositWithdrawSlippageResponse(apiResponse: slippageApiResponse ?? "")
             let form = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(
-                formData: input.formData,
+                formData: formData,
                 accountData: accountData,
                 vaultAccount: vault.account,
                 slippageResponse: slippageResponseParsed)
@@ -160,11 +147,11 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
                 print()
                 guard let self = self else { return }
                 self.update(subaccount: subaccount,
-                       vault: vault,
-                       hasOnboarded: hasOnboarded,
-                       amount: amount,
-                       transferType: transferType,
-                       form: form)
+                            vault: vault,
+                            hasOnboarded: hasOnboarded,
+                            amount: amount,
+                            transferType: transferType,
+                            form: form)
             }
         }
     }
@@ -193,12 +180,12 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
             }
         }
     }
-
+    
     private func updateSubmitState(form: VaultFormValidationResult) {
         form.errors.forEach { print($0) }
         viewModel?.submitState = form.errors.isEmpty ? .enabled : .disabled
     }
-
+    
     private func updateReceiptItems(form: VaultFormValidationResult, subaccount: Abacus.Subaccount, vault: Abacus.Vault, amount: Double, transferType: dydxViews.VaultTransferType) {
         viewModel?.curVaultBalance = vault.account?.balanceUsdc?.doubleValue ?? 0
         viewModel?.curFreeCollateral = subaccount.freeCollateral?.current?.doubleValue ?? 0
@@ -208,7 +195,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
         viewModel?.postFreeCollateral = viewModel?.curFreeCollateral == form.summaryData.freeCollateral?.doubleValue ? nil : form.summaryData.freeCollateral?.doubleValue
         viewModel?.postMarginUsage = viewModel?.curMarginUsage == form.summaryData.marginUsage?.doubleValue ? nil : form.summaryData.marginUsage?.doubleValue
     }
-
+    
     private func updateSubmitAction(amount: Double, transferType: dydxViews.VaultTransferType) {
         viewModel?.submitAction = {
             Router.shared?.navigate(to: RoutingRequest(path: transferType.confirmScreenPath, params: ["amount": amount]), animated: true, completion: nil)
@@ -237,20 +224,5 @@ private extension dydxViews.VaultTransferType {
         case .deposit: return .deposit
         case .withdraw: return .withdraw
         }
-    }
-}
-
-// wrapper of Abacus.VaultFormData
-private class VaultTransferInput {
-    var transferType: dydxViews.VaultTransferType = .deposit
-    var amount: Double = 0
-    let acknowledgedSlippage: Bool = false
-    let inConfirmationStep: Bool = false
-    
-    var formData: Abacus.VaultFormData {
-        VaultFormData(action: transferType.formAction,
-                        amount: KotlinDouble(value: amount),
-                        acknowledgedSlippage: acknowledgedSlippage,
-                        inConfirmationStep: inConfirmationStep)
     }
 }
