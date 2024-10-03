@@ -15,7 +15,7 @@ public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
         case enabled
         case disabled
     }
-
+    
     @Published public var submitState: State = .disabled
     @Published public var submitAction: (() -> Void)?
 
