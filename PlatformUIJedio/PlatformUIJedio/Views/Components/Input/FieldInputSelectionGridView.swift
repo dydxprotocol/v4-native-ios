@@ -16,9 +16,9 @@ public class FieldInputSelectionGridViewModel: FieldInputBaseViewModel {
         var value: String
         var selected: Bool
     }
-    
+
     private var options: [Option] {
-        input?.fieldInput?.options?.compactMap { (dict: [String : Any]) in
+        input?.fieldInput?.options?.compactMap { (dict: [String: Any]) in
             if let text = dict["text"] as? String,
                 let value = dict["value"] as? String {
                 if selectedValue == value || (selectedValue == nil && value == "<null>") {
@@ -31,15 +31,15 @@ public class FieldInputSelectionGridViewModel: FieldInputBaseViewModel {
             }
         } ?? []
     }
-    
+
     private var optionValues: [String] {
-        input?.fieldInput?.options?.compactMap { (dict: [String : Any]) in
+        input?.fieldInput?.options?.compactMap { (dict: [String: Any]) in
             dict["value"] as? String
         } ?? []
     }
-    
+
     private var optionTexts: [(String, Bool)] {
-        input?.fieldInput?.options?.compactMap { (dict: [String : Any]) in
+        input?.fieldInput?.options?.compactMap { (dict: [String: Any]) in
             if let text = dict["text"] as? String, let value = dict["value"] as? String {
                 if selectedValue == value || (selectedValue == nil && value == "<null>") {
                     return (text, true)
@@ -51,20 +51,20 @@ public class FieldInputSelectionGridViewModel: FieldInputBaseViewModel {
             }
         } ?? []
     }
-    
+
     private var selectedValue: String? {
         input?.value as? String
     }
-    
+
     public static var previewValue: FieldInputSelectionGridViewModel {
         let vm = FieldInputSelectionGridViewModel()
         return vm
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            
+
             let columns = [GridItem(), GridItem()]
             return AnyView(
                 VStack(alignment: .leading) {
@@ -79,7 +79,7 @@ public class FieldInputSelectionGridViewModel: FieldInputBaseViewModel {
                                     .padding()
                                     .frame(maxWidth: .infinity)
                                     .themeColor(background: color)
-                                
+
                                 if option.selected {
                                     PlatformIconViewModel(type: .system(name: "checkmark"), size: CGSize(width: 8, height: 8))
                                         .createView(parentStyle: style)
@@ -131,4 +131,3 @@ struct FieldInputSelectionGridView_Previews_Light: PreviewProvider {
     }
 }
 #endif
-

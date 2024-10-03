@@ -210,9 +210,8 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 ctaButtonPresenter.viewModel?.ctaButtonState = .enabled(DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_MARGIN", params: nil) ?? "")
             case .remove:
                 ctaButtonPresenter.viewModel?.ctaButtonState = .enabled(DataLocalizer.shared?.localize(path: "APP.TRADE.REMOVE_MARGIN", params: nil) ?? "")
-            default:
+                default:
                 assertionFailure("no margin direction")
-                break
             }
             viewModel?.inlineAlert = nil
         }

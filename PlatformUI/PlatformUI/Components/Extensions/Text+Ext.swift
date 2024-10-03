@@ -13,4 +13,3 @@ public extension Text {
         self = Text(DataLocalizer.shared?.localize(path: localizerPathKey, params: params) ?? "")
     }
 }
-

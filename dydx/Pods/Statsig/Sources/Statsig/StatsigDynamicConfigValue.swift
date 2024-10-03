@@ -18,8 +18,7 @@ extension String: StatsigDynamicConfigValue {}
 
 extension String?: StatsigDynamicConfigValue {}
 
-
-fileprivate struct TypeString {
+private struct TypeString {
     static let boolean = "boolean"
     static let number = "number"
     static let string = "string"
@@ -43,5 +42,3 @@ func getTypeOf<T: StatsigDynamicConfigValue>(_ value: T) -> String? {
          return nil
      }
 }
-
-

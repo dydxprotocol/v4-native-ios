@@ -1,6 +1,5 @@
 import Foundation
 
-
 class Event {
     let name: String
     let value: Any?
@@ -102,7 +101,7 @@ class Event {
     ) -> Event {
         var metadata = [
             "config": configName,
-            "ruleID": ruleID,
+            "ruleID": ruleID
         ]
 
         evalDetails.addToDictionary(&metadata)
@@ -163,9 +162,7 @@ class Event {
             "metadata": metadataForLogging,
             "statsigMetadata": statsigMetadata,
             "secondaryExposures": secondaryExposures,
-            "allocatedExperimentHash": allocatedExperimentHash,
+            "allocatedExperimentHash": allocatedExperimentHash
         ].compactMapValues { $0 }
     }
 }
-
-

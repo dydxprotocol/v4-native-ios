@@ -20,7 +20,7 @@ import Utilities
     }
 
     open func didSetEntity(oldValue: ModelObjectProtocol?) {
-        changeObservation(from: oldValue, to: entity, keyPath: #keyPath(DictionaryEntity.data)) { [weak self] _, _, _, animated in
+        changeObservation(from: oldValue, to: entity, keyPath: #keyPath(DictionaryEntity.data)) { [weak self] _, _, _, _ in
             self?.save()
         }
     }

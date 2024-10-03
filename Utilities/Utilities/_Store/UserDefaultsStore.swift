@@ -9,7 +9,7 @@
 import Foundation
 
 open class UserDefaultsStore: KeyValueStoreProtocol {
-    public var dictionary: [String : Any]? {
+    public var dictionary: [String: Any]? {
         didSet {
             var keys = Set<String>()
             dictionary?.keys.forEach { key in
@@ -23,18 +23,18 @@ open class UserDefaultsStore: KeyValueStoreProtocol {
             }
         }
     }
-    
+
     private let userDefaults: UserDefaults
-    
+
     public init(tag: String) {
         userDefaults = UserDefaults(suiteName: tag) ?? UserDefaults.standard
         dictionary = userDefaults.dictionaryRepresentation()
     }
-    
+
     public func value(forKey key: String) -> Any? {
         userDefaults.value(forKey: key)
     }
-    
+
     public func setValue(_ value: Any?, forKey key: String) {
         if let value = value {
             userDefaults.set(value, forKey: key)
@@ -44,7 +44,7 @@ open class UserDefaultsStore: KeyValueStoreProtocol {
             dictionary?.removeValue(forKey: key)
         }
     }
-    
+
     public func reset() {
         let dictionary = userDefaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in

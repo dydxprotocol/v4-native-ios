@@ -97,11 +97,11 @@ public extension NSNumber {
     @objc func positiveOrZero() -> Bool {
         return doubleValue >= 0.0
     }
-    
+
     @objc func negative() -> NSNumber {
         return NSNumber(value: doubleValue * -1.0)
     }
-    
+
     @objc func floor(_ minimum: Double) -> NSNumber {
         if doubleValue >= minimum {
             return self
@@ -119,7 +119,7 @@ public extension NSDecimalNumber {
     override func positiveOrZero() -> Bool {
         return decimalValue >= 0.0
     }
-    
+
     convenience init?(decimal: Decimal?) {
         if let decimal = decimal {
             self.init(decimal: decimal)

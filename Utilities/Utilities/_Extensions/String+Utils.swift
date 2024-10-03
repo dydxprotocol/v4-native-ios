@@ -20,7 +20,7 @@ extension String {
     public func encodeUrl() -> String? {
         return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     }
-    
+
     public func decodeUrl() -> String? {
         return removingPercentEncoding
     }
@@ -36,7 +36,7 @@ extension String {
     public var hasText: Bool {
         return self != ""
     }
-    
+
     public var isNotEmpty: Bool {
         !isEmpty
     }
@@ -140,7 +140,7 @@ extension String {
         }
         return input
     }
-    
+
     private func removingNegation() -> String {
         var input = self
         let isNegative = input.first == "-"
@@ -149,51 +149,51 @@ extension String {
         }
         return input
     }
-    
+
     private func isValidNumberForParsing() -> Bool {
         NumberFormatter().number(from: self) != nil
     }
-    
+
     /// returns the string as a whole number, truncated (round towards 0)
     /// - Returns: the string as a whole number, truncated
     public func truncateToWholeNumber() -> String? {
         guard self.isValidNumberForParsing() || self == "-" else { return nil }
 
         let decimalSeparator = Locale.current.decimalSeparator ?? "."
-        
+
         var input = self
-        
+
         let isNegative = input.first == "-"
         input = input.removingNegation()
-        
+
         input = input.removingPrefixZeros()
-        
+
         if let range = input.range(of: decimalSeparator) {
             input = String(input[startIndex..<range.lowerBound])
         }
-        
+
         return isNegative ? "-" + input : input
     }
-    
+
     /// Returns the string as a decimal number. Supports trailing decimal and trailing zeros
     /// - Parameter shouldTreatEmptyStringAsZero: If true, empty string will evaluate to "0" instead of ""
     /// - Returns: the string as a decimal number
     public func cleanAsDecimalNumber() -> String? {
         let decimalSeparator = Locale.current.decimalSeparator ?? "."
         guard self.isValidNumberForParsing() || self == decimalSeparator || self == "-" || self == "-\(decimalSeparator)" else { return nil }
-        
+
         var input = self
-        
+
         let isNegative = input.first == "-"
         input = input.removingNegation()
-        
+
         // If the input string starts with a decimal separator, return "0."
         if input.hasPrefix(decimalSeparator) {
             input = "0" + input
         }
-        
+
         input = input.removingPrefixZeros()
-        
+
         return isNegative ? "-" + input : input
     }
 }
@@ -330,7 +330,7 @@ public extension String {
             return nil
         }
     }
-    
+
     func substring(with: NSRange) -> String {
         let startIndex = with.lowerBound
         let endIndex = with.upperBound
@@ -435,7 +435,7 @@ extension String {
             return self
         }
     }
-    
+
     public func prefix(_ with: String, length: Int) -> String {
         if self.length < length {
             return "\(with)\(self)".prefix(with, length: length)
@@ -443,7 +443,7 @@ extension String {
             return self
         }
     }
-    
+
     public func removeTrailing(_ removing: String) -> String {
         if self.ends(with: removing) {
             return self.substring(toIndex: self.length - removing.length).removeTrailing(removing)
@@ -467,7 +467,7 @@ extension [String: Any] {
         guard let json = try? JSONSerialization.data(withJSONObject: self) else {
             return nil
         }
-        
+
         return String(data: json, encoding: .utf8)
     }
 }

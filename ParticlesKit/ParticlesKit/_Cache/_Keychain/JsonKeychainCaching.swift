@@ -11,7 +11,7 @@ import Utilities
 
 open class JsonKeychainCaching: NSObject, JsonCachingProtocol {
     @objc public dynamic var isLoading: Bool = false
-    
+
     private static let keychain = A0SimpleKeychain()
     public var priority: Int = 0
 

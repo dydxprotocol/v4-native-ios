@@ -24,8 +24,8 @@ public class LocalAuthenticator: NSObject {
 }
 
 open class TimedLocalAuthenticator: NSObject, LocalAuthenticatorProtocol, CombineObserving {
-    public var cancellableMap = [AnyKeyPath : AnyCancellable]()
-    
+    public var cancellableMap = [AnyKeyPath: AnyCancellable]()
+
     public var paused: Bool = false {
         didSet {
             if paused {
@@ -53,7 +53,7 @@ open class TimedLocalAuthenticator: NSObject, LocalAuthenticatorProtocol, Combin
     }
 
     private func didSetAppState(oldValue: AppState?) {
-        changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) {[weak self] observer, obj, change, animated in
+        changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) {[weak self] _, _, _, _ in
             self?.background = self?.appState?.background ?? false
         }
     }

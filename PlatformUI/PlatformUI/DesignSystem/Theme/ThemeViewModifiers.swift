@@ -15,13 +15,13 @@ public extension View {
     func themeColor(foreground: ThemeColor.SemanticColor) -> some View {
         modifier(TextColorModifier(textColor: foreground))
     }
-    
+
     func themeColor(background: ThemeColor.SemanticColor) -> some View {
         modifier(BackgroundColorModifier(layerColor: background))
     }
-    
-    func themeGradient(background: ThemeColor.SemanticColor, 
-                       gradientColor: Color, 
+
+    func themeGradient(background: ThemeColor.SemanticColor,
+                       gradientColor: Color,
                        intensityLayerColor: Double = 0.95,
                        intensityGradientColor: Double = 0.05) -> some View {
         modifier(GradientColorModifier(layerColor: background,
@@ -39,9 +39,9 @@ public extension Text {
 
 private struct TextColorModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
-    
+
     let textColor: ThemeColor.SemanticColor
-  
+
     func body(content: Content) -> some View {
         content
             .foregroundColor(themeSettings.themeConfig.themeColor.color(of: textColor))
@@ -50,9 +50,9 @@ private struct TextColorModifier: ViewModifier {
 
 private struct BackgroundColorModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
-    
+
     let layerColor: ThemeColor.SemanticColor
-    
+
     func body(content: Content) -> some View {
         content
             .background(themeSettings.themeConfig.themeColor.color(of: layerColor))
@@ -61,29 +61,29 @@ private struct BackgroundColorModifier: ViewModifier {
 
 private struct GradientColorModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
-    
+
     let layerColor: ThemeColor.SemanticColor
     let gradientColor: Color
     let intensityLayerColor: Double
     let intensityGradientColor: Double
-    
+
     fileprivate init(layerColor: ThemeColor.SemanticColor, gradientColor: Color, intensityLayerColor: Double = 0.95, intensityGradientColor: Double = 0.05) {
         self.layerColor = layerColor
         self.gradientColor = gradientColor
         self.intensityLayerColor = intensityLayerColor
         self.intensityGradientColor = intensityGradientColor
     }
-    
+
     func body(content: Content) -> some View {
         let layerColor = themeSettings.themeConfig.themeColor.color(of: layerColor)
         let blendedColor = Color(UIColor.blend(color1: UIColor(layerColor), intensity1: intensityLayerColor, color2: UIColor(gradientColor), intensity2: intensityGradientColor))
-        
+
         let gradient = LinearGradient(
             gradient: Gradient(colors: [
                 layerColor,
                 blendedColor]),
             startPoint: .leading, endPoint: .trailing)
-        
+
         content
             .background(gradient)
     }
@@ -97,7 +97,7 @@ public extension Image {
     init(themedImageBaseName: String, bundle: Bundle, themeSettings: ThemeSettings = ThemeSettings.shared) {
         self.init(themedImageBaseName + "_" + "\(themeSettings.themeConfig.id)", bundle: bundle)
     }
-    
+
     func templateColor(_ foreground: ThemeColor.SemanticColor?) -> some View {
         if let foreground = foreground {
             return AnyView(self.renderingMode(.template).themeColor(foreground: foreground))
@@ -126,10 +126,10 @@ public extension View {
 
 private struct ThemeFontModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
-    
+
     let fontType: ThemeFont.FontType
     let fontSize: ThemeFont.FontSize
-    
+
     func body(content: Content) -> some View {
         content
             .font(themeSettings.themeConfig.themeFont.font(of: fontType, fontSize: fontSize))
@@ -148,7 +148,7 @@ public extension View {
     func themeStyle(style: ThemeStyle) -> some View {
         modifier(StyleModifier(style: style))
     }
-    
+
     func themeStyle(styleKey: String, parentStyle: ThemeStyle) -> some View {
         modifier(StyleKeyModifier(styleKey: styleKey, parentStyle: parentStyle))
     }
@@ -156,9 +156,9 @@ public extension View {
 
 private struct StyleModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
-    
+
     let style: ThemeStyle
-    
+
     func body(content: Content) -> some View {
         if let fontType = style.fontType, let fontSize = style.fontSize, let textColor = style.textColor, let layerColor = style.layerColor {
             content
@@ -174,10 +174,10 @@ private struct StyleModifier: ViewModifier {
 
 private struct StyleKeyModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
-    
+
     let styleKey: String
     let parentStyle: ThemeStyle
-    
+
     func body(content: Content) -> some View {
         if let style = themeSettings.styleConfig.styles[styleKey] {
             content
@@ -207,16 +207,16 @@ public extension View {
 private struct SheetViewModifier: ViewModifier {
     let topPadding: CGFloat = 18
     let sheetStyle: MakeSheetStyle
-    
+
     @EnvironmentObject var themeSettings: ThemeSettings
-     
+
     func body(content: Content) -> some View {
         let dragIndicator = Rectangle()
             .themeColor(background: .layer1)
             .frame(width: 36, height: 4)
             .clipShape(Capsule())
             .padding(.top, topPadding)
-        
+
         switch sheetStyle {
         case .fullScreen:
             return AnyView(
@@ -246,7 +246,7 @@ private struct SheetViewModifier: ViewModifier {
                     .environmentObject(themeSettings)
                 }
             )
-            
+
         case .forPresentedOverCurrentScreen:
             return ZStack(alignment: .bottom) {
                 ThemeColor.SemanticColor.layer0.color
@@ -274,9 +274,9 @@ public extension View {
 private struct ButtonViewModifier: ViewModifier {
     let style: ThemeStyle
     let action: (() -> Void)
-    
+
     @EnvironmentObject var themeSettings: ThemeSettings
-     
+
     func body(content: Content) -> some View {
         PlatformButtonViewModel(content: content.wrappedViewModel, type: .iconType) {
             action()
@@ -310,7 +310,7 @@ public extension View {
     func border(borderWidth: CGFloat = 1, cornerRadius: CGFloat = 0, borderColor: Color? = ThemeColor.SemanticColor.layer5.color) -> some View {
         modifier(BorderModifier(cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor))
     }
-    
+
     func borderAndClip(style: ClipStyle, borderColor: ThemeColor.SemanticColor, lineWidth: CGFloat = 1) -> some View {
         modifier(BorderAndClipModifier(style: style, borderColor: borderColor, lineWidth: lineWidth))
     }
@@ -353,14 +353,13 @@ private struct BorderAndClipModifier: ViewModifier {
     }
 }
 
-
 private struct BorderModifier: ViewModifier {
     var cornerRadius: CGFloat = .infinity
     var borderWidth: CGFloat = 1
     var borderColor: Color? = ThemeColor.SemanticColor.layer5.color
 
     @EnvironmentObject var themeSettings: ThemeSettings
-     
+
     func body(content: Content) -> some View {
         content
             .clipShape(.rect(cornerRadius: cornerRadius))
@@ -372,7 +371,6 @@ private struct BorderModifier: ViewModifier {
             .environmentObject(themeSettings)
     }
 }
-
 
 // MARK: List
 
@@ -496,7 +494,7 @@ public extension View {
 
 private struct NavigationViewEmbeddedModifier: ViewModifier {
     let backgroundColor: Color?
-    
+
     func body(content: Content) -> some View {
         NavigationView {
             if let backgroundColor = backgroundColor {
@@ -524,7 +522,7 @@ public extension View {
 private struct CircleBackgroundModifier: ViewModifier {
     let size: CGSize
     let color: ThemeColor.SemanticColor
-    
+
     func body(content: Content) -> some View {
         ZStack {
             content
@@ -562,7 +560,7 @@ public extension AttributedString {
         }
         return string
     }
-    
+
     /// Applies a foreground color to the attributed string.
     /// - Parameters:
     ///   - foreground: the color to apply
@@ -576,7 +574,7 @@ public extension AttributedString {
         }
         return string
     }
-    
+
     func dottedUnderline(foreground: ThemeColor.SemanticColor, for range: Range<AttributedString.Index>? = nil) -> Self {
         var string = self
         let range = range ?? string.startIndex..<string.endIndex
@@ -594,7 +592,7 @@ public extension View {
         if let keyboardToolbarContent = keyboardToolbarContent {
             return modifier(KeyboardAccessoryModifier(keyboardToolbarContent: keyboardToolbarContent, background: background))
         }
-        
+
         let text = Text(DataLocalizer.localize(path: "APP.GENERAL.DONE"))
             .themeColor(foreground: .colorWhite)
             .themeFont(fontSize: .small)
@@ -629,10 +627,10 @@ private struct BulletItemModifier: ViewModifier {
 private struct KeyboardAccessoryModifier: ViewModifier {
     let keyboardToolbarContent: AnyView
     let background: ThemeColor.SemanticColor
-    
+
     func body(content: Content) -> some View {
         ZStack {
-            
+
             background.color
                 .edgesIgnoringSafeArea(.all)
 

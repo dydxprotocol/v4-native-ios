@@ -27,11 +27,11 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     open var notificationTag: String {
         return "firebase"
     }
- 
+
     open lazy var firebaseNotification: FirebaseNotificationHandler = {
         return FirebaseNotificationHandler(tag: notificationTag)
     }()
-    
+
     override open func inject(completion: @escaping () -> Void) {
         super.inject { [weak self] in
             self?.injectUX(completion: completion)
@@ -44,7 +44,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
 
     override open func injectFeatures(completion: @escaping () -> Void) {
         Console.shared.log("injectFeatures")
-        
+
         // statsig needs to be initialized before FeatureService is initialized
         // because FeatureService sets remote to be StatsigFeatureFlagsProvider.shared
         // TODO: remove the ordering dependency
@@ -107,7 +107,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
             add(errorLogging: CrashlyticsErrorLogging())
         }
     }
-    
+
     open func injectAmplitude() {
         Console.shared.log("injectAmplitude")
         let apiKey: String?
@@ -121,7 +121,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
             add(tracking: dydxAmplitudeTracking(apiKey))
         }
     }
-    
+
     open func injectStatsig() {
         Console.shared.log("injectStatsig")
         let environment: StatsigFeatureFlagsProvider.Environment
@@ -137,7 +137,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         }
         StatsigFeatureFlagsProvider.shared = StatsigFeatureFlagsProvider(apiKey: apiKey, userId: dydxCompositeTracking.getStableId(), environment: environment)
     }
-    
+
     open func injectAttribution() {
         Console.shared.log("injectAttribution")
         if let devKey = CredientialConfig.shared.credential(for: "appsFlyerDevKey"), devKey.isNotEmpty,
@@ -187,7 +187,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
             completion()
         }
     }
-    
+
     open override func applicationDidBecomeActive(_ application: UIApplication) {
         super.applicationDidBecomeActive(application)
         Tracking.shared?.log(event: AnalyticsEventV2.AppStart())
@@ -201,7 +201,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     open func injectNotificationHandler() {
         NotificationBridge.shared = firebaseNotification
     }
-    
+
     open func injectURLHandler() {
         URLHandler.shared = UIApplication.shared
     }

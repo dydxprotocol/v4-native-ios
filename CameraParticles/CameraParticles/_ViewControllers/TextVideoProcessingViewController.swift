@@ -77,11 +77,9 @@ import Utilities
         case .scanning:
             data = [:]
             play(sound: soundScanning())
-
-        case .processing:
+            case .processing:
             play(sound: sound(types: data))
             complete(data: data)
-            break
 
         default:
             break
@@ -109,10 +107,6 @@ import Utilities
         videoProcessor = scanner
         let capture = VideoProcessingCapture()
         return capture
-    }
-
-    override open func setup(capture: CameraCapture) {
-        super.setup(capture: capture)
     }
 
     public func receiving(_ scanner: VideoTextScanner, buffer: CMSampleBuffer) {

@@ -39,10 +39,6 @@ open class CombinedGraphingPresenter: GraphingPresenter {
         combinedChartView?.highlightPerDragEnabled = true
     }
 
-    override open func setupXAxis(xAxis: XAxis?) {
-        super.setupXAxis(xAxis: xAxis)
-    }
-
     open func setupLeftAxis(leftAxis: YAxis?) {
         leftAxis?.enabled = true
         leftAxis?.drawLabelsEnabled = drawYAxisText
@@ -67,10 +63,6 @@ open class CombinedGraphingPresenter: GraphingPresenter {
         rightAxis?.labelPosition = outsideYAxisText ? .outsideChart : .insideChart
         rightAxis?.axisMinimum = 0.0
         rightAxis?.spaceTop = 9
-    }
-
-    override open func setupLegend(legend: Legend?) {
-        super.setupLegend(legend: legend)
     }
 
     override open func graphingDataSets() -> [String: [ChartDataSet]] {

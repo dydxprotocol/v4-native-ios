@@ -14,18 +14,18 @@ import SwiftUI
 
 /// Use wrapper to solve tne `UIImageView`/`NSImageView` frame size become image size issue (SwiftUI's Bug)
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public class AnimatedImageViewWrapper : PlatformView {
+public class AnimatedImageViewWrapper: PlatformView {
     /// The wrapped actual image view, using SDWebImage's aniamted image view
     @objc dynamic public var wrapped = SDAnimatedImageView()
     var observation: NSKeyValueObservation?
     var interpolationQuality = CGInterpolationQuality.default
     var shouldAntialias = false
     var resizingMode: Image.ResizingMode?
-    
+
     deinit {
         observation?.invalidate()
     }
-    
+
     public override func draw(_ rect: CGRect) {
         #if os(macOS)
         guard let ctx = NSGraphicsContext.current?.cgContext else {
@@ -39,7 +39,7 @@ public class AnimatedImageViewWrapper : PlatformView {
         ctx.interpolationQuality = interpolationQuality
         ctx.setShouldAntialias(shouldAntialias)
     }
-    
+
     #if os(macOS)
     public override func layout() {
         super.layout()
@@ -51,7 +51,7 @@ public class AnimatedImageViewWrapper : PlatformView {
         wrapped.frame = self.bounds
     }
     #endif
-    
+
     public override var intrinsicContentSize: CGSize {
         /// Match the behavior of SwiftUI.Image, only when image is resizable, use the super implementation to calculate size
         let contentSize = wrapped.intrinsicContentSize
@@ -69,7 +69,7 @@ public class AnimatedImageViewWrapper : PlatformView {
             return contentSize
         }
     }
-    
+
     public override init(frame frameRect: CGRect) {
         super.init(frame: frameRect)
         addSubview(wrapped)
@@ -77,7 +77,7 @@ public class AnimatedImageViewWrapper : PlatformView {
             self.invalidateIntrinsicContentSize()
         }
     }
-    
+
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
         addSubview(wrapped)

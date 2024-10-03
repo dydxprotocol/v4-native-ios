@@ -20,7 +20,7 @@ public class NotificationPermissionAction: PrivacyPermissionAction {
     override public var primer: String? {
         return "/primer/notification"
     }
-    
+
     override public var path: String? {
         return "/authorization/notification"
     }

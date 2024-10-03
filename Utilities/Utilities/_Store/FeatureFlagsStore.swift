@@ -10,8 +10,8 @@ import Foundation
 
 public class FeatureFlagsStore: UserDefaultsStore, FeatureFlagsProtocol {
     public static var shared: FeatureFlagsStore?
-    
-    public var featureFlags: [String : Any]? {
+
+    public var featureFlags: [String: Any]? {
         get {
             dictionary
         }
@@ -27,21 +27,21 @@ public class FeatureFlagsStore: UserDefaultsStore, FeatureFlagsProtocol {
     public func activate(completion: @escaping () -> Void) {
         completion()
     }
-    
+
     public func isOn(feature: String) -> Bool? {
         if let value = featureFlags?[feature] as? Bool {
             return value
         }
         return nil
     }
-    
+
     public func value(feature: String) -> String? {
         if let value = featureFlags?[feature] as? String {
             return value
         }
         return nil
     }
-    
+
     public func customized() -> Bool {
         #if DEBUG
             return false

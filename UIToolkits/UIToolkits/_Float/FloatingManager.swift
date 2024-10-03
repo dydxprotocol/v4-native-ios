@@ -97,13 +97,13 @@ open class FloatingManager: NSObject, FloatingProtocol, FloatingPanelControllerD
 
     open func floatingPanelDidEndAttracting(_ vc: FloatingPanelController) {
     }
-    
+
     open func dismiss(_ viewController: UIViewController?, animated: Bool) {
         if viewController?.floatingParent == half {
             half = nil
         }
     }
-    
+
     open func floatingPanelShouldBeginDragging(_ fpc: FloatingPanelController) -> Bool {
         true
     }

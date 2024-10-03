@@ -28,7 +28,7 @@ public class DeepLinkOpenedEvent: BaseEvent {
 
     public init(url: String?, referrer: String? = nil) {
         var eventProperties = [
-            Constants.AMP_APP_LINK_URL_PROPERTY: url ?? "",
+            Constants.AMP_APP_LINK_URL_PROPERTY: url ?? ""
         ]
         if let referrer = referrer {
             eventProperties[Constants.AMP_APP_LINK_REFERRER_PROPERTY] = referrer

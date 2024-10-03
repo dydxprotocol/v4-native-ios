@@ -12,9 +12,9 @@ import Utilities
 open class UXLabel: UILabel {
     @IBInspectable public var italic: Bool = false
     @IBInspectable public var placeOlder: String?
-    
+
     private var changed: Bool = false
-    
+
     open override var text: String? {
         didSet {
             changed = true

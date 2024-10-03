@@ -61,18 +61,17 @@ extension MaterialActivityIndicatorView: SpinnerProtocol, CombineObserving {
             }
         }
     }
-    
-    public var cancellableMap: [AnyKeyPath : AnyCancellable] {
+
+    public var cancellableMap: [AnyKeyPath: AnyCancellable] {
         get {
             associatedObject(base: self, key: &SpinnerKey.cancellableMap) {
-                [AnyKeyPath : AnyCancellable]()
+                [AnyKeyPath: AnyCancellable]()
             }
         }
         set {
             retainObject(base: self, key: &SpinnerKey.cancellableMap, value: newValue)
         }
     }
-  
 
     public var spinning: Bool {
         get {
@@ -99,7 +98,7 @@ extension MaterialActivityIndicatorView: SpinnerProtocol, CombineObserving {
             let oldValue = appState
             if oldValue !== newValue {
                 retainObject(base: self, key: &SpinnerKey.appState, value: newValue)
-                changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) { [weak self] _, _, _, animated in
+                changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) { [weak self] _, _, _, _ in
                     if self?.appState?.background == false {
                         self?._spinning = self?.spinning ?? false
                     } else {

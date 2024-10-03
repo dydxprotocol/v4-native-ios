@@ -31,7 +31,7 @@ import Utilities
             }
         }
     }
-    
+
     open var cameraPermissionText: String? {
         return "You need to enable camera"
     }
@@ -110,7 +110,7 @@ import Utilities
 
         setupCamera()
     }
-    
+
     private func setupCamera() {
         if !UIDevice.current.isSimulator, cameraPermission?.authorization == .authorized {
             if let capture = createCapture() {
@@ -155,7 +155,6 @@ import Utilities
             case .authorized:
                 setupCamera()
                 cameraPermissionView?.visible = false
-                
 
             default:
                 cameraPermissionView?.bringToFront()

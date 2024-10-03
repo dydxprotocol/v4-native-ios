@@ -10,7 +10,7 @@ import Utilities
 
 open class PagedWebApi<WebApiClass>: NSObject, IOProtocol where WebApiClass: WebApi {
     @objc public dynamic var isLoading: Bool = false
-    
+
     public var priority: Int = 10
     public var page: Int
     public var limit: Int

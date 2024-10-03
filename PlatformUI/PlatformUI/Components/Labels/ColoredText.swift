@@ -11,20 +11,20 @@ import SwiftUI
 public class ColoredTextModel: PlatformViewModel {
     @Published public var text: String?
     @Published public var color: ThemeColor.SemanticColor = .textSecondary
-    
+
     public init(text: String? = nil, color: ThemeColor.SemanticColor = .textSecondary) {
         self.text = text
         self.color = color
     }
-    
+
     public static var previewValue: ColoredTextModel = {
         let vm = ColoredTextModel()
         vm.text = "Test String"
         return vm
     }()
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
@@ -49,4 +49,3 @@ struct ColoredText_Previews: PreviewProvider {
     }
 }
 #endif
-

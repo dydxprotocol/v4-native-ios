@@ -10,15 +10,15 @@ import PlatformParticles
 import Utilities
 
 open class AmplitudeTracking: TransformerTracker {
-    
+
     private let amplitude: Amplitude
-    
+
     public init(_ apiKey: String) {
         self.amplitude = Amplitude.init(configuration: .init(apiKey: apiKey))
         Console.shared.log("analytics log | Amplitude initialized")
         super.init()
     }
-    
+
     override open func log(event: String, data: [String: Any]?, revenue: NSNumber?) {
         if !excluded {
             var data = data
@@ -33,12 +33,12 @@ open class AmplitudeTracking: TransformerTracker {
             amplitude.track(event: event)
         }
     }
-    
+
     override public func setUserId(_ userId: String?) {
         Console.shared.log("analytics log | Amplitude: User ID set to: `\(userId ?? "nil")`")
         amplitude.setUserId(userId: userId)
     }
-    
+
     // https://amplitude.com/docs/sdks/analytics/ios/ios-swift-sdk#identify
     override public func setValue(_ value: Any?, forUserProperty userProperty: String) {
         Console.shared.log("analytics log | Amplitude: User Property `\(userProperty)` set to: \(value ?? "nil")")

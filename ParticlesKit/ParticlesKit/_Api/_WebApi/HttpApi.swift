@@ -17,11 +17,11 @@ public enum HttpVerb: String {
 }
 
 @objc open class HttpApi: NSObject, CombineObserving {
-    public var cancellableMap = [AnyKeyPath : AnyCancellable]()
-    
+    public var cancellableMap = [AnyKeyPath: AnyCancellable]()
+
     private var appState: AppState? {
         didSet {
-            changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) {[weak self] observer, obj, change, animated in
+            changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) {[weak self] _, _, _, _ in
                 self?.background = self?.appState?.background ?? false
             }
         }

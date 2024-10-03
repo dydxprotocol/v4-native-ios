@@ -18,7 +18,7 @@ import Foundation
 
 @objc public class StandardGraphingAnchor: NSObject, GraphingAnchorProtocol {
     private var _graphingAnchor: Date?
-    
+
     public var date: Date {
         if _graphingAnchor == nil {
             let now = Date()

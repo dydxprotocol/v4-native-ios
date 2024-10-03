@@ -1,7 +1,7 @@
 import Foundation
 
 public struct ValidationRuleComparison<T: Comparable>: ValidationRule {
-    
+
     public let min: T
     public let max: T
     public let error: ValidationError
@@ -12,15 +12,15 @@ public struct ValidationRuleComparison<T: Comparable>: ValidationRule {
         self.max = max
         self.error = error
     }
-    
+
     public func validate(input: T?) -> Bool {
 
         guard let input = input else {
-            
+
             return false
         }
-        
+
         return input >= min && input <= max
     }
-    
+
 }

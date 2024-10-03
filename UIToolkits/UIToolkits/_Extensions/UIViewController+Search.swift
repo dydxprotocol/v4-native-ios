@@ -166,18 +166,18 @@ extension UIViewController: SearchUIProtocol {
     @objc open func searchTextChanged() {
     }
 
-    @objc @IBAction open func search(_ sender: Any?) {
+    @IBAction open func search(_ sender: Any?) {
         isSearching = true
     }
 
-    @objc @IBAction open func cancelSearch(_ sender: Any?) {
+    @IBAction open func cancelSearch(_ sender: Any?) {
         isSearching = false
     }
 
-    @objc @IBAction open func saveSearch(_ sender: Any?) {
+    @IBAction open func saveSearch(_ sender: Any?) {
     }
 
-    @objc @IBAction open func doneSearch(_ sender: Any?) {
+    @IBAction open func doneSearch(_ sender: Any?) {
         searchBar?.resignFirstResponder()
     }
 

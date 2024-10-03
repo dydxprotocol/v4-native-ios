@@ -1,17 +1,17 @@
 import Foundation
 
-fileprivate enum Endpoint: String {
+private enum Endpoint: String {
     case initialize = "/v1/initialize"
     case logEvent = "/v1/rgstr"
 }
 
-fileprivate let RetryLimits: [Endpoint: Int] = [
+private let RetryLimits: [Endpoint: Int] = [
     .initialize: 3,
     .logEvent: 3
 ]
 
-fileprivate typealias NetworkCompletionHandler = (Data?, URLResponse?, Error?) -> Void
-fileprivate typealias TaskCaptureHandler = ((URLSessionDataTask) -> Void)?
+private typealias NetworkCompletionHandler = (Data?, URLResponse?, Error?) -> Void
+private typealias TaskCaptureHandler = ((URLSessionDataTask) -> Void)?
 
 class NetworkService {
     let sdkKey: String
@@ -37,7 +37,7 @@ class NetworkService {
             "user": user.toDictionary(forLogging: false),
             "statsigMetadata": user.deviceEnvironment,
             "lastSyncTimeForUser": lastSyncTimeForUser,
-            "previousDerivedFields": previousDerivedFields,
+            "previousDerivedFields": previousDerivedFields
         ])
 
         guard let body = body else {
@@ -54,7 +54,7 @@ class NetworkService {
                 completion?(error.localizedDescription)
                 return
             }
-            
+
             let statusCode = response?.status ?? 0
 
             if !(200...299).contains(statusCode) {
@@ -66,7 +66,7 @@ class NetworkService {
                 completion?("Failed to call NetworkService as it has been released")
                 return
             }
-            
+
             guard let dict = data?.json, dict["has_updates"] as? Bool == true else {
                 self.store.finalizeValues()
                 completion?(nil)
@@ -87,7 +87,7 @@ class NetworkService {
         if let inflight = inflightRequests[cacheKey.v2] {
             inflight.cancel()
         }
-        
+
         if inflightRequests.count() > 50 {
             inflightRequests.reset()
         }
@@ -95,14 +95,14 @@ class NetworkService {
         var task: URLSessionDataTask?
         var completed = false
         let lock = NSLock()
-        
+
         let done: (String?) -> Void = { [weak self] err in
             // Ensures the completion is invoked only once
             lock.lock()
             defer { lock.unlock() }
-            
+
             self?.inflightRequests.removeValue(forKey: cacheKey.v2)
-            
+
             guard !completed else { return }
             completed = true
 
@@ -159,7 +159,7 @@ class NetworkService {
             }
 
             Diagnostics.mark?.initialize.process.start()
-            var values: [String: Any]? = nil
+            var values: [String: Any]?
             if statusCode == 204 {
                 values = ["has_updates": false]
             } else if let json = data?.json {
@@ -184,8 +184,7 @@ class NetworkService {
     }
 
     func sendEvents(forUser: StatsigUser, events: [Event],
-                    completion: @escaping ((_ errorMessage: String?, _ data: Data?) -> Void))
-    {
+                    completion: @escaping ((_ errorMessage: String?, _ data: Data?) -> Void)) {
         let (body, parseErr) = makeReqBody([
             "events": events.map { $0.toDictionary() },
             "user": forUser.toDictionary(forLogging: true),
@@ -220,8 +219,7 @@ class NetworkService {
         for data in dataArray {
             dispatchGroup.enter()
             makeAndSendRequest(.logEvent, body: data) { _, response, error in
-                if error != nil || response?.isOK != true
-                {
+                if error != nil || response?.isOK != true {
                     failedRequests.append(data)
                 }
                 dispatchGroup.leave()
@@ -232,9 +230,9 @@ class NetworkService {
         }
     }
 
-    private func makeReqBody(_ dict: Dictionary<String, Any>) -> (Data?, Error?) {
+    private func makeReqBody(_ dict: [String: Any]) -> (Data?, Error?) {
         if JSONSerialization.isValidJSONObject(dict),
-           let data = try? JSONSerialization.data(withJSONObject: dict){
+           let data = try? JSONSerialization.data(withJSONObject: dict) {
             return (data, nil)
         }
 
@@ -247,8 +245,7 @@ class NetworkService {
         marker: NetworkMarker? = nil,
         completion: @escaping NetworkCompletionHandler,
         taskCapture: TaskCaptureHandler = nil
-    )
-    {
+    ) {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = ApiHost
@@ -296,7 +293,6 @@ class NetworkService {
             let currentAttempt = failedAttempts + 1
             marker?.start(attempt: currentAttempt)
 
-
             let task = self?.statsigOptions.urlSession.dataTask(with: request) {
                 [weak self] responseData, response, error in
 
@@ -305,8 +301,7 @@ class NetworkService {
                 if failedAttempts < retryLimit,
                    let self = self,
                    let code = response?.status,
-                   self.networkRetryErrorCodes.contains(code)
-                {
+                   self.networkRetryErrorCodes.contains(code) {
                     self.sendRequest(
                         request,
                         failedAttempts: currentAttempt,

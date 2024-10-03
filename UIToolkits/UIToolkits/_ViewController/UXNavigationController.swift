@@ -19,7 +19,7 @@ open class UXNavigationController: UINavigationController, UINavigationBarDelega
 //        navigationBar.barTintColor = UIColor(named: "Base")
         navigationBar.shadowImage = UIImage()
     }
-    
+
     public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
         var shouldPop = true
         let viewController = viewControllers.last

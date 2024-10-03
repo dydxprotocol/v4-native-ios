@@ -204,8 +204,8 @@ extension FirebaseNotificationHandler: NotificationBridgeProtocol {
             completionHandler(.noData)
         }
     }
-    
-    public func receivedDeeplink(userInfo: [AnyHashable : Any]) -> URL? {
+
+    public func receivedDeeplink(userInfo: [AnyHashable: Any]) -> URL? {
         if let link = link(message: userInfo) {
             return URL(string: link)
         }

@@ -43,7 +43,7 @@ extension InstallationsProtocol {
     let workingGroup = DispatchGroup()
 
     workingGroup.enter()
-    authToken { (authTokenResult: InstallationsAuthTokenResult?, error: Error?) in
+    authToken { (authTokenResult: InstallationsAuthTokenResult?, _: Error?) in
       authTokenComplete = authTokenResult?.authToken ?? ""
       workingGroup.leave()
     }

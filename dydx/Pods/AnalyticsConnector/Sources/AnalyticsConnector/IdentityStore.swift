@@ -34,7 +34,7 @@ internal let ID_OP_CLEAR_ALL = "$clearAll"
     @objc func getIdentity() -> Identity
     @objc func setIdentity(_ identity: Identity)
     @objc func editIdentity() -> IdentityStoreEditor
-    @objc func addIdentityListener(key: String, _ listener: @escaping (Identity) -> ())
+    @objc func addIdentityListener(key: String, _ listener: @escaping (Identity) -> Void)
     @objc func removeIdentityListener(key: String)
 }
 
@@ -50,14 +50,14 @@ internal let ID_OP_CLEAR_ALL = "$clearAll"
     private let identityLock = DispatchSemaphore(value: 1)
     private var identity = Identity()
     private let listenersLock = DispatchSemaphore(value: 1)
-    private var listeners: [String: (Identity) -> ()] = [:]
-    
+    private var listeners: [String: (Identity) -> Void] = [:]
+
     @objc func getIdentity() -> Identity {
         identityLock.wait()
         defer { identityLock.signal() }
         return identity
     }
-    
+
     @objc func setIdentity(_ identity: Identity) {
         identityLock.wait()
         let identityChanged = self.identity != identity
@@ -72,17 +72,17 @@ internal let ID_OP_CLEAR_ALL = "$clearAll"
             }
         }
     }
-    
+
     @objc func editIdentity() -> IdentityStoreEditor {
         return IdentityStoreEditorImpl(identityStore: self)
     }
-    
-    @objc func addIdentityListener(key: String, _ listener: @escaping (Identity) -> ()) {
+
+    @objc func addIdentityListener(key: String, _ listener: @escaping (Identity) -> Void) {
         listenersLock.wait()
         defer { listenersLock.signal() }
         listeners[key] = listener
     }
-    
+
     @objc func removeIdentityListener(key: String) {
         listenersLock.wait()
         defer { listenersLock.signal() }
@@ -91,13 +91,13 @@ internal let ID_OP_CLEAR_ALL = "$clearAll"
 }
 
 @objc internal class IdentityStoreEditorImpl: NSObject, IdentityStoreEditor {
-    
+
     private let identityStore: IdentityStore
-    
+
     private var userId: String?
     private var deviceId: String?
     private var userProperties: NSMutableDictionary
-    
+
     internal init(identityStore: IdentityStore) {
         let identity = identityStore.getIdentity()
         self.userId = identity.userId
@@ -105,24 +105,24 @@ internal let ID_OP_CLEAR_ALL = "$clearAll"
         self.userProperties = identity.userProperties.mutableCopy() as? NSMutableDictionary ?? NSMutableDictionary()
         self.identityStore = identityStore
     }
-    
+
     @objc func setUserId(_ userId: String?) -> IdentityStoreEditor {
         self.userId = userId
         return self
     }
-    
+
     @objc func setDeviceId(_ deviceId: String?) -> IdentityStoreEditor {
         self.deviceId = deviceId
         return self
     }
-    
+
     @objc func setUserProperties(_ userProperties: NSDictionary) -> IdentityStoreEditor {
         if let userProperties = userProperties.mutableCopy() as? NSMutableDictionary {
             self.userProperties = userProperties
         }
         return self
     }
-    
+
     @objc func updateUserProperties(_ userPropertyActions: NSDictionary) -> IdentityStoreEditor {
         userPropertyActions.forEach { (action: Any, properties: Any) in
             guard let action = action as? String else {
@@ -131,7 +131,7 @@ internal let ID_OP_CLEAR_ALL = "$clearAll"
             guard let properties = properties as? [AnyHashable: Any] else {
                 return
             }
-            switch (action) {
+            switch action {
             case ID_OP_SET:
                 self.userProperties.addEntries(from: properties)
             case ID_OP_UNSET:
@@ -143,7 +143,7 @@ internal let ID_OP_CLEAR_ALL = "$clearAll"
         }
         return self
     }
-    
+
     @objc func commit() {
         let identity = Identity(userId: userId, deviceId: deviceId, userProperties: userProperties)
         self.identityStore.setIdentity(identity)

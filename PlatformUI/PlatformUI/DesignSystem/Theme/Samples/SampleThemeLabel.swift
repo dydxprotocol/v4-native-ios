@@ -22,12 +22,12 @@ struct SampleThemeLabel: View {
     let textColor: ThemeColor.SemanticColor
     let fontType: ThemeFont.FontType
     let fontSize: ThemeFont.FontSize
-    
+
     var body: some View {
         Text(text)
             .themeColor(foreground: textColor)
             .themeFont(fontType: fontType, fontSize: fontSize)
-    
+
     }
 }
 

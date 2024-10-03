@@ -26,7 +26,7 @@ import Utilities
         }
     }
 
-    @objc func setupBackgroundColor() {
+    func setupBackgroundColor() {
         if let backgroundColorName = backgroundColorName, let color = ColorPalette.shared.color(system: backgroundColorName) {
             backgroundColor = color
         }
@@ -42,7 +42,7 @@ import Utilities
         }
     }
 
-    @objc func setupBorderColor() {
+    func setupBorderColor() {
         if let borderColorName = borderColorName, let color = ColorPalette.shared.color(keyed: borderColorName) {
             borderColor = color
         }
@@ -60,7 +60,7 @@ import Utilities
         }
     }
 
-    @objc func setupTextColor() {
+    func setupTextColor() {
         if let textColorName = textColorName, let color = ColorPalette.shared.color(keyed: textColorName) {
             setTitleColor(color, for: .normal)
         }
@@ -78,7 +78,7 @@ import Utilities
         }
     }
 
-    @objc func setupTextColor() {
+    func setupTextColor() {
         if let textColorName = textColorName, let color = ColorPalette.shared.color(keyed: textColorName) {
             textColor = color
         }

@@ -27,7 +27,7 @@ struct FrameTagModifier: ViewModifier {
                         window.save(frame, for: tag)
                     }
                 }
-                .onValueChange(of: window) { _, newValue in
+                .onValueChange(of: window) { _, _ in
                     if let window = window {
                         window.save(frame, for: tag)
                     }

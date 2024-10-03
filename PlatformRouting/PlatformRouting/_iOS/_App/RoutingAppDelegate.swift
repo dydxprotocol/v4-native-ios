@@ -26,7 +26,7 @@ open class RoutingAppDelegate: UIResponder, UIApplicationDelegate {
         startup { [weak self] in
             NotificationBridge.shared?.launched()
             if let self = self {
-                self.route() { [weak self] in
+                self.route { [weak self] in
                     self?.started = true
                     self?.handleDeeplink()
                 }
@@ -39,7 +39,7 @@ open class RoutingAppDelegate: UIResponder, UIApplicationDelegate {
         completion()
     }
 
-    open func route(completion: @escaping () -> ()) {
+    open func route(completion: @escaping () -> Void) {
         Router.shared = router()
 
         routeToStart(completion: completion)
@@ -89,14 +89,13 @@ open class RoutingAppDelegate: UIResponder, UIApplicationDelegate {
         #endif
     }
 
-    
     /// Prioritized handling of the deeplink
     /// - Parameter url: the deeplink url to handle
     /// - Returns: true if the custom handling handled the url
     open func customHandle(url: URL) -> Bool {
         return false
     }
-    
+
     open func handleDeeplink() {
         if started {
             if let urlString = shortcut?.type, let url = URL(string: urlString) {
@@ -114,7 +113,7 @@ open class RoutingAppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+
     open func deepLinkHandled(deeplink: URL, successful: Bool) { }
 
     open func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

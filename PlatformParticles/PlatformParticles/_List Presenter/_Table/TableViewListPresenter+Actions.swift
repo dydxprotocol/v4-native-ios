@@ -14,7 +14,7 @@ extension TableViewListPresenter {
     public func action(request: RoutingRequest?, text: String?, image: String?, color: String?, tint: String?) -> UIContextualAction? {
 		return action(request: request, text: text, image: image, color: ColorPalette.shared.color(system: color), tint: ColorPalette.shared.color(system: tint))
  }
-	
+
     public func action(request: RoutingRequest?, text: String?, image: String?, color: UIColor?, tint: UIColor?) -> UIContextualAction? {
         if let request = request {
             let action = UIContextualAction(style: .normal, title: text) {[weak self] _, _, _ in

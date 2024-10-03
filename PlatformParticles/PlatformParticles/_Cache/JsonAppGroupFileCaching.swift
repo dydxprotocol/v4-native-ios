@@ -11,7 +11,7 @@ import Utilities
 
 open class JsonAppGroupFileCaching: NSObject, JsonCachingProtocol {
     @objc public dynamic var isLoading: Bool = false
-    
+
     public var priority: Int = 0
 
     public var debouncer: Debouncer = Debouncer()
@@ -33,7 +33,7 @@ open class JsonAppGroupFileCaching: NSObject, JsonCachingProtocol {
             handler.run({ [weak self] in
                 if let self = self, let file = self.file(path: path), FileManager.default.fileExists(atPath: file.path) {
                     self.document = JsonDocument(fileURL: file)
-                    self.document?.open(completionHandler: { [weak self] (success: Bool) -> Void in
+                    self.document?.open(completionHandler: { [weak self] (success: Bool) in
                         if let self = self {
                             if success {
                                 let data = self.document?.data

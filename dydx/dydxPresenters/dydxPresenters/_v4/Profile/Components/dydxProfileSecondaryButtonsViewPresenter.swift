@@ -31,7 +31,7 @@ class dydxProfileSecondaryButtonsViewPresenter: HostedViewPresenter<dydxProfileS
         viewModel.helpAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/help"), animated: true, completion: nil)
         }
-        
+
         AbacusStateManager.shared.state.onboarded
             .sink { [weak self] onboarded in
                 // do not show alerts if wallet not connected
@@ -40,7 +40,7 @@ class dydxProfileSecondaryButtonsViewPresenter: HostedViewPresenter<dydxProfileS
                         Router.shared?.navigate(to: RoutingRequest(path: "/alerts"), animated: true, completion: nil)
                     }
                 }
-                
+
             }
             .store(in: &self.subscriptions)
     }

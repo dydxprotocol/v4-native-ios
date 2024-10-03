@@ -34,7 +34,7 @@ import UIKit
         let font = UIFont.systemFont(ofSize: 14, weight: .medium)
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font,
-            .foregroundColor: UIColor.secondaryLabel,
+            .foregroundColor: UIColor.secondaryLabel
         ]
         return attributes
     }
@@ -43,7 +43,7 @@ import UIKit
         let font = UIFont.systemFont(ofSize: 14, weight: .medium)
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font,
-            .foregroundColor: UIColor.link,
+            .foregroundColor: UIColor.link
         ]
         return attributes
     }

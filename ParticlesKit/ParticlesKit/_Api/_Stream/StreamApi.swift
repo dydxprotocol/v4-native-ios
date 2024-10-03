@@ -13,11 +13,11 @@ public typealias StreamingReadFunction = (_ messages: [String]) -> Void
 public typealias DisconnectFuction = (_ error: Error?) -> Void
 
 @objc open class StreamApi: NSObject, CombineObserving {
-    public var cancellableMap = [AnyKeyPath : AnyCancellable]()
-    
+    public var cancellableMap = [AnyKeyPath: AnyCancellable]()
+
     private var appState: AppState? {
         didSet {
-            changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) { [weak self] _, _, _, animated in
+            changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) { [weak self] _, _, _, _ in
                 self?.background = self?.appState?.background ?? false
             }
         }
@@ -64,7 +64,6 @@ public typealias DisconnectFuction = (_ error: Error?) -> Void
 
     @objc public dynamic var isConnected: Bool = false
     private var leftover: String?
-
 
     override public init() {
         super.init()

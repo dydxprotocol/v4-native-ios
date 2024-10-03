@@ -22,13 +22,13 @@ public class CompositeErrorLogging: NSObject & ErrorLoggingProtocol {
             logging.log(error)
         }
     }
-    
+
     public func e(tag: String, message: String) {
         for logging in loggings {
             logging.e(tag: tag, message: message)
         }
     }
-    
+
     public func d(tag: String, message: String) {
         for logging in loggings {
             logging.d(tag: tag, message: message)

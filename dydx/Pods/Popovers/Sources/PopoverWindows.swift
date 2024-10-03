@@ -140,6 +140,6 @@ extension EnvironmentValues {
     private struct WindowEnvironmentKey: EnvironmentKey {
         typealias Value = UIWindow?
 
-        static var defaultValue: UIWindow? = nil
+        static var defaultValue: UIWindow?
     }
 }

@@ -23,11 +23,11 @@ public class AppsFlyerTracking: TransformerTracker {
             AppsFlyerLib.shared().logEvent(event, withValues: data)
         }
     }
-    
+
     public override func setUserId(_ userId: String?) {
         AppsFlyerLib.shared().customerUserID = userId
     }
-    
+
     public override func setValue(_ value: Any?, forUserProperty userProperty: String) {
         if AppsFlyerLib.shared().customData == nil {
             AppsFlyerLib.shared().customData = [String: Any]()

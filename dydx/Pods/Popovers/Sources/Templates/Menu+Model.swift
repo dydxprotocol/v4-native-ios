@@ -50,8 +50,7 @@ extension Templates {
             for (index, frame) in frames {
                 if
                     frame.contains(zeroedLocation),
-                    itemIndices.contains(index) /// Make sure that the index is a tappable button.
-                {
+                    itemIndices.contains(index) { /// Make sure that the index is a tappable button.
                     return index
                 }
             }
@@ -107,8 +106,7 @@ extension Templates {
                     DispatchQueue.main.asyncAfter(deadline: .now() + configuration.holdDelay) {
                         if
                             currentUUID == getCurrentLabelPressUUID(),
-                            let dragLocation = getDragLocation()
-                        {
+                            let dragLocation = getDragLocation() {
                             if labelFrame.contains(dragLocation) {
                                 present(true)
                             }
@@ -175,8 +173,7 @@ extension Templates {
                 /// The user lifted their finger on the label **and** it did not hit a menu item.
                 if
                     selectedIndex == nil,
-                    labelFrame.contains(location)
-                {
+                    labelFrame.contains(location) {
                     present(false)
                 }
             } else {

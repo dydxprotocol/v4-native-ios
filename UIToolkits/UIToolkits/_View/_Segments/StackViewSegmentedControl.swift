@@ -15,7 +15,7 @@ import Utilities
     @IBInspectable var unselectedTintColor: UIColor?
     @IBInspectable var selectedBackgroundColor: UIColor?
     @IBInspectable var selectedTintColor: UIColor?
-    
+
     @IBOutlet var stackView: UIStackView? {
         didSet {
             reload()
@@ -41,7 +41,7 @@ import Utilities
     override open func didSetSegments(oldValue: [ControlSegment]?) {
         reload()
     }
-    
+
     private func reload() {
         if let views = stackView?.arrangedSubviews {
             for view in views {
@@ -97,7 +97,7 @@ import Utilities
             }
         }
     }
-    
+
     private func scroll() {
         if let scrollView = scrollView, let subviews = stackView?.arrangedSubviews, subviews.count > selectedIndex {
             let view = subviews[selectedIndex]

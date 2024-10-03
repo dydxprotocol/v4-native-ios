@@ -6,7 +6,7 @@
 //  Copyright © 2016-2017 Károly Lőrentey.
 //
 
-//MARK: Bitwise Operations
+// MARK: Bitwise Operations
 
 extension BigUInt {
     /// Return the ones' complement of `a`.
@@ -55,7 +55,7 @@ extension BigInt {
             return BigInt(sign: .plus, magnitude: x.magnitude - 1)
         }
     }
-    
+
     public static func &(lhs: inout BigInt, rhs: BigInt) -> BigInt {
         let left = lhs.words
         let right = rhs.words
@@ -72,7 +72,7 @@ extension BigInt {
         }
         return BigInt(sign: .plus, magnitude: BigUInt(words: words))
     }
-    
+
     public static func |(lhs: inout BigInt, rhs: BigInt) -> BigInt {
         let left = lhs.words
         let right = rhs.words
@@ -89,7 +89,7 @@ extension BigInt {
         }
         return BigInt(sign: .plus, magnitude: BigUInt(words: words))
     }
-    
+
     public static func ^(lhs: inout BigInt, rhs: BigInt) -> BigInt {
         let left = lhs.words
         let right = rhs.words
@@ -106,15 +106,15 @@ extension BigInt {
         }
         return BigInt(sign: .plus, magnitude: BigUInt(words: words))
     }
-    
+
     public static func &=(lhs: inout BigInt, rhs: BigInt) {
         lhs = lhs & rhs
     }
-    
+
     public static func |=(lhs: inout BigInt, rhs: BigInt) {
         lhs = lhs | rhs
     }
-    
+
     public static func ^=(lhs: inout BigInt, rhs: BigInt) {
         lhs = lhs ^ rhs
     }

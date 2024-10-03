@@ -43,7 +43,7 @@ import Utilities
     public func isOn(feature: String) -> Bool? {
         featureFlags?[feature] as? Bool
     }
-    
+
     public func value(feature: String) -> String? {
         if let value = featureFlags?[feature] as? String {
             return value

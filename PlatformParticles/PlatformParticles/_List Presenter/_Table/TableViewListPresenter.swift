@@ -13,7 +13,7 @@ import UIToolkits
 import Utilities
 
 open class TableViewListPresenter: XibListPresenter, UITableViewDataSource, UITableViewDelegate, ScrollingProtocol {
-    @IBInspectable @objc public dynamic var upsideDown: Bool = false {
+    @IBInspectable public dynamic var upsideDown: Bool = false {
         didSet {
             if upsideDown != oldValue {
                 orientTableView()
@@ -21,7 +21,7 @@ open class TableViewListPresenter: XibListPresenter, UITableViewDataSource, UITa
         }
     }
 
-    @IBInspectable @objc public dynamic var autoScroll: Bool = false
+    @IBInspectable public dynamic var autoScroll: Bool = false
     @objc public dynamic var isAtEnd: Bool = true
     @objc public dynamic var hasPendingUpdate: Bool = false
     @objc public dynamic var isScrolling: Bool = false {
@@ -174,7 +174,7 @@ open class TableViewListPresenter: XibListPresenter, UITableViewDataSource, UITa
 
     private var tableViewXibRegister: TableViewXibRegister = TableViewXibRegister()
     private var tableViewHeaderXibRegister: TableViewHeaderXibRegister = TableViewHeaderXibRegister()
-    
+
     open var sections: [TableViewSectionListPresenter] = []
 
     override open var title: String? {

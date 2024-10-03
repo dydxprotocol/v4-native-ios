@@ -21,7 +21,7 @@ public class dydxCompositeTracking: CompositeTracking {
     private var onboardingEvents: DictionaryEntity?
 
     private var subscriptions = Set<AnyCancellable>()
-    
+
     /// and id that is the same session-to-session
     public static func getStableId() -> String {
         let key = "dydxStableId"
@@ -30,19 +30,19 @@ public class dydxCompositeTracking: CompositeTracking {
         } else {
             let id = UUID().uuidString
                 .filter { $0.isLetter || $0.isNumber }
-                //firebase max lenght for user properties is 36
+                // firebase max lenght for user properties is 36
                 .prefix(36)
             UserDefaults.standard.set(String(id), forKey: key)
             return String(id)
         }
     }
-    
+
     override public init() {
         super.init()
 
         setUpCurrentWalletObserver()
         setUpCurrentEnvironmentObserver()
-        
+
         if let destinations = (JsonLoader.load(bundle: Bundle.main, fileName: "dydxevents.json") ?? JsonLoader.load(bundles: Bundle.particles, fileName: "dydxevents.json")) as? [String: Any] {
             viewEvents = DictionaryEntity()
             viewEvents?.parse(dictionary: destinations)
@@ -52,7 +52,7 @@ public class dydxCompositeTracking: CompositeTracking {
             onboardingEvents?.parse(dictionary: destinations)
         }
     }
-    
+
     private func setUpCurrentWalletObserver() {
         AbacusStateManager.shared.state.currentWallet
             .sink { [weak self] walletState in
@@ -61,12 +61,12 @@ public class dydxCompositeTracking: CompositeTracking {
                 let walletAddress = walletState?.ethereumAddress ?? walletState?.cosmoAddress
                 self.setUserId(walletAddress)
                 self.setUserProperty(walletAddress, forUserProperty: .walletAddress)
-                //TODO: might have to change this to match https://www.notion.so/dydx/V4-Web-Analytics-Events-d12c9dd791ee4c5d89e48588bb3ef702?pvs=4, but first this linear task needs to finish https://linear.app/dydx/issue/TRCL-2473/create-wallettype-user-property-field-value-in-cartera-wallets-json
+                // TODO: might have to change this to match https://www.notion.so/dydx/V4-Web-Analytics-Events-d12c9dd791ee4c5d89e48588bb3ef702?pvs=4, but first this linear task needs to finish https://linear.app/dydx/issue/TRCL-2473/create-wallettype-user-property-field-value-in-cartera-wallets-json
                 self.setUserProperty(wallet?.userFields?["analyticEvent"], forUserProperty: .walletType)
                 self.setUserProperty(walletState?.cosmoAddress, forUserProperty: .dydxAddress)
             }
             .store(in: &subscriptions)
-        
+
         AbacusStateManager.shared.state.selectedSubaccount
             .map(\.?.subaccountNumber)
             .removeDuplicates()
@@ -75,7 +75,7 @@ public class dydxCompositeTracking: CompositeTracking {
                 self.setUserProperty(subaccountNumber, forUserProperty: .subaccountNumber)
             }
             .store(in: &subscriptions)
-        
+
         // set user property for feature flags once statsig sdk is initialized.
         // Note, this will almost always, if not always, be `initializedRemoteLoading` since `initializedRemoteLoaded` requires round trip
         StatsigFeatureFlagsProvider.shared?.$initializationState
@@ -99,7 +99,7 @@ public class dydxCompositeTracking: CompositeTracking {
             }
             .store(in: &subscriptions)
     }
-    
+
     private func setUpCurrentEnvironmentObserver() {
         AbacusStateManager.shared.$currentEnvironment
             .sink { [weak self] environment in

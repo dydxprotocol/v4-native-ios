@@ -35,8 +35,7 @@ public final class StatsigObjC: NSObject {
     }
 
     @objc public static func start(withSDKKey: String, user: StatsigUserObjC, options: StatsigOptionsObjC,
-                                   completion: completionBlock)
-    {
+                                   completion: completionBlock) {
         Statsig.start(sdkKey: withSDKKey, user: user.user, options: options.optionsInternal, completion: completion)
     }
 
@@ -51,7 +50,6 @@ public final class StatsigObjC: NSObject {
     @objc public static func updateUser(newUser: StatsigUserObjC, completion: completionBlock) {
         Statsig.updateUser(newUser.user, completion: completion)
     }
-
 
     //
     // MARK: - Shutdown
@@ -89,8 +87,6 @@ public final class StatsigObjC: NSObject {
         return DynamicConfigObjC(withConfig: Statsig.getConfigWithExposureLoggingDisabled(configName))
     }
 
-
-
     //
     // MARK: - Get Experiment
     //
@@ -110,7 +106,6 @@ public final class StatsigObjC: NSObject {
     @objc public static func getExperimentWithExposureLoggingDisabled(_ experimentName: String, keepDeviceValue: Bool) -> DynamicConfigObjC {
         return DynamicConfigObjC(withConfig: Statsig.getExperimentWithExposureLoggingDisabled(experimentName, keepDeviceValue: keepDeviceValue))
     }
-
 
     //
     // MARK: - Get Layer
@@ -204,7 +199,6 @@ public final class StatsigObjC: NSObject {
         Statsig.logEvent(withName, value: doubleValue, metadata: metadata)
     }
 
-
     //
     // MARK: - Overrides
     //
@@ -244,7 +238,6 @@ public final class StatsigObjC: NSObject {
     @objc public static func isInitialized() -> Bool {
         return Statsig.isInitialized()
     }
-
 
     //
     // MARK: - Misc

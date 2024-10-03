@@ -176,7 +176,7 @@ struct SortAction: Equatable {
                        first.perpetual?.volume24H?.doubleValue ?? 0 > second.perpetual?.volume24H?.doubleValue ?? 0
                    })
     }
-    
+
     static var actions: [SortAction] {
         [
             .defaultAction,
@@ -215,7 +215,7 @@ struct SortAction: Equatable {
     private let type: MarketSorting
     let text: String
     let action: ((PerpetualMarket, PerpetualMarket) -> Bool)
-    
+
     static func == (lhs: SortAction, rhs: SortAction) -> Bool {
         lhs.type == rhs.type
     }
@@ -231,7 +231,7 @@ struct FilterAction: Equatable {
                          true       // included
                      })
     }
-    
+
     static var actions: [FilterAction] {
         var actions = [
             .defaultAction,
@@ -326,7 +326,7 @@ struct FilterAction: Equatable {
     let type: MarketFiltering
     let content: TabItemViewModel.TabItemContent
     let action: ((PerpetualMarket, [String: Asset]) -> Bool)
-    
+
     static func == (lhs: FilterAction, rhs: FilterAction) -> Bool {
         lhs.type == rhs.type
     }

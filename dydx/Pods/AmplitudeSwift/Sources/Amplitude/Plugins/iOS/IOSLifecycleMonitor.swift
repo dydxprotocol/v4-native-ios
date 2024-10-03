@@ -16,7 +16,7 @@ class IOSLifecycleMonitor: UtilityPlugin {
         UIApplication.didEnterBackgroundNotification,
         UIApplication.willEnterForegroundNotification,
         UIApplication.didFinishLaunchingNotification,
-        UIApplication.didBecomeActiveNotification,
+        UIApplication.didBecomeActiveNotification
     ]
     private var utils: DefaultEventUtils?
     private var sendApplicationOpenedOnDidBecomeActive = false
@@ -132,7 +132,7 @@ class IOSLifecycleMonitor: UtilityPlugin {
         self.amplitude?.track(eventType: Constants.AMP_APPLICATION_OPENED_EVENT, eventProperties: [
             Constants.AMP_APP_BUILD_PROPERTY: currentBuild ?? "",
             Constants.AMP_APP_VERSION_PROPERTY: currentVersion ?? "",
-            Constants.AMP_APP_FROM_BACKGROUND_PROPERTY: fromBackground,
+            Constants.AMP_APP_FROM_BACKGROUND_PROPERTY: fromBackground
         ])
     }
 }

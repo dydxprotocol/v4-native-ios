@@ -14,7 +14,7 @@ open class ObjectCompositeLinePresenter: ObjectLinePresenter {
     }
     @IBOutlet var presenter1: ObjectValueLinePresenter?
     @IBOutlet var presenter2: ObjectValueLinePresenter?
-    
+
     open override func didSetModel(oldValue: ModelObjectProtocol?) {
         super.didSetModel(oldValue: oldValue)
         presenter1?.model = compositeLine?.interactor1

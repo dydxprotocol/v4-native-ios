@@ -9,7 +9,7 @@ public struct BatchUpdate {
     public let deletions: [IndexPath]
     public let insertions: [IndexPath]
     public let moves: [MoveStep]
-    
+
     public init(
         diff: ExtendedDiff,
         indexPathTransform: (IndexPath) -> IndexPath = { $0 }

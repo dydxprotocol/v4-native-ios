@@ -17,7 +17,7 @@ public enum PresenterMode: Int {
 public typealias SelectionCallack = (_ deselect: Bool) -> Void
 
 @IBDesignable
-@objc open class ListPresenter: NSObject {
+open class ListPresenter: NSObject {
     @IBInspectable open var sequence: Int = 0
     private var debouncer: Debouncer = Debouncer()
     @IBOutlet open dynamic var selectionHandler: SelectionHandlerProtocol? {

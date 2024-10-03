@@ -13,7 +13,7 @@ import Utilities
 public class SettingHeaderViewModel: PlatformViewModel {
     @Published public var text: String?
     @Published public var dismissAction: (() -> Void)?
-    
+
     public init() { }
 
     public static var previewValue: SettingHeaderViewModel {
@@ -21,7 +21,7 @@ public class SettingHeaderViewModel: PlatformViewModel {
         vm.text = "Header"
         return vm
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
@@ -36,7 +36,7 @@ public class SettingHeaderViewModel: PlatformViewModel {
                         .createView(parentStyle: style)
                         .padding([.leading, .vertical], 8)
                     }
-                    
+
                     Text(self.text ?? "")
                         .themeFont(fontType: .base, fontSize: .largest)
                         .themeColor(foreground: .textPrimary)
@@ -75,4 +75,3 @@ struct SettingHeaderView_Previews_Light: PreviewProvider {
     }
 }
 #endif
-

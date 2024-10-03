@@ -15,23 +15,23 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
         case initializedRemoteLoading
         case initializedRemoteLoaded
     }
-    
+
     private let apiKey: String
     private let userId: String
     private let environment: Environment
     // ensures feature flag values stay constant throughout the app session after they are used the first time, even if they are initialized to null
     private var sessionValues = [String: Availabilty]()
-    
+
     private enum Availabilty {
         case available(Bool)
         // unavailable is the case for a new feature flag, or a first launch of the app with Statsig
         case unavailable
     }
-    
+
     public enum Environment: CustomDebugStringConvertible {
         case production
         case development
-        
+
         var statsigEnvironemnt: StatsigEnvironment {
             switch self {
             case .production:
@@ -40,7 +40,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
                 return StatsigEnvironment(tier: .Development)
             }
         }
-        
+
         public var debugDescription: String {
             switch self {
             case .production:
@@ -50,15 +50,15 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
             }
         }
     }
-    
+
     public init(apiKey: String, userId: String, environment: Environment) {
         self.apiKey = apiKey
         self.userId = userId
         self.environment = environment
     }
-    
+
     static public var shared: StatsigFeatureFlagsProvider?
-    
+
     public var featureFlags: [String: Any]?
 
     public func refresh(completion: @escaping () -> Void) {
@@ -103,7 +103,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
         }
         completion()
     }
-    
+
     @Published private(set) public var initializationState = InitializationState.uninitialized
 
     // https://docs.statsig.com/sdk/debugging
@@ -122,7 +122,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
         }
         sessionValues[feature] = availability
         Console.shared.log("analytics log | Statsig feature flag \(feature) is \(availability) for the session")
-        
+
         switch availability {
         case .available(let bool):
             return bool
@@ -131,7 +131,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
             return nil
         }
     }
-    
+
     public func value(feature: String) -> String? {
         // not yet implemented for Statsig feature flags since it is not yet needed
         return nil
@@ -141,5 +141,3 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
         return false
     }
 }
-
-

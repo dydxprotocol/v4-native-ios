@@ -17,7 +17,7 @@ open class RealLocation: NSObject, LocationProviderProtocol {
             }
         }
     }
-    
+
     @objc public dynamic var location: CLLocation?
 
     open var background: Bool = false {

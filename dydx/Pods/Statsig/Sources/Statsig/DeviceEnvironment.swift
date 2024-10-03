@@ -52,7 +52,7 @@ struct DeviceEnvironment {
     static func get(_ overrideStableID: String? = nil) -> [String: String?] {
         return instance.get(overrideStableID)
     }
-    
+
     static func getSDKMetadata(_ overrideStableID: String? = nil) -> [String: String?] {
         return instance.getSDKMetadata(overrideStableID)
     }
@@ -62,11 +62,11 @@ struct DeviceEnvironment {
             return val ?? ""
         }
     }
-    
+
     private func getSDKMetadata(_ overrideStableID: String? = nil) -> [String: String?] {
         lock.lock()
         defer { lock.unlock() }
-        
+
         return [
             "sdkType": DeviceEnvironment.sdkType,
             "sdkVersion": DeviceEnvironment.sdkVersion,

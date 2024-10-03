@@ -11,7 +11,7 @@ import Utilities
 
 open class UXImageView: UIImageView {
     private var changed: Bool = false
-    
+
     open override var image: UIImage? {
         didSet {
             changed = true

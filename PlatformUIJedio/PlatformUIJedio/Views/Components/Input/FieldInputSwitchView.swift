@@ -19,7 +19,7 @@ public class FieldInputSwitchViewModel: FieldInputBaseViewModel {
         vm.text = "text"
         return vm
     }
-    
+
     public lazy var inputBinding = Binding<Bool> {
         return self.input?.checked ?? false
     } set: { newValue in
@@ -28,7 +28,7 @@ public class FieldInputSwitchViewModel: FieldInputBaseViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
@@ -78,4 +78,3 @@ struct FieldInputSwitchView_Previews_Light: PreviewProvider {
     }
 }
 #endif
-

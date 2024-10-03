@@ -19,7 +19,7 @@ public final class AuthService: NSObject, SingletonProtocol {
     }
 
     @objc public dynamic var provider: AuthProviderProtocol?
-    
+
     public func didSetName(oldValue: String?) {
         if name != oldValue {
             updateProvider()

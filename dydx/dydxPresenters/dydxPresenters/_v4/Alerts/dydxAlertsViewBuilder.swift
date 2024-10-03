@@ -5,7 +5,7 @@
 //  Created by Michael Maguire on 9/17/24.
 //  Copyright © 2024 dYdX Trading Inc. All rights reserved.
 //
- 
+
 import Utilities
 import dydxViews
 import PlatformParticles
@@ -29,7 +29,7 @@ private class dydxAlertsViewController: HostingViewController<PlatformView, dydx
         return false
     }
 }
- 
+
 private protocol dydxAlertsViewBuilderPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxAlertsViewModel? { get }
 }
@@ -41,11 +41,11 @@ private class dydxAlertsViewBuilderPresenter: HostedViewPresenter<dydxAlertsView
         super.init()
 
         viewModel = dydxAlertsViewModel()
-        
+
         viewModel?.listViewModel.contentChanged = { [weak self] in
             self?.viewModel?.objectWillChange.send()
         }
-        
+
         viewModel?.backAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }

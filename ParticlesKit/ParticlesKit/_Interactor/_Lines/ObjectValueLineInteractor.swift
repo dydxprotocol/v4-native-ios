@@ -117,7 +117,7 @@ import Utilities
             lineValue = nil
         }
     }
-    
+
     public func set(entity: ModelObjectProtocol?, title: String?, formatter: ValueFormatterProtocol?, objectField: String?, valueField: String, xib: String? = nil) {
         self.title = title
         self.formatter = formatter
@@ -182,7 +182,7 @@ import Utilities
         interactor.set(entity: entity, title: title, formatter: nil, objectField: objectField, valueField: valueField, xib: xib)
         return interactor
     }
-    
+
     public var url: String? {
         return parser.asString(lineValue)
     }

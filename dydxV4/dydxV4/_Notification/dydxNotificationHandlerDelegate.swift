@@ -22,13 +22,13 @@ final class dydxNotificationHandlerDelegate: NSObject, NotificationHandlerDelega
             sendTokenUpdate()
         }
     }
-    
+
     private var languageCode: String? {
         didSet {
             sendTokenUpdate()
         }
     }
-    
+
     private var permission: EPrivacyPermission? {
         didSet {
             didSetPermission()
@@ -37,7 +37,7 @@ final class dydxNotificationHandlerDelegate: NSObject, NotificationHandlerDelega
 
     override init() {
         super.init()
-        
+
         DataLocalizer.shared?.languagePublisher
             .sink { [weak self] languageCode in
                 self?.languageCode = languageCode
@@ -79,7 +79,7 @@ final class dydxNotificationHandlerDelegate: NSObject, NotificationHandlerDelega
             }
             UserDefaults.standard.set(permission?.rawValue, forKey: userPermissionTag)
             UserDefaults.standard.synchronize()
-        } else if (permission == .authorized) {
+        } else if permission == .authorized {
             sendTokenUpdate()
         }
     }

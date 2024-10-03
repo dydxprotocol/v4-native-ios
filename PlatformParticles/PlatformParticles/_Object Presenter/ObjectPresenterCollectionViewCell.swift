@@ -19,7 +19,7 @@ import UIKit
                 installView(xib: xib, into: contentView, parentViewController: nil) { [weak self] view in
                     self?.presenterView = view
                 }
-               
+
             }
         }
     }
@@ -31,7 +31,7 @@ import UIKit
             }
         }
     }
-    
+
     @objc public var isCellHighlighted: Bool = false {
         didSet {
             if isCellHighlighted != oldValue {

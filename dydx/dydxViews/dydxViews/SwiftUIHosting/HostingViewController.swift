@@ -42,7 +42,7 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
     private let presenterView = ObjectPresenterView()
     private var configuration: HostingViewControllerConfiguration = .default
     private var subscriptions = Set<AnyCancellable>()
-    
+
     static private var gradientColors: [UIColor] { [ThemeColor.SemanticColor.layer2.uiColor.withAlphaComponent(0.01),
                                                      ThemeColor.SemanticColor.layer2.uiColor.withAlphaComponent(0.90)] }
     private let gradientView = GradientView(gradientColors: HostingViewController.gradientColors,
@@ -80,7 +80,7 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tabBarController?.delegate = self
 
         if let hostingController = hostingController {
@@ -98,7 +98,7 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
 
             hostingController.view.backgroundColor = .clear
         }
-        
+
         if configuration.gradientTabbar {
             tabBarController?.tabBar.backgroundColor = .clear
             tabBarController?.tabBar.isTranslucent = true
@@ -111,7 +111,7 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
                 make.height.equalTo(96)
             }
         }
-        
+
         dydxThemeSettings.shared.$currentThemeType.sink { [weak self] _ in
             self?.updateTabItemGradient()
         }.store(in: &subscriptions)
@@ -140,7 +140,7 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
 
         presenter?.stop()
     }
-    
+
     // https://stackoverflow.com/a/79006732
     public func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         UIView.setAnimationsEnabled(false)

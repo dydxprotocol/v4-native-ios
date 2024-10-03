@@ -79,7 +79,7 @@ import Utilities
             return self.sequence
         }
     }
-    
+
     override public func ordered(sequence: [ModelObjectProtocol]?) -> [ModelObjectProtocol]? {
         if let sequence = sequence {
             if inputReversed {
@@ -91,11 +91,11 @@ import Utilities
             return nil
         }
     }
-    
+
     override open func sequence(data: [String: ModelObjectProtocol]?) -> [ModelObjectProtocol]? {
         return nil
     }
-    
+
     open func merge(_ sequence1: [ModelObjectProtocol], _ sequence2: [ModelObjectProtocol]) -> [ModelObjectProtocol] {
         if let first1 = sequence1.first, let first2 = sequence2.first, let last1 = sequence1.last, let last2 = sequence2.last {
             if last1.order?(ascending: first2) == true {
@@ -127,7 +127,7 @@ import Utilities
             return sequence1.count > 0 ? sequence1 : sequence2
         }
     }
-    
+
     open func binaryMerge(_ sequence1: [ModelObjectProtocol], _ sequence2: [ModelObjectProtocol]) -> [ModelObjectProtocol] {
         // first sequence is in front of the second
         if let last1 = sequence1.last {
@@ -150,7 +150,7 @@ import Utilities
             return sequence2
         }
     }
-    
+
     open func compare(_ item1: ModelObjectProtocol, _ item2: ModelObjectProtocol) -> ComparisonResult {
         if item1 === item2 {
             return .orderedSame
@@ -165,7 +165,7 @@ import Utilities
             }
         }
     }
-    
+
     open func walk(_ sequence1: [ModelObjectProtocol], _ sequence2: [ModelObjectProtocol]) -> [ModelObjectProtocol] {
         var merged = [ModelObjectProtocol]()
         let cursor1 = Cursor(objects: sequence1)

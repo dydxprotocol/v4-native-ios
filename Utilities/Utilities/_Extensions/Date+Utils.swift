@@ -81,7 +81,7 @@ public extension Date {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return formatter.string(from: self)
     }
-    
+
     var utcServerDatetimeString: String {
         let formatter = type(of: self).localFormatter
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"
@@ -132,21 +132,21 @@ public extension Date {
         formatter.timeStyle = .none
         return formatter.string(from: self)
     }
-    
+
     var localLongTimeString: String {
         let formatter = type(of: self).localFormatter
         formatter.dateStyle = .none
         formatter.timeStyle = .long
         return formatter.string(from: self)
     }
-    
+
     var localDateString: String {
         let formatter = type(of: self).localFormatter
         formatter.dateStyle = .short
         formatter.timeStyle = .none
         return formatter.string(from: self)
     }
-    
+
     var localTimeString: String {
         let formatter = type(of: self).localFormatter
         formatter.dateStyle = .none
@@ -219,7 +219,7 @@ public extension Date {
         components.second = -1
         return Calendar.current.date(byAdding: components, to: startOfMonth)!
     }
-    
+
     var nextHour: Date {
         let components = Calendar.current.dateComponents([.year, .month, .day, .hour], from: self)
         return Calendar.current.date(from: components)!.addingTimeInterval(3600)

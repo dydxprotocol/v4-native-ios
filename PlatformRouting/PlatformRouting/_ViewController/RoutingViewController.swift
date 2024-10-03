@@ -36,15 +36,6 @@ open class NavigableViewController: KeyboardAdjustingViewController, NavigablePr
         RoutingHistory.shared.record(destination: self)
     }
 
-    override open func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        print("\(String(describing: type(of: self))) viewWillDisappear")
-//        printTransitionStates()
-//        if !dismissing() && !popping() {
-//            RoutingHistory.shared.remove(destination: self)
-//        }
-    }
-
     open func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if let routingRequest = routingRequest {
             return routingRequest.path == request?.path && (routingRequest.params as NSDictionary?) == (request?.params as NSDictionary?)
