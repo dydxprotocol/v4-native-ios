@@ -257,6 +257,10 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.historicalTradingRewardPeriod = period
     }
 
+    public func refreshVaultAccount() {
+        asyncStateManager.refreshVaultAccount()
+    }
+    
     public func startTrade() {
         asyncStateManager.trade(data: nil, type: nil)
     }

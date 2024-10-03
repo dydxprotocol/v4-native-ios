@@ -162,9 +162,9 @@ private struct VaultDepositWithdrawConfirmationView: View {
             let preTransferFreeCollateral = AmountTextModel(amount: viewModel.curFreeCollateral?.asNsNumber)
             let preTransferMarginUsage = AmountTextModel(amount: viewModel.curMarginUsage?.asNsNumber)
 
-            let postTransferVaultBalance = AmountTextModel(amount: viewModel.postVaultBalance?.asNsNumber)
-            let postTransferFreeCollateral = AmountTextModel(amount: viewModel.postFreeCollateral?.asNsNumber)
-            let postTransferMarginUsage = AmountTextModel(amount: viewModel.postMarginUsage?.asNsNumber)
+            let postTransferVaultBalance = viewModel.postVaultBalance == nil ? nil : AmountTextModel(amount: viewModel.postVaultBalance?.asNsNumber)
+            let postTransferFreeCollateral = viewModel.postFreeCollateral == nil ? nil : AmountTextModel(amount: viewModel.postFreeCollateral?.asNsNumber)
+            let postTransferMarginUsage = viewModel.postMarginUsage == nil ? nil : AmountTextModel(amount: viewModel.postMarginUsage?.asNsNumber)
 
             let estSlippage = AmountTextModel(amount: viewModel.slippage?.asNsNumber, unit: .percentage)
             let expectedAmount = AmountTextModel(amount: viewModel.expectedAmount?.asNsNumber)

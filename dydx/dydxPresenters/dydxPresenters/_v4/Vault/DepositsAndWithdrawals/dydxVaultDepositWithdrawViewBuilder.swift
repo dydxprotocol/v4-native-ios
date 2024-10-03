@@ -222,8 +222,8 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     }
 }
 
-private extension dydxViews.VaultTransferType {
-    var confirmScreenPath: String {
+extension dydxViews.VaultTransferType {
+    fileprivate var confirmScreenPath: String {
         switch self {
         case .deposit: return "/vault/deposit_confirm"
         case .withdraw: return "/vault/withdraw_confirm"

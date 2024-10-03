@@ -122,13 +122,39 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
     public func getMegavaultWithdrawalInfo(sharesToWithdraw: Double) async -> String? {
         return await call(functionName: "getMegavaultWithdrawalInfo", params: [sharesToWithdraw])
     }
-    
-    public func depositToMegavaulut(subaccountNumber: Double, amountUsdc: Double) async -> String? {
-        return await call(functionName: "depositToMegavault", params: [subaccountNumber, amountUsdc])
+
+    public func depositToMegavault(subaccountNumber: Int32, amountUsdc: Double) async -> Result<ChainSuccessResponse, ChainError> {
+        let response = await call(functionName: "depositToMegavault", params: [subaccountNumber, amountUsdc])
+        return handleChainResponse(response)
+    }
+
+    public func withdrawFromMegavault(subaccountTo: String, shares: Double, minAmount: Double) async -> Result<ChainSuccessResponse, ChainError> {
+        let response = await call(functionName: "withdrawFromMegavault", params: [subaccountTo, shares, minAmount])
+        return handleChainResponse(response)
     }
     
-    public func withdrawFromMegavault(subaccountNumber: Double, shares: Double, minAmount: Double) async -> String? {
-        return await call(functionName: "withdrawFromMegavault", params: [subaccountNumber, shares, minAmount])
+    // Helper function for parsing the response
+    private func handleChainResponse(_ response: String?) -> Result<ChainSuccessResponse, ChainError> {
+        guard let response = response else {
+            return .failure(.unknownError)
+        }
+        
+        guard let jsonData = response.data(using: .utf8) else {
+            return .failure(.unknownError)
+        }
+        
+        do {
+            // Try to decode the error first
+            if let error = try? JSONDecoder().decode(ChainErrorResponse.self, from: jsonData) {
+                return .failure(error.error)
+            }
+            
+            // If no error, decode the success response
+            let success = try JSONDecoder().decode(ChainSuccessResponse.self, from: jsonData)
+            return .success(success)
+        } catch {
+            return .failure(.unknownError)
+        }
     }
     
     public func call(functionName: String, params: [Any?]) async -> String? {
@@ -144,6 +170,43 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
             completion(result)
         }
     }
+}
+
+//TODO: Replace?
+// Define the structure of the error message
+public struct ChainError: Decodable, Error {
+    static let unknownError = ChainError(message: "An unknown error occurred", line: nil, column: nil, stack: nil)
+
+    public let message: String
+    public let line: Int?
+    public let column: Int?
+    public let stack: String?
+}
+
+public struct ChainErrorResponse: Decodable, Error {
+    public let error: ChainError
+}
+
+// Define the structure of the success message
+public struct ChainEvent: Decodable {
+    let type: String
+    let attributes: [ChainEventAttribute]
+}
+
+public struct ChainEventAttribute: Decodable {
+    let key: String
+    let value: String
+}
+
+public struct ChainSuccessResponse: Decodable {
+    let height: Int?
+    let hash: String?
+    let code: Int?
+    let tx: String
+    let txIndex: Int?
+    let gasUsed: String?
+    let gasWanted: String?
+    let events: [ChainEvent]?
 }
 
 /* to test
