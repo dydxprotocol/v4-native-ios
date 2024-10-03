@@ -158,8 +158,8 @@ open class SettingsViewPresenter: BaseSettingsViewPresenter {
         }
         return textViewModel
     }
-    
+
     open func onInputValueChanged(input: FieldInput) {
-        
+
     }
 }

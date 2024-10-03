@@ -6,7 +6,6 @@
 //  Copyright © 2024 dYdX Trading Inc. All rights reserved.
 //
 
-
 import Darwin
 
 @propertyWrapper

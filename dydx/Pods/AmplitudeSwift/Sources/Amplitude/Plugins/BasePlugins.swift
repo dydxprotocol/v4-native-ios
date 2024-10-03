@@ -14,7 +14,7 @@ open class BasePlugin {
         return event
     }
 
-    public func teardown(){
+    public func teardown() {
         // Clean up any resources from setup if necessary
     }
 

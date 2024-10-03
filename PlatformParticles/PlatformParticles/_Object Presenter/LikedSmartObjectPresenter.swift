@@ -77,14 +77,14 @@ import UIToolkits
         }
     }
 
-    @IBAction @objc func like(_ sender: Any?) {
+    @IBAction func like(_ sender: Any?) {
         if let key = model?.key, let keyValue = key, let path = likePath {
             Router.shared?.navigate(to: RoutingRequest(path: path, params: ["key": keyValue]), animated: false, completion: nil)
 //            likedManager?.toggleLike(key: key)
         }
     }
 
-    @IBAction @objc func dislike(_ sender: Any?) {
+    @IBAction func dislike(_ sender: Any?) {
         if let key = model?.key, let keyValue = key, let path = dislikePath {
             Router.shared?.navigate(to: RoutingRequest(path: path, params: ["key": keyValue]), animated: false, completion: nil)
 //            likedManager?.toggleDislike(key: key)

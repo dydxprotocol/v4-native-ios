@@ -13,25 +13,25 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
         lhs.isSelected == rhs.isSelected &&
         lhs.value == rhs.value
     }
-    
+
     public enum TabItemContent: Equatable {
         public struct PillConfig {
             var text: String
             var textColor: ThemeColor.SemanticColor
             var backgroundColor: ThemeColor.SemanticColor
-            
+
             public init(text: String, textColor: ThemeColor.SemanticColor, backgroundColor: ThemeColor.SemanticColor) {
                 self.text = text
                 self.textColor = textColor
                 self.backgroundColor = backgroundColor
             }
         }
-        
+
         case text(String, EdgeInsets = EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
         case textWithPillAccessory(text: String, pillConfig: PillConfig)
         case icon(UIImage)
         case bar(PlatformViewModel)
-        
+
         public static func ==(lhs: TabItemContent, rhs: TabItemContent) -> Bool {
             switch (lhs, rhs) {
             case let (.text(leftText, leftInsets), .text(rightText, rightInsets)):
@@ -112,7 +112,7 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
                 }
                 .frame(maxWidth: .infinity)
                 return AnyView(content)
-                
+
             }
         }
     }

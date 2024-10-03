@@ -16,7 +16,7 @@ import Utilities
             didSetClock(oldValue: oldValue)
         }
     }
-    
+
     open override func didSetModel(oldValue: ModelObjectProtocol?) {
         super.didSetModel(oldValue: oldValue)
         clock = Clock.shared
@@ -31,4 +31,3 @@ import Utilities
     open func displayTime(animated: Bool) {
     }
 }
-

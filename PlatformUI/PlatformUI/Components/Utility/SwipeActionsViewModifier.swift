@@ -33,7 +33,7 @@ struct SwipeActionsModifier: ViewModifier {
     @State var cellSwipeAccessoryPosition: CellSwipeAccessoryPosition
     let leftCellSwipeAccessory: CellSwipeAccessory?
     let rightCellSwipeAccessory: CellSwipeAccessory?
-    
+
     @State var shouldResetStatusOnAppear = true
 
     @State var accessoryVisibility: CellSwipeAccessoryVisibility = .showNone
@@ -47,7 +47,7 @@ struct SwipeActionsModifier: ViewModifier {
 
     let cellID = UUID()
 
-    @State var currentCellID: UUID? = nil
+    @State var currentCellID: UUID?
     @State var resetNotice = NotificationCenter.default.publisher(for: .cellSwipeAccessoryVisibilityReset)
 
     let cellSwipeAccessoryWidth: CGFloat = 60
@@ -88,8 +88,7 @@ struct SwipeActionsModifier: ViewModifier {
     }
 
     @ViewBuilder func loadAccessory(_ accessory: CellSwipeAccessory, position: CellSwipeAccessoryPosition, frame: CGRect)
-    -> some View
-    {
+    -> some View {
         accessoryView(accessory: accessory, position: position)
             .offset(
                 x: cellOffset(
@@ -111,11 +110,10 @@ struct SwipeActionsModifier: ViewModifier {
                 frameWidth = width
             }
         }
-        
+
         if position == .left {
             return -width + offset
-        }
-        else {
+        } else {
             return width + offset
         }
 
@@ -134,7 +132,7 @@ struct SwipeActionsModifier: ViewModifier {
         }
         return
     }
-    
+
     func body(content: Content) -> some View {
 
         return ZStack(alignment: .topLeading) {
@@ -226,7 +224,7 @@ struct SwipeActionsModifier: ViewModifier {
     func dismissNotification() {
         NotificationCenter.default.post(name: .cellSwipeAccessoryVisibilityReset, object: nil)
     }
-    
+
     func getGesture() -> _EndedGesture<_ChangedGesture<DragGesture>> {
         let minimumDistance: CGFloat
         if #available(iOS 18.0, *) {
@@ -240,7 +238,7 @@ struct SwipeActionsModifier: ViewModifier {
             var dragWidth = value.translation.width
 
             self.shouldResetStatusOnAppear = false
-            
+
             if currentCellID != cellID {
                 currentCellID = cellID
                 NotificationCenter.default.post(Notification(name: .cellSwipeAccessoryVisibilityReset, object: cellID))
@@ -304,7 +302,7 @@ struct SwipeActionsModifier: ViewModifier {
             let dragWidth = value.translation.width
 
             let swipeCommitDistance: CGFloat = 30
-            
+
             switch accessoryVisibility {
             case .showNone:
                 if abs(dragWidth) < swipeCommitDistance {

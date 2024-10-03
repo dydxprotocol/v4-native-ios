@@ -10,20 +10,20 @@ import SwiftUI
 import Charts
 import DGCharts
 import PlatformUI
-//import S
+// import S
 
 struct SparklineView: View {
     let values: [Double]
-    
+
     let isIncreasingPositive = true
     private let lineWidth = 1.5
-    
+
     private var isIncreasing: Bool { (values.last ?? -Double.infinity) >= (values.first ?? -Double.infinity) }
     private var isPositive: Bool { isIncreasingPositive && isIncreasing || !isIncreasingPositive && !isIncreasing }
     private var color: ThemeColor.SemanticColor { isPositive ? ThemeSettings.positiveColor : ThemeSettings.negativeColor }
-    
+
     private var valuesDomain: ClosedRange<Double> { (values.min() ?? 0)...(values.max() ?? 0) }
-    
+
     var chart: some View {
         Chart(Array(values.enumerated()), id: \.offset) { (offset, element) in
             LineMark(x: .value("", offset),

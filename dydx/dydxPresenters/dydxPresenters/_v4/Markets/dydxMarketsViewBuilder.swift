@@ -41,7 +41,7 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
 
         let viewModel = dydxMarketsViewModel()
         self.viewModel = viewModel
-        
+
         viewModel.header = dydxMarketsHeaderViewModel(searchAction: {
             Router.shared?.navigate(to: RoutingRequest(path: "/markets/search"), animated: true, completion: nil)
         })
@@ -69,11 +69,11 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
         viewModel.sort = dydxMarketAssetSortViewModel(contents: SortAction.actions.map(\.text)) { [weak self] selectedIdx in
             self?.selectedSortAction = SortAction.actions[selectedIdx]
         }
-        
+
         viewModel.marketsListViewModel?.onTap = { marketViewModel in
             Router.shared?.navigate(to: RoutingRequest(path: "/trade/\(marketViewModel.marketId)"), animated: true, completion: nil)
         }
-        
+
         viewModel.marketsListViewModel?.onFavoriteTap = { marketViewModel in
             dydxFavoriteStore.shared.toggleFavorite(marketId: marketViewModel.marketId)
             marketViewModel.isFavorite = dydxFavoriteStore.shared.isFavorite(marketId: marketViewModel.marketId)
@@ -90,7 +90,7 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
                 self?.updateSummary(marketSummary: marketSummary)
             }
             .store(in: &subscriptions)
-        
+
         Publishers
             .CombineLatest4(AbacusStateManager.shared.state.marketList,
                             AbacusStateManager.shared.state.assetMap,
@@ -106,7 +106,7 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
         Publishers
             .CombineLatest($selectedFilterAction, $selectedSortAction)
             .removeDuplicates(by: { $0.0 == $1.0 && $0.1 == $1.1 })
-            .sink { [weak self] filter, sort in
+            .sink { [weak self] _, _ in
                 self?.viewModel?.scrollAction = .toTop
             }
             .store(in: &subscriptions)
@@ -117,7 +117,7 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
             self?.viewModel?.scrollAction = .toTop
         }
     }
-    
+
     private func updateAssetList(markets: [PerpetualMarket], assetMap: [String: Asset], sort: SortAction?, filter: FilterAction?) {
         let markets = markets.filter { $0.status?.canTrade == true }
         viewModel?.marketsListViewModel?.markets = markets

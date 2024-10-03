@@ -16,7 +16,7 @@ struct PopoverContainerView: View {
     @ObservedObject var popoverModel: PopoverModel
 
     /// The currently-dragging popover.
-    @State var selectedPopover: Popover? = nil
+    @State var selectedPopover: Popover?
 
     /// How much to offset the currently-dragging popover.
     @State var selectedPopoverOffset: CGSize = .zero
@@ -42,8 +42,7 @@ struct PopoverContainerView: View {
                         /// If VoiceOver is on and a `dismissButtonLabel` was set, show it.
                         if
                             UIAccessibility.isVoiceOverRunning,
-                            let dismissButtonLabel = popover.attributes.accessibility.dismissButtonLabel
-                        {
+                            let dismissButtonLabel = popover.attributes.accessibility.dismissButtonLabel {
                             Button {
                                 popover.dismiss()
                             } label: {
@@ -143,7 +142,7 @@ struct PopoverContainerView: View {
                         removal: popover.attributes.dismissal.transition ?? .opacity
                     )
                 )
-                
+
                 /// Clean up the container view.
                 .onDisappear {
                     popover.context.onDisappear?()

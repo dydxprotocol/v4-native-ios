@@ -9,7 +9,7 @@
 import Foundation
 
 open class DebugSettingsStore: UserDefaultsStore, DebugProtocol {
-    public var debug: [String : Any]? {
+    public var debug: [String: Any]? {
         get {
             dictionary
         }
@@ -18,4 +18,3 @@ open class DebugSettingsStore: UserDefaultsStore, DebugProtocol {
         }
     }
 }
-

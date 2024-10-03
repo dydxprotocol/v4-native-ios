@@ -57,7 +57,7 @@ open class ParticlesWebPresenter: NSObject, WKNavigationDelegate, UIScrollViewDe
         }
     }
 
-    @IBOutlet @objc open dynamic var webview: ParticlesWebView? {
+    @IBOutlet open dynamic var webview: ParticlesWebView? {
         didSet {
             webview?.domain = domain
             changeObservation(from: oldValue, to: webview, keyPath: #keyPath(ParticlesWebView.title)) { [weak self] _, _, _, _ in
@@ -142,7 +142,7 @@ open class ParticlesWebPresenter: NSObject, WKNavigationDelegate, UIScrollViewDe
             let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
             activityVC.excludedActivityTypes = [
                 UIActivity.ActivityType.airDrop,
-                UIActivity.ActivityType.addToReadingList,
+                UIActivity.ActivityType.addToReadingList
             ]
 
             activityVC.popoverPresentationController?.sourceView = UserInteraction.shared.sender as? UIView

@@ -134,15 +134,15 @@ open class EmbeddingFloatingManager: FloatingManager, EmbeddingProtocol {
             floatingChanged(vc)
         }
     }
-    
+
     override public func floatingPanelShouldBeginDragging(_ fpc: FloatingPanelController) -> Bool {
         if fpc === floating {
             let panGesture = fpc.panGestureRecognizer
             let velocity = panGesture.velocity(in: panGesture.view)
-           
+
             return (floated as? FloatedDelegate)?.shouldPan(currentState: fpc.state, velocity: velocity) ?? true
         }
-        
+
         return super.floatingPanelShouldBeginDragging(fpc)
     }
 

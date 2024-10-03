@@ -12,7 +12,7 @@ import UIKit
 
 open class RoutingExtensionDelegate: NSObject, WKExtensionDelegate {
     open func applicationDidFinishLaunching() {
-        Router.shared = MappedAppleWatchRouter(file:"routing.json")
+        Router.shared = MappedAppleWatchRouter(file: "routing.json")
 
         routeToStart()
     }

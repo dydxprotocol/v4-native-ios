@@ -76,7 +76,7 @@ public class IdentifyInterceptor {
             transferInterceptedIdentifyEvent()
         }
 
-        switch event.eventType  {
+        switch event.eventType {
         case Constants.IDENTIFY_EVENT:
             if isInterceptEvent(event) {
                 try writeEventToStorage(event)

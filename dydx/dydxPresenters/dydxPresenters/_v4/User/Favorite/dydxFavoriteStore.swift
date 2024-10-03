@@ -11,7 +11,7 @@ import Utilities
 final class dydxFavoriteStore {
     private let settingsStore = SettingsStore.shared
     private let storeKey = "favorite_markets"
-    
+
     static let shared = dydxFavoriteStore()
 
     func isFavorite(marketId: String) -> Bool {
@@ -33,7 +33,7 @@ final class dydxFavoriteStore {
             }
         }
     }
-    
+
     func toggleFavorite(marketId: String) {
         setFavorite(isFavorite: !isFavorite(marketId: marketId), marketId: marketId)
     }

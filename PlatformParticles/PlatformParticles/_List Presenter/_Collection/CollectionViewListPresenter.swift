@@ -11,12 +11,12 @@ import ParticlesKit
 import UIToolkits
 
 open class CollectionViewListPresenter: XibListPresenter, UICollectionViewDataSource, UICollectionViewDelegate, ScrollingProtocol {
-    @IBInspectable @objc public dynamic var autoScroll: Bool = false
+    @IBInspectable public dynamic var autoScroll: Bool = false
     @objc public dynamic var isAtEnd: Bool = true
 
     @IBInspectable var sectionHeaderXib: String?
     @IBInspectable var sectionFooterXib: String?
-    @IBOutlet @objc open dynamic var collectionView: UICollectionView? {
+    @IBOutlet open dynamic var collectionView: UICollectionView? {
         didSet {
             if collectionView !== oldValue {
                 oldValue?.dataSource = nil
@@ -74,7 +74,7 @@ open class CollectionViewListPresenter: XibListPresenter, UICollectionViewDataSo
             }
         }
     }
-    
+
     public var initialPosition: Int?
 
     private var collectionViewXibRegister: CollectionViewXibRegister = CollectionViewXibRegister()
@@ -276,7 +276,7 @@ open class CollectionViewListPresenter: XibListPresenter, UICollectionViewDataSo
             completion()
         }
     }
-    
+
     private func reallyScrollTo(index: Int, animated: Bool) {
         if mode == .sections {
             collectionView?.scrollToItem(at: IndexPath(row: NSNotFound, section: index), at: .left, animated: animated)
@@ -284,12 +284,12 @@ open class CollectionViewListPresenter: XibListPresenter, UICollectionViewDataSo
             collectionView?.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: animated)
         }
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         (cell as? ObjectPresenterCollectionViewCell)?.isCellHighlighted = true
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         (cell as? ObjectPresenterCollectionViewCell)?.isCellHighlighted = false

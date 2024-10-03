@@ -52,7 +52,7 @@ import UIKit
     open override func didSetSegments(oldValue: [ControlSegment]?) {
         collectionView?.reloadData()
     }
-    
+
     open override func didSetSelectedIndex(oldValue: Int) {
         super.didSetSelectedIndex(oldValue: oldValue)
         if selectedIndex != -1 {
@@ -63,7 +63,7 @@ import UIKit
             }
         }
     }
-    
+
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         if let textCell = cell as? SegmentCollectionViewCell {

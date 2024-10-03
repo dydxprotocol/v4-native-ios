@@ -27,10 +27,6 @@ open class LoadingNavigationController: UXNavigationController, LoadingIndicator
         status = LoadingStatus.shared
     }
 
-    open override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-
     open func update() {
     }
 }

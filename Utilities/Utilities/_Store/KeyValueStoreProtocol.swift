@@ -13,4 +13,3 @@ public protocol KeyValueStoreProtocol {
     func setValue(_ value: Any?, forKey: String)
     func reset()
 }
-

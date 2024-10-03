@@ -14,6 +14,6 @@ public struct ObjectLoader {
             completion(xibLoaded)
         } else {
             ClassLoader.load(from: xibOrClassName, completion: completion)
-        } 
+        }
     }
 }

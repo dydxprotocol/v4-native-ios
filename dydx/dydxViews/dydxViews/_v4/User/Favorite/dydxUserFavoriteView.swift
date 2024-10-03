@@ -19,7 +19,7 @@ public class dydxUserFavoriteViewModel: PlatformViewModel {
     public init(size: CGSize = .init(width: 16, height: 16)) {
         self.size = size
     }
-    
+
     public convenience init(isFavorited: Bool = false,
                             size: CGSize = .init(width: 16, height: 16),
                             onTapped: (() -> Void)? = nil) {

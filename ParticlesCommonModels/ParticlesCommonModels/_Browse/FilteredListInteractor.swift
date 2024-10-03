@@ -53,7 +53,7 @@ import Utilities
 
     public var filters: FilterEntity? {
         didSet {
-            changeObservation(from: oldValue, to: filters, keyPath: #keyPath(FilterEntity.data)) { [weak self] _, _, _, animated in
+            changeObservation(from: oldValue, to: filters, keyPath: #keyPath(FilterEntity.data)) { [weak self] _, _, _, _ in
                 self?.filter()
             }
         }

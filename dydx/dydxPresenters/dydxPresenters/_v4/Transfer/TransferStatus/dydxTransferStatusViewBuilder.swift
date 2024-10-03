@@ -98,9 +98,8 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
             subscribeToDepositStatus(transfer: transfer)
         case .withdrawal:
             subscribeToWithdrawalStatus(transfer: transfer)
-        case .transferOut:
+            case .transferOut:
             subscribeToTransferOutStatus(transfer: transfer)
-            break
         }
 
         let maxTimeLapsedInSeconds = 3600.0
@@ -135,9 +134,8 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
             step1.title = DataLocalizer.localize(path: "APP.ONBOARDING.INITIATED_WITHDRAWAL")
             step3.title = DataLocalizer.localize(path: "APP.ONBOARDING.DEPOSIT_TO_DESTINATION",
                                                  params: ["DESTINATION_CHAIN": transfer.toChainName ?? ""])
-        case .transferOut:
+                                                 case .transferOut:
             step1.title = DataLocalizer.localize(path: "APP.ONBOARDING.INITIATED_TRANSFEROUT")
-            break
         }
     }
 

@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 public protocol FeatureFlagsProtocol {
-    
+
     func refresh(completion: @escaping () -> Void)
     func activate(completion: @escaping () -> Void)
     func value(feature: String) -> String?

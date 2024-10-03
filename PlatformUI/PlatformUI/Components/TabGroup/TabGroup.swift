@@ -72,8 +72,7 @@ private extension View {
     }
 }
 
-
-public class TabGroupModel<ItemContent: PlatformViewModeling> : PlatformViewModel {
+public class TabGroupModel<ItemContent: PlatformViewModeling>: PlatformViewModel {
     public enum LayoutConfig {
         case naturalSize
         case equalSpacing
@@ -83,12 +82,12 @@ public class TabGroupModel<ItemContent: PlatformViewModeling> : PlatformViewMode
     @Published public var currentSelection: Int?
     @Published public var unselectedStyleKey: String?
     @Published public var selectedStyleKey: String?
-    @Published public var onSelectionChanged: ((Int) ->())?
+    @Published public var onSelectionChanged: ((Int) -> Void)?
     @Published public var spacing: CGFloat?
     @Published public var layoutConfig = LayoutConfig.naturalSize
     @Published public var selectionAnimation: Animation?
 
-    public init(items: [ItemContent]? = nil, selectedItems: [ItemContent]? = nil, currentSelection: Int? = nil, unselectedStyleKey: String? = nil, selectedStyleKey: String? = nil, selectionAnimation: Animation? = nil, onSelectionChanged: ((Int) ->())? = nil, spacing: CGFloat? = 8, layoutConfig: LayoutConfig = .naturalSize) {
+    public init(items: [ItemContent]? = nil, selectedItems: [ItemContent]? = nil, currentSelection: Int? = nil, unselectedStyleKey: String? = nil, selectedStyleKey: String? = nil, selectionAnimation: Animation? = nil, onSelectionChanged: ((Int) -> Void)? = nil, spacing: CGFloat? = 8, layoutConfig: LayoutConfig = .naturalSize) {
         self.items = items
         if let selectedItems = selectedItems {
             self.selectedItems = selectedItems
@@ -103,13 +102,13 @@ public class TabGroupModel<ItemContent: PlatformViewModeling> : PlatformViewMode
         self.layoutConfig = layoutConfig
         self.selectionAnimation = selectionAnimation
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            
+
             assert(self.items?.count == self.selectedItems?.count)
-            
+
             return AnyView(
                 TabGroupView(model: self, selectionAnimation: self.selectionAnimation, parentStyle: parentStyle, styleKey: styleKey)
             )
@@ -120,7 +119,7 @@ public class TabGroupModel<ItemContent: PlatformViewModeling> : PlatformViewMode
 #if DEBUG
 struct TabGroup_Previews: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
-    
+
     static var previews: some View {
         Group {
             let items = [
@@ -133,7 +132,7 @@ struct TabGroup_Previews: PreviewProvider {
                 Text("item 2").themeColor(foreground: .textTertiary).wrappedViewModel,
                 Text("item 3").themeColor(foreground: .textTertiary).wrappedViewModel
             ]
-            
+
             TabGroupModel(items: items, selectedItems: selected, currentSelection: 1)
                 .createView()
                 .environmentObject(themeSettings)
@@ -142,4 +141,3 @@ struct TabGroup_Previews: PreviewProvider {
     }
 }
 #endif
-

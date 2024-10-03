@@ -256,7 +256,7 @@ private enum GoogleDataTransportConfig {
       forName: Sessions.SessionIDChangedNotificationName,
       object: nil,
       queue: nil
-    ) { notification in
+    ) { _ in
       subscriber.onSessionChanged(self.currentSessionDetails)
     }
     // Immediately call the callback because the Sessions SDK starts

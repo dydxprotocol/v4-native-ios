@@ -13,7 +13,7 @@ import Utilities
 @objc public class ParticlesBarChartDataEntry: BarChartDataEntry, ParticlesChartDataEntryProtocol {
     public var dataSet: Weak<ChartDataSet> = Weak<ChartDataSet>()
     public var notifierDebouncer: Debouncer = Debouncer()
-    
+
     private var barData: BarGraphingObjectProtocol? {
         return model as? BarGraphingObjectProtocol
     }

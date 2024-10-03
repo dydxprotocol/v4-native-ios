@@ -29,7 +29,7 @@ public extension AttributedString {
         }
         self = attributedString
     }
-    
+
     init(localizerPathKey: String,
          params: [String: String]? = nil,
          // localizerPathKeys mapped to the action to be performed when tapped

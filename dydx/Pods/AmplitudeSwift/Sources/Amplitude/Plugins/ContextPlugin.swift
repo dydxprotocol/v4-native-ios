@@ -126,7 +126,7 @@ class ContextPlugin: BeforePlugin {
             event.carrier = context["carrier"] as? String
         }
         if trackingOptions?.shouldTrackIpAddress() ?? false {
-            if event.ip == nil  {
+            if event.ip == nil {
                 // get the ip in server side if there is no event level ip
                 event.ip = "$remote"
             }
@@ -173,8 +173,7 @@ class ContextPlugin: BeforePlugin {
 
     func isValidDeviceId(_ deviceId: String?) -> Bool {
         if deviceId == nil || deviceId == "e3f5536a141811db40efd6400f1d0a4e"
-            || deviceId == "04bab7ee75b9a58d39b8dc54e8851084"
-        {
+            || deviceId == "04bab7ee75b9a58d39b8dc54e8851084" {
             return false
         }
         return true

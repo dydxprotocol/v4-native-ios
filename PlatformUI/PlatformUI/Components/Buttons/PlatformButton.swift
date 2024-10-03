@@ -17,7 +17,7 @@ public enum PlatformButtonType {
 }
 
 public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformViewModel {
-    @Published public var action: () -> ()
+    @Published public var action: () -> Void
     @Published public var content: Content
     @Published public var type: PlatformButtonType
     @Published public var state: PlatformButtonState
@@ -25,7 +25,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
     public init(content: Content,
                 type: PlatformButtonType = .defaultType(),
                 state: PlatformButtonState = .primary,
-                action: @escaping () -> ()) {
+                action: @escaping () -> Void) {
         self.content = content
         self.type = type
         self.state = state
@@ -61,7 +61,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         }
                         .themeStyle(styleKey: self.buttonStyleKey, parentStyle: style)
                         .cornerRadius(8)
-                        
+
                         let borderWidth: CGFloat = 1
                         let cornerRadius: CGFloat = 8
                         switch self.state {
@@ -80,7 +80,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                             button
                                 .border(borderWidth: borderWidth, cornerRadius: cornerRadius, borderColor: ThemeColor.SemanticColor.layer6.color)
                         }
-                      
+
                     case .small:
                         Button(action: self.action) {
                                 self.content
@@ -91,14 +91,14 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         .padding(9)
                         .themeStyle(styleKey: self.buttonStyleKey, parentStyle: style)
                         .cornerRadius(6)
-                        
+
                     case .iconType:
                         Button(action: self.action) {
                             self.content.createView(parentStyle: style, styleKey: nil)
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         .disabled(disabled)
-                       
+
                     case .pill:
                         Button(action: self.action) {
                             self.content.createView(parentStyle: style, styleKey: nil)
@@ -114,7 +114,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
             )
         }
     }
-    
+
     private var buttonStyleKey: String {
         switch state {
         case .primary:
@@ -135,50 +135,49 @@ struct PlatformButton_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            PlatformButtonViewModel(content: PlatformViewModel() { _ in AnyView(Text("Primary")) },
+            PlatformButtonViewModel(content: PlatformViewModel { _ in AnyView(Text("Primary")) },
                                     state: .primary) {}
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
-            PlatformButtonViewModel(content: PlatformViewModel() { _ in AnyView(Text("Secondary")) },
+
+            PlatformButtonViewModel(content: PlatformViewModel { _ in AnyView(Text("Secondary")) },
                                     state: .secondary) {}
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
-            PlatformButtonViewModel(content:  PlatformViewModel() { _ in AnyView(Text("Disabled")) },
+
+            PlatformButtonViewModel(content: PlatformViewModel { _ in AnyView(Text("Disabled")) },
                                     state: .disabled) {}
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
-            PlatformButtonViewModel(content:  PlatformViewModel() { _ in AnyView(Text("Destructive")) },
+
+            PlatformButtonViewModel(content: PlatformViewModel { _ in AnyView(Text("Destructive")) },
                                     state: .destructive) {}
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
+
             PlatformButtonViewModel(content: PlatformIconViewModel(type: .system(name: "heart.fill"),
                                                  clip: .circle(background: .layer3, spacing: 15)),
                                     type: .iconType) {}
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
-            PlatformButtonViewModel(content:  PlatformViewModel() { _ in AnyView(Text("Pill")) },
+
+            PlatformButtonViewModel(content: PlatformViewModel { _ in AnyView(Text("Pill")) },
                                     type: .pill,
                                     state: .secondary) {}
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
+
             PlatformButtonViewModel(content: PlatformIconViewModel(type: .system(name: "heart.fill")),
                                     type: .pill) {}
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
-            PlatformButtonViewModel(content:  PlatformViewModel() { _ in AnyView(Text("Smaller")) },
+
+            PlatformButtonViewModel(content: PlatformViewModel { _ in AnyView(Text("Smaller")) },
                                     type: .small) {}
                 .createView()
                 .previewLayout(.sizeThatFits)
-            
+
         }
     }
 }
 #endif
-

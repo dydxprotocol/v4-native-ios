@@ -113,10 +113,6 @@ open class CollectionViewGridPresenter: XibGridPresenter, UICollectionViewDataSo
         return CGSize.zero
     }
 
-    override open func change(to new: [[ModelObjectProtocol]]) {
-        super.change(to: new)
-    }
-
     override open func updateLayout() {
         collectionView?.collectionViewLayout.invalidateLayout()
     }

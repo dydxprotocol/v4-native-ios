@@ -176,9 +176,8 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
                 item.isMarginAdjustable = false
             case .isolated:
                 item.isMarginAdjustable = true
-            default:
+                default:
                 assertionFailure("no margin mode")
-                break
             }
         }
 

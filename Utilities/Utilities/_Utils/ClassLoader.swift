@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol ObjectBuilderProtocol: NSObjectProtocol  {
+public protocol ObjectBuilderProtocol: NSObjectProtocol {
     func build<T>() -> T?
     func buildAsync<T>(completion: @escaping ((T?) -> Void))
 }
@@ -42,7 +42,7 @@ public struct ClassLoader {
                 return
             }
         }
-        
+
         let bundles = Bundle.particles
         for bundle in bundles {
             // The builder objects are loaded dynamically so they need to NSObject
@@ -70,7 +70,7 @@ public struct ClassLoader {
                 }
             }
         }
-        
+
         // assertionFailure("ClassLoader: No matching object found for " + className)
         completion(nil)
     }

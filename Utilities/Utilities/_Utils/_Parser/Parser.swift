@@ -81,7 +81,7 @@ import Foundation
         }
         return nil
     }
-    
+
     @objc open func asNumbers(_ data: Any?) -> [NSNumber]? {
         if let numbers = data as? [NSNumber] {
             return numbers
@@ -150,7 +150,7 @@ import Foundation
 
     @objc open func asArray(_ data: Any?) -> [Any]? {
         if let data = data {
-            if data is Dictionary<AnyHashable, Any> {
+            if data is [AnyHashable: Any] {
                 return nil
             } else if let data = data as? [Any] {
                 return data

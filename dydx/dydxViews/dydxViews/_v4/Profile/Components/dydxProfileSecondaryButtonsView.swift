@@ -20,7 +20,7 @@ public class dydxProfileSecondaryButtonsViewModel: PlatformViewModel {
         let vm = dydxProfileSecondaryButtonsViewModel()
         return vm
     }
-    
+
     @ViewBuilder
     private var settingsHelpRow: some View {
         if let settingsAction, let helpAction {
@@ -28,14 +28,14 @@ public class dydxProfileSecondaryButtonsViewModel: PlatformViewModel {
                 self.createButton(imageName: "icon_settings",
                                   title: DataLocalizer.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS"),
                                   action: settingsAction)
-                
+
                 self.createButton(imageName: "icon_tutorial",
                                   title: DataLocalizer.localize(path: "APP.HEADER.HELP"),
                                   action: helpAction)
             }
         }
     }
-    
+
     @ViewBuilder
     private var alertsRow: some View {
         if let alertsAction {
@@ -44,9 +44,9 @@ public class dydxProfileSecondaryButtonsViewModel: PlatformViewModel {
                               action: alertsAction)
         }
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(

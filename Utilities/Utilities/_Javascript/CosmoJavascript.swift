@@ -75,13 +75,13 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
             }
         }
     }
-    
+
     public func getWithdrawalCapacityByDenom(denom: String, completion: @escaping JavascriptCompletion) {
         callNativeClient(functionName: "getWithdrawalCapacityByDenom", params: [denom]) { result in
             completion(result)
         }
     }
-    
+
     public func getWithdrawalAndTransferGatingStatus(completion: @escaping JavascriptCompletion) {
         callNativeClient(functionName: "getWithdrawalAndTransferGatingStatus", params: []) { result in
             completion(result)

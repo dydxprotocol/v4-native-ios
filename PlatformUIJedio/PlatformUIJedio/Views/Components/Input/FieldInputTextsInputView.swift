@@ -19,12 +19,12 @@ public class FieldInputTextsInputViewModel: FieldInputBaseViewModel {
             self.input?.value = $0
         }
     )
-    
+
     public static var previewValue: FieldInputTextsInputViewModel {
         let vm = FieldInputTextsInputViewModel()
         return vm
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
@@ -46,7 +46,7 @@ public class FieldInputTextsInputViewModel: FieldInputBaseViewModel {
                                        currentValue: self.input?.value as? String,
                                        keyboardType: .default,
                                        onEditingChanged: { [weak self] focused in
-                        if (focused == false) {
+                        if focused == false {
                             self?.valueChanged?(self?.input?.value)
                         }
                     })
@@ -88,4 +88,3 @@ struct FieldInputTextsInputView_Previews_Light: PreviewProvider {
     }
 }
 #endif
-

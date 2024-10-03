@@ -10,7 +10,7 @@ import Foundation
 
 enum CustomTransition {
     case fade
-    
+
     var transitionDelegate: UIViewControllerTransitioningDelegate {
         switch self {
         case .fade:
@@ -26,17 +26,17 @@ protocol RoutingCustomTransitionable: UIViewControllerTransitioningDelegate, UIV
 
 private class CustomTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
     let transitioner: RoutingCustomTransitionable
-    
+
     public init(transitioner: RoutingCustomTransitionable) {
         self.transitioner = transitioner
         super.init()
     }
-    
+
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transitioner.isPresenting = true
         return transitioner
     }
-    
+
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transitioner.isPresenting = false
         return transitioner

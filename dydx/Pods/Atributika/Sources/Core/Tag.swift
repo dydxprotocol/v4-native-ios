@@ -64,8 +64,7 @@ public struct TagTuner: TagTuning {
     public init(attributes: AttributesProvider = [NSAttributedString.Key: Any](),
                 openingTagReplacement: String? = nil,
                 closingTagReplacement: String? = nil,
-                contentReplacement: String? = nil)
-    {
+                contentReplacement: String? = nil) {
         _style = { _ in attributes }
         _transform = { _, part in
             switch part {

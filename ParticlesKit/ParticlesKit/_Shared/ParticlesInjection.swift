@@ -47,11 +47,11 @@ open class ParticlesInjection: NSObject, InjectionProtocol {
             FolderService.shared = RealFolderProvider()
         }
     }
-    
+
     open func injectDebug() {
         DebugSettings.shared = LocalDebugCacheInteractor.shared
     }
-    
+
     open func injectLocalization() {
         #if DEBUG
         LocalizerBuffer.shared = DebugLocalizer()

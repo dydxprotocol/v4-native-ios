@@ -26,9 +26,9 @@ class EventLogger {
     var nonExposedChecks: [String: Int]
 
 #if os(tvOS)
-    let MAX_SAVED_LOG_REQUEST_SIZE = 100_000 //100 KB
+    let MAX_SAVED_LOG_REQUEST_SIZE = 100_000 // 100 KB
 #else
-    let MAX_SAVED_LOG_REQUEST_SIZE = 1_000_000 //1 MB
+    let MAX_SAVED_LOG_REQUEST_SIZE = 1_000_000 // 1 MB
 #endif
 
     init(
@@ -66,7 +66,7 @@ class EventLogger {
 
             self.events.append(event)
 
-            if (self.events.count >= self.maxEventQueueSize) {
+            if self.events.count >= self.maxEventQueueSize {
                 self.flush()
             }
         }
@@ -140,7 +140,7 @@ class EventLogger {
     }
 
     func addNonExposedChecksEvent() {
-        if (self.nonExposedChecks.isEmpty) {
+        if self.nonExposedChecks.isEmpty {
             return
         }
 
@@ -176,8 +176,8 @@ class EventLogger {
 
         failedRequestQueue += requestData
 
-        while (failedRequestQueue.count > 0
-               && failedRequestQueue.reduce(0,{ $0 + $1.count }) > MAX_SAVED_LOG_REQUEST_SIZE) {
+        while failedRequestQueue.count > 0
+               && failedRequestQueue.reduce(0, { $0 + $1.count }) > MAX_SAVED_LOG_REQUEST_SIZE {
             failedRequestQueue.removeFirst()
         }
     }

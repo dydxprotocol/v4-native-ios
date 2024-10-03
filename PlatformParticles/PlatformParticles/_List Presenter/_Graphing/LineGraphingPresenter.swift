@@ -29,7 +29,7 @@ open class LineGraphingPresenter: GraphingPresenter {
 
     override open func setupChart(chartView: ChartViewBase?) {
         super.setupChart(chartView: chartView)
-        
+
         lineChartView?.doubleTapToZoomEnabled = doubleTapToZoomEnabled
         lineChartView?.autoScaleMinMaxEnabled = true
         lineChartView?.highlightPerDragEnabled = true
@@ -69,9 +69,5 @@ open class LineGraphingPresenter: GraphingPresenter {
         if yAxisFormatter !== oldValue {
             lineChartView?.leftAxis.valueFormatter = yAxisFormatter
         }
-    }
-
-    override open func setupLegend(legend: Legend?) {
-        super.setupLegend(legend: legend)
     }
 }

@@ -39,7 +39,7 @@ public class StatsigClient {
         completion: completionBlock = nil
     ) {
         Diagnostics.boot(options)
-        Diagnostics.mark?.overall.start();
+        Diagnostics.mark?.overall.start()
 
         self.sdkKey = sdkKey
         self.currentUser = StatsigClient.normalizeUser(user, options: options)
@@ -58,7 +58,7 @@ public class StatsigClient {
                 return
             }
 
-            if (self.statsigOptions.enableAutoValueUpdate) {
+            if self.statsigOptions.enableAutoValueUpdate {
                 self.scheduleRepeatingSync()
             }
 
@@ -76,7 +76,7 @@ public class StatsigClient {
             completion?(error)
         }
 
-        if (options?.initializeValues != nil) {
+        if options?.initializeValues != nil {
             _onComplete(nil)
         } else {
             fetchValuesFromNetwork(completion: _onComplete)
@@ -105,7 +105,7 @@ public class StatsigClient {
      SeeAlso [StatsigListening](https://docs.statsig.com/client/iosClientSDK#statsiglistening)
      */
     public func addListener(_ listener: StatsigListening) {
-        if (hasInitialized) {
+        if hasInitialized {
             listener.onInitialized(lastInitializeError)
         }
         listeners.append({ [weak listener] in return listener })
@@ -126,7 +126,7 @@ public class StatsigClient {
 
         self.updateUserImpl(user, values: values, completion: completion)
     }
-    
+
     /**
      Manually triggered the refreshing process for the current user
 
@@ -185,7 +185,7 @@ public class StatsigClient {
      Returns the raw values that the SDK is using internally to provide gate/config/layer results
      */
     public func getInitializeResponseJson() -> ExternalInitializeResponse {
-        var values: String? = nil
+        var values: String?
         let dict: [String: Any?] = [
             "feature_gates": self.store.cache.gates,
             "dynamic_configs": self.store.cache.configs,
@@ -264,7 +264,7 @@ extension StatsigClient {
         if let cb = statsigOptions.evaluationCallback {
             cb(.gate(gate))
         }
-        return gate;
+        return gate
     }
 
     /**
@@ -313,7 +313,6 @@ extension StatsigClient {
         }
     }
 }
-
 
 // MARK: Dynamic Configs
 extension StatsigClient {
@@ -395,7 +394,6 @@ extension StatsigClient {
     }
 }
 
-
 // MARK: Experiments
 extension StatsigClient {
     /**
@@ -450,7 +448,6 @@ extension StatsigClient {
         logConfigExposureForConfig(experimentName, config: experiment, isManualExposure: isManualExposure)
     }
 }
-
 
 // MARK: Layers
 extension StatsigClient {
@@ -543,27 +540,26 @@ extension StatsigClient {
     public func getParameterStore(_ storeName: String) -> ParameterStore {
         return getParameterStoreImpl(storeName, shouldExpose: true)
     }
-    
+
     public func getParameterStoreWithExposureLoggingDisabled(_ storeName: String) -> ParameterStore {
         return getParameterStoreImpl(storeName, shouldExpose: false)
     }
-    
+
     private func getParameterStoreImpl(_ storeName: String, shouldExpose: Bool) -> ParameterStore {
         logger.incrementNonExposedCheck(storeName)
 
         var store = store.getParamStore(client: self, forName: storeName)
-        
+
         store.shouldExpose = shouldExpose
-        
+
         if let cb = statsigOptions.evaluationCallback {
             cb(.parameterStore(store))
         }
-        
+
         return store
     }
-    
-}
 
+}
 
 // MARK: Log Event
 extension StatsigClient {
@@ -601,7 +597,6 @@ extension StatsigClient {
     public func logEvent(_ withName: String, value: Double, metadata: [String: String]? = nil) {
         logEventImpl(withName, value: value, metadata: metadata)
     }
-
 
     private func logEventImpl(_ withName: String, value: Any? = nil, metadata: [String: String]? = nil) {
         var eventName = withName
@@ -698,7 +693,6 @@ extension StatsigClient {
     }
 }
 
-
 // MARK: Misc Private
 extension StatsigClient {
     private func fetchValuesFromNetwork(completion: completionBlock) {
@@ -777,22 +771,22 @@ extension StatsigClient {
         currentUser = StatsigClient.normalizeUser(user, options: statsigOptions)
         store.updateUser(currentUser, values: values)
         logger.user = currentUser
-        
+
         if values != nil {
             completion?(nil)
             return
         }
-        
+
         DispatchQueue.main.async { [weak self] in
             self?.fetchValuesFromNetwork { [weak self, completion] error in
                 guard let self = self else {
                     return
                 }
-                
+
                 if self.statsigOptions.enableAutoValueUpdate {
                     self.scheduleRepeatingSync()
                 }
-                
+
                 self.notifyOnUserUpdatedListeners(error)
                 completion?(error)
             }

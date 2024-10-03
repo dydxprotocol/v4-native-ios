@@ -7,8 +7,8 @@
 //
 
 extension BigUInt {
-    //MARK: Addition
-    
+    // MARK: Addition
+
     /// Add `word` to this integer in place.
     /// `word` is shifted `shift` words to the left before being added.
     ///
@@ -51,8 +51,7 @@ extension BigUInt {
                 let (d2, c2) = d.addingReportingOverflow(1)
                 self[ai] = d2
                 carry = c || c2
-            }
-            else {
+            } else {
                 self[ai] = d
                 carry = c
             }
@@ -104,15 +103,13 @@ extension BigInt {
         case (.plus, .minus):
             if a.magnitude >= b.magnitude {
                 return BigInt(sign: .plus, magnitude: a.magnitude - b.magnitude)
-            }
-            else {
+            } else {
                 return BigInt(sign: .minus, magnitude: b.magnitude - a.magnitude)
             }
         case (.minus, .plus):
             if b.magnitude >= a.magnitude {
                 return BigInt(sign: .plus, magnitude: b.magnitude - a.magnitude)
-            }
-            else {
+            } else {
                 return BigInt(sign: .minus, magnitude: a.magnitude - b.magnitude)
             }
         }
@@ -123,4 +120,3 @@ extension BigInt {
         a = a + b
     }
 }
-

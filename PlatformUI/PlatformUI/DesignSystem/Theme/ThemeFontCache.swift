@@ -10,19 +10,19 @@ import SwiftUI
 
 final class ThemeFontCache {
     static let shared = ThemeFontCache()
-    
+
     private var cache = [Key: Font]()
-    
+
     func get(fontType: ThemeFont.FontType, fontSize: ThemeFont.FontSize) -> Font? {
         let key = Key(type: fontType, size: fontSize)
         return cache[key]
     }
-    
+
     func set(fontType: ThemeFont.FontType, fontSize: ThemeFont.FontSize, font: Font) {
         let key = Key(type: fontType, size: fontSize)
         cache[key] = font
     }
-    
+
     func clear() {
         cache = [:]
     }

@@ -19,14 +19,14 @@ public class DefaultEventUtils {
             if lastEventTime == nil {
                 self.amplitude?.track(eventType: Constants.AMP_APPLICATION_INSTALLED_EVENT, eventProperties: [
                     Constants.AMP_APP_BUILD_PROPERTY: currentBuild ?? "",
-                    Constants.AMP_APP_VERSION_PROPERTY: currentVersion ?? "",
+                    Constants.AMP_APP_VERSION_PROPERTY: currentVersion ?? ""
                 ])
             } else if currentBuild != previousBuild {
                 self.amplitude?.track(eventType: Constants.AMP_APPLICATION_UPDATED_EVENT, eventProperties: [
                     Constants.AMP_APP_BUILD_PROPERTY: currentBuild ?? "",
                     Constants.AMP_APP_VERSION_PROPERTY: currentVersion ?? "",
                     Constants.AMP_APP_PREVIOUS_BUILD_PROPERTY: previousBuild ?? "",
-                    Constants.AMP_APP_PREVIOUS_VERSION_PROPERTY: previousVersion ?? "",
+                    Constants.AMP_APP_PREVIOUS_VERSION_PROPERTY: previousVersion ?? ""
                 ])
             }
         }

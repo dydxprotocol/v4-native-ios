@@ -54,7 +54,7 @@ extension UIView {
         }
         contentView.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.snp.updateConstraints() { make in
+        view.snp.updateConstraints { make in
             make.edges.equalToSuperview()
         }
         contentView.sendSubviewToBack(view)

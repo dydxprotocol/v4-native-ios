@@ -18,17 +18,17 @@ public final class FirebaseRunner: NSObject, SingletonProtocol {
         }
     }
     public let enabled: Bool
-    
-    public private (set) static var shared: FirebaseRunner = {
+
+    public private(set) static var shared: FirebaseRunner = {
         FirebaseRunner(optionsFile: optionsFile)
     }()
-    
+
     public init(optionsFile: String?) {
         if let optionsFile = optionsFile,
            let filePath = Bundle.main.path(forResource: optionsFile, ofType: "plist"),
            let options = FirebaseOptions(contentsOfFile: filePath),
            !options.googleAppID.isEmpty {
-            //do not configure firebase if using placeholder config file, otherwise app will crash due to startup runtime exception
+            // do not configure firebase if using placeholder config file, otherwise app will crash due to startup runtime exception
             FirebaseApp.configure(options: options)
             Console.shared.log("analytics log | Firebase initialized")
             FirebaseConfiguration.shared.setLoggerLevel(.min)

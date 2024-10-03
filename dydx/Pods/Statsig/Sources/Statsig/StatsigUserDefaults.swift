@@ -3,7 +3,7 @@ import Foundation
 protocol DefaultsLike {
     func array(forKey defaultName: String) -> [Any]?
     func string(forKey defaultName: String) -> String?
-    func dictionary(forKey defaultName: String) -> [String : Any]?
+    func dictionary(forKey defaultName: String) -> [String: Any]?
     func data(forKey defaultName: String) -> Data?
     func removeObject(forKey defaultName: String)
     func setValue(_ value: Any?, forKey: String)
@@ -68,8 +68,8 @@ class FileBasedUserDefaults: DefaultsLike {
         getValue(forKey: defaultName) as? String
     }
 
-    func dictionary(forKey defaultName: String) -> [String : Any]? {
-        getValue(forKey: defaultName) as? [String : Any]
+    func dictionary(forKey defaultName: String) -> [String: Any]? {
+        getValue(forKey: defaultName) as? [String: Any]
     }
 
     func data(forKey defaultName: String) -> Data? {

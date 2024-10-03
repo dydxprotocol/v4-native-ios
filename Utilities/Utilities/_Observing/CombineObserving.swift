@@ -14,13 +14,13 @@ public protocol CombineObserving: AnyObject {
 }
 
 public extension CombineObserving {
-    
+
     func observeTo<T>(publisher: Published<T>.Publisher?,
                       keyPath: AnyKeyPath,
                       resetCondition: (() -> Bool),
-                      dedupCondition:  ( (T, T) -> Bool)? = nil,
-                      initial: @escaping ((_ obj: T?, _ emitState: EmitState) -> ()),
-                      change: @escaping ((_ obj: T?, _ emitState: EmitState) -> ())) {
+                      dedupCondition: ( (T, T) -> Bool)? = nil,
+                      initial: @escaping ((_ obj: T?, _ emitState: EmitState) -> Void),
+                      change: @escaping ((_ obj: T?, _ emitState: EmitState) -> Void)) {
         if resetCondition() {
             cancellableMap[keyPath]?.cancel()
             cancellableMap.removeValue(forKey: keyPath)
@@ -32,12 +32,12 @@ public extension CombineObserving {
                             initial(t, .initial)
                         }
                     }
-                
+
                 if let dedupCondition = dedupCondition {
                     cancellableMap[keyPath] =
                         publisher
                             .dropFirst()
-                            .removeDuplicates(by:  dedupCondition)
+                            .removeDuplicates(by: dedupCondition)
                             .sink { t in
                                 DispatchQueue.main.async {
                                     change(t, .change)
@@ -56,12 +56,12 @@ public extension CombineObserving {
             }
         }
     }
-    
+
     func observeTo<T>(publisher: Published<T>.Publisher?,
                       keyPath: AnyKeyPath,
                       resetCondition: (() -> Bool),
                       dedupCondition: ( (T, T) -> Bool)? = nil,
-                      change: @escaping ((_ obj: T?, _ emitState: EmitState) -> ())) {
+                      change: @escaping ((_ obj: T?, _ emitState: EmitState) -> Void)) {
         observeTo(publisher: publisher,
                             keyPath: keyPath,
                             resetCondition: resetCondition,
@@ -74,7 +74,7 @@ public extension CombineObserving {
 public enum EmitState {
     case initial
     case change
-    
+
     public var shouldAnimate: Bool {
         switch self {
         case .initial:

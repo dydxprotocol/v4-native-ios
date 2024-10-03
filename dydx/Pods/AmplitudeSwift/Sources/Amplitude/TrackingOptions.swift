@@ -15,7 +15,7 @@ public class TrackingOptions {
         Constants.AMP_TRACKING_OPTION_IDFA,
         Constants.AMP_TRACKING_OPTION_IDFV,
         Constants.AMP_TRACKING_OPTION_CITY,
-        Constants.AMP_TRACKING_OPTION_IP_ADDRESS,
+        Constants.AMP_TRACKING_OPTION_IP_ADDRESS
     ]
 
     var disabledFields: Set<String> = []

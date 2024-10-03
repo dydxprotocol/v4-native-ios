@@ -47,7 +47,7 @@ extension Array where Element: NSObjectProtocol {
         }
     }
 
-    public func maybe() -> Array<Element>? {
+    public func maybe() -> [Element]? {
         if count > 0 {
             return self
         }
@@ -56,7 +56,7 @@ extension Array where Element: NSObjectProtocol {
 }
 
 extension Array {
-    public func filterNils<T>() -> Array<T> where Element == T? {
+    public func filterNils<T>() -> [T] where Element == T? {
         compactMap { $0 }
     }
 }

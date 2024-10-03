@@ -153,7 +153,7 @@ open class TableViewListPresenter: XibListPresenter, UITableViewDataSource, UITa
     private var tableViewXibRegister: TableViewXibRegister = TableViewXibRegister()
     private var tableViewHeaderXibRegister: TableViewHeaderXibRegister = TableViewHeaderXibRegister()
     open var sections: [TableViewSectionListPresenter] = []
-    
+
     override open var title: String? {
         return "List"
     }
@@ -161,7 +161,7 @@ open class TableViewListPresenter: XibListPresenter, UITableViewDataSource, UITa
     override open var icon: UIImage? {
         return UIImage.named("view_list", bundles: Bundle.particles)
     }
-    
+
     open override func didSetInteractor(oldValue: ListInteractor?) {
         super.didSetInteractor(oldValue: oldValue)
         if interactor != oldValue {
@@ -180,7 +180,7 @@ open class TableViewListPresenter: XibListPresenter, UITableViewDataSource, UITa
             }
         }
     }
-    
+
     open override func didSetCurrent(oldValue: [ModelObjectProtocol]?) {
         super.didSetCurrent(oldValue: oldValue)
         if mode == .sections, let list = current as? [ListInteractor] {
@@ -192,7 +192,7 @@ open class TableViewListPresenter: XibListPresenter, UITableViewDataSource, UITa
             })
         }
     }
-    
+
     internal func section(for interactor: ListInteractor, index: Int) -> TableViewSectionListPresenter {
         let section = self.section(with: interactor) ?? TableViewSectionListPresenter()
         if section.xibRegister !== tableViewXibRegister {
@@ -310,7 +310,6 @@ open class TableViewListPresenter: XibListPresenter, UITableViewDataSource, UITa
         return 44
     }
 
-    
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if let tableSection = (mode == .sections) ? sections[section] : sections.first {
             return tableSection.headerViewSize() ?? defaultSize(xib: tableSection.sectionHeaderXib)?.height ?? 0

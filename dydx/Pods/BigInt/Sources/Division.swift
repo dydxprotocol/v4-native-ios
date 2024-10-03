@@ -6,7 +6,7 @@
 //  Copyright © 2016-2017 Károly Lőrentey.
 //
 
-//MARK: Full-width multiplication and division
+// MARK: Full-width multiplication and division
 
 extension FixedWidthInteger where Magnitude == Self {
     private var halfShift: Self {
@@ -70,7 +70,7 @@ extension FixedWidthInteger where Magnitude == Self {
             let r2 = r + vn1
             if r2.high != 0 { return q - 1 }
             if (q - 1).high == 0 && p - vn0 <= r2.upshifted + u.low { return q - 1 }
-            //assert((r + 2 * vn1).high != 0 || p - 2 * vn0 <= (r + 2 * vn1).upshifted + u.low)
+            // assert((r + 2 * vn1).high != 0 || p - 2 * vn0 <= (r + 2 * vn1).upshifted + u.low)
             return q - 2
         }
         /// Divide 3 half-digits by 2 half-digits to get a half-digit quotient and a full-digit remainder.
@@ -118,8 +118,7 @@ extension FixedWidthInteger where Magnitude == Self {
             let (s, o) = x.0.addingReportingOverflow(x.1)
             if o { return q }
             r = s
-        }
-        else {
+        } else {
             (q, r) = y.0.fastDividingFullWidth((x.0, x.1))
         }
         // Now refine q by considering x.2 and y.1.
@@ -139,7 +138,7 @@ extension FixedWidthInteger where Magnitude == Self {
 }
 
 extension BigUInt {
-    //MARK: Division
+    // MARK: Division
 
     /// Divide this integer by the word `y`, leaving the quotient in its place and returning the remainder.
     ///
@@ -148,7 +147,7 @@ extension BigUInt {
     internal mutating func divide(byWord y: Word) -> Word {
         precondition(y > 0)
         if y == 1 { return 0 }
-        
+
         var remainder: Word = 0
         for i in (0 ..< count).reversed() {
             let u = self[i]
@@ -237,8 +236,7 @@ extension BigUInt {
             if product <= x.extract(j - dc ..< j + 1) {
                 x.subtract(product, shiftedBy: j - dc)
                 quotient[j - dc] = q
-            }
-            else {
+            } else {
                 // This case is extremely rare -- it has a probability of 1/2^(Word.bitWidth - 1).
                 x.add(y, shiftedBy: j - dc)
                 x.subtract(product, shiftedBy: j - dc)
@@ -275,8 +273,7 @@ extension BigUInt {
                 product.multiply(byWord: q)
                 if product <= self.extract(j - dc ..< j + 1) {
                     self.subtract(product, shiftedBy: j - dc)
-                }
-                else {
+                } else {
                     self.add(y, shiftedBy: j - dc)
                     self.subtract(product, shiftedBy: j - dc)
                 }
@@ -284,7 +281,6 @@ extension BigUInt {
         }
         self >>= shift
     }
-
 
     /// Divide this integer by `y` and return the resulting quotient and remainder.
     ///

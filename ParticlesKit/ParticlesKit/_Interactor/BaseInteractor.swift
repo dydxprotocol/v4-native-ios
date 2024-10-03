@@ -11,5 +11,5 @@ import Utilities
 import Combine
 
 open class BaseInteractor: NSObject, CombineObserving {
-    public var cancellableMap = [AnyKeyPath : AnyCancellable]()
+    public var cancellableMap = [AnyKeyPath: AnyCancellable]()
 }

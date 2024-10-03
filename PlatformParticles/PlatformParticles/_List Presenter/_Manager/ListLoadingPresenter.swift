@@ -21,10 +21,10 @@ import UIToolkits
             if interactor !== oldValue {
                 let loadingKeyPath = #keyPath(ListInteractor.loading)
                 let itemsKeyPath = #keyPath(ListInteractor.list)
-                changeObservation(from: oldValue, to: interactor, keyPath: loadingKeyPath) { [weak self] _, _, change, _ in
+                changeObservation(from: oldValue, to: interactor, keyPath: loadingKeyPath) { [weak self] _, _, _, _ in
                     self?.updateLoading()
                 }
-                changeObservation(from: oldValue, to: interactor, keyPath: itemsKeyPath) { [weak self] _, _, change, _ in
+                changeObservation(from: oldValue, to: interactor, keyPath: itemsKeyPath) { [weak self] _, _, _, _ in
                     self?.updateLoading()
                 }
             }

@@ -19,7 +19,7 @@ public class FieldOutputTextViewModel: FieldOutputBaseViewModel {
         vm.subtext = "subtext"
         return vm
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
@@ -33,7 +33,7 @@ public class FieldOutputTextViewModel: FieldOutputBaseViewModel {
                     }
                 }
                 .padding(.vertical, 4)
-            
+
             let trailing =
                 HStack {
                     VStack(alignment: .trailing) {
@@ -52,7 +52,7 @@ public class FieldOutputTextViewModel: FieldOutputBaseViewModel {
                     }
                 }
                 .themeColor(foreground: .textTertiary)
-            
+
             return AnyView(
                 PlatformTableViewCellViewModel(main: main.wrappedViewModel,
                                                trailing: trailing.wrappedViewModel)
@@ -92,4 +92,3 @@ struct FieldOutputTextView_Previews_Light: PreviewProvider {
     }
 }
 #endif
-

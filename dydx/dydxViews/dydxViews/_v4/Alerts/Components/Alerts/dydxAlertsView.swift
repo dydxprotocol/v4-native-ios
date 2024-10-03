@@ -13,7 +13,7 @@ import Utilities
 public class dydxAlertsViewModel: PlatformViewModel {
     @Published public var listViewModel: PlatformListViewModel
     @Published public var backAction: (() -> Void)?
-    
+
     public init() {
         self.listViewModel = PlatformListViewModel(intraItemSeparator: false)
     }
@@ -50,11 +50,11 @@ public class dydxAlertsViewModel: PlatformViewModel {
             Spacer()
         }
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            
+
             return VStack(spacing: 20) {
                 self.createHeader(parentStyle: style)
                     .frame(height: 48)

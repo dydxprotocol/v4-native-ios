@@ -75,10 +75,10 @@ public class RoutingMap: NSObject, ParsingProtocol {
 
         case "embed":
             presentation = .embed
-            
+
         case "popup":
             presentation = .popup
-            
+
         case "present_over_full_screen":
             presentation = .presentOverFullScreen
 

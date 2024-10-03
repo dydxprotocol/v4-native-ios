@@ -63,8 +63,7 @@ extension CharacterSet {
 }
 
 extension Dictionary {
-    public func filterNils<T: Any>() -> [Key: Value] where Value == Optional<T> {
+    public func filterNils<T: Any>() -> [Key: Value] where Value == T? {
         filter { $0.value != nil } as? [Key: T] ?? self
     }
 }
-

@@ -75,7 +75,7 @@ open class RoutingEmbeddingController: UIViewController, ParsingProtocol, UIView
     }
 
     @IBInspectable var path: String?
-    
+
     private var paths: [String]? {
         return parser.asStrings(path)
     }

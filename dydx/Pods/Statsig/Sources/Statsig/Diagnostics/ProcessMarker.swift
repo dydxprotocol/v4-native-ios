@@ -7,14 +7,14 @@ class ProcessMarker: MarkerBase {
 
     func start() {
         super.start([
-            "step": step,
+            "step": step
         ])
     }
 
     func end(success: Bool) {
         super.end([
             "step": step,
-            "success": success,
+            "success": success
         ])
     }
 }
