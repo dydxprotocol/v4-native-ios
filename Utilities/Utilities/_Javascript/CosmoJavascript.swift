@@ -60,6 +60,13 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
         callNativeClient(functionName: "deposit", params: [json], completion: completion)
     }
 
+    public func withdrawFromSubaccount(subaccount: Int,
+                                    amount: String,
+                                    completion: @escaping JavascriptCompletion) {
+        let json = "{\"subaccountNumber\": \(subaccount),\"amount\": \"\(amount)\"}"
+        callNativeClient(functionName: "withdraw", params: [json], completion: completion)
+    }
+
     private func callNativeClient(functionName: String, params: [Any?], completion: @escaping JavascriptCompletion) {
         loadV4Client { [weak self] _ in
             DispatchQueue.main.async {
