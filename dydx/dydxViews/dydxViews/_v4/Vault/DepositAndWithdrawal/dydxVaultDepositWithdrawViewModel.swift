@@ -15,13 +15,12 @@ public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
     public enum State {
         case enabled
         case disabled
-        case loading
     }
-
+    
     @Published public var submitState: State = .disabled
     @Published public var submitAction: (() -> Void)?
 
-    @Published public private(set) var numberFormatter = dydxNumberInputFormatter()
+    @Published public private(set) var numberFormatter = dydxNumberInputFormatter(fractionDigits: 2)
 
     @Published public var selectedTransferType: VaultTransferType = .deposit
     @Published public fileprivate(set) var amount: Double?
@@ -109,19 +108,15 @@ private struct VaultDepositWithdrawView: View {
     }
 
     private var submitButton: some View {
-        let content: Text
+        let content = Text(viewModel.selectedTransferType.previewTransferText)
+            .themeColor(foreground: .textPrimary)
+            .themeFont(fontType: .base, fontSize: .large)
         let state: PlatformButtonState
         switch viewModel.submitState {
-        case .enabled, .loading:
+        case .enabled:
             state = .primary
-            content = Text(viewModel.selectedTransferType.previewTransferText)
-                .themeColor(foreground: .textPrimary)
-                .themeFont(fontType: .base, fontSize: .large)
         case .disabled:
             state = .disabled
-            content = Text(viewModel.selectedTransferType.needsAmountText)
-                .themeColor(foreground: .textTertiary)
-                .themeFont(fontType: .base, fontSize: .large)
         }
         return PlatformButtonViewModel(content: content.wrappedViewModel, state: state, action: viewModel.submitAction ?? {})
             .createView()
@@ -129,10 +124,10 @@ private struct VaultDepositWithdrawView: View {
     
     private func makeReceiptItem(titleKey: String, preValue: Double?, postValue: Double?, unit: AmountTextModel.Unit = .dollar, isLoading: Bool = false) -> some View {
         if isLoading {
-            return dydxReceiptLoadingItemView(title: titleKey).createView()
+            return dydxReceiptLoadingItemView(title: DataLocalizer.localize(path: titleKey)).createView()
         } else {
-            let preAmountText = AmountTextModel(amount: preValue?.asNsNumber)
-            let postAmountText = postValue != nil ? AmountTextModel(amount: postValue?.asNsNumber) : nil
+            let preAmountText = AmountTextModel(amount: preValue?.asNsNumber, unit: unit)
+            let postAmountText = postValue != nil ? AmountTextModel(amount: postValue?.asNsNumber, unit: unit) : nil
             let change = AmountChangeModel(before: preAmountText, after: postAmountText)
             return dydxReceiptChangeItemView(title: DataLocalizer.localize(path: titleKey), value: change).createView()
         }
@@ -156,10 +151,9 @@ private struct VaultDepositWithdrawView: View {
                 makeReceiptItem(titleKey: "APP.GENERAL.MARGIN_USAGE", preValue: viewModel.curMarginUsage, postValue: viewModel.postMarginUsage, unit: .percentage)
                 makeReceiptItem(titleKey: "APP.VAULTS.YOUR_VAULT_BALANCE", preValue: viewModel.curVaultBalance, postValue: viewModel.postVaultBalance)
             case .withdraw:
-                let isLoading = viewModel.submitState == .loading
                 makeReceiptItem(titleKey: "APP.GENERAL.CROSS_FREE_COLLATERAL", preValue: viewModel.curFreeCollateral, postValue: viewModel.postFreeCollateral)
-                makeReceiptItem(titleKey: "APP.VAULTS.EST_SLIPPAGE", preValue: viewModel.slippage, postValue: nil, isLoading: isLoading)
-                makeReceiptItem(titleKey: "APP.WITHDRAW_MODAL.EXPECTED_AMOUNT_RECEIVED", preValue: viewModel.expectedAmountReceived, postValue: nil, isLoading: isLoading)
+                makeReceiptItem(titleKey: "APP.VAULTS.EST_SLIPPAGE", preValue: viewModel.slippage, postValue: nil, unit: .percentage)
+                makeReceiptItem(titleKey: "APP.WITHDRAW_MODAL.EXPECTED_AMOUNT_RECEIVED", preValue: viewModel.expectedAmountReceived, postValue: nil)
             }
         }
         .padding(.horizontal, 16)

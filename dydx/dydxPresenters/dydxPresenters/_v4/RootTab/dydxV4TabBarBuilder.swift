@@ -118,7 +118,7 @@ private extension dydxV4TabBarController {
               image: "icon_trade",
               split: true),
         .init(path: "/vault",
-              title: DataLocalizer.localize(path: "APP.VAULTS.EARN"),
+              title: DataLocalizer.localize(path: "APP.VAULTS.VAULT"),
               image: "icon_earn",
               split: true),
         .init(path: "/my-profile",

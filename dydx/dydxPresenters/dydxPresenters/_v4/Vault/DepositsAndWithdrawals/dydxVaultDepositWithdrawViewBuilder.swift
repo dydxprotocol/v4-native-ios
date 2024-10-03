@@ -50,6 +50,7 @@ private protocol dydxVaultDepositWithdrawViewPresenterProtocol: HostedViewPresen
 
 private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVaultDepositWithdrawViewModel>, dydxVaultDepositWithdrawViewPresenterProtocol {
     private var formValidationRequest: Task<Void, Never>?
+    private var aggregatePublisherCancellable: AnyCancellable?
     
     override init() {
         super.init()
@@ -63,18 +64,29 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
         super.start()
         guard let viewModel = viewModel else { return }
         
-        let inputPublisher = Publishers.CombineLatest(viewModel.$amount.removeDuplicates().debounce(for: 0.5, scheduler: RunLoop.main),
-                                                      viewModel.$selectedTransferType.compactMap({ $0 }).removeDuplicates())
-            .map({(amount: $0.0, transferType: $0.1)})
-        Publishers.CombineLatest4(AbacusStateManager.shared.state.selectedSubaccount,
-                                  AbacusStateManager.shared.state.vault.compactMap({ $0 }),
-                                  AbacusStateManager.shared.state.onboarded,
-                                  inputPublisher)
-        .throttle(for: 1, scheduler: RunLoop.main, latest: true)
-        .sink { [weak self] (selectedSubaccount, vault, onboarded, input) in
-            self?.update(subaccount: selectedSubaccount, vault: vault, hasOnboarded: onboarded, amount: input.amount ?? 0, transferType: input.transferType)
-        }
-        .store(in: &subscriptions)
+        viewModel.$selectedTransferType
+            .removeDuplicates()
+            .sink { [weak self] transferType in
+                self?.aggregatePublisherCancellable?.cancel()
+                // transfer types determin throttling/debounce config
+                // do not need debouncing/throttling for deposit since there are no slippage fetches
+                // for withdrawal, refetch slippage every ~10 seconds if subaccount or vault changes during a 10 second period
+                // for withdrawal, refetch slippage after input changes (debounced)
+                let vaultAndSubaccountPublisher = Publishers.CombineLatest(AbacusStateManager.shared.state.selectedSubaccount,
+                                                                           AbacusStateManager.shared.state.vault.compactMap({ $0 }))
+                    .map { (subaccount: $0, vault: $1) }
+                    .throttle(for: transferType == .deposit ? 0 : 5, scheduler: DispatchQueue.main, latest: true)
+                
+                let amountPublisher = viewModel.$amount
+                    .debounce(for: transferType == .deposit ? 0 : 0.5, scheduler: DispatchQueue.main).removeDuplicates()
+                
+                self?.aggregatePublisherCancellable = Publishers.CombineLatest3(vaultAndSubaccountPublisher, AbacusStateManager.shared.state.onboarded, amountPublisher)
+                    .sink(receiveValue: { vaultAndSubaccount, onboarded, amount in
+                        self?.update(subaccount: vaultAndSubaccount.subaccount, vault: vaultAndSubaccount.vault, hasOnboarded: onboarded, amount: amount ?? 0, transferType: transferType)
+                    })
+            }
+            .store(in: &subscriptions)
+        
     }
     
     func update(subaccount: Subaccount?, vault: Abacus.Vault, hasOnboarded: Bool, amount: Double, transferType: dydxViews.VaultTransferType) {
@@ -84,7 +96,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
             return
         }
-                
+        
         let accountData = Abacus.VaultFormAccountData(marginUsage: subaccount.marginUsage?.current,
                                                       freeCollateral: subaccount.freeCollateral?.current,
                                                       canViewAccount: hasOnboarded.asKotlinBoolean)
@@ -94,35 +106,33 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
                                      acknowledgedSlippage: false,
                                      inConfirmationStep: false)
         
-        let preSlippageDataForm = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(
-            formData: formData,
-            accountData: accountData,
-            vaultAccount: vault.account,
-            slippageResponse: nil)
-        
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.update(subaccount: subaccount,
-                        vault: vault,
-                        hasOnboarded: hasOnboarded,
-                        amount: amount,
-                        transferType: transferType,
-                        form: preSlippageDataForm)
-            if transferType == .withdraw {
-                formValidationRequest = Task {
-                    self.fetchSlippageAndUpdate(formData: formData,
-                                                accountData: accountData,
-                                                subaccount: subaccount,
-                                                hasOnboarded: hasOnboarded,
-                                                vault: vault,
-                                                amount: amount,
-                                                transferType: transferType
-                    )
-                }
+        switch transferType {
+        case .deposit:
+            let form = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(formData: formData,
+                                                                                         accountData: accountData,
+                                                                                         vaultAccount: vault.account,
+                                                                                         slippageResponse: nil,
+                                                                                         localizer: DataLocalizer.shared?.asAbacusLocalizer)
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.update(subaccount: subaccount,
+                            vault: vault,
+                            hasOnboarded: hasOnboarded,
+                            amount: amount,
+                            transferType: transferType,
+                            form: form)
             }
+        case .withdraw:
+            fetchSlippageAndUpdate(formData: formData,
+                                   accountData: accountData,
+                                   subaccount: subaccount,
+                                   hasOnboarded: hasOnboarded,
+                                   vault: vault,
+                                   amount: amount,
+                                   transferType: transferType)
         }
-        
     }
+        
     
     /// only necessary for withdrawals
     private func fetchSlippageAndUpdate(formData: Abacus.VaultFormData,
@@ -133,16 +143,15 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
                                         amount: Double,
                                         transferType: dydxViews.VaultTransferType
     ) {
-        viewModel?.submitState = .loading
         formValidationRequest = Task {
             let sharesToWithdraw = Abacus.VaultDepositWithdrawFormValidator.shared.calculateSharesToWithdraw(vaultAccount: vault.account, amount: amount)
             let slippageApiResponse = await CosmoJavascript.shared.getMegavaultWithdrawalInfo(sharesToWithdraw: sharesToWithdraw)
             let slippageResponseParsed = Abacus.VaultDepositWithdrawFormValidator.shared.getVaultDepositWithdrawSlippageResponse(apiResponse: slippageApiResponse ?? "")
-            let form = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(
-                formData: formData,
-                accountData: accountData,
-                vaultAccount: vault.account,
-                slippageResponse: slippageResponseParsed)
+            let form = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(formData: formData,
+                                                                                         accountData: accountData,
+                                                                                         vaultAccount: vault.account,
+                                                                                         slippageResponse: slippageResponseParsed,
+                                                                                         localizer: DataLocalizer.shared?.asAbacusLocalizer)
             
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -171,18 +180,17 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     private func updateMaxAmount(subaccount: Abacus.Subaccount, vault: Abacus.Vault?, transferType: dydxViews.VaultTransferType) {
         switch transferType {
         case .deposit:
-            if let roundedFreeCollateral = subaccount.freeCollateral?.current?.doubleValue.round(to: 2) {
+            if let roundedFreeCollateral = subaccount.freeCollateral?.current?.doubleValue.round(to: 2, rule: .towardZero) {
                 viewModel?.maxAmount = roundedFreeCollateral
             }
         case .withdraw:
-            if let roundedBalance = vault?.account?.balanceUsdc?.doubleValue.round(to: 2) {
+            if let roundedBalance = vault?.account?.balanceUsdc?.doubleValue.round(to: 2, rule: .towardZero) {
                 viewModel?.maxAmount = roundedBalance
             }
         }
     }
     
     private func updateSubmitState(form: VaultFormValidationResult) {
-        form.errors.forEach { print($0) }
         viewModel?.submitState = form.errors.isEmpty ? .enabled : .disabled
     }
     
@@ -206,7 +214,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     }
     
     private func updateErrorAlert(form: VaultFormValidationResult) {
-        guard let error = form.errors.first else {
+        guard let error = form.errors.first, form.submissionData != nil else {
             viewModel?.inputInlineAlert = nil
             return
         }

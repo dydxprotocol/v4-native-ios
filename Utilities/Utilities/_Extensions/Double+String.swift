@@ -31,9 +31,9 @@ extension Double {
         return "\(String(format: "%0.*g", Int(log10(abs(interval))) + 2, interval))\(units[i])"
     }
 
-    public func round(to places: Int) -> Double {
+    public func round(to places: Int, rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) -> Double {
         let divisor = pow(10.0, Double(places))
-        return (self * divisor).rounded() / divisor
+        return (self * divisor).rounded(rule) / divisor
     }
 
     public var stringValue: String? { "\(self)" }
