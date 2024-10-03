@@ -132,7 +132,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         }
     }
     
-    func update(subaccount: Subaccount?, vault: Abacus.Vault, hasAcknowledgedHighSlippage: Bool) {
+    private func update(subaccount: Subaccount?, vault: Abacus.Vault, hasAcknowledgedHighSlippage: Bool) {
         formValidationRequest?.cancel()
         
         guard let subaccount = subaccount, let transferType else {
@@ -175,7 +175,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         }
     }
     
-    func update(subaccount: Subaccount?, vault: Abacus.Vault, hasAcknowledgedHighSlippage: Bool, formValidationResult: Abacus.VaultFormValidationResult) {
+    private func update(subaccount: Subaccount?, vault: Abacus.Vault, hasAcknowledgedHighSlippage: Bool, formValidationResult: Abacus.VaultFormValidationResult) {
         let isSlippageAckSatisfied = formValidationResult.summaryData.needSlippageAck?.boolValue == false || hasAcknowledgedHighSlippage
         let submitDataReady = formValidationResult.submissionData != nil
         viewModel?.submitState = isSlippageAckSatisfied && submitDataReady ? .enabled : .disabled
