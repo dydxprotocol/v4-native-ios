@@ -22,6 +22,7 @@ import class Abacus.VaultFormValidationResult
 import class Abacus.VaultFormAccountData
 import class Abacus.VaultFormData
 import class Abacus.VaultDepositWithdrawFormValidator
+import class Abacus.VaultAccount
 
 public class dydxVaultDepositWithdrawConfirmationViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -33,7 +34,7 @@ public class dydxVaultDepositWithdrawConfirmationViewBuilder: NSObject, ObjectBu
 }
 
 private class dydxVaultDepositWithdrawConfirmationViewController: HostingViewController<PlatformView, dydxVaultDepositWithdrawConfirmationViewModel> {
-
+    
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         let presenter = presenter as? dydxVaultDepositWithdrawConfirmationViewPresenterProtocol
         presenter?.amount = request?.params?["amount"] as? Double
@@ -57,44 +58,43 @@ private protocol dydxVaultDepositWithdrawConfirmationViewPresenterProtocol: Host
 
 private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPresenter<dydxVaultDepositWithdrawConfirmationViewModel>, dydxVaultDepositWithdrawConfirmationViewPresenterProtocol {
     static let slippageAcknowledgementThreshold = 0.01
-
+    
     var transferType: VaultTransferType?
     var amount: Double?
     private var formValidationRequest: Task<Void, Never>?
-
+    
     override init() {
         super.init()
-
+        
         viewModel = dydxVaultDepositWithdrawConfirmationViewModel()
     }
-
+    
     override func start() {
         super.start()
-
+        
         guard let viewModel else { return }
-
+        
         viewModel.amount = amount
         viewModel.faqUrl = AbacusStateManager.shared.environment?.links?.vaultLearnMore
         viewModel.transferType = transferType
-
+        
         initializeSubmitState()
-
+        
         viewModel.cancelAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
         
         // transfer types determin throttling/debounce config
         // do not need debouncing/throttling for deposit since there are no slippage fetches
-        // for withdrawal, refetch slippage every ~10 seconds if subaccount or vault changes during a 10 second period
+        // for withdrawal, refetch slippage every ~2 seconds if subaccount or vault changes during a 2 second period
         // for withdrawal, refetch slippage after input changes (debounced)
         let vaultAndSubaccountPublisher = Publishers.CombineLatest(AbacusStateManager.shared.state.selectedSubaccount,
                                                                    AbacusStateManager.shared.state.vault.compactMap({ $0 }))
             .map { (subaccount: $0, vault: $1) }
-            .throttle(for: transferType == .deposit ? 0 : 5, scheduler: DispatchQueue.main, latest: true)
+            .throttle(for: transferType == .deposit ? 0 : 2, scheduler: DispatchQueue.main, latest: true)
         
         let hasAcknowledgedHighSlippagePublisher = viewModel.$hasAcknowledgedHighSlippage
             .removeDuplicates()
-            .debounce(for: 0.2, scheduler: DispatchQueue.main)
         
         Publishers.CombineLatest(vaultAndSubaccountPublisher, hasAcknowledgedHighSlippagePublisher)
             .sink(receiveValue: { [weak self] vaultAndSubaccount, hasAcknowledgedHighSlippage in
@@ -103,21 +103,15 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
             })
             .store(in: &subscriptions)
         
-        
-        // handle slippage toggling
-//        viewModel.$hasAcknowledgedHighSlippage
-//            .sink {[weak self] hasAcknowledged in
-//                self?.update(newHasAcknowledged: hasAcknowledged)
-//            }
-//            .store(in: &subscriptions)
-//
-//        AbacusStateManager.shared.state.selectedSubaccount
-//            .sink { [weak self] selectedSubaccount in
-//                self?.update(subaccount: selectedSubaccount)
-//            }
-//            .store(in: &subscriptions)
+        // need a non-debounce for the initial fetch so that UI updates immediately after change
+        viewModel.$hasAcknowledgedHighSlippage
+            .sink {[weak self] hasAcknowledgedHighSlippage in
+                guard let self = self else { return }
+                self.update(hasAcknowledgedHighSlippage: hasAcknowledgedHighSlippage)
+            }
+            .store(in: &subscriptions)
     }
-
+    
     private func initializeSubmitState() {
         guard let viewModel, let transferType else { return }
         switch transferType {
@@ -128,6 +122,16 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         }
     }
     
+    private func update(hasAcknowledgedHighSlippage: Bool) {
+        switch self.transferType {
+        case .deposit, nil:
+            // not applicable for deposits
+            break
+        case .withdraw:
+            self.viewModel?.submitState = .loading
+        }
+    }
+    
     func update(subaccount: Subaccount?, vault: Abacus.Vault, hasAcknowledgedHighSlippage: Bool) {
         formValidationRequest?.cancel()
         
@@ -135,6 +139,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
             return
         }
+        
         
         let accountData = Abacus.VaultFormAccountData(marginUsage: subaccount.marginUsage?.current,
                                                       freeCollateral: subaccount.freeCollateral?.current,
@@ -147,11 +152,12 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         
         switch transferType {
         case .deposit:
+            
             let formValidationResult = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(formData: formData,
-                                                                                         accountData: accountData,
                                                                                          vaultAccount: vault.account,
-                                                                                         slippageResponse: nil,
-                                                                                         localizer: DataLocalizer.shared?.asAbacusLocalizer)
+                                                                                                         accountData: accountData,
+                                                                                                         slippageResponse: nil,
+                                                                                                         localizer: DataLocalizer.shared?.asAbacusLocalizer)
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.update(subaccount: subaccount,
@@ -170,28 +176,35 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
     }
     
     func update(subaccount: Subaccount?, vault: Abacus.Vault, hasAcknowledgedHighSlippage: Bool, formValidationResult: Abacus.VaultFormValidationResult) {
-        viewModel?.submitState = formValidationResult.summaryData.needSlippageAck?.boolValue == true ? .disabled : .enabled
+        let isSlippageAckSatisfied = formValidationResult.summaryData.needSlippageAck?.boolValue == false || hasAcknowledgedHighSlippage
+        let submitDataReady = formValidationResult.submissionData != nil
+        viewModel?.submitState = isSlippageAckSatisfied && submitDataReady ? .enabled : .disabled
         viewModel?.slippage = formValidationResult.summaryData.estimatedSlippage?.doubleValue
         viewModel?.expectedAmountReceived = formValidationResult.summaryData.estimatedAmountReceived?.doubleValue
+        viewModel?.requiresAcknowledgeHighSlippage = formValidationResult.summaryData.needSlippageAck == true
+        
         viewModel?.curMarginUsage = subaccount?.marginUsage?.current?.doubleValue ?? 0
         viewModel?.curFreeCollateral = subaccount?.freeCollateral?.current?.doubleValue ?? 0
         viewModel?.curVaultBalance = vault.account?.balanceUsdc?.doubleValue ?? 0
-        viewModel?.postMarginUsage = formValidationResult.summaryData.marginUsage?.doubleValue
-        viewModel?.postFreeCollateral = formValidationResult.summaryData.freeCollateral?.doubleValue
-        viewModel?.postVaultBalance = formValidationResult.summaryData.vaultBalance?.doubleValue
+        
+        viewModel?.postVaultBalance = viewModel?.curVaultBalance == formValidationResult.summaryData.vaultBalance?.doubleValue ? nil : formValidationResult.summaryData.vaultBalance?.doubleValue
+        viewModel?.postFreeCollateral = viewModel?.curFreeCollateral == formValidationResult.summaryData.freeCollateral?.doubleValue ? nil : formValidationResult.summaryData.freeCollateral?.doubleValue
+        viewModel?.postMarginUsage = viewModel?.curMarginUsage == formValidationResult.summaryData.marginUsage?.doubleValue ? nil : formValidationResult.summaryData.marginUsage?.doubleValue
         
         viewModel?.submitAction = { [weak self] in
             self?.viewModel?.submitState = .submitting
             Task {
                 guard let transferType = self?.transferType else { return }
                 let result: Result<ChainSuccessResponse, ChainError>
-
+                
                 switch transferType {
                 case .deposit:
                     guard let subaccountNumber = subaccount?.subaccountNumber, let amount = self?.amount else { return }
                     result = await CosmoJavascript.shared.depositToMegavault(subaccountNumber: subaccountNumber, amountUsdc: amount)
                 case .withdraw:
-                    guard let subaccountTo = formValidationResult.submissionData?.withdraw?.subaccountTo, let shares = formValidationResult.submissionData?.withdraw?.shares, let minAmount = formValidationResult.submissionData?.withdraw?.minAmount else { return }
+                    guard let subaccountTo = formValidationResult.submissionData?.withdraw?.subaccountTo,
+                          let shares = formValidationResult.submissionData?.withdraw?.shares,
+                          let minAmount = formValidationResult.submissionData?.withdraw?.minAmount else { return }
                     result = await CosmoJavascript.shared.withdrawFromMegavault(subaccountTo: subaccountTo, shares: shares, minAmount: minAmount)
                 }
                 DispatchQueue.main.async { [weak self] in
@@ -207,7 +220,6 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
             }
         }
     }
-
     
     /// only necessary for withdrawals
     private func fetchSlippageAndUpdate(formData: Abacus.VaultFormData,
@@ -221,70 +233,14 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
             let slippageApiResponse = await CosmoJavascript.shared.getMegavaultWithdrawalInfo(sharesToWithdraw: sharesToWithdraw)
             let slippageResponseParsed = Abacus.VaultDepositWithdrawFormValidator.shared.getVaultDepositWithdrawSlippageResponse(apiResponse: slippageApiResponse ?? "")
             let formValidationResult = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(formData: formData,
-                                                                                         accountData: accountData,
                                                                                          vaultAccount: vault.account,
-                                                                                         slippageResponse: slippageResponseParsed,
-                                                                                         localizer: DataLocalizer.shared?.asAbacusLocalizer)
+                                                                                                         accountData: accountData,
+                                                                                                         slippageResponse: slippageResponseParsed,
+                                                                                                         localizer: DataLocalizer.shared?.asAbacusLocalizer)
             
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.update(subaccount: subaccount, vault: vault, hasAcknowledgedHighSlippage: hasAcknowledgedHighSlippage, formValidationResult: formValidationResult)
-            }
-        }
-    }
-
-
-    // TODO: replace with real data from abacus
-    func update(subaccount: Subaccount?) {
-        guard let amount,
-              let transferType,
-              amount > 0,
-              // TODO: replace
-              let curVaultBalance = Optional(420.0),
-              let curFreeCollateral = subaccount?.freeCollateral?.current?.doubleValue,
-              let curMarginUsage = subaccount?.marginUsage?.current?.doubleValue
-        else {
-            assertionFailure()
-            return
-        }
-
-        viewModel?.curMarginUsage = curMarginUsage
-        viewModel?.curFreeCollateral = curFreeCollateral
-        viewModel?.curVaultBalance = curVaultBalance
-
-        switch transferType {
-        case .deposit:
-            viewModel?.postVaultBalance = curVaultBalance + amount
-            viewModel?.postFreeCollateral = curFreeCollateral - amount
-            viewModel?.postMarginUsage = curMarginUsage - amount
-        case .withdraw:
-            viewModel?.postVaultBalance = curVaultBalance - amount
-            viewModel?.postFreeCollateral = curFreeCollateral + amount
-            viewModel?.postMarginUsage = curMarginUsage + amount
-        }
-    }
-
-    private func update(newHasAcknowledged: Bool) {
-        guard let viewModel, newHasAcknowledged else { return }
-        switch viewModel.submitState {
-        case .enabled, .disabled:
-            viewModel.submitState = newHasAcknowledged ? .enabled : .disabled
-        case .submitting, .loading:
-            return
-        }
-    }
-
-    private func updateSubmitState(slippage: Double?, expectedAmountReceived: Double?, transferType: VaultTransferType) {
-        switch transferType {
-        case .deposit:
-            viewModel?.submitState = .enabled
-        case .withdraw:
-            viewModel?.slippage = slippage
-            viewModel?.expectedAmountReceived = expectedAmountReceived
-            if let slippage = slippage, viewModel?.requiresAcknowledgeHighSlippage == false || viewModel?.hasAcknowledgedHighSlippage == true {
-                viewModel?.submitState = .enabled
-            } else {
-                viewModel?.submitState = .disabled
             }
         }
     }

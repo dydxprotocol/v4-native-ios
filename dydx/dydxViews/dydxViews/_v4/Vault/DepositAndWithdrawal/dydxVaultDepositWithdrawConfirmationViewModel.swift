@@ -189,7 +189,7 @@ private struct VaultDepositWithdrawConfirmationView: View {
                 case .withdraw:
                     freeCollateralReceiptItem.createView()
                     vaultBalanceReceiptItem.createView()
-                    if let slippage = viewModel.slippage {
+                    if viewModel.slippage != nil {
                         estSlippageReceiptItem.createView()
                         expectedAmountReceiptItem.createView()
                     } else {
@@ -243,9 +243,14 @@ private struct VaultDepositWithdrawConfirmationView: View {
             Group {
                 switch viewModel.submitState {
                 case .enabled, .loading:
-                    Text(viewModel.isFirstSubmission ? transferType.confirmTransferText : DataLocalizer.localize(path: "APP.ONBOARDING.TRY_AGAIN"))
+                    HStack(spacing: 4) {
+                        // spinner on both sides to keep text centered, one always invisible
+                        spinner.opacity(0)
+                        Text(viewModel.isFirstSubmission ? transferType.confirmTransferText : DataLocalizer.localize(path: "APP.ONBOARDING.TRY_AGAIN"))
+                        spinner.opacity(viewModel.submitState == .loading ? 1 : 0)
+                    }
                 case .submitting:
-                    HStack {
+                    HStack(spacing: 4) {
                         Text(DataLocalizer.localize(path: "APP.TRADE.SUBMITTING"))
                         spinner
                     }
