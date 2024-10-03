@@ -57,7 +57,7 @@ public class Debouncer: NSObject, DebouncerProtocol {
     public func ready(handler: DebounceHandler?, function: @escaping DebouncedFunction) {
         function()
     }
-    
+
     @discardableResult open func run(handler: DebounceHandler?, function: @escaping DebouncedFunction) -> Bool {
         if handler === current {
             handler?.reallyRun(function)
@@ -116,7 +116,7 @@ public class DebounceHandler: NSObject {
             self?.reallyRun(backgrounds: backgrounds, final: final, delay: delay)
         })
     }
-        
+
     open func reallyRun(backgrounds: [DebouncedFunction?], final: @escaping DebouncedFunction, delay: TimeInterval?) {
         if let first = backgrounds.first {
             var leftOver = backgrounds

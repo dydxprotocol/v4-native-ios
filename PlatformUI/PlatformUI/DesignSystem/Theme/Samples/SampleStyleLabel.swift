@@ -11,9 +11,9 @@ struct SampleStyleLabel: View, PlatformUIViewProtocol {
     @ObservedObject var themeSettings = ThemeSettings.shared
 
     var parentStyle: ThemeStyle = ThemeStyle.defaultStyle
-    
+
     var styleKey: String? = "title-style"
-    
+
     var body: some View {
         HStack {
             Text("Title")
@@ -29,14 +29,13 @@ struct SampleSubtitleStyleLabel: View, PlatformUIViewProtocol {
 
     var parentStyle: ThemeStyle = ThemeStyle.defaultStyle
     var styleKey: String? = "subtitle-style"
-    
+
     var body: some View {
         Text("Subtitle")
             .themeStyle(style: style)
             .environmentObject(themeSettings)
     }
 }
-
 
 #if DEBUG
 struct SampleStyleLabel_Previews: PreviewProvider {
@@ -56,4 +55,3 @@ struct SampleStyleLabel_Previews: PreviewProvider {
     }
 }
 #endif
-

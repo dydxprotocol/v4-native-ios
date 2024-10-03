@@ -148,7 +148,7 @@ public extension ModelObjectProtocol {
             }
         }
     }
-    
+
     func numberAscending(number: NSNumber?, another: NSNumber?) -> Bool? {
         if let number1 = number {
             if let number2 = another {

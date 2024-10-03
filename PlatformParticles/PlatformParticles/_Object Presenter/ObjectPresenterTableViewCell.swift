@@ -11,7 +11,7 @@ import UIKit
 
 @objc open class ObjectPresenterTableViewCell: UITableViewCell, ObjectPresenterProtocol {
     @IBOutlet public var presenterView: UIView?
-    
+
     public func setXib(_ xib: String?, parentViewController: UIViewController?) {
         if xib != self.xib {
             uninstallView(xib: self.xib, view: presenterView)
@@ -19,7 +19,7 @@ import UIKit
             installPresenterView(xib: xib, parentViewController: parentViewController)
         }
     }
-    
+
     private var xib: String?
     /*
     public var xib: String? {
@@ -97,10 +97,10 @@ import UIKit
 
         (presenterView as? SelectableProtocol)?.isSelected = isSelected
     }
-    
+
     open override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        
+
         (presenterView as? HighlightableProtocol)?.isHighlighted = highlighted
     }
 }

@@ -24,7 +24,7 @@ public class ObjectPresenterContainerView: UIView, ObjectPresenterProtocol, Sele
         didSet {
             if xib != oldValue {
                 uninstallView(xib: oldValue, view: presenterView)
-                installView(xib: xib, into: self, parentViewController: nil) { [weak self] view in
+                installView(xib: xib, into: self, parentViewController: nil) { [weak self] _ in
                     if let self = self {
                         (self.presenterView as? ObjectPresenterView)?.model = self.model
                     }

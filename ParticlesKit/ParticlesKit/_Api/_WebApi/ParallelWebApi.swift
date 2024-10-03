@@ -10,7 +10,7 @@ import Utilities
 
 open class ParallelWebApi<PagedWebApiClass, WebApiClass>: NSObject, IOProtocol where WebApiClass: WebApi, PagedWebApiClass: PagedWebApi<WebApiClass> {
     @objc public dynamic var isLoading: Bool = false
-    
+
     public var priority: Int = 10
 
     public var limit: Int = 100 // items per page

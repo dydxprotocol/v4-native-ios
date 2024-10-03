@@ -35,11 +35,11 @@ extension Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
     }
-    
+
     public var stringValue: String? { "\(self)" }
 }
 
-public extension Optional where Wrapped == Double  {
+public extension Optional where Wrapped == Double {
     var stringValue: String? {
         guard let self else { return nil }
         return "\(self)"

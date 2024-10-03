@@ -17,11 +17,11 @@ extension RoutingMap {
     public var isXib: Bool {
         return destination.ends(with: "xib")
     }
-    
+
     public var isBuilder: Bool {
         return destination.ends(with: "Builder")
     }
-    
+
     public var storyboard: String? {
         if isStoryboard {
             return destination.stringByDeletingPathExtension
@@ -37,7 +37,7 @@ extension RoutingMap {
             return nil
         }
     }
-    
+
     public var builder: String? {
         if isBuilder {
             return destination

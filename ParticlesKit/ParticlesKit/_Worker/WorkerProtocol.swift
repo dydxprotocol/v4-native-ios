@@ -20,13 +20,13 @@ open class BaseWorker: NSObject, WorkerProtocol {
     public var isStarted = false
 
     public override init() {}
-    
+
     open func start() {
         if !isStarted {
             isStarted = true
         }
     }
-    
+
     open func stop() {
         if isStarted {
             subscriptions.forEach { cancellable in

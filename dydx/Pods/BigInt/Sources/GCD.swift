@@ -7,8 +7,8 @@
 //
 
 extension BigUInt {
-    //MARK: Greatest Common Divisor
-    
+    // MARK: Greatest Common Divisor
+
     /// Returns the greatest common divisor of `self` and `b`.
     ///
     /// - Complexity: O(count^2) where count = max(self.count, b.count)
@@ -31,7 +31,7 @@ extension BigUInt {
         }
         return y << twos
     }
-    
+
     /// Returns the [multiplicative inverse of this integer in modulo `modulus` arithmetic][inverse],
     /// or `nil` if there is no such number.
     /// 

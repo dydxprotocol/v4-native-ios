@@ -24,16 +24,6 @@ open class RoutingInterfaceController: WKInterfaceController, NavigableProtocol 
         }
     }
 
-    open override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
-    }
-
-    open override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-    }
-
     open func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         return routingRequest?.path == request?.path && (routingRequest?.params as NSDictionary?) == (request?.params as NSDictionary?)
     }

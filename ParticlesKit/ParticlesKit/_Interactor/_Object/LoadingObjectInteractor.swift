@@ -34,7 +34,7 @@ import Utilities
         }
 
         if let loadingParams = loadingParams, let objectKey = objectKey {
-            loader?.load(params: loadingParams, completion: { [weak self] (io: IOProtocol?, entity: Any?, _: Date?, _: Error?) in
+            loader?.load(params: loadingParams, completion: { [weak self] (_: IOProtocol?, entity: Any?, _: Date?, _: Error?) in
                 if self?.objectKey == objectKey {
                     self?.entity = entity as? (ModelObjectProtocol)
                 }

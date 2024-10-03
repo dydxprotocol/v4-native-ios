@@ -657,7 +657,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
 
         backdropView.alpha = getBackdropAlpha(at: cur, with: value(of: translation))
 
-        guard (pre != cur) else { return }
+        guard pre != cur else { return }
 
         if let vc = ownerVC {
             vc.delegate?.floatingPanelDidMove?(vc)
@@ -1232,13 +1232,13 @@ private class NumericSpringAnimator: NSObject {
     private class UnfairLock {
         var unfairLock = os_unfair_lock()
         func lock() {
-            os_unfair_lock_lock(&unfairLock);
+            os_unfair_lock_lock(&unfairLock)
         }
         func tryLock() -> Bool {
-            return os_unfair_lock_trylock(&unfairLock);
+            return os_unfair_lock_trylock(&unfairLock)
         }
         func unlock() {
-            os_unfair_lock_unlock(&unfairLock);
+            os_unfair_lock_unlock(&unfairLock)
         }
     }
 
@@ -1280,7 +1280,7 @@ private class NumericSpringAnimator: NSObject {
     }
 
     @discardableResult
-    func startAnimation() -> Bool{
+    func startAnimation() -> Bool {
         lock.lock()
         defer { lock.unlock() }
 

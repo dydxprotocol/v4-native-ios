@@ -24,7 +24,7 @@ import Utilities
         debouncer.fifo = true
         return debouncer
     }()
-    
+
     open override func process(buffer: CMSampleBuffer) {
         if let _ = delegate, let _ = scanner {
             if let handler = scanDebouncer.debounce() {

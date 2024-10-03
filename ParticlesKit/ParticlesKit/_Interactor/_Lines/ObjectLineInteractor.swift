@@ -11,7 +11,7 @@ import Utilities
 @objc open class ObjectLineInteractor: BaseInteractor, InteractorProtocol, XibProviderProtocol {
     @IBInspectable open dynamic var title: String?
     @IBInspectable open dynamic var xib: String?
-    
+
     @objc public dynamic var formatter: ValueFormatterProtocol?
 
     @objc open dynamic var entity: ModelObjectProtocol? {

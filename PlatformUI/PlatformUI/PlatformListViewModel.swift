@@ -13,14 +13,13 @@ open class PlatformListViewModel: PlatformViewModeling {
     private let firstListItemTopSeparator: Bool
     private let lastListItemBottomSeparator: Bool
     private let intraItemSeparator: Bool
-    
+
     public var items: [PlatformViewModel] = [] {
         didSet {
             contentChanged?()
         }
     }
 
-    
     public var width: CGFloat? {
         didSet {
             if width != oldValue {
@@ -28,18 +27,18 @@ open class PlatformListViewModel: PlatformViewModeling {
             }
         }
     }
-    
+
     open var header: PlatformViewModel? { nil }
     open var footer: PlatformViewModel? { nil }
     open var placeholder: PlatformViewModel? { nil }
-    
+
     // contentChanged is required because the list view model returns a ForEach struct
     // which does not observe the content change.  Caller should supply a contentChanged block
     // that manually triggers the parent view model's objectWillChange.send()
-    
+
     public var contentChanged: (() -> Void)?
 
-    public init(items: [PlatformViewModel] = [], 
+    public init(items: [PlatformViewModel] = [],
                 intraItemSeparator: Bool = true,
                 firstListItemTopSeparator: Bool = false,
                 lastListItemBottomSeparator: Bool = false,
@@ -50,9 +49,9 @@ open class PlatformListViewModel: PlatformViewModeling {
         self.lastListItemBottomSeparator = lastListItemBottomSeparator
         self.contentChanged = contentChanged
     }
-    
+
     open func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> AnyView {
-        
+
         let itemsOrPlaceholder = items.count > 0 ? items : [placeholder ?? .init(bodyBuilder: nil)]
         let list: [PlatformViewModel]
         if let header, let footer {
@@ -64,7 +63,7 @@ open class PlatformListViewModel: PlatformViewModeling {
         } else {
             list = itemsOrPlaceholder
         }
-        
+
         return AnyView(
             VStack(spacing: intraItemSeparator ? 0 : 10) {
                 ForEach(list, id: \.id) { [weak self] item in
@@ -83,11 +82,11 @@ open class PlatformListViewModel: PlatformViewModeling {
                                         if shouldDisplayTopSeparator {
                                             DividerModel().createView(parentStyle: parentStyle)
                                         }
-                                        
+
                                         Spacer()
                                         item.createView(parentStyle: parentStyle)
                                         Spacer()
-                                        
+
                                         if shouldDisplayBottomSeparator {
                                             DividerModel().createView(parentStyle: parentStyle)
                                         }
@@ -97,7 +96,7 @@ open class PlatformListViewModel: PlatformViewModeling {
                                 }
                             }
                         }
-                        
+
                         if let width = self?.width {
                             cell.frame(width: width)
                         } else {

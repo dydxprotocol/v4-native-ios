@@ -52,7 +52,7 @@ import UIKit
     }
 
     private var _text: String?
-    
+
     open var text: String? {
         get {
             return _text

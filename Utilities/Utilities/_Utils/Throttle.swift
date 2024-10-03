@@ -18,7 +18,7 @@ public class Throttle: NSObject, DebouncerProtocol {
             }
         }
     }
-    
+
     public var runner: DebounceHandler? {
         didSet {
             if runner !== oldValue {
@@ -71,7 +71,7 @@ public class Throttle: NSObject, DebouncerProtocol {
     public func ready(handler: DebounceHandler?, function: @escaping DebouncedFunction) {
         self.pendingFunction = function
     }
-    
+
     @discardableResult open func run(handler: DebounceHandler?, function: @escaping DebouncedFunction) -> Bool {
         if handler === runner {
             handler?.reallyRun(function)
@@ -91,7 +91,7 @@ public class Throttle: NSObject, DebouncerProtocol {
             runner = nil
         }
     }
-    
+
     deinit {
         throttleTimer = nil
     }

@@ -19,7 +19,7 @@ open class ImageCollectionViewCell: UICollectionViewCell {
         didSet {
             if image != oldValue {
                 if let image = image, let url = image.components(separatedBy: "@").first {
-                    imageUrl = URL(string:url)
+                    imageUrl = URL(string: url)
                 } else {
                     imageUrl = nil
                 }

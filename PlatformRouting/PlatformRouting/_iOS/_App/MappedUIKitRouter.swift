@@ -16,7 +16,7 @@ public typealias BacktrackRoutingCompletionBlock = (UIViewController?) -> Void
 
 open class MappedUIKitRouter: MappedRouter {
     let fadeTransitioner = CustomTransition.fade.transitionDelegate
-    
+
     var actions: [NSObject & NavigableProtocol] = [NSObject & NavigableProtocol]()
     override open func backtrack(request: RoutingRequest, animated: Bool, completion: RoutingCompletionBlock?) {
 //        backtrack(to: ViewControllerStack.shared?.topmost(), request: request, animated: animated, completion: completion)
@@ -197,7 +197,7 @@ open class MappedUIKitRouter: MappedRouter {
             }
         }
     }
-    
+
     private func route(storyboardOrBuilder map: RoutingMap, request: RoutingRequest, presentation: RoutingPresentation?, animated: Bool, completion: RoutingCompletionBlock?) {
         loadViewController(from: map) { [weak self] viewController in
             if let viewController = viewController {
@@ -252,8 +252,8 @@ open class MappedUIKitRouter: MappedRouter {
 
         case .drawer:
             drawer(viewController, animated: animated, completion: completion)
-            
-        case .popup: 
+
+        case .popup:
             popup(viewController, animated: animated, completion: completion)
 
         case .presentOverFullScreen:
@@ -349,23 +349,23 @@ open class MappedUIKitRouter: MappedRouter {
             completion?(nil, false)
         }
     }
-    
+
     private func popup(_ viewController: UIViewController, animated: Bool, completion: RoutingCompletionBlock?) {
         if let root = UIViewController.root() {
             // wrapper is necessary for custom transitions
             let wrapperViewController = UIViewController()
             wrapperViewController.modalPresentationStyle = .overFullScreen // or .custom for other presentation styles
             wrapperViewController.transitioningDelegate = fadeTransitioner
-            
+
             // Add the UIHostingController to the wrapper UIViewController
             wrapperViewController.addChild(viewController)
             wrapperViewController.view.addSubview(viewController.view)
             viewController.didMove(toParent: wrapperViewController)
-            
+
             // Ensure the hosting controller's view fills the wrapper view
             viewController.view.translatesAutoresizingMaskIntoConstraints = false
             viewController.view.snp.makeConstraints { $0.edges.equalTo(wrapperViewController.view) }
-            
+
             // Present the wrapper UIViewController
             root.present(wrapperViewController, animated: true, completion: nil)
 
@@ -374,12 +374,12 @@ open class MappedUIKitRouter: MappedRouter {
             completion?(nil, false)
         }
     }
-    
+
     private func presentOverFullScreen(_ viewController: UIViewController, animated: Bool, completion: RoutingCompletionBlock?) {
         if let topmost = ViewControllerStack.shared?.topParent() {
             let navigationController = UIViewController.navigation(with: viewController)
             navigationController.modalPresentationStyle = .overFullScreen
-            //speeds up the animation by 2x
+            // speeds up the animation by 2x
             navigationController.view.layer.speed = 2
             topmost.present(navigationController, animated: animated) {
             }
@@ -484,7 +484,7 @@ open class MappedUIKitRouter: MappedRouter {
             completion(nil)
         }
     }
-    
+
     private func loadViewController(from map: RoutingMap, completion: @escaping ((UIViewController?) -> Void)) {
         if let builder = map.builder {
             ClassLoader.load(from: builder, completion: completion)
@@ -496,8 +496,8 @@ open class MappedUIKitRouter: MappedRouter {
             completion(nil)
         }
     }
-    
-    private func loadAction(from map: RoutingMap, completion:  @escaping (((NSObject & NavigableProtocol)?) -> Void)) {
+
+    private func loadAction(from map: RoutingMap, completion: @escaping (((NSObject & NavigableProtocol)?) -> Void)) {
         if let xib = map.xib {
             let action: (NSObject & NavigableProtocol)? = XibLoader.load(from: xib)
             completion(action)

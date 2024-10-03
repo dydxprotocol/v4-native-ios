@@ -14,7 +14,7 @@ public extension String {
         let outlineTextAttributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor: UIColor.white,
             NSAttributedString.Key.foregroundColor: color,
-            NSAttributedString.Key.strokeWidth: -1.0,
+            NSAttributedString.Key.strokeWidth: -1.0
         ]
         return NSAttributedString(string: self, attributes: outlineTextAttributes)
     }

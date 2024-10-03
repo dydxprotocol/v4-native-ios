@@ -12,7 +12,7 @@ public class NavigationObject: DictionaryEntity, NavigationModelProtocol {
     @objc public var type: String? {
         return parser.asString(data?["type"])
     }
-    
+
     @objc public var title: String? {
         return parser.asString(data?["title"])
     }

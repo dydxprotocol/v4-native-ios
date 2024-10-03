@@ -9,7 +9,7 @@ import XCTest
 @testable import PlatformUI
 
 class PlatformUITests: XCTestCase {
-    
+
     func testFont() throws {
         let themeConfig = ThemeConfig.sampleThemeConfig
         let font = themeConfig.themeFont.font(of: .text, fontSize: .largest)

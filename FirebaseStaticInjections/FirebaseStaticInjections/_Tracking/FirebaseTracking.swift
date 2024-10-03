@@ -38,7 +38,7 @@ public class FirebaseTracking: TransformerTracker {
         }
         return "\(value)"
     }
-    
+
     private func parseAsJsonString(_ value: Any) -> String? {
         if let jsonData = try? JSONSerialization.data(withJSONObject: value, options: .prettyPrinted),
             let jsonString = String(data: jsonData, encoding: .utf8) {
@@ -52,12 +52,12 @@ public class FirebaseTracking: TransformerTracker {
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         Analytics.setUserProperty(String(format: "%.4f", UIDevice.current.systemVersionAsFloat), forName: "os_version")
     }
-    
+
     override public func setUserId(_ userId: String?) {
         Console.shared.log("analytics log | Firebase: User ID set to: `\(userId ?? "nil")`")
         Analytics.setUserID(userId)
     }
-    
+
     override public func setValue(_ value: Any?, forUserProperty userProperty: String) {
         Console.shared.log("analytics log | Firebase: User Property `\(userProperty)` set to: \(value ?? "nil")")
         // firebase max supported length is 36, this is best effort

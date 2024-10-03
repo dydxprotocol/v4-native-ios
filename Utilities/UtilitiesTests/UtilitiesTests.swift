@@ -28,14 +28,14 @@ class UtilitiesTests: XCTestCase {
         XCTAssert(string.pathComponents == ["this", "is", "a", "test.json"], "pathComponents error")
         XCTAssert(string.stringByAppendingPathComponent(path: "another") == "this/is/a/test.json/another", "stringByAppendingPathComponent error")
         XCTAssert(string.stringByAppendingPathExtension(ext: "pdf") == "this/is/a/test.json.pdf", "stringByAppendingPathExtension error")
-        
+
         XCTAssert(string.begins(with: "this"), "begins error")
         XCTAssert(!string.begins(with: "thisx"), "begins error")
-        
+
         XCTAssert(string.ends(with: "test.json"), "ends error")
         XCTAssert(!string.ends(with: "test_json"), "ends error")
     }
-    
+
     func testStringNumberConversion() {
         let decimal = "\(Locale.current.decimalSeparator ?? ".")"
         XCTAssertEqual("-", "-".truncateToWholeNumber())
@@ -84,7 +84,7 @@ class UtilitiesTests: XCTestCase {
 
         XCTAssertEqual(nil, "-a-3skl2dj1   ']\(decimal)  EKD 1 JK 2 J 3KLS(@&#".cleanAsDecimalNumber())
     }
-    
+
     func testJavascriptRunner() {
         let javascriptRunner = JavascriptRunner(file: nil)
         let script = """
@@ -92,7 +92,7 @@ class UtilitiesTests: XCTestCase {
         """
         javascriptRunner.run(script: script) { result in
             DispatchQueue.main.async {
-                javascriptRunner.invoke(className:nil, function: "testFunct", params: ["my message"]) {result in
+                javascriptRunner.invoke(className: nil, function: "testFunct", params: ["my message"]) {result in
                     XCTAssert((result as? String) == "Test Message: my message")
                 }
             }

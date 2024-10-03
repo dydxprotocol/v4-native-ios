@@ -29,7 +29,7 @@ import UIKit
     }
 
     internal var selectedSegment: ControlSegment?
-    
+
     internal var userInteracting: Bool = false
 
     public var numberOfSegments: Int {
@@ -53,7 +53,7 @@ import UIKit
                     } else {
                         selectedSegment = nil
                     }
-                    
+
                     didSetSelectedIndex(oldValue: oldValue)
                 }
             }

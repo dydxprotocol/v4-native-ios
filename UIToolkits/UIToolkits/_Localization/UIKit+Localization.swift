@@ -10,10 +10,6 @@ import UIKit
 import Utilities
 
 extension UILabel {
-    open override func awakeFromNib() {
-        super.awakeFromNib()
-//        text = text?.localized
-    }
 }
 
 extension UITextField {

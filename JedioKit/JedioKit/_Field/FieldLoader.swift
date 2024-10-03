@@ -10,7 +10,7 @@ import ParticlesKit
 import Utilities
 
 @objc open class FieldLoader: NSObject {
-    @IBInspectable @objc public dynamic var definitionFile: String? {
+    @IBInspectable public dynamic var definitionFile: String? {
         didSet {
             if definitionFile != oldValue {
                 definitionGroups = load()

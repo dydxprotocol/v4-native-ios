@@ -18,13 +18,13 @@ public class CrashlyticsErrorLogging: NSObject & ErrorLoggingProtocol {
             Crashlytics.crashlytics().record(error: error)
         }
     }
-    
+
     public func e(tag: String, message: String) {
         Crashlytics.crashlytics().record(error: NSError(domain: tag, code: 0, userInfo: [NSLocalizedDescriptionKey: message]))
     }
-    
+
     public func d(tag: String, message: String) {
         // Do nothing
     }
-    
+
 }

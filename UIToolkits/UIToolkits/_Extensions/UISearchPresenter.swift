@@ -11,8 +11,8 @@ import Utilities
 
 @objc open class UISearchPresenter: NSObject, SearchUIProtocol {
     @IBInspectable var xib: String?
-    
-    @IBOutlet @objc open dynamic var searchButton: UIBarButtonItem? {
+
+    @IBOutlet open dynamic var searchButton: UIBarButtonItem? {
         didSet {
             if searchButton !== oldValue {
                 oldValue?.removeTarget()
@@ -21,7 +21,7 @@ import Utilities
         }
     }
 
-    @IBOutlet @objc open dynamic var cancelSearchButton: UIBarButtonItem? {
+    @IBOutlet open dynamic var cancelSearchButton: UIBarButtonItem? {
         didSet {
             if cancelSearchButton !== oldValue {
                 oldValue?.removeTarget()
@@ -30,7 +30,7 @@ import Utilities
         }
     }
 
-    @IBOutlet @objc open dynamic var searchSaveButton: ButtonProtocol? {
+    @IBOutlet open dynamic var searchSaveButton: ButtonProtocol? {
         didSet {
             if searchSaveButton !== oldValue {
                 oldValue?.removeTarget()
@@ -39,7 +39,7 @@ import Utilities
         }
     }
 
-    @IBOutlet @objc open dynamic var searchDoneButton: ButtonProtocol? {
+    @IBOutlet open dynamic var searchDoneButton: ButtonProtocol? {
         didSet {
             if searchDoneButton !== oldValue {
                 oldValue?.removeTarget()
@@ -48,9 +48,9 @@ import Utilities
         }
     }
 
-    @IBOutlet @objc open dynamic var searchView: UIView?
+    @IBOutlet open dynamic var searchView: UIView?
 
-    @IBOutlet @objc open dynamic var searchBar: UISearchBar? {
+    @IBOutlet open dynamic var searchBar: UISearchBar? {
         didSet {
             if searchBar !== oldValue {
                 oldValue?.delegate = nil
@@ -82,18 +82,18 @@ import Utilities
     @objc open func searchTextChanged() {
     }
 
-    @objc @IBAction open func search(_ sender: Any?) {
+    @IBAction open func search(_ sender: Any?) {
         isSearching = true
     }
 
-    @objc @IBAction open func cancelSearch(_ sender: Any?) {
+    @IBAction open func cancelSearch(_ sender: Any?) {
         isSearching = false
     }
 
-    @objc @IBAction open func saveSearch(_ sender: Any?) {
+    @IBAction open func saveSearch(_ sender: Any?) {
     }
 
-    @objc @IBAction open func doneSearch(_ sender: Any?) {
+    @IBAction open func doneSearch(_ sender: Any?) {
         searchBar?.resignFirstResponder()
     }
 }

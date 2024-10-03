@@ -12,10 +12,10 @@ import Utilities
 
 @objc public class ParticlesPieChartDataSet: PieChartDataSet, ParticlesChartDataSetProtocol {
     public var syncDebouncer = Debouncer()
-    
+
     public var limit: Int = 0
     @objc public dynamic var syncing: Bool = false
-    
+
     public var presenter = Weak<GraphingPresenter>()
 
     public var notifierDebouncer = Debouncer()

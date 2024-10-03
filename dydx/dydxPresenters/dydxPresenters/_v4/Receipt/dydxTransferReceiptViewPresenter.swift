@@ -79,9 +79,8 @@ final class dydxTransferReceiptViewPresenter: dydxReceiptPresenter {
                 } else {
                     value = nil
                 }
-            default:
+                default:
                 value = nil
-                break
             }
             exchangeRateViewModel.value = value
         } else {
@@ -119,9 +118,8 @@ final class dydxTransferReceiptViewPresenter: dydxReceiptPresenter {
                         value = nil
                     }
                 }
-            default:
+                default:
                 value = nil
-                break
             }
             exchangeReceivedViewModel.value = value
         } else {

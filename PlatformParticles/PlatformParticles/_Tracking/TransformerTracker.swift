@@ -23,15 +23,14 @@ open class TransformerTracker: NSObject & TrackingProtocol {
         }
     }
 
-    
     open func setUserId(_ userId: String?) {
         assertionFailure("TransformerTracker does not support setUserId, should override")
     }
-    
+
     open func setValue(_ value: Any?, forUserProperty userProperty: String) {
         assertionFailure("TransformerTracker does not support setUserProperty, should override")
     }
-    
+
     open func leave(_ path: String?) {
     }
 

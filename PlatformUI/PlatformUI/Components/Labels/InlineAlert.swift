@@ -9,37 +9,37 @@
 import SwiftUI
 
 public class InlineAlertViewModel: PlatformViewModel {
-    
+
     @Published public var config: Config
-    
+
     public init(_ config: Config) {
         self.config = config
     }
-    
+
     public static var previewValue: InlineAlertViewModel = {
         let vm = InlineAlertViewModel(Config(title: "Title", body: "Body", level: .error))
         return vm
     }()
-    
+
     private var title: AnyView? {
         guard let titleText = config.title else { return nil }
         return Text(titleText)
             .themeFont(fontType: .plus, fontSize: .medium)
             .wrappedInAnyView()
     }
-    
+
     private var body: AnyView? {
         guard let bodyText = config.body else { return nil }
         return Text(bodyText)
             .themeFont(fontType: .base, fontSize: .small)
             .wrappedInAnyView()
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
             let config = self.config
-            
+
             return HStack(spacing: 0) {
                 config.level.tabColor.color
                     .frame(width: 6)
@@ -64,10 +64,10 @@ public class InlineAlertViewModel: PlatformViewModel {
 
 public extension InlineAlertViewModel {
     struct Config {
-        public var title: AttributedString? = nil
-        public var body: AttributedString? = nil
+        public var title: AttributedString?
+        public var body: AttributedString?
         public var level: Level
-        
+
         public init(title: String?, body: String?, level: Level) {
             if let title = title {
                 self.title = AttributedString(title)
@@ -77,7 +77,7 @@ public extension InlineAlertViewModel {
             }
             self.level = level
         }
-        
+
         public init(title: AttributedString?, body: AttributedString?, level: Level) {
             self.title = title
             self.body = body
@@ -91,7 +91,7 @@ public extension InlineAlertViewModel {
         case error
         case warning
         case success
-        
+
         fileprivate var tabColor: ThemeColor.SemanticColor {
             switch self {
             case .error:
@@ -102,7 +102,7 @@ public extension InlineAlertViewModel {
                 return .colorGreen
             }
         }
-        
+
         fileprivate var backgroundColor: ThemeColor.SemanticColor {
             switch self {
             case .error:
@@ -130,4 +130,3 @@ struct InlineAlert_Previews: PreviewProvider {
     }
 }
 #endif
-

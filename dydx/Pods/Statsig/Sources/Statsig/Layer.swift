@@ -100,11 +100,11 @@ public struct Layer: ConfigProtocol {
         self.undelegatedSecondaryExposures = []
         self.explicitParameters = Set()
         self.hashedName = ""
-        
+
         self.isExperimentActive = false
         self.isUserInExperiment = false
         self.allocatedExperimentName = ""
-        
+
         self.evaluationDetails = evalDetails
     }
 
@@ -121,18 +121,18 @@ public struct Layer: ConfigProtocol {
             print("[Statsig]: \(forKey) does not exist in this Layer. Returning the defaultValue.")
             return defaultValue
         }
-        
+
         guard let result = result as? T else {
             print("[Statsig]: \(forKey) exists in this Layer, but requested type was incorrect (Requested = \(type(of: defaultValue)), Actual = \(type(of: result))). Returning the defaultValue.")
             return defaultValue
         }
-        
+
         client?.logLayerParameterExposureForLayer(
             self,
             parameterName: forKey,
             isManualExposure: false
         )
-        
+
         return result
     }
 }

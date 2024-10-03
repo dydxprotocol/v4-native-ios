@@ -12,7 +12,7 @@ import UIToolkits
 import Utilities
 
 extension UIView {
-    public func installView(xib: String?, completion: @escaping ((UIView?) -> Void))  {
+    public func installView(xib: String?, completion: @escaping ((UIView?) -> Void)) {
         installView(xib: xib, into: self, parentViewController: self.viewController(), completion: completion)
     }
 
@@ -20,7 +20,7 @@ extension UIView {
         #if DEBUG
         accessibilityIdentifier = "xib: \(xib ?? "")"
         #endif
-        
+
         if let contentView = contentView, let xib = xib {
             if let loadedView: UIView = XibLoader.load(from: xib) {
                 install(view: loadedView, into: contentView)
@@ -28,20 +28,20 @@ extension UIView {
              } else {
                 ClassLoader.load(from: xib) { [weak self] viewController in
                     if let self = self, let loadedViewController: UIViewController = viewController {
-                        
-                        guard let parentViewController = parentViewController else  {
+
+                        guard let parentViewController = parentViewController else {
                             assertionFailure("parentViewController is required when loading from ClassLoader")
                             completion(nil)
                             return
                         }
-                        
+
                         self.uninstallView(xib: xib, view: nil)
-                        
+
                         parentViewController.addChild(loadedViewController)
                         self.viewControllerXibMap?[xib] = loadedViewController
                         self.install(view: loadedViewController.view, into: contentView)
                         loadedViewController.didMove(toParent: parentViewController)
-                        
+
                         completion(loadedViewController.view)
                     } else {
                         completion(nil)
@@ -52,7 +52,7 @@ extension UIView {
             completion(nil)
         }
     }
-    
+
     public func uninstallView(xib: String?, view: UIView?) {
         if let xib = xib {
             if let existingViewController = viewControllerXibMap?[xib] {
@@ -63,7 +63,7 @@ extension UIView {
         }
         view?.removeFromSuperview()
     }
-    
+
     private struct AssociatedKey {
         static var bindingKey = "view.xib.viewControllerXibMap"
     }
@@ -77,4 +77,3 @@ extension UIView {
         }
     }
 }
-

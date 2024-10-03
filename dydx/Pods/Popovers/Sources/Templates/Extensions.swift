@@ -309,8 +309,7 @@ extension ForEach: DynamicViewContentProvider where Content: View {
 
         // Retrieving hidden properties containing the data and content.
         if let data = mirror.descendant("data") as? Data,
-           let content = mirror.descendant("content") as? (Data.Element) -> Content
-        {
+           let content = mirror.descendant("content") as? (Data.Element) -> Content {
             return data.flatMap { element -> [AnyView] in
                 // Create content given the data for this `ForEach` element.
                 let newContent = content(element)

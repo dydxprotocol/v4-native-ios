@@ -10,7 +10,7 @@ import Foundation
 
 final public class CachedFileLoader: SingletonProtocol {
     public static let shared: CachedFileLoader = CachedFileLoader()
-    
+
     public func loadString(filePath: String, url: String?, completion: @escaping ((String?) -> Void)) {
         loadData(filePath: filePath, url: url) { (data: Data?) in
             if let data = data, let string = String(data: data, encoding: .utf8) {
@@ -18,7 +18,7 @@ final public class CachedFileLoader: SingletonProtocol {
             }
         }
     }
-    
+
     public func loadData(filePath: String, url: String?, completion: @escaping ((Data?) -> Void)) {
         if let cachedFile = cachedFilePath(filePath: filePath),
            let cachedData = try? Data(contentsOf: cachedFile) {
@@ -28,13 +28,13 @@ final public class CachedFileLoader: SingletonProtocol {
             let bundledData = try? Data(contentsOf: bundledFile)
             completion(bundledData)
         }
-        
+
         if let url = url, let url = URL(string: url) {
-            URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
                 guard let data = data, error == nil else {
                     return
                 }
-                
+
                 if let cachedFile = self?.cachedFilePath(filePath: filePath) {
                     self?.writeToFile(fileUrl: cachedFile, data: data)
                 }
@@ -43,7 +43,7 @@ final public class CachedFileLoader: SingletonProtocol {
             .resume()
         }
     }
-    
+
     private func writeToFile(fileUrl: URL, data: Data) {
         do {
             let filePath = fileUrl.path
@@ -54,7 +54,7 @@ final public class CachedFileLoader: SingletonProtocol {
             Console.shared.log("CachedFileLoader: unable to write file \(fileUrl): \(error)")
         }
     }
-    
+
     private func cachedFilePath(filePath: String) -> URL? {
         do {
             let cacheDirectory = try FileManager.default.url(for: .documentDirectory,

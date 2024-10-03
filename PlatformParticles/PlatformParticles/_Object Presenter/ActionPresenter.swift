@@ -14,7 +14,7 @@ public class ActionPresenter: ObjectPresenter {
     open override var model: ModelObjectProtocol? {
         didSet {
             let dictionaryEntity = action as? DictionaryEntity
-            changeObservation(from: oldValue, to: dictionaryEntity, keyPath: #keyPath(DictionaryEntity.data)) { [weak self] _, _, _, animated in
+            changeObservation(from: oldValue, to: dictionaryEntity, keyPath: #keyPath(DictionaryEntity.data)) { [weak self] _, _, _, _ in
                 self?.update()
             }
         }

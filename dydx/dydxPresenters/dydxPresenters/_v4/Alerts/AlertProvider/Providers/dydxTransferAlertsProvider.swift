@@ -65,7 +65,7 @@ class dydxTransferAlertsProvider: dydxBaseAlertsProvider, dydxCustomAlertsProvid
                                            ])
             // message = DataLocalizer.localize(path: "APP.ONBOARDING.WITHDRAWAL_ALERT_SUBTITLE")
             iconName = "icon_transfer_withdrawal"
-        case .transferOut:
+            case .transferOut:
             let tokenName = usdcSize != nil ? dydxTokenConstants.usdcTokenName : dydxTokenConstants.nativeTokenName
             title = DataLocalizer.localize(path: "APP.ONBOARDING.TRANSFEROUT_ALERT_TITLE",
                                            params: [
@@ -75,7 +75,6 @@ class dydxTransferAlertsProvider: dydxBaseAlertsProvider, dydxCustomAlertsProvid
                                            ])
             // message = DataLocalizer.localize(path: "APP.ONBOARDING.TRANSFEROUT_ALERT_SUBTITLE")
             iconName = "icon_transfer"
-            break
         }
         if let title = title {
             let icon = PlatformIconViewModel(type: .asset(name: iconName, bundle: Bundle.dydxView),

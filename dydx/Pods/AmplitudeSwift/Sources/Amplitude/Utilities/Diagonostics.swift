@@ -14,7 +14,7 @@ public class Diagnostics {
     private var malformedEvents: [String]?
     private var errorLogs = NSMutableOrderedSet(capacity: 10)
 
-    init(){}
+    init() {}
 
     func addMalformedEvent(_ event: String) {
         if malformedEvents == nil {

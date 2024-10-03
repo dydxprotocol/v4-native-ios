@@ -2,7 +2,7 @@ import Foundation
 
 import CommonCrypto
 
-fileprivate let MaxCachedUsers = 10
+private let MaxCachedUsers = 10
 
 public struct StatsigOverrides {
     public var gates: [String: Bool]
@@ -21,13 +21,13 @@ struct StatsigValuesCache {
     var stickyDeviceExperiments: [String: [String: Any]]
     var source: EvaluationSource = .Loading
 
-    var lcut: UInt64? = nil
-    var receivedValuesAt: UInt64? = nil
-    var gates: [String: [String: Any]]? = nil
-    var configs: [String: [String: Any]]? = nil
-    var layers: [String: [String: Any]]? = nil
-    var paramStores: [String: [String: Any]]? = nil
-    var hashUsed: String? = nil
+    var lcut: UInt64?
+    var receivedValuesAt: UInt64?
+    var gates: [String: [String: Any]]?
+    var configs: [String: [String: Any]]?
+    var layers: [String: [String: Any]]?
+    var paramStores: [String: [String: Any]]?
+    var hashUsed: String?
     var sdkKey: String
     var options: StatsigOptions
 
@@ -63,7 +63,7 @@ struct StatsigValuesCache {
             return createUnfoundGate(gateName)
         }
 
-        if let gateObj = gates[gateName] ?? gates[gateName.hashSpecName(hashUsed)]{
+        if let gateObj = gates[gateName] ?? gates[gateName.hashSpecName(hashUsed)] {
             return FeatureGate(
                 name: gateName,
                 gateObj: gateObj,
@@ -102,7 +102,7 @@ struct StatsigValuesCache {
             return Layer(
                 client: client,
                 name: layerName,
-                configObj: configObj, 
+                configObj: configObj,
                 evalDetails: getEvaluationDetails(.Recognized)
             )
         }
@@ -110,7 +110,7 @@ struct StatsigValuesCache {
         print("[Statsig]: The layer with name \(layerName) does not exist. Returning an empty Layer.")
         return createUnfoundLayer(client, layerName)
     }
-    
+
     func getParamStore(_ client: StatsigClient?, _ storeName: String) -> ParameterStore {
         guard let stores = paramStores else {
             print("[Statsig]: Failed to get parameter store with name \(storeName). Returning an empty ParameterStore.")
@@ -151,7 +151,7 @@ struct StatsigValuesCache {
     }
 
     func getLastUpdatedTime(user: StatsigUser) -> UInt64 {
-        if (userCache[InternalStore.userHashKey] as? String == user.getFullUserHash()) {
+        if userCache[InternalStore.userHashKey] as? String == user.getFullUserHash() {
             let cachedValue = userCache[InternalStore.lcutKey]
             return cachedValue as? UInt64 ?? 0
         }
@@ -160,7 +160,7 @@ struct StatsigValuesCache {
     }
 
     func getPreviousDerivedFields(user: StatsigUser) -> [String: String] {
-        if (userCache[InternalStore.userHashKey] as? String == user.getFullUserHash()) {
+        if userCache[InternalStore.userHashKey] as? String == user.getFullUserHash() {
             return userCache[InternalStore.derivedFieldsKey] as? [String: String] ?? [:]
         }
 
@@ -189,7 +189,7 @@ struct StatsigValuesCache {
             cache[InternalStore.derivedFieldsKey] = values[InternalStore.derivedFieldsKey]
         }
 
-        if (userCacheKey.v2 == cacheKey.v2) {
+        if userCacheKey.v2 == cacheKey.v2 {
             // Now the values we serve came from network request
             source = hasUpdates ? .Network : .NetworkNotModified
             userCache = cache
@@ -200,12 +200,12 @@ struct StatsigValuesCache {
     }
 
     mutating func runCacheEviction() {
-        if (cacheByID.count <= MaxCachedUsers) {
+        if cacheByID.count <= MaxCachedUsers {
             return
         }
 
         var oldestTime = UInt64.max
-        var oldestEntryKey: String? = nil
+        var oldestEntryKey: String?
         for (key, value) in cacheByID {
             let evalTime = Time.parse(value[InternalStore.evalTimeKey])
             if evalTime < oldestTime {
@@ -248,7 +248,7 @@ struct StatsigValuesCache {
             InternalStore.gatesKey: [:],
             InternalStore.configsKey: [:],
             InternalStore.stickyExpKey: [:],
-            "time": 0,
+            "time": 0
         ]
     }
 
@@ -331,7 +331,7 @@ struct StatsigValuesCache {
             cacheByID.removeValue(forKey: userCacheKey.v1)
         }
 
-        if (currCache == nil && oldCache != nil) {
+        if currCache == nil && oldCache != nil {
             cacheByID[userCacheKey.v2] = oldCache
         }
     }
@@ -359,7 +359,7 @@ struct StatsigValuesCache {
             evalDetails: getEvaluationDetails(.Unrecognized)
         )
     }
-    
+
     private func createUnfoundParamStore(_ client: StatsigClient?, _ name: String) -> ParameterStore {
         ParameterStore(name: name, evaluationDetails: getEvaluationDetails(.Unrecognized))
     }
@@ -483,7 +483,7 @@ class InternalStore {
                 )
             })
     }
-    
+
     func getParamStore(client: StatsigClient?, forName storeName: String) -> ParameterStore {
         storeQueue.sync {
             return cache.getParamStore(client, storeName)
@@ -601,7 +601,7 @@ class InternalStore {
         isLayer: Bool,
         factory: (_ name: String, _ data: [String: Any]) -> T) -> T {
             return storeQueue.sync {
-                if (!keepDeviceValue) {
+                if !keepDeviceValue {
                     return latestValue
                 }
 
@@ -612,19 +612,18 @@ class InternalStore {
                 }
 
                 // Get the latest config value. Layers require a lookup by allocated_experiment_name.
-                var latestExperimentValue: ConfigProtocol? = nil
+                var latestExperimentValue: ConfigProtocol?
                 if isLayer {
                     latestExperimentValue = cache.getConfig(stickyValue["allocated_experiment_name"] as? String ?? "")
                 } else {
                     latestExperimentValue = latestValue
                 }
 
-
-                if (latestExperimentValue?.isExperimentActive == true) {
+                if latestExperimentValue?.isExperimentActive == true {
                     return factory(name, stickyValue)
                 }
 
-                if (latestValue.isExperimentActive == true) {
+                if latestValue.isExperimentActive == true {
                     saveStickyExperimentIfNeededThreaded(name, latestValue)
                 } else {
                     removeStickyExperimentThreaded(name)
@@ -696,4 +695,3 @@ extension Dictionary {
         }
     }
 }
-

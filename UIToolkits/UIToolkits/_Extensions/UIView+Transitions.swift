@@ -52,11 +52,9 @@ public extension UIView {
                 fallthrough
             case .move:
                 UIView.layerTransition(view, type: type, direction: direction, duration: duration, animations: animations, completion: completion)
-
-            default:
+                default:
                 animations()
                 completion?(false)
-                break
             }
         } else {
             animations()

@@ -22,7 +22,7 @@ struct SampleThemeInput: View {
     let prompt: String?
     let fontType: ThemeFont.FontType
     let fontSize: ThemeFont.FontSize
-    
+
     var body: some View {
         return TextField(prompt ?? "", text: value)
             .themeColor(foreground: .textSecondary)
@@ -38,7 +38,7 @@ struct SampleThemeInput_Previews: PreviewProvider {
     @State static var textValueEmpty = ""
     static var previews: some View {
         ZStack {
-            themeSettings.themeConfig.themeColor.color(of: .layer0) 
+            themeSettings.themeConfig.themeColor.color(of: .layer0)
             VStack {
                 Spacer()
                 Group {

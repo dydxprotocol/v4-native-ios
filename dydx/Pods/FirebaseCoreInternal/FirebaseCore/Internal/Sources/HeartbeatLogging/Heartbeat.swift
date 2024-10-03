@@ -69,7 +69,7 @@ struct Heartbeat: Codable, Equatable {
 extension Heartbeat: HeartbeatsPayloadConvertible {
   func makeHeartbeatsPayload() -> HeartbeatsPayload {
     let userAgentPayloads = [
-      HeartbeatsPayload.UserAgentPayload(agent: agent, dates: [date]),
+      HeartbeatsPayload.UserAgentPayload(agent: agent, dates: [date])
     ]
     return HeartbeatsPayload(userAgentPayloads: userAgentPayloads)
   }

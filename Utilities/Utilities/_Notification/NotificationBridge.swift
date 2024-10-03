@@ -58,11 +58,11 @@ public class CompositeNotificationBridge: NSObject, NotificationBridgeProtocol {
     public func received(userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         received(userInfo: userInfo, index: 0, results: Set<UIBackgroundFetchResult>(), fetchCompletionHandler: completionHandler)
     }
-    
-    public func receivedDeeplink(userInfo: [AnyHashable : Any]) -> URL? {
+
+    public func receivedDeeplink(userInfo: [AnyHashable: Any]) -> URL? {
         bridges?.first?.receivedDeeplink(userInfo: userInfo)
     }
-    
+
     public func received(userInfo: [AnyHashable: Any], index: Int, results: Set<UIBackgroundFetchResult>, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if let bridge = bridges?.object(at: index) {
             bridge.received(userInfo: userInfo) { [weak self] result in

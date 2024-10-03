@@ -381,8 +381,7 @@ public extension Templates {
                 .onAppear {
                     if
                         let index = index,
-                        !model.itemIndices.contains(index)
-                    {
+                        !model.itemIndices.contains(index) {
                         /// Append this button's index to the model's item indices.
                         model.itemIndices.append(index)
                     }
@@ -508,6 +507,6 @@ extension EnvironmentValues {
     private struct IndexEnvironmentKey: EnvironmentKey {
         typealias Value = Int?
 
-        static var defaultValue: Int? = nil
+        static var defaultValue: Int?
     }
 }

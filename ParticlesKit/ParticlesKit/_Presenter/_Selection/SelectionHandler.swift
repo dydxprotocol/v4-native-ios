@@ -58,7 +58,7 @@ import RoutingKit
         }
     }
 
-    @IBInspectable @objc open dynamic var multipleSelection: Bool = false {
+    @IBInspectable open dynamic var multipleSelection: Bool = false {
         didSet {
             if multipleSelection != oldValue {
                 selected = nil

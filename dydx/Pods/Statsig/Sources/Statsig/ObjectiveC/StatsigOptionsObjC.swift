@@ -93,8 +93,7 @@ public final class StatsigOptionsObjC: NSObject {
         enableAutoValueUpdate: Bool,
         overrideStableID: String,
         enableCacheByFile: Bool
-    )
-    {
+    ) {
         self.optionsInternal = StatsigOptions(
             initTimeout: initTimeout,
             disableCurrentVCLogging: disableCurrentVCLogging,

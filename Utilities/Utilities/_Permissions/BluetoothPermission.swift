@@ -58,10 +58,8 @@ import Foundation
 
             case .restricted:
                 status = .restricted
-
-            default:
+                default:
                 status = .notDetermined
-                break
             }
         }
         completion(status, true)

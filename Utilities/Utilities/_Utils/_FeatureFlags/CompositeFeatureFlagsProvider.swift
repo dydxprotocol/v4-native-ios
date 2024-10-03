@@ -53,7 +53,7 @@ public class CompositeFeatureFlagsProvider: NSObject & FeatureFlagsProtocol {
             }
         }
     }
-    
+
     public func isOn(feature: String) -> Bool? {
         switch Installation.source {
         case .appStore, .jailBroken:

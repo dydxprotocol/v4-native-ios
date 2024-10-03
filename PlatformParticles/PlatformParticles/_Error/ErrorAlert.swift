@@ -12,16 +12,16 @@ import Utilities
 import Combine
 
 public class ErrorAlert: NSObject, ErrorInfoProtocol, CombineObserving {
-    public var cancellableMap = [AnyKeyPath : AnyCancellable]()
-    
+    public var cancellableMap = [AnyKeyPath: AnyCancellable]()
+
     public var pending: ErrorInfoData?
-    
+
     public var appState: AppState? {
         didSet {
             didSetAppState(oldValue: oldValue)
         }
     }
-    
+
     public func info(data: ErrorInfoData) {
         if let prompter = PrompterFactory.shared?.prompter() {
             prompter.set(title: data.title, message: self.message(message: data.message, error: data.error), style: .error)

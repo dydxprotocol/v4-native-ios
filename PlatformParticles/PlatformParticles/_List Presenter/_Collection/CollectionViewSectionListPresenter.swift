@@ -80,8 +80,7 @@ open class CollectionViewSectionListPresenter: XibListPresenter {
             switch style {
             case .full:
                 return usefulSize
-
-            case .width:
+                case .width:
                 if let size = defaultSize(at: index) {
                     if layout.scrollDirection == .horizontal {
                         return adjust(size: size, height: usefulSize.height, proportional: proportional)
@@ -89,9 +88,7 @@ open class CollectionViewSectionListPresenter: XibListPresenter {
                         return adjust(size: size, width: usefulSize.width, proportional: proportional)
                     }
                 }
-                break
-
-            default:
+                default:
                 if let size = defaultSize(at: index) {
                     if layout.scrollDirection == .horizontal {
                         var rows = Int((usefulSize.height + layout.minimumInteritemSpacing) / (size.height + layout.minimumInteritemSpacing))
@@ -107,7 +104,6 @@ open class CollectionViewSectionListPresenter: XibListPresenter {
                         return adjust(size: size, width: (usefulSize.width + layout.minimumInteritemSpacing) / CGFloat(columns) - layout.minimumInteritemSpacing - 1.0, proportional: proportional)
                     }
                 }
-                break
             }
         }
         return CGSize.zero

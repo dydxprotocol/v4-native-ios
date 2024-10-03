@@ -24,8 +24,8 @@ import Combine
 
 @objc open class ObjectPresenter: NSObject, ObjectPresenterProtocol, CombineObserving {
     public var cancellableMap = [AnyKeyPath: AnyCancellable]()
-    
-    @IBOutlet @objc open dynamic var model: ModelObjectProtocol? {
+
+    @IBOutlet open dynamic var model: ModelObjectProtocol? {
         didSet {
             if model !== oldValue {
                 didSetModel(oldValue: oldValue)

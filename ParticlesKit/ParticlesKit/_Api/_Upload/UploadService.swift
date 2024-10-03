@@ -18,12 +18,12 @@ import Utilities
     @objc public dynamic var error: Error?
 
     @objc public dynamic var progress: Float = 0.0
-    
+
     @objc public dynamic var text: String?
-    
+
     open func upload() {
     }
-    
+
     open func upload(object: Any?) {
     }
 }

@@ -45,8 +45,8 @@ public extension Notification.Name {
 
 public class Reachability {
 
-    public typealias NetworkReachable = (Reachability) -> ()
-    public typealias NetworkUnreachable = (Reachability) -> ()
+    public typealias NetworkReachable = (Reachability) -> Void
+    public typealias NetworkUnreachable = (Reachability) -> Void
 
     @available(*, unavailable, renamed: "Connection")
     public enum NetworkStatus: CustomStringConvertible {
@@ -69,7 +69,7 @@ public class Reachability {
             case .unavailable: return "No Connection"
             }
         }
-        
+
         @available(*, deprecated, renamed: "unavailable")
         public static let none: Connection = .unavailable
     }
@@ -100,7 +100,7 @@ public class Reachability {
         if flags == nil {
             try? setReachabilityFlags()
         }
-        
+
         switch flags?.connection {
         case .unavailable?, nil: return .unavailable
         case .cellular?: return allowsCellularConnection ? .cellular : .unavailable
@@ -172,7 +172,7 @@ public extension Reachability {
     func startNotifier() throws {
         guard !notifierRunning else { return }
 
-        let callback: SCNetworkReachabilityCallBack = { (reachability, flags, info) in
+        let callback: SCNetworkReachabilityCallBack = { (_, flags, info) in
             guard let info = info else { return }
 
             // `weakifiedReachability` is guaranteed to exist by virtue of our
@@ -195,7 +195,7 @@ public extension Reachability {
                 _ = unmanagedWeakifiedReachability.retain()
                 return UnsafeRawPointer(unmanagedWeakifiedReachability.toOpaque())
             },
-            release: { (info: UnsafeRawPointer) -> Void in
+            release: { (info: UnsafeRawPointer) in
                 let unmanagedWeakifiedReachability = Unmanaged<ReachabilityWeakifier>.fromOpaque(info)
                 unmanagedWeakifiedReachability.release()
             },
@@ -261,11 +261,10 @@ fileprivate extension Reachability {
                 self.stopNotifier()
                 throw ReachabilityError.unableToGetFlags(SCError())
             }
-            
+
             self.flags = flags
         }
     }
-    
 
     func notifyReachabilityChanged() {
         let notify = { [weak self] in

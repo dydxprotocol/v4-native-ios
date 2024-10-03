@@ -82,7 +82,7 @@ class dydxSystemAlertsProvider: dydxBaseAlertsProvider, dydxCustomAlertsProvider
                                                           params: ["HALTED_BLOCK": "\(apiState.haltedBlock?.intValue ?? 0)"]),
                                    icon: PlatformIconViewModel(type: .system(name: "exclamationmark.triangle"), templateColor: .colorYellow),
                                    tapAction: tapAction)
-        case .normal:
+                                   case .normal:
             if hadError {
                 return
                     dydxAlertItemModel(title: DataLocalizer.localize(path: "APP.V4.NETWORK_OPERATIONAL"),
@@ -92,7 +92,6 @@ class dydxSystemAlertsProvider: dydxBaseAlertsProvider, dydxCustomAlertsProvider
             } else {
                 return nil
             }
-            break
         case .unknown:
             break
         default:

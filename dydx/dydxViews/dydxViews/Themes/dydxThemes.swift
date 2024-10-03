@@ -39,7 +39,6 @@ public enum dydxThemeType: String {
     }
 }
 
-
 private var loadFontOnce: Void = {
     let fonts = Bundle(for: dydxViewBundleClass.self).urls(forResourcesWithExtension: "otf", subdirectory: nil)
     fonts?.forEach({ url in

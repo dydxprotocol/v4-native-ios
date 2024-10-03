@@ -10,7 +10,7 @@ import Foundation
 import Utilities
 
 @objc open class ListInteractor: BaseInteractor, ModelListProtocol {
-    
+
     @objc open dynamic var loading: Bool = false
     @objc open dynamic var title: String?
     open var parent: ModelObjectProtocol?

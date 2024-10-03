@@ -17,14 +17,14 @@ public class dydxMarketListViewModel: PlatformViewModeling {
     @Published public var onFavoriteTap: ((dydxMarketViewModel) -> Void)?
 
     public init() {}
-    
+
     public static var previewValue: dydxMarketListViewModel = {
         let vm = dydxMarketListViewModel()
         vm.markets = [
             dydxMarketViewModel(marketId: "ETH-USD",
                                 assetId: "ETH",
                                 iconUrl: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
-                                volume24H : 1_000_000_000,
+                                volume24H: 1_000_000_000,
                                 sparkline: [1, 2, 3, 4, 5],
                                 price: 50_000,
                                 change: 0.05),
@@ -38,12 +38,11 @@ public class dydxMarketListViewModel: PlatformViewModeling {
         ]
         return vm
     }()
-    
+
     public func createView(parentStyle: ThemeStyle = .defaultStyle, styleKey: String? = nil) -> some View {
         dydxMarketListView(viewModel: self)
     }
 }
-
 
 private struct dydxMarketListView: View {
     @ObservedObject var viewModel: dydxMarketListViewModel
@@ -56,7 +55,7 @@ private struct dydxMarketListView: View {
             .wrappedInAnyView()
         return .init(accessoryView: view)
     }
-    
+
     var body: some View {
         ForEach(viewModel.markets, id: \.assetId) { market in
             dydxMarketView(viewModel: market)
@@ -78,11 +77,11 @@ public class dydxMarketViewModel: PlatformViewModeling {
     public let price: Double?
     public let change: Double?
     @Published public var isFavorite: Bool?
-    
+
     public var isPositive: Bool {
         change ?? 0 >= 0
     }
-    
+
     public init(marketId: String,
                 assetId: String,
                 iconUrl: String?,
@@ -101,7 +100,7 @@ public class dydxMarketViewModel: PlatformViewModeling {
         self.change = change
         self.isFavorite = isFavorite
     }
-    
+
     public func createView(parentStyle: ThemeStyle, styleKey: String?) -> some View {
         dydxMarketView(viewModel: self)
     }
@@ -109,7 +108,7 @@ public class dydxMarketViewModel: PlatformViewModeling {
 
 struct dydxMarketView: View {
     let viewModel: dydxMarketViewModel
-    
+
     @ViewBuilder
     var sparkline: some View {
         if let sparkline = viewModel.sparkline {
@@ -119,7 +118,7 @@ struct dydxMarketView: View {
                 .frame(width: 50)
         }
     }
-    
+
     var icon: some View {
         let placeholderText =  { Text(viewModel.assetId.prefix(1))
                 .frame(width: 32, height: 32)
@@ -133,7 +132,7 @@ struct dydxMarketView: View {
                               size: CGSize(width: 32, height: 32))
             .createView()
     }
-    
+
     @ViewBuilder
     var nameVolumeVStack: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -145,7 +144,7 @@ struct dydxMarketView: View {
                 .themeColor(foreground: .textSecondary)
         }
     }
-    
+
     var priceChangeVStack: some View {
         VStack(alignment: .trailing, spacing: 2) {
             Text(dydxFormatter.shared.dollar(number: viewModel.price) ?? "--")
@@ -155,7 +154,7 @@ struct dydxMarketView: View {
                 .createView(parentStyle: ThemeStyle.defaultStyle.themeFont(fontSize: .small))
         }
     }
-    
+
     var body: some View {
         HStack(spacing: 20) {
             HStack(spacing: 12) {
@@ -163,9 +162,9 @@ struct dydxMarketView: View {
                 nameVolumeVStack
             }
             .leftAligned()
-            
+
             sparkline
-            
+
             priceChangeVStack
                 .rightAligned()
         }

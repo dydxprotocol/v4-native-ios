@@ -22,7 +22,7 @@ public final class ThemeSettings: ObservableObject, SingletonProtocol {
         }
     }
     @Published public var styleConfig: StyleConfig = .sampleStyleConfig
-    
+
     public static var respondsToSystemTheme = true
 }
 
@@ -36,7 +36,7 @@ public struct ThemeConfig: Codable, Equatable {
 
 public extension ThemeConfig {
     static let sampleThemeConfig = load(configJson: "SampleTheme.json")!
-    
+
     static func load(configJson: String, bundle: Bundle? = nil) -> ThemeConfig? {
         _load(configJson: configJson, bundle: bundle)
     }
@@ -50,7 +50,7 @@ public struct StyleConfig: Codable {
 
 public extension StyleConfig {
     static let sampleStyleConfig = load(configJson: "SampleStyle.json") ?? StyleConfig(styles: [:])
-    
+
     static func load(configJson: String, bundle: Bundle? = nil) -> StyleConfig? {
         let styles: [String: ThemeStyle]? = _load(configJson: configJson, bundle: bundle)
         if let styles = styles {
@@ -68,45 +68,45 @@ public struct ThemeStyle: Codable {
         self._layerColor = _layerColor
         self._textColor = _textColor
     }
-    
+
     let _fontSize, _fontType, _layerColor, _textColor: String?
 }
 
 public extension ThemeStyle {
     static let defaultStyle: ThemeStyle = ThemeSettings.shared.styleConfig.styles["default-style"]!
-    
+
     var fontSize: ThemeFont.FontSize? {
         guard let _fontSize = _fontSize else {
             return nil
         }
-        
+
         return ThemeFont.FontSize(rawValue: _fontSize)
     }
-    
+
     var fontType: ThemeFont.FontType? {
         guard let _fontType = _fontType else {
             return nil
         }
-        
+
         return ThemeFont.FontType(rawValue: _fontType)
     }
-    
+
     var layerColor: ThemeColor.SemanticColor? {
         guard let _layerColor = _layerColor else {
             return nil
         }
-        
+
         return ThemeColor.SemanticColor(rawValue: _layerColor)
     }
-    
+
     var textColor: ThemeColor.SemanticColor? {
         guard let _textColor = _textColor else {
             return nil
         }
-        
+
         return ThemeColor.SemanticColor(rawValue: _textColor)
     }
-    
+
     func merge(from newStyle: Self) -> Self {
         let _fontSize = newStyle._fontSize ?? _fontSize
         let _fontType = newStyle._fontType ?? _fontType
@@ -114,17 +114,17 @@ public extension ThemeStyle {
         let _textColor = newStyle._textColor ?? _textColor
         return Self.init(_fontSize: _fontSize, _fontType: _fontType, _layerColor: _layerColor, _textColor: _textColor)
     }
-    
+
     func themeColor(foreground: ThemeColor.SemanticColor) -> Self {
         let newStyle = ThemeStyle(_textColor: foreground.rawValue)
         return merge(from: newStyle)
     }
-    
+
     func themeColor(background: ThemeColor.SemanticColor) -> Self {
         let newStyle = ThemeStyle(_layerColor: background.rawValue)
         return merge(from: newStyle)
     }
-    
+
     func themeFont(fontType: ThemeFont.FontType? = nil, fontSize: ThemeFont.FontSize = .medium) -> Self {
         let fontType = fontType ?? .base
         let newStyle = ThemeStyle(_fontSize: fontSize.rawValue, _fontType: fontType.rawValue)
@@ -132,19 +132,18 @@ public extension ThemeStyle {
     }
 }
 
-
 // MARK: - Color
 
 public struct ThemeColor: Codable, Equatable {
-    let color : [String: String]
-                
+    let color: [String: String]
+
     public enum SemanticColor: Hashable {
         case transparent
-        
+
         case textPrimary
         case textSecondary
         case textTertiary
-        
+
         case layer0
         case layer1
         case layer2
@@ -157,7 +156,7 @@ public struct ThemeColor: Codable, Equatable {
         case borderDefault
         case borderDestructive
         case borderButton
-        
+
         case colorPurple
         case colorYellow
         case colorGreen
@@ -170,11 +169,11 @@ public struct ThemeColor: Codable, Equatable {
         case colorFadedYellow
 
         case custom(rgb: String, alpha: Double?)
-        
+
         init(rawValue: String) {
             switch rawValue {
             case "transparent": self = .transparent
-                    
+
             case "color_purple": self = .colorPurple
             case "color_yellow": self = .colorYellow
             case "color_green": self = .colorGreen
@@ -185,7 +184,7 @@ public struct ThemeColor: Codable, Equatable {
             case "color_faded_green": self = .colorFadedGreen
             case "color_faded_red": self = .colorFadedRed
             case "color_faded_yellow": self = .colorFadedYellow
-                
+
             case "layer_0": self = .layer0
             case "layer_1": self = .layer1
             case "layer_2": self = .layer2
@@ -194,11 +193,11 @@ public struct ThemeColor: Codable, Equatable {
             case "layer_5": self = .layer5
             case "layer_6": self = .layer6
             case "layer_7": self = .layer7
-                
+
             case "text_primary": self = .textPrimary
             case "text_secondary": self = .textSecondary
             case "text_tertiary": self = .textTertiary
-                
+
             case "border_default": self = .borderDefault
             case "border_destructive": self = .borderDestructive
             case "border_button": self = .borderButton
@@ -211,11 +210,11 @@ public struct ThemeColor: Codable, Equatable {
                 }
             }
         }
-        
+
         public var rawValue: String {
             switch self {
             case .transparent: return "transparent"
-                
+
             case .layer0: return "layer_0"
             case .layer1: return "layer_1"
             case .layer2: return "layer_2"
@@ -228,11 +227,11 @@ public struct ThemeColor: Codable, Equatable {
             case .textPrimary: return "text_primary"
             case .textSecondary: return "text_secondary"
             case .textTertiary: return "text_tertiary"
-                
+
             case .borderDefault: return "border_default"
             case .borderDestructive: return "border_destructive"
             case .borderButton: return "border_button"
-                
+
             case .colorPurple: return "color_purple"
             case .colorYellow: return "color_yellow"
             case .colorGreen: return "color_green"
@@ -261,7 +260,7 @@ public extension ThemeColor {
             return UIColor(hex: color[semanticColor.rawValue]) ?? .clear
         }
     }
-    
+
     func color(of layerColor: SemanticColor) -> Color {
         if let color = ThemeColorCache.shared.get(layerColor) {
             return color
@@ -282,7 +281,7 @@ public struct ThemeFont: Codable, Equatable {
     public enum FontSize: Hashable {
         case largest, larger, large, medium, small, smaller, smallest
         case custom(size: Float)
-        
+
         init(rawValue: String) {
             switch rawValue {
             case "largest": self = .largest
@@ -292,7 +291,7 @@ public struct ThemeFont: Codable, Equatable {
             case "small": self = .small
             case "smaller": self = .smaller
             case "smallest": self = .smallest
-       
+
             default:
                 if let size = Float(rawValue), size > 0 {
                     self = .custom(size: size)
@@ -302,7 +301,7 @@ public struct ThemeFont: Codable, Equatable {
                 }
             }
         }
-        
+
         var rawValue: String {
             switch self {
             case .largest: return "largest"
@@ -320,7 +319,7 @@ public struct ThemeFont: Codable, Equatable {
     public enum FontType: Hashable {
         case minus, base, plus, number
         case custom(name: String)
-        
+
         init(rawValue: String) {
             switch rawValue {
             case "minus": self = .minus
@@ -330,7 +329,7 @@ public struct ThemeFont: Codable, Equatable {
             default: self = .custom(name: rawValue)
             }
         }
-        
+
         var rawValue: String {
             switch self {
             case .minus: return "minus"
@@ -340,7 +339,7 @@ public struct ThemeFont: Codable, Equatable {
             case .custom(name: let name): return name
             }
         }
-        
+
         var defaultWeight: UIFont.Weight {
             switch self {
             case .minus:
@@ -356,7 +355,7 @@ public struct ThemeFont: Codable, Equatable {
                 return .regular
             }
         }
-        
+
         var defaultFontName: String {
             switch self {
             case .minus:
@@ -380,7 +379,7 @@ public struct FontTypeDetail: Codable, Equatable {
 }
 
 public extension ThemeFont {
-     
+
     func uiFont(of fontType: FontType, fontSize: FontSize) -> UIFont? {
         let sizeValue: Float
         switch fontSize {
@@ -394,7 +393,7 @@ public extension ThemeFont {
                 return nil
             }
         }
-                
+
         if let fontName = type[fontType.rawValue]?.name, fontName.length > 0 {
             return loadFont(name: fontName,
                             size: sizeValue)
@@ -412,7 +411,7 @@ public extension ThemeFont {
             return UIFont.systemFont(ofSize: CGFloat(sizeValue)).withWeight(fontType.defaultWeight)
         }
     }
-    
+
     private func loadFont(name: String, size: Float) -> UIFont? {
         let font = UIFont(name: name, size: CGFloat(size))
         guard let font = font else {
@@ -421,7 +420,7 @@ public extension ThemeFont {
         }
         return font
     }
-    
+
     func font(of fontType: FontType, fontSize: FontSize) -> Font? {
         if let cached = ThemeFontCache.shared.get(fontType: fontType, fontSize: fontSize) {
             return cached
@@ -443,7 +442,6 @@ public extension ThemeColor.SemanticColor {
         ThemeSettings.shared.themeConfig.themeColor.color(of: self)
     }
 }
-
 
 // Private
 
@@ -476,7 +474,6 @@ private func parseCustomRawValue(rawValue: String) -> (rgb: String, alpha: Doubl
     }
     return nil
 }
-
 
 extension UIFont {
     func withWeight(_ weight: UIFont.Weight) -> UIFont {

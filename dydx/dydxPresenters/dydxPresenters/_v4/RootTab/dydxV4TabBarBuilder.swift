@@ -103,7 +103,7 @@ private extension dydxV4TabBarController {
               image: "icon_profile",
               split: true)
     ]
-    
+
     static let tabBarItemInfosV2: [TabbarItemInfo] = [
         .init(path: "/portfolio",
               title: DataLocalizer.localize(path: "APP.PORTFOLIO.PORTFOLIO"),
@@ -127,4 +127,3 @@ private extension dydxV4TabBarController {
               split: true)
     ]
 }
-

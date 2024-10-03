@@ -18,9 +18,9 @@ open class FieldOutputBaseViewModel: PlatformViewModel {
     @Published public var image: String?
     @Published public var link: String?
     @Published public var onTapAction: (() -> Void)?
-    
+
     public init() {}
-    
+
     public init(output: FieldOutputProtocol) {
         if let title = output.title {
             self.title = DataLocalizer.localize(path: title)

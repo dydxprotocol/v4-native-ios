@@ -51,7 +51,7 @@ public protocol ErrorInfoProtocol: NSObjectProtocol {
 
 public extension ErrorInfoProtocol where Self: NSObject & CombineObserving {
     func didSetAppState(oldValue: AppState?) {
-        changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) {[weak self] observer, obj, change, animated in
+        changeObservation(from: oldValue, to: appState, keyPath: #keyPath(AppState.background)) {[weak self] _, _, _, _ in
             if self?.appState?.background == false, let pending = self?.pending {
                 self?.info(data: pending)
                 self?.pending = nil
@@ -93,7 +93,7 @@ public extension ErrorInfoProtocol {
 
         process(data: ErrorInfoData(title: title, message: message, type: type, error: error, time: time, actions: actions))
     }
-    
+
     private func trim(message: String) -> String {
         return message.components(separatedBy: "(error=").first?.trim() ?? message
     }

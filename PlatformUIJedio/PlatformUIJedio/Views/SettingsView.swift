@@ -17,13 +17,13 @@ public class SettingsViewModel: PlatformViewModel {
         }
         public var title: String?
         public var items: PlatformListViewModel?
-        
+
         public init(title: String? = nil, items: PlatformListViewModel? = nil) {
             self.title = title
             self.items = items
         }
     }
-    
+
     @Published public var headerViewModel: PlatformViewModel? = SettingHeaderViewModel()
     @Published public var sections: [SectionViewModel] = [] {
         didSet {
@@ -41,7 +41,7 @@ public class SettingsViewModel: PlatformViewModel {
         self.sections = sections
         self.footerViewModel = footerViewModel
     }
-    
+
     public static var previewValue: SettingsViewModel {
         let vm = SettingsViewModel()
         vm.headerViewModel = SettingHeaderViewModel.previewValue
@@ -54,24 +54,24 @@ public class SettingsViewModel: PlatformViewModel {
         vm.sections = [SectionViewModel(title: "Title", items: itemList)]
         return vm
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            
+
             let view = AnyView(
                 VStack(alignment: .leading, spacing: 30) {
                     self.headerViewModel?.createView(parentStyle: style)
-                    
+
                     ScrollView(showsIndicators: false) {
-                        //note, using a LazyVStack here caused app unresponsiveness, needs investigation
+                        // note, using a LazyVStack here caused app unresponsiveness, needs investigation
                         // settings lists are fairly static/finite, so no concerned about using a VStack
                         VStack {
                             ForEach(self.sections) { section in
                                 if let sectionTitle = section.title {
                                     let header = Text(sectionTitle)
                                         .leftAligned()
-                              
+
                                     Section(header: header) {
                                         section.items?.createView(parentStyle: style)
                                     }
@@ -81,18 +81,18 @@ public class SettingsViewModel: PlatformViewModel {
                                     }
                                 }
                             }
-                            
+
                             self.footerViewModel?.createView(parentStyle: style)
                         }
                     }
-                    
+
                     Spacer()
                 }
                     .padding([.leading, .trailing])
                     .themeColor(background: .layer2)
                     .navigationViewEmbedded(backgroundColor: ThemeColor.SemanticColor.layer2.color)
             )
-            
+
             // make it visible under the tabbar
             return AnyView(
                 view.ignoresSafeArea(edges: [.bottom])
@@ -128,4 +128,3 @@ struct SettingsView_Previews_Light: PreviewProvider {
     }
 }
 #endif
-

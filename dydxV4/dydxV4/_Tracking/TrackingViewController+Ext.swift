@@ -17,12 +17,12 @@ extension TrackingViewController: ScreenIdentifiable, TrackingViewProtocol {
         case "/market", "/trade":
             return "\(path)/\(marketId)"
         default:
-            //TODO: replace default with all acceptable paths (this will force developers to add analytics and not forget)
-            //assertionFailure("add mobile path handling for \(history?.path)")
+            // TODO: replace default with all acceptable paths (this will force developers to add analytics and not forget)
+            // assertionFailure("add mobile path handling for \(history?.path)")
             return path
         }
     }
-    
+
     /// the web-equivalent web page (if there is a good match)
     public var correspondingWebPath: String? {
         switch path {
@@ -33,7 +33,7 @@ extension TrackingViewController: ScreenIdentifiable, TrackingViewProtocol {
             return nil
         }
     }
-    
+
     public var screenClass: String {
         String(describing: type(of: self))
     }
@@ -41,7 +41,7 @@ extension TrackingViewController: ScreenIdentifiable, TrackingViewProtocol {
     public func logScreenView() {
         Tracking.shared?.log(event: AnalyticsEventV2.NavigatePage(screen: self))
     }
-    
+
 }
 
 // MARK: Convenience Accessors
@@ -53,7 +53,7 @@ private extension TrackingViewController {
         }
         return path
     }
-    
+
     private var marketId: String {
         history?.params?["market"] as? String ?? dydxSelectedMarketsStore.shared.lastSelectedMarket
     }

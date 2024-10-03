@@ -10,7 +10,7 @@ import Foundation
 import RoutingKit
 
 @IBDesignable
-@objc open class GridPresenter: NSObject {
+open class GridPresenter: NSObject {
     @IBInspectable open var sequence: Int = 0
 
     @IBOutlet open var selectionHandler: SelectionHandlerProtocol?
