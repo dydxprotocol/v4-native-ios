@@ -154,8 +154,8 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         case .deposit:
             
             let formValidationResult = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(formData: formData,
-                                                                                         vaultAccount: vault.account,
                                                                                                          accountData: accountData,
+                                                                                                         vaultAccount: vault.account,
                                                                                                          slippageResponse: nil,
                                                                                                          localizer: DataLocalizer.shared?.asAbacusLocalizer)
             DispatchQueue.main.async { [weak self] in
@@ -193,7 +193,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         
         viewModel?.submitAction = { [weak self] in
             self?.viewModel?.submitState = .submitting
-            Task {
+            Task { [weak self] in
                 guard let transferType = self?.transferType else { return }
                 let result: Result<ChainSuccessResponse, ChainError>
                 
@@ -209,7 +209,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
                 }
                 DispatchQueue.main.async { [weak self] in
                     switch result {
-                    case .success(let success):
+                    case .success:
                         Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: ["shouldPrioritizeDismiss":true]), animated: true, completion: nil)
                         AbacusStateManager.shared.refreshVaultAccount()
                     case .failure(let error):
@@ -233,8 +233,8 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
             let slippageApiResponse = await CosmoJavascript.shared.getMegavaultWithdrawalInfo(sharesToWithdraw: sharesToWithdraw)
             let slippageResponseParsed = Abacus.VaultDepositWithdrawFormValidator.shared.getVaultDepositWithdrawSlippageResponse(apiResponse: slippageApiResponse ?? "")
             let formValidationResult = Abacus.VaultDepositWithdrawFormValidator.shared.validateVaultForm(formData: formData,
-                                                                                         vaultAccount: vault.account,
                                                                                                          accountData: accountData,
+                                                                                                         vaultAccount: vault.account,
                                                                                                          slippageResponse: slippageResponseParsed,
                                                                                                          localizer: DataLocalizer.shared?.asAbacusLocalizer)
             

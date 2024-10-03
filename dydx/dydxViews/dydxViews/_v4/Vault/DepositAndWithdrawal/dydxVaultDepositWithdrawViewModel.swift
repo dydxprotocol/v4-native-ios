@@ -9,7 +9,6 @@ import SwiftUI
 import PlatformUI
 import Utilities
 import dydxFormatter
-import KeyboardObserving
 
 public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
     public enum State {
