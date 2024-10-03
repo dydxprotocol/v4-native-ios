@@ -259,6 +259,11 @@ public final class AbacusStateManager: NSObject {
 
     public func refreshVaultAccount() {
         asyncStateManager.refreshVaultAccount()
+        Task {
+            //indexer takes a little while for transfers to reflect...
+            try? await Task.sleep(for: .seconds(4))
+            asyncStateManager.refreshVaultAccount()
+        }
     }
     
     public func startTrade() {
