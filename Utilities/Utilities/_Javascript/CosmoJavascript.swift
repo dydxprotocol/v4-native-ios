@@ -133,6 +133,20 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
         return handleChainResponse(response)
     }
     
+    public func call(functionName: String, params: [Any?]) async -> String? {
+        return await withCheckedContinuation { continuation in
+            self.callNativeClient(functionName: functionName, params: params) { result in
+                continuation.resume(returning: result as? String)
+            }
+        }
+    }
+
+    public func call(functionName: String, paramsInJson: String?, completion: @escaping JavascriptCompletion) {
+        callNativeClient(functionName: functionName, params: paramsInJson != nil ? [paramsInJson!] : []) { result in
+            completion(result)
+        }
+    }
+    
     // Helper function for parsing the response
     private func handleChainResponse(_ response: String?) -> Result<ChainSuccessResponse, ChainError> {
         guard let response = response else {
@@ -156,57 +170,6 @@ public final class CosmoJavascript: NSObject, SingletonProtocol {
             return .failure(.unknownError)
         }
     }
-    
-    public func call(functionName: String, params: [Any?]) async -> String? {
-        return await withCheckedContinuation { continuation in
-            self.callNativeClient(functionName: functionName, params: params) { result in
-                continuation.resume(returning: result as? String)
-            }
-        }
-    }
-
-    public func call(functionName: String, paramsInJson: String?, completion: @escaping JavascriptCompletion) {
-        callNativeClient(functionName: functionName, params: paramsInJson != nil ? [paramsInJson!] : []) { result in
-            completion(result)
-        }
-    }
-}
-
-//TODO: Replace?
-// Define the structure of the error message
-public struct ChainError: Decodable, Error {
-    static let unknownError = ChainError(message: "An unknown error occurred", line: nil, column: nil, stack: nil)
-
-    public let message: String
-    public let line: Int?
-    public let column: Int?
-    public let stack: String?
-}
-
-public struct ChainErrorResponse: Decodable, Error {
-    public let error: ChainError
-}
-
-// Define the structure of the success message
-public struct ChainEvent: Decodable {
-    let type: String
-    let attributes: [ChainEventAttribute]
-}
-
-public struct ChainEventAttribute: Decodable {
-    let key: String
-    let value: String
-}
-
-public struct ChainSuccessResponse: Decodable {
-    let height: Int?
-    let hash: String?
-    let code: Int?
-    let tx: String
-    let txIndex: Int?
-    let gasUsed: String?
-    let gasWanted: String?
-    let events: [ChainEvent]?
 }
 
 /* to test
