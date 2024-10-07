@@ -120,7 +120,7 @@ struct dydxMarketView: View {
     }
 
     var icon: some View {
-        let placeholderText =  { Text(viewModel.assetId.prefix(1))
+        let placeholderText = { Text(viewModel.assetId.prefix(1))
                 .frame(width: 32, height: 32)
                 .themeColor(foreground: .textTertiary)
                 .themeColor(background: .layer5)

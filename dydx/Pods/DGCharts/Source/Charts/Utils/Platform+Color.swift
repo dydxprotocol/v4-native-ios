@@ -13,16 +13,21 @@
 import UIKit
 
 public typealias NSUIColor = UIColor
-private func fetchLabelColor() -> UIColor {
-    if #available(iOS 13, tvOS 13, *) {
+private func fetchLabelColor() -> UIColor
+{
+    if #available(iOS 13, tvOS 13, *)
+    {
         return .label
-    } else {
+    }
+    else
+    {
         return .black
     }
 }
 private let labelColor: UIColor = fetchLabelColor()
 
-extension UIColor {
+extension UIColor
+{
     static var labelOrBlack: UIColor { labelColor }
 }
 #endif
@@ -32,16 +37,21 @@ extension UIColor {
 import AppKit
 
 public typealias NSUIColor = NSColor
-private func fetchLabelColor() -> NSColor {
-    if #available(macOS 10.14, *) {
+private func fetchLabelColor() -> NSColor
+{
+    if #available(macOS 10.14, *)
+    {
         return .labelColor
-    } else {
+    }
+    else
+    {
         return .black
     }
 }
 private let labelColor: NSColor = fetchLabelColor()
 
-extension NSColor {
+extension NSColor
+{
     static var labelOrBlack: NSColor { labelColor }
 }
 #endif
