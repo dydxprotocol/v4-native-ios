@@ -70,7 +70,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
             initializationState = .initializedRemoteLoaded
             completion()
         } else {
-            Statsig.start(sdkKey: apiKey, user: StatsigUser(userID: userId), options: StatsigOptions(
+            Statsig.start(sdkKey: apiKey, user: StatsigUser(userID: userId, customIDs: ["isNativeApp":"true"]), options: StatsigOptions(
                 initTimeout: nil,
                 disableCurrentVCLogging: true,
                 environment: environment.statsigEnvironemnt,
