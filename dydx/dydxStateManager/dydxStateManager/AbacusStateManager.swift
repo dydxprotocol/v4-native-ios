@@ -165,6 +165,7 @@ public final class AbacusStateManager: NSObject {
         ]
         appConfigs.onboardingConfigs.alchemyApiKey = CredientialConfig.shared.credential(for: "alchemyApiKey")
         appConfigs.staticTyping = dydxBoolFeatureFlag.abacus_static_typing.isEnabled
+        appConfigs.vaultConfigs = VaultConfigs.companion.forApp
 
         return AsyncAbacusStateManagerV2(
             deploymentUri: deploymentUri,
@@ -254,6 +255,15 @@ public final class AbacusStateManager: NSObject {
 
     public func setHistoricalTradingRewardPeriod(period: HistoricalTradingRewardsPeriod) {
         asyncStateManager.historicalTradingRewardPeriod = period
+    }
+
+    public func refreshVaultAccount() {
+        asyncStateManager.refreshVaultAccount()
+        Task {
+            // indexer takes a little while for transfers to reflect...
+            try? await Task.sleep(for: .seconds(4))
+            asyncStateManager.refreshVaultAccount()
+        }
     }
 
     public func startTrade() {
