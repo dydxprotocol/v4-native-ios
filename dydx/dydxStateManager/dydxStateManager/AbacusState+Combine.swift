@@ -570,7 +570,7 @@ public final class AbacusState {
             .share()
             .eraseToAnyPublisher()
     }
-    
+
     public var vault: AnyPublisher<Vault?, Never> {
         statePublisher
             .map(\.?.vault)

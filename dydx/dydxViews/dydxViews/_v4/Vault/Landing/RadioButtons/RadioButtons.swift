@@ -54,7 +54,7 @@ struct RadioButton: View {
     let width: CGFloat?
     let height: CGFloat?
     let selectionAction: () -> Void
-    
+
     var padding: CGFloat {
         let lineHeight = ThemeSettings.shared.themeConfig.themeFont.uiFont(of: fontType, fontSize: fontSize)?.lineHeight ?? 0
         return lineHeight / 2.0

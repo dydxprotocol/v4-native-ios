@@ -72,7 +72,7 @@ public extension ThemeSettings {
     static var negativeColorLayer: ThemeColor.SemanticColor {
         shared.styleConfig.styles[negativeLayerStyleKey]?.layerColor ?? .colorRed
     }
-    
+
     static func directionalColor(forValue value: Double?, isIncreasingPositive: Bool = true) -> ThemeColor.SemanticColor {
         let value = value ?? 0
         if isIncreasingPositive {
