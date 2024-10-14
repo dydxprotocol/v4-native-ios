@@ -23,20 +23,21 @@ public class dydxVaultChartViewModel: PlatformViewModel {
     fileprivate let lineChart = {
         let lineChart = LineChartView()
         lineChart.data = LineChartData()
-        lineChart.xAxis.drawGridLinesEnabled = false
         lineChart.leftAxis.enabled = false
         lineChart.rightAxis.enabled = false
-        lineChart.xAxis.drawGridLinesEnabled = false
-        lineChart.xAxis.drawAxisLineEnabled = false
-        lineChart.xAxis.labelPosition = .bottom
-        lineChart.xAxis.setLabelCount(5, force: true)
-        lineChart.xAxis.granularityEnabled = true
-        lineChart.xAxis.labelTextColor = ThemeColor.SemanticColor.textTertiary.uiColor
-        lineChart.xAxis.labelFont = ThemeSettings.shared.themeConfig.themeFont.uiFont(of: .number, fontSize: .smallest) ?? .systemFont(ofSize: 11)
-        lineChart.xAxis.valueFormatter = ValueTimeOption.oneDay.valueFormatter
-        lineChart.xAxis.avoidFirstLastClippingEnabled = true
-        // default is 5, but then would have to add that offset to ViewPortOffsets's bottom
-        lineChart.xAxis.yOffset = 0
+//        lineChart.xAxis.drawGridLinesEnabled = false
+//        lineChart.xAxis.drawGridLinesEnabled = false
+//        lineChart.xAxis.drawAxisLineEnabled = false
+//        lineChart.xAxis.labelPosition = .bottom
+//        lineChart.xAxis.setLabelCount(5, force: true)
+//        lineChart.xAxis.granularityEnabled = true
+//        lineChart.xAxis.labelTextColor = ThemeColor.SemanticColor.textTertiary.uiColor
+//        lineChart.xAxis.labelFont = ThemeSettings.shared.themeConfig.themeFont.uiFont(of: .number, fontSize: .smallest) ?? .systemFont(ofSize: 11)
+//        lineChart.xAxis.valueFormatter = ValueTimeOption.oneDay.valueFormatter
+//        lineChart.xAxis.avoidFirstLastClippingEnabled = true
+//        // default is 5, but then would have to add that offset to ViewPortOffsets's bottom
+//        lineChart.xAxis.yOffset = 0
+        lineChart.xAxis.enabled = false
         // enables edge-to-edge
         lineChart.setViewPortOffsets(left: 0, top: 0, right: 0, bottom: lineChart.xAxis.labelFont.lineHeight * 2)
         lineChart.pinchZoomEnabled = false
