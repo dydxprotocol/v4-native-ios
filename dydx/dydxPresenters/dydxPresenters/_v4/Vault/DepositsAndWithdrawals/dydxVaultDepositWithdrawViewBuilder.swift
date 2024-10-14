@@ -112,15 +112,12 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
                                                                                          vaultAccount: vault.account,
                                                                                          slippageResponse: nil,
                                                                                          localizer: DataLocalizer.shared?.asAbacusLocalizer)
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.update(subaccount: subaccount,
-                            vault: vault,
-                            hasOnboarded: hasOnboarded,
-                            amount: amount,
-                            transferType: transferType,
-                            formValidationResult: formValidationResult)
-            }
+            self.update(subaccount: subaccount,
+                        vault: vault,
+                        hasOnboarded: hasOnboarded,
+                        amount: amount,
+                        transferType: transferType,
+                        formValidationResult: formValidationResult)
         case .withdraw:
             fetchSlippageAndUpdate(formData: formData,
                                    accountData: accountData,

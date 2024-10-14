@@ -157,13 +157,10 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
                                                                                                          vaultAccount: vault.account,
                                                                                                          slippageResponse: nil,
                                                                                                          localizer: DataLocalizer.shared?.asAbacusLocalizer)
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.update(subaccount: subaccount,
-                            vault: vault,
-                            hasAcknowledgedHighSlippage: hasAcknowledgedHighSlippage,
-                            formValidationResult: formValidationResult)
-            }
+            self.update(subaccount: subaccount,
+                        vault: vault,
+                        hasAcknowledgedHighSlippage: hasAcknowledgedHighSlippage,
+                        formValidationResult: formValidationResult)
         case .withdraw:
             fetchSlippageAndUpdate(formData: formData,
                                    accountData: accountData,
