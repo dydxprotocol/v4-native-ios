@@ -65,6 +65,18 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
             self?.updateState(vault: vault, assetMap: assetMap, marketMap: marketMap)
         })
         .store(in: &subscriptions)
+
+        if let chartViewModel = viewModel?.vaultChart {
+            Publishers.CombineLatest3(
+                AbacusStateManager.shared.state.vault,
+                chartViewModel.$selectedValueType,
+                chartViewModel.$selectedValueTime
+            )
+            .sink(receiveValue: { [weak self] vault, valueType, timeType in
+                self?.updateChartState(vault: vault, valueType: valueType, timeType: timeType)
+            })
+            .store(in: &subscriptions)
+        }
     }
 
     private func updateState(vault: Abacus.Vault?, assetMap: [String: Asset], marketMap: [String: PerpetualMarket]) {
@@ -95,35 +107,31 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
         .compactMap { $0 }
     }
 
-    // TODO: remove, just for testing
-    private func generateEntries() -> [ChartDataEntry] {
-        let selectedValueTime = viewModel?.vaultChart?.selectedValueTime ?? .oneDay
-        let now = Date().timeIntervalSince1970
-        let finalTimeSecondsAway = selectedValueTime == .oneDay ? 3600.0*24.0 : selectedValueTime == .sevenDays ? 3600.0*24.0*7.0 : 3600.0*24.0*30.0
-        let numEntries = Int.random(in: 0..<100)
-        let entries = (0..<numEntries).map { i in
-            ChartDataEntry(x: now + Double(i)/Double(numEntries) * finalTimeSecondsAway, y: Double.random(in: 0..<100))
+    private func updateChartState(vault: Abacus.Vault?, valueType: dydxVaultChartViewModel.ValueTypeOption, timeType: dydxVaultChartViewModel.ValueTimeOption) {
+        var entries: [ChartDataEntry] = vault?.details?.history?.reversed()
+            .compactMap { entry in
+                let secondsSince1970 = (entry.date?.doubleValue ?? 0) / 1000.0
+                let minSecondsSince1970: Double
+                switch timeType {
+                case .oneDay:
+                    minSecondsSince1970 = Date().addingTimeInterval(-24 * 60 * 60).timeIntervalSince1970
+                case .sevenDays:
+                    minSecondsSince1970 = Date().addingTimeInterval(-7 * 24 * 60 * 60).timeIntervalSince1970
+                case .thirtyDays:
+                    minSecondsSince1970 = Date().addingTimeInterval(-30 * 24 * 60 * 60).timeIntervalSince1970
+                }
+
+                if minSecondsSince1970 <= secondsSince1970,
+                    let value = valueType == .equity ? entry.equity?.doubleValue : entry.totalPnl?.doubleValue {
+                    return ChartDataEntry(x: secondsSince1970, y: value)
+                } else {
+                    return nil
+                }
+            } ?? []
+        if entries.count < 2 {
+            viewModel?.vaultChart?.setEntries(entries: [], valueFormatter: timeType.valueFormatter)
+        } else {
+            viewModel?.vaultChart?.setEntries(entries: entries, valueFormatter: timeType.valueFormatter)
         }
-        return entries
-    }
-
-    // TODO: remove
-    // this is just for testing
-    private func generatePositions() -> [dydxVaultPositionViewModel] {
-        return [
-            dydxVaultPositionViewModel(assetId: "logo_bitcoin", iconUrl: nil, side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetId: "logo_ethereum", iconUrl: nil, side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetId: "logo_bitcoin", iconUrl: nil, side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetId: "logo_ethereum", iconUrl: nil, side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetId: "logo_bitcoin", iconUrl: nil, side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetId: "logo_ethereum", iconUrl: nil, side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetId: "logo_bitcoin", iconUrl: nil, side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetId: "logo_ethereum", iconUrl: nil, side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetId: "logo_bitcoin", iconUrl: nil, side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetId: "logo_ethereum", iconUrl: nil, side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetId: "logo_bitcoin", iconUrl: nil, side: .long, leverage: 10.80, notionalValue: 100000, positionSize: 10000, tokenUnitPrecision: 6, pnlAmount: 1000, pnlPercentage: 10, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) }),
-            dydxVaultPositionViewModel(assetId: "logo_ethereum", iconUrl: nil, side: .short, leverage: 88.88, notionalValue: 50000, positionSize: 10000, tokenUnitPrecision: -1, pnlAmount: -500, pnlPercentage: -1, sparklineValues: (0..<10).map { _ in Double.random(in: 0.0...1.0) })
-        ]
-
     }
 }

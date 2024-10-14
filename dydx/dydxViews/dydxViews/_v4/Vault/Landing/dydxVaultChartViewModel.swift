@@ -15,7 +15,7 @@ import dydxChart
 
 public class dydxVaultChartViewModel: PlatformViewModel {
     @Published public var selectedValueType: ValueTypeOption = .pnl
-    @Published public var selectedValueTime: ValueTimeOption = .oneDay
+    @Published public var selectedValueTime: ValueTimeOption = .thirtyDays
 
     fileprivate let valueTypeOptions = ValueTypeOption.allCases
     fileprivate let valueTimeOptions = ValueTimeOption.allCases
@@ -41,17 +41,19 @@ public class dydxVaultChartViewModel: PlatformViewModel {
         lineChart.setViewPortOffsets(left: 0, top: 0, right: 0, bottom: lineChart.xAxis.labelFont.lineHeight * 2)
         lineChart.pinchZoomEnabled = false
         lineChart.doubleTapToZoomEnabled = false
-        // enables dragging the highlighted value indicator
-        lineChart.dragEnabled = true
+        // disables dragging the highlighted value indicator
+        lineChart.dragEnabled = false
         lineChart.legend.enabled = false
+
+        // disables all user interaction
+        lineChart.isUserInteractionEnabled = false
 
         return lineChart
     }()
 
     public init() {}
 
-    // TODO: replace with actual data
-    public func setEntries(entries: [ChartDataEntry] = []) {
+    public func setEntries(entries: [ChartDataEntry], valueFormatter: IAxisValueFormatter) {
         let dataSet = LineChartDataSet(entries: entries)
         let isPositive = (entries.last?.y ?? -Double.infinity) >= (entries.first?.y ?? -Double.infinity)
         let color = isPositive ? ThemeSettings.positiveColor.uiColor : ThemeSettings.negativeColor.uiColor
@@ -78,7 +80,7 @@ public class dydxVaultChartViewModel: PlatformViewModel {
         dataSet.highlightEnabled = true
         dataSet.drawHorizontalHighlightIndicatorEnabled = false
 
-        lineChart.xAxis.valueFormatter = selectedValueTime.valueFormatter
+        lineChart.xAxis.valueFormatter = valueFormatter
 
         lineChart.data = LineChartData(dataSet: dataSet)
     }
@@ -117,7 +119,7 @@ public class dydxVaultChartViewModel: PlatformViewModel {
             return DataLocalizer.shared?.localize(path: path, params: nil) ?? ""
         }
 
-        fileprivate var valueFormatter: TimeAxisValueFormatter {
+        public var valueFormatter: IAxisValueFormatter {
             let formatter = TimeAxisValueFormatter()
             switch self {
             case .oneDay:
