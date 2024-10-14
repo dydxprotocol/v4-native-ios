@@ -7,7 +7,6 @@
 
 import Abacus
 
-
 extension Double {
     var asKotlinDouble: KotlinDouble {
         KotlinDouble(value: self)

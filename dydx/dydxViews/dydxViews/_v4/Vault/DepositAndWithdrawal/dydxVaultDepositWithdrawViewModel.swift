@@ -15,7 +15,7 @@ public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
         case enabled
         case disabled
     }
-    
+
     @Published public var submitState: State = .disabled
     @Published public var submitAction: (() -> Void)?
 
@@ -27,15 +27,15 @@ public class dydxVaultDepositWithdrawViewModel: PlatformViewModel {
 
     @Published public var inputReceiptChangeItems: [dydxReceiptChangeItemView]?
     @Published public var inputInlineAlert: InlineAlertViewModel?
-    
+
     @Published public var curVaultBalance: Double?
     @Published public var curFreeCollateral: Double?
     @Published public var curMarginUsage: Double?
-    
+
     @Published public var postVaultBalance: Double?
     @Published public var postFreeCollateral: Double?
     @Published public var postMarginUsage: Double?
-    
+
     @Published public var slippage: Double?
     @Published public var expectedAmountReceived: Double?
 
@@ -120,7 +120,7 @@ private struct VaultDepositWithdrawView: View {
         return PlatformButtonViewModel(content: content.wrappedViewModel, state: state, action: viewModel.submitAction ?? {})
             .createView()
     }
-    
+
     private func makeReceiptItem(titleKey: String, preValue: Double?, postValue: Double?, unit: AmountTextModel.Unit = .dollar, isLoading: Bool = false) -> some View {
         if isLoading {
             return dydxReceiptLoadingItemView(title: DataLocalizer.localize(path: titleKey)).createView()
@@ -141,7 +141,7 @@ private struct VaultDepositWithdrawView: View {
             makeReceiptItem(titleKey: "APP.VAULTS.YOUR_VAULT_BALANCE", preValue: viewModel.curVaultBalance, postValue: viewModel.postVaultBalance)
         }
     }
-    
+
     @ViewBuilder
     private var receipts: some View {
         VStack(spacing: 8) {
@@ -157,7 +157,7 @@ private struct VaultDepositWithdrawView: View {
         }
         .padding(.horizontal, 16)
     }
-    
+
     private var buttonArea: some View {
         VStack(spacing: 16) {
             receipts

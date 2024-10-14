@@ -32,10 +32,10 @@ public class dydxVaultDepositWithdrawConfirmationViewModel: PlatformViewModel {
     @Published public var postVaultBalance: Double?
     @Published public var postFreeCollateral: Double?
     @Published public var postMarginUsage: Double?
-    
+
     @Published public var slippage: Double?
     @Published public var expectedAmountReceived: Double?
-    
+
     public var expectedAmount: Double? {
         guard let slippage = slippage, let amount = amount else { return nil }
         return amount * slippage

@@ -61,8 +61,7 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                 self?.updateState(vault: vault, assetMap: assetMap, marketMap: marketMap)
             })
             .store(in: &subscriptions)
-        
-        
+
         // TODO: remove & replace, test only
 //        Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
 //            guard let self = self else { return }
@@ -70,13 +69,13 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
 //            self.viewModel?.positions = self.generatePositions()
 //        }
     }
-    
+
     private func updateState(vault: Abacus.Vault, assetMap: [String: Asset], marketMap: [String: PerpetualMarket]) {
         viewModel?.totalValueLocked = vault.details?.totalValue?.doubleValue ?? Double.random(in: -10000000..<10000000)
         viewModel?.thirtyDayReturnPercent = vault.details?.thirtyDayReturnPercent?.doubleValue ?? Double.random(in: -100..<100)
         viewModel?.vaultBalance = vault.account?.balanceUsdc?.doubleValue ?? Double.random(in: -100..<100)
         viewModel?.allTimeReturnUsdc = vault.account?.allTimeReturnUsdc?.doubleValue ?? Double.random(in: -100..<100)
-        
+
         viewModel?.positions = vault.positions?.positions?.map { (position) -> dydxVaultPositionViewModel? in
             guard let leverage = position.currentLeverageMultiple?.doubleValue,
                   let notionalValue = position.currentPosition?.usdc?.doubleValue,

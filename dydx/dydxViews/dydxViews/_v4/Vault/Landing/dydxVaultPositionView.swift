@@ -88,12 +88,12 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
 }
 
 struct VaultPositionView: View {
-    
+
     static let marketSectionWidth: CGFloat = 130
     static let interSectionPadding: CGFloat = 12
     static let sparklineWidth: CGFloat = 24
     static let pnlSpacing: CGFloat = 6
-    
+
     @ObservedObject var viewModel: dydxVaultPositionViewModel
 
     var marketSection: some View {
