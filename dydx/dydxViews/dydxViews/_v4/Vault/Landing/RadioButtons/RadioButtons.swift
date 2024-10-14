@@ -21,7 +21,6 @@ struct RadioButtonGroup<ButtonItem: RadioButtonContentDisplayable>: View {
 
     let options: [ButtonItem]
 
-    let buttonClipStyle: ClipStyle
     let fontType: ThemeFont.FontType
     let fontSize: ThemeFont.FontSize
     /// when not specified, width will be natural. When specified, width will be forced
@@ -35,7 +34,6 @@ struct RadioButtonGroup<ButtonItem: RadioButtonContentDisplayable>: View {
                 let option = options[index]
                 RadioButton(displayText: option.displayText,
                             isSelected: selected == option,
-                            clipStyle: buttonClipStyle,
                             fontType: fontType,
                             fontSize: fontSize,
                             width: itemWidth,
@@ -51,12 +49,16 @@ struct RadioButtonGroup<ButtonItem: RadioButtonContentDisplayable>: View {
 struct RadioButton: View {
     let displayText: String
     let isSelected: Bool
-    let clipStyle: ClipStyle
     let fontType: ThemeFont.FontType
     let fontSize: ThemeFont.FontSize
     let width: CGFloat?
     let height: CGFloat?
     let selectionAction: () -> Void
+
+    var padding: CGFloat {
+        let lineHeight = ThemeSettings.shared.themeConfig.themeFont.uiFont(of: fontType, fontSize: fontSize)?.lineHeight ?? 0
+        return lineHeight / 2.0
+    }
 
     private var verticalSpacer: some View {
         Spacer(minLength: 11)
@@ -71,15 +73,14 @@ struct RadioButton: View {
             .lineLimit(1)
             .themeColor(foreground: isSelected ? .textPrimary : .textTertiary)
             .themeFont(fontType: fontType, fontSize: fontSize)
-            // if width is specified, i.e. non-nil, setting horizontal inset to 0 will allow entire space to be used horizontally
-            .padding(.horizontal, width == nil ? 8 : 0)
-            // if height is specified, i.e. non-nil, setting vertical inset to 0 will allow entire space to be used horizontally
-            .padding(.horizontal, width == nil ? 8 : 0)
-            .centerAligned()
             .frame(width: width, height: height)
-            .fixedSize()
+            .fixedSize(horizontal: true, vertical: false)
+            // if width is specified, i.e. non-nil, setting horizontal inset to 0 will allow entire space to be used horizontally
+            .padding(.horizontal, width == nil ? padding : 0)
+            // if height is specified, i.e. non-nil, setting vertical inset to 0 will allow entire space to be used horizontally
+            .padding(.vertical, height == nil ? padding : 0)
             .themeColor(background: isSelected ? .layer1 : .layer3)
-            .borderAndClip(style: clipStyle, borderColor: .borderDefault)
+            .borderAndClip(style: .capsule, borderColor: .borderDefault)
             .onTapGesture {
                 selectionAction()
             }

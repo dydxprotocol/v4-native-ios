@@ -13,8 +13,9 @@ import Utilities
 
 public class dydxVaultViewModel: PlatformViewModel {
     @Published public var vaultBalance: Double?
-    @Published public var profitDollars: Double?
-    @Published public var profitPercentage: Double?
+    @Published public var allTimeReturnUsdc: Double?
+    @Published public var thirtyDayReturnPercent: Double?
+    @Published public var totalValueLocked: Double?
     @Published public var vaultChart: dydxVaultChartViewModel?
     @Published public var positions: [dydxVaultPositionViewModel]?
     @Published public var cancelAction: (() -> Void)?
@@ -120,7 +121,7 @@ private struct dydxVaultView: View {
     }
 
     private var vaultBalanceView: some View {
-        VStack(spacing: 4) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.YOUR_VAULT_BALANCE", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
@@ -135,21 +136,13 @@ private struct dydxVaultView: View {
     }
 
     private var pnlView: some View {
-        VStack(spacing: 4) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.YOUR_ALL_TIME_PNL", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
-            VStack {
-                VStack(spacing: 2) {
-                    SignedAmountViewModel(text: dydxFormatter.shared.dollar(number: viewModel.profitDollars) ?? "--", sign: .none, coloringOption: .allText)
-                        .createView()
-                    if let profitPercentage = viewModel.profitPercentage {
-                        Text(dydxFormatter.shared.percent(number: profitPercentage, digits: 2) ?? "")
-                            .themeColor(foreground: .textPrimary)
-                            .themeFont(fontType: .base, fontSize: .smaller)
-                    }
-                }
-            }
+            Text(dydxFormatter.shared.dollar(number: viewModel.allTimeReturnUsdc) ?? "")
+                .themeColor(foreground: ThemeSettings.directionalColor(forValue: viewModel.allTimeReturnUsdc))
+                .themeFont(fontType: .base, fontSize: .medium)
         }
         .leftAligned()
         .padding(.horizontal, 16)
@@ -164,25 +157,26 @@ private struct dydxVaultView: View {
             tvlTitleValue
         }
         .leftAligned()
+        .padding(.horizontal, 16)
     }
 
     private var aprTitleValue: some View {
-        VStack(spacing: 4) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.VAULT_THIRTY_DAY_APR", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
-            Text("--")
-                .themeColor(foreground: .textPrimary)
+            Text(dydxFormatter.shared.percent(number: viewModel.thirtyDayReturnPercent, digits: 2) ?? "")
+                .themeColor(foreground: ThemeSettings.directionalColor(forValue: viewModel.thirtyDayReturnPercent))
                 .themeFont(fontType: .base, fontSize: .medium)
         }
     }
 
     private var tvlTitleValue: some View {
-        VStack(spacing: 4) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.TVL", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
-            Text("--")
+            Text(dydxFormatter.shared.dollar(number: viewModel.totalValueLocked) ?? "")
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontType: .base, fontSize: .medium)
         }
@@ -226,13 +220,13 @@ private struct dydxVaultView: View {
     }
 
     private var positionsColumnsHeader: some View {
-        HStack(spacing: dydxVaultPositionViewModel.interSectionPadding) {
+        HStack(spacing: VaultPositionView.interSectionPadding) {
             Group {
                 Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.MARKET", params: nil) ?? "")
                     .themeColor(foreground: .textTertiary)
                     .themeFont(fontType: .base, fontSize: .small)
                     .leftAligned()
-                    .frame(width: dydxVaultPositionViewModel.marketSectionWidth)
+                    .frame(width: VaultPositionView.marketSectionWidth)
                     .lineLimit(1)
                 Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.SIZE", params: nil) ?? "")
                     .themeColor(foreground: .textTertiary)
@@ -244,7 +238,7 @@ private struct dydxVaultView: View {
                     .themeFont(fontType: .base, fontSize: .small)
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: false)
-                    .padding(.trailing, dydxVaultPositionViewModel.pnlSpacing + dydxVaultPositionViewModel.sparklineWidth)
+                    .padding(.trailing, VaultPositionView.pnlSpacing + VaultPositionView.sparklineWidth)
             }
         }
         .padding(.horizontal, 16)

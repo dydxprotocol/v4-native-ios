@@ -13,22 +13,17 @@ import DGCharts
 import dydxFormatter
 
 public class dydxVaultPositionViewModel: PlatformViewModel {
-    static var marketSectionWidth: CGFloat = 130
-    static var interSectionPadding: CGFloat = 12
-    static var sparklineWidth: CGFloat = 24
-    static var pnlSpacing: CGFloat = 6
 
-    @Published public var assetName: String
-    @Published public var market: String
+    @Published public var assetId: String
+    @Published public var iconUrl: URL?
     @Published public var side: SideTextViewModel.Side
     @Published public var leverage: Double
     @Published public var notionalValue: Double
     @Published public var positionSize: Double
     @Published public var tokenUnitPrecision: Int
-    @Published public var token: String
-    @Published public var pnlAmount: Double
-    @Published public var pnlPercentage: Double
-    @Published public var sparklineValues: [Double]
+    @Published public var pnlAmount: Double?
+    @Published public var pnlPercentage: Double?
+    @Published public var sparklineValues: [Double]?
 
     fileprivate var sideLeverageAttributedText: AttributedString {
         let attributedSideText = AttributedString(text: side.text, urlString: nil)
@@ -49,7 +44,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     fileprivate var pnlColor: ThemeColor.SemanticColor {
-        pnlAmount >= 0 ? ThemeSettings.positiveColor : ThemeSettings.negativeColor
+        pnlAmount ?? 0 >= 0 ? ThemeSettings.positiveColor : ThemeSettings.negativeColor
     }
 
     fileprivate var pnlAmountText: String {
@@ -61,24 +56,22 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     public init(
-        assetName: String,
-        market: String,
+        assetId: String,
+        iconUrl: URL?,
         side: SideTextViewModel.Side,
         leverage: Double,
         notionalValue: Double,
         positionSize: Double,
-        token: String,
         tokenUnitPrecision: Int,
-        pnlAmount: Double,
-        pnlPercentage: Double,
-        sparklineValues: [Double]) {
-            self.assetName = assetName
-            self.market = market
+        pnlAmount: Double?,
+        pnlPercentage: Double?,
+        sparklineValues: [Double]?) {
+            self.assetId = assetId
+            self.iconUrl = iconUrl
             self.side = side
             self.leverage = leverage
             self.notionalValue = notionalValue
             self.positionSize = positionSize
-            self.token = token
             self.tokenUnitPrecision = tokenUnitPrecision
             self.pnlAmount = pnlAmount
             self.pnlPercentage = pnlPercentage
@@ -94,18 +87,21 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 }
 
-private struct VaultPositionView: View {
+struct VaultPositionView: View {
+
+    static let marketSectionWidth: CGFloat = 130
+    static let interSectionPadding: CGFloat = 12
+    static let sparklineWidth: CGFloat = 24
+    static let pnlSpacing: CGFloat = 6
+
     @ObservedObject var viewModel: dydxVaultPositionViewModel
 
     var marketSection: some View {
         HStack(spacing: 8) {
-            PlatformIconViewModel(type: .asset(name: viewModel.assetName, bundle: .dydxView),
-                                  clip: .circle(background: .transparent, spacing: 0, borderColor: nil),
-                                  size: .init(width: 24, height: 24),
-                                  templateColor: nil)
+            PlatformIconViewModel(url: viewModel.iconUrl, placeholderText: viewModel.assetId.prefix(1).uppercased())
                 .createView()
             VStack(alignment: .leading, spacing: 2) {
-                Text(viewModel.market)
+                Text(viewModel.assetId)
                     .themeFont(fontType: .base, fontSize: .small)
                     .themeColor(foreground: .textSecondary)
                     .lineLimit(1)
@@ -115,7 +111,6 @@ private struct VaultPositionView: View {
                     .minimumScaleFactor(0.5)
             }
         }
-        .leftAligned()
     }
 
     var sizeSection: some View {
@@ -131,7 +126,7 @@ private struct VaultPositionView: View {
                     .themeColor(foreground: .textTertiary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                TokenTextViewModel(symbol: viewModel.token)
+                TokenTextViewModel(symbol: viewModel.assetId)
                     .createView(parentStyle: ThemeStyle.defaultStyle.themeFont(fontSize: .smallest))
             }
         }
@@ -139,7 +134,7 @@ private struct VaultPositionView: View {
     }
 
     var pnlSection: some View {
-        HStack(alignment: .center, spacing: dydxVaultPositionViewModel.pnlSpacing) {
+        HStack(alignment: .center, spacing: Self.pnlSpacing) {
             VStack(alignment: .trailing, spacing: 2) {
                 Text(viewModel.pnlAmountText)
                     .themeFont(fontType: .base, fontSize: .small)
@@ -152,15 +147,15 @@ private struct VaultPositionView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
             }
-            SparklineView(values: viewModel.sparklineValues)
-                .frame(width: dydxVaultPositionViewModel.sparklineWidth, height: 24)
+            SparklineView(values: viewModel.sparklineValues ?? [])
+                .frame(width: Self.sparklineWidth, height: 24)
         }
     }
 
     var body: some View {
-        HStack(spacing: dydxVaultPositionViewModel.interSectionPadding) {
+        HStack(spacing: Self.interSectionPadding) {
                 marketSection
-                    .frame(width: dydxVaultPositionViewModel.marketSectionWidth)
+                    .frame(width: Self.marketSectionWidth)
                 sizeSection
                 pnlSection
             }

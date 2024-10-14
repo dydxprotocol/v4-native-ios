@@ -571,6 +571,14 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
+    public var vault: AnyPublisher<Vault?, Never> {
+        statePublisher
+            .map(\.?.vault)
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
     /**
      ApiState
       */

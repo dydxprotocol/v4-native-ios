@@ -144,20 +144,18 @@ private struct dydxVaultChartView: View {
         HStack(spacing: 0) {
             RadioButtonGroup(selected: $viewModel.selectedValueType,
                              options: viewModel.valueTypeOptions,
-                             buttonClipStyle: .capsule,
                              fontType: .base,
                              fontSize: .smaller,
                              itemWidth: nil,
-                             itemHeight: 40
+                             itemHeight: 32
             )
-            Spacer()
+            Spacer().layoutPriority(1)
             RadioButtonGroup(selected: $viewModel.selectedValueTime,
                              options: viewModel.valueTimeOptions,
-                             buttonClipStyle: .circle,
                              fontType: .base,
                              fontSize: .smaller,
-                             itemWidth: 40,
-                             itemHeight: 40
+                             itemWidth: nil,
+                             itemHeight: 32
             )
         }
         .padding(.horizontal, 12)

@@ -30,6 +30,9 @@
 		02EE90552829A95600225B56 /* NSObject+ObservingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EE90542829A95600225B56 /* NSObject+ObservingTests.swift */; };
 		02F958032A18278B00828F9A /* SecureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F958022A18278B00828F9A /* SecureStore.swift */; };
 		02F958052A182BC400828F9A /* SecureStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F958042A182BC400828F9A /* SecureStoreProtocol.swift */; };
+		2784D94D2CAED45400AC03EF /* ChainResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2784D94C2CAED44800AC03EF /* ChainResponses.swift */; };
+		2784D94E2CAED45400AC03EF /* ChainResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2784D94C2CAED44800AC03EF /* ChainResponses.swift */; };
+		2784D94F2CAED45400AC03EF /* ChainResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2784D94C2CAED44800AC03EF /* ChainResponses.swift */; };
 		279B87992B97CD4C00466392 /* PointsRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279B87972B97CD4C00466392 /* PointsRating.swift */; };
 		279B879A2B97CD4C00466392 /* RatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279B87982B97CD4C00466392 /* RatingService.swift */; };
 		27E31E5B2BE40E4000580E59 /* SynchronizedLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E31E5A2BE40E4000580E59 /* SynchronizedLock.swift */; };
@@ -300,6 +303,7 @@
 		02EE90542829A95600225B56 /* NSObject+ObservingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+ObservingTests.swift"; sourceTree = "<group>"; };
 		02F958022A18278B00828F9A /* SecureStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStore.swift; sourceTree = "<group>"; };
 		02F958042A182BC400828F9A /* SecureStoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStoreProtocol.swift; sourceTree = "<group>"; };
+		2784D94C2CAED44800AC03EF /* ChainResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainResponses.swift; sourceTree = "<group>"; };
 		279B87972B97CD4C00466392 /* PointsRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointsRating.swift; sourceTree = "<group>"; };
 		279B87982B97CD4C00466392 /* RatingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingService.swift; sourceTree = "<group>"; };
 		27E31E5A2BE40E4000580E59 /* SynchronizedLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedLock.swift; sourceTree = "<group>"; };
@@ -543,6 +547,7 @@
 		312CE38A2630A37400C519C0 /* _Javascript */ = {
 			isa = PBXGroup;
 			children = (
+				2784D94C2CAED44800AC03EF /* ChainResponses.swift */,
 				312CE38B2630A38700C519C0 /* JavascriptRunner.swift */,
 				64FA07B6298AEF8D00626BF0 /* CosmoJavascript.swift */,
 			);
@@ -1249,6 +1254,7 @@
 				314B643E23DCCF0200139EB3 /* CompositeFeatureFlagsProvider.swift in Sources */,
 				3162C02A24C3791300DE648C /* NotificationService.swift in Sources */,
 				3162C01924C3786D00DE648C /* NotificationPermission.swift in Sources */,
+				2784D94F2CAED45400AC03EF /* ChainResponses.swift in Sources */,
 				314B63EA23DCCF0200139EB3 /* Directory.swift in Sources */,
 				314B64BE23DCCF0200139EB3 /* Int+Random.swift in Sources */,
 				314B64EE23DCCF0200139EB3 /* ParsingProtocol.swift in Sources */,
@@ -1328,6 +1334,7 @@
 				314B643D23DCCF0200139EB3 /* CompositeFeatureFlagsProvider.swift in Sources */,
 				3162C02924C3791300DE648C /* NotificationService.swift in Sources */,
 				31755737262A0CED00D76C4C /* NSNumber+Format.swift in Sources */,
+				2784D94D2CAED45400AC03EF /* ChainResponses.swift in Sources */,
 				3162C01824C3786D00DE648C /* NotificationPermission.swift in Sources */,
 				314B63E923DCCF0200139EB3 /* Directory.swift in Sources */,
 				314B64BD23DCCF0200139EB3 /* Int+Random.swift in Sources */,
@@ -1373,6 +1380,7 @@
 				314B649823DCCF0200139EB3 /* Int+Utils.swift in Sources */,
 				314B642423DCCF0200139EB3 /* RegionMonitor.swift in Sources */,
 				31A7B0D7273E18750089C713 /* RandomAccessCollection+Sort.swift in Sources */,
+				2784D94E2CAED45400AC03EF /* ChainResponses.swift in Sources */,
 				314B648823DCCF0200139EB3 /* Array+Compare.swift in Sources */,
 				319BB728242928D800DC9E97 /* ConditionalParser.swift in Sources */,
 				314B63FC23DCCF0200139EB3 /* MapPoint.swift in Sources */,

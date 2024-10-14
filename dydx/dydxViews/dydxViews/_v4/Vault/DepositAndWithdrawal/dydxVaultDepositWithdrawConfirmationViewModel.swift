@@ -32,7 +32,10 @@ public class dydxVaultDepositWithdrawConfirmationViewModel: PlatformViewModel {
     @Published public var postVaultBalance: Double?
     @Published public var postFreeCollateral: Double?
     @Published public var postMarginUsage: Double?
+
     @Published public var slippage: Double?
+    @Published public var expectedAmountReceived: Double?
+
     public var expectedAmount: Double? {
         guard let slippage = slippage, let amount = amount else { return nil }
         return amount * slippage
@@ -159,16 +162,16 @@ private struct VaultDepositWithdrawConfirmationView: View {
             let preTransferFreeCollateral = AmountTextModel(amount: viewModel.curFreeCollateral?.asNsNumber)
             let preTransferMarginUsage = AmountTextModel(amount: viewModel.curMarginUsage?.asNsNumber)
 
-            let postTransferVaultBalance = AmountTextModel(amount: viewModel.postVaultBalance?.asNsNumber)
-            let postTransferFreeCollateral = AmountTextModel(amount: viewModel.postFreeCollateral?.asNsNumber)
-            let postTransferMarginUsage = AmountTextModel(amount: viewModel.postMarginUsage?.asNsNumber)
+            let postTransferVaultBalance = viewModel.postVaultBalance == nil ? nil : AmountTextModel(amount: viewModel.postVaultBalance?.asNsNumber)
+            let postTransferFreeCollateral = viewModel.postFreeCollateral == nil ? nil : AmountTextModel(amount: viewModel.postFreeCollateral?.asNsNumber)
+            let postTransferMarginUsage = viewModel.postMarginUsage == nil ? nil : AmountTextModel(amount: viewModel.postMarginUsage?.asNsNumber)
 
             let estSlippage = AmountTextModel(amount: viewModel.slippage?.asNsNumber, unit: .percentage)
             let expectedAmount = AmountTextModel(amount: viewModel.expectedAmount?.asNsNumber)
 
             let vaultBalanceReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.YOUR_VAULT_BALANCE"),
                                                                         value: AmountChangeModel(before: preTransferVaultBalance, after: postTransferVaultBalance))
-            let freeCollateralReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.FREE_COLLATERAL"),
+            let freeCollateralReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.CROSS_FREE_COLLATERAL"),
                                                                         value: AmountChangeModel(before: preTransferFreeCollateral, after: postTransferFreeCollateral))
             let marginUsageReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.GENERAL.MARGIN_USAGE"),
                                                                         value: AmountChangeModel(before: preTransferMarginUsage, after: postTransferMarginUsage))
@@ -186,7 +189,7 @@ private struct VaultDepositWithdrawConfirmationView: View {
                 case .withdraw:
                     freeCollateralReceiptItem.createView()
                     vaultBalanceReceiptItem.createView()
-                    if let slippage = viewModel.slippage {
+                    if viewModel.slippage != nil {
                         estSlippageReceiptItem.createView()
                         expectedAmountReceiptItem.createView()
                     } else {
@@ -240,9 +243,14 @@ private struct VaultDepositWithdrawConfirmationView: View {
             Group {
                 switch viewModel.submitState {
                 case .enabled, .loading:
-                    Text(viewModel.isFirstSubmission ? transferType.confirmTransferText : DataLocalizer.localize(path: "APP.ONBOARDING.TRY_AGAIN"))
+                    HStack(spacing: 4) {
+                        // spinner on both sides to keep text centered, one always invisible
+                        spinner.opacity(0)
+                        Text(viewModel.isFirstSubmission ? transferType.confirmTransferText : DataLocalizer.localize(path: "APP.ONBOARDING.TRY_AGAIN"))
+                        spinner.opacity(viewModel.submitState == .loading ? 1 : 0)
+                    }
                 case .submitting:
-                    HStack {
+                    HStack(spacing: 4) {
                         Text(DataLocalizer.localize(path: "APP.TRADE.SUBMITTING"))
                         spinner
                     }
