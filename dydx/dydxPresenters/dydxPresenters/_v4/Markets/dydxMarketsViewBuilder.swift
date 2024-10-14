@@ -54,7 +54,7 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
         let electionDate = Date(timeIntervalSince1970: 1730869200)
         if Date.now <= electionDate && dydxBoolFeatureFlag.showPredictionMarketsUI.isEnabled {
             viewModel?.banner = dydxMarketsBannerViewModel(navigationAction: {
-                Router.shared?.navigate(to: RoutingRequest(path: "/trade/TRUMP-USD"), animated: true, completion: nil)
+                Router.shared?.navigate(to: RoutingRequest(path: "/trade/TRUMPWIN-USD"), animated: true, completion: nil)
             })
         }
 
