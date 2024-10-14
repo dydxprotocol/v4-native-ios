@@ -140,8 +140,8 @@ private struct dydxVaultView: View {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.YOUR_ALL_TIME_PNL", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
-            Text(dydxFormatter.shared.dollar(number: viewModel.allTimeReturnUsdc) ?? "")
-                .themeColor(foreground: ThemeSettings.directionalColor(forValue: viewModel.allTimeReturnUsdc))
+            Text(dydxFormatter.shared.dollar(number: viewModel.allTimeReturnUsdc) ?? "--")
+                .themeColor(foreground: viewModel.allTimeReturnUsdc == nil ? .textPrimary : ThemeSettings.directionalColor(forValue: viewModel.allTimeReturnUsdc))
                 .themeFont(fontType: .base, fontSize: .medium)
         }
         .leftAligned()
