@@ -66,6 +66,13 @@ public extension AnalyticsEventV2 {
     }
 }
 
+public extension AnalyticsEventV2 {
+    enum VaultAnalyticsInputType: String {
+        case deposit = "DEPOSIT"
+        case withdraw = "WITHDRAW"
+    }
+}
+
 public enum AnalyticsEventV2 {
     public struct AppStart: TrackableEvent {
         public var name: String { "AppStart" }
@@ -134,6 +141,80 @@ public enum AnalyticsEventV2 {
         public init(step: OnboardingStep, state: OnboardingState) {
             self.step = step
             self.state = state
+        }
+    }
+
+    public struct VaultFormPreviewStep: TrackableEvent {
+        let type: VaultAnalyticsInputType
+        let amount: Double
+
+        public var name: String { "VaultFormPreviewStep" }
+        public var customParameters: [String: Any] {[
+            "amount": amount,
+            "operation": type.rawValue
+        ]}
+
+        public init(amount: Double, type: VaultAnalyticsInputType) {
+            self.amount = amount
+            self.type = type
+        }
+    }
+
+    public struct AttemptVaultOperation: TrackableEvent {
+        let type: VaultAnalyticsInputType
+        let amount: Double?
+        let slippage: Double?
+
+        public var name: String { "AttemptVaultOperation" }
+        public var customParameters: [String: Any] {
+            var dict: [String: Any] = [
+                "operation": type.rawValue
+            ]
+            if let amount {
+                dict["amount"] = amount
+            }
+            if let slippage {
+                dict["slippage"] = slippage
+            }
+            return dict
+        }
+
+        public init(type: VaultAnalyticsInputType, amount: Double?, slippage: Double?) {
+            self.type = type
+            self.amount = amount
+            self.slippage = slippage
+        }
+    }
+
+    public struct SuccessfulVaultOperation: TrackableEvent {
+        let type: VaultAnalyticsInputType
+        let amount: Double
+        let amountDiff: Double
+
+        public var name: String { "SuccessfulVaultOperation" }
+        public var customParameters: [String: Any] {[
+            "operation": type.rawValue,
+            "amount": amount,
+            "amountDiff": amountDiff
+        ]}
+
+        public init(type: VaultAnalyticsInputType, amount: Double, amountDiff: Double) {
+            self.type = type
+            self.amount = amount
+            self.amountDiff = amountDiff
+        }
+    }
+
+    public struct VaultOperationProtocolError: TrackableEvent {
+        let type: VaultAnalyticsInputType
+
+        public var name: String { "VaultOperationProtocolError" }
+        public var customParameters: [String: Any] {[
+            "operation": type.rawValue
+        ]}
+
+        public init(type: VaultAnalyticsInputType) {
+            self.type = type
         }
     }
 }
