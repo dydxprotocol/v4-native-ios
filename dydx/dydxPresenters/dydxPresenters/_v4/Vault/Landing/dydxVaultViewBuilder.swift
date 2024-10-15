@@ -23,7 +23,6 @@ public class dydxVaultViewBuilder: NSObject, ObjectBuilderProtocol {
         let presenter = dydxVaultViewBuilderPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
         return dydxVaultViewController(presenter: presenter, view: view, configuration: .tabbarItemView) as? T
-        // return HostingViewController(presenter: presenter, view: view) as? T
     }
 }
 
