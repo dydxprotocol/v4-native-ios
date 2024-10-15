@@ -24,6 +24,8 @@ import class Abacus.VaultFormAccountData
 import class Abacus.VaultFormData
 import class Abacus.VaultDepositWithdrawFormValidator
 import class Abacus.VaultAccount
+import class Abacus.OnChainTransactionSuccessResponse
+import class Abacus.ChainError
 
 public class dydxVaultDepositWithdrawConfirmationViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -192,7 +194,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
             self?.viewModel?.submitState = .submitting
             Task { [weak self] in
                 guard let transferType = self?.transferType else { return }
-                let result: Result<ChainSuccessResponse, ChainError>
+                let result: Result<Abacus.OnChainTransactionSuccessResponse, ChainError>
 
                 switch transferType {
                 case .deposit:
@@ -212,11 +214,12 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
                 }
                 DispatchQueue.main.async { [weak self] in
                     switch result {
-                    case .success:
+                    case .success(let chainTransaction):
+                        let amount = self?.amount ?? 0
+                        let actualAmount = chainTransaction.actualWithdrawalAmount?.doubleValue ?? 0
                         Tracking.shared?.log(event: AnalyticsEventV2.SuccessfulVaultOperation(type: transferType.analyticsInputType,
-                                                                                              amount: self?.amount ?? 0,
-                                                                                              // TODO: update
-                                                                                              amountDiff: 0))
+                                                                                              amount: amount,
+                                                                                              amountDiff: actualAmount - amount))
                         Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: ["shouldPrioritizeDismiss": true]), animated: true, completion: nil)
                         AbacusStateManager.shared.refreshVaultAccount()
                     case .failure(let error):
