@@ -16,6 +16,7 @@ import FloatingPanel
 import PlatformRouting
 import dydxFormatter
 import Combine
+import dydxAnalytics
 import class Abacus.Subaccount
 import class Abacus.Vault
 import class Abacus.VaultFormValidationResult
@@ -196,20 +197,31 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
                 switch transferType {
                 case .deposit:
                     guard let subaccountNumber = subaccount?.subaccountNumber, let amount = self?.amount else { return }
+                    Tracking.shared?.log(event: AnalyticsEventV2.AttemptVaultOperation(type: transferType.analyticsInputType,
+                                                                                       amount: amount,
+                                                                                       slippage: nil))
                     result = await CosmoJavascript.shared.depositToMegavault(subaccountNumber: subaccountNumber, amountUsdc: amount)
                 case .withdraw:
                     guard let subaccountTo = formValidationResult.submissionData?.withdraw?.subaccountTo,
                           let shares = formValidationResult.submissionData?.withdraw?.shares,
                           let minAmount = formValidationResult.submissionData?.withdraw?.minAmount else { return }
+                    Tracking.shared?.log(event: AnalyticsEventV2.AttemptVaultOperation(type: transferType.analyticsInputType,
+                                                                                       amount: formValidationResult.summaryData.estimatedAmountReceived?.doubleValue,
+                                                                                       slippage: formValidationResult.summaryData.estimatedSlippage?.doubleValue))
                     result = await CosmoJavascript.shared.withdrawFromMegavault(subaccountTo: subaccountTo, shares: shares, minAmount: minAmount)
                 }
                 DispatchQueue.main.async { [weak self] in
                     switch result {
                     case .success:
+                        Tracking.shared?.log(event: AnalyticsEventV2.SuccessfulVaultOperation(type: transferType.analyticsInputType,
+                                                                                              amount: self?.amount ?? 0,
+                                                                                              // TODO: update
+                                                                                              amountDiff: 0))
                         Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: ["shouldPrioritizeDismiss": true]), animated: true, completion: nil)
                         AbacusStateManager.shared.refreshVaultAccount()
                     case .failure(let error):
                         self?.viewModel?.submitState = .enabled
+                        Tracking.shared?.log(event: AnalyticsEventV2.VaultOperationProtocolError(type: transferType.analyticsInputType))
                         ErrorInfo.shared?.info(title: nil, message: error.message, error: error)
                     }
                 }
