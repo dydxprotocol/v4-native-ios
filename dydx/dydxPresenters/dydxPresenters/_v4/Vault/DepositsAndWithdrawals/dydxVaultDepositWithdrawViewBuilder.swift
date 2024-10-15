@@ -17,6 +17,7 @@ import PlatformRouting
 import dydxFormatter
 import Combine
 import Abacus
+import dydxAnalytics
 
 public class dydxVaultDepositWithdrawViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -204,12 +205,13 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
 
     private func updateSubmitAction(amount: Double, transferType: dydxViews.VaultTransferType) {
         viewModel?.submitAction = {
+            Tracking.shared?.log(event: AnalyticsEventV2.VaultFormPreviewStep(amount: amount, type: transferType.analyticsInputType))
             Router.shared?.navigate(to: RoutingRequest(path: transferType.confirmScreenPath, params: ["amount": amount]), animated: true, completion: nil)
         }
     }
 
     private func updateErrorAlert(formValidationResult: VaultFormValidationResult) {
-        guard let error = formValidationResult.errors.first, formValidationResult.submissionData != nil else {
+        guard let error = formValidationResult.errors.first, viewModel?.amount != nil else {
             viewModel?.inputInlineAlert = nil
             return
         }

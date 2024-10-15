@@ -44,7 +44,11 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     fileprivate var pnlColor: ThemeColor.SemanticColor {
-        pnlAmount ?? 0 >= 0 ? ThemeSettings.positiveColor : ThemeSettings.negativeColor
+        if let pnlAmount = pnlAmount {
+            return pnlAmount >= 0 ? ThemeSettings.positiveColor : ThemeSettings.negativeColor
+        } else {
+            return .textTertiary
+        }
     }
 
     fileprivate var pnlAmountText: String {

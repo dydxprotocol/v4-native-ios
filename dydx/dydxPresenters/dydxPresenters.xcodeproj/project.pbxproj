@@ -132,6 +132,7 @@
 		270BA8F32A6F278F009212EA /* dydxDebugThemeViewerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270BA8F22A6F278F009212EA /* dydxDebugThemeViewerBuilder.swift */; };
 		270E7E242A5F6B1B00136793 /* dydxTradeInputSideViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270E7E232A5F6B1B00136793 /* dydxTradeInputSideViewPresenter.swift */; };
 		272911D62C06A628003F3EA0 /* TransferAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272911D52C06A628003F3EA0 /* TransferAnalytics.swift */; };
+		272C639C2CBE253000323933 /* VaultNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272C639B2CBE252900323933 /* VaultNetworking.swift */; };
 		27351D452AC4A67900E4A563 /* dydxRestrictionsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27351D442AC4A67900E4A563 /* dydxRestrictionsWorker.swift */; };
 		2741B25C2C06A0E100693B17 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2741B2572C06A0CC00693B17 /* dydxAnalytics.framework */; };
 		2741E3702A68787A000FA190 /* settings_direction_color_preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 2741E3632A68787A000FA190 /* settings_direction_color_preference.json */; };
@@ -525,6 +526,7 @@
 		270BA8F22A6F278F009212EA /* dydxDebugThemeViewerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxDebugThemeViewerBuilder.swift; sourceTree = "<group>"; };
 		270E7E232A5F6B1B00136793 /* dydxTradeInputSideViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradeInputSideViewPresenter.swift; sourceTree = "<group>"; };
 		272911D52C06A628003F3EA0 /* TransferAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAnalytics.swift; sourceTree = "<group>"; };
+		272C639B2CBE252900323933 /* VaultNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultNetworking.swift; sourceTree = "<group>"; };
 		27351D442AC4A67900E4A563 /* dydxRestrictionsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRestrictionsWorker.swift; sourceTree = "<group>"; };
 		2741B2512C06A0CC00693B17 /* dydxAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxAnalytics.xcodeproj; path = ../dydxAnalytics/dydxAnalytics.xcodeproj; sourceTree = "<group>"; };
 		2741E3632A68787A000FA190 /* settings_direction_color_preference.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings_direction_color_preference.json; sourceTree = "<group>"; };
@@ -671,13 +673,14 @@
 		0230376A28C11B0300412B72 /* _v4 */ = {
 			isa = PBXGroup;
 			children = (
-				277437612CAC9AC200F9A6B9 /* Extensions */,
-				27592DF72C9A54D6002FBD4B /* Alerts */,
 				0243A75529BE568600A083FE /* Actions */,
+				27592DF72C9A54D6002FBD4B /* Alerts */,
 				021B68A32AD9B86600C5C3BF /* Auth */,
 				27E0735A2C20D1F80034B963 /* CancelOrders */,
+				272C638D2CBE251200323933 /* ChainNetworking */,
 				6453A7CC299C55F90041A0C4 /* ClosePosition */,
 				27DB2E932AC1E7040047BC39 /* Error */,
+				277437612CAC9AC200F9A6B9 /* Extensions */,
 				02B6CE0A2A7071CB00C5F088 /* GlobalWorkers */,
 				026FC3F12AFACA5700C52F20 /* Marker */,
 				02B8419F28EF68E400C4D25B /* MarketInfo */,
@@ -1383,6 +1386,14 @@
 				27044F6F2BBB1CDF004C750D /* dydxTakeProfitStopLossViewPresenter.swift */,
 			);
 			path = TakeProfitStopLoss;
+			sourceTree = "<group>";
+		};
+		272C638D2CBE251200323933 /* ChainNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				272C639B2CBE252900323933 /* VaultNetworking.swift */,
+			);
+			path = ChainNetworking;
 			sourceTree = "<group>";
 		};
 		2741B2522C06A0CC00693B17 /* Products */ = {
@@ -2104,6 +2115,7 @@
 				277E90152B1EA0E3005CCBCB /* dydxTradingRewardsViewPresenter.swift in Sources */,
 				0216441128F36FBE00C7093E /* CandleDataPoint.swift in Sources */,
 				6453A7D2299C563F0041A0C4 /* dydxClosePositionInputViewBuilder.swift in Sources */,
+				272C639C2CBE253000323933 /* VaultNetworking.swift in Sources */,
 				02031F142AC374150069E00D /* dydxTradeSheetTipBuySellViewPresenter.swift in Sources */,
 				02B6CE752A7087A700C5F088 /* dydxTransferSubaccountWorker.swift in Sources */,
 				02FF0BD229AE92FE00781EDA /* dydxWalletListViewBuilder.swift in Sources */,

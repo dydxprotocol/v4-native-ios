@@ -57,16 +57,17 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
 
         Publishers.CombineLatest(
             AbacusStateManager.shared.state.onboarded,
-            // TODO: replace with actual vault info from abacus
-            AbacusStateManager.shared.state.onboarded
-        ).sink { [weak self] onboarded, _ in
-            if onboarded,
-                let viewModel = self?.viewModel,
-               // TODO: replace with actual vault info from abacus
-                let vaultBalance = Double?(420.42),
-                let vaultApy = Double?(Double.random(in: -30...30)) {
-                viewModel.vaultBalance = dydxFormatter.shared.dollar(number: vaultBalance, digits: 2)
-                viewModel.vaultApy = vaultApy
+            AbacusStateManager.shared.state.vault
+        ).sink { [weak self] onboarded, vault in
+            guard let self = self else { return }
+            if onboarded {
+                let vaultBalance = vault?.account?.balanceUsdc?.doubleValue ?? 0
+                let vaultApy = vault?.details?.thirtyDayReturnPercent?.doubleValue
+                self.viewModel?.vaultBalance = dydxFormatter.shared.dollar(number: vaultBalance, digits: 2)
+                self.viewModel?.vaultApy = vaultApy
+            } else {
+                self.viewModel?.vaultBalance = nil
+                self.viewModel?.vaultApy = nil
             }
         }
         .store(in: &subscriptions)
@@ -75,8 +76,8 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
     private func updatePositions(positions: [SubaccountPosition], marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
         let items: [dydxPortfolioPositionItemViewModel] = positions.compactMap { position -> dydxPortfolioPositionItemViewModel? in
             Self.createPositionViewModelItem(position: position,
-                                                        marketMap: marketMap,
-                                                        assetMap: assetMap)
+                                             marketMap: marketMap,
+                                             assetMap: assetMap)
         }
 
         self.viewModel?.positionItems = items
@@ -85,8 +86,8 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
     private func updatePendingPositions(pendingPositions: [SubaccountPendingPosition], marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
         let items: [dydxPortfolioPendingPositionsItemViewModel] = pendingPositions.compactMap { pendingPosition -> dydxPortfolioPendingPositionsItemViewModel? in
             Self.createPendingPositionsViewModelItem(pendingPosition: pendingPosition,
-                                                                marketMap: marketMap,
-                                                                assetMap: assetMap)
+                                                     marketMap: marketMap,
+                                                     assetMap: assetMap)
         }
 
         self.viewModel?.pendingPositionItems = items
@@ -176,7 +177,7 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
                 item.isMarginAdjustable = false
             case .isolated:
                 item.isMarginAdjustable = true
-                default:
+            default:
                 assertionFailure("no margin mode")
             }
         }
@@ -197,7 +198,7 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
                 params: [
                     "marketId": market.id,
                     "childSubaccountNumber": position.childSubaccountNumber?.stringValue as Any
-            ])
+                ])
             Router.shared?.navigate(to: routingRequest,
                                     animated: true,
                                     completion: nil)

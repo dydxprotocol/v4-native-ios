@@ -16,6 +16,7 @@ import FloatingPanel
 import PlatformRouting
 import dydxFormatter
 import Combine
+import dydxAnalytics
 import class Abacus.Subaccount
 import class Abacus.Vault
 import class Abacus.VaultFormValidationResult
@@ -23,6 +24,8 @@ import class Abacus.VaultFormAccountData
 import class Abacus.VaultFormData
 import class Abacus.VaultDepositWithdrawFormValidator
 import class Abacus.VaultAccount
+import class Abacus.OnChainTransactionSuccessResponse
+import class Abacus.ChainError
 
 public class dydxVaultDepositWithdrawConfirmationViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -191,25 +194,37 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
             self?.viewModel?.submitState = .submitting
             Task { [weak self] in
                 guard let transferType = self?.transferType else { return }
-                let result: Result<ChainSuccessResponse, ChainError>
+                let result: Result<Abacus.OnChainTransactionSuccessResponse, ChainError>
 
                 switch transferType {
                 case .deposit:
                     guard let subaccountNumber = subaccount?.subaccountNumber, let amount = self?.amount else { return }
+                    Tracking.shared?.log(event: AnalyticsEventV2.AttemptVaultOperation(type: transferType.analyticsInputType,
+                                                                                       amount: amount,
+                                                                                       slippage: nil))
                     result = await CosmoJavascript.shared.depositToMegavault(subaccountNumber: subaccountNumber, amountUsdc: amount)
                 case .withdraw:
                     guard let subaccountTo = formValidationResult.submissionData?.withdraw?.subaccountTo,
                           let shares = formValidationResult.submissionData?.withdraw?.shares,
                           let minAmount = formValidationResult.submissionData?.withdraw?.minAmount else { return }
+                    Tracking.shared?.log(event: AnalyticsEventV2.AttemptVaultOperation(type: transferType.analyticsInputType,
+                                                                                       amount: formValidationResult.summaryData.estimatedAmountReceived?.doubleValue,
+                                                                                       slippage: formValidationResult.summaryData.estimatedSlippage?.doubleValue))
                     result = await CosmoJavascript.shared.withdrawFromMegavault(subaccountTo: subaccountTo, shares: shares, minAmount: minAmount)
                 }
                 DispatchQueue.main.async { [weak self] in
                     switch result {
-                    case .success:
+                    case .success(let chainTransaction):
+                        let amount = self?.amount ?? 0
+                        let actualAmount = chainTransaction.actualWithdrawalAmount?.doubleValue ?? 0
+                        Tracking.shared?.log(event: AnalyticsEventV2.SuccessfulVaultOperation(type: transferType.analyticsInputType,
+                                                                                              amount: amount,
+                                                                                              amountDiff: actualAmount - amount))
                         Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: ["shouldPrioritizeDismiss": true]), animated: true, completion: nil)
                         AbacusStateManager.shared.refreshVaultAccount()
                     case .failure(let error):
                         self?.viewModel?.submitState = .enabled
+                        Tracking.shared?.log(event: AnalyticsEventV2.VaultOperationProtocolError(type: transferType.analyticsInputType))
                         ErrorInfo.shared?.info(title: nil, message: error.message, error: error)
                     }
                 }
