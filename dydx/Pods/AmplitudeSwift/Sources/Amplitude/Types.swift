@@ -139,7 +139,7 @@ extension Plugin {
     public func setup(amplitude: Amplitude) {
     }
 
-    public func teardown() {
+    public func teardown(){
         // Clean up any resources from setup if necessary
     }
 

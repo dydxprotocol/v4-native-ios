@@ -160,7 +160,8 @@ extension PersistentStorageResponseHandler {
     private func triggerEventsCallback(events: [BaseEvent], code: Int, message: String) {
         events.forEach { event in
             configuration.callback?(event, code, message)
-            if let eventInsertId = event.insertId, let eventCallback = storage.getEventCallback(insertId: eventInsertId) {
+            if let eventInsertId = event.insertId, let eventCallback = storage.getEventCallback(insertId: eventInsertId)
+            {
                 eventCallback(event, code, message)
                 storage.removeEventCallback(insertId: eventInsertId)
             }
@@ -172,7 +173,8 @@ extension PersistentStorageResponseHandler {
             return
         }
         let eventsNSString = NSString(string: eventsString)
-        regex.matches(in: eventsString, options: [], range: NSRange(location: 0, length: eventsNSString.length)).forEach { match in
+        regex.matches(in: eventsString, options: [], range: NSRange(location: 0, length: eventsNSString.length)).forEach
+        { match in
             (1..<match.numberOfRanges).forEach {
                 if match.range(at: $0).location != NSNotFound {
                     let eventInsertId = eventsNSString.substring(with: match.range(at: $0))
