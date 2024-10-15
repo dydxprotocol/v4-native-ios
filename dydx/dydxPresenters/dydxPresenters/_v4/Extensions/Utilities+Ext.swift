@@ -8,7 +8,6 @@
 import Abacus
 import Utilities
 
-// extension DataLocalizer: @retroactive LocalizerProtocol {}
 extension DataLocalizerProtocol {
     var asAbacusLocalizer: (any AbacusLocalizerProtocol)? {
         self as? AbacusLocalizerProtocol
