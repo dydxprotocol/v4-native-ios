@@ -12,7 +12,8 @@
 import Foundation
 import CoreGraphics
 
-open class AnimatedZoomViewJob: AnimatedViewPortJob {
+open class AnimatedZoomViewJob: AnimatedViewPortJob
+{
     internal var yAxis: YAxis?
     internal var xAxisRange: Double = 0.0
     internal var scaleX: CGFloat = 0.0
@@ -37,7 +38,8 @@ open class AnimatedZoomViewJob: AnimatedViewPortJob {
         zoomOriginX: CGFloat,
         zoomOriginY: CGFloat,
         duration: TimeInterval,
-        easing: ChartEasingFunctionBlock?) {
+        easing: ChartEasingFunctionBlock?)
+    {
         super.init(viewPortHandler: viewPortHandler,
             xValue: 0.0,
             yValue: 0.0,
@@ -47,7 +49,7 @@ open class AnimatedZoomViewJob: AnimatedViewPortJob {
             yOrigin: yOrigin,
             duration: duration,
             easing: easing)
-
+        
         self.yAxis = yAxis
         self.xAxisRange = xAxisRange
         self.scaleX = scaleX
@@ -57,35 +59,37 @@ open class AnimatedZoomViewJob: AnimatedViewPortJob {
         self.zoomOriginX = zoomOriginX
         self.zoomOriginY = zoomOriginY
     }
-
-    internal override func animationUpdate() {
+    
+    internal override func animationUpdate()
+    {
         guard
             let viewPortHandler = viewPortHandler,
             let transformer = transformer,
             let view = view
             else { return }
-
+        
         let scaleX = xOrigin + (self.scaleX - xOrigin) * phase
         let scaleY = yOrigin + (self.scaleY - yOrigin) * phase
-
+        
         var matrix = viewPortHandler.setZoom(scaleX: scaleX, scaleY: scaleY)
         viewPortHandler.refresh(newMatrix: matrix, chart: view, invalidate: false)
-
+        
         let valsInView = CGFloat(yAxis?.axisRange ?? 0.0) / viewPortHandler.scaleY
         let xsInView = CGFloat(xAxisRange) / viewPortHandler.scaleX
-
+        
         var pt = CGPoint(
             x: zoomOriginX + ((zoomCenterX - xsInView / 2.0) - zoomOriginX) * phase,
             y: zoomOriginY + ((zoomCenterY + valsInView / 2.0) - zoomOriginY) * phase
         )
-
+        
         transformer.pointValueToPixel(&pt)
-
+        
         matrix = viewPortHandler.translate(pt: pt)
         viewPortHandler.refresh(newMatrix: matrix, chart: view, invalidate: true)
     }
-
-    internal override func animationEnd() {
+    
+    internal override func animationEnd()
+    {
         (view as? BarLineChartViewBase)?.calculateOffsets()
         view?.setNeedsDisplay()
     }

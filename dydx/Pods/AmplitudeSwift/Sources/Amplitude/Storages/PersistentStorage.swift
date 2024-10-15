@@ -164,7 +164,8 @@ class PersistentStorage: Storage {
             }
             if let attributes = try? fileManager.attributesOfItem(atPath: currentFile.path),
                 let fileSize = attributes[FileAttributeKey.size] as? UInt64,
-                fileSize >= 0 {
+                fileSize >= 0
+            {
                 finish(file: currentFile)
             }
         }
@@ -314,7 +315,8 @@ extension PersistentStorage {
         // Verify file size isn't too large
         if let attributes = try? fileManager.attributesOfItem(atPath: storeFile.path),
             let fileSize = attributes[FileAttributeKey.size] as? UInt64,
-            fileSize >= PersistentStorage.MAX_FILE_SIZE {
+            fileSize >= PersistentStorage.MAX_FILE_SIZE
+        {
             finish(file: storeFile)
             // Set the new file path
             storeFile = getCurrentEventFile()
@@ -487,7 +489,7 @@ extension PersistentStorage {
 
     private func readV2File(content: String) -> String {
         var events: [BaseEvent] = [BaseEvent]()
-        content.components(separatedBy: PersistentStorage.DELMITER).forEach {
+        content.components(separatedBy: PersistentStorage.DELMITER).forEach{
             let currentString = String($0)
             if currentString.isEmpty {
                 return
