@@ -48,4 +48,4 @@ extension CosmoJavascript {
     }
 }
 
-extension ChainError: @retroactive Error {}
+extension ChainError: Error {}
