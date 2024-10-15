@@ -15,7 +15,7 @@ public class Timeline {
             PluginType.before: Mediator(),
             PluginType.enrichment: Mediator(),
             PluginType.destination: Mediator(),
-            PluginType.utility: Mediator()
+            PluginType.utility: Mediator(),
         ]
     }
 

@@ -15,7 +15,7 @@
 
         private var appNotifications: [NSNotification.Name] = [
             WKExtension.applicationWillEnterForegroundNotification,
-            WKExtension.applicationDidEnterBackgroundNotification
+            WKExtension.applicationDidEnterBackgroundNotification,
         ]
 
         override init() {

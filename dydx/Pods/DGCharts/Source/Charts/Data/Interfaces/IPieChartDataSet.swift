@@ -13,7 +13,8 @@ import Foundation
 import CoreGraphics
 
 @objc
-public protocol IPieChartDataSet: IChartDataSet {
+public protocol IPieChartDataSet: IChartDataSet
+{
     // MARK: - Styling functions and accessors
 
     /// the space in pixels between the pie-slices

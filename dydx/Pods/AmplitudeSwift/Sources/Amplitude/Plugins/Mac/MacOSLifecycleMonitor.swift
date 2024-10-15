@@ -13,7 +13,7 @@
         private var appNotifications: [NSNotification.Name] =
             [
                 NSApplication.didBecomeActiveNotification,
-                NSApplication.willResignActiveNotification
+                NSApplication.willResignActiveNotification,
             ]
 
         override init() {
