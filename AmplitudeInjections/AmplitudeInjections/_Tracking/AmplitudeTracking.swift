@@ -14,7 +14,7 @@ open class AmplitudeTracking: TransformerTracker {
     private let amplitude: Amplitude
 
     public init(_ apiKey: String) {
-        self.amplitude = Amplitude.init(configuration: .init(apiKey: apiKey))
+        self.amplitude = Amplitude.init(configuration: .init(apiKey: apiKey, serverZone: .EU))
         Console.shared.log("analytics log | Amplitude initialized")
         super.init()
     }
