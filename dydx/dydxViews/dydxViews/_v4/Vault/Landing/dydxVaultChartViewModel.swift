@@ -25,7 +25,7 @@ public class dydxVaultChartViewModel: PlatformViewModel {
     }
 
     @Published public var selectedValueType: ValueTypeOption = .pnl
-    @Published public var selectedValueTime: ValueTimeOption = .thirtyDays
+    @Published public var selectedValueTime: ValueTimeOption = .sevenDays
 
     fileprivate let valueTypeOptions = ValueTypeOption.allCases
     fileprivate let valueTimeOptions = ValueTimeOption.allCases
