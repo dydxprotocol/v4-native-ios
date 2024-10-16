@@ -461,6 +461,24 @@ private struct BottomAlignedModifier: ViewModifier {
     }
 }
 
+// MARK: LeftAligned
+
+public extension View {
+    func verticalCenterAligned() -> some View {
+        modifier(VerticalCenterAlignedModifier())
+    }
+}
+
+private struct VerticalCenterAlignedModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        VStack(spacing: 0) {
+            Spacer(minLength: 0)
+            content
+            Spacer(minLength: 0)
+        }
+    }
+}
+
 // MARK: CenterAligned
 
 public extension View {
