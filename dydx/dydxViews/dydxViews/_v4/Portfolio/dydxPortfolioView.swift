@@ -36,17 +36,6 @@ public class dydxPortfolioViewModel: PlatformViewModel {
     @Published public var expandAction: (() -> Void)?
     @Published public var sectionSelection: PortfolioSection = .positions
 
-    @Published private var contentViewHeight: CGFloat = 0
-    @Published private var scrollViewHeight: CGFloat = 0
-    @Published private var lastSectionVisibleContentHeight: CGFloat = 0
-
-    private var spacerHeight: CGFloat {
-        max(
-            100,
-            self.lastSectionVisibleContentHeight - self.contentViewHeight
-            )
-    }
-
     public init() {
         super.init()
         positions.contentChanged = {
@@ -140,80 +129,7 @@ public class dydxPortfolioViewModel: PlatformViewModel {
     }
 
     private func createOverView(style: ThemeStyle) -> AnyView {
-        AnyView(
-            ScrollView(showsIndicators: false) {
-                    LazyVStack(pinnedViews: [.sectionHeaders]) {
-                        ZStack {
-                            VStack {
-                                Spacer()
-                                self.details.createView(parentStyle: style)
-                            }
-
-                            VStack {
-                                self.chart.createView(parentStyle: style)
-                                Spacer()
-                            }
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .animateHeight(height: self.expanded ? 460 : 332)
-                        .animation(.easeIn(duration: 0.2), value: self.expanded)
-                        Section {
-                            VStack(spacing: 0) {
-                                Group {
-                                    switch self.sectionSelection {
-                                    case .trades:
-                                        self.fills
-                                            .createView(parentStyle: style)
-                                    case .positions:
-                                        self.positions
-                                            .createView(parentStyle: style)
-                                    case .orders:
-                                        self.orders
-                                            .createView(parentStyle: style)
-                                    case .funding:
-                                        self.funding
-                                            .createView(parentStyle: style)
-                                    case .transfers, .fees:
-                                        PlatformView.nilView
-                                    }
-                                    // add space to adjust for tab bar
-                                }
-                                .background {
-                                    GeometryReader { proxy in
-                                        Color.clear
-                                            .onAppear {
-                                                self.contentViewHeight = proxy.size.height
-                                            }
-                                            .onChange(of: proxy.frame(in: .named("scroll"))) { _ in
-                                                self.contentViewHeight = proxy.size.height
-                                                let frameRelativeToScrollView = proxy.frame(in: .named("scroll"))
-
-                                                if self.contentViewHeight < self.lastSectionVisibleContentHeight {
-                                                    self.lastSectionVisibleContentHeight = min(self.lastSectionVisibleContentHeight, self.scrollViewHeight - frameRelativeToScrollView.origin.y)
-                                                } else {
-                                                    self.lastSectionVisibleContentHeight = self.scrollViewHeight - frameRelativeToScrollView.origin.y
-                                                }
-                                            }
-                                    }
-                                }
-                                Spacer()
-                                    .frame(height: self.spacerHeight)
-                            }
-                        } header: {
-                            self.sections.createView(parentStyle: style)
-                        }
-                    }
-            }
-                .background {
-                    GeometryReader { scrollViewProxy in
-                        Color.clear
-                            .onAppear {
-                                self.scrollViewHeight = scrollViewProxy.size.height
-                            }
-                    }
-                }
-                .coordinateSpace(name: "scroll")
-        )
+        AnyView(dydxOverviewView(viewModel: self))
     }
 
     private func createItemListView(style: ThemeStyle, listContent: (() -> some View)) -> AnyView {
@@ -228,6 +144,68 @@ public class dydxPortfolioViewModel: PlatformViewModel {
                 }
             }
         )
+    }
+}
+
+private struct dydxOverviewView: View {
+    @ObservedObject var viewModel: dydxPortfolioViewModel
+
+    @Namespace private var topID
+    @Namespace private var bottomID
+
+    var body: some View {
+        ScrollViewReader { proxy in
+            ScrollView(showsIndicators: false) {
+                LazyVStack(pinnedViews: [.sectionHeaders]) {
+                    ZStack {
+                        VStack {
+                            Spacer()
+                            viewModel.details.createView()
+                        }
+
+                        VStack {
+                            viewModel.chart.createView()
+                            Spacer()
+                        }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .animateHeight(height: viewModel.expanded ? 460 : 332)
+                    .animation(.easeIn(duration: 0.2), value: viewModel.expanded)
+                    Section {
+                        VStack(spacing: 0) {
+                            Group {
+                                switch viewModel.sectionSelection {
+                                case .trades:
+                                    viewModel.fills
+                                        .createView()
+                                case .positions:
+                                    viewModel.positions
+                                        .createView()
+                                case .orders:
+                                    viewModel.orders
+                                        .createView()
+                                case .funding:
+                                    viewModel.funding
+                                        .createView()
+                                case .transfers, .fees:
+                                    PlatformView.nilView
+                                }
+                                // add space to adjust for tab bar
+                            }
+                        }
+                        Spacer(minLength: 100)
+                    } header: {
+                        viewModel.sections.createView()
+                            .onChange(of: viewModel.sectionSelection) { _ in
+                                withAnimation {
+                                    proxy.scrollTo(topID)
+                                }
+                            }
+                    }
+                    .id(topID)
+                }
+            }
+        }
     }
 }
 
