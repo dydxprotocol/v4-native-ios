@@ -156,7 +156,7 @@ public final class AbacusStateManager: NSObject {
             case .jailBroken:
                 deployment = "TESTNET"
             case .testFlight:
-                deployment = "DEV"
+                deployment = "TESTFLIGHT"
             }
         }
 
