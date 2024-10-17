@@ -265,34 +265,30 @@ private struct dydxVaultView: View {
     // MARK: Floating Buttons
     @ViewBuilder
     private var withdrawButton: some View {
-        if let withdrawAction = viewModel.withdrawAction {
-            let content = Text(localizerPathKey: "APP.GENERAL.WITHDRAW")
-                .themeFont(fontType: .plus, fontSize: .medium)
-                .themeColor(foreground: .textPrimary)
-                .wrappedViewModel
+        let content = Text(localizerPathKey: "APP.GENERAL.WITHDRAW")
+            .themeFont(fontType: .plus, fontSize: .medium)
+            .themeColor(foreground: viewModel.withdrawAction == nil ? .textTertiary : .textPrimary)
+            .wrappedViewModel
 
-            PlatformButtonViewModel(content: content,
-                                    type: .defaultType(),
-                                    state: .secondary,
-                                    action: withdrawAction)
-            .createView()
-        }
+        PlatformButtonViewModel(content: content,
+                                type: .defaultType(),
+                                state: viewModel.withdrawAction == nil ? .disabled : .secondary,
+                                action: { viewModel.withdrawAction?() })
+        .createView()
     }
 
     @ViewBuilder
     private var depositButton: some View {
-        if let depositAction = viewModel.depositAction {
-            let content = Text(localizerPathKey: "APP.GENERAL.DEPOSIT")
-                .themeFont(fontType: .plus, fontSize: .medium)
-                .themeColor(foreground: .textPrimary)
-                .wrappedViewModel
+        let content = Text(localizerPathKey: "APP.GENERAL.DEPOSIT")
+            .themeFont(fontType: .plus, fontSize: .medium)
+            .themeColor(foreground: viewModel.depositAction == nil ? .textTertiary : .textPrimary)
+            .wrappedViewModel
 
-            PlatformButtonViewModel(content: content,
-                                    type: .defaultType(),
-                                    state: .primary,
-                                    action: depositAction)
-            .createView()
-        }
+        PlatformButtonViewModel(content: content,
+                                type: .defaultType(),
+                                state: viewModel.depositAction == nil ? .disabled : .primary,
+                                action: { viewModel.depositAction?() })
+        .createView()
     }
 
     private var buttonStack: some View {

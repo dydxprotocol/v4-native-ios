@@ -45,11 +45,6 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
 
         viewModel = dydxVaultViewModel()
         viewModel?.vaultChart = dydxVaultChartViewModel()
-
-        viewModel?.depositAction = { Router.shared?.navigate(to: RoutingRequest(path: "/vault/deposit"), animated: true, completion: nil) }
-        viewModel?.withdrawAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/vault/withdraw"), animated: true, completion: nil)
-        }
     }
 
     override func start() {
@@ -76,6 +71,18 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
             })
             .store(in: &subscriptions)
         }
+
+        AbacusStateManager.shared.state.onboarded
+            .sink { [weak self] onboarded in
+                if onboarded {
+                    self?.viewModel?.depositAction = { Router.shared?.navigate(to: RoutingRequest(path: "/vault/deposit"), animated: true, completion: nil) }
+                    self?.viewModel?.withdrawAction = { Router.shared?.navigate(to: RoutingRequest(path: "/vault/withdraw"), animated: true, completion: nil) }
+                } else {
+                    self?.viewModel?.depositAction = nil
+                    self?.viewModel?.withdrawAction = nil
+                }
+            }
+            .store(in: &subscriptions)
     }
 
     private func updateState(vault: Abacus.Vault?, assetMap: [String: Asset], marketMap: [String: PerpetualMarket]) {
