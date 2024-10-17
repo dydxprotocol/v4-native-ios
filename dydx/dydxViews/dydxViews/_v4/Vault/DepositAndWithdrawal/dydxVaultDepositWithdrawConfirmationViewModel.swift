@@ -21,6 +21,7 @@ public class dydxVaultDepositWithdrawConfirmationViewModel: PlatformViewModel {
     @Published public var amount: Double?
     @Published public var transferType: VaultTransferType?
     @Published public var faqUrl: String?
+    @Published public var tosUrl: String?
 
     @Published public var submitState: State = .enabled
 
@@ -36,15 +37,12 @@ public class dydxVaultDepositWithdrawConfirmationViewModel: PlatformViewModel {
     @Published public var slippage: Double?
     @Published public var expectedAmountReceived: Double?
 
-    public var expectedAmount: Double? {
-        guard let slippage = slippage, let amount = amount else { return nil }
-        return amount * slippage
-    }
-
     @Published public var requiresAcknowledgeHighSlippage: Bool = false
+    @Published public var requiresAcknowledgeVaultTos: Bool = true
     @Published public var isFirstSubmission: Bool = true
 
     @Published fileprivate(set) public var hasAcknowledgedHighSlippage: Bool = false
+    @Published fileprivate(set) public var hasAcknowledgedVaultTos: Bool = false
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
@@ -167,7 +165,7 @@ private struct VaultDepositWithdrawConfirmationView: View {
             let postTransferMarginUsage = viewModel.postMarginUsage == nil ? nil : AmountTextModel(amount: viewModel.postMarginUsage?.asNsNumber)
 
             let estSlippage = AmountTextModel(amount: viewModel.slippage?.asNsNumber, unit: .percentage)
-            let expectedAmount = AmountTextModel(amount: viewModel.expectedAmount?.asNsNumber)
+            let expectedAmount = AmountTextModel(amount: viewModel.expectedAmountReceived?.asNsNumber)
 
             let vaultBalanceReceiptItem = dydxReceiptChangeItemView(title: DataLocalizer.localize(path: "APP.VAULTS.YOUR_VAULT_BALANCE"),
                                                                         value: AmountChangeModel(before: preTransferVaultBalance, after: postTransferVaultBalance))
@@ -226,6 +224,15 @@ private struct VaultDepositWithdrawConfirmationView: View {
             dydxCheckboxView(isChecked: $viewModel.hasAcknowledgedHighSlippage,
                              text: DataLocalizer.localize(path: "APP.VAULTS.SLIPPAGE_ACK",
                                                           params: ["AMOUNT": dydxFormatter.shared.percent(number: viewModel.slippage, digits: 2) ?? "--"]))
+            .disabled(viewModel.submitState == .submitting)
+        } else if viewModel.requiresAcknowledgeVaultTos {
+            let attributedText = AttributedString(localizerPathKey: "APP.VAULTS.MEGAVAULT_TERMS_TEXT",
+                                                   params: ["CONFIRM_BUTTON_TEXT": viewModel.transferType?.confirmTransferText ?? "",
+                                                            "LINK": DataLocalizer.localize(path: "APP.VAULTS.MEGAVAULT_TERMS_LINK_TEXT")],
+                                                   hyperlinks: viewModel.tosUrl == nil ? [:] : ["APP.VAULTS.MEGAVAULT_TERMS_LINK_TEXT": viewModel.tosUrl ?? ""],
+                                                   foreground: .textPrimary)
+            dydxCheckboxView(isChecked: $viewModel.hasAcknowledgedVaultTos,
+                             attributedText: attributedText)
             .disabled(viewModel.submitState == .submitting)
         }
     }

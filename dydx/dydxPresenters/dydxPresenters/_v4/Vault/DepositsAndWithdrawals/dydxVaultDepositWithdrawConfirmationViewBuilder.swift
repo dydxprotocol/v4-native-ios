@@ -66,6 +66,8 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
     var amount: Double?
     private var formValidationRequest: Task<Void, Never>?
 
+    private let hasPreviouslyAcknowledgedVaultDepositTerms: Bool = SettingsStore.shared?.value(forDydxKey: .hasAcknowledgedVaultDepositTerms) as? Bool ?? false
+
     override init() {
         super.init()
 
@@ -79,6 +81,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
 
         viewModel.amount = amount
         viewModel.faqUrl = AbacusStateManager.shared.environment?.links?.vaultLearnMore
+        viewModel.tosUrl =  AbacusStateManager.shared.environment?.links?.vaultTos
         viewModel.transferType = transferType
 
         initializeSubmitState()
@@ -99,10 +102,14 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         let hasAcknowledgedHighSlippagePublisher = viewModel.$hasAcknowledgedHighSlippage
             .removeDuplicates()
 
-        Publishers.CombineLatest(vaultAndSubaccountPublisher, hasAcknowledgedHighSlippagePublisher)
-            .sink(receiveValue: { [weak self] vaultAndSubaccount, hasAcknowledgedHighSlippage in
+        let hasAcknowledgedVaultTosPublisher = viewModel.$hasAcknowledgedVaultTos
+            .map { $0 || self.hasPreviouslyAcknowledgedVaultDepositTerms }
+            .removeDuplicates()
+
+        Publishers.CombineLatest3(vaultAndSubaccountPublisher, hasAcknowledgedHighSlippagePublisher, hasAcknowledgedVaultTosPublisher)
+            .sink(receiveValue: { [weak self] vaultAndSubaccount, hasAcknowledgedHighSlippage, hasAcknowledgedVaultTos in
                 guard self?.viewModel?.submitState != .submitting else { return }
-                self?.update(subaccount: vaultAndSubaccount.subaccount, vault: vaultAndSubaccount.vault, hasAcknowledgedHighSlippage: hasAcknowledgedHighSlippage)
+                self?.update(subaccount: vaultAndSubaccount.subaccount, vault: vaultAndSubaccount.vault, hasAcknowledgedHighSlippage: hasAcknowledgedHighSlippage, hasAcknowledgedVaultTos: hasAcknowledgedVaultTos)
             })
             .store(in: &subscriptions)
 
@@ -119,23 +126,29 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         guard let viewModel, let transferType else { return }
         switch transferType {
         case .deposit:
-            viewModel.submitState = .enabled
+            viewModel.submitState = hasPreviouslyAcknowledgedVaultDepositTerms ? .enabled : .disabled
         case .withdraw:
             viewModel.submitState = .loading
+        }
+
+        switch transferType {
+        case .deposit:
+            viewModel.requiresAcknowledgeVaultTos = !hasPreviouslyAcknowledgedVaultDepositTerms
+        case .withdraw:
+            viewModel.requiresAcknowledgeVaultTos = false
         }
     }
 
     private func update(hasAcknowledgedHighSlippage: Bool) {
         switch self.transferType {
         case .deposit, nil:
-            // not applicable for deposits
             break
         case .withdraw:
             self.viewModel?.submitState = .loading
         }
     }
 
-    private func update(subaccount: Subaccount?, vault: Abacus.Vault, hasAcknowledgedHighSlippage: Bool) {
+    private func update(subaccount: Subaccount?, vault: Abacus.Vault, hasAcknowledgedHighSlippage: Bool, hasAcknowledgedVaultTos: Bool) {
         formValidationRequest?.cancel()
 
         guard let subaccount = subaccount, let transferType else {
@@ -150,6 +163,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         let formData = VaultFormData(action: transferType.formAction,
                                      amount: amount?.asKotlinDouble,
                                      acknowledgedSlippage: hasAcknowledgedHighSlippage,
+                                     acknowledgedTerms: hasAcknowledgedVaultTos,
                                      inConfirmationStep: true)
 
         switch transferType {
@@ -220,6 +234,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
                         Tracking.shared?.log(event: AnalyticsEventV2.SuccessfulVaultOperation(type: transferType.analyticsInputType,
                                                                                               amount: amount,
                                                                                               amountDiff: actualAmount - amount))
+                        SettingsStore.shared?.setValue(true, forDydxKey: .hasAcknowledgedVaultDepositTerms)
                         Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: ["shouldPrioritizeDismiss": true]), animated: true, completion: nil)
                         AbacusStateManager.shared.refreshVaultAccount()
                     case .failure(let error):
