@@ -96,21 +96,28 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                   let notionalValue = position.currentPosition?.usdc?.doubleValue,
                   let positionSize = position.currentPosition?.asset?.doubleValue,
                   let marketId = position.marketId,
-                  let assetId = marketMap[marketId]?.assetId,
-                  let asset = assetMap[assetId]
+                  // special case for fake USDC market to show unused margin
+                  let assetId = marketId == "USDC-USD" ? "USDC" : marketMap[marketId]?.assetId
             else { return nil }
+            let iconType: PlatformIconViewModel.IconType
+            if marketId == "USDC-USD" {
+                iconType = .asset(name: "symbol_USDC", bundle: .dydxView)
+            } else {
+                iconType = .init(url: URL(string: assetMap[assetId]?.resources?.imageUrl ?? ""), placeholderText: assetId.first?.uppercased())
+            }
             return dydxVaultPositionViewModel(assetId: assetId,
-                                              iconUrl: URL(string: asset.resources?.imageUrl ?? ""),
-                                        side: positionSize > 0 ? .long : .short,
-                                       leverage: leverage,
-                                       notionalValue: notionalValue,
+                                              iconType: iconType,
+                                              side: positionSize > 0 ? .long : .short,
+                                              leverage: leverage,
+                                              notionalValue: notionalValue,
                                               positionSize: positionSize.magnitude,
-                                       tokenUnitPrecision: 2,
-                                       pnlAmount: position.thirtyDayPnl?.absolute?.doubleValue,
-                                       pnlPercentage: position.thirtyDayPnl?.percent?.doubleValue,
-                                       sparklineValues: position.thirtyDayPnl?.sparklinePoints?.map({ $0.doubleValue }))
+                                              tokenUnitPrecision: 2,
+                                              pnlAmount: position.thirtyDayPnl?.absolute?.doubleValue,
+                                              pnlPercentage: position.thirtyDayPnl?.percent?.doubleValue,
+                                              sparklineValues: position.thirtyDayPnl?.sparklinePoints?.map({ $0.doubleValue }))
         }
         .compactMap { $0 }
+        .sorted(by: { $0.notionalValue > $1.notionalValue })
     }
 
     private func updateChartState(vault: Abacus.Vault?, valueType: dydxVaultChartViewModel.ValueTypeOption, timeType: dydxVaultChartViewModel.ValueTimeOption) {

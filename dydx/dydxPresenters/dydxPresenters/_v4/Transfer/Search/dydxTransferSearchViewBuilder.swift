@@ -115,9 +115,9 @@ private extension dydxTransferSearchItemViewModel {
             let placeholderText = option.localizedString?.prefix(1).uppercased()
             // SwiftUI does not process svgs well
             if url.absoluteString.ends(with: ".svg") {
-                self.icon = PlatformIconViewModel(url: nil, placeholderText: placeholderText)
+                self.icon = PlatformIconViewModel(type: .init(url: nil, placeholderText: placeholderText))
             } else {
-                self.icon = PlatformIconViewModel(url: url, placeholderText: placeholderText)
+                self.icon = PlatformIconViewModel(type: .init(url: url, placeholderText: placeholderText))
             }
         }
         self.onTapAction = onTapAction

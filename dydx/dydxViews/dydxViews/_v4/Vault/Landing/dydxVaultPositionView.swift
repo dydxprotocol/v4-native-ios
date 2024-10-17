@@ -15,7 +15,7 @@ import dydxFormatter
 public class dydxVaultPositionViewModel: PlatformViewModel {
 
     @Published public var assetId: String
-    @Published public var iconUrl: URL?
+    @Published public var iconType: PlatformIconViewModel.IconType = .init(url: nil, placeholderText: nil)
     @Published public var side: SideTextViewModel.Side
     @Published public var leverage: Double
     @Published public var notionalValue: Double
@@ -61,7 +61,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
 
     public init(
         assetId: String,
-        iconUrl: URL?,
+        iconType: PlatformIconViewModel.IconType,
         side: SideTextViewModel.Side,
         leverage: Double,
         notionalValue: Double,
@@ -71,7 +71,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
         pnlPercentage: Double?,
         sparklineValues: [Double]?) {
             self.assetId = assetId
-            self.iconUrl = iconUrl
+            self.iconType = iconType
             self.side = side
             self.leverage = leverage
             self.notionalValue = notionalValue
@@ -102,7 +102,7 @@ struct VaultPositionView: View {
 
     var marketSection: some View {
         HStack(spacing: 8) {
-            PlatformIconViewModel(url: viewModel.iconUrl, placeholderText: viewModel.assetId.prefix(1).uppercased())
+            PlatformIconViewModel(type: viewModel.iconType)
                 .createView()
             VStack(alignment: .leading, spacing: 2) {
                 Text(viewModel.assetId)
