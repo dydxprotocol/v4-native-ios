@@ -102,12 +102,18 @@ private struct dydxVaultView: View {
             .themeFont(fontType: .plus, fontSize: .largest)
     }
 
+    @ViewBuilder
     private var learnMore: some View {
-        let image = Image("icon_external_link", bundle: .dydxView)
-        return (Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.LEARN_MORE", params: nil) ?? "") + Text(" ") + Text(image))
-            .themeColor(foreground: .textSecondary)
-            .themeFont(fontType: .base, fontSize: .medium)
-            .padding(.trailing, 12)
+        if let learnMoreAction = viewModel.learnMoreAction {
+            let image = Image("icon_external_link", bundle: .dydxView)
+            (Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.LEARN_MORE", params: nil) ?? "") + Text(" ") + Text(image))
+                .themeColor(foreground: .textSecondary)
+                .themeFont(fontType: .base, fontSize: .medium)
+                .padding(.trailing, 12)
+                .onTapGesture {
+                    learnMoreAction()
+                }
+        }
     }
 
     // MARK: - Section 1 - PNL
