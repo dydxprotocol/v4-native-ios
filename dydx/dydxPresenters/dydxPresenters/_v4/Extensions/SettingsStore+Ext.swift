@@ -7,6 +7,7 @@
 
 import Utilities
 
+// convenience/dydx methods
 extension KeyValueStoreProtocol {
     func value(forDydxKey key: dydxSettingsStoreKey) -> Any? {
         self.value(forKey: key.rawValue)
