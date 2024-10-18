@@ -146,13 +146,13 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
     private func update(subaccount: Subaccount?, vault: Abacus.Vault, hasAcknowledgedHighSlippage: Bool, hasAcknowledgedVaultTos: Bool) {
         formValidationRequest?.cancel()
 
-        guard let subaccount = subaccount, let transferType else {
+        guard let transferType else {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
             return
         }
 
-        let accountData = Abacus.VaultFormAccountData(marginUsage: subaccount.marginUsage?.current,
-                                                      freeCollateral: subaccount.freeCollateral?.current,
+        let accountData = Abacus.VaultFormAccountData(marginUsage: subaccount?.marginUsage?.current,
+                                                      freeCollateral: subaccount?.freeCollateral?.current,
                                                       canViewAccount: true)
 
         let formData = VaultFormData(action: transferType.formAction,
@@ -245,7 +245,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
     /// only necessary for withdrawals
     private func fetchSlippageAndUpdate(formData: Abacus.VaultFormData,
                                         accountData: Abacus.VaultFormAccountData,
-                                        subaccount: Abacus.Subaccount,
+                                        subaccount: Abacus.Subaccount?,
                                         vault: Abacus.Vault,
                                         hasAcknowledgedHighSlippage: Bool) {
         formValidationRequest = Task { [weak self] in
