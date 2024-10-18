@@ -127,14 +127,9 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
         switch transferType {
         case .deposit:
             viewModel.submitState = hasPreviouslyAcknowledgedVaultDepositTerms ? .enabled : .disabled
-        case .withdraw:
-            viewModel.submitState = .loading
-        }
-
-        switch transferType {
-        case .deposit:
             viewModel.requiresAcknowledgeVaultTos = !hasPreviouslyAcknowledgedVaultDepositTerms
         case .withdraw:
+            viewModel.submitState = .loading
             viewModel.requiresAcknowledgeVaultTos = false
         }
     }
