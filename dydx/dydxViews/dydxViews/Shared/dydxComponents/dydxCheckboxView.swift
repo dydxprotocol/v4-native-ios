@@ -15,14 +15,14 @@ struct dydxCheckboxView: View {
 
     init(isChecked: Binding<Bool>, text: String) {
         let attributedText = AttributedString(text)
-            .themeFont(fontSize: .medium)
-            .themeColor(foreground: .textSecondary)
         self.init(isChecked: isChecked, attributedText: attributedText)
     }
 
     init(isChecked: Binding<Bool>, attributedText: AttributedString) {
         self._isChecked = isChecked
         self.attributedText = attributedText
+            .themeFont(fontSize: .medium)
+            .themeColor(foreground: .textSecondary)
     }
 
     var body: some View {
