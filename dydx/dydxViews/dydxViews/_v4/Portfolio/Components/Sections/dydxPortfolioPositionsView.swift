@@ -253,6 +253,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
             contentChanged?()
         }
     }
+    @Published public var shouldDisplayVaultSection: Bool = false
     @Published public var vaultBalance: String?
     @Published public var vaultApy: Double?
     @Published public var vaultTapAction: (() -> Void)?
@@ -389,7 +390,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
 
     @ViewBuilder
     public var megaVaultSection: some View {
-        if dydxBoolFeatureFlag.isVaultEnabled.isEnabled {
+        if dydxBoolFeatureFlag.isVaultEnabled.isEnabled && shouldDisplayVaultSection {
             VStack(spacing: 16) {
                 Text(localizerPathKey: "APP.VAULTS.MEGAVAULT")
                     .themeFont(fontType: .plus, fontSize: .larger)
