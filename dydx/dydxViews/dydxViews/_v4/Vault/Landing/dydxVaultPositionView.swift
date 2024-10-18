@@ -14,8 +14,8 @@ import dydxFormatter
 
 public class dydxVaultPositionViewModel: PlatformViewModel {
 
-    @Published public var assetId: String
-    @Published public var iconUrl: URL?
+    @Published public var displayId: String
+    @Published public var iconType: PlatformIconViewModel.IconType = .init(url: nil, placeholderText: nil)
     @Published public var side: SideTextViewModel.Side
     @Published public var leverage: Double
     @Published public var notionalValue: Double
@@ -60,8 +60,8 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     public init(
-        assetId: String,
-        iconUrl: URL?,
+        displayId: String,
+        iconType: PlatformIconViewModel.IconType,
         side: SideTextViewModel.Side,
         leverage: Double,
         notionalValue: Double,
@@ -70,8 +70,8 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
         pnlAmount: Double?,
         pnlPercentage: Double?,
         sparklineValues: [Double]?) {
-            self.assetId = assetId
-            self.iconUrl = iconUrl
+            self.displayId = displayId
+            self.iconType = iconType
             self.side = side
             self.leverage = leverage
             self.notionalValue = notionalValue
@@ -102,10 +102,10 @@ struct VaultPositionView: View {
 
     var marketSection: some View {
         HStack(spacing: 8) {
-            PlatformIconViewModel(url: viewModel.iconUrl, placeholderText: viewModel.assetId.prefix(1).uppercased())
+            PlatformIconViewModel(type: viewModel.iconType)
                 .createView()
             VStack(alignment: .leading, spacing: 2) {
-                Text(viewModel.assetId)
+                Text(viewModel.displayId)
                     .themeFont(fontType: .base, fontSize: .small)
                     .themeColor(foreground: .textSecondary)
                     .lineLimit(1)
@@ -114,6 +114,7 @@ struct VaultPositionView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
             }
+            Spacer()
         }
     }
 
@@ -130,7 +131,7 @@ struct VaultPositionView: View {
                     .themeColor(foreground: .textTertiary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                TokenTextViewModel(symbol: viewModel.assetId)
+                TokenTextViewModel(symbol: viewModel.displayId)
                     .createView(parentStyle: ThemeStyle.defaultStyle.themeFont(fontSize: .smallest))
             }
         }

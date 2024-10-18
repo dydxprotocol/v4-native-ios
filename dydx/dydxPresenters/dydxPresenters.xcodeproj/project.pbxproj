@@ -147,6 +147,7 @@
 		27592DFB2C9A54D6002FBD4B /* dydxAlertsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592DF22C9A54D6002FBD4B /* dydxAlertsProvider.swift */; };
 		27592E052C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27592E042C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift */; };
 		276908FF2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */; };
+		276FE4B42CC1A02E00607646 /* SettingsStore+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276FE4B32CC1A02A00607646 /* SettingsStore+Ext.swift */; };
 		277437642CAC9AD800F9A6B9 /* Kotlin+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277437632CAC9AD600F9A6B9 /* Kotlin+Ext.swift */; };
 		277754352C069F8600E3E985 /* OnboardingAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277754282C069F8600E3E985 /* OnboardingAnalytics.swift */; };
 		277987512BA33F15006DC5CD /* dydxSelectedMarketStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */; };
@@ -542,6 +543,7 @@
 		27592DF22C9A54D6002FBD4B /* dydxAlertsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxAlertsProvider.swift; sourceTree = "<group>"; };
 		27592E042C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAlertsViewBuilder.swift; sourceTree = "<group>"; };
 		276908FE2AAFB22F0075B2D6 /* dydxPortfolioTransfersViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioTransfersViewPresenter.swift; sourceTree = "<group>"; };
+		276FE4B32CC1A02A00607646 /* SettingsStore+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsStore+Ext.swift"; sourceTree = "<group>"; };
 		277437632CAC9AD600F9A6B9 /* Kotlin+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kotlin+Ext.swift"; sourceTree = "<group>"; };
 		277754282C069F8600E3E985 /* OnboardingAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingAnalytics.swift; sourceTree = "<group>"; };
 		277987502BA33F15006DC5CD /* dydxSelectedMarketStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSelectedMarketStore.swift; sourceTree = "<group>"; };
@@ -1461,6 +1463,7 @@
 		277437612CAC9AC200F9A6B9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				276FE4B32CC1A02A00607646 /* SettingsStore+Ext.swift */,
 				277437632CAC9AD600F9A6B9 /* Kotlin+Ext.swift */,
 				278EA5652BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift */,
 				0276FA982A0DB8FD000BDF0B /* Model+Ext.swift */,
@@ -2006,6 +2009,7 @@
 				27592E052C9A57D4002FBD4B /* dydxAlertsViewBuilder.swift in Sources */,
 				645299EF2AE86FB1000810E6 /* dydxUpdateViewPresenter.swift in Sources */,
 				02CA62872A7EBE08006067DB /* dydxPortfolioFeesViewPresenter.swift in Sources */,
+				276FE4B42CC1A02E00607646 /* SettingsStore+Ext.swift in Sources */,
 				0208632528F51EC400C9D3A0 /* dydxMarketDepthChartViewPresenter.swift in Sources */,
 				02F99F3B29E4CB300009B3E8 /* dydxTransferSearchViewBuilder.swift in Sources */,
 				028FB3EC2AD642B30013136C /* dydxTokenConstants.swift in Sources */,

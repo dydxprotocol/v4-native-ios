@@ -60,6 +60,7 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
             AbacusStateManager.shared.state.vault
         ).sink { [weak self] onboarded, vault in
             guard let self = self else { return }
+            self.viewModel?.shouldDisplayVaultSection = onboarded
             if onboarded {
                 let vaultBalance = vault?.account?.balanceUsdc?.doubleValue ?? 0
                 let vaultApy = vault?.details?.thirtyDayReturnPercent?.doubleValue

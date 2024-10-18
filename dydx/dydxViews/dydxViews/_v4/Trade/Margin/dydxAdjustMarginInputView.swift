@@ -95,7 +95,7 @@ public class dydxAdjustMarginInputViewModel: PlatformViewModel {
         HStack(spacing: 12) {
             if let marketIconUrlString = self.sharedMarketViewModel?.logoUrl {
                 let placeholderText = self.sharedMarketViewModel?.assetName?.prefix(1).uppercased()
-                PlatformIconViewModel(url: marketIconUrlString, placeholderText: placeholderText)
+                PlatformIconViewModel(type: .init(url: marketIconUrlString, placeholderText: placeholderText))
                     .createView()
             }
             Text(DataLocalizer.localize(path: "APP.TRADE.ADJUST_ISOLATED_MARGIN"))

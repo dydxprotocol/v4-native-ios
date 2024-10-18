@@ -11,7 +11,19 @@ import PlatformUI
 /// Checkbox with some text next to it
 struct dydxCheckboxView: View {
     @Binding var isChecked: Bool
-    public var text: String
+    private var attributedText: AttributedString
+
+    init(isChecked: Binding<Bool>, text: String) {
+        let attributedText = AttributedString(text)
+        self.init(isChecked: isChecked, attributedText: attributedText)
+    }
+
+    init(isChecked: Binding<Bool>, attributedText: AttributedString) {
+        self._isChecked = isChecked
+        self.attributedText = attributedText
+            .themeFont(fontSize: .medium)
+            .themeColor(foreground: .textSecondary)
+    }
 
     var body: some View {
         HStack(spacing: 8) {
@@ -26,9 +38,7 @@ struct dydxCheckboxView: View {
             }
             .frame(width: 20, height: 20)
             .borderAndClip(style: .cornerRadius(6), borderColor: .borderDefault)
-            Text(text)
-                .themeFont(fontSize: .medium)
-                .themeColor(foreground: .textSecondary)
+            Text(attributedText)
         }
         .leftAligned()
         .onTapGesture {

@@ -25,7 +25,7 @@ public class dydxVaultChartViewModel: PlatformViewModel {
     }
 
     @Published public var selectedValueType: ValueTypeOption = .pnl
-    @Published public var selectedValueTime: ValueTimeOption = .thirtyDays
+    @Published public var selectedValueTime: ValueTimeOption = .sevenDays
 
     fileprivate let valueTypeOptions = ValueTypeOption.allCases
     fileprivate let valueTimeOptions = ValueTimeOption.allCases
@@ -88,24 +88,29 @@ private struct dydxVaultChartView: View {
     }
 
     private var radioButtonsRow: some View {
-        HStack(spacing: 0) {
-            RadioButtonGroup(selected: $viewModel.selectedValueType,
-                             options: viewModel.valueTypeOptions,
-                             fontType: .base,
-                             fontSize: .smaller,
-                             itemWidth: nil,
-                             itemHeight: 32
-            )
-            Spacer().layoutPriority(1)
-            RadioButtonGroup(selected: $viewModel.selectedValueTime,
-                             options: viewModel.valueTimeOptions,
-                             fontType: .base,
-                             fontSize: .smaller,
-                             itemWidth: nil,
-                             itemHeight: 32
-            )
+        GeometryReader { geometry in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
+                    RadioButtonGroup(selected: $viewModel.selectedValueType,
+                                     options: viewModel.valueTypeOptions,
+                                     fontType: .base,
+                                     fontSize: .smaller,
+                                     itemWidth: nil,
+                                     itemHeight: 32
+                    )
+                    Spacer(minLength: 32).layoutPriority(1)
+                    RadioButtonGroup(selected: $viewModel.selectedValueTime,
+                                     options: viewModel.valueTimeOptions,
+                                     fontType: .base,
+                                     fontSize: .smaller,
+                                     itemWidth: nil,
+                                     itemHeight: 32
+                    )
+                }
+                .padding(.horizontal, 12)
+                .frame(minWidth: geometry.size.width, alignment: .center)
+            }
         }
-        .padding(.horizontal, 12)
     }
 
     private var chart: some View {

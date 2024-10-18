@@ -102,12 +102,18 @@ private struct dydxVaultView: View {
             .themeFont(fontType: .plus, fontSize: .largest)
     }
 
+    @ViewBuilder
     private var learnMore: some View {
-        let image = Image("icon_external_link", bundle: .dydxView)
-        return (Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.LEARN_MORE", params: nil) ?? "") + Text(" ") + Text(image))
-            .themeColor(foreground: .textSecondary)
-            .themeFont(fontType: .base, fontSize: .medium)
-            .padding(.trailing, 12)
+        if let learnMoreAction = viewModel.learnMoreAction {
+            let image = Image("icon_external_link", bundle: .dydxView)
+            (Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.LEARN_MORE", params: nil) ?? "") + Text(" ") + Text(image))
+                .themeColor(foreground: .textSecondary)
+                .themeFont(fontType: .base, fontSize: .medium)
+                .padding(.trailing, 12)
+                .onTapGesture {
+                    learnMoreAction()
+                }
+        }
     }
 
     // MARK: - Section 1 - PNL
@@ -121,10 +127,11 @@ private struct dydxVaultView: View {
     }
 
     private var vaultBalanceView: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 0) {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.YOUR_VAULT_BALANCE", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
+            Spacer(minLength: 4)
             Text(dydxFormatter.shared.dollar(number: viewModel.vaultBalance) ?? "--")
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontType: .base, fontSize: .medium)
@@ -136,10 +143,11 @@ private struct dydxVaultView: View {
     }
 
     private var pnlView: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 0) {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.YOUR_ALL_TIME_PNL", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
+            Spacer(minLength: 4)
             Text(dydxFormatter.shared.dollar(number: viewModel.allTimeReturnUsdc) ?? "--")
                 .themeColor(foreground: viewModel.allTimeReturnUsdc == nil ? .textPrimary : ThemeSettings.directionalColor(forValue: viewModel.allTimeReturnUsdc))
                 .themeFont(fontType: .base, fontSize: .medium)
@@ -165,7 +173,7 @@ private struct dydxVaultView: View {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.VAULT_THIRTY_DAY_APR", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
-            Text(dydxFormatter.shared.percent(number: viewModel.thirtyDayReturnPercent, digits: 2) ?? "")
+            Text(dydxFormatter.shared.percent(number: viewModel.thirtyDayReturnPercent, digits: 0) ?? "")
                 .themeColor(foreground: ThemeSettings.directionalColor(forValue: viewModel.thirtyDayReturnPercent))
                 .themeFont(fontType: .base, fontSize: .medium)
         }
@@ -210,9 +218,7 @@ private struct dydxVaultView: View {
     private var positionsStickyHeader: some View {
         VStack(spacing: 0) {
             openPositionsHeader
-            Spacer().frame(height: 8)
-            div
-            Spacer().frame(height: 16)
+            Spacer().frame(height: 12)
             positionsColumnsHeader
             Spacer().frame(height: 8)
         }
@@ -257,34 +263,30 @@ private struct dydxVaultView: View {
     // MARK: Floating Buttons
     @ViewBuilder
     private var withdrawButton: some View {
-        if let withdrawAction = viewModel.withdrawAction {
-            let content = Text(localizerPathKey: "APP.GENERAL.WITHDRAW")
-                .themeFont(fontType: .plus, fontSize: .medium)
-                .themeColor(foreground: .textPrimary)
-                .wrappedViewModel
+        let content = Text(localizerPathKey: "APP.GENERAL.WITHDRAW")
+            .themeFont(fontType: .plus, fontSize: .medium)
+            .themeColor(foreground: viewModel.withdrawAction == nil ? .textTertiary : .textPrimary)
+            .wrappedViewModel
 
-            PlatformButtonViewModel(content: content,
-                                    type: .defaultType(),
-                                    state: .secondary,
-                                    action: withdrawAction)
-            .createView()
-        }
+        PlatformButtonViewModel(content: content,
+                                type: .defaultType(),
+                                state: viewModel.withdrawAction == nil ? .disabled : .secondary,
+                                action: { viewModel.withdrawAction?() })
+        .createView()
     }
 
     @ViewBuilder
     private var depositButton: some View {
-        if let depositAction = viewModel.depositAction {
-            let content = Text(localizerPathKey: "APP.GENERAL.DEPOSIT")
-                .themeFont(fontType: .plus, fontSize: .medium)
-                .themeColor(foreground: .textPrimary)
-                .wrappedViewModel
+        let content = Text(localizerPathKey: "APP.GENERAL.DEPOSIT")
+            .themeFont(fontType: .plus, fontSize: .medium)
+            .themeColor(foreground: viewModel.depositAction == nil ? .textTertiary : .textPrimary)
+            .wrappedViewModel
 
-            PlatformButtonViewModel(content: content,
-                                    type: .defaultType(),
-                                    state: .primary,
-                                    action: depositAction)
-            .createView()
-        }
+        PlatformButtonViewModel(content: content,
+                                type: .defaultType(),
+                                state: viewModel.depositAction == nil ? .disabled : .primary,
+                                action: { viewModel.depositAction?() })
+        .createView()
     }
 
     private var buttonStack: some View {

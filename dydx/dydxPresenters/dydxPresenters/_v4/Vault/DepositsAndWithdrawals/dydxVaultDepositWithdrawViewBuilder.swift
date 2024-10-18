@@ -104,6 +104,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
         let formData = VaultFormData(action: transferType.formAction,
                                      amount: KotlinDouble(value: amount),
                                      acknowledgedSlippage: false,
+                                     acknowledgedTerms: false,
                                      inConfirmationStep: false)
 
         switch transferType {

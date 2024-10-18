@@ -42,6 +42,11 @@ extension CosmoJavascript {
         }
         if let parsedSuccessResponse = Abacus.OnChainTransactionSuccessResponse.companion.fromPayload(payload: response) {
             return .success(parsedSuccessResponse)
+        } else if let responseJsonData = response.data(using: .utf8),
+                    let parsedError = try? JSONSerialization.jsonObject(with: responseJsonData) as? [String: Any],
+                    let error = parsedError["error"] as? [String: Any],
+                    let message = error["message"] as? String {
+            return .failure(ChainError(message: message, line: nil, column: nil, stack: nil))
         } else {
             return .failure(.companion.unknownError)
         }
