@@ -92,13 +92,8 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     private func update(subaccount: Subaccount?, vault: Abacus.Vault, hasOnboarded: Bool, amount: Double, transferType: dydxViews.VaultTransferType) {
         formValidationRequest?.cancel()
 
-        guard let subaccount = subaccount else {
-            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
-            return
-        }
-
-        let accountData = Abacus.VaultFormAccountData(marginUsage: subaccount.marginUsage?.current,
-                                                      freeCollateral: subaccount.freeCollateral?.current,
+        let accountData = Abacus.VaultFormAccountData(marginUsage: subaccount?.marginUsage?.current ?? 0,
+                                                      freeCollateral: subaccount?.freeCollateral?.current ?? 0,
                                                       canViewAccount: hasOnboarded.asKotlinBoolean)
 
         let formData = VaultFormData(action: transferType.formAction,
@@ -134,7 +129,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     /// only necessary for withdrawals
     private func fetchSlippageAndUpdate(formData: Abacus.VaultFormData,
                                         accountData: Abacus.VaultFormAccountData,
-                                        subaccount: Abacus.Subaccount,
+                                        subaccount: Abacus.Subaccount?,
                                         hasOnboarded: Bool,
                                         vault: Abacus.Vault,
                                         amount: Double,
@@ -163,10 +158,6 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     }
 
     private func update(subaccount: Subaccount?, vault: Abacus.Vault, hasOnboarded: Bool, amount: Double, transferType: dydxViews.VaultTransferType, formValidationResult: VaultFormValidationResult) {
-        guard let subaccount = subaccount else {
-            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
-            return
-        }
         updateMaxAmount(subaccount: subaccount, vault: vault, transferType: transferType)
         updateSubmitState(formValidationResult: formValidationResult)
         updateReceiptItems(formValidationResult: formValidationResult, subaccount: subaccount, vault: vault, amount: amount, transferType: transferType)
@@ -174,16 +165,14 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
         updateErrorAlert(formValidationResult: formValidationResult)
     }
 
-    private func updateMaxAmount(subaccount: Abacus.Subaccount, vault: Abacus.Vault?, transferType: dydxViews.VaultTransferType) {
+    private func updateMaxAmount(subaccount: Abacus.Subaccount?, vault: Abacus.Vault?, transferType: dydxViews.VaultTransferType) {
         switch transferType {
         case .deposit:
-            if let roundedFreeCollateral = subaccount.freeCollateral?.current?.doubleValue.round(to: 2, rule: .towardZero) {
-                viewModel?.maxAmount = roundedFreeCollateral
-            }
+            let roundedFreeCollateral = subaccount?.freeCollateral?.current?.doubleValue.round(to: 2, rule: .towardZero) ?? 0
+            viewModel?.maxAmount = roundedFreeCollateral
         case .withdraw:
-            if let roundedBalance = vault?.account?.balanceUsdc?.doubleValue.round(to: 2, rule: .towardZero) {
-                viewModel?.maxAmount = roundedBalance
-            }
+            let roundedBalance = vault?.account?.balanceUsdc?.doubleValue.round(to: 2, rule: .towardZero) ?? 0
+            viewModel?.maxAmount = roundedBalance
         }
     }
 
@@ -191,10 +180,10 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
         viewModel?.submitState = formValidationResult.errors.isEmpty ? .enabled : .disabled
     }
 
-    private func updateReceiptItems(formValidationResult: VaultFormValidationResult, subaccount: Abacus.Subaccount, vault: Abacus.Vault, amount: Double, transferType: dydxViews.VaultTransferType) {
+    private func updateReceiptItems(formValidationResult: VaultFormValidationResult, subaccount: Abacus.Subaccount?, vault: Abacus.Vault, amount: Double, transferType: dydxViews.VaultTransferType) {
         viewModel?.curVaultBalance = vault.account?.balanceUsdc?.doubleValue ?? 0
-        viewModel?.curFreeCollateral = subaccount.freeCollateral?.current?.doubleValue ?? 0
-        viewModel?.curMarginUsage = subaccount.marginUsage?.current?.doubleValue ?? 0
+        viewModel?.curFreeCollateral = subaccount?.freeCollateral?.current?.doubleValue ?? 0
+        viewModel?.curMarginUsage = subaccount?.marginUsage?.current?.doubleValue ?? 0
 
         viewModel?.postVaultBalance = viewModel?.curVaultBalance == formValidationResult.summaryData.vaultBalance?.doubleValue ? nil : formValidationResult.summaryData.vaultBalance?.doubleValue
         viewModel?.postFreeCollateral = viewModel?.curFreeCollateral == formValidationResult.summaryData.freeCollateral?.doubleValue ? nil : formValidationResult.summaryData.freeCollateral?.doubleValue
