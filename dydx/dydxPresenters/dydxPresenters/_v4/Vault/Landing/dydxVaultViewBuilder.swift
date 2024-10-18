@@ -97,21 +97,25 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                   let positionSize = position.currentPosition?.asset?.doubleValue,
                   let marketId = position.marketId,
                   // special case for fake USDC market to show unused margin
-                  let assetId = marketId == "USDC-USD" ? "USDC" : marketMap[marketId]?.assetId
+                  let assetId = marketId == "USDC-USD" ? "USDC" : marketMap[marketId]?.assetId,
+                  let displayId = assetMap[assetId]?.id ?? marketMap[marketId]?.displayId
             else { return nil }
             let iconType: PlatformIconViewModel.IconType
+            let tokenUnitPrecision: Int
             if marketId == "USDC-USD" {
                 iconType = .asset(name: "symbol_USDC", bundle: .dydxView)
+                tokenUnitPrecision = 2
             } else {
                 iconType = .init(url: URL(string: assetMap[assetId]?.resources?.imageUrl ?? ""), placeholderText: assetId.first?.uppercased())
+                tokenUnitPrecision = marketMap[marketId]?.configs?.displayStepSizeDecimals?.intValue ?? 2
             }
-            return dydxVaultPositionViewModel(assetId: assetId,
+            return dydxVaultPositionViewModel(displayId: displayId,
                                               iconType: iconType,
                                               side: positionSize > 0 ? .long : .short,
                                               leverage: leverage,
                                               notionalValue: notionalValue,
                                               positionSize: positionSize.magnitude,
-                                              tokenUnitPrecision: 2,
+                                              tokenUnitPrecision: tokenUnitPrecision,
                                               pnlAmount: position.thirtyDayPnl?.absolute?.doubleValue,
                                               pnlPercentage: position.thirtyDayPnl?.percent?.doubleValue,
                                               sparklineValues: position.thirtyDayPnl?.sparklinePoints?.map({ $0.doubleValue }))
