@@ -114,6 +114,7 @@ struct VaultPositionView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
             }
+            Spacer()
         }
     }
 

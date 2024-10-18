@@ -218,9 +218,7 @@ private struct dydxVaultView: View {
     private var positionsStickyHeader: some View {
         VStack(spacing: 0) {
             openPositionsHeader
-            Spacer().frame(height: 8)
-            div
-            Spacer().frame(height: 16)
+            Spacer().frame(height: 12)
             positionsColumnsHeader
             Spacer().frame(height: 8)
         }
