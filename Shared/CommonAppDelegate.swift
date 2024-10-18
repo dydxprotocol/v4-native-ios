@@ -117,8 +117,9 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         case .appStore:
             apiKey = CredientialConfig.shared.credential(for: "amplitudeApiKey")
         }
+        let serverZone = CredientialConfig.shared.credential(for: "amplitudeServerZone") ?? "US"
         if let apiKey = apiKey, apiKey.isNotEmpty {
-            add(tracking: dydxAmplitudeTracking(apiKey))
+            add(tracking: dydxAmplitudeTracking(apiKey, serverZone: serverZone))
         }
     }
 

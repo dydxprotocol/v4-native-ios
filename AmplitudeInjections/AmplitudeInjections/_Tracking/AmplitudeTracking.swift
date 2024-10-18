@@ -12,9 +12,11 @@ import Utilities
 open class AmplitudeTracking: TransformerTracker {
 
     private let amplitude: Amplitude
-
-    public init(_ apiKey: String) {
-        self.amplitude = Amplitude.init(configuration: .init(apiKey: apiKey, serverZone: .EU))
+    
+    ///   - serverZone: either "EU" or "US", defaults to US
+    public init(_ apiKey: String, serverZone: String) {
+        let serverZone: ServerZone = serverZone.uppercased() == "EU" ? .EU : .US
+        self.amplitude = Amplitude.init(configuration: .init(apiKey: apiKey, serverZone: serverZone))
         Console.shared.log("analytics log | Amplitude initialized")
         super.init()
     }
