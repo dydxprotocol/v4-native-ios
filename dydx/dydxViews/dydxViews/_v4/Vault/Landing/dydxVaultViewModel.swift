@@ -184,7 +184,7 @@ private struct dydxVaultView: View {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.TVL", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
-            Text(dydxFormatter.shared.dollar(number: viewModel.totalValueLocked) ?? "")
+            Text(dydxFormatter.shared.dollar(number: viewModel.totalValueLocked, digits: 0) ?? "")
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontType: .base, fontSize: .medium)
         }
