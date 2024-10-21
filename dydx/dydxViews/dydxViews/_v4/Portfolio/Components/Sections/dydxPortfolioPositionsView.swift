@@ -340,26 +340,13 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
     public var apyAccessory: some View {
         if let vaultApy, let vaultApyText = dydxFormatter.shared.percent(number: vaultApy, digits: 2) {
             Text(vaultApyText)
-                .themeFont(fontSize: .smaller)
+                .themeFont(fontSize: .medium)
                 .padding(.horizontal, 4)
                 .padding(.vertical, 2)
                 .themeColor(foreground: vaultApy < 0 ? ThemeSettings.negativeColor : ThemeSettings.positiveColor)
                 .themeColor(background: vaultApy < 0 ? ThemeSettings.negativeColorLayer : ThemeSettings.positiveColorLayer)
-                .cornerRadius(4)
+                .cornerRadius(8)
         }
-    }
-
-    public var megaVaultBalanceRowHeader: some View {
-        HStack(spacing: 0) {
-            Text(localizerPathKey: "APP.GENERAL.DETAILS")
-                .themeFont(fontType: .plus, fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-            Spacer()
-            Text(localizerPathKey: "APP.VAULTS.YOUR_VAULT_BALANCE")
-                .themeFont(fontType: .plus, fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-        }
-        .padding(.horizontal, 16)
     }
 
     @ViewBuilder
@@ -372,11 +359,9 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
                                       templateColor: nil)
                 .createView()
                 Color.clear.frame(width: 16)
-                Text(localizerPathKey: "APP.VAULTS.MEGAVAULT")
+                Text(localizerPathKey: "APP.VAULTS.YOUR_VAULT_BALANCE")
                     .themeFont(fontSize: .medium)
                     .themeColor(foreground: .textSecondary)
-                Color.clear.frame(width: 6)
-                apyAccessory
                 Spacer()
                 Text(vaultBalance)
                     .themeFont(fontSize: .small)
@@ -392,19 +377,19 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
     public var megaVaultSection: some View {
         if dydxBoolFeatureFlag.isVaultEnabled.isEnabled && shouldDisplayVaultSection {
             VStack(spacing: 16) {
-                Text(localizerPathKey: "APP.VAULTS.MEGAVAULT")
-                    .themeFont(fontType: .plus, fontSize: .larger)
-                    .themeColor(foreground: .textPrimary)
-                    .fixedSize()
-                    .leftAligned()
-                VStack(spacing: 8) {
-                    megaVaultBalanceRowHeader
-                    megaVaultBalanceRow
+                HStack(spacing: 8) {
+                    Text(localizerPathKey: "APP.VAULTS.MEGAVAULT")
+                        .themeFont(fontType: .plus, fontSize: .larger)
+                        .themeColor(foreground: .textPrimary)
+                    apyAccessory
                 }
+                .leftAligned()
+                megaVaultBalanceRow
+                    .onTapGesture { [weak self] in
+                        self?.vaultTapAction?()
+                    }
             }
-            .onTapGesture { [weak self] in
-                self?.vaultTapAction?()
-            }
+
         }
     }
 
