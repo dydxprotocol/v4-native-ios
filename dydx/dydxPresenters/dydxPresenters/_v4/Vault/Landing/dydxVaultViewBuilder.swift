@@ -89,7 +89,7 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
         viewModel?.totalValueLocked = vault?.details?.totalValue?.doubleValue
         viewModel?.thirtyDayReturnPercent = vault?.details?.thirtyDayReturnPercent?.doubleValue
         viewModel?.vaultBalance = vault?.account?.balanceUsdc?.doubleValue
-        viewModel?.allTimeReturnUsdc = vault?.account?.allTimeReturnUsdc?.doubleValue
+        viewModel?.allTimeReturnUsdc = vault?.account?.allTimeReturnUsdc?.doubleValue.round(to: 2)
 
         viewModel?.positions = vault?.positions?.positions?.map { (position) -> dydxVaultPositionViewModel? in
             guard let leverage = position.currentLeverageMultiple?.doubleValue,

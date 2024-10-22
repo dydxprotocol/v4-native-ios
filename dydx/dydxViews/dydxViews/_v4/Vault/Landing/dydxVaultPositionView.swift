@@ -37,8 +37,8 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     fileprivate var notionalValueText: String {
-        let size = dydxFormatter.shared.condensedDollar(number: notionalValue) ?? "--"
-        let equity = dydxFormatter.shared.condensedDollar(number: equity) ?? "--"
+        let size = dydxFormatter.shared.condensedDollar(number: notionalValue, digits: 0) ?? "--"
+        let equity = dydxFormatter.shared.condensedDollar(number: equity, digits: 0) ?? "--"
         return "\(size) / \(equity)"
     }
 
@@ -55,7 +55,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     fileprivate var pnlAmountText: String {
-        dydxFormatter.shared.dollar(number: pnlAmount, digits: 0) ?? "--"
+        dydxFormatter.shared.condensedDollar(number: pnlAmount, digits: 2) ?? "--"
     }
 
     fileprivate var pnlPercentageText: String {
