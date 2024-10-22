@@ -18,6 +18,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     @Published public var iconType: PlatformIconViewModel.IconType = .init(url: nil, placeholderText: nil)
     @Published public var side: SideTextViewModel.Side
     @Published public var leverage: Double
+    @Published public var equity: Double
     @Published public var notionalValue: Double
     @Published public var positionSize: Double
     @Published public var tokenUnitPrecision: Int
@@ -36,11 +37,13 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     fileprivate var notionalValueText: String {
-        dydxFormatter.shared.dollar(number: notionalValue) ?? "--"
+        let size = dydxFormatter.shared.condensedDollar(number: notionalValue) ?? "--"
+        let equity = dydxFormatter.shared.condensedDollar(number: equity) ?? "--"
+        return "\(size) / \(equity)"
     }
 
     fileprivate var positionSizeText: String {
-        dydxFormatter.shared.localFormatted(number: positionSize, digits: tokenUnitPrecision) ?? "--"
+        dydxFormatter.shared.condensed(number: positionSize, digits: tokenUnitPrecision) ?? "--"
     }
 
     fileprivate var pnlColor: ThemeColor.SemanticColor {
@@ -52,7 +55,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     fileprivate var pnlAmountText: String {
-        dydxFormatter.shared.dollar(number: pnlAmount) ?? "--"
+        dydxFormatter.shared.dollar(number: pnlAmount, digits: 0) ?? "--"
     }
 
     fileprivate var pnlPercentageText: String {
@@ -64,6 +67,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
         iconType: PlatformIconViewModel.IconType,
         side: SideTextViewModel.Side,
         leverage: Double,
+        equity: Double,
         notionalValue: Double,
         positionSize: Double,
         tokenUnitPrecision: Int,
@@ -74,6 +78,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
             self.iconType = iconType
             self.side = side
             self.leverage = leverage
+            self.equity = equity
             self.notionalValue = notionalValue
             self.positionSize = positionSize
             self.tokenUnitPrecision = tokenUnitPrecision

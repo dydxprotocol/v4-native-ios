@@ -242,6 +242,18 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
         return nil
     }
 
+    public func condensedDollar(number: Double?, digits: Int = 2) -> String? {
+        if let number = number {
+            let text = condensed(number: NSNumber(value: number), digits: digits)
+            if text?.first == "-" {
+                return "-$\(text?.dropFirst() ?? "")"
+            } else {
+                return "$\(text ?? "")"
+            }
+        }
+        return nil
+    }
+
     ///  formats the number as "$" or "-$" of "+$" prefixed
     /// - Parameters:
     ///   - number: the number to format
