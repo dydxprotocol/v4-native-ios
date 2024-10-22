@@ -229,7 +229,7 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
             let postfix = ["", "K", "M", "B", "T"]
             var value = number.decimalValue
             var index = 0
-            while value > 1000.0 && index < (postfix.count - 1) {
+            while value.magnitude > 1000.0 && index < (postfix.count - 1) {
                 value = value / 1000.0
                 index += 1
             }
@@ -237,6 +237,18 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
             significantDigitsFormatter.maximumFractionDigits = digits
             if let numberString = significantDigitsFormatter.string(from: NSDecimalNumber(decimal: value)) {
                 return "\(numberString)\(postfix[index])"
+            }
+        }
+        return nil
+    }
+
+    public func condensedDollar(number: Double?, digits: Int = 2) -> String? {
+        if let number = number {
+            let text = condensed(number: NSNumber(value: number), digits: digits)
+            if text?.first == "-" {
+                return "-$\(text?.dropFirst() ?? "")"
+            } else {
+                return "$\(text ?? "")"
             }
         }
         return nil

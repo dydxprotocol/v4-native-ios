@@ -11,13 +11,17 @@ import PlatformUI
 import Utilities
 import DGCharts
 import dydxFormatter
+import SDWebImage
+import SDWebImageSwiftUI
 
 public class dydxVaultPositionViewModel: PlatformViewModel {
 
+    @Published public var marketId: String
     @Published public var displayId: String
     @Published public var iconType: PlatformIconViewModel.IconType = .init(url: nil, placeholderText: nil)
     @Published public var side: SideTextViewModel.Side
     @Published public var leverage: Double
+    @Published public var equity: Double
     @Published public var notionalValue: Double
     @Published public var positionSize: Double
     @Published public var tokenUnitPrecision: Int
@@ -36,11 +40,13 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     fileprivate var notionalValueText: String {
-        dydxFormatter.shared.dollar(number: notionalValue) ?? "--"
+        let size = dydxFormatter.shared.condensedDollar(number: notionalValue, digits: 0) ?? "--"
+        let equity = dydxFormatter.shared.condensedDollar(number: equity, digits: 0) ?? "--"
+        return "\(size) / \(equity)"
     }
 
     fileprivate var positionSizeText: String {
-        dydxFormatter.shared.localFormatted(number: positionSize, digits: tokenUnitPrecision) ?? "--"
+        dydxFormatter.shared.condensed(number: positionSize, digits: tokenUnitPrecision) ?? "--"
     }
 
     fileprivate var pnlColor: ThemeColor.SemanticColor {
@@ -52,28 +58,59 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     fileprivate var pnlAmountText: String {
-        dydxFormatter.shared.dollar(number: pnlAmount) ?? "--"
+        dydxFormatter.shared.condensedDollar(number: pnlAmount, digits: 2) ?? "--"
     }
 
     fileprivate var pnlPercentageText: String {
         dydxFormatter.shared.percent(number: pnlPercentage, digits: 2) ?? "--"
     }
 
+    public func updated(marketId: String,
+                       displayId: String,
+                       iconType: PlatformIconViewModel.IconType,
+                       side: SideTextViewModel.Side,
+                       leverage: Double,
+                       equity: Double,
+                       notionalValue: Double,
+                       positionSize: Double,
+                       tokenUnitPrecision: Int,
+                       pnlAmount: Double?,
+                       pnlPercentage: Double?,
+                       sparklineValues: [Double]?) -> dydxVaultPositionViewModel {
+        self.marketId = marketId
+        self.displayId = displayId
+        self.iconType = iconType
+        self.side = side
+        self.leverage = leverage
+        self.equity = equity
+        self.notionalValue = notionalValue
+        self.positionSize = positionSize
+        self.tokenUnitPrecision = tokenUnitPrecision
+        self.pnlAmount = pnlAmount
+        self.pnlPercentage = pnlPercentage
+        self.sparklineValues = sparklineValues
+        return self
+    }
+
     public init(
+        marketId: String,
         displayId: String,
         iconType: PlatformIconViewModel.IconType,
         side: SideTextViewModel.Side,
         leverage: Double,
+        equity: Double,
         notionalValue: Double,
         positionSize: Double,
         tokenUnitPrecision: Int,
         pnlAmount: Double?,
         pnlPercentage: Double?,
         sparklineValues: [Double]?) {
+            self.marketId = marketId
             self.displayId = displayId
             self.iconType = iconType
             self.side = side
             self.leverage = leverage
+            self.equity = equity
             self.notionalValue = notionalValue
             self.positionSize = positionSize
             self.tokenUnitPrecision = tokenUnitPrecision
@@ -82,7 +119,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
             self.sparklineValues = sparklineValues
     }
 
-    public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
+    public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
             return VaultPositionView(viewModel: self)

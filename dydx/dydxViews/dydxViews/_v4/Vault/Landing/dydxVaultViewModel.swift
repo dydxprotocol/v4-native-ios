@@ -17,11 +17,15 @@ public class dydxVaultViewModel: PlatformViewModel {
     @Published public var thirtyDayReturnPercent: Double?
     @Published public var totalValueLocked: Double?
     @Published public var vaultChart: dydxVaultChartViewModel?
-    @Published public var positions: [dydxVaultPositionViewModel]?
+    @Published public var positions: [String: dydxVaultPositionViewModel]?
     @Published public var cancelAction: (() -> Void)?
     @Published public var learnMoreAction: (() -> Void)?
     @Published public var withdrawAction: (() -> Void)?
     @Published public var depositAction: (() -> Void)?
+
+    fileprivate var sortedPositions: [dydxVaultPositionViewModel] {
+        positions?.values.sorted(by: { $0.equity > $1.equity }) ?? []
+    }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
@@ -64,8 +68,6 @@ private struct dydxVaultView: View {
                     }
                 }
             }
-            buttonStack
-                .padding(.bottom, 32)
         }
         .frame(maxWidth: .infinity)
         .themeColor(background: .layer2)
@@ -83,7 +85,6 @@ private struct dydxVaultView: View {
             titleImage
             titleText
             Spacer()
-            learnMore
         }
         .padding(.horizontal, 16)
     }
@@ -118,11 +119,17 @@ private struct dydxVaultView: View {
 
     // MARK: - Section 1 - PNL
     private var vaultPnlRow: some View {
-        HStack(spacing: 15) {
-            vaultBalanceView
-            pnlView
+        VStack(spacing: 14) {
+            HStack(spacing: 16) {
+                vaultBalanceView
+                pnlView
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            HStack(spacing: 16) {
+                withdrawButton
+                depositButton
+            }
         }
-        .fixedSize(horizontal: false, vertical: true)
         .padding(.horizontal, 16)
     }
 
@@ -184,7 +191,7 @@ private struct dydxVaultView: View {
             Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.TVL", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
-            Text(dydxFormatter.shared.dollar(number: viewModel.totalValueLocked) ?? "")
+            Text(dydxFormatter.shared.dollar(number: viewModel.totalValueLocked, digits: 0) ?? "")
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontType: .base, fontSize: .medium)
         }
@@ -234,7 +241,9 @@ private struct dydxVaultView: View {
                     .leftAligned()
                     .frame(width: VaultPositionView.marketSectionWidth)
                     .lineLimit(1)
-                Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.SIZE", params: nil) ?? "")
+                let sizeText = DataLocalizer.shared?.localize(path: "APP.GENERAL.SIZE", params: nil) ?? ""
+                let equityText = DataLocalizer.shared?.localize(path: "APP.GENERAL.EQUITY", params: nil) ?? ""
+                Text(sizeText + " / " + equityText)
                     .themeColor(foreground: .textTertiary)
                     .themeFont(fontType: .base, fontSize: .small)
                     .lineLimit(1)
@@ -251,7 +260,7 @@ private struct dydxVaultView: View {
     }
 
     private var positionsList: some View {
-        ForEach(viewModel.positions ?? [], id: \.id) { position in
+        ForEach(viewModel.sortedPositions, id: \.id) { position in
             position.createView()
                 .centerAligned()
                 .frame(height: 53)
@@ -263,10 +272,17 @@ private struct dydxVaultView: View {
     // MARK: Floating Buttons
     @ViewBuilder
     private var withdrawButton: some View {
-        let content = Text(localizerPathKey: "APP.GENERAL.WITHDRAW")
-            .themeFont(fontType: .plus, fontSize: .medium)
-            .themeColor(foreground: viewModel.withdrawAction == nil ? .textTertiary : .textPrimary)
-            .wrappedViewModel
+        let textColor: ThemeColor.SemanticColor = viewModel.withdrawAction == nil ? .textTertiary : .textPrimary
+        let content = HStack(spacing: 8) {
+            PlatformIconViewModel(type: .asset(name: "icon_transfer_withdrawal", bundle: .dydxView),
+                                  size: .init(width: 20, height: 20),
+                                  templateColor: textColor)
+                .createView()
+            Text(localizerPathKey: "APP.GENERAL.WITHDRAW")
+                .themeFont(fontType: .plus, fontSize: .medium)
+                .themeColor(foreground: textColor)
+        }
+        .wrappedViewModel
 
         PlatformButtonViewModel(content: content,
                                 type: .defaultType(),
@@ -277,23 +293,22 @@ private struct dydxVaultView: View {
 
     @ViewBuilder
     private var depositButton: some View {
-        let content = Text(localizerPathKey: "APP.GENERAL.DEPOSIT")
-            .themeFont(fontType: .plus, fontSize: .medium)
-            .themeColor(foreground: viewModel.depositAction == nil ? .textTertiary : .textPrimary)
-            .wrappedViewModel
+        let textColor: ThemeColor.SemanticColor = viewModel.withdrawAction == nil ? .textTertiary : .textPrimary
+        let content = HStack(spacing: 8) {
+            PlatformIconViewModel(type: .asset(name: "icon_transfer_deposit", bundle: .dydxView),
+                                  size: .init(width: 20, height: 20),
+                                  templateColor: textColor)
+                .createView()
+            Text(localizerPathKey: "APP.GENERAL.DEPOSIT")
+                .themeFont(fontType: .plus, fontSize: .medium)
+                .themeColor(foreground: textColor)
+        }
+        .wrappedViewModel
 
         PlatformButtonViewModel(content: content,
                                 type: .defaultType(),
                                 state: viewModel.depositAction == nil ? .disabled : .primary,
                                 action: { viewModel.depositAction?() })
         .createView()
-    }
-
-    private var buttonStack: some View {
-        HStack(spacing: 12) {
-            withdrawButton
-            depositButton
-        }
-        .padding(.horizontal, 16)
     }
 }
