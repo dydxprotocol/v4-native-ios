@@ -46,7 +46,7 @@ class SessionCoordinator: SessionCoordinatorProtocol {
     fillInFIID(event: event) { fiidResult in
       self.fireLogger.logEvent(event: event) { logResult in
         switch logResult {
-        case .success:
+        case .success():
           Logger.logDebug("Successfully logged Session Start event to GoogleDataTransport")
 
           switch fiidResult {

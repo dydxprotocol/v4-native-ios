@@ -1,7 +1,8 @@
 import Foundation
 
-class AtomicDictionary<T> {
-    private var internalDictionary: [String: T]
+class AtomicDictionary<T>
+{
+    private var internalDictionary:Dictionary<String, T>
     private let queue: DispatchQueue
 
     static func fromData(_ data: Data, label: String) -> AtomicDictionary<T> {
@@ -20,7 +21,7 @@ class AtomicDictionary<T> {
 
     subscript(key: String) -> T? {
         get {
-            var value: T?
+            var value : T?
             self.queue.sync {
                 value = self.internalDictionary[key]
             }
@@ -38,13 +39,14 @@ class AtomicDictionary<T> {
             self.internalDictionary[key] = value
         }
     }
-
+    
     func removeValue(forKey key: String) {
         self.queue.async(flags: .barrier) {
             self.internalDictionary.removeValue(forKey: key)
         }
     }
-
+    
+    
     func count() -> Int {
         return self.queue.sync {
             return self.internalDictionary.count

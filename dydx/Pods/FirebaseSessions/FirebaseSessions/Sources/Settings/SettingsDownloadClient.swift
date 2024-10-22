@@ -55,7 +55,7 @@ class SettingsDownloader: SettingsDownloadClient {
       switch result {
       case let .success(installationsInfo):
         let request = self.buildRequest(url: validURL, fiid: installationsInfo.0)
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
           if let data {
             if let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
               completion(.success(dict))
@@ -83,7 +83,7 @@ class SettingsDownloader: SettingsDownloadClient {
     components.path = "/spi/v2/platforms/\(appInfo.osName)/gmp/\(appInfo.appID)/settings"
     components.queryItems = [
       URLQueryItem(name: "build_version", value: appInfo.appBuildVersion),
-      URLQueryItem(name: "display_version", value: appInfo.appDisplayVersion)
+      URLQueryItem(name: "display_version", value: appInfo.appDisplayVersion),
     ]
     return components.url
   }

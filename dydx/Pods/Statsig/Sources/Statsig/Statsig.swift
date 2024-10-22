@@ -1,5 +1,6 @@
 import Foundation
 
+
 public typealias completionBlock = ((_ errorMessage: String?) -> Void)?
 
 public class Statsig {
@@ -19,7 +20,8 @@ public class Statsig {
      SeeAlso: [Initialization Documentation](https://docs.statsig.com/client/iosClientSDK#step-3---initialize-the-sdk)
      */
     public static func start(sdkKey: String, user: StatsigUser? = nil, options: StatsigOptions? = nil,
-                             completion: completionBlock = nil) {
+                             completion: completionBlock = nil)
+    {
         if client != nil {
             completion?("Statsig has already started!")
             return
@@ -38,6 +40,11 @@ public class Statsig {
         if options?.enableCacheByFile == true {
             DispatchQueue.main.async {
                 StatsigUserDefaults.defaults = FileBasedUserDefaults()
+                _initialize()
+            }
+        } else if let storageProvider = options?.storageProvider {
+            DispatchQueue.main.async {
+                StatsigUserDefaults.defaults = StorageProviderBasedUserDefaults(storageProvider: storageProvider)
                 _initialize()
             }
         } else {
@@ -67,7 +74,8 @@ public class Statsig {
 
      SeeAlso [StatsigListening](https://docs.statsig.com/client/iosClientSDK#statsiglistening)
      */
-    public static func addListener(_ listener: StatsigListening) {
+    public static func addListener(_ listener: StatsigListening)
+    {
         guard let client = client else {
             pendingListeners.append(listener)
             return
@@ -244,7 +252,7 @@ public class Statsig {
     public static func getLayerWithExposureLoggingDisabled(_ layerName: String, keepDeviceValue: Bool = false) -> Layer {
         return getLayerImpl(layerName, keepDeviceValue: keepDeviceValue, withExposures: false, functionName: funcName())
     }
-
+    
     /**
      
      */
@@ -257,7 +265,7 @@ public class Statsig {
             functionName: funcName()
         )
     }
-
+    
     public static func getParameterStoreWithExposureLoggingDisabled(
         _ storeName: String
     ) -> ParameterStore {
@@ -384,7 +392,7 @@ public class Statsig {
 
         client.updateUser(user, values: values, completion: completion)
     }
-
+    
     /**
      Manually triggered the refreshing process for the current user
 
@@ -426,7 +434,7 @@ public class Statsig {
      The generated identifier that exists across users
      */
     public static func getStableID() -> String? {
-        var result: String?
+        var result:String? = nil
         result = client?.getStableID()
         return result
     }
@@ -485,7 +493,7 @@ public class Statsig {
      Returns all values that are currently overriden.
      */
     public static func getAllOverrides() -> StatsigOverrides? {
-        var result: StatsigOverrides?
+        var result: StatsigOverrides? = nil
         result = client?.getAllOverrides()
         return result
     }
@@ -520,7 +528,7 @@ public class Statsig {
             value: false,
             ruleID: "",
             evalDetails: .uninitialized())
-
+     
         guard let client = client else {
             print("[Statsig]: \(getUnstartedErrorMessage(functionName)). Returning false as the default.")
             return result
@@ -529,7 +537,7 @@ public class Statsig {
         result = withExposures
         ? client.getFeatureGate(gateName)
         : client.getFeatureGateWithExposureLoggingDisabled(gateName)
-
+        
         return result
     }
 
@@ -576,7 +584,7 @@ public class Statsig {
         : client.getLayerWithExposureLoggingDisabled(layerName, keepDeviceValue: keepDeviceValue)
         return result
     }
-
+    
     private static func getParameterStoreImpl(
         _ storeName: String,
         withExposures: Bool,
@@ -590,7 +598,7 @@ public class Statsig {
             print("[Statsig]: \(getUnstartedErrorMessage(functionName)). Returning a dummy ParameterStore that will only return default values.")
             return result
         }
-
+        
         result = withExposures ? client.getParameterStore(storeName) : client.getParameterStoreWithExposureLoggingDisabled(storeName)
         return result
     }

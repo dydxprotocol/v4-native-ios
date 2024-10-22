@@ -38,6 +38,7 @@ class Diagnostics {
         if disableCoreAPI && context == MarkerContext.apiCall {
             return
         }
+        
 
         instance.clearMarkers(forContext: context)
 
@@ -46,7 +47,7 @@ class Diagnostics {
     }
 }
 
-private class DiagnosticsImpl: MarkersContainer {
+fileprivate class DiagnosticsImpl: MarkersContainer {
     var overall: OverallMarker
     var initialize: InitializeMarkers
 

@@ -7,7 +7,7 @@ struct DeviceEnvironment {
 
     static internal let deviceOS = PlatformCompatibility.deviceInfo.os
     static internal let sdkType: String = "ios-client"
-    static internal let sdkVersion: String = "1.47.0"
+    static internal let sdkVersion: String = "1.48.0"
 
     let lock = NSLock()
     var sessionID: String? { UUID().uuidString }
@@ -52,7 +52,7 @@ struct DeviceEnvironment {
     static func get(_ overrideStableID: String? = nil) -> [String: String?] {
         return instance.get(overrideStableID)
     }
-
+    
     static func getSDKMetadata(_ overrideStableID: String? = nil) -> [String: String?] {
         return instance.getSDKMetadata(overrideStableID)
     }
@@ -62,11 +62,11 @@ struct DeviceEnvironment {
             return val ?? ""
         }
     }
-
+    
     private func getSDKMetadata(_ overrideStableID: String? = nil) -> [String: String?] {
         lock.lock()
         defer { lock.unlock() }
-
+        
         return [
             "sdkType": DeviceEnvironment.sdkType,
             "sdkVersion": DeviceEnvironment.sdkVersion,

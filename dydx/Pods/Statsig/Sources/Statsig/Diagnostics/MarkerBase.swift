@@ -1,7 +1,7 @@
 import Dispatch
 
-private let TIME_OFFSET = DispatchTime.now().uptimeNanoseconds
-private let NANO_IN_MS = 1_000_000.0
+fileprivate let TIME_OFFSET = DispatchTime.now().uptimeNanoseconds
+fileprivate let NANO_IN_MS = 1_000_000.0
 
 enum MarkerContext: String {
     case initialize = "initialize"

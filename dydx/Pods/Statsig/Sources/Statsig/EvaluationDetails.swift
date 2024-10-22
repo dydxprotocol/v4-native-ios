@@ -1,9 +1,9 @@
 import Foundation
 
 public struct EvaluationDetails: Codable {
-    public let source: EvaluationSource
+    public let source: EvaluationSource;
 
-    public var reason: EvaluationReason?
+    public var reason: EvaluationReason?;
     public var lcut: UInt64?
     public var receivedAt: UInt64?
 
@@ -31,7 +31,7 @@ public struct EvaluationDetails: Codable {
         return result
     }
 
-    func addToDictionary(_ dict: inout [String: String]) {
+    func addToDictionary(_ dict: inout [String: Any]) {
         dict["reason"] = getDetailedReason()
 
         if let lcut = lcut {
@@ -64,4 +64,5 @@ public enum EvaluationReason: String, Codable {
     case Unrecognized
     case Sticky
     case LocalOverride
+    case StableIDMismatch
 }

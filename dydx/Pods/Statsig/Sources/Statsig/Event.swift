@@ -1,9 +1,10 @@
 import Foundation
 
+
 class Event {
     let name: String
     let value: Any?
-    let metadata: [String: String]?
+    let metadata: [String: Any]?
     let time: UInt64
     let userData: [String: Any?]
     let secondaryExposures: [[String: String]]?
@@ -21,7 +22,7 @@ class Event {
         user: StatsigUser?,
         name: String,
         value: Any? = nil,
-        metadata: [String: String]? = nil,
+        metadata: [String: Any]? = nil,
         secondaryExposures: [[String: String]]? = nil,
         disableCurrentVCLogging: Bool
     ) {
@@ -50,7 +51,7 @@ class Event {
         user: StatsigUser?,
         name: String,
         value: Any? = nil,
-        metadata: [String: String]? = nil,
+        metadata: [String: Any]? = nil,
         secondaryExposures: [[String: String]]? = nil,
         disableCurrentVCLogging: Bool = true // for internal events, default to not log the VC, other than for exposures
     ) -> Event {
@@ -71,13 +72,18 @@ class Event {
         ruleID: String,
         secondaryExposures: [[String: String]],
         evalDetails: EvaluationDetails,
+        bootstrapMetadata: BootstrapMetadata?,
         disableCurrentVCLogging: Bool
     ) -> Event {
-        var metadata = [
+        var metadata: [String: Any] = [
             "gate": gateName,
             "gateValue": String(gateValue),
             "ruleID": ruleID
         ]
+        
+        if let bootstrapMetadata = bootstrapMetadata {
+            metadata["bootstrapMetadata"] = bootstrapMetadata.toDictionary()
+        }
 
         evalDetails.addToDictionary(&metadata)
 
@@ -97,12 +103,17 @@ class Event {
         ruleID: String,
         secondaryExposures: [[String: String]],
         evalDetails: EvaluationDetails,
+        bootstrapMetadata: BootstrapMetadata?,
         disableCurrentVCLogging: Bool
     ) -> Event {
-        var metadata = [
+        var metadata: [String: Any] = [
             "config": configName,
-            "ruleID": ruleID
+            "ruleID": ruleID,
         ]
+        
+        if let bootstrapMetadata = bootstrapMetadata {
+            metadata["bootstrapMetadata"] = bootstrapMetadata.toDictionary()
+        }
 
         evalDetails.addToDictionary(&metadata)
 
@@ -125,15 +136,20 @@ class Event {
         allocatedExperimentName: String,
         parameterName: String,
         isExplicitParameter: Bool,
-        evalDetails: EvaluationDetails
+        evalDetails: EvaluationDetails,
+        bootstrapMetadata: BootstrapMetadata?
     ) -> Event {
-        var metadata = [
+        var metadata: [String : Any] = [
             "config": configName,
             "ruleID": ruleID,
             "allocatedExperiment": allocatedExperimentName,
             "parameterName": parameterName,
             "isExplicitParameter": "\(isExplicitParameter)"
         ]
+        
+        if let bootstrapMetadata = bootstrapMetadata {
+            metadata["bootstrapMetadata"] = bootstrapMetadata.toDictionary()
+        }
 
         evalDetails.addToDictionary(&metadata)
 
@@ -162,7 +178,9 @@ class Event {
             "metadata": metadataForLogging,
             "statsigMetadata": statsigMetadata,
             "secondaryExposures": secondaryExposures,
-            "allocatedExperimentHash": allocatedExperimentHash
+            "allocatedExperimentHash": allocatedExperimentHash,
         ].compactMapValues { $0 }
     }
 }
+
+

@@ -20,7 +20,7 @@ class NetworkMarker: MarkerBase {
         var args: [String: Any] = [
             "step": step,
             "success": isSuccess,
-            "attempt": attempt
+            "attempt": attempt,
         ]
 
         if let status = response?.status {
@@ -43,7 +43,7 @@ class NetworkMarker: MarkerBase {
             return nil
         }
 
-        var code: String?
+        var code: String? = nil
         var name = "unknown"
         if let error = error as? NSError {
             name = error.domain
