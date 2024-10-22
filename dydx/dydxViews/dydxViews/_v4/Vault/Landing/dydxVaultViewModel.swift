@@ -17,11 +17,15 @@ public class dydxVaultViewModel: PlatformViewModel {
     @Published public var thirtyDayReturnPercent: Double?
     @Published public var totalValueLocked: Double?
     @Published public var vaultChart: dydxVaultChartViewModel?
-    @Published public var positions: [dydxVaultPositionViewModel]?
+    @Published public var positions: [String: dydxVaultPositionViewModel]?
     @Published public var cancelAction: (() -> Void)?
     @Published public var learnMoreAction: (() -> Void)?
     @Published public var withdrawAction: (() -> Void)?
     @Published public var depositAction: (() -> Void)?
+
+    fileprivate var sortedPositions: [dydxVaultPositionViewModel] {
+        positions?.values.sorted(by: { $0.equity > $1.equity }) ?? []
+    }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
@@ -256,7 +260,7 @@ private struct dydxVaultView: View {
     }
 
     private var positionsList: some View {
-        ForEach(viewModel.positions ?? [], id: \.id) { position in
+        ForEach(viewModel.sortedPositions, id: \.id) { position in
             position.createView()
                 .centerAligned()
                 .frame(height: 53)
