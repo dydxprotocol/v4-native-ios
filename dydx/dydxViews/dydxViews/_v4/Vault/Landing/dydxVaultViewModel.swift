@@ -234,7 +234,9 @@ private struct dydxVaultView: View {
                     .leftAligned()
                     .frame(width: VaultPositionView.marketSectionWidth)
                     .lineLimit(1)
-                Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.SIZE", params: nil) ?? "")
+                let sizeText = DataLocalizer.shared?.localize(path: "APP.GENERAL.SIZE", params: nil) ?? ""
+                let equityText = DataLocalizer.shared?.localize(path: "APP.GENERAL.EQUITY", params: nil) ?? ""
+                Text(sizeText + " / " + equityText)
                     .themeColor(foreground: .textTertiary)
                     .themeFont(fontType: .base, fontSize: .small)
                     .lineLimit(1)

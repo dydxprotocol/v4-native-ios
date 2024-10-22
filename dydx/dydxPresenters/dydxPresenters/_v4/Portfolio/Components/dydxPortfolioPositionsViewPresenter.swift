@@ -64,7 +64,7 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
             if onboarded {
                 let vaultBalance = vault?.account?.balanceUsdc?.doubleValue ?? 0
                 let vaultApy = vault?.details?.thirtyDayReturnPercent?.doubleValue
-                self.viewModel?.vaultBalance = dydxFormatter.shared.dollar(number: vaultBalance, digits: 2)
+                self.viewModel?.vaultBalance = dydxFormatter.shared.dollar(number: vaultBalance, digits: 0)
                 self.viewModel?.vaultApy = vaultApy
             } else {
                 self.viewModel?.vaultBalance = nil
