@@ -2,7 +2,7 @@ import Foundation
 
 typealias ParamStoreConfiguration = [String: [String: Any]]
 
-private struct RefType {
+fileprivate struct RefType {
     static let staticValue = "static"
     static let gate = "gate"
     static let dynamicConfig = "dynamic_config"
@@ -10,18 +10,18 @@ private struct RefType {
     static let layer = "layer"
 }
 
-private struct ParamKeys {
+fileprivate struct ParamKeys {
     static let paramType = "param_type"
     static let refType = "ref_type"
-
+    
     // Gate
     static let gateName = "gate_name"
     static let passValue = "pass_value"
     static let failValue = "fail_value"
-
+    
     // Static Value
     static let value = "value"
-
+    
     // Dynamic Config / Experiment / Layer
     static let paramName = "param_name"
     static let configName = "config_name"
@@ -34,16 +34,16 @@ public struct ParameterStore {
      The name used to retrieve this ParameterStore.
      */
     public let name: String
-
+    
     /**
      (For debug purposes) Why did Statsig return this ParameterStore
      */
     public let evaluationDetails: EvaluationDetails
-
+    
     internal let configuration: ParamStoreConfiguration
     weak internal var client: StatsigClient?
     internal var shouldExpose = true
-
+    
     internal init(
         name: String,
         evaluationDetails: EvaluationDetails,
@@ -55,7 +55,7 @@ public struct ParameterStore {
         self.client = client
         self.configuration = configuration as? ParamStoreConfiguration ?? ParamStoreConfiguration()
     }
-
+    
     /**
      Get the value for the given key. If the value cannot be found, or is found to have a different type than the defaultValue, the defaultValue will be returned.
      If a valid value is found, a layer exposure event will be fired.
@@ -71,7 +71,7 @@ public struct ParameterStore {
         if configuration.isEmpty {
             return defaultValue
         }
-
+        
         guard
             let client = client,
             let param = configuration[paramName],
@@ -81,35 +81,36 @@ public struct ParameterStore {
         else {
             return defaultValue
         }
-
+        
         switch refType {
         case RefType.staticValue:
             return getMappedStaticValue(param, defaultValue)
-
+            
         case RefType.gate:
             return getMappedGateValue(client, param, defaultValue)
-
+            
         case RefType.dynamicConfig:
             return getMappedDynamicConfigValue(client, param, defaultValue)
-
+            
         case RefType.experiment:
             return getMappedExperimentValue(client, param, defaultValue)
-
+            
         case RefType.layer:
             return getMappedLayerValue(client, param, defaultValue)
-
+            
         default:
             return defaultValue
         }
     }
-
+    
     fileprivate func getMappedStaticValue<T>(
         _ param: [String: Any],
         _ defaultValue: T
     ) -> T {
         return param[ParamKeys.value] as? T ?? defaultValue
     }
-
+    
+    
     fileprivate func getMappedGateValue<T: StatsigDynamicConfigValue>(
         _ client: StatsigClient,
         _ param: [String: Any],
@@ -122,13 +123,14 @@ public struct ParameterStore {
         else {
             return defaultValue
         }
-
+        
         let gate = shouldExpose
         ? client.getFeatureGate(gateName)
         : client.getFeatureGateWithExposureLoggingDisabled(gateName)
         return gate.value ? passValue : failValue
     }
-
+    
+    
     fileprivate func getMappedDynamicConfigValue<T: StatsigDynamicConfigValue>(
         _ client: StatsigClient,
         _ param: [String: Any],
@@ -140,13 +142,14 @@ public struct ParameterStore {
         else {
             return defaultValue
         }
-
-        let config = shouldExpose
+        
+        let config = shouldExpose 
             ? client.getConfig(configName)
             : client.getConfigWithExposureLoggingDisabled(configName)
         return config.getValue(forKey: paramName, defaultValue: defaultValue)
     }
-
+    
+    
     fileprivate func getMappedExperimentValue<T: StatsigDynamicConfigValue>(
         _ client: StatsigClient,
         _ param: [String: Any],
@@ -158,13 +161,14 @@ public struct ParameterStore {
         else {
             return defaultValue
         }
-
+        
         let experiment = shouldExpose
             ? client.getExperiment(experimentName)
             : client.getExperimentWithExposureLoggingDisabled(experimentName)
         return experiment.getValue(forKey: paramName, defaultValue: defaultValue)
     }
-
+    
+    
     fileprivate func getMappedLayerValue<T: StatsigDynamicConfigValue>(
         _ client: StatsigClient,
         _ param: [String: Any],
@@ -182,5 +186,5 @@ public struct ParameterStore {
             : client.getLayerWithExposureLoggingDisabled(layerName)
         return layer.getValue(forKey: paramName, defaultValue: defaultValue)
     }
-
+    
 }

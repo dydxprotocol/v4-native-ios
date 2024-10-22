@@ -2,7 +2,7 @@ import Foundation
 
 import CommonCrypto
 
-private let MaxCachedUsers = 10
+fileprivate let MaxCachedUsers = 10
 
 public struct StatsigOverrides {
     public var gates: [String: Bool]
@@ -14,6 +14,31 @@ public struct StatsigOverrides {
     }
 }
 
+public struct BootstrapMetadata {
+    var generatorSDKInfo: [String: String]?
+    var lcut: Int?
+    var user: [String: Any]?
+    
+    func toDictionary() -> [String: Any] {
+        var dict = [String: Any]()
+
+        if let generatorSDKInfo = generatorSDKInfo {
+            dict["generatorSDKInfo"] = generatorSDKInfo
+        }
+
+        if let lcut = lcut {
+            dict["lcut"] = lcut
+        }
+
+        if let user = user {
+            dict["user"] = user
+        }
+
+        return dict
+    }
+}
+
+
 struct StatsigValuesCache {
     var cacheByID: [String: [String: Any]]
     var userCacheKey: UserCacheKey
@@ -21,15 +46,16 @@ struct StatsigValuesCache {
     var stickyDeviceExperiments: [String: [String: Any]]
     var source: EvaluationSource = .Loading
 
-    var lcut: UInt64?
-    var receivedValuesAt: UInt64?
-    var gates: [String: [String: Any]]?
-    var configs: [String: [String: Any]]?
-    var layers: [String: [String: Any]]?
-    var paramStores: [String: [String: Any]]?
-    var hashUsed: String?
+    var lcut: UInt64? = nil
+    var receivedValuesAt: UInt64? = nil
+    var gates: [String: [String: Any]]? = nil
+    var configs: [String: [String: Any]]? = nil
+    var layers: [String: [String: Any]]? = nil
+    var paramStores: [String: [String: Any]]? = nil
+    var hashUsed: String? = nil
     var sdkKey: String
     var options: StatsigOptions
+    var bootstrapMetadata: BootstrapMetadata? = nil
 
     var userCache: [String: Any] {
         didSet {
@@ -40,6 +66,7 @@ struct StatsigValuesCache {
             layers = userCache[InternalStore.layerConfigsKey] as? [String: [String: Any]]
             paramStores = userCache[InternalStore.paramStoresKey] as? [String: [String: Any]]
             hashUsed = userCache[InternalStore.hashUsedKey] as? String
+            bootstrapMetadata = userCache[InternalStore.bootstrapMetadata] as? BootstrapMetadata
         }
     }
 
@@ -63,7 +90,7 @@ struct StatsigValuesCache {
             return createUnfoundGate(gateName)
         }
 
-        if let gateObj = gates[gateName] ?? gates[gateName.hashSpecName(hashUsed)] {
+        if let gateObj = gates[gateName] ?? gates[gateName.hashSpecName(hashUsed)]{
             return FeatureGate(
                 name: gateName,
                 gateObj: gateObj,
@@ -102,7 +129,7 @@ struct StatsigValuesCache {
             return Layer(
                 client: client,
                 name: layerName,
-                configObj: configObj,
+                configObj: configObj, 
                 evalDetails: getEvaluationDetails(.Recognized)
             )
         }
@@ -110,7 +137,7 @@ struct StatsigValuesCache {
         print("[Statsig]: The layer with name \(layerName) does not exist. Returning an empty Layer.")
         return createUnfoundLayer(client, layerName)
     }
-
+    
     func getParamStore(_ client: StatsigClient?, _ storeName: String) -> ParameterStore {
         guard let stores = paramStores else {
             print("[Statsig]: Failed to get parameter store with name \(storeName). Returning an empty ParameterStore.")
@@ -151,16 +178,20 @@ struct StatsigValuesCache {
     }
 
     func getLastUpdatedTime(user: StatsigUser) -> UInt64 {
-        if userCache[InternalStore.userHashKey] as? String == user.getFullUserHash() {
+        if (userCache[InternalStore.userHashKey] as? String == user.getFullUserHash()) {
             let cachedValue = userCache[InternalStore.lcutKey]
             return cachedValue as? UInt64 ?? 0
         }
 
         return 0
     }
+    
+    func getBootstrapMetadata() -> BootstrapMetadata? {
+        return userCache[InternalStore.bootstrapMetadata] as? BootstrapMetadata
+    }
 
     func getPreviousDerivedFields(user: StatsigUser) -> [String: String] {
-        if userCache[InternalStore.userHashKey] as? String == user.getFullUserHash() {
+        if (userCache[InternalStore.userHashKey] as? String == user.getFullUserHash()) {
             return userCache[InternalStore.derivedFieldsKey] as? [String: String] ?? [:]
         }
 
@@ -189,7 +220,7 @@ struct StatsigValuesCache {
             cache[InternalStore.derivedFieldsKey] = values[InternalStore.derivedFieldsKey]
         }
 
-        if userCacheKey.v2 == cacheKey.v2 {
+        if (userCacheKey.v2 == cacheKey.v2) {
             // Now the values we serve came from network request
             source = hasUpdates ? .Network : .NetworkNotModified
             userCache = cache
@@ -200,12 +231,12 @@ struct StatsigValuesCache {
     }
 
     mutating func runCacheEviction() {
-        if cacheByID.count <= MaxCachedUsers {
+        if (cacheByID.count <= MaxCachedUsers) {
             return
         }
 
         var oldestTime = UInt64.max
-        var oldestEntryKey: String?
+        var oldestEntryKey: String? = nil
         for (key, value) in cacheByID {
             let evalTime = Time.parse(value[InternalStore.evalTimeKey])
             if evalTime < oldestTime {
@@ -248,7 +279,7 @@ struct StatsigValuesCache {
             InternalStore.gatesKey: [:],
             InternalStore.configsKey: [:],
             InternalStore.stickyExpKey: [:],
-            "time": 0
+            "time": 0,
         ]
     }
 
@@ -269,10 +300,13 @@ struct StatsigValuesCache {
         if let bootstrapValues = bootstrapValues {
             cacheByID[userCacheKey.v2] = bootstrapValues
             userCache = bootstrapValues
+            let bootstrapMetadata = extractBootstrapMetadata(from: bootstrapValues)
+            userCache[InternalStore.bootstrapMetadata] = bootstrapMetadata
             receivedValuesAt = Time.now()
             source = BootstrapValidator.isValid(user, bootstrapValues)
-            ? .Bootstrap
-            : .InvalidBootstrap
+                ? .Bootstrap
+                : .InvalidBootstrap
+            
             return
         }
 
@@ -285,6 +319,24 @@ struct StatsigValuesCache {
         }
 
         userCache = cachedValues
+    }
+    
+    private func extractBootstrapMetadata(from bootstrapValues: [String: Any]) -> BootstrapMetadata {
+        var bootstrapMetadata = BootstrapMetadata()
+        
+        if let generatorSDKInfo = bootstrapValues["sdkInfo"] as? [String: String] {
+            bootstrapMetadata.generatorSDKInfo = generatorSDKInfo
+        }
+        
+        if let userMetadata = bootstrapValues["user"] as? [String: Any] {
+            bootstrapMetadata.user = userMetadata
+        }
+        
+        if let lcut = bootstrapValues["time"] as? Int {
+            bootstrapMetadata.lcut = lcut
+        }
+        
+        return bootstrapMetadata
     }
 
     private static func loadDictMigratingIfRequired(forKey key: String) -> [String: [String: Any]] {
@@ -331,7 +383,7 @@ struct StatsigValuesCache {
             cacheByID.removeValue(forKey: userCacheKey.v1)
         }
 
-        if currCache == nil && oldCache != nil {
+        if (currCache == nil && oldCache != nil) {
             cacheByID[userCacheKey.v2] = oldCache
         }
     }
@@ -359,7 +411,7 @@ struct StatsigValuesCache {
             evalDetails: getEvaluationDetails(.Unrecognized)
         )
     }
-
+    
     private func createUnfoundParamStore(_ client: StatsigClient?, _ name: String) -> ParameterStore {
         ParameterStore(name: name, evaluationDetails: getEvaluationDetails(.Unrecognized))
     }
@@ -386,6 +438,7 @@ class InternalStore {
     static let userHashKey = "user_hash"
     static let hashUsedKey = "hash_used"
     static let derivedFieldsKey = "derived_fields"
+    static let bootstrapMetadata = "bootstrap_metadata"
 
     var cache: StatsigValuesCache
     var localOverrides: [String: Any] = InternalStore.getEmptyOverrides()
@@ -397,6 +450,12 @@ class InternalStore {
         localOverrides = StatsigUserDefaults.defaults.dictionarySafe(forKey: InternalStore.localOverridesKey)
         ?? InternalStore.getEmptyOverrides()
         Diagnostics.mark?.initialize.readCache.end(success: true)
+    }
+    
+    func getBootstrapMetadata() -> BootstrapMetadata? {
+        storeQueue.sync {
+            return cache.getBootstrapMetadata()
+        }
     }
 
     func getLastUpdateTime(user: StatsigUser) -> UInt64 {
@@ -483,7 +542,7 @@ class InternalStore {
                 )
             })
     }
-
+    
     func getParamStore(client: StatsigClient?, forName storeName: String) -> ParameterStore {
         storeQueue.sync {
             return cache.getParamStore(client, storeName)
@@ -601,7 +660,7 @@ class InternalStore {
         isLayer: Bool,
         factory: (_ name: String, _ data: [String: Any]) -> T) -> T {
             return storeQueue.sync {
-                if !keepDeviceValue {
+                if (!keepDeviceValue) {
                     return latestValue
                 }
 
@@ -612,18 +671,19 @@ class InternalStore {
                 }
 
                 // Get the latest config value. Layers require a lookup by allocated_experiment_name.
-                var latestExperimentValue: ConfigProtocol?
+                var latestExperimentValue: ConfigProtocol? = nil
                 if isLayer {
                     latestExperimentValue = cache.getConfig(stickyValue["allocated_experiment_name"] as? String ?? "")
                 } else {
                     latestExperimentValue = latestValue
                 }
 
-                if latestExperimentValue?.isExperimentActive == true {
+
+                if (latestExperimentValue?.isExperimentActive == true) {
                     return factory(name, stickyValue)
                 }
 
-                if latestValue.isExperimentActive == true {
+                if (latestValue.isExperimentActive == true) {
                     saveStickyExperimentIfNeededThreaded(name, latestValue)
                 } else {
                     removeStickyExperimentThreaded(name)
@@ -695,3 +755,4 @@ extension Dictionary {
         }
     }
 }
+

@@ -43,7 +43,7 @@ public struct StatsigUser {
      Any value you wish to use in evaluation, but not have logged with events can be stored in this field.
      */
     public let privateAttributes: [String: StatsigUserCustomTypeConvertible]?
-
+    
     /**
      Controls whether non-SDK-type SDK version metadata should be excluded or included.
      Setting this option to `true` will exclude metadata related to non-SDK-type SDK versions. By default, this option is set to `false`, meaning all metadata is included.
@@ -69,7 +69,8 @@ public struct StatsigUser {
                 custom: [String: StatsigUserCustomTypeConvertible]? = nil,
                 privateAttributes: [String: StatsigUserCustomTypeConvertible]? = nil,
                 optOutNonSdkMetadata: Bool? = false,
-                customIDs: [String: String]? = nil) {
+                customIDs: [String: String]? = nil)
+    {
         self.userID = userID
         self.email = email
         self.ip = ip
@@ -96,8 +97,8 @@ public struct StatsigUser {
             }
             self.privateAttributes = nil
         }
-
-        if self.optOutNonSdkMetadata ?? false {
+        
+        if (self.optOutNonSdkMetadata ?? false) {
             self.deviceEnvironment = DeviceEnvironment.getSDKMetadata()
         } else {
             self.deviceEnvironment = DeviceEnvironment.get()
@@ -105,7 +106,7 @@ public struct StatsigUser {
     }
 
     mutating func setStableID(_ overrideStableID: String) {
-        if self.optOutNonSdkMetadata ?? false {
+        if (self.optOutNonSdkMetadata ?? false) {
             self.deviceEnvironment = DeviceEnvironment.getSDKMetadata(overrideStableID)
         } else {
             self.deviceEnvironment = DeviceEnvironment.get(overrideStableID)
@@ -138,7 +139,7 @@ public struct StatsigUser {
     }
 }
 
-private func getSortedPairsString(_ dictionary: [String: Any?]) -> String {
+fileprivate func getSortedPairsString(_ dictionary: [String: Any?]) -> String {
     let sortedPairs = dictionary.sorted { $0.key < $1.key }
     var sortedResult = [String]()
 

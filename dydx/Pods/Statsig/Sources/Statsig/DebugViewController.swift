@@ -14,6 +14,7 @@ class DebugViewController: UIViewController, WKNavigationDelegate, WKScriptMessa
     private var isReloadRequested: Bool = false
     private var callback: DebuggerCallback?
 
+
     static func show(_ sdkKey: String, _ state: [String: Any?], _ callback: DebuggerCallback? = nil) {
         guard JSONSerialization.isValidJSONObject(state) else {
             print("[Statsig] DebugView received Invalid state")
@@ -69,6 +70,8 @@ class DebugViewController: UIViewController, WKNavigationDelegate, WKScriptMessa
             let config = WKWebViewConfiguration()
             let userContentController = WKUserContentController()
 
+
+
             let script = WKUserScript(source: "window.__StatsigClientState = \(json)",
                                       injectionTime: .atDocumentStart,
                                       forMainFrameOnly: false)
@@ -96,7 +99,7 @@ class DebugViewController: UIViewController, WKNavigationDelegate, WKScriptMessa
     override func viewWillDisappear(_ animated: Bool) {
         callback?(isReloadRequested)
     }
-
+    
     @objc func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
     }
@@ -105,11 +108,11 @@ class DebugViewController: UIViewController, WKNavigationDelegate, WKScriptMessa
         _ userContentController: WKUserContentController,
         didReceive message: WKScriptMessage
     ) {
-        if message.name != messageHandlerName {
+        if (message.name != messageHandlerName) {
             return
         }
 
-        if message.body as? String == "RELOAD_REQUIRED" {
+        if (message.body as? String == "RELOAD_REQUIRED") {
             isReloadRequested = true
         }
     }

@@ -1,6 +1,6 @@
 // This file is derived from swift/stdlib/public/Darwin/Foundation/JSONEncoder.swift
 
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 //
 // This source file is part of the Swift.org open source project
 //
@@ -10,7 +10,7 @@
 // See https://swift.org/LICENSE.txt for license information
 // See https://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
 //
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 
 import Foundation
 
@@ -52,13 +52,14 @@ extension DecodingError {
       return "a string/data"
     } else if value is [Any] {
       return "an array"
-    } else if value is [String: Any] {
+    } else if value is [String : Any] {
       return "a dictionary"
     } else {
       return "\(type(of: value))"
     }
   }
 }
+
 
 /// A marker protocol used to determine whether a value is a `String`-keyed `Dictionary`
 /// containing `Encodable` values (in which case it should be exempt from key conversion strategies).
@@ -70,10 +71,10 @@ extension DecodingError {
 #if arch(i386) || arch(arm)
 internal protocol _JSONStringDictionaryEncodableMarker { }
 #else
-private protocol _JSONStringDictionaryEncodableMarker { }
+fileprivate protocol _JSONStringDictionaryEncodableMarker { }
 #endif
 
-extension Dictionary: _JSONStringDictionaryEncodableMarker where Key == String, Value: Encodable { }
+extension Dictionary : _JSONStringDictionaryEncodableMarker where Key == String, Value: Encodable { }
 
 /// A marker protocol used to determine whether a value is a `String`-keyed `Dictionary`
 /// containing `Decodable` values (in which case it should be exempt from key conversion strategies).
@@ -87,18 +88,18 @@ internal protocol _JSONStringDictionaryDecodableMarker {
   static var elementType: Decodable.Type { get }
 }
 #else
-private protocol _JSONStringDictionaryDecodableMarker {
+fileprivate protocol _JSONStringDictionaryDecodableMarker {
   static var elementType: Decodable.Type { get }
 }
 #endif
 
-extension Dictionary: _JSONStringDictionaryDecodableMarker where Key == String, Value: Decodable {
+extension Dictionary : _JSONStringDictionaryDecodableMarker where Key == String, Value: Decodable {
   static var elementType: Decodable.Type { return Value.self }
 }
 
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 // JSON Encoder
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 
 /// `JSONEncoder` facilitates the encoding of `Encodable` values into JSON.
 // NOTE: older overlays had Foundation.JSONEncoder as the ObjC name.
@@ -187,7 +188,7 @@ public class FirebaseDataEncoder {
     fileprivate static func _convertToSnakeCase(_ stringKey: String) -> String {
       guard !stringKey.isEmpty else { return stringKey }
 
-      var words: [Range<String.Index>] = []
+      var words : [Range<String.Index>] = []
       // The general idea of this algorithm is to split words on transition from lower to upper case, then on transition of >1 upper case characters to lowercase
       //
       // myProperty -> my_property
@@ -250,7 +251,7 @@ public class FirebaseDataEncoder {
   open var passthroughTypeResolver: StructureCodingPassthroughTypeResolver.Type = NoPassthroughTypes.self
 
   /// Contextual user-provided information for use during encoding.
-  open var userInfo: [CodingUserInfoKey: Any] = [:]
+  open var userInfo: [CodingUserInfoKey : Any] = [:]
 
   /// Options set on the top-level encoder to pass down the encoding hierarchy.
   fileprivate struct _Options {
@@ -259,7 +260,7 @@ public class FirebaseDataEncoder {
     let nonConformingFloatEncodingStrategy: NonConformingFloatEncodingStrategy
     let keyEncodingStrategy: KeyEncodingStrategy
     let passthroughTypeResolver: StructureCodingPassthroughTypeResolver.Type
-    let userInfo: [CodingUserInfoKey: Any]
+    let userInfo: [CodingUserInfoKey : Any]
   }
 
   /// The options set on the top-level encoder.
@@ -285,7 +286,7 @@ public class FirebaseDataEncoder {
   /// - returns: A new `Data` value containing the encoded JSON data.
   /// - throws: `EncodingError.invalidValue` if a non-conforming floating-point value is encountered during encoding, and the encoding strategy is `.throw`.
   /// - throws: An error if any value throws an error during encoding.
-  open func encode<T: Encodable>(_ value: T) throws -> Any {
+  open func encode<T : Encodable>(_ value: T) throws -> Any {
     let encoder = __JSONEncoder(options: self.options)
 
     guard let topLevel = try encoder.box_(value) else {
@@ -301,7 +302,7 @@ public class FirebaseDataEncoder {
 // NOTE: older overlays called this class _JSONEncoder.
 // The two must coexist without a conflicting ObjC class name, so it
 // was renamed. The old name must not be used in the new runtime.
-private class __JSONEncoder: Encoder {
+fileprivate class __JSONEncoder : Encoder {
   // MARK: Properties
 
   /// The encoder's storage.
@@ -314,7 +315,7 @@ private class __JSONEncoder: Encoder {
   public var codingPath: [CodingKey]
 
   /// Contextual user-provided information for use during encoding.
-  public var userInfo: [CodingUserInfoKey: Any] {
+  public var userInfo: [CodingUserInfoKey : Any] {
     return self.options.userInfo
   }
 
@@ -383,7 +384,7 @@ private class __JSONEncoder: Encoder {
 
 // MARK: - Encoding Storage and Containers
 
-private struct _JSONEncodingStorage {
+fileprivate struct _JSONEncodingStorage {
   // MARK: Properties
 
   /// The container stack.
@@ -425,7 +426,7 @@ private struct _JSONEncodingStorage {
 
 // MARK: - Encoding Containers
 
-private struct _JSONKeyedEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol {
+fileprivate struct _JSONKeyedEncodingContainer<K : CodingKey> : KeyedEncodingContainerProtocol {
   typealias Key = K
 
   // MARK: Properties
@@ -518,7 +519,7 @@ private struct _JSONKeyedEncodingContainer<K: CodingKey>: KeyedEncodingContainer
     self.container[_converted(key).stringValue] = try self.encoder.box(value)
   }
 
-  public mutating func encode<T: Encodable>(_ value: T, forKey key: Key) throws {
+  public mutating func encode<T : Encodable>(_ value: T, forKey key: Key) throws {
     if T.self is StructureCodingUncodedUnkeyed.Type { return }
     self.encoder.codingPath.append(key)
     defer { self.encoder.codingPath.removeLast() }
@@ -574,7 +575,7 @@ private struct _JSONKeyedEncodingContainer<K: CodingKey>: KeyedEncodingContainer
   }
 }
 
-private struct _JSONUnkeyedEncodingContainer: UnkeyedEncodingContainer {
+fileprivate struct _JSONUnkeyedEncodingContainer : UnkeyedEncodingContainer {
   // MARK: Properties
 
   /// A reference to the encoder we're writing to.
@@ -630,7 +631,7 @@ private struct _JSONUnkeyedEncodingContainer: UnkeyedEncodingContainer {
     self.container.add(try self.encoder.box(value))
   }
 
-  public mutating func encode<T: Encodable>(_ value: T) throws {
+  public mutating func encode<T : Encodable>(_ value: T) throws {
     self.encoder.codingPath.append(_JSONKey(index: self.count))
     defer { self.encoder.codingPath.removeLast() }
     self.container.add(try self.encoder.box(value))
@@ -661,7 +662,7 @@ private struct _JSONUnkeyedEncodingContainer: UnkeyedEncodingContainer {
   }
 }
 
-extension __JSONEncoder: SingleValueEncodingContainer {
+extension __JSONEncoder : SingleValueEncodingContainer {
   // MARK: - SingleValueEncodingContainer Methods
 
   fileprivate func assertCanEncodeNewValue() {
@@ -743,7 +744,7 @@ extension __JSONEncoder: SingleValueEncodingContainer {
     try self.storage.push(container: self.box(value))
   }
 
-  public func encode<T: Encodable>(_ value: T) throws {
+  public func encode<T : Encodable>(_ value: T) throws {
     assertCanEncodeNewValue()
     try self.storage.push(container: self.box(value))
   }
@@ -753,14 +754,14 @@ extension __JSONEncoder: SingleValueEncodingContainer {
 
 extension __JSONEncoder {
   /// Returns the given value boxed in a container appropriate for pushing onto the container stack.
-  fileprivate func box(_ value: Bool) -> NSObject { return NSNumber(value: value) }
-  fileprivate func box(_ value: Int) -> NSObject { return NSNumber(value: value) }
-  fileprivate func box(_ value: Int8) -> NSObject { return NSNumber(value: value) }
-  fileprivate func box(_ value: Int16) -> NSObject { return NSNumber(value: value) }
-  fileprivate func box(_ value: Int32) -> NSObject { return NSNumber(value: value) }
-  fileprivate func box(_ value: Int64) -> NSObject { return NSNumber(value: value) }
-  fileprivate func box(_ value: UInt) -> NSObject { return NSNumber(value: value) }
-  fileprivate func box(_ value: UInt8) -> NSObject { return NSNumber(value: value) }
+  fileprivate func box(_ value: Bool)   -> NSObject { return NSNumber(value: value) }
+  fileprivate func box(_ value: Int)    -> NSObject { return NSNumber(value: value) }
+  fileprivate func box(_ value: Int8)   -> NSObject { return NSNumber(value: value) }
+  fileprivate func box(_ value: Int16)  -> NSObject { return NSNumber(value: value) }
+  fileprivate func box(_ value: Int32)  -> NSObject { return NSNumber(value: value) }
+  fileprivate func box(_ value: Int64)  -> NSObject { return NSNumber(value: value) }
+  fileprivate func box(_ value: UInt)   -> NSObject { return NSNumber(value: value) }
+  fileprivate func box(_ value: UInt8)  -> NSObject { return NSNumber(value: value) }
   fileprivate func box(_ value: UInt16) -> NSObject { return NSNumber(value: value) }
   fileprivate func box(_ value: UInt32) -> NSObject { return NSNumber(value: value) }
   fileprivate func box(_ value: UInt64) -> NSObject { return NSNumber(value: value) }
@@ -833,7 +834,7 @@ extension __JSONEncoder {
       } catch {
         // If the value pushed a container before throwing, pop it back off to restore state.
         if self.storage.count > depth {
-          _ = self.storage.popContainer()
+          let _ = self.storage.popContainer()
         }
 
         throw error
@@ -860,7 +861,7 @@ extension __JSONEncoder {
         // If the value pushed a container before throwing, pop it back off to restore state.
         // This shouldn't be possible for Data (which encodes as an array of bytes), but it can't hurt to catch a failure.
         if self.storage.count > depth {
-          _ = self.storage.popContainer()
+          let _ = self.storage.popContainer()
         }
 
         throw error
@@ -881,7 +882,7 @@ extension __JSONEncoder {
       } catch {
         // If the value pushed a container before throwing, pop it back off to restore state.
         if self.storage.count > depth {
-          _ = self.storage.popContainer()
+          let _ = self.storage.popContainer()
         }
 
         throw error
@@ -897,7 +898,7 @@ extension __JSONEncoder {
     }
   }
 
-  fileprivate func box(_ dict: [String: Encodable]) throws -> NSObject? {
+  fileprivate func box(_ dict: [String : Encodable]) throws -> NSObject? {
     let depth = self.storage.count
     let result = self.storage.pushKeyedContainer()
     do {
@@ -909,7 +910,7 @@ extension __JSONEncoder {
     } catch {
       // If the value pushed a container before throwing, pop it back off to restore state.
       if self.storage.count > depth {
-        _ = self.storage.popContainer()
+        let _ = self.storage.popContainer()
       }
 
       throw error
@@ -945,7 +946,7 @@ extension __JSONEncoder {
       // JSONSerialization can natively handle NSDecimalNumber.
       return (value as! NSDecimalNumber)
     } else if value is _JSONStringDictionaryEncodableMarker {
-      return try self.box(value as! [String: Encodable])
+      return try self.box(value as! [String : Encodable])
     } else if let object = value as? NSObject, self.options.passthroughTypeResolver.isPassthroughType(value) {
       return object
     }
@@ -957,7 +958,7 @@ extension __JSONEncoder {
     } catch {
       // If the value pushed a container before throwing, pop it back off to restore state.
       if self.storage.count > depth {
-        _ = self.storage.popContainer()
+        let _ = self.storage.popContainer()
       }
 
       throw error
@@ -979,7 +980,7 @@ extension __JSONEncoder {
 // NOTE: older overlays called this class _JSONReferencingEncoder.
 // The two must coexist without a conflicting ObjC class name, so it
 // was renamed. The old name must not be used in the new runtime.
-private class __JSONReferencingEncoder: __JSONEncoder {
+fileprivate class __JSONReferencingEncoder : __JSONEncoder {
   // MARK: Reference types.
 
   /// The type of container we're referencing.
@@ -1050,9 +1051,9 @@ private class __JSONReferencingEncoder: __JSONEncoder {
   }
 }
 
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 // JSON Decoder
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 
 /// `JSONDecoder` facilitates the decoding of JSON into semantic `Decodable` types.
 // NOTE: older overlays had Foundation.JSONDecoder as the ObjC name.
@@ -1150,7 +1151,7 @@ public class FirebaseDataDecoder {
       let trailingUnderscoreRange = stringKey.index(after: lastNonUnderscore)..<stringKey.endIndex
 
       let components = stringKey[keyRange].split(separator: "_")
-      let joinedString: String
+      let joinedString : String
       if components.count == 1 {
         // No underscores in key, leave the word as is - maybe already camel cased
         joinedString = String(stringKey[keyRange])
@@ -1159,13 +1160,13 @@ public class FirebaseDataDecoder {
       }
 
       // Do a cheap isEmpty check before creating and appending potentially empty strings
-      let result: String
-      if leadingUnderscoreRange.isEmpty && trailingUnderscoreRange.isEmpty {
+      let result : String
+      if (leadingUnderscoreRange.isEmpty && trailingUnderscoreRange.isEmpty) {
         result = joinedString
-      } else if !leadingUnderscoreRange.isEmpty && !trailingUnderscoreRange.isEmpty {
+      } else if (!leadingUnderscoreRange.isEmpty && !trailingUnderscoreRange.isEmpty) {
         // Both leading and trailing underscores
         result = String(stringKey[leadingUnderscoreRange]) + joinedString + String(stringKey[trailingUnderscoreRange])
-      } else if !leadingUnderscoreRange.isEmpty {
+      } else if (!leadingUnderscoreRange.isEmpty) {
         // Just leading
         result = String(stringKey[leadingUnderscoreRange]) + joinedString
       } else {
@@ -1192,7 +1193,7 @@ public class FirebaseDataDecoder {
   open var passthroughTypeResolver: StructureCodingPassthroughTypeResolver.Type = NoPassthroughTypes.self
 
   /// Contextual user-provided information for use during decoding.
-  open var userInfo: [CodingUserInfoKey: Any] = [:]
+  open var userInfo: [CodingUserInfoKey : Any] = [:]
 
   /// Options set on the top-level encoder to pass down the decoding hierarchy.
   fileprivate struct _Options {
@@ -1201,7 +1202,7 @@ public class FirebaseDataDecoder {
     let nonConformingFloatDecodingStrategy: NonConformingFloatDecodingStrategy
     let keyDecodingStrategy: KeyDecodingStrategy
     let passthroughTypeResolver: StructureCodingPassthroughTypeResolver.Type
-    let userInfo: [CodingUserInfoKey: Any]
+    let userInfo: [CodingUserInfoKey : Any]
   }
 
   /// The options set on the top-level decoder.
@@ -1228,7 +1229,7 @@ public class FirebaseDataDecoder {
   /// - returns: A value of the requested type.
   /// - throws: `DecodingError.dataCorrupted` if values requested from the payload are corrupted, or if the given data is not valid JSON.
   /// - throws: An error if any value throws an error during decoding.
-  open func decode<T: Decodable>(_ type: T.Type, from structure: Any) throws -> T {
+  open func decode<T : Decodable>(_ type: T.Type, from structure: Any) throws -> T {
     let decoder = __JSONDecoder(referencing: structure, options: self.options)
     guard let value = try decoder.unbox(structure, as: type) else {
       throw Swift.DecodingError.valueNotFound(type, Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data did not contain a top-level value."))
@@ -1243,7 +1244,7 @@ public class FirebaseDataDecoder {
 // NOTE: older overlays called this class _JSONDecoder. The two must
 // coexist without a conflicting ObjC class name, so it was renamed.
 // The old name must not be used in the new runtime.
-private class __JSONDecoder: Decoder {
+fileprivate class __JSONDecoder : Decoder {
   // MARK: Properties
 
   /// The decoder's storage.
@@ -1256,7 +1257,7 @@ private class __JSONDecoder: Decoder {
   fileprivate(set) public var codingPath: [CodingKey]
 
   /// Contextual user-provided information for use during encoding.
-  public var userInfo: [CodingUserInfoKey: Any] {
+  public var userInfo: [CodingUserInfoKey : Any] {
     return self.options.userInfo
   }
 
@@ -1278,16 +1279,16 @@ private class __JSONDecoder: Decoder {
                                         DecodingError.Context(codingPath: self.codingPath,
                                                               debugDescription: "Cannot get keyed decoding container -- found null value instead."))
     }
-    var topContainer: [String: Any]
+    var topContainer : [String : Any]
     if let rcValue = self.storage.topContainer as? FirebaseRemoteConfigValueDecoding {
       guard let top = rcValue.dictionaryValue() else {
-        throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String: Any].self,
+        throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String : Any].self,
                                           reality: rcValue)
       }
       topContainer = top
     } else {
-      guard let top = self.storage.topContainer as? [String: Any] else {
-        throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String: Any].self, reality: self.storage.topContainer)
+      guard let top = self.storage.topContainer as? [String : Any] else {
+        throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String : Any].self, reality: self.storage.topContainer)
       }
       topContainer = top
     }
@@ -1324,7 +1325,7 @@ private class __JSONDecoder: Decoder {
 
 // MARK: - Decoding Storage
 
-private struct _JSONDecodingStorage {
+fileprivate struct _JSONDecodingStorage {
   // MARK: Properties
 
   /// The container stack.
@@ -1359,7 +1360,7 @@ private struct _JSONDecodingStorage {
 
 // MARK: Decoding Containers
 
-private struct _JSONKeyedDecodingContainer<K: CodingKey>: KeyedDecodingContainerProtocol {
+fileprivate struct _JSONKeyedDecodingContainer<K : CodingKey> : KeyedDecodingContainerProtocol {
   typealias Key = K
 
   // MARK: Properties
@@ -1368,7 +1369,7 @@ private struct _JSONKeyedDecodingContainer<K: CodingKey>: KeyedDecodingContainer
   private let decoder: __JSONDecoder
 
   /// A reference to the container we're reading from.
-  private let container: [String: Any]
+  private let container: [String : Any]
 
   /// The path of coding keys taken to get to this point in decoding.
   private(set) public var codingPath: [CodingKey]
@@ -1376,7 +1377,7 @@ private struct _JSONKeyedDecodingContainer<K: CodingKey>: KeyedDecodingContainer
   // MARK: - Initialization
 
   /// Initializes `self` by referencing the given decoder and container.
-  fileprivate init(referencing decoder: __JSONDecoder, wrapping container: [String: Any]) {
+  fileprivate init(referencing decoder: __JSONDecoder, wrapping container: [String : Any]) {
     self.decoder = decoder
     switch decoder.options.keyDecodingStrategy {
     case .useDefaultKeys:
@@ -1643,7 +1644,7 @@ private struct _JSONKeyedDecodingContainer<K: CodingKey>: KeyedDecodingContainer
     return value
   }
 
-  public func decode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
+  public func decode<T : Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
     if type is StructureCodingUncodedUnkeyed.Type {
       // Note: not pushing and popping key to codingPath since the key is
       // not part of the decoded structure.
@@ -1673,8 +1674,8 @@ private struct _JSONKeyedDecodingContainer<K: CodingKey>: KeyedDecodingContainer
                                                             debugDescription: "Cannot get \(KeyedDecodingContainer<NestedKey>.self) -- no value found for key \(_errorDescription(of: key))"))
     }
 
-    guard let dictionary = value as? [String: Any] else {
-      throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String: Any].self, reality: value)
+    guard let dictionary = value as? [String : Any] else {
+      throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String : Any].self, reality: value)
     }
 
     let container = _JSONKeyedDecodingContainer<NestedKey>(referencing: self.decoder, wrapping: dictionary)
@@ -1715,7 +1716,7 @@ private struct _JSONKeyedDecodingContainer<K: CodingKey>: KeyedDecodingContainer
   }
 }
 
-private struct _JSONUnkeyedDecodingContainer: UnkeyedDecodingContainer {
+fileprivate struct _JSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
   // MARK: Properties
 
   /// A reference to the decoder we're reading from.
@@ -1987,7 +1988,7 @@ private struct _JSONUnkeyedDecodingContainer: UnkeyedDecodingContainer {
     return decoded
   }
 
-  public mutating func decode<T: Decodable>(_ type: T.Type) throws -> T {
+  public mutating func decode<T : Decodable>(_ type: T.Type) throws -> T {
     guard !self.isAtEnd else {
       throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [_JSONKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
     }
@@ -2020,8 +2021,8 @@ private struct _JSONUnkeyedDecodingContainer: UnkeyedDecodingContainer {
                                                               debugDescription: "Cannot get keyed decoding container -- found null value instead."))
     }
 
-    guard let dictionary = value as? [String: Any] else {
-      throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String: Any].self, reality: value)
+    guard let dictionary = value as? [String : Any] else {
+      throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String : Any].self, reality: value)
     }
 
     self.currentIndex += 1
@@ -2070,7 +2071,7 @@ private struct _JSONUnkeyedDecodingContainer: UnkeyedDecodingContainer {
   }
 }
 
-extension __JSONDecoder: SingleValueDecodingContainer {
+extension __JSONDecoder : SingleValueDecodingContainer {
   // MARK: SingleValueDecodingContainer Methods
 
   private func expectNonNull<T>(_ type: T.Type) throws {
@@ -2153,7 +2154,7 @@ extension __JSONDecoder: SingleValueDecodingContainer {
     return try self.unbox(self.storage.topContainer, as: String.self)!
   }
 
-  public func decode<T: Decodable>(_ type: T.Type) throws -> T {
+  public func decode<T : Decodable>(_ type: T.Type) throws -> T {
     try expectNonNull(type)
     return try self.unbox(self.storage.topContainer, as: type)!
   }
@@ -2524,7 +2525,7 @@ extension __JSONDecoder {
       return dictionaryValue as? T
     }
 
-    var result = [String: Any]()
+    var result = [String : Any]()
     guard let dict = value as? NSDictionary else {
       throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
     }
@@ -2540,7 +2541,7 @@ extension __JSONDecoder {
     return result as? T
   }
 
-  fileprivate func unbox<T: Decodable>(_ value: Any, as type: T.Type) throws -> T? {
+  fileprivate func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? {
     return try unbox_(value, as: type) as? T
   }
 
@@ -2566,7 +2567,7 @@ extension __JSONDecoder {
     } else {
       self.storage.push(container: value)
       defer { self.storage.popContainer() }
-      if self.options.passthroughTypeResolver.isPassthroughType(value) && type(of: value) == _type {
+      if self.options.passthroughTypeResolver.isPassthroughType(value) && type(of: value) == _type  {
         return value
       }
       return try _type.init(from: self)
@@ -2574,11 +2575,11 @@ extension __JSONDecoder {
   }
 }
 
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 // Shared Key Types
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 
-private struct _JSONKey: CodingKey {
+fileprivate struct _JSONKey : CodingKey {
   public var stringValue: String
   public var intValue: Int?
 
@@ -2605,20 +2606,20 @@ private struct _JSONKey: CodingKey {
   fileprivate static let `super` = _JSONKey(stringValue: "super")!
 }
 
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 // Shared ISO8601 Date Formatter
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 
 // NOTE: This value is implicitly lazy and _must_ be lazy. We're compiled against the latest SDK (w/ ISO8601DateFormatter), but linked against whichever Foundation the user has. ISO8601DateFormatter might not exist, so we better not hit this code path on an older OS.
-private var _iso8601Formatter: ISO8601DateFormatter = {
+fileprivate var _iso8601Formatter: ISO8601DateFormatter = {
   let formatter = ISO8601DateFormatter()
   formatter.formatOptions = .withInternetDateTime
   return formatter
 }()
 
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 // Error Utilities
-// ===----------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
 
 extension EncodingError {
   /// Returns a `.invalidValue` error describing the given invalid floating-point value.
@@ -2627,7 +2628,7 @@ extension EncodingError {
   /// - parameter value: The value that was invalid to encode.
   /// - parameter path: The path of `CodingKey`s taken to encode this value.
   /// - returns: An `EncodingError` with the appropriate path and debug description.
-  fileprivate static func _invalidFloatingPointValue<T: FloatingPoint>(_ value: T, at codingPath: [CodingKey]) -> EncodingError {
+  fileprivate static func _invalidFloatingPointValue<T : FloatingPoint>(_ value: T, at codingPath: [CodingKey]) -> EncodingError {
     let valueDescription: String
     if value == T.infinity {
       valueDescription = "\(T.self).infinity"

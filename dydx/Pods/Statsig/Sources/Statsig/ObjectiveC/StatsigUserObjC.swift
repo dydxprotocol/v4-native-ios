@@ -24,7 +24,8 @@ public final class StatsigUserObjC: NSObject {
                       locale: String? = nil,
                       appVersion: String? = nil,
                       custom: [String: Any]? = nil,
-                      privateAttributes: [String: Any]? = nil) {
+                      privateAttributes: [String: Any]? = nil)
+    {
         self.init(userID: userID,
                   email: email,
                   ip: ip,
@@ -36,6 +37,7 @@ public final class StatsigUserObjC: NSObject {
                   customIDs: nil)
     }
 
+
     @objc public init(userID: String? = nil,
                       email: String? = nil,
                       ip: String? = nil,
@@ -44,7 +46,8 @@ public final class StatsigUserObjC: NSObject {
                       appVersion: String? = nil,
                       custom: [String: Any]? = nil,
                       privateAttributes: [String: Any]? = nil,
-                      customIDs: [String: String]? = nil) {
+                      customIDs: [String: String]? = nil)
+    {
         var filteredCustom = [String: StatsigUserCustomTypeConvertible]()
         if let custom = custom {
             custom.forEach { key, value in

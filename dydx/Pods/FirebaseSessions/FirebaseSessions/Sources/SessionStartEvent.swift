@@ -92,7 +92,7 @@ class SessionStartEvent: NSObject, GDTCOREventDataObject {
       proto.session_data.session_id,
       proto.session_data.firebase_installation_id,
       proto.session_data.firebase_authentication_token,
-      proto.session_data.first_session_id
+      proto.session_data.first_session_id,
     ]
     for pointer in garbage {
       nanopb_free(pointer)
