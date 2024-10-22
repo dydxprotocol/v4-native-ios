@@ -64,8 +64,6 @@ private struct dydxVaultView: View {
                     }
                 }
             }
-            buttonStack
-                .padding(.bottom, 32)
         }
         .frame(maxWidth: .infinity)
         .themeColor(background: .layer2)
@@ -83,7 +81,6 @@ private struct dydxVaultView: View {
             titleImage
             titleText
             Spacer()
-            learnMore
         }
         .padding(.horizontal, 16)
     }
@@ -118,11 +115,17 @@ private struct dydxVaultView: View {
 
     // MARK: - Section 1 - PNL
     private var vaultPnlRow: some View {
-        HStack(spacing: 15) {
-            vaultBalanceView
-            pnlView
+        VStack(spacing: 14) {
+            HStack(spacing: 16) {
+                vaultBalanceView
+                pnlView
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            HStack(spacing: 16) {
+                withdrawButton
+                depositButton
+            }
         }
-        .fixedSize(horizontal: false, vertical: true)
         .padding(.horizontal, 16)
     }
 
@@ -265,10 +268,17 @@ private struct dydxVaultView: View {
     // MARK: Floating Buttons
     @ViewBuilder
     private var withdrawButton: some View {
-        let content = Text(localizerPathKey: "APP.GENERAL.WITHDRAW")
-            .themeFont(fontType: .plus, fontSize: .medium)
-            .themeColor(foreground: viewModel.withdrawAction == nil ? .textTertiary : .textPrimary)
-            .wrappedViewModel
+        let textColor: ThemeColor.SemanticColor = viewModel.withdrawAction == nil ? .textTertiary : .textPrimary
+        let content = HStack(spacing: 8) {
+            PlatformIconViewModel(type: .asset(name: "icon_transfer_withdrawal", bundle: .dydxView),
+                                  size: .init(width: 20, height: 20),
+                                  templateColor: textColor)
+                .createView()
+            Text(localizerPathKey: "APP.GENERAL.WITHDRAW")
+                .themeFont(fontType: .plus, fontSize: .medium)
+                .themeColor(foreground: textColor)
+        }
+        .wrappedViewModel
 
         PlatformButtonViewModel(content: content,
                                 type: .defaultType(),
@@ -279,23 +289,22 @@ private struct dydxVaultView: View {
 
     @ViewBuilder
     private var depositButton: some View {
-        let content = Text(localizerPathKey: "APP.GENERAL.DEPOSIT")
-            .themeFont(fontType: .plus, fontSize: .medium)
-            .themeColor(foreground: viewModel.depositAction == nil ? .textTertiary : .textPrimary)
-            .wrappedViewModel
+        let textColor: ThemeColor.SemanticColor = viewModel.withdrawAction == nil ? .textTertiary : .textPrimary
+        let content = HStack(spacing: 8) {
+            PlatformIconViewModel(type: .asset(name: "icon_transfer_deposit", bundle: .dydxView),
+                                  size: .init(width: 20, height: 20),
+                                  templateColor: textColor)
+                .createView()
+            Text(localizerPathKey: "APP.GENERAL.DEPOSIT")
+                .themeFont(fontType: .plus, fontSize: .medium)
+                .themeColor(foreground: textColor)
+        }
+        .wrappedViewModel
 
         PlatformButtonViewModel(content: content,
                                 type: .defaultType(),
                                 state: viewModel.depositAction == nil ? .disabled : .primary,
                                 action: { viewModel.depositAction?() })
         .createView()
-    }
-
-    private var buttonStack: some View {
-        HStack(spacing: 12) {
-            withdrawButton
-            depositButton
-        }
-        .padding(.horizontal, 16)
     }
 }
