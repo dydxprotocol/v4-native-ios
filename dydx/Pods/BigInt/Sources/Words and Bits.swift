@@ -12,7 +12,8 @@ extension Array where Element == UInt {
         for i in 0 ..< self.count {
             if increment {
                 (self[i], increment) = (~self[i]).addingReportingOverflow(1)
-            } else {
+            }
+            else {
                 self[i] = ~self[i]
             }
         }
@@ -31,7 +32,8 @@ extension BigUInt {
             let (i, j) = index.quotientAndRemainder(dividingBy: Word.bitWidth)
             if newValue {
                 self[i] |= 1 << j
-            } else {
+            }
+            else {
                 self[i] &= ~(1 << j)
             }
         }
@@ -104,7 +106,8 @@ extension BigUInt {
         let uc = words.underestimatedCount
         if uc > 2 {
             self.init(words: Array(words))
-        } else {
+        }
+        else {
             var it = words.makeIterator()
             guard let w0 = it.next() else {
                 self.init()
@@ -124,7 +127,8 @@ extension BigUInt {
                     words.append(word)
                 }
                 self.init(words: words)
-            } else {
+            }
+            else {
                 self.init(low: w0, high: w1)
             }
         }
@@ -189,7 +193,8 @@ extension BigInt {
         var words = Array(words)
         if (words.last ?? 0) >> (Word.bitWidth - 1) == 0 {
             self.init(sign: .plus, magnitude: BigUInt(words: words))
-        } else {
+        }
+        else {
             words.twosComplement()
             self.init(sign: .minus, magnitude: BigUInt(words: words))
         }

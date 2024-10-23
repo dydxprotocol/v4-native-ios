@@ -70,7 +70,7 @@ struct PopoverModifier: ViewModifier {
                 }
 
                 /// Detect a state change in `$present`.
-                .onValueChange(of: present) { _, newValue in
+                .onValueChange(of: present) { oldValue, newValue in
 
                     /// Make sure there is a window first.
                     guard let window = window else {

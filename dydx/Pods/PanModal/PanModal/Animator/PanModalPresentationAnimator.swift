@@ -73,7 +73,7 @@ public class PanModalPresentationAnimator: NSObject {
 
         // Calls viewWillAppear and viewWillDisappear
         fromVC.beginAppearanceTransition(false, animated: true)
-
+        
         // Presents the view in shortForm position, initially
         let yPos: CGFloat = presentable?.shortFormYPos ?? 0.0
 
@@ -111,7 +111,7 @@ public class PanModalPresentationAnimator: NSObject {
 
         // Calls viewWillAppear and viewWillDisappear
         toVC.beginAppearanceTransition(true, animated: true)
-
+        
         let presentable = panModalLayoutType(from: transitionContext)
         let panView: UIView = transitionContext.containerView.panContainerView ?? fromVC.view
 

@@ -193,7 +193,7 @@ public extension Collection {
         let fromCount = Int(count)
         // toCount is M, M is the number of to array
         let toCount = Int(to.count)
-        var traces = [Trace]()
+        var traces = Array<Trace>()
 
         let max = fromCount + toCount // this is arbitrary, maximum difference between from and to. N+M assures that this algorithm always finds from diff
 

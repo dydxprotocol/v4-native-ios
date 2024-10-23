@@ -6,6 +6,7 @@
 //  Copyright © 2016-2017 Károly Lőrentey.
 //
 
+
 // Little-endian to big-endian
 struct Units<Unit: FixedWidthInteger, Words: RandomAccessCollection>: RandomAccessCollection
 where Words.Element: FixedWidthInteger, Words.Index == Int {
@@ -22,7 +23,8 @@ where Words.Element: FixedWidthInteger, Words.Index == Int {
         let index = count - 1 - index
         if Unit.bitWidth == Word.bitWidth {
             return Unit(words[index])
-        } else if Unit.bitWidth > Word.bitWidth {
+        }
+        else if Unit.bitWidth > Word.bitWidth {
             let c = Unit.bitWidth / Word.bitWidth
             var unit: Unit = 0
             var j = 0
@@ -53,7 +55,8 @@ extension Array where Element: FixedWidthInteger {
             while let unit = try generator() {
                 self.append(Word(unit))
             }
-        } else if Unit.bitWidth > Word.bitWidth {
+        }
+        else if Unit.bitWidth > Word.bitWidth {
             let wordsPerUnit = Unit.bitWidth / Word.bitWidth
             if let count = count {
                 self.reserveCapacity(count * wordsPerUnit)
@@ -65,7 +68,8 @@ extension Array where Element: FixedWidthInteger {
                     shift -= Word.bitWidth
                 }
             }
-        } else {
+        }
+        else {
             let unitsPerWord = Word.bitWidth / Unit.bitWidth
             if let count = count {
                 self.reserveCapacity((count + unitsPerWord - 1) / unitsPerWord)
@@ -128,7 +132,8 @@ extension BigInt: Codable {
         let units = Units(of: UInt64.self, self.magnitude.words)
         if units.isEmpty {
             try container.encode(0 as UInt64)
-        } else {
+        }
+        else {
             try container.encode(contentsOf: units)
         }
     }

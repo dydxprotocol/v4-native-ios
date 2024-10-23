@@ -156,7 +156,8 @@ public extension Templates {
             model.present = present
             if
                 present,
-                let window = sourceView.window {
+                let window = sourceView.window
+            {
                 presentPopover()
                 popover?.present(in: window)
                 fadeLabel?(true)
