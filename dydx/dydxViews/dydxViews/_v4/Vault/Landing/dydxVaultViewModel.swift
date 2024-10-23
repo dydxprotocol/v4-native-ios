@@ -19,6 +19,7 @@ public class dydxVaultViewModel: PlatformViewModel {
     @Published public var vaultChart: dydxVaultChartViewModel?
     @Published public var positions: [String: dydxVaultPositionViewModel]?
     @Published public var cancelAction: (() -> Void)?
+    @Published public var operatorName: String?
     @Published public var learnMoreAction: (() -> Void)?
     @Published public var withdrawAction: (() -> Void)?
     @Published public var depositAction: (() -> Void)?
@@ -38,6 +39,7 @@ public class dydxVaultViewModel: PlatformViewModel {
 
 private struct dydxVaultView: View {
     @ObservedObject var viewModel: dydxVaultViewModel
+    @State private var showTooltip = false
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -85,6 +87,7 @@ private struct dydxVaultView: View {
             titleImage
             titleText
             Spacer()
+            infoButton
         }
         .padding(.horizontal, 16)
     }
@@ -106,15 +109,57 @@ private struct dydxVaultView: View {
     @ViewBuilder
     private var learnMore: some View {
         if let learnMoreAction = viewModel.learnMoreAction {
-            let image = Image("icon_external_link", bundle: .dydxView)
-            (Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.LEARN_MORE", params: nil) ?? "") + Text(" ") + Text(image))
-                .themeColor(foreground: .textSecondary)
+            let learnMoreText = DataLocalizer.localize(path: "APP.GENERAL.LEARN_MORE_ARROW", params: nil)
+            Text(learnMoreText)
+                .themeColor(foreground: .colorPurple)
                 .themeFont(fontType: .base, fontSize: .medium)
                 .padding(.trailing, 12)
                 .onTapGesture {
                     learnMoreAction()
                 }
         }
+    }
+
+    @ViewBuilder
+    private var infoTooltip: some View {
+        let infoText = DataLocalizer.localize(path: "APP.VAULTS.VAULT_DESCRIPTION", params: ["OPERATOR_NAME": viewModel.operatorName ?? "--"])
+        VStack(alignment: .leading, spacing: 12) {
+            Text(infoText)
+                .themeFont(fontType: .base, fontSize: .medium)
+                .themeColor(foreground: .textPrimary)
+            learnMore
+        }
+        .padding(.vertical, 12)
+        .padding(.horizontal, 16)
+        .themeColor(background: .layer5)
+        .borderAndClip(style: .cornerRadius(8), borderColor: .layer6, lineWidth: 1)
+        .frame(maxWidth: 300)
+        .shadow(radius: 2)
+        .environmentObject(ThemeSettings.shared)
+    }
+
+    @ViewBuilder
+    private var infoButton: some View {
+        PlatformIconViewModel(type: .asset(name: "icon_info", bundle: .dydxView),
+                              size: .init(width: 24, height: 24),
+                              templateColor: .textTertiary)
+        .createView()
+        .onTapGesture {
+            withAnimation {
+                showTooltip.toggle()
+            }
+        }
+        .popover(present: $showTooltip, attributes: {
+            $0.position = .absolute(
+                originAnchor: .bottom,
+                popoverAnchor: .top
+              )
+            $0.sourceFrameInset = .init(top: 0, left: 0, bottom: -16, right: 0)
+            $0.blocksBackgroundTouches = true
+            $0.onTapOutside = { self.showTooltip = false }
+        }, view: {
+            infoTooltip
+        })
     }
 
     // MARK: - Section 1 - PNL
@@ -207,7 +252,7 @@ private struct dydxVaultView: View {
     // MARK: - Section 4 - positions
     private var openPositionsHeader: some View {
         HStack(spacing: 8) {
-            Text(DataLocalizer.shared?.localize(path: "APP.TRADE.OPEN_POSITIONS", params: nil) ?? "")
+            Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.HOLDINGS", params: nil) ?? "")
                 .themeColor(foreground: .textSecondary)
                 .themeFont(fontType: .base, fontSize: .larger)
             Text("\(viewModel.positions?.count ?? 0)")

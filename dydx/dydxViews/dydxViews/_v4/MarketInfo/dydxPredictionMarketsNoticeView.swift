@@ -8,7 +8,6 @@
 import SwiftUI
 import PlatformUI
 import Utilities
-import Popovers
 
 public class dydxPredictionMarketsNoticeViewModel: PlatformViewModel {
     @Published public var hidePredictionMarketsNotice = false

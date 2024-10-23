@@ -45,6 +45,12 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
 
         viewModel = dydxVaultViewModel()
         viewModel?.vaultChart = dydxVaultChartViewModel()
+
+        viewModel?.operatorName = AbacusStateManager.shared.environment?.megavaultOperatorName
+        if let learnMoreUrlText = AbacusStateManager.shared.environment?.links?.vaultLearnMore,
+              let learnMoreUrl = URL(string: learnMoreUrlText) {
+            viewModel?.learnMoreAction = { Router.shared?.navigate(to: learnMoreUrl, completion: nil) }
+        }
     }
 
     override func start() {

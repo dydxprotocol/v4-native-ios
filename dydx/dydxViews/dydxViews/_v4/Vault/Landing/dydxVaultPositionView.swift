@@ -141,7 +141,7 @@ struct VaultPositionView: View {
         HStack(spacing: 8) {
             PlatformIconViewModel(type: viewModel.iconType)
                 .createView()
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(viewModel.displayId)
                     .themeFont(fontType: .base, fontSize: .small)
                     .themeColor(foreground: .textSecondary)
@@ -156,7 +156,7 @@ struct VaultPositionView: View {
     }
 
     var sizeSection: some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(viewModel.notionalValueText)
                 .themeFont(fontType: .base, fontSize: .small)
                 .themeColor(foreground: .textSecondary)
@@ -177,7 +177,7 @@ struct VaultPositionView: View {
 
     var pnlSection: some View {
         HStack(alignment: .center, spacing: Self.pnlSpacing) {
-            VStack(alignment: .trailing, spacing: 2) {
+            VStack(alignment: .trailing, spacing: 4) {
                 Text(viewModel.pnlAmountText)
                     .themeFont(fontType: .base, fontSize: .small)
                     .themeColor(foreground: viewModel.pnlColor)
