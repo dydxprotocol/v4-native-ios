@@ -143,13 +143,9 @@ public class dydxPortfolioOrderItemViewModel: PlatformViewModel {
 
                 Spacer()
 
-                HStack(spacing: 2) {
+                HStack(spacing: 4) {
                     sideText
                         .createView(parentStyle: parentStyle.themeFont(fontSize: .small))
-
-                    Text("@")
-                        .themeFont(fontSize: .small)
-                        .themeColor(foreground: .textTertiary)
 
                     Text(price ?? "")
                         .themeFont(fontType: .number, fontSize: .small)

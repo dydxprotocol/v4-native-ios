@@ -33,9 +33,9 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
         let attributedSideText = AttributedString(text: side.text, urlString: nil)
             .themeColor(foreground: side.color)
         let leverageText = dydxFormatter.shared.leverage(number: leverage) ?? "--"
-        let attributedLeverageText = AttributedString(text: "@ " + leverageText, urlString: nil)
+        let attributedLeverageText = AttributedString(text: leverageText, urlString: nil)
             .themeColor(foreground: .textTertiary)
-        return (attributedSideText + attributedLeverageText)
+        return (attributedSideText + " " + attributedLeverageText)
                 .themeFont(fontType: .base, fontSize: .smaller)
     }
 
@@ -130,6 +130,10 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
 
 struct VaultPositionView: View {
 
+    private static let verticalSpacing: CGFloat = 6
+    private static let minimumScaleFactor: CGFloat = 0.5
+    private static let lineLimit: Int = 1
+
     static let marketSectionWidth: CGFloat = 130
     static let interSectionPadding: CGFloat = 12
     static let sparklineWidth: CGFloat = 24
@@ -141,33 +145,33 @@ struct VaultPositionView: View {
         HStack(spacing: 8) {
             PlatformIconViewModel(type: viewModel.iconType)
                 .createView()
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: Self.verticalSpacing) {
                 Text(viewModel.displayId)
                     .themeFont(fontType: .base, fontSize: .small)
                     .themeColor(foreground: .textSecondary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
+                    .lineLimit(Self.lineLimit)
+                    .minimumScaleFactor(Self.minimumScaleFactor)
                 Text(viewModel.sideLeverageAttributedText)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
+                    .lineLimit(Self.lineLimit)
+                    .minimumScaleFactor(Self.minimumScaleFactor)
             }
             Spacer()
         }
     }
 
     var sizeSection: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: Self.verticalSpacing) {
             Text(viewModel.notionalValueText)
                 .themeFont(fontType: .base, fontSize: .small)
                 .themeColor(foreground: .textSecondary)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
+                .lineLimit(Self.lineLimit)
+                .minimumScaleFactor(Self.minimumScaleFactor)
             HStack(alignment: .top, spacing: 2) {
                 Text(viewModel.positionSizeText)
                     .themeFont(fontType: .base, fontSize: .smaller)
                     .themeColor(foreground: .textTertiary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
+                    .lineLimit(Self.lineLimit)
+                    .minimumScaleFactor(Self.minimumScaleFactor)
                 TokenTextViewModel(symbol: viewModel.displayId)
                     .createView(parentStyle: ThemeStyle.defaultStyle.themeFont(fontSize: .smallest))
             }
@@ -177,17 +181,17 @@ struct VaultPositionView: View {
 
     var pnlSection: some View {
         HStack(alignment: .center, spacing: Self.pnlSpacing) {
-            VStack(alignment: .trailing, spacing: 4) {
+            VStack(alignment: .trailing, spacing: Self.verticalSpacing) {
                 Text(viewModel.pnlAmountText)
                     .themeFont(fontType: .base, fontSize: .small)
                     .themeColor(foreground: viewModel.pnlColor)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
+                    .lineLimit(Self.lineLimit)
+                    .minimumScaleFactor(Self.minimumScaleFactor)
                 Text(viewModel.pnlPercentageText)
                     .themeFont(fontType: .base, fontSize: .smaller)
                     .themeColor(foreground: .textTertiary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
+                    .lineLimit(Self.lineLimit)
+                    .minimumScaleFactor(Self.minimumScaleFactor)
             }
             SparklineView(values: viewModel.sparklineValues ?? [])
                 .frame(width: Self.sparklineWidth, height: 24)

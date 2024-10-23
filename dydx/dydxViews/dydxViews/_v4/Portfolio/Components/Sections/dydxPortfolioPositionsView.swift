@@ -226,12 +226,9 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
             }
 
             Spacer(minLength: 8)
-            HStack(alignment: .top, spacing: 2) {
+            HStack(alignment: .top, spacing: 4) {
                 sideText
                     .createView(parentStyle: parentStyle.themeFont(fontSize: .smaller))
-                Text("@")
-                    .themeFont(fontSize: .smaller)
-                    .themeColor(foreground: .textTertiary)
 
                 Text(leverage ?? "")
                     .themeFont(fontType: .base, fontSize: .smaller)
