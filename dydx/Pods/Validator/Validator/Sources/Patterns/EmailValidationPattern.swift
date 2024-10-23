@@ -5,7 +5,7 @@ import Foundation
  https://github.com/adamwaite/Validator/issues/36
  */
 public enum EmailValidationPattern: ValidationPattern {
-
+    
     case simple
     case standard
 

@@ -48,11 +48,11 @@ public enum WebImagePhase {
 
 /// Data Binding Object, only properties in this object can support changes from user with @State and refresh
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-final class WebImageModel: ObservableObject {
+final class WebImageModel : ObservableObject {
     /// URL image
     @Published var url: URL?
     @Published var options: SDWebImageOptions = []
-    @Published var context: [SDWebImageContextOption: Any]?
+    @Published var context: [SDWebImageContextOption : Any]? = nil
 }
 
 /// Completion Handler Binding Object, supports dynamic @State changes
@@ -80,43 +80,43 @@ final class WebImageConfiguration: ObservableObject {
 
 /// A Image View type to load image from url. Supports static/animated image format.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public struct WebImage<Content>: View where Content: View {
+public struct WebImage<Content> : View where Content: View {
     var configurations: [(Image) -> Image] = []
-
+    
     var content: (WebImagePhase) -> Content
-
+    
     /// A Binding to control the animation. You can bind external logic to control the animation status.
     /// True to start animation, false to stop animation.
     @Binding public var isAnimating: Bool
-
+    
     /// A observed object to pass through the image model to manager
     @ObservedObject var imageModel: WebImageModel
-
+    
     /// A observed object to pass through the image handler to manager
     @ObservedObject var imageHandler = WebImageHandler()
-
+    
     /// A observed object to pass through the image configuration to player
     @ObservedObject var imageConfiguration = WebImageConfiguration()
-
-    @ObservedObject var indicatorStatus: IndicatorStatus
-
+    
+    @ObservedObject var indicatorStatus : IndicatorStatus
+    
     @StateObject var imagePlayer = ImagePlayer()
-
-    @StateObject var imageManager: ImageManager
-
+    
+    @StateObject var imageManager : ImageManager
+    
     /// Create a web image with url, placeholder, custom options and context. Optional can support animated image using Binding.
     /// - Parameter url: The image url
     /// - Parameter scale: The scale to use for the image. The default is 1. Set a different value when loading images designed for higher resolution displays. For example, set a value of 2 for an image that you would name with the @2x suffix if stored in a file on disk.
     /// - Parameter options: The options to use when downloading the image. See `SDWebImageOptions` for the possible values.
     /// - Parameter context: A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
     /// - Parameter isAnimating: The binding for animation control. The binding value should be `true` when initialized to setup the correct animated image class. If not, you must provide the `.animatedImageClass` explicitly. When the animation started, this binding can been used to start / stop the animation.
-    public init(url: URL?, scale: CGFloat = 1, options: SDWebImageOptions = [], context: [SDWebImageContextOption: Any]? = nil, isAnimating: Binding<Bool> = .constant(true)) where Content == Image {
+    public init(url: URL?, scale: CGFloat = 1, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true)) where Content == Image {
         self.init(url: url, options: options, context: context, isAnimating: isAnimating) { phase in
             phase.image ?? Image(platformImage: .empty)
         }
     }
 
-    public init<I, P>(url: URL?, scale: CGFloat = 1, options: SDWebImageOptions = [], context: [SDWebImageContextOption: Any]? = nil, isAnimating: Binding<Bool> = .constant(true), @ViewBuilder content: @escaping (Image) -> I, @ViewBuilder placeholder: @escaping () -> P) where Content == _ConditionalContent<I, P>, I: View, P: View {
+    public init<I, P>(url: URL?, scale: CGFloat = 1, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true), @ViewBuilder content: @escaping (Image) -> I, @ViewBuilder placeholder: @escaping () -> P) where Content == _ConditionalContent<I, P>, I: View, P: View {
         self.init(url: url, options: options, context: context, isAnimating: isAnimating) { phase in
             if let i = phase.image {
                 content(i)
@@ -126,7 +126,7 @@ public struct WebImage<Content>: View where Content: View {
         }
     }
 
-    public init(url: URL?, scale: CGFloat = 1, options: SDWebImageOptions = [], context: [SDWebImageContextOption: Any]? = nil, isAnimating: Binding<Bool> = .constant(true), transaction: Transaction = Transaction(), @ViewBuilder content: @escaping (WebImagePhase) -> Content) {
+    public init(url: URL?, scale: CGFloat = 1, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil, isAnimating: Binding<Bool> = .constant(true), transaction: Transaction = Transaction(), @ViewBuilder content: @escaping (WebImagePhase) -> Content) {
         self._isAnimating = isAnimating
         var context = context ?? [:]
         if context[.imageScaleFactor] == nil {
@@ -147,12 +147,12 @@ public struct WebImage<Content>: View where Content: View {
         imageManager.transaction = transaction
         _imageManager = StateObject(wrappedValue: imageManager)
         _indicatorStatus = ObservedObject(wrappedValue: imageManager.indicatorStatus)
-
+        
         self.content = { phase in
             content(phase)
         }
     }
-
+    
     public var body: some View {
         // Container
         return ZStack {
@@ -184,7 +184,7 @@ public struct WebImage<Content>: View where Content: View {
             }
         }
     }
-
+    
     /// Configure the platform image into the SwiftUI rendering image
     func configure(image: PlatformImage) -> some View {
         // Actual rendering SwiftUI image
@@ -228,17 +228,17 @@ public struct WebImage<Content>: View where Content: View {
             result = Image(uiImage: image)
         }
         #endif
-
+        
         // Should not use `EmptyView`, which does not respect to the container's frame modifier
         // Using a empty image instead for better compatible
         let i = configurations.reduce(result) { (previous, configuration) in
             configuration(previous)
         }
-
+    
         // Apply view builder
         return content(.success(i))
     }
-
+    
     /// Image Manager status
     func setupManager() {
         self.imageManager.successBlock = self.imageHandler.successBlock
@@ -255,12 +255,12 @@ public struct WebImage<Content>: View where Content: View {
             imageManager.indicatorStatus.progress = 0
         }
     }
-
+    
     /// Container level to resume animation when appear
     func appearAction() {
         self.imagePlayer.startPlaying()
     }
-
+    
     /// Container level to stop animation when disappear
     func disappearAction() {
         if self.imageConfiguration.pausable {
@@ -272,7 +272,7 @@ public struct WebImage<Content>: View where Content: View {
             self.imagePlayer.clearFrameBuffer()
         }
     }
-
+    
     /// Static Image Display
     func displayImage() -> some View {
         disappearAction()
@@ -282,7 +282,7 @@ public struct WebImage<Content>: View where Content: View {
             return configure(image: imageManager.image!)
         }
     }
-
+    
     /// Animated Image Support
     func setupPlayer() -> some View {
         let shouldResetPlayer: Bool
@@ -308,9 +308,9 @@ public struct WebImage<Content>: View where Content: View {
                     // Clear previous status
                     self.imagePlayer.stopPlaying()
                     self.imagePlayer.player = nil
-                    self.imagePlayer.currentFrame = nil
-                    self.imagePlayer.currentFrameIndex = 0
-                    self.imagePlayer.currentLoopCount = 0
+                    self.imagePlayer.currentFrame = nil;
+                    self.imagePlayer.currentFrameIndex = 0;
+                    self.imagePlayer.currentLoopCount = 0;
                 }
                 if let animatedImage = imageManager.image as? PlatformImage & SDAnimatedImageProvider {
                     self.imagePlayer.customLoopCount = self.imageConfiguration.customLoopCount
@@ -325,17 +325,17 @@ public struct WebImage<Content>: View where Content: View {
             }
         }
     }
-
+    
     /// Initial state management (update when imageModel.url changed)
     func setupInitialState() -> some View {
         self.setupManager()
-        if self.imageManager.error == nil {
+        if (self.imageManager.error == nil) {
             // Load remote image when first appear
             self.imageManager.load(url: imageModel.url, options: imageModel.options, context: imageModel.context)
         }
         return setupPlaceholder()
     }
-
+    
     /// Placeholder View Support
     func setupPlaceholder() -> some View {
         let result = content((imageManager.error != nil) ? .failure(imageManager.error!) : .empty)
@@ -353,28 +353,29 @@ extension WebImage {
         result.configurations.append(block)
         return result
     }
-
+    
     /// Configurate this view's image with the specified cap insets and options.
     /// - Parameter capInsets: The values to use for the cap insets.
     /// - Parameter resizingMode: The resizing mode
     public func resizable(
         capInsets: EdgeInsets = EdgeInsets(),
-        resizingMode: Image.ResizingMode = .stretch) -> WebImage {
+        resizingMode: Image.ResizingMode = .stretch) -> WebImage
+    {
         configure { $0.resizable(capInsets: capInsets, resizingMode: resizingMode) }
     }
-
+    
     /// Configurate this view's rendering mode.
     /// - Parameter renderingMode: The resizing mode
     public func renderingMode(_ renderingMode: Image.TemplateRenderingMode?) -> WebImage {
         configure { $0.renderingMode(renderingMode) }
     }
-
+    
     /// Configurate this view's image interpolation quality
     /// - Parameter interpolation: The interpolation quality
     public func interpolation(_ interpolation: Image.Interpolation) -> WebImage {
         configure { $0.interpolation(interpolation) }
     }
-
+    
     /// Configurate this view's image antialiasing
     /// - Parameter isAntialiased: Whether or not to allow antialiasing
     public func antialiased(_ isAntialiased: Bool) -> WebImage {
@@ -385,7 +386,7 @@ extension WebImage {
 // Completion Handler
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
-
+    
     /// Provide the action when image load fails.
     /// - Parameters:
     ///   - action: The action to perform. The first arg is the error during loading. If `action` is `nil`, the call has no effect.
@@ -394,7 +395,7 @@ extension WebImage {
         self.imageHandler.failureBlock = action
         return self
     }
-
+    
     /// Provide the action when image load successes.
     /// - Parameters:
     ///   - action: The action to perform. The first arg is the loaded image, the second arg is the loaded image data, the third arg is the cache type loaded from. If `action` is `nil`, the call has no effect.
@@ -403,7 +404,7 @@ extension WebImage {
         self.imageHandler.successBlock = action
         return self
     }
-
+    
     /// Provide the action when image load progress changes.
     /// - Parameters:
     ///   - action: The action to perform. The first arg is the received size, the second arg is the total size, all in bytes. If `action` is `nil`, the call has no effect.
@@ -423,7 +424,7 @@ extension WebImage {
         self.imageConfiguration.retryOnAppear = flag
         return self
     }
-
+    
     /// Control the behavior to cancel the pending loading when view become disappear again
     /// - Parameter flag: Whether or not to cancel the pending loading
     public func cancelOnDisappear(_ flag: Bool) -> WebImage {
@@ -435,16 +436,16 @@ extension WebImage {
 // Indicator
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
-
+    
     /// Associate a indicator when loading image with url
     /// - Parameter indicator: The indicator type, see `Indicator`
-    public func indicator<T>(_ indicator: Indicator<T>) -> some View where T: View {
+    public func indicator<T>(_ indicator: Indicator<T>) -> some View where T : View {
         return self.modifier(IndicatorViewModifier(status: indicatorStatus, indicator: indicator))
     }
-
+    
     /// Associate a indicator when loading image with url, convenient method with block
     /// - Parameter content: A view that describes the indicator.
-    public func indicator<T>(@ViewBuilder content: @escaping (_ isAnimating: Binding<Bool>, _ progress: Binding<Double>) -> T) -> some View where T: View {
+    public func indicator<T>(@ViewBuilder content: @escaping (_ isAnimating: Binding<Bool>, _ progress: Binding<Double>) -> T) -> some View where T : View {
         return indicator(Indicator(content: content))
     }
 }
@@ -452,7 +453,7 @@ extension WebImage {
 // Animated Image
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension WebImage {
-
+    
     /// Total loop count for animated image rendering. Defaults to nil.
     /// - Note: Pass nil to disable customization, use the image itself loop count (`animatedImageLoopCount`) instead
     /// - Parameter loopCount: The animation loop count
@@ -460,7 +461,7 @@ extension WebImage {
         self.imageConfiguration.customLoopCount = loopCount
         return self
     }
-
+    
     /// Provide a max buffer size by bytes. This is used to adjust frame buffer count and can be useful when the decoding cost is expensive (such as Animated WebP software decoding). Default is nil.
     ///
     /// `0` or nil means automatically adjust by calculating current memory usage.
@@ -471,7 +472,7 @@ extension WebImage {
         self.imageConfiguration.maxBufferSize = bufferSize
         return self
     }
-
+    
     /// The runLoopMode when animation is playing on. Defaults is `.common`
     ///  You can specify a runloop mode to let it rendering.
     /// - Note: This is useful for some cases, for example, always specify NSDefaultRunLoopMode, if you want to pause the animation when user scroll (for Mac user, drag the mouse or touchpad)
@@ -480,7 +481,7 @@ extension WebImage {
         self.imageConfiguration.runLoopMode = runLoopMode
         return self
     }
-
+    
     /// Whether or not to pause the animation (keep current frame), instead of stop the animation (frame index reset to 0). When `isAnimating` binding value changed to false. Defaults is true.
     /// - Note: For some of use case, you may want to reset the frame index to 0 when stop, but some other want to keep the current frame index.
     /// - Parameter pausable: Whether or not to pause the animation instead of stop the animation.
@@ -488,7 +489,7 @@ extension WebImage {
         self.imageConfiguration.pausable = pausable
         return self
     }
-
+    
     /// Whether or not to clear frame buffer cache when stopped. Defaults is false.
     /// Note: This is useful when you want to limit the memory usage during frequently visibility changes (such as image view inside a list view, then push and pop)
     /// - Parameter purgeable: Whether or not to clear frame buffer cache when stopped.
@@ -496,7 +497,7 @@ extension WebImage {
         self.imageConfiguration.purgeable = purgeable
         return self
     }
-
+    
     /// Control the animation playback rate. Default is 1.0.
     /// `1.0` means the normal speed.
     /// `0.0` means stopping the animation.
@@ -508,7 +509,7 @@ extension WebImage {
         self.imageConfiguration.playbackRate = playbackRate
         return self
     }
-
+    
     /// Control the animation playback mode. Default is .normal
     /// - Parameter playbackMode: The playback mode, including normal order, reverse order, bounce order and reversed bounce order.
     public func playbackMode(_ playbackMode: SDAnimatedImagePlaybackMode) -> WebImage {
@@ -519,7 +520,7 @@ extension WebImage {
 
 #if DEBUG
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-struct WebImage_Previews: PreviewProvider {
+struct WebImage_Previews : PreviewProvider {
     static var previews: some View {
         Group {
             WebImage(url: URL(string: "https://raw.githubusercontent.com/SDWebImage/SDWebImage/master/SDWebImage_logo.png"))

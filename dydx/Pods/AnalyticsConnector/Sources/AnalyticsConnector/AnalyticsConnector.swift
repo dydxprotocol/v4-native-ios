@@ -7,11 +7,11 @@
 
 import Foundation
 
-@objc public class AnalyticsConnector: NSObject {
-
+@objc public class AnalyticsConnector : NSObject {
+    
     private static let instancesLock: DispatchSemaphore = DispatchSemaphore(value: 1)
-    private static var instances: [String: AnalyticsConnector] = [:]
-
+    private static var instances: [String:AnalyticsConnector] = [:]
+    
     @objc public static func getInstance(_ instanceName: String) -> AnalyticsConnector {
         instancesLock.wait()
         defer { instancesLock.signal() }
@@ -25,10 +25,10 @@ import Foundation
             return instances[instanceName]!
         }
     }
-
+    
     @objc public let eventBridge: EventBridge
     @objc public let identityStore: IdentityStore
-
+    
     private init(eventBridge: EventBridge, identityStore: IdentityStore) {
         self.eventBridge = eventBridge
         self.identityStore = identityStore

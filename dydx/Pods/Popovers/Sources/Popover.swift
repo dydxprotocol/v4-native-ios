@@ -545,7 +545,8 @@ public extension Popover {
 
         if
             attributes.dismissal.mode.contains(.dragDown),
-            point.y >= windowBounds.height - windowBounds.height * attributes.dismissal.dragDismissalProximity {
+            point.y >= windowBounds.height - windowBounds.height * attributes.dismissal.dragDismissalProximity
+        {
             if attributes.dismissal.dragMovesPopoverOffScreen {
                 var newFrame = context.staticFrame
                 newFrame.origin.y = windowBounds.height
@@ -557,7 +558,8 @@ public extension Popover {
         }
         if
             attributes.dismissal.mode.contains(.dragUp),
-            point.y <= windowBounds.height * attributes.dismissal.dragDismissalProximity {
+            point.y <= windowBounds.height * attributes.dismissal.dragDismissalProximity
+        {
             if attributes.dismissal.dragMovesPopoverOffScreen {
                 var newFrame = context.staticFrame
                 newFrame.origin.y = -newFrame.height
