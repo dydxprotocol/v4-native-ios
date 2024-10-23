@@ -47,16 +47,17 @@ public final class Constraint {
         }
     }
     public var layoutConstraints: [LayoutConstraint]
-
+    
     public var isActive: Bool {
         set {
             if newValue {
                 activate()
-            } else {
+            }
+            else {
                 deactivate()
             }
         }
-
+        
         get {
             for layoutConstraint in self.layoutConstraints {
                 if layoutConstraint.isActive {
@@ -66,7 +67,7 @@ public final class Constraint {
             return false
         }
     }
-
+    
     // MARK: Initialization
 
     internal init(from: ConstraintItem,
@@ -214,12 +215,12 @@ public final class Constraint {
 
     // MARK: Public
 
-    @available(*, deprecated, renamed: "activate()")
+    @available(*, deprecated, renamed:"activate()")
     public func install() {
         self.activate()
     }
 
-    @available(*, deprecated, renamed: "deactivate()")
+    @available(*, deprecated, renamed:"deactivate()")
     public func uninstall() {
         self.deactivate()
     }
@@ -265,26 +266,26 @@ public final class Constraint {
         return self
     }
 
-    @available(*, deprecated, renamed: "update(offset:)")
-    public func updateOffset(amount: ConstraintOffsetTarget) { self.update(offset: amount) }
+    @available(*, deprecated, renamed:"update(offset:)")
+    public func updateOffset(amount: ConstraintOffsetTarget) -> Void { self.update(offset: amount) }
 
-    @available(*, deprecated, renamed: "update(inset:)")
-    public func updateInsets(amount: ConstraintInsetTarget) { self.update(inset: amount) }
+    @available(*, deprecated, renamed:"update(inset:)")
+    public func updateInsets(amount: ConstraintInsetTarget) -> Void { self.update(inset: amount) }
 
-    @available(*, deprecated, renamed: "update(priority:)")
-    public func updatePriority(amount: ConstraintPriorityTarget) { self.update(priority: amount) }
+    @available(*, deprecated, renamed:"update(priority:)")
+    public func updatePriority(amount: ConstraintPriorityTarget) -> Void { self.update(priority: amount) }
 
-    @available(*, deprecated, message: "Use update(priority: ConstraintPriorityTarget) instead.")
-    public func updatePriorityRequired() {}
+    @available(*, deprecated, message:"Use update(priority: ConstraintPriorityTarget) instead.")
+    public func updatePriorityRequired() -> Void {}
 
-    @available(*, deprecated, message: "Use update(priority: ConstraintPriorityTarget) instead.")
-    public func updatePriorityHigh() { fatalError("Must be implemented by Concrete subclass.") }
+    @available(*, deprecated, message:"Use update(priority: ConstraintPriorityTarget) instead.")
+    public func updatePriorityHigh() -> Void { fatalError("Must be implemented by Concrete subclass.") }
 
-    @available(*, deprecated, message: "Use update(priority: ConstraintPriorityTarget) instead.")
-    public func updatePriorityMedium() { fatalError("Must be implemented by Concrete subclass.") }
+    @available(*, deprecated, message:"Use update(priority: ConstraintPriorityTarget) instead.")
+    public func updatePriorityMedium() -> Void { fatalError("Must be implemented by Concrete subclass.") }
 
-    @available(*, deprecated, message: "Use update(priority: ConstraintPriorityTarget) instead.")
-    public func updatePriorityLow() { fatalError("Must be implemented by Concrete subclass.") }
+    @available(*, deprecated, message:"Use update(priority: ConstraintPriorityTarget) instead.")
+    public func updatePriorityLow() -> Void { fatalError("Must be implemented by Concrete subclass.") }
 
     // MARK: Internal
 
@@ -294,7 +295,7 @@ public final class Constraint {
             layoutConstraint.constant = self.constant.constraintConstantTargetValueFor(layoutAttribute: attribute)
 
             let requiredPriority = ConstraintPriority.required.value
-            if layoutConstraint.priority.rawValue < requiredPriority, self.priority.constraintPriorityTargetValue != requiredPriority {
+            if (layoutConstraint.priority.rawValue < requiredPriority), (self.priority.constraintPriorityTargetValue != requiredPriority) {
                 layoutConstraint.priority = LayoutPriority(rawValue: self.priority.constraintPriorityTargetValue)
             }
         }

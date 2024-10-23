@@ -20,7 +20,7 @@ public extension DrawerMenuStyle {
         view?.layer.shadowOpacity = Float(opacity)
         view?.layer.shadowOffset = offset
     }
-
+    
     func removeShadow(view: UIView?) {
         view?.layer.shadowColor = UIColor.clear.cgColor
         view?.layer.shadowRadius = 0.0

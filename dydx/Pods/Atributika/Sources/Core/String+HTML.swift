@@ -96,7 +96,8 @@ extension String {
                 if let tuner = tags[tagName.lowercased()] {
                     if let str = tuner.transform(context: TagContext(tag: tagStackItem.tag,
                                                                      outerTags: tagStackItem.outerTags),
-                                                 part: .closing) {
+                                                 part: .closing)
+                    {
                         resultString.append(str)
                     }
 
@@ -105,7 +106,8 @@ extension String {
 
                     if let str = tuner.transform(context: TagContext(tag: tagStackItem.tag,
                                                                      outerTags: tagStackItem.outerTags),
-                                                 part: .content(body)) {
+                                                 part: .content(body))
+                    {
                         resultString.replaceSubrange(bodyRange, with: str)
 
                         tagsInfo = tagsInfo.filter { tagInfo in
@@ -212,7 +214,8 @@ extension String {
         if let tuner = tags[tagName],
            let str = tuner.transform(context: TagContext(tag: tag,
                                                          outerTags: outerTags),
-                                     part: .opening(selfClosing: selfClosing)) {
+                                     part: .opening(selfClosing: selfClosing))
+        {
             resultString.append(str)
         } else if tagName == "br" {
             resultString.append("\n")

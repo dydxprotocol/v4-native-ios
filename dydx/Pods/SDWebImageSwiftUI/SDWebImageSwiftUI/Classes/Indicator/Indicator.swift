@@ -11,9 +11,9 @@ import Combine
 
 /// A  type to build the indicator
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public struct Indicator<T> where T: View {
+public struct Indicator<T> where T : View {
     var content: (Binding<Bool>, Binding<Double>) -> T
-
+    
     /// Create a indicator with builder
     /// - Parameter builder: A builder to build indicator
     /// - Parameter isAnimating: A Binding to control the animation. If image is during loading, the value is true, else (like start loading) the value is false.
@@ -26,7 +26,7 @@ public struct Indicator<T> where T: View {
 
 /// A observable model to report indicator loading status
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public class IndicatorStatus: ObservableObject {
+public class IndicatorStatus : ObservableObject {
     /// whether indicator is loading or not
     var isLoading: Bool = false {
         didSet {
@@ -49,21 +49,21 @@ public class IndicatorStatus: ObservableObject {
 /// SwiftUI View Modifier construced by using a internal View type which modify the `body`
 /// It use type system to represent the view hierarchy, and Swift `some View` syntax to hide the type detail for users
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public struct IndicatorViewModifier<T>: ViewModifier where T: View {
-
+public struct IndicatorViewModifier<T> : ViewModifier where T : View {
+    
     /// The loading status
     @ObservedObject public var status: IndicatorStatus
-
+    
     /// The indicator
     public var indicator: Indicator<T>
-
+    
     @ViewBuilder
     private var overlay: some View {
         if status.isLoading {
             indicator.content($status.isLoading, $status.progress)
         }
     }
-
+    
     public func body(content: Content) -> some View {
         ZStack {
             content
@@ -80,7 +80,7 @@ extension Indicator where T == AnyView {
             AnyView(ProgressView().opacity(isAnimating.wrappedValue ? 1 : 0))
         }
     }
-
+    
     /// Activity Indicator with style
     /// - Parameter style: style
     public static func activity<S>(style: S) -> Indicator<T> where S: ProgressViewStyle {
@@ -98,7 +98,7 @@ extension Indicator where T == AnyView {
             AnyView(ProgressView(value: progress.wrappedValue).opacity(isAnimating.wrappedValue ? 1 : 0))
         }
     }
-
+    
     /// Progress Indicator with style
     /// - Parameter style: style
     public static func progress<S>(style: S) -> Indicator<T> where S: ProgressViewStyle {

@@ -73,7 +73,8 @@ class PopoverGestureContainer: UIView {
             if
                 popoverToDismiss.attributes.dismissal.mode.contains(.tapOutside), /// The popover can be automatically dismissed when tapped outside.
                 popoverToDismiss.attributes.dismissal.tapOutsideIncludesOtherPopovers || /// The popover can be dismissed even if the touch hit another popover, **or...**
-                !popoverFrames.contains(where: { $0.contains(point) }) { /// ... no other popover frame contains the point (the touch landed outside)
+                !popoverFrames.contains(where: { $0.contains(point) }) /// ... no other popover frame contains the point (the touch landed outside)
+            {
                 popoverToDismiss.dismiss()
             }
         }
@@ -87,7 +88,8 @@ class PopoverGestureContainer: UIView {
                 for popoverToDismiss in popovers {
                     if
                         popoverToDismiss != popover,
-                        !popoverToDismiss.context.frame.contains(point) { /// The popover's frame doesn't contain the touch point.
+                        !popoverToDismiss.context.frame.contains(point) /// The popover's frame doesn't contain the touch point.
+                    {
                         dismissPopoverIfNecessary(popoverToDismiss: popoverToDismiss)
                     }
                 }
