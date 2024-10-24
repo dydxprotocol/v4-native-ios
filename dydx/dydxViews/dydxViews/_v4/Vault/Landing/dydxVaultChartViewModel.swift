@@ -12,6 +12,7 @@ import Utilities
 import Charts
 import Combine
 import dydxChart
+import dydxFormatter
 
 public class dydxVaultChartViewModel: PlatformViewModel {
     public struct Entry {
@@ -80,6 +81,7 @@ public class dydxVaultChartViewModel: PlatformViewModel {
 }
 
 private struct dydxVaultChartView: View {
+    @State private var selectedIndex: Int?
     @ObservedObject var viewModel: dydxVaultChartViewModel
 
     private var chartGradient: Gradient {
@@ -111,37 +113,88 @@ private struct dydxVaultChartView: View {
                 .frame(minWidth: geometry.size.width, alignment: .center)
             }
         }
+        .frame(height: 32)
     }
-
+//        .chartOverlay { chart in
+//            GeometryReader { geometry in
+//                Rectangle()
+//                    .fill(Color.clear)
+//                    .contentShape(Rectangle())
+//                    .gesture(
+//                        DragGesture()
+//                            .onChanged { value in
+//                                let currentX = value.location.x - geometry[chart.plotAreaFrame].origin.x
+//                                guard currentX >= 0, currentX < chart.plotAreaSize.width else {
+//                                    return
+//                                }
+//
+//                                guard let index = chart.value(atX: currentX, as: Int.self) else {
+//                                    return
+//                                }
+//                                selectedIndex = index
+//                            }
+//                            .onEnded { _ in
+//                                selectedIndex = nil
+//                            }
+//                    )
+//            }
+//        }
     private var chart: some View {
-        Chart(viewModel.entries, id: \.date) { entry in
-            LineMark(x: .value("", entry.date),
-                     y: .value("", entry.value))
-            .lineStyle(StrokeStyle(lineWidth: 2))
-            .foregroundStyle(viewModel.lineColor.gradient)
-            .interpolationMethod(.linear)
-            .symbolSize(0)
-            // adds gradient shading
-            AreaMark(
-                x: .value("", entry.date),
-                yStart: .value("", viewModel.valuesDomain.lowerBound),
-                yEnd: .value("", entry.value)
-            )
-            .foregroundStyle(chartGradient)
+        let fontSize = ThemeFont.FontSize.smaller
+        let fontType = ThemeFont.FontType.base
+        let fontLineHeight = ThemeSettings.shared.themeConfig.themeFont.uiFont(of: fontType, fontSize: fontSize)?.lineHeight ?? 0
+        let data = Array(zip(viewModel.entries, viewModel.entries.indices))
+        // overlay the charts so that y axis markers can be overlayed behind the chart
+        return ZStack {
+            Chart(data, id: \.0.date) { entry, _ in
+                LineMark(x: .value("", entry.date),
+                         y: .value("", entry.value))
+                .foregroundStyle(.clear)
+            }
+            .chartYAxis {
+                AxisMarks {
+                    AxisValueLabel(format: CondensedDollar())
+                        .themeFont(fontType: fontType, fontSize: fontSize)
+                        .themeColor(foreground: .textTertiary)
+                    AxisGridLine()
+                        .foregroundStyle(ThemeColor.SemanticColor.textTertiary.color.opacity(0.2))
+                }
+            }
+
+            Chart(data, id: \.0.date) { entry, _ in
+                LineMark(x: .value("", entry.date),
+                         y: .value("", entry.value))
+                .lineStyle(StrokeStyle(lineWidth: 2))
+                .foregroundStyle(viewModel.lineColor.gradient)
+                .interpolationMethod(.linear)
+                .symbolSize(0)
+                // adds gradient shading
+                AreaMark(
+                    x: .value("", entry.date),
+                    yStart: .value("", viewModel.valuesDomain.lowerBound),
+                    yEnd: .value("", entry.value)
+                )
+                .foregroundStyle(chartGradient)
+            }
+            .chartYAxis(.hidden)
         }
         .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
         .chartXScale(domain: .automatic(includesZero: false))
         .chartYScale(domain: .automatic(includesZero: false))
-
-        // the lines can extend outside of chart
-        .padding(.all, 1)
+        // the y axis labels can extend outside of chart
+        .padding(.vertical, fontLineHeight / 2)
     }
 
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 16) {
             radioButtonsRow
             chart
         }
+    }
+}
+
+private struct CondensedDollar: FormatStyle {
+    func format(_ value: Double) -> String {
+        dydxFormatter.shared.condensed(number: value, digits: 2) ?? ""
     }
 }

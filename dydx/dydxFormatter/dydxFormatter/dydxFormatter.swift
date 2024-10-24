@@ -229,7 +229,7 @@ public final class dydxFormatter: NSObject, SingletonProtocol {
             let postfix = ["", "K", "M", "B", "T"]
             var value = number.decimalValue
             var index = 0
-            while value.magnitude > 1000.0 && index < (postfix.count - 1) {
+            while value.magnitude >= 1000.0 && index < (postfix.count - 1) {
                 value = value / 1000.0
                 index += 1
             }

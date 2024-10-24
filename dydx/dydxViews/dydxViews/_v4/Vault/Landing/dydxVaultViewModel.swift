@@ -59,7 +59,7 @@ private struct dydxVaultView: View {
                             div
                             Spacer().frame(height: 16)
                             chart
-                            Spacer().frame(height: 16)
+                            Spacer().frame(height: 24)
                             div
                             Spacer().frame(height: 16)
                         }

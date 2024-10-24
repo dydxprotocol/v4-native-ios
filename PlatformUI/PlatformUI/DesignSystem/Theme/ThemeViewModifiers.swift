@@ -8,6 +8,7 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import Utilities
+import Charts
 
 // MARK: Color
 
@@ -139,6 +140,16 @@ private struct ThemeFontModifier: ViewModifier {
 public extension Text {
     func themeFont(fontType: ThemeFont.FontType = .base, fontSize: ThemeFont.FontSize = .medium) -> Text {
         return self.font(ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize))
+    }
+}
+
+public extension AxisMark {
+    func themeFont(fontType: ThemeFont.FontType = .base, fontSize: ThemeFont.FontSize = .medium) -> some AxisMark {
+        return self.font(ThemeSettings.shared.themeConfig.themeFont.font(of: fontType, fontSize: fontSize))
+    }
+    
+    func themeColor(foreground: ThemeColor.SemanticColor) -> some AxisMark {
+        return self.foregroundStyle(ThemeSettings.shared.themeConfig.themeColor.color(of: foreground))
     }
 }
 
