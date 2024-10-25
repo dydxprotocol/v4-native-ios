@@ -193,7 +193,7 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
 
             step1.tapAction = createUrlAction(url: status.fromChainStatus?.transactionUrl)
             step2.tapAction = createUrlAction(url: status.axelarTransactionUrl)
-
+            step3.tapAction = createUrlAction(url: status.toChainStatus?.transactionUrl)
         } else {
             step1.status = .inProgress
         }
@@ -249,8 +249,9 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
                 }
             }
 
-            step1.tapAction = createMintScanUrlAction(transfer: transfer, mintscanUrl: mintscanUrl)
+            step1.tapAction = createUrlAction(url: status.fromChainStatus?.transactionUrl)
             step2.tapAction = createUrlAction(url: status.axelarTransactionUrl)
+            step3.tapAction = createUrlAction(url: status.toChainStatus?.transactionUrl)
 
             Console.shared.log("Transfer status \(String(describing: status.status)), Gas status \(String(describing: status.gasStatus))")
         } else {

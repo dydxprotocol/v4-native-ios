@@ -423,7 +423,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
 
     private func addTransferHash(hash: String, fromChainName: String?, toChainName: String?, transferInput: TransferInput) {
         let transfer = dydxTransferInstance(transferType: transferType.transferInstanceType,
-                                            transactionHash: hash,
+                                            transactionHash: hash.lowercased(),
                                             fromChainId: transferInput.requestPayload?.fromChainId,
                                             fromChainName: fromChainName,
                                             toChainId: transferInput.requestPayload?.toChainId,
