@@ -10,81 +10,46 @@ import PlatformUI
 import Utilities
 import dydxFormatter
 
-public class MemoBoxModel: PlatformTextInputViewModel {
-    @Published public var pasteAction: (() -> Void)?
+public class MemoBoxModel: PlatformViewModel {
     @Published public var shouldDisplayWarningWhenEmpty: Bool = false
-
-    public init(onEdited: ((String?) -> Void)?) {
-        super.init(label: DataLocalizer.localize(path: "APP.GENERAL.MEMO"),
-                   placeHolder: DataLocalizer.localize(path: "APP.DIRECT_TRANSFER_MODAL.REQUIRED_FOR_CEX"),
-                   onEdited: onEdited)
-    }
-
-    private var memoWarning: InlineAlertViewModel? {
-        guard value?.isEmpty != false && shouldDisplayWarningWhenEmpty else { return nil }
-        return InlineAlertViewModel(.init(title: nil,
-                                   body: DataLocalizer.localize(path: "ERRORS.TRANSFER_MODAL.TRANSFER_WITHOUT_MEMO"),
-                                   level: .warning))
-    }
-
-    public override var valueAccessoryView: AnyView? {
-        set {}
-        get { memoInputAccessory }
-    }
-
-    private var memoInputAccessory: AnyView? {
-        ZStack(alignment: .trailing) {
-            let shouldShowCancel = value?.isEmpty == false
-            if shouldShowCancel {
-                let content = Image("icon_cancel", bundle: .dydxView)
-                    .resizable()
-                    .templateColor(.textSecondary)
-                    .frame(width: 9, height: 9)
-                    .padding(.all, 10)
-                    .borderAndClip(style: .circle, borderColor: .layer6)
-                    .wrappedViewModel
-
-                PlatformButtonViewModel(content: content,
-                                               type: .iconType,
-                                               state: .secondary) {[weak self] in
-                    self?.programmaticallySet(value: "")
-                }
-                                               .createView()
-
-            }
-            let content = Text(localizerPathKey: "APP.GENERAL.PASTE")
-                .themeColor(foreground: .textSecondary)
-                .themeFont(fontType: .base, fontSize: .small)
-                .wrappedViewModel
-
-            PlatformButtonViewModel(content: content,
-                                    type: .defaultType(fillWidth: false,
-                                                       padding: .init(horizontal: 8, vertical: 6)),
-                                    state: .secondary ) {[weak self] in
-                guard let pastedString = UIPasteboard.general.string else { return }
-                self?.programmaticallySet(value: pastedString)
-            }
-                                    .createView()
-                                    .opacity(shouldShowCancel ? 0 : 1) // hide it with opacity so that it sizes correctly all the timem
-        }
-        .wrappedInAnyView()
-
-    }
+    @Published public var text: String = ""
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        VStack(spacing: 12) {
-            super.createView(parentStyle: parentStyle)
-                .makeInput()
-            memoWarning?.createView(parentStyle: parentStyle)
-        }
-        .wrappedViewModel
-        .createView(parentStyle: parentStyle)
+        MemoBoxView(viewModel: self)
+            .wrappedViewModel
+            .createView()
     }
 
     public static var previewValue: MemoBoxModel = {
-        let vm = MemoBoxModel(onEdited: nil)
+        let vm = MemoBoxModel()
         return vm
     }()
+}
+
+private struct MemoBoxView: View {
+    @ObservedObject var viewModel: MemoBoxModel
+
+    private var titledTextField: some View {
+        dydxTitledTextField(title: DataLocalizer.localize(path: "APP.GENERAL.MEMO"),
+                            placeholder: DataLocalizer.localize(path: "APP.DIRECT_TRANSFER_MODAL.REQUIRED_FOR_CEX"),
+                            isPasteEnabled: true,
+                            text: $viewModel.text)
+    }
+
+    private var memoWarning: some View {
+        InlineAlertViewModel(.init(title: nil,
+                                   body: DataLocalizer.localize(path: "ERRORS.TRANSFER_MODAL.TRANSFER_WITHOUT_MEMO"),
+                                   level: .warning))
+        .createView()
+    }
+
+    var body: some View {
+        VStack(spacing: 12) {
+            titledTextField
+                .frame(maxWidth: .infinity)
+            memoWarning
+        }
+    }
 }
 
 #if DEBUG

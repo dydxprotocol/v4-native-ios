@@ -52,11 +52,6 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
     override init() {
         let viewModel = dydxTransferOutViewModel()
 
-        viewModel.chainsComboBox?.text = AbacusStateManager.shared.environment?.chainName
-        if let chainLogo = AbacusStateManager.shared.environment?.chainLogo, let url = URL(string: chainLogo) {
-            viewModel.chainsComboBox?.icon = PlatformIconViewModel(type: .url(url: url), size: CGSize(width: 32, height: 32))
-        }
-
         validationPresenter.$viewModel.assign(to: &viewModel.$validationViewModel)
         ctaButtonPresenter.$viewModel.assign(to: &viewModel.$ctaButton)
 
@@ -73,13 +68,21 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
             }
         }
 
-        viewModel.addressInput?.onEdited = { address in
-            AbacusStateManager.shared.transfer(input: address, type: .address)
-        }
+        viewModel.$addressInput
+            .debounce(for: .milliseconds(10), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink(receiveValue: { address in
+                AbacusStateManager.shared.transfer(input: address, type: .address)
+            })
+            .store(in: &subscriptions)
 
-        viewModel.memoBox = .init { value in
-            AbacusStateManager.shared.transfer(input: value, type: .memo)
-        }
+        viewModel.memoBox.$text
+            .debounce(for: .milliseconds(10), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink(receiveValue: { address in
+                AbacusStateManager.shared.transfer(input: address, type: .memo)
+            })
+            .store(in: &subscriptions)
 
         self.viewModel = viewModel
 
@@ -157,10 +160,10 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
         }
         viewModel?.amountBox?.objectWillChange.send()
 
-        viewModel?.addressInput?.value = transferInput.address
+        viewModel?.addressInput = transferInput.address ?? ""
 
-        viewModel?.memoBox?.shouldDisplayWarningWhenEmpty = transferInput.token != dydxTokenConstants.usdcTokenKey
-        viewModel?.memoBox?.value = transferInput.memo
+        viewModel?.memoBox.shouldDisplayWarningWhenEmpty = transferInput.token != dydxTokenConstants.usdcTokenKey
+        viewModel?.memoBox.text = transferInput.memo ?? ""
     }
 
     private func updateChainsTokensViewModel() {
@@ -183,7 +186,6 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
                     Router.shared?.navigate(to: RoutingRequest(path: "/transfer/search", params: params), animated: true, completion: nil)
                 }
             }
-            viewModel?.chainsComboBox = chainsComboBox
         }
 
         if tokens.count > 0 {

@@ -32,11 +32,12 @@ public class ComboBoxModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let main = VStack(alignment: .leading, spacing: 4) {
+            let main = VStack(alignment: .leading, spacing: 5) {
                 if let title = self.title {
                     Text(title)
                         .themeFont(fontSize: .smaller)
                         .themeColor(foreground: .textTertiary)
+
                 }
 
                 self.content?.createView(parentStyle: style)

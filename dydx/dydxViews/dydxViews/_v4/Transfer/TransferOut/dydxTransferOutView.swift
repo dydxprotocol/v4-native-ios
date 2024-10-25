@@ -11,22 +11,17 @@ import PlatformUI
 import Utilities
 
 public class dydxTransferOutViewModel: PlatformViewModel {
-    @Published public var addressInput: PlatformTextInputViewModel? =
-        PlatformTextInputViewModel(label: DataLocalizer.localize(path: "APP.GENERAL.DESTINATION"),
-                                   placeHolder: "dydx0000...0000",
-                                   truncateMode: .middle)
+    @Published public var addressInput: String = ""
+//        PlatformTextInputViewModel(label: DataLocalizer.localize(path: "APP.GENERAL.DESTINATION"),
+//                                   placeHolder: "dydx0000...0000",
+//                                   truncateMode: .middle)
     @Published public var amountBox: TransferAmountBoxModel? =
         TransferAmountBoxModel(label: DataLocalizer.localize(path: "APP.GENERAL.AMOUNT"),
                                placeHolder: "0.000",
                                inputType: .decimalDigits)
-    @Published public var chainsComboBox: ChainsComboBoxModel? =
-        ChainsComboBoxModel(icon: PlatformIconViewModel(type: .asset(name: "icon_dydx", bundle: Bundle.dydxView),
-                                                        size: CGSize(width: 32, height: 32)),
-                            label: DataLocalizer.localize(path: "APP.GENERAL.NETWORK"),
-                            text: DataLocalizer.localize(path: "APP.GENERAL.DYDX_CHAIN"))
     @Published public var tokensComboBox: TokensComboBoxModel? =
         TokensComboBoxModel(label: DataLocalizer.localize(path: "APP.GENERAL.ASSET"))
-    @Published public var memoBox: MemoBoxModel?
+    @Published public var memoBox = MemoBoxModel()
 
     @Published public var ctaButton: dydxTradeInputCtaButtonViewModel? = dydxTradeInputCtaButtonViewModel()
     @Published public var validationViewModel: dydxValidationViewModel? = dydxValidationViewModel()
@@ -41,38 +36,61 @@ public class dydxTransferOutViewModel: PlatformViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
-            guard let self = self else { return AnyView(PlatformView.nilView) }
-            return AnyView(
-                VStack {
-                    Group {
-                        VStack(spacing: 12) {
-                            HStack(spacing: 12) {
-                                self.addressInput?.createView(parentStyle: style)
-                                    .makeInput()
-                                self.chainsComboBox?.createView(parentStyle: style)
-                            }
-                            self.tokensComboBox?.createView(parentStyle: style)
-                            self.amountBox?.createView(parentStyle: style)
-                            self.memoBox?.createView(parentStyle: style)
-                        }
+        dydxTransferOutView(viewModel: self)
+            .wrappedViewModel
+            .createView()
+    }
+}
+
+private struct dydxTransferOutView: View {
+    @ObservedObject var viewModel: dydxTransferOutViewModel
+
+    private var chainsStaticInputView: some View {
+        let fontType = ThemeFont.FontType.base
+        let fontSize = ThemeFont.FontSize.medium
+        let fontHeight = ThemeSettings.shared.themeConfig.themeFont.uiFont(of: fontType, fontSize: fontSize)?.lineHeight ?? 32
+        return dydxTitledContent(title: DataLocalizer.localize(path: "APP.GENERAL.NETWORK")) {
+            HStack(spacing: 8) {
+                PlatformIconViewModel(type: .asset(name: "icon_dydx", bundle: Bundle.dydxView),
+                                      size: CGSize(width: fontHeight, height: fontHeight))
+                .createView()
+                Text(DataLocalizer.localize(path: "APP.GENERAL.DYDX_CHAIN"))
+                    .themeFont(fontType: fontType, fontSize: fontSize)
+                    .themeColor(foreground: .textPrimary)
+            }
+        }
+    }
+
+    var body: some View {
+        VStack {
+            Group {
+                VStack(spacing: 12) {
+                    HStack(spacing: 12) {
+                        dydxTitledTextField(title: DataLocalizer.localize(path: "APP.GENERAL.DESTINATION"),
+                                            placeholder: "dydx00000000000000",
+                                            text: $viewModel.addressInput)
+                        chainsStaticInputView
                     }
-
-                    Spacer()
-
-                    VStack(spacing: -8) {
-                        VStack {
-                            self.validationViewModel?.createView(parentStyle: style)
-                        }
-                        .padding()
+                    viewModel.tokensComboBox?.createView()
+                    viewModel.amountBox?.createView()
+                    viewModel.memoBox.createView()
                         .frame(maxWidth: .infinity)
-                        .themeColor(background: .layer1)
-                        .cornerRadius(12, corners: [.topLeft, .topRight])
-
-                        self.ctaButton?.createView(parentStyle: style)
-                    }
                 }
-            )
+            }
+
+            Spacer()
+
+            VStack(spacing: -8) {
+                VStack {
+                    viewModel.validationViewModel?.createView()
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .themeColor(background: .layer1)
+                .cornerRadius(12, corners: [.topLeft, .topRight])
+
+                viewModel.ctaButton?.createView()
+            }
         }
     }
 }
