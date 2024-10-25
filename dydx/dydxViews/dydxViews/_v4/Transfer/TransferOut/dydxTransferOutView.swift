@@ -12,9 +12,6 @@ import Utilities
 
 public class dydxTransferOutViewModel: PlatformViewModel {
     @Published public var addressInput: String = ""
-//        PlatformTextInputViewModel(label: DataLocalizer.localize(path: "APP.GENERAL.DESTINATION"),
-//                                   placeHolder: "dydx0000...0000",
-//                                   truncateMode: .middle)
     @Published public var amountBox: TransferAmountBoxModel? =
         TransferAmountBoxModel(label: DataLocalizer.localize(path: "APP.GENERAL.AMOUNT"),
                                placeHolder: "0.000",
