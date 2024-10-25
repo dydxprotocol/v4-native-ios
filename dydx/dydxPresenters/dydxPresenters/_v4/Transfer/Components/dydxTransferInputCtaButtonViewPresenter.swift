@@ -324,7 +324,8 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
         let payload: [String: Any] = [
             "subaccountNumber": subaccountNumber,
             "amount": amount,
-            "recipient": recipient
+            "recipient": recipient,
+            "memo": transferInput.memo as Any
         ]
         if let paramsInJson = payload.jsonString {
             CosmoJavascript.shared.call(functionName: "withdraw", paramsInJson: paramsInJson) { [weak self] result in
@@ -337,7 +338,8 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
     private func transferOutDYDX(amount: String, recipient: String, transferInput: TransferInput) {
         let payload: [String: Any] = [
             "amount": amount,
-            "recipient": recipient
+            "recipient": recipient,
+            "memo": transferInput.memo as Any
         ]
         if let paramsInJson = payload.jsonString {
             CosmoJavascript.shared.call(functionName: "transferNativeToken", paramsInJson: paramsInJson) { [weak self] result in

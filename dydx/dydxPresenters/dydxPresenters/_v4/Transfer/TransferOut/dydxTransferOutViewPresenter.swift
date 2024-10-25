@@ -79,8 +79,8 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
         viewModel.memoBox.$text
             .debounce(for: .milliseconds(10), scheduler: DispatchQueue.main)
             .removeDuplicates()
-            .sink(receiveValue: { address in
-                AbacusStateManager.shared.transfer(input: address, type: .memo)
+            .sink(receiveValue: { memo in
+                AbacusStateManager.shared.transfer(input: memo, type: .memo)
             })
             .store(in: &subscriptions)
 

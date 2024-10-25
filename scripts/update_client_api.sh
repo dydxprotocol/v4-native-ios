@@ -23,6 +23,7 @@ trap cleanup EXIT
 # Cloning into the temporary directory and navigating there
 git clone git@github.com:dydxprotocol/v4-clients.git "$TMP_DIR/v4-clients"
 cd "$TMP_DIR/v4-clients/v4-client-js"
+git checkout mike/send-memo-with-tx
 
 # If cloning fails, exit the script
 if [ $? -ne 0 ]; then
