@@ -40,6 +40,7 @@ private protocol dydxVaultViewBuilderPresenterProtocol: HostedViewPresenterProto
 }
 
 private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewModel>, dydxVaultViewBuilderPresenterProtocol {
+
     override init() {
         super.init()
 
@@ -91,47 +92,57 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
         viewModel?.vaultBalance = vault?.account?.balanceUsdc?.doubleValue
         viewModel?.allTimeReturnUsdc = vault?.account?.allTimeReturnUsdc?.doubleValue.round(to: 2)
 
-        let newPositions = vault?.positions?.positions?.map { (position) -> dydxVaultPositionViewModel? in
-            guard let leverage = position.currentLeverageMultiple?.doubleValue,
-                  let marketId = position.marketId,
-                  // special case for fake USDC market to show unused margin
-                  let assetId = marketId == "USDC-USD" ? "USDC" : marketMap[marketId]?.assetId,
-                  let displayId = assetMap[assetId]?.id ?? marketMap[marketId]?.displayId
-            else { return nil }
-            let equity = position.marginUsdc?.doubleValue ?? 0
-            let notionalValue = position.currentPosition?.usdc?.doubleValue ?? 0
-            let positionSize = position.currentPosition?.asset?.doubleValue ?? 0
-            let iconType: PlatformIconViewModel.IconType
-            let tokenUnitPrecision: Int
-            if marketId == "USDC-USD" {
-                iconType = .asset(name: "symbol_USDC", bundle: .dydxView)
-                tokenUnitPrecision = 2
-            } else {
-                iconType = .init(url: URL(string: assetMap[assetId]?.resources?.imageUrl ?? ""), placeholderText: assetId.first?.uppercased())
-                tokenUnitPrecision = marketMap[marketId]?.configs?.displayStepSizeDecimals?.intValue ?? 2
+        let newPositions = vault?.positions?.positions?
+            .sorted { (lhs, rhs) -> Bool in
+                if lhs.marginUsdc?.doubleValue ?? 0 == rhs.marginUsdc?.doubleValue ?? 0 {
+                    if (lhs.thirtyDayPnl?.absolute?.doubleValue ?? 0) == (rhs.thirtyDayPnl?.absolute?.doubleValue ?? 0) {
+                        return lhs.marketId ?? "" < rhs.marketId ?? ""
+                    }
+                    return lhs.thirtyDayPnl?.absolute?.doubleValue ?? 0 < rhs.thirtyDayPnl?.absolute?.doubleValue ?? 0
+                }
+                return lhs.marginUsdc?.doubleValue ?? 0 > rhs.marginUsdc?.doubleValue ?? 0
             }
+            .map { (position) -> dydxVaultPositionViewModel? in
+                guard
+                    let marketId = position.marketId,
+                    // special case for fake USDC market to show unused margin
+                    let assetId = marketId == "UNALLOCATEDUSDC-USD" ? "USDC" : marketMap[marketId]?.assetId
+                else { return nil }
 
-            // only create new view model instance if it does not already exist
-            if let existing = viewModel?.positions?[marketId] {
-                return existing.updated(
-                    marketId: marketId,
-                    displayId: displayId,
-                    iconType: iconType,
-                    side: positionSize > 0 ? .long : .short,
-                    leverage: leverage,
-                    equity: equity,
-                    notionalValue: notionalValue,
-                    positionSize: positionSize.magnitude,
-                    tokenUnitPrecision: tokenUnitPrecision,
-                    pnlAmount: position.thirtyDayPnl?.absolute?.doubleValue,
-                    pnlPercentage: position.thirtyDayPnl?.percent?.doubleValue,
-                    sparklineValues: position.thirtyDayPnl?.sparklinePoints?.map({ $0.doubleValue }))
-            } else {
+                let leverage = position.currentLeverageMultiple?.doubleValue
+                let asset = assetMap[assetId]
+                let equity = position.marginUsdc?.doubleValue ?? 0
+                let notionalValue = position.currentPosition?.usdc?.doubleValue ?? 0
+                let positionSize = position.currentPosition?.asset?.doubleValue ?? 0
+                let iconType: PlatformIconViewModel.IconType
+                let tokenUnitPrecision: Int
+                let assetName: String?
+                if marketId == "UNALLOCATEDUSDC-USD" {
+                    iconType = .asset(name: "symbol_USDC", bundle: .dydxView)
+                    tokenUnitPrecision = 2
+                    assetName = "USDC"
+                } else {
+                    iconType = .init(url: URL(string: assetMap[assetId]?.resources?.imageUrl ?? ""), placeholderText: assetId.first?.uppercased())
+                    tokenUnitPrecision = marketMap[marketId]?.configs?.displayStepSizeDecimals?.intValue ?? 2
+                    assetName = asset?.name
+                }
+
+                // only create new view model instance if it does not already exist
+                let side: SideTextViewModel.Side
+                if positionSize == 0 {
+                    side = .none
+                } else if positionSize > 0 {
+                    side = .long
+                } else {
+                    side = .short
+                }
+
                 return dydxVaultPositionViewModel(
                     marketId: marketId,
-                    displayId: displayId,
+                    displayId: assetName ?? "",
+                    symbol: asset?.id,
                     iconType: iconType,
-                    side: positionSize > 0 ? .long : .short,
+                    side: side,
                     leverage: leverage,
                     equity: equity,
                     notionalValue: notionalValue,
@@ -141,9 +152,9 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                     pnlPercentage: position.thirtyDayPnl?.percent?.doubleValue,
                     sparklineValues: position.thirtyDayPnl?.sparklinePoints?.map({ $0.doubleValue }))
             }
-        }
-        .compactMap { $0 }
-        viewModel?.positions = Dictionary(uniqueKeysWithValues: newPositions?.map({ ( $0.marketId, $0) }) ?? [])
+            .compactMap { $0 }
+
+        viewModel?.positions = newPositions
     }
 
     private func updateChartState(vault: Abacus.Vault?, valueType: dydxVaultChartViewModel.ValueTypeOption, timeType: dydxVaultChartViewModel.ValueTimeOption) {

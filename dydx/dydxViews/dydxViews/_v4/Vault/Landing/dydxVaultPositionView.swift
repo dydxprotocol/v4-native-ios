@@ -18,9 +18,10 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
 
     @Published public var marketId: String
     @Published public var displayId: String
+    @Published public var symbol: String?
     @Published public var iconType: PlatformIconViewModel.IconType = .init(url: nil, placeholderText: nil)
     @Published public var side: SideTextViewModel.Side
-    @Published public var leverage: Double
+    @Published public var leverage: Double?
     @Published public var equity: Double
     @Published public var notionalValue: Double
     @Published public var positionSize: Double
@@ -65,39 +66,13 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
         dydxFormatter.shared.percent(number: pnlPercentage, digits: 2) ?? "--"
     }
 
-    public func updated(marketId: String,
-                       displayId: String,
-                       iconType: PlatformIconViewModel.IconType,
-                       side: SideTextViewModel.Side,
-                       leverage: Double,
-                       equity: Double,
-                       notionalValue: Double,
-                       positionSize: Double,
-                       tokenUnitPrecision: Int,
-                       pnlAmount: Double?,
-                       pnlPercentage: Double?,
-                       sparklineValues: [Double]?) -> dydxVaultPositionViewModel {
-        self.marketId = marketId
-        self.displayId = displayId
-        self.iconType = iconType
-        self.side = side
-        self.leverage = leverage
-        self.equity = equity
-        self.notionalValue = notionalValue
-        self.positionSize = positionSize
-        self.tokenUnitPrecision = tokenUnitPrecision
-        self.pnlAmount = pnlAmount
-        self.pnlPercentage = pnlPercentage
-        self.sparklineValues = sparklineValues
-        return self
-    }
-
     public init(
         marketId: String,
         displayId: String,
+        symbol: String?,
         iconType: PlatformIconViewModel.IconType,
         side: SideTextViewModel.Side,
-        leverage: Double,
+        leverage: Double?,
         equity: Double,
         notionalValue: Double,
         positionSize: Double,
@@ -107,6 +82,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
         sparklineValues: [Double]?) {
             self.marketId = marketId
             self.displayId = displayId
+            self.symbol = symbol
             self.iconType = iconType
             self.side = side
             self.leverage = leverage
@@ -139,7 +115,8 @@ struct VaultPositionView: View {
 
     var marketSection: some View {
         HStack(spacing: 8) {
-            PlatformIconViewModel(type: viewModel.iconType)
+            PlatformIconViewModel(type: viewModel.iconType,
+                                  clip: PlatformIconViewModel.IconClip.circle(background: ThemeColor.SemanticColor.transparent, spacing: 0, borderColor: nil))
                 .createView()
             VStack(alignment: .leading, spacing: 2) {
                 Text(viewModel.displayId)
@@ -168,8 +145,10 @@ struct VaultPositionView: View {
                     .themeColor(foreground: .textTertiary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                TokenTextViewModel(symbol: viewModel.displayId)
-                    .createView(parentStyle: ThemeStyle.defaultStyle.themeFont(fontSize: .smallest))
+                if let symbol = viewModel.symbol {
+                    TokenTextViewModel(symbol: symbol)
+                        .createView(parentStyle: ThemeStyle.defaultStyle.themeFont(fontSize: .smallest))
+                }
             }
         }
         .leftAligned()
