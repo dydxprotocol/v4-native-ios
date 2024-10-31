@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'Abacus'
-spec.version = '1.13.14'
+spec.version = '1.13.15'
     spec.homepage                 = 'https://github.com/dydxprotocol/v4-abacus'
-    spec.source                   = { :git => "git@github.com:dydxprotocol/v4-abacus.git", :branch => "mike/fix-serialization" }
+    spec.source                   = { :git => "git@github.com:dydxprotocol/v4-abacus.git", :tag => "v#{spec.version}" }
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Shared front-end and mobile logic written in Kotlin'
@@ -34,7 +34,7 @@ spec.version = '1.13.14'
                 
                 if [ ! -f $REPO_ROOT/gradlew ]; then
                     rm -rf $PRODUCT_MODULE_NAME
-                    git clone git@github.com:dydxprotocol/v4-abacus.git --branch mike/fix-serialization $PRODUCT_MODULE_NAME
+                    git clone git@github.com:dydxprotocol/v4-abacus.git --branch v#{spec.version} $PRODUCT_MODULE_NAME
                     
                     "$REPO_ROOT/gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
                         -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME \
