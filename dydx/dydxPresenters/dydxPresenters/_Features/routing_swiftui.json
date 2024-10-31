@@ -369,6 +369,10 @@
                     "destination":"dydxPresenters.dydxVaultDepositWithdrawConfirmationViewBuilder",
                     "presentation":"push"
                 },
+                "/vault/tos":{
+                    "destination":"dydxPresenters.dydxVaultTosViewBuilder",
+                    "presentation":"prompt"
+                },
                 "/wallets":{
                     "destination":"dydxPresenters.Wallets2ViewBuilder",
                     "presentation":"half"

@@ -81,6 +81,13 @@ private struct dydxVaultView: View {
             titleImage
             titleText
             Spacer()
+            PlatformIconViewModel(type: .asset(name: "icon_help", bundle: Bundle.dydxView),
+                                  clip: .circle(background: .layer4, spacing: 10, borderColor: ThemeColor.SemanticColor.layer5),
+                                  templateColor: ThemeColor.SemanticColor.textSecondary)
+                .createView()
+                .onTapGesture {
+                    viewModel.learnMoreAction?()
+                }
         }
         .padding(.horizontal, 16)
     }

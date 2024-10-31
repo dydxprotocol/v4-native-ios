@@ -91,6 +91,9 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
         viewModel?.thirtyDayReturnPercent = vault?.details?.thirtyDayReturnPercent?.doubleValue
         viewModel?.vaultBalance = vault?.account?.balanceUsdc?.doubleValue
         viewModel?.allTimeReturnUsdc = vault?.account?.allTimeReturnUsdc?.doubleValue.round(to: 2)
+        viewModel?.learnMoreAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/vault/tos"), animated: true, completion: nil)
+        }
 
         let newPositions = vault?.positions?.positions?
             .sorted { (lhs, rhs) -> Bool in
