@@ -104,6 +104,7 @@
 		02D9518C2C926B9C007BB2B4 /* dydxNotificationPrimerViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D9518B2C926B9C007BB2B4 /* dydxNotificationPrimerViewPresenter.swift */; };
 		02DA6E0D2AD897EE0048126C /* starkex-lib.js in Resources */ = {isa = PBXBuildFile; fileRef = 02DA6DFF2AD897EE0048126C /* starkex-lib.js */; };
 		02DA6E0E2AD897EE0048126C /* starkex-eth.js in Resources */ = {isa = PBXBuildFile; fileRef = 02DA6E0C2AD897EE0048126C /* starkex-eth.js */; };
+		02DC87952CD441BC00F865C5 /* dydxVaultHistoryViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC87942CD441BB00F865C5 /* dydxVaultHistoryViewBuilder.swift */; };
 		02DDAD55292587C600CC7531 /* QRCodeDisplayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDAD54292587C600CC7531 /* QRCodeDisplayBuilder.swift */; };
 		02E7B39729D79A4400D6626D /* settings_debug.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B36D29D79A4400D6626D /* settings_debug.json */; };
 		02E7B39829D79A4400D6626D /* features.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B36E29D79A4400D6626D /* features.json */; };
@@ -499,6 +500,7 @@
 		02D9518B2C926B9C007BB2B4 /* dydxNotificationPrimerViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNotificationPrimerViewPresenter.swift; sourceTree = "<group>"; };
 		02DA6DFF2AD897EE0048126C /* starkex-lib.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "starkex-lib.js"; sourceTree = "<group>"; };
 		02DA6E0C2AD897EE0048126C /* starkex-eth.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "starkex-eth.js"; sourceTree = "<group>"; };
+		02DC87942CD441BB00F865C5 /* dydxVaultHistoryViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultHistoryViewBuilder.swift; sourceTree = "<group>"; };
 		02DDAD54292587C600CC7531 /* QRCodeDisplayBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeDisplayBuilder.swift; sourceTree = "<group>"; };
 		02E7B36D29D79A4400D6626D /* settings_debug.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings_debug.json; sourceTree = "<group>"; };
 		02E7B36E29D79A4400D6626D /* features.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = features.json; sourceTree = "<group>"; };
@@ -1271,6 +1273,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		02DC87862CD441B500F865C5 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				02DC87942CD441BB00F865C5 /* dydxVaultHistoryViewBuilder.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		02E7B36B29D79A4400D6626D /* _Features */ = {
 			isa = PBXGroup;
 			children = (
@@ -1436,6 +1446,7 @@
 		2751D6442C59642000B36F95 /* Vault */ = {
 			isa = PBXGroup;
 			children = (
+				02DC87862CD441B500F865C5 /* History */,
 				02404F8C2CD42E44001B571D /* Tos */,
 				27457F4C2C8AC89800873640 /* Landing */,
 				27823D022C77E30F009BCD51 /* DepositsAndWithdrawals */,
@@ -2149,6 +2160,7 @@
 				027CA87229EDFC990069781A /* dydxTransferInputCtaButtonViewPresenter.swift in Sources */,
 				02D1CEE129C8DEA7009ADF9A /* dydxLanguageViewBuilder.swift in Sources */,
 				02D1342828EB572100B46941 /* SharedMarketPresenter.swift in Sources */,
+				02DC87952CD441BC00F865C5 /* dydxVaultHistoryViewBuilder.swift in Sources */,
 				0262EFA629D79EE4009889E2 /* Wallets2ViewBuilder.swift in Sources */,
 				27DB2EA32AC1E7B20047BC39 /* dydxTradeRestrictedViewPresenter.swift in Sources */,
 				0253155E29BFA64C00D6CC9B /* dydxOnboardScanInstructionsViewBuilder.swift in Sources */,

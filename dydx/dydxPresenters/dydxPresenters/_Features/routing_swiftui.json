@@ -373,6 +373,10 @@
                     "destination":"dydxPresenters.dydxVaultTosViewBuilder",
                     "presentation":"prompt"
                 },
+                "/vault/history":{
+                    "destination":"dydxPresenters.dydxVaultHistoryViewBuilder",
+                    "presentation":"push"
+                },
                 "/wallets":{
                     "destination":"dydxPresenters.Wallets2ViewBuilder",
                     "presentation":"half"

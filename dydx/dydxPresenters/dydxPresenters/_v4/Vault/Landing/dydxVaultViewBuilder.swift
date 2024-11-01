@@ -94,6 +94,10 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
         viewModel?.learnMoreAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/vault/tos"), animated: true, completion: nil)
         }
+        viewModel?.historyCount = vault?.account?.vaultTransfers?.count
+        viewModel?.historyAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/vault/history"), animated: true, completion: nil)
+        }
 
         let newPositions = vault?.positions?.positions?
             .sorted { (lhs, rhs) -> Bool in

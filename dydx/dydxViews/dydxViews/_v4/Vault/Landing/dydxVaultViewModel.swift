@@ -22,6 +22,8 @@ public class dydxVaultViewModel: PlatformViewModel {
     @Published public var learnMoreAction: (() -> Void)?
     @Published public var withdrawAction: (() -> Void)?
     @Published public var depositAction: (() -> Void)?
+    @Published public var historyCount: Int?
+    @Published public var historyAction: (() -> Void)?
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
@@ -106,20 +108,6 @@ private struct dydxVaultView: View {
             .themeFont(fontType: .plus, fontSize: .largest)
     }
 
-    @ViewBuilder
-    private var learnMore: some View {
-        if let learnMoreAction = viewModel.learnMoreAction {
-            let image = Image("icon_external_link", bundle: .dydxView)
-            (Text(DataLocalizer.shared?.localize(path: "APP.GENERAL.LEARN_MORE", params: nil) ?? "") + Text(" ") + Text(image))
-                .themeColor(foreground: .textSecondary)
-                .themeFont(fontType: .base, fontSize: .medium)
-                .padding(.trailing, 12)
-                .onTapGesture {
-                    learnMoreAction()
-                }
-        }
-    }
-
     // MARK: - Section 1 - PNL
     private var vaultPnlRow: some View {
         VStack(spacing: 14) {
@@ -128,6 +116,29 @@ private struct dydxVaultView: View {
                 pnlView
             }
             .fixedSize(horizontal: false, vertical: true)
+
+            if let historyCount = viewModel.historyCount {
+                HStack(spacing: 8) {
+                    Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.YOUR_DEPOSITS_AND_WITHDRAWALS", params: nil) ?? "")
+                    Text("\(historyCount)")
+                        .themeColor(foreground: ThemeColor.SemanticColor.textTertiary)
+                    Spacer()
+                    PlatformIconViewModel(type: .asset(name: "icon_chevron", bundle: Bundle.dydxView),
+                                                                           size: CGSize(width: 16, height: 16),
+                                                                           templateColor: ThemeColor.SemanticColor.textTertiary)
+                    .createView()
+                }
+                .themeFont(fontType: .base, fontSize: .medium)
+                .leftAligned()
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .themeColor(background: ThemeColor.SemanticColor.layer5)
+                .borderAndClip(style: .cornerRadius(10), borderColor: ThemeColor.SemanticColor.transparent)
+                .onTapGesture {
+                    viewModel.historyAction?()
+                }
+            }
+
             HStack(spacing: 16) {
                 withdrawButton
                 depositButton
@@ -296,7 +307,7 @@ private struct dydxVaultView: View {
 
     @ViewBuilder
     private var depositButton: some View {
-        let textColor: ThemeColor.SemanticColor = viewModel.withdrawAction == nil ? .textTertiary : .textPrimary
+        let textColor: ThemeColor.SemanticColor = .colorWhite
         let content = HStack(spacing: 8) {
             PlatformIconViewModel(type: .asset(name: "icon_transfer_deposit", bundle: .dydxView),
                                   size: .init(width: 20, height: 20),
