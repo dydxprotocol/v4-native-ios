@@ -147,7 +147,7 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                 return dydxVaultPositionViewModel(
                     marketId: marketId,
                     displayId: assetName ?? "",
-                    symbol: asset?.id,
+                    symbol: asset?.displayableAssetId,
                     iconType: iconType,
                     side: side,
                     leverage: leverage,

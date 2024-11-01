@@ -68,6 +68,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
             .removeDuplicates()
             .sink { [weak self] transferType in
                 self?.aggregatePublisherCancellable?.cancel()
+
                 // transfer types determin throttling/debounce config
                 // do not need debouncing/throttling for deposit since there are no slippage fetches
                 // for withdrawal, refetch slippage every ~2 seconds if subaccount or vault changes during a 2 second period
@@ -168,11 +169,9 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     private func updateMaxAmount(subaccount: Abacus.Subaccount?, vault: Abacus.Vault?, transferType: dydxViews.VaultTransferType) {
         switch transferType {
         case .deposit:
-            let roundedFreeCollateral = subaccount?.freeCollateral?.current?.doubleValue.round(to: 2, rule: .towardZero) ?? 0
-            viewModel?.maxAmount = roundedFreeCollateral
+            viewModel?.maxAmount = subaccount?.roundedFreeCollateral ?? 0
         case .withdraw:
-            let roundedBalance = vault?.account?.balanceUsdc?.doubleValue.round(to: 2, rule: .towardZero) ?? 0
-            viewModel?.maxAmount = roundedBalance
+            viewModel?.maxAmount = vault?.account?.roundedWithdrawableUsdc ?? 0
         }
     }
 
@@ -181,12 +180,18 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
     }
 
     private func updateReceiptItems(formValidationResult: VaultFormValidationResult, subaccount: Abacus.Subaccount?, vault: Abacus.Vault, amount: Double, transferType: dydxViews.VaultTransferType) {
-        viewModel?.curVaultBalance = vault.account?.balanceUsdc?.doubleValue ?? 0
-        viewModel?.curFreeCollateral = subaccount?.freeCollateral?.current?.doubleValue ?? 0
+        viewModel?.curVaultBalance = vault.account?.roundedWithdrawableUsdc ?? 0
+        viewModel?.curFreeCollateral = subaccount?.roundedFreeCollateral ?? 0
         viewModel?.curMarginUsage = subaccount?.marginUsage?.current?.doubleValue ?? 0
 
-        viewModel?.postVaultBalance = viewModel?.curVaultBalance == formValidationResult.summaryData.vaultBalance?.doubleValue ? nil : formValidationResult.summaryData.vaultBalance?.doubleValue
-        viewModel?.postFreeCollateral = viewModel?.curFreeCollateral == formValidationResult.summaryData.freeCollateral?.doubleValue ? nil : formValidationResult.summaryData.freeCollateral?.doubleValue
+        viewModel?.postVaultBalance =
+            dydxFormatter.shared.raw(number: vault.account?.roundedWithdrawableUsdc, digits: 2) ==
+            dydxFormatter.shared.raw(number: formValidationResult.summaryData.vaultBalance?.doubleValue, digits: 2)
+            ? nil : formValidationResult.summaryData.vaultBalance?.doubleValue
+        viewModel?.postFreeCollateral =
+            dydxFormatter.shared.raw(number: subaccount?.roundedFreeCollateral, digits: 2) ==
+            dydxFormatter.shared.raw(number: formValidationResult.summaryData.freeCollateral?.doubleValue, digits: 2)
+            ? nil : formValidationResult.summaryData.freeCollateral?.doubleValue
         viewModel?.postMarginUsage = viewModel?.curMarginUsage == formValidationResult.summaryData.marginUsage?.doubleValue ? nil : formValidationResult.summaryData.marginUsage?.doubleValue
 
         viewModel?.slippage = formValidationResult.summaryData.estimatedSlippage?.doubleValue
@@ -222,5 +227,17 @@ extension dydxViews.VaultTransferType {
         case .deposit: return .deposit
         case .withdraw: return .withdraw
         }
+    }
+}
+
+extension VaultAccount {
+    var roundedWithdrawableUsdc: Double? {
+        withdrawableUsdc?.doubleValue.round(to: 2, rule: .towardZero)
+    }
+}
+
+extension Abacus.Subaccount {
+    var roundedFreeCollateral: Double? {
+        freeCollateral?.current?.doubleValue.round(to: 2, rule: .towardZero)
     }
 }

@@ -99,7 +99,7 @@ public class dydxProfileBalancesViewModel: PlatformViewModel {
                 .leftAligned()
 
             Text(amount)
-                .themeColor(foreground: .textTertiary)
+                .themeColor(foreground: .textPrimary)
                 .themeFont(fontType: .number, fontSize: .largest)
                 .leftAligned()
 

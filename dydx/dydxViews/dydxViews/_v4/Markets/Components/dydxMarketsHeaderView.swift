@@ -32,6 +32,7 @@ public class dydxMarketsHeaderViewModel: PlatformViewModel {
                 HStack {
                     Text(DataLocalizer.localize(path: "APP.GENERAL.MARKETS", params: nil))
                         .themeFont(fontType: .plus, fontSize: .largest)
+                        .themeColor(foreground: .textPrimary)
 
                     Spacer()
 
