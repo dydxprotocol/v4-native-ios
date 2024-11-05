@@ -152,7 +152,7 @@ private class dydxTradeStatusViewPresenter: HostedViewPresenter<dydxTradeStatusV
             viewModel?.orderViewModel.type = DataLocalizer.localize(path: typeStringKey)
         }
         viewModel?.orderViewModel.size = dydxFormatter.shared.localFormatted(number: lastOrder.size, digits: configs.stepSizeDecimals?.intValue ?? 1)
-        viewModel?.orderViewModel.token?.symbol = asset.id
+        viewModel?.orderViewModel.token?.symbol = asset.displayableAssetId
         if let createdAt = lastOrder.createdAtMilliseconds?.uint64Value {
             viewModel?.orderViewModel.date = Date(milliseconds: createdAt)
         }

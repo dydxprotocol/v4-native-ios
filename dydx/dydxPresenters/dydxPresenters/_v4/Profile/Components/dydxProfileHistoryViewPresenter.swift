@@ -102,7 +102,7 @@ private extension dydxProfileHistoryViewModel.Item {
          self.init(action: .fill(fill.side == Abacus.OrderSide.buy ?
                                     SideTextViewModel(side: .buy) :
                                     SideTextViewModel(side: .sell),
-                                asset.id),
+                                asset.displayableAssetId),
                    side: fill.side == Abacus.OrderSide.buy ?
                         SideTextViewModel(side: .long, coloringOption: .none) :
                         SideTextViewModel(side: .short, coloringOption: .none),
@@ -119,7 +119,7 @@ private extension dydxProfileHistoryViewModel.Item {
                   side: funding.positionSize > 0 ?
                         SideTextViewModel(side: .long, coloringOption: .none) :
                         SideTextViewModel(side: .short, coloringOption: .none),
-                  type: .token(TokenTextViewModel(symbol: asset.id)),
+                  type: .token(TokenTextViewModel(symbol: asset.displayableAssetId)),
                   amount: amount)
     }
 
