@@ -63,7 +63,7 @@ class dydxTradeSheetTipDraftViewPresenter: HostedViewPresenter<dydxTradeSheetTip
             viewModel?.size = nil
         }
 
-        if let token = asset?.id ?? configsAndAsset?.assetId {
+        if let token = asset?.displayableAssetId ?? configsAndAsset?.assetId {
             viewModel?.token = TokenTextViewModel(symbol: token)
         }
 

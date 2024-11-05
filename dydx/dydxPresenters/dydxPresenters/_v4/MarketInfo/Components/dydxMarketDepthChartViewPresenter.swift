@@ -254,7 +254,7 @@ class dydxMarketDepthChartViewPresenter: HostedViewPresenter<dydxMarketDepthChar
                                AbacusStateManager.shared.state.assetMap)
                 .sink { [weak self] (market: PerpetualMarket, assetMap: [String: Asset]) in
                     let asset = assetMap[market.assetId]
-                    self?.viewModel?.hightlight?.token = TokenTextViewModel(symbol: asset?.id ?? "-")
+                    self?.viewModel?.hightlight?.token = TokenTextViewModel(symbol: asset?.displayableAssetId ?? "-")
                     let tickSize = market.configs?.displayTickSizeDecimals?.intValue ?? 2
                     let stepSize = market.configs?.displayStepSizeDecimals?.intValue ?? 1
                     self?.viewModel?.hightlight?.price = dydxFormatter.shared.dollar(number: NSNumber(value: order.price), digits: tickSize)
