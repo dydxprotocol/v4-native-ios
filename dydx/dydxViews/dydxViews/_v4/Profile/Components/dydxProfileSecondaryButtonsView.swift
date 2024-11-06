@@ -13,6 +13,7 @@ public class dydxProfileSecondaryButtonsViewModel: PlatformViewModel {
     @Published public var settingsAction: (() -> Void)?
     @Published public var helpAction: (() -> Void)?
     @Published public var alertsAction: (() -> Void)?
+    @Published public var hasNewAlerts: Bool = false
 
     public init() { }
 
@@ -39,9 +40,34 @@ public class dydxProfileSecondaryButtonsViewModel: PlatformViewModel {
     @ViewBuilder
     private var alertsRow: some View {
         if let alertsAction {
-            self.createButton(imageName: "icon_alerts",
-                              title: DataLocalizer.localize(path: "APP.GENERAL.ALERTS"),
-                              action: alertsAction)
+            HStack(spacing: 8) {
+                PlatformIconViewModel(type: .asset(name: "icon_alerts", bundle: Bundle.dydxView),
+                                      clip: .noClip,
+                                      size: CGSize(width: 24, height: 24),
+                                      templateColor: .textTertiary)
+                .createView()
+
+                Text(DataLocalizer.localize(path: "APP.GENERAL.ALERTS"))
+                    .themeFont(fontSize: .medium)
+                    .themeColor(foreground: .textPrimary)
+                    .lineLimit(1)
+
+                Spacer()
+
+                if hasNewAlerts {
+                    Circle()
+                        .fill(ThemeColor.SemanticColor.colorPurple.color)
+                        .frame(width: 10, height: 10)
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 22)
+            .themeColor(background: .layer3)
+            .cornerRadius(12, corners: .allCorners)
+            .frame(maxWidth: .infinity)
+            .onTapGesture {
+                alertsAction()
+            }
         }
     }
 
