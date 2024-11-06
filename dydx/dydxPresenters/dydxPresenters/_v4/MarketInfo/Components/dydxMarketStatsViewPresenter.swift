@@ -104,7 +104,7 @@ class dydxMarketStatsViewPresenter: HostedViewPresenter<dydxMarketStatsViewModel
 
         let openInterest = dydxFormatter.shared.localFormatted(number: market.perpetual?.openInterest, digits: stepSizeNumDecimals) ?? "-"
         let token: TokenTextViewModel?
-        if let symbol = asset?.id {
+        if let symbol = asset?.displayableAssetId {
             token = TokenTextViewModel(symbol: symbol)
         } else {
             token = nil

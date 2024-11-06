@@ -126,7 +126,7 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
             .map { market in
                 let asset = assetMap[market.assetId]
                 let market = dydxMarketViewModel(marketId: market.id,
-                                                 assetId: market.assetId,
+                                                 assetId: asset?.displayableAssetId ?? market.assetId,
                                                  iconUrl: asset?.resources?.imageUrl,
                                                  volume24H: market.perpetual?.volume24H?.doubleValue ?? 0,
                                                  sparkline: market.perpetual?.line?.map(\.doubleValue) ?? [],

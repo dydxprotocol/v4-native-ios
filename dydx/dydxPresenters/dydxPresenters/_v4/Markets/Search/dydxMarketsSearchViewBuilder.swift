@@ -62,7 +62,7 @@ private class dydxMarketsSearchViewPresenter: dydxSearchViewPresenter {
                         let asset = assetMap[market.assetId] else {
                         return false
                     }
-                    return asset.id.lowercased().starts(with: searchText) ||
+                    return asset.displayableAssetId.lowercased().starts(with: searchText) ||
                         asset.name?.lowercased().starts(with: searchText) ?? false
                 }
                 // sort by volume if showing empty search string results and search text is empty

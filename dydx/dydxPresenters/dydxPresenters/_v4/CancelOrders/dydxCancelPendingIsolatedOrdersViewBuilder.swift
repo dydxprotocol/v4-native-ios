@@ -68,7 +68,7 @@ private class dydxCancelPendingIsolatedOrdersViewBuilderPresenter: HostedViewPre
             else { return }
             self.viewModel?.marketLogoUrl = URL(string: asset.resources?.imageUrl ?? "")
             self.viewModel?.assetName = asset.name ?? "--"
-            self.viewModel?.assetId = asset.id
+            self.viewModel?.assetId = asset.displayableAssetId
             self.viewModel?.orderCount = pendingOrders.count
             self.viewModel?.failureCount = self.viewModel?.failureCount
             self.viewModel?.cancelAction = { [weak self] in

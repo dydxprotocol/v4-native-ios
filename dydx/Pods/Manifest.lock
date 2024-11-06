@@ -1,6 +1,6 @@
 PODS:
-  - Abacus (1.13.17)
-  - AmplitudeSwift (1.10.0):
+  - Abacus (1.13.18)
+  - AmplitudeSwift (1.10.1):
     - AnalyticsConnector (~> 1.0.1)
   - AnalyticsConnector (1.0.3)
   - AppsFlyerFramework (6.15.3):
@@ -251,9 +251,9 @@ PODS:
     - PromisesObjC (= 2.4.0)
   - RDHCollectionViewGridLayout (1.2.5)
   - ReachabilitySwift (5.2.4)
-  - SDWebImage (5.19.7):
-    - SDWebImage/Core (= 5.19.7)
-  - SDWebImage/Core (5.19.7)
+  - SDWebImage (5.20.0):
+    - SDWebImage/Core (= 5.20.0)
+  - SDWebImage/Core (5.20.0)
   - SDWebImageSVGCoder (1.7.0):
     - SDWebImage/Core (~> 5.6)
   - SDWebImageSwiftUI (3.1.1):
@@ -382,8 +382,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  Abacus: c49081ef835542a3721b308a956db52888c3c585
-  AmplitudeSwift: 4093845011c73eaf65cd198b115a678ba7c9ecda
+  Abacus: ad923b7bd4d7a7dc4824a5b88130f0d7c56af1d0
+  AmplitudeSwift: 9a4b3e0cb70ad8f89176925e7a6f979c5d48f362
   AnalyticsConnector: a53214d38ae22734c6266106c0492b37832633a9
   AppsFlyerFramework: ad7ff0d22aa36c7f8cc4f71a5424e19b89ccb8ae
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
@@ -431,7 +431,7 @@ SPEC CHECKSUMS:
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   RDHCollectionViewGridLayout: 4b4229212ed8c136aa70101d92ecd43742ca62b6
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
-  SDWebImage: 8a6b7b160b4d710e2a22b6900e25301075c34cb3
+  SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
   SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
   SDWebImageSwiftUI: dcff3d05fd0579ff280221ae8856c34ac3b67f25
   SimpleKeychain: 8193a9e40967eccac933c1fde82de46c07a5ae26

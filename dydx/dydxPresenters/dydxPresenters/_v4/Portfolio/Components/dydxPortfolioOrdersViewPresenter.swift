@@ -110,7 +110,7 @@ class dydxPortfolioOrdersViewPresenter: HostedViewPresenter<dydxPortfolioOrdersV
                 item.triggerPrice = dydxFormatter.shared.dollar(number: triggerPrice, digits: tickSize)
             }
         }
-        if let symbol = configsAndAsset.asset?.id {
+        if let symbol = configsAndAsset.asset?.displayableAssetId {
             item.token = TokenTextViewModel(symbol: symbol)
         }
         if let url = asset.resources?.imageUrl {
