@@ -175,10 +175,10 @@ struct VaultPositionView: View {
 
     var body: some View {
         HStack(spacing: Self.interSectionPadding) {
-                marketSection
-                    .frame(width: Self.marketSectionWidth)
-                sizeSection
-                pnlSection
-            }
+            marketSection
+                .frame(width: Self.marketSectionWidth)
+            sizeSection
+            pnlSection
+        }
     }
 }
