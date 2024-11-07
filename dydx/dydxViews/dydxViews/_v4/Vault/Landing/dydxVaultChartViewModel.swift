@@ -54,19 +54,19 @@ public class dydxVaultChartViewModel: PlatformViewModel {
     }
 
     public enum ValueTimeOption: CaseIterable, RadioButtonContentDisplayable {
-        case oneDay
         case sevenDays
         case thirtyDays
+        case ninetyDays
 
         var displayText: String {
             let path: String
             switch self {
-            case .oneDay:
-                path = "APP.GENERAL.TIME_STRINGS.1D"
             case .sevenDays:
                 path = "APP.GENERAL.TIME_STRINGS.7D"
             case .thirtyDays:
                 path = "APP.GENERAL.TIME_STRINGS._30D"
+            case .ninetyDays:
+                path = "APP.GENERAL.TIME_STRINGS.90D"
             }
             return DataLocalizer.shared?.localize(path: path, params: nil) ?? ""
         }

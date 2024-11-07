@@ -174,12 +174,12 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                 let secondsSince1970 = (entry.date?.doubleValue ?? 0) / 1000.0
                 let minSecondsSince1970: Double
                 switch timeType {
-                case .oneDay:
-                    minSecondsSince1970 = Date().addingTimeInterval(-24 * 60 * 60).timeIntervalSince1970
                 case .sevenDays:
                     minSecondsSince1970 = Date().addingTimeInterval(-7 * 24 * 60 * 60).timeIntervalSince1970
                 case .thirtyDays:
                     minSecondsSince1970 = Date().addingTimeInterval(-30 * 24 * 60 * 60).timeIntervalSince1970
+                case .ninetyDays:
+                    minSecondsSince1970 = Date().addingTimeInterval(-90 * 24 * 60 * 60).timeIntervalSince1970
                 }
 
                 if minSecondsSince1970 <= secondsSince1970,
