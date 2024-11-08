@@ -15,6 +15,7 @@ import PlatformUI
 import Abacus
 import dydxStateManager
 import dydxFormatter
+import Combine
 
 protocol dydxMarketConfigsViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxMarketConfigsViewModel? { get }
@@ -32,17 +33,21 @@ class dydxMarketConfigsViewPresenter: HostedViewPresenter<dydxMarketConfigsViewM
     override func start() {
         super.start()
 
-        $marketId
+        let marketPublisher = $marketId
             .compactMap { $0 }
             .flatMap { AbacusStateManager.shared.state.market(of: $0) }
             .compactMap { $0 }
-            .sink { [weak self] market in
-                self?.updateConfigs(market: market)
+
+        Publishers
+            .CombineLatest(marketPublisher,
+                            AbacusStateManager.shared.state.assetMap)
+            .sink { [weak self] market, assetMap in
+                self?.updateConfigs(market: market, asset: assetMap[market.assetId])
             }
             .store(in: &subscriptions)
     }
 
-    private func updateConfigs(market: PerpetualMarket) {
+    private func updateConfigs(market: PerpetualMarket, asset: Asset?) {
         let marketConfigs = market.configs
 
         let maxLeverageText: String?
@@ -53,6 +58,7 @@ class dydxMarketConfigsViewPresenter: HostedViewPresenter<dydxMarketConfigsViewM
         }
 
         let tickSize = dydxFormatter.shared.format(decimal: marketConfigs?.tickSize?.decimalValue)
+        let token = TokenTextViewModel(symbol: asset?.displayableAssetId ?? market.assetId)
         viewModel?.items = [
             dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.MARKET_NAME"),
                                             value: market.displayId ?? "-"),
@@ -60,10 +66,10 @@ class dydxMarketConfigsViewPresenter: HostedViewPresenter<dydxMarketConfigsViewM
                                             value: tickSize != nil ? "$" + (tickSize ?? "") : "-"),
             dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.STEP_SIZE"),
                                             value: marketConfigs?.stepSize?.doubleValue != nil ? "\(marketConfigs?.stepSize?.doubleValue ?? 0)" : "-",
-                                            token: marketConfigs?.stepSize?.doubleValue != nil ? TokenTextViewModel(symbol: market.assetId) : nil),
+                                            token: marketConfigs?.stepSize?.doubleValue != nil ? token : nil),
             dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.MINIMUM_ORDER_SIZE"),
                                             value: marketConfigs?.minOrderSize?.doubleValue != nil ? "\(marketConfigs?.minOrderSize?.doubleValue ?? 0)" : "-",
-                                            token: marketConfigs?.minOrderSize?.doubleValue != nil ? TokenTextViewModel(symbol: market.assetId) : nil),
+                                            token: marketConfigs?.minOrderSize?.doubleValue != nil ? token : nil),
             dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.MAXIMUM_LEVERAGE"),
                                             value: maxLeverageText ?? "-"),
             dydxMarketConfigsViewModel.Item(title: DataLocalizer.localize(path: "APP.GENERAL.MAINTENANCE_MARGIN_FRACTION"),

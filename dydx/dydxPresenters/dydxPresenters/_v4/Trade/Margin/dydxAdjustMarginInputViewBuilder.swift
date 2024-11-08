@@ -110,6 +110,8 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
         super.start()
         guard let marketId, let childSubaccountNumber else { return }
 
+        AbacusStateManager.shared.setMarket(market: marketId)
+        AbacusStateManager.shared.adjustIsolatedMargin(input: marketId, type: .market)
         AbacusStateManager.shared.adjustIsolatedMargin(input: childSubaccountNumber, type: .childsubaccountnumber)
 
         Publishers

@@ -12,6 +12,7 @@ import Utilities
 import Charts
 import Combine
 import dydxChart
+import dydxFormatter
 
 public class dydxVaultChartViewModel: PlatformViewModel {
     public struct Entry {
@@ -53,19 +54,19 @@ public class dydxVaultChartViewModel: PlatformViewModel {
     }
 
     public enum ValueTimeOption: CaseIterable, RadioButtonContentDisplayable {
-        case oneDay
         case sevenDays
         case thirtyDays
+        case ninetyDays
 
         var displayText: String {
             let path: String
             switch self {
-            case .oneDay:
-                path = "APP.GENERAL.TIME_STRINGS.1D"
             case .sevenDays:
                 path = "APP.GENERAL.TIME_STRINGS.7D"
             case .thirtyDays:
                 path = "APP.GENERAL.TIME_STRINGS._30D"
+            case .ninetyDays:
+                path = "APP.GENERAL.TIME_STRINGS.90D"
             }
             return DataLocalizer.shared?.localize(path: path, params: nil) ?? ""
         }
@@ -111,6 +112,7 @@ private struct dydxVaultChartView: View {
                 .frame(minWidth: geometry.size.width, alignment: .center)
             }
         }
+        .frame(height: 38)
     }
 
     private var chart: some View {
@@ -119,7 +121,7 @@ private struct dydxVaultChartView: View {
                      y: .value("", entry.value))
             .lineStyle(StrokeStyle(lineWidth: 2))
             .foregroundStyle(viewModel.lineColor.gradient)
-            .interpolationMethod(.linear)
+            .interpolationMethod(.monotone)
             .symbolSize(0)
             // adds gradient shading
             AreaMark(
@@ -130,16 +132,24 @@ private struct dydxVaultChartView: View {
             .foregroundStyle(chartGradient)
         }
         .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
+        .chartYAxis {
+            AxisMarks(values: .automatic) {
+                let value = dydxFormatter.shared.condensedDollar(number: $0.as(Double.self))
+                AxisValueLabel {
+                    if let value {
+                        Text(value)
+                    }
+                }
+                .font(Font.system(size: 8))
+                .foregroundStyle(ThemeColor.SemanticColor.textTertiary.color)
+            }
+        }
         .chartXScale(domain: .automatic(includesZero: false))
         .chartYScale(domain: .automatic(includesZero: false))
-
-        // the lines can extend outside of chart
-        .padding(.all, 1)
     }
 
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 8) {
             radioButtonsRow
             chart
         }

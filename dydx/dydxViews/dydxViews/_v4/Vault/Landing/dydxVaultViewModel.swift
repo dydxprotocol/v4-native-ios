@@ -155,7 +155,7 @@ private struct dydxVaultView: View {
             Spacer(minLength: 4)
             Text(dydxFormatter.shared.dollar(number: viewModel.vaultBalance) ?? "--")
                 .themeColor(foreground: .textPrimary)
-                .themeFont(fontType: .base, fontSize: .medium)
+                .themeFont(fontType: .base, fontSize: .large)
         }
         .leftAligned()
         .padding(.horizontal, 16)
@@ -171,7 +171,7 @@ private struct dydxVaultView: View {
             Spacer(minLength: 4)
             Text(dydxFormatter.shared.dollar(number: viewModel.allTimeReturnUsdc) ?? "--")
                 .themeColor(foreground: viewModel.allTimeReturnUsdc == nil ? .textPrimary : ThemeSettings.directionalColor(forValue: viewModel.allTimeReturnUsdc))
-                .themeFont(fontType: .base, fontSize: .medium)
+                .themeFont(fontType: .base, fontSize: .large)
         }
         .leftAligned()
         .padding(.horizontal, 16)
@@ -196,7 +196,7 @@ private struct dydxVaultView: View {
                 .themeFont(fontType: .base, fontSize: .small)
             Text(dydxFormatter.shared.percent(number: viewModel.thirtyDayReturnPercent, digits: 0) ?? "")
                 .themeColor(foreground: ThemeSettings.directionalColor(forValue: viewModel.thirtyDayReturnPercent))
-                .themeFont(fontType: .base, fontSize: .medium)
+                .themeFont(fontType: .base, fontSize: .large)
         }
     }
 
@@ -207,7 +207,7 @@ private struct dydxVaultView: View {
                 .themeFont(fontType: .base, fontSize: .small)
             Text(dydxFormatter.shared.dollar(number: viewModel.totalValueLocked, digits: 0) ?? "")
                 .themeColor(foreground: .textPrimary)
-                .themeFont(fontType: .base, fontSize: .medium)
+                .themeFont(fontType: .base, fontSize: .large)
         }
     }
 
@@ -221,7 +221,7 @@ private struct dydxVaultView: View {
     // MARK: - Section 4 - positions
     private var openPositionsHeader: some View {
         HStack(spacing: 8) {
-            Text(DataLocalizer.shared?.localize(path: "APP.TRADE.OPEN_POSITIONS", params: nil) ?? "")
+            Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.HOLDINGS", params: nil) ?? "")
                 .themeColor(foreground: .textSecondary)
                 .themeFont(fontType: .base, fontSize: .larger)
             Text("\(viewModel.positions?.count ?? 0)")

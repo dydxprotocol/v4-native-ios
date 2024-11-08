@@ -326,29 +326,35 @@ public enum ClipStyle {
 }
 
 private struct BorderAndClipModifier: ViewModifier {
+    @EnvironmentObject var themeSettings: ThemeSettings
+    
     let style: ClipStyle
     let borderColor: ThemeColor.SemanticColor
     let lineWidth: CGFloat
 
     func body(content: Content) -> some View {
+        let color = themeSettings.themeConfig.themeColor.color(of: borderColor)
         switch style {
         case .circle:
             content
                 .clipShape(Circle())
                 .overlay(Circle()
-                    .strokeBorder(borderColor.color, lineWidth: lineWidth))
+                    .strokeBorder(color, lineWidth: lineWidth))
+                .environmentObject(themeSettings)
 
         case .cornerRadius(let cornerRadius):
             content
                 .clipShape(.rect(cornerRadius: cornerRadius))
                 .overlay(RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(borderColor.color, lineWidth: lineWidth))
+                    .strokeBorder(color, lineWidth: lineWidth))
+                .environmentObject(themeSettings)
 
         case .capsule:
             content
                 .clipShape(Capsule())
                 .overlay(Capsule()
-                    .strokeBorder(borderColor.color, lineWidth: lineWidth))
+                    .strokeBorder(color, lineWidth: lineWidth))
+                .environmentObject(themeSettings)
         }
     }
 }

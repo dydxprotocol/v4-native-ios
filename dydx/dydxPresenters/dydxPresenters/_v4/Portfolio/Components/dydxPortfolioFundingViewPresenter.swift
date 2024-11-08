@@ -81,7 +81,7 @@ class dydxPortfolioFundingViewPresenter: HostedViewPresenter<dydxPortfolioFundin
             item.sideText.side = funding.positionSize > 0 ? .long : .short
             let position = dydxFormatter.shared.raw(number: NSNumber(value: abs(funding.positionSize)), digits: configs.displayStepSizeDecimals?.intValue ?? 1)
             item.position = position
-            item.token?.symbol = asset.id
+            item.token?.symbol = asset.displayableAssetId
             if let url = asset.resources?.imageUrl {
                 item.logoUrl = URL(string: url)
             }

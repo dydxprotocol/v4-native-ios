@@ -13,12 +13,14 @@ import ParticlesKit
 import PlatformUI
 import dydxStateManager
 import dydxFormatter
+import Combine
 
 protocol dydxProfileSecondaryButtonsViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxProfileSecondaryButtonsViewModel? { get }
 }
 
 class dydxProfileSecondaryButtonsViewPresenter: HostedViewPresenter<dydxProfileSecondaryButtonsViewModel>, dydxProfileSecondaryButtonsViewPresenterProtocol {
+
     init(viewModel: dydxProfileSecondaryButtonsViewModel) {
         super.init()
 
@@ -31,16 +33,23 @@ class dydxProfileSecondaryButtonsViewPresenter: HostedViewPresenter<dydxProfileS
         viewModel.helpAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/help"), animated: true, completion: nil)
         }
+    }
 
-        AbacusStateManager.shared.state.onboarded
-            .sink { [weak self] onboarded in
+    override func start() {
+        super.start()
+
+        Publishers
+            .CombineLatest(
+                AbacusStateManager.shared.state.onboarded,
+                AbacusStateManager.shared.state.alerts)
+            .sink { [weak self] onboarded, alerts in
                 // do not show alerts if wallet not connected
                 if onboarded && dydxBoolFeatureFlag.isVaultEnabled.isEnabled {
                     self?.viewModel?.alertsAction = {
                         Router.shared?.navigate(to: RoutingRequest(path: "/alerts"), animated: true, completion: nil)
                     }
+                    self?.viewModel?.hasNewAlerts = alerts.count > 0
                 }
-
             }
             .store(in: &self.subscriptions)
     }

@@ -33,11 +33,16 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     fileprivate var sideLeverageAttributedText: AttributedString {
         let attributedSideText = AttributedString(text: side.text, urlString: nil)
             .themeColor(foreground: side.color)
-        let leverageText = dydxFormatter.shared.leverage(number: leverage) ?? "--"
-        let attributedLeverageText = AttributedString(text: "@ " + leverageText, urlString: nil)
-            .themeColor(foreground: .textTertiary)
-        return (attributedSideText + attributedLeverageText)
+        if let leverage = leverage {
+            let leverageText = dydxFormatter.shared.leverage(number: leverage) ?? "--"
+            let attributedLeverageText = AttributedString(text: " @ " + leverageText, urlString: nil)
+                .themeColor(foreground: .textTertiary)
+            return (attributedSideText + attributedLeverageText)
                 .themeFont(fontType: .base, fontSize: .smaller)
+        } else {
+            return attributedSideText
+                .themeFont(fontType: .base, fontSize: .smaller)
+        }
     }
 
     fileprivate var notionalValueText: String {
@@ -175,10 +180,10 @@ struct VaultPositionView: View {
 
     var body: some View {
         HStack(spacing: Self.interSectionPadding) {
-                marketSection
-                    .frame(width: Self.marketSectionWidth)
-                sizeSection
-                pnlSection
-            }
+            marketSection
+                .frame(width: Self.marketSectionWidth)
+            sizeSection
+            pnlSection
+        }
     }
 }

@@ -72,7 +72,7 @@ public enum VaultTransferType: CaseIterable, RadioButtonContentDisplayable {
 
     var transferDestinationSubtitleText: String {
         switch self {
-        case .deposit: return DataLocalizer.localize(path: "APP.VAULTS.PROTOCOL_VAULT")
+        case .deposit: return DataLocalizer.localize(path: "APP.VAULTS.MEGAVAULT")
         case .withdraw: return DataLocalizer.localize(path: "APP.VAULTS.CROSS_ACCOUNT")
         }
     }

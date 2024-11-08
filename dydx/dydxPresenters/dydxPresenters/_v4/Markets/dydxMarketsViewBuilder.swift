@@ -126,11 +126,11 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
             .map { market in
                 let asset = assetMap[market.assetId]
                 let market = dydxMarketViewModel(marketId: market.id,
-                                                 assetId: market.assetId,
+                                                 assetId: asset?.displayableAssetId ?? market.assetId,
                                                  iconUrl: asset?.resources?.imageUrl,
                                                  volume24H: market.perpetual?.volume24H?.doubleValue ?? 0,
                                                  sparkline: market.perpetual?.line?.map(\.doubleValue) ?? [],
-                                                 price: market.oraclePrice?.doubleValue ?? 0,
+                                                 price: dydxFormatter.shared.dollar(number: market.oraclePrice?.doubleValue, digits: market.configs?.displayTickSizeDecimals?.intValue ?? 2),
                                                  change: market.priceChange24HPercent?.doubleValue ?? 0,
                                                  isFavorite: dydxFavoriteStore.shared.isFavorite(marketId: market.id)
                 )

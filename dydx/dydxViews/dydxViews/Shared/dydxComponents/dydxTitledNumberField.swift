@@ -85,6 +85,7 @@ struct dydxTitledNumberField: View {
                 }
                 textFieldView
             }
+
             if isMaxButtonVisible {
                 Spacer()
                 maxButton
@@ -123,7 +124,7 @@ private struct NumberTextField: View {
         .keyboardType(keyboardType)
         .focused($isFocused)
         .onChange(of: isFocused) { _ in
-            if !isFocused, let value = Double(filteredTextBinding.wrappedValue) {
+            if !isFocused, let value =  Parser.standard.asInputDecimal(filteredTextBinding.wrappedValue)?.doubleValue {
                 actualValue = formatValue(value)
             }
         }
@@ -149,7 +150,7 @@ private struct NumberTextField: View {
                 }
             },
             set: { newValue in
-                if let doubleValue = Double(newValue) {
+                if let doubleValue = Parser.standard.asInputDecimal(newValue)?.doubleValue {
                     actualValue = formatValue(clamp(doubleValue))
                 } else {
                     actualValue = nil

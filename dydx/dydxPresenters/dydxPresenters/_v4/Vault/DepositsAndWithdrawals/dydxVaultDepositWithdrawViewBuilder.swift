@@ -73,24 +73,38 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
                 // do not need debouncing/throttling for deposit since there are no slippage fetches
                 // for withdrawal, refetch slippage every ~2 seconds if subaccount or vault changes during a 2 second period
                 // for withdrawal, refetch slippage after input changes (debounced)
-                let vaultAndSubaccountPublisher = Publishers.CombineLatest(AbacusStateManager.shared.state.selectedSubaccount,
-                                                                           AbacusStateManager.shared.state.vault.compactMap({ $0 }))
-                    .map { (subaccount: $0, vault: $1) }
-                    .throttle(for: transferType == .deposit ? 0 : 2, scheduler: DispatchQueue.main, latest: true)
+                let vaultAndSubaccountPublisher =
+                    Publishers
+                        .CombineLatest(
+                            AbacusStateManager.shared.state.selectedSubaccount,
+                            AbacusStateManager.shared.state.vault.compactMap({ $0 })
+                        )
+                        .map { (subaccount: $0, vault: $1) }
+                        .throttle(for: transferType == .deposit ? 0 : 2, scheduler: DispatchQueue.main, latest: true)
 
                 let amountPublisher = viewModel.$amount
                     .debounce(for: transferType == .deposit ? 0 : 0.5, scheduler: DispatchQueue.main).removeDuplicates()
 
-                self?.aggregatePublisherCancellable = Publishers.CombineLatest3(vaultAndSubaccountPublisher, AbacusStateManager.shared.state.onboarded, amountPublisher)
-                    .sink(receiveValue: { vaultAndSubaccount, onboarded, amount in
-                        self?.update(subaccount: vaultAndSubaccount.subaccount, vault: vaultAndSubaccount.vault, hasOnboarded: onboarded, amount: amount ?? 0, transferType: transferType)
-                    })
-            }
-            .store(in: &subscriptions)
+                self?.aggregatePublisherCancellable =
+                    Publishers
+                        .CombineLatest3(
+                            vaultAndSubaccountPublisher,
+                            AbacusStateManager.shared.state.onboarded,
+                            amountPublisher
+                        )
+                        .sink { vaultAndSubaccount, onboarded, amount in
+                            self?.update(subaccount: vaultAndSubaccount.subaccount, vault: vaultAndSubaccount.vault, hasOnboarded: onboarded, amount: amount ?? 0, transferType: transferType)
+                        }
+                    }
+                    .store(in: &subscriptions)
 
     }
 
-    private func update(subaccount: Subaccount?, vault: Abacus.Vault, hasOnboarded: Bool, amount: Double, transferType: dydxViews.VaultTransferType) {
+    private func update(subaccount: Subaccount?,
+                        vault: Abacus.Vault,
+                        hasOnboarded: Bool,
+                        amount: Double,
+                        transferType: dydxViews.VaultTransferType) {
         formValidationRequest?.cancel()
 
         let accountData = Abacus.VaultFormAccountData(marginUsage: subaccount?.marginUsage?.current ?? 0,
@@ -158,7 +172,12 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
         }
     }
 
-    private func update(subaccount: Subaccount?, vault: Abacus.Vault, hasOnboarded: Bool, amount: Double, transferType: dydxViews.VaultTransferType, formValidationResult: VaultFormValidationResult) {
+    private func update(subaccount: Subaccount?,
+                        vault: Abacus.Vault,
+                        hasOnboarded: Bool,
+                        amount: Double,
+                        transferType: dydxViews.VaultTransferType,
+                        formValidationResult: VaultFormValidationResult) {
         updateMaxAmount(subaccount: subaccount, vault: vault, transferType: transferType)
         updateSubmitState(formValidationResult: formValidationResult)
         updateReceiptItems(formValidationResult: formValidationResult, subaccount: subaccount, vault: vault, amount: amount, transferType: transferType)
@@ -179,19 +198,19 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
         viewModel?.submitState = formValidationResult.errors.isEmpty ? .enabled : .disabled
     }
 
-    private func updateReceiptItems(formValidationResult: VaultFormValidationResult, subaccount: Abacus.Subaccount?, vault: Abacus.Vault, amount: Double, transferType: dydxViews.VaultTransferType) {
+    private func updateReceiptItems(formValidationResult: VaultFormValidationResult,
+                                    subaccount: Abacus.Subaccount?,
+                                    vault: Abacus.Vault,
+                                    amount: Double,
+                                    transferType: dydxViews.VaultTransferType) {
         viewModel?.curVaultBalance = vault.account?.roundedWithdrawableUsdc ?? 0
         viewModel?.curFreeCollateral = subaccount?.roundedFreeCollateral ?? 0
         viewModel?.curMarginUsage = subaccount?.marginUsage?.current?.doubleValue ?? 0
 
         viewModel?.postVaultBalance =
-            dydxFormatter.shared.raw(number: vault.account?.roundedWithdrawableUsdc, digits: 2) ==
-            dydxFormatter.shared.raw(number: formValidationResult.summaryData.vaultBalance?.doubleValue, digits: 2)
-            ? nil : formValidationResult.summaryData.vaultBalance?.doubleValue
-        viewModel?.postFreeCollateral =
-            dydxFormatter.shared.raw(number: subaccount?.roundedFreeCollateral, digits: 2) ==
-            dydxFormatter.shared.raw(number: formValidationResult.summaryData.freeCollateral?.doubleValue, digits: 2)
-            ? nil : formValidationResult.summaryData.freeCollateral?.doubleValue
+            vault.account?.roundedWithdrawableUsdc == formValidationResult.summaryData.roundedVaultBalance
+            ? nil : formValidationResult.summaryData.roundedVaultBalance
+        viewModel?.postFreeCollateral = subaccount?.roundedFreeCollateral ==  formValidationResult.summaryData.roundedFreeCollateral  ? nil : formValidationResult.summaryData.freeCollateral?.doubleValue
         viewModel?.postMarginUsage = viewModel?.curMarginUsage == formValidationResult.summaryData.marginUsage?.doubleValue ? nil : formValidationResult.summaryData.marginUsage?.doubleValue
 
         viewModel?.slippage = formValidationResult.summaryData.estimatedSlippage?.doubleValue
@@ -239,5 +258,15 @@ extension VaultAccount {
 extension Abacus.Subaccount {
     var roundedFreeCollateral: Double? {
         freeCollateral?.current?.doubleValue.round(to: 2, rule: .towardZero)
+    }
+}
+
+extension VaultFormSummaryData {
+    var roundedVaultBalance: Double? {
+        vaultBalance?.doubleValue.round(to: 2, rule: .towardZero)
+    }
+
+    var roundedFreeCollateral: Double? {
+        freeCollateral?.doubleValue.round(to: 2, rule: .towardZero)
     }
 }

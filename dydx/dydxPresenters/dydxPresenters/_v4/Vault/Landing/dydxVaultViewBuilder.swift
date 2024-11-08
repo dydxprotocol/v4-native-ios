@@ -109,15 +109,20 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                 }
                 return lhs.marginUsdc?.doubleValue ?? 0 > rhs.marginUsdc?.doubleValue ?? 0
             }
-            .map { (position) -> dydxVaultPositionViewModel? in
+            .compactMap { (position) -> dydxVaultPositionViewModel? in
                 guard
-                    let marketId = position.marketId,
-                    // special case for fake USDC market to show unused margin
-                    let assetId = marketId == "UNALLOCATEDUSDC-USD" ? "USDC" : marketMap[marketId]?.assetId
+                    let marketId = position.marketId
                 else { return nil }
 
+                // special case for fake USDC market to show unused margin
+                let assetId = marketId == "UNALLOCATEDUSDC-USD" ? "USDC" : marketMap[marketId]?.assetId
                 let leverage = position.currentLeverageMultiple?.doubleValue
-                let asset = assetMap[assetId]
+                let asset: Asset?
+                if let assetId = assetId {
+                    asset = assetMap[assetId]
+                } else {
+                    asset = nil
+                }
                 let equity = position.marginUsdc?.doubleValue ?? 0
                 let notionalValue = position.currentPosition?.usdc?.doubleValue ?? 0
                 let positionSize = position.currentPosition?.asset?.doubleValue ?? 0
@@ -129,7 +134,7 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                     tokenUnitPrecision = 2
                     assetName = "USDC"
                 } else {
-                    iconType = .init(url: URL(string: assetMap[assetId]?.resources?.imageUrl ?? ""), placeholderText: assetId.first?.uppercased())
+                    iconType = .init(url: URL(string: asset?.resources?.imageUrl ?? ""), placeholderText: asset?.displayableAssetId.first?.uppercased())
                     tokenUnitPrecision = marketMap[marketId]?.configs?.displayStepSizeDecimals?.intValue ?? 2
                     assetName = asset?.name
                 }
@@ -159,7 +164,6 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                     pnlPercentage: position.thirtyDayPnl?.percent?.doubleValue,
                     sparklineValues: position.thirtyDayPnl?.sparklinePoints?.map({ $0.doubleValue }))
             }
-            .compactMap { $0 }
 
         viewModel?.positions = newPositions
     }
@@ -170,12 +174,12 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                 let secondsSince1970 = (entry.date?.doubleValue ?? 0) / 1000.0
                 let minSecondsSince1970: Double
                 switch timeType {
-                case .oneDay:
-                    minSecondsSince1970 = Date().addingTimeInterval(-24 * 60 * 60).timeIntervalSince1970
                 case .sevenDays:
                     minSecondsSince1970 = Date().addingTimeInterval(-7 * 24 * 60 * 60).timeIntervalSince1970
                 case .thirtyDays:
                     minSecondsSince1970 = Date().addingTimeInterval(-30 * 24 * 60 * 60).timeIntervalSince1970
+                case .ninetyDays:
+                    minSecondsSince1970 = Date().addingTimeInterval(-90 * 24 * 60 * 60).timeIntervalSince1970
                 }
 
                 if minSecondsSince1970 <= secondsSince1970,
