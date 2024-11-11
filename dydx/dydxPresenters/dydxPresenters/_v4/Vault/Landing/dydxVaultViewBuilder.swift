@@ -140,9 +140,9 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                 }
 
                 // only create new view model instance if it does not already exist
-                let side: SideTextViewModel.Side
+                let side: SideTextViewModel.Side?
                 if positionSize == 0 {
-                    side = .none
+                    side = nil
                 } else if positionSize > 0 {
                     side = .long
                 } else {

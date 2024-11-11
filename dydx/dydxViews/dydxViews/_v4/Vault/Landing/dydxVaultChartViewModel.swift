@@ -134,7 +134,7 @@ private struct dydxVaultChartView: View {
         .chartXAxis(.hidden)
         .chartYAxis {
             AxisMarks(values: .automatic) {
-                let value = dydxFormatter.shared.condensedDollar(number: $0.as(Double.self))
+                let value = dydxFormatter.shared.condensedDollar(number: $0.as(Double.self), digits: 1)
                 AxisValueLabel {
                     if let value {
                         Text(value)

@@ -155,7 +155,7 @@ private struct dydxVaultView: View {
             Spacer(minLength: 4)
             Text(dydxFormatter.shared.dollar(number: viewModel.vaultBalance) ?? "--")
                 .themeColor(foreground: .textPrimary)
-                .themeFont(fontType: .base, fontSize: .large)
+                .themeFont(fontType: .base, fontSize: .larger)
         }
         .leftAligned()
         .padding(.horizontal, 16)
@@ -171,7 +171,7 @@ private struct dydxVaultView: View {
             Spacer(minLength: 4)
             Text(dydxFormatter.shared.dollar(number: viewModel.allTimeReturnUsdc) ?? "--")
                 .themeColor(foreground: viewModel.allTimeReturnUsdc == nil ? .textPrimary : ThemeSettings.directionalColor(forValue: viewModel.allTimeReturnUsdc))
-                .themeFont(fontType: .base, fontSize: .large)
+                .themeFont(fontType: .base, fontSize: .larger)
         }
         .leftAligned()
         .padding(.horizontal, 16)
@@ -196,7 +196,7 @@ private struct dydxVaultView: View {
                 .themeFont(fontType: .base, fontSize: .small)
             Text(dydxFormatter.shared.percent(number: viewModel.thirtyDayReturnPercent, digits: 0) ?? "")
                 .themeColor(foreground: ThemeSettings.directionalColor(forValue: viewModel.thirtyDayReturnPercent))
-                .themeFont(fontType: .base, fontSize: .large)
+                .themeFont(fontType: .base, fontSize: .larger)
         }
     }
 
@@ -207,7 +207,7 @@ private struct dydxVaultView: View {
                 .themeFont(fontType: .base, fontSize: .small)
             Text(dydxFormatter.shared.dollar(number: viewModel.totalValueLocked, digits: 0) ?? "")
                 .themeColor(foreground: .textPrimary)
-                .themeFont(fontType: .base, fontSize: .large)
+                .themeFont(fontType: .base, fontSize: .larger)
         }
     }
 

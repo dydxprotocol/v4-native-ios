@@ -20,7 +20,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     @Published public var displayId: String
     @Published public var symbol: String?
     @Published public var iconType: PlatformIconViewModel.IconType = .init(url: nil, placeholderText: nil)
-    @Published public var side: SideTextViewModel.Side
+    @Published public var side: SideTextViewModel.Side?
     @Published public var leverage: Double?
     @Published public var equity: Double
     @Published public var notionalValue: Double
@@ -31,8 +31,8 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     @Published public var sparklineValues: [Double]?
 
     fileprivate var sideLeverageAttributedText: AttributedString {
-        let attributedSideText = AttributedString(text: side.text, urlString: nil)
-            .themeColor(foreground: side.color)
+        let attributedSideText = AttributedString(text: side?.text ?? "-", urlString: nil)
+            .themeColor(foreground: side?.color ?? ThemeColor.SemanticColor.textTertiary)
         if let leverage = leverage {
             let leverageText = dydxFormatter.shared.leverage(number: leverage) ?? "--"
             let attributedLeverageText = AttributedString(text: " @ " + leverageText, urlString: nil)
@@ -46,8 +46,8 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
     }
 
     fileprivate var notionalValueText: String {
-        let size = dydxFormatter.shared.condensedDollar(number: notionalValue, digits: 0) ?? "--"
-        let equity = dydxFormatter.shared.condensedDollar(number: equity, digits: 0) ?? "--"
+        let size = dydxFormatter.shared.condensedDollar(number: notionalValue, digits: 2) ?? "--"
+        let equity = dydxFormatter.shared.condensedDollar(number: equity, digits: 2) ?? "--"
         return "\(size) / \(equity)"
     }
 
@@ -76,7 +76,7 @@ public class dydxVaultPositionViewModel: PlatformViewModel {
         displayId: String,
         symbol: String?,
         iconType: PlatformIconViewModel.IconType,
-        side: SideTextViewModel.Side,
+        side: SideTextViewModel.Side?,
         leverage: Double?,
         equity: Double,
         notionalValue: Double,

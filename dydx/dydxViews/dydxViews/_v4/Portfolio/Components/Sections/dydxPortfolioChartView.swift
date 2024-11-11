@@ -81,6 +81,7 @@ public class dydxPortfolioChartViewModel: PlatformViewModel {
                     HStack {
                         Text(equity)
                             .themeFont(fontSize: .larger)
+                            .themeColor(foreground: .textPrimary)
 
                         Spacer()
 
