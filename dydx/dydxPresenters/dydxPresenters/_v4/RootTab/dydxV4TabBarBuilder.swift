@@ -35,6 +35,8 @@ public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .clear
+
         createCenterButton()
         maps = dydxBoolFeatureFlag.isVaultEnabled.isEnabled ? Self.tabBarItemInfosV2 : Self.tabBarItemInfos
     }

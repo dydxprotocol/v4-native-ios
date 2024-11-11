@@ -60,6 +60,7 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
         viewModel.filter = dydxMarketAssetFilterViewModel(contents: FilterAction.actions.map(\.content),
                                                            onSelectionChanged: { [weak self] selectedIdx in
             self?.selectedFilterAction = FilterAction.actions[selectedIdx]
+            self?.scrollToFirstAsset()
             if FilterAction.actions[selectedIdx].type == .predictionMarkets {
                 self?.viewModel?.filterFooterText = DataLocalizer.localize(path: "APP.PREDICTION_MARKET.PREDICTION_MARKETS_SETTLEMENT_DESCRIPTION")
             } else {
@@ -68,6 +69,7 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
         })
         viewModel.sort = dydxMarketAssetSortViewModel(contents: SortAction.actions.map(\.text)) { [weak self] selectedIdx in
             self?.selectedSortAction = SortAction.actions[selectedIdx]
+            self?.scrollToFirstAsset()
         }
 
         viewModel.marketsListViewModel?.onTap = { marketViewModel in
@@ -102,20 +104,10 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
                 self?.updateAssetList(markets: markets, assetMap: assetMap, sort: sort, filter: filter)
             }
             .store(in: &subscriptions)
-
-        Publishers
-            .CombineLatest($selectedFilterAction, $selectedSortAction)
-            .removeDuplicates(by: { $0.0 == $1.0 && $0.1 == $1.1 })
-            .sink { [weak self] _, _ in
-                self?.viewModel?.scrollAction = .toTop
-            }
-            .store(in: &subscriptions)
     }
 
     private func scrollToFirstAsset() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-            self?.viewModel?.scrollAction = .toTop
-        }
+        viewModel?.scrollAction = .toTop
     }
 
     private func updateAssetList(markets: [PerpetualMarket], assetMap: [String: Asset], sort: SortAction?, filter: FilterAction?) {
