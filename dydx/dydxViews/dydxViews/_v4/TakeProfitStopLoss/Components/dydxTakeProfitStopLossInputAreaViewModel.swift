@@ -102,8 +102,14 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
     }
 
     private func createClearButton(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType) -> AnyView? {
-        guard let numOrders = triggerType == .takeProfit ? numOpenTakeProfitOrders : numOpenStopLossOrders else { return nil }
-        if numOrders <= 1 {
+        let hasInput: Bool
+        switch triggerType {
+        case .takeProfit:
+            hasInput = takeProfitPriceInputViewModel?.value?.isNotEmpty ?? false
+        case .stopLoss:
+            hasInput = stopLossPriceInputViewModel?.value?.isNotEmpty ?? false
+        }
+        if hasInput {
             return Text(localizerPathKey: "APP.GENERAL.CLEAR")
                 .themeFont(fontType: .base, fontSize: .medium)
                 .themeColor(foreground: .colorRed)
