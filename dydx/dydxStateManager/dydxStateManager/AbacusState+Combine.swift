@@ -200,6 +200,19 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
+    public func selectedSubaccountPositionOfMarket(marketId: String) -> AnyPublisher<SubaccountPosition?, Never> {
+        selectedSubaccountPositions
+            .map { positions in
+                positions.first { position in
+                    position.id == marketId &&
+                    (position.side.current == Abacus.PositionSide.long_ || position.side.current == Abacus.PositionSide.short_)
+                }
+            }
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
     public var selectedSubaccountPendingPositions: AnyPublisher<[SubaccountPendingPosition], Never> {
         selectedSubaccount
             .compactMap { subaccount in
@@ -222,11 +235,61 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
+    public func selectedSubaccountOrdersOfMarket(marketId: String) -> AnyPublisher<[SubaccountOrder], Never> {
+        selectedSubaccountOrders
+            .map { orders in
+                orders.filter { $0.marketId == marketId }
+            }
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
     public var selectedSubaccountTriggerOrders: AnyPublisher<[SubaccountOrder], Never> {
         selectedSubaccountOrders
             .map { orders in
                 orders.filter { order in
                     order.status == .untriggered
+                }
+            }
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
+    public func takeProfitOrders(marketId: String, includeLimitOrders: Bool) -> AnyPublisher<[SubaccountOrder], Never> {
+        Publishers
+            .CombineLatest(
+                selectedSubaccountPositionOfMarket(marketId: marketId),
+                selectedSubaccountTriggerOrders
+                )
+            .compactMap { (position: SubaccountPosition?, orders: [SubaccountOrder]) in
+                orders.filter { order in
+                    guard let side = position?.side.current else { return false }
+                    return (
+                        order.type == OrderType.takeprofitmarket ||
+                        (order.type == OrderType.takeprofitlimit && includeLimitOrders)
+                    ) && order.side.opposite == side
+                }
+            }
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+    }
+
+    public func stopLossOrders(marketId: String, includeLimitOrders: Bool) -> AnyPublisher<[SubaccountOrder], Never> {
+        Publishers
+            .CombineLatest(
+                selectedSubaccountPositionOfMarket(marketId: marketId),
+                selectedSubaccountTriggerOrders
+                )
+            .compactMap { (position: SubaccountPosition?, orders: [SubaccountOrder]) in
+                orders.filter { order in
+                    guard let side = position?.side.current else { return false }
+                    return (
+                        order.type == OrderType.stopmarket ||
+                        (order.type == OrderType.stoplimit && includeLimitOrders)
+                    ) && order.side.opposite == side
                 }
             }
             .removeDuplicates()

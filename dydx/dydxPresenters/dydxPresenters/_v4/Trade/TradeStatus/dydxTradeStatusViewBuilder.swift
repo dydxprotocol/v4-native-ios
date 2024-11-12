@@ -290,15 +290,17 @@ private class dydxTradeStatusViewPresenter: HostedViewPresenter<dydxTradeStatusV
 
     private func updateOrderStatus(order: SubaccountOrder) {
         if let statusIcon = order.status.statusIcon,
-           let titleKey = order.resources.statusStringKey,
-            let detailKey = order.status.detailKey {
+           let titleKey = order.resources.statusStringKey {
             viewModel?.logoViewModel.status = statusIcon
             viewModel?.logoViewModel.title = DataLocalizer.localize(path: titleKey, params: nil)
-            viewModel?.logoViewModel.detail = DataLocalizer.localize(path: detailKey, params: nil)
+            if let detailKey = order.status.detailKey {
+                viewModel?.logoViewModel.detail = DataLocalizer.localize(path: detailKey, params: nil)
+            } else {
+                viewModel?.logoViewModel.detail = ""
+            }
         } else {
             if order.status.statusIcon == nil { assertionFailure("order.status.statusIcon was nil") }
             if order.resources.statusStringKey == nil { assertionFailure("order.resources.statusStringKey was nil") }
-            if order.status.detailKey == nil { assertionFailure("order.status.detailKey was nil") }
         }
     }
 }

@@ -1,5 +1,5 @@
 PODS:
-  - Abacus (1.13.19)
+  - Abacus (1.13.21)
   - AmplitudeSwift (1.10.1):
     - AnalyticsConnector (~> 1.0.1)
   - AnalyticsConnector (1.0.3)
@@ -382,7 +382,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  Abacus: 8f260c5639033d002ce9584113192b64d1ea6d5e
+  Abacus: 5e25f644a37bd873a9651cf4d8eb53484203cce9
   AmplitudeSwift: 9a4b3e0cb70ad8f89176925e7a6f979c5d48f362
   AnalyticsConnector: a53214d38ae22734c6266106c0492b37832633a9
   AppsFlyerFramework: ad7ff0d22aa36c7f8cc4f71a5424e19b89ccb8ae

@@ -15,13 +15,14 @@ import KeyboardObserving
 public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
 
     public enum SubmissionStatus {
-        case readyToSubmit
-        case needsInput
+        case readyToSubmit(cta: String?)
+        case needsInput(cta: String?)
         case fixErrors(cta: String?)
         case submitting
     }
 
-    @Published public var submissionReadiness: SubmissionStatus = .needsInput
+    @Published public var submissionReadiness: SubmissionStatus = .needsInput(cta: DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_TRIGGERS", params: nil) ?? "")
+
     @Published public var submissionAction: (() -> Void)?
 
     @Published public var entryPrice: String?
@@ -87,12 +88,12 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
         let spinner: AnyView?
 
         switch submissionReadiness {
-        case .readyToSubmit:
-            buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_TRIGGERS", params: nil) ?? ""
+        case .readyToSubmit(let cta):
+            buttonText = cta ?? ""
             buttonState = .primary
             spinner = nil
-        case .needsInput:
-            buttonText = DataLocalizer.shared?.localize(path: "APP.TRADE.ADD_TRIGGERS", params: nil) ?? ""
+        case .needsInput(let cta):
+            buttonText = cta ?? ""
             buttonState = .disabled
             spinner = nil
         case .fixErrors(let cta):

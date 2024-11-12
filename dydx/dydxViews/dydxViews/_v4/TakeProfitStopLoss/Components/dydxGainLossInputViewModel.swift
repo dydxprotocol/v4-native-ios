@@ -28,15 +28,16 @@ public class dydxGainLossInputViewModel: PlatformViewModeling {
         }
     }
 
+    fileprivate let triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType
+    fileprivate let onEdited: ((String?, Unit) -> Void)?
+
     @Published fileprivate var isFocused: Bool = false
-    @Published fileprivate var triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType
     @Published fileprivate var curUnit: Unit = .percentage {
         didSet {
             updateDisplayText()
         }
     }
 
-    @Published fileprivate var onEdited: ((String?, Unit) -> Void)?
     @Published fileprivate var isPresentingUnitOptions: Bool = false
 
     /// text that is edited by user (or in some cases, programmatically)
@@ -66,13 +67,6 @@ public class dydxGainLossInputViewModel: PlatformViewModeling {
         case .percentage:
             displayText = percentage
         }
-    }
-
-    /// force clear the texts, even if user is actively editing
-    public func clear() {
-        set(value: "", forUnit: .dollars)
-        set(value: "", forUnit: .percentage)
-        displayText = ""
     }
 
     public init(triggerType: dydxTakeProfitStopLossInputAreaModel.TriggerType, onEdited: ((String?, Unit) -> Void)? = nil) {
@@ -126,7 +120,9 @@ struct dydxGainLossInputView: View {
 
     private func displayTextOnChange(newValue: String) {
         guard isFocused else { return }
-        viewModel.onEdited?(newValue, viewModel.curUnit)
+        if let onEdited = viewModel.onEdited {
+            onEdited(newValue, viewModel.curUnit)
+        }
     }
 
     private func isFocusedOnChange(newValue: Bool) {
@@ -134,7 +130,7 @@ struct dydxGainLossInputView: View {
         viewModel.onEdited?(viewModel.displayText, viewModel.curUnit)
     }
 
-    var displaySelector: some View {
+    private var displaySelector: some View {
         Button(action: {
             if !viewModel.isPresentingUnitOptions {
                 viewModel.isPresentingUnitOptions = true
