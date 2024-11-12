@@ -168,7 +168,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
         guard let marketId = marketId else { return }
 
-        let includeLimitOrders: Bool = AbacusStateManager.shared.environment?.featureFlags.isSlTpLimitOrdersEnabled == true || true
+        let includeLimitOrders: Bool = AbacusStateManager.shared.environment?.featureFlags.isSlTpLimitOrdersEnabled == true
 
         Publishers
             .CombineLatest4(
