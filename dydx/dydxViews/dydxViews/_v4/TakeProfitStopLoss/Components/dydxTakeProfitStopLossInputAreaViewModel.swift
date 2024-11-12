@@ -109,11 +109,13 @@ public class dydxTakeProfitStopLossInputAreaModel: PlatformViewModel {
                 .themeColor(foreground: .colorRed)
                 .onTapGesture { [weak self] in
                     PlatformView.hideKeyboard()
-                    switch triggerType {
-                    case .takeProfit:
-                        self?.onClearTakeProfit?()
-                    case .stopLoss:
-                        self?.onClearStopLoss?()
+                    DispatchQueue.main.async { // wait for the keyboard to dismiss
+                        switch triggerType {
+                        case .takeProfit:
+                            self?.onClearTakeProfit?()
+                        case .stopLoss:
+                            self?.onClearStopLoss?()
+                        }
                     }
                 }
                 .wrappedInAnyView()

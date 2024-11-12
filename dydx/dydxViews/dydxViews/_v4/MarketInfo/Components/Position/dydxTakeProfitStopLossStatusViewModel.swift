@@ -63,7 +63,8 @@ public class dydxTakeProfitStopLossStatusViewModel: PlatformViewModel {
                             .themeFont(fontType: .base, fontSize: .large)
                             .themeColor(foreground: self.triggerPriceText == nil ? .textTertiary : .textPrimary)
                             .truncationMode(.middle)
-                            .fixedSize()
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
                     }
                     if self.limitPrice != nil || self.amount != nil {
                         VStack(spacing: 8) {

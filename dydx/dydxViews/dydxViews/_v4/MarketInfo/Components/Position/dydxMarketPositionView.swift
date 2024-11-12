@@ -236,13 +236,15 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                 HStack(spacing: 0) {
                     side?.createView(parentStyle: parentStyle.themeFont(fontSize: .small))
                     Spacer(minLength: 4)
-                    Text(marginMode ?? "")
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 4)
-                        .themeFont(fontSize: .small)
-                        .themeColor(foreground: .textSecondary)
-                        .themeColor(background: .layer7)
-                        .clipShape(.rect(cornerRadius: 4))
+                    if let marginMode = marginMode {
+                        Text(marginMode)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 4)
+                            .themeFont(fontSize: .small)
+                            .themeColor(foreground: .textSecondary)
+                            .themeColor(background: .layer7)
+                            .clipShape(.rect(cornerRadius: 4))
+                    }
                 }
             }
             .padding(16)
@@ -357,7 +359,9 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                 HStack(spacing: 10) {
                     Group {
                         takeProfitStatusViewModel?.createView(parentStyle: parentStyle)
+                            .frame(maxWidth: .infinity)
                         stopLossStatusViewModel?.createView(parentStyle: parentStyle)
+                            .frame(maxWidth: .infinity)
                     }
                     .frame(maxHeight: .infinity)
                 }
@@ -368,7 +372,9 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
             } else {
                 HStack(spacing: 10) {
                     addTakeProfitStopLossButton
+                        .frame(maxWidth: .infinity)
                     editMarginButton
+                        .frame(maxWidth: .infinity)
                 }
                 closePositionButton
             }
