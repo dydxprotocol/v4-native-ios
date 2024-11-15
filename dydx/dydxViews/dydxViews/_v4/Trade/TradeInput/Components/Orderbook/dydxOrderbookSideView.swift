@@ -128,7 +128,6 @@ public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
                         sideBySideView(line: line)
                             .themeColor(foreground: line.textColor)
                             .padding(.horizontal, 12)
-                            .padding(.vertical, 4)
                             .themeFont(fontType: .number, fontSize: .medium)
                     )
                 case .topDown:
@@ -159,20 +158,36 @@ public class dydxOrderbookSideViewModel: PlatformViewModel, Equatable {
     }
 
     func sideBySideView(line: dydxOrderbookLine) -> any View {
-        HStack {
+        HStack(spacing: 8) {
             let priceText = dydxFormatter.shared.dollar(number: line.price, size: tickSize)
             Text(priceText ?? "")
-            Spacer()
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .leftAligned()
+                .frame(maxWidth: .infinity)
+
             Text(line.sizeText)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .rightAligned()
+                .frame(maxWidth: .infinity)
         }
     }
 
     func topDownView(line: dydxOrderbookLine) -> any View {
-        HStack {
+        HStack(spacing: 4) {
             let priceText = dydxFormatter.shared.dollar(number: line.price, size: tickSize)
             Text(line.sizeText)
-            Spacer()
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .leftAligned()
+                .frame(maxWidth: .infinity)
+
             Text(priceText ?? "")
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .rightAligned()
+                .frame(maxWidth: .infinity)
         }
     }
 
@@ -243,11 +258,21 @@ public class dydxOrderbookAsksViewModel: dydxOrderbookSideViewModel {
     }
 
     override func sideBySideView(line: dydxOrderbookLine) -> any View {
-        HStack {
+        HStack(spacing: 8) {
             let priceText = dydxFormatter.shared.dollar(number: line.price, size: tickSize)
             Text(line.sizeText)
-            Spacer()
+                .themeFont(fontType: .number, fontSize: .medium)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .leftAligned()
+                .frame(maxWidth: .infinity)
+
             Text(priceText ?? "")
+                .themeFont(fontType: .number, fontSize: .medium)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .rightAligned()
+                .frame(maxWidth: .infinity)
         }
     }
 }
