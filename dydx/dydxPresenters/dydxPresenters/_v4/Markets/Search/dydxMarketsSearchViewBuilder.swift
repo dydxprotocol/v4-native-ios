@@ -20,7 +20,6 @@ private var cachedPresenter: dydxMarketsSearchViewPresenter?
 
 public class dydxMarketsSearchViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        // Caching the presenter for faster load
         let presenter = cachedPresenter ?? dydxMarketsSearchViewPresenter()
         cachedPresenter = presenter
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
@@ -55,7 +54,7 @@ private class dydxMarketsSearchViewPresenter: HostedViewPresenter<dydxMarketsSea
         }
         viewModel.marketsListViewModel?.onTap = { marketViewModel in
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
-                Router.shared?.navigate(to: RoutingRequest(path: "/trade/\(marketViewModel.marketId)"), animated: true, completion: nil)
+                Router.shared?.navigate(to: RoutingRequest(path: "/trade", params: ["market": marketViewModel.marketId]), animated: true, completion: nil)
             }
         }
 
