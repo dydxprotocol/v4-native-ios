@@ -23,11 +23,11 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
         case .enable_app_rating:
             return true
         case .isVaultEnabled:
-            return false
+            return true
         case .showPredictionMarketsUI:
             return false
         case .abacus_static_typing:
-            return Installation.source == .debug
+            return true
         }
     }
 

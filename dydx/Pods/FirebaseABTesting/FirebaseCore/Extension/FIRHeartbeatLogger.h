@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef FIREBASECORE_FIRHEARTBEATLOGGER_H
+#define FIREBASECORE_FIRHEARTBEATLOGGER_H
+
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -30,6 +33,7 @@ typedef NS_ENUM(NSInteger, FIRDailyHeartbeatCode) {
   FIRDailyHeartbeatCodeSome = 2,
 };
 
+NS_SWIFT_SENDABLE
 @protocol FIRHeartbeatLoggerProtocol <NSObject>
 
 /// Asynchronously logs a heartbeat.
@@ -44,8 +48,7 @@ typedef NS_ENUM(NSInteger, FIRDailyHeartbeatCode) {
     API_AVAILABLE(ios(13.0), macosx(10.15), macCatalyst(13.0), tvos(13.0), watchos(6.0));
 
 /// Return the header value for the heartbeat logger.
-- (NSString *_Nullable)
-    headerValue NS_SWIFT_UNAVAILABLE("Use `asyncHeaderValue() async -> String?` instead.");
+- (NSString *_Nullable)headerValue;
 #endif  // FIREBASE_BUILD_CMAKE
 
 @end
@@ -103,3 +106,5 @@ NSString *_Nullable FIRHeaderValueFromHeartbeatsPayload(FIRHeartbeatsPayload *he
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif  // FIREBASECORE_FIRHEARTBEATLOGGER_H
