@@ -102,6 +102,14 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
         }
     }
 
+    @Published private var currentTypeIndex: Int? {
+        didSet {
+            if let currentTypeIndex = currentTypeIndex, currentTypeIndex != oldValue {
+                viewModel?.control.types.currentDisplayType = currentTypeIndex
+            }
+        }
+    }
+
     override init() {
         super.init()
 
@@ -110,17 +118,9 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
         // Control
         viewModel?.control.types.displayTypes = ChartType.displayTypes.map(\.text)
         viewModel?.control.types.onDisplayTypeChanged = { [weak self] index in
-            guard let self = self else { return }
-            if index < ChartType.displayTypes.count {
-                let displayType = ChartType.displayTypes[index]
-                switch displayType.typeId {
-                case .candles:
-                    self.combinedGraph.presenters = [self.candlesGraph, self.barGraph]
-                case .line:
-                    self.combinedGraph.presenters = [self.lineGraph, self.barGraph]
-                }
-            }
+            self?.currentTypeIndex = index
         }
+        currentTypeIndex = 0
 
         viewModel?.control.resolutions.options = Resolution.allResolutions.map { resolution in
             InputSelectOption(value: resolution.key.v4Key, string: DataLocalizer.localize(path: resolution.text))
@@ -151,6 +151,12 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
     override func start() {
         super.start()
 
+        $currentTypeIndex.compactMap { $0 }
+            .sink { [weak self] index in
+                self?.updateChartType(index: index)
+            }
+            .store(in: &subscriptions)
+
         Publishers
             .CombineLatest4($marketId,
                             AbacusStateManager.shared.state.marketMap,
@@ -165,6 +171,18 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
                 }
             }
             .store(in: &subscriptions)
+    }
+
+    private func updateChartType(index: Int) {
+        if index < ChartType.displayTypes.count {
+            let displayType = ChartType.displayTypes[index]
+            switch displayType.typeId {
+            case .candles:
+                self.combinedGraph.presenters = [self.candlesGraph, self.barGraph]
+            case .line:
+                self.combinedGraph.presenters = [self.lineGraph, self.barGraph]
+            }
+        }
     }
 
     private func updateGraphData(candles: MarketCandles, resolutionIndex: Int) {
