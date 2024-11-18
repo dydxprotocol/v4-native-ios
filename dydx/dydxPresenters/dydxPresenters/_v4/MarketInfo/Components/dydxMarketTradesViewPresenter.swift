@@ -32,29 +32,22 @@ class dydxMarketTradesViewPresenter: HostedViewPresenter<dydxMarketTradesViewMod
     override func start() {
         super.start()
 
-        let tradesPublisher = $marketId
-            .compactMap { $0 }
-            .flatMap { AbacusStateManager.shared.state.trades(of: $0) }
-            .compactMap { $0 }
-
-        let configsPublisher = $marketId
-            .compactMap { $0 }
-            .flatMap { AbacusStateManager.shared.state.market(of: $0) }
-            .compactMap(\.?.configs)
-            .compactMap { $0 }
-
         Publishers
-            .CombineLatest(tradesPublisher,
-                           configsPublisher)
-            .sink { [weak self] (trades: [MarketTrade], configs: MarketConfigs) in
+            .CombineLatest3($marketId.compactMap { $0 },
+                           AbacusStateManager.shared.state.tradesMap,
+                           AbacusStateManager.shared.state.marketMap)
+            .sink { [weak self] marketId, tradesMap, marketMap in
+                guard let trades = tradesMap[marketId], let configs = marketMap[marketId]?.configs else {
+                    return
+                }
                 let stepSize = configs.displayStepSize?.decimalValue
                 let tickSize = configs.displayTickSize?.decimalValue
-                let trades = Array(trades)
-                let maxSizeTrade = trades.max { lhs, rhs in
+                let trimmed = trades.prefix(99)     // show max of 99 only for better performance
+                let maxSizeTrade = trimmed.max { lhs, rhs in
                     lhs.size < rhs.size
                 }
                 self?.viewModel = dydxMarketTradesViewModel()
-                self?.viewModel?.tradeItems = trades.compactMap {
+                self?.viewModel?.tradeItems = trimmed.compactMap {
                     dydxMarketTradesViewModel.TradeItem(marketTrade: $0, stepSize: stepSize, tickSize: tickSize, maxSize: maxSizeTrade?.size)
                 }
             }
