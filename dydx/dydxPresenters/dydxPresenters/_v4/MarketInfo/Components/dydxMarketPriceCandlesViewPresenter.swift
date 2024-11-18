@@ -151,17 +151,14 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
     override func start() {
         super.start()
 
-        let candlesPublisher = $marketId
-            .compactMap { $0 }
-            .flatMap { AbacusStateManager.shared.state.candles(of: $0) }
-
         Publishers
             .CombineLatest4($marketId,
                             AbacusStateManager.shared.state.marketMap,
-                            candlesPublisher,
+                            AbacusStateManager.shared.state.candlesMap,
                             $currentResolutionIndex.compactMap { $0 })
-            .sink { [weak self] marketId, marketMap, candles, resolutionIndex in
+            .sink { [weak self] marketId, marketMap, candlesMap, resolutionIndex in
                 guard let marketId = marketId, let market = marketMap[marketId] else { return }
+                let candles = candlesMap[marketId]
                 self?.tickSize = market.configs?.displayTickSize?.doubleValue
                 if let candles = candles {
                     self?.updateGraphData(candles: candles, resolutionIndex: resolutionIndex)
