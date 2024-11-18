@@ -29,22 +29,9 @@ class dydxOrderbookPresenter: HostedViewPresenter<dydxOrderbookViewModel>, dydxO
     @Published var display: OrderbookDisplay = .all
     @Published var marketId: String?
 
-    private var spread: dydxOrderbookSpreadViewModel? {
-        viewModel?.spread
-    }
-    private var asks: dydxOrderbookAsksViewModel? {
-        viewModel?.asks
-    }
-    private var bids: dydxOrderbookBidsViewModel? {
-        viewModel?.bids
-    }
-
     private var asksColorMap: [Double: ColorMapEntry]?
     private var bidsColorMap: [Double: ColorMapEntry]?
     private let colorChangeTime: TimeInterval = 0.2 // time to change the color of the new entries
-
-    private var maxDepthForAsks: Double?
-    private var maxDepthForBids: Double?
 
     override init() {
         super.init()
@@ -74,34 +61,32 @@ class dydxOrderbookPresenter: HostedViewPresenter<dydxOrderbookViewModel>, dydxO
     }
 
     private func update(market: PerpetualMarket?, orderbook: MarketOrderbook?) {
+        var maxDepthForAsks: Double?
+        var maxDepthForBids: Double?
         let tickSize = dydxFormatter.shared.format(decimal: orderbook?.grouping?.tickSize?.decimalValue)
         if display == .all || display == .asks {
-            asks?.tickSize = tickSize
+            viewModel?.asks?.tickSize = tickSize
             let (asks, maxDepth) = filterOrderbookLines(lines: orderbook?.asks, market: market, colorMap: &asksColorMap, textColor: ThemeSettings.negativeColor)
-            self.asks?.lines = asks
-            if maxDepthForAsks == nil {
-                maxDepthForAsks = maxDepth
-            }
-            self.asks?.maxDepth = maxDepthForAsks ?? 0
-            viewModel?.asks = self.asks
+            viewModel?.asks?.lines = asks
+            maxDepthForAsks = maxDepth
         } else {
             viewModel?.asks = nil
         }
 
         if display == .all || display == .bids {
-            bids?.tickSize = tickSize
+            viewModel?.bids?.tickSize = tickSize
             let (bids, maxDepth) = filterOrderbookLines(lines: orderbook?.bids, market: market, colorMap: &bidsColorMap, textColor: ThemeSettings.positiveColor)
-            self.bids?.lines = bids
-            if maxDepthForBids == nil {
-                maxDepthForBids = maxDepth
-            }
-            self.bids?.maxDepth = maxDepthForBids ?? 0
-            viewModel?.bids = self.bids
+            viewModel?.bids?.lines = bids
+            maxDepthForBids = maxDepth
         } else {
             viewModel?.bids = nil
         }
 
-        spread?.percent = orderbook?.spreadPercent?.doubleValue ?? 0.0
+        let maxDepth = max(maxDepthForAsks ?? 0, maxDepthForBids ?? 0)
+        viewModel?.asks?.maxDepth = maxDepth
+        viewModel?.bids?.maxDepth = maxDepth
+
+        viewModel?.spread?.percent = orderbook?.spreadPercent?.doubleValue ?? 0.0
     }
 
     private func filterOrderbookLines(lines: [OrderbookLine]?, market: PerpetualMarket?, colorMap: inout [Double: ColorMapEntry]?, textColor: ThemeColor.SemanticColor) -> ([dydxOrderbookLine], Double) {
