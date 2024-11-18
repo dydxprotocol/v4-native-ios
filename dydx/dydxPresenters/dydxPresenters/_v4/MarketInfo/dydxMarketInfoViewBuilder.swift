@@ -130,14 +130,6 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
     override func start() {
         super.start()
 
-        guard let marketId = marketId else { return }
-
-        fillsPresenter.filterByMarketId = marketId
-        fundingPresenter.filterByMarketId = marketId
-        ordersPresenter.filterByMarketId = marketId
-
-        AbacusStateManager.shared.setMarket(market: marketId)
-
         $marketId
             .compactMap { $0 }
             .removeDuplicates()
@@ -148,15 +140,19 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
                 self?.configsPresenter.marketId = marketId
                 self?.sharedMarketPresenter.marketId = marketId
                 self?.favoritePresenter.marketId = marketId
+
+                self?.fillsPresenter.filterByMarketId = marketId
+                self?.fundingPresenter.filterByMarketId = marketId
+                self?.ordersPresenter.filterByMarketId = marketId
             }
             .store(in: &subscriptions)
 
         Publishers
             .CombineLatest3(AbacusStateManager.shared.state.selectedSubaccountPositions,
                             AbacusStateManager.shared.state.selectedSubaccountPendingPositions,
-                           $marketId
-                            .compactMap { $0 }
-                            .removeDuplicates())
+                            $marketId
+                .compactMap { $0 }
+                .removeDuplicates())
             .sink { [weak self] subaccountPositions, subaccountPendingPositions, marketId in
                 let position = subaccountPositions.first { $0.id == marketId }
                 let pendingPosition = subaccountPendingPositions.first { $0.marketId == marketId }
@@ -164,11 +160,12 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
             }
             .store(in: &subscriptions)
 
-    floatTradeInput()
-    Publishers.CombineLatest(
-        AbacusStateManager.shared.state.marketMap,
-        AbacusStateManager.shared.state.assetMap
-    )
+        floatTradeInput()
+
+        Publishers.CombineLatest(
+            AbacusStateManager.shared.state.marketMap,
+            AbacusStateManager.shared.state.assetMap
+        )
         .first()
         .sink {[weak self] marketMap, assetMap in
             guard let marketId = self?.marketId,

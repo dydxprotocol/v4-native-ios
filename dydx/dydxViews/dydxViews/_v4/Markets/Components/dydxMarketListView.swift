@@ -68,7 +68,7 @@ private struct dydxMarketListView: View {
     }
 }
 
-public class dydxMarketViewModel: PlatformViewModeling {
+public class dydxMarketViewModel: PlatformViewModel {
     public let marketId: String
     public let assetId: String
     public let iconUrl: String?
@@ -101,8 +101,12 @@ public class dydxMarketViewModel: PlatformViewModeling {
         self.isFavorite = isFavorite
     }
 
-    public func createView(parentStyle: ThemeStyle, styleKey: String?) -> some View {
-        dydxMarketView(viewModel: self)
+    public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
+            guard let self = self else { return AnyView(PlatformView.nilView) }
+
+            return dydxMarketView(viewModel: self).wrappedInAnyView()
+        }
     }
 }
 

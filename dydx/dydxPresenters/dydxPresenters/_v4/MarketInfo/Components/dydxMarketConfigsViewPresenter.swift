@@ -33,15 +33,12 @@ class dydxMarketConfigsViewPresenter: HostedViewPresenter<dydxMarketConfigsViewM
     override func start() {
         super.start()
 
-        let marketPublisher = $marketId
-            .compactMap { $0 }
-            .flatMap { AbacusStateManager.shared.state.market(of: $0) }
-            .compactMap { $0 }
-
         Publishers
-            .CombineLatest(marketPublisher,
+            .CombineLatest3($marketId,
+                            AbacusStateManager.shared.state.marketMap,
                             AbacusStateManager.shared.state.assetMap)
-            .sink { [weak self] market, assetMap in
+            .sink { [weak self] marketId, marketMap, assetMap in
+                guard let marketId = marketId, let market = marketMap[marketId] else { return }
                 self?.updateConfigs(market: market, asset: assetMap[market.assetId])
             }
             .store(in: &subscriptions)

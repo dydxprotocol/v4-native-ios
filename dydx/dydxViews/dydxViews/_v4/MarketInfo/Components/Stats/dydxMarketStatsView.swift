@@ -13,7 +13,7 @@ import Utilities
 public class dydxMarketStatsViewModel: PlatformViewModel {
     public struct StatItem: Hashable {
         public static func == (lhs: dydxMarketStatsViewModel.StatItem, rhs: dydxMarketStatsViewModel.StatItem) -> Bool {
-            lhs.header == rhs.header && lhs.token == rhs.token
+            false // always reload
         }
 
         public func hash(into hasher: inout Hasher) {
@@ -32,7 +32,25 @@ public class dydxMarketStatsViewModel: PlatformViewModel {
         let token: TokenTextViewModel?
     }
 
-    @Published public var statItems: [StatItem] = []
+    @Published private var statRows = [[StatItem]]()
+
+    @Published public var statItems: [StatItem] = [] {
+        didSet {
+            var newItems = [[StatItem]]()
+            var currentRow = [StatItem]()
+            for item in statItems {
+                currentRow.append(item)
+                if currentRow.count == 2 {
+                    newItems.append(currentRow)
+                    currentRow = []
+                }
+            }
+            if currentRow.count > 0 {
+                newItems.append(currentRow)
+            }
+            statRows = newItems
+        }
+    }
 
     public init() { }
 
@@ -50,57 +68,43 @@ public class dydxMarketStatsViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let itemPerRow = 2
-
             return AnyView(
                 VStack(spacing: 0) {
                     DividerModel().createView(parentStyle: style)
 
-                    ForEach(0..<self.statItems.count / itemPerRow + 1, id: \.self) { row in
-                        if row * itemPerRow < self.statItems.count {
-                            HStack(spacing: 0) {
-                                ForEach(0..<itemPerRow, id: \.self) { col in
-                                    let itemIdx = row * itemPerRow + col
-                                    if itemIdx < self.statItems.count {
-                                        let item = self.statItems[itemIdx]
-                                        VStack {
-                                            HStack {
-                                                Text(item.header)
-                                                    .themeFont(fontSize: .smaller)
-                                                    .themeColor(foreground: .textTertiary)
-                                                Spacer()
-                                            }
-                                            Spacer()
-                                            HStack {
-                                                item.value
-                                                    .createView(parentStyle: style)
-                                                item.token?
-                                                    .createView(parentStyle: style.themeFont(fontSize: .smaller))
-
-                                                Spacer()
-                                            }
-                                            .minimumScaleFactor(0.5)
-                                        }
-                                        .padding(.horizontal, 16)
-                                        .padding(.vertical, 16)
-                                        .frame(maxWidth: .infinity)
-                                    } else {
-                                        PlatformView.emptyView
-                                            .themeColor(background: .layer0)
-                                            .frame(maxWidth: .infinity)
+                    ForEach(self.statRows, id: \.self) { row in
+                        HStack(spacing: 0) {
+                            ForEach(row, id: \.self) { item in
+                                VStack {
+                                    HStack {
+                                        Text(item.header)
+                                            .themeFont(fontSize: .smaller)
+                                            .themeColor(foreground: .textTertiary)
+                                        Spacer()
                                     }
-
-                                    if col < itemPerRow - 1 {
-                                        DividerModel()
+                                    Spacer()
+                                    HStack {
+                                        item.value
                                             .createView(parentStyle: style)
-                                            .frame(maxHeight: .infinity)
-                                    }
-                                }
-                            }
-                            .frame(height: 78)
+                                        item.token?
+                                            .createView(parentStyle: style.themeFont(fontSize: .smaller))
 
-                            DividerModel().createView(parentStyle: style)
+                                        Spacer()
+                                    }
+                                    .minimumScaleFactor(0.5)
+                                }
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 16)
+                                .frame(maxWidth: .infinity)
+                            }
+
+                            DividerModel()
+                                .createView(parentStyle: style)
+                                .frame(maxHeight: .infinity)
                         }
+                        .frame(height: 78)
+
+                        DividerModel().createView(parentStyle: style)
                     }
                 }
             )

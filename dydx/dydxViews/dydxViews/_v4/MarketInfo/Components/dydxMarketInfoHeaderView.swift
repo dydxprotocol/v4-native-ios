@@ -37,6 +37,8 @@ public class dydxMarketInfoHeaderViewModel: PlatformViewModel {
                         Text(sharedMarketViewModel?.assetName ?? "")
                             .themeColor(foreground: .textSecondary)
                             .themeFont(fontType: .base, fontSize: .large)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                         TokenTextViewModel(symbol: sharedMarketViewModel?.assetId ?? "")
                             .createView(parentStyle: parentStyle.themeFont(fontSize: .smallest), styleKey: styleKey)
                     }
@@ -44,7 +46,10 @@ public class dydxMarketInfoHeaderViewModel: PlatformViewModel {
                         Text(sharedMarketViewModel?.indexPrice ?? "")
                             .themeColor(foreground: .textPrimary)
                             .themeFont(fontType: .number, fontSize: .large)
-                        sharedMarketViewModel?.priceChangePercent24H?.createView(parentStyle: parentStyle.themeFont(fontSize: .medium), styleKey: styleKey)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                        sharedMarketViewModel?.priceChangePercent24H?
+                            .createView(parentStyle: parentStyle.themeFont(fontSize: .medium), styleKey: styleKey)
                     }
                 }
             }
@@ -62,19 +67,24 @@ public class dydxMarketInfoHeaderViewModel: PlatformViewModel {
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
-            guard let self = self, let sharedMarketViewModel = self.sharedMarketViewModel else {
+            guard let self = self, self.sharedMarketViewModel != nil else {
                 return AnyView(PlatformView.nilView)
             }
 
-            return HStack(spacing: 28) {
+            return HStack(spacing: 16) {
                 ChevronBackButtonModel(onBackButtonTap: self.onBackButtonTap ?? {})
                     .createView(parentStyle: style)
+                    .frame(width: 32)
 
                 self.createMarketSelectorView(parentStyle: parentStyle, styleKey: styleKey)
+                    .frame(maxWidth: .infinity)
 
                 self.favoriteViewModel?.createView(parentStyle: style)
-                    .viewModel.createView(parentStyle: parentStyle, styleKey: styleKey)
-            }.wrappedInAnyView()
+                    .frame(width: 32)
+            }
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 12)
+                .wrappedInAnyView()
         }
     }
 }

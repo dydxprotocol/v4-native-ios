@@ -117,16 +117,7 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
             .sorted { sort?.action($0, $1) ?? false }
             .map { market in
                 let asset = assetMap[market.assetId]
-                let market = dydxMarketViewModel(marketId: market.id,
-                                                 assetId: asset?.displayableAssetId ?? market.assetId,
-                                                 iconUrl: asset?.resources?.imageUrl,
-                                                 volume24H: market.perpetual?.volume24H?.doubleValue ?? 0,
-                                                 sparkline: market.perpetual?.line?.map(\.doubleValue) ?? [],
-                                                 price: dydxFormatter.shared.dollar(number: market.oraclePrice?.doubleValue, digits: market.configs?.displayTickSizeDecimals?.intValue ?? 2),
-                                                 change: market.priceChange24HPercent?.doubleValue ?? 0,
-                                                 isFavorite: dydxFavoriteStore.shared.isFavorite(marketId: market.id)
-                )
-                return market
+                return dydxMarketViewModel.createFrom(market: market, asset: asset)
             }
             .compactMap { $0 }
     }
@@ -143,5 +134,19 @@ private class dydxMarketsViewPresenter: HostedViewPresenter<dydxMarketsViewModel
         if items != viewModel?.summary.items {
             viewModel?.summary.items = items
         }
+    }
+}
+
+extension dydxMarketViewModel {
+    static func createFrom(market: PerpetualMarket, asset: Asset?) -> dydxMarketViewModel {
+        dydxMarketViewModel(marketId: market.id,
+                            assetId: asset?.displayableAssetId ?? market.assetId,
+                            iconUrl: asset?.resources?.imageUrl,
+                            volume24H: market.perpetual?.volume24H?.doubleValue ?? 0,
+                            sparkline: market.perpetual?.line?.map(\.doubleValue) ?? [],
+                            price: dydxFormatter.shared.dollar(number: market.oraclePrice?.doubleValue, digits: market.configs?.displayTickSizeDecimals?.intValue ?? 2),
+                            change: market.priceChange24HPercent?.doubleValue ?? 0,
+                            isFavorite: dydxFavoriteStore.shared.isFavorite(marketId: market.id)
+        )
     }
 }

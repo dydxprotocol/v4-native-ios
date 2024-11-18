@@ -32,15 +32,13 @@ class SharedMarketPresenter: HostedViewPresenter<SharedMarketViewModel>, SharedM
     override func start() {
         super.start()
 
-        let marketPublisher = $marketId
-            .compactMap { $0 }
-            .flatMap { AbacusStateManager.shared.state.market(of: $0) }
-            .compactMap { $0 }
-
         Publishers
-            .CombineLatest(marketPublisher,
+            .CombineLatest(AbacusStateManager.shared.state.marketMap,
                            AbacusStateManager.shared.state.assetMap)
-            .sink { [weak self] (market: PerpetualMarket, assetMap: [String: Asset]) in
+            .sink { [weak self] (marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) in
+                guard let marketId = self?.marketId,
+                        let market = marketMap[marketId] else { return }
+
                 let asset = assetMap[market.assetId]
                 self?.viewModel = SharedMarketPresenter.createViewModel(market: market, asset: asset)
             }
