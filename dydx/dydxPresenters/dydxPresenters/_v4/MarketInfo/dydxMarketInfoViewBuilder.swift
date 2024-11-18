@@ -134,7 +134,6 @@ private class dydxMarketInfoViewPresenter: HostedViewPresenter<dydxMarketInfoVie
             .compactMap { $0 }
             .removeDuplicates()
             .sink { [weak self] marketId in
-                print("AAA set marketId: \(marketId)")
                 AbacusStateManager.shared.setMarket(market: marketId)
                 self?.pagingPresenter.marketId = marketId
                 self?.statsPresenter.marketId = marketId
