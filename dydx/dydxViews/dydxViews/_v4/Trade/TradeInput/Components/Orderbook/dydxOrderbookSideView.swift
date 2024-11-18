@@ -11,14 +11,6 @@ import SwiftUI
 import Utilities
 
 public struct dydxOrderbookLine: Identifiable, Equatable {
-    public static func == (lhs: dydxOrderbookLine, rhs: dydxOrderbookLine) -> Bool {
-        lhs.price == rhs.price &&
-            lhs.size == rhs.size &&
-            lhs.sizeText == rhs.sizeText &&
-            lhs.depth == rhs.depth &&
-            lhs.taken == rhs.taken
-    }
-
     public var id: String {
         return "\(price)"
     }

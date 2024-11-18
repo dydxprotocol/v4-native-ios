@@ -47,8 +47,6 @@ public class dydxOrderbookViewModel: PlatformViewModel {
         }
     }
 
-    @Namespace var bottomID
-
     private func orderbookRows(style: ThemeStyle, asks: dydxOrderbookSideViewModel?, bids: dydxOrderbookSideViewModel?) -> some View {
         GeometryReader { [weak self] metrics in
             let spacing = 8.0
