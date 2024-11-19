@@ -158,17 +158,25 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
             .store(in: &subscriptions)
 
         Publishers
-            .CombineLatest4($marketId,
-                            AbacusStateManager.shared.state.marketMap,
-                            AbacusStateManager.shared.state.candlesMap,
-                            $currentResolutionIndex.compactMap { $0 })
-            .sink { [weak self] marketId, marketMap, candlesMap, resolutionIndex in
+            .CombineLatest($marketId,
+                            AbacusStateManager.shared.state.marketMap)
+            .sink { [weak self] marketId, marketMap in
                 guard let marketId = marketId, let market = marketMap[marketId] else { return }
-                let candles = candlesMap[marketId]
                 self?.tickSize = market.configs?.displayTickSize?.doubleValue
-                if let candles = candles {
-                    self?.updateGraphData(candles: candles, resolutionIndex: resolutionIndex)
-                }
+            }
+            .store(in: &subscriptions)
+
+        let candlesPublisher = $marketId
+                   .compactMap { $0 }
+                   .flatMapLatest { AbacusStateManager.shared.state.candles(of: $0) }
+                   .compactMap { $0 }
+                   .removeDuplicates()
+
+        Publishers
+            .CombineLatest(candlesPublisher,
+                           $currentResolutionIndex.compactMap { $0 })
+            .sink { [weak self] candles, resolutionIndex in
+                self?.updateGraphData(candles: candles, resolutionIndex: resolutionIndex)
             }
             .store(in: &subscriptions)
     }
@@ -195,8 +203,7 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
             xAxisFormatter.resolution = resolution.key
         }
         if let candles = candles.candles?[resolution.key.v4Key] {
-            let candleDataPoints =
-                Array(candles)
+            let candleDataPoints = candles
                     .map { candle in
                         CandleDataPoint(candle: candle, resolution: resolution.key)
                     }

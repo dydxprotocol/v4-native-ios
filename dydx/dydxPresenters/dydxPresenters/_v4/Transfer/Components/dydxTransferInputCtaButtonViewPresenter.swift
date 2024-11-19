@@ -142,7 +142,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
         Publishers.Zip(AbacusStateManager.shared.state.transferInput,
                        AbacusStateManager.shared.state.currentWallet.compactMap { $0 })
             .prefix(1)
-            .flatMap { input, wallet in
+            .flatMapLatest { input, wallet in
                 DepositTransaction(transferInput: input, walletAddress: wallet.ethereumAddress, walletId: wallet.walletId)
                     .run()
             }

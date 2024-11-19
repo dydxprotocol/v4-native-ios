@@ -101,7 +101,7 @@ class dydxMarketDepthChartViewPresenter: HostedViewPresenter<dydxMarketDepthChar
 
         let orderbookPublisher = $marketId
             .compactMap { $0 }
-            .flatMap { AbacusStateManager.shared.state.orderbook(of: $0) }
+            .flatMapLatest { AbacusStateManager.shared.state.orderbook(of: $0) }
             .compactMap { $0 }
 
         bidsListInteractor.list = []
@@ -246,7 +246,7 @@ class dydxMarketDepthChartViewPresenter: HostedViewPresenter<dydxMarketDepthChar
 
             let marketPublisher = $marketId
                 .compactMap { $0 }
-                .flatMap { AbacusStateManager.shared.state.market(of: $0) }
+                .flatMapLatest { AbacusStateManager.shared.state.market(of: $0) }
                 .compactMap { $0 }
 
             Publishers

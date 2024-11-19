@@ -113,7 +113,7 @@ class dydxMarketFundingChartViewPresenter: HostedViewPresenter<dydxMarketFunding
 
         let fundingPublisher = $marketId
             .compactMap { $0 }
-            .flatMap { AbacusStateManager.shared.state.historicalFundings(of: $0) }
+            .flatMapLatest { AbacusStateManager.shared.state.historicalFundings(of: $0) }
             .compactMap { $0 }
 
         fundingPublisher
@@ -129,7 +129,7 @@ class dydxMarketFundingChartViewPresenter: HostedViewPresenter<dydxMarketFunding
 
         let perpetualPublisher = $marketId
             .compactMap { $0 }
-            .flatMap { AbacusStateManager.shared.state.market(of: $0) }
+            .flatMapLatest { AbacusStateManager.shared.state.market(of: $0) }
             .compactMap(\.?.perpetual)
             .compactMap { $0 }
 
