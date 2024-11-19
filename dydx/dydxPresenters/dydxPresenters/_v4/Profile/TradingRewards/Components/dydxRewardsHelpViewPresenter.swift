@@ -10,6 +10,7 @@ import PlatformParticles
 import ParticlesKit
 import RoutingKit
 import dydxStateManager
+import Abacus
 
 public protocol dydxRewardsHelpViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxRewardsHelpViewModel? { get }
@@ -22,8 +23,8 @@ public class dydxRewardsHelpViewPresenter: HostedViewPresenter<dydxRewardsHelpVi
         viewModel = dydxRewardsHelpViewModel()
 
         viewModel?.learnMoreTapped = {
-            // TODO get url from abacus
-//            Router.shared?.navigate(to: .init(url: ...), animated: true, completion: nil)
+            let urlString = AbacusStateManager.shared.environment?.links?.tradingRewardsLearnMore
+            Router.shared?.navigate(to: RoutingRequest(url: urlString), animated: true, completion: nil)
         }
 
         let faqs = AbacusStateManager.shared.documentation?.tradingRewardsFAQs.map { faq in
