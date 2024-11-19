@@ -36,9 +36,9 @@ public class dydxProfileRewardsViewPresenter: HostedViewPresenter<dydxProfileRew
 
         AbacusStateManager.shared.state.account
             .sink { [weak self] account in
-                // allTimeRewardsAmount is commented out because we do not have historical data accurate for "all time"
-                // see thread: https://dydx-team.slack.com/archives/C066T2L1HM4/p1703107669507409
-                // self?.viewModel?.allTimeRewardsAmount = dydxFormatter.shared.format(decimal: account?.tradingRewards?.total?.decimalValue)
+                if let amount = account?.tradingRewards?.total?.doubleValue {
+                    self?.viewModel?.allTimeRewardsAmount = dydxFormatter.shared.raw(number: NSNumber(value: amount), digits: 4)
+                }
                 if let amount = account?.tradingRewards?.filledHistory?["WEEKLY"]?.first?.amount {
                     self?.viewModel?.last7DaysRewardsAmount = dydxFormatter.shared.raw(number: NSNumber(value: amount), digits: 4)
                 }
