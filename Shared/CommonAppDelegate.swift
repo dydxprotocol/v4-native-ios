@@ -89,8 +89,8 @@ open class CommonAppDelegate: ParticlesAppDelegate {
 
     open func useProductionFirebase() -> Bool {
         switch Installation.source {
-        case .debug, .testFlight, .jailBroken: return false
-        case .appStore: return true
+        case .debug, .jailBroken: return false
+        case .appStore, .testFlight: return true
         }
     }
 

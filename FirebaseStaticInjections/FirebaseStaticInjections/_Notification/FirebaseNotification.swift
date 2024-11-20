@@ -28,7 +28,7 @@ public class FirebaseNotificationHandler: NotificationHandler {
             if token != oldValue {
                 updateAssociation()
                 if let token = token {
-                    Console.shared.log("Firebase registration token: \(token)")
+                    NSLog("Firebase registration token: \(token)")
                 }
                 switch Installation.source {
                 case .debug, .testFlight:
