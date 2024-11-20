@@ -96,13 +96,14 @@ open class CommonAppDelegate: ParticlesAppDelegate {
 
     open func injectFirebase() {
         Console.shared.log("injectFirebase")
+        let optionsFile: String
         if useProductionFirebase() {
-            FirebaseRunner.optionsFile = "GoogleService-Info"
+            optionsFile = "GoogleService-Info"
         } else {
-            FirebaseRunner.optionsFile = "GoogleService-Info-Staging"
+            optionsFile = "GoogleService-Info-Staging"
         }
-        _ = FirebaseRunner.shared
-        if FirebaseRunner.shared.enabled {
+        FirebaseRunner.shared = FirebaseRunner(optionsFile: optionsFile)
+        if FirebaseRunner.shared?.enabled ?? false  {
             add(tracking: FirebaseTracking())
             add(errorLogging: CrashlyticsErrorLogging())
         }
@@ -181,10 +182,10 @@ open class CommonAppDelegate: ParticlesAppDelegate {
     }
 
     override open func startup(completion: @escaping () -> Void) {
-        injectNotificationHandler()
         injectURLHandler()
         super.startup { [weak self] in
             self?.injectNotification()
+            self?.injectNotificationHandler()
             completion()
         }
     }

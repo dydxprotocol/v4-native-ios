@@ -10,18 +10,11 @@ import FirebaseCore
 import FirebaseCrashlytics
 import Utilities
 
-public final class FirebaseRunner: NSObject, SingletonProtocol {
-    public static var optionsFile: String? {
-        didSet {
-            guard oldValue != optionsFile else { return }
-            shared = .init(optionsFile: optionsFile)
-        }
-    }
+public final class FirebaseRunner: NSObject {
+
     public let enabled: Bool
 
-    public private(set) static var shared: FirebaseRunner = {
-        FirebaseRunner(optionsFile: optionsFile)
-    }()
+    public static var shared: FirebaseRunner?
 
     public init(optionsFile: String?) {
         if let optionsFile = optionsFile,
@@ -34,6 +27,7 @@ public final class FirebaseRunner: NSObject, SingletonProtocol {
             FirebaseConfiguration.shared.setLoggerLevel(.min)
             enabled = true
         } else {
+            NSLog("Unable to initialize Firebase for options file: \(optionsFile ?? "")")
             enabled = false
         }
         super.init()

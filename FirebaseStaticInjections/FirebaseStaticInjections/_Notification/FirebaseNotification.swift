@@ -44,7 +44,6 @@ public class FirebaseNotificationHandler: NotificationHandler {
         self.tag = tag
         super.init()
 
-        _ = FirebaseRunner.shared
         Messaging.messaging().delegate = self
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             self?.token = Messaging.messaging().fcmToken
