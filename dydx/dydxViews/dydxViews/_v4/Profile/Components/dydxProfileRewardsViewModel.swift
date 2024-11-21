@@ -34,12 +34,12 @@ public class dydxProfileRewardsViewModel: dydxTitledCardViewModel {
     private func titleValueStack(title: String, value: String?) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
-                .themeColor(foreground: .textTertiary)
+                .themeColor(foreground: .textSecondary)
                 .themeFont(fontType: .base, fontSize: .smaller)
             HStack(spacing: 6) {
                 Text(value ?? "-")
-                    .themeColor(foreground: .textSecondary)
-                    .themeFont(fontType: .number, fontSize: .medium)
+                    .themeColor(foreground: .textPrimary)
+                    .themeFont(fontType: .base, fontSize: .small)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                 PlatformIconViewModel(type: .asset(name: "icon_dydx", bundle: .dydxView), clip: .noClip, size: .init(width: 24, height: 24), templateColor: nil)

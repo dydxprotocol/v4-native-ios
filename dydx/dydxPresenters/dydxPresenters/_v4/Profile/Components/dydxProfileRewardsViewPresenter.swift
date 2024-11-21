@@ -29,6 +29,8 @@ public class dydxProfileRewardsViewPresenter: HostedViewPresenter<dydxProfileRew
         viewModel?.tapAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/profile/trading-rewards"), animated: true, completion: nil)
         }
+
+        AbacusStateManager.shared.setHistoricalTradingRewardPeriod(period: HistoricalTradingRewardsPeriod.weekly)
     }
 
     public override func start() {

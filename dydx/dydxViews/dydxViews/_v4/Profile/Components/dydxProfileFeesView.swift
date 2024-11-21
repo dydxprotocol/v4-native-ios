@@ -39,6 +39,7 @@ public class dydxProfileFeesViewModel: dydxTitledCardViewModel, Equatable {
                 VStack(spacing: 8) {
                     Text(DataLocalizer.localize(path: "APP.TRADE.TAKER"))
                         .themeFont(fontType: .base, fontSize: .smaller)
+
                         .leftAligned()
 
                     Text(self.takerFeeRate ?? "-")

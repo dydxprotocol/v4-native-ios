@@ -102,12 +102,14 @@ public class dydxProfileHistoryViewModel: dydxTitledCardViewModel {
                             if let type = item.type {
                                 switch type {
                                 case .token(let token):
-                                    token.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest))
+                                    token.createView(parentStyle: parentStyle.themeFont(fontSize: .smallest)
+                                        .themeColor(foreground: .textSecondary))
                                         .leftAligned()
                                         .frame(width: metrics.size.width / 10 * 2)
                                 case .string(let value):
                                     Text(value)
                                         .themeFont(fontSize: .smaller)
+                                        .themeColor(foreground: .textSecondary)
                                         .leftAligned()
                                         .frame(width: metrics.size.width / 10 * 2)
                                 }
@@ -115,6 +117,7 @@ public class dydxProfileHistoryViewModel: dydxTitledCardViewModel {
 
                             Text(item.amount ?? "-")
                                 .themeFont(fontSize: .smaller)
+                                .themeColor(foreground: .textSecondary)
                                 .frame(width: metrics.size.width / 10 * 3)
                                 .rightAligned()
                         }
