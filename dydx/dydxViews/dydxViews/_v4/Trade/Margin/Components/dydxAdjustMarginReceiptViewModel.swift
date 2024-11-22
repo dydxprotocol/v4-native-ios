@@ -31,10 +31,6 @@ public class dydxAdjustMarginReceiptViewModel: PlatformViewModel {
                 ForEach(self.receiptChangeItems, id: \.id) { item in
                     item.createView(parentStyle: style)
                 }
-//                ForEach(self.receiptChangeItems.indices, id: \.self) { index in
-//                    self.receiptChangeItems[index]
-//                        .createView(parentStyle: style)
-//                }
             }
                 .padding(padding)
                 .themeColor(background: .layer2)
