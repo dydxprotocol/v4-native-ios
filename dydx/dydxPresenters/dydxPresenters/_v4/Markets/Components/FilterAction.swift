@@ -53,61 +53,58 @@ struct FilterAction: Equatable {
             actions.append(predictionMarketsAction)
         }
         actions.append(contentsOf: [
-            FilterAction(type: .layer1,
-                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.LAYER_1")),
-                         action: { market, assetMap in
-                         assetMap[market.assetId]?.tags?.contains("Layer 1") ?? false
-                         }),
+            FilterAction(type: .meme,
+                        content: .text(DataLocalizer.localize(path: "APP.GENERAL.MEME")),
+                        action: { market, assetMap in
+                            assetMap[market.assetId]?.tags?.contains("memes") ?? false
+                        }),
 
-            FilterAction(type: .layer2,
-                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.LAYER_2")),
+            FilterAction(type: .ai,
+                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.AI")),
                          action: { market, assetMap in
-                         assetMap[market.assetId]?.tags?.contains("Layer 2") ?? false
+                             assetMap[market.assetId]?.tags?.contains("ai-big-data") ?? false
                          }),
 
             FilterAction(type: .defi,
                          content: .text(DataLocalizer.localize(path: "APP.GENERAL.DEFI")),
                          action: { market, assetMap in
-                         assetMap[market.assetId]?.tags?.contains("Defi") ?? false
+                             assetMap[market.assetId]?.tags?.contains("defi") ?? false
                          }),
 
-            FilterAction(type: .ai,
-                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.AI")),
+            FilterAction(type: .defin,
+                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.DEPIN")),
                          action: { market, assetMap in
-                             if market.assetId == "RENDER" {
-                                 print(assetMap[market.assetId]?.tags?.first ?? "aa")
-                             }
-                         return assetMap[market.assetId]?.tags?.contains("AI") ?? false
+                             assetMap[market.assetId]?.tags?.contains("depin") ?? false
                          }),
 
-            FilterAction(type: .nft,
-                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.NFT")),
+            FilterAction(type: .layer1,
+                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.LAYER_1")),
                          action: { market, assetMap in
-                         assetMap[market.assetId]?.tags?.contains("NFT") ?? false
+                             assetMap[market.assetId]?.tags?.contains("layer-1") ?? false
                          }),
 
-            FilterAction(type: .gaming,
-                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.GAMING")),
+            FilterAction(type: .layer2,
+                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.LAYER_2")),
                          action: { market, assetMap in
-                         assetMap[market.assetId]?.tags?.contains("Gaming") ?? false
-                         }),
-
-            FilterAction(type: .meme,
-                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.MEME")),
-                         action: { market, assetMap in
-                         assetMap[market.assetId]?.tags?.contains("Meme") ?? false
+                             assetMap[market.assetId]?.tags?.contains("layer-2") ?? false
                          }),
 
             FilterAction(type: .rwa,
                          content: .text(DataLocalizer.localize(path: "APP.GENERAL.REAL_WORLD_ASSET_SHORT")),
                          action: { market, assetMap in
-                         assetMap[market.assetId]?.tags?.contains("RWA") ?? false
+                             assetMap[market.assetId]?.tags?.contains("real-world-assets") ?? false
+                         }),
+
+            FilterAction(type: .gaming,
+                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.GAMING")),
+                         action: { market, assetMap in
+                             assetMap[market.assetId]?.tags?.contains("gaming") ?? false
                          }),
 
             FilterAction(type: .ent,
-                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.ENTERTAINMENT")),
+                         content: .text(DataLocalizer.localize(path: "APP.GENERAL.FOREX")),
                          action: { market, assetMap in
-                         assetMap[market.assetId]?.tags?.contains("ENT") ?? false
+                             assetMap[market.assetId]?.tags?.contains("fiat") ?? false
                          })
         ])
         return actions
@@ -129,6 +126,7 @@ enum MarketFiltering: Equatable {
     case layer1
     case layer2
     case defi
+    case defin
     case new
     case ai
     case nft

@@ -35,26 +35,6 @@
             },
             {
                 "title":{
-                    "text":"Use skip"
-                },
-                "field":{
-                    "field":"ff_skip_migration",
-                    "optional":true,
-                    "type" : "bool",
-                    "options" : [
-                        {
-                            "text": "yes",
-                            "value" : 1
-                        },
-                        {
-                            "text": "no",
-                            "value" : 0
-                        }
-                    ]
-                }
-            },
-            {
-                "title":{
                     "text":"Vault"
                 },
                 "field":{
@@ -99,6 +79,26 @@
                 },
                 "field":{
                     "field":"abacus_static_typing",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : 1
+                        },
+                        {
+                            "text": "no",
+                            "value" : 0
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Market Asset Metadata"
+                },
+                "field":{
+                    "field":"metadata_service",
                     "optional":true,
                     "type" : "bool",
                     "options" : [
