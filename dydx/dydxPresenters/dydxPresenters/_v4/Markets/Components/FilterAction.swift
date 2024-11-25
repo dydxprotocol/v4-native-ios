@@ -71,7 +71,7 @@ struct FilterAction: Equatable {
                              assetMap[market.assetId]?.tags?.contains("defi") ?? false
                          }),
 
-            FilterAction(type: .defin,
+            FilterAction(type: .depin,
                          content: .text(DataLocalizer.localize(path: "APP.GENERAL.DEPIN")),
                          action: { market, assetMap in
                              assetMap[market.assetId]?.tags?.contains("depin") ?? false
@@ -126,7 +126,7 @@ enum MarketFiltering: Equatable {
     case layer1
     case layer2
     case defi
-    case defin
+    case depin
     case new
     case ai
     case nft
