@@ -156,7 +156,7 @@ internal class dydxTradeInputEditViewPresenter: HostedViewPresenter<dydxTradeInp
             } else {
                 sizeViewModel.usdcSize = nil
             }
-            sizeViewModel.tokenSymbol = asset?.id ?? configsAndAsset?.assetId
+            sizeViewModel.tokenSymbol = configsAndAsset?.asset?.displayableAssetId ?? asset?.id
             visible.append(sizeViewModel)
 
             if tradeInput.options?.needsLeverage ?? false {

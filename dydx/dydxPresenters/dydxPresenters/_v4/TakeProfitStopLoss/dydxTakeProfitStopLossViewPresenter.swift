@@ -195,10 +195,13 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             }
             .store(in: &subscriptions)
 
-        AbacusStateManager.shared.state.market(of: marketId)
-            .compactMap { $0 }
-            .sink { [weak self] market in
-                self?.update(market: market)
+        Publishers
+            .CombineLatest(
+                AbacusStateManager.shared.state.market(of: marketId).compactMap { $0 },
+                AbacusStateManager.shared.state.configsAndAssetMap
+            )
+            .sink { [weak self] market, configsMap in
+                self?.update(market: market, configsMap: configsMap)
             }
             .store(in: &subscriptions)
 
@@ -250,12 +253,13 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         }
     }
 
-    private func update(market: PerpetualMarket?) {
-        viewModel?.oraclePrice = dydxFormatter.shared.dollar(number: market?.oraclePrice?.doubleValue, digits: market?.configs?.displayTickSizeDecimals?.intValue ?? 2)
-        viewModel?.customAmountViewModel?.sliderTextInput.accessoryTitle = market?.assetId
-        viewModel?.customAmountViewModel?.sliderTextInput.minValue = market?.configs?.minOrderSize?.doubleValue.magnitude ?? 0
+    private func update(market: PerpetualMarket, configsMap: [String: MarketConfigsAndAsset]) {
+        let configs = configsMap[market.assetId]
+        viewModel?.oraclePrice = dydxFormatter.shared.dollar(number: market.oraclePrice?.doubleValue, digits: market.configs?.displayTickSizeDecimals?.intValue ?? 2)
+        viewModel?.customAmountViewModel?.sliderTextInput.accessoryTitle = configs?.asset?.displayableAssetId
+        viewModel?.customAmountViewModel?.sliderTextInput.minValue = market.configs?.minOrderSize?.doubleValue.magnitude ?? 0
         // abacus stepSizeDecimals is not accurate for 10/100/1000 precision
-        if let stepSize = market?.configs?.stepSize?.doubleValue, stepSize > 0 {
+        if let stepSize = market.configs?.stepSize?.doubleValue, stepSize > 0 {
             viewModel?.customAmountViewModel?.sliderTextInput.numberFormatter.fractionDigits = Int(-log10(stepSize))
         }
     }

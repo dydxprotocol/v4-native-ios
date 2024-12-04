@@ -201,7 +201,7 @@ private class dydxTradeStatusViewPresenter: HostedViewPresenter<dydxTradeStatusV
         if let size = tradeInput.summary?.size {
             viewModel?.orderViewModel.size = dydxFormatter.shared.localFormatted(number: size, digits: configs?.stepSizeDecimals?.intValue ?? 1)
         }
-        if let token = asset?.id ?? configsAndAsset?.assetId {
+        if let token = asset?.displayableAssetId ?? configsAndAsset?.assetId {
             viewModel?.orderViewModel.token?.symbol = token
         }
 
@@ -236,7 +236,7 @@ private class dydxTradeStatusViewPresenter: HostedViewPresenter<dydxTradeStatusV
 
         viewModel?.orderViewModel.type = DataLocalizer.localize(path: "APP.GENERAL.MARKET")
         viewModel?.orderViewModel.size = dydxFormatter.shared.localFormatted(number: closePositionInput.summary?.size, digits: configs?.stepSizeDecimals?.intValue ?? 1)
-        if let token = asset?.id ?? configsAndAsset?.assetId {
+        if let token = asset?.displayableAssetId ?? configsAndAsset?.assetId {
             viewModel?.orderViewModel.token?.symbol = token
         }
         viewModel?.orderViewModel.date = submissionDate

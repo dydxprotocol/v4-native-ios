@@ -90,7 +90,7 @@ class dydxClosePositionInputEditViewPresenter: HostedViewPresenter<dydxClosePosi
         } else {
             sizeViewModel.usdcSize = nil
         }
-        sizeViewModel.tokenSymbol = asset?.id ?? configsAndAsset?.assetId
+        sizeViewModel.tokenSymbol = asset?.displayableAssetId ?? configsAndAsset?.assetId
         visible.append(sizeViewModel)
 
         if parser.asNumber(percentViewModel.value)?.doubleValue != closePositionInput.size?.percent?.doubleValue {
