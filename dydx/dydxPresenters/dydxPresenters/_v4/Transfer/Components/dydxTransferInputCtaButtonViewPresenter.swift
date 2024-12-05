@@ -152,7 +152,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 case let .result(hash, error):
                     if let error = error {
                         self?.showError(error: error)
-                    } else if let hash = hash {
+                    } else if let hash = hash?.lowercased() {
                         self?.sendOnboardingAnalytics()
                         self?.transferAnalytics.logDeposit(transferInput: transferInput)
                         self?.addTransferHash(hash: hash,
@@ -357,7 +357,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                                        type: .error,
                                        error: nil, time: nil)
             } else if let hash = result["transactionHash"] as? String {
-                let fullHash = "0x" + hash
+                let fullHash = "0x" + hash.lowercased()
                 addTransferHash(hash: fullHash,
                                 fromChainName: AbacusStateManager.shared.environment?.chainName,
                                 toChainName: transferInput.chainName ?? transferInput.networkName,
@@ -365,7 +365,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 showTransferStatus(hash: fullHash, transferInput: transferInput)
                 resetInputFields()
             } else if let hash = result["hash"] as? String {
-                let fullHash = "0x" + hash
+                let fullHash = "0x" + hash.lowercased()
                 addTransferHash(hash: fullHash,
                                 fromChainName: AbacusStateManager.shared.environment?.chainName,
                                 toChainName: transferInput.chainName ?? transferInput.networkName,
