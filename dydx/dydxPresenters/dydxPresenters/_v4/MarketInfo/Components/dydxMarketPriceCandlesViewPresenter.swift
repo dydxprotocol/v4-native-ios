@@ -181,6 +181,13 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
             .store(in: &subscriptions)
     }
 
+    override func stop() {
+        super.stop()
+
+        // let start() reload the chart
+        listInteractor.list = []
+    }
+
     private func updateChartType(index: Int) {
         if index < ChartType.displayTypes.count {
             let displayType = ChartType.displayTypes[index]
