@@ -141,8 +141,11 @@ public final class AbacusStateManager: NSObject {
     private lazy var asyncStateManager: SingletonAsyncAbacusStateManagerProtocol = {
         UIImplementations.reset(language: nil)
 
+        let appConfigs = Installation.source == .debug ?
+            AppConfigsV2.companion.forAppDebug :
+            AppConfigsV2.companion.forApp
+
         let deployment: String
-        let appConfigs = AppConfigsV2.companion.forAppWithIsolatedMargins
         if dydxBoolFeatureFlag.force_mainnet.isEnabled {
             deployment = "MAINNET"
         } else {
