@@ -22,7 +22,7 @@ struct EnableERC20TokenStep: AsyncStep {
     let ethereumAddress: String
     let spenderAddress: String
     let desiredAmount: BigUInt
-    let walletId: String
+    let walletId: String?
     let chainIdInt: Int
 
     func run() -> AnyPublisher<Utilities.AsyncEvent<ProgressType, ResultType>, Never> {

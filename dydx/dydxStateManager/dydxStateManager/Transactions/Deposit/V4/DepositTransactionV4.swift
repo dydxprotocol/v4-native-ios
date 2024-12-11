@@ -27,7 +27,6 @@ struct DepositTransactionV4: AsyncStep {
     func run() -> AnyPublisher<AsyncEvent<Void, ResultType>, Never> {
         guard let targetAddress = transferInput.requestPayload?.targetAddress,
               let tokenSize = transferInput.tokenSize,
-              let walletId = walletId,
               let chainId = transferInput.chain,
               let chainIdInt = Parser.standard.asInt(chainId),
               let payload = transferInput.requestPayload,
@@ -110,7 +109,7 @@ private extension EthereumTransactionRequest {
     init?(requestPayload: TransferInputRequestPayload, chainId: Int?, walletAddress: String) {
         guard let targetAddress = requestPayload.targetAddress,
               let payloadData = requestPayload.data,
-              let data = try? EthereumData(payloadData),
+              let data = try? EthereumData.string(payloadData),
               let from = try? EthereumAddress(hex: walletAddress, eip55: false),
               let to = try? EthereumAddress(hex: targetAddress, eip55: false) else {
             return nil

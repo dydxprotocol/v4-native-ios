@@ -41,7 +41,7 @@ struct ERC20AllowanceStep: AsyncStep {
                 ethereumInteractor.eth_call(call) { result in
                     switch result.status {
                     case .success(let value):
-                        let amount = Parser.standard.asUInt256(value)
+                        let amount = Parser.standard.asUInt256(value.ethereumValue().string)
                         if let amount = amount {
                             _ = subscriber.receive(.result(amount, nil))
                         } else {

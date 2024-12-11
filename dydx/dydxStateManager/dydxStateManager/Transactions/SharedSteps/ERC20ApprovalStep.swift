@@ -22,13 +22,13 @@ struct ERC20ApprovalStep: AsyncStep {
     let ethereumAddress: String
     let spenderAddress: String
     let provider: CarteraProvider
-    let walletId: String
+    let walletId: String?
     let chainIdInt: Int
     let amount: BigUInt
 
     private let ethereumInteractor: EthereumInteractor
 
-    init(chainRpc: String, tokenAddress: String, ethereumAddress: String, spenderAddress: String, provider: CarteraProvider, walletId: String, chainIdInt: Int, amount: BigUInt) {
+    init(chainRpc: String, tokenAddress: String, ethereumAddress: String, spenderAddress: String, provider: CarteraProvider, walletId: String?, chainIdInt: Int, amount: BigUInt) {
         self.chainRpc = chainRpc
         self.tokenAddress = tokenAddress
         self.ethereumAddress = ethereumAddress
