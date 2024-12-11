@@ -1,6 +1,6 @@
 import Foundation
 
-fileprivate enum Endpoint: String {
+internal enum Endpoint: String {
     case initialize = "/v1/initialize"
     case logEvent = "/v1/rgstr"
 }
@@ -19,6 +19,16 @@ class NetworkService {
     var store: InternalStore
     var inflightRequests = AtomicDictionary<URLSessionTask>(label: "com.Statsig.InFlightRequests")
 
+    /**
+     Default URL used to initialize the SDK. Used for tests.
+     */
+    internal static var defaultInitializationURL = URL(string: "https://\(ApiHost)\(Endpoint.initialize.rawValue)")
+
+    /**
+     Default URL used for log_event network requests. Used for tests.
+     */
+    internal static var defaultEventLoggingURL = URL(string: "https://\(LogEventHost)\(Endpoint.logEvent.rawValue)")
+
     private final let networkRetryErrorCodes = [408, 500, 502, 503, 504, 522, 524, 599]
 
     init(sdkKey: String, options: StatsigOptions, store: InternalStore) {
@@ -31,7 +41,7 @@ class NetworkService {
         for user: StatsigUser,
         lastSyncTimeForUser: UInt64,
         previousDerivedFields: [String: String],
-        completion: completionBlock
+        completion: ResultCompletionBlock?
     ) {
         let (body, parseErr) = makeReqBody([
             "user": user.toDictionary(forLogging: false),
@@ -42,7 +52,11 @@ class NetworkService {
 
         guard let body = body else {
             self.store.finalizeValues()
-            completion?(parseErr?.localizedDescription ?? "Failed to serialize request body ")
+            completion?(StatsigClientError(
+                .failedToFetchValues,
+                message: parseErr?.localizedDescription ?? "Failed to serialize request body ",
+                cause: parseErr
+            ))
             return
         }
 
@@ -51,19 +65,19 @@ class NetworkService {
 
         makeAndSendRequest(.initialize, body: body) { [weak self] data, response, error in
             if let error {
-                completion?(error.localizedDescription)
+                completion?(StatsigClientError(.failedToFetchValues, cause: error))
                 return
             }
             
             let statusCode = response?.status ?? 0
 
             if !(200...299).contains(statusCode) {
-                completion?("An error occurred during fetching values for the user. \(statusCode)")
+                completion?(StatsigClientError(.failedToFetchValues, message: "An error occurred during fetching values for the user. \(statusCode)"))
                 return
             }
 
             guard let self = self else {
-                completion?("Failed to call NetworkService as it has been released")
+                completion?(StatsigClientError(.failedToFetchValues, message: "Failed to call NetworkService as it has been released"))
                 return
             }
             
@@ -81,7 +95,7 @@ class NetworkService {
         for user: StatsigUser,
         sinceTime: UInt64,
         previousDerivedFields: [String: String],
-        completion: completionBlock
+        completion: ResultCompletionBlock?
     ) {
         let cacheKey = UserCacheKey.from(self.statsigOptions, user, self.sdkKey)
         if let inflight = inflightRequests[cacheKey.v2] {
@@ -95,8 +109,8 @@ class NetworkService {
         var task: URLSessionDataTask?
         var completed = false
         let lock = NSLock()
-        
-        let done: (String?) -> Void = { [weak self] err in
+
+        let done: (StatsigClientError?) -> Void = { [weak self] err in
             // Ensures the completion is invoked only once
             lock.lock()
             defer { lock.unlock() }
@@ -117,7 +131,7 @@ class NetworkService {
 
         if statsigOptions.initTimeout > 0 {
             DispatchQueue.main.asyncAfter(deadline: .now() + statsigOptions.initTimeout) {
-                done("initTimeout Expired")
+                done(StatsigClientError(.initTimeoutExpired))
             }
         }
 
@@ -130,7 +144,7 @@ class NetworkService {
         ])
 
         guard let body = body else {
-            done(parseErr?.localizedDescription)
+            done(StatsigClientError(.failedToFetchValues, cause: parseErr))
             return
         }
 
@@ -142,19 +156,19 @@ class NetworkService {
             marker: Diagnostics.mark?.initialize.network
         ) { [weak self] data, response, error in
             if let error = error {
-                done(error.localizedDescription)
+                done(StatsigClientError(.failedToFetchValues, cause: error))
                 return
             }
 
             let statusCode = response?.status ?? 0
 
             if !(200...299).contains(statusCode) {
-                done("An error occurred during fetching values for the user. \(statusCode)")
+                done(StatsigClientError(.failedToFetchValues, message: "An error occurred during fetching values for the user. \(statusCode)"))
                 return
             }
 
             guard let self = self else {
-                done("Failed to call NetworkService as it has been released")
+                done(StatsigClientError(.failedToFetchValues, message: "Failed to call NetworkService as it has been released"))
                 return
             }
 
@@ -168,7 +182,7 @@ class NetworkService {
 
             guard let values = values else {
                 Diagnostics.mark?.initialize.process.end(success: false)
-                done("No values returned with initialize response")
+                done(StatsigClientError(.failedToFetchValues, message: "No values returned with initialize response"))
                 return
             }
 
@@ -241,6 +255,13 @@ class NetworkService {
         return (nil, StatsigError.invalidJSONParam("requestBody"))
     }
 
+    private func urlForEndpoint(_ endpoint: Endpoint) -> URL? {
+        return switch endpoint {
+            case .initialize: self.statsigOptions.initializationURL ?? NetworkService.defaultInitializationURL
+            case .logEvent: self.statsigOptions.eventLoggingURL ?? NetworkService.defaultEventLoggingURL
+        }
+    }
+
     private func makeAndSendRequest(
         _ endpoint: Endpoint,
         body: Data,
@@ -249,20 +270,7 @@ class NetworkService {
         taskCapture: TaskCaptureHandler = nil
     )
     {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = ApiHost
-        urlComponents.path = endpoint.rawValue
-
-        if let override = self.statsigOptions.mainApiUrl {
-            urlComponents.applyOverride(override)
-        }
-        
-        if endpoint == .logEvent, let loggingApiOverride = self.statsigOptions.logEventApiUrl {
-            urlComponents.applyOverride(loggingApiOverride)
-        }
-
-        guard let requestURL = urlComponents.url else {
+        guard let requestURL = urlForEndpoint(endpoint) else {
             completion(nil, nil, StatsigError.invalidRequestURL("\(endpoint)"))
             return
         }
@@ -326,13 +334,5 @@ class NetworkService {
 
             task?.resume()
         }
-    }
-}
-
-extension URLComponents {
-    mutating func applyOverride(_ url: URL) {
-        scheme = url.scheme
-        host = url.host
-        port = url.port
     }
 }

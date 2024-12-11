@@ -29,6 +29,13 @@ private class dydxLanguageViewPresenter: BaseSettingsViewPresenter {
 
     private let localizer = DataLocalizer.shared as? AbacusLocalizerProtocol
 
+    private var filteredLanguages: [SelectionOption] {
+        let restrictedLocales = AbacusStateManager.shared.environment?.restrictedLocales
+        return localizer?.languages.filter { language -> Bool in
+            restrictedLocales.isNilOrEmpty || restrictedLocales?.contains(language.type) == false
+        } ?? []
+    }
+
     init() {
         super.init(definitionFile: "")
 
@@ -41,7 +48,7 @@ private class dydxLanguageViewPresenter: BaseSettingsViewPresenter {
 
         let listModel = PlatformListViewModel(firstListItemTopSeparator: true, lastListItemBottomSeparator: true)
         listModel.width = UIScreen.main.bounds.width - 16
-        listModel.items = localizer?.languages.map { option in
+        listModel.items = filteredLanguages.map { option in
             let itemViewModel = SettingOptionViewModel()
             itemViewModel.text = option.localizedString
             itemViewModel.isSelected = option.type == localizer?.language
@@ -56,7 +63,7 @@ private class dydxLanguageViewPresenter: BaseSettingsViewPresenter {
                 })
             }
             return itemViewModel
-        } ?? []
+        }
 
         let section = SettingsViewModel.SectionViewModel(items: listModel)
         viewModel?.sections = [section]
