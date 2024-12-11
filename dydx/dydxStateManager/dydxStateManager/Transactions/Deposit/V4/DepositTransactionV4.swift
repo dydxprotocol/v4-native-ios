@@ -110,9 +110,9 @@ private extension EthereumTransactionRequest {
     init?(requestPayload: TransferInputRequestPayload, chainId: Int?, walletAddress: String) {
         guard let targetAddress = requestPayload.targetAddress,
               let payloadData = requestPayload.data,
-        let data = try? EthereumData(payloadData),
-        let from = try? EthereumAddress(walletAddress),
-        let to = try? EthereumAddress(targetAddress) else {
+              let data = try? EthereumData(payloadData),
+              let from = try? EthereumAddress(hex: walletAddress, eip55: false),
+              let to = try? EthereumAddress(hex: targetAddress, eip55: false) else {
             return nil
         }
 

@@ -134,7 +134,7 @@ class dydxTransferDepositViewPresenter: HostedViewPresenter<dydxTransferDepositV
     }
 
     private func fetchTokenAmount(chainRpc: String, tokenSymbol: String, tokenAddress: String, tokenDecimals: Int, walletAddress: String) {
-        guard let address = try? EthereumAddress(walletAddress) else {
+        guard let address = try? EthereumAddress(hex: walletAddress, eip55: false) else {
             Console.shared.log("Invalid wallet address")
             return
         }
@@ -155,7 +155,7 @@ class dydxTransferDepositViewPresenter: HostedViewPresenter<dydxTransferDepositV
                 }
             }
         } else {
-            guard let contract = try? EthereumAddress(tokenAddress) else {
+            guard let contract = try? EthereumAddress(hex: tokenAddress, eip55: false) else {
                 Console.shared.log("Invalid token address")
                 return
             }
@@ -174,7 +174,7 @@ class dydxTransferDepositViewPresenter: HostedViewPresenter<dydxTransferDepositV
                             self?.updateMaxAmount(tokenSymbol: tokenSymbol, amount: nil)
                         }
                     case .failure(let error):
-                        Console.shared.log(error)
+                        Console.shared.log("Failed to get balance: \(error)")
                         self?.updateMaxAmount(tokenSymbol: tokenSymbol, amount: nil)
                     }
                 }

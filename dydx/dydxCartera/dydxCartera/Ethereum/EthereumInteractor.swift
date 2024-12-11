@@ -29,47 +29,69 @@ public final class EthereumInteractor {
     }
 
     public func net_version(completion: @escaping Web3.Web3ResponseCompletion<String>) {
-        client?.net.version(response: completion)
+        client?.net.version { resp in
+            DispatchQueue.main.async { completion(resp) }
+        }
     }
 
     public func eth_blockNumber(completion: @escaping Web3.Web3ResponseCompletion<EthereumQuantity>) {
-        client?.eth.blockNumber(response: completion)
+        client?.eth.blockNumber { resp in
+            DispatchQueue.main.async { completion(resp) }
+        }
     }
 
     public func eth_getBalance(address: EthereumAddress, block: EthereumQuantityTag = .latest, completion: @escaping Web3.Web3ResponseCompletion<EthereumQuantity>) {
-        client?.eth.getBalance(address: address, block: block, response: completion)
+        client?.eth.getBalance(address: address, block: block) { resp in
+            DispatchQueue.main.async { completion(resp) }
+        }
     }
 
     public func eth_getCode(address: EthereumAddress, block: EthereumQuantityTag = .latest, completion: @escaping Web3.Web3ResponseCompletion<EthereumData>) {
-        client?.eth.getCode(address: address, block: block, response: completion)
+        client?.eth.getCode(address: address, block: block) { resp in
+            DispatchQueue.main.async { completion(resp) }
+        }
     }
 
     public func eth_estimateGas(_ transaction: EthereumCall, completion: @escaping Web3.Web3ResponseCompletion<EthereumQuantity>) {
-        client?.eth.estimateGas(call: transaction, response: completion)
+        client?.eth.estimateGas(call: transaction) { resp in
+            DispatchQueue.main.async { completion(resp) }
+        }
     }
 
     public func eth_sendRawTransaction(_ transaction: EthereumSignedTransaction, completion: @escaping Web3.Web3ResponseCompletion<EthereumData>) {
-        client?.eth.sendRawTransaction(transaction: transaction, response: completion)
+        client?.eth.sendRawTransaction(transaction: transaction) { resp in
+            DispatchQueue.main.async { completion(resp) }
+        }
     }
 
     public func eth_getTransactionCount(address: EthereumAddress, block: EthereumQuantityTag, completion: @escaping Web3.Web3ResponseCompletion<EthereumQuantity>) {
-        client?.eth.getTransactionCount(address: address, block: block, response: completion)
+        client?.eth.getTransactionCount(address: address, block: block) { resp in
+            DispatchQueue.main.async { completion(resp) }
+        }
     }
 
     public func eth_getTransactionReceipt(txHash: EthereumData, completion: @escaping Web3.Web3ResponseCompletion<EthereumTransactionReceiptObject?>) {
-        client?.eth.getTransactionReceipt(transactionHash: txHash, response: completion)
+        client?.eth.getTransactionReceipt(transactionHash: txHash) { resp in
+            DispatchQueue.main.async { completion(resp) }
+        }
     }
 
     public func eth_getTransactionByHash(txHash: EthereumData, completion: @escaping Web3.Web3ResponseCompletion<EthereumTransactionObject?>) {
-        client?.eth.getTransactionByHash(blockHash: txHash, response: completion)
+        client?.eth.getTransactionByHash(blockHash: txHash) { resp in
+            DispatchQueue.main.async { completion(resp) }
+        }
     }
 
     public func eth_call(_ transaction: EthereumCall, block: EthereumQuantityTag = .latest, completion: @escaping Web3.Web3ResponseCompletion<EthereumData>) {
-        client?.eth.call(call: transaction, block: block, response: completion)
+        client?.eth.call(call: transaction, block: block) { resp in
+            DispatchQueue.main.async { completion(resp) }
+        }
     }
 
     public func eth_getBlockByNumber(_ block: EthereumQuantityTag, completion: @escaping Web3.Web3ResponseCompletion<EthereumBlockObject?>) {
-        client?.eth.getBlockByNumber(block: block, fullTransactionObjects: true, response: completion)
+        client?.eth.getBlockByNumber(block: block, fullTransactionObjects: true) { resp in
+            DispatchQueue.main.async { completion(resp) }
+        }
     }
 
 //    public func call<T: ABIResponse>(_ transaction: EthereumTransaction, responseType: T.Type, block: EthereumBlock = .Latest, completion: @escaping ((EthereumClientError?, T?) -> Void)) {

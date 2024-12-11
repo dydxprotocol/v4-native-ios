@@ -60,7 +60,7 @@ public class ABIFunctionEncoder {
         guard let data = signature.data(using: .utf8) else {
             throw ABIError.invalidSignature
         }
-        return data.bytes // .web3.keccak256.web3.bytes
+        return data.web3.bytes // .keccak256.web3.bytes
     }
 
     static func signature(name: String, types: [ABIType.Type]) throws -> [UInt8] {

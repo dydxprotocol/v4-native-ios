@@ -41,9 +41,9 @@ struct ERC20ApprovalStep: AsyncStep {
     }
 
     func run() -> AnyPublisher<AsyncEvent<ProgressType, ResultType>, Never> {
-        guard let contract = try? EthereumAddress(tokenAddress),
-              let from = try? EthereumAddress(ethereumAddress),
-              let spender = try? EthereumAddress(spenderAddress) else {
+        guard let contract = try? EthereumAddress(hex: tokenAddress, eip55: false),
+              let from = try? EthereumAddress(hex: ethereumAddress, eip55: false),
+              let spender = try? EthereumAddress(hex: spenderAddress, eip55: false) else {
             return Just(AsyncEvent.result(false, nil)).eraseToAnyPublisher()
         }
         let function = ERC20ApproveFunction(contract: contract,

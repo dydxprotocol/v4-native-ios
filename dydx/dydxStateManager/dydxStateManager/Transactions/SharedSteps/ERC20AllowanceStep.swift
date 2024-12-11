@@ -34,10 +34,10 @@ struct ERC20AllowanceStep: AsyncStep {
         return AnyPublisher<AsyncEvent<Void, ResultType>, Never>.create { subscriber in
 
             if let call =
-                try? ERC20AllowanceFunction(contract: EthereumAddress(tokenAddress),
-                                            from: EthereumAddress(ethereumAddress),
-                                            owner: EthereumAddress(ethereumAddress),
-                                            spender: EthereumAddress(spenderAddress)).call() {
+                try? ERC20AllowanceFunction(contract: EthereumAddress(hex: tokenAddress, eip55: false),
+                                            from: EthereumAddress(hex: ethereumAddress, eip55: false),
+                                            owner: EthereumAddress(hex: ethereumAddress, eip55: false),
+                                            spender: EthereumAddress(hex: spenderAddress, eip55: false)).call() {
                 ethereumInteractor.eth_call(call) { result in
                     switch result.status {
                     case .success(let value):
