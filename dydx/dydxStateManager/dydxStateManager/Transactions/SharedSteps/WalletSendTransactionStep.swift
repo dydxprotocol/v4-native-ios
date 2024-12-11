@@ -10,7 +10,7 @@ import Combine
 import Abacus
 import Cartera
 import BigInt
-import web3
+import Web3
 
 struct WalletSendTransactionStep: AsyncStep {
     typealias ProgressType = Void
@@ -25,7 +25,7 @@ struct WalletSendTransactionStep: AsyncStep {
     func run() -> AnyPublisher<Utilities.AsyncEvent<ProgressType, ResultType>, Never> {
         AnyPublisher<AsyncEvent<Void, ResultType>, Never>.create { subscriber in
             let wallet = CarteraConfig.shared.wallets.first { $0.id == walletId } ?? CarteraConfig.shared.wallets.first
-            let walletRequest = WalletRequest(wallet: wallet, address: walletAddress, chainId: chainIdInt)
+            let walletRequest = WalletRequest(wallet: wallet, address: walletAddress, chainId: chainIdInt, useModal: walletId == nil)
             let transactinoRequest = WalletTransactionRequest(walletRequest: walletRequest, ethereum: transaction)
             provider.send(request: transactinoRequest) { info in
                 if info == nil {

@@ -64,7 +64,9 @@ extension WalletConnectV2Config {
                   clientUrl: AbacusStateManager.shared.deploymentUri,
                   iconUrls: iconUrls,
                   redirectNative: scheme,
-                  redirectUniversal: AbacusStateManager.shared.deploymentUri)
+                  redirectUniversal: AbacusStateManager.shared.deploymentUri,
+                  appGroupIdentifier: "group.exchange.dydx.v4"
+        )
     }
 }
 

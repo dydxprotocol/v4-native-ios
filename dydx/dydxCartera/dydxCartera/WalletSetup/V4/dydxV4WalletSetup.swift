@@ -12,8 +12,9 @@ import Utilities
 
 public final class dydxV4WalletSetup: dydxWalletSetup {
     private let parser = Parser()
-    override func sign(wallet: Wallet?, address: String, ethereumChainId: Int, signTypedDataAction: String, signTypedDataDomainName: String) {
-        let request = WalletRequest(wallet: wallet, address: address, chainId: ethereumChainId)
+
+    override func sign(wallet: Wallet?, address: String, ethereumChainId: Int, signTypedDataAction: String, signTypedDataDomainName: String, useModal: Bool) {
+        let request = WalletRequest(wallet: wallet, address: address, chainId: ethereumChainId, useModal: useModal)
         let typeData = typedData(action: signTypedDataAction, chainId: ethereumChainId, signTypedDataDomainName: signTypedDataDomainName)
         provider.sign(request: request, typedDataProvider: typeData, connected: nil) { [weak self] signed, error in
             if let signed = signed, error == nil {

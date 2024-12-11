@@ -11,7 +11,7 @@ import Cartera
 import Combine
 import Foundation
 import Utilities
-import web3
+import Web3
 
 struct DepositTransactionV4: AsyncStep {
     typealias ProgressType = Void
@@ -108,17 +108,25 @@ private extension TransferInput {
 
 private extension EthereumTransactionRequest {
     init?(requestPayload: TransferInputRequestPayload, chainId: Int?, walletAddress: String) {
-        guard let targetAddress = requestPayload.targetAddress, let data = requestPayload.data else {
+        guard let targetAddress = requestPayload.targetAddress,
+              let payloadData = requestPayload.data,
+        let data = try? EthereumData(payloadData),
+        let from = try? EthereumAddress(walletAddress),
+        let to = try? EthereumAddress(targetAddress) else {
             return nil
         }
-        let transaction = EthereumTransaction(from: EthereumAddress(walletAddress),
-                                              to: EthereumAddress(targetAddress),
-                                              value: requestPayload.value?.asBigUInt,
-                                              data: data.web3.hexData,
-                                              nonce: nil,
-                                              gasPrice: nil,
-                                              gasLimit: nil,
-                                              chainId: chainId)
+
+        let value: EthereumQuantity?
+        if let payloadValue = requestPayload.value {
+            value = try? EthereumQuantity(payloadValue)
+        } else {
+            value = nil
+        }
+
+        let transaction = EthereumTransaction(from: from,
+                                              to: to,
+                                              value: value,
+                                              data: data)
 
         self.init(transaction: transaction)
     }

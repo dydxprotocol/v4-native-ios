@@ -10,7 +10,7 @@ import Combine
 import Abacus
 import Cartera
 import BigInt
-import web3
+import Web3
 import dydxCartera
 
 struct ERC20AllowanceStep: AsyncStep {
@@ -33,17 +33,21 @@ struct ERC20AllowanceStep: AsyncStep {
     func run() -> AnyPublisher<Utilities.AsyncEvent<ProgressType, ResultType>, Never> {
         return AnyPublisher<AsyncEvent<Void, ResultType>, Never>.create { subscriber in
 
-            let function = ERC20AllowanceFunction(contract: EthereumAddress(tokenAddress),
-                                                  from: EthereumAddress(ethereumAddress),
-                                                  owner: EthereumAddress(ethereumAddress),
-                                                  spender: EthereumAddress(spenderAddress))
-
-            if let transaction = try? function.transaction() {
-                ethereumInteractor.eth_call(transaction) { error, value in
-                    let amount = Parser.standard.asUInt256(value)
-                    if let amount = amount {
-                        _ = subscriber.receive(.result(amount, nil))
-                    } else {
+            if let call =
+                try? ERC20AllowanceFunction(contract: EthereumAddress(tokenAddress),
+                                            from: EthereumAddress(ethereumAddress),
+                                            owner: EthereumAddress(ethereumAddress),
+                                            spender: EthereumAddress(spenderAddress)).call() {
+                ethereumInteractor.eth_call(call) { result in
+                    switch result.status {
+                    case .success(let value):
+                        let amount = Parser.standard.asUInt256(value)
+                        if let amount = amount {
+                            _ = subscriber.receive(.result(amount, nil))
+                        } else {
+                            _ = subscriber.receive(.result(nil, result.error))
+                        }
+                    case .failure(let error):
                         _ = subscriber.receive(.result(nil, error))
                     }
                 }

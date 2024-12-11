@@ -63,17 +63,21 @@ public class dydxWalletSetup: WalletStatusDelegate {
         provider.startDebugLink(chainId: chainId, completion: completion)
     }
 
-    public func start(walletId: String?, ethereumChainId: Int, signTypedDataAction: String, signTypedDataDomainName: String) {
+    public func start(walletId: String?,
+                      ethereumChainId: Int,
+                      signTypedDataAction: String,
+                      signTypedDataDomainName: String,
+                      useModal: Bool
+    ) {
         let wallet = CarteraConfig.shared.wallets.first { $0.id == walletId }
         status = .started
-        let request = WalletRequest(wallet: wallet, address: nil, chainId: ethereumChainId)
+        let request = WalletRequest(wallet: wallet, address: nil, chainId: ethereumChainId, useModal: useModal)
         provider.connect(request: request) { [weak self] info, error in
             if let address = info?.address, error == nil {
                 self?.status = .connected
                 let walletName = info?.wallet?.name ?? ""
-                let walletType = info?.wallet?.metadata?.shortName?.uppercased()
                 Tracking.shared?.log(event: "ConnectWallet", data: ["walletType": walletName.uppercased(), "autoReconnect": true])
-                self?.sign(wallet: wallet, address: address, ethereumChainId: ethereumChainId, signTypedDataAction: signTypedDataAction, signTypedDataDomainName: signTypedDataDomainName)
+                self?.sign(wallet: wallet, address: address, ethereumChainId: ethereumChainId, signTypedDataAction: signTypedDataAction, signTypedDataDomainName: signTypedDataDomainName, useModal: useModal)
             } else if let error = error {
                 self?.status = .error(error)
                 self?.provider.disconnect()
@@ -86,7 +90,7 @@ public class dydxWalletSetup: WalletStatusDelegate {
         status = .idle
     }
 
-    func sign(wallet: Wallet?, address: String, ethereumChainId: Int, signTypedDataAction: String, signTypedDataDomainName: String) {
+    func sign(wallet: Wallet?, address: String, ethereumChainId: Int, signTypedDataAction: String, signTypedDataDomainName: String, useModal: Bool) {
 
     }
 

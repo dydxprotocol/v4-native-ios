@@ -15,7 +15,7 @@ import Abacus
 import dydxStateManager
 import dydxCartera
 import Combine
-import web3
+import Web3
 import BigInt
 import dydxFormatter
 
@@ -134,30 +134,46 @@ class dydxTransferDepositViewPresenter: HostedViewPresenter<dydxTransferDepositV
     }
 
     private func fetchTokenAmount(chainRpc: String, tokenSymbol: String, tokenAddress: String, tokenDecimals: Int, walletAddress: String) {
+        guard let address = try? EthereumAddress(walletAddress) else {
+            Console.shared.log("Invalid wallet address")
+            return
+        }
+
         ethereumInteractor = EthereumInteractor(url: chainRpc)
         updateMaxAmount(tokenSymbol: tokenSymbol, amount: nil)
         if tokenAddress == "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" {
-            ethereumInteractor?.eth_getBalance(address: EthereumAddress(walletAddress)) { [weak self, ethereumInteractor] (error: EthereumClientError?, result: BigUInt?) in
+            ethereumInteractor?.eth_getBalance(address: address) { [weak self, ethereumInteractor] result in
                 guard ethereumInteractor === self?.ethereumInteractor else { return }
-                if let amount = result {
-                    let string = "\(amount)"
+                switch result.status {
+                case .success(let amount):
+                    let string = "\(amount.quantity)"
                     let balance = EthConversions.uint256ToHumanTokenString(output: string, decimals: tokenDecimals)
                     self?.updateMaxAmount(tokenSymbol: tokenSymbol, amount: Parser.standard.asNumber(balance)?.doubleValue)
-                } else if let error = error {
-                    Console.shared.log(error)
+                case .failure(let error):
+                    Console.shared.log("Failed to get balance: \(error)")
                     self?.updateMaxAmount(tokenSymbol: tokenSymbol, amount: nil)
                 }
             }
         } else {
-            let function = ERC20BalanceOfFunction(contract: EthereumAddress(tokenAddress), from: EthereumAddress(walletAddress), account: EthereumAddress(walletAddress))
-            if let transaction = try? function.transaction() {
-                ethereumInteractor?.eth_call(transaction) { [weak self, ethereumInteractor] error, value in
+            guard let contract = try? EthereumAddress(tokenAddress) else {
+                Console.shared.log("Invalid token address")
+                return
+            }
+            let function = ERC20BalanceOfFunction(contract: contract, from: address, account: address)
+            if let transaction = try? function.call() {
+                ethereumInteractor?.eth_call(transaction) { [weak self, ethereumInteractor] result in
                     guard ethereumInteractor === self?.ethereumInteractor else { return }
-                    if let amount = self?.parser.asUInt256(value) {
-                        let string = "\(amount)"
-                        let balance = EthConversions.uint256ToHumanTokenString(output: string, decimals: tokenDecimals)
-                        self?.updateMaxAmount(tokenSymbol: tokenSymbol, amount: Parser.standard.asNumber(balance)?.doubleValue)
-                    } else if let error = error {
+                    switch result.status {
+                    case .success(let data):
+                        if let amount = self?.parser.asUInt256(data.ethereumValue().string) {
+                            let string = "\(amount)"
+                            let balance = EthConversions.uint256ToHumanTokenString(output: string, decimals: tokenDecimals)
+                            self?.updateMaxAmount(tokenSymbol: tokenSymbol, amount: Parser.standard.asNumber(balance)?.doubleValue)
+                        } else {
+                            Console.shared.log("Unable to parse response amount")
+                            self?.updateMaxAmount(tokenSymbol: tokenSymbol, amount: nil)
+                        }
+                    case .failure(let error):
                         Console.shared.log(error)
                         self?.updateMaxAmount(tokenSymbol: tokenSymbol, amount: nil)
                     }

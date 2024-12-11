@@ -7,7 +7,7 @@
 //
 
 import BigInt
-import web3
+import Web3
 
 public protocol ContractFunction: ABIFunction {
     func data() -> [Any]

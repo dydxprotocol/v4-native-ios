@@ -26,7 +26,7 @@ struct WalletSwitchChainStep: AsyncStep {
                let resource = transferInput.resources?.chainResources?[chainId] {
 
                 let wallet = CarteraConfig.shared.wallets.first { $0.id == walletId } ?? CarteraConfig.shared.wallets.first
-                let request = WalletRequest(wallet: wallet, address: nil, chainId: chainIdInt)
+                let request = WalletRequest(wallet: wallet, address: nil, chainId: chainIdInt, useModal: walletId == nil)
 
                 provider.connect(request: request) { info, error in
                     if info?.chainId == chainIdInt {

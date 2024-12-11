@@ -50,7 +50,11 @@ private class dydxOnboardQRCodeViewPresenter: HostedViewPresenter<dydxOnboardQRC
             if let chainId = info?.chainId,
                let action = AbacusStateManager.shared.environment?.walletConnection?.signTypedDataAction,
                let domain = AbacusStateManager.shared.environment?.walletConnection?.signTypedDataDomainName {
-                self?.walletSetup.start(walletId: info?.wallet?.id, ethereumChainId: chainId, signTypedDataAction: action, signTypedDataDomainName: domain)
+                self?.walletSetup.start(walletId: info?.wallet?.id,
+                                        ethereumChainId: chainId,
+                                        signTypedDataAction: action,
+                                        signTypedDataDomainName: domain,
+                                        useModal: false)
             } else if let error = error {
                 self?.showError(error: error)
                 self?.walletSetup.stop()

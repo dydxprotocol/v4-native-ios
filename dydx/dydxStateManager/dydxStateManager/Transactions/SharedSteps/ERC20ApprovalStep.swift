@@ -10,7 +10,7 @@ import Combine
 import Abacus
 import Cartera
 import BigInt
-import web3
+import Web3
 import dydxCartera
 
 struct ERC20ApprovalStep: AsyncStep {
@@ -41,9 +41,14 @@ struct ERC20ApprovalStep: AsyncStep {
     }
 
     func run() -> AnyPublisher<AsyncEvent<ProgressType, ResultType>, Never> {
-        let function = ERC20ApproveFunction(contract: EthereumAddress(tokenAddress),
-                                            from: EthereumAddress(ethereumAddress),
-                                            spender: EthereumAddress(spenderAddress),
+        guard let contract = try? EthereumAddress(tokenAddress),
+              let from = try? EthereumAddress(ethereumAddress),
+              let spender = try? EthereumAddress(spenderAddress) else {
+            return Just(AsyncEvent.result(false, nil)).eraseToAnyPublisher()
+        }
+        let function = ERC20ApproveFunction(contract: contract,
+                                            from: from,
+                                            spender: spender,
                                             amount: amount)
         guard let transaction = try? function.transaction() else {
             return Just(AsyncEvent.result(false, nil)).eraseToAnyPublisher()

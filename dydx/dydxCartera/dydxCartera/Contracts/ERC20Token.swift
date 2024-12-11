@@ -7,7 +7,7 @@
 //
 
 import BigInt
-import web3
+import Web3
 
 public struct ERC20AllowanceFunction: ContractFunction {
     public init(contract: EthereumAddress, from: EthereumAddress? = nil, owner: EthereumAddress, spender: EthereumAddress) {

@@ -54,13 +54,13 @@ private class WalletActionImp: WalletActionProtocol {
     private let walletSetup = dydxV4WalletSetup()
 
     public func connect(walletId: String?) {
-        if let walletId = walletId,
-           let action = AbacusStateManager.shared.environment?.walletConnection?.signTypedDataAction,
+        if let action = AbacusStateManager.shared.environment?.walletConnection?.signTypedDataAction,
            let domain = AbacusStateManager.shared.environment?.walletConnection?.signTypedDataDomainName {
             walletSetup.start(walletId: walletId,
                               ethereumChainId: AbacusStateManager.shared.ethereumChainId,
                               signTypedDataAction: action,
-                              signTypedDataDomainName: domain)
+                              signTypedDataDomainName: domain,
+                              useModal: walletId == nil)
         }
     }
 

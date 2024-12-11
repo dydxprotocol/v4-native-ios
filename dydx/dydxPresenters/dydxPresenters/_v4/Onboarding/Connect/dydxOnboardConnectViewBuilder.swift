@@ -70,10 +70,14 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
         viewModel = dydxOnboardConnectViewModel()
         viewModel?.steps = [step1ViewModel, step2ViewModel]
         viewModel?.ctaAction = { [weak self] in
-            if let walletId = self?.walletId,
-               let action = AbacusStateManager.shared.environment?.walletConnection?.signTypedDataAction,
+            if let action = AbacusStateManager.shared.environment?.walletConnection?.signTypedDataAction,
                let domain = AbacusStateManager.shared.environment?.walletConnection?.signTypedDataDomainName {
-                self?.walletSetup.start(walletId: walletId, ethereumChainId: AbacusStateManager.shared.ethereumChainId, signTypedDataAction: action, signTypedDataDomainName: domain)
+                self?.walletSetup.start(walletId: self?.walletId,
+                                        ethereumChainId: AbacusStateManager.shared.ethereumChainId,
+                                        signTypedDataAction: action,
+                                        signTypedDataDomainName: domain,
+                                        useModal: self?.walletId == nil
+                )
             }
         }
     }

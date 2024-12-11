@@ -8,7 +8,7 @@
 
 import BigInt
 import Utilities
-import web3
+import Web3
 
 public class EthConversions {
     static let BASE_DECIMALS = 6

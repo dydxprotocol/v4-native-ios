@@ -58,7 +58,7 @@ private class dydxWalletListViewPresenter: HostedViewPresenter<dydxWalletListVie
         }
     }
 
-    private var desktopSyncViewModel: dydxSyncDesktopViewModel = {
+    private let desktopSyncViewModel: dydxSyncDesktopViewModel = {
         let viewModel = dydxSyncDesktopViewModel()
         viewModel.onTap = {
             Router.shared?.navigate(to: RoutingRequest(path: "/onboard/scan/instructions"), animated: true, completion: nil)
@@ -66,10 +66,18 @@ private class dydxWalletListViewPresenter: HostedViewPresenter<dydxWalletListVie
         return viewModel
     }()
 
-    private var debugScanViewModel: dydxDebugScanViewModel = {
+    private let debugScanViewModel: dydxDebugScanViewModel = {
         let viewModel = dydxDebugScanViewModel()
         viewModel.onTap = {
             Router.shared?.navigate(to: RoutingRequest(path: "/onboard/qrcode"), animated: true, completion: nil)
+        }
+        return viewModel
+    }()
+
+    private let wcModalViewModel: dydxWcModalViewModel = {
+        let viewModel = dydxWcModalViewModel()
+        viewModel.onTap = {
+           Router.shared?.navigate(to: RoutingRequest(path: "/onboard/connect", params: nil), animated: true, completion: nil)
         }
         return viewModel
     }()
@@ -119,9 +127,9 @@ private class dydxWalletListViewPresenter: HostedViewPresenter<dydxWalletListVie
 
         let debugScan = UIDevice.current.isSimulator ? [debugScanViewModel] : []
         if mobileOnly {
-            viewModel?.items = installedWalletViewModels + uninstalledWalletViewModels
+            viewModel?.items = [wcModalViewModel] + installedWalletViewModels + uninstalledWalletViewModels
         } else {
-            viewModel?.items = [desktopSyncViewModel] + debugScan + installedWalletViewModels + uninstalledWalletViewModels
+            viewModel?.items = [desktopSyncViewModel] + debugScan + [wcModalViewModel] + installedWalletViewModels + uninstalledWalletViewModels
         }
     }
 }

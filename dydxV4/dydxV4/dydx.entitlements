@@ -9,5 +9,9 @@
 		<string>applinks:v4.testnet.dydx.exchange</string>
 		<string>applinks:v4.testnet.dydx.exchange?mode=developer</string>
 	</array>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.exchange.dydx.v4</string>
+	</array>
 </dict>
 </plist>

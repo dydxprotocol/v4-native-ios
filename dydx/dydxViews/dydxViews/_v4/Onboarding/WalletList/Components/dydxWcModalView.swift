@@ -1,20 +1,23 @@
 //
-//  dydxDebugScanView.swift
-//  dydxViews
+//  dydxWcModalView.swift
+//  dydxUI
 //
-//  Created by Rui Huang on 3/1/23.
-//  Copyright © 2023 dYdX Trading Inc. All rights reserved.
+//  Created by Rui Huang on 10/12/2024.
+//  Copyright © 2024 dYdX Trading Inc. All rights reserved.
 //
 
 import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxDebugScanViewModel: dydxWalletListItemView {
+public class dydxWcModalViewModel: dydxWalletListItemView {
+    @Published public var text: String?
+
     public init() { }
 
-    public static var previewValue: dydxDebugScanViewModel {
-        let vm = dydxDebugScanViewModel()
+    public static var previewValue: dydxWcModalViewModel {
+        let vm = dydxWcModalViewModel()
+        vm.text = "Test String"
         return vm
     }
 
@@ -22,11 +25,11 @@ public class dydxDebugScanViewModel: dydxWalletListItemView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let main = Text("Scan me in Wallet")
-            let trailing = Text("Debug only")
+            let main = Text(DataLocalizer.localize(path: "APP.WALLETS.WALLET_CONNECT_2"))
+            let trailing = Text(DataLocalizer.localize(path: "APP.GENERAL.RECOMMENDED"))
                     .themeFont(fontSize: .small)
                     .themeColor(foreground: .textTertiary)
-            let image = PlatformIconViewModel(type: .asset(name: "icon_qrscan", bundle: Bundle.dydxView),
+            let image = PlatformIconViewModel(type: .asset(name: "icon_wc_logo", bundle: Bundle.dydxView),
                                      size: CGSize(width: 36, height: 36))
 
             return self.createItemView(main: main.wrappedViewModel,
@@ -38,27 +41,31 @@ public class dydxDebugScanViewModel: dydxWalletListItemView {
 }
 
 #if DEBUG
-struct dydxDebugScanView_Previews_Dark: PreviewProvider {
+struct dydxWcModalView_Previews_Dark: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyDarkTheme()
         ThemeSettings.applyStyles()
-        return dydxDebugScanViewModel.previewValue
+        return dydxWcModalViewModel.previewValue
             .createView()
+            .themeColor(background: .layer0)
+            .environmentObject(themeSettings)
             // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
     }
 }
 
-struct dydxDebugScanView_Previews_Light: PreviewProvider {
+struct dydxWcModalView_Previews_Light: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyLightTheme()
         ThemeSettings.applyStyles()
-        return dydxDebugScanViewModel.previewValue
+        return dydxWcModalViewModel.previewValue
             .createView()
+            .themeColor(background: .layer0)
+            .environmentObject(themeSettings)
         // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
     }

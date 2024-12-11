@@ -10,7 +10,7 @@ import Combine
 import Abacus
 import Cartera
 import BigInt
-import web3
+import Web3
 import dydxCartera
 
 struct EnableERC20TokenStep: AsyncStep {

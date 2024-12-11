@@ -8,13 +8,8 @@
 
 import BigInt
 import Utilities
-import web3
 
 public extension Parser {
-    func asEthereumAddress(_ data: Any?) -> EthereumAddress {
-        return EthereumAddress(asString(data) ?? "")
-    }
-
     func asInt256(_ data: Any?) -> BigInt? {
         if var string = data as? String {
             if string.starts(with: "0x") {
