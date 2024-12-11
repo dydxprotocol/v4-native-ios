@@ -37,6 +37,9 @@
 		029E51C02D08BD4A005D4DC5 /* ByteExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E51BF2D08BD4A005D4DC5 /* ByteExtensions.swift */; };
 		029E51C22D08BE51005D4DC5 /* String+Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E51C12D08BE51005D4DC5 /* String+Numeric.swift */; };
 		02DB5ECD29E602E5001EA0F1 /* EthereumInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB5ECC29E602E5001EA0F1 /* EthereumInteractor.swift */; };
+		02DE2A6E2D0A0091007E1277 /* KeccakExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DE2A6D2D0A0091007E1277 /* KeccakExtensions.swift */; };
+		02DE2EAE2D0A05AE007E1277 /* keccak-tiny.c in Sources */ = {isa = PBXBuildFile; fileRef = 02DE2EAB2D0A05AE007E1277 /* keccak-tiny.c */; };
+		02DE2EAF2D0A05AE007E1277 /* keccak-tiny.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DE2EA92D0A05AE007E1277 /* keccak-tiny.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		02EF44D429F6F5A700C97746 /* dydxWalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF44D329F6F5A700C97746 /* dydxWalletSetup.swift */; };
 		02EF44E429F6FA8D00C97746 /* StarkJavascript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF44D729F6FA8D00C97746 /* StarkJavascript.swift */; };
 		380B90E0F0184BA5387AC70A /* Pods_iOS_dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90BD66B2E0C0AEA29121D4EB /* Pods_iOS_dydxCartera.framework */; };
@@ -169,6 +172,10 @@
 		029E51BF2D08BD4A005D4DC5 /* ByteExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteExtensions.swift; sourceTree = "<group>"; };
 		029E51C12D08BE51005D4DC5 /* String+Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Numeric.swift"; sourceTree = "<group>"; };
 		02DB5ECC29E602E5001EA0F1 /* EthereumInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumInteractor.swift; sourceTree = "<group>"; };
+		02DE2A6D2D0A0091007E1277 /* KeccakExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeccakExtensions.swift; sourceTree = "<group>"; };
+		02DE2EA92D0A05AE007E1277 /* keccak-tiny.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "keccak-tiny.h"; sourceTree = "<group>"; };
+		02DE2EAB2D0A05AE007E1277 /* keccak-tiny.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "keccak-tiny.c"; sourceTree = "<group>"; };
+		02DE2EAC2D0A05AE007E1277 /* module.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
 		02EF44D329F6F5A700C97746 /* dydxWalletSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWalletSetup.swift; sourceTree = "<group>"; };
 		02EF44D729F6FA8D00C97746 /* StarkJavascript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarkJavascript.swift; sourceTree = "<group>"; };
 		755B5FABDB988B2B3FA3C414 /* Pods-iOS-dydxCartera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxCartera.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxCartera/Pods-iOS-dydxCartera.release.xcconfig"; sourceTree = "<group>"; };
@@ -278,6 +285,8 @@
 		029E51A42D08AD0C005D4DC5 /* web3swift */ = {
 			isa = PBXGroup;
 			children = (
+				02DE2EAD2D0A05AE007E1277 /* keccak-tiny */,
+				02DE2A6D2D0A0091007E1277 /* KeccakExtensions.swift */,
 				029E51BD2D08BC6B005D4DC5 /* HexUtil.swift */,
 				029E51C12D08BE51005D4DC5 /* String+Numeric.swift */,
 				029E51BB2D08BC44005D4DC5 /* HexExtensions.swift */,
@@ -303,6 +312,24 @@
 				02DB5ECC29E602E5001EA0F1 /* EthereumInteractor.swift */,
 			);
 			path = Ethereum;
+			sourceTree = "<group>";
+		};
+		02DE2EAA2D0A05AE007E1277 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				02DE2EA92D0A05AE007E1277 /* keccak-tiny.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		02DE2EAD2D0A05AE007E1277 /* keccak-tiny */ = {
+			isa = PBXGroup;
+			children = (
+				02DE2EAA2D0A05AE007E1277 /* include */,
+				02DE2EAB2D0A05AE007E1277 /* keccak-tiny.c */,
+				02DE2EAC2D0A05AE007E1277 /* module.map */,
+			);
+			path = "keccak-tiny";
 			sourceTree = "<group>";
 		};
 		02EF44D229F6F59A00C97746 /* WalletSetup */ = {
@@ -378,6 +405,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02DE2EAF2D0A05AE007E1277 /* keccak-tiny.h in Headers */,
 				02439C9C29B03E8A00A083FE /* dydxCartera.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -653,6 +681,7 @@
 				029E51B22D08AD4D005D4DC5 /* ABIEncoder.swift in Sources */,
 				029E51BC2D08BC44005D4DC5 /* HexExtensions.swift in Sources */,
 				029E51B42D08AD78005D4DC5 /* ABIRawType+Static.swift in Sources */,
+				02DE2EAE2D0A05AE007E1277 /* keccak-tiny.c in Sources */,
 				029E51AD2D08AD3B005D4DC5 /* ABIFunctionEncoder.swift in Sources */,
 				029E51C02D08BD4A005D4DC5 /* ByteExtensions.swift in Sources */,
 				029E51B82D08AF01005D4DC5 /* ABITuple.swift in Sources */,
@@ -664,6 +693,7 @@
 				029E51BE2D08BC6B005D4DC5 /* HexUtil.swift in Sources */,
 				0274248729E76718004C89AE /* EthConversions.swift in Sources */,
 				02439E4429B04D2700A083FE /* dydxV4WalletSetup.swift in Sources */,
+				02DE2A6E2D0A0091007E1277 /* KeccakExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,6 +871,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -871,6 +902,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

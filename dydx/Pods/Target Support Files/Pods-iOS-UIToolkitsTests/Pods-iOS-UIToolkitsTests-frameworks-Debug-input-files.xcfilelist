@@ -1,5 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-iOS-UIToolkitsTests/Pods-iOS-UIToolkitsTests-frameworks.sh
-${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework
 ${BUILT_PRODUCTS_DIR}/CombineExt/CombineExt.framework
 ${BUILT_PRODUCTS_DIR}/KVOController/KVOController.framework
 ${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework

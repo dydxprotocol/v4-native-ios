@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "keccak-tiny.h"
+
 //! Project version number for dydxCartera.
 FOUNDATION_EXPORT double dydxCarteraVersionNumber;
 

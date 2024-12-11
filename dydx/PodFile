@@ -52,7 +52,7 @@ def abacus_pods
 end
 
 def util_pods
-  pod 'BigInt'
+  #pod 'BigInt'
   #pod 'CryptoSwift', '1.5.1'
   pod 'libPhoneNumber-iOS', '~> 0.9.15'
   pod 'KVOController'
