@@ -1,5 +1,5 @@
 {
-  "originHash" : "6b6fbfbdab526a057a6a5698f2f39e312febc536a1831092bffde66577c4d466",
+  "originHash" : "c6d13a8669c6f06bed5cd9f1fcb0fa88055a1be183797745f849e2658b63151d",
   "pins" : [
     {
       "identity" : "bigint",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "793a7fac0bfc318e85994bf6900652e827aef33e",
         "version" : "5.4.1"
+      }
+    },
+    {
+      "identity" : "cartera-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dydxprotocol/cartera-ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "36aa44f2a492fa105bfb942c0f88c95cdc6e4aa9"
       }
     },
     {

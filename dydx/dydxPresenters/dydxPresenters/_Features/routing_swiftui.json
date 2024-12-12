@@ -38,10 +38,6 @@
                 }
             },
             "dydx.exchange":{
-                "*":{
-                    "destination":"Web.storyboard",
-                    "presentation":"prompt"
-                },
                 "/privacy":{
                     "destination":"Web.storyboard",
                     "presentation":"prompt"

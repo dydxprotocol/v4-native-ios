@@ -37,29 +37,14 @@ struct DepositTransactionV4: AsyncStep {
             return Just(AsyncEvent.result(nil, error)).eraseToAnyPublisher()
         }
 
-        return WalletSwitchChainStep(transferInput: transferInput, provider: provider, walletId: walletId)
+        return EnableERC20TokenStep(chainRpc: chainRpc,
+                                    tokenAddress: tokenAddress,
+                                    ethereumAddress: walletAddress,
+                                    spenderAddress: targetAddress,
+                                    desiredAmount: tokenSize,
+                                    walletId: walletId,
+                                    chainIdInt: chainIdInt)
             .run()
-            .flatMap { event -> AnyPublisher<AsyncEvent<Void, Bool>, Never> in
-                if case let .result(success, error) = event {
-                    if success == true {
-                        return EnableERC20TokenStep(chainRpc: chainRpc,
-                                                    tokenAddress: tokenAddress,
-                                                    ethereumAddress: walletAddress,
-                                                    spenderAddress: targetAddress,
-                                                    desiredAmount: tokenSize,
-                                                    walletId: walletId,
-                                                    chainIdInt: chainIdInt)
-                            .run()
-
-                    } else if let error = error {
-                        return Just(AsyncEvent.result(nil, error)).eraseToAnyPublisher()
-                    } else {
-                        let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Chain mismatch"])
-                        return Just(AsyncEvent.result(nil, error)).eraseToAnyPublisher()
-                    }
-                }
-                return Empty<AsyncEvent<Void, Bool>, Never>().eraseToAnyPublisher()
-            }
             .flatMap { event -> AnyPublisher<AsyncEvent<Void, String>, Never> in
                 if case let .result(enabled, error) = event {
                     if enabled == true {

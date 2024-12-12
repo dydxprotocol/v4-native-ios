@@ -126,7 +126,7 @@ class dydxTransferDepositViewPresenter: HostedViewPresenter<dydxTransferDepositV
                     self?.viewModel?.showConnectWallet = false
                     self?.fetchTokenAmount(chainRpc: chainRpc, tokenSymbol: tokenSymbol, tokenAddress: tokenAddress, tokenDecimals: tokenDecimals.intValue, walletAddress: walletAddress)
                 } else {
-                    self?.viewModel?.showConnectWallet = true
+                    self?.viewModel?.showConnectWallet = false
                     self?.ethereumInteractor = nil
                 }
             }
