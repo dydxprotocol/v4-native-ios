@@ -470,7 +470,7 @@ open class MappedUIKitRouter: MappedRouter {
                     completion?(data, success)
                 }
             } else {
-                //assertionFailure("Action not found: \(String(describing: request.url))")
+                assertionFailure("Action not found: \(String(describing: request.url))")
                 completion?(nil, false)
             }
         }
