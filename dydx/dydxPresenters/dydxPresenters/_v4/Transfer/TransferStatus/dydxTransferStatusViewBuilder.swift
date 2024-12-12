@@ -39,8 +39,8 @@ private protocol dydxTransferStatusViewPresenterProtocol: HostedViewPresenterPro
 }
 
 private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferStatusViewModel>, dydxTransferStatusViewPresenterProtocol {
-    fileprivate var transactionHash: String?
-    fileprivate var transferInput: TransferInput?
+    @Published fileprivate var transactionHash: String?
+    @Published fileprivate var transferInput: TransferInput?
 
     private let receiptPresenter = dydxTransferReceiptViewPresenter()
 
@@ -79,9 +79,10 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
 
         viewModel?.receipt = nil // hide the receipt for now
 
-        AbacusStateManager.shared.state.transferState
-            .prefix(1)
-            .sink { [weak self] transferState in
+        Publishers.CombineLatest3(AbacusStateManager.shared.state.transferState.prefix(1),
+                                  $transactionHash,
+                                  $transferInput)
+            .sink { [weak self] transferState, _, _ in
                 if let transferInstance = transferState.transfers.first(where: { $0.transactionHash == self?.transactionHash }) {
                     self?.updateTransferInstance(transfer: transferInstance)
                 }
