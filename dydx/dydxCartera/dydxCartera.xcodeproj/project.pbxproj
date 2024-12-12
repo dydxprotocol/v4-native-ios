@@ -20,7 +20,6 @@
 		0274248729E76718004C89AE /* EthConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248629E76718004C89AE /* EthConversions.swift */; };
 		0274248929E78576004C89AE /* ERC20Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248829E78576004C89AE /* ERC20Token.swift */; };
 		0274248B29E785AD004C89AE /* ContractFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248A29E785AD004C89AE /* ContractFunction.swift */; };
-		027B62C32D0B5CD90094C3CB /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 027B62C22D0B5CD90094C3CB /* Cartera */; };
 		029E51A32D08966E005D4DC5 /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 029E51A22D08966E005D4DC5 /* Cartera */; };
 		029E51AA2D08AD3B005D4DC5 /* ABIEncoder+Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E51A62D08AD3B005D4DC5 /* ABIEncoder+Static.swift */; };
 		029E51AB2D08AD3B005D4DC5 /* ABIFunctionEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E51A82D08AD3B005D4DC5 /* ABIFunctionEncodable.swift */; };
@@ -195,7 +194,6 @@
 				023F7F0D2AD09732006CC4CD /* ParticlesKit.framework in Frameworks */,
 				023F7F082AD09725006CC4CD /* Utilities.framework in Frameworks */,
 				380B90E0F0184BA5387AC70A /* Pods_iOS_dydxCartera.framework in Frameworks */,
-				027B62C32D0B5CD90094C3CB /* Cartera in Frameworks */,
 				029E51A32D08966E005D4DC5 /* Cartera in Frameworks */,
 				02669B932AD872A300A756AA /* Cartera in Frameworks */,
 				021A1DCA2AD34103008A3D73 /* Cartera in Frameworks */,
@@ -436,7 +434,6 @@
 				021A1DC92AD34103008A3D73 /* Cartera */,
 				02669B922AD872A300A756AA /* Cartera */,
 				029E51A22D08966E005D4DC5 /* Cartera */,
-				027B62C22D0B5CD90094C3CB /* Cartera */,
 			);
 			productName = dydxCartera;
 			productReference = 02439C8B29B03E8A00A083FE /* dydxCartera.framework */;
@@ -490,7 +487,7 @@
 			);
 			mainGroup = 02439C8129B03E8A00A083FE;
 			packageReferences = (
-				027B62C12D0B5CD90094C3CB /* XCRemoteSwiftPackageReference "cartera-ios" */,
+				027B64182D0B788C0094C3CB /* XCRemoteSwiftPackageReference "cartera-ios" */,
 			);
 			productRefGroup = 02439C8C29B03E8A00A083FE /* Products */;
 			projectDirPath = "";
@@ -982,7 +979,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		027B62C12D0B5CD90094C3CB /* XCRemoteSwiftPackageReference "cartera-ios" */ = {
+		027B64182D0B788C0094C3CB /* XCRemoteSwiftPackageReference "cartera-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dydxprotocol/cartera-ios";
 			requirement = {
@@ -999,11 +996,6 @@
 		};
 		02669B922AD872A300A756AA /* Cartera */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Cartera;
-		};
-		027B62C22D0B5CD90094C3CB /* Cartera */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 027B62C12D0B5CD90094C3CB /* XCRemoteSwiftPackageReference "cartera-ios" */;
 			productName = Cartera;
 		};
 		029E51A22D08966E005D4DC5 /* Cartera */ = {
