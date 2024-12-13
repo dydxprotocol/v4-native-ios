@@ -83,6 +83,7 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
         super.init()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
+            AbacusStateManager.shared.startTrade()
             AbacusStateManager.shared.startTransfer()
             self?.setDefaultSection()
         }

@@ -92,6 +92,7 @@ class dydxTransferWithdrawalViewPresenter: HostedViewPresenter<dydxTransferWithd
                         // Default to user's eth address
                         AbacusStateManager.shared.transfer(input: ethereumAddress, type: .address)
                     }
+                    AbacusStateManager.shared.transfer(input: wallet?.ethereumAddress, type: .address)
                 }
             }
             .store(in: &subscriptions)

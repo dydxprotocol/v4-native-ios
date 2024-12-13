@@ -39,17 +39,19 @@ struct WalletSendTransactionStep: AsyncStep {
                     let walletError = error as? NSError
                     let errorMessage = walletError?.userInfo["message"] as? String
                     if provider.walletStatus?.connectedWallet?.peerName == "MetaMask Wallet", errorMessage == "User rejected." {
-                        // MetaMask wallet will send a "User rejected" response when switching chain... let's catch it and resend
-                        provider.send(request: transactionRequest) { info in
-                            if info == nil {
-                                let error = NSError(domain: "", code: -1, userInfo: [ NSLocalizedDescriptionKey: "Unable to connect to wallet"])
-                                _ = subscriber.receive(.result(nil, error))
-                            }
-                        } completion: { signed, error in
-                            if signed != nil {
-                                _ = subscriber.receive(.result(signed, nil))
-                            } else {
-                                _ = subscriber.receive(.result(nil, error))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            // MetaMask wallet will send a "User rejected" response when switching chain... let's catch it and resend
+                            provider.send(request: transactionRequest) { info in
+                                if info == nil {
+                                    let error = NSError(domain: "", code: -1, userInfo: [ NSLocalizedDescriptionKey: "Unable to connect to wallet"])
+                                    _ = subscriber.receive(.result(nil, error))
+                                }
+                            } completion: { signed, error in
+                                if signed != nil {
+                                    _ = subscriber.receive(.result(signed, nil))
+                                } else {
+                                    _ = subscriber.receive(.result(nil, error))
+                                }
                             }
                         }
                     } else {
