@@ -166,6 +166,7 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
             .onTapGesture {
                 PlatformView.hideKeyboard()
             }
+            .keyboardAccessory(background: .layer3, parentStyle: parentStyle)
 
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
