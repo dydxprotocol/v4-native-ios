@@ -1,5 +1,5 @@
 {
-  "originHash" : "c6d13a8669c6f06bed5cd9f1fcb0fa88055a1be183797745f849e2658b63151d",
+  "originHash" : "4abc8b6e37ddb299948f224ccf7a7ccf9ed6d5156db6de917ea842dc596c3bbf",
   "pins" : [
     {
       "identity" : "bigint",
@@ -15,8 +15,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dydxprotocol/cartera-ios",
       "state" : {
-        "branch" : "main",
-        "revision" : "6fbb35a5aab316e8e97239ef7733945cd59171cc"
+        "revision" : "e3e29704ffce1b8d38ba758e6a982bec28e5a06f"
       }
     },
     {
@@ -148,10 +147,10 @@
     {
       "identity" : "walletconnectswiftv2",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/WalletConnect/WalletConnectSwiftV2.git",
+      "location" : "https://github.com/dydxprotocol/WalletConnectSwiftV2.git",
       "state" : {
-        "revision" : "3327c0a8c014b155534b91520554d812e2960077",
-        "version" : "1.20.3"
+        "branch" : "develop",
+        "revision" : "0b269efb6aa088042edf9e64d3c7f4a03a45a778"
       }
     },
     {
