@@ -17,13 +17,13 @@ import PlatformUI
 import ParticlesKit
 import dydxFormatter
 
-public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
+public class dydxProUITabBarBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        return dydxV4TabBarController() as? T
+        return dydxProUITabBarController() as? T
     }
 }
 
-@objc public class dydxV4TabBarController: RoutingTabBarController {
+@objc public class dydxProUITabBarController: RoutingTabBarController {
     public var subscriptions = Set<AnyCancellable>()
 
      private var firstSubaccount: Subaccount? {
@@ -82,7 +82,7 @@ public class dydxV4TabBarBuilder: NSObject, ObjectBuilderProtocol {
     }
 }
 
-private extension dydxV4TabBarController {
+private extension dydxProUITabBarController {
     static let tabBarItemInfos: [TabbarItemInfo] = [
         .init(path: "/portfolio",
               title: DataLocalizer.localize(path: "APP.PORTFOLIO.PORTFOLIO"),

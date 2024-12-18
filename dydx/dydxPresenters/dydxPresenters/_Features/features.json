@@ -112,6 +112,26 @@
                         }
                     ]
                 }
+            },
+            {
+                "title":{
+                    "text":"Enable Simple UI"
+                },
+                "field":{
+                    "field":"simple_ui",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : 1
+                        },
+                        {
+                            "text": "no",
+                            "value" : 0
+                        }
+                    ]
+                }
             }
         ]
     }

@@ -17,6 +17,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
     case gasToken = "gas_token"
     case hidePredictionMarketsNoticeKey = "hide_prediction_markets_notice"
     case hasAcknowledgedVaultDepositTerms = "has_acknowledged_vault_deposit_terms"
+    case appMode = "app_mode"
 
     public var defaultValue: Any? {
         switch self {
@@ -27,6 +28,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
         case .gasToken: return "USDC"
         case .hidePredictionMarketsNoticeKey: return false
         case .hasAcknowledgedVaultDepositTerms: return false
+        case .appMode: return nil
         }
     }
 }

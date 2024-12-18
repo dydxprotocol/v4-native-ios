@@ -25,7 +25,11 @@ import Utilities
 
 public extension FieldDefinition {
     var visible: Bool {
-        return parser.asBoolean(data?["visible"])?.boolValue ?? true
+        var visible = parser.asBoolean(data?["visible"])?.boolValue ?? true
+        if let featureFlag = parser.asString(data?["featureFlag"]) {
+            visible = visible && (FeatureService.shared?.isOn(feature: featureFlag) ?? true)
+        }
+        return visible
     }
 
     var title: [String: Any]? {

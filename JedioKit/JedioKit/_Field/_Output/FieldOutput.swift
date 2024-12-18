@@ -11,6 +11,10 @@ import RoutingKit
 import Utilities
 
 @objc public class FieldOutput: NSObject, FieldOutputProtocol, RoutingOriginatorProtocol {
+    public var visible: Bool {
+        fieldOutput?.visible ?? false
+    }
+    
     @objc public dynamic var field: FieldDefinition? {
         didSet {
             if field !== oldValue {

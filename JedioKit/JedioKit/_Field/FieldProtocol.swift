@@ -134,6 +134,7 @@ public protocol FieldOutputProtocol: FieldProtocol {
     var items: [FieldOutputProtocol]? { get }
 
     var hasData: Bool { get }
+    var visible: Bool { get }
 }
 
 extension FieldOutputProtocol {

@@ -47,7 +47,7 @@
                     "presentation":"prompt"
                 },
                 "/":{
-                    "destination":"dydxPresenters.dydxV4TabBarBuilder",
+                    "destination":"dydxPresenters.dydxRootBuilder",
                     "presentation":"root"
                 },
                 "/action/debug/enable": {
@@ -83,16 +83,6 @@
                 "/action/withdraw": {
                     "destination":"WithdrawAction.xib"
                 },
-                "/affiliate/start": {
-                    "destination":"AffiliateStart.storyboard",
-                    "presentation":"prompt"
-                },
-                "/affiliate/individual": {
-                    "destination":"AffiliateIndividual.storyboard"
-                },
-                "/affiliate/entity": {
-                    "destination":"AffiliateEntity.storyboard"
-                },
                 "/alerts":{
                     "destination":"dydxPresenters.dydxAlertsViewBuilder",
                     "presentation":"push"
@@ -101,33 +91,9 @@
                     "destination":"dydxPresenters.dydxTradeStatusViewBuilder",
                     "presentation":"prompt"
                 },
-                "/compliance":{
-                    "destination":"Compliance.storyboard",
-                    "presentation":"half"
-                },
-                "/deposit":{
-                    "destination":"Transfer3.storyboard",
-                    "presentation":"prompt"
-                },
-                "/deposit/connect":{
-                    "destination":"DepositConnect.storyboard",
-                    "presentation":"half"
-                },
                 "/error/geo":{
                     "destination":"dydxPresenters.dydxTradeRestrictedViewBuilder",
                     "presentation":"prompt"
-                },
-                "/error/noconnection":{
-                    "destination":"NoConnection.storyboard",
-                    "presentation":"half"
-                },
-                "/error/wrongnetwork":{
-                    "destination":"WrongNetwork.storyboard",
-                    "presentation":"half"
-                },
-                "/error/accountfailure":{
-                    "destination":"AccountFailure.storyboard",
-                    "presentation":"half"
                 },
                 "/settings/feature_flag_overrides":{
                     "destination":"dydxPresenters.dydxFeatureFlagsViewBuilder",
@@ -163,10 +129,6 @@
                     "destination":"dydxPresenters.dydxOnboardConnectViewBuilder",
                     "presentation":"half"
                 },
-                "/onboard/profile":{
-                    "destination":"ProfileInput.storyboard",
-                    "presentation":"half"
-                },
                 "/onboard/qrcode":{
                     "destination":"dydxPresenters.dydxOnboardQRCodeViewBuilder",
                     "presentation":"half"
@@ -199,14 +161,6 @@
                     "destination":"dydxPresenters.dydxCancelPendingIsolatedOrdersViewBuilder",
                     "presentation":"half"
                 },
-                "/profile/user":{
-                    "destination":"ProfileInput.storyboard",
-                    "presentation":"half"
-                },
-                "/prompt":{
-                    "destination":"Prompt.storyboard",
-                    "presentation":"half"
-                },
                 "/profile/fees":{
                     "destination":"dydxPresenters.dydxFeesStuctureViewBuilder",
                     "presentation":"push"
@@ -221,9 +175,6 @@
                 "/portfolio/history":{
                     "destination":"dydxPresenters.dydxHistoryViewBuilder",
                     "presentation":"push"
-                },
-                "/portfolio/rewards":{
-                    "destination":"Rewards.storyboard"
                 },
                 "/qrcode/display": {
                     "destination":"dydxPresenters.QRCodeDisplayBuilder",
@@ -285,6 +236,10 @@
                 "/settings/status": {
                     "destination":"dydxPresenters.dydxSystemStatusBuilder"
                 },
+                "/settings/app_mode": {
+                    "destination": "dydxPresenters.dydxAppModeViewBuilder",
+                    "presentation":"prompt"
+                },
                 "/share/:type": {
                     "destination":"Share.storyboard",
                     "presentation":"half"
@@ -337,10 +292,6 @@
                     "destination":"dydxPresenters.dydxTransferStatusViewBuilder",
                     "presentation":"prompt"
                 },
-                "/transferOut":{
-                    "destination":"Transfer3.storyboard",
-                    "presentation":"prompt"
-                },
                 "/update":{
                     "destination":"dydxPresenters.dydxUpdateViewBuilder",
                     "presentation":"root"
@@ -379,14 +330,6 @@
                 },
                 "/help":{
                     "destination":"dydxPresenters.dydxHelpViewBuilder",
-                    "presentation":"half"
-                },
-                "/withdraw":{
-                    "destination":"Transfer3.storyboard",
-                    "presentation":"half"
-                },
-                "/withdraw/confirm":{
-                    "destination":"WithdrawalConfirmation.storyboard",
                     "presentation":"half"
                 },
                 "/primer/notification":{

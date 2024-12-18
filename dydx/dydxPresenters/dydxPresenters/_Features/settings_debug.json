@@ -3,6 +3,15 @@
         "fields" :[
             {
                 "title" : {
+                    "text" : "APP.TRADE.MODE.SELECT_MODE"
+                },
+                "link" : {
+                    "text" : "/settings/app_mode"
+                },
+                "featureFlag": "simple_ui",
+            },
+            {
+                "title" : {
                     "text" : "APP.LANGUAGE.LANGUAGE"
                 },
                 "link" : {

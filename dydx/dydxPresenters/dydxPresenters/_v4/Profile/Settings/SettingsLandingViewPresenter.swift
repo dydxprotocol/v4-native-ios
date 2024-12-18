@@ -39,6 +39,7 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
         case colorPreference = "/settings/direction_color_preference"
         case notifications = "/settings/notifications"
         case gas_token = "/settings/gas_token"
+        case app_mode = "/settings/app_mode"
 
         var settingsStoreKey: String {
             switch self {
@@ -48,6 +49,7 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
             case .colorPreference: return dydxSettingsStoreKey.directionColorPreference.rawValue
             case .notifications: return dydxSettingsStoreKey.shouldDisplayInAppNotifications.rawValue
             case .gas_token: return dydxSettingsStoreKey.gasToken.rawValue
+            case .app_mode: return dydxSettingsStoreKey.appMode.rawValue
             }
         }
 
@@ -68,6 +70,11 @@ class SettingsLandingViewPresenter: SettingsViewPresenter {
             case .gas_token:
                 return SettingsLandingViewPresenter.extractLocalizerKeyLookup(fromDefinitionFile: "settings_gas_token.json",
                                                                               transformer: GasTokenOptionTransformer())
+            case .app_mode:
+                return [
+                    AppMode.simple.rawValue: DataLocalizer.localize(path: "APP.TRADE.MODE.SIMPLE"),
+                    AppMode.pro.rawValue: DataLocalizer.localize(path: "APP.TRADE.MODE.PRO")
+                ]
             }
         }
     }

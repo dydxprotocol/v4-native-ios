@@ -40,9 +40,11 @@ public class dydxMarginModeItemViewModel: PlatformViewModel {
 
                     if !self.isDisabled {
                         if self.isSelected {
-                            self.createSelectedCheckmark(parentStyle: style)
+                            PlatformIconViewModel.selectedCheckmark
+                                .createView(parentStyle: style)
                         } else {
-                            self.createUnselectedCheckmark(parentStyle: style)
+                            PlatformIconViewModel.unselectedCheckmark
+                                .createView(parentStyle: style)
                         }
                     }
                 }
@@ -68,25 +70,6 @@ public class dydxMarginModeItemViewModel: PlatformViewModel {
                     .disabled(isDisabled)
             )
         }
-    }
-
-    private func createSelectedCheckmark(parentStyle: ThemeStyle) -> some View {
-        PlatformIconViewModel(type: .asset(name: "icon_checked", bundle: Bundle.dydxView),
-                             clip: .circle(background: .colorPurple,
-                                           spacing: 12,
-                                           borderColor: nil),
-                             size: CGSize(width: 20, height: 20),
-                             templateColor: .textPrimary)
-       .createView(parentStyle: parentStyle)
-    }
-
-    private func createUnselectedCheckmark(parentStyle: ThemeStyle) -> some View {
-        Circle()
-            .fill(ThemeColor.SemanticColor.layer1.color)
-            .frame(width: 20, height: 20)
-            .overlay(
-                Circle().stroke(ThemeColor.SemanticColor.layer5.color, lineWidth: 1)
-            )
     }
 }
 
