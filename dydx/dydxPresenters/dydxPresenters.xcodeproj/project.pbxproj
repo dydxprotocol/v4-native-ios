@@ -104,6 +104,7 @@
 		02D6DAFA2D1234B7008AAEA1 /* dydxSimpleUIMarketsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D6DAF92D1234B4008AAEA1 /* dydxSimpleUIMarketsViewBuilder.swift */; };
 		02D6DAFC2D123576008AAEA1 /* dydxRootBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D6DAFB2D123570008AAEA1 /* dydxRootBuilder.swift */; };
 		02D6DB272D124AAF008AAEA1 /* dydxAppModeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D6DB262D124AAD008AAEA1 /* dydxAppModeViewBuilder.swift */; };
+		02D6DBB92D134BEA008AAEA1 /* dydxSimpleUIMarketListViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D6DBB82D134BE8008AAEA1 /* dydxSimpleUIMarketListViewPresenter.swift */; };
 		02D9518C2C926B9C007BB2B4 /* dydxNotificationPrimerViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D9518B2C926B9C007BB2B4 /* dydxNotificationPrimerViewPresenter.swift */; };
 		02DA6E0D2AD897EE0048126C /* starkex-lib.js in Resources */ = {isa = PBXBuildFile; fileRef = 02DA6DFF2AD897EE0048126C /* starkex-lib.js */; };
 		02DA6E0E2AD897EE0048126C /* starkex-eth.js in Resources */ = {isa = PBXBuildFile; fileRef = 02DA6E0C2AD897EE0048126C /* starkex-eth.js */; };
@@ -503,6 +504,7 @@
 		02D6DAF92D1234B4008AAEA1 /* dydxSimpleUIMarketsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketsViewBuilder.swift; sourceTree = "<group>"; };
 		02D6DAFB2D123570008AAEA1 /* dydxRootBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxRootBuilder.swift; sourceTree = "<group>"; };
 		02D6DB262D124AAD008AAEA1 /* dydxAppModeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAppModeViewBuilder.swift; sourceTree = "<group>"; };
+		02D6DBB82D134BE8008AAEA1 /* dydxSimpleUIMarketListViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketListViewPresenter.swift; sourceTree = "<group>"; };
 		02D9518B2C926B9C007BB2B4 /* dydxNotificationPrimerViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNotificationPrimerViewPresenter.swift; sourceTree = "<group>"; };
 		02DA6DFF2AD897EE0048126C /* starkex-lib.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "starkex-lib.js"; sourceTree = "<group>"; };
 		02DA6E0C2AD897EE0048126C /* starkex-eth.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "starkex-eth.js"; sourceTree = "<group>"; };
@@ -1292,6 +1294,7 @@
 		02D6DAF82D1234A8008AAEA1 /* Markets */ = {
 			isa = PBXGroup;
 			children = (
+				02D6DBB72D134BE0008AAEA1 /* components */,
 				02D6DAF92D1234B4008AAEA1 /* dydxSimpleUIMarketsViewBuilder.swift */,
 			);
 			path = Markets;
@@ -1303,6 +1306,14 @@
 				02D6DB262D124AAD008AAEA1 /* dydxAppModeViewBuilder.swift */,
 			);
 			path = AppMode;
+			sourceTree = "<group>";
+		};
+		02D6DBB72D134BE0008AAEA1 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				02D6DBB82D134BE8008AAEA1 /* dydxSimpleUIMarketListViewPresenter.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		02DC87862CD441B500F865C5 /* History */ = {
@@ -2096,6 +2107,7 @@
 				270E7E242A5F6B1B00136793 /* dydxTradeInputSideViewPresenter.swift in Sources */,
 				278A4D1E2B8EA95A003898EB /* dydxCollectFeedbackActionBuilder.swift in Sources */,
 				2741E3732A689740000FA190 /* dydxDirectionColorPreferenceViewBuilder.swift in Sources */,
+				02D6DBB92D134BEA008AAEA1 /* dydxSimpleUIMarketListViewPresenter.swift in Sources */,
 				0236F12D296B91BD00EB995F /* dydxPortfolioOrdersViewPresenter.swift in Sources */,
 				0280B3A629CB63E10017D64A /* dydxOnboardWelcomeViewBuilder.swift in Sources */,
 				023848D72A9E785900B1A673 /* dydxTosViewBuilder.swift in Sources */,

@@ -35,12 +35,25 @@ public protocol dydxSimpleUIMarketsViewPresenterProtocol: HostedViewPresenterPro
 
 public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIMarketsViewModel>, dydxSimpleUIMarketsViewPresenterProtocol {
 
-    override init() {
-        super.init()
+    private let marketListPresenter = dydxSimpleUIMarketListViewPresenter()
 
-        viewModel = dydxSimpleUIMarketsViewModel()
-        viewModel?.onSettingTapped = {
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        marketListPresenter
+   ]
+
+    override init() {
+        let viewModel = dydxSimpleUIMarketsViewModel()
+
+        marketListPresenter.$viewModel.assign(to: &viewModel.$marketList)
+
+        viewModel.onSettingTapped = {
             Router.shared?.navigate(to: RoutingRequest(path: "/settings/app_mode"), animated: true, completion: nil)
         }
+
+        super.init()
+
+        self.viewModel = viewModel
+
+        attachChildren(workers: childPresenters)
     }
 }

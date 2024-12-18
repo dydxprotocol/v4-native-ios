@@ -12,6 +12,7 @@ import Utilities
 
 public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
     @Published public var onSettingTapped: (() -> Void)?
+    @Published public var marketList: dydxSimpleUIMarketListViewModel?
 
     public init() { }
 
@@ -34,9 +35,14 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                                             type: .pill) { [weak self] in
                         self?.onSettingTapped?()
                     }
-                                            .createView(parentStyle: style)
+                    .createView(parentStyle: style)
                 }
                 .padding(.horizontal)
+
+                Spacer()
+                    .frame(height: 320)
+
+                self.marketList?.createView(parentStyle: style)
 
                 Spacer()
             }
