@@ -1,5 +1,5 @@
 {
-  "originHash" : "4abc8b6e37ddb299948f224ccf7a7ccf9ed6d5156db6de917ea842dc596c3bbf",
+  "originHash" : "c6d13a8669c6f06bed5cd9f1fcb0fa88055a1be183797745f849e2658b63151d",
   "pins" : [
     {
       "identity" : "bigint",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/dydxprotocol/cartera-ios",
       "state" : {
         "branch" : "main",
-        "revision" : "e3e29704ffce1b8d38ba758e6a982bec28e5a06f"
+        "revision" : "da4dcffc9d295ccbba70d46df26a0d5a5ef45a83"
       }
     },
     {
@@ -151,7 +151,7 @@
       "location" : "https://github.com/dydxprotocol/WalletConnectSwiftV2.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "0b269efb6aa088042edf9e64d3c7f4a03a45a778"
+        "revision" : "0d9a566b375a29fcc36e3ce66824c49925fa72aa"
       }
     },
     {
