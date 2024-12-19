@@ -487,7 +487,7 @@
 			);
 			mainGroup = 02439C8129B03E8A00A083FE;
 			packageReferences = (
-				02D6DACB2D1208C2008AAEA1 /* XCRemoteSwiftPackageReference "cartera-ios" */,
+				02AD39C02D14A28600CF0B70 /* XCRemoteSwiftPackageReference "cartera-ios" */,
 			);
 			productRefGroup = 02439C8C29B03E8A00A083FE /* Products */;
 			projectDirPath = "";
@@ -979,12 +979,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		02D6DACB2D1208C2008AAEA1 /* XCRemoteSwiftPackageReference "cartera-ios" */ = {
+		02AD39C02D14A28600CF0B70 /* XCRemoteSwiftPackageReference "cartera-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dydxprotocol/cartera-ios";
 			requirement = {
-				kind = revision;
-				revision = e3e29704ffce1b8d38ba758e6a982bec28e5a06f;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
