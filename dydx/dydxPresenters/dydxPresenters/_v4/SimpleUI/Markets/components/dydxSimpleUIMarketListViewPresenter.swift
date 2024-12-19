@@ -21,6 +21,9 @@ protocol dydxSimpleUIMarketListViewPresenterProtocol: HostedViewPresenterProtoco
 }
 
 class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarketListViewModel>, dydxSimpleUIMarketListViewPresenterProtocol {
+
+    @Published var searchText: String = ""
+
     override init() {
         super.init()
 
@@ -30,11 +33,7 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
     override func start() {
         super.start()
 
-        guard let viewModel else {
-            return
-        }
-
-        let searchTextPublisher = viewModel.$searchText.map { $0.lowercased() }.removeDuplicates()
+        let searchTextPublisher = $searchText.map({ $0.lowercased() }).removeDuplicates()
 
         Publishers
             .CombineLatest4(AbacusStateManager.shared.state.marketList,
@@ -51,14 +50,14 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
     private func updateMarketList(markets: [PerpetualMarket],
                                   assetMap: [String: Asset],
                                   positions: [SubaccountPosition],
-                                  searchText: String) {
+                                  searchText: String?) {
         let markets = markets.filter { $0.status?.canTrade == true }
         viewModel?.markets = markets
             .compactMap { market in
                 guard let asset = assetMap[market.assetId] else {
                     return nil
                 }
-                if searchText.isNotEmpty,
+                if let searchText = searchText, searchText.isNotEmpty,
                    asset.displayableAssetId.lowercased().contains(searchText) == false,
                    asset.name?.lowercased().contains(searchText) == false {
                     return nil

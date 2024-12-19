@@ -12,17 +12,6 @@ import Utilities
 
 public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
     @Published public var markets: [dydxSimpleUIMarketViewModel]?
-    @Published public var searchText: String = ""
-    @Published public var cancelAction: (() -> Void)?
-
-    private lazy var searchTextBinding = Binding(
-        get: {
-            self.searchText
-        },
-        set: {
-            self.searchText = $0
-        }
-    )
 
     public init() { }
 
@@ -35,70 +24,36 @@ public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
         return vm
     }
 
+    private let dummyMarket = dydxSimpleUIMarketViewModel(marketId: "_dummy", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, onMarketSelected: nil)
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack {
-                ScrollView(.vertical, showsIndicators: false) {
-                    LazyVStack(pinnedViews: [.sectionHeaders]) {
-                        if self.markets?.isEmpty ?? false {
-                            PlaceholderViewModel(text: DataLocalizer.localize(path: "APP.GENERAL.NO_MARKET"))
-                                .createView(parentStyle: style)
-                        } else {
-                            ForEach(self.markets ?? [], id: \.marketId) { market in
-                                market.createView(parentStyle: style)
-                                if market !== self.markets?.last {
-                                    DividerModel().createView(parentStyle: style)
-                                }
-                            }
-                        }
-                    }
-                }
-
-                self.createSearchBar(style: style)
+            // Need to insert "No Market" into ForEach for better performance
+            let markets: [dydxSimpleUIMarketViewModel]
+            if self.markets == nil {
+                markets = []
+            } else if self.markets?.count == 0 {
+                markets = [dummyMarket]
+            } else {
+                markets = self.markets ?? []
             }
-                .keyboardObserving()
+
+            let view = ForEach(markets, id: \.marketId) { market in
+                if market.marketId == "_dummy" {
+                    PlaceholderViewModel(text: DataLocalizer.localize(path: "APP.GENERAL.NO_MARKET"))
+                                          .createView(parentStyle: style)
+                } else {
+                    market.createView(parentStyle: style)
+                }
+                if market !== markets.last {
+                    DividerModel().createView(parentStyle: style)
+                }
+            }
 
             return AnyView(view)
         }
-    }
-
-    private func createSearchBar(style: ThemeStyle) -> some View {
-        HStack(alignment: .center, spacing: 0) {
-            PlatformIconViewModel(type: .asset(name: "icon_search", bundle: Bundle.dydxView),
-                                  size: CGSize(width: 16, height: 16),
-                                  templateColor: .textTertiary)
-            .createView(parentStyle: style)
-            .padding(.leading, 16)
-
-            PlatformInputModel(value: self.searchTextBinding,
-                               currentValue: self.searchText,
-                               placeHolder: DataLocalizer.localize(path: "APP.GENERAL.SEARCH"),
-                               keyboardType: .default,
-                               focusedOnAppear: false)
-            .createView(parentStyle: style)
-            .frame(height: 40)
-            .padding(.vertical, 2)
-
-            if searchText.isNotEmpty {
-                let closeIcon = PlatformIconViewModel(type: .asset(name: "icon_cancel", bundle: Bundle.dydxView),
-                                                      clip: .circle(background: .layer3, spacing: 0, borderColor: .layer6),
-                                                      size: CGSize(width: 16, height: 16),
-                                                      templateColor: .textTertiary)
-                PlatformButtonViewModel(content: closeIcon,
-                                        type: .iconType,
-                                        action: { [weak self] in
-                    self?.searchText = ""
-                })
-                .createView(parentStyle: style)
-                .padding(.trailing, 16)
-            }
-        }
-        .themeColor(background: .layer3)
-        .clipShape(Capsule())
-        .padding(.vertical, 8)
-        .padding(.horizontal, 16)
     }
 }
 
