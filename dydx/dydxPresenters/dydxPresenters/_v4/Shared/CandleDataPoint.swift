@@ -61,6 +61,21 @@ final class CandleDataPoint: DictionaryEntity, LinearGraphingObjectProtocol, Can
 
     required init() {}
 
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? CandleDataPoint else { return false }
+
+        return barY == object.barY &&
+            candleLabel == object.candleLabel &&
+            candleOpen == object.candleOpen &&
+            candleClose == object.candleClose &&
+            candleHigh == object.candleHigh &&
+            candleLow == object.candleLow &&
+            graphingX == object.graphingX &&
+            lineY == object.lineY &&
+            resolution == object.resolution &&
+            marketCandle == object.marketCandle
+    }
+
     private lazy var unitInterval: Double = {
         switch resolution {
         case .FIVEMINS:
