@@ -40,14 +40,13 @@ final class dydxCarteraConfigWorker: BaseWorker {
     }
 
     private func configureCartera(environment: V4Environment) {
+        if let wallets = environment.walletConnection?.walletConnect?.v2?.wallets?.ios {
+            CarteraConfig.shared.wcModalWallets = wallets
+        }
         let config = WalletProvidersConfig(walletConnectV1: nil,
                                            walletConnectV2: WalletConnectV2Config(environment: environment),
                                            walletSegue: WalletSegueConfig(environment: environment))
         CarteraConfig.shared.walletProvidersConfig = config
-
-        if let wallets = environment.walletConnection?.walletConnect?.v2?.wallets?.ios {
-            CarteraConfig.shared.wcModalWallets = wallets
-        }
     }
 }
 
