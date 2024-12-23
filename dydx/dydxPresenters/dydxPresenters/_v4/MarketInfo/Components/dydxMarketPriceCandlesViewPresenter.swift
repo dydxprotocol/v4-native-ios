@@ -215,10 +215,10 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
                         CandleDataPoint(candle: candle, resolution: resolution.key)
                     }
 
-            if listInteractor.list as? [CandleDataPoint] != candleDataPoints {
+             if listInteractor.list as? [CandleDataPoint] != candleDataPoints {
                 listInteractor.list = []        // Needed to ensure the chart reloads properly
                 listInteractor.list = candleDataPoints
-            }
+             }
          } else {
             listInteractor.list = []
         }
