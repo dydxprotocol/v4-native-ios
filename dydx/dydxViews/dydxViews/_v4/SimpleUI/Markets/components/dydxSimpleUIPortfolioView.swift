@@ -33,8 +33,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     @Published public var sharedAccountViewModel: SharedAccountViewModel? = SharedAccountViewModel()
     @Published public var pnlAmount: String?
     @Published public var pnlPercent: SignedAmountViewModel?
-
-    public init() { }
+    @Published public var chart = dydxLineChartViewModel()
 
     public static var previewValue: dydxSimpleUIPortfolioViewModel {
         let vm = dydxSimpleUIPortfolioViewModel()
@@ -65,50 +64,57 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     }
 
     private func createPortfolioView(style: ThemeStyle) -> some View {
-        sharedAccountViewModel?.leverageIcon?.displayOption = .iconAndText
+        ZStack {
+            chart.createView(parentStyle: style)
 
-        return VStack(spacing: 16) {
-
-            Spacer()
-
-            HStack(alignment: .center, spacing: 16) {
-                Text(sharedAccountViewModel?.equity ?? "-")
-                    .themeFont(fontType: .plus, fontSize: .largest)
-                    .themeColor(foreground: .textPrimary)
-
+            VStack(spacing: 16) {
                 Spacer()
 
-                VStack(alignment: .trailing, spacing: 8) {
-                    Text(pnlAmount ?? "-")
-                        .themeColor(foreground: .textTertiary)
-                    pnlPercent?.createView(parentStyle: style.themeFont(fontSize: .small))
-                }
-                .themeFont(fontSize: .small)
-            }
-            .frame(height: 48)
-            .padding(.horizontal, 16)
+                HStack(alignment: .center, spacing: 16) {
+                    Text(sharedAccountViewModel?.equity ?? "-")
+                        .themeFont(fontType: .plus, fontSize: .largest)
+                        .themeColor(foreground: .textPrimary)
 
-            HStack(spacing: 16) {
-                HStack(alignment: .center) {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
-                        .themeColor(foreground: .textTertiary)
                     Spacer()
-                    Text(sharedAccountViewModel?.buyingPower ?? "-")
-                        .themeColor(foreground: .textSecondary)
-                }
-                .themeFont(fontSize: .small)
 
-                DividerModel().createView(parentStyle: style)
-
-                HStack(alignment: .center, spacing: 24) {
-                    Text(DataLocalizer.localize(path: "APP.TRADE.RISK"))
-                        .themeColor(foreground: .textTertiary)
-                        .themeFont(fontSize: .small)
-                    sharedAccountViewModel?.leverageIcon?.createView(parentStyle: style)
+                    VStack(alignment: .trailing, spacing: 8) {
+                        Text(pnlAmount ?? "-")
+                            .themeColor(foreground: .textTertiary)
+                        pnlPercent?.createView(parentStyle: style.themeFont(fontSize: .small))
+                    }
+                    .themeFont(fontSize: .small)
                 }
+                .frame(height: 48)
+                .padding(.horizontal, 16)
+
+                HStack(spacing: 16) {
+                    HStack(alignment: .center) {
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
+                            .themeColor(foreground: .textTertiary)
+                        Spacer()
+                        Text(sharedAccountViewModel?.buyingPower ?? "-")
+                            .themeColor(foreground: .textSecondary)
+                    }
+                    .themeFont(fontSize: .small)
+
+                    DividerModel().createView(parentStyle: style)
+
+                    HStack(alignment: .center, spacing: 24) {
+                        Text(DataLocalizer.localize(path: "APP.TRADE.RISK"))
+                            .themeColor(foreground: .textTertiary)
+                            .themeFont(fontSize: .small)
+
+                        if let leverageIcon = sharedAccountViewModel?.leverageIcon {
+                            let leverageIcon = LeverageRiskModel(level: leverageIcon.level,
+                                                                 viewSize: leverageIcon.viewSize,
+                                                                 displayOption: .iconAndText)
+                            leverageIcon.createView(parentStyle: style)
+                        }
+                    }
+                }
+                .frame(height: 32)
+                .padding(.horizontal, 16)
             }
-            .frame(height: 32)
-            .padding(.horizontal, 16)
         }
     }
 

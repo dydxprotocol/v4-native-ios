@@ -72,10 +72,8 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
     }
 
     private func updatePNLs(pnls: [SubaccountHistoricalPNL], subaccount: Subaccount) {
-        let dataPoints = pnls.compactMap { HistoricalPNLDataPoint(pnl: $0) }
-
         let firstTotalPnl = pnls.first?.totalPnl
-        let targetTotalPnl = pnls.last?.totalPnl
+        let targetTotalPnl = subaccount.pnlTotal?.doubleValue ?? pnls.last?.totalPnl
         let beginning = pnls.first?.equity
 
         if let firstTotalPnl = firstTotalPnl, let targetTotalPnl = targetTotalPnl, let beginning = beginning, beginning != 0 {
@@ -83,5 +81,19 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
             let percent = dydxFormatter.shared.percent(number: abs(targetTotalPnl - firstTotalPnl) / beginning, digits: 2)
             viewModel?.pnlPercent = SignedAmountViewModel(text: percent, sign: targetTotalPnl >= firstTotalPnl ? .plus : .minus, coloringOption: .textOnly)
         }
+
+        var chartEntries = pnls.compactMap {
+            let date = $0.createdAtMilliseconds / 1000
+            let value = $0.equity
+            return dydxLineChartViewModel.Entry(date: date, value: value)
+        }
+        if let currentValue = subaccount.equity?.current?.doubleValue {
+            chartEntries.append(dydxLineChartViewModel.Entry(date: Double(Date().millisecondsSince1970) / 1000, value: currentValue))
+        }
+        let maxValue = chartEntries.max { $0.value < $1.value }?.value ?? 0
+        let minValue = chartEntries.min { $0.value < $1.value }?.value ?? 0
+        viewModel?.chart.entries = chartEntries
+        viewModel?.chart.showYLabels = false
+        viewModel?.chart.valueLowerBoundOffset = (maxValue - minValue) * 0.8
     }
 }

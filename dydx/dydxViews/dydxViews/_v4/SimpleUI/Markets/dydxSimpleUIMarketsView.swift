@@ -28,7 +28,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack {
+            let view = VStack(spacing: 16) {
                 HStack {
                     Spacer()
 
@@ -61,8 +61,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                         }
                         .keyboardObserving()
                     }
-                   // .padding(.bottom, 50) // Button height + additional spacing
-
+                 
                     self.marketSearch?.createView(parentStyle: style)
                 }
             }
