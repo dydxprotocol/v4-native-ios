@@ -169,7 +169,7 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
     }
 
     private func updateChartState(vault: Abacus.Vault?, valueType: dydxVaultChartViewModel.ValueTypeOption, timeType: dydxVaultChartViewModel.ValueTimeOption) {
-        let entries: [dydxVaultChartViewModel.Entry] = vault?.details?.history?.reversed()
+        let entries: [dydxLineChartViewModel.Entry] = vault?.details?.history?.reversed()
             .compactMap { entry in
                 let secondsSince1970 = (entry.date?.doubleValue ?? 0) / 1000.0
                 let minSecondsSince1970: Double
@@ -189,6 +189,6 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                     return nil
                 }
             } ?? []
-        viewModel?.vaultChart?.entries = entries
+        viewModel?.vaultChart?.chart.entries = entries
     }
 }
