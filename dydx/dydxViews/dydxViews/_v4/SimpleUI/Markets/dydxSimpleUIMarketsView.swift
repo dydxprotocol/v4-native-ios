@@ -61,7 +61,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                         }
                         .keyboardObserving()
                     }
-                 
+
                     self.marketSearch?.createView(parentStyle: style)
                 }
             }

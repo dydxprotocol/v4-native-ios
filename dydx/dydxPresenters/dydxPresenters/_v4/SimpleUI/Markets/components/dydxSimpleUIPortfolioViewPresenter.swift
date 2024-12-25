@@ -27,6 +27,10 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
         accountPresenter
     ]
 
+    private var loadingStartTime: Date?
+
+    private static let loadingDelay: TimeInterval = 2.0
+
     override init() {
         let viewModel = dydxSimpleUIPortfolioViewModel()
 
@@ -42,27 +46,31 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
     override func start() {
         super.start()
 
-        Publishers.CombineLatest3(
+        loadingStartTime = Date()
+        Publishers.CombineLatest4(
             AbacusStateManager.shared.state.selectedSubaccount,
             AbacusStateManager.shared.state.selectedSubaccountPNLs,
-            AbacusStateManager.shared.state.onboarded
+            AbacusStateManager.shared.state.onboarded,
+            Timer.publish(every: Self.loadingDelay, on: .main, in: .default).autoconnect()
         )
-        .sink { [weak self] subaccount, pnls, onboarded in
+        .sink { [weak self] subaccount, pnls, onboarded, _ in
             if subaccount?.freeCollateral?.current?.doubleValue ?? 0 > 0 {
                 self?.viewModel?.state = .hasBalance
                 self?.viewModel?.buttonAction = nil
                 if let subaccount = subaccount {
                     self?.updatePNLs(pnls: pnls, subaccount: subaccount)
                 }
-            } else if onboarded {
-                self?.viewModel?.state = .walletConnected
-                self?.viewModel?.buttonAction = {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
-                }
-            } else {
-                self?.viewModel?.state = .loggedOut
-                self?.viewModel?.buttonAction = {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/onboard"), animated: true, completion: nil)
+            } else if let loadingStartTime = self?.loadingStartTime, Date().timeIntervalSince(loadingStartTime) > Self.loadingDelay {
+                if onboarded {
+                    self?.viewModel?.state = .walletConnected
+                    self?.viewModel?.buttonAction = {
+                        Router.shared?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
+                    }
+                } else {
+                    self?.viewModel?.state = .loggedOut
+                    self?.viewModel?.buttonAction = {
+                        Router.shared?.navigate(to: RoutingRequest(path: "/onboard"), animated: true, completion: nil)
+                    }
                 }
             }
         }

@@ -56,7 +56,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
             case .loggedOut:
                 view = AnyView(createLoggedOutView(style: style))
             case .unknown:
-                view = AnyView(PlatformView.nilView)
+                view = AnyView(VStack {})
             }
 
             return view
