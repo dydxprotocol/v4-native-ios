@@ -41,13 +41,13 @@ class SharedAccountPresenter: HostedViewPresenter<SharedAccountViewModel>, Share
 
         viewModel?.freeCollateral = dydxFormatter.shared.dollar(number: account?.freeCollateral?.current?.doubleValue, size: nil)
 
-        viewModel?.buyingPower = dydxFormatter.shared.dollar(number: account?.buyingPower?.current?.doubleValue.filter(filter: .notNegative), size: nil)
+        viewModel?.buyingPower = dydxFormatter.shared.dollar(number: account?.buyingPower?.current?.doubleValue.filter(filter: .notNegative), digits: 2)
 
         viewModel?.marginUsage = dydxFormatter.shared.percent(number: account?.marginUsage?.current?.doubleValue, digits: 2)
 
         viewModel?.leverage = dydxFormatter.shared.leverage(number: account?.leverage?.current?.doubleValue)
 
-        viewModel?.equity = dydxFormatter.shared.dollar(number: account?.equity?.current?.doubleValue, size: nil)
+        viewModel?.equity = dydxFormatter.shared.dollar(number: account?.equity?.current?.doubleValue, digits: 2)
 
         viewModel?.openInterest = dydxFormatter.shared.dollarVolume(number: account?.notionalTotal?.current?.doubleValue, digits: 2)
 

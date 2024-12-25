@@ -136,11 +136,11 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
             .sink { walletInstance in
                 if walletInstance == nil {
                     let accepted: (() -> Void) = {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/portfolio", params: ["ethereumAddress": ethereumAddress, "cosmoAddress": cosmoAddress, "mnemonic": mnemonic, "walletId": walletId]), animated: true, completion: nil)
+                        Router.shared?.navigate(to: RoutingRequest(path: "/action/post_onboarding", params: ["ethereumAddress": ethereumAddress, "cosmoAddress": cosmoAddress, "mnemonic": mnemonic, "walletId": walletId]), animated: true, completion: nil)
                     }
                     Router.shared?.navigate(to: RoutingRequest(path: "/onboard/tos", params: ["accepted": accepted]), animated: true, completion: nil)
                 } else {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/portfolio", params: ["ethereumAddress": ethereumAddress, "cosmoAddress": cosmoAddress, "mnemonic": mnemonic, "walletId": walletId]), animated: true, completion: nil)
+                    Router.shared?.navigate(to: RoutingRequest(path: "/action/post_onboarding", params: ["ethereumAddress": ethereumAddress, "cosmoAddress": cosmoAddress, "mnemonic": mnemonic, "walletId": walletId]), animated: true, completion: nil)
                 }
             }
             .store(in: &subscriptions)

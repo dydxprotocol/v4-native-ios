@@ -77,11 +77,8 @@
                 "/action/wallet/etherscan": {
                     "destination":"dydxPresenters.WalletActionBuilder"
                 },
-                "/action/wallets/delete": {
-                    "destination":"WalletsDelete.xib"
-                },
-                "/action/withdraw": {
-                    "destination":"WithdrawAction.xib"
+                "/action/post_onboarding": {
+                    "destination":"dydxPresenters.dydxPostOnboardingActionBuilder"
                 },
                 "/alerts":{
                     "destination":"dydxPresenters.dydxAlertsViewBuilder",

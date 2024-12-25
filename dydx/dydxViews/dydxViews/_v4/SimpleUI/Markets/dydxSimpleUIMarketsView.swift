@@ -15,6 +15,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
     @Published public var marketList: dydxSimpleUIMarketListViewModel?
     @Published public var marketSearch: dydxSimpleUIMarketSearchViewModel?
     @Published public var keyboardUp: Bool = false
+    @Published public var portfolio: dydxSimpleUIPortfolioViewModel?
 
     public init() { }
 
@@ -46,10 +47,13 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                         LazyVStack(pinnedViews: [.sectionHeaders]) {
                             if self.keyboardUp == false {
                                 Section {
-                                    Spacer()
-                                        .frame(height: 320)
+                                    self.portfolio?.createView(parentStyle: style)
+                                        .frame(height: 240)
+                                        .padding(.bottom, 24)
                                 }
                             }
+
+                            DividerModel().createView(parentStyle: style)
 
                             Section {
                                 self.marketList?.createView(parentStyle: style)

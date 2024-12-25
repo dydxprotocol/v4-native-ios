@@ -40,17 +40,6 @@ private class dydxPortfolioViewController: HostingViewController<PlatformView, d
             if let presenter = presenter as? dydxPortfolioViewPresenterProtocol {
                 presenter.updateDisplayType(displayType: request?.path?.lastPathComponent)
             }
-            let walletId = parser.asString(request?.params?["walletId"])
-            if let ethereumAddress = parser.asString(request?.params?["ethereumAddress"]) {
-                if let cosmoAddress = parser.asString(request?.params?["cosmoAddress"]),
-                    let mnemonic = parser.asString(request?.params?["mnemonic"]) {
-                    AbacusStateManager.shared.setV4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic)
-                } else if let apiKey = parser.asString(request?.params?["apiKey"]),
-                          let secret = parser.asString(request?.params?["secret"]),
-                          let passPhrase = parser.asString(request?.params?["passPhrase"]) {
-                    AbacusStateManager.shared.setV3(ethereumAddress: ethereumAddress, walletId: walletId, apiKey: apiKey, secret: secret, passPhrase: passPhrase)
-                }
-            }
             return true
         }
         return false

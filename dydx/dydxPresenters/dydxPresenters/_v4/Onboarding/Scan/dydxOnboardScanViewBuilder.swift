@@ -155,7 +155,7 @@ private class dydxOnboardScanViewPresenter: HostedViewPresenter<dydxOnboardScanV
                                                 walletId: nil,
                                                 cosmoAddress: address,
                                                 mnemonic: mnemonic)
-                Router.shared?.navigate(to: RoutingRequest(path: "/portfolio",
+                Router.shared?.navigate(to: RoutingRequest(path: "/action/post_onboarding",
                                                            params: ["cosmoAddress": address, "mnemonic": mnemonic]),
                                         animated: true, completion: nil)
             } else {

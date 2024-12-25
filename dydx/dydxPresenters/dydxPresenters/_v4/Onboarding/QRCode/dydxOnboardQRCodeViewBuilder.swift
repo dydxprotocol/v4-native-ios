@@ -85,7 +85,7 @@ private class dydxOnboardQRCodeViewPresenter: HostedViewPresenter<dydxOnboardQRC
         case .signed(let result):
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if let cosmoAddress = result.cosmoAddress, let mnemonic = result.mnemonic {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/portfolio", params: ["ethereumAddress": result.ethereumAddress, "cosmoAddress": cosmoAddress, "mnemonic": mnemonic, "walletId": result.walletId ?? ""]), animated: true, completion: nil)
+                    Router.shared?.navigate(to: RoutingRequest(path: "/action/post_onboarding", params: ["ethereumAddress": result.ethereumAddress, "cosmoAddress": cosmoAddress, "mnemonic": mnemonic, "walletId": result.walletId ?? ""]), animated: true, completion: nil)
                 }
             }
 

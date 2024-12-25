@@ -24,7 +24,9 @@ public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
         return vm
     }
 
-    private let dummyMarket = dydxSimpleUIMarketViewModel(marketId: "_dummy", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, onMarketSelected: nil)
+    private let dummyNoMarket = dydxSimpleUIMarketViewModel(marketId: "_dummy_no_market", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, onMarketSelected: nil)
+
+    private let dummyLoading = dydxSimpleUIMarketViewModel(marketId: "_dummy_loading", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, onMarketSelected: nil)
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
@@ -33,15 +35,23 @@ public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
             // Need to insert "No Market" into ForEach for better performance
             let markets: [dydxSimpleUIMarketViewModel]
             if self.markets == nil {
-                markets = []
+                markets = [dummyLoading]
             } else if self.markets?.count == 0 {
-                markets = [dummyMarket]
+                markets = [dummyNoMarket]
             } else {
                 markets = self.markets ?? []
             }
 
             let view = ForEach(markets, id: \.marketId) { market in
-                if market.marketId == "_dummy" {
+                if market.marketId == "_dummy_loading" {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .tint(ThemeColor.SemanticColor.textSecondary.color)
+                        Spacer()
+                    }
+                } else if market.marketId == "_dummy_no_market" {
                     PlaceholderViewModel(text: DataLocalizer.localize(path: "APP.GENERAL.NO_MARKET"))
                                           .createView(parentStyle: style)
                 } else {
