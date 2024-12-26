@@ -34,9 +34,23 @@ private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpl
     @Published var marketId: String?
     @Published var shouldDisplayFullTradeInputOnAppear: Bool = false
 
+    private let headerPresenter = dydxSimpleUIMarketInfoHeaderViewPresenter()
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        headerPresenter
+    ]
+
     override init() {
+        let viewModel = dydxSimpleUIMarketInfoViewModel()
+
+        headerPresenter.$viewModel.assign(to: &viewModel.$header)
+
         super.init()
 
-        viewModel = dydxSimpleUIMarketInfoViewModel()
+        self.viewModel = viewModel
+
+        $marketId.assign(to: &headerPresenter.$marketId)
+
+        attachChildren(workers: childPresenters)
     }
+
 }

@@ -11,23 +11,29 @@ import PlatformUI
 import Utilities
 
 public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
-    @Published public var text: String?
+    @Published public var header: dydxSimpleUIMarketInfoHeaderViewModel?
 
     public init() { }
 
     public static var previewValue: dydxSimpleUIMarketInfoViewModel {
         let vm = dydxSimpleUIMarketInfoViewModel()
-        vm.text = "Test String"
+        vm.header = .previewValue
         return vm
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            return AnyView(
-                Text(self.text ?? "")
-            )
+            let view = VStack {
+                self.header?.createView(parentStyle: style)
+
+                Spacer()
+            }
+                .frame(maxWidth: .infinity)
+                .themeColor(background: .layer2)
+
+            return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
     }
 }
