@@ -46,6 +46,8 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
     override func start() {
         super.start()
 
+        AbacusStateManager.shared.setHistoricalPNLPeriod(period: HistoricalPnlPeriod.period90d)
+
         loadingStartTime = Date()
         Publishers.CombineLatest4(
             AbacusStateManager.shared.state.selectedSubaccount,
