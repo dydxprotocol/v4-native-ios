@@ -14,14 +14,20 @@ import PlatformUI
 import Combine
 import dydxStateManager
 import Abacus
+import dydxFormatter
 
 public class dydxMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        let presenter = dydxMarketInfoViewPresenter()
-        let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        let viewController = dydxMarketInfoViewController(presenter: presenter, view: view, configuration: .default)
-        viewController.hidesBottomBarWhenPushed = true
-        return viewController as? T
+        if dydxBoolFeatureFlag.simple_ui.isEnabled, AppMode.current == .simple {
+            let viewController: dydxSimpleUIMarketInfoViewController? = dydxSimpleUIMarketInfoViewBuilder().build()
+            return viewController as? T
+        } else {
+            let presenter = dydxMarketInfoViewPresenter()
+            let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
+            let viewController = dydxMarketInfoViewController(presenter: presenter, view: view, configuration: .default)
+            viewController.hidesBottomBarWhenPushed = true
+            return viewController as? T
+        }
     }
 }
 

@@ -18,7 +18,8 @@ public class dydxRootBuilder: NSObject, ObjectBuilderProtocol {
         if dydxBoolFeatureFlag.simple_ui.isEnabled, AppMode.current == .simple {
             let presenter = dydxSimpleUIMarketsViewPresenter()
             let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-            return dydxSimpleUIMarketsViewController(presenter: presenter, view: view, configuration: .default) as? T
+            let viewController = dydxSimpleUIMarketsViewController(presenter: presenter, view: view, configuration: .default)
+            return UINavigationController(rootViewController: viewController) as? T
         } else {
             return dydxProUITabBarController() as? T
         }

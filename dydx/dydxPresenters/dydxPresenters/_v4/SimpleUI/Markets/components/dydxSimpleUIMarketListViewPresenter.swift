@@ -104,6 +104,7 @@ private extension dydxSimpleUIMarketViewModel {
                                            leverage: leverage,
                                            volumn: market.perpetual?.volume24HUSDC?.doubleValue,
                                            onMarketSelected: {
+            Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["market": market.id]), animated: true, completion: nil)
         })
     }
 }
