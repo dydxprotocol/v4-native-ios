@@ -12,12 +12,14 @@ import Utilities
 
 public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
     @Published public var header: dydxSimpleUIMarketInfoHeaderViewModel?
+    @Published public var chart: dydxSimpleUIMarketCandlesViewModel?
 
     public init() { }
 
     public static var previewValue: dydxSimpleUIMarketInfoViewModel {
         let vm = dydxSimpleUIMarketInfoViewModel()
         vm.header = .previewValue
+        vm.chart = .previewValue
         return vm
     }
 
@@ -28,7 +30,16 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
             let view = VStack {
                 self.header?.createView(parentStyle: style)
 
-                Spacer()
+                ScrollView(showsIndicators: false) {
+                    LazyVStack(pinnedViews: [.sectionHeaders]) {
+                        self.chart?.createView(parentStyle: style)
+
+                        // for tab bar scroll adjstment overlap
+                        Spacer(minLength: 128)
+                    }
+                    .themeColor(background: .layer2)
+                }
+
             }
                 .frame(maxWidth: .infinity)
                 .themeColor(background: .layer2)

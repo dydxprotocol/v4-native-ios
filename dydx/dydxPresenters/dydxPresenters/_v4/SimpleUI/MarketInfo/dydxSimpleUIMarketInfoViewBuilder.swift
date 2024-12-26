@@ -4,6 +4,9 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import Combine
+import dydxStateManager
+import Abacus
 
 public class dydxSimpleUIMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -31,26 +34,36 @@ private protocol dydxSimpleUIMarketInfoViewPresenterProtocol: HostedViewPresente
 }
 
 private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpleUIMarketInfoViewModel>, dydxSimpleUIMarketInfoViewPresenterProtocol {
-    @Published var marketId: String?
+    @Published var marketId: String? {
+        didSet {
+            if marketId != oldValue {
+                AbacusStateManager.shared.setMarket(market: marketId)
+            }
+        }
+    }
     @Published var shouldDisplayFullTradeInputOnAppear: Bool = false
 
     private let headerPresenter = dydxSimpleUIMarketInfoHeaderViewPresenter()
+    private let chartPresenter = dydxSimpleUIMarketCandlesViewPresenter()
+
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
-        headerPresenter
+        headerPresenter,
+        chartPresenter
     ]
 
     override init() {
         let viewModel = dydxSimpleUIMarketInfoViewModel()
 
         headerPresenter.$viewModel.assign(to: &viewModel.$header)
+        chartPresenter.$viewModel.assign(to: &viewModel.$chart)
 
         super.init()
 
         self.viewModel = viewModel
 
         $marketId.assign(to: &headerPresenter.$marketId)
+        $marketId.assign(to: &chartPresenter.$marketId)
 
         attachChildren(workers: childPresenters)
     }
-
 }

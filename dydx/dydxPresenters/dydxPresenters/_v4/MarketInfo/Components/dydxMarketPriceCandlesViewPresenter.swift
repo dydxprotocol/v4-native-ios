@@ -308,7 +308,7 @@ private struct ChartType {
 
 // MARK: Resolution
 
-private struct Resolution {
+struct Resolution {
     let text: String
     let key: CandleResolution
 

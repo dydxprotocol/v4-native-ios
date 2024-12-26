@@ -69,13 +69,13 @@ class dydxPortfolioChartViewPresenter: HostedViewPresenter<dydxPortfolioChartVie
         viewModel?.resolutionTitles = Resolution.allResolutions.map(\.text)
         viewModel?.resolutionIndex = defaultResolutionIndex
         viewModel?.pnlLabel = DataLocalizer.localize(path: "APP.GENERAL.PROFIT_AND_LOSS_WITH_DURATION", params: ["PERIOD": Resolution.allResolutions[defaultResolutionIndex].text])
-        AbacusStateManager.shared.setHistoricalPNLPeriod(period: Resolution.allResolutions[defaultResolutionIndex].key)
+        AbacusStateManager.shared.setHistoricalPNLPeriod(period: PortfolioChartResolution.allResolutions[defaultResolutionIndex].key)
 
         viewModel?.onResolutionChanged = { index in
             if index < Resolution.allResolutions.count {
                 viewModel?.resolutionIndex = index
                 viewModel?.pnlLabel = DataLocalizer.localize(path: "APP.GENERAL.PROFIT_AND_LOSS_WITH_DURATION", params: ["PERIOD": Resolution.allResolutions[index].text])
-                AbacusStateManager.shared.setHistoricalPNLPeriod(period: Resolution.allResolutions[index].key)
+                AbacusStateManager.shared.setHistoricalPNLPeriod(period: PortfolioChartResolution.allResolutions[index].key)
              }
         }
 
@@ -202,16 +202,16 @@ class dydxPortfolioChartViewPresenter: HostedViewPresenter<dydxPortfolioChartVie
 
 // MARK: Resolution
 
-private struct Resolution {
+private struct PortfolioChartResolution {
     let text: String
     let key: HistoricalPnlPeriod
 
-    static var allResolutions: [Resolution] {
+    static var allResolutions: [PortfolioChartResolution] {
         [
-            Resolution(text: DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.1D"), key: .period1d),
-            Resolution(text: DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.7D"), key: .period7d),
-            Resolution(text: DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.30D"), key: .period30d),
-            Resolution(text: DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.90D"), key: .period90d)
+            PortfolioChartResolution(text: DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.1D"), key: .period1d),
+            PortfolioChartResolution(text: DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.7D"), key: .period7d),
+            PortfolioChartResolution(text: DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.30D"), key: .period30d),
+            PortfolioChartResolution(text: DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.90D"), key: .period90d)
         ]
     }
 }

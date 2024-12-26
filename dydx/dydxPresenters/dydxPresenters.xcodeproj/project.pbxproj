@@ -73,6 +73,7 @@
 		027885DF2D1B811400366321 /* dydxPostOnboardingAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027885DE2D1B811400366321 /* dydxPostOnboardingAction.swift */; };
 		027885E82D1DD67200366321 /* dydxSimpleUIMarketInfoViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027885E72D1DD66500366321 /* dydxSimpleUIMarketInfoViewBuilder.swift */; };
 		027885F02D1DE14600366321 /* dydxSimpleUIMarketInfoHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027885EF2D1DE14500366321 /* dydxSimpleUIMarketInfoHeaderViewPresenter.swift */; };
+		027885F42D1DEBF700366321 /* dydxSimpleUIMarketCandlesViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027885F32D1DEBF600366321 /* dydxSimpleUIMarketCandlesViewPresenter.swift */; };
 		0279656A29D795E8004DEB20 /* tabs_v4.json in Resources */ = {isa = PBXBuildFile; fileRef = 0279655B29D795E7004DEB20 /* tabs_v4.json */; };
 		0279656C29D795E8004DEB20 /* routing_swiftui.json in Resources */ = {isa = PBXBuildFile; fileRef = 0279656929D795E7004DEB20 /* routing_swiftui.json */; };
 		0279DE482BEBE76900F9ECF8 /* dydxTargetLeverageCtaButtonViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE472BEBE76900F9ECF8 /* dydxTargetLeverageCtaButtonViewPresenter.swift */; };
@@ -479,6 +480,7 @@
 		027885DE2D1B811400366321 /* dydxPostOnboardingAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPostOnboardingAction.swift; sourceTree = "<group>"; };
 		027885E72D1DD66500366321 /* dydxSimpleUIMarketInfoViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketInfoViewBuilder.swift; sourceTree = "<group>"; };
 		027885EF2D1DE14500366321 /* dydxSimpleUIMarketInfoHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketInfoHeaderViewPresenter.swift; sourceTree = "<group>"; };
+		027885F32D1DEBF600366321 /* dydxSimpleUIMarketCandlesViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketCandlesViewPresenter.swift; sourceTree = "<group>"; };
 		0279655B29D795E7004DEB20 /* tabs_v4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabs_v4.json; sourceTree = "<group>"; };
 		0279656929D795E7004DEB20 /* routing_swiftui.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = routing_swiftui.json; sourceTree = "<group>"; };
 		0279DE472BEBE76900F9ECF8 /* dydxTargetLeverageCtaButtonViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTargetLeverageCtaButtonViewPresenter.swift; sourceTree = "<group>"; };
@@ -1119,6 +1121,7 @@
 			isa = PBXGroup;
 			children = (
 				027885EF2D1DE14500366321 /* dydxSimpleUIMarketInfoHeaderViewPresenter.swift */,
+				027885F32D1DEBF600366321 /* dydxSimpleUIMarketCandlesViewPresenter.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -2241,6 +2244,7 @@
 				2749F8FF2B853B8700D6BA16 /* dydxRewardsLaunchIncentivesPresenter.swift in Sources */,
 				027CA87229EDFC990069781A /* dydxTransferInputCtaButtonViewPresenter.swift in Sources */,
 				02D1CEE129C8DEA7009ADF9A /* dydxLanguageViewBuilder.swift in Sources */,
+				027885F42D1DEBF700366321 /* dydxSimpleUIMarketCandlesViewPresenter.swift in Sources */,
 				02D1342828EB572100B46941 /* SharedMarketPresenter.swift in Sources */,
 				02DC87952CD441BC00F865C5 /* dydxVaultHistoryViewBuilder.swift in Sources */,
 				0262EFA629D79EE4009889E2 /* Wallets2ViewBuilder.swift in Sources */,
