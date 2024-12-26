@@ -13,6 +13,9 @@ import Utilities
 public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
     @Published public var header: dydxSimpleUIMarketInfoHeaderViewModel?
     @Published public var chart: dydxSimpleUIMarketCandlesViewModel?
+    @Published public var stats: dydxMarketStatsViewModel? = dydxMarketStatsViewModel()
+    @Published public var resources: dydxMarketResourcesViewModel = dydxMarketResourcesViewModel()
+    @Published public var configs: dydxMarketConfigsViewModel? = dydxMarketConfigsViewModel()
 
     public init() { }
 
@@ -34,12 +37,19 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
                     LazyVStack(pinnedViews: [.sectionHeaders]) {
                         self.chart?.createView(parentStyle: style)
 
+                        self.stats?.createView(parentStyle: style)
+                            .section(path: "APP.GENERAL.STATISTICS")
+
+                        self.resources.createView(parentStyle: style)
+                            .section(path: "APP.GENERAL.DETAILS")
+
+                        self.configs?.createView(parentStyle: style)
+
                         // for tab bar scroll adjstment overlap
                         Spacer(minLength: 128)
                     }
                     .themeColor(background: .layer2)
                 }
-
             }
                 .frame(maxWidth: .infinity)
                 .themeColor(background: .layer2)

@@ -45,10 +45,16 @@ private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpl
 
     private let headerPresenter = dydxSimpleUIMarketInfoHeaderViewPresenter()
     private let chartPresenter = dydxSimpleUIMarketCandlesViewPresenter()
+    private let statsPresenter = dydxMarketStatsViewPresenter()
+    private let configsPresenter = dydxMarketConfigsViewPresenter()
+    private let sharedMarketPresenter = SharedMarketPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         headerPresenter,
-        chartPresenter
+        chartPresenter,
+        statsPresenter,
+        configsPresenter,
+        sharedMarketPresenter
     ]
 
     override init() {
@@ -56,6 +62,9 @@ private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpl
 
         headerPresenter.$viewModel.assign(to: &viewModel.$header)
         chartPresenter.$viewModel.assign(to: &viewModel.$chart)
+        statsPresenter.$viewModel.assign(to: &viewModel.$stats)
+        configsPresenter.$viewModel.assign(to: &viewModel.$configs)
+        sharedMarketPresenter.$viewModel.assign(to: &viewModel.resources.$sharedMarketViewModel)
 
         super.init()
 
@@ -63,6 +72,9 @@ private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpl
 
         $marketId.assign(to: &headerPresenter.$marketId)
         $marketId.assign(to: &chartPresenter.$marketId)
+        $marketId.assign(to: &statsPresenter.$marketId)
+        $marketId.assign(to: &configsPresenter.$marketId)
+        $marketId.assign(to: &sharedMarketPresenter.$marketId)
 
         attachChildren(workers: childPresenters)
     }
