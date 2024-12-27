@@ -106,6 +106,7 @@
 		027885F22D1DEBE300366321 /* dydxSimpleUIMarketCandlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027885F12D1DEBE300366321 /* dydxSimpleUIMarketCandlesView.swift */; };
 		027885F62D1E0C5500366321 /* dydxSimpleUIMarketCandlesResolutionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027885F52D1E0C5500366321 /* dydxSimpleUIMarketCandlesResolutionsView.swift */; };
 		027885FA2D1E170900366321 /* dydxSimpleUIMarketPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027885F92D1E170900366321 /* dydxSimpleUIMarketPositionView.swift */; };
+		027886062D1F4C0500366321 /* dydxSimpleUITradeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027886052D1F4C0500366321 /* dydxSimpleUITradeInputView.swift */; };
 		0279DE452BEBE75100F9ECF8 /* dydxTargetLeverageCtaButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE442BEBE75100F9ECF8 /* dydxTargetLeverageCtaButtonView.swift */; };
 		0279DE6B2BEC471700F9ECF8 /* dydxAdjustMarginInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE6A2BEC471700F9ECF8 /* dydxAdjustMarginInputView.swift */; };
 		0279DE872BED3F5400F9ECF8 /* dydxAdjustMarginDirectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE862BED3F5400F9ECF8 /* dydxAdjustMarginDirectionView.swift */; };
@@ -513,6 +514,7 @@
 		027885F12D1DEBE300366321 /* dydxSimpleUIMarketCandlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketCandlesView.swift; sourceTree = "<group>"; };
 		027885F52D1E0C5500366321 /* dydxSimpleUIMarketCandlesResolutionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketCandlesResolutionsView.swift; sourceTree = "<group>"; };
 		027885F92D1E170900366321 /* dydxSimpleUIMarketPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketPositionView.swift; sourceTree = "<group>"; };
+		027886052D1F4C0500366321 /* dydxSimpleUITradeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputView.swift; sourceTree = "<group>"; };
 		0279DE442BEBE75100F9ECF8 /* dydxTargetLeverageCtaButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTargetLeverageCtaButtonView.swift; sourceTree = "<group>"; };
 		0279DE6A2BEC471700F9ECF8 /* dydxAdjustMarginInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginInputView.swift; sourceTree = "<group>"; };
 		0279DE862BED3F5400F9ECF8 /* dydxAdjustMarginDirectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginDirectionView.swift; sourceTree = "<group>"; };
@@ -1290,6 +1292,22 @@
 			path = components;
 			sourceTree = "<group>";
 		};
+		027885FD2D1F4B9400366321 /* Trade */ = {
+			isa = PBXGroup;
+			children = (
+				027885FE2D1F4BA400366321 /* TradeInput */,
+			);
+			path = Trade;
+			sourceTree = "<group>";
+		};
+		027885FE2D1F4BA400366321 /* TradeInput */ = {
+			isa = PBXGroup;
+			children = (
+				027886052D1F4C0500366321 /* dydxSimpleUITradeInputView.swift */,
+			);
+			path = TradeInput;
+			sourceTree = "<group>";
+		};
 		0279DE412BEBE56C00F9ECF8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -1469,6 +1487,7 @@
 		02D6DADA2D12342B008AAEA1 /* SimpleUI */ = {
 			isa = PBXGroup;
 			children = (
+				027885FD2D1F4B9400366321 /* Trade */,
 				027885E32D1DD63B00366321 /* MarketInfo */,
 				02D6DAE72D12344E008AAEA1 /* Markets */,
 			);
@@ -2234,6 +2253,7 @@
 				026382EB28F0EF0000F766FA /* dydxMarketPriceCandlesResolutionsView.swift in Sources */,
 				02F99F3E29E4D5750009B3E8 /* dydxTransferSearchItemView.swift in Sources */,
 				27EB25832C6D1E5E008C187B /* dydxVaultPositionView.swift in Sources */,
+				027886062D1F4C0500366321 /* dydxSimpleUITradeInputView.swift in Sources */,
 				27DBF3C92C4A05B9009EB2D6 /* dydxTitledNumberField.swift in Sources */,
 				02D6DBB62D134BCF008AAEA1 /* dydxSimpleUIMarketListView.swift in Sources */,
 				0284201629AD71B600C0E7CC /* Enums.swift in Sources */,

@@ -1,0 +1,160 @@
+//
+//  dydxSimpleUITradeInputViewModelPresenter.swift
+//  dydxPresenters
+//
+//  Created by Rui Huang on 27/12/2024.
+//
+
+import Utilities
+import dydxViews
+import PlatformParticles
+import RoutingKit
+import ParticlesKit
+import PlatformUI
+import Abacus
+import dydxStateManager
+import FloatingPanel
+import PlatformRouting
+import Combine
+import dydxFormatter
+
+public class dydxSimpleUITradeInputViewBuilder: NSObject, ObjectBuilderProtocol {
+    public func build<T>() -> T? {
+        let presenter = dydxSimpleUITradeInputViewPresenter()
+        let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
+        let viewController = dydxSimpleUITradeInputViewController(presenter: presenter, view: view, configuration: .default)
+        presenter.delegate = viewController
+        return viewController as? T
+    }
+}
+
+class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, dydxSimpleUITradeInputViewModel>, FloatingInsetProvider, FloatedDelegate, dydxSimpeUITradeInputViewPresenterDelegate {
+    override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
+        if request?.path == "/trade/input", let presenter = presenter as? dydxSimpleUITradeInputViewPresenter {
+            AbacusStateManager.shared.startTrade()
+            if request?.params?["full"] as? String == "true" {
+                presenter.updateViewControllerPosition(position: .half)
+                move(to: .half)
+            } else {
+                presenter.updateViewControllerPosition(position: .tip)
+                move(to: .tip)
+            }
+
+            presenter.viewModel?.onScrollViewCreated  = { [weak self] scrollView in
+                self?.floatTracking = scrollView
+            }
+            return true
+        }
+        return false
+    }
+
+    // MARK: FloatingInsetProvider, FloatedDelegate
+
+    var anchors: [FloatingPanel.FloatingPanelState: FloatingPanel.FloatingPanelLayoutAnchoring] {
+        var positions: [FloatingPanel.FloatingPanelState: FloatingPanel.FloatingPanelLayoutAnchoring] = [
+            .tip: FloatingPanelLayoutAnchor(absoluteInset: 90, edge: .bottom, referenceGuide: .safeArea),
+            // Use .half instead of .full, so that the back button from the parent view is enabled.
+            .half: FloatingPanelLayoutAnchor(absoluteInset: 76, edge: .top, referenceGuide: .safeArea)
+        ]
+        if position == nil {
+            positions[.hidden] = FloatingPanelLayoutAnchor(absoluteInset: 0, edge: .bottom, referenceGuide: .superview)
+        }
+        return positions
+    }
+
+    var initialPosition: FloatingPanelState = .hidden
+
+    func floatingChanged() {
+        if let presenter = presenter as? dydxSimpleUITradeInputViewPresenterProtocol, let position = position {
+            presenter.updateViewControllerPosition(position: position)
+        }
+    }
+
+    var position: FloatingPanelState?
+
+    var floatTracking: UIScrollView? {
+        didSet {
+            if let floatTracking = floatTracking {
+                floatingParent?.track(scrollView: floatTracking)
+            }
+        }
+    }
+
+    func shouldPan(currentState: FloatingPanel.FloatingPanelState, velocity: CGPoint) -> Bool {
+        if currentState == .half {
+            return velocity.y > 0 // only allow panning down
+        }
+
+        return true
+    }
+
+    // MARK: dydxSimpeUITradeInputViewPresenterDelegate
+
+    func buySellButtonTapped() {
+        move(to: .half)
+    }
+}
+
+private protocol dydxSimpeUITradeInputViewPresenterDelegate: AnyObject {
+    func buySellButtonTapped()
+}
+
+private protocol dydxSimpleUITradeInputViewPresenterProtocol: HostedViewPresenterProtocol {
+    var viewModel: dydxSimpleUITradeInputViewModel? { get }
+    func updateViewControllerPosition(position: FloatingPanelState)
+}
+
+private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputViewModel>, dydxSimpleUITradeInputViewPresenterProtocol, dydxTradeSheetTipBuySellViewPresenterDelegate {
+    weak var delegate: dydxSimpeUITradeInputViewPresenterDelegate?
+
+    // MARK: dydxTradeInputViewPresenterProtocol
+
+    func updateViewControllerPosition(position: FloatingPanel.FloatingPanelState) {
+        switch position {
+        case .tip:
+            viewModel?.displayState = .tip
+        default:
+            viewModel?.displayState = .full
+        }
+    }
+
+    // MARK: dydxTradeSheetTipBuySellViewPresenterDelegate
+
+    func buySellButtonTapped() {
+        viewModel?.displayState = .full
+        delegate?.buySellButtonTapped()
+    }
+
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        tipBuySellPresenter,
+        tipDraftPresenter
+    ]
+
+    private let tipBuySellPresenter = dydxTradeSheetTipBuySellViewPresenter()
+    private let tipDraftPresenter = dydxTradeSheetTipDraftViewPresenter()
+
+    override init() {
+        let viewModel = dydxSimpleUITradeInputViewModel()
+
+        tipBuySellPresenter.$viewModel.assign(to: &viewModel.$tipBuySellViewModel)
+        tipDraftPresenter.$viewModel.assign(to: &viewModel.$tipDraftViewModel)
+
+        super.init()
+
+        self.viewModel = viewModel
+
+        attachChildren(workers: childPresenters)
+    }
+
+    override func start() {
+        super.start()
+
+        AbacusStateManager.shared.state.tradeInput
+            .map(\.?.size)
+            .sink { [weak self] size in
+                let size = self?.parser.asNumber(size?.size)?.doubleValue ?? 0
+                self?.viewModel?.tipState = size > 0 ? .draft : .buySell
+            }
+            .store(in: &subscriptions)
+    }
+}
