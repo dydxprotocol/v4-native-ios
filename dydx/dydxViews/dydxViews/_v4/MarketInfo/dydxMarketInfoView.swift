@@ -132,14 +132,14 @@ public class dydxMarketInfoViewModel: PlatformViewModel {
             stats?
                 .createView(parentStyle: parentStyle)
                 .frame(width: UIScreen.main.bounds.width)
-                .section(path: "APP.GENERAL.STATISTICS")
+                .sectionHeader(path: "APP.GENERAL.STATISTICS")
     }
 
     private func createDetailsSection(parentStyle: ThemeStyle) -> some View {
         resources
             .createView(parentStyle: parentStyle)
             .frame(width: UIScreen.main.bounds.width)
-            .section(path: "APP.GENERAL.DETAILS")
+            .sectionHeader(path: "APP.GENERAL.DETAILS")
     }
 
     private func createConfigsSection(parentStyle: ThemeStyle) -> some View {
@@ -151,8 +151,12 @@ public class dydxMarketInfoViewModel: PlatformViewModel {
 }
 
 extension View {
-    func section(path: String) -> some View {
+    func sectionHeader(path: String) -> some View {
         self.modifier(SectionModifier(localizedStringPath: path))
+    }
+
+    func sectionHeader(header: @escaping (() -> some View)) -> some View {
+        self.modifier(SectionHeaderModifier(header: header))
     }
 }
 
@@ -178,6 +182,22 @@ private struct SectionModifier: ViewModifier {
                 }
                 .themeColor(background: .layer2)
             }
+        }
+    }
+}
+
+private struct SectionHeaderModifier<Parent>: ViewModifier where Parent: View {
+    var header: (() -> Parent)
+
+    func body(content: Content) -> some View {
+        Section {
+            VStack(alignment: .leading) {
+                content
+                Spacer(minLength: 24)
+            }
+        } header: {
+            header()
+                .themeColor(background: .layer2)
         }
     }
 }

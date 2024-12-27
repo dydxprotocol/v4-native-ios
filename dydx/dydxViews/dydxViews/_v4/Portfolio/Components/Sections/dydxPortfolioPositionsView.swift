@@ -60,6 +60,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
     @Published public var leverage: String?
     @Published public var leverageIcon: LeverageRiskModel?
     @Published public var liquidationPrice: String?
+    @Published public var entryPrice: String?
     @Published public var indexPrice: String?
     @Published public var unrealizedPnl: SignedAmountViewModel?
     @Published public var unrealizedPnlPercent: String = ""

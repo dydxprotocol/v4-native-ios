@@ -15,7 +15,7 @@ import dydxChart
 import dydxFormatter
 
 public class dydxLineChartViewModel: PlatformViewModel {
-    public struct Entry {
+    public struct Entry: Equatable {
         public let date: Double
         public let value: Double
 

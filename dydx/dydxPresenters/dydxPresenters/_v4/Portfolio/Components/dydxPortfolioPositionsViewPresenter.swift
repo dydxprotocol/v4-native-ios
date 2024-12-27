@@ -165,6 +165,7 @@ class dydxPortfolioPositionsViewPresenter: HostedViewPresenter<dydxPortfolioPosi
         } else {
             item.liquidationPrice = DataLocalizer.localize(path: "APP.GENERAL.NONE")
         }
+        item.entryPrice = dydxFormatter.shared.dollar(number: position.entryPrice.current?.doubleValue ?? 0, digits: configs.displayTickSizeDecimals?.intValue ?? 0)
 
         item.unrealizedPnl = SignedAmountViewModel(amount: position.unrealizedPnl.current?.doubleValue ?? 0, displayType: .dollar, coloringOption: .allText)
         item.unrealizedPnlPercent = dydxFormatter.shared.percent(number: position.unrealizedPnlPercent.current?.doubleValue, digits: 2) ?? ""

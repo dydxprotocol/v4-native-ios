@@ -16,6 +16,7 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
     @Published public var stats: dydxMarketStatsViewModel? = dydxMarketStatsViewModel()
     @Published public var resources: dydxMarketResourcesViewModel = dydxMarketResourcesViewModel()
     @Published public var configs: dydxMarketConfigsViewModel? = dydxMarketConfigsViewModel()
+    @Published public var position: dydxSimpleUIMarketPositionViewModel?
 
     public init() { }
 
@@ -23,6 +24,7 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
         let vm = dydxSimpleUIMarketInfoViewModel()
         vm.header = .previewValue
         vm.chart = .previewValue
+        vm.position = .previewValue
         return vm
     }
 
@@ -36,12 +38,15 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(pinnedViews: [.sectionHeaders]) {
                         self.chart?.createView(parentStyle: style)
+                            .padding(.bottom, 18)
+
+                        self.position?.createView(parentStyle: style)
 
                         self.stats?.createView(parentStyle: style)
-                            .section(path: "APP.GENERAL.STATISTICS")
+                            .sectionHeader(path: "APP.GENERAL.STATISTICS")
 
                         self.resources.createView(parentStyle: style)
-                            .section(path: "APP.GENERAL.DETAILS")
+                            .sectionHeader(path: "APP.GENERAL.DETAILS")
 
                         self.configs?.createView(parentStyle: style)
 

@@ -46,7 +46,7 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
     override func start() {
         super.start()
 
-        AbacusStateManager.shared.setHistoricalPNLPeriod(period: HistoricalPnlPeriod.period90d)
+        AbacusStateManager.shared.setHistoricalPNLPeriod(period: HistoricalPnlPeriod.period30d)
 
         loadingStartTime = Date()
         Publishers.CombineLatest4(
@@ -102,7 +102,13 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
         }
         let maxValue = chartEntries.max { $0.value < $1.value }?.value ?? 0
         let minValue = chartEntries.min { $0.value < $1.value }?.value ?? 0
-        viewModel?.chart.entries = chartEntries
+
+        // only update when there is significant change
+        if chartEntries.count != viewModel?.chart.entries.count ||
+            abs((chartEntries.last?.value ?? 0) - (viewModel?.chart.entries.last?.value ?? 0)) > 1.0 {
+            viewModel?.chart.entries = chartEntries
+        }
+
         viewModel?.chart.showYLabels = false
         viewModel?.chart.valueLowerBoundOffset = (maxValue - minValue) * 0.8
     }
