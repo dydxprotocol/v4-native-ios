@@ -25,6 +25,12 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
     @Published public var tipBuySellViewModel: dydxTradeSheetTipBuySellViewModel? = dydxTradeSheetTipBuySellViewModel()
     @Published public var tipDraftViewModel: dydxTradeSheetTipDraftViewModel? = dydxTradeSheetTipDraftViewModel()
 
+    @Published public var sideViewModel: dydxTradeInputSideViewModel? = dydxTradeInputSideViewModel()
+    @Published public var ctaButtonViewModel: dydxTradeInputCtaButtonViewModel? = dydxTradeInputCtaButtonViewModel()
+    @Published public var sizeViewModel: dydxSimpleUITradeInputSizeViewModel? = dydxSimpleUITradeInputSizeViewModel()
+
+    @Published public var buyingPowerViewModel = dydxReceiptBuyingPowerViewModel()
+
     @Published public var onScrollViewCreated: ((UIScrollView) -> Void)?
 
     public init() { }
@@ -41,23 +47,35 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let spacing = 16.0
-            let fullWidth = UIScreen.main.bounds.width - spacing * 2
-            let widthWithoutSpacing = fullWidth - spacing
-            let orderbookViewProportion = 0.45
-            let editViewWidth = widthWithoutSpacing * (1 - orderbookViewProportion)
-            let orderbookWdith = widthWithoutSpacing * orderbookViewProportion
 
-            let view = ScrollView(showsIndicators: false) {
+            let view =
                 VStack(spacing: 8) {
                     if case(.tip) = self.displayState {
                         self.createSwipeUpView(parentStyle: style)
+                        Spacer()
+
+                    } else {
+                        ScrollView(showsIndicators: false) {
+                            VStack {
+                                self.sideViewModel?
+                                    .createView(parentStyle: parentStyle)
+                                    .padding([.top], 34)
+                                    .padding([.bottom], 10)
+
+                                self.sizeViewModel?
+                                    .createView(parentStyle: parentStyle)
+
+                            }
+                            .introspectScrollView { [weak self] scrollView in
+                                self?.onScrollViewCreated?(scrollView)
+                            }
+                        }
+                        Spacer()
+                        self.buyingPowerViewModel.createView(parentStyle: style)
+                        self.ctaButtonViewModel?.createView(parentStyle: style)
                     }
-                    Spacer()
                 }
-                .introspectScrollView { [weak self] scrollView in
-                    self?.onScrollViewCreated?(scrollView)
-                }
-            }
+
                 .padding(.horizontal, spacing)
                 .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)

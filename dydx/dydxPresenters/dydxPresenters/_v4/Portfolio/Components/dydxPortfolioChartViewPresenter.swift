@@ -66,15 +66,15 @@ class dydxPortfolioChartViewPresenter: HostedViewPresenter<dydxPortfolioChartVie
         self.viewModel = viewModel
 
         let defaultResolutionIndex = 1
-        viewModel?.resolutionTitles = Resolution.allResolutions.map(\.text)
+        viewModel?.resolutionTitles = PortfolioChartResolution.allResolutions.map(\.text)
         viewModel?.resolutionIndex = defaultResolutionIndex
-        viewModel?.pnlLabel = DataLocalizer.localize(path: "APP.GENERAL.PROFIT_AND_LOSS_WITH_DURATION", params: ["PERIOD": Resolution.allResolutions[defaultResolutionIndex].text])
+        viewModel?.pnlLabel = DataLocalizer.localize(path: "APP.GENERAL.PROFIT_AND_LOSS_WITH_DURATION", params: ["PERIOD": PortfolioChartResolution.allResolutions[defaultResolutionIndex].text])
         AbacusStateManager.shared.setHistoricalPNLPeriod(period: PortfolioChartResolution.allResolutions[defaultResolutionIndex].key)
 
         viewModel?.onResolutionChanged = { index in
-            if index < Resolution.allResolutions.count {
+            if index < PortfolioChartResolution.allResolutions.count {
                 viewModel?.resolutionIndex = index
-                viewModel?.pnlLabel = DataLocalizer.localize(path: "APP.GENERAL.PROFIT_AND_LOSS_WITH_DURATION", params: ["PERIOD": Resolution.allResolutions[index].text])
+                viewModel?.pnlLabel = DataLocalizer.localize(path: "APP.GENERAL.PROFIT_AND_LOSS_WITH_DURATION", params: ["PERIOD": PortfolioChartResolution.allResolutions[index].text])
                 AbacusStateManager.shared.setHistoricalPNLPeriod(period: PortfolioChartResolution.allResolutions[index].key)
              }
         }

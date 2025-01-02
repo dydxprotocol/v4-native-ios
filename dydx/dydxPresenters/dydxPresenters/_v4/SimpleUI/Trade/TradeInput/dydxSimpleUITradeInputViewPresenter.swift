@@ -54,7 +54,7 @@ class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, 
         var positions: [FloatingPanel.FloatingPanelState: FloatingPanel.FloatingPanelLayoutAnchoring] = [
             .tip: FloatingPanelLayoutAnchor(absoluteInset: 90, edge: .bottom, referenceGuide: .safeArea),
             // Use .half instead of .full, so that the back button from the parent view is enabled.
-            .half: FloatingPanelLayoutAnchor(absoluteInset: 76, edge: .top, referenceGuide: .safeArea)
+            .half: FloatingPanelLayoutAnchor(absoluteInset: 58, edge: .top, referenceGuide: .safeArea)
         ]
         if position == nil {
             positions[.hidden] = FloatingPanelLayoutAnchor(absoluteInset: 0, edge: .bottom, referenceGuide: .superview)
@@ -125,25 +125,41 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
         delegate?.buySellButtonTapped()
     }
 
-    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
-        tipBuySellPresenter,
-        tipDraftPresenter
-    ]
-
     private let tipBuySellPresenter = dydxTradeSheetTipBuySellViewPresenter()
     private let tipDraftPresenter = dydxTradeSheetTipDraftViewPresenter()
+    private let sideViewPresenter = dydxTradeInputSideViewPresenter()
+    private let ctaButtonPresenter = dydxTradeInputCtaButtonViewPresenter()
+    private let sizeViewPresenter = dydxSimpleUITradeInputSizeViewPresenter()
+
+    private let receiptPresenter = dydxTradeReceiptPresenter(tradeReceiptType: .open)
+
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        tipBuySellPresenter,
+        tipDraftPresenter,
+        sideViewPresenter,
+        ctaButtonPresenter,
+        sizeViewPresenter,
+        receiptPresenter
+    ]
 
     override init() {
         let viewModel = dydxSimpleUITradeInputViewModel()
 
         tipBuySellPresenter.$viewModel.assign(to: &viewModel.$tipBuySellViewModel)
         tipDraftPresenter.$viewModel.assign(to: &viewModel.$tipDraftViewModel)
+        sideViewPresenter.$viewModel.assign(to: &viewModel.$sideViewModel)
+        ctaButtonPresenter.$viewModel.assign(to: &viewModel.$ctaButtonViewModel)
+        sizeViewPresenter.$viewModel.assign(to: &viewModel.$sizeViewModel)
+        receiptPresenter.$buyingPowerViewModel.assign(to: &viewModel.$buyingPowerViewModel)
 
         super.init()
 
         self.viewModel = viewModel
+        tipBuySellPresenter.delegate = self
 
         attachChildren(workers: childPresenters)
+
+        AbacusStateManager.shared.trade(input: "MARKET", type: .type)
     }
 
     override func start() {

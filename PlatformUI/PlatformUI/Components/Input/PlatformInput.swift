@@ -12,20 +12,20 @@ import Introspect
 import Popovers
 
 // a View is required here since programmatically focusing a textView requires a @FocusState property wrapper
-private struct PlatformInputView: View {
+public struct PlatformInputView: View {
     @ObservedObject private var model: PlatformInputModel
     @FocusState private var isFocused: Bool
 
     private var parentStyle: ThemeStyle
     private var styleKey: String?
 
-    init(model: PlatformInputModel, parentStyle: ThemeStyle, styleKey: String?) {
+    init(model: PlatformInputModel, parentStyle: ThemeStyle = ThemeStyle.defaultStyle.themeFont(fontType: .number, fontSize: .large), styleKey: String?) {
         self.model = model
         self.parentStyle = parentStyle
         self.styleKey = styleKey
     }
 
-    var body: some View {
+    public var body: some View {
         return HStack(alignment: .center, spacing: 4) {
             VStack(alignment: .leading, spacing: 4) {
                 header
@@ -68,13 +68,13 @@ private struct PlatformInputView: View {
         .keyboardType(model.keyboardType)
         .textContentType(model.contentType)
         .themeColor(foreground: .textPrimary)
-        .themeFont(fontType: fontType, fontSize: .large)
+        .themeStyle(style: parentStyle)
     }
 
     private var placeholder: some View {
         Text(model.placeHolder)
             .themeColor(foreground: .textTertiary)
-            .themeFont(fontType: fontType, fontSize: .large)
+            .themeStyle(style: parentStyle)
             .lineLimit(1)
             .minimumScaleFactor(0.5)
             .truncationMode(model.truncateMode)
@@ -295,7 +295,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     }
 
     override open func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let model = PlatformInputModel(
