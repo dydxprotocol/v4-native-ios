@@ -49,7 +49,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
             let spacing = 16.0
 
             let view =
-                VStack(spacing: 8) {
+                VStack(spacing: 16) {
                     if case(.tip) = self.displayState {
                         self.createSwipeUpView(parentStyle: style)
                         Spacer()
@@ -72,6 +72,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
                         }
                         Spacer()
                         self.buyingPowerViewModel.createView(parentStyle: style)
+                            .padding(.horizontal, 8)
                         self.ctaButtonViewModel?.createView(parentStyle: style)
                     }
                 }

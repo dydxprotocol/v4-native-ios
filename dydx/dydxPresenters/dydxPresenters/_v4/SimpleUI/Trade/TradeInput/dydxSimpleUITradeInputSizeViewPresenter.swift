@@ -25,11 +25,18 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
     override init() {
         super.init()
 
-        viewModel = dydxSimpleUITradeInputSizeViewModel(label: nil, placeHolder: "0.000") { [weak self] value in
-            if let vm = self?.viewModel {
-                AbacusStateManager.shared.trade(input: value?.unlocalizedNumericValue, type: vm.showingUsdc ? TradeInputField.usdcsize : TradeInputField.size)
-            }
+        viewModel = dydxSimpleUITradeInputSizeViewModel()
+        viewModel?.sizeItem = dydxSimpleUITradeInputSizeItemViewModel(label: nil, placeHolder: "0.000") { value in
+            AbacusStateManager.shared.trade(input: value?.unlocalizedNumericValue,
+                                            type: TradeInputField.size)
         }
+        viewModel?.sizeItem.showingUsdc = false
+
+        viewModel?.usdSizeItem = dydxSimpleUITradeInputSizeItemViewModel(label: nil, placeHolder: "0.000") { value in
+            AbacusStateManager.shared.trade(input: value?.unlocalizedNumericValue,
+                                            type: TradeInputField.usdcsize)
+        }
+        viewModel?.usdSizeItem.showingUsdc = true
     }
 
     override func start() {
@@ -37,7 +44,7 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
 
         Publishers
             .CombineLatest(
-                AbacusStateManager.shared.state.tradeInput.compactMap { $0 },
+                AbacusStateManager.shared.state.tradeInput.compactMap { $0 }.removeDuplicates(),
                 AbacusStateManager.shared.state.configsAndAssetMap)
             .sink { [weak self] tradeInput, configsAndAssetMap in
                 if let marketId = tradeInput.marketId {
@@ -51,20 +58,24 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
         let marketConfigs = configsAndAsset?.configs
         let asset = configsAndAsset?.asset
 
-        viewModel?.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
+        viewModel?.sizeItem.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
+        viewModel?.sizeItem.tokenSymbol = configsAndAsset?.asset?.displayableAssetId ?? asset?.id
 
-        if tradeInput.options?.needsSize ?? false {
-            if let size = tradeInput.size?.size {
-                viewModel?.size = dydxFormatter.shared.raw(number: size, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
-            } else {
-                viewModel?.size = nil
+        for itemViewModel in [viewModel?.sizeItem, viewModel?.usdSizeItem] {
+            if tradeInput.options?.needsSize ?? false {
+                if let size = tradeInput.size?.size {
+                    itemViewModel?.size = dydxFormatter.shared.raw(number: size, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
+                } else {
+                    itemViewModel?.size = nil
+                }
+                if let usdcSize = tradeInput.size?.usdcSize {
+                    itemViewModel?.usdcSize = dydxFormatter.shared.raw(number: usdcSize, digits: 2)
+                } else {
+                    itemViewModel?.usdcSize = nil
+                }
             }
-            if let usdcSize = tradeInput.size?.usdcSize {
-                viewModel?.usdcSize = dydxFormatter.shared.raw(number: usdcSize, digits: 2)
-            } else {
-                viewModel?.usdcSize = nil
-            }
-            viewModel?.tokenSymbol = configsAndAsset?.asset?.displayableAssetId ?? asset?.id
         }
+
+        // viewModel?.objectWillChange.send()
     }
 }

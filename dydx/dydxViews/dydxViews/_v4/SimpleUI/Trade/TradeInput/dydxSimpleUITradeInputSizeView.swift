@@ -10,78 +10,53 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxSimpleUITradeInputSizeViewModel: PlatformTextInputViewModel {
+public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
+    @Published public var sizeItem = dydxSimpleUITradeInputSizeItemViewModel()
+    @Published public var usdSizeItem = dydxSimpleUITradeInputSizeItemViewModel()
+
+    @Published public var showingUsdc: Bool = true
+
     public static var previewValue: dydxSimpleUITradeInputSizeViewModel = {
-        let vm = dydxSimpleUITradeInputSizeViewModel(label: "Amount", value: "1.0")
-        vm.tokenSymbol = "ETH"
-        vm.size = "111"
-        vm.usdcSize = "222"
+        let vm = dydxSimpleUITradeInputSizeViewModel()
+        vm.sizeItem = .previewValue
+        vm.usdSizeItem = .previewValue
         return vm
     }()
 
-    @Published public var tokenSymbol: String? {
-        didSet {
-            if tokenSymbol != oldValue {
-                updateValue()
-            }
-        }
-    }
-
-    @Published public var size: String? {
-        didSet {
-            if size != oldValue {
-                updateValue()
-            }
-        }
-    }
-
-    @Published public var usdcSize: String? {
-        didSet {
-            if usdcSize != oldValue {
-                updateValue()
-            }
-        }
-    }
-
-    @Published public var showingUsdc: Bool = false {
-        didSet {
-            if showingUsdc != oldValue {
-                updateValue()
-            }
-        }
-    }
-
-    private var valueAccessoryTextAnyView: AnyView {
-        let text = showingUsdc ? "USD" : tokenSymbol ?? ""
-        return AnyView(
-            Text(text)
-                .themeFont(fontSize: .smaller)
-        )
-    }
-
-    private func updateValue() {
-        if showingUsdc {
-            value = usdcSize
-        } else {
-            value = size
-        }
-        valueAccessoryView = valueAccessoryTextAnyView
-    }
-
-    public init(label: String? = nil, value: String? = nil, placeHolder: String? = nil, contentType: UITextContentType? = nil, onEdited: ((String?) -> Void)? = nil) {
-        super.init(label: label, value: value, placeHolder: placeHolder, inputType: .decimalDigits, contentType: contentType, onEdited: onEdited)
-    }
+    public init() {}
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        let view = super.createView(parentStyle: parentStyle.themeFont(fontSize: .custom(size: 32)), styleKey: styleKey)
-        return PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
-            AnyView(
-                VStack {
-                    view
-                    Spacer()
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+            guard let self = self else { return AnyView(PlatformView.nilView) }
+
+            let view = HStack(alignment: .center) {
+                let animationBoxHeight = dydxSimpleUITradeInputSizeItemViewModel.viewHeight
+                ZStack(alignment: .leading) {
+                    let offset = self.showingUsdc ? 0.0 : -animationBoxHeight
+                    VStack(alignment: .leading, spacing: 0) {
+                        self.usdSizeItem.createView(parentStyle: style)
+                        self.sizeItem.createView(parentStyle: style)
+                    }
+                    .offset(x: 0, y: offset)
                 }
-                .frame(height: 108)
-            )
+                .frame(height: animationBoxHeight, alignment: .top)
+                .clipped()
+
+                let content = PlatformIconViewModel(type: .asset(name: "icon_swap_vertical", bundle: .dydxView),
+                                                    clip: .circle(background: .layer4, spacing: 16, borderColor: .textTertiary),
+                                                    templateColor: .textSecondary)
+                PlatformButtonViewModel(content: content,
+                                        type: .iconType) { [weak self] in
+                    PlatformView.hideKeyboard()
+                    withAnimation(Animation.easeInOut) {
+                        self?.showingUsdc.toggle()
+                    }
+                }
+                 .createView(parentStyle: style)
+            }
+                .padding(.horizontal, 8)
+
+            return AnyView(view)
         }
     }
 }
