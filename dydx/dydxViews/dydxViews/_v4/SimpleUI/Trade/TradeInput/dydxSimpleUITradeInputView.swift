@@ -53,41 +53,43 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let spacing = 16.0
-
             let view =
                 VStack(spacing: 16) {
                     if case(.tip) = self.displayState {
                         self.createSwipeUpView(parentStyle: style)
                         Spacer()
-
                     } else {
-                        ScrollView(showsIndicators: false) {
-                            VStack {
-                                self.sideViewModel?
-                                    .createView(parentStyle: parentStyle)
-                                    .padding([.top], 34)
-                                    .padding([.bottom], 10)
+                        VStack {
+                            ScrollView(showsIndicators: false) {
+                                VStack {
+                                    self.sideViewModel?
+                                        .createView(parentStyle: parentStyle)
+                                        .padding([.top], 34)
+                                        .padding([.bottom], 48)
 
-                                self.sizeViewModel?
-                                    .createView(parentStyle: parentStyle)
+                                    self.sizeViewModel?
+                                        .createView(parentStyle: parentStyle)
 
-                                self.validationErrorViewModel?
-                                    .createView(parentStyle: parentStyle)
+                                    self.validationErrorViewModel?
+                                        .createView(parentStyle: parentStyle)
 
+                                }
+                                .introspectScrollView { [weak self] scrollView in
+                                    self?.onScrollViewCreated?(scrollView)
+                                }
                             }
-                            .introspectScrollView { [weak self] scrollView in
-                                self?.onScrollViewCreated?(scrollView)
-                            }
+
+                            Spacer()
+
+                            self.buyingPowerViewModel.createView(parentStyle: style)
+                                .padding(.horizontal, 8)
+
+                            self.ctaButtonViewModel?.createView(parentStyle: style)
                         }
-                        Spacer()
-                        self.buyingPowerViewModel.createView(parentStyle: style)
-                            .padding(.horizontal, 8)
-                        self.ctaButtonViewModel?.createView(parentStyle: style)
+                        .keyboardObserving(offset: 16)
                     }
                 }
-
-                .padding(.horizontal, spacing)
+                .padding(.horizontal, 16)
                 .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)
                 .keyboardAccessory(background: .layer3, parentStyle: parentStyle)

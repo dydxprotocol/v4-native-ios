@@ -16,8 +16,17 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
 
     @Published public var showingUsdc: Bool = true {
         didSet {
-            usdSizeItem.isFocused = showingUsdc
-            sizeItem.isFocused = !showingUsdc
+            if showingUsdc {
+                sizeItem.isFocused = false
+                DispatchQueue.main.async { [weak self] in
+                    self?.usdSizeItem.isFocused = true
+                }
+            } else {
+                usdSizeItem.isFocused = false
+                DispatchQueue.main.async {  [weak self] in
+                    self?.sizeItem.isFocused = true
+                }
+            }
         }
     }
 

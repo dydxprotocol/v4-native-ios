@@ -44,9 +44,9 @@ public struct PlatformInputView: View {
         .onChange(of: model.isFocused) {
             isFocused = $0
         }
-        .onChange(of: isFocused) {
-            model.isFocused = $0
-        }
+//        .onChange(of: isFocused) {
+//            model.isFocused = $0
+//        }
         .onTapGesture {
             isFocused = true
         }
