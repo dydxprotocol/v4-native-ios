@@ -415,7 +415,7 @@ public extension ThemeFont {
     private func loadFont(name: String, size: Float) -> UIFont? {
         let font = UIFont(name: name, size: CGFloat(size))
         guard let font = font else {
-            assertionFailure("Font not found: \(name) \(size)")
+            //assertionFailure("Font not found: \(name) \(size)")
             return nil
         }
         return font

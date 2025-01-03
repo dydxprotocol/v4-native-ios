@@ -30,6 +30,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
     @Published public var sizeViewModel: dydxSimpleUITradeInputSizeViewModel? = dydxSimpleUITradeInputSizeViewModel()
 
     @Published public var buyingPowerViewModel = dydxReceiptBuyingPowerViewModel()
+    @Published public var validationErrorViewModel: ValidationErrorViewModel? = ValidationErrorViewModel()
 
     @Published public var onScrollViewCreated: ((UIScrollView) -> Void)?
 
@@ -39,6 +40,12 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
         let vm = dydxSimpleUITradeInputViewModel()
         vm.tipBuySellViewModel = .previewValue
         vm.tipDraftViewModel = .previewValue
+        vm.sideViewModel = .previewValue
+        vm.ctaButtonViewModel = .previewValue
+        vm.sizeViewModel = .previewValue
+        vm.buyingPowerViewModel = .previewValue
+        vm.displayState = .full
+        vm.validationErrorViewModel = .previewValue
        return vm
     }
 
@@ -63,6 +70,9 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
                                     .padding([.bottom], 10)
 
                                 self.sizeViewModel?
+                                    .createView(parentStyle: parentStyle)
+
+                                self.validationErrorViewModel?
                                     .createView(parentStyle: parentStyle)
 
                             }

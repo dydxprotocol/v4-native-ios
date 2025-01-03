@@ -25,6 +25,9 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
         vm.header = .previewValue
         vm.chart = .previewValue
         vm.position = .previewValue
+        vm.stats = .previewValue
+        vm.resources = .previewValue
+        vm.configs = .previewValue
         return vm
     }
 

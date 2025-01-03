@@ -40,6 +40,8 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
         vm.sharedAccountViewModel = SharedAccountViewModel.previewValue
         vm.pnlAmount = "$100,000"
         vm.pnlPercent = .previewValue
+        vm.state = .hasBalance
+        vm.sharedAccountViewModel = .previewValue
         return vm
     }
 

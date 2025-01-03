@@ -132,6 +132,7 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
     private let sizeViewPresenter = dydxSimpleUITradeInputSizeViewPresenter()
 
     private let receiptPresenter = dydxTradeReceiptPresenter(tradeReceiptType: .open)
+    private let validationErrorPresenter = dydxSimpleUITradeInputValidationViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         tipBuySellPresenter,
@@ -139,7 +140,8 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
         sideViewPresenter,
         ctaButtonPresenter,
         sizeViewPresenter,
-        receiptPresenter
+        receiptPresenter,
+        validationErrorPresenter
     ]
 
     override init() {
@@ -151,6 +153,7 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
         ctaButtonPresenter.$viewModel.assign(to: &viewModel.$ctaButtonViewModel)
         sizeViewPresenter.$viewModel.assign(to: &viewModel.$sizeViewModel)
         receiptPresenter.$buyingPowerViewModel.assign(to: &viewModel.$buyingPowerViewModel)
+        validationErrorPresenter.$viewModel.assign(to: &viewModel.$validationErrorViewModel)
 
         super.init()
 

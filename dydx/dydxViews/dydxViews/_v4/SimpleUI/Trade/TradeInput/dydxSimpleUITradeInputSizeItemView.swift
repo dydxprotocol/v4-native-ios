@@ -12,7 +12,7 @@ import Utilities
 
 public class dydxSimpleUITradeInputSizeItemViewModel: PlatformTextInputViewModel {
     public static var previewValue: dydxSimpleUITradeInputSizeItemViewModel = {
-        let vm = dydxSimpleUITradeInputSizeItemViewModel(label: "Amount", value: "1.0")
+        let vm = dydxSimpleUITradeInputSizeItemViewModel(label: nil, value: "1.0")
         vm.tokenSymbol = "ETH"
         vm.size = "111"
         vm.usdcSize = "222"

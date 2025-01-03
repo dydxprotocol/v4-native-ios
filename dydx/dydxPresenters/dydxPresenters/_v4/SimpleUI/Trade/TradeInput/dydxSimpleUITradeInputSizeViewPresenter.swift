@@ -75,7 +75,5 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
                 }
             }
         }
-
-        // viewModel?.objectWillChange.send()
     }
 }

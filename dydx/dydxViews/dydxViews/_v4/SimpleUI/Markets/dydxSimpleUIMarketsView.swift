@@ -21,6 +21,9 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
 
     public static var previewValue: dydxSimpleUIMarketsViewModel {
         let vm = dydxSimpleUIMarketsViewModel()
+        vm.marketList = .previewValue
+        vm.marketSearch = .previewValue
+        vm.portfolio = .previewValue
         return vm
     }
 
