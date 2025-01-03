@@ -135,7 +135,7 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
     private let tipBuySellPresenter = dydxTradeSheetTipBuySellViewPresenter()
     private let tipDraftPresenter = dydxTradeSheetTipDraftViewPresenter()
     private let sideViewPresenter = dydxTradeInputSideViewPresenter()
-    private let ctaButtonPresenter = dydxTradeInputCtaButtonViewPresenter()
+    private let ctaButtonPresenter = dydxSimpleUITradeInputCtaButtonViewPresenter()
     private let sizeViewPresenter = dydxSimpleUITradeInputSizeViewPresenter()
 
     private let receiptPresenter = dydxTradeReceiptPresenter(tradeReceiptType: .open)
