@@ -68,7 +68,7 @@ public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
                     .padding(.trailing, 16)
                 }
             }
-            .themeColor(background: .layer3)
+            .themeColor(background: .layer5)
             .clipShape(Capsule())
             .padding(.vertical, 8)
             .padding(.horizontal, 16)

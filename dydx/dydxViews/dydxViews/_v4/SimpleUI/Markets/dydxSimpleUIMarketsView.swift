@@ -69,7 +69,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                 }
             }
                 .frame(maxWidth: .infinity)
-                .themeColor(background: .transparent)
+                .themeColor(background: .layer2)
 
             return AnyView(view)
         }
