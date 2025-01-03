@@ -41,11 +41,19 @@ public struct PlatformInputView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
         .contentShape(Rectangle())
+        .onChange(of: model.isFocused) {
+            isFocused = $0
+        }
+        .onChange(of: isFocused) {
+            model.isFocused = $0
+        }
         .onTapGesture {
             isFocused = true
         }
         .onAppear {
-            isFocused = model.focusedOnAppear
+            if model.focusedOnAppear {
+                isFocused = true
+            }
         }
     }
 
@@ -104,7 +112,8 @@ public class PlatformInputModel: PlatformViewModel {
     @Published public var onEditingChanged: ((Bool) -> Void)?
     @Published public var truncateMode: Text.TruncationMode = .tail
     @Published public var focusedOnAppear: Bool = false
-
+    @Published public var isFocused: Bool = false
+    
     public init(label: String? = nil,
                 labelAccessory: AnyView? = nil,
                 value: Binding<String>,
@@ -115,7 +124,8 @@ public class PlatformInputModel: PlatformViewModel {
                 contentType: UITextContentType? = nil,
                 onEditingChanged: ((Bool) -> Void)? = nil,
                 truncateMode: Text.TruncationMode = .tail,
-                focusedOnAppear: Bool = false) {
+                focusedOnAppear: Bool = false,
+                isFocused: Bool = false) {
         self.label = label
         self.labelAccessory = labelAccessory
         self.value = value
@@ -127,6 +137,7 @@ public class PlatformInputModel: PlatformViewModel {
         self.onEditingChanged = onEditingChanged
         self.truncateMode = truncateMode
         self.focusedOnAppear = focusedOnAppear
+        self.isFocused = isFocused
     }
 
     public static var previewValue: PlatformInputModel = {
@@ -137,7 +148,8 @@ public class PlatformInputModel: PlatformViewModel {
     override public func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            return AnyView(PlatformInputView(model: self, parentStyle: parentStyle, styleKey: styleKey))
+            let view = PlatformInputView(model: self, parentStyle: parentStyle, styleKey: styleKey)
+            return AnyView(view)
         }
     }
 }
@@ -275,7 +287,10 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     public var contentType: UITextContentType?
 
     private let truncateMode: Text.TruncationMode
-
+    private let focusedOnAppear: Bool
+    
+    @Published public var isFocused: Bool = false
+    
     public init(label: String? = nil,
                 labelAccessory: AnyView? = nil,
                 value: String? = nil,
@@ -284,9 +299,11 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 inputType: InputType = .default,
                 contentType: UITextContentType? = nil,
                 onEdited: ((String?) -> Void)? = nil,
-                truncateMode: Text.TruncationMode = .middle) {
+                truncateMode: Text.TruncationMode = .middle,
+                focusedOnAppear: Bool = false) {
         self.inputType = inputType
         self.truncateMode = truncateMode
+        self.focusedOnAppear = focusedOnAppear
         super.init(label: label, labelAccessory: labelAccessory, valueAccessoryView: valueAccessoryView, onEdited: onEdited)
         self.value = value
         input = value ?? ""
@@ -309,12 +326,14 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 onEditingChanged: { focused in
                     self.focused = focused
                 },
-                truncateMode: self.truncateMode
+                truncateMode: truncateMode,
+                focusedOnAppear: focusedOnAppear,
+                isFocused: isFocused
             )
-
-            return AnyView( PlatformInputView(model: model,
-                                              parentStyle: parentStyle,
-                                              styleKey: styleKey) )
+            
+            return AnyView(PlatformInputView(model: model,
+                                             parentStyle: parentStyle,
+                                             styleKey: styleKey))
         }
     }
 }

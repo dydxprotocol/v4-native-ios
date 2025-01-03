@@ -22,21 +22,31 @@ protocol dydxSimpleUITradeInputSizeViewPresenterProtocol: HostedViewPresenterPro
 
 class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputSizeViewModel>, dydxSimpleUITradeInputSizeViewPresenterProtocol {
 
+    private lazy var sizeItem: dydxSimpleUITradeInputSizeItemViewModel = {
+        let item = dydxSimpleUITradeInputSizeItemViewModel(label: nil, placeHolder: "0.000", onEdited: { value in
+            AbacusStateManager.shared.trade(input: value?.unlocalizedNumericValue,
+                                            type: TradeInputField.size)
+        })
+        item.showingUsdc = false
+        return item
+    }()
+
+    private lazy var usdSizeItem: dydxSimpleUITradeInputSizeItemViewModel = {
+        let item = dydxSimpleUITradeInputSizeItemViewModel(label: nil, placeHolder: "0.000", onEdited: { value in
+            AbacusStateManager.shared.trade(input: value?.unlocalizedNumericValue,
+                                            type: TradeInputField.usdcsize)
+        })
+        item.showingUsdc = true
+        return item
+    }()
+
     override init() {
         super.init()
 
         viewModel = dydxSimpleUITradeInputSizeViewModel()
-        viewModel?.sizeItem = dydxSimpleUITradeInputSizeItemViewModel(label: nil, placeHolder: "0.000") { value in
-            AbacusStateManager.shared.trade(input: value?.unlocalizedNumericValue,
-                                            type: TradeInputField.size)
-        }
-        viewModel?.sizeItem.showingUsdc = false
-
-        viewModel?.usdSizeItem = dydxSimpleUITradeInputSizeItemViewModel(label: nil, placeHolder: "0.000") { value in
-            AbacusStateManager.shared.trade(input: value?.unlocalizedNumericValue,
-                                            type: TradeInputField.usdcsize)
-        }
-        viewModel?.usdSizeItem.showingUsdc = true
+        viewModel?.sizeItem = sizeItem
+        viewModel?.usdSizeItem = usdSizeItem
+        viewModel?.showingUsdc = true
     }
 
     override func start() {

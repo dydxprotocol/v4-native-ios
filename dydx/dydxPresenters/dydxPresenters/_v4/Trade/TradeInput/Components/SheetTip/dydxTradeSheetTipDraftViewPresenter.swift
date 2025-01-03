@@ -76,11 +76,12 @@ class dydxTradeSheetTipDraftViewPresenter: HostedViewPresenter<dydxTradeSheetTip
         case Abacus.OrderType.stopmarket, Abacus.OrderType.takeprofitmarket:
             price = tradeInput.price?.triggerPrice?.doubleValue
         case Abacus.OrderType.market:
-            if let usdcSize = tradeInput.size?.usdcSize?.doubleValue, let size = tradeInput.size?.size?.doubleValue, size > 0 {
-                price = usdcSize / size
-            } else {
-                price = nil
-            }
+            price = nil
+//            if let usdcSize = tradeInput.size?.usdcSize?.doubleValue, let size = tradeInput.size?.size?.doubleValue, size > 0 {
+//                price = usdcSize / size
+//            } else {
+//                price = nil
+//            }
         default:
             assertionFailure("unexpected trade type \(String(describing: tradeInput.type))")
             price = nil

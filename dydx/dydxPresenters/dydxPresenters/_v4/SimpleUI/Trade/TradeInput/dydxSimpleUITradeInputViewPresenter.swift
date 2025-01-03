@@ -31,7 +31,14 @@ public class dydxSimpleUITradeInputViewBuilder: NSObject, ObjectBuilderProtocol 
 class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, dydxSimpleUITradeInputViewModel>, FloatingInsetProvider, FloatedDelegate, dydxSimpeUITradeInputViewPresenterDelegate {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/trade/input", let presenter = presenter as? dydxSimpleUITradeInputViewPresenter {
+
             AbacusStateManager.shared.startTrade()
+            AbacusStateManager.shared.trade(input: "MARKET", type: .type)
+            AbacusStateManager.shared.trade(input: "0", type: .size)
+            AbacusStateManager.shared.trade(input: "0", type: .usdcsize)
+            AbacusStateManager.shared.trade(input: nil, type: .size)
+            AbacusStateManager.shared.trade(input: nil, type: .usdcsize)
+
             if request?.params?["full"] as? String == "true" {
                 presenter.updateViewControllerPosition(position: .half)
                 move(to: .half)
@@ -161,8 +168,6 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
         tipBuySellPresenter.delegate = self
 
         attachChildren(workers: childPresenters)
-
-        AbacusStateManager.shared.trade(input: "MARKET", type: .type)
     }
 
     override func start() {

@@ -14,7 +14,12 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
     @Published public var sizeItem = dydxSimpleUITradeInputSizeItemViewModel()
     @Published public var usdSizeItem = dydxSimpleUITradeInputSizeItemViewModel()
 
-    @Published public var showingUsdc: Bool = true
+    @Published public var showingUsdc: Bool = true {
+        didSet {
+            usdSizeItem.isFocused = showingUsdc
+            sizeItem.isFocused = !showingUsdc
+        }
+    }
 
     public static var previewValue: dydxSimpleUITradeInputSizeViewModel = {
         let vm = dydxSimpleUITradeInputSizeViewModel()
@@ -23,7 +28,7 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
         return vm
     }()
 
-    public init() {}
+    public init() { }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
@@ -47,7 +52,6 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
                                                     templateColor: .textSecondary)
                 PlatformButtonViewModel(content: content,
                                         type: .iconType) { [weak self] in
-                    PlatformView.hideKeyboard()
                     withAnimation(Animation.easeInOut) {
                         self?.showingUsdc.toggle()
                     }
