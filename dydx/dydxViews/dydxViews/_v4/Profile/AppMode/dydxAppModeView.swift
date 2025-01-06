@@ -43,7 +43,7 @@ public class dydxAppModeViewModel: PlatformViewModel {
             let view = VStack(alignment: .leading, spacing: 24) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(DataLocalizer.localize(path: "APP.TRADE.MODE.SELECT_MODE"))
-                        .themeFont(fontSize: .largest)
+                        .themeFont(fontType: .plus, fontSize: .largest)
 
                     Text(DataLocalizer.localize(path: "APP.TRADE.MODE.CHANGE_SETINGS"))
                         .themeFont(fontSize: .small)
@@ -56,7 +56,7 @@ public class dydxAppModeViewModel: PlatformViewModel {
                 Button(action: { [weak self] in
                     self?.onChange?(.simple)
                 }) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: 16) {
                         if self.appMode == .simple {
                             PlatformIconViewModel.selectedCheckmark
                                 .createView(parentStyle: style)
@@ -66,20 +66,26 @@ public class dydxAppModeViewModel: PlatformViewModel {
                         }
 
                         VStack(alignment: .leading) {
-                            Text(DataLocalizer.localize(path: "APP.TRADE.MODE.SIMPLE"))
-                                .themeFont(fontSize: .large)
-                                .themeColor(foreground: .textSecondary)
+                            HStack {
+                                Text(DataLocalizer.localize(path: "APP.TRADE.MODE.SIMPLE"))
+                                    .themeFont(fontSize: .large)
+                                    .themeColor(foreground: .textSecondary)
 
-                            Text(DataLocalizer.localize(path: "APP.TRADE.MODE.SIMPLE_AND_EASIER"))
-                                .themeFont(fontSize: .medium)
-                                .themeColor(foreground: .textTertiary)
-                                .lineLimit(1)
+                                Spacer()
+
+                                Text(DataLocalizer.localize(path: "APP.TRADE.MODE.SIMPLE_AND_EASIER"))
+                                    .themeFont(fontSize: .small)
+                                    .themeColor(foreground: .textTertiary)
+                                    .lineLimit(1)
+                            }
+
+                            Image("mode_simple", bundle: Bundle.dydxView)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
                         }
-
-                        Spacer()
                     }
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 8)
+                    .padding(.vertical, 12)
                 }
                 .padding(.horizontal, 16)
                 .themeColor(background: .layer5)
@@ -88,7 +94,7 @@ public class dydxAppModeViewModel: PlatformViewModel {
                 Button(action: { [weak self] in
                     self?.onChange?(.pro)
                 }) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: 16) {
                         if self.appMode == .pro {
                             PlatformIconViewModel.selectedCheckmark
                                 .createView(parentStyle: style)
@@ -98,20 +104,26 @@ public class dydxAppModeViewModel: PlatformViewModel {
                         }
 
                         VStack(alignment: .leading) {
-                            Text(DataLocalizer.localize(path: "APP.TRADE.MODE.PRO"))
-                                .themeFont(fontSize: .large)
-                                .themeColor(foreground: .textSecondary)
+                            HStack {
+                                Text(DataLocalizer.localize(path: "APP.TRADE.MODE.PRO"))
+                                    .themeFont(fontSize: .large)
+                                    .themeColor(foreground: .textSecondary)
 
-                            Text(DataLocalizer.localize(path: "APP.TRADE.MODE.FULLY_FEATURED"))
-                                .themeFont(fontSize: .medium)
-                                .themeColor(foreground: .textTertiary)
-                                .lineLimit(1)
+                                Spacer()
+
+                                Text(DataLocalizer.localize(path: "APP.TRADE.MODE.FULLY_FEATURED"))
+                                    .themeFont(fontSize: .small)
+                                    .themeColor(foreground: .textTertiary)
+                                    .lineLimit(1)
+                            }
+
+                            Image("mode_pro", bundle: Bundle.dydxView)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
                         }
-
-                        Spacer()
                     }
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 8)
+                    .padding(.vertical, 12)
                 }
                 .padding(.horizontal, 16)
                 .themeColor(background: .layer5)
