@@ -23,6 +23,7 @@ private struct PlatformInputView: View {
         self.model = model
         self.parentStyle = parentStyle
         self.styleKey = styleKey
+        self.isFocused = model.isFocused       
     }
 
     var body: some View {
@@ -44,9 +45,12 @@ private struct PlatformInputView: View {
         .onChange(of: model.isFocused) {
             isFocused = $0
         }
-//        .onChange(of: isFocused) {
-//            model.isFocused = $0
-//        }
+        .if(model.twoWayBinding, transform: { content in
+            content
+                .onChange(of: isFocused) {
+                    model.isFocused = $0
+                }
+        })
         .onTapGesture {
             isFocused = true
         }
@@ -113,6 +117,7 @@ public class PlatformInputModel: PlatformViewModel {
     @Published public var truncateMode: Text.TruncationMode = .tail
     @Published public var focusedOnAppear: Bool = false
     @Published public var isFocused: Bool = false
+    @Published public var twoWayBinding: Bool = false
     
     public init(label: String? = nil,
                 labelAccessory: AnyView? = nil,
@@ -125,7 +130,8 @@ public class PlatformInputModel: PlatformViewModel {
                 onEditingChanged: ((Bool) -> Void)? = nil,
                 truncateMode: Text.TruncationMode = .tail,
                 focusedOnAppear: Bool = false,
-                isFocused: Bool = false) {
+                isFocused: Bool = false,
+                twoWayBinding: Bool = false) {
         self.label = label
         self.labelAccessory = labelAccessory
         self.value = value
@@ -138,6 +144,7 @@ public class PlatformInputModel: PlatformViewModel {
         self.truncateMode = truncateMode
         self.focusedOnAppear = focusedOnAppear
         self.isFocused = isFocused
+        self.twoWayBinding = twoWayBinding
     }
 
     public static var previewValue: PlatformInputModel = {
@@ -288,7 +295,8 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
 
     private let truncateMode: Text.TruncationMode
     private let focusedOnAppear: Bool
-    
+    private let twoWayBinding: Bool
+   
     @Published public var isFocused: Bool = false
     
     public init(label: String? = nil,
@@ -300,17 +308,19 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 contentType: UITextContentType? = nil,
                 onEdited: ((String?) -> Void)? = nil,
                 truncateMode: Text.TruncationMode = .middle,
-                focusedOnAppear: Bool = false) {
+                focusedOnAppear: Bool = false,
+                twoWayBinding: Bool = false) {
         self.inputType = inputType
         self.truncateMode = truncateMode
         self.focusedOnAppear = focusedOnAppear
+        self.twoWayBinding = twoWayBinding
         super.init(label: label, labelAccessory: labelAccessory, valueAccessoryView: valueAccessoryView, onEdited: onEdited)
         self.value = value
         input = value ?? ""
         self.placeHolder = placeHolder
         self.contentType = contentType
     }
-
+    
     override open func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
@@ -328,7 +338,8 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 },
                 truncateMode: truncateMode,
                 focusedOnAppear: focusedOnAppear,
-                isFocused: isFocused
+                isFocused: isFocused,
+                twoWayBinding: twoWayBinding
             )
             
             return AnyView(PlatformInputView(model: model,

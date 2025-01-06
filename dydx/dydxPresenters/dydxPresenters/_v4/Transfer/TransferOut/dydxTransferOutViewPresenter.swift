@@ -15,7 +15,6 @@ import Abacus
 import dydxStateManager
 import dydxFormatter
 import Combine
-import KeyboardObserving
 
 protocol dydxTransferOutViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxTransferOutViewModel? { get }

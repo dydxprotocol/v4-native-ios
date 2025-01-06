@@ -9,6 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import dydxFormatter
 
 public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     public let marketId: String
@@ -17,7 +18,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     public let price: String?
     public let change: SignedAmountViewModel?
     public let sideText: SideTextViewModel
-    public let leverage: String?
+    public let leverage: Double?
     public let volumn: Double?
     public let onMarketSelected: (() -> Void)?
 
@@ -27,7 +28,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 price: String?,
                 change: SignedAmountViewModel?,
                 sideText: SideTextViewModel,
-                leverage: String?,
+                leverage: Double?,
                 volumn: Double?,
                 onMarketSelected: (() -> Void)?
     ) {
@@ -49,7 +50,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                                              price: "50_000",
                                              change: .previewValue,
                                              sideText: .previewValue,
-                                             leverage: "1.34",
+                                             leverage: 1.34,
                                              volumn: nil,
                                              onMarketSelected: nil)
         return vm
@@ -109,8 +110,8 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
 
             HStack {
                 sideText.createView(parentStyle: style.themeFont(fontSize: .small))
-                if let leverage = leverage {
-                    Text(leverage)
+                if let leverage, leverage != 0, let leverageText = dydxFormatter.shared.raw(number: leverage, digits: 3) {
+                    Text(leverageText)
                         .themeColor(foreground: .textSecondary)
                         .themeFont(fontSize: .small)
                 }

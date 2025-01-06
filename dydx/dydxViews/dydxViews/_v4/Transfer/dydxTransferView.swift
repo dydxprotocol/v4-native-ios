@@ -9,7 +9,6 @@
 import SwiftUI
 import PlatformUI
 import Utilities
-import KeyboardObserving
 
 public class dydxTransferViewModel: PlatformViewModel {
     @Published public var sections = dydxTransferSectionsViewModel()

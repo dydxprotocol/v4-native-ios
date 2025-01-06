@@ -11,20 +11,34 @@ import PlatformUI
 import Utilities
 
 public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
-    @Published public var sizeItem = dydxSimpleUITradeInputSizeItemViewModel()
-    @Published public var usdSizeItem = dydxSimpleUITradeInputSizeItemViewModel()
+    @Published public var sizeItem: dydxSimpleUITradeInputSizeItemViewModel?
+    @Published public var usdSizeItem: dydxSimpleUITradeInputSizeItemViewModel?
 
-    @Published public var showingUsdc: Bool = true {
+    public enum FocusState {
+        case atUsdcSize, atSize, none
+
+        var isKeyboardUp: Bool {
+            return self == .atUsdcSize || self == .atSize
+        }
+    }
+
+    @Published public var focusState: FocusState = .none {
         didSet {
-            if showingUsdc {
-                sizeItem.isFocused = false
-                DispatchQueue.main.async { [weak self] in
-                    self?.usdSizeItem.isFocused = true
-                }
-            } else {
-                usdSizeItem.isFocused = false
-                DispatchQueue.main.async {  [weak self] in
-                    self?.sizeItem.isFocused = true
+            if focusState != oldValue {
+                switch focusState {
+                case .atUsdcSize:
+                    sizeItem?.isFocused = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                        self?.usdSizeItem?.isFocused = true
+                    }
+                case .atSize:
+                    usdSizeItem?.isFocused = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                        self?.sizeItem?.isFocused = true
+                    }
+                case .none:
+                    sizeItem?.isFocused = false
+                    usdSizeItem?.isFocused = false
                 }
             }
         }
@@ -46,15 +60,16 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
             let view = HStack(alignment: .center) {
                 let animationBoxHeight = dydxSimpleUITradeInputSizeItemViewModel.viewHeight
                 ZStack(alignment: .leading) {
-                    let offset = self.showingUsdc ? 0.0 : -animationBoxHeight
+                    let offset = self.focusState == .atUsdcSize ? 0.0 : -animationBoxHeight
                     VStack(alignment: .leading, spacing: 0) {
-                        self.usdSizeItem.createView(parentStyle: style)
-                        self.sizeItem.createView(parentStyle: style)
+                        self.usdSizeItem?.createView(parentStyle: style)
+                        self.sizeItem?.createView(parentStyle: style)
                     }
                     .offset(x: 0, y: offset)
                 }
                 .frame(height: animationBoxHeight, alignment: .top)
                 .clipped()
+                .contentShape(Rectangle())      // needed to clip the tap events
 
                 let content = PlatformIconViewModel(type: .asset(name: "icon_swap_vertical", bundle: .dydxView),
                                                     clip: .circle(background: .layer4, spacing: 16, borderColor: .textTertiary),
@@ -62,7 +77,15 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
                 PlatformButtonViewModel(content: content,
                                         type: .iconType) { [weak self] in
                     withAnimation(Animation.easeInOut) {
-                        self?.showingUsdc.toggle()
+                        switch self?.focusState {
+                            case .atUsdcSize:
+                            self?.focusState = .atSize
+                        case .atSize:
+                            self?.focusState = .atUsdcSize
+                        default:
+                            break
+                        }
+                        // self?.showingUsdc.toggle()
                     }
                 }
                  .createView(parentStyle: style)

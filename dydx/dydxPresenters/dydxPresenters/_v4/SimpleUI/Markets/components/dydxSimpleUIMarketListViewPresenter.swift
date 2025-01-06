@@ -68,11 +68,13 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                 return dydxSimpleUIMarketViewModel.createFrom(market: market, asset: asset, position: position)
             }
             .sorted { lhs, rhs in
-                if lhs.leverage != nil && rhs.leverage != nil {
+                let lhsLeverage = lhs.leverage ?? 0
+                let rhsLeverage = rhs.leverage ?? 0
+                if lhsLeverage != 0 && rhsLeverage != 0 {
                     return (lhs.volumn ?? 0) > (rhs.volumn ?? 0)
-                } else if lhs.leverage != nil {
+                } else if lhsLeverage != 0 {
                     return true
-                } else if rhs.leverage != nil {
+                } else if rhsLeverage != 0 {
                     return false
                 }
                 return (lhs.volumn ?? 0) > (rhs.volumn ?? 0)
@@ -94,14 +96,13 @@ private extension dydxSimpleUIMarketViewModel {
                 side = SideTextViewModel(side: .short)
             }
         }
-        let leverage = dydxFormatter.shared.raw(number: position?.leverage.current?.doubleValue, digits: 3)
         return dydxSimpleUIMarketViewModel(marketId: market.id,
                                            assetName: asset?.displayableAssetId ?? market.assetId,
                                            iconUrl: asset?.resources?.imageUrl,
                                            price: price,
                                            change: change,
                                            sideText: side,
-                                           leverage: leverage,
+                                           leverage: position?.leverage.current?.doubleValue,
                                            volumn: market.perpetual?.volume24HUSDC?.doubleValue,
                                            onMarketSelected: {
             Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["market": market.id]), animated: true, completion: nil)

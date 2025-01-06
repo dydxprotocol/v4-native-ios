@@ -53,6 +53,8 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
+            let bottomPadding = max((self.safeAreaInsets?.bottom ?? 0), 16)
+
             let view =
                 VStack(spacing: 16) {
                     if case(.tip) = self.displayState {
@@ -65,14 +67,13 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
                                     self.sideViewModel?
                                         .createView(parentStyle: parentStyle)
                                         .padding([.top], 34)
-                                        .padding([.bottom], 48)
+                                        .padding([.bottom], 36)
 
                                     self.sizeViewModel?
                                         .createView(parentStyle: parentStyle)
 
                                     self.validationErrorViewModel?
                                         .createView(parentStyle: parentStyle)
-
                                 }
                                 .introspectScrollView { [weak self] scrollView in
                                     self?.onScrollViewCreated?(scrollView)
@@ -81,18 +82,20 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
 
                             Spacer()
 
-                            self.buyingPowerViewModel.createView(parentStyle: style)
-                                .padding(.horizontal, 8)
+                            VStack {
+                                self.buyingPowerViewModel.createView(parentStyle: style)
+                                    .padding(.horizontal, 8)
 
-                            self.ctaButtonViewModel?.createView(parentStyle: style)
+                                self.ctaButtonViewModel?.createView(parentStyle: style)
+                            }
+                            .keyboardObserving(offset: -bottomPadding + 16, mode: .yOffset)
                         }
-                        .keyboardObserving(offset: 16)
                     }
                 }
                 .padding(.horizontal, 16)
-                .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
+                .padding(.bottom, bottomPadding)
                 .themeColor(background: .layer3)
-                .keyboardAccessory(background: .layer3, parentStyle: parentStyle)
+               // .keyboardAccessory(background: .layer3, parentStyle: parentStyle)
                 .makeSheet()
 
             // make it visible under the tabbar

@@ -120,14 +120,25 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
 
     weak var delegate: dydxSimpeUITradeInputViewPresenterDelegate?
 
+    private var lastSizeFocusState: dydxSimpleUITradeInputSizeViewModel.FocusState?
+
     // MARK: dydxTradeInputViewPresenterProtocol
 
     func updateViewControllerPosition(position: FloatingPanel.FloatingPanelState) {
         switch position {
         case .tip:
             viewModel?.displayState = .tip
+            if sizeViewPresenter.viewModel?.focusState != dydxSimpleUITradeInputSizeViewModel.FocusState.none {
+                lastSizeFocusState = sizeViewPresenter.viewModel?.focusState
+            }
+            sizeViewPresenter.updateFocusState(.none)
         default:
             viewModel?.displayState = .full
+            if let lastSizeFocusState, lastSizeFocusState != dydxSimpleUITradeInputSizeViewModel.FocusState.none {
+                sizeViewPresenter.updateFocusState(lastSizeFocusState)
+            } else {
+                sizeViewPresenter.updateFocusState(.atUsdcSize)
+            }
         }
     }
 

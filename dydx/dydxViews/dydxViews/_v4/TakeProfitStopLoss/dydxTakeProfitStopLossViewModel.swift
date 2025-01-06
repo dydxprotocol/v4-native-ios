@@ -10,7 +10,6 @@ import SwiftUI
 import Utilities
 import Introspect
 import dydxFormatter
-import KeyboardObserving
 
 public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
 

@@ -9,7 +9,6 @@ import SwiftUI
 import PlatformUI
 import Utilities
 import Introspect
-import KeyboardObserving
 
 public class dydxTradeInputEditViewModel: PlatformViewModel {
     @Published public var children: [PlatformValueInputViewModel]?

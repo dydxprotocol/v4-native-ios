@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0207FCA62D2BCEDB004C2C9F /* KeyboardObserving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FCA52D2BCEDA004C2C9F /* KeyboardObserving.swift */; };
 		0230377828C15C0E00412B72 /* PlatformViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230377728C15C0E00412B72 /* PlatformViewModel.swift */; };
 		023788F528B9924D00F212E1 /* PlatformButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023788F428B9924D00F212E1 /* PlatformButton.swift */; };
 		0242E3E92A9B1AE1007605F9 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0242E3E82A9B1AE1007605F9 /* Media.xcassets */; };
@@ -104,6 +105,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0207FCA52D2BCEDA004C2C9F /* KeyboardObserving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserving.swift; sourceTree = "<group>"; };
 		0230377728C15C0E00412B72 /* PlatformViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformViewModel.swift; sourceTree = "<group>"; };
 		023788F428B9924D00F212E1 /* PlatformButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformButton.swift; sourceTree = "<group>"; };
 		0242E3E82A9B1AE1007605F9 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -175,6 +177,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0207FCA42D2BCECD004C2C9F /* KeyboardObserving */ = {
+			isa = PBXGroup;
+			children = (
+				0207FCA52D2BCEDA004C2C9F /* KeyboardObserving.swift */,
+			);
+			path = KeyboardObserving;
+			sourceTree = "<group>";
+		};
 		023788EF28B991F100F212E1 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +326,7 @@
 		02E2C92D28A1C8A400F7C3BE /* PlatformUI */ = {
 			isa = PBXGroup;
 			children = (
+				0207FCA42D2BCECD004C2C9F /* KeyboardObserving */,
 				02F16FDA28B491EE0085DC58 /* PlatformUI.swift */,
 				0230377728C15C0E00412B72 /* PlatformViewModel.swift */,
 				0278DD0D2A7C7A1400FE6ABE /* PlatformViewModel+Ext.swift */,
@@ -655,6 +666,7 @@
 			files = (
 				0273A32D2ACDFFAC001B89F5 /* ThemeFontCache.swift in Sources */,
 				02714C8C29E0C3AD00CC1C44 /* ComboBox.swift in Sources */,
+				0207FCA62D2BCEDB004C2C9F /* KeyboardObserving.swift in Sources */,
 				02F16FE228B53A200085DC58 /* SampleStyleLabel.swift in Sources */,
 				6488BBDC296F6AEA0096502F /* TabItemViewModel.swift in Sources */,
 				27044F882BBB2ADF004C750D /* Text+Ext.swift in Sources */,

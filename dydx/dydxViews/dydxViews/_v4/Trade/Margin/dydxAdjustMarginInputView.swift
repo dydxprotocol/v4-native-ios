@@ -9,7 +9,6 @@
 import SwiftUI
 import PlatformUI
 import Utilities
-import KeyboardObserving
 
 public class dydxAdjustMarginInputViewModel: PlatformViewModel {
     @Published public var sharedMarketViewModel: SharedMarketViewModel? = SharedMarketViewModel()

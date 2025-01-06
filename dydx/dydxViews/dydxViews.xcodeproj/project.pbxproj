@@ -190,7 +190,6 @@
 		272030182A7812B900D233B9 /* UINavigationController+SwipeBackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272030172A7812B900D233B9 /* UINavigationController+SwipeBackNavigation.swift */; };
 		2728CE1B2BBCD2AB004C9323 /* dydxGainLossInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2728CE1A2BBCD2AB004C9323 /* dydxGainLossInputViewModel.swift */; };
 		2729123E2C06A775003F3EA0 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 2729123D2C06A775003F3EA0 /* Introspect */; };
-		272912402C06A780003F3EA0 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 2729123F2C06A780003F3EA0 /* KeyboardObserving */; };
 		2729F9E92C64093700769BA4 /* dydxMarketsBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2729F9E82C64093700769BA4 /* dydxMarketsBannerViewModel.swift */; };
 		273C2F382C496F4F00F8391F /* dydxSliderInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273C2F372C496F4F00F8391F /* dydxSliderInputView.swift */; };
 		273F50162B7C3F120034792A /* SignedAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F50152B7C3F120034792A /* SignedAmountView.swift */; };
@@ -690,7 +689,6 @@
 				0284201429AD705B00C0E7CC /* dydxFormatter.framework in Frameworks */,
 				024B7B4E28B7F82400F7C386 /* Utilities.framework in Frameworks */,
 				024B7B4C28B7F80F00F7C386 /* PlatformParticles.framework in Frameworks */,
-				272912402C06A780003F3EA0 /* KeyboardObserving in Frameworks */,
 				2729123E2C06A775003F3EA0 /* Introspect in Frameworks */,
 				024B7B4D28B7F80F00F7C386 /* PlatformUI.framework in Frameworks */,
 				D389C2240B81C64330A95B2D /* Pods_iOS_dydxViews.framework in Frameworks */,
@@ -1922,7 +1920,6 @@
 			name = dydxViews;
 			packageProductDependencies = (
 				2729123D2C06A775003F3EA0 /* Introspect */,
-				2729123F2C06A780003F3EA0 /* KeyboardObserving */,
 			);
 			productName = dydxViews;
 			productReference = 024B79BA28B7F53800F7C386 /* dydxViews.framework */;
@@ -1977,7 +1974,6 @@
 			mainGroup = 024B79B028B7F53800F7C386;
 			packageReferences = (
 				027C379D29AEC11000381B00 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				27289B152BC9AA44009D21AD /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
 			);
 			productRefGroup = 024B79BB28B7F53800F7C386 /* Products */;
 			projectDirPath = "";
@@ -2855,14 +2851,6 @@
 				minimumVersion = 0.2.3;
 			};
 		};
-		27289B152BC9AA44009D21AD /* XCRemoteSwiftPackageReference "KeyboardObserving" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nickffox/KeyboardObserving";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2870,11 +2858,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 027C379D29AEC11000381B00 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
-		};
-		2729123F2C06A780003F3EA0 /* KeyboardObserving */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 27289B152BC9AA44009D21AD /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
-			productName = KeyboardObserving;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

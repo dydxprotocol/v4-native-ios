@@ -46,7 +46,11 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
         viewModel = dydxSimpleUITradeInputSizeViewModel()
         viewModel?.sizeItem = sizeItem
         viewModel?.usdSizeItem = usdSizeItem
-        viewModel?.showingUsdc = true
+        viewModel?.focusState = .none
+    }
+
+    func updateFocusState(_ focusState: dydxSimpleUITradeInputSizeViewModel.FocusState) {
+        viewModel?.focusState = focusState
     }
 
     override func start() {
@@ -68,8 +72,8 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
         let marketConfigs = configsAndAsset?.configs
         let asset = configsAndAsset?.asset
 
-        viewModel?.sizeItem.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
-        viewModel?.sizeItem.tokenSymbol = configsAndAsset?.asset?.displayableAssetId ?? asset?.id
+        viewModel?.sizeItem?.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
+        viewModel?.sizeItem?.tokenSymbol = configsAndAsset?.asset?.displayableAssetId ?? asset?.id
 
         for itemViewModel in [viewModel?.sizeItem, viewModel?.usdSizeItem] {
             if tradeInput.options?.needsSize ?? false {

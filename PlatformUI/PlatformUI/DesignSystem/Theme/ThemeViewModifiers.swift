@@ -228,6 +228,7 @@ private struct SheetViewModifier: ViewModifier {
                         Spacer()
                     }
                 }
+                    .frame(maxWidth: .infinity)
                     .environmentObject(themeSettings)
             )
         case .fitSize:
@@ -243,6 +244,7 @@ private struct SheetViewModifier: ViewModifier {
                             }
                         }
                     }
+                    .frame(maxWidth: .infinity)
                     .environmentObject(themeSettings)
                 }
             )
@@ -258,6 +260,7 @@ private struct SheetViewModifier: ViewModifier {
                 .themeColor(background: .layer3)
                 .cornerRadius(36, corners: [.topLeft, .topRight])
             }
+            .frame(maxWidth: .infinity)
             .ignoresSafeArea(edges: [.all])
             .wrappedInAnyView()
         }
