@@ -40,7 +40,7 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
 
     private var hostingController: UIHostingController<AnyView>?
     private let presenterView = ObjectPresenterView()
-    private var configuration: HostingViewControllerConfiguration = .default
+    public var configuration: HostingViewControllerConfiguration = .default
     private var subscriptions = Set<AnyCancellable>()
 
     static private var gradientColors: [UIColor] { [ThemeColor.SemanticColor.layer2.uiColor.withAlphaComponent(0.01),

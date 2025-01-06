@@ -78,7 +78,9 @@ private extension dydxSimpleUIMarketsHeaderViewModel.MenuItem {
     static let history = dydxSimpleUIMarketsHeaderViewModel.MenuItem(
         icon: "icon_clock",
         title: DataLocalizer.localize(path: "APP.GENERAL.HISTORY")) {
-            Router.shared?.navigate(to: RoutingRequest(path: "/portfolio/history"), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/portfolio/history",
+                                                       params: ["inTabBar": "false"]),
+                                    animated: true, completion: nil)
         }
 
     static let transfers = dydxSimpleUIMarketsHeaderViewModel.MenuItem(

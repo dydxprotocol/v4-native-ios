@@ -23,6 +23,12 @@ public class dydxHistoryViewBuilder: NSObject, ObjectBuilderProtocol {
 private class dydxHistoryViewController: HostingViewController<PlatformView, dydxHistoryViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/portfolio/history" {
+            let inTabBar = parser.asBoolean(request?.params?["inTabBar"])?.boolValue ?? true
+            if inTabBar {
+                configuration = .tabbarItemView
+            } else {
+                configuration = .default
+            }
             return true
         }
         return false
