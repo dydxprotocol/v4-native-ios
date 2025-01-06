@@ -20,7 +20,13 @@ protocol dydxSimpleUITradeInputCtaButtonViewPresenterProtocol: HostedViewPresent
     var viewModel: dydxTradeInputCtaButtonViewModel? { get }
 }
 
+protocol dydxSimpleUITradeInputCtaButtonViewPresenterDelegate: AnyObject {
+    func tradeButtonTapped()
+}
+
 class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInputCtaButtonViewModel>, dydxSimpleUITradeInputCtaButtonViewPresenterProtocol {
+
+    weak var delegate: dydxSimpleUITradeInputCtaButtonViewPresenterDelegate?
 
     private enum OnboardingState {
         case newUser
@@ -128,6 +134,7 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxTrad
         case .needDeposit:
             Router.shared?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
         case .readyToTrade:
+            delegate?.tradeButtonTapped()
             Router.shared?.navigate(to: RoutingRequest(path: "/trade/status"), animated: true, completion: nil)
         }
     }

@@ -11,11 +11,11 @@ import PlatformUI
 import Utilities
 
 public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
-    @Published public var onSettingTapped: (() -> Void)?
     @Published public var marketList: dydxSimpleUIMarketListViewModel?
     @Published public var marketSearch: dydxSimpleUIMarketSearchViewModel?
     @Published public var keyboardUp: Bool = false
     @Published public var portfolio: dydxSimpleUIPortfolioViewModel?
+    @Published public var header: dydxSimpleUIMarketsHeaderViewModel?
 
     public init() { }
 
@@ -24,6 +24,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
         vm.marketList = .previewValue
         vm.marketSearch = .previewValue
         vm.portfolio = .previewValue
+        vm.header = .previewValue
         return vm
     }
 
@@ -31,19 +32,10 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack(spacing: 16) {
-                HStack {
-                    Spacer()
-
-                    let text = Text("Settings")
-                        .themeColor(foreground: .textPrimary)
-                    PlatformButtonViewModel(content: text.wrappedViewModel,
-                                            type: .pill) { [weak self] in
-                        self?.onSettingTapped?()
-                    }
-                                            .createView(parentStyle: style)
-                }
-                .padding(.horizontal)
+            let view = VStack(spacing: 8) {
+                self.header?.createView(parentStyle: style)
+                    .padding(.top, 16)
+                    .padding(.horizontal, 16)
 
                 ZStack(alignment: .bottom) {
                     ScrollView(.vertical, showsIndicators: false) {

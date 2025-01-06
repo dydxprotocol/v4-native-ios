@@ -100,10 +100,15 @@ class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, 
     func buySellButtonTapped() {
         move(to: .half)
     }
+
+    func tradeButtonTapped() {
+        move(to: .tip)
+    }
 }
 
 private protocol dydxSimpeUITradeInputViewPresenterDelegate: AnyObject {
     func buySellButtonTapped()
+    func tradeButtonTapped()
 }
 
 private protocol dydxSimpleUITradeInputViewPresenterProtocol: HostedViewPresenterProtocol {
@@ -111,7 +116,8 @@ private protocol dydxSimpleUITradeInputViewPresenterProtocol: HostedViewPresente
     func updateViewControllerPosition(position: FloatingPanelState)
 }
 
-private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputViewModel>, dydxSimpleUITradeInputViewPresenterProtocol, dydxTradeSheetTipBuySellViewPresenterDelegate {
+private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputViewModel>, dydxSimpleUITradeInputViewPresenterProtocol, dydxTradeSheetTipBuySellViewPresenterDelegate, dydxSimpleUITradeInputCtaButtonViewPresenterDelegate {
+
     weak var delegate: dydxSimpeUITradeInputViewPresenterDelegate?
 
     // MARK: dydxTradeInputViewPresenterProtocol
@@ -130,6 +136,12 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
     func buySellButtonTapped() {
         viewModel?.displayState = .full
         delegate?.buySellButtonTapped()
+    }
+
+    // MARK: dydxSimpleUITradeInputCtaButtonViewPresenterDelegate
+
+    func tradeButtonTapped() {
+        delegate?.tradeButtonTapped()
     }
 
     private let tipBuySellPresenter = dydxTradeSheetTipBuySellViewPresenter()
@@ -166,6 +178,7 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
 
         self.viewModel = viewModel
         tipBuySellPresenter.delegate = self
+        ctaButtonPresenter.delegate = self
 
         attachChildren(workers: childPresenters)
     }

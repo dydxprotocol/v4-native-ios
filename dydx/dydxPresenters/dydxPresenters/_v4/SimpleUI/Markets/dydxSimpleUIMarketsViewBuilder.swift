@@ -40,11 +40,13 @@ public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIM
     private let marketListPresenter = dydxSimpleUIMarketListViewPresenter()
     private let marketSearchPresenter = dydxSimpleUIMarketSearchViewPresenter()
     private let portfolioPresenter = dydxSimpleUIPortfolioViewPresenter()
+    private let headerPresenter = dydxSimpleUIMarketsHeaderViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         marketListPresenter,
         marketSearchPresenter,
-        portfolioPresenter
+        portfolioPresenter,
+        headerPresenter
     ]
 
     override init() {
@@ -55,10 +57,7 @@ public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIM
         portfolioPresenter.$viewModel.assign(to: &viewModel.$portfolio)
         marketSearchPresenter.viewModel?.$searchText.assign(to: &marketListPresenter.$searchText)
         marketSearchPresenter.viewModel?.$focused.assign(to: &viewModel.$keyboardUp)
-
-        viewModel.onSettingTapped = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/settings/app_mode"), animated: true, completion: nil)
-        }
+        headerPresenter.$viewModel.assign(to: &viewModel.$header)
 
         super.init()
 

@@ -198,9 +198,6 @@
                 },
                 "/settings":{
                     "destination":"dydxPresenters.dydxSettingsLandingViewBuilder",
-                    "dependencies":[
-                        "/my-profile"
-                    ]
                 },
                 "/settings/notifications":{
                     "destination":"dydxPresenters.dydxNotificationsSettingsViewBuilder",

@@ -66,5 +66,11 @@ class dydxSimpleUIMarketPositionViewPresenter: HostedViewPresenter<dydxSimpleUIM
         viewModel?.logoUrl = sharedOrderViewModel.logoUrl
         viewModel?.amount = dydxFormatter.shared.dollar(number: position.notionalTotal.current?.doubleValue, digits: 2)
         viewModel?.funding = SignedAmountViewModel(amount: position.netFunding?.doubleValue, displayType: .dollar, coloringOption: .allText)
+
+        viewModel?.closeAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/close",
+                                                       params: ["marketId": position.id]),
+                                    animated: true, completion: nil)
+        }
     }
 }
