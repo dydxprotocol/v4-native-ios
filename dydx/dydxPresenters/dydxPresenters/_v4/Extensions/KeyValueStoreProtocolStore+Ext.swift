@@ -22,7 +22,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
     public var defaultValue: Any? {
         switch self {
         case .language: return DataLocalizer.shared?.language
-        case .v4Theme: return dydxThemeType.classicDark.rawValue
+        case .v4Theme: return dydxThemeType.dark.rawValue
         case .directionColorPreference: return "green_is_up"
         case .shouldDisplayInAppNotifications: return true
         case .gasToken: return "USDC"
