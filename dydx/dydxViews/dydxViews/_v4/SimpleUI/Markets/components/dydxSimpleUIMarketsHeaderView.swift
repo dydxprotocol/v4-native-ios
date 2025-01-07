@@ -62,8 +62,14 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
+            let imageName: String
+            if dydxThemeSettings.shared.currentThemeType == .light {
+                imageName = "dydx_light"
+            } else {
+                imageName = "dydx"
+            }
             let view = HStack(alignment: .center) {
-                Image("dydx", bundle: Bundle.dydxView)
+                Image(imageName, bundle: Bundle.dydxView)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 65)
