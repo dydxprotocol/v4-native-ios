@@ -85,7 +85,6 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
                         default:
                             break
                         }
-                        // self?.showingUsdc.toggle()
                     }
                 }
                  .createView(parentStyle: style)
