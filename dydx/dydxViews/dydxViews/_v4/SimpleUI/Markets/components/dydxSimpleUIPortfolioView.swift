@@ -35,6 +35,16 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     @Published public var pnlPercent: SignedAmountViewModel?
     @Published public var chart = dydxLineChartViewModel()
 
+    private var pnlColor: ThemeColor.SemanticColor {
+        get {
+            switch pnlPercent?.sign {
+            case .plus: return ThemeSettings.positiveColor
+            case .minus: return ThemeSettings.negativeColor
+            default: return .layer6
+            }
+        }
+    }
+
     public static var previewValue: dydxSimpleUIPortfolioViewModel {
         let vm = dydxSimpleUIPortfolioViewModel()
         vm.sharedAccountViewModel = SharedAccountViewModel.previewValue
@@ -74,7 +84,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
 
                 HStack(alignment: .center, spacing: 16) {
                     Text(sharedAccountViewModel?.equity ?? "-")
-                        .themeFont(fontType: .plus, fontSize: .largest)
+                        .themeFont(fontType: .plus, fontSize: .custom(size: 42))
                         .themeColor(foreground: .textPrimary)
 
                     Spacer()
@@ -82,26 +92,34 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                     VStack(alignment: .trailing, spacing: 8) {
                         Text(pnlAmount ?? "-")
                             .themeColor(foreground: .textTertiary)
-                        pnlPercent?.createView(parentStyle: style.themeFont(fontSize: .small))
+
+                        pnlPercent?
+                            .createView(parentStyle: style.themeFont(fontSize: .small))
+                            .padding(.vertical, 3)
+                            .padding(.horizontal, 8)
+                            .background(pnlColor.color.opacity(0.1))
+                            .cornerRadius(7)
+
                     }
                     .themeFont(fontSize: .small)
                 }
                 .frame(height: 48)
                 .padding(.horizontal, 16)
 
-                HStack(spacing: 16) {
-                    HStack(alignment: .center) {
+                HStack(alignment: .center, spacing: 16) {
+                    HStack(alignment: .center, spacing: 16) {
                         Text(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
                             .themeColor(foreground: .textTertiary)
-                        Spacer()
                         Text(sharedAccountViewModel?.buyingPower ?? "-")
                             .themeColor(foreground: .textSecondary)
                     }
                     .themeFont(fontSize: .small)
 
+                    Spacer()
                     DividerModel().createView(parentStyle: style)
+                    Spacer()
 
-                    HStack(alignment: .center, spacing: 24) {
+                    HStack(alignment: .center, spacing: 8) {
                         Text(DataLocalizer.localize(path: "APP.TRADE.RISK"))
                             .themeColor(foreground: .textTertiary)
                             .themeFont(fontSize: .small)

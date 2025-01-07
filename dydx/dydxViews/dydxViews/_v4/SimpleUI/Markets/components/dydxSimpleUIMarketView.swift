@@ -84,10 +84,11 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     }
 
     private func createIcon(style: ThemeStyle) -> some View {
+        let iconSize: CGFloat = 36
         let placeholderText = { [weak self] in
             if let assetName = self?.assetName {
                 return Text(assetName.prefix(1))
-                    .frame(width: 32, height: 32)
+                    .frame(width: iconSize, height: iconSize)
                     .themeColor(foreground: .textTertiary)
                     .themeColor(background: .layer5)
                     .borderAndClip(style: .circle, borderColor: .layer7, lineWidth: 1)
@@ -98,7 +99,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
         let iconType = PlatformIconViewModel.IconType.url(url: URL(string: iconUrl ?? ""), placeholderContent: placeholderText)
         return PlatformIconViewModel(type: iconType,
                                      clip: .circle(background: .transparent, spacing: 0),
-                                     size: CGSize(width: 32, height: 32))
+                                     size: CGSize(width: iconSize, height: iconSize))
             .createView(parentStyle: style)
     }
 
