@@ -32,6 +32,8 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
+            let bottomPadding = max((self.safeAreaInsets?.bottom ?? 0), 16)
+
             let view = VStack(spacing: 8) {
                 self.header?.createView(parentStyle: style)
                     .padding(.top, 16)
@@ -57,13 +59,27 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                         .keyboardObserving()
                     }
 
+                    let blendedColor = Color(UIColor.blend(color1: ThemeColor.SemanticColor.layer2.uiColor,
+                                                           intensity1: 0.05,
+                                                           color2: UIColor.clear,
+                                                           intensity2: 0.95))
+                    let gradient = LinearGradient(
+                        gradient: Gradient(colors: [
+                            ThemeColor.SemanticColor.layer2.color,
+                            blendedColor]),
+                        startPoint: .bottom, endPoint: .top)
+
                     self.marketSearch?.createView(parentStyle: style)
+                        .padding(.top, 32)
+                        .padding(.bottom, bottomPadding)
+                        .frame(maxWidth: .infinity)
+                        .background(gradient)
                 }
             }
                 .frame(maxWidth: .infinity)
                 .themeColor(background: .layer2)
 
-            return AnyView(view)
+            return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
     }
 }
