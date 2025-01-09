@@ -45,12 +45,12 @@ private struct PlatformInputView: View {
         .onChange(of: model.isFocused) {
             isFocused = $0
         }
-        .if(model.twoWayBinding, transform: { content in
+        .if(model.twoWayBinding) { content in
             content
                 .onChange(of: isFocused) {
                     model.isFocused = $0
                 }
-        })
+        }
         .onTapGesture {
             isFocused = true
         }

@@ -64,7 +64,8 @@ private extension dydxSimpleUIMarketsHeaderViewModel.MenuItem {
     static func signOut(ethereumAddress: String) -> Self {
         dydxSimpleUIMarketsHeaderViewModel.MenuItem(
             icon: "settings_signout",
-            title: DataLocalizer.localize(path: "APP.GENERAL.SIGN_OUT")) {
+            title: DataLocalizer.localize(path: "APP.GENERAL.SIGN_OUT"),
+            destructive: true) {
                 Router.shared?.navigate(to: RoutingRequest(path: "/action/wallet/disconnect", params: ["ethereumAddress": ethereumAddress]), animated: true, completion: nil)
             }
     }

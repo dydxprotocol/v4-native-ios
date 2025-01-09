@@ -12,24 +12,28 @@ import Utilities
 
 public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
     public struct MenuItem: Hashable, Equatable {
-        public init(icon: String, title: String, action: @escaping () -> Void) {
+        public init(icon: String, title: String, destructive: Bool = false, action: @escaping () -> Void) {
             self.icon = icon
             self.title = title
+            self.destructive = destructive
             self.action = action
         }
 
         public var icon: String
         public var title: String
+        public var destructive: Bool
         public var action: () -> Void
 
         public func hash(into hasher: inout Hasher) {
             hasher.combine(icon)
             hasher.combine(title)
+            hasher.combine(destructive)
         }
 
         public static func == (lhs: Self, rhs: Self) -> Bool {
             lhs.icon == rhs.icon &&
-            lhs.title == rhs.title
+            lhs.title == rhs.title &&
+            lhs.destructive == rhs.destructive
         }
     }
 
@@ -106,28 +110,36 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
                  }, view: {
                      VStack(alignment: .leading, spacing: 0) {
                          ForEach(Array(self.items.enumerated()), id: \.element) { index, item in
-                             HStack(spacing: 12) {
-                                 PlatformIconViewModel(type: .asset(name: item.icon, bundle: .dydxView),
-                                                       size: CGSize(width: 22, height: 22),
-                                                       templateColor: .textSecondary)
-                                 .createView(parentStyle: style)
-
-                                 Text(item.title)
-                                     .themeFont(fontSize: .large)
-                                     .themeColor(foreground: .textSecondary)
+                             let color: ThemeColor.SemanticColor
+                             if item.destructive {
+                                 color = .colorRed
+                             } else {
+                                 color = .textSecondary
                              }
-                             .themeColor(background: .layer3)
-                             .padding(.horizontal, 16)
-                             .padding(.vertical, 12)
-                             .onTapGesture {
-                                 self.present = false
-                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                     item.action()
-                                 })
-                             }
+                             return VStack(alignment: .leading, spacing: 0) {
+                                 HStack(spacing: 12) {
+                                     PlatformIconViewModel(type: .asset(name: item.icon, bundle: .dydxView),
+                                                           size: CGSize(width: 22, height: 22),
+                                                           templateColor: color)
+                                     .createView(parentStyle: style)
 
-                             if index != self.items.count - 1 {
-                                 DividerModel().createView(parentStyle: style)
+                                     Text(item.title)
+                                         .themeFont(fontSize: .large)
+                                         .themeColor(foreground: color)
+                                 }
+                                 .themeColor(background: .layer3)
+                                 .padding(.horizontal, 16)
+                                 .padding(.vertical, 12)
+                                 .onTapGesture {
+                                     self.present = false
+                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                                         item.action()
+                                     })
+                                 }
+
+                                 if index != self.items.count - 1 {
+                                     DividerModel().createView(parentStyle: style)
+                                 }
                              }
                          }
                      }

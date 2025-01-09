@@ -731,9 +731,11 @@ struct DisableBouncesModifier: ViewModifier {
 // MARK: Conditional
 
 public extension View {
-    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, _ transform: (Self) -> Content, `else` elseTransform: ((Self) -> Content)? = nil) -> some View {
         if condition {
             transform(self)
+        } else if let elseTransform {
+            elseTransform(self)
         } else {
             self
         }

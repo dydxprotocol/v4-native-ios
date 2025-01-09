@@ -29,12 +29,12 @@ struct KeyboardObserving: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .if(mode == .yPadding, transform: { content in
+            .if(mode == .yPadding) { content in
                 content.padding([.bottom], keyboardHeight)
-            })
-            .if(mode == .yOffset, transform: { content in
+            }
+            .if(mode == .yOffset) { content in
                 content.offset(y: -keyboardHeight)
-            })
+            }
             .edgesIgnoringSafeArea((keyboardHeight > 0) ? [.bottom] : [])
             .animation(.easeOut(duration: keyboardAnimationDuration), value: keyboardHeight)
             .onReceive(
