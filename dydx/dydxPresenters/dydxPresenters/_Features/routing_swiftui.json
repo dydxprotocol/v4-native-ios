@@ -97,7 +97,7 @@
                     "presentation":"push"
                 },
                 "/loading":{
-                    "destination":"LaunchScreen.storyboard",
+                    "destination":"Launch Screen.storyboard",
                     "presentation":"root"
                 },
                 "/markets":{

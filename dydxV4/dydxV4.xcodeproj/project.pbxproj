@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01EEEC77C8B7F3846916AF28 /* Pods_iOS_dydxV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 171807B0CCAE5C86B5D65793 /* Pods_iOS_dydxV4.framework */; };
+		0207FED92D2F5B50004C2C9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0207FED82D2F5B50004C2C9F /* Launch Screen.storyboard */; };
 		0217A0A129D78BD5007F31C5 /* dydxBiometricsLocalAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */; };
 		022F35CD28D39304000BCA41 /* dydxPresenters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02439D1129B03F6700A083FE /* dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; };
@@ -44,7 +45,6 @@
 		3101FC582511508800AC4010 /* CommonAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101FC572511508800AC4010 /* CommonAppDelegate.swift */; };
 		3112F463216BBF8400708927 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112F462216BBF8400708927 /* AppDelegate.swift */; };
 		3112F46C216BBF8500708927 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3112F46B216BBF8500708927 /* Assets.xcassets */; };
-		3112F46F216BBF8500708927 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3112F46D216BBF8500708927 /* LaunchScreen.storyboard */; };
 		3112F47A216BBF8600708927 /* dydxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112F479216BBF8600708927 /* dydxTests.swift */; };
 		314B729C23DD126F00139EB3 /* libAppsFlyerStaticInjections.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 314B726A23DD124E00139EB3 /* libAppsFlyerStaticInjections.a */; };
 		314C368524C7CC7600695F7E /* ui.json in Resources */ = {isa = PBXBuildFile; fileRef = 314C368424C7CC7600695F7E /* ui.json */; };
@@ -817,6 +817,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0207FED82D2F5B50004C2C9F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		020F66BA2858F29300E2D072 /* dydxNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNotificationService.swift; sourceTree = "<group>"; };
 		020F66BC2858F29300E2D072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxBiometricsLocalAuthenticator.swift; sourceTree = "<group>"; };
@@ -854,7 +855,6 @@
 		3112F45F216BBF8400708927 /* dydxV4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dydxV4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3112F462216BBF8400708927 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3112F46B216BBF8500708927 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3112F46E216BBF8500708927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3112F470216BBF8500708927 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3112F475216BBF8600708927 /* dydxV4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dydxV4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3112F479216BBF8600708927 /* dydxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTests.swift; sourceTree = "<group>"; };
@@ -1171,9 +1171,9 @@
 				31659015227D55CD00BAF133 /* Design.txt */,
 				310273EC25F0728700DA70A4 /* dydx.entitlements */,
 				3112F470216BBF8500708927 /* Info.plist */,
-				3112F46D216BBF8500708927 /* LaunchScreen.storyboard */,
 				3162B55226E181BB000209E1 /* WebCrypto.js */,
 				274F43052BA4C0B400645059 /* PrivacyInfo.xcprivacy */,
+				0207FED82D2F5B50004C2C9F /* Launch Screen.storyboard */,
 			);
 			name = dydx;
 			path = dydxV4;
@@ -2160,8 +2160,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				027B7CA62AD5E559005A8288 /* configs in Resources */,
-				3112F46F216BBF8500708927 /* LaunchScreen.storyboard in Resources */,
 				3162B58226E181BB000209E1 /* WebCrypto.js in Resources */,
+				0207FED92D2F5B50004C2C9F /* Launch Screen.storyboard in Resources */,
 				3112F46C216BBF8500708927 /* Assets.xcassets in Resources */,
 				31659016227D55CD00BAF133 /* Design.txt in Resources */,
 				64AEE63E27B2F74C0038C791 /* config in Resources */,
@@ -2571,17 +2571,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		3112F46D216BBF8500708927 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3112F46E216BBF8500708927 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		02DA0B002B57609100BFA975 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2759,6 +2748,7 @@
 			baseConfigurationReference = 4CA3E661F388FD1F860FDCC6 /* Pods-iOS-dydxV4.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = dydxV4/dydx.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 999999999;
@@ -2781,6 +2771,7 @@
 			baseConfigurationReference = A7579EE7C41F2F8512489E50 /* Pods-iOS-dydxV4.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = dydxV4/dydx.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
