@@ -163,7 +163,8 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
             let buttonLabel = Text(
                 self.state.buttonText
             ).themeFont(fontType: .base, fontSize: .medium)
-            PlatformButtonViewModel(content: buttonLabel.wrappedViewModel) { [weak self] in
+            PlatformButtonViewModel(content: buttonLabel.wrappedViewModel,
+                                    type: .defaultType(pilledCorner: true)) { [weak self] in
                 self?.buttonAction?()
             }
             .createView(parentStyle: style)

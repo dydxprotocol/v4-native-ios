@@ -13,7 +13,12 @@ public enum PlatformButtonState {
 }
 
 public enum PlatformButtonType {
-    case defaultType(fillWidth: Bool = true, padding: EdgeInsets = .init(all: 14)), iconType, pill, small
+    case defaultType(fillWidth: Bool = true,
+                     pilledCorner: Bool = false,
+                     padding: EdgeInsets = .init(all: 14)),
+         iconType,
+         pill,
+         small
 }
 
 public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformViewModel {
@@ -40,7 +45,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
             return AnyView(
                 Group {
                     switch self.type {
-                    case .defaultType(let fillWidth, let padding):
+                    case .defaultType(let fillWidth, let pilledCorner, let padding):
                        let button = Button(action: self.action) {
                             HStack {
                                 if fillWidth {
@@ -60,7 +65,12 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                             view.frame(maxWidth: .infinity)
                         }
                         .themeStyle(styleKey: self.buttonStyleKey, parentStyle: style)
-                        .cornerRadius(8)
+                        .if(pilledCorner) { view in
+                            view.clipShape(Capsule())
+                        }
+                        .if(!pilledCorner) { view in
+                            view.cornerRadius(8)
+                        }
 
                         let borderWidth: CGFloat = 1
                         let cornerRadius: CGFloat = 8
