@@ -202,7 +202,7 @@ class dydxPortfolioChartViewPresenter: HostedViewPresenter<dydxPortfolioChartVie
 
 // MARK: Resolution
 
-private struct PortfolioChartResolution {
+struct PortfolioChartResolution {
     let text: String
     let key: HistoricalPnlPeriod
 

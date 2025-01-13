@@ -76,7 +76,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                .lineLimit(1)
                .minimumScaleFactor(0.5)
                .padding(.horizontal, 16)
-               .padding(.vertical, 12)
+               .padding(.vertical, 4)
             }
 
             return AnyView(view)

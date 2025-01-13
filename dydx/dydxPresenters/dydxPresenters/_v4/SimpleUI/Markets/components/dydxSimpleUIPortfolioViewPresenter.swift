@@ -40,13 +40,15 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
 
         self.viewModel = viewModel
 
+        updateChartResolutions()
+
         attachChildren(workers: childPresenters)
     }
 
     override func start() {
         super.start()
 
-        AbacusStateManager.shared.setHistoricalPNLPeriod(period: HistoricalPnlPeriod.period30d)
+        AbacusStateManager.shared.setHistoricalPNLPeriod(period: HistoricalPnlPeriod.period7d)
 
         loadingStartTime = Date()
         Publishers.CombineLatest4(
@@ -87,9 +89,15 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
         let beginning = pnls.first?.equity
 
         if let firstTotalPnl = firstTotalPnl, let targetTotalPnl = targetTotalPnl, let beginning = beginning, beginning != 0 {
-            viewModel?.pnlAmount = dydxFormatter.shared.dollar(number: targetTotalPnl - firstTotalPnl, digits: 2)
+            let amount =  dydxFormatter.shared.dollar(number: targetTotalPnl - firstTotalPnl, digits: 2)
+            viewModel?.pnlAmount = SignedAmountViewModel(text: amount, sign: targetTotalPnl >= firstTotalPnl ? .plus : .minus, coloringOption: .textOnly)
+
             let percent = dydxFormatter.shared.percent(number: abs(targetTotalPnl - firstTotalPnl) / beginning, digits: 2)
-            viewModel?.pnlPercent = SignedAmountViewModel(text: percent, sign: targetTotalPnl >= firstTotalPnl ? .plus : .minus, coloringOption: .textOnly)
+            if let percent {
+                viewModel?.pnlPercent = SignedAmountViewModel(text: "(" + percent + ")", sign: targetTotalPnl >= firstTotalPnl ? .plus : .minus, coloringOption: .textOnly)
+            } else {
+                viewModel?.pnlAmount = nil
+            }
         }
 
         var chartEntries = pnls.compactMap {
@@ -111,5 +119,15 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
 
         viewModel?.chart.showYLabels = false
         viewModel?.chart.valueLowerBoundOffset = (maxValue - minValue) * 0.8
+    }
+
+    private func updateChartResolutions() {
+        viewModel?.periodOption.items =  PortfolioChartResolution.allResolutions.map {
+            dydxSimpleUIPortfolioPeriodViewModel.OptionItem(text: $0.text, value: $0.key.rawValue)
+        }
+        viewModel?.periodOption.selectedIndex = 1
+        viewModel?.periodOption.selectAction = { index in
+            AbacusStateManager.shared.setHistoricalPNLPeriod(period: PortfolioChartResolution.allResolutions[index].key)
+        }
     }
 }

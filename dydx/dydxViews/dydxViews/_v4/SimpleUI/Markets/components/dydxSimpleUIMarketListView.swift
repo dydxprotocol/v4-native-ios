@@ -57,9 +57,6 @@ public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
                 } else {
                     market.createView(parentStyle: style)
                 }
-                if market !== markets.last {
-                    DividerModel().createView(parentStyle: style)
-                }
             }
 
             return AnyView(view)

@@ -40,9 +40,11 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     @Published public var buttonAction: (() -> Void)?
     @Published public var state: LoginState  = .unknown
     @Published public var sharedAccountViewModel: SharedAccountViewModel? = SharedAccountViewModel()
-    @Published public var pnlAmount: String?
+    @Published public var pnlAmount: SignedAmountViewModel?
     @Published public var pnlPercent: SignedAmountViewModel?
     @Published public var chart = dydxLineChartViewModel()
+
+    @Published public var periodOption = dydxSimpleUIPortfolioPeriodViewModel.previewValue
 
     private var pnlColor: ThemeColor.SemanticColor {
         get {
@@ -57,7 +59,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     public static var previewValue: dydxSimpleUIPortfolioViewModel {
         let vm = dydxSimpleUIPortfolioViewModel()
         vm.sharedAccountViewModel = SharedAccountViewModel.previewValue
-        vm.pnlAmount = "$100,000"
+        vm.pnlAmount = .previewValue
         vm.pnlPercent = .previewValue
         vm.state = .hasBalance
         vm.sharedAccountViewModel = .previewValue
@@ -96,11 +98,13 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                         .themeColor(foreground: .textPrimary)
 
                     HStack(alignment: .center, spacing: 8) {
-                        Text(pnlAmount ?? "-")
-                            .themeColor(foreground: .textTertiary)
+                        pnlAmount?
+                            .createView(parentStyle: style.themeFont(fontSize: .small))
 
                         pnlPercent?
                             .createView(parentStyle: style.themeFont(fontSize: .small))
+
+                        periodOption.createView(parentStyle: style)
                     }
                     .themeFont(fontSize: .small)
                 }
