@@ -80,6 +80,9 @@
                 "/action/post_onboarding": {
                     "destination":"dydxPresenters.dydxPostOnboardingActionBuilder"
                 },
+                "/action/mode/switch": {
+                    "destination":"dydxPresenters.dydxSwitchAppModeActionBuilder"
+                },
                 "/alerts":{
                     "destination":"dydxPresenters.dydxAlertsViewBuilder",
                     "presentation":"push"

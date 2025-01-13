@@ -12,15 +12,17 @@ import Utilities
 
 public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
     public struct MenuItem: Hashable, Equatable {
-        public init(icon: String, title: String, destructive: Bool = false, action: @escaping () -> Void) {
+        public init(icon: String, title: String, subtitle: String? = nil, destructive: Bool = false, action: @escaping () -> Void) {
             self.icon = icon
             self.title = title
+            self.subtitle = subtitle
             self.destructive = destructive
             self.action = action
         }
 
         public var icon: String
         public var title: String
+        public var subtitle: String?
         public var destructive: Bool
         public var action: () -> Void
 
@@ -33,6 +35,7 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
         public static func == (lhs: Self, rhs: Self) -> Bool {
             lhs.icon == rhs.icon &&
             lhs.title == rhs.title &&
+            lhs.subtitle == rhs.subtitle &&
             lhs.destructive == rhs.destructive
         }
     }
@@ -56,8 +59,8 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
     public static var previewValue: dydxSimpleUIMarketsHeaderViewModel {
         let vm = dydxSimpleUIMarketsHeaderViewModel()
         vm.items = [
-            .init(icon: "icon_copy", title: "Settings", action: {}),
-            .init(icon: "icon_copy", title: "Onboarding", action: {})
+            .init(icon: "icon_copy", title: "Settings", subtitle: nil, action: {}),
+            .init(icon: "icon_copy", title: "Onboarding", subtitle: "subtitle", action: {})
         ]
         return vm
     }
@@ -107,14 +110,24 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
                              }
                              return VStack(alignment: .leading, spacing: 0) {
                                  HStack(spacing: 12) {
+                                     VStack(alignment: .leading, spacing: 2) {
+                                         Text(item.title)
+                                             .themeFont(fontSize: .large)
+                                             .themeColor(foreground: color)
+
+                                         if let subtitle = item.subtitle {
+                                             Text(subtitle)
+                                                 .themeFont(fontSize: .small)
+                                                 .themeColor(foreground: .textTertiary)
+                                         }
+                                     }
+                                     .leftAligned()
+                                     .frame(minWidth: 180)
+
                                      PlatformIconViewModel(type: .asset(name: item.icon, bundle: .dydxView),
                                                            size: CGSize(width: 22, height: 22),
                                                            templateColor: color)
                                      .createView(parentStyle: style)
-
-                                     Text(item.title)
-                                         .themeFont(fontSize: .large)
-                                         .themeColor(foreground: color)
                                  }
                                  .themeColor(background: .layer3)
                                  .padding(.horizontal, 16)

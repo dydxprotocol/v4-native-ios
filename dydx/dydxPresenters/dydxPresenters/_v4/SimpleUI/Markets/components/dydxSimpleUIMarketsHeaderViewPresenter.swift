@@ -46,9 +46,9 @@ class dydxSimpleUIMarketsHeaderViewPresenter: HostedViewPresenter<dydxSimpleUIMa
 
         let ethereumAddress = currentWallet?.ethereumAddress ?? ""
         if onboarded {
-            viewModel?.items = [.transfers, .history, .settings, .help, .signOut(ethereumAddress: ethereumAddress)]
+            viewModel?.items = [.transfers, .history, .settings, .help, .signOut(ethereumAddress: ethereumAddress), .switchMode]
         } else {
-            viewModel?.items = [.signIn, .settings, .help]
+            viewModel?.items = [.signIn, .settings, .help, .switchMode]
         }
     }
 }
@@ -94,5 +94,14 @@ private extension dydxSimpleUIMarketsHeaderViewModel.MenuItem {
         icon: "icon_help",
         title: DataLocalizer.localize(path: "APP.HEADER.HELP")) {
             Router.shared?.navigate(to: RoutingRequest(path: "/help"), animated: true, completion: nil)
+        }
+
+    static let switchMode = dydxSimpleUIMarketsHeaderViewModel.MenuItem(
+        icon: "icon_switch",
+        title: DataLocalizer.localize(path: "APP.TRADE.MODE.SWITCH_TO_PRO"),
+        subtitle: DataLocalizer.localize(path: "APP.TRADE.MODE.FULLY_FEATURED")) {
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/mode/switch",
+                                                       params: ["mode": "pro"]),
+                                    animated: true, completion: nil)
         }
 }
