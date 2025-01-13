@@ -63,7 +63,7 @@ private extension dydxSimpleUIMarketsHeaderViewModel.MenuItem {
 
     static func signOut(ethereumAddress: String) -> Self {
         dydxSimpleUIMarketsHeaderViewModel.MenuItem(
-            icon: "settings_signout",
+            icon: "icon_close",
             title: DataLocalizer.localize(path: "APP.GENERAL.SIGN_OUT"),
             destructive: true) {
                 Router.shared?.navigate(to: RoutingRequest(path: "/action/wallet/disconnect", params: ["ethereumAddress": ethereumAddress]), animated: true, completion: nil)
@@ -71,7 +71,7 @@ private extension dydxSimpleUIMarketsHeaderViewModel.MenuItem {
     }
 
     static let settings = dydxSimpleUIMarketsHeaderViewModel.MenuItem(
-        icon: "icon_settings",
+        icon: "icon_settings_1",
         title: DataLocalizer.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS")) {
             Router.shared?.navigate(to: RoutingRequest(url: "/settings"), animated: true, completion: nil)
         }

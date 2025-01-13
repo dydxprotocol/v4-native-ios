@@ -66,23 +66,12 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let imageName: String
-            if dydxThemeSettings.shared.currentThemeType == .light {
-                imageName = "dydx_light"
-            } else {
-                imageName = "dydx"
-            }
             let view = HStack(alignment: .center) {
-                Image(imageName, bundle: Bundle.dydxView)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 65)
-
                 Spacer()
 
-                let iconName = self.onboarded ? "logo_hedgie" : "hedgie_placeholder"
+                let iconName = "icon_list"
                 let content = PlatformIconViewModel(type: .asset(name: iconName, bundle: .dydxView),
-                                                    clip: .circle(background: .layer4, spacing: 4, borderColor: .textTertiary),
+                                                    clip: .circle(background: .layer4, spacing: 16),
                                                     size: CGSize(width: 36, height: 36))
                 PlatformButtonViewModel(content: content,
                                         type: .iconType) { [weak self] in

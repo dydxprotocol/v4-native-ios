@@ -35,18 +35,20 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
             let bottomPadding = max((self.safeAreaInsets?.bottom ?? 0), 16)
 
             let view = VStack(spacing: 8) {
-                self.header?.createView(parentStyle: style)
-                    .padding(.top, 16)
-                    .padding(.horizontal, 16)
-
                 ZStack(alignment: .bottom) {
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVStack(pinnedViews: [.sectionHeaders]) {
                             if self.keyboardUp == false {
                                 Section {
-                                    self.portfolio?.createView(parentStyle: style)
-                                        .frame(height: 240)
-                                        .padding(.bottom, 24)
+                                    ZStack(alignment: .top) {
+                                        self.header?.createView(parentStyle: style)
+                                            .padding(.top, 16)
+                                            .padding(.horizontal, 16)
+
+                                        self.portfolio?.createView(parentStyle: style)
+                                            .frame(height: 240)
+                                            .padding(.bottom, 8)
+                                    }
                                 }
                             }
 
@@ -59,7 +61,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                         .keyboardObserving()
                     }
 
-                    let blendedColor = Color(UIColor.blend(color1: ThemeColor.SemanticColor.layer2.uiColor,
+                    let blendedColor = Color(UIColor.blend(color1: UIColor.clear,
                                                            intensity1: 0.05,
                                                            color2: UIColor.clear,
                                                            intensity2: 0.95))
