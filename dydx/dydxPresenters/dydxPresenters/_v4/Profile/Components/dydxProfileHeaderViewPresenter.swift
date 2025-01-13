@@ -55,9 +55,10 @@ class dydxProfileHeaderViewPresenter: HostedViewPresenter<dydxProfileHeaderViewM
                 } else {
                     self?.viewModel?.copyAction = nil
                 }
-                if let ethereumAddress = walletState.currentWallet?.ethereumAddress {
+                if let cosmoAddress = walletState.currentWallet?.cosmoAddress,
+                    let mintscanBase = AbacusStateManager.shared.environment?.links?.mintscanBase {
                     self?.viewModel?.openInEtherscanAction = {
-                        let urlString = "https://etherscan.io/address/\(ethereumAddress)"
+                        let urlString = "\(mintscanBase)/address/\(cosmoAddress)"
                         if let url = URL(string: urlString), URLHandler.shared?.canOpenURL(url) ?? false {
                             URLHandler.shared?.open(url, completionHandler: nil)
                         }
