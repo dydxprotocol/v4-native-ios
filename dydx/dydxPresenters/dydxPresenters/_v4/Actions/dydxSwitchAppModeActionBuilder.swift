@@ -42,25 +42,4 @@ private class dydxSwitchAppModeAction: NSObject, NavigableProtocol {
             completion?(nil, false)
         }
     }
-
-    private func cancelOrder(orderId: String, side: String, size: String, market: String, completion: RoutingCompletionBlock?) {
-        AbacusStateManager.shared.cancelOrder(orderId: orderId) { status in
-            switch status {
-            case .success:
-                ErrorInfo.shared?.info(
-                    title: DataLocalizer.localize(path: "APP.TRADE.CANCELING_ORDER"),
-                    message: DataLocalizer.localize(path: "APP.TRADE.CANCELING_ORDER_DESC", params: [
-                        "SIDE": side,
-                        "SIZE": size,
-                        "MARKET": market
-                    ]),
-                    type: .success, error: nil)
-                completion?(nil, true)
-            case .failed(let error):
-                ErrorInfo.shared?.info(title: nil, message: nil, type: .error, error: error)
-                HapticFeedback.shared?.notify(type: .error)
-                completion?(nil, false)
-            }
-        }
-    }
 }
