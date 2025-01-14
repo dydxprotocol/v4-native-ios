@@ -83,7 +83,7 @@ public class dydxLineChartViewModel: PlatformViewModel {
     }
 
     private var chartGradient: Gradient {
-        Gradient(colors: [lineColor.opacity(0.5),
+        Gradient(colors: [lineColor.opacity(0.3),
                           lineColor.opacity(0)])
     }
 }

@@ -89,6 +89,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     private func createPortfolioView(style: ThemeStyle) -> some View {
         ZStack {
             chart.createView(parentStyle: style)
+                .opacity(0.6)
                 .padding(.top, 78)
 
             VStack(spacing: 16) {
@@ -115,7 +116,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                 Spacer()
 
                 HStack(alignment: .center, spacing: 16) {
-                    HStack(alignment: .center, spacing: 16) {
+                    HStack(alignment: .center, spacing: 8) {
                         Text(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
                             .themeColor(foreground: .textTertiary)
                         Text(sharedAccountViewModel?.buyingPower ?? "-")
@@ -123,8 +124,6 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                     }
                     .themeFont(fontSize: .small)
 
-                    Spacer()
-                    DividerModel().createView(parentStyle: style)
                     Spacer()
 
                     HStack(alignment: .center, spacing: 8) {

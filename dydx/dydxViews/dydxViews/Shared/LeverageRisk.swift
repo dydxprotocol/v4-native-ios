@@ -122,7 +122,7 @@ public class LeverageRiskModel: PlatformViewModel {
                                 .themeColor(foreground: self.level.foregroundColor)
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 4)
-                                .background(self.level.backgroundColor.color.opacity(0.3))
+                                .background(self.level.backgroundColor.color.opacity(0.1))
                                 .cornerRadius(6, corners: .allCorners)
                                 .themeStyle(style: style)
                                 .lineLimit(1)

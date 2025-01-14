@@ -72,7 +72,7 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = HStack(alignment: .center) {
+            let view = HStack(alignment: .center, spacing: 16) {
                 Spacer()
 
                 if self.depositAction != nil {
@@ -85,6 +85,7 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
 
                 self.createMenuButton(parentStyle: style)
             }
+
             return AnyView(view)
         }
     }
@@ -92,8 +93,9 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
     private func createDepositButton(parentStyle: ThemeStyle) -> some View {
         let iconName = "icon_transfer_deposit"
         let content = PlatformIconViewModel(type: .asset(name: iconName, bundle: .dydxView),
-                                            clip: .circle(background: .layer4, spacing: 16),
-                                            size: CGSize(width: 36, height: 36))
+                                            clip: .circle(background: .layer5, spacing: 16, borderColor: .layer6),
+                                            size: CGSize(width: 36, height: 36),
+                                            templateColor: .textPrimary)
         return PlatformButtonViewModel(content: content,
                                        type: .iconType) { [weak self] in
             self?.depositAction?()
@@ -104,8 +106,9 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
     private func createWithdrawButton(parentStyle: ThemeStyle) -> some View {
         let iconName = "icon_transfer_withdrawal"
         let content = PlatformIconViewModel(type: .asset(name: iconName, bundle: .dydxView),
-                                            clip: .circle(background: .layer4, spacing: 16),
-                                            size: CGSize(width: 36, height: 36))
+                                            clip: .circle(background: .layer5, spacing: 16, borderColor: .layer6),
+                                            size: CGSize(width: 36, height: 36),
+                                            templateColor: .textPrimary)
         return PlatformButtonViewModel(content: content,
                                        type: .iconType) { [weak self] in
             self?.withdrawAction?()
@@ -116,8 +119,9 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
     private func createMenuButton(parentStyle: ThemeStyle) -> some View {
         let iconName = "icon_list"
         let content = PlatformIconViewModel(type: .asset(name: iconName, bundle: .dydxView),
-                                            clip: .circle(background: .layer4, spacing: 16),
-                                            size: CGSize(width: 36, height: 36))
+                                            clip: .circle(background: .layer5, spacing: 16, borderColor: .layer6),
+                                            size: CGSize(width: 36, height: 36),
+                                            templateColor: .textPrimary)
         return PlatformButtonViewModel(content: content,
                                 type: .iconType) { [weak self] in
             withAnimation(Animation.easeInOut) {

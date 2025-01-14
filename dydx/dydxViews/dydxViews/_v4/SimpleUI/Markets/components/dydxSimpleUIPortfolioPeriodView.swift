@@ -76,7 +76,7 @@ public class dydxSimpleUIPortfolioPeriodViewModel: PlatformViewModel {
                              .themeColor(foreground: .textPrimary)
                              .padding(.horizontal, 8)
                              .padding(.vertical, 4)
-                             .themeColor(background: .layer4)
+                             .themeColor(background: .layer5)
                              .cornerRadius(7, corners: .allCorners)
                      }
                 })
