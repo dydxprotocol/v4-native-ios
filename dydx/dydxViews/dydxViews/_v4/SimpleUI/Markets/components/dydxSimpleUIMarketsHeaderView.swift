@@ -93,8 +93,7 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
         let iconName = "icon_transfer_deposit"
         let content = PlatformIconViewModel(type: .asset(name: iconName, bundle: .dydxView),
                                             clip: .circle(background: .layer4, spacing: 16),
-                                            size: CGSize(width: 36, height: 36),
-                                            templateColor: .colorPurple)
+                                            size: CGSize(width: 36, height: 36))
         return PlatformButtonViewModel(content: content,
                                        type: .iconType) { [weak self] in
             self?.depositAction?()
@@ -106,8 +105,7 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
         let iconName = "icon_transfer_withdrawal"
         let content = PlatformIconViewModel(type: .asset(name: iconName, bundle: .dydxView),
                                             clip: .circle(background: .layer4, spacing: 16),
-                                            size: CGSize(width: 36, height: 36),
-                                            templateColor: .colorPurple)
+                                            size: CGSize(width: 36, height: 36))
         return PlatformButtonViewModel(content: content,
                                        type: .iconType) { [weak self] in
             self?.withdrawAction?()

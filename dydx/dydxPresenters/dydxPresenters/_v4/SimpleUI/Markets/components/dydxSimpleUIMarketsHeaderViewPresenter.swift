@@ -46,13 +46,13 @@ class dydxSimpleUIMarketsHeaderViewPresenter: HostedViewPresenter<dydxSimpleUIMa
 
         let ethereumAddress = currentWallet?.ethereumAddress ?? ""
         if onboarded {
-            viewModel?.items = [.history, .settings, .help, .signOut(ethereumAddress: ethereumAddress), .switchMode]
+            viewModel?.items = [.transfers, .history, .settings, .help, .signOut(ethereumAddress: ethereumAddress), .switchMode]
             viewModel?.depositAction = {
                 Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.deposit.rawValue]), animated: true, completion: nil)
             }
-            viewModel?.withdrawAction = {
-                Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.withdrawal.rawValue]), animated: true, completion: nil)
-            }
+//            viewModel?.withdrawAction = {
+//                Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.withdrawal.rawValue]), animated: true, completion: nil)
+//            }
         } else {
             viewModel?.items = [.signIn, .settings, .help, .switchMode]
             viewModel?.depositAction = nil
@@ -90,6 +90,12 @@ private extension dydxSimpleUIMarketsHeaderViewModel.MenuItem {
             Router.shared?.navigate(to: RoutingRequest(path: "/portfolio/history",
                                                        params: ["inTabBar": "false"]),
                                     animated: true, completion: nil)
+        }
+
+    static let transfers = dydxSimpleUIMarketsHeaderViewModel.MenuItem(
+        icon: "icon_transfer",
+        title: DataLocalizer.localize(path: "APP.GENERAL.TRANSFER")) {
+            Router.shared?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
         }
 
     static let help = dydxSimpleUIMarketsHeaderViewModel.MenuItem(

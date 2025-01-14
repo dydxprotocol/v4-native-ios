@@ -38,12 +38,14 @@ public protocol dydxSimpleUIMarketsViewPresenterProtocol: HostedViewPresenterPro
 public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIMarketsViewModel>, dydxSimpleUIMarketsViewPresenterProtocol {
 
     private let marketListPresenter = dydxSimpleUIMarketListViewPresenter()
+    private let positionListPresenter = dydxSimpleUIPositionListViewPresenter()
     private let marketSearchPresenter = dydxSimpleUIMarketSearchViewPresenter()
     private let portfolioPresenter = dydxSimpleUIPortfolioViewPresenter()
     private let headerPresenter = dydxSimpleUIMarketsHeaderViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         marketListPresenter,
+        positionListPresenter,
         marketSearchPresenter,
         portfolioPresenter,
         headerPresenter
@@ -53,6 +55,7 @@ public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIM
         let viewModel = dydxSimpleUIMarketsViewModel()
 
         marketListPresenter.$viewModel.assign(to: &viewModel.$marketList)
+        positionListPresenter.$viewModel.assign(to: &viewModel.$positionList)
         marketSearchPresenter.$viewModel.assign(to: &viewModel.$marketSearch)
         portfolioPresenter.$viewModel.assign(to: &viewModel.$portfolio)
         marketSearchPresenter.viewModel?.$searchText.assign(to: &marketListPresenter.$searchText)
@@ -64,5 +67,15 @@ public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIM
         self.viewModel = viewModel
 
         attachChildren(workers: childPresenters)
+    }
+
+    public override func start() {
+        super.start()
+
+        positionListPresenter.viewModel?.$positions
+            .sink { [weak self] positions in
+                self?.viewModel?.hasPosition = positions.isNilOrEmpty == false
+            }
+            .store(in: &subscriptions)
     }
 }

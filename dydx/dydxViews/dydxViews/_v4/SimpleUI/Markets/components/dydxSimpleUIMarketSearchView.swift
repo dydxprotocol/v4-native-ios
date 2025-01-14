@@ -44,7 +44,7 @@ public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
 
                 PlatformInputModel(value: self.searchTextBinding,
                                    currentValue: self.searchText,
-                                   placeHolder: DataLocalizer.localize(path: "APP.GENERAL.SEARCH" + "..."),
+                                   placeHolder: DataLocalizer.localize(path: "APP.GENERAL.SEARCH") + "...",
                                    keyboardType: .default,
                                    onEditingChanged: { [weak self] focused in
                                         self?.focused = focused

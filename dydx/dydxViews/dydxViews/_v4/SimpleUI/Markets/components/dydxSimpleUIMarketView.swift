@@ -20,6 +20,8 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     public let sideText: SideTextViewModel
     public let leverage: Double?
     public let volumn: Double?
+    public let positionTotal: Double?
+    public let positionSize: String?
     public let onMarketSelected: (() -> Void)?
 
     public init(marketId: String,
@@ -30,6 +32,8 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 sideText: SideTextViewModel,
                 leverage: Double?,
                 volumn: Double?,
+                positionTotal: Double?,
+                positionSize: String?,
                 onMarketSelected: (() -> Void)?
     ) {
         self.marketId = marketId
@@ -40,6 +44,8 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
         self.sideText = sideText
         self.leverage = leverage
         self.volumn = volumn
+        self.positionTotal = positionTotal
+        self.positionSize = positionSize
         self.onMarketSelected = onMarketSelected
     }
 
@@ -52,6 +58,8 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                                              sideText: .previewValue,
                                              leverage: 1.34,
                                              volumn: nil,
+                                             positionTotal: 122333,
+                                             positionSize: "$349",
                                              onMarketSelected: nil)
         return vm
     }
@@ -66,7 +74,11 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 HStack(spacing: 20) {
                    HStack(spacing: 12) {
                        self.createIcon(style: style)
-                       self.createNamePosition(style: style)
+                       if self.positionSize != nil {
+                           self.createSideSizeValue(style: style)
+                       } else {
+                           self.createNameVolume(style: style)
+                       }
                    }
                        .leftAligned()
 
@@ -103,20 +115,41 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
             .createView(parentStyle: style)
     }
 
-    private func createNamePosition(style: ThemeStyle) -> some View {
+    private func createSideSizeValue(style: ThemeStyle) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 4) {
+                sideText.createView(parentStyle: style.themeFont(fontSize: .medium))
+                if let positionSize {
+                    Text(positionSize)
+                        .themeColor(foreground: .textPrimary)
+                        .themeFont(fontSize: .medium)
+                    TokenTextViewModel(symbol: assetName)
+                        .createView(parentStyle: style.themeFont(fontSize: .smallest))
+                }
+            }
+
+            let valueString = dydxFormatter.shared.dollar(number: self.positionTotal, digits: 2)
+            Text(valueString ?? "")
+                .themeColor(foreground: .textTertiary)
+                .themeFont(fontSize: .small)
+        }
+    }
+
+    private func createNameVolume(style: ThemeStyle) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(assetName)
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontSize: .medium)
 
             HStack {
-                sideText.createView(parentStyle: style.themeFont(fontSize: .small))
-                if let leverage, leverage != 0, let leverageText = dydxFormatter.shared.raw(number: leverage, digits: 3) {
-                    Text(leverageText)
-                        .themeColor(foreground: .textSecondary)
-                        .themeFont(fontSize: .small)
+                Text(DataLocalizer.localize(path: "APP.TRADE.VOLUME"))
+                    .themeColor(foreground: .textTertiary)
+
+                if let volumeText = dydxFormatter.shared.dollarVolume(number: volumn) {
+                    Text(volumeText)
                 }
             }
+            .themeFont(fontSize: .small)
         }
     }
 

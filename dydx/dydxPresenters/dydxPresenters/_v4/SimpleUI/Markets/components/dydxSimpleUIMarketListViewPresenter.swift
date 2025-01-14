@@ -65,6 +65,9 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                 let position = positions.first { position in
                     position.id == market.id
                 }
+                if position != nil {
+                    return nil
+                }
                 return dydxSimpleUIMarketViewModel.createFrom(market: market, asset: asset, position: position)
             }
             .sorted { lhs, rhs in
@@ -82,7 +85,7 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
     }
 }
 
-private extension dydxSimpleUIMarketViewModel {
+extension dydxSimpleUIMarketViewModel {
     static func createFrom(market: PerpetualMarket, asset: Asset?, position: SubaccountPosition?) -> dydxSimpleUIMarketViewModel {
         let price = dydxFormatter.shared.dollar(number: market.oraclePrice?.doubleValue, digits: market.configs?.displayTickSizeDecimals?.intValue ?? 2)
         let change = SignedAmountViewModel(amount: market.priceChange24HPercent?.doubleValue,
@@ -96,6 +99,9 @@ private extension dydxSimpleUIMarketViewModel {
                 side = SideTextViewModel(side: .short)
             }
         }
+
+        let positionSize = dydxFormatter.shared.localFormatted(number: position?.size.current?.doubleValue, digits: market.configs?.displayStepSizeDecimals?.intValue ?? 1)
+
         return dydxSimpleUIMarketViewModel(marketId: market.id,
                                            assetName: asset?.displayableAssetId ?? market.assetId,
                                            iconUrl: asset?.resources?.imageUrl,
@@ -103,7 +109,9 @@ private extension dydxSimpleUIMarketViewModel {
                                            change: change,
                                            sideText: side,
                                            leverage: position?.leverage.current?.doubleValue,
-                                           volumn: market.perpetual?.volume24HUSDC?.doubleValue,
+                                           volumn: market.perpetual?.volume24H?.doubleValue,
+                                           positionTotal: position?.valueTotal.current?.doubleValue,
+                                           positionSize: positionSize,
                                            onMarketSelected: {
             Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["market": market.id]), animated: true, completion: nil)
         })
