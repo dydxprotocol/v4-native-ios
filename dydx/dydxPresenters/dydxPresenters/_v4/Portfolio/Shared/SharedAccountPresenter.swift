@@ -53,7 +53,7 @@ class SharedAccountPresenter: HostedViewPresenter<SharedAccountViewModel>, Share
 
         if let margin = account?.marginUsage?.current?.doubleValue {
             viewModel?.marginUsageIcon = MarginUsageModel(percent: margin, displayOption: .iconOnly)
-            viewModel?.leverageIcon = LeverageRiskModel(level: LeverageRiskModel.Level(marginUsage: margin), viewSize: 16, displayOption: .iconOnly)
+            viewModel?.leverageIcon = LeverageRiskModel(marginUsage: margin, viewSize: 16, displayOption: .iconOnly)
         }
     }
 }

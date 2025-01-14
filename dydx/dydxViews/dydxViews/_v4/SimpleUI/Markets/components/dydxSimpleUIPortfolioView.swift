@@ -128,15 +128,16 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                     Spacer()
 
                     HStack(alignment: .center, spacing: 8) {
-                        Text(DataLocalizer.localize(path: "APP.TRADE.RISK"))
-                            .themeColor(foreground: .textTertiary)
-                            .themeFont(fontSize: .small)
 
                         if let leverageIcon = sharedAccountViewModel?.leverageIcon {
-                            let leverageIcon = LeverageRiskModel(level: leverageIcon.level,
+                            let leverageText = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
                                                                  viewSize: leverageIcon.viewSize,
-                                                                 displayOption: .iconAndText)
-                            leverageIcon.createView(parentStyle: style)
+                                                                 displayOption: .fullText)
+                            leverageText.createView(parentStyle: style.themeColor(foreground: .textTertiary))
+                            let leveragePercent = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
+                                                                    viewSize: leverageIcon.viewSize,
+                                                                    displayOption: .percent)
+                            leveragePercent.createView(parentStyle: style.themeColor(foreground: .textTertiary))
                         }
                     }
                 }

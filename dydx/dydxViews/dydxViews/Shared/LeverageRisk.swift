@@ -9,6 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import dydxFormatter
 
 public class LeverageRiskModel: PlatformViewModel {
     public enum Level {
@@ -35,6 +36,17 @@ public class LeverageRiskModel: PlatformViewModel {
             }
         }
 
+        public var fullText: String {
+            switch self {
+            case .low:
+                return DataLocalizer.localize(path: "APP.TRADE.LOW_RISK")
+            case .medium:
+                return DataLocalizer.localize(path: "APP.TRADE.MEDIUM_RISK")
+            case .high:
+                return DataLocalizer.localize(path: "APP.TRADE.HIGH_RISK")
+            }
+        }
+
         var imageName: String {
             switch self {
             case .low:
@@ -45,17 +57,45 @@ public class LeverageRiskModel: PlatformViewModel {
                 return "leverage_high"
             }
         }
+
+        public var foregroundColor: ThemeColor.SemanticColor {
+            switch self {
+            case .low:
+                return .colorGreen
+            case .medium:
+                return .colorYellow
+            case .high:
+                return .colorRed
+            }
+        }
+
+        public var backgroundColor: ThemeColor.SemanticColor {
+            switch self {
+            case .low:
+                return .colorGreen
+            case .medium:
+                return .colorYellow
+            case .high:
+                return .colorRed
+            }
+        }
     }
 
     public enum DisplayOption {
-        case iconOnly, iconAndText
+        case iconOnly, iconAndText, fullText, percent
     }
     @Published public var level = Level.low
     @Published public var viewSize = 32
     @Published public var displayOption: DisplayOption = .iconAndText
+    @Published public var marginUsage: Double = 0 {
+        didSet {
+            level = .init(marginUsage: marginUsage)
+        }
+    }
 
-    public init(level: LeverageRiskModel.Level = Level.low, viewSize: Int = 32, displayOption: DisplayOption = .iconAndText) {
-        self.level = level
+    public init(marginUsage: Double, viewSize: Int = 32, displayOption: DisplayOption = .iconAndText) {
+        self.marginUsage = marginUsage
+        self.level = .init(marginUsage: marginUsage)
         self.viewSize = viewSize
         self.displayOption = displayOption
     }
@@ -64,7 +104,7 @@ public class LeverageRiskModel: PlatformViewModel {
 
     public static var previewValue: LeverageRiskModel {
         let vm = LeverageRiskModel()
-        vm.level = .high
+        vm.marginUsage = 0.89
         vm.viewSize = 24
         return vm
     }
@@ -75,15 +115,35 @@ public class LeverageRiskModel: PlatformViewModel {
 
             return AnyView(
                 HStack {
-                    PlatformIconViewModel(type: .asset(name: self.level.imageName, bundle: Bundle.dydxView),
-                                          clip: .noClip,
-                                          size: CGSize(width: self.viewSize, height: self.viewSize))
-                    .createView(parentStyle: style)
-
-                    if self.displayOption == .iconAndText {
-                        Text(self.level.text)
+                    if self.displayOption == .percent {
+                        if let percentText = dydxFormatter.shared.percent(number: self.marginUsage, digits: 0) {
+                            Text(percentText)
+                                .themeFont(fontSize: .smallest)
+                                .themeColor(foreground: self.level.foregroundColor)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 4)
+                                .background(self.level.backgroundColor.color.opacity(0.3))
+                                .cornerRadius(6, corners: .allCorners)
+                                .themeStyle(style: style)
+                                .lineLimit(1)
+                        }
+                    } else if self.displayOption == .fullText {
+                        Text(self.level.fullText)
                             .themeFont(fontSize: .small)
+                            .themeStyle(style: style)
                             .lineLimit(1)
+                    } else {
+                        PlatformIconViewModel(type: .asset(name: self.level.imageName, bundle: Bundle.dydxView),
+                                              clip: .noClip,
+                                              size: CGSize(width: self.viewSize, height: self.viewSize))
+                        .createView(parentStyle: style)
+
+                        if self.displayOption == .iconAndText {
+                            Text(self.level.text)
+                                .themeFont(fontSize: .small)
+                                .themeStyle(style: style)
+                                .lineLimit(1)
+                        }
                     }
                 }
             )
