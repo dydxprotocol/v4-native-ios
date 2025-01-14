@@ -114,27 +114,27 @@ class dydxPortfolioChartViewPresenter: HostedViewPresenter<dydxPortfolioChartVie
     private func updatePNLs(pnls: [SubaccountHistoricalPNL], subaccount: Subaccount, selectedChartEntry: ChartDataEntry?) {
 
         let dataPoints = pnls.compactMap { HistoricalPNLDataPoint(pnl: $0) }
-        if let equity = subaccount.equity?.current?.doubleValue, let totalPnl = subaccount.pnlTotal?.doubleValue {
+        if let equity = subaccount.equity?.current?.doubleValue {
             // Add the current PNL
-             let lastPoint = SubaccountHistoricalPNL(equity: equity, totalPnl: totalPnl, netTransfers: 0, createdAtMilliseconds: Date().timeIntervalSince1970 * 1000)
+             let lastPoint = SubaccountHistoricalPNL(equity: equity, totalPnl: 0, netTransfers: 0, createdAtMilliseconds: Date().timeIntervalSince1970 * 1000)
             listInteractor.list = dataPoints + [HistoricalPNLDataPoint(pnl: lastPoint)]
         } else {
             listInteractor.list = dataPoints
         }
 
-        let firstTotalPnl = pnls.first?.totalPnl
-        let targetTotalPnl: Double?
+        let firstEquity = pnls.first?.equity
+        let targetEquity: Double?
         if let historicalPNL = (selectedChartEntry?.model as? HistoricalPNLDataPoint)?.historicalPNL {
-            targetTotalPnl = historicalPNL.totalPnl
+            targetEquity = historicalPNL.equity
             viewModel?.equity = dydxFormatter.shared.dollar(number: historicalPNL.equity, size: nil)
             viewModel?.equityLabel = Date(milliseconds: historicalPNL.createdAtMilliseconds).localDatetimeString
         } else {
-            targetTotalPnl = pnls.last?.totalPnl
+            targetEquity = subaccount.equity?.current?.doubleValue
             viewModel?.equity = dydxFormatter.shared.dollar(number: subaccount.equity?.current?.doubleValue ?? 0, size: nil)
             viewModel?.equityLabel = DataLocalizer.localize(path: "APP.PORTFOLIO.PORTFOLIO_VALUE")
         }
-        if let firstTotalPnl = firstTotalPnl, let targetTotalPnl = targetTotalPnl {
-            displayChange(from: firstTotalPnl, to: targetTotalPnl, beginning: pnls.first?.equity)
+        if let firstEquity = firstEquity, let targetEquity = targetEquity {
+            displayChange(from: firstEquity, to: targetEquity, beginning: pnls.first?.equity)
         }
     }
 
