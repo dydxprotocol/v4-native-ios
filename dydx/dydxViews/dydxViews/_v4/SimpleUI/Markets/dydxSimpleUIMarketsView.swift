@@ -35,7 +35,12 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let bottomPadding = max((self.safeAreaInsets?.bottom ?? 0), 16)
+            let bottomPadding: CGFloat
+            if keyboardUp {
+                bottomPadding = 16
+            } else {
+                bottomPadding = max((self.safeAreaInsets?.bottom ?? 0), 16)
+            }
 
             let view = VStack(spacing: 8) {
                 ZStack(alignment: .bottom) {
@@ -69,7 +74,6 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                                 self.marketList?.createView(parentStyle: style)
                             }
                         }
-                        .keyboardObserving()
                     }
                     .clipped()      // prevent blending into status bar
 
@@ -89,6 +93,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                         .frame(maxWidth: .infinity)
                         .background(gradient)
                 }
+                .keyboardObserving()
             }
                 .frame(maxWidth: .infinity)
                 .themeColor(background: .layer2)
