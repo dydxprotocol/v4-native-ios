@@ -12,6 +12,7 @@ import RoutingKit
 import ParticlesKit
 import PlatformUI
 import dydxStateManager
+import dydxFormatter
 
 public class dydxProfileViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -41,12 +42,13 @@ private protocol dydxProfileViewPresenterProtocol: HostedViewPresenterProtocol {
 
 private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel>, dydxProfileViewPresenterProtocol {
     private let buttonsPresenter: dydxProfileButtonsViewPresenter
-    private let secondaryButtonsPresenter: dydxProfileSecondaryButtonsViewPresenter
+    private let secondaryButtonsPresenter = dydxProfileSecondaryButtonsViewPresenter()
     private let headerPresenter: dydxProfileHeaderViewPresenter
     private let historyPresenter: dydxProfileHistoryViewPresenter
     private let feesPresenter: dydxProfileFeesViewPresenter
     private let rewardsPresenter: dydxProfileRewardsViewPresenter
     private let balancesPresenter: dydxProfileBalancesViewPresenter
+    private let topButtonsPresenter = dydxProfileTopButtonsViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         buttonsPresenter,
@@ -55,13 +57,13 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
         historyPresenter,
         feesPresenter,
         rewardsPresenter,
-        balancesPresenter
+        balancesPresenter,
+        topButtonsPresenter
     ]
 
     override init() {
         let viewModel = dydxProfileViewModel()
         headerPresenter = .init(viewModel: viewModel.header)
-        secondaryButtonsPresenter = .init(viewModel: viewModel.secondaryButtons)
         buttonsPresenter = .init(viewModel: viewModel.buttons)
         historyPresenter = .init()
         feesPresenter = .init()
@@ -76,6 +78,12 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
         feesPresenter.$viewModel.assign(to: &viewModel.$fees)
         rewardsPresenter.$viewModel.assign(to: &viewModel.$rewards)
         balancesPresenter.$viewModel.assign(to: &viewModel.$balances)
+
+        if dydxBoolFeatureFlag.simple_ui.isEnabled {
+            topButtonsPresenter.$viewModel.assign(to: &viewModel.$topButtons)
+        } else {
+            secondaryButtonsPresenter.$viewModel.assign(to: &viewModel.$secondaryButtons)
+        }
 
         attachChildren(workers: childPresenters)
 

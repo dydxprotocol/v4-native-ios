@@ -118,7 +118,7 @@
                     "text":"Enable Simple UI"
                 },
                 "field":{
-                    "field":"simple_ui",
+                    "field":"ff_simple_ui",
                     "optional":true,
                     "type" : "bool",
                     "options" : [

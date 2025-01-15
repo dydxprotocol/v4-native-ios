@@ -14,12 +14,13 @@ import dydxFormatter
 public class dydxProfileViewModel: PlatformViewModel {
     @Published public var header = dydxProfileHeaderViewModel()
     @Published public var buttons = dydxProfileButtonsViewModel()
-    @Published public var secondaryButtons = dydxProfileSecondaryButtonsViewModel()
+    @Published public var secondaryButtons: dydxProfileSecondaryButtonsViewModel?
     @Published public var history: dydxProfileHistoryViewModel? = dydxProfileHistoryViewModel()
     @Published public var fees: dydxProfileFeesViewModel? = dydxProfileFeesViewModel()
     @Published public var balances: dydxProfileBalancesViewModel? = dydxProfileBalancesViewModel()
     @Published public var rewards: dydxProfileRewardsViewModel? = dydxProfileRewardsViewModel()
     @Published public var share: dydxInlineShareViewModel? = dydxInlineShareViewModel()
+    @Published public var topButtons: dydxProfileTopButtonsViewModel?
 
     public init() { }
 
@@ -35,12 +36,14 @@ public class dydxProfileViewModel: PlatformViewModel {
 
             let view = ScrollView(showsIndicators: false) {
                 VStack(spacing: 16) {
+                    self.topButtons?.createView(parentStyle: style)
+
                     self.header.createView(parentStyle: style)
 
                     self.buttons
                         .createView(parentStyle: style)
 
-                    self.secondaryButtons
+                    self.secondaryButtons?
                         .createView(parentStyle: style)
                         .padding(.top, 8)
 

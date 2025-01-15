@@ -8,7 +8,7 @@
                 "link" : {
                     "text" : "/settings/app_mode"
                 },
-                "featureFlag": "simple_ui",
+                "featureFlag": "ff_simple_ui",
             },
             {
                 "title" : {

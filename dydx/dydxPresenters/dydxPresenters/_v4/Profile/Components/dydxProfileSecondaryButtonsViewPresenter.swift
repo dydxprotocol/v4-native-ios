@@ -21,16 +21,16 @@ protocol dydxProfileSecondaryButtonsViewPresenterProtocol: HostedViewPresenterPr
 
 class dydxProfileSecondaryButtonsViewPresenter: HostedViewPresenter<dydxProfileSecondaryButtonsViewModel>, dydxProfileSecondaryButtonsViewPresenterProtocol {
 
-    init(viewModel: dydxProfileSecondaryButtonsViewModel) {
+    override init() {
         super.init()
 
-        self.viewModel = viewModel
+        viewModel = dydxProfileSecondaryButtonsViewModel()
 
-        viewModel.settingsAction = {
+        viewModel?.settingsAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/settings"), animated: true, completion: nil)
         }
 
-        viewModel.helpAction = {
+        viewModel?.helpAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/help"), animated: true, completion: nil)
         }
     }
