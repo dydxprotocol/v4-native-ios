@@ -56,7 +56,9 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
                 if position == nil {
                     return nil
                 }
-                return dydxSimpleUIMarketViewModel.createFrom(market: market, asset: asset, position: position)
+                return dydxSimpleUIMarketViewModel.createFrom(displayType: .position, market: market, asset: asset, position: position) {
+                    Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["market": market.id]), animated: true, completion: nil)
+                }
             }
             .sorted { lhs, rhs in
                 return (lhs.positionTotal ?? 0) > (rhs.positionTotal ?? 0)

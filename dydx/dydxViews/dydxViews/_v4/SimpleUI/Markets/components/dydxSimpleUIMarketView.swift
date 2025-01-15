@@ -12,6 +12,11 @@ import Utilities
 import dydxFormatter
 
 public class dydxSimpleUIMarketViewModel: PlatformViewModel {
+    public enum DisplayType {
+        case market, position
+    }
+
+    public let displayType: DisplayType
     public let marketId: String
     public let assetName: String
     public let iconUrl: String?
@@ -24,7 +29,8 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     public let positionSize: String?
     public let onMarketSelected: (() -> Void)?
 
-    public init(marketId: String,
+    public init(displayType: DisplayType,
+                marketId: String,
                 assetName: String,
                 iconUrl: String?,
                 price: String?,
@@ -36,6 +42,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 positionSize: String?,
                 onMarketSelected: (() -> Void)?
     ) {
+        self.displayType = displayType
         self.marketId = marketId
         self.assetName = assetName
         self.iconUrl = iconUrl
@@ -50,7 +57,8 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     }
 
     public static var previewValue: dydxSimpleUIMarketViewModel {
-        let vm = dydxSimpleUIMarketViewModel(marketId: "ETH-USD",
+        let vm = dydxSimpleUIMarketViewModel(displayType: .market,
+                                             marketId: "ETH-USD",
                                              assetName: "ETH",
                                              iconUrl: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
                                              price: "50_000",
@@ -74,10 +82,11 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 HStack(spacing: 20) {
                    HStack(spacing: 12) {
                        self.createIcon(style: style)
-                       if self.positionSize != nil {
-                           self.createSideSizeValue(style: style)
-                       } else {
+                       switch self.displayType {
+                       case .market:
                            self.createNameVolume(style: style)
+                       case .position:
+                           self.createSideSizeValue(style: style)
                        }
                    }
                        .leftAligned()

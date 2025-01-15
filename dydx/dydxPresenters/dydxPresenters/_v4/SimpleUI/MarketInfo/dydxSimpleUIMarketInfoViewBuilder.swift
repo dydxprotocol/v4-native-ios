@@ -83,12 +83,6 @@ private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpl
         attachChildren(workers: childPresenters)
     }
 
-    override func start() {
-        super.start()
-
-        floatTradeInput()
-    }
-
     private func floatTradeInput() {
         if shouldDisplayFullTradeInputOnAppear {
             Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["full": "true", "market": marketId ?? ""]), animated: true, completion: nil)

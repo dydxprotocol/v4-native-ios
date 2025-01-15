@@ -24,9 +24,9 @@ public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
         return vm
     }
 
-    private let dummyNoMarket = dydxSimpleUIMarketViewModel(marketId: "_dummy_no_market", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, positionTotal: nil, positionSize: nil, onMarketSelected: nil)
+    private let dummyNoMarket = dydxSimpleUIMarketViewModel(displayType: .market, marketId: "_dummy_no_market", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, positionTotal: nil, positionSize: nil, onMarketSelected: nil)
 
-    private let dummyLoading = dydxSimpleUIMarketViewModel(marketId: "_dummy_loading", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, positionTotal: nil, positionSize: nil, onMarketSelected: nil)
+    private let dummyLoading = dydxSimpleUIMarketViewModel(displayType: .market, marketId: "_dummy_loading", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, positionTotal: nil, positionSize: nil, onMarketSelected: nil)
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in

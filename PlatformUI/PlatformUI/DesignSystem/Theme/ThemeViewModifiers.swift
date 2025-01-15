@@ -204,6 +204,14 @@ public extension View {
     }
 }
 
+public func dragIndicator(topPadding: CGFloat = 18) -> some View {
+    Rectangle()
+        .themeColor(background: .layer1)
+        .frame(width: 36, height: 4)
+        .clipShape(Capsule())
+        .padding(.top, topPadding)
+}
+
 private struct SheetViewModifier: ViewModifier {
     let topPadding: CGFloat = 18
     let sheetStyle: MakeSheetStyle
@@ -211,11 +219,7 @@ private struct SheetViewModifier: ViewModifier {
     @EnvironmentObject var themeSettings: ThemeSettings
 
     func body(content: Content) -> some View {
-        let dragIndicator = Rectangle()
-            .themeColor(background: .layer1)
-            .frame(width: 36, height: 4)
-            .clipShape(Capsule())
-            .padding(.top, topPadding)
+        let dragIndicator = dragIndicator(topPadding: topPadding)
 
         switch sheetStyle {
         case .fullScreen:

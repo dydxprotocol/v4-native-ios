@@ -20,11 +20,16 @@ private var cachedPresenter: dydxMarketsSearchViewPresenter?
 
 public class dydxMarketsSearchViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        let presenter = cachedPresenter ?? dydxMarketsSearchViewPresenter()
-        cachedPresenter = presenter
-        let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        let configuration = HostingViewControllerConfiguration(fixedHeight: UIScreen.main.bounds.height)
-        return dydxMarketsSearchViewController(presenter: presenter, view: view, configuration: configuration) as? T
+        if dydxBoolFeatureFlag.simple_ui.isEnabled, AppMode.current == .simple {
+            let viewController: dydxSimpleUIMarketSearchViewController? = dydxSimpleUIMarketSearchViewBuilder().build()
+            return viewController as? T
+        } else {
+            let presenter = cachedPresenter ?? dydxMarketsSearchViewPresenter()
+            cachedPresenter = presenter
+            let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
+            let configuration = HostingViewControllerConfiguration(fixedHeight: UIScreen.main.bounds.height)
+            return dydxMarketsSearchViewController(presenter: presenter, view: view, configuration: configuration) as? T
+        }
     }
 }
 

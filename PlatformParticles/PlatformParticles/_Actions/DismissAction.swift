@@ -30,7 +30,7 @@ private class DismissAction: NSObject, NavigableProtocol {
                viewController?.navigationController?.viewControllers.count ?? 0 > 1 {
                 viewController?.navigationController?.popViewController(animated: animated)
             } else if viewController?.presentingViewController !== nil {
-                viewController?.dismiss(animated: true, completion: {
+                viewController?.dismiss(animated: animated, completion: {
                     completion?(nil, true)
                 })
             } else if viewController?.floatingParent !== nil {

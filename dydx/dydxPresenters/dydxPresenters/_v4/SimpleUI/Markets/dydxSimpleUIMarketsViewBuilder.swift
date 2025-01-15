@@ -37,16 +37,14 @@ public protocol dydxSimpleUIMarketsViewPresenterProtocol: HostedViewPresenterPro
 
 public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIMarketsViewModel>, dydxSimpleUIMarketsViewPresenterProtocol {
 
-    private let marketListPresenter = dydxSimpleUIMarketListViewPresenter()
+    private let marketListPresenter = dydxSimpleUIMarketListViewPresenter(excludePositions: true)
     private let positionListPresenter = dydxSimpleUIPositionListViewPresenter()
-    private let marketSearchPresenter = dydxSimpleUIMarketSearchViewPresenter()
     private let portfolioPresenter = dydxSimpleUIPortfolioViewPresenter()
     private let headerPresenter = dydxSimpleUIMarketsHeaderViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         marketListPresenter,
         positionListPresenter,
-        marketSearchPresenter,
         portfolioPresenter,
         headerPresenter
     ]
@@ -56,15 +54,22 @@ public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIM
 
         marketListPresenter.$viewModel.assign(to: &viewModel.$marketList)
         positionListPresenter.$viewModel.assign(to: &viewModel.$positionList)
-        marketSearchPresenter.$viewModel.assign(to: &viewModel.$marketSearch)
         portfolioPresenter.$viewModel.assign(to: &viewModel.$portfolio)
-        marketSearchPresenter.viewModel?.$searchText.assign(to: &marketListPresenter.$searchText)
-        marketSearchPresenter.viewModel?.$focused.assign(to: &viewModel.$keyboardUp)
         headerPresenter.$viewModel.assign(to: &viewModel.$header)
 
         super.init()
 
         self.viewModel = viewModel
+
+        viewModel.searchAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/markets/search"),
+                                    animated: true,
+                                    completion: nil)
+        }
+
+        marketListPresenter.onMarketSelected = { marketId in
+            Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["market": marketId]), animated: true, completion: nil)
+        }
 
         attachChildren(workers: childPresenters)
     }

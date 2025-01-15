@@ -108,7 +108,7 @@
                 },
                 "/markets/search":{
                     "destination":"dydxPresenters.dydxMarketsSearchViewBuilder",
-                    "presentation":"half"
+                    "presentation":"prompt"
                 },
                 "/market/:market":{
                     "destination":"dydxPresenters.dydxMarketInfoViewBuilder",

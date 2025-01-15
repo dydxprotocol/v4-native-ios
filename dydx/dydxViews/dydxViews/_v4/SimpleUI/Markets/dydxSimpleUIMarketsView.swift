@@ -13,11 +13,22 @@ import Utilities
 public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
     @Published public var marketList: dydxSimpleUIMarketListViewModel?
     @Published public var positionList: dydxSimpleUIPositionListViewModel?
-    @Published public var marketSearch: dydxSimpleUIMarketSearchViewModel?
     @Published public var keyboardUp: Bool = false
     @Published public var portfolio: dydxSimpleUIPortfolioViewModel?
     @Published public var header: dydxSimpleUIMarketsHeaderViewModel?
     @Published public var hasPosition: Bool = false
+
+    @Published public var searchText: String = ""
+    private lazy var searchTextBinding = Binding(
+        get: {
+            self.searchText
+        },
+        set: {
+            self.searchText = $0
+        }
+    )
+
+    @Published public var searchAction: (() -> Void)?
 
     public init() { }
 
@@ -25,7 +36,6 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
         let vm = dydxSimpleUIMarketsViewModel()
         vm.marketList = .previewValue
         vm.positionList = .previewValue
-        vm.marketSearch = .previewValue
         vm.portfolio = .previewValue
         vm.header = .previewValue
         return vm
@@ -77,21 +87,15 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                     }
                     .clipped()      // prevent blending into status bar
 
-                    let blendedColor = Color(UIColor.blend(color1: UIColor.clear,
-                                                           intensity1: 0.05,
-                                                           color2: UIColor.clear,
-                                                           intensity2: 0.95))
-                    let gradient = LinearGradient(
-                        gradient: Gradient(colors: [
-                            ThemeColor.SemanticColor.layer2.color,
-                            blendedColor]),
-                        startPoint: .bottom, endPoint: .top)
-
-                    self.marketSearch?.createView(parentStyle: style)
+                    SearchBoxModel(searchText: "", focusedOnAppear: false, enabled: false)
+                        .createView(parentStyle: style)
+                        .onTapGesture { [weak self]  in
+                            self?.searchAction?()
+                        }
                         .padding(.top, 32)
                         .padding(.bottom, bottomPadding)
                         .frame(maxWidth: .infinity)
-                        .background(gradient)
+                        .background(SearchBoxModel.bottomBlendGradiant)
                 }
                 .keyboardObserving()
             }

@@ -193,7 +193,7 @@ open class MappedUIKitRouter: MappedRouter {
             if completed {
                 completion?(object, true)
             } else {
-                self?.route(xib: map, request: request, completion: completion)
+                self?.route(xib: map, request: request, animated: animated, completion: completion)
             }
         }
     }
@@ -458,12 +458,12 @@ open class MappedUIKitRouter: MappedRouter {
         }
     }
 
-    private func route(xib map: RoutingMap, request: RoutingRequest, completion: RoutingCompletionBlock?) {
+    private func route(xib map: RoutingMap, request: RoutingRequest, animated: Bool, completion: RoutingCompletionBlock?) {
         loadAction(from: map) { [weak self] action in
             if let action = action {
                 self?.actions.append(action)
                 weak var actionReference = action
-                action.navigate(to: request, animated: true) { data, success in
+                action.navigate(to: request, animated: animated) { data, success in
                     self?.actions.removeAll(where: { (actionInList) -> Bool in
                         actionReference === actionInList
                     })
