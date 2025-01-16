@@ -17,7 +17,6 @@ protocol dydxSimpleUIMarketInfoHeaderViewPresenterProtocol: HostedViewPresenterP
 }
 
 class dydxSimpleUIMarketInfoHeaderViewPresenter: HostedViewPresenter<dydxSimpleUIMarketInfoHeaderViewModel>, dydxSimpleUIMarketInfoHeaderViewPresenterProtocol {
-
     @Published var marketId: String?
 
     private let marketPresenter = SharedMarketPresenter()

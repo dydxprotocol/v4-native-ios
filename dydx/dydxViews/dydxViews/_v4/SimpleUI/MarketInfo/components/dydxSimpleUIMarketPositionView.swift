@@ -23,6 +23,10 @@ public class dydxSimpleUIMarketPositionViewModel: PlatformViewModel {
     @Published public var liquidationPrice: String?
     @Published public var symbol: String?
 
+    @Published public var takeProfitStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
+    @Published public var stopLossStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
+    @Published public var takeProfitStopLossAction: (() -> Void)?
+
     public init() { }
 
     public static var previewValue: dydxSimpleUIMarketPositionViewModel {
@@ -55,19 +59,17 @@ public class dydxSimpleUIMarketPositionViewModel: PlatformViewModel {
 
     private func createContent(style: ThemeStyle) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            DividerModel().createView(parentStyle: style)
-
             HStack {
                 let amountHeader = HStack {
                     Text(DataLocalizer.localize(path: "APP.GENERAL.SIZE"))
                         .themeFont(fontType: .plus, fontSize: .small)
                         .themeColor(foreground: .textTertiary)
                     TokenTextViewModel(symbol: symbol ?? "-")
-                        .createView(parentStyle: style.themeFont(fontSize: .smaller))
+                        .createView(parentStyle: style.themeFont(fontSize: .smallest))
                 }
-                createCollectionItem(parentStyle: style,
-                                     titleViewModel: amountHeader.wrappedViewModel,
-                                     value: size)
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: amountHeader.wrappedViewModel,
+                                                        value: size)
                 .frame(minWidth: 0, maxWidth: .infinity)
 
                 let sizeHeader = HStack {
@@ -75,119 +77,120 @@ public class dydxSimpleUIMarketPositionViewModel: PlatformViewModel {
                         .themeFont(fontType: .plus, fontSize: .small)
                         .themeColor(foreground: .textTertiary)
                     TokenTextViewModel(symbol: "USD")
-                        .createView(parentStyle: style.themeFont(fontSize: .smaller))
+                        .createView(parentStyle: style.themeFont(fontSize: .smallest))
                 }
-                createCollectionItem(parentStyle: style,
-                                     titleViewModel: sizeHeader.wrappedViewModel,
-                                     value: amount)
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: sizeHeader.wrappedViewModel,
+                                                        value: amount)
                 .frame(minWidth: 0, maxWidth: .infinity)
 
-                createCollectionItem(parentStyle: style,
-                                     title: DataLocalizer.localize(path: "APP.SHARE_ACTIVITY_MODAL.PROFIT"),
-                                     valueViewModel: unrealizedPNLAmount)
+                let profitHeader = HStack {
+                    Text(DataLocalizer.localize(path: "APP.SHARE_ACTIVITY_MODAL.PROFIT"))
+                        .themeFont(fontType: .plus, fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
+                    TokenTextViewModel(symbol: "USD")
+                        .createView(parentStyle: style.themeFont(fontSize: .smallest))
+                }
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: profitHeader.wrappedViewModel,
+                                                        valueViewModel: unrealizedPNLAmount)
                 .frame(minWidth: 0, maxWidth: .infinity)
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 16)
-
-            DividerModel().createView(parentStyle: style)
 
             HStack {
-                createCollectionItem(parentStyle: style,
-                                     title: DataLocalizer.localize(path: "APP.GENERAL.FUNDING_RATE_CHART_SHORT"),
-                                     valueViewModel: funding)
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        title: DataLocalizer.localize(path: "APP.GENERAL.FUNDING_RATE_CHART_SHORT"),
+                                                        valueViewModel: funding)
                 .frame(minWidth: 0, maxWidth: .infinity)
 
-                createCollectionItem(parentStyle: style,
-                                     title: DataLocalizer.localize(path: "APP.GENERAL.AVG_ENTRY"),
-                                     value: entryPrice)
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        title: DataLocalizer.localize(path: "APP.GENERAL.AVG_ENTRY"),
+                                                        value: entryPrice)
                 .frame(minWidth: 0, maxWidth: .infinity)
 
-                createCollectionItem(parentStyle: style,
-                                     title: DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE_SHORT"),
-                                     value: liquidationPrice)
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        title: DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE_SHORT"),
+                                                        value: liquidationPrice)
                 .frame(minWidth: 0, maxWidth: .infinity)
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 16)
 
-            DividerModel().createView(parentStyle: style)
-
+            self.createTpSlButtons(parentStyle: style)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 16)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
     }
 
-    private func createCollectionItem(parentStyle: ThemeStyle, title: String?, valueViewModel: PlatformViewModel?) -> some View {
-        let titleViewModel = Text(title ?? "")
-            .themeFont(fontType: .plus, fontSize: .small)
-            .themeColor(foreground: .textTertiary)
-            .wrappedViewModel
-        return createCollectionItem(parentStyle: parentStyle, titleViewModel: titleViewModel, valueViewModel: valueViewModel)
-    }
-
-    private func createCollectionItem(parentStyle: ThemeStyle, titleViewModel: PlatformViewModel?, value: String?) -> some View {
-        let valueViewModel = Text(value ?? "-")
-            .themeFont(fontSize: .large)
-            .themeColor(foreground: .textSecondary)
-            .lineLimit(1)
-            .minimumScaleFactor(0.5)
-           // .fixedSize(horizontal: true, vertical: false)
-            .leftAligned()
-            .wrappedViewModel
-        return createCollectionItem(parentStyle: parentStyle, titleViewModel: titleViewModel, valueViewModel: valueViewModel)
-    }
-
-    private func createCollectionItem(parentStyle: ThemeStyle, title: String?, value: String?) -> some View {
-        let titleViewModel = Text(title ?? "")
-            .themeFont(fontType: .plus, fontSize: .small)
-            .themeColor(foreground: .textTertiary)
-            .wrappedViewModel
-        let valueViewModel = Text(value ?? "-")
-            .themeFont(fontSize: .large)
-            .themeColor(foreground: .textSecondary)
-            .lineLimit(1)
-            .minimumScaleFactor(0.5)
-          //  .fixedSize(horizontal: true, vertical: false)
-            .leftAligned()
-            .wrappedViewModel
-        return createCollectionItem(parentStyle: parentStyle, titleViewModel: titleViewModel, valueViewModel: valueViewModel)
-    }
-
-    private func createCollectionItem(parentStyle: ThemeStyle, titleViewModel: PlatformViewModel?, valueViewModel: PlatformViewModel?) -> some View {
-        VStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 8) {
-                titleViewModel?.createView(parentStyle: parentStyle)
-                valueViewModel?.createView(parentStyle: parentStyle, styleKey: nil)
-            }
-            Spacer()
-        }
-        .leftAligned()
-    }
-
     private func createHeader(style: ThemeStyle) -> some View {
         VStack {
-            HStack {
+            HStack(alignment: .center) {
                 Text(DataLocalizer.localize(path: "APP.GENERAL.POSITION"))
-                    .themeFont(fontType: .plus, fontSize: .largest)
+                    .themeFont(fontType: .plus, fontSize: .large)
+                    .themeColor(foreground: .textPrimary)
                     .padding(.leading, 16)
 
-                self.side?.createView(parentStyle: style)
+                DividerModel().createView(parentStyle: style)
+
+                self.side?.createView(parentStyle: style.themeFont(fontSize: .small))
 
                 Spacer()
 
-                Button(action: self.closeAction ?? {}) {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.CLOSE"))
-                        .themeColor(foreground: .colorRed)
-                }
-                .buttonStyle(BorderlessButtonStyle())
-                .padding([.bottom, .top], 4)
-                .padding([.leading, .trailing], 12)
-                .themeColor(background: .colorFadedRed)
-                .clipShape(Capsule())
+                let content = Text(DataLocalizer.localize(path: "APP.TRADE.CLOSE_POSITION"))
+                    .themeColor(foreground: .colorRed)
+                    .themeFont(fontSize: .small)
+                    .wrappedViewModel
+
+                PlatformButtonViewModel(content: content, type: .pill, state: .secondary, action: { [weak self] in
+                    self?.closeAction?()
+                })
+                    .createView(parentStyle: style)
             }
             .padding(.trailing, 16)
 
             Spacer(minLength: 24)
+        }
+    }
+
+    private func createTpSlButtons(parentStyle: ThemeStyle) -> some View {
+        var addTakeProfitStopLossButton: AnyView?
+
+        if let takeProfitStopLossAction = self.takeProfitStopLossAction {
+            let content = AnyView(
+                HStack {
+                    Spacer()
+                    Text(DataLocalizer.localize(path: "APP.TRADE.ADD_TP_SL"))
+                        .themeFont(fontSize: .medium)
+                        .themeColor(foreground: .textSecondary)
+                    Spacer()
+                }
+            )
+
+            addTakeProfitStopLossButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+                takeProfitStopLossAction()
+            }
+            .createView(parentStyle: parentStyle)
+            .wrappedInAnyView()
+        }
+
+        return VStack(spacing: 10) {
+            if takeProfitStatusViewModel != nil || stopLossStatusViewModel != nil {
+                HStack(spacing: 10) {
+                    Group {
+                        takeProfitStatusViewModel?.createView(parentStyle: parentStyle)
+                            .frame(maxWidth: .infinity)
+                        stopLossStatusViewModel?.createView(parentStyle: parentStyle)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .frame(maxHeight: .infinity)
+                }
+            } else {
+                addTakeProfitStopLossButton
+                    .frame(maxWidth: .infinity)
+            }
         }
     }
 }

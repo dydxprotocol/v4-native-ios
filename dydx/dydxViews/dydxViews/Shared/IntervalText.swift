@@ -12,7 +12,7 @@ import Utilities
 import Combine
 import dydxFormatter
 
-public class IntervalTextModel: PlatformViewModel {
+public class IntervalTextModel: PlatformViewModel, Equatable {
     public enum Direction {
         case countDown, countUp, countDownToHour
     }
@@ -27,6 +27,12 @@ public class IntervalTextModel: PlatformViewModel {
     private var cancellable = [AnyCancellable]()
 
     @Published private var dateText: String?
+
+    public static func == (lhs: IntervalTextModel, rhs: IntervalTextModel) -> Bool {
+        lhs.date == rhs.date &&
+        lhs.direction == rhs.direction &&
+        lhs.format == rhs.format
+    }
 
     public init(date: Date?, direction: Direction = .countUp, format: Format = .short) {
         self.date = date

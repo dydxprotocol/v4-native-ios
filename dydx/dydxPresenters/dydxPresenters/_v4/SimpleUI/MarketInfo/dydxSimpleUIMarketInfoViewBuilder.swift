@@ -45,18 +45,14 @@ private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpl
 
     private let headerPresenter = dydxSimpleUIMarketInfoHeaderViewPresenter()
     private let chartPresenter = dydxSimpleUIMarketCandlesViewPresenter()
-    private let statsPresenter = dydxMarketStatsViewPresenter()
-    private let configsPresenter = dydxMarketConfigsViewPresenter()
-    private let sharedMarketPresenter = SharedMarketPresenter()
     private let positionPresenter = dydxSimpleUIMarketPositionViewPresenter()
+    private let detailsPresenter = dydxSimpleUIMarketDetailsViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         headerPresenter,
         chartPresenter,
-        statsPresenter,
-        configsPresenter,
-        sharedMarketPresenter,
-        positionPresenter
+        positionPresenter,
+        detailsPresenter
     ]
 
     override init() {
@@ -64,9 +60,7 @@ private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpl
 
         headerPresenter.$viewModel.assign(to: &viewModel.$header)
         chartPresenter.$viewModel.assign(to: &viewModel.$chart)
-        statsPresenter.$viewModel.assign(to: &viewModel.$stats)
-        configsPresenter.$viewModel.assign(to: &viewModel.$configs)
-        sharedMarketPresenter.$viewModel.assign(to: &viewModel.resources.$sharedMarketViewModel)
+        detailsPresenter.$viewModel.assign(to: &viewModel.$details)
         positionPresenter.$viewModel.assign(to: &viewModel.$position)
 
         super.init()
@@ -75,10 +69,14 @@ private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpl
 
         $marketId.assign(to: &headerPresenter.$marketId)
         $marketId.assign(to: &chartPresenter.$marketId)
-        $marketId.assign(to: &statsPresenter.$marketId)
-        $marketId.assign(to: &configsPresenter.$marketId)
-        $marketId.assign(to: &sharedMarketPresenter.$marketId)
+        $marketId.assign(to: &detailsPresenter.$marketId)
         $marketId.assign(to: &positionPresenter.$marketId)
+
+        // To force the list header to update (might be a bug in SwiftUI)
+        detailsPresenter.onContentChanged = { [weak self] market in
+            self?.viewModel?.details = dydxSimpleUIMarketDetailsViewModel()
+            self?.viewModel?.details?.sharedMarketViewModel = market
+        }
 
         attachChildren(workers: childPresenters)
     }

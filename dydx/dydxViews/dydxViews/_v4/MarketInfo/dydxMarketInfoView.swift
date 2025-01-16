@@ -151,8 +151,8 @@ public class dydxMarketInfoViewModel: PlatformViewModel {
 }
 
 extension View {
-    func sectionHeader(path: String) -> some View {
-        self.modifier(SectionModifier(localizedStringPath: path))
+    func sectionHeader(path: String, style: ThemeStyle = .defaultStyle) -> some View {
+        self.modifier(SectionModifier(localizedStringPath: path, style: style))
     }
 
     func sectionHeader(header: @escaping (() -> some View)) -> some View {
@@ -161,7 +161,8 @@ extension View {
 }
 
 private struct SectionModifier: ViewModifier {
-    var localizedStringPath: String?
+    let localizedStringPath: String?
+    let style: ThemeStyle
 
     func body(content: Content) -> some View {
         Section {
@@ -174,6 +175,7 @@ private struct SectionModifier: ViewModifier {
                 VStack(alignment: .leading) {
                     HStack {
                         Text(DataLocalizer.localize(path: localizedStringPath))
+                            .themeStyle(style: style)
                             .themeFont(fontType: .plus, fontSize: .largest)
                             .padding(.leading, 16)
                         Spacer()

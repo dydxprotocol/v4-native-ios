@@ -67,12 +67,12 @@ public class dydxSimpleUIMarketInfoHeaderViewModel: PlatformViewModel {
 
     private func createNameVolume(style: ThemeStyle) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(sharedMarketViewModel?.assetName ?? "")
+            Text(sharedMarketViewModel?.assetId ?? "")
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontSize: .medium)
 
             HStack {
-                Text(DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS._24H"))
+                Text(DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS._24H_VOLUME"))
                     .themeColor(foreground: .textTertiary)
 
                 Text(sharedMarketViewModel?.volume24H ?? "")

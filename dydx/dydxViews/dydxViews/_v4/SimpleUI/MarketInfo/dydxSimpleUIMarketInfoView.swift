@@ -13,10 +13,8 @@ import Utilities
 public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
     @Published public var header: dydxSimpleUIMarketInfoHeaderViewModel?
     @Published public var chart: dydxSimpleUIMarketCandlesViewModel?
-    @Published public var stats: dydxMarketStatsViewModel? = dydxMarketStatsViewModel()
-    @Published public var resources: dydxMarketResourcesViewModel = dydxMarketResourcesViewModel()
-    @Published public var configs: dydxMarketConfigsViewModel? = dydxMarketConfigsViewModel()
     @Published public var position: dydxSimpleUIMarketPositionViewModel?
+    @Published public var details: dydxSimpleUIMarketDetailsViewModel?
 
     public init() { }
 
@@ -25,9 +23,7 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
         vm.header = .previewValue
         vm.chart = .previewValue
         vm.position = .previewValue
-        vm.stats = .previewValue
-        vm.resources = .previewValue
-        vm.configs = .previewValue
+        vm.details = .previewValue
         return vm
     }
 
@@ -45,13 +41,7 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
 
                         self.position?.createView(parentStyle: style)
 
-                        self.stats?.createView(parentStyle: style)
-                            .sectionHeader(path: "APP.GENERAL.STATISTICS")
-
-                        self.resources.createView(parentStyle: style)
-                            .sectionHeader(path: "APP.GENERAL.DETAILS")
-
-                        self.configs?.createView(parentStyle: style)
+                        self.details?.createView(parentStyle: style)
 
                         // for tab bar scroll adjstment overlap
                         Spacer(minLength: 128)

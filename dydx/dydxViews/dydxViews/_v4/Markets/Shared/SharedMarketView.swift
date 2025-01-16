@@ -23,6 +23,9 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
     @Published public var websiteUrl: URL?
     @Published public var coinMarketPlaceUrl: URL?
 
+    @Published public var openInterest: String?
+    @Published public var nextFunding: IntervalTextModel?
+
     public init() { }
 
     public static var previewValue: SharedMarketViewModel = {
@@ -40,6 +43,9 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
         vm.whitepaperUrl = URL(string: "https://www.getmonero.org/resources/research-lab/")
         vm.coinMarketPlaceUrl = URL(string: "https://coinmarketcap.com/currencies/monero/")
 
+        vm.openInterest = "$222.5M"
+        vm.nextFunding = .previewValue
+
         return vm
     }()
 
@@ -55,6 +61,8 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
         lhs.secondaryDescription == rhs.secondaryDescription &&
         lhs.websiteUrl == rhs.websiteUrl &&
         lhs.whitepaperUrl == rhs.whitepaperUrl &&
-        lhs.coinMarketPlaceUrl == rhs.coinMarketPlaceUrl
+        lhs.coinMarketPlaceUrl == rhs.coinMarketPlaceUrl &&
+        lhs.openInterest == rhs.openInterest &&
+        lhs.nextFunding == rhs.nextFunding
     }
 }
