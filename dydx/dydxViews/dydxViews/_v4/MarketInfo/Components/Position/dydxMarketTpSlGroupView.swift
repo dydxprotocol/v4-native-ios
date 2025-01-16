@@ -10,71 +10,62 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-/*
-// Move the builder code to the dydxPresenters module for v4, or dydxUI modules for v3
- 
-import Utilities
-import dydxViews
-import PlatformParticles
-import RoutingKit
-import ParticlesKit
-import PlatformUI
-
-public class dydxMarketTpSlGroupViewBuilder: NSObject, ObjectBuilderProtocol {
-    public func build<T>() -> T? {
-        let presenter = dydxMarketTpSlGroupViewPresenter()
-        let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxMarketTpSlGroupViewController(presenter: presenter, view: view, configuration: .default) as? T
-        // return HostingViewController(presenter: presenter, view: view) as? T
-    }
-}
-
-private class dydxMarketTpSlGroupViewController: HostingViewController<PlatformView, dydxMarketTpSlGroupViewModel> {
-    override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if request?.path == "<Replace>" {
-            return true
-        }
-        return false
-    }
-}
- 
-private protocol dydxMarketTpSlGroupViewPresenterProtocol: HostedViewPresenterProtocol {
-    var viewModel: dydxMarketTpSlGroupViewModel? { get }
-}
-
-private class dydxMarketTpSlGroupViewPresenter: HostedViewPresenter<dydxMarketTpSlGroupViewModel>, dydxMarketTpSlGroupViewPresenterProtocol {
-    override init() {
-        super.init()
-
-        viewModel = dydxMarketTpSlGroupViewModel()
-    }
-
-    override func start() {
-        super.start()
-
-        /* Add observation and update viewModel */
-    }
-}
-*/
-
 public class dydxMarketTpSlGroupViewModel: PlatformViewModel {
-    @Published public var text: String?
+    @Published public var takeProfitStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
+    @Published public var stopLossStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
+    @Published public var takeProfitStopLossAction: (() -> Void)?
 
     public init() { }
 
     public static var previewValue: dydxMarketTpSlGroupViewModel {
         let vm = dydxMarketTpSlGroupViewModel()
-        vm.text = "Test String"
+        vm.takeProfitStatusViewModel = .previewValue
+        vm.stopLossStatusViewModel = .previewValue
         return vm
     }
-    
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            return AnyView(
-                Text(self.text ?? "")
-            )
+            var addTakeProfitStopLossButton: AnyView?
+
+            if let takeProfitStopLossAction = self.takeProfitStopLossAction {
+                let content = AnyView(
+                    HStack {
+                        Spacer()
+                        Text(DataLocalizer.localize(path: "APP.TRADE.ADD_TP_SL"))
+                            .themeFont(fontSize: .medium)
+                            .themeColor(foreground: .textSecondary)
+                        Spacer()
+                    }
+                )
+
+                addTakeProfitStopLossButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+                    takeProfitStopLossAction()
+                }
+                .createView(parentStyle: parentStyle)
+                .wrappedInAnyView()
+            }
+
+            let view =  HStack(spacing: 10) {
+                if self.takeProfitStatusViewModel != nil || self.stopLossStatusViewModel != nil {
+                    HStack(spacing: 10) {
+                        Group {
+                            self.takeProfitStatusViewModel?.createView(parentStyle: parentStyle)
+                                .frame(maxWidth: .infinity)
+                            self.stopLossStatusViewModel?.createView(parentStyle: parentStyle)
+                                .frame(maxWidth: .infinity)
+                        }
+                        .frame(maxHeight: .infinity)
+                    }
+                } else {
+                    addTakeProfitStopLossButton
+                        .frame(maxWidth: .infinity)
+                }
+            }
+
+            return AnyView(view)
         }
     }
 }
@@ -110,4 +101,3 @@ struct dydxMarketTpSlGroupView_Previews_Light: PreviewProvider {
     }
 }
 #endif
-

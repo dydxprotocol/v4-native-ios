@@ -21,8 +21,18 @@ protocol dydxMarketPositionViewPresenterProtocol: HostedViewPresenterProtocol {
 }
 
 class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionViewModel>, dydxMarketPositionViewPresenterProtocol {
-    @Published var position: SubaccountPosition?
+    @Published var position: SubaccountPosition? {
+        didSet {
+            tpSlPresenter.position = position
+        }
+    }
     @Published var pendingPosition: SubaccountPendingPosition?
+
+    private let tpSlPresenter = dydxMarketTpSlGroupViewPresenter()
+
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        tpSlPresenter
+    ]
 
     init(viewModel: dydxMarketPositionViewModel?) {
         super.init()
@@ -34,10 +44,18 @@ class dydxMarketPositionViewPresenter: HostedViewPresenter<dydxMarketPositionVie
                 Router.shared?.navigate(to: RoutingRequest(path: "/trade/close", params: ["marketId": "\(marketId)"]), animated: true, completion: nil)
             }
         }
+
+        attachChildren(workers: childPresenters)
     }
 
     override func start() {
         super.start()
+
+        tpSlPresenter.$viewModel
+            .sink { [weak self] tpSlGroupViewModel in
+                self?.viewModel?.tpSlGroupViewModel = tpSlGroupViewModel
+            }
+            .store(in: &subscriptions)
 
         Publishers
             .CombineLatest3($pendingPosition,

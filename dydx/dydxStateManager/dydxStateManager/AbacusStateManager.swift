@@ -309,6 +309,14 @@ public final class AbacusStateManager: NSObject {
         }
     }
 
+    public func resetTriggerOrders() {
+        for field in TriggerOrdersInputField.entries {
+            if field != .marketid {
+                asyncStateManager.triggerOrders(data: nil, type: field)
+            }
+        }
+    }
+
     public func triggerOrders(input: String?, type: TriggerOrdersInputField?) {
         asyncStateManager.triggerOrders(data: input, type: type)
     }

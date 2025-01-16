@@ -265,7 +265,7 @@ public final class AbacusState {
                 )
             .compactMap { (position: SubaccountPosition?, orders: [SubaccountOrder]) in
                 orders.filter { order in
-                    guard let side = position?.side.current else { return false }
+                    guard let side = position?.side.current, order.marketId == marketId else { return false }
                     return (
                         order.type == OrderType.takeprofitmarket ||
                         (order.type == OrderType.takeprofitlimit && includeLimitOrders)
@@ -285,7 +285,7 @@ public final class AbacusState {
                 )
             .compactMap { (position: SubaccountPosition?, orders: [SubaccountOrder]) in
                 orders.filter { order in
-                    guard let side = position?.side.current else { return false }
+                    guard let side = position?.side.current, order.marketId == marketId else { return false }
                     return (
                         order.type == OrderType.stopmarket ||
                         (order.type == OrderType.stoplimit && includeLimitOrders)

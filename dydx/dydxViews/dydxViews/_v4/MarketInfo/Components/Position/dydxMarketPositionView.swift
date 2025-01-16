@@ -13,7 +13,6 @@ import Utilities
 public class dydxMarketPositionViewModel: PlatformViewModel {
     @Published public var emptyText: String?
 
-    @Published public var takeProfitStopLossAction: (() -> Void)?
     @Published public var closeAction: (() -> Void)?
     @Published public var editMarginAction: (() -> Void)?
     @Published public var unrealizedPNLAmount: SignedAmountViewModel?
@@ -37,6 +36,9 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 
     @Published public var takeProfitStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
     @Published public var stopLossStatusViewModel: dydxTakeProfitStopLossStatusViewModel?
+    @Published public var takeProfitStopLossAction: (() -> Void)?
+
+    @Published public var tpSlGroupViewModel: dydxMarketTpSlGroupViewModel?
 
     @Published public var pendingPosition: dydxPortfolioPendingPositionsItemViewModel? {
         didSet {
@@ -312,23 +314,23 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
             .wrappedInAnyView()
         }
 
-        if let takeProfitStopLossAction = self.takeProfitStopLossAction {
-            let content = AnyView(
-                HStack {
-                    Spacer()
-                    Text(DataLocalizer.localize(path: "APP.TRADE.ADD_TP_SL"))
-                        .themeFont(fontSize: .medium)
-                        .themeColor(foreground: .textSecondary)
-                    Spacer()
-                }
-            )
-
-            addTakeProfitStopLossButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
-                takeProfitStopLossAction()
-            }
-            .createView(parentStyle: parentStyle)
-            .wrappedInAnyView()
-        }
+//        if let takeProfitStopLossAction = self.takeProfitStopLossAction {
+//            let content = AnyView(
+//                HStack {
+//                    Spacer()
+//                    Text(DataLocalizer.localize(path: "APP.TRADE.ADD_TP_SL"))
+//                        .themeFont(fontSize: .medium)
+//                        .themeColor(foreground: .textSecondary)
+//                    Spacer()
+//                }
+//            )
+//
+//            addTakeProfitStopLossButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+//                takeProfitStopLossAction()
+//            }
+//            .createView(parentStyle: parentStyle)
+//            .wrappedInAnyView()
+//        }
 
         if let editMarginAction = self.editMarginAction {
             let content = AnyView(
@@ -355,31 +357,40 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
         }
 
         return VStack(spacing: 10) {
-            if takeProfitStatusViewModel != nil || stopLossStatusViewModel != nil {
-                HStack(spacing: 10) {
-                    Group {
-                        takeProfitStatusViewModel?.createView(parentStyle: parentStyle)
-                            .frame(maxWidth: .infinity)
-                        stopLossStatusViewModel?.createView(parentStyle: parentStyle)
-                            .frame(maxWidth: .infinity)
-                    }
-                    .frame(maxHeight: .infinity)
-                }
-                HStack(spacing: 10) {
-                    closePositionButton
-                    editMarginButton
-                }
-            } else {
-                HStack(spacing: 10) {
-                    addTakeProfitStopLossButton
-                        .frame(maxWidth: .infinity)
-                    editMarginButton
-                        .frame(maxWidth: .infinity)
-                }
+            self.tpSlGroupViewModel?.createView(parentStyle: parentStyle)
+            HStack(spacing: 10) {
                 closePositionButton
+                editMarginButton
             }
         }
         .padding(.bottom, 16)
+//        
+//        return VStack(spacing: 10) {
+//            if takeProfitStatusViewModel != nil || stopLossStatusViewModel != nil {
+//                HStack(spacing: 10) {
+//                    Group {
+//                        takeProfitStatusViewModel?.createView(parentStyle: parentStyle)
+//                            .frame(maxWidth: .infinity)
+//                        stopLossStatusViewModel?.createView(parentStyle: parentStyle)
+//                            .frame(maxWidth: .infinity)
+//                    }
+//                    .frame(maxHeight: .infinity)
+//                }
+//                HStack(spacing: 10) {
+//                    closePositionButton
+//                    editMarginButton
+//                }
+//            } else {
+//                HStack(spacing: 10) {
+//                    addTakeProfitStopLossButton
+//                        .frame(maxWidth: .infinity)
+//                    editMarginButton
+//                        .frame(maxWidth: .infinity)
+//                }
+//                closePositionButton
+//            }
+//        }
+//        .padding(.bottom, 16)
     }
 
     private func createList(parentStyle: ThemeStyle) -> some View {

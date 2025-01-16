@@ -47,6 +47,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
         didSet {
             if marketId != oldValue {
                 AbacusStateManager.shared.setMarket(market: marketId)
+                AbacusStateManager.shared.resetTriggerOrders()
                 AbacusStateManager.shared.triggerOrders(input: marketId, type: .marketid)
             }
         }
@@ -231,10 +232,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
     }
 
     private func clearTriggersInput() {
-        let types: [TriggerOrdersInputField] = [.marketid, .size, .stoplossorderid, .takeprofitorderid]
-        for type in types {
-            AbacusStateManager.shared.triggerOrders(input: nil, type: type)
-        }
+        AbacusStateManager.shared.resetTriggerOrders()
         clearStopLossOrder()
         clearTakeProfitOrder()
     }

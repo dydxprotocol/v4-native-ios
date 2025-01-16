@@ -879,9 +879,9 @@
 		0238FDF3296EF8C6002E1C1A /* Position */ = {
 			isa = PBXGroup;
 			children = (
-				0238FE07296EF8E5002E1C1A /* dydxMarketPositionView.swift */,
 				27BAAF102BD851B500F650C3 /* dydxTakeProfitStopLossStatusViewModel.swift */,
 				02048E242D398CC700394CBE /* dydxMarketTpSlGroupView.swift */,
+				0238FE07296EF8E5002E1C1A /* dydxMarketPositionView.swift */,
 			);
 			path = Position;
 			sourceTree = "<group>";
