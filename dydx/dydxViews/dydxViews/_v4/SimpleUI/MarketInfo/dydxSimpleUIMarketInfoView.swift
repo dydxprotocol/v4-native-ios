@@ -15,6 +15,7 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
     @Published public var chart: dydxSimpleUIMarketCandlesViewModel?
     @Published public var position: dydxSimpleUIMarketPositionViewModel?
     @Published public var details: dydxSimpleUIMarketDetailsViewModel?
+    @Published public var buySell: dydxSimpleUIMarketBuySellViewModel?
 
     public init() { }
 
@@ -24,6 +25,7 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
         vm.chart = .previewValue
         vm.position = .previewValue
         vm.details = .previewValue
+        vm.buySell = .previewValue
         return vm
     }
 
@@ -31,23 +33,32 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack {
-                self.header?.createView(parentStyle: style)
+            let bottomPadding = max((self.safeAreaInsets?.bottom ?? 0), 16)
 
-                ScrollView(showsIndicators: false) {
-                    LazyVStack(pinnedViews: [.sectionHeaders]) {
-                        self.chart?.createView(parentStyle: style)
-                            .padding(.bottom, 18)
+            let view = ZStack(alignment: .bottom) {
+                VStack {
+                    self.header?.createView(parentStyle: style)
 
-                        self.position?.createView(parentStyle: style)
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack(pinnedViews: [.sectionHeaders]) {
+                            self.chart?.createView(parentStyle: style)
+                                .padding(.bottom, 18)
 
-                        self.details?.createView(parentStyle: style)
+                            self.position?.createView(parentStyle: style)
 
-                        // for tab bar scroll adjstment overlap
-                        Spacer(minLength: 128)
+                            self.details?.createView(parentStyle: style)
+
+                            // for tab bar scroll adjstment overlap
+                            Spacer(minLength: 128)
+                        }
                     }
-                    .themeColor(background: .layer2)
                 }
+
+                self.buySell?.createView(parentStyle: style)
+                    .padding(.top, 16)
+                    .padding(.bottom, bottomPadding)
+                    .themeColor(background: .layer2)
+                  //  .background(SearchBoxModel.bottomBlendGradiant)
             }
                 .frame(maxWidth: .infinity)
                 .themeColor(background: .layer2)

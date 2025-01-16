@@ -15,6 +15,7 @@
 		02048BC32D382B9500394CBE /* dydxSimpleUIMarketSearchViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048BC22D382B9300394CBE /* dydxSimpleUIMarketSearchViewBuilder.swift */; };
 		02048E212D38A11000394CBE /* dydxSimpleUIMarketDetailsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048E132D38A10E00394CBE /* dydxSimpleUIMarketDetailsViewPresenter.swift */; };
 		02048E272D398D7E00394CBE /* dydxMarketTpSlGroupViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048E262D398D7C00394CBE /* dydxMarketTpSlGroupViewPresenter.swift */; };
+		02048E5C2D39BCF700394CBE /* dydxSimpleUIMarketBuySellViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048E4E2D39BCF600394CBE /* dydxSimpleUIMarketBuySellViewPresenter.swift */; };
 		0207FC9D2D269C00004C2C9F /* dydxSimpleUITradeInputValidationViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FC8F2D269BFF004C2C9F /* dydxSimpleUITradeInputValidationViewPresenter.swift */; };
 		0207FC9F2D27BA6B004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FC9E2D27BA62004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift */; };
 		0207FCA32D2A181D004C2C9F /* dydxSimpleUIMarketsHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FCA22D2A181C004C2C9F /* dydxSimpleUIMarketsHeaderViewPresenter.swift */; };
@@ -432,6 +433,7 @@
 		02048BC22D382B9300394CBE /* dydxSimpleUIMarketSearchViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketSearchViewBuilder.swift; sourceTree = "<group>"; };
 		02048E132D38A10E00394CBE /* dydxSimpleUIMarketDetailsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketDetailsViewPresenter.swift; sourceTree = "<group>"; };
 		02048E262D398D7C00394CBE /* dydxMarketTpSlGroupViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketTpSlGroupViewPresenter.swift; sourceTree = "<group>"; };
+		02048E4E2D39BCF600394CBE /* dydxSimpleUIMarketBuySellViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketBuySellViewPresenter.swift; sourceTree = "<group>"; };
 		0207FC8F2D269BFF004C2C9F /* dydxSimpleUITradeInputValidationViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputValidationViewPresenter.swift; sourceTree = "<group>"; };
 		0207FC9E2D27BA62004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputCtaButtonViewPresenter.swift; sourceTree = "<group>"; };
 		0207FCA22D2A181C004C2C9F /* dydxSimpleUIMarketsHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketsHeaderViewPresenter.swift; sourceTree = "<group>"; };
@@ -1153,6 +1155,7 @@
 		027885EE2D1DE13C00366321 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				02048E4E2D39BCF600394CBE /* dydxSimpleUIMarketBuySellViewPresenter.swift */,
 				02048E132D38A10E00394CBE /* dydxSimpleUIMarketDetailsViewPresenter.swift */,
 				027885EF2D1DE14500366321 /* dydxSimpleUIMarketInfoHeaderViewPresenter.swift */,
 				027885F32D1DEBF600366321 /* dydxSimpleUIMarketCandlesViewPresenter.swift */,
@@ -2275,6 +2278,7 @@
 				024F488729657FE600E40247 /* dydxUserFavoriteViewPresenter.swift in Sources */,
 				029CBE7428F6032C00259C1D /* HistoricalFundingDataPoint.swift in Sources */,
 				0274B34828F1140D005AF69E /* dydxMarketPriceCandlesViewPresenter.swift in Sources */,
+				02048E5C2D39BCF700394CBE /* dydxSimpleUIMarketBuySellViewPresenter.swift in Sources */,
 				02404FAA2CD42E8C001B571D /* dydxVaultTosViewBuilder.swift in Sources */,
 				0253179729C1270700D6CC9B /* dydxTradingNetworkViewBuilder.swift in Sources */,
 				027885E82D1DD67200366321 /* dydxSimpleUIMarketInfoViewBuilder.swift in Sources */,
