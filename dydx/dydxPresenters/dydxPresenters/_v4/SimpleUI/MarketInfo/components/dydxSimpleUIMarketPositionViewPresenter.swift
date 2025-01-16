@@ -23,25 +23,40 @@ protocol dydxSimpleUIMarketPositionViewPresenterProtocol: HostedViewPresenterPro
 class dydxSimpleUIMarketPositionViewPresenter: HostedViewPresenter<dydxSimpleUIMarketPositionViewModel>, dydxSimpleUIMarketPositionViewPresenterProtocol {
     @Published var marketId: String?
 
+    private let tpSlPresenter = dydxMarketTpSlGroupViewPresenter()
+
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        tpSlPresenter
+    ]
+
     override init() {
         super.init()
 
         viewModel = dydxSimpleUIMarketPositionViewModel()
+
+        attachChildren(workers: childPresenters)
     }
 
     override func start() {
         super.start()
 
+        tpSlPresenter.$viewModel
+            .sink { [weak self] tpSlGroupViewModel in
+                self?.viewModel?.tpSlGroupViewModel = tpSlGroupViewModel
+            }
+            .store(in: &subscriptions)
+
         Publishers
             .CombineLatest4(AbacusStateManager.shared.state.selectedSubaccountPositions,
-                           $marketId,
-                           AbacusStateManager.shared.state.marketMap,
-                           AbacusStateManager.shared.state.assetMap)
-            .sink { [weak self] position, marketId, marketMap, assetMap in
-                let position = position.first { position in
+                            $marketId,
+                            AbacusStateManager.shared.state.marketMap,
+                            AbacusStateManager.shared.state.assetMap)
+            .sink { [weak self] positions, marketId, marketMap, assetMap in
+                let position = positions.first { position in
                     position.id == marketId &&
                     (position.side.current == Abacus.PositionSide.long_ || position.side.current == Abacus.PositionSide.short_)
                 }
+                self?.tpSlPresenter.position = position
                 self?.updatePositionSection(position: position, marketMap: marketMap, assetMap: assetMap)
             }
             .store(in: &subscriptions)
