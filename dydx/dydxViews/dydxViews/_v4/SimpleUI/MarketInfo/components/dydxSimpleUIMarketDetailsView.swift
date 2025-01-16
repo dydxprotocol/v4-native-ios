@@ -45,7 +45,6 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
             }
                 .themeFont(fontSize: .medium)
                 .themeColor(foreground: .textSecondary)
-                .padding(.vertical, 8)
                 .padding(.horizontal, 16)
 
             HStack {

@@ -50,7 +50,15 @@ struct CollectionItemUtil {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 8) {
                 titleViewModel?.createView(parentStyle: parentStyle)
-                valueViewModel?.createView(parentStyle: parentStyle, styleKey: nil)
+                if let valueViewModel {
+                    valueViewModel.createView(parentStyle: parentStyle, styleKey: nil)
+                } else {
+                    Text( "-")
+                        .themeFont(fontSize: .large)
+                        .themeColor(foreground: .textSecondary)
+                        .lineLimit(1)
+                        .leftAligned()
+                }
             }
             Spacer()
         }

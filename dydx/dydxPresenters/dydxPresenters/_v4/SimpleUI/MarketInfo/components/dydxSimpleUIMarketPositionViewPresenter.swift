@@ -63,18 +63,23 @@ class dydxSimpleUIMarketPositionViewPresenter: HostedViewPresenter<dydxSimpleUIM
     }
 
     private func updatePositionSection(position: SubaccountPosition?, marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
+        let newViewModel = dydxSimpleUIMarketPositionViewModel()
+        newViewModel.tpSlGroupViewModel = viewModel?.tpSlGroupViewModel
+        viewModel = newViewModel
         guard let position, let sharedOrderViewModel = dydxPortfolioPositionsViewPresenter.createPositionViewModelItem(position: position,
                                                                                                                        marketMap: marketMap,
                                                                                                                        assetMap: assetMap)
         else {
-            viewModel?.side = nil       // hide the view
+            viewModel?.hasPosition = false
+            viewModel?.side = SideTextViewModel(side: .none, coloringOption: .none)
             return
         }
 
+        viewModel?.hasPosition = true
         viewModel?.symbol = sharedOrderViewModel.token?.symbol
         viewModel?.unrealizedPNLAmount = sharedOrderViewModel.unrealizedPnl
         viewModel?.size = sharedOrderViewModel.size
-        viewModel?.side = SideTextViewModel(side: sharedOrderViewModel.sideText.side, coloringOption: .withBackground)
+        viewModel?.side = SideTextViewModel(side: sharedOrderViewModel.sideText.side, coloringOption: .colored)
         viewModel?.liquidationPrice = sharedOrderViewModel.liquidationPrice
         viewModel?.entryPrice = sharedOrderViewModel.entryPrice
 

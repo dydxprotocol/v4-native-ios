@@ -75,12 +75,6 @@ private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpl
         $marketId.assign(to: &detailsPresenter.$marketId)
         $marketId.assign(to: &positionPresenter.$marketId)
 
-        // To force the list header to update (might be a bug in SwiftUI)
-        detailsPresenter.onContentChanged = { [weak self] market in
-            self?.viewModel?.details = dydxSimpleUIMarketDetailsViewModel()
-            self?.viewModel?.details?.sharedMarketViewModel = market
-        }
-
         attachChildren(workers: childPresenters)
     }
 

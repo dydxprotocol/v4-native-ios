@@ -24,6 +24,7 @@ public class dydxSimpleUIMarketPositionViewModel: PlatformViewModel {
     @Published public var symbol: String?
 
     @Published public var tpSlGroupViewModel: dydxMarketTpSlGroupViewModel?
+    @Published public var hasPosition: Bool = true
 
     public init() { }
 
@@ -44,7 +45,7 @@ public class dydxSimpleUIMarketPositionViewModel: PlatformViewModel {
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
-            guard let self = self, self.side != nil else { return AnyView(PlatformView.nilView) }
+            guard let self = self  else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
                 self.createContent(style: style)
@@ -97,28 +98,30 @@ public class dydxSimpleUIMarketPositionViewModel: PlatformViewModel {
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 16)
 
-            HStack {
-                CollectionItemUtil.createCollectionItem(parentStyle: style,
-                                                        title: DataLocalizer.localize(path: "APP.GENERAL.FUNDING_RATE_CHART_SHORT"),
-                                                        valueViewModel: funding)
-                .frame(minWidth: 0, maxWidth: .infinity)
+            if self.hasPosition {
+                HStack {
+                    CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                            title: DataLocalizer.localize(path: "APP.GENERAL.FUNDING_RATE_CHART_SHORT"),
+                                                            valueViewModel: funding)
+                    .frame(minWidth: 0, maxWidth: .infinity)
 
-                CollectionItemUtil.createCollectionItem(parentStyle: style,
-                                                        title: DataLocalizer.localize(path: "APP.GENERAL.AVG_ENTRY"),
-                                                        value: entryPrice)
-                .frame(minWidth: 0, maxWidth: .infinity)
+                    CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                            title: DataLocalizer.localize(path: "APP.GENERAL.AVG_ENTRY"),
+                                                            value: entryPrice)
+                    .frame(minWidth: 0, maxWidth: .infinity)
 
-                CollectionItemUtil.createCollectionItem(parentStyle: style,
-                                                        title: DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE_SHORT"),
-                                                        value: liquidationPrice)
-                .frame(minWidth: 0, maxWidth: .infinity)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 16)
-
-            self.tpSlGroupViewModel?.createView(parentStyle: style)
+                    CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                            title: DataLocalizer.localize(path: "APP.TRADE.LIQUIDATION_PRICE_SHORT"),
+                                                            value: liquidationPrice)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                }
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 16)
+
+                self.tpSlGroupViewModel?.createView(parentStyle: style)
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 16)
+            }
         }
         .frame(minWidth: 0, maxWidth: .infinity)
     }
@@ -137,15 +140,23 @@ public class dydxSimpleUIMarketPositionViewModel: PlatformViewModel {
 
                 Spacer()
 
-                let content = Text(DataLocalizer.localize(path: "APP.TRADE.CLOSE_POSITION"))
-                    .themeColor(foreground: .colorRed)
-                    .themeFont(fontSize: .small)
-                    .wrappedViewModel
+                if hasPosition {
+                    let content = Text(DataLocalizer.localize(path: "APP.TRADE.CLOSE_POSITION"))
+                        .themeColor(foreground: .colorRed)
+                        .themeFont(fontSize: .small)
+                        .wrappedViewModel
 
-                PlatformButtonViewModel(content: content, type: .pill, state: .secondary, action: { [weak self] in
-                    self?.closeAction?()
-                })
-                    .createView(parentStyle: style)
+                    Button(action: { [weak self] in
+                            self?.closeAction?()
+                    }) {
+                        content.createView(parentStyle: style)
+                    }
+                    .buttonStyle(BorderlessButtonStyle())
+                    .padding([.bottom, .top], 8)
+                    .padding([.leading, .trailing], 12)
+                    .themeColor(background: .layer3)
+                    .clipShape(Capsule())
+                }
             }
             .padding(.trailing, 16)
 
