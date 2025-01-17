@@ -22,7 +22,7 @@ protocol dydxReceiptPresenterProtocol: HostedViewPresenterProtocol {
 }
 
 class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxReceiptPresenterProtocol {
-    @Published var buyingPowerViewModel = dydxReceiptBuyingPowerViewModel()
+    let buyingPowerViewModel = dydxReceiptBuyingPowerViewModel()
     let marginUsageViewModel = dydxReceiptMarginUsageViewModel()
     let feeViewModel = dydxReceiptFeeViewModel()
     let expectedPriceViewModel = dydxReceiptItemViewModel()

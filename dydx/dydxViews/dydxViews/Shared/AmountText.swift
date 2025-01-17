@@ -36,7 +36,7 @@ public class AmountTextModel: PlatformViewModel, Equatable {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return PlatformView.emptyView.wrappedInAnyView() }
             let amount = self.amount?.filter(filter: self.requiresPositive == true ? .notNegative : nil)
             let amountText: String?

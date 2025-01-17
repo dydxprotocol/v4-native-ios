@@ -13,11 +13,10 @@ import Utilities
 public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
     @Published public var header: dydxSimpleUITradeInputHeaderViewModel?
 
-    @Published public var sideViewModel: dydxTradeInputSideViewModel? = dydxTradeInputSideViewModel()
     @Published public var ctaButtonViewModel: dydxTradeInputCtaButtonViewModel? = dydxTradeInputCtaButtonViewModel()
     @Published public var sizeViewModel: dydxSimpleUITradeInputSizeViewModel? = dydxSimpleUITradeInputSizeViewModel()
 
-    @Published public var buyingPowerViewModel = dydxReceiptBuyingPowerViewModel()
+    @Published public var buyingPowerViewModel: dydxSimpleUIBuyingPowerViewModel? =  dydxSimpleUIBuyingPowerViewModel()
     @Published public var validationErrorViewModel: ValidationErrorViewModel? = ValidationErrorViewModel()
 
     @Published public var onScrollViewCreated: ((UIScrollView) -> Void)?
@@ -27,7 +26,6 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
     public static var previewValue: dydxSimpleUITradeInputViewModel {
         let vm = dydxSimpleUITradeInputViewModel()
         vm.header = .previewValue
-        vm.sideViewModel = .previewValue
         vm.ctaButtonViewModel = .previewValue
         vm.sizeViewModel = .previewValue
         vm.buyingPowerViewModel = .previewValue
@@ -48,13 +46,15 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
                 VStack {
                     ScrollView(showsIndicators: false) {
                         VStack {
-                            self.sideViewModel?
-                                .createView(parentStyle: parentStyle)
-                                .padding([.top], 34)
-                                .padding([.bottom], 36)
 
-                            self.sizeViewModel?
-                                .createView(parentStyle: parentStyle)
+                            VStack(spacing: 16) {
+                                self.buyingPowerViewModel?.createView(parentStyle: style)
+                                    .padding(.horizontal, 8)
+
+                                self.sizeViewModel?
+                                    .createView(parentStyle: parentStyle)
+                            }
+                            .padding(.top, 34)
 
                             self.validationErrorViewModel?
                                 .createView(parentStyle: parentStyle)
@@ -67,9 +67,6 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
                     Spacer()
 
                     VStack {
-                        self.buyingPowerViewModel.createView(parentStyle: style)
-                            .padding(.horizontal, 8)
-
                         self.ctaButtonViewModel?.createView(parentStyle: style)
                     }
                     .keyboardObserving(offset: -bottomPadding + 16, mode: .yOffset)

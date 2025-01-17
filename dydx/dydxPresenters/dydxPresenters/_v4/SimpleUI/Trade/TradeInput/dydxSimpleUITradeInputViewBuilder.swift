@@ -79,14 +79,14 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
 
     private let ctaButtonPresenter = dydxSimpleUITradeInputCtaButtonViewPresenter()
     private let sizeViewPresenter = dydxSimpleUITradeInputSizeViewPresenter()
-    private let receiptPresenter = dydxTradeReceiptPresenter(tradeReceiptType: .open)
+    private let buyingPowerPresenter = dydxSimpleUIBuyingPowerViewPresenter()
     private let validationErrorPresenter = dydxSimpleUITradeInputValidationViewPresenter()
     private let headerPresenter = dydxSimpleUITradeInputHeaderViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         ctaButtonPresenter,
         sizeViewPresenter,
-        receiptPresenter,
+        buyingPowerPresenter,
         validationErrorPresenter,
         headerPresenter
     ]
@@ -96,7 +96,7 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
 
         ctaButtonPresenter.$viewModel.assign(to: &viewModel.$ctaButtonViewModel)
         sizeViewPresenter.$viewModel.assign(to: &viewModel.$sizeViewModel)
-        receiptPresenter.$buyingPowerViewModel.assign(to: &viewModel.$buyingPowerViewModel)
+        buyingPowerPresenter.$viewModel.assign(to: &viewModel.$buyingPowerViewModel)
         validationErrorPresenter.$viewModel.assign(to: &viewModel.$validationErrorViewModel)
         headerPresenter.$viewModel.assign(to: &viewModel.$header)
 

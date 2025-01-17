@@ -20,6 +20,7 @@
 		02048E252D398CC700394CBE /* dydxMarketTpSlGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048E242D398CC700394CBE /* dydxMarketTpSlGroupView.swift */; };
 		02048E412D39BCE700394CBE /* dydxSimpleUIMarketBuySellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048E402D39BCE700394CBE /* dydxSimpleUIMarketBuySellView.swift */; };
 		02048FBE2D39E59000394CBE /* dydxSimpleUITradeInputHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048FBD2D39E59000394CBE /* dydxSimpleUITradeInputHeaderView.swift */; };
+		02048FD22D3A083C00394CBE /* dydxSimpleUIBuyingPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048FD12D3A083C00394CBE /* dydxSimpleUIBuyingPowerView.swift */; };
 		0207FCA12D2A17DF004C2C9F /* dydxSimpleUIMarketsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FCA02D2A17DF004C2C9F /* dydxSimpleUIMarketsHeaderView.swift */; };
 		02084B2D297FC2CD00CF9522 /* dydxTransferFaucetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02084B2C297FC2CD00CF9522 /* dydxTransferFaucetView.swift */; };
 		02084C682981253200CF9522 /* dydxValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02084C672981253200CF9522 /* dydxValidationView.swift */; };
@@ -439,6 +440,7 @@
 		02048E242D398CC700394CBE /* dydxMarketTpSlGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketTpSlGroupView.swift; sourceTree = "<group>"; };
 		02048E402D39BCE700394CBE /* dydxSimpleUIMarketBuySellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketBuySellView.swift; sourceTree = "<group>"; };
 		02048FBD2D39E59000394CBE /* dydxSimpleUITradeInputHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputHeaderView.swift; sourceTree = "<group>"; };
+		02048FD12D3A083C00394CBE /* dydxSimpleUIBuyingPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIBuyingPowerView.swift; sourceTree = "<group>"; };
 		0207FCA02D2A17DF004C2C9F /* dydxSimpleUIMarketsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketsHeaderView.swift; sourceTree = "<group>"; };
 		02084B2C297FC2CD00CF9522 /* dydxTransferFaucetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferFaucetView.swift; sourceTree = "<group>"; };
 		02084C672981253200CF9522 /* dydxValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxValidationView.swift; sourceTree = "<group>"; };
@@ -740,6 +742,17 @@
 				02048BBF2D382B7D00394CBE /* dydxSimpleUIMarketSearchView.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		02048FCD2D39F5CE00394CBE /* components */ = {
+			isa = PBXGroup;
+			children = (
+				02048FBD2D39E59000394CBE /* dydxSimpleUITradeInputHeaderView.swift */,
+				027887B82D26769000366321 /* dydxSimpleUITradeInputSizeItemView.swift */,
+				027886072D261F4A00366321 /* dydxSimpleUITradeInputSizeView.swift */,
+				02048FD12D3A083C00394CBE /* dydxSimpleUIBuyingPowerView.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		02084B1F297FC2BE00CF9522 /* Components */ = {
@@ -1342,9 +1355,7 @@
 		027885FE2D1F4BA400366321 /* TradeInput */ = {
 			isa = PBXGroup;
 			children = (
-				027887B82D26769000366321 /* dydxSimpleUITradeInputSizeItemView.swift */,
-				027886072D261F4A00366321 /* dydxSimpleUITradeInputSizeView.swift */,
-				02048FBD2D39E59000394CBE /* dydxSimpleUITradeInputHeaderView.swift */,
+				02048FCD2D39F5CE00394CBE /* components */,
 				027886052D1F4C0500366321 /* dydxSimpleUITradeInputView.swift */,
 			);
 			path = TradeInput;
@@ -2481,6 +2492,7 @@
 				02F958142A1BDEE500828F9A /* dydxKeyExportView.swift in Sources */,
 				0238B90B29FB38F200FCE4D0 /* dydxThemeLoader.swift in Sources */,
 				27C6AE182C618055005517B5 /* RadioButtons.swift in Sources */,
+				02048FD22D3A083C00394CBE /* dydxSimpleUIBuyingPowerView.swift in Sources */,
 				0279DE872BED3F5400F9ECF8 /* dydxAdjustMarginDirectionView.swift in Sources */,
 				029E54882D08E18B005D4DC5 /* dydxWcModalView.swift in Sources */,
 				023DC88F29CCBD2C000DD920 /* dydxOnboardQRCodeView.swift in Sources */,
