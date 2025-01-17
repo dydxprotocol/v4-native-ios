@@ -1,0 +1,111 @@
+//
+//  dydxSimpleUITradeInputViewModelPresenter.swift
+//  dydxPresenters
+//
+//  Created by Rui Huang on 27/12/2024.
+//
+
+import Utilities
+import dydxViews
+import PlatformParticles
+import RoutingKit
+import ParticlesKit
+import PlatformUI
+import Abacus
+import dydxStateManager
+import FloatingPanel
+import PlatformRouting
+import Combine
+import dydxFormatter
+
+public class dydxSimpleUITradeInputViewBuilder: NSObject, ObjectBuilderProtocol {
+    public func build<T>() -> T? {
+        let presenter = dydxSimpleUITradeInputViewPresenter()
+        let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
+        let viewController = dydxSimpleUITradeInputViewController(presenter: presenter, view: view, configuration: .default)
+        return viewController as? T
+    }
+}
+
+class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, dydxSimpleUITradeInputViewModel> {
+    override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
+        if request?.path == "/trade/simple", let presenter = presenter as? dydxSimpleUITradeInputViewPresenter {
+            guard let side = request?.params?["side"] as? String else {
+                return false
+            }
+
+            AbacusStateManager.shared.startTrade()
+            AbacusStateManager.shared.trade(input: "MARKET", type: .type)
+            AbacusStateManager.shared.trade(input: "0", type: .size)
+            AbacusStateManager.shared.trade(input: "0", type: .usdcsize)
+            AbacusStateManager.shared.trade(input: nil, type: .size)
+            AbacusStateManager.shared.trade(input: nil, type: .usdcsize)
+
+            switch side {
+            case "sell":
+                presenter.side = .SELL
+            case "buy":
+                presenter.side = .BUY
+            default:
+                return false
+            }
+
+            AbacusStateManager.shared.trade(input: side.uppercased(), type: TradeInputField.side)
+
+            return true
+        }
+        return false
+    }
+}
+
+private protocol dydxSimpleUITradeInputViewPresenterProtocol: HostedViewPresenterProtocol {
+    var viewModel: dydxSimpleUITradeInputViewModel? { get }
+}
+
+private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputViewModel>, dydxSimpleUITradeInputViewPresenterProtocol, dydxTradeSheetTipBuySellViewPresenterDelegate, dydxSimpleUITradeInputCtaButtonViewPresenterDelegate {
+    @Published var side: dydxViews.OrderSide?
+
+    private var lastSizeFocusState: dydxSimpleUITradeInputSizeViewModel.FocusState?
+
+    // MARK: dydxTradeSheetTipBuySellViewPresenterDelegate
+
+    func buySellButtonTapped() {
+    }
+
+    // MARK: dydxSimpleUITradeInputCtaButtonViewPresenterDelegate
+
+    func tradeButtonTapped() {
+    }
+
+    private let ctaButtonPresenter = dydxSimpleUITradeInputCtaButtonViewPresenter()
+    private let sizeViewPresenter = dydxSimpleUITradeInputSizeViewPresenter()
+    private let receiptPresenter = dydxTradeReceiptPresenter(tradeReceiptType: .open)
+    private let validationErrorPresenter = dydxSimpleUITradeInputValidationViewPresenter()
+    private let headerPresenter = dydxSimpleUITradeInputHeaderViewPresenter()
+
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        ctaButtonPresenter,
+        sizeViewPresenter,
+        receiptPresenter,
+        validationErrorPresenter,
+        headerPresenter
+    ]
+
+    override init() {
+        let viewModel = dydxSimpleUITradeInputViewModel()
+
+        ctaButtonPresenter.$viewModel.assign(to: &viewModel.$ctaButtonViewModel)
+        sizeViewPresenter.$viewModel.assign(to: &viewModel.$sizeViewModel)
+        receiptPresenter.$buyingPowerViewModel.assign(to: &viewModel.$buyingPowerViewModel)
+        validationErrorPresenter.$viewModel.assign(to: &viewModel.$validationErrorViewModel)
+        headerPresenter.$viewModel.assign(to: &viewModel.$header)
+
+        super.init()
+
+        self.viewModel = viewModel
+
+        ctaButtonPresenter.delegate = self
+
+        attachChildren(workers: childPresenters)
+    }
+}

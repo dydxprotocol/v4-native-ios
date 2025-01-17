@@ -74,6 +74,7 @@ private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpl
         $marketId.assign(to: &chartPresenter.$marketId)
         $marketId.assign(to: &detailsPresenter.$marketId)
         $marketId.assign(to: &positionPresenter.$marketId)
+        $marketId.assign(to: &buySellPresenter.$marketId)
 
         attachChildren(workers: childPresenters)
     }

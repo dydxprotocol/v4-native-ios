@@ -21,16 +21,11 @@ import dydxFormatter
 
 public class dydxTradeInputViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        if dydxBoolFeatureFlag.simple_ui.isEnabled, AppMode.current == .simple {
-            let viewController: dydxSimpleUITradeInputViewController? = dydxSimpleUITradeInputViewBuilder().build()
-            return viewController as? T
-        } else {
-            let presenter = dydxTradeInputViewPresenter()
-            let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-            let viewController = dydxTradeInputViewController(presenter: presenter, view: view, configuration: .default)
-            presenter.delegate = viewController
-            return viewController as? T
-        }
+        let presenter = dydxTradeInputViewPresenter()
+        let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
+        let viewController = dydxTradeInputViewController(presenter: presenter, view: view, configuration: .default)
+        presenter.delegate = viewController
+        return viewController as? T
     }
 }
 

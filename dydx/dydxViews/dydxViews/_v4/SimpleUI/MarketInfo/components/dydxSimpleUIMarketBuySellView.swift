@@ -29,26 +29,30 @@ public class dydxSimpleUIMarketBuySellViewModel: PlatformViewModel {
 
             let view = HStack(spacing: 16) {
                 Button {
-                    self.buyAction?()
+                    self.sellAction?()
                 } label: {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.SELL"))
-                        .themeColor(foreground: .colorRed)
+                    Group {
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.SELL"))
+                            .themeColor(foreground: .colorRed)
+                    }
+                    .frame(height: 56)
+                    .frame(maxWidth: .infinity)
+                    .background(ThemeColor.SemanticColor.colorRed.color.opacity(0.2))
+                    .cornerRadius(8, corners: .allCorners)
                 }
-                .frame(height: 56)
-                .frame(maxWidth: .infinity)
-                .background(ThemeColor.SemanticColor.colorRed.color.opacity(0.2))
-                .cornerRadius(8, corners: .allCorners)
 
                 Button {
                     self.buyAction?()
                 } label: {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.BUY"))
-                        .themeColor(foreground: .colorGreen)
+                    Group {
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.BUY"))
+                            .themeColor(foreground: .colorGreen)
+                    }
+                    .frame(height: 56)
+                    .frame(maxWidth: .infinity)
+                    .background(ThemeColor.SemanticColor.colorGreen.color.opacity(0.2))
+                    .cornerRadius(8, corners: .allCorners)
                 }
-                .frame(height: 56)
-                .frame(maxWidth: .infinity)
-                .background(ThemeColor.SemanticColor.colorGreen.color.opacity(0.2))
-                .cornerRadius(8, corners: .allCorners)
             }
                 .padding(.horizontal, 16)
 

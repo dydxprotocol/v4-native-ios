@@ -249,6 +249,10 @@
                     "destination":"dydxPresenters.dydxTradeInputViewBuilder",
                     "presentation":"float"
                 },
+                "/trade/simple":{
+                    "destination":"dydxPresenters.dydxSimpleUITradeInputViewBuilder",
+                    "presentation":"prompt"
+                },
                 "/trade/prediction_markets_notice": {
                     "destination":"dydxPresenters.dydxPredictionMarketsNoticeViewBuilder",
                     "presentation":"present_over_full_screen"

@@ -17,9 +17,23 @@ protocol dydxSimpleUIMarketBuySellViewPresenterProtocol: HostedViewPresenterProt
 }
 
 class dydxSimpleUIMarketBuySellViewPresenter: HostedViewPresenter<dydxSimpleUIMarketBuySellViewModel>, dydxSimpleUIMarketBuySellViewPresenterProtocol {
+    @Published var marketId: String?
+
     override init() {
         super.init()
 
         viewModel = dydxSimpleUIMarketBuySellViewModel()
+
+        viewModel?.buyAction = { [weak self] in
+            guard let marketId = self?.marketId else { return }
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/simple",
+                                                       params: ["side": "buy", "market": marketId]), animated: true, completion: nil)
+        }
+
+        viewModel?.sellAction = { [weak self] in
+            guard let marketId = self?.marketId else { return }
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/simple",
+                                                       params: ["side": "sell", "market": marketId]), animated: true, completion: nil)
+        }
     }
 }
