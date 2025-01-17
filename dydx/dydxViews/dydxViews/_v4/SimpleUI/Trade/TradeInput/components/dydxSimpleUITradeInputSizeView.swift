@@ -82,19 +82,6 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
     }
 
     private func createSwapView(style: ThemeStyle) -> some View {
-//        let secondarySize: String?
-//        let secondaryToken: String?
-//        switch focusState {
-//        case .atUsdcSize:
-//            secondarySize = sizeItem?.size ?? sizeItem?.placeHolder
-//            secondaryToken = sizeItem?.tokenSymbol
-//        case .atSize:
-//            secondarySize = usdSizeItem?.size ?? usdSizeItem?.placeHolder
-//            secondaryToken = usdSizeItem?.tokenSymbol
-//        case .none:
-//            secondarySize = nil
-//            secondaryToken = nil
-//        }
         return Group {
             let content = HStack {
                 if let secondaryText, let secondaryToken {
@@ -128,7 +115,6 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
             }
                                     .createView(parentStyle: style)
         }
-
     }
 }
 
