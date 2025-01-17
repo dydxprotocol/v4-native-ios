@@ -49,31 +49,45 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
         viewModel?.focusState = .none
     }
 
-    func updateFocusState(_ focusState: dydxSimpleUITradeInputSizeViewModel.FocusState) {
+    private func updateFocusState(_ focusState: dydxSimpleUITradeInputSizeViewModel.FocusState) {
         viewModel?.focusState = focusState
     }
 
     override func start() {
         super.start()
 
+        guard let viewModel else { return }
+
         Publishers
-            .CombineLatest(
-                AbacusStateManager.shared.state.tradeInput.compactMap { $0 }.removeDuplicates(),
-                AbacusStateManager.shared.state.configsAndAssetMap)
-            .sink { [weak self] tradeInput, configsAndAssetMap in
+            .CombineLatest3(
+                AbacusStateManager.shared.state.tradeInput
+                    .compactMap { $0 }
+                    .removeDuplicates(),
+                AbacusStateManager.shared.state.configsAndAssetMap,
+                viewModel.$focusState)
+            .sink { [weak self] tradeInput, configsAndAssetMap, focusState in
                 if let marketId = tradeInput.marketId {
-                    self?.update(tradeInput: tradeInput, configsAndAsset: configsAndAssetMap[marketId])
+                    self?.update(tradeInput: tradeInput,
+                                 configsAndAsset: configsAndAssetMap[marketId],
+                                 focusState: focusState)
+                    if focusState == dydxSimpleUITradeInputSizeViewModel.FocusState.none {
+                        self?.updateFocusState(.atUsdcSize)
+                    }
                 }
             }
             .store(in: &subscriptions)
     }
 
-    private func update(tradeInput: TradeInput, configsAndAsset: MarketConfigsAndAsset?) {
+    private func update(tradeInput: TradeInput,
+                        configsAndAsset: MarketConfigsAndAsset?,
+                        focusState: dydxSimpleUITradeInputSizeViewModel.FocusState) {
         let marketConfigs = configsAndAsset?.configs
         let asset = configsAndAsset?.asset
 
         viewModel?.sizeItem?.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
         viewModel?.sizeItem?.tokenSymbol = configsAndAsset?.asset?.displayableAssetId ?? asset?.id
+        viewModel?.usdSizeItem?.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: 3)
+        viewModel?.usdSizeItem?.tokenSymbol = "USD"
 
         for itemViewModel in [viewModel?.sizeItem, viewModel?.usdSizeItem] {
             if tradeInput.options?.needsSize ?? false {
@@ -88,6 +102,18 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
                     itemViewModel?.usdcSize = nil
                 }
             }
+        }
+
+        switch focusState {
+        case .atSize:
+            viewModel?.secondaryText = viewModel?.usdSizeItem?.usdcSize ?? viewModel?.usdSizeItem?.placeHolder
+            viewModel?.secondaryToken = viewModel?.usdSizeItem?.tokenSymbol
+        case .atUsdcSize:
+            viewModel?.secondaryText = viewModel?.sizeItem?.size ?? viewModel?.sizeItem?.placeHolder
+            viewModel?.secondaryToken = viewModel?.sizeItem?.tokenSymbol
+        default:
+            viewModel?.secondaryText =  nil
+            viewModel?.secondaryToken = nil
         }
     }
 }

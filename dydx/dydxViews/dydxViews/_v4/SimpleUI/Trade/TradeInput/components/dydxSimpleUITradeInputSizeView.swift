@@ -13,6 +13,8 @@ import Utilities
 public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
     @Published public var sizeItem: dydxSimpleUITradeInputSizeItemViewModel?
     @Published public var usdSizeItem: dydxSimpleUITradeInputSizeItemViewModel?
+    @Published public var secondaryText: String?
+    @Published public var secondaryToken: String?
 
     public enum FocusState {
         case atUsdcSize, atSize, none
@@ -80,24 +82,53 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
     }
 
     private func createSwapView(style: ThemeStyle) -> some View {
-        let content = PlatformIconViewModel(type: .asset(name: "icon_swap_vertical", bundle: .dydxView),
-                                            clip: .circle(background: .layer3, spacing: 8),
-                                            size: CGSize(width: 24, height: 24),
-                                            templateColor: .textSecondary)
-        return PlatformButtonViewModel(content: content,
-                                type: .iconType) { [weak self] in
-            withAnimation(Animation.easeInOut) {
-                switch self?.focusState {
+//        let secondarySize: String?
+//        let secondaryToken: String?
+//        switch focusState {
+//        case .atUsdcSize:
+//            secondarySize = sizeItem?.size ?? sizeItem?.placeHolder
+//            secondaryToken = sizeItem?.tokenSymbol
+//        case .atSize:
+//            secondarySize = usdSizeItem?.size ?? usdSizeItem?.placeHolder
+//            secondaryToken = usdSizeItem?.tokenSymbol
+//        case .none:
+//            secondarySize = nil
+//            secondaryToken = nil
+//        }
+        return Group {
+            let content = HStack {
+                if let secondaryText, let secondaryToken {
+                    Text(secondaryText)
+                        .themeFont(fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
+
+                    Text(secondaryToken)
+                        .themeFont(fontSize: .small)
+                }
+
+                PlatformIconViewModel(type: .asset(name: "icon_swap_vertical", bundle: .dydxView),
+                                      clip: .circle(background: .layer3, spacing: 8),
+                                      size: CGSize(width: 24, height: 24),
+                                      templateColor: .textSecondary)
+                .createView(parentStyle: style)
+
+            }.wrappedViewModel
+            PlatformButtonViewModel(content: content,
+                                    type: .iconType) { [weak self] in
+                withAnimation(Animation.easeInOut) {
+                    switch self?.focusState {
                     case .atUsdcSize:
-                    self?.focusState = .atSize
-                case .atSize:
-                    self?.focusState = .atUsdcSize
-                default:
-                    break
+                        self?.focusState = .atSize
+                    case .atSize:
+                        self?.focusState = .atUsdcSize
+                    default:
+                        break
+                    }
                 }
             }
+                                    .createView(parentStyle: style)
         }
-         .createView(parentStyle: style)
+
     }
 }
 
