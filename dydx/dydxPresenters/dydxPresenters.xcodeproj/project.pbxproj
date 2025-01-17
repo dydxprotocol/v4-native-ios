@@ -709,9 +709,9 @@
 			children = (
 				02048FD52D3A09D300394CBE /* dydxSimpleUIIBuyingPowerViewPresenter.swift */,
 				02048FCB2D39E5DF00394CBE /* dydxSimpleUITradeInputHeaderViewPresenter.swift */,
-				0207FC9E2D27BA62004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift */,
 				0207FC8F2D269BFF004C2C9F /* dydxSimpleUITradeInputValidationViewPresenter.swift */,
 				027886092D261FA900366321 /* dydxSimpleUITradeInputSizeViewPresenter.swift */,
+				0207FC9E2D27BA62004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";

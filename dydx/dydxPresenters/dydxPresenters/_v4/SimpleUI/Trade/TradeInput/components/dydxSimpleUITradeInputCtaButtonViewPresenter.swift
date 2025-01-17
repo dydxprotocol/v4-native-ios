@@ -17,16 +17,10 @@ import dydxStateManager
 import dydxFormatter
 
 protocol dydxSimpleUITradeInputCtaButtonViewPresenterProtocol: HostedViewPresenterProtocol {
-    var viewModel: dydxTradeInputCtaButtonViewModel? { get }
+    var viewModel: dydxSimpleUITradeInputCtaButtonView? { get }
 }
 
-protocol dydxSimpleUITradeInputCtaButtonViewPresenterDelegate: AnyObject {
-    func tradeButtonTapped()
-}
-
-class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInputCtaButtonViewModel>, dydxSimpleUITradeInputCtaButtonViewPresenterProtocol {
-
-    weak var delegate: dydxSimpleUITradeInputCtaButtonViewPresenterDelegate?
+class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputCtaButtonView>, dydxSimpleUITradeInputCtaButtonViewPresenterProtocol {
 
     private enum OnboardingState {
         case newUser
@@ -55,7 +49,7 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxTrad
     override init() {
         super.init()
 
-        viewModel = dydxTradeInputCtaButtonViewModel()
+        viewModel = dydxSimpleUITradeInputCtaButtonView()
     }
 
     override func start() {
@@ -78,6 +72,16 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxTrad
                     )
                 }
 
+                let side = tradeInput.side
+                switch side {
+                case .buy:
+                    self.viewModel?.side = .BUY
+                case .sell:
+                    self.viewModel?.side = .SELL
+                default:
+                    break
+                }
+
                 self.viewModel?.ctaAction = { [weak self] in
                     self?.trade(onboardingState: onboardingState)
                 }
@@ -91,38 +95,21 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxTrad
                         onboardingState: OnboardingState) {
         switch onboardingState {
         case .newUser:
-            viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONNECT_WALLET"))
+            viewModel?.state = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONNECT_WALLET"))
         case .needDeposit:
-            viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT_FUNDS"))
+            viewModel?.state = .enabled(DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT_FUNDS"))
         case .readyToTrade:
             let firstBlockingError = tradeErrors.first { $0.type == ErrorType.required || $0.type == ErrorType.error }
             if firstBlockingError?.action != nil {
-                viewModel?.ctaButtonState = .enabled(firstBlockingError?.resources.action?.localizedString)
+                viewModel?.state = .enabled(firstBlockingError?.resources.action?.localizedString)
             } else if tradeInput.size?.size?.doubleValue ?? 0 > 0 {
                 if let firstBlockingError = firstBlockingError {
-                    viewModel?.ctaButtonState = .disabled(firstBlockingError.resources.action?.localizedString)
+                    viewModel?.state = .disabled(firstBlockingError.resources.action?.localizedString)
                 } else {
-                    let localizePath: String?
-                    switch tradeInput.side {
-                    case .buy:
-                        localizePath = "APP.TRADE.BUY_AMOUNT_ASSET"
-                    case .sell:
-                        localizePath = "APP.TRADE.SELL_AMOUNT_ASSET"
-                    default:
-                        localizePath = nil
-                    }
-                    let stepSize = configsAndAsset?.configs?.displayStepSizeDecimals?.intValue ?? 1
-                    let amountText = dydxFormatter.shared.localFormatted(number: tradeInput.size?.size,
-                                                                         digits: stepSize)
-                    if let localizePath = localizePath, let amountText = amountText, let asset = configsAndAsset?.asset?.displayableAssetId {
-                        let localizedString = DataLocalizer.localize(path: localizePath, params: ["AMOUNT": amountText, "ASSET": asset])
-                        viewModel?.ctaButtonState = .enabled(localizedString)
-                    } else {
-                        viewModel?.ctaButtonState = .disabled()
-                    }
+                    viewModel?.state = .slider
                 }
             } else {
-                viewModel?.ctaButtonState = .disabled()
+                viewModel?.state = .disabled()
             }
         }
     }
@@ -134,7 +121,6 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxTrad
         case .needDeposit:
             Router.shared?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
         case .readyToTrade:
-            delegate?.tradeButtonTapped()
             Router.shared?.navigate(to: RoutingRequest(path: "/trade/status"), animated: true, completion: nil)
         }
     }

@@ -108,12 +108,9 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
         case .atSize:
             viewModel?.secondaryText = viewModel?.usdSizeItem?.usdcSize ?? viewModel?.usdSizeItem?.placeHolder
             viewModel?.secondaryToken = viewModel?.usdSizeItem?.tokenSymbol
-        case .atUsdcSize:
+        case .atUsdcSize, .none:
             viewModel?.secondaryText = viewModel?.sizeItem?.size ?? viewModel?.sizeItem?.placeHolder
             viewModel?.secondaryToken = viewModel?.sizeItem?.tokenSymbol
-        default:
-            viewModel?.secondaryText =  nil
-            viewModel?.secondaryToken = nil
         }
     }
 }

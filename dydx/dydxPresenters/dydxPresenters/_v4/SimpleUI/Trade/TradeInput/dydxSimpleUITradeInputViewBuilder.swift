@@ -62,20 +62,8 @@ private protocol dydxSimpleUITradeInputViewPresenterProtocol: HostedViewPresente
     var viewModel: dydxSimpleUITradeInputViewModel? { get }
 }
 
-private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputViewModel>, dydxSimpleUITradeInputViewPresenterProtocol, dydxTradeSheetTipBuySellViewPresenterDelegate, dydxSimpleUITradeInputCtaButtonViewPresenterDelegate {
+private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputViewModel>, dydxSimpleUITradeInputViewPresenterProtocol {
     @Published var side: dydxViews.OrderSide?
-
-    private var lastSizeFocusState: dydxSimpleUITradeInputSizeViewModel.FocusState?
-
-    // MARK: dydxTradeSheetTipBuySellViewPresenterDelegate
-
-    func buySellButtonTapped() {
-    }
-
-    // MARK: dydxSimpleUITradeInputCtaButtonViewPresenterDelegate
-
-    func tradeButtonTapped() {
-    }
 
     private let ctaButtonPresenter = dydxSimpleUITradeInputCtaButtonViewPresenter()
     private let sizeViewPresenter = dydxSimpleUITradeInputSizeViewPresenter()
@@ -103,8 +91,6 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
         super.init()
 
         self.viewModel = viewModel
-
-        ctaButtonPresenter.delegate = self
 
         attachChildren(workers: childPresenters)
     }

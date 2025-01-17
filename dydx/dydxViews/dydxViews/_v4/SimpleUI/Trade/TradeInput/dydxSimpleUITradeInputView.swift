@@ -13,7 +13,7 @@ import Utilities
 public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
     @Published public var header: dydxSimpleUITradeInputHeaderViewModel?
 
-    @Published public var ctaButtonViewModel: dydxTradeInputCtaButtonViewModel? = dydxTradeInputCtaButtonViewModel()
+    @Published public var ctaButtonViewModel: dydxSimpleUITradeInputCtaButtonView? = dydxSimpleUITradeInputCtaButtonView()
     @Published public var sizeViewModel: dydxSimpleUITradeInputSizeViewModel? = dydxSimpleUITradeInputSizeViewModel()
 
     @Published public var buyingPowerViewModel: dydxSimpleUIBuyingPowerViewModel? =  dydxSimpleUIBuyingPowerViewModel()

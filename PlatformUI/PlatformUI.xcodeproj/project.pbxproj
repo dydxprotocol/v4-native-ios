@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020490A82D3AEE5600394CBE /* SlideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020490A62D3AEE5600394CBE /* SlideButton.swift */; };
+		020490A92D3AEE5600394CBE /* SlideButtonStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020490A72D3AEE5600394CBE /* SlideButtonStyling.swift */; };
+		020490AA2D3AEE5600394CBE /* ShimmerEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020490A52D3AEE5600394CBE /* ShimmerEffect.swift */; };
 		0207FCA62D2BCEDB004C2C9F /* KeyboardObserving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FCA52D2BCEDA004C2C9F /* KeyboardObserving.swift */; };
 		0230377828C15C0E00412B72 /* PlatformViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230377728C15C0E00412B72 /* PlatformViewModel.swift */; };
 		023788F528B9924D00F212E1 /* PlatformButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023788F428B9924D00F212E1 /* PlatformButton.swift */; };
@@ -105,6 +108,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		020490A52D3AEE5600394CBE /* ShimmerEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerEffect.swift; sourceTree = "<group>"; };
+		020490A62D3AEE5600394CBE /* SlideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideButton.swift; sourceTree = "<group>"; };
+		020490A72D3AEE5600394CBE /* SlideButtonStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideButtonStyling.swift; sourceTree = "<group>"; };
 		0207FCA52D2BCEDA004C2C9F /* KeyboardObserving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserving.swift; sourceTree = "<group>"; };
 		0230377728C15C0E00412B72 /* PlatformViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformViewModel.swift; sourceTree = "<group>"; };
 		023788F428B9924D00F212E1 /* PlatformButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformButton.swift; sourceTree = "<group>"; };
@@ -177,6 +183,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		020490A02D3AEE4A00394CBE /* SlideButton */ = {
+			isa = PBXGroup;
+			children = (
+				020490A52D3AEE5600394CBE /* ShimmerEffect.swift */,
+				020490A62D3AEE5600394CBE /* SlideButton.swift */,
+				020490A72D3AEE5600394CBE /* SlideButtonStyling.swift */,
+			);
+			path = SlideButton;
+			sourceTree = "<group>";
+		};
 		0207FCA42D2BCECD004C2C9F /* KeyboardObserving */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +255,7 @@
 		025B844028AACBDE0037FF7C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				020490A02D3AEE4A00394CBE /* SlideButton */,
 				276581F22C139F27009E072A /* Containers */,
 				27044F862BBB2ACB004C750D /* Extensions */,
 				27E6A72C2AB8D5B500026CB5 /* Utility */,
@@ -690,6 +707,9 @@
 				02E2C9C128A2C22B00F7C3BE /* SampleThemeLabel.swift in Sources */,
 				0243A73729BB8DBB00A083FE /* PlatformListViewModel.swift in Sources */,
 				277E7AC62BBF3BE8009F95DE /* InlineAlert.swift in Sources */,
+				020490A82D3AEE5600394CBE /* SlideButton.swift in Sources */,
+				020490A92D3AEE5600394CBE /* SlideButtonStyling.swift in Sources */,
+				020490AA2D3AEE5600394CBE /* ShimmerEffect.swift in Sources */,
 				02F16FDB28B491EE0085DC58 /* PlatformUI.swift in Sources */,
 				64A4DC5F29677BCB008D8E20 /* PlatformOutput.swift in Sources */,
 				0243A73E29BE2D7C00A083FE /* Divider.swift in Sources */,
