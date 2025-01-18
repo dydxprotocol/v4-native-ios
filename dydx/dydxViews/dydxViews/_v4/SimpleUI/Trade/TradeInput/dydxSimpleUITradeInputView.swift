@@ -20,6 +20,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
     @Published public var validationErrorViewModel: ValidationErrorViewModel? = ValidationErrorViewModel()
 
     @Published public var onScrollViewCreated: ((UIScrollView) -> Void)?
+    @Published public var marginUsage: Double?
 
     public init() { }
 
