@@ -11,32 +11,18 @@ import PlatformUI
 import Utilities
 
 public class dydxSimpleUIBuyingPowerViewModel: PlatformViewModel {
-    public struct BuyingPowerChange: Identifiable {
-        let symbol: String
-        let change: AmountChangeModel
-
-        public var id: String {
-            symbol
-        }
-
-        public init(symbol: String, change: AmountChangeModel) {
-            self.symbol = symbol
-            self.change = change
-        }
-    }
-
-    @Published public var buyingPowerChange: BuyingPowerChange?
+    @Published public var buyingPower: String?
 
     public init() {}
 
     public static var previewValue: dydxSimpleUIBuyingPowerViewModel = {
         let vm = dydxSimpleUIBuyingPowerViewModel()
-        vm.buyingPowerChange = BuyingPowerChange(symbol: "", change: .previewValue)
+        vm.buyingPower = "$1200.0"
         return vm
     }()
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
@@ -46,12 +32,9 @@ public class dydxSimpleUIBuyingPowerViewModel: PlatformViewModel {
                         .themeColor(foreground: .textTertiary)
                         .lineLimit(1)
 
-                    if let buyingPowerChange = self.buyingPowerChange?.change {
-                        buyingPowerChange.createView(parentStyle: style)
-                            .lineLimit(1)
-                    } else {
-                        dydxReceiptEmptyView.emptyValue
-                    }
+                    Text(self.buyingPower ?? "-")
+                        .themeFont(fontSize: .small)
+                        .lineLimit(1)
                 }
             )
         }
