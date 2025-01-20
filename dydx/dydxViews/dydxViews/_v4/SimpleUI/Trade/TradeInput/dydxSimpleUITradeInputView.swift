@@ -18,6 +18,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
 
     @Published public var buyingPowerViewModel: dydxSimpleUIBuyingPowerViewModel? =  dydxSimpleUIBuyingPowerViewModel()
     @Published public var marginUsageViewModel: dydxSimpleUIMarginUsageViewModel? =  dydxSimpleUIMarginUsageViewModel()
+    @Published public var feesViewModel: dydxSimpleUIFeesViewModel? = dydxSimpleUIFeesViewModel()
 
     @Published public var validationErrorViewModel: ValidationErrorViewModel? = ValidationErrorViewModel()
 
@@ -32,6 +33,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
         vm.sizeViewModel = .previewValue
         vm.buyingPowerViewModel = .previewValue
         vm.marginUsageViewModel = .previewValue
+        vm.feesViewModel = .previewValue
         vm.validationErrorViewModel = .previewValue
        return vm
     }
@@ -73,6 +75,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
                         HStack {
                             self.marginUsageViewModel?.createView(parentStyle: style)
                             Spacer()
+                            self.feesViewModel?.createView(parentStyle: style)
                         }
                         self.ctaButtonViewModel?.createView(parentStyle: style)
                     }

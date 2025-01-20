@@ -68,6 +68,7 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
     private let ctaButtonPresenter = dydxSimpleUITradeInputCtaButtonViewPresenter()
     private let sizeViewPresenter = dydxSimpleUITradeInputSizeViewPresenter()
     private let buyingPowerPresenter = dydxSimpleUIBuyingPowerViewPresenter()
+    private let feesPresenter = dydxSimpleUIFeesViewPresenter(feesType: .trade)
     private let marginUsagePreesnter = dydxSimpleUIMarginUsageViewPresenter()
     private let validationErrorPresenter = dydxSimpleUITradeInputValidationViewPresenter()
     private let headerPresenter = dydxSimpleUITradeInputHeaderViewPresenter()
@@ -76,6 +77,7 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
         ctaButtonPresenter,
         sizeViewPresenter,
         buyingPowerPresenter,
+        feesPresenter,
         marginUsagePreesnter,
         validationErrorPresenter,
         headerPresenter
@@ -88,6 +90,7 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
         sizeViewPresenter.$viewModel.assign(to: &viewModel.$sizeViewModel)
         buyingPowerPresenter.$viewModel.assign(to: &viewModel.$buyingPowerViewModel)
         marginUsagePreesnter.$viewModel.assign(to: &viewModel.$marginUsageViewModel)
+        feesPresenter.$viewModel.assign(to: &viewModel.$feesViewModel)
         validationErrorPresenter.$viewModel.assign(to: &viewModel.$validationErrorViewModel)
         headerPresenter.$viewModel.assign(to: &viewModel.$header)
 
