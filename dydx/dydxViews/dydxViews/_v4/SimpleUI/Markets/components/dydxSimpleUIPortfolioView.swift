@@ -132,7 +132,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                             let leverageText = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
                                                                  viewSize: leverageIcon.viewSize,
                                                                  displayOption: .fullText)
-                            leverageText.createView(parentStyle: style.themeColor(foreground: .textTertiary))
+                            leverageText.createView(parentStyle: style)
                             let leveragePercent = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
                                                                     viewSize: leverageIcon.viewSize,
                                                                     displayOption: .percent)

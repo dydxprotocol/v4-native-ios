@@ -18,6 +18,7 @@
 		02048E5C2D39BCF700394CBE /* dydxSimpleUIMarketBuySellViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048E4E2D39BCF600394CBE /* dydxSimpleUIMarketBuySellViewPresenter.swift */; };
 		02048FCC2D39E5DF00394CBE /* dydxSimpleUITradeInputHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048FCB2D39E5DF00394CBE /* dydxSimpleUITradeInputHeaderViewPresenter.swift */; };
 		02048FD62D3A09D800394CBE /* dydxSimpleUIIBuyingPowerViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048FD52D3A09D300394CBE /* dydxSimpleUIIBuyingPowerViewPresenter.swift */; };
+		020492492D3DF64400394CBE /* dydxSimpleUIMarginUsageViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204923B2D3DF64200394CBE /* dydxSimpleUIMarginUsageViewPresenter.swift */; };
 		0207FC9D2D269C00004C2C9F /* dydxSimpleUITradeInputValidationViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FC8F2D269BFF004C2C9F /* dydxSimpleUITradeInputValidationViewPresenter.swift */; };
 		0207FC9F2D27BA6B004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FC9E2D27BA62004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift */; };
 		0207FCA32D2A181D004C2C9F /* dydxSimpleUIMarketsHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FCA22D2A181C004C2C9F /* dydxSimpleUIMarketsHeaderViewPresenter.swift */; };
@@ -438,6 +439,7 @@
 		02048E4E2D39BCF600394CBE /* dydxSimpleUIMarketBuySellViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketBuySellViewPresenter.swift; sourceTree = "<group>"; };
 		02048FCB2D39E5DF00394CBE /* dydxSimpleUITradeInputHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputHeaderViewPresenter.swift; sourceTree = "<group>"; };
 		02048FD52D3A09D300394CBE /* dydxSimpleUIIBuyingPowerViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIIBuyingPowerViewPresenter.swift; sourceTree = "<group>"; };
+		0204923B2D3DF64200394CBE /* dydxSimpleUIMarginUsageViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarginUsageViewPresenter.swift; sourceTree = "<group>"; };
 		0207FC8F2D269BFF004C2C9F /* dydxSimpleUITradeInputValidationViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputValidationViewPresenter.swift; sourceTree = "<group>"; };
 		0207FC9E2D27BA62004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputCtaButtonViewPresenter.swift; sourceTree = "<group>"; };
 		0207FCA22D2A181C004C2C9F /* dydxSimpleUIMarketsHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketsHeaderViewPresenter.swift; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 			isa = PBXGroup;
 			children = (
 				02048FD52D3A09D300394CBE /* dydxSimpleUIIBuyingPowerViewPresenter.swift */,
+				0204923B2D3DF64200394CBE /* dydxSimpleUIMarginUsageViewPresenter.swift */,
 				02048FCB2D39E5DF00394CBE /* dydxSimpleUITradeInputHeaderViewPresenter.swift */,
 				0207FC8F2D269BFF004C2C9F /* dydxSimpleUITradeInputValidationViewPresenter.swift */,
 				027886092D261FA900366321 /* dydxSimpleUITradeInputSizeViewPresenter.swift */,
@@ -2168,6 +2171,7 @@
 				024FEB662ACB75FA0087A55E /* dydxFeesStuctureViewBuilder.swift in Sources */,
 				02048FCC2D39E5DF00394CBE /* dydxSimpleUITradeInputHeaderViewPresenter.swift in Sources */,
 				02048AFC2D35837F00394CBE /* dydxSwitchAppModeActionBuilder.swift in Sources */,
+				020492492D3DF64400394CBE /* dydxSimpleUIMarginUsageViewPresenter.swift in Sources */,
 				0256F54229AFFCAC00A083C0 /* dydxOnboardConnectViewBuilder.swift in Sources */,
 				64A4DB972966480E008D8E20 /* dydxOrderbookPresenter.swift in Sources */,
 				027885DB2D1A34EB00366321 /* dydxSimpleUIPortfolioViewPresenter.swift in Sources */,

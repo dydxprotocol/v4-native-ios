@@ -17,10 +17,11 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
     @Published public var sizeViewModel: dydxSimpleUITradeInputSizeViewModel? = dydxSimpleUITradeInputSizeViewModel()
 
     @Published public var buyingPowerViewModel: dydxSimpleUIBuyingPowerViewModel? =  dydxSimpleUIBuyingPowerViewModel()
+    @Published public var marginUsageViewModel: dydxSimpleUIMarginUsageViewModel? =  dydxSimpleUIMarginUsageViewModel()
+
     @Published public var validationErrorViewModel: ValidationErrorViewModel? = ValidationErrorViewModel()
 
     @Published public var onScrollViewCreated: ((UIScrollView) -> Void)?
-    @Published public var marginUsage: Double?
 
     public init() { }
 
@@ -30,6 +31,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
         vm.ctaButtonViewModel = .previewValue
         vm.sizeViewModel = .previewValue
         vm.buyingPowerViewModel = .previewValue
+        vm.marginUsageViewModel = .previewValue
         vm.validationErrorViewModel = .previewValue
        return vm
     }
@@ -68,6 +70,10 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
                     Spacer()
 
                     VStack {
+                        HStack {
+                            self.marginUsageViewModel?.createView(parentStyle: style)
+                            Spacer()
+                        }
                         self.ctaButtonViewModel?.createView(parentStyle: style)
                     }
                     .keyboardObserving(offset: -bottomPadding + 16, mode: .yOffset)

@@ -79,6 +79,18 @@ public class LeverageRiskModel: PlatformViewModel {
                 return .colorRed
             }
         }
+
+        public var fullTextColor: ThemeColor.SemanticColor {
+            switch self {
+            case .low:
+                return .textTertiary
+            case .medium:
+                return .textTertiary
+            case .high:
+                return .colorRed
+            }
+        }
+
     }
 
     public enum DisplayOption {
@@ -118,7 +130,7 @@ public class LeverageRiskModel: PlatformViewModel {
                     if self.displayOption == .percent {
                         if let percentText = dydxFormatter.shared.percent(number: self.marginUsage, digits: 0) {
                             Text(percentText)
-                                .themeFont(fontSize: .smallest)
+                                .themeFont(fontSize: .smaller)
                                 .themeColor(foreground: self.level.foregroundColor)
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 4)
@@ -130,7 +142,8 @@ public class LeverageRiskModel: PlatformViewModel {
                     } else if self.displayOption == .fullText {
                         Text(self.level.fullText)
                             .themeFont(fontSize: .small)
-                            .themeStyle(style: style)
+                           // .themeStyle(style: style)
+                            .themeColor(foreground: self.level.fullTextColor)
                             .lineLimit(1)
                     } else {
                         PlatformIconViewModel(type: .asset(name: self.level.imageName, bundle: Bundle.dydxView),
