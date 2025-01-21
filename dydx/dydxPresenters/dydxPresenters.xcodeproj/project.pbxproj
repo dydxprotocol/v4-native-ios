@@ -20,6 +20,7 @@
 		02048FD62D3A09D800394CBE /* dydxSimpleUIIBuyingPowerViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02048FD52D3A09D300394CBE /* dydxSimpleUIIBuyingPowerViewPresenter.swift */; };
 		020492492D3DF64400394CBE /* dydxSimpleUIMarginUsageViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204923B2D3DF64200394CBE /* dydxSimpleUIMarginUsageViewPresenter.swift */; };
 		0204924D2D3DFDC400394CBE /* dydxSimpleUIFeesViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204924C2D3DFDC300394CBE /* dydxSimpleUIFeesViewPresenter.swift */; };
+		020492532D3EDA3100394CBE /* dydxSimpleUITradeStatusViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020492522D3EDA3000394CBE /* dydxSimpleUITradeStatusViewBuilder.swift */; };
 		0207FC9D2D269C00004C2C9F /* dydxSimpleUITradeInputValidationViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FC8F2D269BFF004C2C9F /* dydxSimpleUITradeInputValidationViewPresenter.swift */; };
 		0207FC9F2D27BA6B004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FC9E2D27BA62004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift */; };
 		0207FCA32D2A181D004C2C9F /* dydxSimpleUIMarketsHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FCA22D2A181C004C2C9F /* dydxSimpleUIMarketsHeaderViewPresenter.swift */; };
@@ -442,6 +443,7 @@
 		02048FD52D3A09D300394CBE /* dydxSimpleUIIBuyingPowerViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIIBuyingPowerViewPresenter.swift; sourceTree = "<group>"; };
 		0204923B2D3DF64200394CBE /* dydxSimpleUIMarginUsageViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarginUsageViewPresenter.swift; sourceTree = "<group>"; };
 		0204924C2D3DFDC300394CBE /* dydxSimpleUIFeesViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIFeesViewPresenter.swift; sourceTree = "<group>"; };
+		020492522D3EDA3000394CBE /* dydxSimpleUITradeStatusViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeStatusViewBuilder.swift; sourceTree = "<group>"; };
 		0207FC8F2D269BFF004C2C9F /* dydxSimpleUITradeInputValidationViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputValidationViewPresenter.swift; sourceTree = "<group>"; };
 		0207FC9E2D27BA62004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputCtaButtonViewPresenter.swift; sourceTree = "<group>"; };
 		0207FCA22D2A181C004C2C9F /* dydxSimpleUIMarketsHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketsHeaderViewPresenter.swift; sourceTree = "<group>"; };
@@ -720,6 +722,14 @@
 				0207FC9E2D27BA62004C2C9F /* dydxSimpleUITradeInputCtaButtonViewPresenter.swift */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		020492512D3EDA1F00394CBE /* TradeStatus */ = {
+			isa = PBXGroup;
+			children = (
+				020492522D3EDA3000394CBE /* dydxSimpleUITradeStatusViewBuilder.swift */,
+			);
+			path = TradeStatus;
 			sourceTree = "<group>";
 		};
 		02084B1B297FC2B400CF9522 /* Components */ = {
@@ -1189,6 +1199,7 @@
 		027886012D1F4BC300366321 /* Trade */ = {
 			isa = PBXGroup;
 			children = (
+				020492512D3EDA1F00394CBE /* TradeStatus */,
 				027886022D1F4BC900366321 /* TradeInput */,
 			);
 			path = Trade;
@@ -2279,6 +2290,7 @@
 				021B68B12AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift in Sources */,
 				024B43A229812DC700E35D54 /* dydxValidationViewPresenter.swift in Sources */,
 				024B44D42982D24A00E35D54 /* dydxTradeStatusViewBuilder.swift in Sources */,
+				020492532D3EDA3100394CBE /* dydxSimpleUITradeStatusViewBuilder.swift in Sources */,
 				02D6DAFA2D1234B7008AAEA1 /* dydxSimpleUIMarketsViewBuilder.swift in Sources */,
 				02D6DAFC2D123576008AAEA1 /* dydxRootBuilder.swift in Sources */,
 				02F543B62C17B792000924E4 /* dydxGasTokenWorker.swift in Sources */,

@@ -44,8 +44,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
 
             let bottomPadding = max((self.safeAreaInsets?.bottom ?? 0), 16)
 
-            let view =
-            VStack(spacing: 16) {
+            let view = VStack(spacing: 16) {
                 self.header?.createView(parentStyle: style)
 
                 VStack {

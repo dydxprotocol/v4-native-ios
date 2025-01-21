@@ -10,6 +10,7 @@
 		020490A82D3AEE5600394CBE /* SlideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020490A62D3AEE5600394CBE /* SlideButton.swift */; };
 		020490A92D3AEE5600394CBE /* SlideButtonStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020490A72D3AEE5600394CBE /* SlideButtonStyling.swift */; };
 		020490AA2D3AEE5600394CBE /* ShimmerEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020490A52D3AEE5600394CBE /* ShimmerEffect.swift */; };
+		020492592D3F1E5300394CBE /* IndeterminateCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020492542D3F1E5200394CBE /* IndeterminateCircularProgress.swift */; };
 		0207FCA62D2BCEDB004C2C9F /* KeyboardObserving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FCA52D2BCEDA004C2C9F /* KeyboardObserving.swift */; };
 		0230377828C15C0E00412B72 /* PlatformViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230377728C15C0E00412B72 /* PlatformViewModel.swift */; };
 		023788F528B9924D00F212E1 /* PlatformButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023788F428B9924D00F212E1 /* PlatformButton.swift */; };
@@ -111,6 +112,7 @@
 		020490A52D3AEE5600394CBE /* ShimmerEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerEffect.swift; sourceTree = "<group>"; };
 		020490A62D3AEE5600394CBE /* SlideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideButton.swift; sourceTree = "<group>"; };
 		020490A72D3AEE5600394CBE /* SlideButtonStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideButtonStyling.swift; sourceTree = "<group>"; };
+		020492542D3F1E5200394CBE /* IndeterminateCircularProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndeterminateCircularProgress.swift; sourceTree = "<group>"; };
 		0207FCA52D2BCEDA004C2C9F /* KeyboardObserving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserving.swift; sourceTree = "<group>"; };
 		0230377728C15C0E00412B72 /* PlatformViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformViewModel.swift; sourceTree = "<group>"; };
 		023788F428B9924D00F212E1 /* PlatformButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformButton.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 		02F38BEC2A9AAE0800969E06 /* CircularProgressView */ = {
 			isa = PBXGroup;
 			children = (
+				020492542D3F1E5200394CBE /* IndeterminateCircularProgress.swift */,
 				02F38BF12A9AAE3700969E06 /* CircularProgressView.swift */,
 			);
 			path = CircularProgressView;
@@ -686,6 +689,7 @@
 				0207FCA62D2BCEDB004C2C9F /* KeyboardObserving.swift in Sources */,
 				02F16FE228B53A200085DC58 /* SampleStyleLabel.swift in Sources */,
 				6488BBDC296F6AEA0096502F /* TabItemViewModel.swift in Sources */,
+				020492592D3F1E5300394CBE /* IndeterminateCircularProgress.swift in Sources */,
 				27044F882BBB2ADF004C750D /* Text+Ext.swift in Sources */,
 				0258B9EE2991C9FF0098E1BE /* PlatformWebView.swift in Sources */,
 				274C47EA2C0FC6CF000212C3 /* EdgeInsets+Ext.swift in Sources */,
