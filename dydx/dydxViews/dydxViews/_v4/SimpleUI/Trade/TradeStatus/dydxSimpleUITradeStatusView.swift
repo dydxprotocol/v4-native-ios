@@ -43,7 +43,7 @@ public class dydxSimpleUITradeStatusViewModel: PlatformViewModel {
         vm.price = "$100.00"
         vm.size = "100.00"
         vm.assetId = "BTC"
-        vm.status = .failed
+        vm.status = .submitting
         vm.ctaButtonViewModel = .previewValue
         return vm
     }
@@ -77,10 +77,10 @@ public class dydxSimpleUITradeStatusViewModel: PlatformViewModel {
         switch side {
         case .BUY:
             sideColor = ThemeColor.SemanticColor.colorGreen
-            sideText = DataLocalizer.localize(path: "APP.TRADE.BUY")
+            sideText = DataLocalizer.localize(path: "APP.GENERAL.BUY")
         case .SELL:
             sideColor = ThemeColor.SemanticColor.colorRed
-            sideText = DataLocalizer.localize(path: "APP.TRADE.SELL")
+            sideText = DataLocalizer.localize(path: "APP.GENERAL.SELL")
         default:
             sideColor = ThemeColor.SemanticColor.textSecondary
             sideText = nil
@@ -107,7 +107,7 @@ public class dydxSimpleUITradeStatusViewModel: PlatformViewModel {
                 .themeFont(fontType: .plus, fontSize: .largest)
 
                 HStack {
-                    Text(DataLocalizer.localize(path: "APP.PRICE.PRICE") + ":")
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.PRICE") + ":")
                         .themeColor(foreground: .textTertiary)
                     Text(price ?? "-")
                         .themeColor(foreground: .textSecondary)
@@ -143,7 +143,7 @@ public class dydxSimpleUITradeStatusViewModel: PlatformViewModel {
         VStack {
             HStack {
                 HStack {
-                    Text(DataLocalizer.localize(path: "APP.TRADE.TRADE") + ":")
+                    Text(DataLocalizer.localize(path: "APP.TRADE.TOTAL") + ":")
                         .themeColor(foreground: .textTertiary)
                     Text(self.totalAmount ?? "-")
                         .themeColor(foreground: .textPrimary)
