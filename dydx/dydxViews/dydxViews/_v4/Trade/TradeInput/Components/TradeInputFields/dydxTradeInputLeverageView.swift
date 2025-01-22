@@ -43,7 +43,7 @@ public class dydxTradeInputLeverageViewModel: PlatformTextInputViewModel {
 
     @Published public var positionLeverage: Double?
     @Published public var maxLeverage: Double?
-    @Published public var tradeSide: OrderSide?
+    @Published public var tradeSide: AppOrderSide?
 
     public static var previewValue: dydxTradeInputLeverageViewModel = {
         let vm = dydxTradeInputLeverageViewModel(label: "Leverage", value: "1.0")

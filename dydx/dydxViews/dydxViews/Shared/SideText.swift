@@ -62,7 +62,7 @@ public class SideTextViewModel: PlatformViewModel, Hashable {
             }
         }
 
-        public init(positionSide: PositionSide) {
+        public init(positionSide: AppPositionSide) {
             switch positionSide {
             case .LONG:
                 self = .long

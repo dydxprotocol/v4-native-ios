@@ -63,7 +63,7 @@ private protocol dydxSimpleUITradeInputViewPresenterProtocol: HostedViewPresente
 }
 
 private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputViewModel>, dydxSimpleUITradeInputViewPresenterProtocol {
-    @Published var side: dydxViews.OrderSide?
+    @Published var side: AppOrderSide?
 
     private let ctaButtonPresenter = dydxSimpleUITradeInputCtaButtonViewPresenter()
     private let sizeViewPresenter = dydxSimpleUITradeInputSizeViewPresenter()

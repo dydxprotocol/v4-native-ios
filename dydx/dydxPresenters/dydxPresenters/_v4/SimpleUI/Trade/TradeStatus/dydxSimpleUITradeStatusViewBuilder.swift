@@ -162,9 +162,9 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
             .sink { [weak self] side in
                 switch side {
                 case .buy:
-                    self?.viewModel?.side = OrderSide.BUY
+                    self?.viewModel?.side = AppOrderSide.BUY
                 case .sell:
-                    self?.viewModel?.side = OrderSide.SELL
+                    self?.viewModel?.side = AppOrderSide.SELL
                 default:
                     self?.viewModel?.side = nil
                 }

@@ -25,7 +25,7 @@ public class dydxSimpleUITradeStatusViewModel: PlatformViewModel {
 
     @Published public var totalAmount: String?
     @Published public var totalFees: String?
-    @Published public var side: OrderSide?
+    @Published public var side: AppOrderSide?
     @Published public var price: String?
     @Published public var size: String?
     @Published public var assetId: String?

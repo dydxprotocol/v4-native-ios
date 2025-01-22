@@ -27,7 +27,7 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
 
     @Published public var ctaAction: (() -> Void)?
     @Published public var state: State = .disabled()
-    @Published public var side: OrderSide = .BUY
+    @Published public var side: AppOrderSide = .BUY
 
     public init() { }
 

@@ -111,7 +111,7 @@ extension dydxSimpleUIMarketViewModel {
             }
         }
 
-        let positionSize = dydxFormatter.shared.localFormatted(number: position?.size.current?.doubleValue, digits: market.configs?.displayStepSizeDecimals?.intValue ?? 1)
+        let positionSize = dydxFormatter.shared.localFormatted(number: position?.size.current?.abs().doubleValue, digits: market.configs?.displayStepSizeDecimals?.intValue ?? 1)
 
         return dydxSimpleUIMarketViewModel(displayType: displayType,
                                            marketId: market.id,
@@ -122,7 +122,7 @@ extension dydxSimpleUIMarketViewModel {
                                            sideText: side,
                                            leverage: position?.leverage.current?.doubleValue,
                                            volumn: market.perpetual?.volume24H?.doubleValue,
-                                           positionTotal: position?.valueTotal.current?.doubleValue,
+                                           positionTotal: position?.notionalTotal.current?.doubleValue,
                                            positionSize: positionSize,
                                            onMarketSelected: onMarketsSelected)
     }
