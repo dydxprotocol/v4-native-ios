@@ -33,7 +33,15 @@ public class dydxSimpleUITradeStatusViewModel: PlatformViewModel {
     @Published public var status = StatusIcon.submitting
     @Published public var ctaButtonViewModel = dydxTradeStatusCtaButtonViewModel()
 
-    public init() { }
+    public init() {
+        super.init()
+
+        ctaButtonViewModel.buttonType = PlatformButtonType.defaultType(
+            fillWidth: true,
+            pilledCorner: false,
+            minHeight: 60,
+            cornerRadius: 16)
+    }
 
     public static var previewValue: dydxSimpleUITradeStatusViewModel {
         let vm = dydxSimpleUITradeStatusViewModel()

@@ -20,6 +20,7 @@ public class dydxTradeStatusCtaButtonViewModel: PlatformViewModel {
 
     @Published public var ctaAction: (() -> Void)?
     @Published public var ctaButtonState: State = .cancel
+    @Published public var buttonType = PlatformButtonType.defaultType()
 
     public init() { }
 
@@ -39,27 +40,33 @@ public class dydxTradeStatusCtaButtonViewModel: PlatformViewModel {
     }
 
     private func createCtaButton(parentStyle style: ThemeStyle) -> some View {
-        let buttonTitle: String
         let buttonState: PlatformButtonState
+        let buttonContent: PlatformViewModel
         switch ctaButtonState {
         case .cancel:
-            buttonTitle = DataLocalizer.localize(path: "APP.TRADE.CANCEL_ORDER")
+            let buttonTitle = DataLocalizer.localize(path: "APP.TRADE.CANCEL_ORDER")
             buttonState = .destructive
+            buttonContent = Text(buttonTitle)
+                    .wrappedViewModel
         case .done:
-            buttonTitle = DataLocalizer.localize(path: "APP.GENERAL.DONE")
+            let buttonTitle = DataLocalizer.localize(path: "APP.GENERAL.DONE")
             buttonState = .primary
+            buttonContent = Text(buttonTitle)
+                    .wrappedViewModel
         case .tryAgain:
-            buttonTitle = DataLocalizer.localize(path: "APP.ONBOARDING.TRY_AGAIN")
+            let buttonTitle = DataLocalizer.localize(path: "APP.ONBOARDING.TRY_AGAIN")
             buttonState = .primary
+            buttonContent = Text(buttonTitle)
+                    .wrappedViewModel
         case .waiting:
-            buttonTitle = "..."
+            buttonContent = LoadingDots(color: ThemeColor.SemanticColor.textTertiary.color)
+                .fixedSize()
+                    .wrappedViewModel
             buttonState = .disabled
         }
 
-        let buttonContent = Text(buttonTitle)
-                .wrappedViewModel
-
         return PlatformButtonViewModel(content: buttonContent,
+                                       type: buttonType,
                                        state: buttonState) { [weak self] in
             self?.ctaAction?()
         }

@@ -148,7 +148,6 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
         super.init()
 
         viewModel = dydxSimpleUITradeStatusViewModel()
-        viewModel = .previewValue
     }
 
     override func start() {

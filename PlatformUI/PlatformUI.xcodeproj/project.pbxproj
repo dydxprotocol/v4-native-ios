@@ -11,6 +11,7 @@
 		020490A92D3AEE5600394CBE /* SlideButtonStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020490A72D3AEE5600394CBE /* SlideButtonStyling.swift */; };
 		020490AA2D3AEE5600394CBE /* ShimmerEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020490A52D3AEE5600394CBE /* ShimmerEffect.swift */; };
 		020492592D3F1E5300394CBE /* IndeterminateCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020492542D3F1E5200394CBE /* IndeterminateCircularProgress.swift */; };
+		0204935F2D41B6D300394CBE /* LoadingDots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204935E2D41B6D100394CBE /* LoadingDots.swift */; };
 		0207FCA62D2BCEDB004C2C9F /* KeyboardObserving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FCA52D2BCEDA004C2C9F /* KeyboardObserving.swift */; };
 		0230377828C15C0E00412B72 /* PlatformViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230377728C15C0E00412B72 /* PlatformViewModel.swift */; };
 		023788F528B9924D00F212E1 /* PlatformButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023788F428B9924D00F212E1 /* PlatformButton.swift */; };
@@ -113,6 +114,7 @@
 		020490A62D3AEE5600394CBE /* SlideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideButton.swift; sourceTree = "<group>"; };
 		020490A72D3AEE5600394CBE /* SlideButtonStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideButtonStyling.swift; sourceTree = "<group>"; };
 		020492542D3F1E5200394CBE /* IndeterminateCircularProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndeterminateCircularProgress.swift; sourceTree = "<group>"; };
+		0204935E2D41B6D100394CBE /* LoadingDots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDots.swift; sourceTree = "<group>"; };
 		0207FCA52D2BCEDA004C2C9F /* KeyboardObserving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserving.swift; sourceTree = "<group>"; };
 		0230377728C15C0E00412B72 /* PlatformViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformViewModel.swift; sourceTree = "<group>"; };
 		023788F428B9924D00F212E1 /* PlatformButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformButton.swift; sourceTree = "<group>"; };
@@ -195,6 +197,14 @@
 			path = SlideButton;
 			sourceTree = "<group>";
 		};
+		020493592D41B6C900394CBE /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				0204935E2D41B6D100394CBE /* LoadingDots.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
 		0207FCA42D2BCECD004C2C9F /* KeyboardObserving */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +267,7 @@
 		025B844028AACBDE0037FF7C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				020493592D41B6C900394CBE /* Loading */,
 				020490A02D3AEE4A00394CBE /* SlideButton */,
 				276581F22C139F27009E072A /* Containers */,
 				27044F862BBB2ACB004C750D /* Extensions */,
@@ -696,6 +707,7 @@
 				02F38BF22A9AAE3700969E06 /* CircularProgressView.swift in Sources */,
 				02E2C93028A1C8A400F7C3BE /* PlatformUI.docc in Sources */,
 				02B120B528A430DF00281498 /* ThemeViewModifiers.swift in Sources */,
+				0204935F2D41B6D300394CBE /* LoadingDots.swift in Sources */,
 				024B795028B6D95D00F7C386 /* SignedAmount.swift in Sources */,
 				02DE88F828A2DB9C00728FF3 /* PlatformUIBundleClass.swift in Sources */,
 				02F16FD928B47E2D0085DC58 /* PlatformTableViewCell.swift in Sources */,

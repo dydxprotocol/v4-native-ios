@@ -40,6 +40,12 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
+            let buttonType = PlatformButtonType.defaultType(
+                fillWidth: true,
+                pilledCorner: false,
+                minHeight: 60,
+                cornerRadius: 16)
+
             let buttonText: String?
             let sideColor: Color
 
@@ -70,6 +76,7 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
                     .wrappedViewModel
 
                 let view = PlatformButtonViewModel(content: buttonContent,
+                                                   type: buttonType,
                                                    state: .primary) { [weak self] in
                     PlatformView.hideKeyboard()
                     self?.ctaAction?()
@@ -81,11 +88,6 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
             } else if case .disabled = state {
                 let buttonContent = Text(buttonText ?? DataLocalizer.localize(path: "APP.TRADE.ENTER_AMOUNT"))
                     .wrappedViewModel
-                let buttonType = PlatformButtonType.defaultType(
-                    fillWidth: true,
-                    pilledCorner: false,
-                    padding: EdgeInsets(all: 19),
-                    cornerRadius: 16)
                 let view = PlatformButtonViewModel(content: buttonContent,
                                                    type: buttonType,
                                                    state: .disabled) {
