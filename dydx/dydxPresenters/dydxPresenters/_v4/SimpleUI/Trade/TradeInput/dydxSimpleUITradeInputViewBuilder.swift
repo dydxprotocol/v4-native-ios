@@ -68,7 +68,7 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
     private let ctaButtonPresenter = dydxSimpleUITradeInputCtaButtonViewPresenter()
     private let sizeViewPresenter = dydxSimpleUITradeInputSizeViewPresenter()
     private let buyingPowerPresenter = dydxSimpleUIBuyingPowerViewPresenter()
-    private let feesPresenter = dydxSimpleUIFeesViewPresenter(feesType: .trade)
+    private let feesPresenter = dydxSimpleUIFeesViewPresenter(tradeType: .trade)
     private let marginUsagePreesnter = dydxSimpleUIMarginUsageViewPresenter()
     private let validationErrorPresenter = dydxSimpleUITradeInputValidationViewPresenter()
     private let headerPresenter = dydxSimpleUITradeInputHeaderViewPresenter()

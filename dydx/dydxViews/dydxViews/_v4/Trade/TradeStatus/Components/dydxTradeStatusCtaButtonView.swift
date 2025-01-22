@@ -15,6 +15,7 @@ public class dydxTradeStatusCtaButtonViewModel: PlatformViewModel {
         case cancel
         case done
         case tryAgain
+        case waiting
     }
 
     @Published public var ctaAction: (() -> Void)?
@@ -50,6 +51,9 @@ public class dydxTradeStatusCtaButtonViewModel: PlatformViewModel {
         case .tryAgain:
             buttonTitle = DataLocalizer.localize(path: "APP.ONBOARDING.TRY_AGAIN")
             buttonState = .primary
+        case .waiting:
+            buttonTitle = "..."
+            buttonState = .disabled
         }
 
         let buttonContent = Text(buttonTitle)

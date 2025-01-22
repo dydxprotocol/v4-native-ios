@@ -65,10 +65,6 @@ public class dydxProfileTopButtonsViewModel: PlatformViewModel {
                 Text("dYdX " + DataLocalizer.localize(path: "APP.TRADE.MODE.PRO"))
                     .themeFont(fontSize: .medium)
                     .themeColor(foreground: .textSecondary)
-
-                Text(DataLocalizer.localize(path: "APP.TRADE.MODE.FULLY_FEATURED"))
-                    .themeFont(fontSize: .small)
-                    .themeColor(foreground: .textTertiary)
             }
             Toggle("", isOn: toggleBinding)
                 .tint(ThemeColor.SemanticColor.colorPurple.color)

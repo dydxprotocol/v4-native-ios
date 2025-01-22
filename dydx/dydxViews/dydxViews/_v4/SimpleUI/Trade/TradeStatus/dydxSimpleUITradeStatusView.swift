@@ -152,15 +152,15 @@ public class dydxSimpleUITradeStatusViewModel: PlatformViewModel {
 
                 Spacer()
 
-                HStack {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.COST") + ":")
-                        .themeColor(foreground: .textTertiary)
-                    Text(self.totalFees ?? "-")
-                        .themeColor(foreground: .textPrimary)
-                    Text(self.assetId ?? "-")
-                        .themeColor(foreground: .textPrimary)
+                if let totalFees = self.totalFees {
+                    HStack {
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.COST") + ":")
+                            .themeColor(foreground: .textTertiary)
+                        Text(totalFees)
+                            .themeColor(foreground: .textPrimary)
+                    }
+                    .themeFont(fontSize: .small)
                 }
-                .themeFont(fontSize: .small)
             }
             ctaButtonViewModel.createView(parentStyle: style)
         }

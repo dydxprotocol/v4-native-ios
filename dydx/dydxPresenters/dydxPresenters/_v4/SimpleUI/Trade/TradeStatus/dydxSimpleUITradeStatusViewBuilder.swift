@@ -41,7 +41,7 @@ private protocol dydxSimpleUITradeStatusViewPresenterProtocol: HostedViewPresent
 }
 
 private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimpleUITradeStatusViewModel>, dydxSimpleUITradeStatusViewPresenterProtocol {
-    var tradeType: TradeSubmission.TradeType = .trade
+    @Published var tradeType: TradeSubmission.TradeType = .trade
 
     private var submissionDate: Date?
     @Published private var submissionStatus: AbacusStateManager.SubmissionStatus?
@@ -66,25 +66,82 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
         Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
             completion?()
         }
-
-//        switch tradeType {
-//            case .trade:
-//            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) {
-//                _, _ in
-//                completion?()
-//            }
-//        case .closePosition:
-//            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) {
-//                _, _ in
-//                Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
-//                    completion?()
-//                }
-//            }
-//        }
     }
 
     private lazy var tryAgainAction: (() -> Void) = { [weak self] in
         self?.submitOrder()
+    }
+
+    private var orderSidePublisher: AnyPublisher<Abacus.OrderSide?, Never> {
+        $tradeType
+            .flatMapLatest { tradeType in
+                switch tradeType {
+                case .trade:
+                    AbacusStateManager.shared.state.tradeInput
+                        .map {  $0?.side }
+                        .eraseToAnyPublisher()
+                case .closePosition:
+                    AbacusStateManager.shared.state.closePositionInput
+                        .map {  $0.side }
+                        .eraseToAnyPublisher()
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+
+    private var marketIdPublisher: AnyPublisher<String?, Never> {
+        $tradeType
+            .flatMapLatest { tradeType in
+                switch tradeType {
+                case .trade:
+                    AbacusStateManager.shared.state.tradeInput
+                        .map {  $0?.marketId }
+                        .eraseToAnyPublisher()
+                case .closePosition:
+                    AbacusStateManager.shared.state.closePositionInput
+                        .map {  $0.marketId }
+                        .eraseToAnyPublisher()
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+
+    private var tradeSummaryPublisher: AnyPublisher<TradeInputSummary?, Never> {
+        $tradeType
+            .flatMapLatest { tradeType in
+                switch tradeType {
+                case .trade:
+                    AbacusStateManager.shared.state.tradeInput
+                        .map {  $0?.summary }
+                        .eraseToAnyPublisher()
+                case .closePosition:
+                    AbacusStateManager.shared.state.closePositionInput
+                        .map {  $0.summary }
+                        .eraseToAnyPublisher()
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+
+    // last order of the current submission
+    private var validLastOrderPublisher: AnyPublisher<SubaccountOrder?, Never> {
+        Publishers.CombineLatest(
+            AbacusStateManager.shared.state.lastOrder,
+            $submissionStatus
+        )
+        .map { subaccountOrder, status in
+            if status != nil {
+                if let subaccountOrder = subaccountOrder,
+                   subaccountOrder.createdAtHeight != nil || subaccountOrder.goodTilBlock != nil {
+                    return subaccountOrder
+                } else {
+                    return nil
+                }
+            } else {
+                return nil
+            }
+        }
+        .eraseToAnyPublisher()
     }
 
     override init() {
@@ -94,10 +151,92 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
         viewModel = .previewValue
     }
 
+    override func start() {
+        super.start()
+
+        _ = submitOrderOnce
+
+        observeStatus()
+
+        orderSidePublisher
+            .sink { [weak self] side in
+                switch side {
+                case .buy:
+                    self?.viewModel?.side = OrderSide.BUY
+                case .sell:
+                    self?.viewModel?.side = OrderSide.SELL
+                default:
+                    self?.viewModel?.side = nil
+                }
+            }
+            .store(in: &subscriptions)
+    }
+
+    private func observeStatus() {
+        Publishers
+            .CombineLatest4(
+                validLastOrderPublisher,
+                marketIdPublisher,
+                AbacusStateManager.shared.state.configsAndAssetMap,
+                tradeSummaryPublisher
+            )
+            .sink { [weak self] validLastOrder, marketId, configsAndAssetMap, inputSummary in
+                if let validLastOrder = validLastOrder {
+                    self?.update(lastOrder: validLastOrder, configsAndAssetMap: configsAndAssetMap)
+                } else {
+                    self?.update(marketId: marketId, configsAndAssetMap: configsAndAssetMap, inputSummary: inputSummary)
+                }
+            }
+            .store(in: &subscriptions)
+    }
+
+    private func update(lastOrder: SubaccountOrder, configsAndAssetMap: [String: MarketConfigsAndAsset]) {
+        guard let configsAndAsset = configsAndAssetMap[lastOrder.marketId] else {
+            return
+        }
+
+        let marketConfigs = configsAndAsset.configs
+        let asset = configsAndAsset.asset
+
+        viewModel?.size = dydxFormatter.shared.raw(number: lastOrder.size, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 3)
+
+        viewModel?.assetId = asset?.displayableAssetId
+
+        viewModel?.price = dydxFormatter.shared.dollar(number: lastOrder.price, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 3)
+
+        viewModel?.totalFees = nil
+        viewModel?.totalAmount = dydxFormatter.shared.dollar(number: lastOrder.price * lastOrder.size, digits: 3)
+    }
+
+    private func update(marketId: String?, configsAndAssetMap: [String: MarketConfigsAndAsset], inputSummary: TradeInputSummary?) {
+        guard let marketId, let configsAndAsset = configsAndAssetMap[marketId] else { return }
+
+        let marketConfigs = configsAndAsset.configs
+        let asset = configsAndAsset.asset
+
+        viewModel?.size = dydxFormatter.shared.raw(number: inputSummary?.size?.doubleValue, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 3)
+
+        viewModel?.assetId = asset?.displayableAssetId
+
+        viewModel?.price = dydxFormatter.shared.dollar(number: inputSummary?.price?.doubleValue, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 3)
+
+        let tradeAmount = abs(inputSummary?.total?.doubleValue ?? 0)
+        if tradeAmount > 0 {
+            let tradeFees = inputSummary?.fee?.doubleValue ?? 0
+            let slippage = inputSummary?.slippage?.doubleValue ?? 0
+            let totalFees = tradeFees + slippage
+            viewModel?.totalFees = dydxFormatter.shared.dollar(number: totalFees, digits: 3)
+            viewModel?.totalAmount = dydxFormatter.shared.dollar(number: tradeAmount, digits: 3)
+        } else {
+            viewModel?.totalFees = nil
+            viewModel?.totalAmount = nil
+        }
+    }
+
     private func submitOrder() {
         submissionStatus = nil
         viewModel?.status = .submitting
-        viewModel?.ctaButtonViewModel.ctaButtonState = .cancel
+        viewModel?.ctaButtonViewModel.ctaButtonState = .waiting
         viewModel?.ctaButtonViewModel.ctaAction = doneAction
 
         switch tradeType {
