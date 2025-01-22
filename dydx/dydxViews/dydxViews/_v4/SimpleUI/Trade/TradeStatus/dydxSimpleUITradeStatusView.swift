@@ -139,7 +139,7 @@ public class dydxSimpleUITradeStatusViewModel: PlatformViewModel {
     }
 
     private func createBottomItems(style: ThemeStyle) -> some View {
-        VStack {
+        VStack(spacing: 21) {
             HStack {
                 HStack {
                     Text(DataLocalizer.localize(path: "APP.TRADE.TOTAL") + ":")

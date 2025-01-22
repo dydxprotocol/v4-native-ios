@@ -70,7 +70,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
 
                     Spacer()
 
-                    VStack {
+                    VStack(spacing: 21) {
                         HStack {
                             self.marginUsageViewModel?.createView(parentStyle: style)
                             Spacer()

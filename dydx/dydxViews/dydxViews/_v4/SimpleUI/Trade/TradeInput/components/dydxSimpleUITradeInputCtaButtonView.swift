@@ -59,24 +59,41 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
                     return AnyView(PlatformView.nilView)
                 }
             case .disabled(let text):
-                buttonText = text ?? DataLocalizer.localize(path: "ERRORS.TRADE_BOX_TITLE.MISSING_TRADE_SIZE")
+                buttonText = text
                 sideColor = ThemeColor.SemanticColor.textTertiary.color
             }
 
             if case .enabled(let text) = state {
                 let buttonText = text ?? DataLocalizer.localize(path: "APP.TRADE.PREVIEW")
                 let buttonContent =
-                    Text(buttonText)
-                        .wrappedViewModel
+                Text(buttonText)
+                    .wrappedViewModel
 
                 let view = PlatformButtonViewModel(content: buttonContent,
-                                               state: .primary) { [weak self] in
+                                                   state: .primary) { [weak self] in
                     PlatformView.hideKeyboard()
                     self?.ctaAction?()
                 }
-                   .createView(parentStyle: style)
-                   .animation(.easeInOut(duration: 0.1))
+                    .createView(parentStyle: style)
+                    .animation(.easeInOut(duration: 0.1))
                 return AnyView(view)
+
+            } else if case .disabled = state {
+                let buttonContent = Text(buttonText ?? DataLocalizer.localize(path: "APP.TRADE.ENTER_AMOUNT"))
+                    .wrappedViewModel
+                let buttonType = PlatformButtonType.defaultType(
+                    fillWidth: true,
+                    pilledCorner: false,
+                    padding: EdgeInsets(all: 19),
+                    cornerRadius: 16)
+                let view = PlatformButtonViewModel(content: buttonContent,
+                                                   type: buttonType,
+                                                   state: .disabled) {
+                }
+                    .createView(parentStyle: style)
+                    .animation(.easeInOut(duration: 0.1))
+                return AnyView(view)
+
             } else {
                 let view = Group {
                     let styling = SlideButtonStyling(
