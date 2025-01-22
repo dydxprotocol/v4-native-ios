@@ -22,7 +22,7 @@ public class dydxSimpleUITradeStatusViewBuilder: NSObject, ObjectBuilderProtocol
     public func build<T>() -> T? {
         let presenter = dydxSimpleUITradeStatusViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxSimpleUITradeStatusViewController(presenter: presenter, view: view, configuration: .default) as? T
+        return dydxSimpleUITradeStatusViewController(presenter: presenter, view: view, configuration: .fullScreenSheet) as? T
     }
 }
 

@@ -39,6 +39,21 @@ extension UIViewController {
         if navigationController === nil {
             navigationController = UINavigationController.load(storyboard: "Nav", with: viewController)
             navigationController?.modalPresentationStyle = viewController.modalPresentationStyle
+            
+            if let sheet = navigationController?.sheetPresentationController,
+                let source = viewController.sheetPresentationController {
+                sheet.detents = source.detents
+                sheet.selectedDetentIdentifier = source.selectedDetentIdentifier
+                sheet.delegate = source.delegate
+                sheet.preferredCornerRadius = source.preferredCornerRadius
+                sheet.prefersEdgeAttachedInCompactHeight = source.prefersEdgeAttachedInCompactHeight
+                sheet.prefersScrollingExpandsWhenScrolledToEdge = source.prefersScrollingExpandsWhenScrolledToEdge
+                sheet.sourceView = source.sourceView
+                sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = source.widthFollowsPreferredContentSizeWhenEdgeAttached
+                sheet.largestUndimmedDetentIdentifier = source.largestUndimmedDetentIdentifier
+                sheet.prefersGrabberVisible = source.prefersGrabberVisible
+            }
+            
         }
         return navigationController!
     }

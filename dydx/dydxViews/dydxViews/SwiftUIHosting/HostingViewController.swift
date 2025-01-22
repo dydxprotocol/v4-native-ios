@@ -19,21 +19,24 @@ import Utilities
 import Combine
 
 public struct HostingViewControllerConfiguration {
-    public init(ignoreSafeArea: Bool = true, fixedHeight: CGFloat? = nil, gradientTabbar: Bool = false, disableNavigationController: Bool = false) {
+    public init(ignoreSafeArea: Bool = true, fixedHeight: CGFloat? = nil, gradientTabbar: Bool = false, disableNavigationController: Bool = false, fullScreenSheet: Bool = false) {
         self.ignoreSafeArea = ignoreSafeArea
         self.fixedHeight = fixedHeight
         self.gradientTabbar = gradientTabbar
         self.disableNavigationController = disableNavigationController
+        self.fullScreenSheet = fullScreenSheet
     }
 
-    let ignoreSafeArea: Bool
-    let fixedHeight: CGFloat?
-    let gradientTabbar: Bool
-    let disableNavigationController: Bool
+    var ignoreSafeArea: Bool
+    var fixedHeight: CGFloat?
+    var gradientTabbar: Bool
+    var disableNavigationController: Bool
+    var fullScreenSheet: Bool
 
     public static let `default` = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: false)
     public static let ignoreSafeArea = HostingViewControllerConfiguration(ignoreSafeArea: true)
     public static let tabbarItemView = HostingViewControllerConfiguration(ignoreSafeArea: false, fixedHeight: nil, gradientTabbar: true)
+    public static let fullScreenSheet = HostingViewControllerConfiguration(ignoreSafeArea: true, fullScreenSheet: true)
 }
 
 open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol, UITabBarControllerDelegate {
@@ -80,6 +83,11 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
 
     open override func viewDidLoad() {
         super.viewDidLoad()
+
+        if configuration.fullScreenSheet, let sheet = sheetPresentationController {
+            sheet.detents = [.large()]
+            sheet.prefersGrabberVisible = true
+        }
 
         tabBarController?.delegate = self
 

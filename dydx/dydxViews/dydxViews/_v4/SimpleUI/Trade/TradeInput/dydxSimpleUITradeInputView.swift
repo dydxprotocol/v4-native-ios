@@ -85,8 +85,6 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
                 .padding(.top, 32)
                 .padding(.bottom, bottomPadding)
                 .themeColor(background: .layer2)
-               // .keyboardAccessory(background: .layer3, parentStyle: parentStyle)
-                .makeSheet()
 
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))

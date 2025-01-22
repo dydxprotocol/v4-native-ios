@@ -65,7 +65,6 @@ public class dydxSimpleUITradeStatusViewModel: PlatformViewModel {
                 .padding(.top, 32)
                 .padding(.bottom, bottomPadding)
                 .themeColor(background: .layer2)
-                .makeSheet()
 
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }

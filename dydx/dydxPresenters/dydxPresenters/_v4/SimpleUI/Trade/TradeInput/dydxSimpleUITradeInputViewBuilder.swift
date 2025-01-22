@@ -22,7 +22,7 @@ public class dydxSimpleUITradeInputViewBuilder: NSObject, ObjectBuilderProtocol 
     public func build<T>() -> T? {
         let presenter = dydxSimpleUITradeInputViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        let viewController = dydxSimpleUITradeInputViewController(presenter: presenter, view: view, configuration: .default)
+        let viewController = dydxSimpleUITradeInputViewController(presenter: presenter, view: view, configuration: .fullScreenSheet)
         return viewController as? T
     }
 }

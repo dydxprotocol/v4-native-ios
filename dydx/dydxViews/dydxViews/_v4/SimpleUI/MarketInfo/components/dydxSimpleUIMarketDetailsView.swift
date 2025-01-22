@@ -34,7 +34,7 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
     }
 
     private func createContent(style: ThemeStyle) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 16) {
             Group {
                 if let primaryDescription = sharedMarketViewModel?.primaryDescription {
                     Text(primaryDescription)
