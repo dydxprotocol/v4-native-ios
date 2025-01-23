@@ -82,7 +82,7 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
                         .eraseToAnyPublisher()
                 case .closePosition:
                     AbacusStateManager.shared.state.closePositionInput
-                        .map {  $0.side }
+                        .map {  $0?.side }
                         .eraseToAnyPublisher()
                 }
             }
@@ -99,7 +99,7 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
                         .eraseToAnyPublisher()
                 case .closePosition:
                     AbacusStateManager.shared.state.closePositionInput
-                        .map {  $0.marketId }
+                        .map {  $0?.marketId }
                         .eraseToAnyPublisher()
                 }
             }
@@ -116,7 +116,7 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
                         .eraseToAnyPublisher()
                 case .closePosition:
                     AbacusStateManager.shared.state.closePositionInput
-                        .map {  $0.summary }
+                        .map {  $0?.summary }
                         .eraseToAnyPublisher()
                 }
             }

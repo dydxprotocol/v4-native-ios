@@ -536,9 +536,9 @@ public final class AbacusState {
             .eraseToAnyPublisher()
     }
 
-    public var closePositionInput: AnyPublisher<ClosePositionInput, Never> {
+    public var closePositionInput: AnyPublisher<ClosePositionInput?, Never> {
         statePublisher
-            .compactMap(\.?.input?.closePosition)
+            .map(\.?.input?.closePosition)
             .throttle(for: .milliseconds(10), scheduler: DispatchQueue.main, latest: true)
             .removeDuplicates()
             .share()

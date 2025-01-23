@@ -21,7 +21,7 @@ struct CollectionItemUtil {
     static func createCollectionItem(parentStyle: ThemeStyle, titleViewModel: PlatformViewModel?, value: String?) -> some View {
         let valueViewModel = Text(value ?? "-")
             .themeFont(fontSize: .large)
-            .themeColor(foreground: .textSecondary)
+            .themeColor(foreground: .textPrimary)
             .lineLimit(1)
             .minimumScaleFactor(0.5)
            // .fixedSize(horizontal: true, vertical: false)
@@ -37,7 +37,7 @@ struct CollectionItemUtil {
             .wrappedViewModel
         let valueViewModel = Text(value ?? "-")
             .themeFont(fontSize: .large)
-            .themeColor(foreground: .textSecondary)
+            .themeColor(foreground: .textPrimary)
             .lineLimit(1)
             .minimumScaleFactor(0.5)
           //  .fixedSize(horizontal: true, vertical: false)

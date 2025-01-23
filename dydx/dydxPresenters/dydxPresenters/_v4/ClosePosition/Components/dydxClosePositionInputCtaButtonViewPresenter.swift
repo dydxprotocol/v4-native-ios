@@ -42,8 +42,8 @@ class dydxClosePositionInputCtaButtonViewPresenter: HostedViewPresenter<dydxTrad
             .store(in: &subscriptions)
     }
 
-    private func update(closePositionInput: ClosePositionInput, tradeErrors: [ValidationError]) {
-        if closePositionInput.size?.size?.doubleValue ?? 0 > 0 {
+    private func update(closePositionInput: ClosePositionInput?, tradeErrors: [ValidationError]) {
+        if closePositionInput?.size?.size?.doubleValue ?? 0 > 0 {
             let firstBlockingError = tradeErrors.first { $0.type == ErrorType.required || $0.type == ErrorType.error }
             if let firstBlockingError = firstBlockingError {
                 viewModel?.ctaButtonState = .disabled(firstBlockingError.resources.action?.localizedString)

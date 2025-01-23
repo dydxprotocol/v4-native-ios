@@ -100,7 +100,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                 .keyboardObserving()
             }
                 .frame(maxWidth: .infinity)
-                .themeColor(background: .layer2)
+                .themeColor(background: .layer1)
 
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
@@ -115,7 +115,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
         }
-        .themeColor(background: .layer2)
+        .themeColor(background: .layer1)
     }
 }
 

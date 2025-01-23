@@ -15,6 +15,7 @@ public class SideTextViewModel: PlatformViewModel, Hashable {
     public enum ColoringOption {
         case none
         case colored
+        case customColored(ThemeColor.SemanticColor)
         case withBackground
     }
 
@@ -105,6 +106,10 @@ public class SideTextViewModel: PlatformViewModel, Hashable {
                     case .colored:
                         Text(self.side.text)
                             .themeStyle(styleKey: self.side.styleKey, parentStyle: style)
+                    case .customColored(let color):
+                        Text(self.side.text)
+                            .themeColor(foreground: color)
+                            .themeStyle(styleKey: self.side.styleKey, parentStyle: style)
                     case .withBackground:
                         Text(self.side.text)
                             .themeStyle(styleKey: self.side.styleKey, parentStyle: style)
@@ -119,12 +124,11 @@ public class SideTextViewModel: PlatformViewModel, Hashable {
     }
 
     public static func == (lhs: SideTextViewModel, rhs: SideTextViewModel) -> Bool {
-        lhs.side == rhs.side && lhs.coloringOption == rhs.coloringOption
+        lhs.side == rhs.side
     }
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(side)
-        hasher.combine(coloringOption)
     }
 
     public var layerColor: ThemeColor.SemanticColor {

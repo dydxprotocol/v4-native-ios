@@ -30,7 +30,7 @@ class dydxClosePositionHeaderViewPresenter: HostedViewPresenter<dydxClosePositio
         super.start()
 
         let marketPublisher = AbacusStateManager.shared.state.closePositionInput
-            .compactMap { $0.marketId }
+            .compactMap { $0?.marketId }
             .flatMap { AbacusStateManager.shared.state.market(of: $0) }
             .compactMap { $0 }
             .eraseToAnyPublisher()

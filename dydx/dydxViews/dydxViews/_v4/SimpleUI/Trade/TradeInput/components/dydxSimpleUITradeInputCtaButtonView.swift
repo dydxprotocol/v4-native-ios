@@ -28,6 +28,7 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
     @Published public var ctaAction: (() -> Void)?
     @Published public var state: State = .disabled()
     @Published public var side: AppOrderSide = .BUY
+    @Published public var isClosePosition: Bool = false
 
     public init() { }
 
@@ -54,15 +55,20 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
                 buttonText = text
                 sideColor = ThemeColor.SemanticColor.textTertiary.color
             case .slider:
-                switch side {
-                case .BUY:
-                    sideColor = ThemeColor.SemanticColor.colorGreen.color
-                    buttonText = DataLocalizer.localize(path: "APP.TRADE.SLIDE_TO_BUY")
-                case .SELL:
-                    sideColor = ThemeColor.SemanticColor.colorRed.color
-                    buttonText = DataLocalizer.localize(path: "APP.TRADE.SLIDE_TO_SELL")
-                default:
-                    return AnyView(PlatformView.nilView)
+                if isClosePosition {
+                    sideColor = ThemeColor.SemanticColor.colorPurple.color
+                    buttonText = DataLocalizer.localize(path: "APP.TRADE.SLIDE_TO_CLOSE")
+                } else {
+                    switch side {
+                    case .BUY:
+                        sideColor = ThemeColor.SemanticColor.colorGreen.color
+                        buttonText = DataLocalizer.localize(path: "APP.TRADE.SLIDE_TO_CLOSE")
+                    case .SELL:
+                        sideColor = ThemeColor.SemanticColor.colorRed.color
+                        buttonText = DataLocalizer.localize(path: "APP.TRADE.SLIDE_TO_SELL")
+                    default:
+                        return AnyView(PlatformView.nilView)
+                    }
                 }
             case .disabled(let text):
                 buttonText = text

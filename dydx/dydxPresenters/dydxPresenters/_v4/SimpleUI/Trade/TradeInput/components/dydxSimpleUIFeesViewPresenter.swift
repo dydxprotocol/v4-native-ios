@@ -33,7 +33,7 @@ class dydxSimpleUIFeesViewPresenter: HostedViewPresenter<dydxSimpleUIFeesViewMod
                 .eraseToAnyPublisher()
         case .closePosition:
             tradeSummaryPublisher = AbacusStateManager.shared.state.closePositionInput
-                .map {  $0.summary }
+                .map {  $0?.summary }
                 .eraseToAnyPublisher()
         }
         super.init()

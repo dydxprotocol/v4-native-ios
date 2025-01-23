@@ -57,11 +57,11 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
                 self.buySell?.createView(parentStyle: style)
                     .padding(.top, 16)
                     .padding(.bottom, bottomPadding)
-                    .themeColor(background: .layer2)
+                    .themeColor(background: .layer1)
                   //  .background(SearchBoxModel.bottomBlendGradiant)
             }
                 .frame(maxWidth: .infinity)
-                .themeColor(background: .layer2)
+                .themeColor(background: .layer1)
 
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }

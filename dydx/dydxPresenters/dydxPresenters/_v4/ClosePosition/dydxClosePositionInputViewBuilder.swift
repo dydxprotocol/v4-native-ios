@@ -80,16 +80,16 @@ private class dydxClosePositionInputViewPresenter: HostedViewPresenter<dydxClose
         super.start()
 
         AbacusStateManager.shared.state.closePositionInput
-            .map(\.marketId)
+            .map(\.?.marketId)
             .assign(to: &orderbookPresenter.$marketId)
 
         AbacusStateManager.shared.state.closePositionInput
-            .map(\.marketId)
+            .map(\.?.marketId)
             .assign(to: &orderbookGroupPresenter.$marketId)
 
         AbacusStateManager.shared.state.closePositionInput
             .map { input -> OrderbookDisplay in
-                guard let side = input.side else {
+                guard let side = input?.side else {
                     return .all
                 }
                 switch side {

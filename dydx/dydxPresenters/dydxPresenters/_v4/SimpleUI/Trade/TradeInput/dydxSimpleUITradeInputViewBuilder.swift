@@ -29,7 +29,10 @@ public class dydxSimpleUITradeInputViewBuilder: NSObject, ObjectBuilderProtocol 
 
 class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, dydxSimpleUITradeInputViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if request?.path == "/trade/simple", let presenter = presenter as? dydxSimpleUITradeInputViewPresenter {
+        guard let presenter = presenter as? dydxSimpleUITradeInputViewPresenter else {
+            return false
+        }
+        if request?.path == "/trade/simple" {
             guard let side = request?.params?["side"] as? String else {
                 return false
             }
@@ -41,19 +44,20 @@ class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, 
             AbacusStateManager.shared.trade(input: nil, type: .size)
             AbacusStateManager.shared.trade(input: nil, type: .usdcsize)
 
-            switch side {
-            case "sell":
-                presenter.side = .SELL
-            case "buy":
-                presenter.side = .BUY
-            default:
-                return false
-            }
-
             AbacusStateManager.shared.trade(input: side.uppercased(), type: TradeInputField.side)
 
+            presenter.tradeType = .trade
+            return true
+
+        } else if request?.path == "/trade/simple/close", let marketId = parser.asString(request?.params?["marketId"]) {
+
+            AbacusStateManager.shared.setMarket(market: marketId)
+            AbacusStateManager.shared.startClosePosition(marketId: marketId)
+
+            presenter.tradeType = .closePosition
             return true
         }
+
         return false
     }
 }
@@ -63,7 +67,13 @@ private protocol dydxSimpleUITradeInputViewPresenterProtocol: HostedViewPresente
 }
 
 private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputViewModel>, dydxSimpleUITradeInputViewPresenterProtocol {
-    @Published var side: AppOrderSide?
+    var tradeType: TradeSubmission.TradeType = .trade {
+        didSet {
+            headerPresenter.tradeType = tradeType
+            ctaButtonPresenter.tradeType = tradeType
+            sizeViewPresenter.tradeType = tradeType
+        }
+    }
 
     private let ctaButtonPresenter = dydxSimpleUITradeInputCtaButtonViewPresenter()
     private let sizeViewPresenter = dydxSimpleUITradeInputSizeViewPresenter()

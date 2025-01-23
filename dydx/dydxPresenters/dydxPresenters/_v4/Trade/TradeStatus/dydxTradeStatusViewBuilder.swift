@@ -225,8 +225,8 @@ private class dydxTradeStatusViewPresenter: HostedViewPresenter<dydxTradeStatusV
         }
     }
 
-    private func update(closePositionInput: ClosePositionInput, configsAndAssetMap: [String: MarketConfigsAndAsset]) {
-        guard let marketId = closePositionInput.marketId else {
+    private func update(closePositionInput: ClosePositionInput?, configsAndAssetMap: [String: MarketConfigsAndAsset]) {
+        guard  let closePositionInput, let marketId = closePositionInput.marketId else {
             return
         }
 

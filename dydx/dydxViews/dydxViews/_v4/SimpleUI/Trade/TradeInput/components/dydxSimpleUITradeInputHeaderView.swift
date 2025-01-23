@@ -66,7 +66,7 @@ public class dydxSimpleUITradeInputHeaderViewModel: PlatformViewModel {
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontSize: .medium)
 
-            side?.createView(parentStyle: style)
+            side?.createView(parentStyle: style.themeFont(fontSize: .small))
         }
     }
 

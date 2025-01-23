@@ -28,7 +28,7 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
                 .eraseToAnyPublisher()
         case .close:
             tradeSummaryPublisher = AbacusStateManager.shared.state.closePositionInput
-                .map { (summary: $0.summary, marketId: $0.marketId) }
+                .map { (summary: $0?.summary, marketId: $0?.marketId) }
                 .eraseToAnyPublisher()
         }
         super.init()

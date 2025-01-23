@@ -72,7 +72,7 @@ public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
         }
-        .themeColor(background: .layer2)
+        .themeColor(background: .layer1)
     }
 }
 

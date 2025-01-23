@@ -16,6 +16,8 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
     @Published public var secondaryText: String?
     @Published public var secondaryToken: String?
 
+    @Published public var percent: dydxSimpleUIClosePercentViewModel?
+
     public enum FocusState {
         case atUsdcSize, atSize, none
 
@@ -50,6 +52,7 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
         let vm = dydxSimpleUITradeInputSizeViewModel()
         vm.sizeItem = .previewValue
         vm.usdSizeItem = .previewValue
+        vm.percent = .previewValue
         return vm
     }()
 
@@ -59,7 +62,7 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack(alignment: .center) {
+            let view = VStack(alignment: .center, spacing: 20) {
                 let animationBoxHeight = dydxSimpleUITradeInputSizeItemViewModel.viewHeight
                 ZStack(alignment: .leading) {
                     let offset = self.focusState == .atUsdcSize ? 0.0 : -animationBoxHeight
@@ -74,6 +77,9 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
                 .contentShape(Rectangle())      // needed to clip the tap events
 
                 self.createSwapView(style: style)
+
+                self.percent?
+                    .createView(parentStyle: parentStyle)
             }
                 .padding(.horizontal, 8)
 
@@ -82,38 +88,45 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
     }
 
     private func createSwapView(style: ThemeStyle) -> some View {
-        return Group {
-            let content = HStack {
-                if let secondaryText, let secondaryToken {
-                    Text(secondaryText)
-                        .themeFont(fontSize: .small)
-                        .themeColor(foreground: .textTertiary)
+        let textContent = HStack {
+            if let secondaryText, let secondaryToken {
+                Text(secondaryText)
+                    .themeFont(fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
 
-                    Text(secondaryToken)
-                        .themeFont(fontSize: .small)
+                Text(secondaryToken)
+                    .themeFont(fontSize: .small)
+            }
+        }
+
+        return Group {
+            if percent != nil {
+                textContent
+            } else {
+                let content = HStack {
+                    textContent
+                    PlatformIconViewModel(type: .asset(name: "icon_swap_vertical", bundle: .dydxView),
+                                          clip: .circle(background: .layer3, spacing: 8),
+                                          size: CGSize(width: 24, height: 24),
+                                          templateColor: .textSecondary)
+                    .createView(parentStyle: style)
                 }
 
-                PlatformIconViewModel(type: .asset(name: "icon_swap_vertical", bundle: .dydxView),
-                                      clip: .circle(background: .layer3, spacing: 8),
-                                      size: CGSize(width: 24, height: 24),
-                                      templateColor: .textSecondary)
-                .createView(parentStyle: style)
-
-            }.wrappedViewModel
-            PlatformButtonViewModel(content: content,
-                                    type: .iconType) { [weak self] in
-                withAnimation(Animation.easeInOut) {
-                    switch self?.focusState {
-                    case .atUsdcSize:
-                        self?.focusState = .atSize
-                    case .atSize:
-                        self?.focusState = .atUsdcSize
-                    default:
-                        break
+                PlatformButtonViewModel(content: content.wrappedViewModel,
+                                        type: .iconType) { [weak self] in
+                    withAnimation(Animation.easeInOut) {
+                        switch self?.focusState {
+                        case .atUsdcSize:
+                            self?.focusState = .atSize
+                        case .atSize:
+                            self?.focusState = .atUsdcSize
+                        default:
+                            break
+                        }
                     }
                 }
+                                        .createView(parentStyle: style)
             }
-                                    .createView(parentStyle: style)
         }
     }
 }

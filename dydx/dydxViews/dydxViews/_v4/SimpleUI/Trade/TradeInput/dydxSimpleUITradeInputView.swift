@@ -49,8 +49,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
 
                 VStack {
                     ScrollView(showsIndicators: false) {
-                        VStack {
-
+                        VStack(spacing: 16) {
                             VStack(spacing: 16) {
                                 self.buyingPowerViewModel?.createView(parentStyle: style)
                                     .padding(.horizontal, 8)
@@ -84,7 +83,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
                 .padding(.horizontal, 16)
                 .padding(.top, 32)
                 .padding(.bottom, bottomPadding)
-                .themeColor(background: .layer2)
+                .themeColor(background: .layer1)
 
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))

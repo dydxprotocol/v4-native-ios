@@ -88,7 +88,7 @@ class dydxSimpleUIMarketPositionViewPresenter: HostedViewPresenter<dydxSimpleUIM
         viewModel?.funding = SignedAmountViewModel(amount: position.netFunding?.doubleValue, displayType: .dollar, coloringOption: .allText)
 
         viewModel?.closeAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/trade/close",
+            Router.shared?.navigate(to: RoutingRequest(path: "/trade/simple/close",
                                                        params: ["marketId": position.id]),
                                     animated: true, completion: nil)
         }

@@ -21,7 +21,7 @@ protocol dydxSimpleUITradeInputHeaderViewPresenterProtocol: HostedViewPresenterP
 }
 
 class dydxSimpleUITradeInputHeaderViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputHeaderViewModel>, dydxSimpleUITradeInputHeaderViewPresenterProtocol {
-    @Published var marketId: String?
+    @Published var tradeType: TradeSubmission.TradeType = .trade
 
     private let marketPresenter = SharedMarketPresenter()
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
@@ -37,32 +37,55 @@ class dydxSimpleUITradeInputHeaderViewPresenter: HostedViewPresenter<dydxSimpleU
 
         self.viewModel = viewModel
 
-        $marketId.assign(to: &marketPresenter.$marketId)
-
         attachChildren(workers: childPresenters)
     }
 
     override func start() {
         super.start()
 
-        AbacusStateManager.shared.state.tradeInput
-            .compactMap { $0 }
-            .removeDuplicates()
-            .sink { [weak self] tradeInput in
-                self?.marketPresenter.marketId = tradeInput.marketId
-                let side: SideTextViewModel.Side?
-                switch tradeInput.side {
-                case .buy:
-                    side = .buy
-                case .sell:
-                    side = .sell
-                default:
-                    side = nil
-                }
-                if let side {
-                    self?.viewModel?.side = SideTextViewModel(side: side)
+        Publishers
+            .CombineLatest3(
+                $tradeType,
+                AbacusStateManager.shared.state.tradeInput,
+                AbacusStateManager.shared.state.closePositionInput
+            )
+            .sink { [weak self] tradeType, tradeInput, closePositionINput in
+                switch tradeType {
+                case .trade:
+                    self?.update(tradeInput: tradeInput)
+                case .closePosition:
+                    self?.update(closePositionInput: closePositionINput)
                 }
             }
             .store(in: &subscriptions)
+    }
+
+    private func update(tradeInput: TradeInput?) {
+        guard let tradeInput else {
+            viewModel?.side = nil
+            return
+        }
+        marketPresenter.marketId = tradeInput.marketId
+        let side: SideTextViewModel.Side?
+        switch tradeInput.side {
+        case .buy:
+            side = .buy
+        case .sell:
+            side = .sell
+        default:
+            side = nil
+        }
+        if let side {
+            viewModel?.side = SideTextViewModel(side: side)
+        }
+    }
+
+    private func update(closePositionInput: ClosePositionInput?) {
+        guard let closePositionInput else {
+            viewModel?.side = nil
+            return
+        }
+        marketPresenter.marketId = closePositionInput.marketId
+        viewModel?.side = SideTextViewModel(side: .custom(DataLocalizer.localize(path: "APP.TRADE.CLOSE_POSITION")), coloringOption: .customColored(ThemeColor.SemanticColor.colorRed))
     }
 }

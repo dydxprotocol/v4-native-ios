@@ -28,6 +28,7 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
                 self.createContent(style: style)
                     .sectionHeader {
                         self.createHeader(style: style)
+                            .themeColor(background: .layer1)
                     }
             )
         }

@@ -66,7 +66,7 @@ class dydxClosePositionInputEditViewPresenter: HostedViewPresenter<dydxClosePosi
                 AbacusStateManager.shared.state.closePositionInput,
                 AbacusStateManager.shared.state.configsAndAssetMap)
             .sink { [weak self] closePositionInput, configsAndAssetMap in
-                if let marketId = closePositionInput.marketId {
+                if let closePositionInput, let marketId = closePositionInput.marketId {
                     self?.update(closePositionInput: closePositionInput, configsAndAsset: configsAndAssetMap[marketId])
                 }
             }
