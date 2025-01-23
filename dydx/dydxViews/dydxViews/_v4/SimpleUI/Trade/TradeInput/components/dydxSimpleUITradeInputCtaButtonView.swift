@@ -126,6 +126,8 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
                     })
                     .disabled(self.state.buttonDisabled)
                 }
+                    .animation(.easeInOut(duration: 0.1))
+
                 return AnyView(view)
             }
         }

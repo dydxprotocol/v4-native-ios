@@ -61,6 +61,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
 
                             self.validationErrorViewModel?
                                 .createView(parentStyle: parentStyle)
+                                .animation(.default)
                         }
                         .introspectScrollView { [weak self] scrollView in
                             self?.onScrollViewCreated?(scrollView)

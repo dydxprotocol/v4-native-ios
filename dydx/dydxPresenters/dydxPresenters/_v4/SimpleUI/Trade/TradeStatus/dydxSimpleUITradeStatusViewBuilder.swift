@@ -28,7 +28,14 @@ public class dydxSimpleUITradeStatusViewBuilder: NSObject, ObjectBuilderProtocol
 
 private class dydxSimpleUITradeStatusViewController: HostingViewController<PlatformView, dydxSimpleUITradeStatusViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
+        guard let presenter = presenter as? dydxSimpleUITradeStatusViewPresenter else {
+            return false
+        }
         if request?.path == "/trade/simple/status" {
+            presenter.tradeType = .trade
+            return true
+        } else if request?.path == "/closePosition/simple/status" {
+            presenter.tradeType = .closePosition
             return true
         }
         return false

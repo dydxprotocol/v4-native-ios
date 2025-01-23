@@ -93,9 +93,11 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
                 Text(secondaryText)
                     .themeFont(fontSize: .small)
                     .themeColor(foreground: .textTertiary)
+                    .animation(.default)
 
                 Text(secondaryToken)
                     .themeFont(fontSize: .small)
+                    .animation(.default)
             }
         }
 

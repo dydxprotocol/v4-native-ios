@@ -71,6 +71,7 @@ public class dydxSimpleUIFeesViewModel: PlatformViewModel {
                      }
                      .padding(.horizontal, 8)
                      .padding(.vertical, 4)
+                     .animation(.default)
                 })
                 .popover(present: self.presentBinding, attributes: { attrs in
                     attrs.position = .absolute(

@@ -97,13 +97,16 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                     Text(sharedAccountViewModel?.equity ?? "-")
                         .themeFont(fontType: .plus, fontSize: .custom(size: 32))
                         .themeColor(foreground: .textPrimary)
+                        .animation(.default)
 
                     HStack(alignment: .center, spacing: 8) {
                         pnlAmount?
                             .createView(parentStyle: style.themeFont(fontSize: .small))
+                            .animation(.default)
 
                         pnlPercent?
                             .createView(parentStyle: style.themeFont(fontSize: .small))
+                            .animation(.default)
 
                         periodOption.createView(parentStyle: style)
                     }
@@ -121,6 +124,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                             .themeColor(foreground: .textTertiary)
                         Text(sharedAccountViewModel?.buyingPower ?? "-")
                             .themeColor(foreground: .textSecondary)
+                            .animation(.default)
                     }
                     .themeFont(fontSize: .small)
 
@@ -137,6 +141,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                                                                     viewSize: leverageIcon.viewSize,
                                                                     displayOption: .percent)
                             leveragePercent.createView(parentStyle: style.themeColor(foreground: .textTertiary))
+                                .animation(.default)
                         }
                     }
                 }

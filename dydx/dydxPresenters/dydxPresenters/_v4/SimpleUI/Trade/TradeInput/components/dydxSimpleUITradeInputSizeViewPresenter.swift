@@ -51,9 +51,10 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
     private lazy var percent: dydxSimpleUIClosePercentViewModel = {
         var options = [InputSelectOption]()
         // must be 1.0 so that when double value is parsed as string, it matches for 1
-        options.append(InputSelectOption(value: "1.0", string: "100%"))
-        options.append(InputSelectOption(value: "0.50", string: "50%"))
         options.append(InputSelectOption(value: "0.25", string: "25%"))
+        options.append(InputSelectOption(value: "0.50", string: "50%"))
+        options.append(InputSelectOption(value: "0.75", string: "75%"))
+        options.append(InputSelectOption(value: "1.0", string: DataLocalizer.localize(path: "APP.GENERAL.FULL_CLOSE")))
 
         let item = dydxSimpleUIClosePercentViewModel()
         item.options = options

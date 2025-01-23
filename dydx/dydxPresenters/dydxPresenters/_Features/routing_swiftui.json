@@ -91,6 +91,10 @@
                     "destination":"dydxPresenters.dydxTradeStatusViewBuilder",
                     "presentation":"prompt"
                 },
+                "/closePosition/simple/status":{
+                    "destination":"dydxPresenters.dydxSimpleUITradeStatusViewBuilder",
+                    "presentation":"prompt"
+                },
                 "/error/geo":{
                     "destination":"dydxPresenters.dydxTradeRestrictedViewBuilder",
                     "presentation":"prompt"

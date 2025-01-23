@@ -65,23 +65,21 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
             .eraseToAnyPublisher()
 
         Publishers
-            .CombineLatest4(
+            .CombineLatest3(
                 inputsPublisher,
                 AbacusStateManager.shared.state.validationErrors,
-                AbacusStateManager.shared.state.configsAndAssetMap,
                 onboardingStatePublisher)
-            .sink { [weak self] inputs, tradeErrors, configsAndAssetMap, onboardingState in
+            .sink { [weak self] inputs, errors, onboardingState in
                 guard let self else { return }
                 let (tradeType, tradeInput, closePositionInput) = inputs
 
                 switch tradeType {
                 case .trade:
-                    guard let tradeInput, let marketId = tradeInput.marketId else {
+                    guard let tradeInput else {
                         return
                     }
                     self.update(tradeInput: tradeInput,
-                                tradeErrors: tradeErrors,
-                                configsAndAsset: configsAndAssetMap[marketId],
+                                errors: errors,
                                 onboardingState: onboardingState)
                     switch tradeInput.side {
                     case .buy:
@@ -98,16 +96,43 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
                     guard let closePositionInput else {
                         return
                     }
-                    break
-                }
+                    self.update(closePositionInput: closePositionInput,
+                                errors: errors)
 
+                    self.viewModel?.ctaAction = { [weak self] in
+                        self?.closePosition()
+                    }
+                }
             }
             .store(in: &subscriptions)
     }
 
+    private func update(closePositionInput: ClosePositionInput,
+                        errors: [ValidationError]) {
+        let firstBlockingError = errors.first { $0.type == ErrorType.required || $0.type == ErrorType.error }
+        if firstBlockingError?.action != nil {
+            viewModel?.state = .enabled(firstBlockingError?.resources.action?.localizedString)
+        } else if closePositionInput.size?.size?.doubleValue ?? 0 > 0 {
+            if let firstBlockingError = firstBlockingError {
+                viewModel?.state = .disabled(firstBlockingError.resources.action?.localizedString)
+            } else {
+                viewModel?.state = .slider
+            }
+        } else {
+            viewModel?.state = .disabled()
+        }
+        viewModel?.isClosePosition = true
+    }
+
+    private func closePosition() {
+        Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+            HapticFeedback.shared?.notify(type: .success)
+            Router.shared?.navigate(to: RoutingRequest(path: "/closePosition/simple/status"), animated: true, completion: nil)
+        }
+    }
+
     private func update(tradeInput: TradeInput,
-                        tradeErrors: [ValidationError],
-                        configsAndAsset: MarketConfigsAndAsset?,
+                        errors: [ValidationError],
                         onboardingState: OnboardingState) {
         switch onboardingState {
         case .newUser:
@@ -115,7 +140,7 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
         case .needDeposit:
             viewModel?.state = .enabled(DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT_FUNDS"))
         case .readyToTrade:
-            let firstBlockingError = tradeErrors.first { $0.type == ErrorType.required || $0.type == ErrorType.error }
+            let firstBlockingError = errors.first { $0.type == ErrorType.required || $0.type == ErrorType.error }
             if firstBlockingError?.action != nil {
                 viewModel?.state = .enabled(firstBlockingError?.resources.action?.localizedString)
             } else if tradeInput.size?.size?.doubleValue ?? 0 > 0 {
@@ -128,6 +153,8 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
                 viewModel?.state = .disabled()
             }
         }
+
+        viewModel?.isClosePosition = false
     }
 
     private func trade(onboardingState: OnboardingState) {
