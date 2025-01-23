@@ -25,7 +25,7 @@ public class dydxSimpleUIClosePercentViewModel: PlatformOptionsInputViewModel {
             .themeFont(fontType: .plus, fontSize: .small)
             .padding(8)
             .themeColor(foreground: .textTertiary)
-            .themeColor(background: .layer6)
+            .themeColor(background: .layer4)
             .cornerRadius(8)
             .wrappedViewModel
     }
