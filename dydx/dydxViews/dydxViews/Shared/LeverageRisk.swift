@@ -72,11 +72,11 @@ public class LeverageRiskModel: PlatformViewModel {
         public var backgroundColor: ThemeColor.SemanticColor {
             switch self {
             case .low:
-                return .colorGreen
+                return .colorFadedGreen
             case .medium:
-                return .colorYellow
+                return .colorFadedYellow
             case .high:
-                return .colorRed
+                return .colorFadedRed
             }
         }
 
@@ -134,7 +134,7 @@ public class LeverageRiskModel: PlatformViewModel {
                                 .themeColor(foreground: self.level.foregroundColor)
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 4)
-                                .background(self.level.backgroundColor.color.opacity(0.1))
+                                .background(self.level.backgroundColor.color)
                                 .cornerRadius(6, corners: .allCorners)
                                 .themeStyle(style: style)
                                 .lineLimit(1)

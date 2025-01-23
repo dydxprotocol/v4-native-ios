@@ -33,7 +33,8 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
         Publishers.CombineLatest(
             AbacusStateManager.shared.state.onboarded,
             AbacusStateManager.shared.state.selectedSubaccount
-        ).map { onboarded, subaccount in
+        )
+        .map { onboarded, subaccount in
             if onboarded {
                 if subaccount?.equity?.current?.doubleValue ?? 0 > 0 {
                     .readyToTrade

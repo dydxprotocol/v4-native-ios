@@ -12,18 +12,15 @@ import Utilities
 
 public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
     @Published public var sizeItem: dydxSimpleUITradeInputSizeItemViewModel?
-    @Published public var usdSizeItem: dydxSimpleUITradeInputSizeItemViewModel?
+    @Published public var usdcSizeItem: dydxSimpleUITradeInputSizeItemViewModel?
+    @Published public var closePositionSizeItem: dydxSimpleUITradeInputSizeItemViewModel?
     @Published public var secondaryText: String?
     @Published public var secondaryToken: String?
 
     @Published public var percent: dydxSimpleUIClosePercentViewModel?
 
     public enum FocusState {
-        case atUsdcSize, atSize, none
-
-        var isKeyboardUp: Bool {
-            return self == .atUsdcSize || self == .atSize
-        }
+        case atUsdcSize, atSize, none, atClosePosition
     }
 
     @Published public var focusState: FocusState = .none {
@@ -33,16 +30,21 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
                 case .atUsdcSize:
                     sizeItem?.isFocused = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                        self?.usdSizeItem?.isFocused = true
+                        self?.usdcSizeItem?.isFocused = true
                     }
                 case .atSize:
-                    usdSizeItem?.isFocused = false
+                    usdcSizeItem?.isFocused = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
                         self?.sizeItem?.isFocused = true
                     }
                 case .none:
                     sizeItem?.isFocused = false
-                    usdSizeItem?.isFocused = false
+                    usdcSizeItem?.isFocused = false
+                    closePositionSizeItem?.isFocused = false
+                case .atClosePosition:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                        self?.closePositionSizeItem?.isFocused = true
+                    }
                 }
             }
         }
@@ -51,7 +53,8 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
     public static var previewValue: dydxSimpleUITradeInputSizeViewModel = {
         let vm = dydxSimpleUITradeInputSizeViewModel()
         vm.sizeItem = .previewValue
-        vm.usdSizeItem = .previewValue
+        vm.usdcSizeItem = .previewValue
+        vm.closePositionSizeItem = .previewValue
         vm.percent = .previewValue
         return vm
     }()
@@ -65,12 +68,16 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
             let view = VStack(alignment: .center, spacing: 20) {
                 let animationBoxHeight = dydxSimpleUITradeInputSizeItemViewModel.viewHeight
                 ZStack(alignment: .leading) {
-                    let offset = self.focusState == .atUsdcSize ? 0.0 : -animationBoxHeight
-                    VStack(alignment: .leading, spacing: 0) {
-                        self.usdSizeItem?.createView(parentStyle: style)
-                        self.sizeItem?.createView(parentStyle: style)
+                    if self.percent != nil {
+                        self.closePositionSizeItem?.createView(parentStyle: style)
+                    } else {
+                        let offset = self.focusState == .atUsdcSize ? 0.0 : -animationBoxHeight
+                        VStack(alignment: .leading, spacing: 0) {
+                            self.usdcSizeItem?.createView(parentStyle: style)
+                            self.sizeItem?.createView(parentStyle: style)
+                        }
+                        .offset(x: 0, y: offset)
                     }
-                    .offset(x: 0, y: offset)
                 }
                 .frame(height: animationBoxHeight, alignment: .top)
                 .clipped()

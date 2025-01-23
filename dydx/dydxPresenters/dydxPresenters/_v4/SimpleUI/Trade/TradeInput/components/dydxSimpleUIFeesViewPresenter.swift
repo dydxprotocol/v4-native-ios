@@ -21,21 +21,26 @@ protocol dydxSimpleUIFeesViewPresenterProtocol: HostedViewPresenterProtocol {
 }
 
 class dydxSimpleUIFeesViewPresenter: HostedViewPresenter<dydxSimpleUIFeesViewModel>, dydxSimpleUIFeesViewPresenterProtocol {
-    private let tradeType: TradeSubmission.TradeType
-    private let tradeSummaryPublisher: AnyPublisher<TradeInputSummary?, Never>
+    @Published var tradeType: TradeSubmission.TradeType = .trade
 
-    init(tradeType: TradeSubmission.TradeType) {
-        self.tradeType = tradeType
-        switch tradeType {
-        case .trade:
-            tradeSummaryPublisher = AbacusStateManager.shared.state.tradeInput
-                .map {  $0?.summary }
-                .eraseToAnyPublisher()
-        case .closePosition:
-            tradeSummaryPublisher = AbacusStateManager.shared.state.closePositionInput
-                .map {  $0?.summary }
-                .eraseToAnyPublisher()
-        }
+    private var tradeSummaryPublisher: AnyPublisher<TradeInputSummary?, Never> {
+        $tradeType
+            .flatMapLatest { tradeType in
+                switch tradeType {
+                case .trade:
+                    AbacusStateManager.shared.state.tradeInput
+                        .map {  $0?.summary }
+                        .eraseToAnyPublisher()
+                case .closePosition:
+                    AbacusStateManager.shared.state.closePositionInput
+                        .map {  $0?.summary }
+                        .eraseToAnyPublisher()
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+
+    override init() {
         super.init()
 
         viewModel = dydxSimpleUIFeesViewModel()

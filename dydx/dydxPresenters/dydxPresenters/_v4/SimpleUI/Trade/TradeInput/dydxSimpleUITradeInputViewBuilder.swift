@@ -67,21 +67,23 @@ private protocol dydxSimpleUITradeInputViewPresenterProtocol: HostedViewPresente
 }
 
 private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputViewModel>, dydxSimpleUITradeInputViewPresenterProtocol {
-    var tradeType: TradeSubmission.TradeType = .trade {
+    @Published var tradeType: TradeSubmission.TradeType = .trade {
         didSet {
             headerPresenter.tradeType = tradeType
             ctaButtonPresenter.tradeType = tradeType
             sizeViewPresenter.tradeType = tradeType
+            feesPresenter.tradeType = tradeType
         }
     }
 
     private let ctaButtonPresenter = dydxSimpleUITradeInputCtaButtonViewPresenter()
     private let sizeViewPresenter = dydxSimpleUITradeInputSizeViewPresenter()
     private let buyingPowerPresenter = dydxSimpleUIBuyingPowerViewPresenter()
-    private let feesPresenter = dydxSimpleUIFeesViewPresenter(tradeType: .trade)
+    private let feesPresenter = dydxSimpleUIFeesViewPresenter()
     private let marginUsagePreesnter = dydxSimpleUIMarginUsageViewPresenter()
     private let validationErrorPresenter = dydxSimpleUITradeInputValidationViewPresenter()
     private let headerPresenter = dydxSimpleUITradeInputHeaderViewPresenter()
+    private let positionPresenter = dydxSimpleUITradeInputPositionViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         ctaButtonPresenter,
@@ -90,7 +92,8 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
         feesPresenter,
         marginUsagePreesnter,
         validationErrorPresenter,
-        headerPresenter
+        headerPresenter,
+        positionPresenter
     ]
 
     override init() {
@@ -98,7 +101,6 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
 
         ctaButtonPresenter.$viewModel.assign(to: &viewModel.$ctaButtonViewModel)
         sizeViewPresenter.$viewModel.assign(to: &viewModel.$sizeViewModel)
-        buyingPowerPresenter.$viewModel.assign(to: &viewModel.$buyingPowerViewModel)
         marginUsagePreesnter.$viewModel.assign(to: &viewModel.$marginUsageViewModel)
         feesPresenter.$viewModel.assign(to: &viewModel.$feesViewModel)
         validationErrorPresenter.$viewModel.assign(to: &viewModel.$validationErrorViewModel)
@@ -109,5 +111,27 @@ private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpl
         self.viewModel = viewModel
 
         attachChildren(workers: childPresenters)
+    }
+
+    override func start() {
+        super.start()
+
+        Publishers
+            .CombineLatest3(
+                $tradeType,
+                buyingPowerPresenter.$viewModel,
+                positionPresenter.$viewModel)
+            .sink { [weak self] tradeType, buyingPowerViewModel, positionViewModel in
+                switch tradeType {
+                case .trade:
+                    self?.viewModel?.buyingPowerViewModel = buyingPowerViewModel
+                    self?.viewModel?.positionViewModel = nil
+                case .closePosition:
+                    self?.viewModel?.buyingPowerViewModel = nil
+                    self?.viewModel?.positionViewModel = positionViewModel
+                }
+            }
+            .store(in: &subscriptions)
+
     }
 }
