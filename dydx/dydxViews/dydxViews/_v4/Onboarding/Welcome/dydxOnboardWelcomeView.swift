@@ -25,19 +25,26 @@ public class dydxOnboardWelcomeViewModel: PlatformViewModel {
     private func createHeader() -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(DataLocalizer.localize(path: "APP.ONBOARDING.WELCOME"))
-                .themeFont(fontType: .base, fontSize: .largest)
+                .themeFont(fontType: .plus, fontSize: .largest)
                 .themeColor(foreground: .textPrimary)
+                .leftAligned()
             Text(DataLocalizer.localize(path: "APP.ONBOARDING.WELCOME_TEXT"))
                 .themeFont(fontSize: .small)
                 .themeColor(foreground: .textTertiary)
+                .frame(minHeight: 48)
+                .leftAligned()
         }
+        .padding(.horizontal, 8)
+        .padding(.top, 16)
+        .frame(maxWidth: .infinity)
     }
 
     private func createHighlightView(assetName: String, titlePath: String, subtitlePath: String, style: ThemeStyle) -> some View {
-        HStack {
+        HStack(spacing: 16) {
             PlatformIconViewModel(type: .asset(name: assetName, bundle: Bundle.dydxView),
                                   clip: .circle(background: .layer5, spacing: 30),
-                                  size: CGSize(width: 60, height: 60))
+                                  size: CGSize(width: 60, height: 60),
+                                  templateColor: .textPrimary)
             .createView(parentStyle: style)
 
             VStack(alignment: .leading, spacing: 6) {
@@ -52,12 +59,14 @@ public class dydxOnboardWelcomeViewModel: PlatformViewModel {
 
             Spacer()
         }
+        .padding(.horizontal, 8)
         .frame(maxWidth: .infinity)
     }
 
     private func createCta(style: ThemeStyle) -> some View {
-        let ctaContent = Text(DataLocalizer.localize(path: "APP.ONBOARDING.GET_STARTED"))
+        let ctaContent = Text(DataLocalizer.localize(path: "APP.COMPLIANCE_MODAL.CONTINUE"))
         return PlatformButtonViewModel(content: ctaContent.wrappedViewModel,
+                                       type: .defaultType(minHeight: 56),
                                 state: .primary) { [weak self] in
             self?.ctaAction?()
         }
@@ -80,7 +89,8 @@ public class dydxOnboardWelcomeViewModel: PlatformViewModel {
                 }
                 Spacer()
             }
-                .padding()
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
                 .themeColor(background: .layer3)
                 .makeSheet()
 
@@ -100,8 +110,8 @@ public class dydxOnboardWelcomeViewModel: PlatformViewModel {
         let tosText = DataLocalizer.localize(path: "APP.HEADER.TERMS_OF_USE")
         let privacyText = DataLocalizer.localize(path: "APP.ONBOARDING.PRIVACY_POLICY")
 
-        let tos = AttributedString(text: tosText, urlString: tosUrl)
-        let privacy = AttributedString(text: privacyText, urlString: privacyPolicyUrl)
+        let tos = AttributedString(text: tosText, urlString: tosUrl, foregroundColor: ThemeColor.SemanticColor.colorPurple.uiColor)
+        let privacy = AttributedString(text: privacyText, urlString: privacyPolicyUrl, foregroundColor: ThemeColor.SemanticColor.colorPurple.uiColor)
 
         let agreementText = DataLocalizer.localize(path: "APP.ONBOARDING.YOU_AGREE_TO_TERMS")
         var result = AttributedString(agreementText)

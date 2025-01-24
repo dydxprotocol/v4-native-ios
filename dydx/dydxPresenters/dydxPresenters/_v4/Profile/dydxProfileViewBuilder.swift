@@ -49,6 +49,7 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
     private let rewardsPresenter: dydxProfileRewardsViewPresenter
     private let balancesPresenter: dydxProfileBalancesViewPresenter
     private let topButtonsPresenter = dydxProfileTopButtonsViewPresenter()
+    private let helpPresenter = dydxProfileHelpViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         buttonsPresenter,
@@ -58,7 +59,8 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
         feesPresenter,
         rewardsPresenter,
         balancesPresenter,
-        topButtonsPresenter
+        topButtonsPresenter,
+        helpPresenter
     ]
 
     override init() {
@@ -81,6 +83,7 @@ private class dydxProfileViewPresenter: HostedViewPresenter<dydxProfileViewModel
 
         if dydxBoolFeatureFlag.simple_ui.isEnabled {
             topButtonsPresenter.$viewModel.assign(to: &viewModel.$topButtons)
+            helpPresenter.$viewModel.assign(to: &viewModel.$help)
         } else {
             secondaryButtonsPresenter.$viewModel.assign(to: &viewModel.$secondaryButtons)
         }

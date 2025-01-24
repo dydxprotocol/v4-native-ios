@@ -9,16 +9,16 @@
 import Foundation
 
 extension AttributedString {
-    public init(text: String, url: URL?) {
+    public init(text: String, url: URL?, foregroundColor: UIColor? = .link) {
         self.init(text)
         if let url = url {
             self.link = url
-            self.foregroundColor = .link
+            self.foregroundColor = foregroundColor
         }
     }
 
-    public init(text: String, urlString: String?) {
-        self.init(text: text, url: createUrl(string: urlString))
+    public init(text: String, urlString: String?, foregroundColor: UIColor? = .link) {
+        self.init(text: text, url: createUrl(string: urlString), foregroundColor: foregroundColor)
     }
 }
 

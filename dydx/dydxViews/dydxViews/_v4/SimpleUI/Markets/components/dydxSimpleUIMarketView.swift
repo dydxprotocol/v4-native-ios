@@ -89,10 +89,9 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                            self.createSideSizeValue(style: style)
                        }
                    }
-                       .leftAligned()
+                   Spacer()
 
                    self.createPriceChange(style: style)
-                       .rightAligned()
                }
                .lineLimit(1)
                .minimumScaleFactor(0.5)

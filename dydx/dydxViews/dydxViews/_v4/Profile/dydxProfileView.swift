@@ -21,12 +21,21 @@ public class dydxProfileViewModel: PlatformViewModel {
     @Published public var rewards: dydxProfileRewardsViewModel? = dydxProfileRewardsViewModel()
     @Published public var share: dydxInlineShareViewModel? = dydxInlineShareViewModel()
     @Published public var topButtons: dydxProfileTopButtonsViewModel?
+    @Published public var help: dydxProfileHelpViewModel?
 
     public init() { }
 
     public static var previewValue: dydxProfileViewModel {
         let vm = dydxProfileViewModel()
         vm.buttons = .previewValue
+        vm.header = .previewValue
+        vm.secondaryButtons = .previewValue
+        vm.history = .previewValue
+        vm.balances = .previewValue
+        vm.rewards = .previewValue
+        vm.share = .previewValue
+        vm.topButtons = .previewValue
+        vm.help = .previewValue
         return vm
     }
 
@@ -58,6 +67,9 @@ public class dydxProfileViewModel: PlatformViewModel {
                     }
 
                     self.history?
+                        .createView(parentStyle: style)
+
+                    self.help?
                         .createView(parentStyle: style)
 
                     self.share?

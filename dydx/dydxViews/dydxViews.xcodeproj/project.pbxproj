@@ -27,6 +27,7 @@
 		020492502D3EDA1200394CBE /* dydxSimpleUITradeStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204924F2D3EDA1200394CBE /* dydxSimpleUITradeStatusView.swift */; };
 		020494192D41ED8D00394CBE /* dydxSimpleUIClosePercentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020494182D41ED8D00394CBE /* dydxSimpleUIClosePercentView.swift */; };
 		020494272D42D1CD00394CBE /* dydxSimpleUITradeInputPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020494262D42D1CD00394CBE /* dydxSimpleUITradeInputPositionView.swift */; };
+		020494502D43F46900394CBE /* dydxProfileHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204944F2D43F46900394CBE /* dydxProfileHelpView.swift */; };
 		0207FCA12D2A17DF004C2C9F /* dydxSimpleUIMarketsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207FCA02D2A17DF004C2C9F /* dydxSimpleUIMarketsHeaderView.swift */; };
 		02084B2D297FC2CD00CF9522 /* dydxTransferFaucetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02084B2C297FC2CD00CF9522 /* dydxTransferFaucetView.swift */; };
 		02084C682981253200CF9522 /* dydxValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02084C672981253200CF9522 /* dydxValidationView.swift */; };
@@ -453,6 +454,7 @@
 		0204924F2D3EDA1200394CBE /* dydxSimpleUITradeStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeStatusView.swift; sourceTree = "<group>"; };
 		020494182D41ED8D00394CBE /* dydxSimpleUIClosePercentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIClosePercentView.swift; sourceTree = "<group>"; };
 		020494262D42D1CD00394CBE /* dydxSimpleUITradeInputPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputPositionView.swift; sourceTree = "<group>"; };
+		0204944F2D43F46900394CBE /* dydxProfileHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileHelpView.swift; sourceTree = "<group>"; };
 		0207FCA02D2A17DF004C2C9F /* dydxSimpleUIMarketsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketsHeaderView.swift; sourceTree = "<group>"; };
 		02084B2C297FC2CD00CF9522 /* dydxTransferFaucetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferFaucetView.swift; sourceTree = "<group>"; };
 		02084C672981253200CF9522 /* dydxValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxValidationView.swift; sourceTree = "<group>"; };
@@ -1276,6 +1278,7 @@
 				02F6E7102A8292FC0018F00C /* dydxProfileFeesView.swift */,
 				27C027442AFD734800E92CCB /* dydxProfileSecondaryButtonsView.swift */,
 				277E8F9E2B1A847D005CCBCB /* dydxTitledCardView.swift */,
+				0204944F2D43F46900394CBE /* dydxProfileHelpView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -2458,6 +2461,7 @@
 				0230A2A328B84A160036DDF3 /* HostingViewController.swift in Sources */,
 				025BA65A290100CD00CDAE99 /* LeverageRisk.swift in Sources */,
 				027887BB2D268FE800366321 /* ValidationErrorView.swift in Sources */,
+				020494502D43F46900394CBE /* dydxProfileHelpView.swift in Sources */,
 				024F487A29657D7900E40247 /* dydxUserFavoriteView.swift in Sources */,
 				02D6DBB42D134723008AAEA1 /* dydxSimpleUIMarketView.swift in Sources */,
 				02B27A3A2AE8BC5A00A995EC /* dydxHelpView.swift in Sources */,
