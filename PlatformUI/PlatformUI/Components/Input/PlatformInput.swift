@@ -27,10 +27,19 @@ private struct PlatformInputView: View {
     }
 
     var body: some View {
+        let alignment: Alignment
+        switch model.textAlignment {
+            case .leading:
+            alignment = .leading
+        case .trailing:
+            alignment = .trailing
+        default:
+            alignment = .center
+        }
         return HStack(alignment: .center, spacing: 4) {
             VStack(alignment: .leading, spacing: 4) {
                 header
-                ZStack(alignment: .leading) {
+                ZStack(alignment: alignment) {
                     if model.currentValue == nil || model.currentValue?.length == 0 {
                         placeholder
                     }
@@ -75,6 +84,7 @@ private struct PlatformInputView: View {
             isFocused = editingChanged
             model.onEditingChanged?(editingChanged)
         })
+        .multilineTextAlignment(model.textAlignment)
         .focused($isFocused)
         .truncationMode(model.truncateMode)
         .keyboardType(model.keyboardType)
@@ -99,7 +109,6 @@ private struct PlatformInputView: View {
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontSize: .smaller)
             model.labelAccessory
-            Spacer()
         }.wrappedInAnyView()
     }
 }
@@ -118,6 +127,7 @@ public class PlatformInputModel: PlatformViewModel {
     @Published public var focusedOnAppear: Bool = false
     @Published public var isFocused: Bool = false
     @Published public var twoWayBinding: Bool = false
+    @Published public var textAlignment: TextAlignment = .leading
     
     public init(label: String? = nil,
                 labelAccessory: AnyView? = nil,
@@ -131,7 +141,8 @@ public class PlatformInputModel: PlatformViewModel {
                 truncateMode: Text.TruncationMode = .tail,
                 focusedOnAppear: Bool = false,
                 isFocused: Bool = false,
-                twoWayBinding: Bool = false) {
+                twoWayBinding: Bool = false,
+                textAlignment: TextAlignment = .leading) {
         self.label = label
         self.labelAccessory = labelAccessory
         self.value = value
@@ -145,6 +156,7 @@ public class PlatformInputModel: PlatformViewModel {
         self.focusedOnAppear = focusedOnAppear
         self.isFocused = isFocused
         self.twoWayBinding = twoWayBinding
+        self.textAlignment = textAlignment
     }
 
     public static var previewValue: PlatformInputModel = {
@@ -296,7 +308,8 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     private let truncateMode: Text.TruncationMode
     private let focusedOnAppear: Bool
     private let twoWayBinding: Bool
-   
+    private let textAlignment: TextAlignment
+    
     @Published public var isFocused: Bool = false
     
     public init(label: String? = nil,
@@ -309,11 +322,13 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 onEdited: ((String?) -> Void)? = nil,
                 truncateMode: Text.TruncationMode = .middle,
                 focusedOnAppear: Bool = false,
-                twoWayBinding: Bool = false) {
+                twoWayBinding: Bool = false,
+                textAlignment: TextAlignment = .leading) {
         self.inputType = inputType
         self.truncateMode = truncateMode
         self.focusedOnAppear = focusedOnAppear
         self.twoWayBinding = twoWayBinding
+        self.textAlignment = textAlignment
         super.init(label: label, labelAccessory: labelAccessory, valueAccessoryView: valueAccessoryView, onEdited: onEdited)
         self.value = value
         input = value ?? ""
@@ -339,7 +354,8 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 truncateMode: truncateMode,
                 focusedOnAppear: focusedOnAppear,
                 isFocused: isFocused,
-                twoWayBinding: twoWayBinding
+                twoWayBinding: twoWayBinding,
+                textAlignment: textAlignment
             )
             
             return AnyView(PlatformInputView(model: model,

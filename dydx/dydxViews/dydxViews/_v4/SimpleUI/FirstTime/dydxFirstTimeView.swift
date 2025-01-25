@@ -23,13 +23,16 @@ public class dydxFirstTimeViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack {
+            let view = ZStack {
+                Image("splash", bundle: Bundle.dydxView)
+                  //  .resizable()
+                  //  .aspectRatio(contentMode:)
             }
                 .frame(maxWidth: .infinity)
                 .frame(maxHeight: .infinity)
-                .themeColor(background: .layer1)
+                .themeColor(background: .colorPurple)
 
-            return AnyView(view)
+            return AnyView(view.ignoresSafeArea(edges: [.all]))
         }
     }
 }

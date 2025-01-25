@@ -16,6 +16,7 @@ public class dydxSimpleUITradeInputSizeItemViewModel: PlatformTextInputViewModel
         vm.tokenSymbol = "ETH"
         vm.size = "111"
         vm.usdcSize = "222"
+        vm.placeHolder = "0.000"
         return vm
     }()
 
@@ -71,7 +72,7 @@ public class dydxSimpleUITradeInputSizeItemViewModel: PlatformTextInputViewModel
     }
 
     public init(label: String? = nil, value: String? = nil, placeHolder: String? = nil, contentType: UITextContentType? = nil, onEdited: ((String?) -> Void)? = nil) {
-        super.init(label: label, value: value, placeHolder: placeHolder, inputType: .decimalDigits, contentType: contentType, onEdited: onEdited, twoWayBinding: true)
+        super.init(label: label, value: value, placeHolder: placeHolder, inputType: .decimalDigits, contentType: contentType, onEdited: onEdited, twoWayBinding: true, textAlignment: .center)
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {

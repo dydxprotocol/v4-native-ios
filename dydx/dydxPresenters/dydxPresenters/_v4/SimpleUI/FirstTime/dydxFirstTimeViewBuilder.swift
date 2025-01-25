@@ -16,7 +16,7 @@ public class dydxFirstTimeViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxFirstTimeViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxFirstTimeViewController(presenter: presenter, view: view, configuration: .default) as? T
+        return dydxFirstTimeViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
     }
 }
 
