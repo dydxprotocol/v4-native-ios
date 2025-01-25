@@ -84,10 +84,10 @@ public class dydxSimpleUITradeStatusViewModel: PlatformViewModel {
         switch side {
         case .BUY:
             sideColor = ThemeColor.SemanticColor.colorGreen
-            sideText = DataLocalizer.localize(path: "APP.GENERAL.BUY")
+            sideText = DataLocalizer.localize(path: "APP.GENERAL.LONG_POSITION_SHORT")
         case .SELL:
             sideColor = ThemeColor.SemanticColor.colorRed
-            sideText = DataLocalizer.localize(path: "APP.GENERAL.SELL")
+            sideText = DataLocalizer.localize(path: "APP.GENERAL.SHORT_POSITION_SHORT")
         default:
             sideColor = ThemeColor.SemanticColor.textSecondary
             sideText = nil

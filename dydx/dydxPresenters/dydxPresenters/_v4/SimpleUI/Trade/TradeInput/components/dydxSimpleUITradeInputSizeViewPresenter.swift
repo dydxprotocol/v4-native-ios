@@ -24,7 +24,7 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
     @Published var tradeType: TradeSubmission.TradeType = .trade
 
     private lazy var sizeItem: dydxSimpleUITradeInputSizeItemViewModel = {
-        let item = dydxSimpleUITradeInputSizeItemViewModel(label: nil, placeHolder: "0.000", onEdited: { value in
+        let item = dydxSimpleUITradeInputSizeItemViewModel(label: nil, placeHolder: "0.000  ", onEdited: { value in
                 AbacusStateManager.shared.trade(input: value?.unlocalizedNumericValue,
                                                 type: TradeInputField.size)
         })
@@ -33,7 +33,7 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
     }()
 
     private lazy var closePositionSizeItem: dydxSimpleUITradeInputSizeItemViewModel = {
-        let item = dydxSimpleUITradeInputSizeItemViewModel(label: nil, placeHolder: "0.000", onEdited: { value in
+        let item = dydxSimpleUITradeInputSizeItemViewModel(label: nil, placeHolder: "0.000  ", onEdited: { value in
             AbacusStateManager.shared.closePosition(input: value?.unlocalizedNumericValue,
                                                     type: ClosePositionInputField.size)
         })

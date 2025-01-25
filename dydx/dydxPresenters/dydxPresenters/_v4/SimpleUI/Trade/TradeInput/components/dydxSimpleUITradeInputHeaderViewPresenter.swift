@@ -69,9 +69,9 @@ class dydxSimpleUITradeInputHeaderViewPresenter: HostedViewPresenter<dydxSimpleU
         let side: SideTextViewModel.Side?
         switch tradeInput.side {
         case .buy:
-            side = .buy
+            side = .long
         case .sell:
-            side = .sell
+            side = .short
         default:
             side = nil
         }

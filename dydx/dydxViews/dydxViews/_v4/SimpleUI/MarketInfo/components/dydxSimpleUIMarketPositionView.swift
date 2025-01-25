@@ -64,7 +64,7 @@ public class dydxSimpleUIMarketPositionViewModel: PlatformViewModel {
                     Text(DataLocalizer.localize(path: "APP.GENERAL.SIZE"))
                         .themeFont(fontType: .plus, fontSize: .small)
                         .themeColor(foreground: .textTertiary)
-                    TokenTextViewModel(symbol: symbol ?? "-")
+                    TokenTextViewModel(symbol: symbol ?? "-", withBorder: true)
                         .createView(parentStyle: style.themeFont(fontSize: .smallest))
                 }
                 CollectionItemUtil.createCollectionItem(parentStyle: style,
@@ -76,7 +76,7 @@ public class dydxSimpleUIMarketPositionViewModel: PlatformViewModel {
                     Text(DataLocalizer.localize(path: "APP.GENERAL.SIZE"))
                         .themeFont(fontType: .plus, fontSize: .small)
                         .themeColor(foreground: .textTertiary)
-                    TokenTextViewModel(symbol: "USD")
+                    TokenTextViewModel(symbol: "USD", withBorder: true)
                         .createView(parentStyle: style.themeFont(fontSize: .smallest))
                 }
                 CollectionItemUtil.createCollectionItem(parentStyle: style,
@@ -88,7 +88,7 @@ public class dydxSimpleUIMarketPositionViewModel: PlatformViewModel {
                     Text(DataLocalizer.localize(path: "APP.SHARE_ACTIVITY_MODAL.PROFIT"))
                         .themeFont(fontType: .plus, fontSize: .small)
                         .themeColor(foreground: .textTertiary)
-                    TokenTextViewModel(symbol: "USD")
+                    TokenTextViewModel(symbol: "USD", withBorder: true)
                         .createView(parentStyle: style.themeFont(fontSize: .smallest))
                 }
                 CollectionItemUtil.createCollectionItem(parentStyle: style,

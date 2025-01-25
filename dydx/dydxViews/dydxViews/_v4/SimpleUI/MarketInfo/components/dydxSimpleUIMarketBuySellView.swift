@@ -32,7 +32,7 @@ public class dydxSimpleUIMarketBuySellViewModel: PlatformViewModel {
                     self.sellAction?()
                 } label: {
                     Group {
-                        Text(DataLocalizer.localize(path: "APP.GENERAL.SELL"))
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.SHORT_POSITION_SHORT"))
                             .themeColor(foreground: .colorRed)
                     }
                     .frame(height: 56)
@@ -45,7 +45,7 @@ public class dydxSimpleUIMarketBuySellViewModel: PlatformViewModel {
                     self.buyAction?()
                 } label: {
                     Group {
-                        Text(DataLocalizer.localize(path: "APP.GENERAL.BUY"))
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.LONG_POSITION_SHORT"))
                             .themeColor(foreground: .colorGreen)
                     }
                     .frame(height: 56)

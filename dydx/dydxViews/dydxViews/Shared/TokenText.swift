@@ -12,28 +12,43 @@ import Utilities
 
 public class TokenTextViewModel: PlatformViewModel, Hashable {
     @Published public var symbol: String = "---"
+    @Published public var withBorder: Bool
 
-    public init(symbol: String = "---") {
+    public init(symbol: String = "---", withBorder: Bool = false) {
         self.symbol = symbol
+        self.withBorder = withBorder
     }
 
-    public static var previewValue = TokenTextViewModel(symbol: "ETH")
+    public static var previewValue = TokenTextViewModel(symbol: "ETH", withBorder: true)
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            return AnyView(
-                Group {
-                    Text(self.symbol)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                        .padding(.vertical, 1)
-                        .padding(.horizontal, 3)
+            let view = Group {
+                if self.withBorder {
+                    Group {
+                        Text(self.symbol)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .padding(.vertical, 1)
+                            .padding(.horizontal, 3)
+                    }
+                    .themeColor(background: .layer0)
+                    .borderAndClip(style: ClipStyle.cornerRadius(4), borderColor: ThemeColor.SemanticColor.borderDefault, lineWidth: 1)
+                } else {
+                    Group {
+                        Text(self.symbol)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .padding(.vertical, 1)
+                            .padding(.horizontal, 3)
+                    }
+                    .themeColor(background: .layer6)
+                    .cornerRadius(4)
                 }
-                .themeColor(background: .layer6)
-                .cornerRadius(4)
-            )
+            }
+            return AnyView(view)
         }
     }
 

@@ -131,7 +131,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                     Text(positionSize)
                         .themeColor(foreground: .textPrimary)
                         .themeFont(fontSize: .medium)
-                    TokenTextViewModel(symbol: assetName)
+                    TokenTextViewModel(symbol: assetName, withBorder: true)
                         .createView(parentStyle: style.themeFont(fontSize: .smallest))
                 }
             }
