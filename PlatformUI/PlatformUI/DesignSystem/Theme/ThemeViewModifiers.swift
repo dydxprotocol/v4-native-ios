@@ -715,21 +715,21 @@ public extension View {
 // MARK: ScrollView
 
 public extension View {
-  func disableBounces() -> some View {
-    modifier(DisableBouncesModifier())
-  }
+    func disableBounces() -> some View {
+        modifier(DisableBouncesModifier())
+    }
 }
 
 struct DisableBouncesModifier: ViewModifier {
-  func body(content: Content) -> some View {
-      content
-          .onAppear {
-              UIScrollView.appearance().bounces = false
-          }
-          .onDisappear {
-              UIScrollView.appearance().bounces = true
-          }
-  }
+    func body(content: Content) -> some View {
+        content
+            .onAppear {
+                UIScrollView.appearance().bounces = false
+            }
+            .onDisappear {
+                UIScrollView.appearance().bounces = true
+            }
+    }
 }
 
 // MARK: Conditional
@@ -742,6 +742,40 @@ public extension View {
             elseTransform(self)
         } else {
             self
+        }
+    }
+}
+
+// MARK: GradientShade
+
+public extension View {
+    func gradientShade(backgroundColor: ThemeColor.SemanticColor = .layer2, height: CGFloat = 42) -> some View {
+        modifier(GradientShadeModifier(layerColor: backgroundColor, height: height))
+    }
+}
+
+private struct GradientShadeModifier: ViewModifier {
+    let layerColor: ThemeColor.SemanticColor
+    let  height: CGFloat
+    
+    private var gradient: LinearGradient { LinearGradient(
+        gradient: Gradient(colors: [
+            layerColor.color,
+            Color.clear]),
+        startPoint: .bottom, endPoint: .top)
+    }
+    
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+            VStack {
+                Spacer()
+                VStack {
+                }
+                .frame(height: height)
+                .frame(maxWidth: .infinity)
+                .background(gradient)
+            }
         }
     }
 }

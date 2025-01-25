@@ -39,7 +39,7 @@ public struct HostingViewControllerConfiguration {
     public static let fullScreenSheet = HostingViewControllerConfiguration(ignoreSafeArea: true, fullScreenSheet: true)
 }
 
-open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol, UITabBarControllerDelegate {
+open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol, UITabBarControllerDelegate, UISheetPresentationControllerDelegate {
 
     private var hostingController: UIHostingController<AnyView>?
     private let presenterView = ObjectPresenterView()
@@ -87,6 +87,7 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
         if configuration.fullScreenSheet, let sheet = sheetPresentationController {
             sheet.detents = [.large()]
             sheet.prefersGrabberVisible = true
+            sheet.delegate = self
         }
 
         tabBarController?.delegate = self
@@ -149,6 +150,10 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
         presenter?.stop()
     }
 
+    open override func panModalDidDismiss() {
+        presenter?.onHalfSheetDismissal()
+    }
+
     // https://stackoverflow.com/a/79006732
     public func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         UIView.setAnimationsEnabled(false)
@@ -190,6 +195,12 @@ open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewCo
             }
             updateTabItemGradient()
         }
+    }
+
+    // MARK: UISheetPresentationControllerDelegate
+
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        presenter?.onHalfSheetDismissal()
     }
 
     // MARK: UIViewControllerEmbeddingProtocol

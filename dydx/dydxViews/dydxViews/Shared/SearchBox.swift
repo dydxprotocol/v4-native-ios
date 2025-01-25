@@ -13,14 +13,14 @@ import Utilities
 public class SearchBoxModel: PlatformViewModel {
 
     public static var bottomBlendGradiant: LinearGradient {
-        let blendedColor = Color(UIColor.blend(color1: UIColor.clear,
-                                               intensity1: 0.05,
-                                               color2: UIColor.clear,
-                                               intensity2: 0.95))
+//        let blendedColor = Color(UIColor.blend(color1: UIColor.clear,
+//                                               intensity1: 0.05,
+//                                               color2: UIColor.clear,
+//                                               intensity2: 0.95))
         return LinearGradient(
             gradient: Gradient(colors: [
-                ThemeColor.SemanticColor.layer2.color,
-                blendedColor]),
+                ThemeColor.SemanticColor.layer1.color,
+                Color.clear]),
             startPoint: .bottom, endPoint: .top)
     }
 

@@ -54,7 +54,6 @@ public class dydxOnboardWelcomeViewModel: PlatformViewModel {
                 Text(DataLocalizer.localize(path: subtitlePath))
                     .themeFont(fontSize: .small)
                     .themeColor(foreground: .textTertiary)
-
             }
 
             Spacer()

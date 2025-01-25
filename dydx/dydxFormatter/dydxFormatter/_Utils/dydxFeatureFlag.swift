@@ -33,7 +33,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
         case .metadata_service:
             return true
         case .simple_ui:
-            return false
+            return true
         }
     }
 

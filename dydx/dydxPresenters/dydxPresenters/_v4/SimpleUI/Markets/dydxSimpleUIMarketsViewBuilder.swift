@@ -72,6 +72,13 @@ public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIM
         }
 
         attachChildren(workers: childPresenters)
+
+        AbacusStateManager.shared.state.onboarded
+            .prefix(1)
+            .sink { onboarded in
+                print(onboarded)
+            }
+            .store(in: &subscriptions)
     }
 
     public override func start() {

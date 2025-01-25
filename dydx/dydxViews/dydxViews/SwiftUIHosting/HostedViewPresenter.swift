@@ -49,6 +49,10 @@ open class HostedViewPresenter<ViewModel: PlatformViewModeling>: ObjectViewPrese
         }
     }
 
+    open func onHalfSheetDismissal() {
+
+    }
+
     public func attachChild(worker: WorkerProtocol) {
         if workers.contains(where: { $0 === worker }) == false {
             workers.append(worker)
@@ -77,6 +81,7 @@ open class HostedViewPresenter<ViewModel: PlatformViewModeling>: ObjectViewPrese
     public func detachChildren(workers: [WorkerProtocol]) {
         workers.forEach { detachChild(worker: $0) }
     }
+
 }
 
 public class SimpleHostedViewPresenter: HostedViewPresenter<PlatformViewModel> {}

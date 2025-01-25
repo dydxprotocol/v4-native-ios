@@ -54,4 +54,8 @@ extension UIViewController: PanModalPresentable {
     @objc open var showDragIndicator: Bool {
         return false
     }
+    
+    @objc open func panModalDidDismiss() {
+        
+    }
 }

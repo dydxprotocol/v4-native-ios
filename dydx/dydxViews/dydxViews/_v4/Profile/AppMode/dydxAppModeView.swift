@@ -37,13 +37,14 @@ public class dydxAppModeViewModel: PlatformViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack(alignment: .leading, spacing: 24) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(DataLocalizer.localize(path: "APP.TRADE.MODE.SELECT_MODE"))
                         .themeFont(fontType: .plus, fontSize: .largest)
+                        .themeColor(foreground: .textPrimary)
 
                     Text(DataLocalizer.localize(path: "APP.TRADE.MODE.CHANGE_SETINGS"))
                         .themeFont(fontSize: .small)
@@ -56,84 +57,64 @@ public class dydxAppModeViewModel: PlatformViewModel {
                 Button(action: { [weak self] in
                     self?.onChange?(.simple)
                 }) {
-                    HStack(spacing: 16) {
-                        if self.appMode == .simple {
-                            PlatformIconViewModel.selectedCheckmark
-                                .createView(parentStyle: style)
-                        } else {
-                            PlatformIconViewModel.unselectedCheckmark
-                                .createView(parentStyle: style)
+                    VStack(spacing: 16) {
+                        HStack {
+                            Text(DataLocalizer.localize(path: "APP.TRADE.MODE.SIMPLE"))
+                                .themeFont(fontSize: .large)
+                                .themeColor(foreground: .textPrimary)
+
+                            Spacer()
+
+                            Text(DataLocalizer.localize(path: "APP.TRADE.MODE.SIMPLE_AND_EASIER"))
+                                .themeFont(fontSize: .small)
+                                .themeColor(foreground: .textTertiary)
+                                .lineLimit(1)
                         }
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 16)
+                        .themeColor(background: .layer4)
 
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text(DataLocalizer.localize(path: "APP.TRADE.MODE.SIMPLE"))
-                                    .themeFont(fontSize: .large)
-                                    .themeColor(foreground: .textSecondary)
-
-                                Spacer()
-
-                                Text(DataLocalizer.localize(path: "APP.TRADE.MODE.SIMPLE_AND_EASIER"))
-                                    .themeFont(fontSize: .small)
-                                    .themeColor(foreground: .textTertiary)
-                                    .lineLimit(1)
-                            }
-
-                            Image("mode_simple", bundle: Bundle.dydxView)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        }
+                        Image("mode_simple", bundle: Bundle.dydxView)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(.horizontal)
+                            .gradientShade(backgroundColor: .layer5, height: 64)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
                 }
-                .padding(.horizontal, 16)
                 .themeColor(background: .layer5)
-                .borderAndClip(style: .cornerRadius(12), borderColor: .layer7)
+                .cornerRadius(24)
 
                 Button(action: { [weak self] in
                     self?.onChange?(.pro)
                 }) {
-                    HStack(spacing: 16) {
-                        if self.appMode == .pro {
-                            PlatformIconViewModel.selectedCheckmark
-                                .createView(parentStyle: style)
-                        } else {
-                            PlatformIconViewModel.unselectedCheckmark
-                                .createView(parentStyle: style)
+                    VStack(spacing: 16) {
+                        HStack {
+                            Text(DataLocalizer.localize(path: "APP.TRADE.MODE.PRO"))
+                                .themeFont(fontSize: .large)
+                                .themeColor(foreground: .textPrimary)
+
+                            Spacer()
+
+                            Text(DataLocalizer.localize(path: "APP.TRADE.MODE.FULLY_FEATURED"))
+                                .themeFont(fontSize: .small)
+                                .themeColor(foreground: .textTertiary)
+                                .lineLimit(1)
                         }
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 16)
+                        .themeColor(background: .layer4)
 
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text(DataLocalizer.localize(path: "APP.TRADE.MODE.PRO"))
-                                    .themeFont(fontSize: .large)
-                                    .themeColor(foreground: .textSecondary)
-
-                                Spacer()
-
-                                Text(DataLocalizer.localize(path: "APP.TRADE.MODE.FULLY_FEATURED"))
-                                    .themeFont(fontSize: .small)
-                                    .themeColor(foreground: .textTertiary)
-                                    .lineLimit(1)
-                            }
-
-                            Image("mode_pro", bundle: Bundle.dydxView)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        }
+                        Image("mode_pro", bundle: Bundle.dydxView)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(.horizontal)
+                            .gradientShade(backgroundColor: .layer5, height: 64)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
                 }
-                .padding(.horizontal, 16)
                 .themeColor(background: .layer5)
-                .borderAndClip(style: .cornerRadius(12), borderColor: .layer7)
-
-                let cancelText = Text(DataLocalizer.localize(path: "APP.GENERAL.OK", params: nil))
-                PlatformButtonViewModel(content: cancelText.wrappedViewModel, state: self.buttonState) { [weak self] in
-                    self?.onCancel?()
-                }
-                .createView(parentStyle: style)
+                .cornerRadius(24)
             }
                 .padding([.leading, .trailing])
                 .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
@@ -143,6 +124,14 @@ public class dydxAppModeViewModel: PlatformViewModel {
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
+    }
+
+    private var bottomBlendGradiant: LinearGradient {
+        return LinearGradient(
+            gradient: Gradient(colors: [
+                ThemeColor.SemanticColor.layer5.color,
+                Color.clear]),
+            startPoint: .bottom, endPoint: .top)
     }
 }
 

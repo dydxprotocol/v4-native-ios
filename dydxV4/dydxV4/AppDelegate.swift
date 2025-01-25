@@ -82,7 +82,7 @@ class AppDelegate: CommonAppDelegate {
         firebaseNotification.delegate = notificationHandlerDelegate
         workers.start()
 
-        let localCompletion = { [weak self] in
+        let localCompletion = {
             // This gets called after passing the security/login screen
             completion()
         }

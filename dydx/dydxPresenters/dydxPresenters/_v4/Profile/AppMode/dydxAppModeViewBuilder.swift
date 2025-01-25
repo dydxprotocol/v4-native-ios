@@ -16,7 +16,7 @@ public class dydxAppModeViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxAppModeViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxAppModeViewController(presenter: presenter, view: view, configuration: .ignoreSafeArea) as? T
+        return dydxAppModeViewController(presenter: presenter, view: view, configuration: .fullScreenSheet) as? T
     }
 }
 
@@ -52,15 +52,29 @@ private class dydxAppModeViewPresenter: HostedViewPresenter<dydxAppModeViewModel
                 self?.viewModel?.appMode = mode
                 AppMode.current = mode
 
-                Router.shared?.navigate(to: RoutingRequest(path: "/loading"), animated: true, completion: { _, _ in
-                    Router.shared?.navigate(to: RoutingRequest(path: "/"), animated: true, completion: { _, _ in
-                    })
-                })
+                self?.loadRoot()
             }
         }
         viewModel?.onCancel = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
+    }
+
+    override func onHalfSheetDismissal() {
+        super.onHalfSheetDismissal()
+
+        if AppMode.current == nil {
+            // Defaulting to Simple
+            AppMode.current = .simple
+            loadRoot()
+        }
+    }
+
+    private func loadRoot() {
+        Router.shared?.navigate(to: RoutingRequest(path: "/loading"), animated: true, completion: { _, _ in
+            Router.shared?.navigate(to: RoutingRequest(path: "/"), animated: true, completion: { _, _ in
+            })
+        })
     }
 }
 
