@@ -17,6 +17,7 @@ import FloatingPanel
 import PlatformRouting
 import Combine
 import dydxFormatter
+import dydxAnalytics
 
 public class dydxSimpleUITradeInputViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -47,6 +48,8 @@ class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, 
             AbacusStateManager.shared.trade(input: side.uppercased(), type: TradeInputField.side)
 
             presenter.tradeType = .trade
+
+            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .tradeEdit))
             return true
 
         } else if request?.path == "/trade/simple/close", let marketId = parser.asString(request?.params?["marketId"]) {
@@ -55,6 +58,8 @@ class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, 
             AbacusStateManager.shared.startClosePosition(marketId: marketId)
 
             presenter.tradeType = .closePosition
+
+            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .tradeEdit))
             return true
         }
 

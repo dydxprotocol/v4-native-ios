@@ -7,6 +7,7 @@ import PlatformUI
 import Combine
 import dydxStateManager
 import Abacus
+import dydxAnalytics
 
 public class dydxSimpleUIMarketInfoViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -23,6 +24,8 @@ class dydxSimpleUIMarketInfoViewController: HostingViewController<PlatformView, 
             dydxSelectedMarketsStore.shared.lastSelectedMarket = selectedMarketId
             presenter.marketId = selectedMarketId
             presenter.shouldDisplayFullTradeInputOnAppear = request?.path == "/trade"
+
+            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .marketInfo))
             return true
         }
         return false

@@ -13,6 +13,7 @@ import ParticlesKit
 import PlatformUI
 import dydxStateManager
 import Abacus
+import dydxAnalytics
 
 public class dydxSimpleUIMarketsViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -25,6 +26,7 @@ public class dydxSimpleUIMarketsViewBuilder: NSObject, ObjectBuilderProtocol {
 public class dydxSimpleUIMarketsViewController: HostingViewController<PlatformView, dydxSimpleUIMarketsViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/" {
+            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .markets))
             return true
         }
         return false

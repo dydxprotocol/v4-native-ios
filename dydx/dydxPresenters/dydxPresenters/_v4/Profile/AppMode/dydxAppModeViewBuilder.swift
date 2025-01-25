@@ -11,6 +11,7 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import dydxAnalytics
 
 public class dydxAppModeViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -23,6 +24,7 @@ public class dydxAppModeViewBuilder: NSObject, ObjectBuilderProtocol {
 private class dydxAppModeViewController: HostingViewController<PlatformView, dydxAppModeViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/settings/app_mode" {
+            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .modeSelector))
             return true
         }
         return false
@@ -87,7 +89,13 @@ public extension AppMode {
             return nil
         }
         set {
-            SettingsStore.shared?.setValue(newValue?.rawValue, forDydxKey: .appMode)
+            if current != newValue {
+                let fromMode = current?.rawValue ?? "none"
+                let toMode = newValue?.rawValue ?? "none"
+                Tracking.shared?.log(event: AnalyticsEventV2.ModeSelectorEvent(fromMode: fromMode, toMode: toMode))
+
+                SettingsStore.shared?.setValue(newValue?.rawValue, forDydxKey: .appMode)
+            }
         }
     }
 }

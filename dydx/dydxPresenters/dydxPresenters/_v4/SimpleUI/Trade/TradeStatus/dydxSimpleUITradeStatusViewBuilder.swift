@@ -17,6 +17,7 @@ import FloatingPanel
 import PlatformRouting
 import Combine
 import dydxFormatter
+import dydxAnalytics
 
 public class dydxSimpleUITradeStatusViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -33,9 +34,11 @@ private class dydxSimpleUITradeStatusViewController: HostingViewController<Platf
         }
         if request?.path == "/trade/simple/status" {
             presenter.tradeType = .trade
+            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .traddeStatus))
             return true
         } else if request?.path == "/closePosition/simple/status" {
             presenter.tradeType = .closePosition
+            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .traddeStatus))
             return true
         }
         return false
