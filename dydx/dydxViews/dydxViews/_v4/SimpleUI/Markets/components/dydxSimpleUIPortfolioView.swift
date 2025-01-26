@@ -79,11 +79,64 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
             case .loggedOut:
                 view = AnyView(createLoggedOutView(style: style))
             case .unknown:
-                view = AnyView(VStack {})
+                view = AnyView(createLoadingView(style: style))
             }
 
             return view
         }
+    }
+
+    private func createLoadingView(style: ThemeStyle) -> some View {
+        VStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 0) {
+                Text("$1000.00")
+                    .themeFont(fontType: .plus, fontSize: .custom(size: 32))
+                    .themeColor(foreground: .textPrimary)
+
+                HStack(alignment: .center, spacing: 8) {
+                    SignedAmountViewModel.previewValue
+                        .createView(parentStyle: style.themeFont(fontSize: .small))
+
+                    SignedAmountViewModel.previewValue
+                        .createView(parentStyle: style.themeFont(fontSize: .small))
+
+                    dydxSimpleUIPortfolioPeriodViewModel.previewValue.createView(parentStyle: style)
+                }
+                .themeFont(fontSize: .small)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 16)
+            .leftAligned()
+
+            Spacer()
+
+            HStack(alignment: .center, spacing: 16) {
+                HStack(alignment: .center, spacing: 8) {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
+                        .themeColor(foreground: .textTertiary)
+                    Text("$10000.0")
+                        .themeColor(foreground: .textSecondary)
+                }
+                .themeFont(fontSize: .small)
+
+                Spacer()
+
+                HStack(alignment: .center, spacing: 8) {
+                    let leverageIcon = LeverageRiskModel.previewValue
+                    let leverageText = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
+                                                         viewSize: leverageIcon.viewSize,
+                                                         displayOption: .fullText)
+                    leverageText.createView(parentStyle: style)
+                    let leveragePercent = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
+                                                            viewSize: leverageIcon.viewSize,
+                                                            displayOption: .percent)
+                    leveragePercent.createView(parentStyle: style.themeColor(foreground: .textTertiary))
+                }
+            }
+            .frame(height: 32)
+            .padding(.horizontal, 16)
+        }
+        .redacted(reason: .placeholder)
     }
 
     private func createPortfolioView(style: ThemeStyle) -> some View {
