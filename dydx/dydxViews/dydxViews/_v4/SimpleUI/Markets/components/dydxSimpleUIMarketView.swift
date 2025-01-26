@@ -28,6 +28,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     public let positionTotal: Double?
     public let positionSize: String?
     public let onMarketSelected: (() -> Void)?
+    public let isLoading: Bool
 
     public init(displayType: DisplayType,
                 marketId: String,
@@ -40,6 +41,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 volumn: Double?,
                 positionTotal: Double?,
                 positionSize: String?,
+                isLoading: Bool = false,
                 onMarketSelected: (() -> Void)?
     ) {
         self.displayType = displayType
@@ -53,6 +55,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
         self.volumn = volumn
         self.positionTotal = positionTotal
         self.positionSize = positionSize
+        self.isLoading = isLoading
         self.onMarketSelected = onMarketSelected
     }
 
@@ -76,31 +79,54 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = Button { [weak self] in
-                self?.onMarketSelected?()
-            } label: {
-                HStack(spacing: 20) {
-                   HStack(spacing: 12) {
-                       self.createIcon(style: style)
-                       switch self.displayType {
-                       case .market:
-                           self.createNameVolume(style: style)
-                       case .position:
-                           self.createSideSizeValue(style: style)
-                       }
-                   }
-                   Spacer()
+            let view = Group {
+                if self.isLoading {
+                    self.createLoadingView(style: style)
+                } else {
+                    Button { [weak self] in
+                        self?.onMarketSelected?()
+                    } label: {
+                        HStack(spacing: 20) {
+                            HStack(spacing: 12) {
+                                self.createIcon(style: style)
+                                switch self.displayType {
+                                case .market:
+                                    self.createNameVolume(style: style)
+                                case .position:
+                                    self.createSideSizeValue(style: style)
+                                }
+                            }
+                            Spacer()
 
-                   self.createPriceChange(style: style)
-               }
-               .lineLimit(1)
-               .minimumScaleFactor(0.5)
-               .padding(.horizontal, 16)
-               .padding(.vertical, 4)
+                            self.createPriceChange(style: style)
+                        }
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 4)
+                    }
+                }
             }
 
             return AnyView(view)
         }
+    }
+
+    private func createLoadingView(style: ThemeStyle) -> some View {
+        HStack(spacing: 20) {
+            HStack(spacing: 12) {
+                self.createIcon(style: style)
+                    .redacted(reason: .placeholder)
+                self.createNameVolume(style: style)
+                    .redacted(reason: .placeholder)
+            }
+            Spacer()
+
+            self.createPriceChange(style: style)
+                .redacted(reason: .placeholder)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 4)
     }
 
     private func createIcon(style: ThemeStyle) -> some View {

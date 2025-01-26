@@ -16,6 +16,7 @@
 		0230377828C15C0E00412B72 /* PlatformViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230377728C15C0E00412B72 /* PlatformViewModel.swift */; };
 		023788F528B9924D00F212E1 /* PlatformButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023788F428B9924D00F212E1 /* PlatformButton.swift */; };
 		0242E3E92A9B1AE1007605F9 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0242E3E82A9B1AE1007605F9 /* Media.xcassets */; };
+		024399142D45B0880073DCF3 /* ShimmeringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024399132D45B0850073DCF3 /* ShimmeringView.swift */; };
 		0243A73729BB8DBB00A083FE /* PlatformListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243A73629BB8DBB00A083FE /* PlatformListViewModel.swift */; };
 		0243A73E29BE2D7C00A083FE /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243A73D29BE2D7C00A083FE /* Divider.swift */; };
 		024B794528B6A6A200F7C386 /* PlatformIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024B794428B6A6A200F7C386 /* PlatformIcon.swift */; };
@@ -119,6 +120,7 @@
 		0230377728C15C0E00412B72 /* PlatformViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformViewModel.swift; sourceTree = "<group>"; };
 		023788F428B9924D00F212E1 /* PlatformButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformButton.swift; sourceTree = "<group>"; };
 		0242E3E82A9B1AE1007605F9 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		024399132D45B0850073DCF3 /* ShimmeringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmeringView.swift; sourceTree = "<group>"; };
 		0243A73629BB8DBB00A083FE /* PlatformListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformListViewModel.swift; sourceTree = "<group>"; };
 		0243A73D29BE2D7C00A083FE /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		024B794428B6A6A200F7C386 /* PlatformIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformIcon.swift; sourceTree = "<group>"; };
@@ -219,6 +221,14 @@
 				023788F428B9924D00F212E1 /* PlatformButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		0243990E2D45B0770073DCF3 /* ShimmerView */ = {
+			isa = PBXGroup;
+			children = (
+				024399132D45B0850073DCF3 /* ShimmeringView.swift */,
+			);
+			path = ShimmerView;
 			sourceTree = "<group>";
 		};
 		0243A73C29BE2D6700A083FE /* Divider */ = {
@@ -356,6 +366,7 @@
 		02E2C92D28A1C8A400F7C3BE /* PlatformUI */ = {
 			isa = PBXGroup;
 			children = (
+				0243990E2D45B0770073DCF3 /* ShimmerView */,
 				0207FCA42D2BCECD004C2C9F /* KeyboardObserving */,
 				02F16FDA28B491EE0085DC58 /* PlatformUI.swift */,
 				0230377728C15C0E00412B72 /* PlatformViewModel.swift */,
@@ -716,6 +727,7 @@
 				0230377828C15C0E00412B72 /* PlatformViewModel.swift in Sources */,
 				276581F82C139F36009E072A /* SingleAxisGeometryReader.swift in Sources */,
 				0278DD0E2A7C7A1400FE6ABE /* PlatformViewModel+Ext.swift in Sources */,
+				024399142D45B0880073DCF3 /* ShimmeringView.swift in Sources */,
 				0273A3332ACE06EE001B89F5 /* ThemeColorCache.swift in Sources */,
 				02ABDAF028D9150A00728C54 /* PlatformInput.swift in Sources */,
 				02DE89A628A2F10A00728FF3 /* SampleThemeInput.swift in Sources */,

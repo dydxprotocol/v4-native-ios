@@ -26,7 +26,14 @@ public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
 
     private let dummyNoMarket = dydxSimpleUIMarketViewModel(displayType: .market, marketId: "_dummy_no_market", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, positionTotal: nil, positionSize: nil, onMarketSelected: nil)
 
-    private let dummyLoading = dydxSimpleUIMarketViewModel(displayType: .market, marketId: "_dummy_loading", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, positionTotal: nil, positionSize: nil, onMarketSelected: nil)
+    private let loadingList: [dydxSimpleUIMarketViewModel] = {
+        var list = [dydxSimpleUIMarketViewModel]()
+        for i in 0..<10 {
+            let item = dydxSimpleUIMarketViewModel(displayType: .market, marketId: "_dummy_loading_\(i)", assetName: "ETH", iconUrl: nil, price: "$100.00", change: .previewValue, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: 20000000, positionTotal: nil, positionSize: nil, isLoading: true, onMarketSelected: nil)
+            list.append(item)
+        }
+        return list
+    }()
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
@@ -35,7 +42,7 @@ public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
             // Need to insert "No Market" into ForEach for better performance
             let markets: [dydxSimpleUIMarketViewModel]
             if self.markets == nil {
-                markets = [dummyLoading]
+                markets = loadingList
             } else if self.markets?.count == 0 {
                 markets = [dummyNoMarket]
             } else {
@@ -43,15 +50,7 @@ public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
             }
 
             let view = ForEach(markets, id: \.marketId) { market in
-                if market.marketId == "_dummy_loading" {
-                    HStack {
-                        Spacer()
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                            .tint(ThemeColor.SemanticColor.textSecondary.color)
-                        Spacer()
-                    }
-                } else if market.marketId == "_dummy_no_market" {
+                if market.marketId == "_dummy_no_market" {
                     PlaceholderViewModel(text: DataLocalizer.localize(path: "APP.GENERAL.NO_MARKET"))
                         .createView(parentStyle: style)
                 } else {
