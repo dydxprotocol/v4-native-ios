@@ -61,7 +61,7 @@ final class dydxAlertsWorker: BaseWorker {
                     ErrorInfo.shared?.info(title: alert.title,
                                            message: alert.text,
                                            type: alert.type.infoType,
-                                           error: nil, time: nil, actions: actions)
+                                           error: nil, time: 3.0, actions: actions)
                 }
                 // add to alert ids set to avoid double handling
                 handledAlertHashes.insert(alert.hashValue)
