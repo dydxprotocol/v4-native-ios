@@ -18,6 +18,7 @@ public enum UserProperty: String {
     case statsigFlags
     case statsigStableId
     case pushNotificationsEnabled
+    case appMode
 }
 
 public extension TrackingProtocol {
