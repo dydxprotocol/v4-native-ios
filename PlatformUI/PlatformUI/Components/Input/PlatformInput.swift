@@ -41,7 +41,7 @@ private struct PlatformInputView: View {
                 header
                 ZStack(alignment: alignment) {
                     if model.currentValue == nil || model.currentValue?.length == 0 {
-                        placeholder.offset(x: -48)
+                        placeholder
                     }
                     textField
                 }
@@ -96,6 +96,7 @@ private struct PlatformInputView: View {
     private var placeholder: some View {
         Text(model.placeHolder)
             .themeColor(foreground: .textTertiary)
+            .opacity(0.3)
             .themeStyle(style: parentStyle)
             .lineLimit(1)
             .minimumScaleFactor(0.5)

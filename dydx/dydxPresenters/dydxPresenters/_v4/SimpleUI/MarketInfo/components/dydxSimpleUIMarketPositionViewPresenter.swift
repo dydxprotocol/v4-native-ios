@@ -57,33 +57,36 @@ class dydxSimpleUIMarketPositionViewPresenter: HostedViewPresenter<dydxSimpleUIM
                     (position.side.current == Abacus.PositionSide.long_ || position.side.current == Abacus.PositionSide.short_)
                 }
                 self?.tpSlPresenter.position = position
-                self?.updatePositionSection(position: position, marketMap: marketMap, assetMap: assetMap)
+                self?.updatePositionSection(position: position, marketId: marketId, marketMap: marketMap, assetMap: assetMap)
             }
             .store(in: &subscriptions)
     }
 
-    private func updatePositionSection(position: SubaccountPosition?, marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
+    private func updatePositionSection(position: SubaccountPosition?, marketId: String?, marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) {
         let newViewModel = dydxSimpleUIMarketPositionViewModel()
         newViewModel.tpSlGroupViewModel = viewModel?.tpSlGroupViewModel
         viewModel = newViewModel
-        guard let position, let sharedOrderViewModel = dydxPortfolioPositionsViewPresenter.createPositionViewModelItem(position: position,
+        guard let position, let sharedPositionViewModel = dydxPortfolioPositionsViewPresenter.createPositionViewModelItem(position: position,
                                                                                                                        marketMap: marketMap,
                                                                                                                        assetMap: assetMap)
         else {
             viewModel?.hasPosition = false
             viewModel?.side = SideTextViewModel(side: .none, coloringOption: .none)
+            if let marketId, let market = marketMap[marketId] {
+                viewModel?.symbol = assetMap[market.assetId]?.displayableAssetId
+            }
             return
         }
 
         viewModel?.hasPosition = true
-        viewModel?.symbol = sharedOrderViewModel.token?.symbol
-        viewModel?.unrealizedPNLAmount = sharedOrderViewModel.unrealizedPnl
-        viewModel?.size = sharedOrderViewModel.size
-        viewModel?.side = SideTextViewModel(side: sharedOrderViewModel.sideText.side, coloringOption: .colored)
-        viewModel?.liquidationPrice = sharedOrderViewModel.liquidationPrice
-        viewModel?.entryPrice = sharedOrderViewModel.entryPrice
+        viewModel?.symbol = sharedPositionViewModel.token?.symbol
+        viewModel?.unrealizedPNLAmount = sharedPositionViewModel.unrealizedPnl
+        viewModel?.size = sharedPositionViewModel.size
+        viewModel?.side = SideTextViewModel(side: sharedPositionViewModel.sideText.side, coloringOption: .colored)
+        viewModel?.liquidationPrice = sharedPositionViewModel.liquidationPrice
+        viewModel?.entryPrice = sharedPositionViewModel.entryPrice
 
-        viewModel?.logoUrl = sharedOrderViewModel.logoUrl
+        viewModel?.logoUrl = sharedPositionViewModel.logoUrl
         viewModel?.amount = dydxFormatter.shared.dollar(number: position.notionalTotal.current?.doubleValue, digits: 2)
         viewModel?.funding = SignedAmountViewModel(amount: position.netFunding?.doubleValue, displayType: .dollar, coloringOption: .allText)
 

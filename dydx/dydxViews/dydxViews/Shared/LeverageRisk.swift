@@ -116,7 +116,7 @@ public class LeverageRiskModel: PlatformViewModel {
 
     public static var previewValue: LeverageRiskModel {
         let vm = LeverageRiskModel()
-        vm.marginUsage = 0.89
+        vm.marginUsage = 0.1
         vm.viewSize = 24
         return vm
     }

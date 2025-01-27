@@ -73,7 +73,7 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
                 } else {
                     self?.viewModel?.state = .loggedOut
                     self?.viewModel?.buttonAction = {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/onboard"), animated: true, completion: nil)
+                        Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
                     }
                 }
             }

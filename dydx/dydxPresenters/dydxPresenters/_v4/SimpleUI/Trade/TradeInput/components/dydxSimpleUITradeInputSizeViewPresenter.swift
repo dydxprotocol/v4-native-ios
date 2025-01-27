@@ -149,11 +149,13 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
         let marketConfigs = configsAndAsset?.configs
         let asset = configsAndAsset?.asset
 
-        viewModel?.sizeItem?.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
+        let stepSize = marketConfigs?.displayStepSizeDecimals?.intValue ?? 0
+        var placeHolder = dydxFormatter.shared.raw(number: .zero, digits: stepSize) ?? ""
+        viewModel?.sizeItem?.placeHolder = placeHolder
         viewModel?.sizeItem?.tokenSymbol = configsAndAsset?.asset?.displayableAssetId ?? asset?.id
-        viewModel?.closePositionSizeItem?.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: marketConfigs?.displayStepSizeDecimals?.intValue ?? 0)
+        viewModel?.closePositionSizeItem?.placeHolder = placeHolder
         viewModel?.closePositionSizeItem?.tokenSymbol = configsAndAsset?.asset?.displayableAssetId ?? asset?.id
-        viewModel?.usdcSizeItem?.placeHolder = dydxFormatter.shared.raw(number: .zero, digits: 3)
+        viewModel?.usdcSizeItem?.placeHolder = "0.000"
         viewModel?.usdcSizeItem?.tokenSymbol = "USD"
 
         let items: [dydxSimpleUITradeInputSizeItemViewModel?]
