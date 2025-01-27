@@ -125,14 +125,6 @@ public class dydxAppModeViewModel: PlatformViewModel {
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
     }
-
-    private var bottomBlendGradiant: LinearGradient {
-        return LinearGradient(
-            gradient: Gradient(colors: [
-                ThemeColor.SemanticColor.layer5.color,
-                Color.clear]),
-            startPoint: .bottom, endPoint: .top)
-    }
 }
 
 #if DEBUG

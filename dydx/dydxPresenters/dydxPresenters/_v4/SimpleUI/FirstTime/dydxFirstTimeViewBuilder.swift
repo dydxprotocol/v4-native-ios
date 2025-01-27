@@ -35,7 +35,7 @@ class dydxFirstTimeViewController: HostingViewController<PlatformView, dydxFirst
             return
         }
 
-        presenter.showWelecomScreen()
+        presenter.showWelecomeScreen()
     }
 }
 
@@ -53,7 +53,7 @@ class dydxFirstTimeViewPresenter: HostedViewPresenter<dydxFirstTimeViewModel>, d
         viewModel = dydxFirstTimeViewModel()
     }
 
-    func showWelecomScreen() {
+    func showWelecomeScreen() {
         if !started {
             started = true
             let params = ["mode": "welcome"]
