@@ -178,7 +178,7 @@
           {
             "kind": "Function",
             "name": "sendARSRequest",
-            "printedName": "sendARSRequest(with:completionHandler:)",
+            "printedName": "sendARSRequest(with:withStoreKitVersion:completionHandler:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -203,6 +203,12 @@
                   }
                 ],
                 "usr": "s:SD"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
               },
               {
                 "kind": "TypeFunc",
@@ -272,13 +278,13 @@
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@AppsFlyerLib@objc(pl)AFSDKPurchaseDataSendingDelegate(im)sendARSRequestWith:completionHandler:",
-            "mangledName": "$s12AppsFlyerLib32AFSDKPurchaseDataSendingDelegateP14sendARSRequest4with17completionHandlerySDys11AnyHashableVypG_yAISg_s5Error_pSgSitctF",
+            "usr": "c:@M@AppsFlyerLib@objc(pl)AFSDKPurchaseDataSendingDelegate(im)sendARSRequestWith:withStoreKitVersion:completionHandler:",
+            "mangledName": "$s12AppsFlyerLib32AFSDKPurchaseDataSendingDelegateP14sendARSRequest4with0J15StoreKitVersion17completionHandlerySDys11AnyHashableVypG_SiyAJSg_s5Error_pSgSitctF",
             "moduleName": "AppsFlyerLib",
             "genericSig": "<τ_0_0 where τ_0_0 : AppsFlyerLib.AFSDKPurchaseDataSendingDelegate>",
             "sugared_genericSig": "<Self where Self : AppsFlyerLib.AFSDKPurchaseDataSendingDelegate>",
             "protocolReq": true,
-            "objc_name": "sendARSRequestWith:completionHandler:",
+            "objc_name": "sendARSRequestWith:withStoreKitVersion:completionHandler:",
             "declAttributes": [
               "ObjC",
               "RawDocComment"
@@ -289,7 +295,7 @@
           {
             "kind": "Function",
             "name": "sendVIAPRequest",
-            "printedName": "sendVIAPRequest(with:completionHandler:)",
+            "printedName": "sendVIAPRequest(with:withStoreKitVersion:completionHandler:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -314,6 +320,12 @@
                   }
                 ],
                 "usr": "s:SD"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
               },
               {
                 "kind": "TypeFunc",
@@ -383,13 +395,13 @@
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@AppsFlyerLib@objc(pl)AFSDKPurchaseDataSendingDelegate(im)sendVIAPRequestWith:completionHandler:",
-            "mangledName": "$s12AppsFlyerLib32AFSDKPurchaseDataSendingDelegateP15sendVIAPRequest4with17completionHandlerySDys11AnyHashableVypG_yAISg_s5Error_pSgSitctF",
+            "usr": "c:@M@AppsFlyerLib@objc(pl)AFSDKPurchaseDataSendingDelegate(im)sendVIAPRequestWith:withStoreKitVersion:completionHandler:",
+            "mangledName": "$s12AppsFlyerLib32AFSDKPurchaseDataSendingDelegateP15sendVIAPRequest4with0J15StoreKitVersion17completionHandlerySDys11AnyHashableVypG_SiyAJSg_s5Error_pSgSitctF",
             "moduleName": "AppsFlyerLib",
             "genericSig": "<τ_0_0 where τ_0_0 : AppsFlyerLib.AFSDKPurchaseDataSendingDelegate>",
             "sugared_genericSig": "<Self where Self : AppsFlyerLib.AFSDKPurchaseDataSendingDelegate>",
             "protocolReq": true,
-            "objc_name": "sendVIAPRequestWith:completionHandler:",
+            "objc_name": "sendVIAPRequestWith:withStoreKitVersion:completionHandler:",
             "declAttributes": [
               "ObjC",
               "RawDocComment"

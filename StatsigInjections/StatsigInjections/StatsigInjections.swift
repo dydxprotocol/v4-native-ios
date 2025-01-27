@@ -93,6 +93,7 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
                         Console.shared.log("analytics log | Statsig feature flags finished initial fetch with error: \(error)")
                         return
                     }
+                    
                     self?.initializationState = .initializedRemoteLoaded
                     // intentionally not calling completion here since we do not want ff init to be blocking startup
                     // this may change if we need FF pre-launch

@@ -2,7 +2,7 @@
 //  AppsFlyerLib.h
 //  AppsFlyerLib
 //
-//  AppsFlyer iOS SDK 6.15.3 (217)
+//  AppsFlyer iOS SDK 6.16.0 (227)
 //  Copyright (c) 2012-2023 AppsFlyer Ltd. All rights reserved.
 //
 
