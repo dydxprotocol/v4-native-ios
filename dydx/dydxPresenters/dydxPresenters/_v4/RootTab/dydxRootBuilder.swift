@@ -26,6 +26,8 @@ public class dydxRootBuilder: NSObject, ObjectBuilderProtocol {
         AbacusStateManager.shared.state.onboarded
             .prefix(1)
             .sink { onboarded in
+                Tracking.shared?.setUserProperty(AppMode.current?.rawValue, forUserProperty: .appMode)
+
                 if dydxBoolFeatureFlag.simple_ui.isEnabled {
                     if AppMode.current == nil {
                         if onboarded {
