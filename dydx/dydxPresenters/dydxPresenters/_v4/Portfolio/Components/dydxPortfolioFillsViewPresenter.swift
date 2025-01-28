@@ -49,7 +49,8 @@ class dydxPortfolioFillsViewPresenter: HostedViewPresenter<dydxPortfolioFillsVie
                             AbacusStateManager.shared.state.configsAndAssetMap,
                             $filterByMarketId)
             .sink { [weak self] fills, configsAndAssetMap, filterByMarketId in
-                self?.updateFills(fills: fills, configsAndAssetMap: configsAndAssetMap, filterByMarketId: filterByMarketId)
+                let truncatedFills = Array(fills.prefix(100))
+                self?.updateFills(fills: truncatedFills, configsAndAssetMap: configsAndAssetMap, filterByMarketId: filterByMarketId)
 
             }
             .store(in: &subscriptions)
