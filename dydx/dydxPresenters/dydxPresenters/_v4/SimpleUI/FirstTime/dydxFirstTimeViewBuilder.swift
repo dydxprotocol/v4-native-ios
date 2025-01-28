@@ -57,7 +57,7 @@ class dydxFirstTimeViewPresenter: HostedViewPresenter<dydxFirstTimeViewModel>, d
         if !started {
             started = true
             let params = ["mode": "welcome"]
-            Router.shared?.navigate(to: RoutingRequest(path: "/onboard", params: params), animated: true, completion: nil)
+            navigate(to: RoutingRequest(path: "/onboard", params: params), animated: true, completion: nil)
         }
     }
 }

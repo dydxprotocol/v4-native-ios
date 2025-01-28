@@ -18,8 +18,7 @@ public class dydxWalletListViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxWalletListViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        let configuration = HostingViewControllerConfiguration(fixedHeight: UIScreen.main.bounds.height)
-        return dydxWalletListViewController(presenter: presenter, view: view, configuration: configuration) as? T
+        return dydxWalletListViewController(presenter: presenter, view: view, configuration: .fullScreenSheet) as? T
     }
 }
 

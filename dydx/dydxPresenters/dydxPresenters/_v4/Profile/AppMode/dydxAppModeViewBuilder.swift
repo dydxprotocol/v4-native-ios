@@ -24,7 +24,6 @@ public class dydxAppModeViewBuilder: NSObject, ObjectBuilderProtocol {
 private class dydxAppModeViewController: HostingViewController<PlatformView, dydxAppModeViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/settings/app_mode" {
-            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .modeSelector))
             return true
         }
         return false
@@ -53,12 +52,12 @@ private class dydxAppModeViewPresenter: HostedViewPresenter<dydxAppModeViewModel
             if mode != self?.viewModel?.appMode {
                 self?.viewModel?.appMode = mode
                 AppMode.current = mode
-
-                self?.loadRoot()
             }
+
+            self?.loadRoot()
         }
-        viewModel?.onCancel = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        viewModel?.onCancel = { [weak self] in
+            self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
     }
 
@@ -73,8 +72,8 @@ private class dydxAppModeViewPresenter: HostedViewPresenter<dydxAppModeViewModel
     }
 
     private func loadRoot() {
-        Router.shared?.navigate(to: RoutingRequest(path: "/loading"), animated: true, completion: { _, _ in
-            Router.shared?.navigate(to: RoutingRequest(path: "/"), animated: true, completion: { _, _ in
+        navigate(to: RoutingRequest(path: "/loading"), animated: true, completion: { _, _ in
+            self.navigate(to: RoutingRequest(path: "/"), animated: true, completion: { _, _ in
             })
         })
     }

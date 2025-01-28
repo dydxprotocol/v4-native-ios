@@ -151,7 +151,7 @@
                 },
                 "/onboard/wallets":{
                     "destination":"dydxPresenters.dydxWalletListViewBuilder",
-                    "presentation":"half"
+                    "presentation":"prompt"
                 },
                 "/order":{
                     "destination":"dydxPresenters.dydxOrderDetailsViewBuilder",

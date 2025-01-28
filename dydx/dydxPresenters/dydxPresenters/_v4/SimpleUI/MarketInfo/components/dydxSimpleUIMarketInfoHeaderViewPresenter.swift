@@ -26,15 +26,16 @@ class dydxSimpleUIMarketInfoHeaderViewPresenter: HostedViewPresenter<dydxSimpleU
 
     override init() {
         let viewModel = dydxSimpleUIMarketInfoHeaderViewModel()
-        viewModel.onBackButtonTap = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
-        }
 
         marketPresenter.$viewModel.assign(to: &viewModel.$sharedMarketViewModel)
 
         super.init()
 
         self.viewModel = viewModel
+
+        viewModel.onBackButtonTap = { [weak self] in
+            self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        }
 
         $marketId.assign(to: &marketPresenter.$marketId)
 

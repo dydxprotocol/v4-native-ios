@@ -26,7 +26,6 @@ public class dydxSimpleUIMarketsViewBuilder: NSObject, ObjectBuilderProtocol {
 public class dydxSimpleUIMarketsViewController: HostingViewController<PlatformView, dydxSimpleUIMarketsViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/" {
-            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .markets))
             return true
         }
         return false
@@ -63,14 +62,15 @@ public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIM
 
         self.viewModel = viewModel
 
-        viewModel.searchAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/markets/search"),
-                                    animated: true,
-                                    completion: nil)
+        viewModel.searchAction = { [weak self] in
+            self?.navigate(to: RoutingRequest(path: "/markets/search"),
+                           animated: true, completion: nil)
         }
 
-        marketListPresenter.onMarketSelected = { marketId in
-            Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["market": marketId]), animated: true, completion: nil)
+        marketListPresenter.onMarketSelected = { [weak self] marketId in
+           self?.navigate(to: RoutingRequest(path: "/market",
+                                             params: ["market": marketId]),
+                          animated: true, completion: nil)
         }
 
         attachChildren(workers: childPresenters)

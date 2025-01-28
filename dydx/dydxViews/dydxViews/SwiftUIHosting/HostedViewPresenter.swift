@@ -11,8 +11,12 @@ import Combine
 import PlatformUI
 import PlatformParticles
 import Utilities
+import RoutingKit
+import dydxAnalytics
 
-public protocol HostedViewPresenterProtocol: WorkerProtocol {}
+public protocol HostedViewPresenterProtocol: WorkerProtocol {
+    var currentRoute: RoutingRequest? { get set }
+}
 
 open class HostedViewPresenter<ViewModel: PlatformViewModeling>: ObjectViewPresenter, HostedViewPresenterProtocol {
     @Published public var viewModel: ViewModel?
@@ -20,6 +24,16 @@ open class HostedViewPresenter<ViewModel: PlatformViewModeling>: ObjectViewPrese
     public var isStarted = false
 
     private var workers = [WorkerProtocol]()
+
+    public var currentRoute: RoutingRequest? {
+        didSet {
+            for worker in workers {
+                if let presenter = worker as? HostedViewPresenterProtocol {
+                    presenter.currentRoute = currentRoute
+                }
+            }
+        }
+    }
 
     deinit {
         detachChildren(workers: workers)
@@ -75,11 +89,28 @@ open class HostedViewPresenter<ViewModel: PlatformViewModeling>: ObjectViewPrese
     }
 
     public func attachChildren(workers: [WorkerProtocol]) {
-        workers.forEach { attachChild(worker: $0) }
+        workers.forEach { worker in
+            if let presenter = worker as? HostedViewPresenterProtocol {
+                presenter.currentRoute = currentRoute
+            }
+            attachChild(worker: worker)
+        }
     }
 
     public func detachChildren(workers: [WorkerProtocol]) {
         workers.forEach { detachChild(worker: $0) }
+    }
+
+    public func navigate(to request: RoutingRequest, animated: Bool, completion: RoutingCompletionBlock?) {
+        if let toRoute = request.url?.relativePath {
+            let event = AnalyticsEventV2.RoutingEvent(fromPath: currentRoute?.url?.relativePath,
+                                                      toPath: toRoute,
+                                                      fromQuery: currentRoute?.url?.query,
+                                                      toQuery: request.url?.query)
+            Tracking.shared?.log(event: event)
+        }
+
+        Router.shared?.navigate(to: request, animated: animated, completion: completion)
     }
 
 }

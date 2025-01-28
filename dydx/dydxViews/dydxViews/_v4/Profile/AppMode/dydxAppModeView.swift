@@ -119,7 +119,6 @@ public class dydxAppModeViewModel: PlatformViewModel {
                 .padding([.leading, .trailing])
                 .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer3)
-                .makeSheet(sheetStyle: .fitSize)
 
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))

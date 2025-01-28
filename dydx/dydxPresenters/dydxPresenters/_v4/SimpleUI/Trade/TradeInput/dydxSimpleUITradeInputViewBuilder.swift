@@ -49,7 +49,6 @@ class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, 
 
             presenter.tradeType = .trade
 
-            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .tradeEdit))
             return true
 
         } else if request?.path == "/trade/simple/close", let marketId = parser.asString(request?.params?["marketId"]) {
@@ -59,7 +58,6 @@ class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, 
 
             presenter.tradeType = .closePosition
 
-            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .tradeEdit))
             return true
         }
 

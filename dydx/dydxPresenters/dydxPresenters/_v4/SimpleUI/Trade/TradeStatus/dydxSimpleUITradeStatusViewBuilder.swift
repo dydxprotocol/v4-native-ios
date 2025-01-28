@@ -34,11 +34,9 @@ private class dydxSimpleUITradeStatusViewController: HostingViewController<Platf
         }
         if request?.path == "/trade/simple/status" {
             presenter.tradeType = .trade
-            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .traddeStatus))
             return true
         } else if request?.path == "/closePosition/simple/status" {
             presenter.tradeType = .closePosition
-            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .traddeStatus))
             return true
         }
         return false
@@ -65,7 +63,7 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
         let notificationPermission = NotificationService.shared?.authorization
         if notificationPermission?.authorization == .notDetermined {
             self?.dismissView {
-                Router.shared?.navigate(to: RoutingRequest(path: "/authorization/notification", params: nil), animated: true, completion: nil)
+                self?.navigate(to: RoutingRequest(path: "/authorization/notification", params: nil), animated: true, completion: nil)
             }
         } else {
             self?.dismissView(completion: nil)
@@ -73,7 +71,7 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
     }
 
     private func dismissView(completion: (() -> Void)?) {
-        Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+        navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
             completion?()
         }
     }

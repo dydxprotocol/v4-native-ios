@@ -63,7 +63,6 @@ public class dydxWalletListViewModel: PlatformViewModel {
             }
                 .padding([.leading, .trailing])
                 .themeColor(background: .layer3)
-                .makeSheet()
 
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))

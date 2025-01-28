@@ -17,6 +17,7 @@ import PlatformRouting
 import FloatingPanel
 import Utilities
 import Combine
+import RoutingKit
 
 public struct HostingViewControllerConfiguration {
     public init(ignoreSafeArea: Bool = true, fixedHeight: CGFloat? = nil, gradientTabbar: Bool = false, disableNavigationController: Bool = false, fullScreenSheet: Bool = false) {
@@ -40,6 +41,12 @@ public struct HostingViewControllerConfiguration {
 }
 
 open class HostingViewController<V: View, VM: PlatformViewModel>: TrackingViewController, UIViewControllerEmbeddingProtocol, UITabBarControllerDelegate, UISheetPresentationControllerDelegate {
+
+    open override var routingRequest: RoutingRequest? {
+        didSet {
+            presenter?.currentRoute = routingRequest
+        }
+    }
 
     private var hostingController: UIHostingController<AnyView>?
     private let presenterView = ObjectPresenterView()

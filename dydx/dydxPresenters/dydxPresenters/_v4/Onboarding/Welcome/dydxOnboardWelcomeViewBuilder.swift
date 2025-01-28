@@ -31,7 +31,6 @@ private class dydxOnboardWelcomeViewController: HostingViewController<PlatformVi
             let presenter = presenter as? dydxOnboardWelcomeViewPresenter {
                 if mode == "welcome" {
                     presenter.mode = .simpleUIWelcome
-                    Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .modeSelector))
                 }
             }
             return true
