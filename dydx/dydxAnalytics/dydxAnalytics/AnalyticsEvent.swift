@@ -73,19 +73,6 @@ public extension AnalyticsEventV2 {
     }
 }
 
-public extension AnalyticsEventV2 {
-    enum SimpleUIPageName: String {
-        case welcome = "Welcome"
-        case modeSelector = "ModeSelector"
-        case markets = "Markets"
-        case search = "Search"
-        case marketInfo = "MarketInfo"
-        case tradeEdit = "TradeEdit"
-        case tpsl = "TPSL"
-        case traddeStatus = "TradeStatus"
-    }
-}
-
 public enum AnalyticsEventV2 {
     public struct AppStart: TrackableEvent {
         public var name: String { "AppStart" }
