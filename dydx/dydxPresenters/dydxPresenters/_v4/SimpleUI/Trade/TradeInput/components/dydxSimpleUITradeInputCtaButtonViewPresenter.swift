@@ -126,9 +126,9 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
     }
 
     private func closePosition() {
-        Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+        navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
             HapticFeedback.shared?.notify(type: .success)
-            Router.shared?.navigate(to: RoutingRequest(path: "/closePosition/simple/status"), animated: true, completion: nil)
+            self.navigate(to: RoutingRequest(path: "/closePosition/simple/status"), animated: true, completion: nil)
         }
     }
 
@@ -159,15 +159,15 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
     }
 
     private func trade(onboardingState: OnboardingState) {
-        Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+        navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) {  _, _ in
             switch onboardingState {
             case .newUser:
-                Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+                self.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
             case .needDeposit:
-                Router.shared?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
+                self.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
             case .readyToTrade:
                 HapticFeedback.shared?.notify(type: .success)
-                Router.shared?.navigate(to: RoutingRequest(path: "/trade/simple/status"), animated: true, completion: nil)
+                self.navigate(to: RoutingRequest(path: "/trade/simple/status"), animated: true, completion: nil)
             }
         }
     }

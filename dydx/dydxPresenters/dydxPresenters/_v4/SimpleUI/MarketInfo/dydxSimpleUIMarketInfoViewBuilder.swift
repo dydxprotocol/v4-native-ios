@@ -24,8 +24,6 @@ class dydxSimpleUIMarketInfoViewController: HostingViewController<PlatformView, 
             dydxSelectedMarketsStore.shared.lastSelectedMarket = selectedMarketId
             presenter.marketId = selectedMarketId
             presenter.shouldDisplayFullTradeInputOnAppear = request?.path == "/trade"
-
-            Tracking.shared?.log(event: AnalyticsEventV2.SimpleUIPageEvent(page: .marketInfo))
             return true
         }
         return false
@@ -80,13 +78,5 @@ private class dydxSimpleUIMarketInfoViewPresenter: HostedViewPresenter<dydxSimpl
         $marketId.assign(to: &buySellPresenter.$marketId)
 
         attachChildren(workers: childPresenters)
-    }
-
-    private func floatTradeInput() {
-        if shouldDisplayFullTradeInputOnAppear {
-            Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["full": "true", "market": marketId ?? ""]), animated: true, completion: nil)
-        } else {
-            Router.shared?.navigate(to: RoutingRequest(path: "/trade/input", params: ["market": marketId ?? ""]), animated: true, completion: nil)
-        }
     }
 }

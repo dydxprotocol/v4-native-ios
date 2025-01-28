@@ -231,16 +231,25 @@ public enum AnalyticsEventV2 {
         }
     }
 
-    public struct SimpleUIPageEvent: TrackableEvent {
-        let page: SimpleUIPageName
+    public struct RoutingEvent: TrackableEvent {
+        let fromPath: String?
+        let toPath: String
+        let fromQuery: String?
+        let toQuery: String?
 
-        public var name: String { "SimpleUIPageEvent" }
+        public var name: String { "RoutingEvent" }
         public var customParameters: [String: Any] {[
-            "page": page.rawValue
+            "fromPath": fromPath ?? "nil",
+            "toPath": toPath,
+            "fromQuery": fromQuery ?? "nil",
+            "toQuery": toQuery ?? "nil"
         ]}
 
-        public init(page: SimpleUIPageName) {
-            self.page = page
+        public init(fromPath: String? = nil, toPath: String, fromQuery: String? = nil, toQuery: String? = nil) {
+            self.fromPath = fromPath
+            self.toPath = toPath
+            self.fromQuery = fromQuery
+            self.toQuery = toQuery
         }
     }
 

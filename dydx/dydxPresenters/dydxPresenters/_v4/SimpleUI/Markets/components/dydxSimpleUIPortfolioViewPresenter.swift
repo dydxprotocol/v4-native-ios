@@ -8,7 +8,6 @@
 import Utilities
 import dydxViews
 import PlatformParticles
-import RoutingKit
 import ParticlesKit
 import PlatformUI
 import dydxStateManager
@@ -68,12 +67,12 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
                 if onboarded {
                     self?.viewModel?.state = .walletConnected
                     self?.viewModel?.buttonAction = {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
+                        self?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
                     }
                 } else {
                     self?.viewModel?.state = .loggedOut
                     self?.viewModel?.buttonAction = {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/onboard"), animated: true, completion: nil)
+                        self?.navigate(to: RoutingRequest(path: "/onboard"), animated: true, completion: nil)
                     }
                 }
             }

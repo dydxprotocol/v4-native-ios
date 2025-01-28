@@ -26,14 +26,14 @@ class dydxSimpleUIMarketBuySellViewPresenter: HostedViewPresenter<dydxSimpleUIMa
 
         viewModel?.buyAction = { [weak self] in
             guard let marketId = self?.marketId else { return }
-            Router.shared?.navigate(to: RoutingRequest(path: "/trade/simple",
-                                                       params: ["side": "buy", "market": marketId]), animated: true, completion: nil)
+            self?.navigate(to: RoutingRequest(path: "/trade/simple",
+                                              params: ["side": "buy", "market": marketId]), animated: true, completion: nil)
         }
 
         viewModel?.sellAction = { [weak self] in
             guard let marketId = self?.marketId else { return }
-            Router.shared?.navigate(to: RoutingRequest(path: "/trade/simple",
-                                                       params: ["side": "sell", "market": marketId]), animated: true, completion: nil)
+            self?.navigate(to: RoutingRequest(path: "/trade/simple",
+                                              params: ["side": "sell", "market": marketId]), animated: true, completion: nil)
         }
     }
 }

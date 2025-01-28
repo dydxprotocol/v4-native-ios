@@ -57,9 +57,9 @@ private class dydxSimpleUIMarketSearchViewPresenter: HostedViewPresenter<dydxSim
             self?.marketListPresenter.searchText = text
         }
 
-        marketListPresenter.onMarketSelected = { marketId in
-            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
-                Router.shared?.navigate(to: RoutingRequest(path: "/market", params: ["market": marketId]), animated: true, completion: nil)
+        marketListPresenter.onMarketSelected = { [weak self] marketId in
+           self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+                self?.navigate(to: RoutingRequest(path: "/market", params: ["market": marketId]), animated: true, completion: nil)
             }
         }
 
