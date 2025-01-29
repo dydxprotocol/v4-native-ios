@@ -87,9 +87,7 @@ class dydxMarketTpSlGroupViewPresenter: HostedViewPresenter<dydxMarketTpSlGroupV
                     amount: positionSize == orderSize && positionSize > 0 ? nil : dydxFormatter.shared.percent(number: orderSize / positionSize, digits: 2),
                     action: routeToTakeProfitStopLossAction)
             } else {
-                viewModel?.takeProfitStatusViewModel = .init(
-                    triggerSide: .takeProfit,
-                    action: routeToTakeProfitStopLossAction)
+                viewModel?.takeProfitStatusViewModel = nil
             }
 
             if stopLossOrders.count > 1 {
@@ -107,9 +105,7 @@ class dydxMarketTpSlGroupViewPresenter: HostedViewPresenter<dydxMarketTpSlGroupV
                     amount: positionSize == orderSize && positionSize > 0 ? nil : dydxFormatter.shared.percent(number: orderSize / positionSize, digits: 2),
                     action: routeToTakeProfitStopLossAction)
             } else {
-                viewModel?.stopLossStatusViewModel = .init(
-                    triggerSide: .stopLoss,
-                    action: routeToTakeProfitStopLossAction)
+                viewModel?.stopLossStatusViewModel = nil
             }
         }
 

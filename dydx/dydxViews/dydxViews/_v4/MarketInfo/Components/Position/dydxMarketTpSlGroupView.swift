@@ -25,48 +25,57 @@ public class dydxMarketTpSlGroupViewModel: PlatformViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            var addTakeProfitStopLossButton: AnyView?
-
-            if let takeProfitStopLossAction = self.takeProfitStopLossAction {
-                let content = AnyView(
-                    HStack {
-                        Spacer()
-                        Text(DataLocalizer.localize(path: "APP.TRADE.ADD_TP_SL"))
-                            .themeFont(fontSize: .medium)
-                            .themeColor(foreground: .textSecondary)
-                        Spacer()
-                    }
-                )
-
-                addTakeProfitStopLossButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
-                    takeProfitStopLossAction()
-                }
-                .createView(parentStyle: parentStyle)
-                .wrappedInAnyView()
-            }
-
-            let view =  HStack(spacing: 10) {
-                if self.takeProfitStatusViewModel != nil || self.stopLossStatusViewModel != nil {
-                    HStack(spacing: 10) {
-                        Group {
-                            self.takeProfitStatusViewModel?.createView(parentStyle: parentStyle)
-                                .frame(maxWidth: .infinity)
-                            self.stopLossStatusViewModel?.createView(parentStyle: parentStyle)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .frame(maxHeight: .infinity)
-                    }
+            let view =  HStack(spacing: 12) {
+                if self.takeProfitStatusViewModel != nil {
+                    self.takeProfitStatusViewModel?.createView(parentStyle: style)
                 } else {
-                    addTakeProfitStopLossButton
-                        .frame(maxWidth: .infinity)
+                    self.createAddButton(label: DataLocalizer.localize(path: "APP.TRADE.TAKE_PROFIT"),
+                                         style: style)
+                }
+
+                if self.stopLossStatusViewModel != nil {
+                    self.stopLossStatusViewModel?.createView(parentStyle: parentStyle)
+                } else {
+                    self.createAddButton(label: DataLocalizer.localize(path: "APP.TRADE.STOP_LOSS"),
+                                         style: style)
                 }
             }
+                .frame(maxHeight: .infinity)
 
             return AnyView(view)
         }
+    }
+
+    private func createAddButton(label: String, style: ThemeStyle) -> some View {
+        let content = HStack {
+            Text(label)
+                .multilineTextAlignment(.leading)
+                .themeFont(fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+                .frame(maxWidth: 60)
+
+            Spacer()
+
+            PlatformIconViewModel(type: .system(name: "plus"),
+                                  size: CGSize(width: 14, height: 14),
+                                  templateColor: .textSecondary)
+            .createView(parentStyle: style)
+            .frame(width: 24, height: 24)
+            .themeColor(background: .layer5)
+            .clipShape(Circle())
+        }
+            .padding(8)
+            .themeColor(background: .layer3)
+            .cornerRadius(10, corners: .allCorners)
+            .wrappedViewModel
+
+        return PlatformButtonViewModel(content: content, type: .iconType) { [weak self] in
+            self?.takeProfitStopLossAction?()
+        }
+        .createView(parentStyle: style)
     }
 }
 

@@ -33,61 +33,62 @@ public class dydxTakeProfitStopLossStatusViewModel: PlatformViewModel {
 
     private func createTitleValueRow(titleStringKey: String, value: String?) -> AnyView? {
         guard let value = value else { return nil }
-        return HStack(spacing: 0) {
+        return HStack(spacing: 8) {
             Text(DataLocalizer.shared?.localize(path: titleStringKey, params: nil) ?? "")
-                .themeFont(fontType: .base, fontSize: .smaller)
+                .multilineTextAlignment(.leading)
+                .themeFont(fontSize: .small)
                 .themeColor(foreground: .textTertiary)
-                .fixedSize()
-            Spacer(minLength: 10)
+                .frame(width: 60)
+
+            Spacer()
+
             Text(value)
-                .themeFont(fontType: .base, fontSize: .smaller)
-                .themeColor(foreground: .textSecondary)
-                .fixedSize()
+                .themeFont(fontType: .base, fontSize: .small)
+                .themeColor(foreground: .textPrimary)
+                .minimumScaleFactor(0.5)
+                .lineLimit(1)
         }
         .wrappedInAnyView()
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let content = VStack(spacing: 0) {
-                Spacer(minLength: 0)
-                VStack(spacing: 14) {
-                    HStack(spacing: 0) {
-                        TokenTextViewModel(symbol: DataLocalizer.shared?.localize(path: self.triggerSide.titleStringKey, params: nil) ?? "")
-                            .createView(parentStyle: parentStyle.themeFont(fontSize: .smallest), styleKey: styleKey)
-                            .fixedSize()
-                        Spacer(minLength: 10)
-                        Text(self.triggerPriceText ?? DataLocalizer.localize(path: self.triggerSide.placeholderStringKey))
-                            .themeFont(fontType: .base, fontSize: .large)
-                            .themeColor(foreground: self.triggerPriceText == nil ? .textTertiary : .textPrimary)
-                            .truncationMode(.middle)
-                            .minimumScaleFactor(0.5)
-                            .lineLimit(1)
-                    }
-                    if self.limitPrice != nil || self.amount != nil {
-                        VStack(spacing: 8) {
-                            Divider()
-                                .overlay(ThemeColor.SemanticColor.textTertiary.color)
-                                .padding(.horizontal, -100) // this padding counteracts the button horizontal padding
-                            VStack(spacing: 4) {
-                                self.createTitleValueRow(titleStringKey: "APP.TRADE.LIMIT_ORDER_SHORT", value: self.limitPrice)
-                                self.createTitleValueRow(titleStringKey: "APP.GENERAL.AMOUNT", value: self.amount)
-                            }
-                            .padding(.bottom, -6) // this padding counteracts the button bottom padding
-                        }
-                    }
+            let content = VStack(spacing: 8) {
+                HStack(spacing: 8) {
+                    Text(DataLocalizer.shared?.localize(path: self.triggerSide.titleStringKey, params: nil) ?? "")
+                        .themeFont(fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
+                        .frame(width: 60)
 
+                    Spacer()
+
+                    Text(self.triggerPriceText ?? "")
+                        .themeFont(fontType: .base, fontSize: .large)
+                        .themeColor(foreground: .textPrimary)
+                        .truncationMode(.middle)
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
                 }
-                Spacer(minLength: 0)
-            }
-                .padding(.horizontal, -4) // this padding counteracts some of the button horizontal padding, to be updated
+                if self.limitPrice != nil || self.amount != nil {
+                    DividerModel().createView(parentStyle: style)
+                        .padding(.horizontal, -8)
 
-            return PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {[weak self] in
+                    VStack(spacing: 4) {
+                        self.createTitleValueRow(titleStringKey: "APP.TRADE.LIMIT_ORDER_SHORT", value: self.limitPrice)
+                        self.createTitleValueRow(titleStringKey: "APP.GENERAL.AMOUNT", value: self.amount)
+                    }
+                }
+            }
+                .padding(8)
+                .themeColor(background: .layer3)
+                .cornerRadius(10, corners: .allCorners)
+
+            return PlatformButtonViewModel(content: content.wrappedViewModel, type: .iconType) {[weak self] in
                 self?.action?()
             }
-            .createView(parentStyle: parentStyle.themeFont(fontSize: .large))
+            .createView(parentStyle: style)
             .wrappedInAnyView()
         }
     }
@@ -132,18 +133,9 @@ extension dydxTakeProfitStopLossStatusViewModel {
         var titleStringKey: String {
             switch self {
             case .takeProfit:
-                return "TP"
+                return "APP.TRADE.TAKE_PROFIT"
             case .stopLoss:
-                return "SL"
-            }
-        }
-
-        var placeholderStringKey: String {
-            switch self {
-            case .takeProfit:
-                return "APP.TRADE.ADD_TAKE_PROFIT"
-            case .stopLoss:
-                return "APP.TRADE.ADD_STOP_LOSS"
+                return "APP.TRADE.STOP_LOSS"
             }
         }
     }
