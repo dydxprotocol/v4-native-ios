@@ -50,19 +50,21 @@ private struct dydxSliderTextInput: View {
 
     var textInput: some View {
         dydxTitledNumberField(title: viewModel.title,
-                        accessoryTitle: viewModel.accessoryTitle,
-                        numberFormatter: viewModel.numberFormatter,
-                        minValue: viewModel.minValue,
-                        maxValue: viewModel.maxValue,
-                        isMaxButtonVisible: false,
-                        value: $viewModel.value)
+                              accessoryTitle: viewModel.accessoryTitle,
+                              numberFormatter: viewModel.numberFormatter,
+                              minValue: viewModel.minValue,
+                              maxValue: viewModel.maxValue,
+                              isMaxButtonVisible: false,
+                              withBorder: false,
+                              value: $viewModel.value)
     }
 
     var body: some View {
         HStack(alignment: .center, spacing: 16) {
             slider
             textInput
-                .makeInput()
+                .themeColor(background: .layer3)
+                .cornerRadius(12, corners: .allCorners)
             // min 114 is the min size and fixed size will allow it to expand to keep title in one line
                 .frame(minWidth: 114)
                 .fixedSize()

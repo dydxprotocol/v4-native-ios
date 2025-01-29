@@ -97,6 +97,7 @@ private struct VaultDepositWithdrawView: View {
                                   minValue: 0,
                                   maxValue: viewModel.maxAmount,
                                   isMaxButtonVisible: true,
+                                  withBorder: true,
                                   value: $viewModel.amount)
             inputReceipts
             .padding(.horizontal, 16)

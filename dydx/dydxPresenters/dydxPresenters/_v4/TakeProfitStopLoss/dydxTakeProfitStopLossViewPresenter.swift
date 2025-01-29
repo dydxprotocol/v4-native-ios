@@ -22,7 +22,7 @@ public class dydxTakeProfitStopLossViewBuilder: NSObject, ObjectBuilderProtocol 
     public func build<T>() -> T? {
         let presenter = dydxTakeProfitStopLossViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxTakeProfitStopLossViewController(presenter: presenter, view: view, configuration: .default) as? T
+        return dydxTakeProfitStopLossViewController(presenter: presenter, view: view, configuration: .fullScreenSheet) as? T
     }
 }
 
@@ -157,6 +157,12 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
             }
         }
 
+        if dydxBoolFeatureFlag.simple_ui.isEnabled, AppMode.current == .simple {
+            viewModel.showAdvanced = false
+        } else {
+            viewModel.showAdvanced = true
+        }
+
         self.viewModel = viewModel
     }
 
@@ -253,6 +259,7 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
 
     private func update(market: PerpetualMarket, configsMap: [String: MarketConfigsAndAsset]) {
         let configs = configsMap[market.id]
+        viewModel?.assetId = configs?.asset?.displayableAssetId
         viewModel?.oraclePrice = dydxFormatter.shared.dollar(number: market.oraclePrice?.doubleValue, digits: market.configs?.displayTickSizeDecimals?.intValue ?? 2)
         viewModel?.customAmountViewModel?.sliderTextInput.accessoryTitle = configs?.asset?.displayableAssetId
         viewModel?.customAmountViewModel?.sliderTextInput.minValue = market.configs?.minOrderSize?.doubleValue.magnitude ?? 0
@@ -362,8 +369,13 @@ private class dydxTakeProfitStopLossViewPresenter: HostedViewPresenter<dydxTakeP
     }
 
     private func update(position: SubaccountPosition?, configsMap: [String: MarketConfigsAndAsset]) {
-        guard let marketConfig = configsMap[marketId ?? ""]?.configs else { return }
+        guard let marketId, let marketConfig = configsMap[marketId]?.configs, let asset = configsMap[marketId]?.asset else { return }
 
+        if let imageUrl =  asset.resources?.imageUrl, let url = URL(string: imageUrl) {
+            viewModel?.icon = url
+        } else {
+            viewModel?.icon = nil
+        }
         viewModel?.entryPrice = dydxFormatter.shared.dollar(number: position?.entryPrice.current?.doubleValue,
                                                          digits: marketConfig.displayTickSizeDecimals?.intValue ?? 2)
         viewModel?.customAmountViewModel?.sliderTextInput.maxValue = position?.size.current?.doubleValue.magnitude ?? 0

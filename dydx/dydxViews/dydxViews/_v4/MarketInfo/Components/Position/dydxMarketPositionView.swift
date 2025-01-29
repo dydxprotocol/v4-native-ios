@@ -291,7 +291,6 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
 
     private func createButtons(parentStyle: ThemeStyle) -> some View {
         var closePositionButton: AnyView?
-        var addTakeProfitStopLossButton: AnyView?
         var editMarginButton: AnyView?
 
         if let closeAction = self.closeAction {
@@ -311,23 +310,25 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
         }
 
         if let editMarginAction = self.editMarginAction {
-            let content = AnyView(
-                HStack(spacing: 0) {
-                    Spacer()
-                    HStack(spacing: 8) {
-                        PlatformIconViewModel(type: .asset(name: "icon_edit", bundle: Bundle.dydxView),
-                                              size: CGSize(width: 20, height: 20),
-                                              templateColor: .textSecondary)
-                        .createView()
-                        Text(DataLocalizer.localize(path: "APP.TRADE.EDIT_MARGIN"))
-                            .themeFont(fontSize: .medium)
-                            .themeColor(foreground: .textSecondary)
-                    }
-                    Spacer()
+            let content = HStack(spacing: 0) {
+                Spacer()
+                HStack(spacing: 8) {
+                    PlatformIconViewModel(type: .asset(name: "icon_edit", bundle: Bundle.dydxView),
+                                          size: CGSize(width: 20, height: 20),
+                                          templateColor: .textSecondary)
+                    .createView()
+                    Text(DataLocalizer.localize(path: "APP.TRADE.EDIT_MARGIN"))
+                        .themeFont(fontSize: .medium)
+                        .themeColor(foreground: .textSecondary)
                 }
-            )
+                Spacer()
+            }
+            .padding(8)
+            .frame(minHeight: 50)
+            .themeColor(background: .layer3)
+            .cornerRadius(10, corners: .allCorners)
 
-            editMarginButton = PlatformButtonViewModel(content: content.wrappedViewModel, state: .secondary) {
+            editMarginButton = PlatformButtonViewModel(content: content.wrappedViewModel, type: .iconType) {
                 editMarginAction()
             }
             .createView(parentStyle: parentStyle)

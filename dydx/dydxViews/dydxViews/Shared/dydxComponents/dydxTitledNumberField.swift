@@ -19,6 +19,7 @@ struct dydxTitledNumberField: View {
     let minValue: Double
     let maxValue: Double
     let isMaxButtonVisible: Bool
+    let withBorder: Bool
     @Binding var value: Double?
     @State private var textWidth: CGFloat = 0
 
@@ -93,7 +94,7 @@ struct dydxTitledNumberField: View {
         }
         .padding(.vertical, 12)
         .padding(.horizontal, 16)
-        .makeInput()
+        .makeInput(withBorder: withBorder)
     }
 }
 

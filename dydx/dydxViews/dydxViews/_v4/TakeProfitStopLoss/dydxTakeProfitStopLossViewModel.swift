@@ -24,53 +24,82 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
 
     @Published public var submissionAction: (() -> Void)?
 
+    @Published public var icon: URL?
+    @Published public var assetId: String?
     @Published public var entryPrice: String?
     @Published public var oraclePrice: String?
     @Published public var takeProfitStopLossInputAreaViewModel: dydxTakeProfitStopLossInputAreaModel?
     @Published public var customAmountViewModel: dydxCustomAmountViewModel?
     @Published public var customLimitPriceViewModel: dydxCustomLimitPriceViewModel?
     @Published public var shouldDisplayCustomLimitPriceViewModel: Bool = false
+    @Published public var showAdvanced: Bool = true
 
     public init() {}
 
     public static var previewValue: dydxTakeProfitStopLossViewModel {
         let vm = dydxTakeProfitStopLossViewModel()
+        vm.icon = URL(string: "https://media.dydx.exchange/currencies/eth.png")
+        vm.entryPrice = "100"
+        vm.oraclePrice = "100"
+        vm.takeProfitStopLossInputAreaViewModel = .previewValue
+        vm.customAmountViewModel = .previewValue
+        vm.customLimitPriceViewModel = .previewValue
+        vm.shouldDisplayCustomLimitPriceViewModel = true
         return vm
     }
 
-    private func createHeader() -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(localizerPathKey: "APP.TRIGGERS_MODAL.PRICE_TRIGGERS")
-                .themeFont(fontType: .plus, fontSize: .larger)
-                .themeColor(foreground: .textPrimary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text(localizerPathKey: "APP.TRIGGERS_MODAL.PRICE_TRIGGERS_DESCRIPTION")
-                .themeFont(fontType: .base, fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-                .frame(maxWidth: .infinity, alignment: .leading)
+    private func createHeader(style: ThemeStyle) -> some View {
+        HStack(spacing: 12) {
+            PlatformIconViewModel(type: .url(url: icon),
+                                  clip: .defaultCircle,
+                                  size: CGSize(width: 36, height: 36))
+            .createView(parentStyle: style)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(localizerPathKey: "APP.TRIGGERS_MODAL.PRICE_TRIGGERS")
+                    .themeFont(fontType: .plus, fontSize: .larger)
+                    .themeColor(foreground: .textPrimary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                Text(localizerPathKey: "APP.TRIGGERS_MODAL.PRICE_TRIGGERS_DESCRIPTION")
+                    .themeFont(fontType: .base, fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
         }
         .frame(maxWidth: .infinity)
     }
 
-    private func createReceipt() -> some View {
-        VStack(spacing: 12) {
-            createReceiptLine(titleLocalizerPathKey: "APP.TRIGGERS_MODAL.AVG_ENTRY_PRICE", displayText: entryPrice)
-            createReceiptLine(titleLocalizerPathKey: "APP.TRADE.ORACLE_PRICE", displayText: oraclePrice)
+    private func createReceipt(style: ThemeStyle) -> some View {
+        HStack(spacing: 12) {
+            createReceiptLine(title: DataLocalizer.localize(path: "APP.TRIGGERS_MODAL.AVG_ENTRY_PRICE"),
+                              displayText: entryPrice,
+                              style: style)
+                .frame(maxWidth: .infinity)
+            createReceiptLine(title: (assetId ?? "") + " " + DataLocalizer.localize(path: "APP.GENERAL.PRICE"),
+                              displayText: oraclePrice,
+                              style: style)
+                .frame(maxWidth: .infinity)
         }
-        .padding(.all, 12)
-        .themeColor(background: .layer2)
-        .clipShape(.rect(cornerRadius: 8))
+        .padding(.vertical, 12)
     }
 
-    private func createReceiptLine(titleLocalizerPathKey: String, displayText: String?) -> some View {
-        HStack(alignment: .center, spacing: 0) {
-            Text(localizerPathKey: titleLocalizerPathKey)
-                .themeFont(fontType: .base, fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-            Spacer()
+    private func createReceiptLine(title: String, displayText: String?, style: ThemeStyle) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text(title)
+                    .themeFont(fontType: .base, fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
+                TokenTextViewModel(symbol: "USD", withBorder: true)
+                    .createView(parentStyle: style
+                    .themeFont(fontType: .base, fontSize: .smallest))
+            }
+            .leftAligned()
+
             Text(displayText ?? "")
-                .themeFont(fontType: .number, fontSize: .small)
+                .themeFont(fontType: .base, fontSize: .medium)
                 .themeColor(foreground: .textPrimary)
+                .leftAligned()
         }
     }
 
@@ -135,16 +164,16 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
     }
 
     override public func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack(spacing: 0) {
-                 VStack(spacing: 0) {
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 18) {
-                            self.createHeader()
-                            self.createReceipt()
-                            self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 18) {
+                        self.createHeader(style: style)
+                        self.createReceipt(style: style)
+                        self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                        if self.showAdvanced {
                             self.separator
                             self.customAmountViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
                             if self.shouldDisplayCustomLimitPriceViewModel {
@@ -152,20 +181,19 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
                             }
                         }
                     }
-                    .keyboardObserving()
-                    Spacer(minLength: 18)
-                    self.createCta(parentStyle: parentStyle, styleKey: styleKey)
                 }
+                .keyboardObserving()
+                Spacer(minLength: 18)
+                self.createCta(parentStyle: parentStyle, styleKey: styleKey)
             }
             .padding(.top, 32)
             .padding([.leading, .trailing])
             .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
-            .themeColor(background: .layer3)
-            .makeSheet(sheetStyle: .fitSize)
+            .themeColor(background: .layer1)
             .onTapGesture {
                 PlatformView.hideKeyboard()
             }
-            .keyboardAccessory(background: .layer3, parentStyle: parentStyle)
+            .keyboardAccessory(background: .layer1, parentStyle: parentStyle)
 
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
@@ -173,9 +201,34 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
     }
 }
 
-#Preview {
-    dydxTakeProfitStopLossViewModel.previewValue
-        .createView()
-        .previewLayout(.fixed(width: 375, height: 667))
-        .previewDisplayName("dydxTakeProfitStopLossViewModel")
+#if DEBUG
+struct dydxTakeProfitStopLossViewModell_Previews_Dark: PreviewProvider {
+    @StateObject static var themeSettings = ThemeSettings.shared
+
+    static var previews: some View {
+        ThemeSettings.applyDarkTheme()
+        ThemeSettings.applyStyles()
+        return dydxTakeProfitStopLossViewModel.previewValue
+            .createView()
+            .themeColor(background: .layer0)
+            .environmentObject(themeSettings)
+            // .edgesIgnoringSafeArea(.bottom)
+            .previewLayout(.sizeThatFits)
+    }
 }
+
+struct dydxTakeProfitStopLossViewModel_Previews_Light: PreviewProvider {
+    @StateObject static var themeSettings = ThemeSettings.shared
+
+    static var previews: some View {
+        ThemeSettings.applyLightTheme()
+        ThemeSettings.applyStyles()
+        return dydxTakeProfitStopLossViewModel.previewValue
+            .createView()
+            .themeColor(background: .layer0)
+            .environmentObject(themeSettings)
+        // .edgesIgnoringSafeArea(.bottom)
+            .previewLayout(.sizeThatFits)
+    }
+}
+#endif

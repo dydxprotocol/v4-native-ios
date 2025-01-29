@@ -143,7 +143,9 @@ struct dydxGainLossInputView: View {
                 .contentShape(.rect)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .borderAndClip(style: .cornerRadius(6), borderColor: .borderDefault)
+                .frame(minWidth: 40)
+                .themeColor(background: .layer5)
+                .cornerRadius(6, corners: .allCorners)
         })
         .popover(present: $viewModel.isPresentingUnitOptions, attributes: { attrs in
                 attrs.position = .absolute(
@@ -178,8 +180,7 @@ struct dydxGainLossInputView: View {
                     }
                 }
                 .fixedSize()
-                .themeColor(background: .layer3)
-                .borderAndClip(style: .cornerRadius(8), borderColor: .borderDefault)
+                .makeInput(withBorder: false)
                 .environmentObject(ThemeSettings.shared)
             }, background: {
                 ThemeColor.SemanticColor.layer0.color.opacity(0.7)
@@ -199,7 +200,7 @@ struct dydxGainLossInputView: View {
         }
         .padding(.vertical, 12)
         .padding(.horizontal, 16)
-        .makeInput()
+        .makeInput(withBorder: false)
     }
 }
 

@@ -18,7 +18,7 @@ public class dydxPriceInputViewModel: PlatformTextInputViewModel {
     public init(title: String?, onEdited: ((String?) -> Void)? = nil) {
         super.init(
             label: title,
-            labelAccessory: TokenTextViewModel(symbol: "USD").createView(parentStyle: ThemeStyle.defaultStyle.themeFont(fontSize: .smallest)).wrappedInAnyView(),
+            labelAccessory: TokenTextViewModel(symbol: "USD", withBorder: true).createView(parentStyle: ThemeStyle.defaultStyle.themeFont(fontSize: .smallest)).wrappedInAnyView(),
             placeHolder: dydxFormatter.shared.dollar(number: 0.0, digits: 0),
             inputType: .decimalDigits,
             onEdited: onEdited
@@ -34,7 +34,7 @@ public class dydxPriceInputViewModel: PlatformTextInputViewModel {
         let view = super.createView(parentStyle: parentStyle, styleKey: styleKey)
         return PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { _  in
             return view
-                .makeInput()
+                .makeInput(withBorder: false)
                 .border(borderWidth: 1, cornerRadius: 12, borderColor: self.hasInputError ? ThemeColor.SemanticColor.colorRed.color : .clear)
                 .wrappedInAnyView()
         }

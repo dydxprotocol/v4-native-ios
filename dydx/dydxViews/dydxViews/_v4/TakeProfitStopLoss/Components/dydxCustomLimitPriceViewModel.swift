@@ -26,6 +26,16 @@ public class dydxCustomLimitPriceViewModel: PlatformViewModel {
         set: { [weak self] in self?.isTooltipPresented = $0 }
     )
 
+    public init() {}
+
+    public static var previewValue: dydxCustomLimitPriceViewModel {
+        let vm = dydxCustomLimitPriceViewModel()
+        vm.takeProfitPriceInputViewModel = .previewValue
+        vm.stopLossPriceInputViewModel = .previewValue
+        vm.alert = .previewValue
+        return vm
+    }
+
     private var onOffSwitch: some View {
         PlatformBooleanInputViewModel(label: DataLocalizer.shared?.localize(path: "APP.TRADE.LIMIT_PRICE", params: nil), labelAccessory: nil, value: isOn.description, valueAccessoryView: nil) { [weak self] value in
             guard let self, let value, let isOn = Bool(value) else { return }
@@ -35,18 +45,6 @@ public class dydxCustomLimitPriceViewModel: PlatformViewModel {
         .createView()
         .padding(.trailing, 2) // swiftui bug where toggle view in a scrollview gets clipped without this
     }
-
-    private var input: AnyView? {
-        guard isOn else { return nil }
-        return super.createView()
-            .makeInput()
-            .wrappedInAnyView()
-    }
-
-    public static var previewValue: dydxPriceInputViewModel = {
-        let vm = dydxPriceInputViewModel(title: "TP Limit")
-        return vm
-    }()
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
