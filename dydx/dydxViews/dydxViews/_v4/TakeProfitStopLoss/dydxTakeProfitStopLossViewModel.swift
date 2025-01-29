@@ -139,12 +139,16 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
             Text(buttonText)
             spinner
             Spacer()
-        }.wrappedInAnyView()
+        }.wrappedViewModel
 
+        let type: PlatformButtonType
+        if showAdvanced {
+            type = .defaultType()
+        } else {
+            type = .defaultType(minHeight: 56, cornerRadius: 16)
+        }
         if let submissionAction = submissionAction {
-            return PlatformButtonViewModel(content: PlatformViewModel(bodyBuilder: { _ in
-                content
-            }), state: buttonState, action: submissionAction)
+            return PlatformButtonViewModel(content: content, type: type, state: buttonState, action: submissionAction)
             .createView(parentStyle: parentStyle, styleKey: styleKey)
             .wrappedInAnyView()
         } else {
