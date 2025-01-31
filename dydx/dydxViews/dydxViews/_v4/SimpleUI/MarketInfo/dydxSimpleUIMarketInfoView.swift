@@ -16,6 +16,7 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
     @Published public var position: dydxSimpleUIMarketPositionViewModel?
     @Published public var details: dydxSimpleUIMarketDetailsViewModel?
     @Published public var buySell: dydxSimpleUIMarketBuySellViewModel?
+    @Published public var launchable: dydxSimpleUiMarketLaunchableViewModel?
 
     public init() { }
 
@@ -26,6 +27,7 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
         vm.position = .previewValue
         vm.details = .previewValue
         vm.buySell = .previewValue
+        vm.launchable = .previewValue
         return vm
     }
 
@@ -35,30 +37,39 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
 
             let bottomPadding = max((self.safeAreaInsets?.bottom ?? 0), 16)
 
-            let view = ZStack(alignment: .bottom) {
-                VStack {
-                    self.header?.createView(parentStyle: style)
+            let view = Group {
+                if self.launchable == nil {
+                    ZStack(alignment: .bottom) {
+                        VStack {
+                            self.header?.createView(parentStyle: style)
 
-                    ScrollView(showsIndicators: false) {
-                        LazyVStack(pinnedViews: [.sectionHeaders]) {
-                            self.chart?.createView(parentStyle: style)
-                                .padding(.bottom, 18)
+                            ScrollView(showsIndicators: false) {
+                                LazyVStack(pinnedViews: [.sectionHeaders]) {
+                                    self.chart?.createView(parentStyle: style)
+                                        .padding(.bottom, 18)
 
-                            self.position?.createView(parentStyle: style)
+                                    self.position?.createView(parentStyle: style)
 
-                            self.details?.createView(parentStyle: style)
+                                    self.details?.createView(parentStyle: style)
 
-                            // for tab bar scroll adjstment overlap
-                            Spacer(minLength: 128)
+                                    // for tab bar scroll adjstment overlap
+                                    Spacer(minLength: 128)
+                                }
+                            }
                         }
+
+                        self.buySell?.createView(parentStyle: style)
+                            .padding(.top, 16)
+                            .padding(.bottom, bottomPadding)
+                            .themeColor(background: .layer1)
+                        //  .background(SearchBoxModel.bottomBlendGradiant)
+                    }
+                } else {
+                    VStack {
+                        self.header?.createView(parentStyle: style)
+                        self.launchable?.createView(parentStyle: style)
                     }
                 }
-
-                self.buySell?.createView(parentStyle: style)
-                    .padding(.top, 16)
-                    .padding(.bottom, bottomPadding)
-                    .themeColor(background: .layer1)
-                  //  .background(SearchBoxModel.bottomBlendGradiant)
             }
                 .frame(maxWidth: .infinity)
                 .themeColor(background: .layer1)

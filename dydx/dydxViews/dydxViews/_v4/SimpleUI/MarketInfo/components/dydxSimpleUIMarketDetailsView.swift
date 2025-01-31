@@ -61,7 +61,7 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
                     Text(DataLocalizer.localize(path: "APP.TRADE.OPEN_INTEREST"))
                         .themeFont(fontType: .plus, fontSize: .small)
                         .themeColor(foreground: .textTertiary)
-                    TokenTextViewModel(symbol: "USD")
+                    TokenTextViewModel(symbol: "USD", withBorder: true)
                         .createView(parentStyle: style.themeFont(fontSize: .smallest))
                 }
                 CollectionItemUtil.createCollectionItem(parentStyle: style,
@@ -71,17 +71,6 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
             }
             .padding(.horizontal, 16)
         }
-    }
-
-    private func createCollectionItem(parentStyle: ThemeStyle, titleViewModel: PlatformViewModel?, valueViewModel: PlatformViewModel?) -> some View {
-        VStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 8) {
-                titleViewModel?.createView(parentStyle: parentStyle)
-                valueViewModel?.createView(parentStyle: parentStyle, styleKey: nil)
-            }
-            Spacer()
-        }
-        .leftAligned()
     }
 
     private func createHeader(style: ThemeStyle) -> some View {
@@ -95,9 +84,9 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
                 Spacer()
 
                 HStack {
-                    createIconButton(url: sharedMarketViewModel?.coinMarketPlaceUrl, iconAssetName: "icon_coinmarketcap", style: style)
-                    createIconButton(url: sharedMarketViewModel?.whitepaperUrl, iconAssetName: "icon_whitepaper", style: style)
-                    createIconButton(url: sharedMarketViewModel?.websiteUrl, iconAssetName: "icon_web", style: style)
+                    Self.createIconButton(url: sharedMarketViewModel?.coinMarketPlaceUrl, iconAssetName: "icon_coinmarketcap", style: style)
+                    Self.createIconButton(url: sharedMarketViewModel?.whitepaperUrl, iconAssetName: "icon_whitepaper", style: style)
+                    Self.createIconButton(url: sharedMarketViewModel?.websiteUrl, iconAssetName: "icon_web", style: style)
                 }
             }
             .padding(.trailing, 16)
@@ -106,7 +95,7 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
         }
     }
 
-    private func createIconButton(url: URL?, iconAssetName: String, style: ThemeStyle) -> AnyView {
+    static func createIconButton(url: URL?, iconAssetName: String, style: ThemeStyle) -> AnyView {
         if let url = url {
             let icon = PlatformIconViewModel(type: .asset(name: iconAssetName, bundle: Bundle.dydxView),
                                              clip: .circle(background: .layer4, spacing: 16),

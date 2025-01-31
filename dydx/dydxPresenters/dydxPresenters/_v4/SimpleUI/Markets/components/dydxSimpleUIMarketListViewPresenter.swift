@@ -147,6 +147,7 @@ extension dydxSimpleUIMarketViewModel {
                                            positionTotal: position?.notionalTotal.current?.doubleValue,
                                            positionSize: positionSize,
                                            marketCaps: market.marketCaps?.doubleValue,
+                                           isLaunched: market.isLaunched,
                                            onMarketSelected: onMarketsSelected)
     }
 }

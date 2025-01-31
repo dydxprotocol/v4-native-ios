@@ -72,11 +72,16 @@ public class dydxSimpleUIMarketInfoHeaderViewModel: PlatformViewModel {
                 .themeFont(fontSize: .medium)
 
             HStack {
-                Text(DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS._24H_VOLUME"))
-                    .themeColor(foreground: .textTertiary)
+                if sharedMarketViewModel?.isLaunched ?? true {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS._24H_VOLUME"))
+                        .themeColor(foreground: .textTertiary)
 
-                Text(sharedMarketViewModel?.volume24H ?? "")
-                    .themeColor(foreground: .textSecondary)
+                    Text(sharedMarketViewModel?.volume24H ?? "")
+                        .themeColor(foreground: .textSecondary)
+                } else {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.LAUNCHABLE"))
+                        .themeColor(foreground: .textTertiary)
+                }
             }
             .themeFont(fontSize: .small)
         }

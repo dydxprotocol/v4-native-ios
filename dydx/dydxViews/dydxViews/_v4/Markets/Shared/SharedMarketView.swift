@@ -15,6 +15,8 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
     @Published public var logoUrl: URL?
     @Published public var volume24H: String?
     @Published public var indexPrice: String?
+    @Published public var marketCap: String?
+    @Published public var spotVolume24H: String?
     @Published public var priceChangePercent24H: SignedAmountViewModel?
 
     @Published public var primaryDescription: String?
@@ -25,6 +27,7 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
 
     @Published public var openInterest: String?
     @Published public var nextFunding: IntervalTextModel?
+    @Published public var isLaunched: Bool = true
 
     public init() { }
 
@@ -35,6 +38,8 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
         vm.logoUrl = URL(string: "https://media.dydx.exchange/currencies/eth.png")
         vm.volume24H = "$223M"
         vm.indexPrice = "$1.00"
+        vm.marketCap = "$100B"
+        vm.spotVolume24H = "$111M"
         vm.priceChangePercent24H = SignedAmountViewModel(text: "0.2%",
                                                          sign: .plus, coloringOption: .allText)
         vm.primaryDescription = "Ethereum is a global, open-source platform for decentralized applications."
@@ -45,6 +50,7 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
 
         vm.openInterest = "$222.5M"
         vm.nextFunding = .previewValue
+        vm.isLaunched = true
 
         return vm
     }()
@@ -56,6 +62,8 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
         lhs.logoUrl == rhs.logoUrl &&
         lhs.volume24H == rhs.volume24H &&
         lhs.indexPrice == rhs.indexPrice &&
+        lhs.marketCap == rhs.marketCap &&
+        lhs.spotVolume24H == rhs.spotVolume24H &&
         lhs.priceChangePercent24H == rhs.priceChangePercent24H &&
         lhs.primaryDescription == rhs.primaryDescription &&
         lhs.secondaryDescription == rhs.secondaryDescription &&
@@ -63,6 +71,7 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
         lhs.whitepaperUrl == rhs.whitepaperUrl &&
         lhs.coinMarketPlaceUrl == rhs.coinMarketPlaceUrl &&
         lhs.openInterest == rhs.openInterest &&
-        lhs.nextFunding == rhs.nextFunding
+        lhs.nextFunding == rhs.nextFunding &&
+        lhs.isLaunched == rhs.isLaunched
     }
 }

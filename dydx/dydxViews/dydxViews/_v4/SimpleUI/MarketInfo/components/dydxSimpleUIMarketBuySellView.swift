@@ -11,7 +11,6 @@ import PlatformUI
 import Utilities
 
 public class dydxSimpleUIMarketBuySellViewModel: PlatformViewModel {
-    @Published public var text: String?
     @Published public var buyAction: (() -> Void)?
     @Published public var sellAction: (() -> Void)?
 
@@ -19,7 +18,6 @@ public class dydxSimpleUIMarketBuySellViewModel: PlatformViewModel {
 
     public static var previewValue: dydxSimpleUIMarketBuySellViewModel {
         let vm = dydxSimpleUIMarketBuySellViewModel()
-        vm.text = "Test String"
         return vm
     }
 

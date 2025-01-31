@@ -89,6 +89,9 @@ class SharedMarketPresenter: HostedViewPresenter<SharedMarketViewModel>, SharedM
             // With no nextFundingAt, we will just count down to the next hour mark
             viewModel.nextFunding  = IntervalTextModel(date: nil, direction: .countDownToHour, format: .full)
         }
+        viewModel.isLaunched = market.isLaunched
+        viewModel.marketCap = dydxFormatter.shared.dollarVolume(number: market.marketCaps?.doubleValue)
+        viewModel.spotVolume24H = dydxFormatter.shared.dollarVolume(number: market.spot24hVolume?.doubleValue)
 
         return viewModel
     }

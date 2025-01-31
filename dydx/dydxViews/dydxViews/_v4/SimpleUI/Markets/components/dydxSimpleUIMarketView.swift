@@ -30,6 +30,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     public let onMarketSelected: (() -> Void)?
     public let isLoading: Bool
     public let marketCaps: Double?
+    public let isLaunched: Bool
 
     public init(displayType: DisplayType,
                 marketId: String,
@@ -44,6 +45,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 positionSize: String?,
                 isLoading: Bool = false,
                 marketCaps: Double?,
+                isLaunched: Bool,
                 onMarketSelected: (() -> Void)?
     ) {
         self.displayType = displayType
@@ -59,6 +61,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
         self.positionSize = positionSize
         self.isLoading = isLoading
         self.marketCaps = marketCaps
+        self.isLaunched = isLaunched
         self.onMarketSelected = onMarketSelected
     }
 
@@ -75,6 +78,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                                              positionTotal: 122333,
                                              positionSize: "$349",
                                              marketCaps: 122000,
+                                             isLaunched: true,
                                              onMarketSelected: nil)
         return vm
     }
@@ -180,11 +184,16 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 .themeFont(fontSize: .medium)
 
             HStack {
-                Text(DataLocalizer.localize(path: "APP.TRADE.VOLUME"))
-                    .themeColor(foreground: .textTertiary)
+                if isLaunched {
+                    Text(DataLocalizer.localize(path: "APP.TRADE.VOLUME"))
+                        .themeColor(foreground: .textTertiary)
 
-                if let volumeText = dydxFormatter.shared.dollarVolume(number: volumn) {
-                    Text(volumeText)
+                    if let volumeText = dydxFormatter.shared.dollarVolume(number: volumn) {
+                        Text(volumeText)
+                    }
+                } else {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.LAUNCHABLE"))
+                        .themeColor(foreground: .textTertiary)
                 }
             }
             .themeFont(fontSize: .small)
