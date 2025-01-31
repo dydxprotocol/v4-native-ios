@@ -56,8 +56,8 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                                   assetMap: [String: Asset],
                                   positions: [SubaccountPosition],
                                   searchText: String?) {
-        let markets = markets.filter { $0.status?.canTrade == true }
-        viewModel?.markets = markets
+        let launchedMarkets: [dydxSimpleUIMarketViewModel]? = markets
+            .filter { $0.status?.canTrade == true }
             .compactMap { market in
                 guard let asset = assetMap[market.assetId] else {
                     return nil
@@ -87,8 +87,30 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                 } else if rhsLeverage != 0 {
                     return false
                 }
+
                 return (lhs.volumn ?? 0) > (rhs.volumn ?? 0)
             }
+
+        let launchableMarkets: [dydxSimpleUIMarketViewModel]? = markets
+            .filter { $0.isLaunched == false }
+            .compactMap { market in
+                guard let asset = assetMap[market.assetId] else {
+                    return nil
+                }
+                if let searchText = searchText, searchText.isNotEmpty,
+                   asset.displayableAssetId.lowercased().contains(searchText) == false,
+                   asset.name?.lowercased().contains(searchText) == false {
+                    return nil
+                }
+                return dydxSimpleUIMarketViewModel.createFrom(displayType: .market, market: market, asset: asset, position: nil) { [weak self] in
+                    self?.onMarketSelected?(market.id)
+                }
+            }
+            .sorted { lhs, rhs in
+                (lhs.marketCaps ?? 0) > (rhs.marketCaps ?? 0)
+            }
+
+        viewModel?.markets = (launchedMarkets ?? []) + (launchableMarkets ?? [])
     }
 }
 
@@ -124,6 +146,7 @@ extension dydxSimpleUIMarketViewModel {
                                            volumn: market.perpetual?.volume24H?.doubleValue,
                                            positionTotal: position?.notionalTotal.current?.doubleValue,
                                            positionSize: positionSize,
+                                           marketCaps: market.marketCaps?.doubleValue,
                                            onMarketSelected: onMarketsSelected)
     }
 }

@@ -29,6 +29,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     public let positionSize: String?
     public let onMarketSelected: (() -> Void)?
     public let isLoading: Bool
+    public let marketCaps: Double?
 
     public init(displayType: DisplayType,
                 marketId: String,
@@ -42,6 +43,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 positionTotal: Double?,
                 positionSize: String?,
                 isLoading: Bool = false,
+                marketCaps: Double?,
                 onMarketSelected: (() -> Void)?
     ) {
         self.displayType = displayType
@@ -56,6 +58,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
         self.positionTotal = positionTotal
         self.positionSize = positionSize
         self.isLoading = isLoading
+        self.marketCaps = marketCaps
         self.onMarketSelected = onMarketSelected
     }
 
@@ -71,6 +74,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                                              volumn: nil,
                                              positionTotal: 122333,
                                              positionSize: "$349",
+                                             marketCaps: 122000,
                                              onMarketSelected: nil)
         return vm
     }

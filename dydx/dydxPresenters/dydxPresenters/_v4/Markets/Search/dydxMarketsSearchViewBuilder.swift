@@ -79,7 +79,7 @@ private class dydxMarketsSearchViewPresenter: HostedViewPresenter<dydxMarketsSea
                             searchTextPublisher.removeDuplicates())
             .sink { [weak self] (markets: [PerpetualMarket], assetMap: [String: Asset], searchText: String) in
                 var filterMarkets = markets.filter { market in
-                    guard market.status?.canTrade == true,
+                    guard market.status?.canTrade == true || market.isLaunched == false,
                         searchText.isNotEmpty || self?.shouldShowResultsForEmptySearch == true,
                         let asset = assetMap[market.assetId] else {
                         return false
