@@ -53,7 +53,7 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
                 let position = positions.first { position in
                     position.id == market.id
                 }
-                if position == nil {
+                if position == nil || (position?.size.current?.doubleValue ?? 0.0) == 0.0 {
                     return nil
                 }
                 return dydxSimpleUIMarketViewModel.createFrom(displayType: .position, market: market, asset: asset, position: position) { [weak self] in
