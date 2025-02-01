@@ -82,6 +82,8 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                             let marketHeader = self.createHeader(text: DataLocalizer.localize(path: "APP.GENERAL.MARKETS"))
                             Section(header: marketHeader) {
                                 self.marketList?.createView(parentStyle: style)
+
+                                Spacer(minLength: 96)
                             }
                         }
                     }
