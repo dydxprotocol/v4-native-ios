@@ -48,6 +48,7 @@ end
 
 def abacus_pods
   #pod 'abacus', :path => '~/v4-abacus'
+  cccccbrgcggblcucvihifbbidlutfrcvrffnvvvhgfkt
   pod 'Abacus', :podspec => '../podspecs/Abacus.podspec'
 end
 

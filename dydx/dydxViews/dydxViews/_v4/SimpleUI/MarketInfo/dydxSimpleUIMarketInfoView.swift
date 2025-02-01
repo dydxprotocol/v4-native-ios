@@ -68,6 +68,7 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
                     VStack {
                         self.header?.createView(parentStyle: style)
                         self.launchable?.createView(parentStyle: style)
+                            .padding(.bottom, bottomPadding)
                     }
                 }
             }

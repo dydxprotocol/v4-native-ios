@@ -9,15 +9,21 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import dydxFormatter
 
 public class dydxSimpleUiMarketLaunchableViewModel: PlatformViewModel {
     @Published public var sharedMarketViewModel: SharedMarketViewModel? = SharedMarketViewModel()
+    @Published public var ctaAction: (() -> Void)?
+    @Published public var minDeposit: Double?
+    @Published public var thirtyDayReturnPercent: Double?
 
     public init() { }
 
     public static var previewValue: dydxSimpleUiMarketLaunchableViewModel {
         let vm = dydxSimpleUiMarketLaunchableViewModel()
         vm.sharedMarketViewModel = .previewValue
+        vm.minDeposit = 100000
+        vm.thirtyDayReturnPercent = 0.2
         return vm
     }
 
@@ -30,6 +36,7 @@ public class dydxSimpleUiMarketLaunchableViewModel: PlatformViewModel {
                 self.createHeader(style: style)
                 self.createDetails(style: style)
                 Spacer()
+                self.createButton(style: style)
             }
                 .padding(.top, 24)
                 .padding(.horizontal, 20)
@@ -50,7 +57,7 @@ public class dydxSimpleUiMarketLaunchableViewModel: PlatformViewModel {
                 .themeFont(fontSize: .small)
             Spacer()
         }
-        .padding(8)
+        .padding(12)
         .borderAndClip(style: .cornerRadius(8), borderColor: .borderDefault)
     }
 
@@ -71,40 +78,105 @@ public class dydxSimpleUiMarketLaunchableViewModel: PlatformViewModel {
     }
 
     private func createDetails(style: ThemeStyle) -> some View {
-        HStack {
-            let nameHeader = Text(DataLocalizer.localize(path: "APP.GENERAL.MARKET_NAME"))
-                .themeFont(fontType: .plus, fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-            CollectionItemUtil.createCollectionItem(parentStyle: style,
-                                                    titleViewModel: nameHeader.wrappedViewModel,
-                                                    value: sharedMarketViewModel?.assetName)
-            .frame(minWidth: 0, maxWidth: .infinity)
-
-            let marketCapHeader = HStack {
-                Text(DataLocalizer.localize(path: "APP.GENERAL.MARKET_CAP"))
+        VStack(alignment: .leading) {
+            HStack {
+                let nameHeader = Text(DataLocalizer.localize(path: "APP.GENERAL.MARKET_NAME"))
                     .themeFont(fontType: .plus, fontSize: .small)
                     .themeColor(foreground: .textTertiary)
-                TokenTextViewModel(symbol: "USD", withBorder: true)
-                    .createView(parentStyle: style.themeFont(fontSize: .smallest))
-            }
-            CollectionItemUtil.createCollectionItem(parentStyle: style,
-                                                    titleViewModel: marketCapHeader.wrappedViewModel,
-                                                    value: sharedMarketViewModel?.marketCap)
-            .frame(minWidth: 0, maxWidth: .infinity)
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: nameHeader.wrappedViewModel,
+                                                        value: sharedMarketViewModel?.assetName)
+                .frame(minWidth: 0, maxWidth: .infinity)
 
-            let volumeCapHeader = HStack {
-                Text(DataLocalizer.localize(path: "APP.TRADE.SPOT_VOLUME_24H"))
-                    .themeFont(fontType: .plus, fontSize: .small)
-                    .themeColor(foreground: .textTertiary)
-                TokenTextViewModel(symbol: "USD", withBorder: true)
-                    .createView(parentStyle: style.themeFont(fontSize: .smallest))
+                let marketCapHeader = HStack {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.MARKET_CAP"))
+                        .themeFont(fontType: .plus, fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
+                    TokenTextViewModel(symbol: "USD", withBorder: true)
+                        .createView(parentStyle: style.themeFont(fontSize: .smallest))
+                }
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: marketCapHeader.wrappedViewModel,
+                                                        value: sharedMarketViewModel?.marketCap)
+                .frame(minWidth: 0, maxWidth: .infinity)
             }
-            CollectionItemUtil.createCollectionItem(parentStyle: style,
-                                                    titleViewModel: volumeCapHeader.wrappedViewModel,
-                                                    value: sharedMarketViewModel?.spotVolume24H)
-            .frame(minWidth: 0, maxWidth: .infinity)
+            .frame(maxHeight: 72)
+
+            HStack {
+                let volumeCapHeader = HStack {
+                    Text(DataLocalizer.localize(path: "APP.TRADE.SPOT_VOLUME_24H"))
+                        .themeFont(fontType: .plus, fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
+                    TokenTextViewModel(symbol: "USD", withBorder: true)
+                        .createView(parentStyle: style.themeFont(fontSize: .smallest))
+                }
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: volumeCapHeader.wrappedViewModel,
+                                                        value: sharedMarketViewModel?.spotVolume24H)
+                .frame(minWidth: 0, maxWidth: .infinity)
+            }
+            .frame(maxHeight: 72)
+
         }
     }
+
+    private func createButton(style: ThemeStyle) -> some View {
+        let aprAttributedString: AttributedString?
+        if let aprValue = dydxFormatter.shared.percent(number: thirtyDayReturnPercent, digits: 2) {
+
+            let aprText = DataLocalizer.localize(path: "APP.VAULT.LAUNCH_MARKET_LINE2")
+            var result = AttributedString(aprText)
+                .themeFont(fontType: .base, fontSize: .small)
+                .themeColor(foreground: .textTertiary, to: nil)
+
+            let paramText = AttributedString(aprValue)
+            if let range = result.range(of: "{APR}") {
+                result.replaceSubrange(range, with: paramText.themeColor(foreground: .colorGreen)
+                    .themeFont(fontSize: .small))
+            }
+            aprAttributedString = result
+        } else {
+            aprAttributedString = nil
+        }
+
+        return VStack(spacing: 16) {
+            VStack(spacing: 4) {
+                if let depositValue = dydxFormatter.shared.dollarVolume(number: minDeposit) {
+                    Text(DataLocalizer.localize(path: "APP.VAULT.LAUNCH_MARKET_LINE1", params: ["DEPOSIT_AMOUNT": depositValue]))
+                        .themeFont(fontSize: .medium)
+                }
+                if let aprAttributedString {
+                    Text(aprAttributedString)
+                }
+            }
+
+            let buttonType = PlatformButtonType.defaultType(
+                fillWidth: true,
+                pilledCorner: false,
+                minHeight: 60,
+                cornerRadius: 16)
+
+            let buttonText = DataLocalizer.localize(path: "APP.GENERAL.LAUNCH_ON_WEB")
+            let buttonContent = HStack {
+                Text(buttonText)
+                PlatformIconViewModel(type: .asset(name: "icon_external_link", bundle: Bundle.dydxView),
+                                      size: CGSize(width: 20, height: 20),
+                                      templateColor: .textPrimary)
+                .createView(parentStyle: style)
+            }
+                .wrappedViewModel
+
+            PlatformButtonViewModel(content: buttonContent,
+                                    type: buttonType,
+                                    state: .primary) { [weak self] in
+                PlatformView.hideKeyboard()
+                self?.ctaAction?()
+            }
+                                    .createView(parentStyle: style)
+        }
+
+    }
+
 }
 
 #if DEBUG

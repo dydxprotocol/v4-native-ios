@@ -138,6 +138,17 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
         return nil
     }
 
+    public func value<T>(feature: String, defaultValue: T) -> T {
+        let store = Statsig.getParameterStore("v4_params")
+        if let defaultValue = defaultValue as? StatsigDynamicConfigValue {
+            let result = store.getValue(forKey: feature, defaultValue: defaultValue)
+            if let result = result as? T {
+                return result
+            }
+        }
+        return defaultValue
+    }
+        
     public func customized() -> Bool {
         return false
     }

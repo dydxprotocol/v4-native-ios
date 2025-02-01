@@ -62,6 +62,24 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     }
 }
 
+public enum dydxNumberFeatureFlag: String {
+    case min_deposit_for_launchable_market
+
+    var defaultValue: Double {
+        switch self {
+        case .min_deposit_for_launchable_market:
+            return 10000.0
+        }
+    }
+
+    public var value: Double {
+        if FeatureService.shared == nil {
+            Console.shared.log("WARNING: FeatureService not yet set up.")
+        }
+        return FeatureService.shared?.value(feature: rawValue, defaultValue: defaultValue) ?? defaultValue
+    }
+}
+
 public enum dydxStringFeatureFlag: String {
     case deployment_url
 

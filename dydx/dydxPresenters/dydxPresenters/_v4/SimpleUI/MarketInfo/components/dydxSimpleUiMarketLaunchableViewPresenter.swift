@@ -16,6 +16,7 @@ import dydxStateManager
 import Abacus
 import dydxFormatter
 import SwiftUI
+import Statsig
 
 protocol dydxSimpleUiMarketLaunchableViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxSimpleUiMarketLaunchableViewModel? { get }
@@ -43,24 +44,36 @@ class dydxSimpleUiMarketLaunchableViewPresenter: HostedViewPresenter<dydxSimpleU
         Publishers
             .CombineLatest4($marketId,
                             AbacusStateManager.shared.state.marketMap,
-                            AbacusStateManager.shared.state.assetMap,
+                            AbacusStateManager.shared.state.vault,
                             marketPresenter.$viewModel)
-            .sink { [weak self] marketId, marketMap, assetMap, marketViewModel in
-                guard let marketId, let market = marketMap[marketId], let asset = assetMap[market.assetId] else {
+            .sink { [weak self] marketId, marketMap, vault, marketViewModel in
+                guard let marketId, let market = marketMap[marketId] else {
                     return
                 }
                 if market.isLaunched {
                     self?.viewModel = nil
                 } else {
-                    self?.viewModel = self?.createViewModel(market: market, asset: asset, marketViewModel: marketViewModel)
+                    self?.viewModel = self?.createViewModel(market: market, vault: vault, marketViewModel: marketViewModel)
                 }
             }
             .store(in: &subscriptions)
     }
 
-    private func createViewModel(market: PerpetualMarket, asset: Asset, marketViewModel: SharedMarketViewModel?) -> dydxSimpleUiMarketLaunchableViewModel {
+    private func createViewModel(market: PerpetualMarket, vault: Vault?, marketViewModel: SharedMarketViewModel?) -> dydxSimpleUiMarketLaunchableViewModel {
         let viewModel = dydxSimpleUiMarketLaunchableViewModel()
         viewModel.sharedMarketViewModel = marketViewModel
+        viewModel.ctaAction = {
+            let urlString = "\(AbacusStateManager.shared.deploymentUri)/trade/\(market.id)"
+            if let url = URL(string: urlString) {
+                if URLHandler.shared?.canOpenURL(url) ?? false {
+                    URLHandler.shared?.open(url, completionHandler: nil)
+                }
+            }
+        }
+
+        viewModel.minDeposit = dydxNumberFeatureFlag.min_deposit_for_launchable_market.value
+        viewModel.thirtyDayReturnPercent = vault?.details?.thirtyDayReturnPercent?.doubleValue
+
         return viewModel
     }
 }

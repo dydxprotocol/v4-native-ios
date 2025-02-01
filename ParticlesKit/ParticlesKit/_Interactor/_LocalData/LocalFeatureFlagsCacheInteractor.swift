@@ -9,6 +9,10 @@
 import Utilities
 
 @objc public final class LocalFeatureFlagsCacheInteractor: LocalEntityCacheInteractor, SingletonProtocol, FeatureFlagsProtocol {
+    public func value<T>(feature: String, defaultValue: T) -> T {
+        defaultValue
+    }
+    
     public static var shared: LocalFeatureFlagsCacheInteractor = {
         LocalFeatureFlagsCacheInteractor(key: "features", default: "features_default.json")
     }()
