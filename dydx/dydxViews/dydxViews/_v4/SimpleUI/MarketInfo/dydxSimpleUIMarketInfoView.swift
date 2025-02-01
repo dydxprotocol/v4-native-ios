@@ -58,11 +58,18 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
                             }
                         }
 
-                        self.buySell?.createView(parentStyle: style)
-                            .padding(.top, 16)
-                            .padding(.bottom, bottomPadding)
-                            .themeColor(background: .layer1)
-                        //  .background(SearchBoxModel.bottomBlendGradiant)
+                        VStack(spacing: 0) {
+                            HStack {
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 32)
+                            .background(SearchBoxModel.bottomBlendGradiant)
+
+                            self.buySell?.createView(parentStyle: style)
+                                .padding(.top, 16)
+                                .padding(.bottom, bottomPadding)
+                                .themeColor(background: .layer1)
+                        }
                     }
                 } else {
                     VStack {
