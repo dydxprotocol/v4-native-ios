@@ -76,7 +76,7 @@ public class dydxSimpleUITradeInputSizeItemViewModel: PlatformTextInputViewModel
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        let view = super.createView(parentStyle: parentStyle.themeFont(fontType: .number, fontSize: .custom(size: 36)), styleKey: styleKey)
+        let view = super.createView(parentStyle: parentStyle.themeFont(fontType: .plus, fontSize: .custom(size: 36)), styleKey: styleKey)
         return PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { _ in
             AnyView(view.frame(height: Self.viewHeight))
         }

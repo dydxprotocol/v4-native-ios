@@ -98,12 +98,12 @@ struct dydxGainLossInputView: View {
     var placeholder: Text {
         Text("0")
             .themeColor(foreground: .textTertiary)
-            .themeFont(fontType: .number, fontSize: .large)
+            .themeFont(fontType: .base, fontSize: .large)
     }
 
     var textInput: some View {
         let textField = TextField("", text: $viewModel.displayText, prompt: placeholder)
-            .themeFont(fontType: .number, fontSize: .large)
+            .themeFont(fontType: .base, fontSize: .large)
             .themeColor(foreground: .textPrimary)
             .keyboardType(.decimalPad)
             .focused($isFocused)

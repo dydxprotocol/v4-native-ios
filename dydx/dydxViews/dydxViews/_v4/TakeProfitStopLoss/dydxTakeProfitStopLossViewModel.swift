@@ -176,19 +176,19 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
                     VStack(spacing: 18) {
                         self.createHeader(style: style)
                         self.createReceipt(style: style)
-                        self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                        self.takeProfitStopLossInputAreaViewModel?.createView(parentStyle: style, styleKey: styleKey)
                         if self.showAdvanced {
                             self.separator
-                            self.customAmountViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            self.customAmountViewModel?.createView(parentStyle: style, styleKey: styleKey)
                             if self.shouldDisplayCustomLimitPriceViewModel {
-                                self.customLimitPriceViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                                self.customLimitPriceViewModel?.createView(parentStyle: style, styleKey: styleKey)
                             }
                         }
                     }
                 }
                 .keyboardObserving()
                 Spacer(minLength: 18)
-                self.createCta(parentStyle: parentStyle, styleKey: styleKey)
+                self.createCta(parentStyle: style, styleKey: styleKey)
             }
             .padding(.top, 32)
             .padding([.leading, .trailing])
@@ -197,7 +197,7 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
             .onTapGesture {
                 PlatformView.hideKeyboard()
             }
-            .keyboardAccessory(background: .layer1, parentStyle: parentStyle)
+            .keyboardAccessory(background: .layer1, parentStyle: style)
 
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))

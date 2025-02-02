@@ -87,6 +87,7 @@ private struct VaultDepositWithdrawView: View {
         .onTapGesture {
             PlatformView.hideKeyboard()
         }
+        .keyboardAccessory(background: .layer3, parentStyle: .defaultStyle)
     }
 
     private var inputArea: some View {

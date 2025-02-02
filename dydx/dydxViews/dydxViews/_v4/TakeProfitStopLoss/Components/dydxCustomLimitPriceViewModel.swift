@@ -47,17 +47,17 @@ public class dydxCustomLimitPriceViewModel: PlatformViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return PlatformView.emptyView.wrappedInAnyView() }
             return VStack(spacing: 15) {
                 self.onOffSwitch
                 if self.isOn {
                     VStack(spacing: 16) {
                         HStack(alignment: .center, spacing: 20) {
-                            self.takeProfitPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
-                            self.stopLossPriceInputViewModel?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                            self.takeProfitPriceInputViewModel?.createView(parentStyle: style, styleKey: styleKey)
+                            self.stopLossPriceInputViewModel?.createView(parentStyle: style, styleKey: styleKey)
                         }
-                        self.alert?.createView(parentStyle: parentStyle, styleKey: styleKey)
+                        self.alert?.createView(parentStyle: style, styleKey: styleKey)
                     }
                 }
             }

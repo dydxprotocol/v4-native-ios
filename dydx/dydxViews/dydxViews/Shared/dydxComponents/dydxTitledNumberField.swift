@@ -129,7 +129,6 @@ private struct NumberTextField: View {
                 actualValue = formatValue(value)
             }
         }
-        .keyboardAccessory(parentStyle: .defaultStyle)
     }
 
     private func formatValue(_ value: Double?) -> Double? {

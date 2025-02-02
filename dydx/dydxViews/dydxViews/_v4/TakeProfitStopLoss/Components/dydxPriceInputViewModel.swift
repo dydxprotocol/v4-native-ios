@@ -31,7 +31,7 @@ public class dydxPriceInputViewModel: PlatformTextInputViewModel {
     }()
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        let view = super.createView(parentStyle: parentStyle, styleKey: styleKey)
+        let view = super.createView(parentStyle: parentStyle.themeFont(fontType: .base, fontSize: .medium), styleKey: styleKey)
         return PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { _  in
             return view
                 .makeInput(withBorder: false)
