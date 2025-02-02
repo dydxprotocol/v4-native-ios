@@ -88,7 +88,6 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
                     self?.ctaAction?()
                 }
                     .createView(parentStyle: style)
-                    .animation(.easeInOut(duration: 0.1))
                 return AnyView(view)
 
             } else if case .disabled = state {
@@ -99,7 +98,6 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
                                                    state: .disabled) {
                 }
                     .createView(parentStyle: style)
-                    .animation(.easeInOut(duration: 0.1))
                 return AnyView(view)
 
             } else {
@@ -113,10 +111,10 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
                         textColor: sideColor,
                         indicatorSystemName: "chevron.right.dotted.chevron.right",
                         indicatorDisabledSystemName: "xmark",
-                        textAlignment: .center,
+                        textAlignment: .globalCenter,
                         textFadesOpacity: true,
                         textHiddenBehindIndicator: true,
-                        textShimmers: false
+                        textShimmers: true
                     )
 
                     SlideButton(buttonText ?? "", styling: styling, action: { [weak self] in
@@ -126,7 +124,6 @@ public class dydxSimpleUITradeInputCtaButtonView: PlatformViewModel {
                     })
                     .disabled(self.state.buttonDisabled)
                 }
-                    .animation(.easeInOut(duration: 0.1))
 
                 return AnyView(view)
             }
