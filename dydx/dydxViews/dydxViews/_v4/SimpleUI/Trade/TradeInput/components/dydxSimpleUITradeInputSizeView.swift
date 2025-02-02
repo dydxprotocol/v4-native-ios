@@ -99,7 +99,6 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
             if let secondaryText, let secondaryToken {
                 Text(secondaryText)
                     .themeFont(fontSize: .small)
-                    .themeColor(foreground: .textTertiary)
                     .animation(.default)
 
                 Text(secondaryToken)
@@ -115,7 +114,7 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
                 let content = HStack {
                     textContent
                     PlatformIconViewModel(type: .asset(name: "icon_swap_vertical", bundle: .dydxView),
-                                          clip: .circle(background: .layer3, spacing: 8),
+                                          clip: .circle(background: .layer3, spacing: 10),
                                           size: CGSize(width: 24, height: 24),
                                           templateColor: .textSecondary)
                     .createView(parentStyle: style)

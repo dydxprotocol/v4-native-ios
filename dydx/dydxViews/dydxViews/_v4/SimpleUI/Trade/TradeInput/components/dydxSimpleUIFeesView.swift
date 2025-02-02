@@ -41,12 +41,16 @@ public class dydxSimpleUIFeesViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self, let totalFees = self.totalFees else { return AnyView(PlatformView.nilView) }
 
-            let feesText: String
-            if let feesPercentage = self.feesPercentage {
-                feesText = "\(totalFees) (\(feesPercentage))"
-            } else {
-                feesText = totalFees
+            let feesText = HStack {
+                Text(totalFees)
+                    .themeColor(foreground: .textSecondary)
+                if let feesPercentage = self.feesPercentage {
+                    let feesText = "(\(feesPercentage))"
+                    Text(feesText)
+                }
             }
+                .themeFont(fontSize: .small)
+                .themeColor(foreground: .textTertiary)
 
             let iconName: String
             if self.present {
@@ -61,9 +65,7 @@ public class dydxSimpleUIFeesViewModel: PlatformViewModel {
                     }
                  }, label: {
                      HStack(alignment: .center) {
-                         Text(feesText)
-                                 .themeFont(fontSize: .small)
-                                 .themeColor(foreground: .textTertiary)
+                         feesText
                          PlatformIconViewModel(type: .system(name: iconName),
                                                size: CGSize(width: 12, height: 12),
                                                templateColor: .textTertiary)
@@ -85,7 +87,7 @@ public class dydxSimpleUIFeesViewModel: PlatformViewModel {
                     }
                 }, view: {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(DataLocalizer.localize(path: "APP.GENERAL.COST"))
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.ESTIMATED_COST"))
                             .themeFont(fontSize: .small)
                             .themeColor(foreground: .textSecondary)
                         VStack(alignment: .leading, spacing: 8) {
@@ -102,17 +104,16 @@ public class dydxSimpleUIFeesViewModel: PlatformViewModel {
 
                             DividerModel().createView(parentStyle: style)
 
-                            Text(feesText)
+                            feesText
                         }
                         .themeFont(fontSize: .small)
                         .themeColor(foreground: .textTertiary)
                     }
                     .padding(.vertical, 8)
-                    .padding(.horizontal, 8)
+                    .padding(.horizontal, 12)
                     .frame(maxWidth: 160)
                     .themeColor(background: .layer3)
                     .cornerRadius(16, corners: .allCorners)
-                    .border(cornerRadius: 16)
                     .environmentObject(ThemeSettings.shared)
                 }, background: {
                     ThemeColor.SemanticColor.layer0.color.opacity(0.7)
