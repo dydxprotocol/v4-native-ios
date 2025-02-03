@@ -63,8 +63,17 @@ public struct SlideButton<Label: View>: View {
     }
 
     public var body: some View {
-        GeometryReader { reading in
+        let indicatorImage: Image
+        if let indicatorImageOverride = styling.indicatorImageOverride {
+            indicatorImage = indicatorImageOverride
+        } else {
+            indicatorImage = Image(systemName: isEnabled ? styling.indicatorSystemName : styling.indicatorDisabledSystemName)
+        }
+     
+       return GeometryReader { reading in
             let calculatedOffset: CGFloat = swipeState == .swiping ? offset : (swipeState == .start ? styling.indicatorSpacing : (reading.size.width - styling.indicatorSize + styling.indicatorSpacing))
+            
+            
             ZStack(alignment: .leading) {
                 styling.backgroundColor
                     .saturation(isEnabled ? 1 : 0)
@@ -114,7 +123,8 @@ public struct SlideButton<Label: View>: View {
                             ProgressView().progressViewStyle(.circular)
                                 .tint(.white)
                                 .opacity(swipeState == .end ? 1 : 0)
-                            Image(systemName: isEnabled ? styling.indicatorSystemName : styling.indicatorDisabledSystemName)
+                            
+                            indicatorImage
                                 .foregroundColor(.white)
                                 .font(.system(size: max(0.4 * styling.indicatorSize, 0.5 * styling.indicatorSize - 2 * styling.indicatorSpacing), weight: .semibold))
                                 .opacity(swipeState == .end ? 0 : 1)

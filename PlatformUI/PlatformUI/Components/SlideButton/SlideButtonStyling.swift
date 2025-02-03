@@ -33,6 +33,7 @@ public struct SlideButtonStyling {
         backgroundColor: Color? = nil,
         textColor: Color = .secondary,
         indicatorSystemName: String = "chevron.right",
+        indicatorImageOverride: Image? = nil,
         indicatorDisabledSystemName: String = "xmark",
         textAlignment: SlideTextAlignment = .center,
         textFadesOpacity: Bool = true,
@@ -50,6 +51,7 @@ public struct SlideButtonStyling {
         self.textColor = textColor
 
         self.indicatorSystemName = indicatorSystemName
+        self.indicatorImageOverride = indicatorImageOverride
         self.indicatorDisabledSystemName = indicatorDisabledSystemName
         self.textAlignment = textAlignment
         self.textFadesOpacity = textFadesOpacity
@@ -68,6 +70,7 @@ public struct SlideButtonStyling {
     var textColor: Color
 
     var indicatorSystemName: String
+    var indicatorImageOverride: Image?
     var indicatorDisabledSystemName: String
 
     var textAlignment: SlideTextAlignment
