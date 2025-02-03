@@ -23,31 +23,6 @@ protocol dydxSimpleUITradeInputCtaButtonViewPresenterProtocol: HostedViewPresent
 class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputCtaButtonView>, dydxSimpleUITradeInputCtaButtonViewPresenterProtocol {
     @Published var tradeType: TradeSubmission.TradeType = .trade
 
-    private enum OnboardingState {
-        case newUser
-        case needDeposit
-        case readyToTrade
-    }
-
-    private let onboardingStatePublisher: AnyPublisher<OnboardingState, Never> =
-        Publishers.CombineLatest(
-            AbacusStateManager.shared.state.onboarded,
-            AbacusStateManager.shared.state.selectedSubaccount
-        )
-        .map { onboarded, subaccount in
-            if onboarded {
-                if subaccount?.equity?.current?.doubleValue ?? 0 > 0 {
-                    .readyToTrade
-                } else {
-                    .needDeposit
-                }
-            } else {
-                .newUser
-            }
-        }
-        .removeDuplicates()
-        .eraseToAnyPublisher()
-
     override init() {
         super.init()
 
@@ -60,8 +35,9 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
         let inputsPublisher = Publishers
             .CombineLatest3(
                 $tradeType,
-            AbacusStateManager.shared.state.tradeInput,
-            AbacusStateManager.shared.state.closePositionInput)
+                AbacusStateManager.shared.state.tradeInput,
+                AbacusStateManager.shared.state.closePositionInput
+            )
             .map { ($0, $1, $2) }
             .eraseToAnyPublisher()
 
@@ -69,20 +45,17 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
             .CombineLatest3(
                 inputsPublisher,
                 AbacusStateManager.shared.state.validationErrors,
-                onboardingStatePublisher)
+                OnboardingState.onboardingStatePublisher)
             .sink { [weak self] inputs, errors, onboardingState in
                 guard let self else { return }
                 let (tradeType, tradeInput, closePositionInput) = inputs
 
                 switch tradeType {
                 case .trade:
-                    guard let tradeInput else {
-                        return
-                    }
                     self.update(tradeInput: tradeInput,
                                 errors: errors,
                                 onboardingState: onboardingState)
-                    switch tradeInput.side {
+                    switch tradeInput?.side {
                     case .buy:
                         self.viewModel?.side = .BUY
                     case .sell:
@@ -132,7 +105,7 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
         }
     }
 
-    private func update(tradeInput: TradeInput,
+    private func update(tradeInput: TradeInput?,
                         errors: [ValidationError],
                         onboardingState: OnboardingState) {
         switch onboardingState {
@@ -144,7 +117,7 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
             let firstBlockingError = errors.first { $0.type == ErrorType.required || $0.type == ErrorType.error }
             if firstBlockingError?.action != nil {
                 viewModel?.state = .enabled(firstBlockingError?.resources.action?.localizedString)
-            } else if tradeInput.size?.size?.doubleValue ?? 0 > 0 {
+            } else if tradeInput?.size?.size?.doubleValue ?? 0 > 0 {
                 if let firstBlockingError = firstBlockingError {
                     viewModel?.state = .disabled(firstBlockingError.resources.action?.localizedString)
                 } else {

@@ -45,9 +45,14 @@ class dydxSimpleUITradeInputViewController: HostingViewController<PlatformView, 
             AbacusStateManager.shared.trade(input: nil, type: .size)
             AbacusStateManager.shared.trade(input: nil, type: .usdcsize)
 
-            AbacusStateManager.shared.trade(input: side.uppercased(), type: TradeInputField.side)
+            AbacusStateManager.shared.trade(input: side.uppercased(), type: .side)
 
             presenter.tradeType = .trade
+            if side == "buy" {
+                presenter.side = .buy
+            } else if side == "sell" {
+                presenter.side = .sell
+            }
 
             return true
 
@@ -70,6 +75,12 @@ private protocol dydxSimpleUITradeInputViewPresenterProtocol: HostedViewPresente
 }
 
 private class dydxSimpleUITradeInputViewPresenter: HostedViewPresenter<dydxSimpleUITradeInputViewModel>, dydxSimpleUITradeInputViewPresenterProtocol {
+    @Published var side: OrderSide? {
+        didSet {
+            headerPresenter.side = side
+        }
+    }
+
     @Published var tradeType: TradeSubmission.TradeType = .trade {
         didSet {
             headerPresenter.tradeType = tradeType

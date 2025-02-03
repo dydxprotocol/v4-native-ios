@@ -122,6 +122,7 @@
 		02A8980628E76175006F1658 /* dydxStateManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DD9728CFB30000727949 /* dydxStateManager.framework */; platformFilter = ios; };
 		02B27A492AE8BC7600A995EC /* dydxHelpViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B27A482AE8BC7600A995EC /* dydxHelpViewPresenter.swift */; };
 		02B6CE752A7087A700C5F088 /* dydxTransferSubaccountWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6CE742A7087A700C5F088 /* dydxTransferSubaccountWorker.swift */; };
+		02B8341E2D50343400B955F5 /* OnboardingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B834102D50343400B955F5 /* OnboardingState.swift */; };
 		02B841B228EF6C6400C4D25B /* dydxMarketInfoViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B841B128EF6C6400C4D25B /* dydxMarketInfoViewBuilder.swift */; };
 		02CA62872A7EBE08006067DB /* dydxPortfolioFeesViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CA62862A7EBE08006067DB /* dydxPortfolioFeesViewPresenter.swift */; };
 		02D1342828EB572100B46941 /* SharedMarketPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D1342728EB572100B46941 /* SharedMarketPresenter.swift */; };
@@ -549,6 +550,7 @@
 		02A5C85D297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferViewBuilder.swift; sourceTree = "<group>"; };
 		02B27A482AE8BC7600A995EC /* dydxHelpViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxHelpViewPresenter.swift; sourceTree = "<group>"; };
 		02B6CE742A7087A700C5F088 /* dydxTransferSubaccountWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferSubaccountWorker.swift; sourceTree = "<group>"; };
+		02B834102D50343400B955F5 /* OnboardingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingState.swift; sourceTree = "<group>"; };
 		02B841B128EF6C6400C4D25B /* dydxMarketInfoViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketInfoViewBuilder.swift; sourceTree = "<group>"; };
 		02CA62862A7EBE08006067DB /* dydxPortfolioFeesViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioFeesViewPresenter.swift; sourceTree = "<group>"; };
 		02D1342728EB572100B46941 /* SharedMarketPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedMarketPresenter.swift; sourceTree = "<group>"; };
@@ -721,6 +723,7 @@
 		02048FCE2D39F5DA00394CBE /* components */ = {
 			isa = PBXGroup;
 			children = (
+				02B834102D50343400B955F5 /* OnboardingState.swift */,
 				02048FD52D3A09D300394CBE /* dydxSimpleUIIBuyingPowerViewPresenter.swift */,
 				0204923B2D3DF64200394CBE /* dydxSimpleUIMarginUsageViewPresenter.swift */,
 				0204924C2D3DFDC300394CBE /* dydxSimpleUIFeesViewPresenter.swift */,
@@ -2308,6 +2311,7 @@
 				27457F5B2C8AC8B700873640 /* dydxVaultDepositWithdrawConfirmationViewBuilder.swift in Sources */,
 				027E1EF829CA27CD0098666F /* dydxSettingsLandingViewBuilder.swift in Sources */,
 				020DBF1E29E092C00068AAA6 /* dydxTransferDepositViewPresenter.swift in Sources */,
+				02B8341E2D50343400B955F5 /* OnboardingState.swift in Sources */,
 				277987512BA33F15006DC5CD /* dydxSelectedMarketStore.swift in Sources */,
 				0238FB72296C4438002E1C1A /* HistoricalPNLDataPoint.swift in Sources */,
 				021B68B12AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift in Sources */,
