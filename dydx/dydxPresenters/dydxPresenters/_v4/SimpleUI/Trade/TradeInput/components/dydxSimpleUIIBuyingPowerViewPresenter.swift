@@ -51,7 +51,7 @@ class dydxSimpleUIBuyingPowerViewPresenter: HostedViewPresenter<dydxSimpleUIBuyi
 
                 let offsettingValue: Double
                 if isOpposite {
-                    offsettingValue = 2 * ( existingPosition?.notionalTotal.current?.doubleValue ?? 0.0)
+                    offsettingValue = 2 * (existingPosition?.notionalTotal.current?.doubleValue ?? 0.0)
                 } else {
                     offsettingValue = 0.0
                 }
@@ -64,8 +64,8 @@ class dydxSimpleUIBuyingPowerViewPresenter: HostedViewPresenter<dydxSimpleUIBuyi
                         self?.viewModel?.buyingPower = nil
                     }
                 } else {
-                    if let imf = configsAndAssetMap[marketId]?.configs?.initialMarginFraction?.doubleValue, imf > 0 {
-                        let buyingPower = freeCollateral * (1.0 / imf) + offsettingValue
+                    if let maxMarketLeverage = configsAndAssetMap[marketId]?.configs?.maxMarketLeverage, maxMarketLeverage > 0 {
+                        let buyingPower = freeCollateral * maxMarketLeverage + offsettingValue
                         self?.viewModel?.buyingPower = dydxFormatter.shared.dollar(number: buyingPower.filter(filter: .notNegative), digits: 2)
                     } else {
                         self?.viewModel?.buyingPower = nil

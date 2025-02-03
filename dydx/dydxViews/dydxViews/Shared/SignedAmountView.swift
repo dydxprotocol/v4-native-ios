@@ -9,10 +9,11 @@ import PlatformUI
 import dydxFormatter
 
 public extension SignedAmountViewModel {
-    convenience init(text: String? = nil, sign: PlatformUISign = .plus, coloringOption: ColoringOption) {
+    convenience init(text: String? = nil, sign: PlatformUISign = .plus, coloringOption: ColoringOption, noneColor: ThemeColor.SemanticColor = .textSecondary) {
         self.init(text: text,
                   sign: sign,
                   coloringOption: coloringOption,
+                  noneColor: noneColor,
                   positiveTextStyleKey: ThemeSettings.positiveTextStyleKey,
                   negativeTextStyleKey: ThemeSettings.negativeTextStyleKey)
     }

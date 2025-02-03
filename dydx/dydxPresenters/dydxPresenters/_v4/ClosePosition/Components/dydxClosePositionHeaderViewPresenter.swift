@@ -36,24 +36,25 @@ class dydxClosePositionHeaderViewPresenter: HostedViewPresenter<dydxClosePositio
             .eraseToAnyPublisher()
 
         Publishers
-            .CombineLatest3(
+            .CombineLatest4(
                 marketPublisher,
                 AbacusStateManager.shared.state.selectedSubaccountPositions,
-                AbacusStateManager.shared.state.assetMap)
-            .sink { [weak self] market, subaccountPositions, assetMap in
+                AbacusStateManager.shared.state.assetMap,
+                AbacusStateManager.shared.state.selectedSubaccount)
+            .sink { [weak self] market, subaccountPositions, assetMap, subaccount in
                 let position = subaccountPositions.first { (subaccountPosition: SubaccountPosition) in
                     subaccountPosition.id == market.id
                 }
                 if let position = position {
-                    self?.updateHeader(market: market, position: position, assetMap: assetMap)
+                    self?.updateHeader(market: market, position: position, assetMap: assetMap, subaccount: subaccount)
                 }
             }
             .store(in: &subscriptions)
     }
 
-    private func updateHeader(market: PerpetualMarket, position: SubaccountPosition, assetMap: [String: Asset]) {
+    private func updateHeader(market: PerpetualMarket, position: SubaccountPosition, assetMap: [String: Asset], subaccount: Subaccount?) {
         let asset = assetMap[market.assetId]
-        viewModel?.sharedMarketViewModel = SharedMarketPresenter.createViewModel(market: market, asset: asset)
+        viewModel?.sharedMarketViewModel = SharedMarketPresenter.createViewModel(market: market, asset: asset, subaccount: subaccount)
         viewModel?.sideViewModel = SideTextViewModel(side: position.side.current == PositionSide.long_ ? .long : .short,
                                                      coloringOption: .colored)
     }

@@ -97,7 +97,7 @@ struct dydxGainLossInputView: View {
 
     var placeholder: Text {
         Text("0")
-            .themeColor(foreground: .textTertiary)
+            .foregroundColor(ThemeColor.SemanticColor.textTertiary.color.opacity(0.3))
             .themeFont(fontType: .base, fontSize: .large)
     }
 

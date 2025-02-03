@@ -27,6 +27,8 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
 
     @Published public var openInterest: String?
     @Published public var nextFunding: IntervalTextModel?
+    @Published public var fundingRate: SignedAmountViewModel?
+    @Published public var buyingPower: String?
     @Published public var isLaunched: Bool = true
 
     public init() { }
@@ -50,6 +52,8 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
 
         vm.openInterest = "$222.5M"
         vm.nextFunding = .previewValue
+        vm.fundingRate = .previewValue
+        vm.buyingPower = "$1111.11"
         vm.isLaunched = true
 
         return vm
@@ -72,6 +76,8 @@ public final class SharedMarketViewModel: PlatformViewModel, Equatable {
         lhs.coinMarketPlaceUrl == rhs.coinMarketPlaceUrl &&
         lhs.openInterest == rhs.openInterest &&
         lhs.nextFunding == rhs.nextFunding &&
+        lhs.fundingRate == rhs.fundingRate &&
+        lhs.buyingPower == rhs.buyingPower &&
         lhs.isLaunched == rhs.isLaunched
     }
 }

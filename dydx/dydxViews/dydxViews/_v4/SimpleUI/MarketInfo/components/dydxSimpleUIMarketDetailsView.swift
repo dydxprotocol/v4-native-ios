@@ -35,7 +35,7 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
     }
 
     private func createContent(style: ThemeStyle) -> some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 12) {
             Group {
                 if let primaryDescription = sharedMarketViewModel?.primaryDescription {
                     Text(primaryDescription)
@@ -47,16 +47,28 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
                 .themeFont(fontSize: .medium)
                 .themeColor(foreground: .textSecondary)
                 .padding(.horizontal, 16)
+                .padding(.bottom, 8)
 
             HStack {
-                let fundingHeader = Text(DataLocalizer.localize(path: "APP.TRADE.NEXT_FUNDING"))
+                let nameHeader = Text(DataLocalizer.localize(path: "APP.GENERAL.MARKET_NAME"))
+                    .themeFont(fontType: .plus, fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: nameHeader.wrappedViewModel,
+                                                        value: sharedMarketViewModel?.assetName)
+                .frame(minWidth: 0, maxWidth: .infinity)
+
+                let fundingHeader = Text(DataLocalizer.localize(path: "APP.TRADE.CURRENT_FUNDING_RATE"))
                     .themeFont(fontType: .plus, fontSize: .small)
                     .themeColor(foreground: .textTertiary)
                 CollectionItemUtil.createCollectionItem(parentStyle: style,
                                                         titleViewModel: fundingHeader.wrappedViewModel,
-                                                        valueViewModel: sharedMarketViewModel?.nextFunding)
+                                                        valueViewModel: sharedMarketViewModel?.fundingRate)
                 .frame(minWidth: 0, maxWidth: .infinity)
+            }
+            .padding(.horizontal, 16)
 
+            HStack {
                 let openInterestHeader = HStack {
                     Text(DataLocalizer.localize(path: "APP.TRADE.OPEN_INTEREST"))
                         .themeFont(fontType: .plus, fontSize: .small)
@@ -68,6 +80,19 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
                                                         titleViewModel: openInterestHeader.wrappedViewModel,
                                                         value: sharedMarketViewModel?.openInterest)
                 .frame(minWidth: 0, maxWidth: .infinity)
+
+                let buyingPowerHeader = HStack {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
+                        .themeFont(fontType: .plus, fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
+                    TokenTextViewModel(symbol: "USD", withBorder: true)
+                        .createView(parentStyle: style.themeFont(fontSize: .smallest))
+                }
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: buyingPowerHeader.wrappedViewModel,
+                                                        value: sharedMarketViewModel?.buyingPower)
+                .frame(minWidth: 0, maxWidth: .infinity)
+
             }
             .padding(.horizontal, 16)
         }

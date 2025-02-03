@@ -33,21 +33,24 @@ class SharedMarketPresenter: HostedViewPresenter<SharedMarketViewModel>, SharedM
         super.start()
 
         Publishers
-            .CombineLatest3(
+            .CombineLatest4(
                 $marketId,
                 AbacusStateManager.shared.state.marketMap,
-                AbacusStateManager.shared.state.assetMap)
-            .sink { [weak self] (marketId: String?, marketMap: [String: PerpetualMarket], assetMap: [String: Asset]) in
+                AbacusStateManager.shared.state.assetMap,
+                AbacusStateManager.shared.state.selectedSubaccount)
+            .sink { [weak self] marketId, marketMap, assetMap, subaccount in
                 guard let marketId = marketId,
                       let market = marketMap[marketId] else { return }
 
                 let asset = assetMap[market.assetId]
-                self?.viewModel = SharedMarketPresenter.createViewModel(market: market, asset: asset)
+                self?.viewModel = SharedMarketPresenter.createViewModel(market: market, asset: asset, subaccount: subaccount)
             }
             .store(in: &subscriptions)
     }
 
-    static func createViewModel(market: PerpetualMarket, asset: Asset?) -> SharedMarketViewModel {
+    static func createViewModel(market: PerpetualMarket,
+                                asset: Asset?,
+                                subaccount: Subaccount?) -> SharedMarketViewModel {
         let viewModel = SharedMarketViewModel()
         viewModel.assetId = asset?.displayableAssetId ?? market.assetId
         viewModel.assetName = asset?.name ?? market.displayId
@@ -89,9 +92,45 @@ class SharedMarketPresenter: HostedViewPresenter<SharedMarketViewModel>, SharedM
             // With no nextFundingAt, we will just count down to the next hour mark
             viewModel.nextFunding  = IntervalTextModel(date: nil, direction: .countDownToHour, format: .full)
         }
+        if let fundingRate = market.perpetual?.nextFundingRate?.doubleValue {
+            let percentText = dydxFormatter.shared.percent(number: fundingRate, digits: 6)
+            let sign: PlatformUISign
+            if fundingRate == 0 {
+                sign = .none
+            } else if fundingRate > 0 {
+                sign = .plus
+            } else {
+                sign = .minus
+            }
+            viewModel.fundingRate = SignedAmountViewModel(text: percentText,
+                                                          sign: sign,
+                                                          coloringOption: .allText,
+                                                          noneColor: .textPrimary)
+        } else {
+            viewModel.fundingRate = nil
+        }
         viewModel.isLaunched = market.isLaunched
         viewModel.marketCap = dydxFormatter.shared.dollarVolume(number: market.marketCaps?.doubleValue)
         viewModel.spotVolume24H = dydxFormatter.shared.dollarVolume(number: market.spot24hVolume?.doubleValue)
+
+        let freeCollateral = subaccount?.freeCollateral?.current?.doubleValue ?? 0.0
+        let targetLeverage: Double?
+        switch market.configs?.perpetualMarketType {
+        case .isolated:
+            let DEFAULT_TARGET_LEVERAGE = 2.0
+            let maxMarketLeverage = market.configs?.maxMarketLeverage ?? 1.0
+            targetLeverage = min(DEFAULT_TARGET_LEVERAGE, maxMarketLeverage)
+        case .cross:
+            targetLeverage =  market.configs?.maxMarketLeverage ?? 1.0
+        default:
+            targetLeverage = nil
+        }
+        if let targetLeverage {
+            let buyingPower = freeCollateral * targetLeverage
+            viewModel.buyingPower = dydxFormatter.shared.dollar(number: buyingPower.filter(filter: .notNegative), digits: 2)
+        } else {
+            viewModel.buyingPower = nil
+        }
 
         return viewModel
     }

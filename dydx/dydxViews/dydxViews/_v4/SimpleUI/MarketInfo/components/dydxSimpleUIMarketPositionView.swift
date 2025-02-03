@@ -129,7 +129,7 @@ public class dydxSimpleUIMarketPositionViewModel: PlatformViewModel {
 
     private func createHeader(style: ThemeStyle) -> some View {
         VStack {
-            HStack(alignment: .center) {
+            HStack(alignment: .center, spacing: 12) {
                 Text(DataLocalizer.localize(path: "APP.GENERAL.POSITION"))
                     .themeFont(fontType: .plus, fontSize: .large)
                     .themeColor(foreground: .textPrimary)

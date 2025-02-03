@@ -82,6 +82,7 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
                             self.feesViewModel?.createView(parentStyle: style)
                         }
                         self.ctaButtonViewModel?.createView(parentStyle: style)
+                            .frame(height: 62)
                     }
                     .keyboardObserving(offset: -bottomPadding + 16, mode: .yOffset)
                 }

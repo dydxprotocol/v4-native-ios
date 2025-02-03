@@ -119,22 +119,25 @@ private class dydxAdjustMarginInputViewPresenter: HostedViewPresenter<dydxAdjust
                 AbacusStateManager.shared.state.market(of: marketId).compactMap { $0 },
                 AbacusStateManager.shared.state.assetMap,
                 AbacusStateManager.shared.state.adjustIsolatedMarginInput.compactMap { $0 },
-                AbacusStateManager.shared.state.selectedSubaccountPositions.compactMap { $0.first(where: { $0.id == marketId }) }
+                AbacusStateManager.shared.state.selectedSubaccount
             )
-            .sink { [weak self] market, assetMap, input, position in
-                self?.updateState(market: market, assetMap: assetMap)
+            .sink { [weak self] market, assetMap, input, subaccount in
+                self?.updateState(market: market, assetMap: assetMap, subaccount: subaccount)
                 self?.updateFields(input: input)
                 self?.updateForMarginDirection(input: input)
                 self?.updatePrePostValues(input: input, market: market)
-                guard let side = position.side.current else { return }
+
+                let position = subaccount?.openPositions?.first(where: { $0.id == marketId
+                })
+                guard let side = position?.side.current else { return }
                 self?.updateLiquidationPrice(input: input, side: side, market: market)
             }
             .store(in: &subscriptions)
     }
 
-    private func updateState(market: PerpetualMarket, assetMap: [String: Asset]) {
+    private func updateState(market: PerpetualMarket, assetMap: [String: Asset], subaccount: Subaccount?) {
         let asset = assetMap[market.assetId]
-        viewModel?.sharedMarketViewModel = SharedMarketPresenter.createViewModel(market: market, asset: asset)
+        viewModel?.sharedMarketViewModel = SharedMarketPresenter.createViewModel(market: market, asset: asset, subaccount: subaccount)
     }
 
     private func updateForMarginDirection(input: AdjustIsolatedMarginInput) {

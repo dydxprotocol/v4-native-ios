@@ -25,13 +25,20 @@ public class SignedAmountViewModel: PlatformViewModel, Hashable {
     @Published public var coloringOption: ColoringOption
     @Published public var positiveTextStyleKey: String
     @Published public var negativeTextStyleKey: String
-
-    public init(text: String? = nil, sign: PlatformUISign = .plus, coloringOption: ColoringOption, positiveTextStyleKey: String, negativeTextStyleKey: String) {
+    @Published public var noneColor: ThemeColor.SemanticColor
+    
+    public init(text: String? = nil,
+                sign: PlatformUISign = .plus,
+                coloringOption: ColoringOption,
+                noneColor: ThemeColor.SemanticColor = .textSecondary,
+                positiveTextStyleKey: String,
+                negativeTextStyleKey: String) {
         self.text = text
         self.sign = sign
         self.coloringOption = coloringOption
         self.positiveTextStyleKey = positiveTextStyleKey
         self.negativeTextStyleKey = negativeTextStyleKey
+        self.noneColor = noneColor
     }
 
     public static func == (lhs: SignedAmountViewModel, rhs: SignedAmountViewModel) -> Bool {
@@ -85,6 +92,7 @@ public class SignedAmountViewModel: PlatformViewModel, Hashable {
                                     .themeStyle(styleKey: self.negativeTextStyleKey, parentStyle: style)
                             case .none:
                                 Text(text)
+                                    .themeColor(foreground: self.noneColor)
                             }
                         }
                     } else {
