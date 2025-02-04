@@ -54,12 +54,18 @@ public class dydxSimpleUITradeInputSizeItemViewModel: PlatformTextInputViewModel
         }
     }
 
-    private var valueAccessoryTextAnyView: AnyView {
-        let text = showingUsdc ? "USD" : tokenSymbol ?? ""
-        return AnyView(
-            TokenTextViewModel(symbol: text)
-                .createView(parentStyle: .defaultStyle.themeFont(fontSize: .small))
-        )
+    private var leftValueAccessoryText: some View {
+        let text = showingUsdc ? "$" : ""
+        return Text(text)
+                .themeFont(fontSize: .large)
+                .themeColor(foreground: .textPrimary)
+    }
+
+    private var rightValueAccessoryText: some View {
+        let text = showingUsdc ? "" : (tokenSymbol ?? "")
+        return Text(text)
+                .themeFont(fontSize: .large)
+                .themeColor(foreground: .textPrimary)
     }
 
     private func updateValue() {
@@ -68,17 +74,23 @@ public class dydxSimpleUITradeInputSizeItemViewModel: PlatformTextInputViewModel
         } else {
             value = size
         }
-        valueAccessoryView = valueAccessoryTextAnyView
     }
 
     public init(label: String? = nil, value: String? = nil, placeHolder: String? = nil, contentType: UITextContentType? = nil, onEdited: ((String?) -> Void)? = nil) {
-        super.init(label: label, value: value, placeHolder: placeHolder, inputType: .decimalDigits, contentType: contentType, onEdited: onEdited, twoWayBinding: true, textAlignment: .center)
+        super.init(label: label, value: value, placeHolder: placeHolder, inputType: .decimalDigits, contentType: contentType, onEdited: onEdited, twoWayBinding: true, textAlignment: .center, dynamicWidth: true)
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        let view = super.createView(parentStyle: parentStyle.themeFont(fontType: .plus, fontSize: .custom(size: 36)), styleKey: styleKey)
-        return PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { _ in
-            AnyView(view.frame(height: Self.viewHeight))
+        let inputView = super.createView(parentStyle: parentStyle.themeFont(fontType: .plus, fontSize: .custom(size: 36)), styleKey: styleKey)
+
+        return PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _ in
+            let view = HStack(alignment: .center, spacing: -8) {
+                self?.leftValueAccessoryText
+                inputView
+                self?.rightValueAccessoryText
+            }
+                .frame(height: Self.viewHeight)
+            return AnyView(view)
         }
     }
 }

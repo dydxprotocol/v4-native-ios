@@ -15,15 +15,17 @@ import Popovers
 private struct PlatformInputView: View {
     @ObservedObject private var model: PlatformInputModel
     @FocusState private var isFocused: Bool
+    
+    private let parentStyle: ThemeStyle
+    private let styleKey: String?
 
-    private var parentStyle: ThemeStyle
-    private var styleKey: String?
-
+    @State private var textRect = CGRect()
+ 
     init(model: PlatformInputModel, parentStyle: ThemeStyle = ThemeStyle.defaultStyle.themeFont(fontType: .number, fontSize: .large), styleKey: String?) {
         self.model = model
         self.parentStyle = parentStyle
         self.styleKey = styleKey
-        self.isFocused = model.isFocused       
+        self.isFocused = model.isFocused
     }
 
     var body: some View {
@@ -80,17 +82,40 @@ private struct PlatformInputView: View {
     }
 
     private var textField: some View {
-        TextField("", text: model.value, onEditingChanged: { editingChanged in
+        let textField = TextField("", text: model.value, onEditingChanged: { editingChanged in
             isFocused = editingChanged
             model.onEditingChanged?(editingChanged)
         })
-        .multilineTextAlignment(model.textAlignment)
-        .focused($isFocused)
-        .truncationMode(model.truncateMode)
-        .keyboardType(model.keyboardType)
-        .textContentType(model.contentType)
-        .themeColor(foreground: .textPrimary)
-        .themeStyle(style: parentStyle)
+            .multilineTextAlignment(model.textAlignment)
+            .focused($isFocused)
+            .truncationMode(model.truncateMode)
+            .keyboardType(model.keyboardType)
+            .textContentType(model.contentType)
+            .themeColor(foreground: .textPrimary)
+            .themeStyle(style: parentStyle)
+        
+        // currentValue is used to measure the textField width
+        var currentValue = model.currentValueRaw ?? ""
+        if currentValue == "" {
+            currentValue = model.placeHolder
+        }
+        
+        return Group {
+            if model.dynamicWidth {
+                ZStack {
+                    Text(currentValue)
+                        .background(GlobalGeometryGetter(rect: $textRect))
+                        .layoutPriority(1)
+                        .opacity(0)
+                    HStack {
+                        textField
+                            .frame(width: textRect.width)
+                    }
+                }
+            } else {
+                textField
+            }
+        }
     }
 
     private var placeholder: some View {
@@ -114,12 +139,32 @@ private struct PlatformInputView: View {
     }
 }
 
+struct GlobalGeometryGetter: View {
+    @Binding var rect: CGRect
+
+    var body: some View {
+        return GeometryReader { geometry in
+            self.makeView(geometry: geometry)
+        }
+    }
+
+    func makeView(geometry: GeometryProxy) -> some View {
+        DispatchQueue.main.async {
+            self.rect = geometry.frame(in: .global)
+        }
+
+        return Rectangle().fill(Color.clear)
+    }
+}
+
+
 public class PlatformInputModel: PlatformViewModel {
     @Published public var label: String?
     @Published public var labelAccessory: AnyView?
     @Published public var value: Binding<String>
     @Published public var valueAccessory: AnyView?
     @Published public var currentValue: String?
+    @Published public var currentValueRaw: String?
     @Published public var placeHolder: String = ""
     @Published public var keyboardType: UIKeyboardType = .default
     @Published public var contentType: UITextContentType?
@@ -129,12 +174,14 @@ public class PlatformInputModel: PlatformViewModel {
     @Published public var isFocused: Bool = false
     @Published public var twoWayBinding: Bool = false
     @Published public var textAlignment: TextAlignment = .leading
-    
+    @Published public var dynamicWidth: Bool = false
+  
     public init(label: String? = nil,
                 labelAccessory: AnyView? = nil,
                 value: Binding<String>,
                 valueAccessory: AnyView? = nil,
                 currentValue: String? = nil,
+                currentValueRaw: String? = nil,
                 placeHolder: String = "",
                 keyboardType: UIKeyboardType = .default,
                 contentType: UITextContentType? = nil,
@@ -143,12 +190,14 @@ public class PlatformInputModel: PlatformViewModel {
                 focusedOnAppear: Bool = false,
                 isFocused: Bool = false,
                 twoWayBinding: Bool = false,
-                textAlignment: TextAlignment = .leading) {
+                textAlignment: TextAlignment = .leading,
+                dynamicWidth: Bool = false) {
         self.label = label
         self.labelAccessory = labelAccessory
         self.value = value
         self.valueAccessory = valueAccessory
         self.currentValue = currentValue
+        self.currentValueRaw = currentValueRaw
         self.placeHolder = placeHolder
         self.keyboardType = keyboardType
         self.contentType = contentType
@@ -158,6 +207,7 @@ public class PlatformInputModel: PlatformViewModel {
         self.isFocused = isFocused
         self.twoWayBinding = twoWayBinding
         self.textAlignment = textAlignment
+        self.dynamicWidth = dynamicWidth
     }
 
     public static var previewValue: PlatformInputModel = {
@@ -273,11 +323,14 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
 
     @Published private var input: String = ""
 
+    @Published private var rawInput: String = ""
+    
     public lazy var inputBinding = Binding(
         get: {
             return self.input
         },
         set: { newInput in
+            self.rawInput = newInput
             if self.focused {
                 let sanitized = self.inputType.sanitize(newInput)
                 if let sanitized {
@@ -310,6 +363,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     private let focusedOnAppear: Bool
     private let twoWayBinding: Bool
     private let textAlignment: TextAlignment
+    private let dynamicWidth: Bool
     
     @Published public var isFocused: Bool = false
     
@@ -324,12 +378,14 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 truncateMode: Text.TruncationMode = .middle,
                 focusedOnAppear: Bool = false,
                 twoWayBinding: Bool = false,
-                textAlignment: TextAlignment = .leading) {
+                textAlignment: TextAlignment = .leading,
+                dynamicWidth: Bool = false) {
         self.inputType = inputType
         self.truncateMode = truncateMode
         self.focusedOnAppear = focusedOnAppear
         self.twoWayBinding = twoWayBinding
         self.textAlignment = textAlignment
+        self.dynamicWidth = dynamicWidth
         super.init(label: label, labelAccessory: labelAccessory, valueAccessoryView: valueAccessoryView, onEdited: onEdited)
         self.value = value
         input = value ?? ""
@@ -347,6 +403,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 value: self.inputBinding,
                 valueAccessory: self.valueAccessoryView,
                 currentValue: self.input,
+                currentValueRaw: self.rawInput,
                 placeHolder: self.placeHolder ?? "",
                 keyboardType: self.inputType.keyboardType,
                 onEditingChanged: { focused in
@@ -356,7 +413,8 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 focusedOnAppear: focusedOnAppear,
                 isFocused: isFocused,
                 twoWayBinding: twoWayBinding,
-                textAlignment: textAlignment
+                textAlignment: textAlignment,
+                dynamicWidth: dynamicWidth
             )
             
             return AnyView(PlatformInputView(model: model,

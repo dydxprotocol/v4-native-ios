@@ -34,7 +34,6 @@ public class dydxSimpleUIMarginUsageViewModel: PlatformViewModel {
                     leveragePercent.createView(parentStyle: style.themeColor(foreground: .textTertiary))
                 }
             }
-                .animation(.default)
             return AnyView(view)
         }
     }

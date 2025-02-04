@@ -72,7 +72,7 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
                         self.closePositionSizeItem?.createView(parentStyle: style)
                     } else {
                         let offset = self.focusState == .atUsdcSize ? 0.0 : -animationBoxHeight
-                        VStack(alignment: .leading, spacing: 0) {
+                        VStack(alignment: .center, spacing: 0) {
                             self.usdcSizeItem?.createView(parentStyle: style)
                             self.sizeItem?.createView(parentStyle: style)
                         }
@@ -95,17 +95,19 @@ public class dydxSimpleUITradeInputSizeViewModel: PlatformViewModel {
     }
 
     private func createSwapView(style: ThemeStyle) -> some View {
-        let textContent = HStack {
+        let textContent = HStack(spacing: 4) {
             if let secondaryText, let secondaryToken {
+                if secondaryToken == "USD" {
+                    Text("$")
+                }
                 Text(secondaryText)
-                    .themeFont(fontSize: .small)
                     .animation(.default)
-
-                Text(secondaryToken)
-                    .themeFont(fontSize: .small)
-                    .animation(.default)
+                if secondaryToken != "USD" {
+                    Text(secondaryToken)
+                }
             }
         }
+            .themeFont(fontSize: .small)
 
         return Group {
             if percent != nil {
