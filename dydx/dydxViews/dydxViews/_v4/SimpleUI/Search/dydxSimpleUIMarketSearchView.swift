@@ -36,8 +36,6 @@ public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
 
             let view = ZStack(alignment: .bottom) {
                 VStack(spacing: 0) {
-                    dragIndicator(topPadding: 0)
-
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVStack(pinnedViews: [.sectionHeaders]) {
 
@@ -64,8 +62,8 @@ public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
                 .background(SearchBoxModel.bottomBlendGradiant)
             }
                 .keyboardObserving()
-                .padding(.top, 32)
-                .themeColor(background: .layer2)
+                .padding(.top, 8)
+                .themeColor(background: .layer1)
 
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
@@ -80,7 +78,7 @@ public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
         }
-        .themeColor(background: .layer2)
+        .themeColor(background: .layer1)
     }
 }
 

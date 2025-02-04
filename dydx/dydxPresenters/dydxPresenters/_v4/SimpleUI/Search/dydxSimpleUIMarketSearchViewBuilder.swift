@@ -18,8 +18,7 @@ public class dydxSimpleUIMarketSearchViewBuilder: NSObject, ObjectBuilderProtoco
     public func build<T>() -> T? {
         let presenter = dydxSimpleUIMarketSearchViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        let configuration = HostingViewControllerConfiguration(fixedHeight: UIScreen.main.bounds.height)
-        return dydxSimpleUIMarketSearchViewController(presenter: presenter, view: view, configuration: configuration) as? T
+        return dydxSimpleUIMarketSearchViewController(presenter: presenter, view: view, configuration: .fullScreenSheet) as? T
     }
 }
 
