@@ -74,6 +74,15 @@ class dydxSimpleUiMarketLaunchableViewPresenter: HostedViewPresenter<dydxSimpleU
         viewModel.minDeposit = dydxNumberFeatureFlag.min_deposit_for_launchable_market.value
         viewModel.thirtyDayReturnPercent = vault?.details?.thirtyDayReturnPercent?.doubleValue
 
+        viewModel.faqUrlAction = {
+            if let urlString = AbacusStateManager.shared.environment?.links?.vaultLearnMore,
+               let url = URL(string: urlString) {
+                if URLHandler.shared?.canOpenURL(url) ?? false {
+                    URLHandler.shared?.open(url, completionHandler: nil)
+                }
+            }
+        }
+
         return viewModel
     }
 }

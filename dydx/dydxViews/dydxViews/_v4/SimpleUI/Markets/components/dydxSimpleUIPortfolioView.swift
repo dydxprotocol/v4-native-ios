@@ -38,6 +38,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     }
 
     @Published public var buttonAction: (() -> Void)?
+    @Published public var learnMoreAction: (() -> Void)?
     @Published public var state: LoginState  = .unknown
     @Published public var sharedAccountViewModel: SharedAccountViewModel? = SharedAccountViewModel()
     @Published public var pnlAmount: SignedAmountViewModel?
@@ -45,6 +46,55 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     @Published public var chart = dydxLineChartViewModel()
 
     @Published public var periodOption = dydxSimpleUIPortfolioPeriodViewModel.previewValue
+
+    private lazy var buyingPowerTooltip: TooltipModel = {
+        let tooltip = TooltipModel()
+        let attributedTitle = AttributedString(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
+            .themeFont(fontSize: .small)
+            .themeColor(foreground: .textTertiary)
+        tooltip.label = Text(attributedTitle.dottedUnderline(foreground: .textSecondary))
+            .themeColor(foreground: .textTertiary)
+            .wrappedViewModel
+        tooltip.content = VStack(alignment: .leading, spacing: 8) {
+            Text(DataLocalizer.localize(path: "APP.SIMPLE_UI.BUYING_POWER_TOOLTIP"))
+                .themeFont(fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+            Text(DataLocalizer.localize(path: "APP.GENERAL.LEARN_MORE"))
+                .themeFont(fontSize: .small)
+                .themeColor(foreground: ThemeColor.SemanticColor.colorPurple)
+                .onTapGesture { [weak self] in
+                    tooltip.dismiss()
+                    self?.learnMoreAction?()
+                }
+        }
+        .wrappedViewModel
+        return tooltip
+    }()
+
+    private lazy var leverageTooltip: PlatformViewModel = {
+        guard let leverageIcon = sharedAccountViewModel?.leverageIcon else {
+            return PlatformViewModel()
+        }
+
+        let tooltip = TooltipModel()
+        tooltip.label = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
+                                             viewSize: leverageIcon.viewSize,
+                                          displayOption: .fullText(dotted: true))
+        tooltip.content = VStack(alignment: .leading, spacing: 8) {
+            Text(DataLocalizer.localize(path: "APP.SIMPLE_UI.RISK_TOOLTIP"))
+                .themeFont(fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+            Text(DataLocalizer.localize(path: "APP.GENERAL.LEARN_MORE"))
+                .themeFont(fontSize: .small)
+                .themeColor(foreground: ThemeColor.SemanticColor.colorPurple)
+                .onTapGesture { [weak self] in
+                    tooltip.dismiss()
+                    self?.learnMoreAction?()
+                }
+        }
+        .wrappedViewModel
+        return tooltip
+    }()
 
     private var pnlColor: ThemeColor.SemanticColor {
         get {
@@ -125,7 +175,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                     let leverageIcon = LeverageRiskModel.previewValue
                     let leverageText = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
                                                          viewSize: leverageIcon.viewSize,
-                                                         displayOption: .fullText)
+                                                         displayOption: .fullText())
                     leverageText.createView(parentStyle: style)
                     let leveragePercent = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
                                                             viewSize: leverageIcon.viewSize,
@@ -173,8 +223,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
 
                 HStack(alignment: .center, spacing: 16) {
                     HStack(alignment: .center, spacing: 8) {
-                        Text(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
-                            .themeColor(foreground: .textTertiary)
+                        buyingPowerTooltip.createView(parentStyle: style)
                         Text(sharedAccountViewModel?.buyingPower ?? "-")
                             .themeColor(foreground: .textSecondary)
                             .animation(.default)
@@ -184,12 +233,8 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                     Spacer()
 
                     HStack(alignment: .center, spacing: 8) {
-
                         if let leverageIcon = sharedAccountViewModel?.leverageIcon {
-                            let leverageText = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
-                                                                 viewSize: leverageIcon.viewSize,
-                                                                 displayOption: .fullText)
-                            leverageText.createView(parentStyle: style)
+                            leverageTooltip.createView(parentStyle: style)
                             let leveragePercent = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
                                                                     viewSize: leverageIcon.viewSize,
                                                                     displayOption: .percent)

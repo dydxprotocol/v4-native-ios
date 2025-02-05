@@ -27,7 +27,7 @@ public class dydxSimpleUIMarginUsageViewModel: PlatformViewModel {
             let view = HStack(alignment: .center, spacing: 8) {
                 if let marginUsage = self.marginUsage {
                     let leverageText = LeverageRiskModel(marginUsage: marginUsage,
-                                                         displayOption: .fullText)
+                                                         displayOption: .fullText())
                     leverageText.createView(parentStyle: style.themeColor(foreground: .textTertiary))
                     let leveragePercent = LeverageRiskModel(marginUsage: marginUsage,
                                                             displayOption: .percent)

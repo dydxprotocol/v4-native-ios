@@ -94,7 +94,7 @@ public class LeverageRiskModel: PlatformViewModel {
     }
 
     public enum DisplayOption {
-        case iconOnly, iconAndText, fullText, percent
+        case iconOnly, iconAndText, fullText(dotted: Bool = false), percent
     }
     @Published public var level = Level.low
     @Published public var viewSize = 32
@@ -127,7 +127,8 @@ public class LeverageRiskModel: PlatformViewModel {
 
             return AnyView(
                 HStack {
-                    if self.displayOption == .percent {
+                    switch self.displayOption {
+                    case .percent:
                         if let percentText = dydxFormatter.shared.percent(number: self.marginUsage, digits: 0) {
                             Text(percentText)
                                 .themeFont(fontSize: .smaller)
@@ -139,24 +140,39 @@ public class LeverageRiskModel: PlatformViewModel {
                                 .themeStyle(style: style)
                                 .lineLimit(1)
                         }
-                    } else if self.displayOption == .fullText {
-                        Text(self.level.fullText)
-                            .themeFont(fontSize: .small)
-                           // .themeStyle(style: style)
-                            .themeColor(foreground: self.level.fullTextColor)
-                            .lineLimit(1)
-                    } else {
+
+                    case .fullText(let dotted):
+                        if dotted {
+                            let attributedTitle = AttributedString(self.level.fullText)
+                               .themeFont(fontSize: .small)
+                               .themeColor(foreground: self.level.fullTextColor)
+                            Text(attributedTitle.dottedUnderline(foreground: self.level.fullTextColor))
+                                .lineLimit(1)
+
+                        } else {
+                            Text(self.level.fullText)
+                                .themeFont(fontSize: .small)
+                            // .themeStyle(style: style)
+                                .themeColor(foreground: self.level.fullTextColor)
+                                .lineLimit(1)
+                        }
+
+                    case .iconOnly:
                         PlatformIconViewModel(type: .asset(name: self.level.imageName, bundle: Bundle.dydxView),
                                               clip: .noClip,
                                               size: CGSize(width: self.viewSize, height: self.viewSize))
                         .createView(parentStyle: style)
 
-                        if self.displayOption == .iconAndText {
-                            Text(self.level.text)
+                    case .iconAndText:
+                        PlatformIconViewModel(type: .asset(name: self.level.imageName, bundle: Bundle.dydxView),
+                                              clip: .noClip,
+                                              size: CGSize(width: self.viewSize, height: self.viewSize))
+                        .createView(parentStyle: style)
+
+                           Text(self.level.text)
                                 .themeFont(fontSize: .small)
                                 .themeStyle(style: style)
                                 .lineLimit(1)
-                        }
                     }
                 }
             )
