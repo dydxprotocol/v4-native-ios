@@ -1,6 +1,6 @@
 PODS:
-  - Abacus (1.13.51)
-  - AmplitudeSwift (1.11.4):
+  - Abacus (1.13.53)
+  - AmplitudeSwift (1.11.5):
     - AnalyticsConnector (~> 1.3.0)
   - AnalyticsConnector (1.3.1)
   - AppsFlyerFramework (6.16.0):
@@ -20,18 +20,18 @@ PODS:
   - EasyTipView (2.1.0)
   - EFQRCode (6.2.2):
     - ef_swift_qrcodejs (~> 2.3.0)
-  - Firebase/AnalyticsWithoutAdIdSupport (11.8.0):
+  - Firebase/AnalyticsWithoutAdIdSupport (11.8.1):
     - Firebase/CoreOnly
     - FirebaseAnalytics/WithoutAdIdSupport (~> 11.8.0)
-  - Firebase/Core (11.8.0):
+  - Firebase/Core (11.8.1):
     - Firebase/CoreOnly
     - FirebaseAnalytics (~> 11.8.0)
-  - Firebase/CoreOnly (11.8.0):
-    - FirebaseCore (~> 11.8.0)
-  - Firebase/Messaging (11.8.0):
+  - Firebase/CoreOnly (11.8.1):
+    - FirebaseCore (~> 11.8.1)
+  - Firebase/Messaging (11.8.1):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 11.8.0)
-  - Firebase/Performance (11.8.0):
+  - Firebase/Performance (11.8.1):
     - Firebase/CoreOnly
     - FirebasePerformance (~> 11.8.0)
   - FirebaseABTesting (11.8.0):
@@ -63,7 +63,7 @@ PODS:
     - GoogleUtilities/Network (~> 8.0)
     - "GoogleUtilities/NSData+zlib (~> 8.0)"
     - nanopb (~> 3.30910.0)
-  - FirebaseCore (11.8.0):
+  - FirebaseCore (11.8.1):
     - FirebaseCoreInternal (~> 11.8.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/Logger (~> 8.0)
@@ -379,8 +379,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  Abacus: 39cf1dd62898060c9ec8e8f34bc43fce169160ac
-  AmplitudeSwift: 1e64ee50853f0bab85d3f450770055585d5747ff
+  Abacus: 0559c257597a740b378e0ed75f8b9eb0360d7a9f
+  AmplitudeSwift: 16f62b30b8f6ac90eec4fc24798daf1fba4c7869
   AnalyticsConnector: 3def11199b4ddcad7202c778bde982ec5da0ebb3
   AppsFlyerFramework: 4e88540b96c0bd57c5cfffbac63e392387e44b93
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
@@ -392,10 +392,10 @@ SPEC CHECKSUMS:
   DrawerMenu: f6ca91901e2b21086e3c19bcca278d3d3127e85f
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
   EFQRCode: 3d3cb93a31339639b244f6d4da151099ef4d9e6e
-  Firebase: d80354ed7f6df5f9aca55e9eb47cc4b634735eaf
+  Firebase: 973c28133496aab0223e9ea99f0abafb9f91ad58
   FirebaseABTesting: 7d6eee42b9137541eac2610e5fea3568d956707a
   FirebaseAnalytics: 4fd42def128146e24e480e89f310e3d8534ea42b
-  FirebaseCore: 861681f012101000fba3c2a321ed00181d257591
+  FirebaseCore: 99fe0c4b44a39f37d99e6404e02009d2db5d718d
   FirebaseCoreExtension: 3d3f2017a00d06e09ab4ebe065391b0bb642565e
   FirebaseCoreInternal: df24ce5af28864660ecbd13596fc8dd3a8c34629
   FirebaseCrashlytics: a1102c035f18d5dd94a5969ee439c526d0c9e313

@@ -41,6 +41,15 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
 
         updateChartResolutions()
 
+        viewModel.learnMoreAction = {
+            if let urlString = AbacusStateManager.shared.environment?.links?.simpleTradeLearnMore,
+               let url = URL(string: urlString) {
+                if URLHandler.shared?.canOpenURL(url) ?? false {
+                    URLHandler.shared?.open(url, completionHandler: nil)
+                }
+            }
+        }
+
         attachChildren(workers: childPresenters)
     }
 

@@ -16,7 +16,7 @@ public class dydxSimpleUiMarketLaunchableViewModel: PlatformViewModel {
     @Published public var ctaAction: (() -> Void)?
     @Published public var minDeposit: Double?
     @Published public var thirtyDayReturnPercent: Double?
-    @Published public var faqUrlAction: (() -> Void)?
+    @Published public var faqAction: (() -> Void)?
 
     public init() { }
 
@@ -151,7 +151,7 @@ public class dydxSimpleUiMarketLaunchableViewModel: PlatformViewModel {
                 }
             }
             .onTapGesture { [weak self] in
-                self?.faqUrlAction?()
+                self?.faqAction?()
             }
 
             let buttonType = PlatformButtonType.defaultType(
