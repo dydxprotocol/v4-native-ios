@@ -28,6 +28,8 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
 
     var onMarketSelected: ((String) -> Void)?
 
+    private var launchableMarkets: [dydxSimpleUIMarketViewModel]?
+
     init(excludePositions: Bool = true) {
         self.excludePositions = excludePositions
         super.init()
@@ -91,24 +93,26 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                 return (lhs.volumn ?? 0) > (rhs.volumn ?? 0)
             }
 
-        let launchableMarkets: [dydxSimpleUIMarketViewModel]? = markets
-            .filter { $0.isLaunched == false }
-            .compactMap { market in
-                guard let asset = assetMap[market.assetId] else {
-                    return nil
+        if launchableMarkets == nil {
+            launchableMarkets = markets
+                .filter { $0.isLaunched == false }
+                .compactMap { market in
+                    guard let asset = assetMap[market.assetId] else {
+                        return nil
+                    }
+                    if let searchText = searchText, searchText.isNotEmpty,
+                       asset.displayableAssetId.lowercased().contains(searchText) == false,
+                       asset.name?.lowercased().contains(searchText) == false {
+                        return nil
+                    }
+                    return dydxSimpleUIMarketViewModel.createFrom(displayType: .market, market: market, asset: asset, position: nil) { [weak self] in
+                        self?.onMarketSelected?(market.id)
+                    }
                 }
-                if let searchText = searchText, searchText.isNotEmpty,
-                   asset.displayableAssetId.lowercased().contains(searchText) == false,
-                   asset.name?.lowercased().contains(searchText) == false {
-                    return nil
+                .sorted { lhs, rhs in
+                    (lhs.marketCaps ?? 0) > (rhs.marketCaps ?? 0)
                 }
-                return dydxSimpleUIMarketViewModel.createFrom(displayType: .market, market: market, asset: asset, position: nil) { [weak self] in
-                    self?.onMarketSelected?(market.id)
-                }
-            }
-            .sorted { lhs, rhs in
-                (lhs.marketCaps ?? 0) > (rhs.marketCaps ?? 0)
-            }
+        }
 
         viewModel?.markets = (launchedMarkets ?? []) + (launchableMarkets ?? [])
     }
