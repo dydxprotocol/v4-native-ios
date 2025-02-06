@@ -46,7 +46,7 @@ public class dydxSimpleUIMarketInfoViewModel: PlatformViewModel {
                             ScrollView(showsIndicators: false) {
                                 LazyVStack(pinnedViews: [.sectionHeaders]) {
                                     self.chart?.createView(parentStyle: style)
-                                        .padding(.bottom, 18)
+                                        .padding(.bottom, 32)
 
                                     self.position?.createView(parentStyle: style)
 

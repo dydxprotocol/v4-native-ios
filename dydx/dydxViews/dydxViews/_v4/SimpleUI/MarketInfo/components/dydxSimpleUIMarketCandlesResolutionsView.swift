@@ -46,16 +46,22 @@ public class dydxSimpleUIMarketCandlesResolutionsViewModel: PlatformViewModel {
                     .wrappedViewModel
             }
             return AnyView(
-                VStack {
-                    TabGroupModel(items: items,
-                                  selectedItems: selectedItems,
-                                  currentSelection: self.currentResolution,
-                                  onSelectionChanged: self.onResolutionChanged,
-                                  layoutConfig: .equalSpacing)
-                    .createView(parentStyle: style)
-                    .padding(.horizontal, 16)
-                }
+                GeometryReader { proxy in
+                    ScrollView(.horizontal) {
+                        HStack {
+                            TabGroupModel(items: items,
+                                          selectedItems: selectedItems,
+                                          currentSelection: self.currentResolution,
+                                          onSelectionChanged: self.onResolutionChanged,
+                                          spacing: 24,
+                                          layoutConfig: .naturalSize)
+                            .createView(parentStyle: style)
+                            .padding(.horizontal, 16)
+                        }
+                        .frame(minWidth: proxy.size.width)
+                    }
                     .frame(height: 32)
+                }
             )
         }
     }

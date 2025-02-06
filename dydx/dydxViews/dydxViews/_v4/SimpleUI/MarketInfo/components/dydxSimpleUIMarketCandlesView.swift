@@ -26,7 +26,7 @@ public class dydxSimpleUIMarketCandlesViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack(alignment: .leading, spacing: 16) {
+            let view = VStack(alignment: .leading, spacing: 8) {
                 self.chart?.createView(parentStyle: style)
                     .frame(height: 224)
 

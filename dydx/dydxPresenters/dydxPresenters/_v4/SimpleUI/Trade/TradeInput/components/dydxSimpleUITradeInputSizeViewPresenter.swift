@@ -99,7 +99,8 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
             .CombineLatest3(
                 inputsPublisher,
                 AbacusStateManager.shared.state.configsAndAssetMap,
-                viewModel.$focusState)
+                viewModel.$focusState
+            )
             .sink { [weak self] inputs, configsAndAssetMap, focusState in
                 guard let self else { return }
                 let (tradeType, tradeInput, closePositionInput) = inputs
@@ -111,6 +112,9 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
                 switch tradeType {
                 case .trade:
                     marketId = tradeInput?.marketId
+                    if marketId == nil {
+                        return
+                    }
                     size = tradeInput?.size?.size?.doubleValue
                     usdcSize = tradeInput?.size?.usdcSize?.doubleValue
                     if focusState == dydxSimpleUITradeInputSizeViewModel.FocusState.none {
@@ -119,6 +123,9 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
                     self.viewModel?.percent = nil
                 case .closePosition:
                     marketId = closePositionInput?.marketId
+                    if marketId == nil {
+                        return
+                    }
                     size = closePositionInput?.size?.size?.doubleValue
                     usdcSize = closePositionInput?.size?.usdcSize?.doubleValue
                     if parser.asNumber(self.percent.value)?.doubleValue != closePositionInput?.size?.percent?.doubleValue {
@@ -150,7 +157,7 @@ class dydxSimpleUITradeInputSizeViewPresenter: HostedViewPresenter<dydxSimpleUIT
         let asset = configsAndAsset?.asset
 
         let stepSize = marketConfigs?.displayStepSizeDecimals?.intValue ?? 0
-        var placeHolder = dydxFormatter.shared.raw(number: .zero, digits: stepSize) ?? ""
+        let placeHolder = dydxFormatter.shared.raw(number: .zero, digits: stepSize) ?? ""
         viewModel?.sizeItem?.placeHolder = placeHolder
         viewModel?.sizeItem?.tokenSymbol = configsAndAsset?.asset?.displayableAssetId ?? asset?.id
         viewModel?.closePositionSizeItem?.placeHolder = placeHolder

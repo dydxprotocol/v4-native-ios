@@ -88,7 +88,10 @@ class dydxSimpleUIMarketPositionViewPresenter: HostedViewPresenter<dydxSimpleUIM
 
         viewModel?.logoUrl = sharedPositionViewModel.logoUrl
         viewModel?.amount = dydxFormatter.shared.dollar(number: position.notionalTotal.current?.doubleValue, digits: 2)
-        viewModel?.funding = SignedAmountViewModel(amount: position.netFunding?.doubleValue, displayType: .dollar, coloringOption: .allText)
+        viewModel?.funding = SignedAmountViewModel(amount: position.netFunding?.doubleValue,
+                                                   displayType: .dollar,
+                                                   coloringOption: .allText,
+                                                   noneColor: .textPrimary)
 
         viewModel?.closeAction = { [weak self] in
             self?.navigate(to: RoutingRequest(path: "/trade/simple/close",

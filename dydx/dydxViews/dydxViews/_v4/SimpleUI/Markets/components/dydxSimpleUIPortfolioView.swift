@@ -52,7 +52,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
         let attributedTitle = AttributedString(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
             .themeFont(fontSize: .small)
             .themeColor(foreground: .textTertiary)
-        tooltip.label = Text(attributedTitle.dottedUnderline(foreground: .textSecondary))
+        tooltip.label = Text(attributedTitle.dottedUnderline(foreground: .textTertiary))
             .themeColor(foreground: .textTertiary)
             .wrappedViewModel
         tooltip.content = VStack(alignment: .leading, spacing: 8) {
@@ -205,11 +205,8 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                     HStack(alignment: .center, spacing: 8) {
                         pnlAmount?
                             .createView(parentStyle: style.themeFont(fontSize: .small))
-                            .animation(.default)
-
                         pnlPercent?
                             .createView(parentStyle: style.themeFont(fontSize: .small))
-                            .animation(.default)
 
                         periodOption.createView(parentStyle: style)
                     }
@@ -239,7 +236,6 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                                                                     viewSize: leverageIcon.viewSize,
                                                                     displayOption: .percent)
                             leveragePercent.createView(parentStyle: style.themeColor(foreground: .textTertiary))
-                                .animation(.default)
                         }
                     }
                 }

@@ -18,7 +18,7 @@ public extension SignedAmountViewModel {
                   negativeTextStyleKey: ThemeSettings.negativeTextStyleKey)
     }
 
-    convenience init(amount: Double?, displayType: DisplayType, coloringOption: ColoringOption, shouldDisplaySignForPositiveNumbers: Bool = false) {
+    convenience init(amount: Double?, displayType: DisplayType, coloringOption: ColoringOption, noneColor: ThemeColor.SemanticColor = .textSecondary, shouldDisplaySignForPositiveNumbers: Bool = false) {
         let formattedZero: String?
         let formattedText: String?
         let sign: PlatformUISign
@@ -41,6 +41,7 @@ public extension SignedAmountViewModel {
         }
         self.init(text: formattedText,
                   sign: sign,
-                  coloringOption: coloringOption)
+                  coloringOption: coloringOption,
+                  noneColor: noneColor)
     }
 }

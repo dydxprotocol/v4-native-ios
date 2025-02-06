@@ -44,7 +44,8 @@ public class SignedAmountViewModel: PlatformViewModel, Hashable {
     public static func == (lhs: SignedAmountViewModel, rhs: SignedAmountViewModel) -> Bool {
         lhs.text == rhs.text &&
         lhs.sign == rhs.sign &&
-        lhs.coloringOption == rhs.coloringOption
+        lhs.coloringOption == rhs.coloringOption &&
+        lhs.noneColor == rhs.noneColor
     }
 
     public func hash(into hasher: inout Hasher) {
