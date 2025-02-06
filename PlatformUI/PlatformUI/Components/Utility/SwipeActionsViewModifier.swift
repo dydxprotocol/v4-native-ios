@@ -165,19 +165,24 @@ struct SwipeActionsModifier: ViewModifier {
                     including: currentCellID == nil ? .subviews : .none
                 )
                 .contentShape(Rectangle())
-                .onTapGesture(
-                    count: currentCellID != nil ? 1 : 4,
-                    perform: {
-                        resetStatus()
-                        dismissNotification()
-                    }
-                )
+//                .onTapGesture(
+//                    count: currentCellID != nil ? 1 : 4,
+//                    perform: {
+//                        resetStatus()
+//                        dismissNotification()
+//                    }
+//                )
                 .offset(x: offset)
             }
         }
         .contentShape(Rectangle())
         .gesture(getGesture())
         .onAppear {
+            // Always reset... otherwise, the onTapGesture above (commented out) causes
+            // significant UI delay
+            accessoryVisibility = .showNone
+            shouldResetStatusOnAppear = true
+            
             self.set(accessoryVisibility: accessoryVisibility)
             switch accessoryVisibility {
             case .showLeft:
