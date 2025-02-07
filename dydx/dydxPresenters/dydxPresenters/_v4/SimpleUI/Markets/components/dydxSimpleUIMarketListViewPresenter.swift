@@ -54,6 +54,8 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
             .store(in: &subscriptions)
     }
 
+    private var lastSearchText: String?
+
     private func updateMarketList(markets: [PerpetualMarket],
                                   assetMap: [String: Asset],
                                   positions: [SubaccountPosition],
@@ -99,7 +101,8 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                 return (lhs.volumn ?? 0) > (rhs.volumn ?? 0)
             }
 
-        if launchableMarkets == nil {
+        if lastSearchText != searchText || launchedMarkets == nil {
+            lastSearchText = searchText
             launchableMarkets = markets
                 .filter { $0.isLaunched == false }
                 .compactMap { market in
@@ -117,15 +120,14 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                         asset: asset,
                         position: nil,
                         onMarketSelected: { [weak self] in
-                        self?.onMarketSelected?(market.id)
-                    },
+                            self?.onMarketSelected?(market.id)
+                        },
                         onCancelAction: nil)
                 }
                 .sorted { lhs, rhs in
                     (lhs.marketCaps ?? 0) > (rhs.marketCaps ?? 0)
                 }
         }
-
         viewModel?.markets = (launchedMarkets ?? []) + (launchableMarkets ?? [])
     }
 }
