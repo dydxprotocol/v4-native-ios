@@ -66,12 +66,9 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
                     },
                     onCancelAction: { [weak self] in
                         if let marketId = position?.id {
-                            AbacusStateManager.shared.setMarket(market: marketId)
-                            DispatchQueue.main.async {
-                                self?.navigate(to: RoutingRequest(path: "/trade/simple/close",
-                                                                  params: ["marketId": marketId]),
-                                               animated: true, completion: nil)
-                            }
+                            self?.navigate(to: RoutingRequest(path: "/trade/simple/close",
+                                                              params: ["marketId": marketId]),
+                                           animated: true, completion: nil)
                         }
                     }
                 )
