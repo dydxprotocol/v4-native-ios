@@ -91,7 +91,15 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
         attachChild(worker: accountPresenter)
     }
 
+    private var lastPnls: [SubaccountHistoricalPNL]?
+    private var lastSubaccountBalance: Double?
+    private var lastChartEntries: [dydxLineChartViewModel.Entry]?
+
     private func updatePNLs(pnls: [SubaccountHistoricalPNL], subaccount: Subaccount) {
+        if lastPnls == pnls && lastSubaccountBalance == subaccount.equity?.current?.doubleValue {
+            return
+        }
+
         let firstEquity = pnls.first?.equity
         let targetEquity = subaccount.equity?.current?.doubleValue ?? pnls.last?.equity
         let beginning = pnls.first?.equity
@@ -108,25 +116,43 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
             }
         }
 
-        var chartEntries = pnls.compactMap {
-            let date = $0.createdAtMilliseconds / 1000
-            let value = $0.equity
-            return dydxLineChartViewModel.Entry(date: date, value: value)
+        var chartEntries = lastChartEntries
+        if lastPnls != pnls {
+            let entries = pnls.compactMap {
+                let date = $0.createdAtMilliseconds / 1000
+                let value = $0.equity
+                return dydxLineChartViewModel.Entry(date: date, value: value)
+            }
+            let maxEntryCount = 200 // for fast rendering
+            if entries.count > maxEntryCount {
+                var interpolatedEntries: [dydxLineChartViewModel.Entry] = []
+                let step = entries.count / maxEntryCount
+                for i in 0..<maxEntryCount {
+                    if i * step < entries.count {
+                        interpolatedEntries.append(entries[i * step])
+                    }
+                }
+                chartEntries = interpolatedEntries
+            } else {
+                chartEntries = entries
+            }
+            lastChartEntries = chartEntries
         }
-        if let currentValue = subaccount.equity?.current?.doubleValue {
-            chartEntries.append(dydxLineChartViewModel.Entry(date: Double(Date().millisecondsSince1970) / 1000, value: currentValue))
-        }
-        let maxValue = chartEntries.max { $0.value < $1.value }?.value ?? 0
-        let minValue = chartEntries.min { $0.value < $1.value }?.value ?? 0
 
-        // only update when there is significant change
-        if chartEntries.count != viewModel?.chart.entries.count ||
-            abs((chartEntries.last?.value ?? 0) - (viewModel?.chart.entries.last?.value ?? 0)) > 1.0 {
+        if var chartEntries {
+            if let currentValue = subaccount.equity?.current?.doubleValue {
+                chartEntries.append(dydxLineChartViewModel.Entry(date: Double(Date().millisecondsSince1970) / 1000, value: currentValue))
+            }
+            let maxValue = chartEntries.max { $0.value < $1.value }?.value ?? 0
+            let minValue = chartEntries.min { $0.value < $1.value }?.value ?? 0
+
             viewModel?.chart.entries = chartEntries
+            viewModel?.chart.showYLabels = false
+            viewModel?.chart.valueLowerBoundOffset = (maxValue - minValue) * 0.8
         }
 
-        viewModel?.chart.showYLabels = false
-        viewModel?.chart.valueLowerBoundOffset = (maxValue - minValue) * 0.8
+        lastPnls = pnls
+        lastSubaccountBalance = subaccount.equity?.current?.doubleValue
     }
 
     private func updateChartResolutions() {
