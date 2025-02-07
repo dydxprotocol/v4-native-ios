@@ -111,7 +111,7 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
                     .onTapGesture { [weak self] in
                         self?.handler?.onTapAction?()
                     }
-//                    .swipeActions(leftCellSwipeAccessory: nil, rightCellSwipeAccessory: rightCellSwipeAccessory)
+                    .swipeActions(leftCellSwipeAccessory: nil, rightCellSwipeAccessory: rightCellSwipeAccessory)
             )
         }
     }

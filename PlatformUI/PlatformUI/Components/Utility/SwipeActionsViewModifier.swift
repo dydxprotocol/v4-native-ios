@@ -202,7 +202,7 @@ struct SwipeActionsModifier: ViewModifier {
         .onReceive(resetNotice) { notice in
             if cellID != notice.object as? UUID {
                 resetStatus()
-                currentCellID = notice.object as? UUID ?? nil
+              //  currentCellID = notice.object as? UUID ?? nil
             }
 
         }

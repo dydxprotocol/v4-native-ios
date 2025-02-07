@@ -56,9 +56,25 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
                 if position == nil || (position?.size.current?.doubleValue ?? 0.0) == 0.0 {
                     return nil
                 }
-                return dydxSimpleUIMarketViewModel.createFrom(displayType: .position, market: market, asset: asset, position: position) { [weak self] in
-                    self?.navigate(to: RoutingRequest(path: "/market", params: ["market": market.id]), animated: true, completion: nil)
-                }
+                return dydxSimpleUIMarketViewModel.createFrom(
+                    displayType: .position,
+                    market: market,
+                    asset: asset,
+                    position: position,
+                    onMarketSelected: { [weak self] in
+                        self?.navigate(to: RoutingRequest(path: "/market", params: ["market": market.id]), animated: true, completion: nil)
+                    },
+                    onCancelAction: { [weak self] in
+                        if let marketId = position?.id {
+                            AbacusStateManager.shared.setMarket(market: marketId)
+                            DispatchQueue.main.async {
+                                self?.navigate(to: RoutingRequest(path: "/trade/simple/close",
+                                                                  params: ["marketId": marketId]),
+                                               animated: true, completion: nil)
+                            }
+                        }
+                    }
+                )
             }
             .sorted { lhs, rhs in
                 return (lhs.positionTotal ?? 0) > (rhs.positionTotal ?? 0)

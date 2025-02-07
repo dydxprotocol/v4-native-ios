@@ -24,12 +24,12 @@ public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
         return vm
     }
 
-    private let dummyNoMarket = dydxSimpleUIMarketViewModel(displayType: .market, marketId: "_dummy_no_market", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, positionTotal: nil, positionSize: nil, marketCaps: nil, isLaunched: true, onMarketSelected: nil)
+    private let dummyNoMarket = dydxSimpleUIMarketViewModel(displayType: .market, marketId: "_dummy_no_market", assetName: "", iconUrl: nil, price: nil, change: nil, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: nil, positionTotal: nil, positionSize: nil, marketCaps: nil, isLaunched: true, onMarketSelected: nil, onCancelAction: nil)
 
     private let loadingList: [dydxSimpleUIMarketViewModel] = {
         var list = [dydxSimpleUIMarketViewModel]()
         for i in 0..<10 {
-            let item = dydxSimpleUIMarketViewModel(displayType: .market, marketId: "_dummy_loading_\(i)", assetName: "ETH", iconUrl: nil, price: "$100.00", change: .previewValue, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: 20000000, positionTotal: nil, positionSize: nil, isLoading: true, marketCaps: 10000000, isLaunched: true, onMarketSelected: nil)
+            let item = dydxSimpleUIMarketViewModel(displayType: .market, marketId: "_dummy_loading_\(i)", assetName: "ETH", iconUrl: nil, price: "$100.00", change: .previewValue, sideText: SideTextViewModel.previewValue, leverage: nil, volumn: 20000000, positionTotal: nil, positionSize: nil, isLoading: true, marketCaps: 10000000, isLaunched: true, onMarketSelected: nil, onCancelAction: nil)
             list.append(item)
         }
         return list

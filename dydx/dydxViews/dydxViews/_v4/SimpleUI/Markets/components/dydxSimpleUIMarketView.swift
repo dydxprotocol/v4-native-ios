@@ -31,6 +31,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     public let isLoading: Bool
     public let marketCaps: Double?
     public let isLaunched: Bool
+    public let onCancelAction: (() -> Void)?
 
     public init(displayType: DisplayType,
                 marketId: String,
@@ -46,7 +47,8 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 isLoading: Bool = false,
                 marketCaps: Double?,
                 isLaunched: Bool,
-                onMarketSelected: (() -> Void)?
+                onMarketSelected: (() -> Void)?,
+                onCancelAction: (() -> Void)?
     ) {
         self.displayType = displayType
         self.marketId = marketId
@@ -63,6 +65,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
         self.marketCaps = marketCaps
         self.isLaunched = isLaunched
         self.onMarketSelected = onMarketSelected
+        self.onCancelAction = onCancelAction
     }
 
     public static var previewValue: dydxSimpleUIMarketViewModel {
@@ -79,13 +82,21 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                                              positionSize: "$349",
                                              marketCaps: 122000,
                                              isLaunched: true,
-                                             onMarketSelected: nil)
+                                             onMarketSelected: nil,
+                                             onCancelAction: nil)
         return vm
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
+
+            let rightCellSwipeAccessoryView = PlatformIconViewModel(type: .asset(name: "action_cancel", bundle: Bundle.dydxView), size: .init(width: 16, height: 16))
+                .createView(parentStyle: style, styleKey: styleKey)
+                .tint(ThemeColor.SemanticColor.layer1.color)
+            let rightCellSwipeAccessory = CellSwipeAccessory(accessoryView: AnyView(rightCellSwipeAccessoryView)) {
+                self.onCancelAction?()
+            }
 
             let view = Group {
                 if self.isLoading {
@@ -112,6 +123,10 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                         .minimumScaleFactor(0.5)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 4)
+                        .if(self.onCancelAction != nil) { view in
+                            view.swipeActions(leftCellSwipeAccessory: nil,
+                                               rightCellSwipeAccessory: rightCellSwipeAccessory)
+                        }
                     }
                 }
             }

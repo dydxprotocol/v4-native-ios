@@ -75,9 +75,15 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                 if excludePositions && (position?.size.current?.doubleValue ?? 0.0) != 0.0 {
                     return nil
                 }
-                return dydxSimpleUIMarketViewModel.createFrom(displayType: .market, market: market, asset: asset, position: position) { [weak self] in
+                return dydxSimpleUIMarketViewModel.createFrom(
+                    displayType: .market,
+                    market: market,
+                    asset: asset,
+                    position: position,
+                    onMarketSelected: { [weak self] in
                     self?.onMarketSelected?(market.id)
-                }
+                },
+                    onCancelAction: nil)
             }
             .sorted { lhs, rhs in
                 let lhsLeverage = lhs.leverage ?? 0
@@ -105,9 +111,15 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                        asset.name?.lowercased().contains(searchText) == false {
                         return nil
                     }
-                    return dydxSimpleUIMarketViewModel.createFrom(displayType: .market, market: market, asset: asset, position: nil) { [weak self] in
+                    return dydxSimpleUIMarketViewModel.createFrom(
+                        displayType: .market,
+                        market: market,
+                        asset: asset,
+                        position: nil,
+                        onMarketSelected: { [weak self] in
                         self?.onMarketSelected?(market.id)
-                    }
+                    },
+                        onCancelAction: nil)
                 }
                 .sorted { lhs, rhs in
                     (lhs.marketCaps ?? 0) > (rhs.marketCaps ?? 0)
@@ -123,7 +135,8 @@ extension dydxSimpleUIMarketViewModel {
                            market: PerpetualMarket,
                            asset: Asset?,
                            position: SubaccountPosition?,
-                           onMarketsSelected: (() -> Void)?) -> dydxSimpleUIMarketViewModel {
+                           onMarketSelected: (() -> Void)?,
+                           onCancelAction: (() -> Void)?) -> dydxSimpleUIMarketViewModel {
         let price = dydxFormatter.shared.dollar(number: market.oraclePrice?.doubleValue, digits: market.configs?.displayTickSizeDecimals?.intValue ?? 2)
         let change = SignedAmountViewModel(amount: market.priceChange24HPercent?.doubleValue,
                                            displayType: .percent,
@@ -152,6 +165,7 @@ extension dydxSimpleUIMarketViewModel {
                                            positionSize: positionSize,
                                            marketCaps: market.marketCaps?.doubleValue,
                                            isLaunched: market.isLaunched,
-                                           onMarketSelected: onMarketsSelected)
+                                           onMarketSelected: onMarketSelected,
+                                           onCancelAction: onCancelAction)
     }
 }
