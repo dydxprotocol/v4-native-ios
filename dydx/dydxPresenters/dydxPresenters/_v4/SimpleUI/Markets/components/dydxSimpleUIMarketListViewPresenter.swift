@@ -101,7 +101,7 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                 return (lhs.volumn ?? 0) > (rhs.volumn ?? 0)
             }
 
-        if lastSearchText != searchText || launchedMarkets == nil {
+        if lastSearchText != searchText || launchableMarkets.isNilOrEmpty {
             lastSearchText = searchText
             launchableMarkets = markets
                 .filter { $0.isLaunched == false }
