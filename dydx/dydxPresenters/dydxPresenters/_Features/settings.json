@@ -40,14 +40,6 @@
                 "link" : {
                     "text" : "/settings/direction_color_preference"
                 }
-            },
-            {
-                "title" : {
-                    "text" : "APP.HELP_MODAL.PROVIDE_FEEDBACK"
-                },
-                "link" : {
-                    "text" : "/action/rate_app?context=settings"
-                }
             }
         ]
     }

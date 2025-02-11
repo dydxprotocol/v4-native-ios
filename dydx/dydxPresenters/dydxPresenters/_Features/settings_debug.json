@@ -80,14 +80,6 @@
                 "link" : {
                     "text" : "/settings/debug_theme_viewer"
                 }
-            },
-            {
-                "title" : {
-                    "text" : "APP.HELP_MODAL.PROVIDE_FEEDBACK"
-                },
-                "link" : {
-                    "text" : "/action/collect_feedback?context=settings"
-                }
             }
         ]
     }
