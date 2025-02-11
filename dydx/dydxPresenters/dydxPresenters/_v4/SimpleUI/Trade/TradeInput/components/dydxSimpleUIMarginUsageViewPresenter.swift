@@ -26,6 +26,15 @@ class dydxSimpleUIMarginUsageViewPresenter: HostedViewPresenter<dydxSimpleUIMarg
         super.init()
 
         viewModel = dydxSimpleUIMarginUsageViewModel()
+
+        viewModel?.learnMoreAction = {
+            if let urlString = AbacusStateManager.shared.environment?.links?.simpleTradeLearnMore,
+               let url = URL(string: urlString) {
+                if URLHandler.shared?.canOpenURL(url) ?? false {
+                    URLHandler.shared?.open(url, completionHandler: nil)
+                }
+            }
+        }
     }
 
     override func start() {

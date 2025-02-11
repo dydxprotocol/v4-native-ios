@@ -48,52 +48,15 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     @Published public var periodOption = dydxSimpleUIPortfolioPeriodViewModel.previewValue
 
     private lazy var buyingPowerTooltip: TooltipModel = {
-        let tooltip = TooltipModel()
-        let attributedTitle = AttributedString(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
-            .themeFont(fontSize: .small)
-            .themeColor(foreground: .textTertiary)
-        tooltip.label = Text(attributedTitle.dottedUnderline(foreground: .textTertiary))
-            .themeColor(foreground: .textTertiary)
-            .wrappedViewModel
-        tooltip.content = VStack(alignment: .leading, spacing: 8) {
-            Text(DataLocalizer.localize(path: "APP.SIMPLE_UI.BUYING_POWER_TOOLTIP"))
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-            Text(DataLocalizer.localize(path: "APP.GENERAL.LEARN_MORE"))
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: ThemeColor.SemanticColor.colorPurple)
-                .onTapGesture { [weak self] in
-                    tooltip.dismiss()
-                    self?.learnMoreAction?()
-                }
+        Tooltips.buyingPower { [weak self] in
+            self?.learnMoreAction?()
         }
-        .wrappedViewModel
-        return tooltip
     }()
 
     private lazy var leverageTooltip: PlatformViewModel = {
-        guard let leverageIcon = sharedAccountViewModel?.leverageIcon else {
-            return PlatformViewModel()
+        Tooltips.leverage(marginUsage: sharedAccountViewModel?.leverageIcon?.marginUsage) { [weak self] in
+            self?.learnMoreAction?()
         }
-
-        let tooltip = TooltipModel()
-        tooltip.label = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
-                                             viewSize: leverageIcon.viewSize,
-                                          displayOption: .fullText(dotted: true))
-        tooltip.content = VStack(alignment: .leading, spacing: 8) {
-            Text(DataLocalizer.localize(path: "APP.SIMPLE_UI.RISK_TOOLTIP"))
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-            Text(DataLocalizer.localize(path: "APP.GENERAL.LEARN_MORE"))
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: ThemeColor.SemanticColor.colorPurple)
-                .onTapGesture { [weak self] in
-                    tooltip.dismiss()
-                    self?.learnMoreAction?()
-                }
-        }
-        .wrappedViewModel
-        return tooltip
     }()
 
     private var pnlColor: ThemeColor.SemanticColor {

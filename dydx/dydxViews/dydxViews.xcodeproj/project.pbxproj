@@ -163,6 +163,7 @@
 		02AEE4BC28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEE4BB28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift */; };
 		02B27A3A2AE8BC5A00A995EC /* dydxHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B27A392AE8BC5A00A995EC /* dydxHelpView.swift */; };
 		02B8419D28EF68C300C4D25B /* dydxMarketInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B8419C28EF68C300C4D25B /* dydxMarketInfoView.swift */; };
+		02BB8A412D5BD5100087A7FC /* Tooltips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BB8A342D5BD50D0087A7FC /* Tooltips.swift */; };
 		02CA62852A7EBDBA006067DB /* dydxPortfolioFeesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CA62842A7EBDBA006067DB /* dydxPortfolioFeesView.swift */; };
 		02D1342228EB564900B46941 /* SharedMarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D1342128EB564900B46941 /* SharedMarketView.swift */; };
 		02D1344128EBA86200B46941 /* dydxMarketAssetSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D1344028EBA86200B46941 /* dydxMarketAssetSortView.swift */; };
@@ -594,6 +595,7 @@
 		02AEE4BB28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketPriceCandlesControlView.swift; sourceTree = "<group>"; };
 		02B27A392AE8BC5A00A995EC /* dydxHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxHelpView.swift; sourceTree = "<group>"; };
 		02B8419C28EF68C300C4D25B /* dydxMarketInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketInfoView.swift; sourceTree = "<group>"; };
+		02BB8A342D5BD50D0087A7FC /* Tooltips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltips.swift; sourceTree = "<group>"; };
 		02CA62842A7EBDBA006067DB /* dydxPortfolioFeesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioFeesView.swift; sourceTree = "<group>"; };
 		02D1342128EB564900B46941 /* SharedMarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedMarketView.swift; sourceTree = "<group>"; };
 		02D1344028EBA86200B46941 /* dydxMarketAssetSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketAssetSortView.swift; sourceTree = "<group>"; };
@@ -1067,6 +1069,7 @@
 		024B7AD628B7F78900F7C386 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				02BB8A342D5BD50D0087A7FC /* Tooltips.swift */,
 				02048BC42D3832A900394CBE /* SearchBox.swift */,
 				02D6DBB02D12770A008AAEA1 /* Checkmark.swift */,
 				024B7AD528B7F78900F7C386 /* SideText.swift */,
@@ -2507,6 +2510,7 @@
 				02084C682981253200CF9522 /* dydxValidationView.swift in Sources */,
 				02934CE5290067F1005DB99C /* SideChange.swift in Sources */,
 				02CA62852A7EBDBA006067DB /* dydxPortfolioFeesView.swift in Sources */,
+				02BB8A412D5BD5100087A7FC /* Tooltips.swift in Sources */,
 				024B7B5628B7F8AB00F7C386 /* dydxThemes.swift in Sources */,
 				27C6E4C92BC8C30E00ED892A /* dydxCustomLimitPriceViewModel.swift in Sources */,
 				277E8FCB2B1E5798005CCBCB /* dydxProfileRewardsViewModel.swift in Sources */,

@@ -12,6 +12,8 @@ import Utilities
 
 public class dydxSimpleUIMarginUsageViewModel: PlatformViewModel {
     @Published public var marginUsage: Double?
+    @Published public var learnMoreAction: (() -> Void)?
+
     public init() { }
 
     public static var previewValue: dydxSimpleUIMarginUsageViewModel {
@@ -20,15 +22,24 @@ public class dydxSimpleUIMarginUsageViewModel: PlatformViewModel {
         return vm
     }
 
+    private lazy var leverageTooltip: PlatformViewModel = {
+        Tooltips.leverage(marginUsage: marginUsage) { [weak self] in
+            self?.learnMoreAction?()
+        }
+    }()
+
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = HStack(alignment: .center, spacing: 8) {
                 if let marginUsage = self.marginUsage {
-                    let leverageText = LeverageRiskModel(marginUsage: marginUsage,
-                                                         displayOption: .fullText())
-                    leverageText.createView(parentStyle: style.themeColor(foreground: .textTertiary))
+//                    let leverageText = LeverageRiskModel(marginUsage: marginUsage,
+//                                                         displayOption: .fullText())
+//                    leverageText.createView(parentStyle: style.themeColor(foreground: .textTertiary))
+
+                    self.leverageTooltip.createView(parentStyle: style)
+
                     let leveragePercent = LeverageRiskModel(marginUsage: marginUsage,
                                                             displayOption: .percent)
                     leveragePercent.createView(parentStyle: style.themeColor(foreground: .textTertiary))
