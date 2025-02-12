@@ -46,7 +46,7 @@ class dydxSimpleUIMarketsHeaderViewPresenter: HostedViewPresenter<dydxSimpleUIMa
 
         let ethereumAddress = currentWallet?.ethereumAddress ?? ""
         if onboarded {
-            viewModel?.items = [transfers, history, alerts, settings, help, signOut(ethereumAddress: ethereumAddress), switchMode]
+            viewModel?.items = [transfers, alerts, history, settings, help, signOut(ethereumAddress: ethereumAddress), switchMode]
             viewModel?.depositAction = { [weak self] in
                 self?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.deposit.rawValue]), animated: true, completion: nil)
             }
@@ -84,7 +84,7 @@ class dydxSimpleUIMarketsHeaderViewPresenter: HostedViewPresenter<dydxSimpleUIMa
     }
 
     private var alerts: dydxSimpleUIMarketsHeaderViewModel.MenuItem { dydxSimpleUIMarketsHeaderViewModel.MenuItem(
-            icon: "icon_settings_1",
+            icon: "icon_alerts_circle",
             title: DataLocalizer.localize(path: "APP.GENERAL.ALERTS")) { [weak self] in
                 self?.navigate(to: RoutingRequest(url: "/alerts"), animated: true, completion: nil)
         }
