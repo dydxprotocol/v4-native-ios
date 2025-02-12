@@ -92,7 +92,7 @@ class dydxSimpleUIMarketsHeaderViewPresenter: HostedViewPresenter<dydxSimpleUIMa
 
     private var history: dydxSimpleUIMarketsHeaderViewModel.MenuItem {
         dydxSimpleUIMarketsHeaderViewModel.MenuItem(
-            icon: "icon_clock",
+            icon: "icon_history",
             title: DataLocalizer.localize(path: "APP.GENERAL.HISTORY")) { [weak self] in
                 self?.navigate(to: RoutingRequest(path: "/portfolio/history",
                                                   params: ["inTabBar": "false"]),
