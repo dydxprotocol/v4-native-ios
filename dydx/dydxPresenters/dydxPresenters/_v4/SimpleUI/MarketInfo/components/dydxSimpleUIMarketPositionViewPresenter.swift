@@ -80,7 +80,9 @@ class dydxSimpleUIMarketPositionViewPresenter: HostedViewPresenter<dydxSimpleUIM
 
         viewModel?.hasPosition = true
         viewModel?.symbol = sharedPositionViewModel.token?.symbol
-        viewModel?.unrealizedPNLAmount = sharedPositionViewModel.unrealizedPnl
+        let amountViewModel = sharedPositionViewModel.unrealizedPnl
+        amountViewModel?.noneColor = .textPrimary
+        viewModel?.unrealizedPNLAmount = amountViewModel
         viewModel?.size = sharedPositionViewModel.size
         viewModel?.side = SideTextViewModel(side: sharedPositionViewModel.sideText.side, coloringOption: .colored)
         viewModel?.liquidationPrice = sharedPositionViewModel.liquidationPrice

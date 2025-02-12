@@ -123,7 +123,6 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                         .minimumScaleFactor(0.5)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 4)
-                        // Conflicts with Button on device
                         .if(self.onCancelAction != nil) { view in
                             view.swipeActions(leftCellSwipeAccessory: nil,
                                                rightCellSwipeAccessory: rightCellSwipeAccessory)
