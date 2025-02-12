@@ -43,7 +43,7 @@ public final class AbacusState {
     public var transfers: AnyPublisher<[SubaccountTransfer], Never> {
         statePublisher
             .map(\.?.transfers)
-            .compactMap { [weak self] transfers in
+            .map { [weak self] transfers in
                 if let subaccountNumber = self?.subaccountNumber, let transfers = transfers?[subaccountNumber] {
                     return Array(transfers)
                 }
@@ -104,7 +104,7 @@ public final class AbacusState {
     /// protocol pre v5.0
     public var restriction: AnyPublisher<Restriction, Never> {
         statePublisher
-            .compactMap { $0?.restriction?.restriction ?? .noRestriction }
+            .map { $0?.restriction?.restriction ?? .noRestriction }
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
@@ -144,7 +144,7 @@ public final class AbacusState {
      **/
     public func subaccount(of subaccountNumber: String) -> AnyPublisher<Subaccount?, Never> {
         account
-            .compactMap(\.?.groupedSubaccounts?[subaccountNumber])
+            .map(\.?.groupedSubaccounts?[subaccountNumber])
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
@@ -165,7 +165,7 @@ public final class AbacusState {
 
     public var selectedSubaccountFills: AnyPublisher<[SubaccountFill], Never> {
         statePublisher
-            .compactMap { [weak self] (state: PerpetualState?) in
+            .map { [weak self] (state: PerpetualState?) in
                 if let key = self?.subaccountNumber, let fill = state?.fills?[key] {
                     return Array(fill)
                 }
@@ -178,7 +178,7 @@ public final class AbacusState {
 
     public var selectedSubaccountFundings: AnyPublisher<[SubaccountFundingPayment], Never> {
         statePublisher
-            .compactMap { [weak self] (state: PerpetualState?) in
+            .map { [weak self] (state: PerpetualState?) in
                 if let key = self?.subaccountNumber, let funding = state?.fundingPayments?[key] {
                     return Array(funding)
                 }
@@ -191,8 +191,8 @@ public final class AbacusState {
 
     public var selectedSubaccountPositions: AnyPublisher<[SubaccountPosition], Never> {
         selectedSubaccount
-            .compactMap { subaccount in
-                subaccount?.openPositions
+            .map { subaccount in
+                subaccount?.openPositions ?? []
             }
             .prepend([])
             .removeDuplicates()
@@ -215,8 +215,8 @@ public final class AbacusState {
 
     public var selectedSubaccountPendingPositions: AnyPublisher<[SubaccountPendingPosition], Never> {
         selectedSubaccount
-            .compactMap { subaccount in
-                subaccount?.pendingPositions
+            .map { subaccount in
+                subaccount?.pendingPositions ?? []
             }
             .prepend([])
             .removeDuplicates()
@@ -226,8 +226,8 @@ public final class AbacusState {
 
     public var selectedSubaccountOrders: AnyPublisher<[SubaccountOrder], Never> {
         selectedSubaccount
-            .compactMap { subaccount in
-                subaccount?.orders
+            .map { subaccount in
+                subaccount?.orders ?? []
             }
             .prepend([])
             .removeDuplicates()
@@ -299,7 +299,7 @@ public final class AbacusState {
 
     public var selectedSubaccountPNLs: AnyPublisher<[SubaccountHistoricalPNL], Never> {
         statePublisher
-            .compactMap { [weak self] (state: PerpetualState?) in
+            .map { [weak self] (state: PerpetualState?) in
                 if let key = self?.subaccountNumber, let pnls = state?.historicalPnl?[key] {
                     return Array(pnls)
                 }
@@ -361,7 +361,7 @@ public final class AbacusState {
      **/
     public func candles(of marketId: String) -> AnyPublisher<MarketCandles?, Never> {
         candlesMap
-            .compactMap { $0[marketId] }
+            .map { $0[marketId] }
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
@@ -385,7 +385,7 @@ public final class AbacusState {
      **/
     public func orderbook(of marketId: String) -> AnyPublisher<MarketOrderbook?, Never> {
         orderbooksMap
-            .compactMap { $0[marketId] }
+            .map { $0[marketId] }
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
@@ -408,7 +408,7 @@ public final class AbacusState {
      **/
     public func trades(of marketId: String) -> AnyPublisher<[MarketTrade]?, Never> {
         tradesMap
-            .compactMap { $0[marketId] }
+            .map { $0[marketId] }
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
@@ -459,7 +459,7 @@ public final class AbacusState {
      **/
     public func market(of marketId: String) -> AnyPublisher<PerpetualMarket?, Never> {
         marketMap
-            .compactMap { $0[marketId] }
+            .map { $0[marketId] }
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
@@ -599,7 +599,7 @@ public final class AbacusState {
       */
     public var backendError: AnyPublisher<ParsingError?, Never> {
         errorsStatePublisher
-            .compactMap { (errors: [ParsingError]?) -> ParsingError? in
+            .map { (errors: [ParsingError]?) -> ParsingError? in
                 errors?.first { error in
                     switch error.type {
                     case .backenderror:
