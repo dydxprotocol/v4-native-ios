@@ -35,20 +35,25 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
     }
 
     private func createContent(style: ThemeStyle) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Group {
-                if let primaryDescription = sharedMarketViewModel?.primaryDescription {
-                    Text(primaryDescription)
-                }
-                if let secondaryDescription = sharedMarketViewModel?.secondaryDescription {
-                    Text(secondaryDescription)
-                }
+        var allText = ""
+        if let primaryDescription = sharedMarketViewModel?.primaryDescription {
+            allText = primaryDescription
+        }
+        if let secondaryDescription = sharedMarketViewModel?.secondaryDescription {
+            allText = allText + "\n\n" + secondaryDescription
+        }
+        return VStack(alignment: .leading, spacing: 12) {
+            if allText.isNotEmpty {
+                ExpandableText(text: allText)
+                    .themeFont(fontSize: .medium)
+                    .themeColor(foreground: .textSecondary)
+                    .expandButton(TextSet(text: DataLocalizer.localize(path: "APP.HEADER.MORE"),
+                                          fontSize: .medium))
+                    .expandAnimation(.easeOut)
+                    .lineLimit(2)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 8)
             }
-                .themeFont(fontSize: .medium)
-                .themeColor(foreground: .textSecondary)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 8)
-
             HStack {
                 let nameHeader = Text(DataLocalizer.localize(path: "APP.GENERAL.MARKET_NAME"))
                     .themeFont(fontType: .plus, fontSize: .small)
