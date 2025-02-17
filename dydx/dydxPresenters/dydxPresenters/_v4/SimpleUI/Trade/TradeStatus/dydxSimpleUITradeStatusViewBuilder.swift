@@ -209,7 +209,8 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
 
         viewModel?.assetId = asset?.displayableAssetId
 
-        viewModel?.price = dydxFormatter.shared.dollar(number: lastOrder.price, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 3)
+        // Market order uses the limit price, so let's hide it for now
+//        viewModel?.price = dydxFormatter.shared.dollar(number: lastOrder.price, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 3)
 
         viewModel?.totalFees = nil
         viewModel?.totalAmount = dydxFormatter.shared.dollar(number: lastOrder.price * lastOrder.size, digits: 3)
