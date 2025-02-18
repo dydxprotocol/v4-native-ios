@@ -93,7 +93,7 @@ class SharedMarketPresenter: HostedViewPresenter<SharedMarketViewModel>, SharedM
             viewModel.nextFunding  = IntervalTextModel(date: nil, direction: .countDownToHour, format: .full)
         }
         if let fundingRate = market.perpetual?.nextFundingRate?.doubleValue {
-            let percentText = dydxFormatter.shared.percent(number: fundingRate, digits: 6)
+            let percentText = dydxFormatter.shared.percent(number: abs(fundingRate), digits: 6)
             let sign: PlatformUISign
             if fundingRate == 0 {
                 sign = .none
