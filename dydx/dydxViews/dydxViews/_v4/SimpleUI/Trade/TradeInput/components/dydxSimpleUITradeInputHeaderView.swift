@@ -56,7 +56,8 @@ public class dydxSimpleUITradeInputHeaderViewModel: PlatformViewModel {
         let iconType = PlatformIconViewModel.IconType.url(url: sharedMarketViewModel?.logoUrl, placeholderContent: placeholderText)
         return PlatformIconViewModel(type: iconType,
                                      clip: .circle(background: .transparent, spacing: 0),
-                                     size: CGSize(width: 32, height: 32))
+                                     size: CGSize(width: 32, height: 32),
+                                     backgroundColor: .colorWhite)
             .createView(parentStyle: style)
     }
 

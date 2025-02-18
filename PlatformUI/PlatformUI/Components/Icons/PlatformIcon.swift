@@ -33,12 +33,14 @@ public class PlatformIconViewModel: PlatformViewModel {
     @Published public var clip: IconClip
     @Published public var size: CGSize
     @Published public var templateColor: ThemeColor.SemanticColor?
+    @Published public var backgroundColor: ThemeColor.SemanticColor
 
-    public init(type: IconType, clip: IconClip = .noClip, size: CGSize = CGSize(width: 32, height: 32), templateColor: ThemeColor.SemanticColor? = nil) {
+    public init(type: IconType, clip: IconClip = .noClip, size: CGSize = CGSize(width: 32, height: 32), templateColor: ThemeColor.SemanticColor? = nil, backgroundColor: ThemeColor.SemanticColor = .transparent) {
         self.type = type
         self.clip = clip
         self.size = size
         self.templateColor = templateColor
+        self.backgroundColor = backgroundColor
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
@@ -52,12 +54,14 @@ public class PlatformIconViewModel: PlatformViewModel {
                             .resizable()
                             .templateColor(self.templateColor)
                             .scaledToFit()
+                            .themeColor(background: self.backgroundColor)
                 case .asset(let name, let bundle):
                     if let name = name {
                         Image(name, bundle: bundle)
                             .resizable()
                             .templateColor(self.templateColor)
                             .scaledToFit()
+                            .themeColor(background: self.backgroundColor)
                     } else {
                         PlatformView.nilView
                     }
@@ -70,6 +74,7 @@ public class PlatformIconViewModel: PlatformViewModel {
                         .resizable()
                         .templateColor(self.templateColor)
                         .scaledToFit()
+                        .themeColor(background: self.backgroundColor)
                 case .uiImage(let image):
                     if let cgImage = image.cgImage {
                         Image(decorative: cgImage, scale: 1)
@@ -81,6 +86,7 @@ public class PlatformIconViewModel: PlatformViewModel {
                     }
                 case .any(let viewModel):
                     viewModel.createView(parentStyle: style)
+                        .themeColor(background: self.backgroundColor)
                 }
             }
 

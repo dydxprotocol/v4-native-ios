@@ -47,7 +47,8 @@ public class dydxPortfolioPendingPositionsItemViewModel: PlatformViewModel {
             HStack(spacing: 8) {
                 PlatformIconViewModel(type: .url(url: marketLogoUrl),
                                       clip: .defaultCircle,
-                                      size: CGSize(width: 20, height: 20))
+                                      size: CGSize(width: 20, height: 20),
+                                      backgroundColor: .colorWhite)
                 .createView()
                 Text(marketName)
                     .themeFont(fontSize: .large)

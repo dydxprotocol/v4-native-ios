@@ -33,7 +33,8 @@ public class dydxClosePositionHeaderViewModel: PlatformViewModel {
                 VStack {
                     let icon = PlatformIconViewModel(type: .url(url: sharedMarketViewModel.logoUrl),
                                                      clip: .defaultCircle,
-                                                     size: CGSize(width: 40, height: 40))
+                                                     size: CGSize(width: 40, height: 40),
+                                                     backgroundColor: .colorWhite)
 
                     let main =
                         Text(DataLocalizer.localize(path: "APP.GENERAL.CLOSE", params: nil))

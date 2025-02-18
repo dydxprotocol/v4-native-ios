@@ -128,7 +128,8 @@ public class dydxOrderDetailsViewModel: PlatformViewModel {
         HStack {
             PlatformIconViewModel(type: .url(url: self.logoUrl),
                                   clip: .defaultCircle,
-                                  size: CGSize(width: 40, height: 40))
+                                  size: CGSize(width: 40, height: 40),
+                                  backgroundColor: .colorWhite)
                 .createView(parentStyle: parentStyle)
 
             self.side?.createView(parentStyle: parentStyle)
