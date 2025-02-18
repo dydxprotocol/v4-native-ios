@@ -71,6 +71,7 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
     }
 
     private func dismissView(completion: (() -> Void)?) {
+        AbacusStateManager.shared.trade(input: nil, type: .size)
         navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
             completion?()
         }
@@ -166,6 +167,7 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
         observeStatus()
 
         orderSidePublisher
+            .prefix(1)
             .sink { [weak self] side in
                 switch side {
                 case .buy:
@@ -213,7 +215,7 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
 //        viewModel?.price = dydxFormatter.shared.dollar(number: lastOrder.price, digits: marketConfigs?.displayTickSizeDecimals?.intValue ?? 3)
 
         viewModel?.totalFees = nil
-        viewModel?.totalAmount = dydxFormatter.shared.dollar(number: lastOrder.price * lastOrder.size, digits: 3)
+//        viewModel?.totalAmount = dydxFormatter.shared.dollar(number: lastOrder.price * lastOrder.size, digits: 3)
     }
 
     private func update(marketId: String?, configsAndAssetMap: [String: MarketConfigsAndAsset], inputSummary: TradeInputSummary?) {
@@ -262,7 +264,6 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
             viewModel?.status = .success
             viewModel?.ctaButtonViewModel.ctaButtonState = .done
             viewModel?.ctaButtonViewModel.ctaAction = doneAction
-            AbacusStateManager.shared.trade(input: nil, type: .size)
 
             HapticFeedback.shared?.notify(type: .success)
 
