@@ -61,6 +61,8 @@ class dydxTransferDepositViewPresenter: HostedViewPresenter<dydxTransferDepositV
 
         super.init()
 
+        viewModel.skipGoFast = dydxBoolFeatureFlag.skip_go_fast.isEnabled
+
         viewModel.amountBox?.stepSize = 0.001
         viewModel.amountBox?.onEdited = { [weak self] amount in
             var amountDouble = Parser.standard.asNumber(amount?.unlocalizedNumericValue)?.doubleValue ?? 0

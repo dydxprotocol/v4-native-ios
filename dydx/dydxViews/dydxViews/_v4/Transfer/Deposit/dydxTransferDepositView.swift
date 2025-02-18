@@ -21,6 +21,7 @@ public class dydxTransferDepositViewModel: PlatformViewModel {
     @Published public var validationViewModel: dydxValidationViewModel? = dydxValidationViewModel()
     @Published public var showConnectWallet = false
     @Published public var connectWalletAction: (() -> Void)?
+    @Published public var skipGoFast = false
 
     public init() { }
 

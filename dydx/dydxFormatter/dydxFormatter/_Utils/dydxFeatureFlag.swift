@@ -17,6 +17,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     case abacus_static_typing
     case metadata_service
     case simple_ui = "ff_simple_ui"
+    case skip_go_fast
 
     var defaultValue: Bool {
         switch self {
@@ -34,6 +35,8 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
             return true
         case .simple_ui:
             return true
+        case .skip_go_fast:
+            return false
         }
     }
 
