@@ -47,7 +47,7 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
                 ExpandableText(text: allText)
                     .themeFont(fontSize: .medium)
                     .themeColor(foreground: .textSecondary)
-                    .expandButton(TextSet(text: DataLocalizer.localize(path: "APP.HEADER.MORE"),
+                    .expandButton(TextSet(text: DataLocalizer.localize(path: "APP.GENERAL.VIEW_MORE"),
                                           fontSize: .medium))
                     .expandAnimation(.easeOut)
                     .lineLimit(2)
@@ -63,41 +63,48 @@ public class dydxSimpleUIMarketDetailsViewModel: PlatformViewModel {
                                                         value: sharedMarketViewModel?.assetName)
                 .frame(minWidth: 0, maxWidth: .infinity)
 
-                let fundingHeader = Text(DataLocalizer.localize(path: "APP.TRADE.CURRENT_FUNDING_RATE"))
+                let volHeader = Text(DataLocalizer.localize(path: "APP.TRADE.VOLUME_24H"))
+                    .themeFont(fontType: .plus, fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: volHeader.wrappedViewModel,
+                                                        value: sharedMarketViewModel?.volume24H)
+                .frame(minWidth: 0, maxWidth: .infinity)
+
+                let marketCapHeader = Text(DataLocalizer.localize(path: "APP.GENERAL.MARKET_CAP"))
+                    .themeFont(fontType: .plus, fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: marketCapHeader.wrappedViewModel,
+                                                        value: sharedMarketViewModel?.marketCap)
+                .frame(minWidth: 0, maxWidth: .infinity)
+            }
+            .padding(.horizontal, 16)
+
+            HStack {
+                let buyingPowerHeader = Text(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
+                        .themeFont(fontType: .plus, fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: buyingPowerHeader.wrappedViewModel,
+                                                        value: sharedMarketViewModel?.buyingPower)
+                .frame(minWidth: 0, maxWidth: .infinity)
+
+                let openInterestHeader = Text(DataLocalizer.localize(path: "APP.TRADE.OPEN_INTEREST"))
+                        .themeFont(fontType: .plus, fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
+                CollectionItemUtil.createCollectionItem(parentStyle: style,
+                                                        titleViewModel: openInterestHeader.wrappedViewModel,
+                                                        value: sharedMarketViewModel?.openInterest)
+                .frame(minWidth: 0, maxWidth: .infinity)
+
+                let fundingHeader = Text(DataLocalizer.localize(path: "APP.TRADE.FUNDING_RATE_SHORT"))
                     .themeFont(fontType: .plus, fontSize: .small)
                     .themeColor(foreground: .textTertiary)
                 CollectionItemUtil.createCollectionItem(parentStyle: style,
                                                         titleViewModel: fundingHeader.wrappedViewModel,
                                                         valueViewModel: sharedMarketViewModel?.fundingRate)
                 .frame(minWidth: 0, maxWidth: .infinity)
-            }
-            .padding(.horizontal, 16)
-
-            HStack {
-                let openInterestHeader = HStack {
-                    Text(DataLocalizer.localize(path: "APP.TRADE.OPEN_INTEREST"))
-                        .themeFont(fontType: .plus, fontSize: .small)
-                        .themeColor(foreground: .textTertiary)
-                    TokenTextViewModel(symbol: "USD", withBorder: true)
-                        .createView(parentStyle: style.themeFont(fontSize: .smallest))
-                }
-                CollectionItemUtil.createCollectionItem(parentStyle: style,
-                                                        titleViewModel: openInterestHeader.wrappedViewModel,
-                                                        value: sharedMarketViewModel?.openInterest)
-                .frame(minWidth: 0, maxWidth: .infinity)
-
-                let buyingPowerHeader = HStack {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.BUYING_POWER"))
-                        .themeFont(fontType: .plus, fontSize: .small)
-                        .themeColor(foreground: .textTertiary)
-                    TokenTextViewModel(symbol: "USD", withBorder: true)
-                        .createView(parentStyle: style.themeFont(fontSize: .smallest))
-                }
-                CollectionItemUtil.createCollectionItem(parentStyle: style,
-                                                        titleViewModel: buyingPowerHeader.wrappedViewModel,
-                                                        value: sharedMarketViewModel?.buyingPower)
-                .frame(minWidth: 0, maxWidth: .infinity)
-
             }
             .padding(.horizontal, 16)
         }

@@ -232,6 +232,10 @@ struct StatsigValuesCache {
         return [:]
     }
 
+    func getFullChecksum(user: StatsigUser) -> String? {
+        return userCache[InternalStore.fullChecksum] as? String ?? nil
+    }
+
     mutating func updateUser(_ newUser: StatsigUser, _ values: [String: Any]? = nil) {
         // when updateUser is called, state will be uninitialized until updated values are fetched or local cache is retrieved
         source = .Loading
@@ -252,6 +256,7 @@ struct StatsigValuesCache {
             cache[InternalStore.userHashKey] = userHash
             cache[InternalStore.hashUsedKey] = values[InternalStore.hashUsedKey]
             cache[InternalStore.derivedFieldsKey] = values[InternalStore.derivedFieldsKey]
+            cache[InternalStore.fullChecksum] = values[InternalStore.fullChecksum]
         }
 
         if (userCacheKey.v2 == cacheKey.v2) {
@@ -475,6 +480,7 @@ class InternalStore {
     static let hashUsedKey = "hash_used"
     static let derivedFieldsKey = "derived_fields"
     static let bootstrapMetadata = "bootstrap_metadata"
+    static let fullChecksum = "full_checksum"
 
     var cache: StatsigValuesCache
     var localOverrides: [String: Any] = InternalStore.getEmptyOverrides()
@@ -515,6 +521,12 @@ class InternalStore {
     func getPreviousDerivedFields(user: StatsigUser) -> [String: String] {
         storeQueue.sync {
             return cache.getPreviousDerivedFields(user: user)
+        }
+    }
+
+    func getFullChecksum(user: StatsigUser) -> String? {
+        storeQueue.sync {
+            return cache.getFullChecksum(user: user)
         }
     }
 

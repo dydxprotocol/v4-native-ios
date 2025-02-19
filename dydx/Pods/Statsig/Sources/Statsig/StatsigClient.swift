@@ -72,7 +72,8 @@ public class StatsigClient {
 
             self.hasInitialized = true
             self.lastInitializeError = error
-            self.notifyOnInitializedListeners(error)
+
+            self.logger.retryFailedRequests();
 
             Diagnostics.mark?.overall.end(
                 success: error == nil,
@@ -81,6 +82,7 @@ public class StatsigClient {
             )
             Diagnostics.log(self.logger, user: capturedUser, context: .initialize)
 
+            self.notifyOnInitializedListeners(error)
             completionWithResult?(error)
             completion?(error?.message)
         }
@@ -171,27 +173,6 @@ public class StatsigClient {
     }
 
     /**
-     Presents a view of the current internal state of the SDK.
-     */
-    public func openDebugView(_ callback: DebuggerCallback? = nil) {
-        let cache = store.cache
-        let reason = cache.getEvaluationDetails().getDetailedReason()
-        let state: [String: Any?] = [
-            "user": self.currentUser.toDictionary(forLogging: false),
-            "gates": cache.gates,
-            "configs": cache.configs,
-            "layers": cache.layers,
-            "evalReason": reason
-        ]
-
-        DispatchQueue.main.async { [weak self] in
-            if let self = self {
-                DebugViewController.show(self.sdkKey, state, callback)
-            }
-        }
-    }
-
-    /**
      Returns the raw values that the SDK is using internally to provide gate/config/layer results
      */
     public func getInitializeResponseJson() -> ExternalInitializeResponse {
@@ -240,12 +221,7 @@ extension StatsigClient {
      SeeAlso [Gate Documentation](https://docs.statsig.com/feature-gates/working-with)
      */
     public func getFeatureGate(_ gateName: String) -> FeatureGate {
-        let gate = store.checkGate(forName: gateName)
-        logGateExposureForGate(gateName, gate: gate, isManualExposure: false)
-        if let cb = statsigOptions.evaluationCallback {
-            cb(.gate(gate))
-        }
-        return gate
+        return getFeatureGateImpl(gateName, shouldExpose: true)
     }
 
     /**
@@ -269,12 +245,23 @@ extension StatsigClient {
      SeeAlso [Gate Documentation](https://docs.statsig.com/feature-gates/working-with)
      */
     public func getFeatureGateWithExposureLoggingDisabled(_ gateName: String) -> FeatureGate {
-        logger.incrementNonExposedCheck(gateName)
-        let gate = store.checkGate(forName: gateName)
+        return getFeatureGateImpl(gateName, shouldExpose: false)
+    }
+
+    private func getFeatureGateImpl(_ gateName: String, shouldExpose: Bool) -> FeatureGate {
+        let original = store.checkGate(forName: gateName)
+
+        let gate = self.statsigOptions.overrideAdapter?.getGate(user: currentUser, name: gateName, original: original) ?? original;
+
+        if (shouldExpose) {
+            logGateExposureForGate(gateName, gate: gate, isManualExposure: false)
+        } else {
+            logger.incrementNonExposedCheck(gateName)
+        }
         if let cb = statsigOptions.evaluationCallback {
             cb(.gate(gate))
         }
-        return gate;
+        return gate
     }
 
     /**
@@ -337,12 +324,7 @@ extension StatsigClient {
      SeeAlso [Dynamic Config Documentation](https://docs.statsig.com/dynamic-config)
      */
     public func getConfig(_ configName: String) -> DynamicConfig {
-        let config = store.getConfig(forName: configName)
-        logConfigExposureForConfig(configName, config: config, isManualExposure: false)
-        if let cb = statsigOptions.evaluationCallback {
-            cb(.config(config))
-        }
-        return config
+        return getConfigImpl(configName, shouldExpose: true)
     }
 
     /**
@@ -354,8 +336,23 @@ extension StatsigClient {
      SeeAlso [Dynamic Config Documentation](https://docs.statsig.com/dynamic-config)
      */
     public func getConfigWithExposureLoggingDisabled(_ configName: String) -> DynamicConfig {
-        logger.incrementNonExposedCheck(configName)
-        let config = store.getConfig(forName: configName)
+        return getConfigImpl(configName, shouldExpose: false)
+    }
+
+    private func getConfigImpl(_ configName: String, shouldExpose: Bool) -> DynamicConfig {
+        let original = store.getConfig(forName: configName)
+
+        let config = self.statsigOptions.overrideAdapter?.getDynamicConfig(
+            user: currentUser,
+            name: configName,
+            original: original
+        ) ?? original
+
+        if (shouldExpose) {
+            logConfigExposureForConfig(configName, config: config, isManualExposure: false)
+        } else {
+            logger.incrementNonExposedCheck(configName)
+        }
         if let cb = statsigOptions.evaluationCallback {
             cb(.config(config))
         }
@@ -418,12 +415,7 @@ extension StatsigClient {
      SeeAlso [Experiments Documentation](https://docs.statsig.com/experiments-plus)
      */
     public func getExperiment(_ experimentName: String, keepDeviceValue: Bool = false) -> DynamicConfig {
-        let experiment = store.getExperiment(forName: experimentName, keepDeviceValue: keepDeviceValue)
-        logConfigExposureForConfig(experimentName, config: experiment, isManualExposure: false)
-        if let cb = statsigOptions.evaluationCallback {
-            cb(.experiment(experiment))
-        }
-        return experiment
+        return getExperimentImpl(experimentName, keepDeviceValue: keepDeviceValue, shouldExpose: true)
     }
 
     /**
@@ -436,8 +428,23 @@ extension StatsigClient {
      SeeAlso [Experiments Documentation](https://docs.statsig.com/experiments-plus)
      */
     public func getExperimentWithExposureLoggingDisabled(_ experimentName: String, keepDeviceValue: Bool = false) -> DynamicConfig {
-        logger.incrementNonExposedCheck(experimentName)
-        let experiment = store.getExperiment(forName: experimentName, keepDeviceValue: keepDeviceValue)
+        return getExperimentImpl(experimentName, keepDeviceValue: keepDeviceValue, shouldExpose: false)
+    }
+
+    private func getExperimentImpl(_ experimentName: String, keepDeviceValue: Bool, shouldExpose: Bool) -> DynamicConfig {
+        let original = store.getExperiment(forName: experimentName, keepDeviceValue: keepDeviceValue)
+
+        let experiment = self.statsigOptions.overrideAdapter?.getExperiment(
+            user: currentUser,
+            name: experimentName,
+            original: original
+        ) ?? original
+
+        if (shouldExpose) {
+            logConfigExposureForConfig(experimentName, config: experiment, isManualExposure: false)
+        } else {
+            logger.incrementNonExposedCheck(experimentName)
+        }
         if let cb = statsigOptions.evaluationCallback {
             cb(.experiment(experiment))
         }
@@ -474,11 +481,7 @@ extension StatsigClient {
      SeeAlso [Layers Documentation](https://docs.statsig.com/layers)
      */
     public func getLayer(_ layerName: String, keepDeviceValue: Bool = false) -> Layer {
-        let layer = store.getLayer(client: self, forName: layerName, keepDeviceValue: keepDeviceValue)
-        if let cb = statsigOptions.evaluationCallback {
-            cb(.layer(layer))
-        }
-        return layer
+        return getLayerImpl(layerName, keepDeviceValue: keepDeviceValue, shouldExpose: true)
     }
 
     /**
@@ -491,8 +494,21 @@ extension StatsigClient {
      SeeAlso [Layers Documentation](https://docs.statsig.com/layers)
      */
     public func getLayerWithExposureLoggingDisabled(_ layerName: String, keepDeviceValue: Bool = false) -> Layer {
-        logger.incrementNonExposedCheck(layerName)
-        let layer = store.getLayer(client: nil, forName: layerName, keepDeviceValue: keepDeviceValue)
+        return getLayerImpl(layerName, keepDeviceValue: keepDeviceValue, shouldExpose: false)
+    }
+
+    private func getLayerImpl(_ layerName: String, keepDeviceValue: Bool, shouldExpose: Bool) -> Layer {
+        if (!shouldExpose) {
+            logger.incrementNonExposedCheck(layerName)
+        }
+        let original = store.getLayer(client: shouldExpose ? self : nil, forName: layerName, keepDeviceValue: keepDeviceValue)
+
+        let layer = self.statsigOptions.overrideAdapter?.getLayer(
+            client: shouldExpose ? self : nil,
+            user: currentUser,
+            name: layerName,
+            original: original
+        ) ?? original
         if let cb = statsigOptions.evaluationCallback {
             cb(.layer(layer))
         }
@@ -621,7 +637,7 @@ extension StatsigClient {
             print("[Statsig]: Must log with a non-empty event name.")
             return
         }
-        if eventName.count > maxEventNameLength {
+        if !self.statsigOptions.disableEventNameTrimming && eventName.count > maxEventNameLength {
             print("[Statsig]: Event name is too long. Trimming to \(maxEventNameLength).")
             eventName = String(eventName.prefix(maxEventNameLength))
         }
@@ -710,16 +726,52 @@ extension StatsigClient {
 }
 
 
+// MARK: Debug View
+extension StatsigClient {
+    /**
+     Presents a view of the current internal state of the SDK.
+     */
+    public func openDebugView(_ callback: DebuggerCallback? = nil) {
+        DispatchQueue.main.async { [weak self] in
+            if let self = self {
+                StatsigDebugViewController.show(self.sdkKey, self.getDebugViewControllerState(), callback)
+            }
+        }
+    }
+
+    /**
+     Creates a view controller with the current internal state of the SDK.
+     */
+    public func createDebugViewController(_ callback: DebuggerCallback? = nil) -> StatsigDebugViewController? {
+        return StatsigDebugViewController(sdkKey: self.sdkKey, state: self.getDebugViewControllerState(), callback: callback)
+    }
+
+    private func getDebugViewControllerState() -> [String: Any?] {
+        let cache = store.cache
+        let reason = cache.getEvaluationDetails().getDetailedReason()
+        return [
+            "user": self.currentUser.toDictionary(forLogging: false),
+            "gates": cache.gates,
+            "configs": cache.configs,
+            "layers": cache.layers,
+            "evalReason": reason
+        ]
+    }
+}
+
+
 // MARK: Misc Private
 extension StatsigClient {
+
     private func fetchValuesFromNetwork(completion: ResultCompletionBlock?) {
         let currentUser = self.currentUser
         Diagnostics.mark?.initialize.storeRead.start()
         let sinceTime = self.store.getLastUpdateTime(user: currentUser)
         let previousDerivedFields = self.store.getPreviousDerivedFields(user: currentUser)
+        let fullChecksum = self.store.getFullChecksum(user: currentUser)
         Diagnostics.mark?.initialize.storeRead.end(success: true)
 
-        networkService.fetchInitialValues(for: currentUser, sinceTime: sinceTime, previousDerivedFields: previousDerivedFields) { [weak self] error in
+        networkService.fetchInitialValues(for: currentUser, sinceTime: sinceTime, previousDerivedFields: previousDerivedFields, fullChecksum: fullChecksum) { [weak self] error in
             if let self = self {
                 if let error = error {
                     self.logger.log(Event.statsigInternalEvent(
@@ -750,11 +802,13 @@ extension StatsigClient {
     private func syncValuesForCurrentUser() {
         let sinceTime = self.store.getLastUpdateTime(user: currentUser)
         let previousDerivedFields = self.store.getPreviousDerivedFields(user: currentUser)
+        let fullChecksum = self.store.getFullChecksum(user: currentUser)
 
         self.networkService.fetchUpdatedValues(
             for: currentUser,
             lastSyncTimeForUser: sinceTime,
-            previousDerivedFields: previousDerivedFields) { [weak self] error in
+            previousDerivedFields: previousDerivedFields,
+            fullChecksum: fullChecksum) { [weak self] error in
                 self?.notifyOnUserUpdatedListeners(error)
             }
     }

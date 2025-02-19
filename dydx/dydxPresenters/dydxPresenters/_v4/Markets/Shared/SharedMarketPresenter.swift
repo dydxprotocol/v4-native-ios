@@ -84,7 +84,7 @@ class SharedMarketPresenter: HostedViewPresenter<SharedMarketViewModel>, SharedM
         if let coinMarketCapsLink = asset?.resources?.coinMarketCapsLink {
             viewModel.coinMarketPlaceUrl = URL(string: coinMarketCapsLink)
         }
-        viewModel.openInterest = dydxFormatter.shared.dollarVolume(number: market.perpetual?.openInterest)
+        viewModel.openInterest = dydxFormatter.shared.dollarVolume(number: market.perpetual?.openInterestUSDC)
         if let nextFundingAtMilliseconds = market.perpetual?.nextFundingAtMilliseconds {
             let nextFundingAt = Date(milliseconds: nextFundingAtMilliseconds.doubleValue)
             viewModel.nextFunding = IntervalTextModel(date: nextFundingAt, direction: .countDown, format: .full)
