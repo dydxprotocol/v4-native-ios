@@ -117,14 +117,15 @@ class dydxTransferDepositViewPresenter: HostedViewPresenter<dydxTransferDepositV
             ).sink { [weak self] (resources: TransferInputResources?, chain: String?, tokenAddress: String?, ethereumAddress: String?) in
                 if let tokenAddress = tokenAddress,
                    let walletAddress = ethereumAddress,
-                   walletAddress.starts(with: "dydx") == false,
-                   let chain = chain,
-                   let chainRpc = resources?.chainResources?[chain]?.rpc,
-                   let tokenResource = resources?.tokenResources?[tokenAddress],
-                   let tokenSymbol = tokenResource.symbol,
-                   let tokenDecimals = tokenResource.decimals {
+                   walletAddress.starts(with: "dydx") == false {
                     self?.viewModel?.showConnectWallet = false
-                    self?.fetchTokenAmount(chainRpc: chainRpc, tokenSymbol: tokenSymbol, tokenAddress: tokenAddress, tokenDecimals: tokenDecimals.intValue, walletAddress: walletAddress)
+                    if let chain = chain,
+                       let chainRpc = resources?.chainResources?[chain]?.rpc,
+                       let tokenResource = resources?.tokenResources?[tokenAddress],
+                       let tokenSymbol = tokenResource.symbol,
+                       let tokenDecimals = tokenResource.decimals {
+                        self?.fetchTokenAmount(chainRpc: chainRpc, tokenSymbol: tokenSymbol, tokenAddress: tokenAddress, tokenDecimals: tokenDecimals.intValue, walletAddress: walletAddress)
+                    }
                 } else {
                     self?.viewModel?.showConnectWallet = true
                     self?.ethereumInteractor = nil

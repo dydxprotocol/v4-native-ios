@@ -50,6 +50,7 @@ public class dydxSearchViewModel: PlatformViewModel {
                                     .createView(parentStyle: style)
                             }
                         }
+                        .keyboardObserving()
                     } else {
                         HStack {
                             Spacer()
