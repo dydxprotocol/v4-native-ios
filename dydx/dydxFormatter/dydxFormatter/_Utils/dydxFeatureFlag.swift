@@ -15,7 +15,6 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     case isVaultEnabled = "ff_vault_enabled"
     case showPredictionMarketsUI = "ff_show_prediction_markets_ui"
     case abacus_static_typing
-    case metadata_service
     case simple_ui = "ff_simple_ui"
     case skip_go_fast
 
@@ -30,8 +29,6 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
         case .showPredictionMarketsUI:
             return false
         case .abacus_static_typing:
-            return true
-        case .metadata_service:
             return true
         case .simple_ui:
             return true

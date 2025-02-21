@@ -95,10 +95,10 @@
             },
             {
                 "title":{
-                    "text":"Market Asset Metadata"
+                    "text":"Enable Simple UI"
                 },
                 "field":{
-                    "field":"metadata_service",
+                    "field":"ff_simple_ui",
                     "optional":true,
                     "type" : "bool",
                     "options" : [
@@ -115,10 +115,10 @@
             },
             {
                 "title":{
-                    "text":"Enable Simple UI"
+                    "text":"Instant Deposit"
                 },
                 "field":{
-                    "field":"ff_simple_ui",
+                    "field":"skip_go_fast",
                     "optional":true,
                     "type" : "bool",
                     "options" : [

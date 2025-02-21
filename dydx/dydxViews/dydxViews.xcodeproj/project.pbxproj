@@ -63,6 +63,9 @@
 		0238FF162976432D002E1C1A /* TradeInputViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238FF152976432D002E1C1A /* TradeInputViewModifier.swift */; };
 		023AB3B42BEAD53D005230B2 /* dydxMarginModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023AB3B32BEAD53D005230B2 /* dydxMarginModeView.swift */; };
 		023AB3C62BEAD5E9005230B2 /* dydxTargetLeverageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023AB3C52BEAD5E9005230B2 /* dydxTargetLeverageView.swift */; };
+		023DB0892D69122900F15534 /* dydxInstantDepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DB0882D69122900F15534 /* dydxInstantDepositView.swift */; };
+		023DB0A72D691E3D00F15534 /* dydxInstantDepositSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DB0A62D691E3D00F15534 /* dydxInstantDepositSelector.swift */; };
+		023DB0AB2D6932ED00F15534 /* dydxInstantDepositInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DB0AA2D6932ED00F15534 /* dydxInstantDepositInput.swift */; };
 		023DC88F29CCBD2C000DD920 /* dydxOnboardQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DC88229CCBD2B000DD920 /* dydxOnboardQRCodeView.swift */; };
 		02404FA82CD42E77001B571D /* dydxVaultTosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02404FA72CD42E77001B571D /* dydxVaultTosView.swift */; };
 		02428C192962E219000D7929 /* dydxMarketFundingDurationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02428C182962E219000D7929 /* dydxMarketFundingDurationsView.swift */; };
@@ -494,6 +497,9 @@
 		0238FF152976432D002E1C1A /* TradeInputViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeInputViewModifier.swift; sourceTree = "<group>"; };
 		023AB3B32BEAD53D005230B2 /* dydxMarginModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarginModeView.swift; sourceTree = "<group>"; };
 		023AB3C52BEAD5E9005230B2 /* dydxTargetLeverageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTargetLeverageView.swift; sourceTree = "<group>"; };
+		023DB0882D69122900F15534 /* dydxInstantDepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxInstantDepositView.swift; sourceTree = "<group>"; };
+		023DB0A62D691E3D00F15534 /* dydxInstantDepositSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxInstantDepositSelector.swift; sourceTree = "<group>"; };
+		023DB0AA2D6932ED00F15534 /* dydxInstantDepositInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxInstantDepositInput.swift; sourceTree = "<group>"; };
 		023DC88229CCBD2B000DD920 /* dydxOnboardQRCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxOnboardQRCodeView.swift; sourceTree = "<group>"; };
 		02404FA72CD42E77001B571D /* dydxVaultTosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultTosView.swift; sourceTree = "<group>"; };
 		02428C182962E219000D7929 /* dydxMarketFundingDurationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketFundingDurationsView.swift; sourceTree = "<group>"; };
@@ -975,6 +981,15 @@
 			path = Margin;
 			sourceTree = "<group>";
 		};
+		023DB0A52D691E1400F15534 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				023DB0A62D691E3D00F15534 /* dydxInstantDepositSelector.swift */,
+				023DB0AA2D6932ED00F15534 /* dydxInstantDepositInput.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		023DC88129CCBD2B000DD920 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -1354,7 +1369,9 @@
 		02714C8E29E0C74800CC1C44 /* Deposit */ = {
 			isa = PBXGroup;
 			children = (
+				023DB0A52D691E1400F15534 /* Components */,
 				020DBF0E29E0924E0068AAA6 /* dydxTransferDepositView.swift */,
+				023DB0882D69122900F15534 /* dydxInstantDepositView.swift */,
 			);
 			path = Deposit;
 			sourceTree = "<group>";
@@ -2392,6 +2409,7 @@
 				64A4DB59296620B4008D8E20 /* dydxTradeInputTimeInForceView.swift in Sources */,
 				27DFA53D2CCB1736005FCABB /* dydxTitledTextField.swift in Sources */,
 				027885E12D1BA34000366321 /* dydxLineChartView.swift in Sources */,
+				023DB0AB2D6932ED00F15534 /* dydxInstantDepositInput.swift in Sources */,
 				27ED365C2AD735A800C159F5 /* dydxSecurityView.swift in Sources */,
 				029CBE7728F608F400259C1D /* dydxMarketTradesView.swift in Sources */,
 				0238FC46296DA53F002E1C1A /* dydxOrderDetailsView.swift in Sources */,
@@ -2448,6 +2466,7 @@
 				02714C9D29E0C78600CC1C44 /* ChainsComboBox.swift in Sources */,
 				02B8419D28EF68C300C4D25B /* dydxMarketInfoView.swift in Sources */,
 				02D3C46E28F74F5400683843 /* dydxMarketResourcesView.swift in Sources */,
+				023DB0A72D691E3D00F15534 /* dydxInstantDepositSelector.swift in Sources */,
 				02FA5B6F2A12FB040045F2F5 /* dydxTransferWithdrawalView.swift in Sources */,
 				0230377628C13DA500412B72 /* dydxMarketsHeaderView.swift in Sources */,
 				277E904F2B1FAFCB005CCBCB /* dydxFAQView.swift in Sources */,
@@ -2488,6 +2507,7 @@
 				02B27A3A2AE8BC5A00A995EC /* dydxHelpView.swift in Sources */,
 				27673BB02C8F971900689E3F /* dydxCheckboxView.swift in Sources */,
 				02678FAA29666C0E00EE346B /* dydxPortfolioFundingView.swift in Sources */,
+				023DB0892D69122900F15534 /* dydxInstantDepositView.swift in Sources */,
 				0273A15F2ACCDDB1001B89F5 /* SelectionBar.swift in Sources */,
 				020490BD2D3AFA7800394CBE /* dydxSimpleUITradeInputCtaButtonView.swift in Sources */,
 				02031F032AC36CE60069E00D /* BuySellButton.swift in Sources */,
