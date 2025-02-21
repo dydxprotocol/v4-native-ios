@@ -55,7 +55,8 @@ public class dydxMarketResourcesViewModel: PlatformViewModel {
 
                     let icon = PlatformIconViewModel(type: .url(url: sharedMarketViewModel.logoUrl),
                                                      clip: .defaultCircle,
-                                                     size: CGSize(width: 40, height: 40))
+                                                     size: CGSize(width: 40, height: 40),
+                                                     backgroundColor: .colorWhite)
 
                     let main =
                         HStack {

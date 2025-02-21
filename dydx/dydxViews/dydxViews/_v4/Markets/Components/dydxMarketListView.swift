@@ -132,9 +132,10 @@ struct dydxMarketView: View {
                 .wrappedInAnyView()
         }
         return PlatformIconViewModel(type: .url(url: URL(string: viewModel.iconUrl ?? ""), placeholderContent: placeholderText),
-                              clip: .circle(background: .transparent, spacing: 0),
-                              size: CGSize(width: 32, height: 32))
-            .createView()
+                                     clip: .circle(background: .transparent, spacing: 0),
+                                     size: CGSize(width: 32, height: 32),
+                                     backgroundColor: .colorWhite)
+        .createView()
     }
 
     @ViewBuilder

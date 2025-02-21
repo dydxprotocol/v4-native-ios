@@ -50,6 +50,8 @@ struct CollectionItemUtil {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 8) {
                 titleViewModel?.createView(parentStyle: parentStyle)
+                    .lineLimit(1)
+
                 if let valueViewModel {
                     valueViewModel.createView(parentStyle: parentStyle, styleKey: nil)
                 } else {

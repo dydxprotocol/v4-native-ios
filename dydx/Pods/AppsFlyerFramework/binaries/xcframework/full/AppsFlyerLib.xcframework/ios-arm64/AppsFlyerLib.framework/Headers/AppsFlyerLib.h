@@ -2,7 +2,7 @@
 //  AppsFlyerLib.h
 //  AppsFlyerLib
 //
-//  AppsFlyer iOS SDK 6.16.0 (227)
+//  AppsFlyer iOS SDK 6.16.1 (227)
 //  Copyright (c) 2012-2023 AppsFlyer Ltd. All rights reserved.
 //
 
@@ -12,10 +12,10 @@
 #import <AppsFlyerLib/AppsFlyerShareInviteHelper.h>
 #import <AppsFlyerLib/AppsFlyerDeepLinkResult.h>
 #import <AppsFlyerLib/AppsFlyerDeepLink.h>
-#import <AppsFlyerLib/AppsFlyerConsent.h>
 #import <AppsFlyerLib/AFSDKPurchaseDetails.h>
 #import <AppsFlyerLib/AFSDKValidateAndLogResult.h>
 #import <AppsFlyerLib/AFAdRevenueData.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -129,6 +129,8 @@ NS_ASSUME_NONNULL_BEGIN
 #define AFEventParamPreferredNeighborhoods  @"af_preferred_neighborhoods" //array of string
 #define AFEventParamPreferredNumStops       @"af_preferred_num_stops"
 
+
+@class AppsFlyerConsent;
 /// Mail hashing type
 typedef enum  {
     /// None

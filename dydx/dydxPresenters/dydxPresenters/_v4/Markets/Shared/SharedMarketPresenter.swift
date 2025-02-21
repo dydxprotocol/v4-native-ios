@@ -84,7 +84,7 @@ class SharedMarketPresenter: HostedViewPresenter<SharedMarketViewModel>, SharedM
         if let coinMarketCapsLink = asset?.resources?.coinMarketCapsLink {
             viewModel.coinMarketPlaceUrl = URL(string: coinMarketCapsLink)
         }
-        viewModel.openInterest = dydxFormatter.shared.dollarVolume(number: market.perpetual?.openInterest)
+        viewModel.openInterest = dydxFormatter.shared.dollarVolume(number: market.perpetual?.openInterestUSDC)
         if let nextFundingAtMilliseconds = market.perpetual?.nextFundingAtMilliseconds {
             let nextFundingAt = Date(milliseconds: nextFundingAtMilliseconds.doubleValue)
             viewModel.nextFunding = IntervalTextModel(date: nextFundingAt, direction: .countDown, format: .full)
@@ -93,7 +93,7 @@ class SharedMarketPresenter: HostedViewPresenter<SharedMarketViewModel>, SharedM
             viewModel.nextFunding  = IntervalTextModel(date: nil, direction: .countDownToHour, format: .full)
         }
         if let fundingRate = market.perpetual?.nextFundingRate?.doubleValue {
-            let percentText = dydxFormatter.shared.percent(number: fundingRate, digits: 6)
+            let percentText = dydxFormatter.shared.percent(number: abs(fundingRate), digits: 6)
             let sign: PlatformUISign
             if fundingRate == 0 {
                 sign = .none

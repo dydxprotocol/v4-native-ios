@@ -167,8 +167,9 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
         }
         let iconType = PlatformIconViewModel.IconType.url(url: URL(string: iconUrl ?? ""), placeholderContent: placeholderText)
         return PlatformIconViewModel(type: iconType,
-                                     clip: .circle(background: .transparent, spacing: 0),
-                                     size: CGSize(width: iconSize, height: iconSize))
+                                     clip: .circle(background: .colorWhite, spacing: 0),
+                                     size: CGSize(width: iconSize, height: iconSize),
+                                     backgroundColor: .colorWhite)
             .createView(parentStyle: style)
     }
 

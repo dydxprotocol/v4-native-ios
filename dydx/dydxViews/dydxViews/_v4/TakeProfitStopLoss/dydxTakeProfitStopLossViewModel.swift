@@ -52,7 +52,8 @@ public class dydxTakeProfitStopLossViewModel: PlatformViewModel {
         HStack(spacing: 12) {
             PlatformIconViewModel(type: .url(url: icon),
                                   clip: .defaultCircle,
-                                  size: CGSize(width: 36, height: 36))
+                                  size: CGSize(width: 36, height: 36),
+                                  backgroundColor: .colorWhite)
             .createView(parentStyle: style)
 
             VStack(alignment: .leading, spacing: 6) {

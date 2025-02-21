@@ -212,7 +212,8 @@ public class dydxMarketPositionViewModel: PlatformViewModel {
                 HStack {
                     PlatformIconViewModel(type: .url(url: logoUrl),
                                           clip: .defaultCircle,
-                                          size: CGSize(width: 36, height: 36))
+                                          size: CGSize(width: 36, height: 36),
+                                          backgroundColor: .colorWhite)
                         .createView(parentStyle: parentStyle)
 
                     Spacer(minLength: 4)

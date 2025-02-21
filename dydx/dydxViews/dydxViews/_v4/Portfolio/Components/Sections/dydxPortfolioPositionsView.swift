@@ -203,11 +203,12 @@ public class dydxPortfolioPositionItemViewModel: PlatformViewModel {
         }
     }
 
-    private func createLogo( parentStyle: ThemeStyle) -> some View {
+    private func createLogo(parentStyle: ThemeStyle) -> some View {
         HStack {
             PlatformIconViewModel(type: .url(url: logoUrl),
                                   clip: .defaultCircle,
-                                  size: CGSize(width: 32, height: 32))
+                                  size: CGSize(width: 32, height: 32),
+                                  backgroundColor: .colorWhite)
             .createView(parentStyle: parentStyle)
         }
     }

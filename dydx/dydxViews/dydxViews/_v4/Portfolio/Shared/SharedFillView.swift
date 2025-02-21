@@ -92,7 +92,8 @@ public class SharedFillViewModel: PlatformViewModel {
             ZStack {
                 PlatformIconViewModel(type: .url(url: logoUrl),
                                       clip: .defaultCircle,
-                                      size: CGSize(width: 32, height: 32))
+                                      size: CGSize(width: 32, height: 32),
+                                      backgroundColor: .colorWhite)
                 .createView(parentStyle: parentStyle)
 
                 Group {

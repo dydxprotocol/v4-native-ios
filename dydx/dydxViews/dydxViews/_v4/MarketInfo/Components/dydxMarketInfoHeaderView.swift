@@ -30,7 +30,8 @@ public class dydxMarketInfoHeaderViewModel: PlatformViewModel {
             HStack(spacing: 12) {
                 PlatformIconViewModel(type: .url(url: self.sharedMarketViewModel?.logoUrl),
                                       clip: .defaultCircle,
-                                      size: CGSize(width: 40, height: 40))
+                                      size: CGSize(width: 40, height: 40),
+                                      backgroundColor: .colorWhite)
                 .createView(parentStyle: parentStyle, styleKey: styleKey)
                 VStack(alignment: .leading, spacing: 0) {
                     HStack(spacing: 4) {
