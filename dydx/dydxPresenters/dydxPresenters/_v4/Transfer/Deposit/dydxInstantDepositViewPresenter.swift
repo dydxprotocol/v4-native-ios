@@ -21,5 +21,8 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
         super.init()
 
         viewModel = dydxInstantDepositViewModel.previewValue
+        viewModel?.input?.assetAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/transfer/deposit/search", params: nil), animated: true, completion: nil)
+         }
     }
 }

@@ -17,6 +17,7 @@ public class dydxInstantDepositInputModel: PlatformViewModel {
     @Published public var tokenIcon: URL?
     @Published public var chainIcon: URL?
     @Published public var amountInput: PlatformTextInputViewModel?
+    @Published public var assetAction: (() -> Void)?
 
     public init() { }
 
@@ -84,8 +85,8 @@ public class dydxInstantDepositInputModel: PlatformViewModel {
                     .themeColor(background: .layer5)
                     .borderAndClip(style: .cornerRadius(8), borderColor: .layer6)
 
-                PlatformButtonViewModel(content: buttonContent.wrappedViewModel, type: .iconType, state: .primary) {
-
+                PlatformButtonViewModel(content: buttonContent.wrappedViewModel, type: .iconType, state: .primary) { [weak self] in
+                    self?.assetAction?()
                 }
                 .createView(parentStyle: style)
             }

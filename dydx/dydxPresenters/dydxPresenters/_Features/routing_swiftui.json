@@ -301,6 +301,10 @@
                     "destination":"dydxPresenters.dydxTransferSearchViewBuilder",
                     "presentation":"push"
                 },
+                "/transfer/deposit/search":{
+                    "destination":"dydxPresenters.dydxInstantDepositSearchViewBuilder",
+                    "presentation":"push"
+                },
                 "/transfer/status":{
                     "destination":"dydxPresenters.dydxTransferStatusViewBuilder",
                     "presentation":"prompt"

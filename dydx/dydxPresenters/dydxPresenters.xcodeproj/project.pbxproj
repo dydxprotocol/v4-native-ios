@@ -59,6 +59,7 @@
 		023AB3C42BEAD56A005230B2 /* dydxMarginModeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023AB3C32BEAD56A005230B2 /* dydxMarginModeViewBuilder.swift */; };
 		023AB3C82BEAD5F3005230B2 /* dydxTargetLeverageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023AB3C72BEAD5F3005230B2 /* dydxTargetLeverageViewBuilder.swift */; };
 		023DB0A42D69123700F15534 /* dydxInstantDepositViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DB0962D69123500F15534 /* dydxInstantDepositViewPresenter.swift */; };
+		023DB0AF2D6947E700F15534 /* dydxInstantDepositSearchViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DB0AE2D6947E600F15534 /* dydxInstantDepositSearchViewBuilder.swift */; };
 		023DC88029CCBD21000DD920 /* dydxOnboardQRCodeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DC87329CCBD21000DD920 /* dydxOnboardQRCodeViewBuilder.swift */; };
 		023FC7E32C94DCBF003D77A6 /* dydxPushNotificationToggleWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023FC7E22C94DCBF003D77A6 /* dydxPushNotificationToggleWorker.swift */; };
 		02404FAA2CD42E8C001B571D /* dydxVaultTosViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02404FA92CD42E89001B571D /* dydxVaultTosViewBuilder.swift */; };
@@ -489,6 +490,7 @@
 		023AB3C32BEAD56A005230B2 /* dydxMarginModeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarginModeViewBuilder.swift; sourceTree = "<group>"; };
 		023AB3C72BEAD5F3005230B2 /* dydxTargetLeverageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTargetLeverageViewBuilder.swift; sourceTree = "<group>"; };
 		023DB0962D69123500F15534 /* dydxInstantDepositViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxInstantDepositViewPresenter.swift; sourceTree = "<group>"; };
+		023DB0AE2D6947E600F15534 /* dydxInstantDepositSearchViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxInstantDepositSearchViewBuilder.swift; sourceTree = "<group>"; };
 		023DC87329CCBD21000DD920 /* dydxOnboardQRCodeViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxOnboardQRCodeViewBuilder.swift; sourceTree = "<group>"; };
 		023FC7E22C94DCBF003D77A6 /* dydxPushNotificationToggleWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPushNotificationToggleWorker.swift; sourceTree = "<group>"; };
 		02404FA92CD42E89001B571D /* dydxVaultTosViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultTosViewBuilder.swift; sourceTree = "<group>"; };
@@ -1550,6 +1552,7 @@
 		02F99F3929E4C7130009B3E8 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				023DB0AE2D6947E600F15534 /* dydxInstantDepositSearchViewBuilder.swift */,
 				02F99F3A29E4CB300009B3E8 /* dydxTransferSearchViewBuilder.swift */,
 			);
 			path = Search;
@@ -2382,6 +2385,7 @@
 				02D1CEE129C8DEA7009ADF9A /* dydxLanguageViewBuilder.swift in Sources */,
 				027885F42D1DEBF700366321 /* dydxSimpleUIMarketCandlesViewPresenter.swift in Sources */,
 				02D1342828EB572100B46941 /* SharedMarketPresenter.swift in Sources */,
+				023DB0AF2D6947E700F15534 /* dydxInstantDepositSearchViewBuilder.swift in Sources */,
 				0278860A2D261FAA00366321 /* dydxSimpleUITradeInputSizeViewPresenter.swift in Sources */,
 				02DC87952CD441BC00F865C5 /* dydxVaultHistoryViewBuilder.swift in Sources */,
 				0262EFA629D79EE4009889E2 /* Wallets2ViewBuilder.swift in Sources */,
