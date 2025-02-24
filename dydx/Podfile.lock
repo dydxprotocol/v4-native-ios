@@ -1,5 +1,5 @@
 PODS:
-  - Abacus (1.13.58)
+  - Abacus (1.13.59)
   - AmplitudeSwift (1.11.5):
     - AnalyticsConnector (~> 1.3.0)
   - AnalyticsConnector (1.3.1)
@@ -223,10 +223,10 @@ PODS:
   - GoogleUtilities/UserDefaults (8.0.2):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - GTMSessionFetcher (4.3.0):
-    - GTMSessionFetcher/Full (= 4.3.0)
-  - GTMSessionFetcher/Core (4.3.0)
-  - GTMSessionFetcher/Full (4.3.0):
+  - GTMSessionFetcher (4.4.0):
+    - GTMSessionFetcher/Full (= 4.4.0)
+  - GTMSessionFetcher/Core (4.4.0)
+  - GTMSessionFetcher/Full (4.4.0):
     - GTMSessionFetcher/Core
   - HMSegmentedControl (1.5.6)
   - iCarousel (1.8.3)
@@ -250,9 +250,9 @@ PODS:
     - PromisesObjC (= 2.4.0)
   - RDHCollectionViewGridLayout (1.2.5)
   - ReachabilitySwift (5.2.4)
-  - SDWebImage (5.20.0):
-    - SDWebImage/Core (= 5.20.0)
-  - SDWebImage/Core (5.20.0)
+  - SDWebImage (5.21.0):
+    - SDWebImage/Core (= 5.21.0)
+  - SDWebImage/Core (5.21.0)
   - SDWebImageSVGCoder (1.8.0):
     - SDWebImage/Core (~> 5.6)
   - SDWebImageSwiftUI (3.1.3):
@@ -379,7 +379,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  Abacus: c59d1fa0d0365e5fa4186a2003d6af3991b9dc21
+  Abacus: 5563911d97e559550dbe4dd446492348c7d9cdd7
   AmplitudeSwift: 16f62b30b8f6ac90eec4fc24798daf1fba4c7869
   AnalyticsConnector: 3def11199b4ddcad7202c778bde982ec5da0ebb3
   AppsFlyerFramework: 21e63ddd5cf0727d2e4f37452114d3b36fc6d7a3
@@ -411,7 +411,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleToolboxForMac: d0a675de27cb3e7fbf157925680ac8421d86c257
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
-  GTMSessionFetcher: 257ead9ba8e15a2d389d79496e02b9cc5dd0c62c
+  GTMSessionFetcher: 75b671f9e551e4c49153d4c4f8659ef4f559b970
   HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   JTCalendar: 1b326e0d59dd1855b52c5f3feb059d2ff953805d
@@ -427,7 +427,7 @@ SPEC CHECKSUMS:
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   RDHCollectionViewGridLayout: 4b4229212ed8c136aa70101d92ecd43742ca62b6
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
-  SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
+  SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
   SDWebImageSVGCoder: 8e10c8f6cc879c7dfb317b284e13dd589379f01c
   SDWebImageSwiftUI: a6d7129fb68fc18c8b930b869ddcfce314e49ded
   SimpleKeychain: 8193a9e40967eccac933c1fde82de46c07a5ae26

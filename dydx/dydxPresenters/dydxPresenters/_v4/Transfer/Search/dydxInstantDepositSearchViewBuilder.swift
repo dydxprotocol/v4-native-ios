@@ -11,6 +11,10 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import dydxFormatter
+import dydxStateManager
+import Combine
+import Abacus
 
 public class dydxInstantDepositSearchViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -41,6 +45,61 @@ private class dydxInstantDepositSearchViewPresenter: HostedViewPresenter<dydxIns
         viewModel?.cancelAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
-        viewModel?.tokens = [.previewValue]
+    }
+
+    override func start() {
+        super.start()
+
+        guard let transferTokenDetails = TransferTokenDetails.shared else {
+            return
+        }
+
+        Publishers
+            .CombineLatest3(
+                transferTokenDetails.infos.removeDuplicates(),
+                transferTokenDetails.$defaultToken,
+                transferTokenDetails.$selectedToken
+            )
+            .sink { [weak self]  tokens, defaultToken, selectedToken in
+                guard let self else { return }
+
+                let selected = selectedToken ?? defaultToken
+
+                var tokenViewModels = [dydxInstantDepositSearchItemViewModel]()
+                var nullViewModels = [dydxInstantDepositSearchItemViewModel]()
+                for token in tokens {
+                    let itemViewModel = self.createItemViewModel(token: token, selected: selected)
+                    if (token.amount ?? 0) > 0 || (token.usdcAmount ?? 0) > 0 {
+                        tokenViewModels.append(itemViewModel)
+                    } else {
+                        nullViewModels.append(itemViewModel)
+                    }
+                }
+                viewModel?.tokens = tokenViewModels
+                viewModel?.otherTokens = nullViewModels
+            }
+            .store(in: &subscriptions)
+    }
+
+    private func createItemViewModel(token: TransferTokenInfo, selected: TransferTokenInfo?) -> dydxInstantDepositSearchItemViewModel {
+        let viewModel = dydxInstantDepositSearchItemViewModel()
+        viewModel.chain = token.chain.rawValue
+        viewModel.chainIcon = URL(string: token.chainLogoUrl)
+        viewModel.token = token.token.rawValue
+        viewModel.tokenIcon = URL(string: token.tokenLogoUrl)
+        if let amount = token.amount, amount > 0 {
+            viewModel.tokenSize = dydxFormatter.shared.raw(number: amount, digits: 4)
+        }
+        if let usdcAmount = token.usdcAmount, usdcAmount > 0 {
+            viewModel.usdcSize = dydxFormatter.shared.dollar(number: usdcAmount, digits: 2)
+        }
+        viewModel.selected = token.tokenAddress == selected?.tokenAddress && token.chainId == selected?.chainId
+        if let amount = token.amount, amount > 0 {
+            viewModel.selectAction = {
+                TransferTokenDetails.shared?.selectedToken = token
+                Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+            }
+        }
+        return viewModel
     }
 }

@@ -71,7 +71,7 @@ private class dydxTransferSearchViewPresenter: dydxSearchViewPresenter {
         }
 
         Publishers.CombineLatest4($options.compactMap { $0 },
-                                 $selected.compactMap { $0 },
+                                  $selected.compactMap { $0 },
                                   $resources.compactMap { $0 },
                                  searchTextPublisher.removeDuplicates())
             .sink { [weak self] options, selected, resources, searchText in

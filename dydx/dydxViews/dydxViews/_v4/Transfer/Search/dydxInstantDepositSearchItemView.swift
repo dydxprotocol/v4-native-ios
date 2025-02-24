@@ -18,6 +18,7 @@ public class dydxInstantDepositSearchItemViewModel: PlatformViewModel {
     @Published public var tokenSize: String?
     @Published public var usdcSize: String?
     @Published public var selected: Bool = false
+    @Published public var selectAction: (() -> Void)?
 
     public var id: String {
         (token ?? "") + (chain ?? "")
@@ -77,7 +78,13 @@ public class dydxInstantDepositSearchItemViewModel: PlatformViewModel {
                     view.borderAndClip(style: .cornerRadius(12), borderColor: .colorPurple, lineWidth: 2)
                 }
 
-            return AnyView(view)
+            let button = Button {
+                self.selectAction?()
+            } label: {
+                view
+            }
+
+            return AnyView(button)
         }
     }
 }

@@ -7,12 +7,53 @@
 
 import Foundation
 import Combine
+import dydxStateManager
 
 final class TransferTokenDetails {
-    @Published var infos: [TransferTokenInfo] = []
+    @Published var selectedToken: TransferTokenInfo?
+    @Published var defaultToken: TransferTokenInfo?
+
+    let marketPrices: AnyPublisher<[String: Double], Never> =
+        AbacusStateManager.shared.state.marketMap
+        .compactMap { marketMap in
+            var markets = [String: Double]()
+            for marketId in ["ETH-USD", "POL-USD"] {
+                if let oraclePrice = marketMap[marketId]?.oraclePrice?.doubleValue {
+                    markets[marketId] = oraclePrice
+                }
+            }
+            return markets
+        }
+        .eraseToAnyPublisher()
+
+    @Published private var _infos: [TransferTokenInfo] = []
+
+    lazy var infos: AnyPublisher<[TransferTokenInfo], Never> =
+        Publishers
+            .CombineLatest(
+                $_infos.removeDuplicates(),
+                marketPrices.removeDuplicates()
+            )
+            .map { [weak self] infos, marketPrices in
+                var newInfos = [TransferTokenInfo]()
+                for token in infos {
+                    var newToken = token
+                    if  token.token == .USDC, token.amount == nil {
+                        newToken.amount = newToken.usdcAmount
+                    } else if let amount = token.amount, amount > 0 {
+                        let key = token.token.rawValue + "-USD"
+                        if let marketPrice = marketPrices[key] {
+                             newToken.usdcAmount = amount * marketPrice
+                        }
+                    }
+                    newInfos.append(newToken)
+                }
+                return newInfos.sorted { ($0.usdcAmount ?? 0) > ($1.usdcAmount ?? 0) }
+            }
+            .eraseToAnyPublisher()
 
     private init(isMainnet: Bool) {
-        infos = isMainnet ? mainnetTokens : testnetTokens
+        _infos =  mainnetTokens // isMainnet ? mainnetTokens : testnetTokens
     }
 
     private static var _shared: TransferTokenDetails?
@@ -21,43 +62,87 @@ final class TransferTokenDetails {
         _shared
     }
 
-    static func create(isMainnet: Bool) -> TransferTokenDetails? {
-        _shared = TransferTokenDetails(isMainnet: isMainnet)
-        return _shared
+    static func create(isMainnet: Bool) -> TransferTokenDetails {
+        let instance = TransferTokenDetails(isMainnet: isMainnet)
+        _shared = instance
+        return instance
+    }
+
+    func update(info: TransferTokenInfo) {
+        for i in 0..<_infos.count {
+            let existing = _infos[i]
+            if info.chainId == existing.chainId, info.tokenAddress == existing.tokenAddress {
+                _infos[i] = info
+                return
+            }
+        }
+        assertionFailure("Could not find token info to update")
     }
 }
 
-struct TransferTokenInfo {
-    let chain: String
+enum TransferChain: String {
+    case Ethereum, Optimism, Arbitrum, Base, Polygon
+}
+
+enum TransferToken: String {
+    case ETH, USDC, POL
+}
+
+struct TransferTokenInfo: Equatable {
+    let chain: TransferChain
     let chainId: String
-    let token: String
+
+    let token: TransferToken
     let tokenAddress: String
+
     var amount: Double?
     var usdcAmount: Double?
+
+    var chainLogoUrl: String {
+        let logoName: String
+        switch chain {
+        case .Ethereum: logoName = "ethereum.png"
+        case .Optimism: logoName = "optimism.png"
+        case .Arbitrum: logoName = "arbitrum.png"
+        case .Base: logoName = "base.png"
+        case .Polygon: logoName = "polygon.png"
+        }
+        return AbacusStateManager.shared.deploymentUri + "/chains/\(logoName)"
+    }
+
+    var tokenLogoUrl: String {
+        let logoName: String
+        switch token {
+        case .ETH: logoName = "eth.png"
+        case .USDC: logoName = "usdc.png"
+        case .POL: logoName = "pol.png"
+        }
+        return AbacusStateManager.shared.deploymentUri + "/currencies/\(logoName)"
+    }
 }
 
 private let mainnetTokens: [TransferTokenInfo] = [
-    TransferTokenInfo(chain: "Ethereum", chainId: "1", token: "USDC", tokenAddress: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"),
-    TransferTokenInfo(chain: "Base", chainId: "8453", token: "USDC", tokenAddress: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"),
-    TransferTokenInfo(chain: "Optimism", chainId: "10", token: "USDC", tokenAddress: "0x0b2c639c533813f4aa9d7837caf62653d097ff85"),
-    TransferTokenInfo(chain: "Arbitrum", chainId: "42161", token: "USDC", tokenAddress: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"),
-    TransferTokenInfo(chain: "Polygon", chainId: "137", token: "USDC", tokenAddress: "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"),
-    TransferTokenInfo(chain: "Ethereum", chainId: "1", token: "ETH", tokenAddress: "native"),
-    TransferTokenInfo(chain: "Base", chainId: "8453", token: "ETH", tokenAddress: "native"),
-    TransferTokenInfo(chain: "Optimism", chainId: "10", token: "ETH", tokenAddress: "native"),
-    TransferTokenInfo(chain: "Arbitrum", chainId: "42161", token: "ETH", tokenAddress: "native"),
-    TransferTokenInfo(chain: "Polygon", chainId: "137", token: "ETH", tokenAddress: "native")
+    TransferTokenInfo(chain: .Ethereum, chainId: "1", token: .USDC, tokenAddress: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"),
+    TransferTokenInfo(chain: .Base, chainId: "8453", token: .USDC, tokenAddress: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"),
+    TransferTokenInfo(chain: .Optimism, chainId: "10", token: .USDC, tokenAddress: "0x0b2c639c533813f4aa9d7837caf62653d097ff85"),
+    TransferTokenInfo(chain: .Arbitrum, chainId: "42161", token: .USDC, tokenAddress: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"),
+    TransferTokenInfo(chain: .Polygon, chainId: "137", token: .USDC, tokenAddress: "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"),
+    TransferTokenInfo(chain: .Ethereum, chainId: "1", token: .ETH, tokenAddress: "native"),
+    TransferTokenInfo(chain: .Base, chainId: "8453", token: .ETH, tokenAddress: "native"),
+    TransferTokenInfo(chain: .Optimism, chainId: "10", token: .ETH, tokenAddress: "native"),
+    TransferTokenInfo(chain: .Arbitrum, chainId: "42161", token: .ETH, tokenAddress: "native"),
+    TransferTokenInfo(chain: .Polygon, chainId: "137", token: .POL, tokenAddress: "native")
 ]
 
 private let testnetTokens: [TransferTokenInfo] = [
-    TransferTokenInfo(chain: "Ethereum", chainId: "11155111", token: "USDC", tokenAddress: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"),
-    TransferTokenInfo(chain: "Base", chainId: "84532", token: "USDC", tokenAddress: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"),
-    TransferTokenInfo(chain: "Optimism", chainId: "11155420", token: "USDC", tokenAddress: "0x0b2c639c533813f4aa9d7837caf62653d097ff85"),
-    TransferTokenInfo(chain: "Arbitrum", chainId: "421614", token: "USDC", tokenAddress: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"),
-    TransferTokenInfo(chain: "Polygon", chainId: "80002", token: "USDC", tokenAddress: "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"),
-    TransferTokenInfo(chain: "Ethereum", chainId: "11155111", token: "ETH", tokenAddress: "native"),
-    TransferTokenInfo(chain: "Base", chainId: "84532", token: "ETH", tokenAddress: "native"),
-    TransferTokenInfo(chain: "Optimism", chainId: "11155420", token: "ETH", tokenAddress: "native"),
-    TransferTokenInfo(chain: "Arbitrum", chainId: "421614", token: "ETH", tokenAddress: "native"),
-    TransferTokenInfo(chain: "Polygon", chainId: "80002", token: "ETH", tokenAddress: "native")
+    TransferTokenInfo(chain: .Ethereum, chainId: "11155111", token: .USDC, tokenAddress: "0x482ff112ae0658a014978f53120a64e111e6bedf"),
+    TransferTokenInfo(chain: .Base, chainId: "84532", token: .USDC, tokenAddress: "0x0F2559677a6CF88b48BBFAddE1757D4f302C8e23"),
+    TransferTokenInfo(chain: .Optimism, chainId: "11155420", token: .USDC, tokenAddress: "0xD0C591da9805D1f801B297bDF46352287E0A6A63"),
+    TransferTokenInfo(chain: .Arbitrum, chainId: "421614", token: .USDC, tokenAddress: "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d"),
+    TransferTokenInfo(chain: .Polygon, chainId: "80002", token: .USDC, tokenAddress: "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582"),
+    TransferTokenInfo(chain: .Ethereum, chainId: "11155111", token: .ETH, tokenAddress: "native"),
+    TransferTokenInfo(chain: .Base, chainId: "84532", token: .ETH, tokenAddress: "native"),
+    TransferTokenInfo(chain: .Optimism, chainId: "11155420", token: .ETH, tokenAddress: "native"),
+    TransferTokenInfo(chain: .Arbitrum, chainId: "421614", token: .ETH, tokenAddress: "native"),
+    TransferTokenInfo(chain: .Polygon, chainId: "80002", token: .POL, tokenAddress: "native")
 ]

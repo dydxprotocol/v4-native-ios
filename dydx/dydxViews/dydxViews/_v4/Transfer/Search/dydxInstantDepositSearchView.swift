@@ -58,7 +58,7 @@ public class dydxInstantDepositSearchViewModel: PlatformViewModel {
 
                         let otherHeader = self.createHeader(text: DataLocalizer.localize(path: "APP.GENERAL.OTHER_TOKENS"))
                         Section(header: otherHeader) {
-                            ForEach(self.tokens ?? [], id: \.id) { item in
+                            ForEach(self.otherTokens ?? [], id: \.id) { item in
                                 item.createView(parentStyle: style)
                                     .padding(.horizontal, 16)
                             }
