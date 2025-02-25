@@ -17,19 +17,12 @@ import dydxCartera
 import Web3
 
 public final class dydxTransferTokensWorker: BaseWorker {
-
-    private let transferTokenDetails: TransferTokenDetails
-
     private var ethereumInteractors = [String: EthereumInteractor]()
-
-    public override init() {
-        transferTokenDetails = TransferTokenDetails.create(isMainnet: AbacusStateManager.shared.isMainNet)
-
-        super.init()
-    }
 
     public override func start() {
         super.start()
+
+        let transferTokenDetails = TransferTokenDetails.create(isMainnet: AbacusStateManager.shared.isMainNet)
 
         Publishers
             .CombineLatest3(
@@ -49,9 +42,9 @@ public final class dydxTransferTokensWorker: BaseWorker {
         // set the default
         transferTokenDetails.infos
             .removeDuplicates()
-            .sink { [weak self] tokens in
-                if self?.transferTokenDetails.defaultToken == nil, let firstToken = tokens.first {
-                    self?.transferTokenDetails.defaultToken = firstToken
+            .sink { tokens in
+                if TransferTokenDetails.shared?.defaultToken == nil, let firstToken = tokens.first {
+                    TransferTokenDetails.shared?.defaultToken = firstToken
                 }
             }
             .store(in: &self.subscriptions)
@@ -68,8 +61,8 @@ public final class dydxTransferTokensWorker: BaseWorker {
 
         let ethereumInteractor = ethereumInteractors[rpcInfo.rpcUrl] ??  EthereumInteractor(url: rpcInfo.rpcUrl)
         ethereumInteractors[rpcInfo.rpcUrl] = ethereumInteractor
-        if info.tokenAddress == "native" {
-           ethereumInteractor.eth_getBalance(address: address) { [weak self] result in
+        if info.tokenAddress == "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" {
+           ethereumInteractor.eth_getBalance(address: address) { result in
                 let tokenDecimals = 18
                 switch result.status {
                 case .success(let amount):
@@ -77,7 +70,7 @@ public final class dydxTransferTokensWorker: BaseWorker {
                     let balance = EthConversions.uint256ToHumanTokenString(output: string, decimals: tokenDecimals)
                     var info = info
                     info.amount = Parser.standard.asNumber(balance)?.doubleValue
-                    self?.transferTokenDetails.update(info: info)
+                    TransferTokenDetails.shared?.update(info: info)
                 case .failure(let error):
                     Console.shared.log("Failed to get balance: \(error)")
                 }
@@ -98,7 +91,7 @@ public final class dydxTransferTokensWorker: BaseWorker {
                             let balance = EthConversions.uint256ToHumanTokenString(output: string, decimals: tokenDecimals)
                             var info = info
                             info.usdcAmount = Parser.standard.asNumber(balance)?.doubleValue
-                            self?.transferTokenDetails.update(info: info)
+                            TransferTokenDetails.shared?.update(info: info)
                         } else {
                             Console.shared.log("Unable to parse response amount")
                         }

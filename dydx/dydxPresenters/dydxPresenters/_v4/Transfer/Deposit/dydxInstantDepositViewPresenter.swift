@@ -21,10 +21,27 @@ protocol dydxInstantDepositViewPresenterProtocol: HostedViewPresenterProtocol {
 }
 
 class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositViewModel>, dydxInstantDepositViewPresenterProtocol {
+    private var currentSize: Double?
+
+    private let validationPresenter = dydxValidationViewPresenter(receiptType: .transfer)
+    private let ctaButtonPresenter = dydxTransferInputCtaButtonViewPresenter(transferType: .deposit)
+
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        validationPresenter,
+        ctaButtonPresenter
+    ]
+
     override init() {
+        let viewModel = dydxInstantDepositViewModel.previewValue
+
+        validationPresenter.$viewModel.assign(to: &viewModel.$validationViewModel)
+        ctaButtonPresenter.$viewModel.assign(to: &viewModel.$ctaButton)
+
         super.init()
 
-        viewModel = dydxInstantDepositViewModel.previewValue
+        self.viewModel = viewModel
+
+        attachChildren(workers: childPresenters)
     }
 
     override func start() {
@@ -35,29 +52,61 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
         }
 
         Publishers
-            .CombineLatest(
+            .CombineLatest3(
+                AbacusStateManager.shared.state.transferInput,
                 transferTokenDetails.$defaultToken,
                 transferTokenDetails.$selectedToken)
-            .sink { [weak self] defaultToken, selectedToken in
-                self?.updateInputToken(token: selectedToken ?? defaultToken)
+            .sink { [weak self] transferInput, defaultToken, selectedToken in
+                if transferInput.type != .deposit {
+                    AbacusStateManager.shared.startDeposit()
+                }
+
+                let token = selectedToken ?? defaultToken
+                self?.updateInputToken(transferInput: transferInput, token: token)
+                if transferInput.chain != token?.chainId {
+                    AbacusStateManager.shared.transfer(input: token?.chainId, type: .chain)
+                }
+                if transferInput.token != token?.tokenAddress {
+                    AbacusStateManager.shared.transfer(input: token?.tokenAddress, type: .token)
+                }
             }
             .store(in: &subscriptions)
     }
 
-    private func updateInputToken(token: TransferTokenInfo?) {
-        let input = dydxInstantDepositInputModel()
-        input.maxAmount = dydxFormatter.shared.dollar(number: token?.usdcAmount, digits: 2)
-        input.token = token?.token.rawValue
+    private func updateInputToken(transferInput: TransferInput, token: TransferTokenInfo?) {
+        let input = viewModel?.input
+
+        input?.maxAmount = token?.amount
+        input?.maxAmountString = dydxFormatter.shared.raw(number: token?.amount, digits: 4)
+        input?.token = token?.token.rawValue
         if let tokenLogoUrl = token?.tokenLogoUrl {
-            input.tokenIcon = URL(string: tokenLogoUrl)
+            input?.tokenIcon = URL(string: tokenLogoUrl)
         }
         if let chainLogoUrl = token?.chainLogoUrl {
-            input.chainIcon = URL(string: chainLogoUrl)
+            input?.chainIcon = URL(string: chainLogoUrl)
         }
-        input.assetAction = {
+        input?.assetAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/transfer/deposit/search", params: nil), animated: true, completion: nil)
         }
-        input.amountInput = PlatformTextInputViewModel()
-        viewModel?.input = input
+        let placholder = dydxFormatter.shared.raw(number: 0.0, digits: 4)
+        input?.value = transferInput.size?.size
+        input?.placeHolder = placholder
+        input?.onEdited = { [weak self] amount in
+            var amountDouble = Parser.standard.asNumber(amount?.unlocalizedNumericValue)?.doubleValue ?? 0
+            amountDouble = min(amountDouble, token?.amount ?? 0)
+            if amountDouble != self?.currentSize {
+                AbacusStateManager.shared.transfer(input: Parser.standard.asString(amountDouble), type: .size)
+            }
+        }
+        let size: Double = parser.asNumber(transferInput.size?.size)?.doubleValue ?? 0
+        if size > 0 {
+             input?.value = dydxFormatter.shared.raw(number: NSNumber(value: size), size: "0.001")
+        } else {
+             input?.value = nil
+        }
+        input?.maxAction = {
+            AbacusStateManager.shared.transfer(input: Parser.standard.asString(token?.amount), type: .size)
+        }
+        currentSize = size
     }
 }

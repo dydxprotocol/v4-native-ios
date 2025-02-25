@@ -91,9 +91,9 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     private var focused: Bool = false {
         didSet {
             if focused != oldValue {
-                if !focused {
+                //if !focused {
                     input = value ?? ""
-                }
+                //}
             }
         }
     }
@@ -105,6 +105,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     private let twoWayBinding: Bool
     private let textAlignment: TextAlignment
     private let dynamicWidth: Bool
+    let padding: EdgeInsets
     
     @Published public var isFocused: Bool = false
     
@@ -120,13 +121,15 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 focusedOnAppear: Bool = false,
                 twoWayBinding: Bool = false,
                 textAlignment: TextAlignment = .leading,
-                dynamicWidth: Bool = false) {
+                dynamicWidth: Bool = false,
+                padding: EdgeInsets = EdgeInsets(horizontal: 16, vertical: 12)) {
         self.inputType = inputType
         self.truncateMode = truncateMode
         self.focusedOnAppear = focusedOnAppear
         self.twoWayBinding = twoWayBinding
         self.textAlignment = textAlignment
         self.dynamicWidth = dynamicWidth
+        self.padding = padding
         super.init(label: label, labelAccessory: labelAccessory, valueAccessoryView: valueAccessoryView, onEdited: onEdited)
         self.value = value
         input = value ?? ""
@@ -155,7 +158,8 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 isFocused: isFocused,
                 twoWayBinding: twoWayBinding,
                 textAlignment: textAlignment,
-                dynamicWidth: dynamicWidth
+                dynamicWidth: dynamicWidth,
+                padding: padding
             )
             
             return AnyView(PlatformInputView(model: model,

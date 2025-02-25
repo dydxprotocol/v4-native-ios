@@ -127,11 +127,11 @@ private let mainnetTokens: [TransferTokenInfo] = [
     TransferTokenInfo(chain: .Optimism, chainId: "10", token: .USDC, tokenAddress: "0x0b2c639c533813f4aa9d7837caf62653d097ff85"),
     TransferTokenInfo(chain: .Arbitrum, chainId: "42161", token: .USDC, tokenAddress: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"),
     TransferTokenInfo(chain: .Polygon, chainId: "137", token: .USDC, tokenAddress: "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"),
-    TransferTokenInfo(chain: .Ethereum, chainId: "1", token: .ETH, tokenAddress: "native"),
-    TransferTokenInfo(chain: .Base, chainId: "8453", token: .ETH, tokenAddress: "native"),
-    TransferTokenInfo(chain: .Optimism, chainId: "10", token: .ETH, tokenAddress: "native"),
-    TransferTokenInfo(chain: .Arbitrum, chainId: "42161", token: .ETH, tokenAddress: "native"),
-    TransferTokenInfo(chain: .Polygon, chainId: "137", token: .POL, tokenAddress: "native")
+    TransferTokenInfo(chain: .Ethereum, chainId: "1", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+    TransferTokenInfo(chain: .Base, chainId: "8453", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+    TransferTokenInfo(chain: .Optimism, chainId: "10", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+    TransferTokenInfo(chain: .Arbitrum, chainId: "42161", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+    TransferTokenInfo(chain: .Polygon, chainId: "137", token: .POL, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE")
 ]
 
 private let testnetTokens: [TransferTokenInfo] = [
@@ -140,9 +140,9 @@ private let testnetTokens: [TransferTokenInfo] = [
     TransferTokenInfo(chain: .Optimism, chainId: "11155420", token: .USDC, tokenAddress: "0xD0C591da9805D1f801B297bDF46352287E0A6A63"),
     TransferTokenInfo(chain: .Arbitrum, chainId: "421614", token: .USDC, tokenAddress: "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d"),
     TransferTokenInfo(chain: .Polygon, chainId: "80002", token: .USDC, tokenAddress: "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582"),
-    TransferTokenInfo(chain: .Ethereum, chainId: "11155111", token: .ETH, tokenAddress: "native"),
-    TransferTokenInfo(chain: .Base, chainId: "84532", token: .ETH, tokenAddress: "native"),
-    TransferTokenInfo(chain: .Optimism, chainId: "11155420", token: .ETH, tokenAddress: "native"),
-    TransferTokenInfo(chain: .Arbitrum, chainId: "421614", token: .ETH, tokenAddress: "native"),
-    TransferTokenInfo(chain: .Polygon, chainId: "80002", token: .POL, tokenAddress: "native")
+    TransferTokenInfo(chain: .Ethereum, chainId: "11155111", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+    TransferTokenInfo(chain: .Base, chainId: "84532", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+    TransferTokenInfo(chain: .Optimism, chainId: "11155420", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+    TransferTokenInfo(chain: .Arbitrum, chainId: "421614", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+    TransferTokenInfo(chain: .Polygon, chainId: "80002", token: .POL, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE")
 ]

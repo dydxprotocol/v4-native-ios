@@ -10,29 +10,32 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxInstantDepositInputModel: PlatformViewModel {
+public class dydxInstantDepositInputModel: PlatformTextInputViewModel {
     @Published public var token: String?
     @Published public var maxAction: (() -> Void)?
-    @Published public var maxAmount: String?
+    @Published public var maxAmount: Double?
+    @Published public var maxAmountString: String?
     @Published public var tokenIcon: URL?
     @Published public var chainIcon: URL?
-    @Published public var amountInput: PlatformTextInputViewModel?
     @Published public var assetAction: (() -> Void)?
 
-    public init() { }
+    public init() {
+        super.init(padding: EdgeInsets(horizontal: 16, vertical: 0))
+    }
 
     public static var previewValue: dydxInstantDepositInputModel {
         let vm = dydxInstantDepositInputModel()
         vm.token = "USDC"
-        vm.maxAmount = "$1000.00"
-        vm.amountInput = PlatformTextInputViewModel()
+        vm.maxAmount = 1000.00
         vm.chainIcon = URL(string: "https://v4.testnet.dydx.exchange/chains/ethereum.png")
         vm.tokenIcon = URL(string: "https://v4.testnet.dydx.exchange/currencies/usdc.png")
         return vm
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
+        let inputView = super.createView(parentStyle: parentStyle.themeFont(fontType: .base, fontSize: .largest), styleKey: styleKey)
+
+        return PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = HStack {
@@ -41,7 +44,7 @@ public class dydxInstantDepositInputModel: PlatformViewModel {
                         Text(DataLocalizer.localize(path: "APP.GENERAL.AMOUNT"))
                             .themeFont(fontSize: .small)
 
-                        Text(self.maxAmount ?? "")
+                        Text(self.maxAmountString ?? "")
                             .themeFont(fontSize: .small)
                             .themeColor(foreground: .textTertiary)
 
@@ -50,14 +53,22 @@ public class dydxInstantDepositInputModel: PlatformViewModel {
                             .themeColor(foreground: .colorPurple)
 
                         PlatformButtonViewModel(content: buttonContent.wrappedViewModel, type: .iconType, state: .primary) { [weak self] in
-                            self?.maxAction?()
+                            PlatformView.hideKeyboard()
+
+                            let amount = self?.maxAmount ?? 0
+                            if amount > 0 {
+                                self?.value = self?.maxAmountString
+                                self?.valueChanged(value: self?.value)
+                                self?.maxAction?()
+                            }
                         }
                         .createView(parentStyle: style)
                     }
                     .padding(.horizontal, 16)
 
-                    self.amountInput?.createView(parentStyle: style.themeFont(fontType: .base, fontSize: .largest))
-                        .padding(.vertical, -8)
+                    inputView
+                        .padding(.vertical, 4)
+                        .clipped()
                 }
 
                 Spacer()

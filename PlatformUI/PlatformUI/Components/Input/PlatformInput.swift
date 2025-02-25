@@ -50,8 +50,7 @@ struct PlatformInputView: View {
             }
             model.valueAccessory
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
+        .padding(model.padding)
         .contentShape(Rectangle())
         .onChange(of: model.isFocused) {
             isFocused = $0
@@ -175,7 +174,8 @@ public class PlatformInputModel: PlatformViewModel {
     @Published public var twoWayBinding: Bool = false
     @Published public var textAlignment: TextAlignment = .leading
     @Published public var dynamicWidth: Bool = false
-  
+    @Published public var padding: EdgeInsets
+    
     public init(label: String? = nil,
                 labelAccessory: AnyView? = nil,
                 value: Binding<String>,
@@ -191,7 +191,8 @@ public class PlatformInputModel: PlatformViewModel {
                 isFocused: Bool = false,
                 twoWayBinding: Bool = false,
                 textAlignment: TextAlignment = .leading,
-                dynamicWidth: Bool = false) {
+                dynamicWidth: Bool = false,
+                padding: EdgeInsets = EdgeInsets(horizontal: 16, vertical: 12)) {
         self.label = label
         self.labelAccessory = labelAccessory
         self.value = value
@@ -208,6 +209,7 @@ public class PlatformInputModel: PlatformViewModel {
         self.twoWayBinding = twoWayBinding
         self.textAlignment = textAlignment
         self.dynamicWidth = dynamicWidth
+        self.padding = padding
     }
 
     public static var previewValue: PlatformInputModel = {
