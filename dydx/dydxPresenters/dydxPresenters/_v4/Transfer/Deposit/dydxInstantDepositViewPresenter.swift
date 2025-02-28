@@ -32,7 +32,7 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
     ]
 
     override init() {
-        let viewModel = dydxInstantDepositViewModel.previewValue
+        let viewModel = dydxInstantDepositViewModel()
 
         validationPresenter.$viewModel.assign(to: &viewModel.$validationViewModel)
         ctaButtonPresenter.$viewModel.assign(to: &viewModel.$ctaButton)
@@ -42,6 +42,7 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
         self.viewModel = viewModel
 
         attachChildren(workers: childPresenters)
+
     }
 
     override func start() {
@@ -62,7 +63,13 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
                 }
 
                 let token = selectedToken ?? defaultToken
+                if let tokenDecimals = self?.parser.asString(token?.decimals) {
+                    AbacusStateManager.shared.transfer(input: tokenDecimals, type: .decimals)
+                }
                 self?.updateInputToken(transferInput: transferInput, token: token)
+
+                self?.updateSelector(transferInput: transferInput)
+
                 if transferInput.chain != token?.chainId {
                     AbacusStateManager.shared.transfer(input: token?.chainId, type: .chain)
                 }
@@ -71,6 +78,46 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
                 }
             }
             .store(in: &subscriptions)
+    }
+
+    private func updateSelector(transferInput: TransferInput) {
+        if let duration = transferInput.summary?.estimatedRouteDurationSeconds?.doubleValue,
+           let minutes = parser.asString(Int(ceil(duration / 60))) {
+            let minutesLocalized = DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.X_MINUTES", params: ["X": minutes])
+            viewModel?.selector?.regularTime = minutesLocalized
+        } else {
+            viewModel?.selector?.regularTime = "< " + DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.30MIN")
+        }
+
+        if let fees = transferInput.summary?.bridgeFee?.doubleValue,
+           let amount = dydxFormatter.shared.dollar(number: parser.asNumber(fees)) {
+            viewModel?.selector?.regularFee = amount
+        } else {
+            viewModel?.selector?.regularFee = DataLocalizer.localize(path: "APP.ONBOARDING.SKIP_SLOW_ROUTE_DESC")
+        }
+
+        if let fees = transferInput.goFastSummary?.bridgeFee?.doubleValue,
+           let amount = dydxFormatter.shared.dollar(number: parser.asNumber(fees)) {
+            viewModel?.selector?.instantFee = amount
+            if TransferRouteSelectionInfo.shared.allSelections != [.regular, .instant] {
+                viewModel?.selector?.selection = .instant
+                TransferRouteSelectionInfo.shared.allSelections = [.regular, .instant]
+                TransferRouteSelectionInfo.shared.selected = .instant
+            }
+        } else {
+            viewModel?.selector?.instantFee = DataLocalizer.localize(path: "APP.GENERAL.UNAVAILABLE")
+            if TransferRouteSelectionInfo.shared.allSelections != [.regular] {
+                viewModel?.selector?.selection = .regular
+                TransferRouteSelectionInfo.shared.allSelections = [.regular]
+                TransferRouteSelectionInfo.shared.selected = .regular
+            }
+        }
+        viewModel?.selector?.selectionAction = { [weak self] selected in
+            if TransferRouteSelectionInfo.shared.allSelections.contains(selected) {
+                TransferRouteSelectionInfo.shared.selected = selected
+                self?.viewModel?.selector?.selection = selected
+            }
+        }
     }
 
     private func updateInputToken(transferInput: TransferInput, token: TransferTokenInfo?) {

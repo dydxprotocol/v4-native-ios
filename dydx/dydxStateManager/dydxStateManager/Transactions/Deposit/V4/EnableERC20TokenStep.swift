@@ -47,7 +47,7 @@ struct EnableERC20TokenStep: AsyncStep {
                                                      provider: CarteraProvider(),
                                                      walletId: walletId,
                                                      chainIdInt: chainIdInt,
-                                                     amount: desiredAmount)
+                                                     amount: nil)       // max amount
                             .run()
                         }
                     } else if let error = error {

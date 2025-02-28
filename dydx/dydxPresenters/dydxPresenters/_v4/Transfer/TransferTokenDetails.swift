@@ -28,6 +28,10 @@ final class TransferTokenDetails {
 
     @Published private var _infos: [TransferTokenInfo] = []
 
+    var currentInfos: [TransferTokenInfo] {
+        _infos
+    }
+
     lazy var infos: AnyPublisher<[TransferTokenInfo], Never> =
         Publishers
             .CombineLatest(
@@ -118,6 +122,14 @@ struct TransferTokenInfo: Equatable {
         case .POL: logoName = "pol.png"
         }
         return AbacusStateManager.shared.deploymentUri + "/currencies/\(logoName)"
+    }
+
+    var decimals: Int {
+        switch token {
+        case .ETH: return 18
+        case .POL: return 18
+        case .USDC: return 6
+        }
     }
 }
 

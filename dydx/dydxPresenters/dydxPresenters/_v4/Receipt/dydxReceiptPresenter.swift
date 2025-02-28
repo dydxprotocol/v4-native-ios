@@ -49,12 +49,6 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
     override func start() {
         super.start()
 
-        AbacusStateManager.shared.state.receipts
-            .sink { [weak self] (lines: [ReceiptLine]) in
-                self?.updateLines(lines: lines)
-            }
-            .store(in: &subscriptions)
-
         AbacusStateManager.shared.state.selectedSubaccount
             .compactMap { $0 }
             .sink { [weak self] account in
@@ -64,7 +58,7 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
             .store(in: &subscriptions)
     }
 
-    private func updateLines(lines: [ReceiptLine]) {
+    func updateLines(lines: [ReceiptLine]) {
         viewModel?.children = lines.compactMap { (line: Abacus.ReceiptLine) -> PlatformViewModel? in
             switch line {
             case .buyingpower:

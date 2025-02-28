@@ -309,6 +309,10 @@
                     "destination":"dydxPresenters.dydxTransferStatusViewBuilder",
                     "presentation":"prompt"
                 },
+                "/transfer/status/instant":{
+                    "destination":"dydxPresenters.dydxTransferInstantStatusViewBuilder",
+                    "presentation":"prompt"
+                },
                 "/update":{
                     "destination":"dydxPresenters.dydxUpdateViewBuilder",
                     "presentation":"root"

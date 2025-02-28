@@ -21,11 +21,26 @@ final class dydxTransferReceiptViewPresenter: dydxReceiptPresenter {
     override func start() {
         super.start()
 
-        AbacusStateManager.shared.state.transferInput
-            .sink { [weak self] (input: TransferInput) in
-                self?.updateReceipt(transferInput: input)
+        Publishers.CombineLatest(
+            AbacusStateManager.shared.state.receipts,
+            AbacusStateManager.shared.state.transferInput
+        )
+        .sink { [weak self] lines, input in
+            var filteredLines = lines
+            if dydxBoolFeatureFlag.skip_go_fast.isEnabled && input.type == .deposit {
+                filteredLines.removeAll {
+                    $0 == .bridgefee || $0 == .transferrouteestimatedduration || $0 == .slippage
+                }
+                if dydxBoolFeatureFlag.simple_ui.isEnabled, AppMode.current == .simple {
+                    filteredLines.removeAll {
+                        $0 == .equity
+                    }
+                }
             }
-            .store(in: &subscriptions)
+            self?.updateLines(lines: filteredLines)
+            self?.updateReceipt(transferInput: input)
+        }
+        .store(in: &subscriptions)
 
         AbacusStateManager.shared.state.selectedSubaccount
             .sink { [weak self] subaccount in

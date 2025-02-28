@@ -10,6 +10,8 @@ import Utilities
 import Combine
 import Abacus
 import Cartera
+import dydxFormatter
+import BigInt
 
 public struct DepositTransaction: AsyncStep {
     public typealias ProgressType = Void
@@ -17,20 +19,36 @@ public struct DepositTransaction: AsyncStep {
 
     private let depositTransactionV4: DepositTransactionV4?
 
-    public let transferInput: TransferInput
     public let walletAddress: String?
     public let walletId: String?
+    public let tokenAddress: String?
+    public let chainRpc: String?
+    public let payload: TransferInputRequestPayload?
+    public let tokenSize: BigUInt?
+    public let chainId: String?
 
-    public init(transferInput: TransferInput, walletAddress: String?, walletId: String?) {
-        self.transferInput = transferInput
-        self.walletAddress = walletAddress
+    public init(walletAddress: String?,
+                walletId: String?,
+                tokenAddress: String?,
+                chainRpc: String?,
+                payload: TransferInputRequestPayload?,
+                tokenSize: BigUInt?,
+                chainId: String?) {
+       self.walletAddress = walletAddress
         self.walletId = walletId
+        self.tokenAddress = tokenAddress
+        self.chainRpc = chainRpc
+        self.payload = payload
+        self.tokenSize = tokenSize
+        self.chainId = chainId
 
         if let walletAddress = walletAddress,
-            let chain = transferInput.chain, let token = transferInput.token,
-           let chainRpc = transferInput.resources?.chainResources?[chain]?.rpc,
-           let tokenAddress = transferInput.resources?.tokenResources?[token]?.address {
-            depositTransactionV4 = DepositTransactionV4(transferInput: transferInput,
+           let chainId = chainId,
+           let chainRpc = chainRpc,
+           let tokenAddress = tokenAddress {
+            depositTransactionV4 = DepositTransactionV4(payload: payload,
+                                                        tokenSize: tokenSize,
+                                                        chainId: chainId,
                                                         provider: CarteraProvider(),
                                                         walletAddress: walletAddress,
                                                         walletId: walletId,

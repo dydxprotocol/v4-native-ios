@@ -19,6 +19,10 @@ public class dydxInstantDepositInputModel: PlatformTextInputViewModel {
     @Published public var chainIcon: URL?
     @Published public var assetAction: (() -> Void)?
 
+    public override var inputType: PlatformTextInputViewModel.InputType {
+        .decimalDigits
+    }
+
     public init() {
         super.init(padding: EdgeInsets(horizontal: 16, vertical: 0))
     }

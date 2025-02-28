@@ -37,6 +37,12 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
     override func start() {
         super.start()
 
+        AbacusStateManager.shared.state.receipts
+            .sink { [weak self] (lines: [ReceiptLine]) in
+                self?.updateLines(lines: lines)
+            }
+            .store(in: &subscriptions)
+
         Publishers
             .CombineLatest3(
                 tradeSummaryPublisher,

@@ -24,11 +24,11 @@ struct ERC20ApprovalStep: AsyncStep {
     let provider: CarteraProvider
     let walletId: String?
     let chainIdInt: Int
-    let amount: BigUInt
+    let amount: BigUInt?
 
     private let ethereumInteractor: EthereumInteractor
 
-    init(chainRpc: String, tokenAddress: String, ethereumAddress: String, spenderAddress: String, provider: CarteraProvider, walletId: String?, chainIdInt: Int, amount: BigUInt) {
+    init(chainRpc: String, tokenAddress: String, ethereumAddress: String, spenderAddress: String, provider: CarteraProvider, walletId: String?, chainIdInt: Int, amount: BigUInt?) {
         self.chainRpc = chainRpc
         self.tokenAddress = tokenAddress
         self.ethereumAddress = ethereumAddress
@@ -46,10 +46,18 @@ struct ERC20ApprovalStep: AsyncStep {
               let spender = try? EthereumAddress(hex: spenderAddress, eip55: false) else {
             return Just(AsyncEvent.result(false, nil)).eraseToAnyPublisher()
         }
-        let function = ERC20ApproveFunction(contract: contract,
+        let function: ERC20ApproveFunction
+        if let amount = amount {
+            function = ERC20ApproveFunction(contract: contract,
                                             from: from,
                                             spender: spender,
                                             amount: amount)
+        } else {
+            // max amount
+            function = ERC20ApproveFunction(contract: contract,
+                                            from: from,
+                                            spender: spender)
+        }
         guard let transaction = try? function.transaction() else {
             return Just(AsyncEvent.result(false, nil)).eraseToAnyPublisher()
         }

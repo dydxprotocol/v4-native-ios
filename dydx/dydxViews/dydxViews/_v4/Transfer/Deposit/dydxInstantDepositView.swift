@@ -12,7 +12,8 @@ import Utilities
 
 public class dydxInstantDepositViewModel: PlatformViewModel {
     @Published public var input: dydxInstantDepositInputModel? = dydxInstantDepositInputModel()
-    @Published public var selector: dydxInstantDepositSelectorModel?
+    @Published public var selector: dydxInstantDepositSelectorModel? =
+        dydxInstantDepositSelectorModel()
     @Published public var ctaButton: dydxTradeInputCtaButtonViewModel? = dydxTradeInputCtaButtonViewModel()
     @Published public var validationViewModel: dydxValidationViewModel? = dydxValidationViewModel()
     @Published public var showConnectWallet = false

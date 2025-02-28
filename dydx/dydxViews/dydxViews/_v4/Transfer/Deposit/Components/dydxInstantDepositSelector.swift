@@ -10,21 +10,22 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxInstantDepositSelectorModel: PlatformViewModel {
-    public enum Selection {
-        case instant, regular
-    }
+public enum TransferRouteSelection {
+    case instant, regular
+}
 
-    @Published public var selection: Selection = .regular
-    @Published public var instantTime: String?
+public class dydxInstantDepositSelectorModel: PlatformViewModel {
+    @Published public var selection: TransferRouteSelection = .regular
+    @Published public var instantFee: String?
     @Published public var regularTime: String?
     @Published public var regularFee: String?
+    @Published public var selectionAction: ((TransferRouteSelection) -> Void)?
 
     public init() { }
 
     public static var previewValue: dydxInstantDepositSelectorModel {
         let vm = dydxInstantDepositSelectorModel()
-        vm.instantTime = "$0.01"
+        vm.instantFee = "$0.01"
         vm.regularTime = "$0.02"
         vm.regularFee = "$1.00"
         return vm
@@ -36,10 +37,18 @@ public class dydxInstantDepositSelectorModel: PlatformViewModel {
 
             let view = VStack {
                 HStack(spacing: 16) {
-                    self.instantSelectView(style: style)
-                        .frame(maxWidth: .infinity)
-                    self.regularSelectView(style: style)
-                        .frame(maxWidth: .infinity)
+                    Button(action: {
+                        self.selectionAction?(.instant)
+                    }) {
+                        self.instantSelectView(style: style)
+                            .frame(maxWidth: .infinity)
+                    }
+                    Button(action: {
+                        self.selectionAction?(.regular)
+                    }) {
+                        self.regularSelectView(style: style)
+                            .frame(maxWidth: .infinity)
+                    }
                 }
             }
             return AnyView(view)
@@ -57,9 +66,9 @@ public class dydxInstantDepositSelectorModel: PlatformViewModel {
 
             VStack(alignment: .leading) {
                 Text(DataLocalizer.localize(path: "APP.GENERAL.INSTANT"))
-                    .themeFont(fontSize: .medium)
+                    .themeFont(fontSize: .large)
                     .themeColor(foreground: selected ? .textPrimary : .textTertiary)
-                Text(instantTime ?? "")
+                Text(instantFee ?? "")
                     .themeFont(fontSize: .small)
                     .themeColor(foreground: selected ? .textSecondary : .textTertiary)
             }
@@ -85,10 +94,10 @@ public class dydxInstantDepositSelectorModel: PlatformViewModel {
             .createView(parentStyle: style)
 
             VStack(alignment: .leading) {
-                Text(regularFee ?? "")
-                    .themeFont(fontSize: .medium)
+                Text(regularTime ?? "")
+                    .themeFont(fontSize: .large)
                     .themeColor(foreground: selected ? .textPrimary : .textTertiary)
-               Text(regularTime ?? "")
+               Text(regularFee ?? "")
                     .themeFont(fontSize: .small)
                     .themeColor(foreground: selected ? .textSecondary : .textTertiary)
            }
