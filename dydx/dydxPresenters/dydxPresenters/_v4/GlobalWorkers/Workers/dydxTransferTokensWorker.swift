@@ -25,14 +25,15 @@ public final class dydxTransferTokensWorker: BaseWorker {
         let transferTokenDetails = TransferTokenDetails.create(isMainnet: AbacusStateManager.shared.isMainNet)
 
         Publishers
-            .CombineLatest3(
+            .CombineLatest4(
                 AbacusStateManager.shared.state.configs
                     .compactMap { $0?.rpcMap },
                 AbacusStateManager.shared.state.currentWallet
                     .compactMap { $0?.ethereumAddress },
-                transferTokenDetails.infos.prefix(1)
+                transferTokenDetails.infos.prefix(1),
+                transferTokenDetails.$refreshCounter
             )
-            .sink { [weak self] rpcMap, ethereumAddress, infos in
+            .sink { [weak self] rpcMap, ethereumAddress, infos, _ in
                 for token in infos {
                     self?.loadTokenInfo(info: token, rpcMap: rpcMap, sourceAddress: ethereumAddress)
                 }

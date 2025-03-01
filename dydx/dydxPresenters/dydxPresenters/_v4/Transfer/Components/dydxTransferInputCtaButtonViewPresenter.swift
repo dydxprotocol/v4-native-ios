@@ -166,9 +166,11 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                         self?.addTransferHash(hash: hash,
                                               fromChainName: transferInput.chainName ?? transferInput.networkName,
                                               toChainName: AbacusStateManager.shared.environment?.chainName,
-                                              transferInput: transferInput)
-                        self?.showTransferStatus(hash: hash, transferInput: transferInput, isInstant: TransferRouteSelectionInfo.shared.selected == .instant)
+                                              transferInput: transferInput,
+                                              requestPayload: selectedRoute == .instant ? transferInput.goFastRequestPayload : transferInput.requestPayload)
+                        self?.showTransferStatus(hash: hash, transferInput: transferInput, isInstant: selectedRoute == .instant)
                         self?.resetInputFields()
+                        TransferTokenDetails.shared?.refresh()
                     } else {
                         ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
                                                message: DataLocalizer.localize(path: "APP.V4.NO_HASH"),
@@ -369,17 +371,21 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 addTransferHash(hash: fullHash,
                                 fromChainName: AbacusStateManager.shared.environment?.chainName,
                                 toChainName: transferInput.chainName ?? transferInput.networkName,
-                                transferInput: transferInput)
+                                transferInput: transferInput,
+                                requestPayload: transferInput.requestPayload)
                 showTransferStatus(hash: fullHash, transferInput: transferInput, isInstant: false)
                 resetInputFields()
+                TransferTokenDetails.shared?.refresh()
             } else if let hash = result["hash"] as? String {
                 let fullHash = "0x" + hash.lowercased()
                 addTransferHash(hash: fullHash,
                                 fromChainName: AbacusStateManager.shared.environment?.chainName,
                                 toChainName: transferInput.chainName ?? transferInput.networkName,
-                                transferInput: transferInput)
+                                transferInput: transferInput,
+                                requestPayload: transferInput.requestPayload)
                 showTransferStatus(hash: fullHash, transferInput: transferInput, isInstant: false)
                 resetInputFields()
+                TransferTokenDetails.shared?.refresh()
             } else {
                 ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
                                        message: DataLocalizer.localize(path: "APP.V4.NO_HASH"),
@@ -444,18 +450,22 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
         }
     }
 
-    private func addTransferHash(hash: String, fromChainName: String?, toChainName: String?, transferInput: TransferInput) {
+    private func addTransferHash(hash: String,
+                                 fromChainName: String?,
+                                 toChainName: String?,
+                                 transferInput: TransferInput,
+                                 requestPayload: TransferInputRequestPayload?) {
         let transfer = dydxTransferInstance(transferType: transferType.transferInstanceType,
                                             transactionHash: hash.lowercased(),
-                                            fromChainId: transferInput.requestPayload?.fromChainId,
+                                            fromChainId: requestPayload?.fromChainId,
                                             fromChainName: fromChainName,
-                                            toChainId: transferInput.requestPayload?.toChainId,
+                                            toChainId: requestPayload?.toChainId,
                                             toChainName: toChainName,
                                             date: Date(),
                                             usdcSize: parser.asDecimal(transferInput.size?.usdcSize)?.doubleValue,
                                             size: parser.asDecimal(transferInput.size?.size)?.doubleValue,
                                             isCctp: transferInput.isCctp,
-                                            requestId: transferInput.requestPayload?.requestId)
+                                            requestId: requestPayload?.requestId)
         AbacusStateManager.shared.addTransferInstance(transfer: transfer)
     }
 

@@ -13,6 +13,8 @@ final class TransferTokenDetails {
     @Published var selectedToken: TransferTokenInfo?
     @Published var defaultToken: TransferTokenInfo?
 
+    @Published var refreshCounter = 0
+
     let marketPrices: AnyPublisher<[String: Double], Never> =
         AbacusStateManager.shared.state.marketMap
         .compactMap { marketMap in
@@ -77,10 +79,20 @@ final class TransferTokenDetails {
             let existing = _infos[i]
             if info.chainId == existing.chainId, info.tokenAddress == existing.tokenAddress {
                 _infos[i] = info
+                if selectedToken?.chain == info.chain, selectedToken?.tokenAddress == info.tokenAddress {
+                    selectedToken = info
+                }
+                if defaultToken?.chain == info.chain, defaultToken?.tokenAddress == info.tokenAddress {
+                    defaultToken = info
+                }
                 return
             }
         }
         assertionFailure("Could not find token info to update")
+    }
+
+    func refresh() {
+        refreshCounter += 1
     }
 }
 

@@ -50,8 +50,7 @@ struct DepositTransactionV4: AsyncStep {
             .flatMap { event -> AnyPublisher<AsyncEvent<Void, String>, Never> in
                 if case let .result(enabled, error) = event {
                     if enabled == true {
-                        let transaction = EthereumTransactionRequest(transaction: ethereumTransactionRequest.transaction)
-                        return WalletSendTransactionStep(transaction: transaction,
+                        return WalletSendTransactionStep(transaction: ethereumTransactionRequest,
                                                          chainIdInt: chainIdInt,
                                                          provider: provider,
                                                          walletAddress: walletAddress,
@@ -103,8 +102,8 @@ private extension EthereumTransactionRequest {
         }
 
         let value: EthereumQuantity?
-        if let payloadValue = requestPayload.value {
-            value = try? EthereumQuantity(payloadValue)
+        if let payloadValue = requestPayload.value, let bigUIntValue = payloadValue.asBigUInt {
+            value = EthereumQuantity(quantity: bigUIntValue)
         } else {
             value = nil
         }
