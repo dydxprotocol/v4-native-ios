@@ -26,6 +26,7 @@ final class TransferTokenDetails {
             }
             return markets
         }
+        .share(replay: 1)
         .eraseToAnyPublisher()
 
     @Published private var _infos: [TransferTokenInfo] = []
@@ -56,6 +57,7 @@ final class TransferTokenDetails {
                 }
                 return newInfos.sorted { ($0.usdcAmount ?? 0) > ($1.usdcAmount ?? 0) }
             }
+            .share(replay: 1)
             .eraseToAnyPublisher()
 
     private init(isMainnet: Bool) {

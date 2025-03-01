@@ -64,11 +64,14 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
 
 public enum dydxNumberFeatureFlag: String {
     case min_deposit_for_launchable_market
+    case min_usdc_for_deposit
 
     var defaultValue: Double {
         switch self {
         case .min_deposit_for_launchable_market:
             return 10000.0
+        case .min_usdc_for_deposit:
+            return 10.0
         }
     }
 

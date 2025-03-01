@@ -114,6 +114,8 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
         super.start()
 
         resetPresentersForVisibilityChange()
+
+        TransferTokenDetails.shared?.refresh()
     }
 
     override func stop() {

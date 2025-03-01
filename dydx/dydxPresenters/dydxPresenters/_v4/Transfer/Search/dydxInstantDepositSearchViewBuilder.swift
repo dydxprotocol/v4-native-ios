@@ -54,8 +54,6 @@ private class dydxInstantDepositSearchViewPresenter: HostedViewPresenter<dydxIns
             return
         }
 
-        transferTokenDetails.refresh()
-
         Publishers
             .CombineLatest3(
                 transferTokenDetails.infos.removeDuplicates(),

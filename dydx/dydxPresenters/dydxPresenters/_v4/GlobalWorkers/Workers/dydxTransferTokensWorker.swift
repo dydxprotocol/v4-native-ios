@@ -91,7 +91,9 @@ public final class dydxTransferTokensWorker: BaseWorker {
                             let string = "\(amount)"
                             let balance = EthConversions.uint256ToHumanTokenString(output: string, decimals: tokenDecimals)
                             var info = info
-                            info.usdcAmount = Parser.standard.asNumber(balance)?.doubleValue
+                            let amount = Parser.standard.asNumber(balance)?.doubleValue
+                            info.amount = amount
+                            info.usdcAmount = amount
                             TransferTokenDetails.shared?.update(info: info)
                         } else {
                             Console.shared.log("Unable to parse response amount")

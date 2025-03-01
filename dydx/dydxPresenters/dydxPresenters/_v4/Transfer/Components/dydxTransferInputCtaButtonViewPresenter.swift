@@ -15,6 +15,7 @@ import PlatformUI
 import RoutingKit
 import Utilities
 import dydxAnalytics
+import dydxFormatter
 
 protocol dydxTransferInputCtaButtonViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxTradeInputCtaButtonViewModel? { get }
@@ -81,6 +82,9 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 }
             } else if transferError != nil {
                 viewModel?.ctaButtonState = .disabled(DataLocalizer.localize(path: "APP.GENERAL.ERROR"))
+            } else if belowMinSizeForDeposit(transferInput: transferInput) {
+                let minUsdcAmount = dydxFormatter.shared.dollar(number: dydxNumberFeatureFlag.min_usdc_for_deposit.value, digits: 2) ?? ""
+                viewModel?.ctaButtonState = .disabled(DataLocalizer.localize(path: "APP.ONBOARDING.MINIMUM_DEPOSIT", params: ["MIN_DEPOSIT_USDC": minUsdcAmount]))
             } else {
                 switch transferType {
                 case .deposit:
@@ -129,13 +133,24 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
     private func hasValidSize(transferInput: TransferInput) -> Bool {
         let size = parser.asDecimal(transferInput.size?.size)?.doubleValue ?? 0
         let usdcSize = parser.asDecimal(transferInput.size?.usdcSize)?.doubleValue ?? 0
+        let minAmount = powl(10.0, -16)
         switch transferType {
         case .deposit:
-            return size > 0
+            return size > minAmount
         case .withdrawal:
-            return usdcSize > 0
+            return usdcSize > minAmount
         case .transferOut:
-            return size > 0 || usdcSize > 0
+            return size > minAmount || usdcSize > minAmount
+        }
+    }
+
+    private func belowMinSizeForDeposit(transferInput: TransferInput) -> Bool {
+        let usdcSize = parser.asDecimal(transferInput.size?.usdcSize)?.doubleValue ?? 0
+        switch transferType {
+        case .deposit:
+            return usdcSize < dydxNumberFeatureFlag.min_usdc_for_deposit.value * 0.99 // since USDC price is not always == $1.00
+        default:
+            return true
         }
     }
 
