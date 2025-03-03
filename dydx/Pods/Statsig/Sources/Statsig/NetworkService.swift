@@ -112,6 +112,9 @@ class NetworkService {
         sinceTime: UInt64,
         previousDerivedFields: [String: String],
         fullChecksum: String?,
+        marker: NetworkMarker? = nil,
+        threadMarker: InitializeStepMarker? = nil,
+        processMarker: InitializeStepMarker? = nil,
         completion: ResultCompletionBlock?
     ) {
         let cacheKey = UserCacheKey.from(self.statsigOptions, user, self.sdkKey)
@@ -138,7 +141,7 @@ class NetworkService {
             completed = true
 
             self?.store.finalizeValues {
-                DispatchQueue.main.async {
+                ensureMainThread {
                     task?.cancel()
                     completion?(err)
                 }
@@ -171,8 +174,8 @@ class NetworkService {
         makeAndSendRequest(
             .initialize,
             body: body,
-            marker: Diagnostics.mark?.initialize.network,
-            threadMarker: Diagnostics.mark?.initialize.netThreadJump
+            marker: marker,
+            threadMarker: threadMarker
         ) { [weak self] data, response, error in
             if let error = error {
                 done(StatsigClientError(.failedToFetchValues, cause: error))
@@ -191,7 +194,7 @@ class NetworkService {
                 return
             }
 
-            Diagnostics.mark?.initialize.process.start()
+            processMarker?.start()
             var values: [String: Any]? = nil
             if statusCode == 204 {
                 values = ["has_updates": false]
@@ -200,13 +203,13 @@ class NetworkService {
             }
 
             guard let values = values else {
-                Diagnostics.mark?.initialize.process.end(success: false)
+                processMarker?.end(success: false)
                 done(StatsigClientError(.failedToFetchValues, message: "No values returned with initialize response"))
                 return
             }
 
             self.store.saveValues(values, cacheKey, fullUserHash) {
-                Diagnostics.mark?.initialize.process.end(success: true)
+                processMarker?.end(success: true)
                 done(nil)
             }
 
@@ -334,7 +337,7 @@ class NetworkService {
         threadMarker: InitializeStepMarker? = nil
     ) {
         threadMarker?.start()
-        DispatchQueue.main.async { [weak self] in
+        ensureMainThread { [weak self] in
             let currentAttempt = failedAttempts + 1
             threadMarker?.end(success: true)
             marker?.start(attempt: currentAttempt)

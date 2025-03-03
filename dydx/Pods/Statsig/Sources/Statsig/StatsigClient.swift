@@ -90,7 +90,12 @@ public class StatsigClient {
         if (options?.initializeValues != nil) {
             _onComplete(nil)
         } else {
-            fetchValuesFromNetwork(completion: _onComplete)
+            fetchValuesFromNetwork(
+                marker: Diagnostics.mark?.initialize.network,
+                threadMarker: Diagnostics.mark?.initialize.netThreadJump,
+                processMarker: Diagnostics.mark?.initialize.process,
+                completion: _onComplete
+            )
         }
     }
 
@@ -732,7 +737,7 @@ extension StatsigClient {
      Presents a view of the current internal state of the SDK.
      */
     public func openDebugView(_ callback: DebuggerCallback? = nil) {
-        DispatchQueue.main.async { [weak self] in
+        ensureMainThread { [weak self] in
             if let self = self {
                 StatsigDebugViewController.show(self.sdkKey, self.getDebugViewControllerState(), callback)
             }
@@ -763,7 +768,12 @@ extension StatsigClient {
 // MARK: Misc Private
 extension StatsigClient {
 
-    private func fetchValuesFromNetwork(completion: ResultCompletionBlock?) {
+    internal func fetchValuesFromNetwork(
+        marker: NetworkMarker? = nil,
+        threadMarker: InitializeStepMarker? = nil,
+        processMarker: InitializeStepMarker? = nil,
+        completion: ResultCompletionBlock?
+    ) {
         let currentUser = self.currentUser
         Diagnostics.mark?.initialize.storeRead.start()
         let sinceTime = self.store.getLastUpdateTime(user: currentUser)
@@ -771,7 +781,15 @@ extension StatsigClient {
         let fullChecksum = self.store.getFullChecksum(user: currentUser)
         Diagnostics.mark?.initialize.storeRead.end(success: true)
 
-        networkService.fetchInitialValues(for: currentUser, sinceTime: sinceTime, previousDerivedFields: previousDerivedFields, fullChecksum: fullChecksum) { [weak self] error in
+        networkService.fetchInitialValues(
+            for: currentUser,
+            sinceTime: sinceTime,
+            previousDerivedFields: previousDerivedFields,
+            fullChecksum: fullChecksum,
+            marker: marker,
+            threadMarker: threadMarker,
+            processMarker: processMarker
+        ) { [weak self] error in
             if let self = self {
                 if let error = error {
                     self.logger.log(Event.statsigInternalEvent(
@@ -850,7 +868,7 @@ extension StatsigClient {
             return
         }
         
-        DispatchQueue.main.async { [weak self] in
+        ensureMainThread { [weak self] in
             self?.fetchValuesFromNetwork { [weak self, completion] error in
                 guard let self = self else {
                     return
