@@ -133,14 +133,13 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
     private func hasValidSize(transferInput: TransferInput) -> Bool {
         let size = parser.asDecimal(transferInput.size?.size)?.doubleValue ?? 0
         let usdcSize = parser.asDecimal(transferInput.size?.usdcSize)?.doubleValue ?? 0
-        let minAmount = powl(10.0, -16)
         switch transferType {
         case .deposit:
-            return size > minAmount
+            return size > 0
         case .withdrawal:
-            return usdcSize > minAmount
+            return usdcSize > 0
         case .transferOut:
-            return size > minAmount || usdcSize > minAmount
+            return size > 0 || usdcSize > 0
         }
     }
 
@@ -150,7 +149,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
         case .deposit:
             return usdcSize < dydxNumberFeatureFlag.min_usdc_for_deposit.value * 0.99 // since USDC price is not always == $1.00
         default:
-            return true
+            return false
         }
     }
 
