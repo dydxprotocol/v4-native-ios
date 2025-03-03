@@ -91,9 +91,9 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
     private var focused: Bool = false {
         didSet {
             if focused != oldValue {
-                //if !focused {
+                if !focused {
                     input = value ?? ""
-                //}
+                }
             }
         }
     }
