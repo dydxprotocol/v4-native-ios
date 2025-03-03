@@ -47,9 +47,9 @@ class dydxSimpleUIMarketsHeaderViewPresenter: HostedViewPresenter<dydxSimpleUIMa
         let ethereumAddress = currentWallet?.ethereumAddress ?? ""
         if onboarded {
             viewModel?.items = [transfers, alerts, history, settings, help, signOut(ethereumAddress: ethereumAddress), switchMode]
-            viewModel?.depositAction = { [weak self] in
-                self?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.deposit.rawValue]), animated: true, completion: nil)
-            }
+//            viewModel?.depositAction = { [weak self] in
+//                self?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.deposit.rawValue]), animated: true, completion: nil)
+//            }
 //            viewModel?.withdrawAction = {
 //                Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.withdrawal.rawValue]), animated: true, completion: nil)
 //            }

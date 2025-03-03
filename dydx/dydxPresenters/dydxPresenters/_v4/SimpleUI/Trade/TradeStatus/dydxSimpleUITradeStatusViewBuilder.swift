@@ -235,7 +235,8 @@ private class dydxSimpleUITradeStatusViewPresenter: HostedViewPresenter<dydxSimp
             let tradeFees = inputSummary?.fee?.doubleValue ?? 0
             let slippage = inputSummary?.slippage?.doubleValue ?? 0
             let totalFees = tradeFees + slippage
-            viewModel?.totalFees = dydxFormatter.shared.dollar(number: totalFees, digits: 3)
+        //    viewModel?.totalFees = dydxFormatter.shared.dollar(number: totalFees, digits: 3)
+            viewModel?.totalFees = nil
             viewModel?.totalAmount = dydxFormatter.shared.dollar(number: tradeAmount, digits: 3)
         } else {
             viewModel?.totalFees = nil
