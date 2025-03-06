@@ -150,18 +150,14 @@ class AppDelegate: CommonAppDelegate {
         Tracking.shared?.log(event: AnalyticsEventV2.DeepLinkHandled(url: deeplink.absoluteString, succeeded: successful))
     }
 
-    /// Prioritized CoinbaseWalletSDK handling of the deeplink
-    /// - Parameter url: the deeplink url to handle
-    /// - Returns: true if the CoinbaseWalletSDK handled the url
     override func customHandle(url: URL) -> Bool {
         do {
-            if try CoinbaseWalletSDK.shared.handleResponse(url) == true {
+            if try CarteraConfig.shared.handleResponse(url) == true {
                 return true
             }
             return false
         } catch {
-            // Coinbase SDK throwing error -> URL is still considered handled.
-            Console.shared.log("Coinbase SDK throwing error: \(error)")
+            Console.shared.log("CarteraConfig SDK throwing error: \(error)")
             return true
         }
     }

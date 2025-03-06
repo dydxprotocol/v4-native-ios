@@ -9,14 +9,17 @@ import Cartera
 import Combine
 import Foundation
 import Utilities
+import Base58Swift
 
 public final class dydxV4WalletSetup: dydxWalletSetup {
     private let parser = Parser()
 
     override func sign(wallet: Wallet?, address: String, ethereumChainId: Int, signTypedDataAction: String, signTypedDataDomainName: String, useModal: Bool) {
+
         let request = WalletRequest(wallet: wallet, address: address, chainId: ethereumChainId, useModal: useModal)
         let typeData = typedData(action: signTypedDataAction, chainId: ethereumChainId, signTypedDataDomainName: signTypedDataDomainName)
-        provider.sign(request: request, typedDataProvider: typeData, connected: nil) { [weak self] signed, error in
+
+        let operationCallback: WalletOperationCompletion = { [weak self] signed, error in
             if let signed = signed, error == nil {
                 self?.generatePrivateKey(wallet: wallet, privateKeySignature: signed, address: address)
                 self?.provider.disconnect()
@@ -42,6 +45,31 @@ public final class dydxV4WalletSetup: dydxWalletSetup {
                     self.provider.disconnect()
                 }
             }
+        }
+
+        if wallet?.id == "phantom-wallet" {
+            // Solana only doesn't have structured typed message, so let's just hardcode the message as a string
+            // This is the same string used on web
+            let message =
+    """
+    {"domain":{"name":"dYdX Chain"},"message":{"action":"dYdX Chain Onboarding"},"primaryType":"dYdX","types":{"dYdX":[{"name":"action","type":"string"}]}}
+    """
+            provider.signMessage(request: request, message: message, connected: nil) { signed, error in
+                if let signed = signed {
+                    // The signature from Solana is Base58 encoded
+                    if let bytes = Base58.base58Decode(signed) {
+                        // Pad a leading zero to make it 65 bytes before passing it down v4-client
+                        let data =  Data([0] + bytes)
+                        operationCallback(data.hex, error)
+                    } else {
+                        operationCallback(signed, error)
+                    }
+                } else {
+                    operationCallback(signed, error)
+                }
+            }
+        } else {
+            provider.sign(request: request, typedDataProvider: typeData, connected: nil, completion: operationCallback)
         }
     }
 

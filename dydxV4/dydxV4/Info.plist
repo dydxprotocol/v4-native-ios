@@ -85,6 +85,7 @@
 		<string>cbwallet</string>
 		<string>zerion</string>
 		<string>itokenhd</string>
+		<string>phantom</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
