@@ -1,6 +1,6 @@
 PODS:
-  - Abacus (1.13.60)
-  - AmplitudeSwift (1.11.5):
+  - Abacus (1.13.61)
+  - AmplitudeSwift (1.11.7):
     - AnalyticsConnector (~> 1.3.0)
   - AnalyticsConnector (1.3.1)
   - AppsFlyerFramework (6.16.1):
@@ -259,7 +259,7 @@ PODS:
     - SDWebImage (~> 5.10)
   - SimpleKeychain (0.12.5)
   - SnapKit (5.7.1)
-  - Statsig (1.51.2)
+  - Statsig (1.51.3)
   - SVGKit (3.0.0):
     - CocoaLumberjack (~> 3.0)
   - Validator (3.2.1)
@@ -379,8 +379,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  Abacus: f3cf67ae783f97e807555f58105c8fd2a447caa6
-  AmplitudeSwift: 16f62b30b8f6ac90eec4fc24798daf1fba4c7869
+  Abacus: c96587720905464f9b40a7079cfa7bf52fd9ffee
+  AmplitudeSwift: d779154ed598aeb2bfd1dab8da6e5ea529bf170c
   AnalyticsConnector: 3def11199b4ddcad7202c778bde982ec5da0ebb3
   AppsFlyerFramework: 21e63ddd5cf0727d2e4f37452114d3b36fc6d7a3
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
@@ -432,7 +432,7 @@ SPEC CHECKSUMS:
   SDWebImageSwiftUI: a6d7129fb68fc18c8b930b869ddcfce314e49ded
   SimpleKeychain: 8193a9e40967eccac933c1fde82de46c07a5ae26
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
-  Statsig: 76b7c02ffa2acdab5011eb285f7c30a53475f587
+  Statsig: 9a86281fdd2c7fc562c55ce4c591cddf272acdbf
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
