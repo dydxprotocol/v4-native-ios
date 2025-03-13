@@ -149,6 +149,7 @@ public final class AbacusStateManager: NSObject {
         if dydxBoolFeatureFlag.force_mainnet.isEnabled {
             deployment = "MAINNET"
             appConfigs.loadRemote = true
+            appConfigs.screening = false
         } else {
             // Expose more options for Testflight build
             switch Installation.source {

@@ -39,7 +39,7 @@ public final class SolanaInteractor {
                                                              configs: configs)
         var balance: UInt64 = 0
         for account in result {
-            balance = max(balance, account.account.lamports)
+            balance = max(balance, account.account.data.lamports)
         }
         return balance
     }

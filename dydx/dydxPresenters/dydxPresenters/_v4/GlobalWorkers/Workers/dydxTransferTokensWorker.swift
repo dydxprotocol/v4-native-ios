@@ -69,7 +69,7 @@ public final class dydxTransferTokensWorker: BaseWorker {
                     do {
                         let balance = try await solanaInteractor?.getSolBalance(account: publicKey)
                         var info = info
-                        info.amount = (Parser.standard.asNumber(balance)?.doubleValue ?? 0) / Double(info.decimals)
+                        info.amount = (Parser.standard.asNumber(balance)?.doubleValue ?? 0) / pow(10.0, Double(info.decimals))
                         TransferTokenDetails.shared?.update(info: info)
                     } catch {
                         Console.shared.log("Failed to get SOL balance: \(error)")
@@ -80,7 +80,7 @@ public final class dydxTransferTokensWorker: BaseWorker {
                     do {
                         let balance = try await solanaInteractor?.getUsdcBalance(account: publicKey, tokenAddress: info.tokenAddress)
                         var info = info
-                        let amount = (Parser.standard.asNumber(balance)?.doubleValue ?? 0) / Double(info.decimals)
+                        let amount = (Parser.standard.asNumber(balance)?.doubleValue ?? 0) / pow(10.0, Double(info.decimals))
                         info.amount = amount
                         info.usdcAmount = amount
                         TransferTokenDetails.shared?.update(info: info)
