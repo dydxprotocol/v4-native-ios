@@ -1779,25 +1779,26 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "Swift.Bool?",
+                "printedName": "Foundation.NSNumber?",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
+                    "name": "NSNumber",
+                    "printedName": "Foundation.NSNumber",
+                    "usr": "c:objc(cs)NSNumber"
                   }
                 ],
                 "usr": "s:Sq"
               }
             ],
             "declKind": "Var",
-            "usr": "s:12AppsFlyerLib0aB7ConsentC03hasD12ForAdStorageSbSgvp",
-            "mangledName": "$s12AppsFlyerLib0aB7ConsentC03hasD12ForAdStorageSbSgvp",
+            "usr": "c:@M@AppsFlyerLib@objc(cs)AppsFlyerConsent(py)hasConsentForAdStorage",
+            "mangledName": "$s12AppsFlyerLib0aB7ConsentC03hasD12ForAdStorageSo8NSNumberCSgvp",
             "moduleName": "AppsFlyerLib",
             "declAttributes": [
               "Final",
-              "AccessControl"
+              "AccessControl",
+              "ObjC"
             ],
             "accessors": [
               {
@@ -1808,24 +1809,25 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Optional",
-                    "printedName": "Swift.Bool?",
+                    "printedName": "Foundation.NSNumber?",
                     "children": [
                       {
                         "kind": "TypeNominal",
-                        "name": "Bool",
-                        "printedName": "Swift.Bool",
-                        "usr": "s:Sb"
+                        "name": "NSNumber",
+                        "printedName": "Foundation.NSNumber",
+                        "usr": "c:objc(cs)NSNumber"
                       }
                     ],
                     "usr": "s:Sq"
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:12AppsFlyerLib0aB7ConsentC03hasD12ForAdStorageSbSgvg",
-                "mangledName": "$s12AppsFlyerLib0aB7ConsentC03hasD12ForAdStorageSbSgvg",
+                "usr": "c:@M@AppsFlyerLib@objc(cs)AppsFlyerConsent(im)hasConsentForAdStorage",
+                "mangledName": "$s12AppsFlyerLib0aB7ConsentC03hasD12ForAdStorageSo8NSNumberCSgvg",
                 "moduleName": "AppsFlyerLib",
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -1875,13 +1877,13 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "Swift.Bool?",
+                "printedName": "Foundation.NSNumber?",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
+                    "name": "NSNumber",
+                    "printedName": "Foundation.NSNumber",
+                    "usr": "c:objc(cs)NSNumber"
                   }
                 ],
                 "hasDefaultArg": true,
@@ -1890,13 +1892,13 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "Swift.Bool?",
+                "printedName": "Foundation.NSNumber?",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
+                    "name": "NSNumber",
+                    "printedName": "Foundation.NSNumber",
+                    "usr": "c:objc(cs)NSNumber"
                   }
                 ],
                 "hasDefaultArg": true,
@@ -1905,13 +1907,13 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "Swift.Bool?",
+                "printedName": "Foundation.NSNumber?",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
+                    "name": "NSNumber",
+                    "printedName": "Foundation.NSNumber",
+                    "usr": "c:objc(cs)NSNumber"
                   }
                 ],
                 "hasDefaultArg": true,
@@ -1920,13 +1922,13 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "Swift.Bool?",
+                "printedName": "Foundation.NSNumber?",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
+                    "name": "NSNumber",
+                    "printedName": "Foundation.NSNumber",
+                    "usr": "c:objc(cs)NSNumber"
                   }
                 ],
                 "hasDefaultArg": true,
@@ -1934,12 +1936,14 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:12AppsFlyerLib0aB7ConsentC19isUserSubjectToGDPR03hasD12ForDataUsage0jdK18AdsPersonalization0jdK9AdStorageACSbSg_A3Htcfc",
-            "mangledName": "$s12AppsFlyerLib0aB7ConsentC19isUserSubjectToGDPR03hasD12ForDataUsage0jdK18AdsPersonalization0jdK9AdStorageACSbSg_A3Htcfc",
+            "usr": "c:@M@AppsFlyerLib@objc(cs)AppsFlyerConsent(im)initWithIsUserSubjectToGDPR:hasConsentForDataUsage:hasConsentForAdsPersonalization:hasConsentForAdStorage:",
+            "mangledName": "$s12AppsFlyerLib0aB7ConsentC19isUserSubjectToGDPR03hasD12ForDataUsage0jdK18AdsPersonalization0jdK9AdStorageACSo8NSNumberCSg_A3Jtcfc",
             "moduleName": "AppsFlyerLib",
+            "objc_name": "initWithIsUserSubjectToGDPR:hasConsentForDataUsage:hasConsentForAdsPersonalization:hasConsentForAdStorage:",
             "declAttributes": [
+              "Convenience",
               "AccessControl",
-              "Convenience"
+              "ObjC"
             ],
             "init_kind": "Convenience"
           },
@@ -2734,91 +2738,91 @@
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 260,
+      "offset": 265,
       "length": 21,
       "value": "\"isUserSubjectToGDPR\""
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 326,
+      "offset": 331,
       "length": 24,
       "value": "\"hasConsentForDataUsage\""
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 404,
+      "offset": 409,
       "length": 33,
       "value": "\"hasConsentForAdsPersonalization\""
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 482,
+      "offset": 487,
       "length": 24,
       "value": "\"hasConsentForAdStorage\""
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 712,
+      "offset": 674,
       "length": 52,
       "value": "\"Appsflyer Consent Data: isUserSubjectToGDPR is nil\""
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "BooleanLiteral",
-      "offset": 789,
+      "offset": 751,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 1031,
+      "offset": 1009,
       "length": 55,
       "value": "\"Appsflyer Consent Data: hasConsentForDataUsage is nil\""
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "BooleanLiteral",
-      "offset": 1111,
+      "offset": 1089,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 1389,
+      "offset": 1377,
       "length": 64,
       "value": "\"Appsflyer Consent Data: hasConsentForAdsPersonalization is nil\""
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "BooleanLiteral",
-      "offset": 1478,
+      "offset": 1466,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "BooleanLiteral",
-      "offset": 1882,
+      "offset": 2125,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "BooleanLiteral",
-      "offset": 3203,
+      "offset": 3985,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/amit.levy\/Old-BM\/build-machine-sdk\/workspace\/ios_sdk_framework_test\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "Dictionary",
-      "offset": 3527,
+      "offset": 4309,
       "length": 3,
       "value": "[]"
     }

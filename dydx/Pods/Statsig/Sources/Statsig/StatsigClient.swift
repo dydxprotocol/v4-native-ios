@@ -92,7 +92,6 @@ public class StatsigClient {
         } else {
             fetchValuesFromNetwork(
                 marker: Diagnostics.mark?.initialize.network,
-                threadMarker: Diagnostics.mark?.initialize.netThreadJump,
                 processMarker: Diagnostics.mark?.initialize.process,
                 completion: _onComplete
             )
@@ -706,6 +705,17 @@ extension StatsigClient {
     }
 
     /**
+     Sets a value to be returned for the given parameter store instead of following the actual ref in the store.
+
+     Parameters:
+     - storeName: The name of the config or experiment to be overridden
+     - value: Dictionary where keys are property names and values are static ref values in the overridden store
+     */
+    public func overrideParamStore(_ storeName: String, value: [String: Any]) {
+        store.overrideParamStore(storeName, value)
+    }
+
+    /**
      Clears any overridden value for the given gate/dynamic config/experiment.
 
      Parameters:
@@ -770,7 +780,6 @@ extension StatsigClient {
 
     internal func fetchValuesFromNetwork(
         marker: NetworkMarker? = nil,
-        threadMarker: InitializeStepMarker? = nil,
         processMarker: InitializeStepMarker? = nil,
         completion: ResultCompletionBlock?
     ) {
@@ -787,7 +796,6 @@ extension StatsigClient {
             previousDerivedFields: previousDerivedFields,
             fullChecksum: fullChecksum,
             marker: marker,
-            threadMarker: threadMarker,
             processMarker: processMarker
         ) { [weak self] error in
             if let self = self {
