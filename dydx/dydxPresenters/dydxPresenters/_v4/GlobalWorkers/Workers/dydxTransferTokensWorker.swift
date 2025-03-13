@@ -18,9 +18,13 @@ import Web3
 
 public final class dydxTransferTokensWorker: BaseWorker {
     private var ethereumInteractors = [String: EthereumInteractor]()
+    private var solanaInteractor: SolanaInteractor?
 
     public override func start() {
         super.start()
+
+        let endpoint = AbacusStateManager.shared.isMainNet ? SolanaInteractor.mainnetEndpoint : SolanaInteractor.devnetEndpoint
+        solanaInteractor = SolanaInteractor(endpoint: endpoint)
 
         let transferTokenDetails = TransferTokenDetails.create(isMainnet: AbacusStateManager.shared.isMainNet)
 
@@ -29,13 +33,20 @@ public final class dydxTransferTokensWorker: BaseWorker {
                 AbacusStateManager.shared.state.configs
                     .compactMap { $0?.rpcMap },
                 AbacusStateManager.shared.state.currentWallet
-                    .compactMap { $0?.ethereumAddress },
+                    .compactMap { $0 },
                 transferTokenDetails.infos.prefix(1),
                 transferTokenDetails.$refreshCounter
             )
-            .sink { [weak self] rpcMap, ethereumAddress, infos, _ in
-                for token in infos {
-                    self?.loadTokenInfo(info: token, rpcMap: rpcMap, sourceAddress: ethereumAddress)
+            .sink { [weak self] rpcMap, currentWallet, infos, _ in
+                if let ethereumAddress = currentWallet.ethereumAddress {
+                    let walletId = currentWallet.walletId
+                    for token in infos {
+                        if walletId == "phantom-wallet" {
+                            self?.loadSolanaTokenInfo(info: token, publicKey: ethereumAddress)
+                        } else {
+                            self?.loadEthTokenInfo(info: token, rpcMap: rpcMap, sourceAddress: ethereumAddress)
+                        }
+                    }
                 }
             }
             .store(in: &self.subscriptions)
@@ -51,7 +62,37 @@ public final class dydxTransferTokensWorker: BaseWorker {
             .store(in: &self.subscriptions)
     }
 
-    private func loadTokenInfo(info: TransferTokenInfo, rpcMap: [String: RpcInfo], sourceAddress: String) {
+    private func loadSolanaTokenInfo(info: TransferTokenInfo, publicKey: String) {
+        if info.chain == .Solana {
+            if info.token == .SOL {
+                Task {
+                    do {
+                        let balance = try await solanaInteractor?.getSolBalance(account: publicKey)
+                        var info = info
+                        info.amount = (Parser.standard.asNumber(balance)?.doubleValue ?? 0) / Double(info.decimals)
+                        TransferTokenDetails.shared?.update(info: info)
+                    } catch {
+                        Console.shared.log("Failed to get SOL balance: \(error)")
+                    }
+                }
+            } else if info.token == .USDC {
+                Task {
+                    do {
+                        let balance = try await solanaInteractor?.getUsdcBalance(account: publicKey, tokenAddress: info.tokenAddress)
+                        var info = info
+                        let amount = (Parser.standard.asNumber(balance)?.doubleValue ?? 0) / Double(info.decimals)
+                        info.amount = amount
+                        info.usdcAmount = amount
+                        TransferTokenDetails.shared?.update(info: info)
+                    } catch {
+                        Console.shared.log("Failed to get USDC balance: \(error)")
+                    }
+                }
+            }
+        }
+    }
+
+    private func loadEthTokenInfo(info: TransferTokenInfo, rpcMap: [String: RpcInfo], sourceAddress: String) {
         guard let address = try? EthereumAddress(hex: sourceAddress, eip55: false) else {
             Console.shared.log("Invalid wallet address")
             return
@@ -64,7 +105,7 @@ public final class dydxTransferTokensWorker: BaseWorker {
         ethereumInteractors[rpcInfo.rpcUrl] = ethereumInteractor
         if info.tokenAddress == "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" {
            ethereumInteractor.eth_getBalance(address: address) { result in
-                let tokenDecimals = 18
+               let tokenDecimals = info.decimals
                 switch result.status {
                 case .success(let amount):
                     let string = "\(amount.quantity)"
@@ -84,7 +125,7 @@ public final class dydxTransferTokensWorker: BaseWorker {
             let function = ERC20BalanceOfFunction(contract: contract, from: address, account: address)
             if let transaction = try? function.call() {
                 ethereumInteractor.eth_call(transaction) { [weak self] result in
-                    let tokenDecimals = 6
+                    let tokenDecimals = info.decimals
                     switch result.status {
                     case .success(let data):
                         if let amount = self?.parser.asUInt256(data.ethereumValue().string) {

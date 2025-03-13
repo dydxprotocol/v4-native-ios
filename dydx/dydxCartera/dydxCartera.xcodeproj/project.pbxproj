@@ -20,6 +20,8 @@
 		0274248729E76718004C89AE /* EthConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248629E76718004C89AE /* EthConversions.swift */; };
 		0274248929E78576004C89AE /* ERC20Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248829E78576004C89AE /* ERC20Token.swift */; };
 		0274248B29E785AD004C89AE /* ContractFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248A29E785AD004C89AE /* ContractFunction.swift */; };
+		0276AC8E2D833AEE0039919D /* SolanaSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0276AC8D2D833AEE0039919D /* SolanaSwift */; };
+		0276AC912D833BA10039919D /* SolanaInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276AC902D833BA10039919D /* SolanaInteractor.swift */; };
 		0294C6002D790BD900F62FB5 /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 0294C5FF2D790BD900F62FB5 /* Cartera */; };
 		0294C6032D790C3C00F62FB5 /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 0294C6022D790C3C00F62FB5 /* Cartera */; };
 		0294C8912D7930EB00F62FB5 /* Base58Swift in Frameworks */ = {isa = PBXBuildFile; productRef = 0294C8902D7930EB00F62FB5 /* Base58Swift */; };
@@ -157,6 +159,7 @@
 		0274248629E76718004C89AE /* EthConversions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthConversions.swift; sourceTree = "<group>"; };
 		0274248829E78576004C89AE /* ERC20Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC20Token.swift; sourceTree = "<group>"; };
 		0274248A29E785AD004C89AE /* ContractFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractFunction.swift; sourceTree = "<group>"; };
+		0276AC902D833BA10039919D /* SolanaInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolanaInteractor.swift; sourceTree = "<group>"; };
 		027C74252A032E56004DF574 /* ParticlesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticlesKit.xcodeproj; path = ../../ParticlesKit/ParticlesKit.xcodeproj; sourceTree = "<group>"; };
 		027C74372A032E5E004DF574 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
 		029E51A52D08AD3B005D4DC5 /* ABIDecoder+Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ABIDecoder+Static.swift"; sourceTree = "<group>"; };
@@ -200,6 +203,7 @@
 				380B90E0F0184BA5387AC70A /* Pods_iOS_dydxCartera.framework in Frameworks */,
 				0294C8912D7930EB00F62FB5 /* Base58Swift in Frameworks */,
 				0294C6002D790BD900F62FB5 /* Cartera in Frameworks */,
+				0276AC8E2D833AEE0039919D /* SolanaSwift in Frameworks */,
 				029E51A32D08966E005D4DC5 /* Cartera in Frameworks */,
 				02669B932AD872A300A756AA /* Cartera in Frameworks */,
 				021A1DCA2AD34103008A3D73 /* Cartera in Frameworks */,
@@ -246,6 +250,7 @@
 				0274248529E766F6004C89AE /* Contracts */,
 				0274248229E74C9B004C89AE /* Utils */,
 				02DB5ECB29E6029C001EA0F1 /* Ethereum */,
+				0276AC8F2D833B840039919D /* Solana */,
 				02439C8E29B03E8A00A083FE /* dydxCartera.h */,
 				02439C8F29B03E8A00A083FE /* dydxCartera.docc */,
 			);
@@ -277,6 +282,14 @@
 				0274248629E76718004C89AE /* EthConversions.swift */,
 			);
 			path = Contracts;
+			sourceTree = "<group>";
+		};
+		0276AC8F2D833B840039919D /* Solana */ = {
+			isa = PBXGroup;
+			children = (
+				0276AC902D833BA10039919D /* SolanaInteractor.swift */,
+			);
+			path = Solana;
 			sourceTree = "<group>";
 		};
 		027C74562A0330E4004DF574 /* Dependencies */ = {
@@ -443,6 +456,7 @@
 				0294C5FF2D790BD900F62FB5 /* Cartera */,
 				0294C6022D790C3C00F62FB5 /* Cartera */,
 				0294C8902D7930EB00F62FB5 /* Base58Swift */,
+				0276AC8D2D833AEE0039919D /* SolanaSwift */,
 			);
 			productName = dydxCartera;
 			productReference = 02439C8B29B03E8A00A083FE /* dydxCartera.framework */;
@@ -498,6 +512,7 @@
 			packageReferences = (
 				0294C6012D790C3C00F62FB5 /* XCLocalSwiftPackageReference "../../../cartera-ios" */,
 				0294C88F2D7930EB00F62FB5 /* XCRemoteSwiftPackageReference "Base58Swift" */,
+				0276AC8C2D833AEE0039919D /* XCRemoteSwiftPackageReference "solana-swift" */,
 			);
 			productRefGroup = 02439C8C29B03E8A00A083FE /* Products */;
 			projectDirPath = "";
@@ -679,6 +694,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0274248429E74CA5004C89AE /* Parser+Eth.swift in Sources */,
+				0276AC912D833BA10039919D /* SolanaInteractor.swift in Sources */,
 				02439C9029B03E8A00A083FE /* dydxCartera.docc in Sources */,
 				0274248929E78576004C89AE /* ERC20Token.swift in Sources */,
 				02EF44D429F6F5A700C97746 /* dydxWalletSetup.swift in Sources */,
@@ -996,6 +1012,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0276AC8C2D833AEE0039919D /* XCRemoteSwiftPackageReference "solana-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/p2p-org/solana-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		0294C88F2D7930EB00F62FB5 /* XCRemoteSwiftPackageReference "Base58Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/heckj/Base58Swift.git";
@@ -1014,6 +1038,11 @@
 		02669B922AD872A300A756AA /* Cartera */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Cartera;
+		};
+		0276AC8D2D833AEE0039919D /* SolanaSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0276AC8C2D833AEE0039919D /* XCRemoteSwiftPackageReference "solana-swift" */;
+			productName = SolanaSwift;
 		};
 		0294C5FF2D790BD900F62FB5 /* Cartera */ = {
 			isa = XCSwiftPackageProductDependency;

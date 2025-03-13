@@ -237,12 +237,10 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
 
                 if let iconName = self.state.buttonIcon {
                     PlatformIconViewModel(type: .asset(name: iconName, bundle: .dydxView),
-                                          size: CGSize(width: 20, height: 20),
-                                          templateColor: .textPrimary)
+                                          size: CGSize(width: 20, height: 20))
                         .createView(parentStyle: style)
                 }
             }
-
             PlatformButtonViewModel(content: buttonLabel.wrappedViewModel,
                                     type: .defaultType(pilledCorner: true)) { [weak self] in
                 self?.buttonAction?()

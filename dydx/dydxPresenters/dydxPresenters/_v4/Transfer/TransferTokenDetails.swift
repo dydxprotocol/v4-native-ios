@@ -99,11 +99,11 @@ final class TransferTokenDetails {
 }
 
 enum TransferChain: String {
-    case Ethereum, Optimism, Arbitrum, Base, Polygon
+    case Ethereum, Optimism, Arbitrum, Base, Polygon, Solana
 }
 
 enum TransferToken: String {
-    case ETH, USDC, POL
+    case ETH, USDC, POL, SOL
 }
 
 struct TransferTokenInfo: Equatable {
@@ -124,6 +124,7 @@ struct TransferTokenInfo: Equatable {
         case .Arbitrum: logoName = "arbitrum.png"
         case .Base: logoName = "base.png"
         case .Polygon: logoName = "polygon.png"
+        case .Solana: logoName = "solana.png"
         }
         return AbacusStateManager.shared.deploymentUri + "/chains/\(logoName)"
     }
@@ -134,6 +135,7 @@ struct TransferTokenInfo: Equatable {
         case .ETH: logoName = "eth.png"
         case .USDC: logoName = "usdc.png"
         case .POL: logoName = "pol.png"
+        case .SOL: logoName = "sol.png"
         }
         return AbacusStateManager.shared.deploymentUri + "/currencies/\(logoName)"
     }
@@ -143,6 +145,7 @@ struct TransferTokenInfo: Equatable {
         case .ETH: return 18
         case .POL: return 18
         case .USDC: return 6
+        case .SOL: return 9
         }
     }
 }
@@ -157,7 +160,11 @@ private let mainnetTokens: [TransferTokenInfo] = [
     TransferTokenInfo(chain: .Base, chainId: "8453", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Optimism, chainId: "10", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Arbitrum, chainId: "42161", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
-    TransferTokenInfo(chain: .Polygon, chainId: "137", token: .POL, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE")
+    TransferTokenInfo(chain: .Polygon, chainId: "137", token: .POL, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+
+    TransferTokenInfo(chain: .Solana, chainId: "solana", token: .SOL, tokenAddress: ""),
+    TransferTokenInfo(chain: .Solana, chainId: "solana", token: .USDC, tokenAddress: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
+
 ]
 
 private let testnetTokens: [TransferTokenInfo] = [
@@ -170,5 +177,8 @@ private let testnetTokens: [TransferTokenInfo] = [
     TransferTokenInfo(chain: .Base, chainId: "84532", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Optimism, chainId: "11155420", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Arbitrum, chainId: "421614", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
-    TransferTokenInfo(chain: .Polygon, chainId: "80002", token: .POL, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE")
+    TransferTokenInfo(chain: .Polygon, chainId: "80002", token: .POL, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+
+    TransferTokenInfo(chain: .Solana, chainId: "solana", token: .SOL, tokenAddress: ""),
+    TransferTokenInfo(chain: .Solana, chainId: "solana", token: .USDC, tokenAddress: "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU")
 ]
