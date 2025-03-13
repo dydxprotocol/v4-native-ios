@@ -2,15 +2,17 @@ import Foundation
 
 import CommonCrypto
 
-fileprivate let MaxCachedUsers = 10
+fileprivate let MaxCachedUserObjects = 10
 
 public struct StatsigOverrides {
     public var gates: [String: Bool]
     public var configs: [String: [String: Any]]
+    public var params: [String: [String: Any]]
 
     init(_ overrides: [String: Any]) {
         gates = overrides[InternalStore.gatesKey] as? [String: Bool] ?? [:]
         configs = overrides[InternalStore.configsKey] as? [String: [String: Any]] ?? [:]
+        params = overrides[InternalStore.paramStoresKey] as? [String: [String: Any]] ?? [:]
     }
 }
 
@@ -45,6 +47,10 @@ struct StatsigValuesCache {
     var userLastUpdateTime: Double
     var stickyDeviceExperiments: [String: [String: Any]]
     var networkFallbackInfo: [String: [String: Any]]
+    /*
+     Maps .v2 cache keys to .full cache keys
+     */
+    var cacheKeyMapping: [String: String]
     var source: EvaluationSource = .Loading
 
     var lcut: UInt64? = nil
@@ -77,9 +83,10 @@ struct StatsigValuesCache {
         self.cacheByID = StatsigValuesCache.loadDictMigratingIfRequired(forKey: InternalStore.localStorageKey)
         self.stickyDeviceExperiments = StatsigValuesCache.loadDictMigratingIfRequired(forKey: InternalStore.stickyDeviceExperimentsKey)
         self.networkFallbackInfo = StatsigValuesCache.loadDictMigratingIfRequired(forKey: InternalStore.networkFallbackInfoKey)
+        self.cacheKeyMapping = StatsigUserDefaults.defaults.dictionarySafe(forKey: InternalStore.cacheKeyMappingKey) as? [String: String] ?? [:]
 
         self.userCache = [:]
-        self.userCacheKey = UserCacheKey(v1: "null", v2: "null")
+        self.userCacheKey = UserCacheKey.from(options, user, sdkKey)
         self.userLastUpdateTime = 0
 
         self.setUserCacheKeyAndValues(user, withBootstrapValues: options.initializeValues)
@@ -233,7 +240,11 @@ struct StatsigValuesCache {
     }
 
     func getFullChecksum(user: StatsigUser) -> String? {
-        return userCache[InternalStore.fullChecksum] as? String ?? nil
+        if (userCache[InternalStore.userHashKey] as? String == user.getFullUserHash()) {
+            return userCache[InternalStore.fullChecksum] as? String ?? nil
+        }
+
+        return nil
     }
 
     mutating func updateUser(_ newUser: StatsigUser, _ values: [String: Any]? = nil) {
@@ -243,7 +254,7 @@ struct StatsigValuesCache {
     }
 
     mutating func saveValues(_ values: [String: Any], _ cacheKey: UserCacheKey, _ userHash: String?) {
-        var cache = cacheKey.v2 == userCacheKey.v2 ? userCache : getCacheValues(forCacheKey: cacheKey)
+        var cache = cacheKey.full == userCacheKey.full ? userCache : (getCacheValues(forCacheKey: cacheKey) ?? getDefaultValues())
 
         let hasUpdates = values["has_updates"] as? Bool == true
         if hasUpdates {
@@ -259,18 +270,19 @@ struct StatsigValuesCache {
             cache[InternalStore.fullChecksum] = values[InternalStore.fullChecksum]
         }
 
-        if (userCacheKey.v2 == cacheKey.v2) {
+        if (userCacheKey.full == cacheKey.full) {
             // Now the values we serve came from network request
             source = hasUpdates ? .Network : .NetworkNotModified
             userCache = cache
         }
 
-        cacheByID[cacheKey.v2] = cache
+        cacheByID[cacheKey.full] = cache
+        cacheKeyMapping[userCacheKey.v2] = userCacheKey.full
         runCacheEviction()
     }
 
     mutating func runCacheEviction() {
-        if (cacheByID.count <= MaxCachedUsers) {
+        if (cacheByID.count <= MaxCachedUserObjects) {
             return
         }
 
@@ -286,6 +298,10 @@ struct StatsigValuesCache {
 
         if let key = oldestEntryKey {
             cacheByID.removeValue(forKey: key)
+            cacheKeyMapping.removeValue(forKey: key)
+            if let cacheKeyMappingIndex = cacheKeyMapping.firstIndex(where: { $1 == key }) {
+                cacheKeyMapping.remove(at: cacheKeyMappingIndex)
+            }
         }
     }
 
@@ -309,8 +325,24 @@ struct StatsigValuesCache {
         saveToUserDefaults()
     }
 
-    private func getCacheValues(forCacheKey key: UserCacheKey) -> [String: Any] {
-        return cacheByID[key.v2] ?? getDefaultValues()
+    private func getCacheValues(forCacheKey key: UserCacheKey) -> [String: Any]? {
+        // Full User Hash Key
+        if let fullHashCachedValues = cacheByID[key.full] {
+            return fullHashCachedValues
+        }
+
+        // v2 Key
+        if let v2KeyCachedValues = cacheByID[key.v2] ?? cacheByID[key.v1] {
+            return v2KeyCachedValues
+        }
+
+        // Map v2 -> full cache
+        if let cacheMappedKey = cacheKeyMapping[key.v2],
+            let cachedValues = cacheByID[cacheMappedKey]  {
+                return cachedValues
+        }
+
+        return nil;
     }
 
     private func getDefaultValues() -> [String: Any] {
@@ -323,10 +355,11 @@ struct StatsigValuesCache {
     }
 
     private mutating func saveToUserDefaults() {
-        cacheByID[userCacheKey.v2] = userCache
+        cacheByID[userCacheKey.full] = userCache
         StatsigUserDefaults.defaults.setDictionarySafe(cacheByID, forKey: InternalStore.localStorageKey)
         StatsigUserDefaults.defaults.setDictionarySafe(stickyDeviceExperiments, forKey: InternalStore.stickyDeviceExperimentsKey)
         StatsigUserDefaults.defaults.setDictionarySafe(networkFallbackInfo, forKey: InternalStore.networkFallbackInfoKey)
+        StatsigUserDefaults.defaults.setDictionarySafe(cacheKeyMapping, forKey: InternalStore.cacheKeyMappingKey)
     }
 
     private mutating func setUserCacheKeyAndValues(
@@ -337,8 +370,10 @@ struct StatsigValuesCache {
 
         migrateOldUserCacheKey()
 
+        // Bootstrap
         if let bootstrapValues = bootstrapValues {
-            cacheByID[userCacheKey.v2] = bootstrapValues
+            cacheByID[userCacheKey.full] = bootstrapValues
+            cacheKeyMapping[userCacheKey.v2] = userCacheKey.full
             userCache = bootstrapValues
             let bootstrapMetadata = extractBootstrapMetadata(from: bootstrapValues)
             userCache[InternalStore.bootstrapMetadata] = bootstrapMetadata
@@ -350,15 +385,15 @@ struct StatsigValuesCache {
             return
         }
 
-        let cachedValues = getCacheValues(forCacheKey: userCacheKey)
-        if cacheByID[userCacheKey.v2] == nil {
-            cacheByID[userCacheKey.v2] = getDefaultValues()
-        } else {
-            // The values we serve now is from the local cache
+        // Cache
+        if let cachedValues = getCacheValues(forCacheKey: userCacheKey) {
             source = .Cache
+            userCache = cachedValues
+            return
         }
 
-        userCache = cachedValues
+        // Default values
+        userCache = getDefaultValues()
     }
     
     private func extractBootstrapMetadata(from bootstrapValues: [String: Any]) -> BootstrapMetadata {
@@ -416,15 +451,19 @@ struct StatsigValuesCache {
     }
 
     private mutating func migrateOldUserCacheKey() {
-        let oldCache = cacheByID[userCacheKey.v1]
-        let currCache = cacheByID[userCacheKey.v2]
+        let v1Cache = cacheByID[userCacheKey.v1]
+        let v2Cache = cacheByID[userCacheKey.v2]
+        let oldCache = v2Cache ?? v1Cache
 
-        if oldCache != nil {
+        if v1Cache != nil {
             cacheByID.removeValue(forKey: userCacheKey.v1)
         }
+        if v2Cache != nil {
+            cacheByID.removeValue(forKey: userCacheKey.v2)
+        }
 
-        if (currCache == nil && oldCache != nil) {
-            cacheByID[userCacheKey.v2] = oldCache
+        if cacheByID[userCacheKey.full] == nil && oldCache != nil {
+            cacheByID[userCacheKey.full] = oldCache
         }
     }
 
@@ -460,6 +499,7 @@ struct StatsigValuesCache {
 class InternalStore {
     static let localOverridesKey = "com.Statsig.InternalStore.localOverridesKey"
     static let localStorageKey = "com.Statsig.InternalStore.localStorageKeyV2"
+    static let cacheKeyMappingKey = "com.Statsig.InternalStore.cacheKeyMappingKey"
     static let stickyDeviceExperimentsKey = "com.Statsig.InternalStore.stickyDeviceExperimentsKey"
     static let networkFallbackInfoKey = "com.Statsig.InternalStore.networkFallbackInfoKey"
 
@@ -481,6 +521,7 @@ class InternalStore {
     static let derivedFieldsKey = "derived_fields"
     static let bootstrapMetadata = "bootstrap_metadata"
     static let fullChecksum = "full_checksum"
+    static let fullUserHashKey = "full_user_hash"
 
     var cache: StatsigValuesCache
     var localOverrides: [String: Any] = InternalStore.getEmptyOverrides()
@@ -605,6 +646,18 @@ class InternalStore {
     
     func getParamStore(client: StatsigClient?, forName storeName: String) -> ParameterStore {
         storeQueue.sync {
+            if let override = (localOverrides[InternalStore.paramStoresKey] as? [String: [String: StatsigDynamicConfigValue]])?[storeName] {
+                return ParameterStore(
+                    name: storeName,
+                    evaluationDetails: cache.getEvaluationDetails(.LocalOverride),
+                    client: client,
+                    configuration: override.mapValues {[
+                        "ref_type": "static",
+                        "param_type": getTypeOf($0),
+                        "value": $0
+                    ]}
+                )
+            }
             return cache.getParamStore(client, storeName)
         }
     }
@@ -640,9 +693,11 @@ class InternalStore {
 
             self.cache.saveValues(values, cacheKey, userHash)
             let cacheByID = self.cache.cacheByID
+            let cacheKeyMapping = self.cache.cacheKeyMapping
 
             DispatchQueue.global().async() {
                 StatsigUserDefaults.defaults.setDictionarySafe(cacheByID, forKey: InternalStore.localStorageKey)
+                StatsigUserDefaults.defaults.setDictionarySafe(cacheKeyMapping, forKey: InternalStore.cacheKeyMappingKey)
             }
 
             DispatchQueue.global().async { completion?() }
@@ -658,6 +713,7 @@ class InternalStore {
     static func deleteAllLocalStorage() {
         StatsigUserDefaults.defaults.removeObject(forKey: InternalStore.DEPRECATED_localStorageKey)
         StatsigUserDefaults.defaults.removeObject(forKey: InternalStore.localStorageKey)
+        StatsigUserDefaults.defaults.removeObject(forKey: InternalStore.cacheKeyMappingKey)
         StatsigUserDefaults.defaults.removeObject(forKey: InternalStore.DEPRECATED_stickyUserExperimentsKey)
         StatsigUserDefaults.defaults.removeObject(forKey: InternalStore.stickyDeviceExperimentsKey)
         StatsigUserDefaults.defaults.removeObject(forKey: InternalStore.networkFallbackInfoKey)
@@ -688,11 +744,19 @@ class InternalStore {
         }
     }
 
+    func overrideParamStore(_ storeName: String, _ value: [String: Any]) {
+        storeQueue.async(flags: .barrier) { [weak self] in
+            self?.localOverrides[jsonDict: InternalStore.paramStoresKey]?[storeName] = value
+            self?.saveOverrides()
+        }
+    }
+
     func removeOverride(_ name: String) {
         storeQueue.async(flags: .barrier) { [weak self] in
             self?.localOverrides[jsonDict: InternalStore.gatesKey]?.removeValue(forKey: name)
             self?.localOverrides[jsonDict: InternalStore.configsKey]?.removeValue(forKey: name)
             self?.localOverrides[jsonDict: InternalStore.layerConfigsKey]?.removeValue(forKey: name)
+            self?.localOverrides[jsonDict: InternalStore.paramStoresKey]?.removeValue(forKey: name)
         }
     }
 
@@ -715,7 +779,12 @@ class InternalStore {
     }
 
     private static func getEmptyOverrides() -> [String: Any] {
-        return [InternalStore.gatesKey: [:], InternalStore.configsKey: [:], InternalStore.layerConfigsKey: [:]]
+        return [
+            InternalStore.gatesKey: [:],
+            InternalStore.configsKey: [:],
+            InternalStore.layerConfigsKey: [:],
+            InternalStore.paramStoresKey: [:]
+        ]
     }
 
     // Sticky Logic: https://gist.github.com/daniel-statsig/3d8dfc9bdee531cffc96901c1a06a402
