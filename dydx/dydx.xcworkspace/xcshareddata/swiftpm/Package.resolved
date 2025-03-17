@@ -1,5 +1,5 @@
 {
-  "originHash" : "7c51c785db69f7b6af452aebaade42d79435968885cae55d92383f3487343d6e",
+  "originHash" : "45c9f959f022857144b22ac3ae1b1ff8e7963690bf2acd5460a7e8ee602f87ed",
   "pins" : [
     {
       "identity" : "base58swift",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "793a7fac0bfc318e85994bf6900652e827aef33e",
         "version" : "5.4.1"
+      }
+    },
+    {
+      "identity" : "cartera-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dydxprotocol/cartera-ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "51ebfbebbdc68607e2bb351dd98d74f571a9177d"
       }
     },
     {
@@ -71,6 +80,15 @@
       "state" : {
         "revision" : "cd187c632fb812fd93711a9f7e644adb7e5f97f0",
         "version" : "0.1.7"
+      }
+    },
+    {
+      "identity" : "solana-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dydxprotocol/solana-swift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3212af8f57321f81ae7035c27388c2a9cde11ab0"
       }
     },
     {
