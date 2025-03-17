@@ -52,7 +52,7 @@ public final class dydxV4WalletSetup: dydxWalletSetup {
             // This is the same string used on web
             let message =
     """
-    {"domain":{"name":"dYdX Chain"},"message":{"action":"dYdX Chain Onboarding"},"primaryType":"dYdX","types":{"dYdX":[{"name":"action","type":"string"}]}}
+    {"domain":{"name":"\(signTypedDataDomainName)"},"message":{"action":"\(signTypedDataAction)"},"primaryType":"dYdX","types":{"dYdX":[{"name":"action","type":"string"}]}}
     """
             provider.signMessage(request: request, message: message, connected: nil) { signed, error in
                 if let signed = signed {

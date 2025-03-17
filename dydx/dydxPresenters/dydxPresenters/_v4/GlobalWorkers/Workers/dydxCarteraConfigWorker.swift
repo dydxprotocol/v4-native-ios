@@ -43,12 +43,10 @@ final class dydxCarteraConfigWorker: BaseWorker {
         if let wallets = environment.walletConnection?.walletConnect?.v2?.wallets?.ios {
             CarteraConfig.shared.wcModalWallets = wallets
         }
-        let phantomWalletConfig = PhantomWalletConfig(appUrl: "https://v4.testnet.dydx.exchange/",
-                                                      appRedirectBaseUrl: "https://v4-web-internal.vercel.app/phantomV4")
         let config = WalletProvidersConfig(walletConnectV1: nil,
                                            walletConnectV2: WalletConnectV2Config(environment: environment),
                                            walletSegue: WalletSegueConfig(environment: environment),
-                                           phantomWallet: phantomWalletConfig)
+                                           phantomWallet: PhantomWalletConfig(environment: environment))
         CarteraConfig.shared.walletProvidersConfig = config
     }
 }
@@ -84,5 +82,16 @@ extension WalletSegueConfig {
         }
 
         self.init(callbackUrl: callbackUrl)
+    }
+}
+
+extension PhantomWalletConfig {
+    init?(environment: V4Environment) {
+        guard let callbackUrl = environment.walletConnection?.phantom?.callbackUrl,
+                let _ = URL(string: callbackUrl) else {
+            return nil
+        }
+
+        self.init(appUrl: AbacusStateManager.shared.deploymentUri, appRedirectBaseUrl: callbackUrl)
     }
 }
