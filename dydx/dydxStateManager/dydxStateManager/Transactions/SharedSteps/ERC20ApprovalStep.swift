@@ -65,6 +65,7 @@ struct ERC20ApprovalStep: AsyncStep {
         let ethereumTransactionRequest = EthereumTransactionRequest(transaction: transaction)
 
         return WalletSendTransactionStep(transaction: ethereumTransactionRequest,
+                                         solana: nil,
                                          chainIdInt: chainIdInt,
                                          provider: provider,
                                          walletAddress: ethereumAddress,

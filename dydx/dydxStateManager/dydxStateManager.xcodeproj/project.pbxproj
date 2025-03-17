@@ -22,8 +22,9 @@
 		02603B9429F1A99D00DFFD11 /* dydxTransferState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02603B9329F1A99D00DFFD11 /* dydxTransferState.swift */; };
 		026734F22BF2BFCC00DBF51A /* AbacusLoggingImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026734F12BF2BFCC00DBF51A /* AbacusLoggingImp.swift */; };
 		027CB28E29EF02C50069781A /* DepositTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027CB28D29EF02C50069781A /* DepositTransaction.swift */; };
-		027CB29429EF035E0069781A /* DepositTransactionV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027CB29329EF035E0069781A /* DepositTransactionV4.swift */; };
+		027CB29429EF035E0069781A /* EvmDepositTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027CB29329EF035E0069781A /* EvmDepositTransaction.swift */; };
 		027CB2A029EF04270069781A /* dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 027CB29B29EF04170069781A /* dydxCartera.framework */; };
+		02886B122D848F86005EF461 /* SolanaDepositTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02886B112D848F81005EF461 /* SolanaDepositTransaction.swift */; };
 		02A8962128E65FBD006F1658 /* AbacusState+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A8962028E65FBD006F1658 /* AbacusState+Combine.swift */; };
 		02E7DC6328CFAF5C00727949 /* dydxStateManager.docc in Sources */ = {isa = PBXBuildFile; fileRef = 02E7DC6228CFAF5C00727949 /* dydxStateManager.docc */; };
 		02E7DC6928CFAF5C00727949 /* dydxStateManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DC5E28CFAF5C00727949 /* dydxStateManager.framework */; };
@@ -140,8 +141,9 @@
 		02603B9329F1A99D00DFFD11 /* dydxTransferState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferState.swift; sourceTree = "<group>"; };
 		026734F12BF2BFCC00DBF51A /* AbacusLoggingImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbacusLoggingImp.swift; sourceTree = "<group>"; };
 		027CB28D29EF02C50069781A /* DepositTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositTransaction.swift; sourceTree = "<group>"; };
-		027CB29329EF035E0069781A /* DepositTransactionV4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositTransactionV4.swift; sourceTree = "<group>"; };
+		027CB29329EF035E0069781A /* EvmDepositTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmDepositTransaction.swift; sourceTree = "<group>"; };
 		027CB29529EF04170069781A /* dydxCartera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxCartera.xcodeproj; path = ../dydxCartera/dydxCartera.xcodeproj; sourceTree = "<group>"; };
+		02886B112D848F81005EF461 /* SolanaDepositTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolanaDepositTransaction.swift; sourceTree = "<group>"; };
 		02A8962028E65FBD006F1658 /* AbacusState+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AbacusState+Combine.swift"; sourceTree = "<group>"; };
 		02E7DC5E28CFAF5C00727949 /* dydxStateManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxStateManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		02E7DC6128CFAF5C00727949 /* dydxStateManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dydxStateManager.h; sourceTree = "<group>"; };
@@ -256,7 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				023BFFD62ABBBAA900D3ED5C /* EnableERC20TokenStep.swift */,
-				027CB29329EF035E0069781A /* DepositTransactionV4.swift */,
+				027CB29329EF035E0069781A /* EvmDepositTransaction.swift */,
+				02886B112D848F81005EF461 /* SolanaDepositTransaction.swift */,
 			);
 			path = V4;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				023BFFD72ABBBAA900D3ED5C /* EnableERC20TokenStep.swift in Sources */,
 				6473ACB62A65B19F00BBC01F /* AbacusLocalizerImp.swift in Sources */,
 				02E7DD8D28CFB1C600727949 /* ParamsHelper.swift in Sources */,
+				02886B122D848F86005EF461 /* SolanaDepositTransaction.swift in Sources */,
 				646EE0852A75A8F4006A68E4 /* AbacusTimerImp.swift in Sources */,
 				6473ACB82A65B1B100BBC01F /* AbacusThreadingImp.swift in Sources */,
 				022EDB70299EF054003D59A7 /* dydxWalletState.swift in Sources */,
@@ -669,7 +673,7 @@
 				02603B9429F1A99D00DFFD11 /* dydxTransferState.swift in Sources */,
 				026734F22BF2BFCC00DBF51A /* AbacusLoggingImp.swift in Sources */,
 				022E928828EA4FD80096CDA9 /* Models+Ext.swift in Sources */,
-				027CB29429EF035E0069781A /* DepositTransactionV4.swift in Sources */,
+				027CB29429EF035E0069781A /* EvmDepositTransaction.swift in Sources */,
 				646EDDEF2A732DBB006A68E4 /* Implementations.swift in Sources */,
 				02E7DC6328CFAF5C00727949 /* dydxStateManager.docc in Sources */,
 				02603B9129F1A95E00DFFD11 /* dydxClientState.swift in Sources */,

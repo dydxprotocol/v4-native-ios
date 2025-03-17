@@ -17,7 +17,8 @@ public struct DepositTransaction: AsyncStep {
     public typealias ProgressType = Void
     public typealias ResultType = String        // Returning transaction hash
 
-    private let depositTransactionV4: DepositTransactionV4?
+    private let evm: EvmDepositTransaction?
+    private let solana: SolanaDepositTransaction?
 
     public let walletAddress: String?
     public let walletId: String?
@@ -34,7 +35,7 @@ public struct DepositTransaction: AsyncStep {
                 payload: TransferInputRequestPayload?,
                 tokenSize: BigUInt?,
                 chainId: String?) {
-       self.walletAddress = walletAddress
+        self.walletAddress = walletAddress
         self.walletId = walletId
         self.tokenAddress = tokenAddress
         self.chainRpc = chainRpc
@@ -44,22 +45,41 @@ public struct DepositTransaction: AsyncStep {
 
         if let walletAddress = walletAddress,
            let chainId = chainId,
-           let chainRpc = chainRpc,
            let tokenAddress = tokenAddress {
-            depositTransactionV4 = DepositTransactionV4(payload: payload,
-                                                        tokenSize: tokenSize,
-                                                        chainId: chainId,
-                                                        provider: CarteraProvider(),
-                                                        walletAddress: walletAddress,
-                                                        walletId: walletId,
-                                                        chainRpc: chainRpc,
-                                                        tokenAddress: tokenAddress)
+            if chainId == "solana" || chainId == "solana-devnet" {
+                solana = SolanaDepositTransaction(payload: payload,
+                                                  tokenSize: tokenSize,
+                                                  provider: CarteraProvider(),
+                                                  walletAddress: walletAddress,
+                                                  walletId: walletId,
+                                                  tokenAddress: tokenAddress,
+                                                  isMainnet: chainId == "solana")
+                evm = nil
+            } else if let chainRpc = chainRpc {
+                evm = EvmDepositTransaction(payload: payload,
+                                            tokenSize: tokenSize,
+                                            chainId: chainId,
+                                            provider: CarteraProvider(),
+                                            walletAddress: walletAddress,
+                                            walletId: walletId,
+                                            chainRpc: chainRpc,
+                                            tokenAddress: tokenAddress)
+                solana = nil
+            } else {
+                evm = nil
+                solana = nil
+            }
         } else {
-            depositTransactionV4 = nil
+            evm = nil
+            solana = nil
         }
     }
 
     public func run() -> AnyPublisher<AsyncEvent<ProgressType, ResultType>, Never> {
-        depositTransactionV4?.run() ?? Empty<AsyncEvent<Void, ResultType>, Never>().eraseToAnyPublisher()
+        if chainId == "solana" || chainId == "solana-devnet"{
+            solana?.run() ?? Empty<AsyncEvent<Void, ResultType>, Never>().eraseToAnyPublisher()
+        } else {
+            evm?.run() ?? Empty<AsyncEvent<Void, ResultType>, Never>().eraseToAnyPublisher()
+        }
     }
 }

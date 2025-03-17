@@ -52,10 +52,19 @@ public final class dydxTransferTokensWorker: BaseWorker {
             .store(in: &self.subscriptions)
 
         // set the default
-        transferTokenDetails.infos
-            .removeDuplicates()
-            .sink { tokens in
-                if TransferTokenDetails.shared?.defaultToken == nil, let firstToken = tokens.first {
+        Publishers
+            .CombineLatest(
+                transferTokenDetails.infos
+                    .removeDuplicates(),
+                AbacusStateManager.shared.state.currentWallet
+                    .compactMap { $0 }
+            )
+            .sink { tokens, currentWallet in
+                if currentWallet.walletId == "phantom-wallet" {
+                    TransferTokenDetails.shared?.defaultToken = tokens.first { token in
+                        token.chain == .Solana && token.token == .USDC
+                    }
+                } else if let firstToken = tokens.first {
                     TransferTokenDetails.shared?.defaultToken = firstToken
                 }
             }
@@ -70,7 +79,9 @@ public final class dydxTransferTokensWorker: BaseWorker {
                         let balance = try await solanaInteractor?.getSolBalance(account: publicKey)
                         var info = info
                         info.amount = (Parser.standard.asNumber(balance)?.doubleValue ?? 0) / pow(10.0, Double(info.decimals))
-                        TransferTokenDetails.shared?.update(info: info)
+                        DispatchQueue.main.async {
+                            TransferTokenDetails.shared?.update(info: info)
+                        }
                     } catch {
                         Console.shared.log("Failed to get SOL balance: \(error)")
                     }
@@ -83,7 +94,9 @@ public final class dydxTransferTokensWorker: BaseWorker {
                         let amount = (Parser.standard.asNumber(balance)?.doubleValue ?? 0) / pow(10.0, Double(info.decimals))
                         info.amount = amount
                         info.usdcAmount = amount
-                        TransferTokenDetails.shared?.update(info: info)
+                        DispatchQueue.main.async {
+                            TransferTokenDetails.shared?.update(info: info)
+                        }
                     } catch {
                         Console.shared.log("Failed to get USDC balance: \(error)")
                     }

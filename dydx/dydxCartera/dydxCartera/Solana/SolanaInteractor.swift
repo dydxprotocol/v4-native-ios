@@ -9,7 +9,6 @@ import Foundation
 import SolanaSwift
 
 public final class SolanaInteractor {
-
     public static let mainnetEndpoint = APIEndPoint(
         address: "https://api.mainnet-beta.solana.com",
         network: .mainnetBeta
@@ -24,6 +23,11 @@ public final class SolanaInteractor {
 
     public init(endpoint: APIEndPoint) {
         apiClient = JSONRPCAPIClient(endpoint: endpoint)
+    }
+
+    public func getRecentBlockhash() async throws -> String {
+        let result = try await apiClient.getRecentBlockhash()
+        return result
     }
 
     public func getSolBalance(account: String) async throws -> UInt64 {

@@ -161,8 +161,7 @@ private let mainnetTokens: [TransferTokenInfo] = [
     TransferTokenInfo(chain: .Optimism, chainId: "10", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Arbitrum, chainId: "42161", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Polygon, chainId: "137", token: .POL, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
-
-    TransferTokenInfo(chain: .Solana, chainId: "solana", token: .SOL, tokenAddress: ""),
+//    TransferTokenInfo(chain: .Solana, chainId: "solana", token: .SOL, tokenAddress: "solana-native"),
     TransferTokenInfo(chain: .Solana, chainId: "solana", token: .USDC, tokenAddress: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
 
 ]
@@ -178,7 +177,6 @@ private let testnetTokens: [TransferTokenInfo] = [
     TransferTokenInfo(chain: .Optimism, chainId: "11155420", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Arbitrum, chainId: "421614", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Polygon, chainId: "80002", token: .POL, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
-
-    TransferTokenInfo(chain: .Solana, chainId: "solana", token: .SOL, tokenAddress: ""),
-    TransferTokenInfo(chain: .Solana, chainId: "solana", token: .USDC, tokenAddress: "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU")
+//    TransferTokenInfo(chain: .Solana, chainId: "solana-devnet", token: .SOL, tokenAddress: "solana-devnet-native"),
+    TransferTokenInfo(chain: .Solana, chainId: "solana-devnet", token: .USDC, tokenAddress: "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU")
 ]

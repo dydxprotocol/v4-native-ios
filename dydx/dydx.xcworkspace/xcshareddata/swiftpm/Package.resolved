@@ -1,5 +1,5 @@
 {
-  "originHash" : "ce3d571eefa8f4c4286bddb38cb3ef39c72856acc443bfe4fc4fa99a76796de9",
+  "originHash" : "7c51c785db69f7b6af452aebaade42d79435968885cae55d92383f3487343d6e",
   "pins" : [
     {
       "identity" : "base58swift",
@@ -71,15 +71,6 @@
       "state" : {
         "revision" : "cd187c632fb812fd93711a9f7e644adb7e5f97f0",
         "version" : "0.1.7"
-      }
-    },
-    {
-      "identity" : "solana-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/p2p-org/solana-swift",
-      "state" : {
-        "revision" : "010a3e3a4cb583ccc3150a04d4270ad37d784ee8",
-        "version" : "5.0.0"
       }
     },
     {

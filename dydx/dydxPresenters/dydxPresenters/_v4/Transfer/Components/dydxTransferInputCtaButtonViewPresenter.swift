@@ -147,7 +147,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
         let usdcSize = parser.asDecimal(transferInput.size?.usdcSize)?.doubleValue ?? 0
         switch transferType {
         case .deposit:
-            return usdcSize < dydxNumberFeatureFlag.min_usdc_for_deposit.value * 0.99 // since USDC price is not always == $1.00
+            return false // usdcSize < dydxNumberFeatureFlag.min_usdc_for_deposit.value * 0.99 // since USDC price is not always == $1.00
         default:
             return false
         }
@@ -174,7 +174,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 case let .result(hash, error):
                     if let error = error {
                         self?.showError(error: error)
-                    } else if let hash = hash?.lowercased() {
+                    } else if let hash = hash {
                         self?.sendOnboardingAnalytics()
                         self?.transferAnalytics.logDeposit(transferInput: transferInput)
                         self?.addTransferHash(hash: hash,
@@ -381,7 +381,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                                        type: .error,
                                        error: nil, time: nil)
             } else if let hash = result["transactionHash"] as? String {
-                let fullHash = "0x" + hash.lowercased()
+                let fullHash = "0x" + hash
                 addTransferHash(hash: fullHash,
                                 fromChainName: AbacusStateManager.shared.environment?.chainName,
                                 toChainName: transferInput.chainName ?? transferInput.networkName,
@@ -391,7 +391,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 resetInputFields()
                 TransferTokenDetails.shared?.refresh()
             } else if let hash = result["hash"] as? String {
-                let fullHash = "0x" + hash.lowercased()
+                let fullHash = "0x" + hash
                 addTransferHash(hash: fullHash,
                                 fromChainName: AbacusStateManager.shared.environment?.chainName,
                                 toChainName: transferInput.chainName ?? transferInput.networkName,
@@ -469,8 +469,12 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                                  toChainName: String?,
                                  transferInput: TransferInput,
                                  requestPayload: TransferInputRequestPayload?) {
+        var hash = hash
+        if transferInput.chain != "solana" && transferInput.chain != "solana-devnet" {
+            hash = hash.lowercased()
+        }
         let transfer = dydxTransferInstance(transferType: transferType.transferInstanceType,
-                                            transactionHash: hash.lowercased(),
+                                            transactionHash: hash,
                                             fromChainId: requestPayload?.fromChainId,
                                             fromChainName: fromChainName,
                                             toChainId: requestPayload?.toChainId,

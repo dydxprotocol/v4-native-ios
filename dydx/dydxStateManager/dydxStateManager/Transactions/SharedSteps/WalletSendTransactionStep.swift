@@ -16,23 +16,26 @@ struct WalletSendTransactionStep: AsyncStep {
     typealias ProgressType = Void
     typealias ResultType = String
 
-    let transaction: EthereumTransactionRequest
+    let transaction: EthereumTransactionRequest?
+    let solana: Data?
     let chainIdInt: Int
     let provider: CarteraProvider
     let walletAddress: String
     let walletId: String?
 
-    func run() -> AnyPublisher<Utilities.AsyncEvent<ProgressType, ResultType>, Never> {
+    func run() -> AnyPublisher<AsyncEvent<ProgressType, ResultType>, Never> {
         AnyPublisher<AsyncEvent<Void, ResultType>, Never>.create { subscriber in
             let wallet = CarteraConfig.shared.wallets.first { $0.id == walletId } ?? CarteraConfig.shared.wallets.first
             let walletRequest = WalletRequest(wallet: wallet, address: walletAddress, chainId: chainIdInt, useModal: walletId == nil)
-            let transactionRequest = WalletTransactionRequest(walletRequest: walletRequest, ethereum: transaction)
-            provider.send(request: transactionRequest) { info in
+            let transactionRequest = WalletTransactionRequest(walletRequest: walletRequest,
+                                                              ethereum: transaction,
+                                                              solana: solana)
+            provider.send(request: transactionRequest, connected: { info in
                 if info == nil {
                     let error = NSError(domain: "", code: -1, userInfo: [ NSLocalizedDescriptionKey: "Unable to connect to wallet"])
                     _ = subscriber.receive(.result(nil, error))
                 }
-            } completion: { signed, error in
+            }, completion: { signed, error in
                 if signed != nil {
                     _ = subscriber.receive(.result(signed, nil))
                 } else {
@@ -58,7 +61,7 @@ struct WalletSendTransactionStep: AsyncStep {
                         _ = subscriber.receive(.result(nil, error))
                     }
                 }
-            }
+            })
 
             return AnyCancellable {
                 // Imperative cancellation implementation

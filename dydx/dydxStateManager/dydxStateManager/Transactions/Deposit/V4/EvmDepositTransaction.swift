@@ -13,7 +13,7 @@ import Foundation
 import Utilities
 import Web3
 
-struct DepositTransactionV4: AsyncStep {
+struct EvmDepositTransaction: AsyncStep {
     typealias ProgressType = Void
     typealias ResultType = String
 
@@ -51,6 +51,7 @@ struct DepositTransactionV4: AsyncStep {
                 if case let .result(enabled, error) = event {
                     if enabled == true {
                         return WalletSendTransactionStep(transaction: ethereumTransactionRequest,
+                                                         solana: nil,
                                                          chainIdInt: chainIdInt,
                                                          provider: provider,
                                                          walletAddress: walletAddress,
