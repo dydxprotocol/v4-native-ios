@@ -22,11 +22,11 @@ public class dydxSimpleUIMarginUsageViewModel: PlatformViewModel {
         return vm
     }
 
-    private lazy var leverageTooltip: PlatformViewModel = {
+    private var leverageTooltip: PlatformViewModel {
         Tooltips.leverage(marginUsage: marginUsage) { [weak self] in
             self?.learnMoreAction?()
         }
-    }()
+    }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
