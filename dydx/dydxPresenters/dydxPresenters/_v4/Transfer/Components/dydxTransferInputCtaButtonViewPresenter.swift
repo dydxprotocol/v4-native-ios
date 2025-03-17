@@ -147,7 +147,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
         let usdcSize = parser.asDecimal(transferInput.size?.usdcSize)?.doubleValue ?? 0
         switch transferType {
         case .deposit:
-            return false // usdcSize < dydxNumberFeatureFlag.min_usdc_for_deposit.value * 0.99 // since USDC price is not always == $1.00
+            return usdcSize < dydxNumberFeatureFlag.min_usdc_for_deposit.value * 0.99 // since USDC price is not always == $1.00
         default:
             return false
         }

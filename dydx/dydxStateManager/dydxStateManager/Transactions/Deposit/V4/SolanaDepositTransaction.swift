@@ -19,11 +19,9 @@ struct SolanaDepositTransaction: AsyncStep {
     typealias ResultType = String
 
     let payload: TransferInputRequestPayload?
-    let tokenSize: BigUInt?
     let provider: CarteraProvider
     let walletAddress: String
     let walletId: String?
-    let tokenAddress: String
     let isMainnet: Bool
 
     func run() -> AnyPublisher<AsyncEvent<ProgressType, ResultType>, Never> {

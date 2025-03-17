@@ -48,11 +48,9 @@ public struct DepositTransaction: AsyncStep {
            let tokenAddress = tokenAddress {
             if chainId == "solana" || chainId == "solana-devnet" {
                 solana = SolanaDepositTransaction(payload: payload,
-                                                  tokenSize: tokenSize,
                                                   provider: CarteraProvider(),
                                                   walletAddress: walletAddress,
                                                   walletId: walletId,
-                                                  tokenAddress: tokenAddress,
                                                   isMainnet: chainId == "solana")
                 evm = nil
             } else if let chainRpc = chainRpc {
