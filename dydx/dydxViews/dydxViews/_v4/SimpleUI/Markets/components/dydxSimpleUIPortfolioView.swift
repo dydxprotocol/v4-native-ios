@@ -47,17 +47,17 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
 
     @Published public var periodOption = dydxSimpleUIPortfolioPeriodViewModel.previewValue
 
-    private lazy var buyingPowerTooltip: TooltipModel = {
+    private var buyingPowerTooltip: TooltipModel {
         Tooltips.buyingPower { [weak self] in
             self?.learnMoreAction?()
         }
-    }()
+    }
 
-    private lazy var leverageTooltip: PlatformViewModel = {
+    private var leverageTooltip: PlatformViewModel {
         Tooltips.leverage(marginUsage: sharedAccountViewModel?.leverageIcon?.marginUsage) { [weak self] in
             self?.learnMoreAction?()
         }
-    }()
+    }
 
     private var pnlColor: ThemeColor.SemanticColor {
         get {
