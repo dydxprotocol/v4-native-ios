@@ -1,5 +1,5 @@
 {
-  "originHash" : "45c9f959f022857144b22ac3ae1b1ff8e7963690bf2acd5460a7e8ee602f87ed",
+  "originHash" : "7f5c9e40842ef01489632236ab1a6c9a632f75c5b2b2409462b98ed78023152d",
   "pins" : [
     {
       "identity" : "base58swift",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dydxprotocol/cartera-ios",
       "state" : {
-        "branch" : "main",
-        "revision" : "51ebfbebbdc68607e2bb351dd98d74f571a9177d"
+        "branch" : "features/fix_build",
+        "revision" : "9b4b66dfa288a712be02ca89de0aa62fd42bd8b1"
       }
     },
     {
