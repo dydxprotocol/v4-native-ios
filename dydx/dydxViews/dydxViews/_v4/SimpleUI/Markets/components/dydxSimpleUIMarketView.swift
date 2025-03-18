@@ -199,13 +199,15 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontSize: .medium)
 
-            HStack {
+            HStack(spacing: 4) {
                 if isLaunched {
-                    Text(DataLocalizer.localize(path: "APP.TRADE.VOLUME"))
-                        .themeColor(foreground: .textTertiary)
+                    if let marketCapText = dydxFormatter.shared.dollarVolume(number: marketCaps) {
+                        Text(marketCapText)
 
-                    if let volumeText = dydxFormatter.shared.dollarVolume(number: volumn) {
-                        Text(volumeText)
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.MARKET"))
+                            .themeColor(foreground: .textTertiary)
+                    } else {
+                        Text("-")
                     }
                 } else {
                     Text(DataLocalizer.localize(path: "APP.GENERAL.LAUNCHABLE"))

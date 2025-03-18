@@ -27,12 +27,14 @@ public class dydxSimpleUIMarketInfoHeaderViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            return HStack(spacing: 8) {
-                ChevronBackButtonModel(onBackButtonTap: self.onBackButtonTap ?? {})
-                    .createView(parentStyle: style)
-                    .frame(width: 32)
+            return HStack(spacing: 12) {
+                HStack(spacing: 4) {
+                    ChevronBackButtonModel(onBackButtonTap: self.onBackButtonTap ?? {})
+                        .createView(parentStyle: style)
+                        .frame(width: 24)
 
-                self.createIcon(style: style)
+                    self.createIcon(style: style)
+                }
 
                 self.createNameVolume(style: style)
 
@@ -41,7 +43,7 @@ public class dydxSimpleUIMarketInfoHeaderViewModel: PlatformViewModel {
                 self.createPriceChange(style: style)
             }
                 .frame(maxWidth: .infinity)
-                .padding(.horizontal, 12)
+                .padding(.horizontal, 16)
                 .wrappedInAnyView()
         }
     }
@@ -72,13 +74,12 @@ public class dydxSimpleUIMarketInfoHeaderViewModel: PlatformViewModel {
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontSize: .medium)
 
-            HStack {
+            HStack(spacing: 4) {
                 if sharedMarketViewModel?.isLaunched ?? true {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS._24H_VOLUME"))
-                        .themeColor(foreground: .textTertiary)
-
-                    Text(sharedMarketViewModel?.volume24H ?? "")
+                    Text(sharedMarketViewModel?.marketCap ?? "-")
                         .themeColor(foreground: .textSecondary)
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.MARKET"))
+                        .themeColor(foreground: .textTertiary)
                 } else {
                     Text(DataLocalizer.localize(path: "APP.GENERAL.LAUNCHABLE"))
                         .themeColor(foreground: .textTertiary)
