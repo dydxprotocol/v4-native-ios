@@ -1015,8 +1015,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dydxprotocol/cartera-ios";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = revision;
+				revision = 059325cc8e2ca306136f2ce342dad3f54a09cf6c;
 			};
 		};
 		024F0E602D88B9310001D799 /* XCRemoteSwiftPackageReference "solana-swift" */ = {
