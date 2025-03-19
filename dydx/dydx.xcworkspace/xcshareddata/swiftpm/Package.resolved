@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dydxprotocol/cartera-ios",
       "state" : {
-        "branch" : "features/fix_build",
-        "revision" : "9b4b66dfa288a712be02ca89de0aa62fd42bd8b1"
+        "branch" : "main",
+        "revision" : "059325cc8e2ca306136f2ce342dad3f54a09cf6c"
       }
     },
     {
