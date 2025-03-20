@@ -183,6 +183,7 @@
 		02D6DBB42D134723008AAEA1 /* dydxSimpleUIMarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D6DBB32D134723008AAEA1 /* dydxSimpleUIMarketView.swift */; };
 		02D6DBB62D134BCF008AAEA1 /* dydxSimpleUIMarketListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D6DBB52D134BCF008AAEA1 /* dydxSimpleUIMarketListView.swift */; };
 		02D9518A2C926B8E007BB2B4 /* dydxNotificationPrimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D951892C926B8E007BB2B4 /* dydxNotificationPrimerView.swift */; };
+		02DB807C2D8BB3CD00D281A6 /* MarginUsageTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB807B2D8BB3CD00D281A6 /* MarginUsageTooltip.swift */; };
 		02DC87852CD441A900F865C5 /* dydxVaultHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC87842CD441A900F865C5 /* dydxVaultHistoryView.swift */; };
 		02DC87972CD452BB00F865C5 /* dydxVaultHistoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC87962CD452BB00F865C5 /* dydxVaultHistoryItemView.swift */; };
 		02DDAD3C2925859D00CC7531 /* QRCodeDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDAD3B2925859D00CC7531 /* QRCodeDisplay.swift */; };
@@ -621,6 +622,7 @@
 		02D6DBB32D134723008AAEA1 /* dydxSimpleUIMarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketView.swift; sourceTree = "<group>"; };
 		02D6DBB52D134BCF008AAEA1 /* dydxSimpleUIMarketListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketListView.swift; sourceTree = "<group>"; };
 		02D951892C926B8E007BB2B4 /* dydxNotificationPrimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNotificationPrimerView.swift; sourceTree = "<group>"; };
+		02DB807B2D8BB3CD00D281A6 /* MarginUsageTooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarginUsageTooltip.swift; sourceTree = "<group>"; };
 		02DC87842CD441A900F865C5 /* dydxVaultHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultHistoryView.swift; sourceTree = "<group>"; };
 		02DC87962CD452BB00F865C5 /* dydxVaultHistoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultHistoryItemView.swift; sourceTree = "<group>"; };
 		02DDAD3B2925859D00CC7531 /* QRCodeDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeDisplay.swift; sourceTree = "<group>"; };
@@ -1121,6 +1123,7 @@
 				2774376C2CACCA6500F9A6B9 /* PlatformUI+Ext.swift */,
 				027887BA2D268FE800366321 /* ValidationErrorView.swift */,
 				020948ED2D52D63C008FE753 /* Tooltip.swift */,
+				02DB807B2D8BB3CD00D281A6 /* MarginUsageTooltip.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -2339,6 +2342,7 @@
 				020494192D41ED8D00394CBE /* dydxSimpleUIClosePercentView.swift in Sources */,
 				27E0736B2C20D27F0034B963 /* dydxCancelPendingIsolatedOrdersView.swift in Sources */,
 				277DB23E2C669AB700964F9B /* dydxPredictionMarketsNoticeView.swift in Sources */,
+				02DB807C2D8BB3CD00D281A6 /* MarginUsageTooltip.swift in Sources */,
 				02F1D3882BEAA6CA00A9376C /* dydxTradeInputMarginView.swift in Sources */,
 				02048E232D39873100394CBE /* CollectionItemUtil.swift in Sources */,
 				02048B0E2D3596F400394CBE /* dydxSimpleUIPortfolioPeriodView.swift in Sources */,

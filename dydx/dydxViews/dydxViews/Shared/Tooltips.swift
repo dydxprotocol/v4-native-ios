@@ -34,28 +34,4 @@ enum Tooltips {
         .wrappedViewModel
         return tooltip
     }
-
-    static func leverage(marginUsage: Double?, learnMoreAction: (() -> Void)?) -> PlatformViewModel {
-        guard let marginUsage = marginUsage else {
-            return PlatformViewModel()
-        }
-
-        let tooltip = TooltipModel()
-        tooltip.label = LeverageRiskModel(marginUsage: marginUsage,
-                                          displayOption: .fullText(dotted: true))
-        tooltip.content = VStack(alignment: .leading, spacing: 8) {
-            Text(DataLocalizer.localize(path: "APP.SIMPLE_UI.RISK_TOOLTIP"))
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: .textTertiary)
-            Text(DataLocalizer.localize(path: "APP.GENERAL.LEARN_MORE"))
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: ThemeColor.SemanticColor.colorPurple)
-                .onTapGesture {
-                    tooltip.dismiss()
-                    learnMoreAction?()
-                }
-        }
-        .wrappedViewModel
-        return tooltip
-    }
 }

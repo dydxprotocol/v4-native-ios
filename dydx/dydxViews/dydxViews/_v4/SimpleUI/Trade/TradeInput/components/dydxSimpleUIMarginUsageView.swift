@@ -11,21 +11,16 @@ import PlatformUI
 import Utilities
 
 public class dydxSimpleUIMarginUsageViewModel: PlatformViewModel {
-    @Published public var marginUsage: Double?
-    @Published public var learnMoreAction: (() -> Void)?
+    @Published public var marginUsageTooltip = MarginUsageTooltipModel()
+    @Published public var leveragePercent = LeverageRiskModel(marginUsage: 0, displayOption: .percent)
 
     public init() { }
 
     public static var previewValue: dydxSimpleUIMarginUsageViewModel {
         let vm = dydxSimpleUIMarginUsageViewModel()
-        vm.marginUsage = 0.78
+        vm.marginUsageTooltip = .previewValue
+        vm.leveragePercent = .previewValue
         return vm
-    }
-
-    private var leverageTooltip: PlatformViewModel {
-        Tooltips.leverage(marginUsage: marginUsage) { [weak self] in
-            self?.learnMoreAction?()
-        }
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
@@ -33,13 +28,8 @@ public class dydxSimpleUIMarginUsageViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = HStack(alignment: .center, spacing: 8) {
-                if let marginUsage = self.marginUsage {
-                    self.leverageTooltip.createView(parentStyle: style)
-
-                    let leveragePercent = LeverageRiskModel(marginUsage: marginUsage,
-                                                            displayOption: .percent)
-                    leveragePercent.createView(parentStyle: style.themeColor(foreground: .textTertiary))
-                }
+                self.marginUsageTooltip.createView(parentStyle: style)
+                self.leveragePercent.createView(parentStyle: style.themeColor(foreground: .textTertiary))
             }
             return AnyView(view)
         }

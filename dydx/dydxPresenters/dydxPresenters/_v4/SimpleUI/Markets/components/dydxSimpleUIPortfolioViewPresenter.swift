@@ -41,7 +41,7 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
 
         updateChartResolutions()
 
-        viewModel.learnMoreAction = {
+        let learnMoreAction = {
             if let urlString = AbacusStateManager.shared.environment?.links?.simpleTradeLearnMore,
                let url = URL(string: urlString) {
                 if URLHandler.shared?.canOpenURL(url) ?? false {
@@ -49,6 +49,8 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
                 }
             }
         }
+        viewModel.learnMoreAction = learnMoreAction
+        viewModel.marginUsageTooltip.learnMoreAction = learnMoreAction
 
         attachChildren(workers: childPresenters)
     }
@@ -85,6 +87,7 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
                     }
                 }
             }
+            self?.viewModel?.marginUsageTooltip.marginUsage = subaccount?.marginUsage?.current?.doubleValue
         }
         .store(in: &subscriptions)
 

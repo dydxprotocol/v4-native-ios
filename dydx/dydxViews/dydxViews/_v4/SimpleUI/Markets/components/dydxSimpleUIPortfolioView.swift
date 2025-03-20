@@ -47,14 +47,10 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
 
     @Published public var periodOption = dydxSimpleUIPortfolioPeriodViewModel.previewValue
 
+    @Published public var marginUsageTooltip = MarginUsageTooltipModel()
+
     private var buyingPowerTooltip: TooltipModel {
         Tooltips.buyingPower { [weak self] in
-            self?.learnMoreAction?()
-        }
-    }
-
-    private var leverageTooltip: PlatformViewModel {
-        Tooltips.leverage(marginUsage: sharedAccountViewModel?.leverageIcon?.marginUsage) { [weak self] in
             self?.learnMoreAction?()
         }
     }
@@ -71,11 +67,11 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
 
     public static var previewValue: dydxSimpleUIPortfolioViewModel {
         let vm = dydxSimpleUIPortfolioViewModel()
-        vm.sharedAccountViewModel = SharedAccountViewModel.previewValue
+        vm.sharedAccountViewModel = .previewValue
         vm.pnlAmount = .previewValue
         vm.pnlPercent = .previewValue
         vm.state = .hasBalance
-        vm.sharedAccountViewModel = .previewValue
+        vm.marginUsageTooltip = .previewValue
         return vm
     }
 
@@ -194,7 +190,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
 
                     HStack(alignment: .center, spacing: 8) {
                         if let leverageIcon = sharedAccountViewModel?.leverageIcon {
-                            leverageTooltip.createView(parentStyle: style)
+                            marginUsageTooltip.createView(parentStyle: style)
                             let leveragePercent = LeverageRiskModel(marginUsage: leverageIcon.marginUsage,
                                                                     viewSize: leverageIcon.viewSize,
                                                                     displayOption: .percent)

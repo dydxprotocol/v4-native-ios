@@ -27,7 +27,7 @@ class dydxSimpleUIMarginUsageViewPresenter: HostedViewPresenter<dydxSimpleUIMarg
 
         viewModel = dydxSimpleUIMarginUsageViewModel()
 
-        viewModel?.learnMoreAction = {
+        viewModel?.marginUsageTooltip.learnMoreAction = {
             if let urlString = AbacusStateManager.shared.environment?.links?.simpleTradeLearnMore,
                let url = URL(string: urlString) {
                 if URLHandler.shared?.canOpenURL(url) ?? false {
@@ -63,7 +63,8 @@ class dydxSimpleUIMarginUsageViewPresenter: HostedViewPresenter<dydxSimpleUIMarg
             after = nil
         }
 
-        viewModel?.marginUsage = after ?? before
+        viewModel?.marginUsageTooltip.marginUsage = after ?? before
+        viewModel?.leveragePercent.marginUsage = after ?? before ?? 0
     }
 
 }
