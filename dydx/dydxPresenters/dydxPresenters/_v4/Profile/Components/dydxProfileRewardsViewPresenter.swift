@@ -40,9 +40,13 @@ public class dydxProfileRewardsViewPresenter: HostedViewPresenter<dydxProfileRew
             .sink { [weak self] account in
                 if let amount = account?.tradingRewards?.total?.doubleValue {
                     self?.viewModel?.allTimeRewardsAmount = dydxFormatter.shared.raw(number: NSNumber(value: amount), digits: 4)
+                } else {
+                    self?.viewModel?.allTimeRewardsAmount = nil
                 }
                 if let amount = account?.tradingRewards?.filledHistory?["WEEKLY"]?.first?.amount {
                     self?.viewModel?.last7DaysRewardsAmount = dydxFormatter.shared.raw(number: NSNumber(value: amount), digits: 4)
+                } else {
+                    self?.viewModel?.last7DaysRewardsAmount = nil
                 }
             }
             .store(in: &subscriptions)

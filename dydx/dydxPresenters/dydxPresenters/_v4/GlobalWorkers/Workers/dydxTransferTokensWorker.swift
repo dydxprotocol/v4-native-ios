@@ -84,6 +84,11 @@ public final class dydxTransferTokensWorker: BaseWorker {
                         }
                     } catch {
                         Console.shared.log("Failed to get SOL balance: \(error)")
+                        var info = info
+                        info.amount = 0
+                        DispatchQueue.main.async {
+                            TransferTokenDetails.shared?.update(info: info)
+                        }
                     }
                 }
             } else if info.token == .USDC {
@@ -99,6 +104,12 @@ public final class dydxTransferTokensWorker: BaseWorker {
                         }
                     } catch {
                         Console.shared.log("Failed to get USDC balance: \(error)")
+                        var info = info
+                        info.amount = 0
+                        info.usdcAmount = 0
+                        DispatchQueue.main.async {
+                            TransferTokenDetails.shared?.update(info: info)
+                        }
                     }
                 }
             }

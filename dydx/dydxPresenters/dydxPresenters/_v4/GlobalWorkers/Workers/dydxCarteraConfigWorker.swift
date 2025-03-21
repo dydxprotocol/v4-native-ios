@@ -87,11 +87,21 @@ extension WalletSegueConfig {
 
 extension PhantomWalletConfig {
     init?(environment: V4Environment) {
-        guard let callbackUrl = environment.walletConnection?.phantom?.callbackUrl,
-                let _ = URL(string: callbackUrl) else {
+        guard let envCallbackUrl = environment.walletConnection?.phantom?.callbackUrl,
+                let _ = URL(string: envCallbackUrl) else {
             return nil
         }
 
-        self.init(appUrl: AbacusStateManager.shared.deploymentUri, appRedirectBaseUrl: callbackUrl)
+        let appUrl: String
+        let callbackUrl: String
+        switch Installation.source {
+        case .debug:
+            appUrl = "https://v4.testnet.dydx.exchange"
+            callbackUrl = "https://v4.testnet.dydx.exchange/phantom"
+        case .appStore, .jailBroken, .testFlight:
+            appUrl = AbacusStateManager.shared.deploymentUri
+            callbackUrl = envCallbackUrl
+        }
+        self.init(appUrl: appUrl, appRedirectBaseUrl: callbackUrl)
     }
 }
