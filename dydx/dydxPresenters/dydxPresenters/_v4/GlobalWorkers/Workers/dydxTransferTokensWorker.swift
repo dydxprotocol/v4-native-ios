@@ -113,12 +113,21 @@ public final class dydxTransferTokensWorker: BaseWorker {
                     }
                 }
             }
+        } else {
+            var info = info
+            info.amount = 0
+            info.usdcAmount = 0
+            TransferTokenDetails.shared?.update(info: info)
         }
     }
 
     private func loadEthTokenInfo(info: TransferTokenInfo, rpcMap: [String: RpcInfo], sourceAddress: String) {
         guard let address = try? EthereumAddress(hex: sourceAddress, eip55: false) else {
             Console.shared.log("Invalid wallet address")
+            var info = info
+            info.amount = 0
+            info.usdcAmount = 0
+            TransferTokenDetails.shared?.update(info: info)
             return
         }
         guard let rpcInfo = rpcMap[info.chainId] else {
