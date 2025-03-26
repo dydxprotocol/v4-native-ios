@@ -236,6 +236,11 @@ public final class AbacusStateManager: NSObject {
                 self._walletState.setCurrentWallet(wallet: wallet)
                 self.asyncStateManager.accountAddress = cosmoAddress
                 self.asyncStateManager.sourceAddress = ethereumAddress
+                if walletId == "phantom-wallet" {
+                    self.asyncStateManager.walletConnectionType = .solana
+                } else {
+                    self.asyncStateManager.walletConnectionType = .ethereum
+                }
             }
         }
     }
