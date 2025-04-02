@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dydxprotocol/cartera-ios",
       "state" : {
-        "branch" : "releases/0.1.10",
-        "revision" : "059325cc8e2ca306136f2ce342dad3f54a09cf6c"
+        "branch" : "releases/0.1.11",
+        "revision" : "d8e147811f5215558dd3c679127e7fa346553eb8"
       }
     },
     {
@@ -157,7 +157,7 @@
     {
       "identity" : "wallet-mobile-sdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coinbase/wallet-mobile-sdk",
+      "location" : "https://github.com/MobileWalletProtocol/wallet-mobile-sdk",
       "state" : {
         "branch" : "1.0.5",
         "revision" : "4aa89e682f8d7ab1515d85d0797f0d25306bb56a"
