@@ -54,6 +54,7 @@ public extension AnalyticsEventV2 {
         case chooseWallet = "ChooseWallet"
         case keyDerivation = "KeyDerivation"
         case acknowledgeTerms = "AcknowledgeTerms"
+        case depositInitiated = "TransferDepositFundsClick"
         case depositFunds = "DepositFunds"
     }
 }

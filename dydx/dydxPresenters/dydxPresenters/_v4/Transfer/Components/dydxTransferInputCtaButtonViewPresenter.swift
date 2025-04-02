@@ -163,7 +163,8 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
         Publishers.Zip(AbacusStateManager.shared.state.transferInput,
                        AbacusStateManager.shared.state.currentWallet.compactMap { $0 })
             .prefix(1)
-            .flatMapLatest { input, wallet in
+            .flatMapLatest { [weak self] input, wallet in
+                self?.onboardingAnalytics.log(step: .depositInitiated)
                 let payload = selectedRoute == .instant ? input.goFastRequestPayload : input.requestPayload
                 return DepositTransaction(walletAddress: wallet.ethereumAddress,
                                           walletId: wallet.walletId,
@@ -181,7 +182,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                     if let error = error {
                         self?.showError(error: error)
                     } else if let hash = hash {
-                        self?.sendOnboardingAnalytics()
+                        self?.onboardingAnalytics.log(step: .depositFunds)
                         self?.transferAnalytics.logDeposit(transferInput: transferInput)
                         self?.addTransferHash(hash: hash,
                                               fromChainName: transferInput.chainName ?? transferInput.networkName,
@@ -487,18 +488,6 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                                             isCctp: transferInput.isCctp,
                                             requestId: requestPayload?.requestId)
         AbacusStateManager.shared.addTransferInstance(transfer: transfer)
-    }
-
-    private func sendOnboardingAnalytics() {
-        AbacusStateManager.shared.state.hasAccount
-            .prefix(1)
-            .sink { [weak self] hasAccount in
-                // only log for newly onboarded users (i.e., user without an account)
-                if !hasAccount {
-                    self?.onboardingAnalytics.log(step: .depositFunds)
-                }
-            }
-            .store(in: &subscriptions)
     }
 }
 
