@@ -49,7 +49,7 @@ class PersistentStorageResponseHandler: ResponseHandler {
         let error = data["error"] as? String ?? ""
 
         let isInvalidApiKey = error == "Invalid API key: \(configuration.apiKey)"
-        if events.count == 1 || isInvalidApiKey {
+        if isInvalidApiKey {
             triggerEventsCallback(
                 events: events,
                 code: HttpClient.HttpStatus.BAD_REQUEST.rawValue,
@@ -91,7 +91,7 @@ class PersistentStorageResponseHandler: ResponseHandler {
         }
 
         storage.remove(eventBlock: eventBlock)
-        return true
+        return !eventsToDrop.isEmpty
     }
 
     func handlePayloadTooLargeResponse(data: [String: Any]) -> Bool {

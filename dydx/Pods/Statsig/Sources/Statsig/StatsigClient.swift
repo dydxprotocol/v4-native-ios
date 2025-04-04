@@ -73,7 +73,7 @@ public class StatsigClient {
             self.hasInitialized = true
             self.lastInitializeError = error
 
-            self.logger.retryFailedRequests();
+            self.logger.retryFailedRequests(forUser: capturedUser);
 
             Diagnostics.mark?.overall.end(
                 success: error == nil,
@@ -582,8 +582,14 @@ extension StatsigClient {
     private func getParameterStoreImpl(_ storeName: String, shouldExpose: Bool) -> ParameterStore {
         logger.incrementNonExposedCheck(storeName)
 
-        var store = store.getParamStore(client: self, forName: storeName)
-        
+        let original = store.getParamStore(client: self, forName: storeName)
+
+        var store = self.statsigOptions.overrideAdapter?.getParameterStore(
+            client: self,
+            name: storeName,
+            original: original
+        ) ?? original
+
         store.shouldExpose = shouldExpose
         
         if let cb = statsigOptions.evaluationCallback {

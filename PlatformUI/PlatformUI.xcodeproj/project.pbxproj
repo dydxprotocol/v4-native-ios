@@ -540,8 +540,6 @@
 				02DE889B28A2C91500728FF3 /* PBXTargetDependency */,
 			);
 			name = PlatformUI;
-			packageProductDependencies = (
-			);
 			productName = PlatformUI;
 			productReference = 02E2C92B28A1C8A400F7C3BE /* PlatformUI.framework */;
 			productType = "com.apple.product-type.framework";
@@ -593,8 +591,6 @@
 				Base,
 			);
 			mainGroup = 02E2C92128A1C8A400F7C3BE;
-			packageReferences = (
-			);
 			productRefGroup = 02E2C92C28A1C8A400F7C3BE /* Products */;
 			projectDirPath = "";
 			projectReferences = (

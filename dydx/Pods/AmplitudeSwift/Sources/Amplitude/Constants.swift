@@ -46,7 +46,7 @@ public enum ServerZone: Int {
 
 public struct Constants {
     static let SDK_LIBRARY = "amplitude-swift"
-    static let SDK_VERSION = "1.11.7"
+    static let SDK_VERSION = "1.11.9"
     public static let DEFAULT_API_HOST = "https://api2.amplitude.com/2/httpapi"
     public static let EU_DEFAULT_API_HOST = "https://api.eu.amplitude.com/2/httpapi"
     static let BATCH_API_HOST = "https://api2.amplitude.com/batch"
@@ -108,7 +108,7 @@ public struct Constants {
         public static let FLUSH_QUEUE_SIZE = 30
         public static let FLUSH_INTERVAL_MILLIS = 30 * 1000  // 30s
         public static let DEFAULT_INSTANCE = "$default_instance"
-        public static let FLUSH_MAX_RETRIES = 5
+        public static let FLUSH_MAX_RETRIES = 6
         public static let MIN_TIME_BETWEEN_SESSIONS_MILLIS = 300000
         public static let IDENTIFY_BATCH_INTERVAL_MILLIS = 30 * 1000  // 30s
     }
