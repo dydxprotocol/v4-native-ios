@@ -88,7 +88,12 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
 
     private func updateState(vault: Abacus.Vault?, assetMap: [String: Asset], marketMap: [String: PerpetualMarket]) {
         viewModel?.totalValueLocked = vault?.details?.totalValue?.doubleValue
-        viewModel?.thirtyDayReturnPercent = vault?.details?.thirtyDayReturnPercent?.doubleValue
+        if let thirtyDayReturnPercent =  vault?.details?.thirtyDayReturnPercent?.doubleValue,
+           let ninetyDayReturnPercent =  vault?.details?.ninetyDayReturnPercent?.doubleValue {
+            viewModel?.thirtyDayReturnPercent = max(thirtyDayReturnPercent, ninetyDayReturnPercent)
+        } else {
+            viewModel?.thirtyDayReturnPercent = nil
+        }
         viewModel?.vaultBalance = vault?.account?.balanceUsdc?.doubleValue
         viewModel?.allTimeReturnUsdc = vault?.account?.allTimeReturnUsdc?.doubleValue.round(to: 2)
         viewModel?.learnMoreAction = {

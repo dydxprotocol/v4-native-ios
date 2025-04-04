@@ -191,7 +191,7 @@ private struct dydxVaultView: View {
 
     private var aprTitleValue: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.VAULT_THIRTY_DAY_APR", params: nil) ?? "")
+            Text(DataLocalizer.shared?.localize(path: "APP.VAULTS.EST_APR_PLAIN", params: nil) ?? "")
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontType: .base, fontSize: .small)
             Text(dydxFormatter.shared.percent(number: viewModel.thirtyDayReturnPercent, digits: 0) ?? "")
