@@ -25,6 +25,7 @@ public class dydxRewardsLaunchIncentivesPresenter: HostedViewPresenter<dydxRewar
         super.init()
 
         viewModel = dydxRewardsLaunchIncentivesViewModel()
+        viewModel?.rewardPool = dydxFormatter.shared.dollar(number: 1500000.0, digits: 0)
     }
 
     public override func start() {
