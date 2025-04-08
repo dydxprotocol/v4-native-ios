@@ -41,11 +41,17 @@ public class dydxRewardsLaunchIncentivesPresenter: HostedViewPresenter<dydxRewar
         .store(in: &subscriptions)
 
         viewModel?.aboutAction = {
-            Router.shared?.navigate(to: URL(string: "https://dydx.forum/t/launch-of-season-5-of-the-launch-incentive-program/2725"), completion: nil)
+            let urlString = AbacusStateManager.shared.environment?.links?.incentiveProgram
+            if let urlString = urlString, let url = URL(string: urlString) {
+                Router.shared?.navigate(to: url, completion: nil)
+            }
         }
 
         viewModel?.leaderboardAction = {
-            Router.shared?.navigate(to: URL(string: "https://community.chaoslabs.xyz/dydx-v4/risk/leaderboard"), completion: nil)
+            let urlString = AbacusStateManager.shared.environment?.links?.incentiveProgramLeaderboard
+            if let urlString = urlString, let url = URL(string: urlString) {
+                Router.shared?.navigate(to: url, completion: nil)
+            }
         }
     }
 

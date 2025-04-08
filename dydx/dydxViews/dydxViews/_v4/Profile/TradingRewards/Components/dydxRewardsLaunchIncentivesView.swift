@@ -24,7 +24,7 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
     }()
 
     private let launchIncentivesFormatted: AttributedString = {
-        guard let launchIncentives = DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.INCENTIVE_PROGRAM", params: nil) else { return .init() }
+        guard let launchIncentives = DataLocalizer.shared?.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_HEADLINE", params: nil) else { return .init() }
         return AttributedString(launchIncentives)
            .themeFont(fontType: .base, fontSize: .medium)
            .themeColor(foreground: .textPrimary)
@@ -120,10 +120,7 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
 
                         Spacer()
                     }
-                    Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.EARN_POINTS_TO_QUALIFY_FOR_REWARDS", params: [
-                        "REWARD_POOL": self.rewardPool ?? "",
-                        "TOKEN": "DYDX"
-                    ]) ?? "")
+                    Text(DataLocalizer.shared?.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_BODY", params: nil) ?? "")
                         .themeFont(fontType: .base, fontSize: .small)
                         .themeColor(foreground: .textTertiary)
                     HStack(spacing: 8) {
