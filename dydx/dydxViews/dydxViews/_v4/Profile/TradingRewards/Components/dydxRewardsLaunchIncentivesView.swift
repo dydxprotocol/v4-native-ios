@@ -13,7 +13,6 @@ import Utilities
 public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
     @Published public var seasonOrdinal: String?
     @Published public var points: String?
-    @Published public var rewardPool: String?
     @Published public var aboutAction: (() -> Void)?
     @Published public var leaderboardAction: (() -> Void)?
 
