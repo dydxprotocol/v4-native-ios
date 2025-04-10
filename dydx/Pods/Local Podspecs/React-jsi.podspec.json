@@ -31,12 +31,14 @@
     "RCT-Folly": [
       "2024.11.18.00"
     ],
-    "glog": []
+    "glog": [],
+    "hermes-engine": []
   },
   "source_files": "**/*.{cpp,h}",
   "exclude_files": [
     "jsi/jsilib-posix.cpp",
     "jsi/jsilib-windows.cpp",
-    "**/test/*"
+    "**/test/*",
+    "jsi/jsi.cpp"
   ]
 }

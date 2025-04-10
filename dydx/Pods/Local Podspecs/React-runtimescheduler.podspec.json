@@ -38,6 +38,6 @@
     "React-performancetimeline": [],
     "React-rendererconsistency": [],
     "React-debug": [],
-    "React-jsc": []
+    "hermes-engine": []
   }
 }

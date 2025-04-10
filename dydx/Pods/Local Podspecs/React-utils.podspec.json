@@ -31,7 +31,7 @@
       "0.78.2"
     ],
     "glog": [],
-    "React-jsc": [],
+    "hermes-engine": [],
     "React-debug": []
   }
 }

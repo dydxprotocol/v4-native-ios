@@ -12,10 +12,10 @@
 
 #import "ReactCommon/ObjCTimerRegistry.h"
 #import "ReactCommon/RCTContextContainerHandling.h"
+#import "ReactCommon/RCTHermesInstance.h"
 #import "ReactCommon/RCTHost+Internal.h"
 #import "ReactCommon/RCTHost.h"
 #import "ReactCommon/RCTInstance.h"
-#import "ReactCommon/RCTJscInstance.h"
 #import "ReactCommon/RCTJSThreadManager.h"
 #import "ReactCommon/RCTLegacyUIManagerConstantsProvider.h"
 #import "ReactCommon/RCTPerformanceLoggerUtils.h"

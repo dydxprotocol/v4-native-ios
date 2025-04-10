@@ -1417,6 +1417,7 @@
 				312C8BC921F9878D00142C7A /* Embed Frameworks */,
 				3165906D227F532B00BAF133 /* Run Script (Firebase) */,
 				020F66C02858F29300E2D072 /* Embed Foundation Extensions */,
+				0201207B2DA75F2D00761811 /* Run Script (Bundle React Native code and images) */,
 				16DEFDB1896BDF443F34E3AC /* [CP] Embed Pods Frameworks */,
 				026FC4232AFAD3EB00C52F20 /* Run Script (unset_scheme.sh) */,
 				52574510D5C216006099A2F7 /* [CP] Copy Pods Resources */,
@@ -2186,6 +2187,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0201207B2DA75F2D00761811 /* Run Script (Bundle React Native code and images) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (Bundle React Native code and images)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
+		};
 		026F2E9E28230DBD00DF3EB5 /* Run Script (Swiftlint --fix) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2711,7 +2730,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				USE_HERMES = false;
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};
@@ -2782,7 +2801,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				USE_HERMES = false;
+				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

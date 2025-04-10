@@ -317,6 +317,12 @@ abstract_target 'iOS' do
     ios_util_pods
     ios_ui_pods
     abacus_pods
+    
+    use_react_native!(
+      :path => '../node_modules/react-native',
+  #    :app_path => '/Users/ruihuang/v4-native-ios',
+      :hermes_enabled => true # set to true if you're using Hermes
+    )
   end
   
   target 'dydxPresentersTests' do
@@ -379,12 +385,6 @@ abstract_target 'iOS' do
     amplitude_pods
     statsig_pods
     abacus_pods
-    
-    use_react_native!(
-      :path => '../node_modules/react-native',
-      :app_path => '/Users/ruihuang/v4-native-ios',
-      :hermes_enabled => false # set to true if you're using Hermes
-    )
     
    #  use_react_native!(
    #   :path => config[:reactNativePath],

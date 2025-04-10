@@ -74,6 +74,7 @@ ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTText.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTVibration.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_RuntimeApple.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_RuntimeCore.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_RuntimeHermes.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/cxxreact.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_debug.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_defaultsnativemodule.framework
@@ -81,8 +82,8 @@ ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_domnativemodule.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_featureflags.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_featureflagsnativemodule.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_graphics.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/reacthermes.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/idlecallbacksnativemodule.framework
-${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_jsc.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_jserrorhandler.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsi.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsireact.framework
@@ -103,3 +104,4 @@ ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fmt.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework

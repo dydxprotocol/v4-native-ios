@@ -15,15 +15,15 @@
   "resource_bundles": {
     "React-Core_privacy": "React/Resources/PrivacyInfo.xcprivacy"
   },
-  "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_HAVE_CLOCK_GETTIME=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-documentation",
+  "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_HAVE_CLOCK_GETTIME=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-documentation -DUSE_HERMES=1",
   "header_dir": "React",
   "weak_frameworks": "JavaScriptCore",
   "pod_target_xcconfig": {
-    "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/ReactCommon $(PODS_ROOT)/boost $(PODS_ROOT)/DoubleConversion $(PODS_ROOT)/fast_float/include $(PODS_ROOT)/fmt/include $(PODS_ROOT)/RCT-Folly ${PODS_ROOT}/Headers/Public/FlipperKit $(PODS_ROOT)/Headers/Public/ReactCommon \"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector/jsinspector_modern.framework/Headers\" \"${PODS_CONFIGURATION_BUILD_DIR}/RCTDeprecation/RCTDeprecation.framework/Headers\"",
+    "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/ReactCommon $(PODS_ROOT)/boost $(PODS_ROOT)/DoubleConversion $(PODS_ROOT)/fast_float/include $(PODS_ROOT)/fmt/include $(PODS_ROOT)/RCT-Folly ${PODS_ROOT}/Headers/Public/FlipperKit $(PODS_ROOT)/Headers/Public/ReactCommon $(PODS_ROOT)/Headers/Public/React-hermes $(PODS_ROOT)/Headers/Public/hermes-engine \"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector/jsinspector_modern.framework/Headers\" \"${PODS_CONFIGURATION_BUILD_DIR}/RCTDeprecation/RCTDeprecation.framework/Headers\"",
     "DEFINES_MODULE": "YES",
     "GCC_PREPROCESSOR_DEFINITIONS": "RCT_METRO_PORT=${RCT_METRO_PORT}",
     "CLANG_CXX_LANGUAGE_STANDARD": "c++20",
-    "FRAMEWORK_SEARCH_PATHS": ""
+    "FRAMEWORK_SEARCH_PATHS": "\"$(PODS_CONFIGURATION_BUILD_DIR)/React-hermes\""
   },
   "user_target_xcconfig": {
     "HEADER_SEARCH_PATHS": "\"$(PODS_ROOT)/Headers/Private/React-Core\""
@@ -47,7 +47,8 @@
     "glog": [],
     "React-jsinspector": [],
     "RCTDeprecation": [],
-    "React-jsc": []
+    "React-hermes": [],
+    "hermes-engine": []
   },
   "subspecs": [
     {
@@ -59,7 +60,8 @@
         "React/Fabric/**/*",
         "React/FBReactNativeSpec/**/*",
         "React/Tests/**/*",
-        "React/Inspector/**/*"
+        "React/Inspector/**/*",
+        "React/CxxBridge/JSCExecutorFactory.{h,mm}"
       ],
       "private_header_files": "React/Cxx*/*.h"
     },

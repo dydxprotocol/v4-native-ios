@@ -96,15 +96,17 @@ class AppDelegate: CommonAppDelegate {
                 AbacusStateManager.shared.state.restriction)
                 .prefix(1)
                 .sink { walletState, restriction in
-                    defer { dydxRestrictionsWorker.handle(restriction: restriction) }
-                    if walletState.currentWallet != nil, !UIDevice.current.isSimulator {
-                        let params = ["securityCompleted": localCompletion]
-                        Router.shared?.navigate(to: RoutingRequest(path: "/security_at_launch", params: params), animated: true, completion: nil)
-                    } else {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/"), animated: true) { _, _ in
-                            localCompletion()
-                        }
-                    }
+                    Router.shared?.navigate(to: RoutingRequest(path: "/react_native", params: nil), animated: true, completion: nil)
+                    
+//                    defer { dydxRestrictionsWorker.handle(restriction: restriction) }
+//                    if walletState.currentWallet != nil, !UIDevice.current.isSimulator {
+//                        let params = ["securityCompleted": localCompletion]
+//                        Router.shared?.navigate(to: RoutingRequest(path: "/security_at_launch", params: params), animated: true, completion: nil)
+//                    } else {
+//                        Router.shared?.navigate(to: RoutingRequest(path: "/"), animated: true) { _, _ in
+//                            localCompletion()
+//                        }
+//                    }
                 }
                 .store(in: &self.subscriptions)
 

@@ -52,7 +52,8 @@
         "fmt": [
           "11.0.2"
         ],
-        "glog": []
+        "glog": [],
+        "hermes-engine": []
       },
       "subspecs": [
         {
@@ -60,7 +61,8 @@
           "dependencies": {
             "React-jsi": [
               "0.78.2"
-            ]
+            ],
+            "hermes-engine": []
           },
           "source_files": "react/bridging/**/*.{cpp,h}",
           "exclude_files": "react/bridging/tests",

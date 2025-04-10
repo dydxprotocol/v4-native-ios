@@ -252,6 +252,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-RuntimeApple/React_RuntimeApple.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-RuntimeCore/React_RuntimeCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RuntimeHermes/React_RuntimeHermes.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-cxxreact/cxxreact.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-debug/React_debug.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-defaultsnativemodule/React_defaultsnativemodule.framework"
@@ -259,8 +260,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/React-featureflags/React_featureflags.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-featureflagsnativemodule/React_featureflagsnativemodule.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-graphics/React_graphics.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-hermes/reacthermes.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-idlecallbacksnativemodule/idlecallbacksnativemodule.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/React-jsc/React_jsc.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-jserrorhandler/React_jserrorhandler.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework"
@@ -281,6 +282,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/fmt/fmt.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/glog/glog.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/CombineExt/CombineExt.framework"
@@ -359,6 +361,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-RuntimeApple/React_RuntimeApple.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-RuntimeCore/React_RuntimeCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RuntimeHermes/React_RuntimeHermes.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-cxxreact/cxxreact.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-debug/React_debug.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-defaultsnativemodule/React_defaultsnativemodule.framework"
@@ -366,8 +369,8 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/React-featureflags/React_featureflags.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-featureflagsnativemodule/React_featureflagsnativemodule.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-graphics/React_graphics.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-hermes/reacthermes.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-idlecallbacksnativemodule/idlecallbacksnativemodule.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/React-jsc/React_jsc.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-jserrorhandler/React_jserrorhandler.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework"
@@ -388,6 +391,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/fmt/fmt.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/glog/glog.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -33,6 +33,6 @@
     "React-jsi": [],
     "React-runtimeexecutor": [],
     "React-jsinspector": [],
-    "React-jsc": []
+    "hermes-engine": []
   }
 }

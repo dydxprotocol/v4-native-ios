@@ -75,6 +75,7 @@ ${BUILT_PRODUCTS_DIR}/React-RCTText/RCTText.framework
 ${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework
 ${BUILT_PRODUCTS_DIR}/React-RuntimeApple/React_RuntimeApple.framework
 ${BUILT_PRODUCTS_DIR}/React-RuntimeCore/React_RuntimeCore.framework
+${BUILT_PRODUCTS_DIR}/React-RuntimeHermes/React_RuntimeHermes.framework
 ${BUILT_PRODUCTS_DIR}/React-cxxreact/cxxreact.framework
 ${BUILT_PRODUCTS_DIR}/React-debug/React_debug.framework
 ${BUILT_PRODUCTS_DIR}/React-defaultsnativemodule/React_defaultsnativemodule.framework
@@ -82,8 +83,8 @@ ${BUILT_PRODUCTS_DIR}/React-domnativemodule/React_domnativemodule.framework
 ${BUILT_PRODUCTS_DIR}/React-featureflags/React_featureflags.framework
 ${BUILT_PRODUCTS_DIR}/React-featureflagsnativemodule/React_featureflagsnativemodule.framework
 ${BUILT_PRODUCTS_DIR}/React-graphics/React_graphics.framework
+${BUILT_PRODUCTS_DIR}/React-hermes/reacthermes.framework
 ${BUILT_PRODUCTS_DIR}/React-idlecallbacksnativemodule/idlecallbacksnativemodule.framework
-${BUILT_PRODUCTS_DIR}/React-jsc/React_jsc.framework
 ${BUILT_PRODUCTS_DIR}/React-jserrorhandler/React_jserrorhandler.framework
 ${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework
 ${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework
@@ -104,3 +105,4 @@ ${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework
 ${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework
 ${BUILT_PRODUCTS_DIR}/fmt/fmt.framework
 ${BUILT_PRODUCTS_DIR}/glog/glog.framework
+${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes

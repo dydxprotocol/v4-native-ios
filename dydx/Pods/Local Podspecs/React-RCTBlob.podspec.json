@@ -43,6 +43,7 @@
     "React-RCTFBReactNativeSpec": [],
     "React-NativeModulesApple": [],
     "React-jsinspector": [],
-    "ReactCommon": []
+    "ReactCommon": [],
+    "hermes-engine": []
   }
 }

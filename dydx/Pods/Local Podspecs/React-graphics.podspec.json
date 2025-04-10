@@ -42,6 +42,6 @@
     "fmt": [
       "11.0.2"
     ],
-    "React-jsc": []
+    "hermes-engine": []
   }
 }

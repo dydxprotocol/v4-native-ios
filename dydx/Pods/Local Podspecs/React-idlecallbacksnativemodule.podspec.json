@@ -27,7 +27,7 @@
     "RCT-Folly": [],
     "React-jsi": [],
     "React-jsiexecutor": [],
-    "React-jsc": [],
+    "hermes-engine": [],
     "ReactCommon/turbomodule/core": [],
     "React-runtimescheduler": [],
     "React-RCTFBReactNativeSpec": [],
