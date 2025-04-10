@@ -1,6 +1,8 @@
 **/xcuserdata
 .DS_Store
 .*.swp
+.xcode*
+node_modules
 dydx/fastlane
 dydx/Pods/abacus/.gradle
 dydx/Pods/abacus/build

@@ -7,7 +7,7 @@
 //
 
 import SDWebImage
-import SVGKit
+//import SVGKit
 import UIKit
 
 //  The converted code is limited to 2 KB.
@@ -19,11 +19,11 @@ open class CachedImageView: UXImageView {
             if imageUrl != oldValue {
                 if let imageUrl = imageUrl {
                     if imageUrl.absoluteString.lowercased().ends(with: ".svg") {
-                        SVGCache.shared.image(url: imageUrl, completion: { [weak self] image, _ in
-                            DispatchQueue.runInMainThread { [weak self] in
-                                self?.image = image
-                            }
-                        })
+//                        SVGCache.shared.image(url: imageUrl, completion: { [weak self] image, _ in
+//                            DispatchQueue.runInMainThread { [weak self] in
+//                                self?.image = image
+//                            }
+//                        })
                     } else {
                         sd_setImage(with: imageUrl, completed: nil)
                     }

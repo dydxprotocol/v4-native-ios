@@ -6,6 +6,7 @@
 //  Copyright © 2021 dYdX Trading Inc. All rights reserved.
 //
 
+#if false
 import SVGKit
 import UIKit
 
@@ -38,3 +39,5 @@ public typealias SVGImageFunction = (_ image: UIImage?, _ error: Error?) -> Void
         }
     }
 }
+#endif
+

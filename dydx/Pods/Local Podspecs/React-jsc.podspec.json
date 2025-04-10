@@ -1,0 +1,31 @@
+{
+  "name": "React-jsc",
+  "version": "0.78.2",
+  "summary": "JavaScriptCore engine for React Native",
+  "homepage": "https://reactnative.dev/",
+  "license": "MIT",
+  "authors": "Meta Platforms, Inc. and its affiliates",
+  "platforms": {
+    "ios": "15.1"
+  },
+  "source": {
+    "git": "https://github.com/facebook/react-native.git",
+    "tag": "v0.78.2"
+  },
+  "source_files": "JSCRuntime.{cpp,h}",
+  "exclude_files": "**/test/*",
+  "weak_frameworks": "JavaScriptCore",
+  "dependencies": {
+    "React-jsi": [
+      "0.78.2"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Fabric",
+      "pod_target_xcconfig": {
+        "OTHER_CFLAGS": "$(inherited)"
+      }
+    }
+  ]
+}
