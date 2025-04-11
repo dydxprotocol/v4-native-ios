@@ -42,6 +42,7 @@
 		02107A6F297A0FEA000D75E1 /* dydxReceiptFeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02107A6E297A0FEA000D75E1 /* dydxReceiptFeeView.swift */; };
 		02195E1F2A20229700F73C17 /* dydxMarketOrderbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195E1E2A20229700F73C17 /* dydxMarketOrderbookView.swift */; };
 		02195E212A20328900F73C17 /* dydxMarketOrderbookSpreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195E202A20328900F73C17 /* dydxMarketOrderbookSpreadView.swift */; };
+		0226DD182DA857B8009243C7 /* dydxAppModeSurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226DD172DA857B8009243C7 /* dydxAppModeSurveyView.swift */; };
 		022A24442A030831003A385E /* dydxAlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022A24432A030831003A385E /* dydxAlertsView.swift */; };
 		022A24622A030997003A385E /* dydxAlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022A24612A030997003A385E /* dydxAlertItem.swift */; };
 		022EDC8E29A048B3003D59A7 /* dydxClosePositionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EDC8D29A048B3003D59A7 /* dydxClosePositionHeaderView.swift */; };
@@ -480,6 +481,7 @@
 		02107A6E297A0FEA000D75E1 /* dydxReceiptFeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxReceiptFeeView.swift; sourceTree = "<group>"; };
 		02195E1E2A20229700F73C17 /* dydxMarketOrderbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketOrderbookView.swift; sourceTree = "<group>"; };
 		02195E202A20328900F73C17 /* dydxMarketOrderbookSpreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketOrderbookSpreadView.swift; sourceTree = "<group>"; };
+		0226DD172DA857B8009243C7 /* dydxAppModeSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAppModeSurveyView.swift; sourceTree = "<group>"; };
 		022A24432A030831003A385E /* dydxAlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAlertsView.swift; sourceTree = "<group>"; };
 		022A24612A030997003A385E /* dydxAlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAlertItem.swift; sourceTree = "<group>"; };
 		022EDC8D29A048B3003D59A7 /* dydxClosePositionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxClosePositionHeaderView.swift; sourceTree = "<group>"; };
@@ -1629,6 +1631,7 @@
 			isa = PBXGroup;
 			children = (
 				02D6DB162D124A8C008AAEA1 /* dydxAppModeView.swift */,
+				0226DD172DA857B8009243C7 /* dydxAppModeSurveyView.swift */,
 			);
 			path = AppMode;
 			sourceTree = "<group>";
@@ -2269,9 +2272,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2419,6 +2426,7 @@
 				029CBE7728F608F400259C1D /* dydxMarketTradesView.swift in Sources */,
 				0238FC46296DA53F002E1C1A /* dydxOrderDetailsView.swift in Sources */,
 				2769090E2AAFD8030075B2D6 /* TransferInstanceViewModel.swift in Sources */,
+				0226DD182DA857B8009243C7 /* dydxAppModeSurveyView.swift in Sources */,
 				27E072D22C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift in Sources */,
 				024FEB642ACB75E10087A55E /* dydxFeesStuctureView.swift in Sources */,
 				277E918B2B27762F005CCBCB /* dydxRewardsLaunchIncentivesView.swift in Sources */,

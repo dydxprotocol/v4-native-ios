@@ -256,6 +256,35 @@ public enum AnalyticsEventV2 {
             self.toMode = toMode
         }
     }
+
+    public struct AppModeSurveyEvent: TrackableEvent {
+        let option1: Bool
+        let option2: Bool
+        let option3: Bool
+        let feedback: String?
+        let isSubmit: Bool
+        let isDoNotShowAgain: Bool
+
+        public var name: String { "AppModeSurveyEvent" }
+        public var customParameters: [String: Any] {[
+            "option1": option1,
+            "option2": option2,
+            "option3": option3,
+            "feedback": feedback ?? "nil",
+            "isSubmit": isSubmit,
+            "isDoNotShowAgain": isDoNotShowAgain
+        ]}
+
+        public init(option1: Bool, option2: Bool, option3: Bool, feedback: String? = nil, isSubmit: Bool, isDoNotShowAgain: Bool) {
+            self.option1 = option1
+            self.option2 = option2
+            self.option3 = option3
+            self.feedback = feedback
+            self.isSubmit = isSubmit
+            self.isDoNotShowAgain = isDoNotShowAgain
+        }
+
+    }
 }
 
 public extension TrackingProtocol {

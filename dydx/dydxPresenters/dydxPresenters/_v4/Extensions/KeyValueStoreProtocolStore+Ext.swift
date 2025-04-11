@@ -18,6 +18,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
     case hidePredictionMarketsNoticeKey = "hide_prediction_markets_notice"
     case hasAcknowledgedVaultDepositTerms = "has_acknowledged_vault_deposit_terms"
     case appMode = "app_mode"
+    case showAppModeSurvey = "show_app_mode_survey"
 
     public var defaultValue: Any? {
         switch self {
@@ -29,6 +30,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
         case .hidePredictionMarketsNoticeKey: return false
         case .hasAcknowledgedVaultDepositTerms: return false
         case .appMode: return nil
+        case .showAppModeSurvey: return true
         }
     }
 }

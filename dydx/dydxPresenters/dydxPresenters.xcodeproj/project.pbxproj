@@ -34,6 +34,7 @@
 		020EB697299D36AD00E8026B /* dydxApiStatusWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020EB696299D36AD00E8026B /* dydxApiStatusWorker.swift */; };
 		0216441128F36FBE00C7093E /* CandleDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0216441028F36FBE00C7093E /* CandleDataPoint.swift */; };
 		021B68B12AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B68A42AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift */; };
+		0226DD262DA857F8009243C7 /* dydxAppModeSurveyViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226DD252DA857F6009243C7 /* dydxAppModeSurveyViewBuilder.swift */; };
 		02279D5F2CE7ECDC00266956 /* SortAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02279D5E2CE7ECD900266956 /* SortAction.swift */; };
 		02279D612CE7ED0400266956 /* FilterAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02279D602CE7ECF400266956 /* FilterAction.swift */; };
 		02282E752AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02282E742AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift */; };
@@ -469,6 +470,7 @@
 		020EB696299D36AD00E8026B /* dydxApiStatusWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxApiStatusWorker.swift; sourceTree = "<group>"; };
 		0216441028F36FBE00C7093E /* CandleDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleDataPoint.swift; sourceTree = "<group>"; };
 		021B68A42AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxSecurityViewPresenter.swift; sourceTree = "<group>"; };
+		0226DD252DA857F6009243C7 /* dydxAppModeSurveyViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAppModeSurveyViewBuilder.swift; sourceTree = "<group>"; };
 		02279D5E2CE7ECD900266956 /* SortAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAction.swift; sourceTree = "<group>"; };
 		02279D602CE7ECF400266956 /* FilterAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAction.swift; sourceTree = "<group>"; };
 		02282E742AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOrderbookGroupViewPresenter.swift; sourceTree = "<group>"; };
@@ -1469,6 +1471,7 @@
 			isa = PBXGroup;
 			children = (
 				02D6DB262D124AAD008AAEA1 /* dydxAppModeViewBuilder.swift */,
+				0226DD252DA857F6009243C7 /* dydxAppModeSurveyViewBuilder.swift */,
 			);
 			path = AppMode;
 			sourceTree = "<group>";
@@ -2232,6 +2235,7 @@
 				02048AFC2D35837F00394CBE /* dydxSwitchAppModeActionBuilder.swift in Sources */,
 				020492492D3DF64400394CBE /* dydxSimpleUIMarginUsageViewPresenter.swift in Sources */,
 				0256F54229AFFCAC00A083C0 /* dydxOnboardConnectViewBuilder.swift in Sources */,
+				0226DD262DA857F8009243C7 /* dydxAppModeSurveyViewBuilder.swift in Sources */,
 				64A4DB972966480E008D8E20 /* dydxOrderbookPresenter.swift in Sources */,
 				027885DB2D1A34EB00366321 /* dydxSimpleUIPortfolioViewPresenter.swift in Sources */,
 				02F99F3829E4C0030009B3E8 /* dydxSearchViewPresenter.swift in Sources */,

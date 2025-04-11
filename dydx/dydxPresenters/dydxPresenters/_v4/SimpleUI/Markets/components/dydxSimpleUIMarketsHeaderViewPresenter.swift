@@ -119,9 +119,14 @@ class dydxSimpleUIMarketsHeaderViewPresenter: HostedViewPresenter<dydxSimpleUIMa
         icon: "icon_switch",
         title: DataLocalizer.localize(path: "APP.TRADE.MODE.SWITCH_TO_PRO"),
         subtitle: DataLocalizer.localize(path: "APP.TRADE.MODE.FULLY_FEATURED")) { [weak self] in
-            self?.navigate(to: RoutingRequest(path: "/action/mode/switch",
-                                              params: ["mode": "pro"]),
-                           animated: true, completion: nil)
+            let showAppModeSurvey = SettingsStore.shared?.value(forDydxKey: .showAppModeSurvey) as? Bool ?? false
+            if showAppModeSurvey {
+                self?.navigate(to: RoutingRequest(path: "/settings/app_mode_survey"), animated: true, completion: nil)
+            } else {
+                self?.navigate(to: RoutingRequest(path: "/action/mode/switch",
+                                                  params: ["mode": "pro"]),
+                               animated: true, completion: nil)
+            }
         }
     }
 }

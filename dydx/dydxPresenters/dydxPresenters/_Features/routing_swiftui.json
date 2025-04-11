@@ -241,6 +241,10 @@
                     "destination": "dydxPresenters.dydxAppModeViewBuilder",
                     "presentation":"prompt"
                 },
+                "/settings/app_mode_survey": {
+                    "destination": "dydxPresenters.dydxAppModeSurveyViewBuilder",
+                    "presentation":"prompt"
+                },
                 "/share/:type": {
                     "destination":"Share.storyboard",
                     "presentation":"half"
