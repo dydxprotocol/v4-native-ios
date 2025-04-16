@@ -1,5 +1,5 @@
 {
-  "originHash" : "7f5c9e40842ef01489632236ab1a6c9a632f75c5b2b2409462b98ed78023152d",
+  "originHash" : "a858961351e010bd8a13e79ee492c0c7c59810ebddf89b83982e848c3d329532",
   "pins" : [
     {
       "identity" : "base58swift",
@@ -44,6 +44,15 @@
       "state" : {
         "branch" : "develop",
         "revision" : "748a85b1dfe9a2fa592bd9266c5a926e4e1d3f44"
+      }
+    },
+    {
+      "identity" : "mobile-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/moonpay/mobile-sdk-ios",
+      "state" : {
+        "revision" : "8f687fee8b6b39d57dc181f22959c746320d93cb",
+        "version" : "1.3.3"
       }
     },
     {

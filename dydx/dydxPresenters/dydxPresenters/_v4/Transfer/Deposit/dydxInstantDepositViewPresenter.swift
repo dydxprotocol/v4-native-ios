@@ -15,6 +15,7 @@ import dydxFormatter
 import dydxStateManager
 import Combine
 import Abacus
+import dydxFiatRamp
 
 protocol dydxInstantDepositViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxInstantDepositViewModel? { get }
@@ -31,6 +32,8 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
         ctaButtonPresenter
     ]
 
+    private let moonPayRamp = dydxMoonPayRamp()
+
     override init() {
         let viewModel = dydxInstantDepositViewModel()
 
@@ -41,8 +44,13 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
 
         self.viewModel = viewModel
 
-        attachChildren(workers: childPresenters)
+        viewModel.fiatAction = { [weak self] in
+            self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+                self?.showOnRamp()
+            }
+        }
 
+        attachChildren(workers: childPresenters)
     }
 
     override func start() {
@@ -75,6 +83,19 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
                 }
                 if transferInput.token != token?.tokenAddress {
                     AbacusStateManager.shared.transfer(input: token?.tokenAddress, type: .token)
+                }
+            }
+            .store(in: &subscriptions)
+    }
+
+    private func showOnRamp() {
+        AbacusStateManager.shared.state.currentWallet
+            .prefix(1)
+            .sink { [weak self] wallet in
+                let dydxAddress = wallet?.cosmoAddress
+                if let dydxAddress,
+                   let nobleAddress = AbacusStringUtils.shared.toNobleAddress(dydxAddress: dydxAddress) {
+                    self?.moonPayRamp.show(targetAddress: nobleAddress, usdAmount: 20.00)
                 }
             }
             .store(in: &subscriptions)

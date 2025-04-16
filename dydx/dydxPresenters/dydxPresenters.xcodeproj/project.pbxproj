@@ -35,6 +35,7 @@
 		0216441128F36FBE00C7093E /* CandleDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0216441028F36FBE00C7093E /* CandleDataPoint.swift */; };
 		021B68B12AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B68A42AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift */; };
 		0226DD262DA857F8009243C7 /* dydxAppModeSurveyViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226DD252DA857F6009243C7 /* dydxAppModeSurveyViewBuilder.swift */; };
+		0226DE912DA9B31A009243C7 /* dydxFiatRamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0226DE902DA9B30E009243C7 /* dydxFiatRamp.framework */; };
 		02279D5F2CE7ECDC00266956 /* SortAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02279D5E2CE7ECD900266956 /* SortAction.swift */; };
 		02279D612CE7ED0400266956 /* FilterAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02279D602CE7ECF400266956 /* FilterAction.swift */; };
 		02282E752AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02282E742AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift */; };
@@ -230,6 +231,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0226DE8C2DA9B30E009243C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0226DE892DA9B30E009243C7 /* dydxFiatRamp.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0226DD692DA9B235009243C7;
+			remoteInfo = dydxFiatRamp;
+		};
+		0226DE8F2DA9B30E009243C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0226DE892DA9B30E009243C7 /* dydxFiatRamp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0226DD6A2DA9B235009243C7;
+			remoteInfo = dydxFiatRamp;
+		};
+		0226DFFB2DA9CD1E009243C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0226DE862DA9B304009243C7 /* dydxFiatRamp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0226DD6A2DA9B235009243C7;
+			remoteInfo = dydxFiatRamp;
+		};
 		023789F428BD381C00F212E1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 023789DF28BD381C00F212E1 /* Project object */;
@@ -471,6 +493,8 @@
 		0216441028F36FBE00C7093E /* CandleDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleDataPoint.swift; sourceTree = "<group>"; };
 		021B68A42AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxSecurityViewPresenter.swift; sourceTree = "<group>"; };
 		0226DD252DA857F6009243C7 /* dydxAppModeSurveyViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAppModeSurveyViewBuilder.swift; sourceTree = "<group>"; };
+		0226DE862DA9B304009243C7 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = ../dydxFiatRamp/dydxFiatRamp.xcodeproj; sourceTree = "<group>"; };
+		0226DE892DA9B30E009243C7 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxFiatRamp/dydxFiatRamp.xcodeproj"; sourceTree = "<absolute>"; };
 		02279D5E2CE7ECD900266956 /* SortAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAction.swift; sourceTree = "<group>"; };
 		02279D602CE7ECF400266956 /* FilterAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAction.swift; sourceTree = "<group>"; };
 		02282E742AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOrderbookGroupViewPresenter.swift; sourceTree = "<group>"; };
@@ -675,6 +699,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0226DE912DA9B31A009243C7 /* dydxFiatRamp.framework in Frameworks */,
 				2741B25C2C06A0E100693B17 /* dydxAnalytics.framework in Frameworks */,
 				02D1CEED29C8E016009ADF9A /* PlatformUIJedio.framework in Frameworks */,
 				025315BA29BFF18700D6CC9B /* CameraParticles.framework in Frameworks */,
@@ -784,6 +809,22 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		0226DE8A2DA9B30E009243C7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0226DE902DA9B30E009243C7 /* dydxFiatRamp.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0226DFF22DA9CD1E009243C7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0226DFFC2DA9CD1E009243C7 /* dydxFiatRamp.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0230375A28C1176100412B72 /* Markets */ = {
 			isa = PBXGroup;
 			children = (
@@ -858,6 +899,7 @@
 				F10F7B6C6C3DD5D631B7405B /* Pods */,
 				51E65BFD078A26FDF0980B06 /* Frameworks */,
 				02860A8229C15E490079E644 /* Recovered References */,
+				0226DE892DA9B30E009243C7 /* dydxFiatRamp.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1152,6 +1194,7 @@
 		02684E1628BD40CF0007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				0226DE862DA9B304009243C7 /* dydxFiatRamp.xcodeproj */,
 				2741B2512C06A0CC00693B17 /* dydxAnalytics.xcodeproj */,
 				02D1CEE229C8DFFC009ADF9A /* PlatformUIJedio.xcodeproj */,
 				025315AF29BFF17700D6CC9B /* CameraParticles.xcodeproj */,
@@ -1867,6 +1910,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0226DE8D2DA9B30E009243C7 /* PBXTargetDependency */,
 				2741B25B2C06A0D800693B17 /* PBXTargetDependency */,
 				02D1CEEC29C8E00D009ADF9A /* PBXTargetDependency */,
 				025315B929BFF18100D6CC9B /* PBXTargetDependency */,
@@ -1948,6 +1992,14 @@
 					ProjectRef = 029E118D29ADB77300FE271C /* dydxChart.xcodeproj */;
 				},
 				{
+					ProductGroup = 0226DFF22DA9CD1E009243C7 /* Products */;
+					ProjectRef = 0226DE862DA9B304009243C7 /* dydxFiatRamp.xcodeproj */;
+				},
+				{
+					ProductGroup = 0226DE8A2DA9B30E009243C7 /* Products */;
+					ProjectRef = 0226DE892DA9B30E009243C7 /* dydxFiatRamp.xcodeproj */;
+				},
+				{
 					ProductGroup = 02E7DD9228CFB30000727949 /* Products */;
 					ProjectRef = 02E7DD9128CFB30000727949 /* dydxStateManager.xcodeproj */;
 				},
@@ -1973,6 +2025,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		0226DE902DA9B30E009243C7 /* dydxFiatRamp.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxFiatRamp.framework;
+			remoteRef = 0226DE8F2DA9B30E009243C7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0226DFFC2DA9CD1E009243C7 /* dydxFiatRamp.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxFiatRamp.framework;
+			remoteRef = 0226DFFB2DA9CD1E009243C7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		02439CC629B03ECD00A083FE /* dydxCartera.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -2433,6 +2499,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0226DE8D2DA9B30E009243C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxFiatRamp;
+			targetProxy = 0226DE8C2DA9B30E009243C7 /* PBXContainerItemProxy */;
+		};
 		023789F528BD381C00F212E1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 023789E728BD381C00F212E1 /* dydxPresenters */;

@@ -18,6 +18,7 @@ public class dydxInstantDepositViewModel: PlatformViewModel {
     @Published public var validationViewModel: dydxValidationViewModel? = dydxValidationViewModel()
     @Published public var showConnectWallet = false
     @Published public var connectWalletAction: (() -> Void)?
+    @Published public var fiatAction: (() -> Void)?
 
     public init() { }
 
@@ -37,6 +38,13 @@ public class dydxInstantDepositViewModel: PlatformViewModel {
             let view = VStack(spacing: 16) {
                 self.input?.createView(parentStyle: style)
                 self.selector?.createView(parentStyle: style)
+
+                let buttonText = Text("Deposit with Credit Cards ...")
+                PlatformButtonViewModel(content: buttonText.wrappedViewModel,
+                                        state: .secondary) { [weak self] in
+                    self?.fiatAction?()
+                }
+                .createView(parentStyle: style)
 
                 Spacer()
 

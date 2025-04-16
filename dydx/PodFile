@@ -47,8 +47,8 @@ def statsig_pods
 end 
 
 def abacus_pods
-  #pod 'abacus', :path => '~/v4-abacus'
-  pod 'Abacus', :podspec => '../podspecs/Abacus.podspec'
+  pod 'abacus', :path => '~/v4-abacus'
+  #pod 'Abacus', :podspec => '../podspecs/Abacus.podspec'
 end
 
 def util_pods
@@ -349,6 +349,11 @@ abstract_target 'iOS' do
   
   target 'dydxCarteraTests' do
     project '../dydx/dydxCartera/dydxCartera'
+    ios_ui_pods
+  end
+  
+  target 'dydxFiatRamp' do
+    project '../dydx/dydxFiatRamp/dydxFiatRamp'
     ios_ui_pods
   end
 

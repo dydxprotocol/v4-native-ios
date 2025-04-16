@@ -1,0 +1,6 @@
+framework module Pods_iOS_dydxFiatRamp {
+  umbrella header "Pods-iOS-dydxFiatRamp-umbrella.h"
+
+  export *
+  module * { export * }
+}
