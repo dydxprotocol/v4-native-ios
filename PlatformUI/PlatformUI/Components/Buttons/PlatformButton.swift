@@ -9,12 +9,13 @@
 import SwiftUI
 
 public enum PlatformButtonState {
-    case primary, secondary, disabled, destructive
+    case primary, secondary, disabled, destructive, none
 }
 
 public enum PlatformButtonType {
     case defaultType(fillWidth: Bool = true,
                      pilledCorner: Bool = false,
+                     backgroundColor: ThemeColor.SemanticColor? = nil,
                      padding: EdgeInsets = .init(all: 14),
                      minHeight: CGFloat = 0,
                      cornerRadius: CGFloat = 8),
@@ -49,6 +50,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                     switch self.type {
                     case .defaultType(let fillWidth,
                                       let pilledCorner,
+                                      let backgroundColor,
                                       let padding,
                                       let minHeight,
                                       let cornerRadius):
@@ -71,14 +73,19 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         .if(fillWidth) { view in
                             view.frame(maxWidth: .infinity)
                         }
-                        .themeStyle(styleKey: self.buttonStyleKey, parentStyle: style)
+                        .if(self.buttonStyleKey != nil) { view in
+                            view.themeStyle(styleKey: self.buttonStyleKey!, parentStyle: style)
+                        }
+                        .if(backgroundColor != nil) { view in
+                            view.themeColor(background: backgroundColor!)
+                        }
                         .if(pilledCorner) { view in
                             view.clipShape(Capsule())
                         }
                         .if(!pilledCorner) { view in
                             view.cornerRadius(cornerRadius)
                         }
-
+                      
                         let borderWidth: CGFloat = 1
                         switch self.state {
                         case .primary:
@@ -95,6 +102,8 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         case .disabled:
                             button
                                 .border(borderWidth: borderWidth, cornerRadius: cornerRadius, borderColor: ThemeColor.SemanticColor.layer6.color)
+                        case .none:
+                            button
                         }
 
                     case .small:
@@ -105,7 +114,9 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         .buttonStyle(BorderlessButtonStyle())
                         .disabled(disabled)
                         .padding(9)
-                        .themeStyle(styleKey: self.buttonStyleKey, parentStyle: style)
+                        .if(self.buttonStyleKey != nil) { view in
+                            view.themeStyle(styleKey: self.buttonStyleKey!, parentStyle: style)
+                        }
                         .cornerRadius(6)
 
                     case .iconType:
@@ -123,7 +134,9 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
                         .disabled(disabled)
                         .padding([.bottom, .top], 4)
                         .padding([.leading, .trailing], 12)
-                        .themeStyle(styleKey: self.buttonStyleKey, parentStyle: style)
+                        .if(self.buttonStyleKey != nil) { view in
+                            view.themeStyle(styleKey: self.buttonStyleKey!, parentStyle: style)
+                        }
                         .clipShape(Capsule())
                     }
                 }
@@ -131,7 +144,7 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
         }
     }
 
-    private var buttonStyleKey: String {
+    private var buttonStyleKey: String? {
         switch state {
         case .primary:
             return "button-primary"
@@ -141,6 +154,8 @@ public class PlatformButtonViewModel<Content: PlatformViewModeling>: PlatformVie
             return "button-disabled"
         case .destructive:
             return "button-destructive"
+        case .none:
+            return nil
         }
     }
 }

@@ -76,6 +76,7 @@ public class dydxSimpleUIMenuViewModel: PlatformViewModel {
             let view = VStack(alignment: .leading, spacing: 24) {
                 if self.onboarded {
                     self.account?.createView(parentStyle: style)
+                    self.buttons?.createView(parentStyle: style)
                 }
 
                 VStack(alignment: .leading, spacing: 0) {
@@ -98,8 +99,6 @@ public class dydxSimpleUIMenuViewModel: PlatformViewModel {
                 .cornerRadius(16, corners: .allCorners)
 
                 Spacer()
-
-                self.buttons?.createView(parentStyle: style)
             }
                 .padding([.leading, .trailing])
                 .padding(.top, 32)

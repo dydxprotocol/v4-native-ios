@@ -39,7 +39,7 @@ public class dydxSimpleUIMenuButtonsViewModel: PlatformViewModel {
     }
 
     private func createDepositButton(parentStyle: ThemeStyle) -> some View {
-        let iconName = "icon_transfer_deposit"
+        let iconName = "icon_transfer_deposit_2"
         let content = HStack {
             PlatformIconViewModel(type: .asset(name: iconName, bundle: .dydxView),
                                   size: CGSize(width: 20, height: 20),
@@ -66,8 +66,8 @@ public class dydxSimpleUIMenuButtonsViewModel: PlatformViewModel {
                                   templateColor: .textPrimary)
 
         return PlatformButtonViewModel(content: content,
-                                       type: .defaultType(fillWidth: false, cornerRadius: 16),
-                                       state: .secondary) { [weak self] in
+                                       type: .defaultType(fillWidth: false, backgroundColor: .layer3, cornerRadius: 16),
+                                       state: .none) { [weak self] in
             self?.transferAction?()
         }
                                        .createView(parentStyle: parentStyle)
