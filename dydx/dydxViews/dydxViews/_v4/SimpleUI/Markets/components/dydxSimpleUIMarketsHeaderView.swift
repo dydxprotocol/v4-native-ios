@@ -57,6 +57,8 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
     @Published public var depositAction: (() -> Void)?
     @Published public var withdrawAction: (() -> Void)?
 
+    @Published public var menuAction: (() -> Void)?
+
     public init() { }
 
     public static var previewValue: dydxSimpleUIMarketsHeaderViewModel {
@@ -125,9 +127,10 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
         return PlatformButtonViewModel(content: content,
                                 type: .iconType) { [weak self] in
             withAnimation(Animation.easeInOut) {
-                if !(self?.present ?? false) {
-                    self?.present = true
-                }
+//                if !(self?.present ?? false) {
+//                    self?.present = true
+//                }
+                self?.menuAction?()
             }
         }
          .createView(parentStyle: parentStyle)

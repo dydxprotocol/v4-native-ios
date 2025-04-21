@@ -361,6 +361,10 @@
                    "destination":"dydxPresenters.dydxNotificationPrimerViewBuilder",
                    "presentation":"half"
                 },
+                "/simple_ui/menu":{
+                    "destination":"dydxPresenters.dydxSimpleUIMenuViewBuilder",
+                    "presentation":"prompt"
+                }
             }
         }
     }

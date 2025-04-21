@@ -25,6 +25,9 @@ class dydxSimpleUIMarketsHeaderViewPresenter: HostedViewPresenter<dydxSimpleUIMa
         super.init()
 
         viewModel = dydxSimpleUIMarketsHeaderViewModel()
+        viewModel?.menuAction = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/simple_ui/menu", params: nil), animated: true, completion: nil)
+        }
     }
 
     override func start() {

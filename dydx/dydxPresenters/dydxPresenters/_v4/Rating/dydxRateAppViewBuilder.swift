@@ -50,6 +50,7 @@ private class dydxRateAppViewBuilderPresenter: HostedViewPresenter<dydxRateAppVi
 
         viewModel?.negativeRatingIntentAction = {
             Tracking.shared?.log(event: "NegativeRatingIntentFollowed", data: dydxRatingService.shared?.stateData)
+            dydxRatingService.shared?.disablePreprompting()
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { (_, _) in
                 Router.shared?.navigate(to: RoutingRequest(path: "/action/collect_feedback"), animated: true, completion: nil)
             }
