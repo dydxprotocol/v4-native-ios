@@ -9,6 +9,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import dydxFormatter
 
 public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
     public enum ScrollAction {
@@ -24,6 +25,7 @@ public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
 
     @Published public var scrollAction: ScrollAction = .none
     @Published public var searchText: String = ""
+    @Published public var showCount = false
 
     private static let topId = UUID().uuidString
 
@@ -48,6 +50,15 @@ public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
                 bottomPadding = max((self.safeAreaInsets?.bottom ?? 0), 16)
             }
 
+            let headerText: String
+            if self.showCount {
+                let marketsCount = self.marketList?.markets?.count ?? 0
+                let countString = dydxFormatter.shared.localFormatted(number: Double(marketsCount) * 1.0, digits: 0) ?? "0"
+                headerText = DataLocalizer.localize(path: "APP.GENERAL.MARKETS_FOUND", params: ["COUNT": countString])
+            } else {
+                headerText = DataLocalizer.localize(path: "APP.GENERAL.MARKETS")
+            }
+
             let view = ZStack(alignment: .bottom) {
                 VStack(spacing: 0) {
                     ScrollViewReader { proxy in
@@ -60,7 +71,7 @@ public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
 
                                 let sortView = AnyView(self.marketSort?.createView(parentStyle: style))
                                 let marketHeader = VStack {
-                                    self.createHeader(text: DataLocalizer.localize(path: "APP.GENERAL.MARKETS"),
+                                    self.createHeader(text: headerText,
                                                       rightAccessory: sortView)
                                     self.filter.createView(parentStyle: style)
                                         .padding(.leading, 16)

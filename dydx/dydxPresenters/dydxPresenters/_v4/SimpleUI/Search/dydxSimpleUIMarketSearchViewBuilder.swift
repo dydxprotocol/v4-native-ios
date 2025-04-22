@@ -58,6 +58,7 @@ private class dydxSimpleUIMarketSearchViewPresenter: HostedViewPresenter<dydxSim
         viewModel.onTextChanged = { [weak self] text in
             self?.marketListPresenter.searchText = text
             self?.viewModel?.searchText = text
+            self?.updateShowCount()
         }
 
         marketListPresenter.onMarketSelected = { [weak self] marketId in
@@ -71,6 +72,7 @@ private class dydxSimpleUIMarketSearchViewPresenter: HostedViewPresenter<dydxSim
                                                           onSelectionChanged: { [weak self] selectedIdx in
             self?.marketListPresenter.filterAction = actions[selectedIdx]
             self?.viewModel?.scrollAction = .toTop
+            self?.updateShowCount()
         })
 
         attachChildren(workers: childPresenters)
@@ -84,5 +86,9 @@ private class dydxSimpleUIMarketSearchViewPresenter: HostedViewPresenter<dydxSim
                 self?.viewModel?.scrollAction = .toTop
             }
             .store(in: &subscriptions)
+    }
+
+    private func updateShowCount() {
+        viewModel?.showCount = marketListPresenter.searchText.isNotEmpty || marketListPresenter.filterAction != .defaultAction
     }
 }

@@ -64,6 +64,7 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
 
     private var lastSearchText: String?
     private var lastSortOption: SimpleUIMarketSortOption?
+    private var lastFilterOption: FilterAction?
 
     private func updateMarketList(markets: [PerpetualMarket],
                                   assetMap: [String: Asset],
@@ -127,9 +128,10 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                     onCancelAction: nil)
             }
 
-        if lastSearchText != searchText || launchableMarkets.isNilOrEmpty || lastSortOption != sortOption {
+        if lastSearchText != searchText || launchableMarkets.isNilOrEmpty || lastSortOption != sortOption || lastFilterOption != filterOption {
             lastSearchText = searchText
             lastSortOption = sortOption
+            lastFilterOption = filterOption
             launchableMarkets = markets
                 .filter { market in
                     guard market.isLaunched == false, let asset = assetMap[market.assetId] else {
@@ -140,7 +142,13 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                        asset.name?.lowercased().contains(searchText) == false {
                         return false
                     }
-                    return true
+
+                    // filter by favorite
+                    if sortOption == .favorites {
+                        return FilterAction.favoriteAction.action(market, assetMap)
+                    }
+
+                    return filterOption.action(market, assetMap)
                 }
                 .sorted { (lhs: PerpetualMarket, rhs: PerpetualMarket) in
                     switch sortOption {
