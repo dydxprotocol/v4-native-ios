@@ -25,6 +25,7 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
     private let excludePositions: Bool
 
     @Published var searchText: String = ""
+    @Published var sortOption: SimpleUIMarketSortOption = .volume
 
     var onMarketSelected: ((String) -> Void)?
 
@@ -40,16 +41,22 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
     override func start() {
         super.start()
 
-        let searchTextPublisher = $searchText.map({ $0.lowercased() }).removeDuplicates()
+        let searchAndSortPublisher =
+            Publishers
+                .CombineLatest(
+                    $searchText.map({ $0.lowercased() }).removeDuplicates(),
+                    $sortOption)
+                .map { ($0, $1) }
+                .eraseToAnyPublisher()
 
         Publishers
             .CombineLatest4(AbacusStateManager.shared.state.marketList,
                             AbacusStateManager.shared.state.assetMap,
                             AbacusStateManager.shared.state.selectedSubaccountPositions,
-                            searchTextPublisher
+                            searchAndSortPublisher
             )
-           .sink { [weak self] markets, assetMap, positions, searchText in
-               self?.updateMarketList(markets: markets, assetMap: assetMap, positions: positions, searchText: searchText)
+           .sink { [weak self] markets, assetMap, positions, searchAndSort in
+               self?.updateMarketList(markets: markets, assetMap: assetMap, positions: positions, searchText: searchAndSort.0, sortOption: searchAndSort.1)
             }
             .store(in: &subscriptions)
     }
@@ -59,23 +66,50 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
     private func updateMarketList(markets: [PerpetualMarket],
                                   assetMap: [String: Asset],
                                   positions: [SubaccountPosition],
-                                  searchText: String?) {
+                                  searchText: String?,
+                                  sortOption: SimpleUIMarketSortOption) {
         let launchedMarkets: [dydxSimpleUIMarketViewModel]? = markets
             .filter { $0.status?.canTrade == true }
-            .compactMap { market in
+            .filter { market in
                 guard let asset = assetMap[market.assetId] else {
-                    return nil
+                    return false
                 }
                 if let searchText = searchText, searchText.isNotEmpty,
                    asset.displayableAssetId.lowercased().contains(searchText) == false,
                    asset.name?.lowercased().contains(searchText) == false {
-                    return nil
+                    return false
                 }
                 let position = positions.first { position in
                     position.id == market.id
                 }
                 if excludePositions && (position?.size.current?.doubleValue ?? 0.0) != 0.0 {
+                    return false
+                }
+
+                // filter by favorite
+
+                return true
+            }
+            .sorted { (lhs: PerpetualMarket, rhs: PerpetualMarket) in
+                switch sortOption {
+                case .volume:
+                    return (lhs.perpetual?.volume24H?.doubleValue ?? 0) > (rhs.perpetual?.volume24H?.doubleValue ?? 0)
+                case .price:
+                    return (lhs.oraclePrice?.doubleValue ?? 0) > (rhs.oraclePrice?.doubleValue ?? 0)
+                case .gainers:
+                    return (lhs.priceChange24HPercent?.doubleValue ?? 0) > (rhs.priceChange24HPercent?.doubleValue ?? 0)
+                case .losers:
+                    return (lhs.priceChange24HPercent?.doubleValue ?? 0) < (rhs.priceChange24HPercent?.doubleValue ?? 0)
+                case .favorites:
+                    return (lhs.perpetual?.volume24H?.doubleValue ?? 0) > (rhs.perpetual?.volume24H?.doubleValue ?? 0)
+                }
+            }
+            .compactMap { market in
+                guard let asset = assetMap[market.assetId] else {
                     return nil
+                }
+                let position = positions.first { position in
+                    position.id == market.id
                 }
                 return dydxSimpleUIMarketViewModel.createFrom(
                     displayType: .market,
@@ -83,23 +117,23 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                     asset: asset,
                     position: position,
                     onMarketSelected: { [weak self] in
-                    self?.onMarketSelected?(market.id)
-                },
+                        self?.onMarketSelected?(market.id)
+                    },
                     onCancelAction: nil)
             }
-            .sorted { lhs, rhs in
-                let lhsLeverage = lhs.leverage ?? 0
-                let rhsLeverage = rhs.leverage ?? 0
-                if lhsLeverage != 0 && rhsLeverage != 0 {
-                    return (lhs.volumn ?? 0) > (rhs.volumn ?? 0)
-                } else if lhsLeverage != 0 {
-                    return true
-                } else if rhsLeverage != 0 {
-                    return false
-                }
-
-                return (lhs.volumn ?? 0) > (rhs.volumn ?? 0)
-            }
+//            .sorted { lhs, rhs in
+//                let lhsLeverage = lhs.leverage ?? 0
+//                let rhsLeverage = rhs.leverage ?? 0
+//                if lhsLeverage != 0 && rhsLeverage != 0 {
+//                    return (lhs.volume ?? 0) > (rhs.volume ?? 0)
+//                } else if lhsLeverage != 0 {
+//                    return true
+//                } else if rhsLeverage != 0 {
+//                    return false
+//                }
+//
+//                return (lhs.volume ?? 0) > (rhs.volume ?? 0)
+//            }
 
         if lastSearchText != searchText || launchableMarkets.isNilOrEmpty {
             lastSearchText = searchText

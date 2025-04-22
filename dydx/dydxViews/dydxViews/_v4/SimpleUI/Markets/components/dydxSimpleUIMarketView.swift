@@ -24,7 +24,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     public let change: SignedAmountViewModel?
     public let sideText: SideTextViewModel
     public let leverage: Double?
-    public let volumn: Double?
+    public let volume: Double?
     public let positionTotal: Double?
     public let positionSize: String?
     public let onMarketSelected: (() -> Void)?
@@ -58,7 +58,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
         self.change = change
         self.sideText = sideText
         self.leverage = leverage
-        self.volumn = volumn
+        self.volume = volumn
         self.positionTotal = positionTotal
         self.positionSize = positionSize
         self.isLoading = isLoading

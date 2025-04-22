@@ -21,9 +21,10 @@ protocol dydxSimpleUIMarketSortViewPresenterProtocol: HostedViewPresenterProtoco
 }
 
 class dydxSimpleUIMarketSortViewPresenter: HostedViewPresenter<dydxSimpleUIMarketSortViewModel>, dydxSimpleUIMarketSortViewPresenterProtocol {
-    @Published var sortOption: SimpleUIMarketSortOption = .price {
+    @Published var sortOption: SimpleUIMarketSortOption = .volume {
         didSet {
             updateSortOption()
+            SettingsStore.shared?.setValue(sortOption.rawValue, forDydxKey: .simpleUISortOrder)
         }
     }
 
@@ -31,6 +32,10 @@ class dydxSimpleUIMarketSortViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
         super.init()
 
         viewModel = dydxSimpleUIMarketSortViewModel()
+
+        if let simpleUISortOrder = SettingsStore.shared?.value(forDydxKey: .simpleUISortOrder) as? String {
+            sortOption = SimpleUIMarketSortOption(rawValue: simpleUISortOrder) ?? .volume
+        }
     }
 
     override func start() {

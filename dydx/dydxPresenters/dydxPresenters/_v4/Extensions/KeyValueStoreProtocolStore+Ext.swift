@@ -19,6 +19,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
     case hasAcknowledgedVaultDepositTerms = "has_acknowledged_vault_deposit_terms"
     case appMode = "app_mode"
     case showAppModeSurvey = "show_app_mode_survey"
+    case simpleUISortOrder = "simple_ui_sort_order"
 
     public var defaultValue: Any? {
         switch self {
@@ -31,6 +32,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
         case .hasAcknowledgedVaultDepositTerms: return false
         case .appMode: return nil
         case .showAppModeSurvey: return true
+        case .simpleUISortOrder: return SimpleUIMarketSortOption.volume.rawValue
         }
     }
 }
