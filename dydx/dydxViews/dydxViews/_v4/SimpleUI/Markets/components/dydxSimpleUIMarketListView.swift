@@ -61,18 +61,6 @@ public class dydxSimpleUIMarketListViewModel: PlatformViewModel {
             return AnyView(view)
         }
     }
-
-    private func createHeader(text: String) -> some View {
-        VStack(spacing: 0) {
-            Text(text)
-                .themeFont(fontType: .plus)
-                .themeColor(foreground: .textPrimary)
-                .leftAligned()
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-        }
-        .themeColor(background: .layer1)
-    }
 }
 
 #if DEBUG

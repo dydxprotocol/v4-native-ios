@@ -162,6 +162,7 @@
 		02A6517D2DB30D76006DBD5F /* dydxSimpleUIMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A6517C2DB30D76006DBD5F /* dydxSimpleUIMenuView.swift */; };
 		02A651822DB408D3006DBD5F /* dydxSimpleUIMenuAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A651812DB408D3006DBD5F /* dydxSimpleUIMenuAccountView.swift */; };
 		02A651872DB6DA15006DBD5F /* dydxSimpleUIMenuButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A651862DB6DA15006DBD5F /* dydxSimpleUIMenuButtonsView.swift */; };
+		02A651F12DB6F956006DBD5F /* dydxSimpleUIMarketSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A651F02DB6F956006DBD5F /* dydxSimpleUIMarketSortView.swift */; };
 		02A9B60C29005A3F00AE1516 /* AmountChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9B60B29005A3F00AE1516 /* AmountChange.swift */; };
 		02A9B60E29005D5A00AE1516 /* AmountText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9B60D29005D5A00AE1516 /* AmountText.swift */; };
 		02A9B6102900605400AE1516 /* SizeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9B60F2900605400AE1516 /* SizeText.swift */; };
@@ -605,6 +606,7 @@
 		02A6517C2DB30D76006DBD5F /* dydxSimpleUIMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuView.swift; sourceTree = "<group>"; };
 		02A651812DB408D3006DBD5F /* dydxSimpleUIMenuAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuAccountView.swift; sourceTree = "<group>"; };
 		02A651862DB6DA15006DBD5F /* dydxSimpleUIMenuButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuButtonsView.swift; sourceTree = "<group>"; };
+		02A651F02DB6F956006DBD5F /* dydxSimpleUIMarketSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketSortView.swift; sourceTree = "<group>"; };
 		02A9B60B29005A3F00AE1516 /* AmountChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountChange.swift; sourceTree = "<group>"; };
 		02A9B60D29005D5A00AE1516 /* AmountText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountText.swift; sourceTree = "<group>"; };
 		02A9B60F2900605400AE1516 /* SizeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeText.swift; sourceTree = "<group>"; };
@@ -1670,6 +1672,7 @@
 				02048B0F2D35E3C100394CBE /* dydxSimpleUIPositionListView.swift */,
 				027885DC2D1A3EDA00366321 /* dydxSimpleUIPortfolioView.swift */,
 				02048B0D2D3596F400394CBE /* dydxSimpleUIPortfolioPeriodView.swift */,
+				02A651F02DB6F956006DBD5F /* dydxSimpleUIMarketSortView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -2454,6 +2457,7 @@
 				2769090E2AAFD8030075B2D6 /* TransferInstanceViewModel.swift in Sources */,
 				0226DD182DA857B8009243C7 /* dydxAppModeSurveyView.swift in Sources */,
 				27E072D22C1A095C0034B963 /* dydxPortfolioPendingPositionsItemViewModel.swift in Sources */,
+				02A651F12DB6F956006DBD5F /* dydxSimpleUIMarketSortView.swift in Sources */,
 				024FEB642ACB75E10087A55E /* dydxFeesStuctureView.swift in Sources */,
 				277E918B2B27762F005CCBCB /* dydxRewardsLaunchIncentivesView.swift in Sources */,
 				0268BBF92A8BE08C00D0C59B /* dydxTransferOutView.swift in Sources */,

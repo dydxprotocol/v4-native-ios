@@ -17,6 +17,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
     @Published public var portfolio: dydxSimpleUIPortfolioViewModel?
     @Published public var header: dydxSimpleUIMarketsHeaderViewModel?
     @Published public var hasPosition: Bool = false
+    @Published public var marketSort: dydxSimpleUIMarketSortViewModel?
 
     @Published public var searchText: String = ""
     private lazy var searchTextBinding = Binding(
@@ -38,6 +39,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
         vm.positionList = .previewValue
         vm.portfolio = .previewValue
         vm.header = .previewValue
+        vm.marketSort = .previewValue
         return vm
     }
 
@@ -79,7 +81,9 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                                 }
                             }
 
-                            let marketHeader = self.createHeader(text: DataLocalizer.localize(path: "APP.GENERAL.MARKETS"))
+                            let sortView = AnyView(self.marketSort?.createView(parentStyle: style))
+                            let marketHeader = self.createHeader(text: DataLocalizer.localize(path: "APP.GENERAL.MARKETS"),
+                                                                 rightAccessory: sortView)
                             Section(header: marketHeader) {
                                 self.marketList?.createView(parentStyle: style)
 
@@ -108,14 +112,18 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
         }
     }
 
-    private func createHeader(text: String) -> some View {
-        VStack(spacing: 0) {
+    private func createHeader(text: String, rightAccessory: AnyView? = nil) -> some View {
+        HStack(spacing: 0) {
             Text(text)
                 .themeFont(fontType: .plus)
                 .themeColor(foreground: .textPrimary)
                 .leftAligned()
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
+
+            Spacer()
+
+            rightAccessory?.padding(.trailing, 16)
         }
         .themeColor(background: .layer1)
     }

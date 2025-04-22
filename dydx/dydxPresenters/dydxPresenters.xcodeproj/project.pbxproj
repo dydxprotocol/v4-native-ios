@@ -127,6 +127,7 @@
 		02A6517F2DB30D87006DBD5F /* dydxSimpleUIMenuViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A6517E2DB30D86006DBD5F /* dydxSimpleUIMenuViewBuilder.swift */; };
 		02A651852DB408EA006DBD5F /* dydxSimpleUIMenuAccountViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A651842DB408E9006DBD5F /* dydxSimpleUIMenuAccountViewPresenter.swift */; };
 		02A651892DB6DA22006DBD5F /* dydxSimpleUIMenuButtonsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A651882DB6DA21006DBD5F /* dydxSimpleUIMenuButtonsViewPresenter.swift */; };
+		02A6520C2DB6F965006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A651FE2DB6F964006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift */; };
 		02A8980628E76175006F1658 /* dydxStateManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DD9728CFB30000727949 /* dydxStateManager.framework */; platformFilter = ios; };
 		02B27A492AE8BC7600A995EC /* dydxHelpViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B27A482AE8BC7600A995EC /* dydxHelpViewPresenter.swift */; };
 		02B6CE752A7087A700C5F088 /* dydxTransferSubaccountWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6CE742A7087A700C5F088 /* dydxTransferSubaccountWorker.swift */; };
@@ -567,6 +568,7 @@
 		02A6517E2DB30D86006DBD5F /* dydxSimpleUIMenuViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuViewBuilder.swift; sourceTree = "<group>"; };
 		02A651842DB408E9006DBD5F /* dydxSimpleUIMenuAccountViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuAccountViewPresenter.swift; sourceTree = "<group>"; };
 		02A651882DB6DA21006DBD5F /* dydxSimpleUIMenuButtonsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuButtonsViewPresenter.swift; sourceTree = "<group>"; };
+		02A651FE2DB6F964006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketSortViewPresenter.swift; sourceTree = "<group>"; };
 		02B27A482AE8BC7600A995EC /* dydxHelpViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxHelpViewPresenter.swift; sourceTree = "<group>"; };
 		02B6CE742A7087A700C5F088 /* dydxTransferSubaccountWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferSubaccountWorker.swift; sourceTree = "<group>"; };
 		02B834102D50343400B955F5 /* OnboardingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingState.swift; sourceTree = "<group>"; };
@@ -1508,6 +1510,7 @@
 				027885DA2D1A34EA00366321 /* dydxSimpleUIPortfolioViewPresenter.swift */,
 				02D6DBB82D134BE8008AAEA1 /* dydxSimpleUIMarketListViewPresenter.swift */,
 				02048B112D35E3DE00394CBE /* dydxSimpleUIPositionListViewPresenter.swift */,
+				02A651FE2DB6F964006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -2392,6 +2395,7 @@
 				02031F1C2AC3A7130069E00D /* dydxTradeSheetTipDraftViewPresenter.swift in Sources */,
 				02D9518C2C926B9C007BB2B4 /* dydxNotificationPrimerViewPresenter.swift in Sources */,
 				277E8FC92B1E576B005CCBCB /* dydxProfileRewardsViewPresenter.swift in Sources */,
+				02A6520C2DB6F965006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift in Sources */,
 				64A4DB9B2966490C008D8E20 /* dydxTradeInputOrderTypePresenter.swift in Sources */,
 				0236F118296ABEF500EB995F /* dydxPortfolioPositionsViewPresenter.swift in Sources */,
 				02282E752AC8860300BC9F01 /* dydxOrderbookGroupViewPresenter.swift in Sources */,
