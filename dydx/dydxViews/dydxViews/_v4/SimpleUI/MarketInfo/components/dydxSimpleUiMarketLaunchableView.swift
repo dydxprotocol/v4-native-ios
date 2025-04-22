@@ -163,9 +163,11 @@ public class dydxSimpleUiMarketLaunchableViewModel: PlatformViewModel {
             let buttonText = DataLocalizer.localize(path: "APP.GENERAL.LAUNCH_ON_WEB")
             let buttonContent = HStack {
                 Text(buttonText)
+                    .themeColor(foreground: .colorWhite)
+
                 PlatformIconViewModel(type: .asset(name: "icon_external_link", bundle: Bundle.dydxView),
                                       size: CGSize(width: 20, height: 20),
-                                      templateColor: .textPrimary)
+                                      templateColor: .colorWhite)
                 .createView(parentStyle: style)
             }
                 .wrappedViewModel

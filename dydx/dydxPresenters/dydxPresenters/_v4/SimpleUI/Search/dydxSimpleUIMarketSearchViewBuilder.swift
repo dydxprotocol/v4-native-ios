@@ -57,6 +57,7 @@ private class dydxSimpleUIMarketSearchViewPresenter: HostedViewPresenter<dydxSim
         self.viewModel = viewModel
         viewModel.onTextChanged = { [weak self] text in
             self?.marketListPresenter.searchText = text
+            self?.viewModel?.searchText = text
         }
 
         marketListPresenter.onMarketSelected = { [weak self] marketId in
@@ -65,6 +66,23 @@ private class dydxSimpleUIMarketSearchViewPresenter: HostedViewPresenter<dydxSim
             }
         }
 
+        let actions = FilterAction.simpleUIActions
+        viewModel.filter = dydxMarketAssetFilterViewModel(contents: actions.map(\.content),
+                                                          onSelectionChanged: { [weak self] selectedIdx in
+            self?.marketListPresenter.filterAction = actions[selectedIdx]
+            self?.viewModel?.scrollAction = .toTop
+        })
+
         attachChildren(workers: childPresenters)
+    }
+
+    override func start() {
+        super.start()
+
+        SimpleUIMarketSortOptionState.shared.$current
+            .sink { [weak self] _ in
+                self?.viewModel?.scrollAction = .toTop
+            }
+            .store(in: &subscriptions)
     }
 }

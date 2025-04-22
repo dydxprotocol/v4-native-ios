@@ -18,19 +18,31 @@ struct FilterAction: Equatable {
         FilterAction(type: .all,
                      content: .text(DataLocalizer.localize(path: "APP.GENERAL.ALL")),
                      action: { _, _ in
-                         true       // included
-                     })
+            true       // included
+        })
+    }
+
+    static var favoriteAction: FilterAction {
+        FilterAction(type: .favorited,
+                     content: .icon(UIImage.named("action_like_unselected", bundles: Bundle.particles) ?? UIImage()),
+                     action: { market, _ in
+            dydxFavoriteStore().isFavorite(marketId: market.id)
+        })
+    }
+
+    static var launchableAction: FilterAction {
+        FilterAction(type: .launchable,
+                     content: .text(DataLocalizer.localize(path: "APP.GENERAL.LAUNCHABLE")),
+                     action: { market, _ in
+            market.isLaunched == false
+        })
     }
 
     static var actions: [FilterAction] {
         var actions = [
             .defaultAction,
 
-            FilterAction(type: .favorited,
-                         content: .icon(UIImage.named("action_like_unselected", bundles: Bundle.particles) ?? UIImage()),
-                         action: { market, _ in
-                             dydxFavoriteStore().isFavorite(marketId: market.id)
-                         }),
+            .favoriteAction,
 
             FilterAction(type: .new,
                          content: .text(DataLocalizer.localize(path: "APP.GENERAL.RECENTLY_LISTED")),
@@ -110,6 +122,13 @@ struct FilterAction: Equatable {
         return actions
     }
 
+    static var simpleUIActions: [FilterAction] {
+        var actions = actions
+        actions.removeAll { $0.type == .favorited }
+        actions.insert(.launchableAction, at: 2)
+        return actions
+    }
+
     let type: MarketFiltering
     let content: TabItemViewModel.TabItemContent
     let action: ((PerpetualMarket, [String: Asset]) -> Bool)
@@ -122,6 +141,7 @@ struct FilterAction: Equatable {
 enum MarketFiltering: Equatable {
     case all
     case favorited
+    case launchable
     case predictionMarkets
     case layer1
     case layer2
