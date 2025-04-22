@@ -60,7 +60,6 @@ public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIM
         portfolioPresenter.$viewModel.assign(to: &viewModel.$portfolio)
         headerPresenter.$viewModel.assign(to: &viewModel.$header)
         sortPresenter.$viewModel.assign(to: &viewModel.$marketSort)
-        sortPresenter.$sortOption.assign(to: &marketListPresenter.$sortOption)
 
         super.init()
 

@@ -39,15 +39,18 @@ private protocol dydxSimpleUIMarketSearchViewPresenterProtocol: HostedViewPresen
 private class dydxSimpleUIMarketSearchViewPresenter: HostedViewPresenter<dydxSimpleUIMarketSearchViewModel>, dydxSimpleUIMarketSearchViewPresenterProtocol {
 
     private let marketListPresenter = dydxSimpleUIMarketListViewPresenter(excludePositions: false)
+    private let sortPresenter = dydxSimpleUIMarketSortViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
-        marketListPresenter
+        marketListPresenter,
+        sortPresenter
     ]
 
     override init() {
         let viewModel = dydxSimpleUIMarketSearchViewModel()
 
         marketListPresenter.$viewModel.assign(to: &viewModel.$marketList)
+        sortPresenter.$viewModel.assign(to: &viewModel.$marketSort)
 
         super.init()
 

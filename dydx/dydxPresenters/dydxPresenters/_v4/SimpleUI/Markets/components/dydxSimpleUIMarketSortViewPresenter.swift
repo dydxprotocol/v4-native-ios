@@ -14,6 +14,23 @@ import PlatformUI
 
 enum SimpleUIMarketSortOption: String, CaseIterable {
     case price, volume, gainers, losers, favorites
+
+}
+
+final class SimpleUIMarketSortOptionState: SingletonProtocol {
+    static var shared = SimpleUIMarketSortOptionState()
+
+    init() {
+        if let simpleUISortOrder = SettingsStore.shared?.value(forDydxKey: .simpleUISortOrder) as? String {
+            current = SimpleUIMarketSortOption(rawValue: simpleUISortOrder) ?? .volume
+        }
+    }
+
+    @Published var current: SimpleUIMarketSortOption = .volume {
+        didSet {
+            SettingsStore.shared?.setValue(current.rawValue, forDydxKey: .simpleUISortOrder)
+        }
+    }
 }
 
 protocol dydxSimpleUIMarketSortViewPresenterProtocol: HostedViewPresenterProtocol {
@@ -21,63 +38,56 @@ protocol dydxSimpleUIMarketSortViewPresenterProtocol: HostedViewPresenterProtoco
 }
 
 class dydxSimpleUIMarketSortViewPresenter: HostedViewPresenter<dydxSimpleUIMarketSortViewModel>, dydxSimpleUIMarketSortViewPresenterProtocol {
-    @Published var sortOption: SimpleUIMarketSortOption = .volume {
-        didSet {
-            updateSortOption()
-            SettingsStore.shared?.setValue(sortOption.rawValue, forDydxKey: .simpleUISortOrder)
-        }
-    }
-
     override init() {
         super.init()
 
         viewModel = dydxSimpleUIMarketSortViewModel()
-
-        if let simpleUISortOrder = SettingsStore.shared?.value(forDydxKey: .simpleUISortOrder) as? String {
-            sortOption = SimpleUIMarketSortOption(rawValue: simpleUISortOrder) ?? .volume
-        }
     }
 
     override func start() {
         super.start()
 
-        updateSortOption()
+        SimpleUIMarketSortOptionState.shared.$current
+            .sink { [weak self] option in
+                self?.updateSortOption(sortOption: option)
+            }
+            .store(in: &subscriptions)
     }
 
-    private func updateSortOption() {
+    private func updateSortOption(sortOption: SimpleUIMarketSortOption) {
         viewModel?.items = [
             .init(icon: "icon_sort_price",
                   title: DataLocalizer.localize(path: "APP.GENERAL.PRICE"),
                   selected: sortOption == .price,
-                  action: { [weak self] in
-                self?.sortOption = .price
-            }),
+                  action: {
+                      SimpleUIMarketSortOptionState.shared.current = .price
+                  }),
             .init(icon: "icon_sort_volume",
                   title: DataLocalizer.localize(path: "APP.TRADE.VOLUME"),
                   selected: sortOption == .volume,
-                  action: { [weak self] in
-                self?.sortOption = .volume
-            }),
+                  action: {
+                      SimpleUIMarketSortOptionState.shared.current = .volume
+                  }),
             .init(icon: "icon_sort_gainer",
                   title: DataLocalizer.localize(path: "APP.GENERAL.GAINERS"),
                   subtitle: "(" + DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS._24H") + ")",
                   selected: sortOption == .gainers,
-                  action: { [weak self] in
-                self?.sortOption = .gainers
-            }),
+                  action: {
+                      SimpleUIMarketSortOptionState.shared.current = .gainers
+                  }),
             .init(icon: "icon_sort_loser",
                   title: DataLocalizer.localize(path: "APP.GENERAL.LOSERS"),
                   subtitle: "(" + DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS._24H") + ")",
                   selected: sortOption == .losers,
-                  action: { [weak self] in
-                self?.sortOption = .losers
-            }),
+                  action: {
+                      SimpleUIMarketSortOptionState.shared.current = .losers
+                  }),
             .init(icon: "icon_sort_favorite",
                   title: DataLocalizer.localize(path: "APP.GENERAL.FAVORITES"),
                   selected: sortOption == .favorites,
-                  action: { [weak self] in
-                self?.sortOption = .favorites
-            })
+                  action: {
+                      SimpleUIMarketSortOptionState.shared.current = .favorites
+                  })
         ]
     }
 }

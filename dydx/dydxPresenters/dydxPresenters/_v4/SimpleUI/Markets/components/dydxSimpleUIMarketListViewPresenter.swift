@@ -25,7 +25,6 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
     private let excludePositions: Bool
 
     @Published var searchText: String = ""
-    @Published var sortOption: SimpleUIMarketSortOption = .volume
 
     var onMarketSelected: ((String) -> Void)?
 
@@ -45,7 +44,7 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
             Publishers
                 .CombineLatest(
                     $searchText.map({ $0.lowercased() }).removeDuplicates(),
-                    $sortOption)
+                    SimpleUIMarketSortOptionState.shared.$current)
                 .map { ($0, $1) }
                 .eraseToAnyPublisher()
 
