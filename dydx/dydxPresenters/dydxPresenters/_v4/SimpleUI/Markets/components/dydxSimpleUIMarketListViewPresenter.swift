@@ -72,9 +72,8 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                                   sortOption: SimpleUIMarketSortOption,
                                   filterOption: FilterAction) {
         let launchedMarkets: [dydxSimpleUIMarketViewModel]? = markets
-            .filter { $0.status?.canTrade == true }
             .filter { market in
-                guard let asset = assetMap[market.assetId] else {
+                guard market.status?.canTrade == true, let asset = assetMap[market.assetId] else {
                     return false
                 }
                 if let searchText = searchText, searchText.isNotEmpty,
@@ -132,7 +131,17 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
             lastSearchText = searchText
             lastSortOption = sortOption
             launchableMarkets = markets
-                .filter { $0.isLaunched == false }
+                .filter { market in
+                    guard market.isLaunched == false, let asset = assetMap[market.assetId] else {
+                        return false
+                    }
+                    if let searchText = searchText, searchText.isNotEmpty,
+                       asset.displayableAssetId.lowercased().contains(searchText) == false,
+                       asset.name?.lowercased().contains(searchText) == false {
+                        return false
+                    }
+                    return true
+                }
                 .sorted { (lhs: PerpetualMarket, rhs: PerpetualMarket) in
                     switch sortOption {
                     case .volume:
@@ -149,11 +158,6 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                 }
                 .compactMap { market in
                     guard let asset = assetMap[market.assetId] else {
-                        return nil
-                    }
-                    if let searchText = searchText, searchText.isNotEmpty,
-                       asset.displayableAssetId.lowercased().contains(searchText) == false,
-                       asset.name?.lowercased().contains(searchText) == false {
                         return nil
                     }
                     return dydxSimpleUIMarketViewModel.createFrom(
