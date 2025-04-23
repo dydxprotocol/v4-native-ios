@@ -20,14 +20,18 @@ class dydxSimpleUIMarketInfoHeaderViewPresenter: HostedViewPresenter<dydxSimpleU
     @Published var marketId: String?
 
     private let marketPresenter = SharedMarketPresenter()
+    private let favoritePresenter = dydxUserFavoriteViewPresenter()
+
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
-        marketPresenter
+        marketPresenter,
+        favoritePresenter
     ]
 
     override init() {
         let viewModel = dydxSimpleUIMarketInfoHeaderViewModel()
 
         marketPresenter.$viewModel.assign(to: &viewModel.$sharedMarketViewModel)
+        favoritePresenter.$viewModel.assign(to: &viewModel.$favoriteViewModel)
 
         super.init()
 
@@ -38,6 +42,7 @@ class dydxSimpleUIMarketInfoHeaderViewPresenter: HostedViewPresenter<dydxSimpleU
         }
 
         $marketId.assign(to: &marketPresenter.$marketId)
+        $marketId.assign(to: &favoritePresenter.$marketId)
 
         attachChildren(workers: childPresenters)
      }

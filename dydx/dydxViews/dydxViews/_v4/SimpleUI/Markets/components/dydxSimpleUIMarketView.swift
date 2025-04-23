@@ -32,6 +32,8 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     public let marketCaps: Double?
     public let isLaunched: Bool
     public let onCancelAction: (() -> Void)?
+    public let isFavorite: Bool
+    public let onFavoriteTapped: (() -> Void)?
 
     public init(displayType: DisplayType,
                 marketId: String,
@@ -47,8 +49,10 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 isLoading: Bool = false,
                 marketCaps: Double?,
                 isLaunched: Bool,
+                isFavorite: Bool,
                 onMarketSelected: (() -> Void)?,
-                onCancelAction: (() -> Void)?
+                onCancelAction: (() -> Void)?,
+                onFavoriteTapped: (() -> Void)?
     ) {
         self.displayType = displayType
         self.marketId = marketId
@@ -64,8 +68,10 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
         self.isLoading = isLoading
         self.marketCaps = marketCaps
         self.isLaunched = isLaunched
+        self.isFavorite = isFavorite
         self.onMarketSelected = onMarketSelected
         self.onCancelAction = onCancelAction
+        self.onFavoriteTapped = onFavoriteTapped
     }
 
     public static var previewValue: dydxSimpleUIMarketViewModel {
@@ -82,14 +88,24 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                                              positionSize: "$349",
                                              marketCaps: 122000,
                                              isLaunched: true,
+                                             isFavorite: true,
                                              onMarketSelected: nil,
-                                             onCancelAction: nil)
+                                             onCancelAction: nil,
+                                             onFavoriteTapped: nil)
         return vm
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
+
+            let assetName = isFavorite ? "action_like" : "action_dislike"
+            let leftCellSwipeAccessoryView = PlatformIconViewModel(type: .asset(name: assetName, bundle: Bundle.dydxView), size: .init(width: 16, height: 16))
+                .createView(parentStyle: style, styleKey: styleKey)
+                .tint(ThemeColor.SemanticColor.layer1.color)
+            let leftCellSwipeAccessory = CellSwipeAccessory(accessoryView: AnyView(leftCellSwipeAccessoryView)) {
+                self.onFavoriteTapped?()
+            }
 
             let rightCellSwipeAccessoryView = PlatformIconViewModel(type: .asset(name: "action_cancel", bundle: Bundle.dydxView), size: .init(width: 16, height: 16))
                 .createView(parentStyle: style, styleKey: styleKey)
@@ -123,10 +139,13 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                         .minimumScaleFactor(0.5)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 4)
-                        .if(self.onCancelAction != nil) { view in
-                            view.swipeActions(leftCellSwipeAccessory: nil,
-                                               rightCellSwipeAccessory: rightCellSwipeAccessory)
-                        }
+                        .if(self.onCancelAction != nil, { view in
+                            view.swipeActions(leftCellSwipeAccessory: leftCellSwipeAccessory,
+                                              rightCellSwipeAccessory: rightCellSwipeAccessory)
+                        }, else: { view in
+                            view.swipeActions(leftCellSwipeAccessory: leftCellSwipeAccessory,
+                                              rightCellSwipeAccessory: nil)
+                        })
                     }
                 }
             }
@@ -184,6 +203,11 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                     TokenTextViewModel(symbol: assetName, withBorder: true)
                         .createView(parentStyle: style.themeFont(fontSize: .smallest))
                 }
+                if isFavorite {
+                    PlatformIconViewModel(type: .asset(name: "action_like", bundle: Bundle.dydxView),
+                                          size: CGSize(width: 12, height: 12))
+                    .createView(parentStyle: style)
+                }
             }
 
             let valueString = dydxFormatter.shared.dollar(number: self.positionTotal, digits: 2)
@@ -195,9 +219,17 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
 
     private func createNameVolume(style: ThemeStyle) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(assetName)
-                .themeColor(foreground: .textPrimary)
-                .themeFont(fontSize: .medium)
+            HStack(alignment: .center, spacing: 4) {
+                Text(assetName)
+                    .themeColor(foreground: .textPrimary)
+                    .themeFont(fontSize: .medium)
+
+                if isFavorite {
+                    PlatformIconViewModel(type: .asset(name: "action_like", bundle: Bundle.dydxView),
+                                          size: CGSize(width: 12, height: 12))
+                    .createView(parentStyle: style)
+                }
+            }
 
             HStack(spacing: 4) {
                 if isLaunched {

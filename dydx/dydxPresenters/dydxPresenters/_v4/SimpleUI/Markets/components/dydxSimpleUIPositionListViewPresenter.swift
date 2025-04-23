@@ -21,6 +21,9 @@ protocol dydxSimpleUIPositionListViewPresenterProtocol: HostedViewPresenterProto
 }
 
 class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPositionListViewModel>, dydxSimpleUIPositionListViewPresenterProtocol {
+    
+    @Published var favUpdated = 0
+    
     override init() {
         super.init()
 
@@ -31,11 +34,12 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
         super.start()
 
         Publishers
-            .CombineLatest3(AbacusStateManager.shared.state.marketList,
+            .CombineLatest4(AbacusStateManager.shared.state.marketList,
                             AbacusStateManager.shared.state.assetMap,
-                            AbacusStateManager.shared.state.selectedSubaccountPositions
+                            AbacusStateManager.shared.state.selectedSubaccountPositions,
+                            $favUpdated,
             )
-           .sink { [weak self] markets, assetMap, positions in
+           .sink { [weak self] markets, assetMap, positions, _ in
                self?.updateMarketList(markets: markets, assetMap: assetMap, positions: positions)
             }
             .store(in: &subscriptions)
@@ -56,11 +60,13 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
                 if position == nil || (position?.size.current?.doubleValue ?? 0.0) == 0.0 {
                     return nil
                 }
+                let isFavorite = dydxFavoriteStore.shared.isFavorite(marketId: market.id)
                 return dydxSimpleUIMarketViewModel.createFrom(
                     displayType: .position,
                     market: market,
                     asset: asset,
                     position: position,
+                    isFavorite: isFavorite,
                     onMarketSelected: { [weak self] in
                         self?.navigate(to: RoutingRequest(path: "/market", params: ["market": market.id]), animated: true, completion: nil)
                     },
@@ -70,6 +76,10 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
                                                               params: ["marketId": marketId]),
                                            animated: true, completion: nil)
                         }
+                    },
+                    onFavoriteTapped: { [weak self] in
+                        dydxFavoriteStore.shared.toggleFavorite(marketId: market.id)
+                        self?.favUpdated += 1
                     }
                 )
             }

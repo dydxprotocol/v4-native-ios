@@ -15,7 +15,6 @@ public class dydxSimpleUIMarketsHeaderViewModel: PlatformViewModel {
 
     @Published public var depositAction: (() -> Void)?
     @Published public var withdrawAction: (() -> Void)?
-
     @Published public var menuAction: (() -> Void)?
 
     public init() { }
