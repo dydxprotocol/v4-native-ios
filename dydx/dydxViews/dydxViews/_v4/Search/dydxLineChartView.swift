@@ -73,8 +73,6 @@ private struct dydxLineChartView: View {
         }
     }
 
-    @GestureState private var location: CGPoint = .zero
-
     init(model: dydxLineChartViewModel, parentStyle: ThemeStyle = ThemeStyle.defaultStyle.themeFont(fontType: .number, fontSize: .large), styleKey: String?) {
         self.model = model
         self.parentStyle = parentStyle
