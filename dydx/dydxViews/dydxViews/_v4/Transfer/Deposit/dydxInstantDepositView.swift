@@ -35,8 +35,22 @@ public class dydxInstantDepositViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack(spacing: 16) {
-                self.input?.createView(parentStyle: style)
-                self.selector?.createView(parentStyle: style)
+                if self.showConnectWallet {
+                    HStack(spacing: 8) {
+                        Text(DataLocalizer.localize(path: "APP.V4_DEPOSIT.MOBILE_WALLET_REQUIRED"))
+                            .themeFont(fontSize: .medium)
+
+                        let content = Text(DataLocalizer.localize(path: "APP.GENERAL.CONNECT_WALLET")).lineLimit(1).wrappedViewModel
+                        PlatformButtonViewModel(content: content,
+                                                type: .defaultType(fillWidth: false)) { [weak self] in
+                            self?.connectWalletAction?()
+                        }
+                        .createView(parentStyle: style)
+                    }
+                } else {
+                    self.input?.createView(parentStyle: style)
+                    self.selector?.createView(parentStyle: style)
+                }
 
                 Spacer()
 
