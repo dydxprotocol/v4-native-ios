@@ -43,7 +43,11 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     @Published public var sharedAccountViewModel: SharedAccountViewModel? = SharedAccountViewModel()
     @Published public var pnlAmount: SignedAmountViewModel?
     @Published public var pnlPercent: SignedAmountViewModel?
-    @Published public var chart = dydxLineChartViewModel()
+    @Published public var chart = dydxLineChartViewModel(backgroundColor: .layer1)
+
+    // Only populate the following if user selects a data point from the chart
+    @Published public var selectedEquityAmount: String?
+    @Published public var selectedEquityDate: String?
 
     @Published public var periodOption = dydxSimpleUIPortfolioPeriodViewModel.previewValue
 
@@ -155,21 +159,12 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                 .padding(.top, 78)
 
             VStack(spacing: 16) {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(sharedAccountViewModel?.equity ?? "-")
-                        .themeFont(fontType: .plus, fontSize: .custom(size: 32))
-                        .themeColor(foreground: .textPrimary)
-                        .animation(.default)
-
-                    HStack(alignment: .center, spacing: 8) {
-                        pnlAmount?
-                            .createView(parentStyle: style.themeFont(fontSize: .small))
-                        pnlPercent?
-                            .createView(parentStyle: style.themeFont(fontSize: .small))
-
-                        periodOption.createView(parentStyle: style)
+                Group {
+                    if selectedEquityAmount != nil && selectedEquityDate != nil {
+                        createSelectedEquityView(style: style)
+                    } else {
+                        createCurrentEquityView(style: style)
                     }
-                    .themeFont(fontSize: .small)
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16)
@@ -201,6 +196,41 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                 .frame(height: 32)
                 .padding(.horizontal, 16)
             }
+        }
+    }
+
+    private func createCurrentEquityView(style: ThemeStyle) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(sharedAccountViewModel?.equity ?? "-")
+                .themeFont(fontType: .plus, fontSize: .custom(size: 32))
+                .themeColor(foreground: .textPrimary)
+                .animation(.default)
+
+            HStack(alignment: .center, spacing: 8) {
+                pnlAmount?
+                    .createView(parentStyle: style.themeFont(fontSize: .small))
+                pnlPercent?
+                    .createView(parentStyle: style.themeFont(fontSize: .small))
+
+                periodOption.createView(parentStyle: style)
+            }
+            .themeFont(fontSize: .small)
+            .frame(minHeight: 28)
+        }
+    }
+
+    private func createSelectedEquityView(style: ThemeStyle) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(selectedEquityAmount ?? "-")
+                .themeFont(fontType: .plus, fontSize: .custom(size: 32))
+                .themeColor(foreground: .textPrimary)
+                .animation(.default)
+
+            Text(selectedEquityDate ?? "-")
+                .themeFont(fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+                .animation(.default)
+                .frame(minHeight: 28)
         }
     }
 

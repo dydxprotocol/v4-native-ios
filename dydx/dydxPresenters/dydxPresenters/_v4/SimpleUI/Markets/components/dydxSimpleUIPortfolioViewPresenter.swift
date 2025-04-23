@@ -152,6 +152,16 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
             viewModel?.chart.entries = chartEntries
             viewModel?.chart.showYLabels = false
             viewModel?.chart.valueLowerBoundOffset = (maxValue - minValue) * 0.8
+            viewModel?.chart.dataPointSelected = { [weak self] entry in
+                if let entry {
+                    self?.viewModel?.selectedEquityAmount = dydxFormatter.shared.dollar(number: entry.value, digits: 2)
+                    let date = Date(timeIntervalSince1970: TimeInterval(entry.date))
+                    self?.viewModel?.selectedEquityDate = dydxFormatter.shared.dateAndTime(date: date)
+                } else {
+                    self?.viewModel?.selectedEquityAmount = nil
+                    self?.viewModel?.selectedEquityDate = nil
+                }
+            }
         }
 
         lastPnls = pnls

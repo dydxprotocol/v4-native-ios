@@ -22,7 +22,11 @@ public class dydxVaultChartViewModel: PlatformViewModel {
     fileprivate let valueTypeOptions = ValueTypeOption.allCases
     fileprivate let valueTimeOptions = ValueTimeOption.allCases
 
-    @Published public var chart = dydxLineChartViewModel()
+    // Only populate the following when user selects a value
+    @Published public var selectedValue: String?
+    @Published public var selectedTime: String?
+
+    @Published public var chart = dydxLineChartViewModel(backgroundColor: .layer2)
 
     public enum ValueTypeOption: CaseIterable, RadioButtonContentDisplayable {
         case pnl
@@ -60,15 +64,17 @@ public class dydxVaultChartViewModel: PlatformViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            return AnyView(dydxVaultChartView(viewModel: self)).wrappedInAnyView()
+            return AnyView(dydxVaultChartView(viewModel: self, themeStyle: style))
         }
     }
 }
 
 private struct dydxVaultChartView: View {
     @ObservedObject var viewModel: dydxVaultChartViewModel
+
+    let themeStyle: ThemeStyle
 
     private var radioButtonsRow: some View {
         GeometryReader { geometry in
@@ -100,7 +106,25 @@ private struct dydxVaultChartView: View {
     var body: some View {
         VStack(spacing: 8) {
             radioButtonsRow
-            viewModel.chart.createView()
+
+            ZStack {
+                if let selectedTime = viewModel.selectedTime,
+                   let selectedValue = viewModel.selectedValue {
+                    VStack(alignment: .leading) {
+                        Text(selectedValue)
+                            .themeFont(fontSize: .smaller)
+
+                        Text(selectedTime)
+                            .themeFont(fontSize: .smallest)
+                            .themeColor(foreground: .textTertiary)
+                    }
+                    .padding(.horizontal, 12)
+                    .topAligned()
+                    .leftAligned()
+                }
+
+                viewModel.chart.createView(parentStyle: themeStyle)
+            }
         }
     }
 }
