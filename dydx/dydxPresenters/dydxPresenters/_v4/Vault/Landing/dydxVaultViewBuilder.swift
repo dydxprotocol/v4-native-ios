@@ -206,7 +206,6 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                 self?.viewModel?.vaultChart?.selectedTime = nil
                 self?.viewModel?.vaultChart?.selectedValue = nil
             }
-
         }
     }
 }
