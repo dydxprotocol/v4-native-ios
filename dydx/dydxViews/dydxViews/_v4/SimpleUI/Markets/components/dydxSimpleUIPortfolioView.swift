@@ -38,7 +38,6 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     }
 
     @Published public var buttonAction: (() -> Void)?
-    @Published public var learnMoreAction: (() -> Void)?
     @Published public var state: LoginState  = .unknown
     @Published public var sharedAccountViewModel: SharedAccountViewModel? = SharedAccountViewModel()
     @Published public var pnlAmount: SignedAmountViewModel?
@@ -52,12 +51,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     @Published public var periodOption = dydxSimpleUIPortfolioPeriodViewModel.previewValue
 
     @Published public var marginUsageTooltip = MarginUsageTooltipModel()
-
-    private var buyingPowerTooltip: TooltipModel {
-        Tooltips.buyingPower { [weak self] in
-            self?.learnMoreAction?()
-        }
-    }
+    @Published public var buyingPowerTooltip = BuyingPowerTooltipModel()
 
     private var pnlColor: ThemeColor.SemanticColor {
         get {
@@ -76,6 +70,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
         vm.pnlPercent = .previewValue
         vm.state = .hasBalance
         vm.marginUsageTooltip = .previewValue
+        vm.buyingPowerTooltip = .previewValue
         return vm
     }
 

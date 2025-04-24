@@ -49,7 +49,7 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
                 }
             }
         }
-        viewModel.learnMoreAction = learnMoreAction
+        viewModel.buyingPowerTooltip.learnMoreAction = learnMoreAction
         viewModel.marginUsageTooltip.learnMoreAction = learnMoreAction
 
         attachChildren(workers: childPresenters)
