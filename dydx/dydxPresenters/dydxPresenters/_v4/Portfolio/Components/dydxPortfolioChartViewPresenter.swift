@@ -14,51 +14,14 @@ import PlatformUI
 import Abacus
 import dydxStateManager
 import Combine
-import DGCharts
 import dydxFormatter
 
 protocol dydxPortfolioChartViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxPortfolioChartViewModel? { get }
 }
 
-class dydxPortfolioChartViewPresenter: HostedViewPresenter<dydxPortfolioChartViewModel>, dydxPortfolioChartViewPresenterProtocol, ChartViewDelegate {
-
-    private let chartView = LineChartView()
-
-    private lazy var linePresenter: LineGraphingListPresenter = {
-        let presenter = LineGraphingListPresenter()
-        presenter.color = ThemeSettings.positiveColor.uiColor
-        presenter.sequence = 0
-        presenter.increasingColor = ThemeSettings.positiveColor.uiColor
-        presenter.decreasingColor = ThemeSettings.negativeColor.uiColor
-        presenter.highlightColor = .gray
-        presenter.highlightLineWidth = 0.5
-        presenter.highlightPhase = 1
-        presenter.highlightEnabled = true
-        presenter.highlightDash = 2
-        presenter.smooth = true
-        return presenter
-    }()
-
-    private lazy var graphPresenter: LineGraphingPresenter = {
-        let presenter = LineGraphingPresenter()
-        presenter.highlightDistance = 0
-        presenter.chartDelegate = self
-        presenter.chartView = chartView
-        return presenter
-    }()
-
-    private let listInteractor = ListInteractor()
-
-    @Published private var selectedChartEntry: ChartDataEntry? {
-        didSet {
-            if selectedChartEntry !== oldValue {
-                if selectedChartEntry === nil || oldValue === nil {
-                    HapticFeedback.shared?.impact(level: .high)
-                }
-            }
-        }
-    }
+class dydxPortfolioChartViewPresenter: HostedViewPresenter<dydxPortfolioChartViewModel>, dydxPortfolioChartViewPresenterProtocol {
+    @Published private var selectedChartEntry: dydxLineChartViewModel.Entry?
 
     init(viewModel: dydxPortfolioChartViewModel?) {
         super.init()
@@ -78,16 +41,6 @@ class dydxPortfolioChartViewPresenter: HostedViewPresenter<dydxPortfolioChartVie
                 AbacusStateManager.shared.setHistoricalPNLPeriod(period: PortfolioChartResolution.allResolutions[index].key)
              }
         }
-
-        // Chart
-        viewModel?.chart = dydxChartViewModel(chartView: chartView)
-
-        graphPresenter.chartView = chartView
-        graphPresenter.presenters = [linePresenter]
-
-        linePresenter.interactor = listInteractor
-
-        chartView.delegate = self
     }
 
     override func start() {
@@ -105,29 +58,38 @@ class dydxPortfolioChartViewPresenter: HostedViewPresenter<dydxPortfolioChartVie
                    self?.viewModel?.state = .onboard
                    self?.viewModel?.equity = nil
                    self?.viewModel?.pnl = nil
-                   self?.listInteractor.list = []
                }
            }
            .store(in: &subscriptions)
     }
 
-    private func updatePNLs(pnls: [SubaccountHistoricalPNL], subaccount: Subaccount, selectedChartEntry: ChartDataEntry?) {
+    private func updatePNLs(pnls: [SubaccountHistoricalPNL], subaccount: Subaccount, selectedChartEntry: dydxLineChartViewModel.Entry?) {
 
-        let dataPoints = pnls.compactMap { HistoricalPNLDataPoint(pnl: $0) }
+        var entries = pnls.compactMap {
+            dydxLineChartViewModel.Entry(date: $0.createdAtMilliseconds, value: $0.equity)
+        }
         if let equity = subaccount.equity?.current?.doubleValue {
             // Add the current PNL
-             let lastPoint = SubaccountHistoricalPNL(equity: equity, totalPnl: 0, netTransfers: 0, createdAtMilliseconds: Date().timeIntervalSince1970 * 1000)
-            listInteractor.list = dataPoints + [HistoricalPNLDataPoint(pnl: lastPoint)]
-        } else {
-            listInteractor.list = dataPoints
+            let date = Date().timeIntervalSince1970 * 1000
+            let lastPoint = dydxLineChartViewModel.Entry(date: date, value: equity)
+            entries += [lastPoint]
+        }
+        let maxValue = entries.max { $0.value < $1.value }?.value ?? 0
+        let minValue = entries.min { $0.value < $1.value }?.value ?? 0
+
+        viewModel?.chart.entries = entries
+        viewModel?.chart.showYLabels = false
+        viewModel?.chart.valueLowerBoundOffset = (maxValue - minValue) * 0.8
+        viewModel?.chart.dataPointSelected = { [weak self] entry in
+            self?.selectedChartEntry = entry
         }
 
         let firstEquity = pnls.first?.equity
         let targetEquity: Double?
-        if let historicalPNL = (selectedChartEntry?.model as? HistoricalPNLDataPoint)?.historicalPNL {
-            targetEquity = historicalPNL.equity
-            viewModel?.equity = dydxFormatter.shared.dollar(number: historicalPNL.equity, size: nil)
-            viewModel?.equityLabel = Date(milliseconds: historicalPNL.createdAtMilliseconds).localDatetimeString
+        if let selectedChartEntry {
+            targetEquity = selectedChartEntry.value
+            viewModel?.equity = dydxFormatter.shared.dollar(number: selectedChartEntry.value, size: nil)
+            viewModel?.equityLabel = Date(milliseconds: selectedChartEntry.date).localDatetimeString
         } else {
             targetEquity = subaccount.equity?.current?.doubleValue
             viewModel?.equity = dydxFormatter.shared.dollar(number: subaccount.equity?.current?.doubleValue ?? 0, size: nil)
@@ -169,34 +131,6 @@ class dydxPortfolioChartViewPresenter: HostedViewPresenter<dydxPortfolioChartVie
         } else {
             return nil
         }
-    }
-
-    // MARK: ChartViewDelegate
-
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        chartView.highlightValue(highlight)
-        selectedChartEntry = entry
-    }
-
-    func chartViewDidEndPanning(_ chartView: ChartViewBase) {
-        chartView.highlightValue(nil)
-        selectedChartEntry = nil
-    }
-
-    func chartValueNothingSelected(_ chartView: ChartViewBase) {
-        chartView.highlightValue(nil)
-        selectedChartEntry = nil
-    }
-
-    func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
-    }
-
-    // Callbacks when the chart is moved / translated via drag gesture.
-    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
-    }
-
-    // Callbacks when Animator stops animating
-    func chartView(_ chartView: ChartViewBase, animatorDidStop animator: Animator) {
     }
 }
 

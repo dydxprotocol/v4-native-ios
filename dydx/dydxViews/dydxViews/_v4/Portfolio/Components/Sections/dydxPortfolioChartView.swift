@@ -12,7 +12,7 @@ import Utilities
 
 public class dydxPortfolioChartViewModel: PlatformViewModel {
     @Published public var state: dydxPortfolioViewModel.State = .onboard
-    @Published public var chart: dydxChartViewModel?
+    @Published public var chart = dydxLineChartViewModel(backgroundColor: .layer2)
 
     @Published public var resolutionTitles: [String]?
     @Published public var onResolutionChanged: ((Int) -> Void)?
@@ -46,7 +46,8 @@ public class dydxPortfolioChartViewModel: PlatformViewModel {
                     VStack(spacing: 0) {
                         self.createInfoView(parentStyle: style)
 
-                        self.chart?.createView(parentStyle: style)
+                        self.chart.createView(parentStyle: style)
+                            .padding(.top, 16)
                             .frame(height: 174)
 
                         self.createResolutionControl(parentStyle: style)

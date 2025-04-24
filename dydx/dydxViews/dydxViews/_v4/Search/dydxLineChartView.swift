@@ -25,6 +25,7 @@ public class dydxLineChartViewModel: PlatformViewModel {
         }
     }
 
+    @Published public var interpolatedCount: Int?
     @Published public var valueLowerBoundOffset: Double = 0
     @Published public var valueUpperBoundOffset: Double = 0
     @Published public var showYLabels: Bool = true
@@ -32,23 +33,54 @@ public class dydxLineChartViewModel: PlatformViewModel {
 
     @Published public var backgroundColor: ThemeColor.SemanticColor = .transparent
 
-    @Published public var entries: [Entry] = []
-    fileprivate var isPositive: Bool { (entries.last?.value ?? -Double.infinity) >= (entries.first?.value ?? -Double.infinity) }
-    fileprivate var lineColor: Color { isPositive ? ThemeSettings.positiveColor.color : ThemeSettings.negativeColor.color }
-    fileprivate var datesDomain: ClosedRange<Double> {
-        (entries.map(\.date).min() ?? 0)...(entries.map(\.date).max() ?? 0)
-    }
-    fileprivate var valuesDomain: ClosedRange<Double> {
-        ((entries.map(\.value).min() ?? 0) - valueLowerBoundOffset)...((entries.map(\.value).max() ?? 0) + valueUpperBoundOffset)
+    @Published public var entries: [Entry] = [] {
+        didSet {
+            if let interpolatedCount, interpolatedCount > 0, entries.count > interpolatedCount {
+                var interpolatedEntries: [dydxLineChartViewModel.Entry] = []
+                let step = entries.count / interpolatedCount
+                for i in 0..<interpolatedCount {
+                    if i * step < entries.count {
+                        interpolatedEntries.append(entries[i * step])
+                    }
+                }
+                interpolatedEntries.append(entries.last!)
+                self.interpolatedEntries = interpolatedEntries
+            } else {
+                interpolatedEntries = entries
+            }
+        }
     }
 
-    public init(valueLowerBoundOffset: Double = 0, valueUpperBoundOffset: Double = 0, showYLabels: Bool = true, dataPointSelected: ((dydxLineChartViewModel.Entry?) -> Void)? = nil, backgroundColor: ThemeColor.SemanticColor = .transparent, entries: [dydxLineChartViewModel.Entry] = []) {
+    fileprivate var interpolatedEntries: [Entry] = []
+
+    fileprivate var isPositive: Bool { (interpolatedEntries.last?.value ?? -Double.infinity) >= (interpolatedEntries.first?.value ?? -Double.infinity) }
+    fileprivate var lineColor: Color { isPositive ? ThemeSettings.positiveColor.color : ThemeSettings.negativeColor.color }
+    fileprivate var datesDomain: ClosedRange<Double> {
+        (interpolatedEntries.map(\.date).min() ?? 0)...(interpolatedEntries.map(\.date).max() ?? 0)
+    }
+    fileprivate var valuesDomain: ClosedRange<Double> {
+        ((interpolatedEntries.map(\.value).min() ?? 0) - valueLowerBoundOffset)...((interpolatedEntries.map(\.value).max() ?? 0) + valueUpperBoundOffset)
+    }
+
+    public static var previewValue: dydxLineChartViewModel = {
+        let vm = dydxLineChartViewModel()
+        vm.entries = [
+            Entry(date: 0, value: 100),
+            Entry(date: 1000, value: 200),
+            Entry(date: 2000, value: 300),
+            Entry(date: 3000, value: 400)
+        ]
+        return vm
+    }()
+
+    public init(valueLowerBoundOffset: Double = 0, valueUpperBoundOffset: Double = 0, showYLabels: Bool = true, dataPointSelected: ((dydxLineChartViewModel.Entry?) -> Void)? = nil, backgroundColor: ThemeColor.SemanticColor = .transparent, entries: [dydxLineChartViewModel.Entry] = [], interpolatedCount: Int? = 200) {
         self.valueLowerBoundOffset = valueLowerBoundOffset
         self.valueUpperBoundOffset = valueUpperBoundOffset
         self.showYLabels = showYLabels
         self.dataPointSelected = dataPointSelected
         self.backgroundColor = backgroundColor
         self.entries = entries
+        self.interpolatedCount = interpolatedCount
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
@@ -81,7 +113,7 @@ private struct dydxLineChartView: View {
 
     var body: some View {
         Chart {
-            ForEach(model.entries, id: \.date) { entry in
+            ForEach(model.interpolatedEntries, id: \.date) { entry in
                 LineMark(x: .value("", entry.date),
                          y: .value("", entry.value))
                 .lineStyle(StrokeStyle(lineWidth: 2))

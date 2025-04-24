@@ -121,23 +121,10 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
 
         var chartEntries = lastChartEntries
         if lastPnls != pnls {
-            let entries = pnls.compactMap {
+            chartEntries = pnls.compactMap {
                 let date = $0.createdAtMilliseconds / 1000
                 let value = $0.equity
                 return dydxLineChartViewModel.Entry(date: date, value: value)
-            }
-            let maxEntryCount = 200 // for fast rendering
-            if entries.count > maxEntryCount {
-                var interpolatedEntries: [dydxLineChartViewModel.Entry] = []
-                let step = entries.count / maxEntryCount
-                for i in 0..<maxEntryCount {
-                    if i * step < entries.count {
-                        interpolatedEntries.append(entries[i * step])
-                    }
-                }
-                chartEntries = interpolatedEntries
-            } else {
-                chartEntries = entries
             }
             lastChartEntries = chartEntries
         }
