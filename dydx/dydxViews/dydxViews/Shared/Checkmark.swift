@@ -15,7 +15,7 @@ public extension PlatformIconViewModel {
                                            spacing: 12,
                                            borderColor: nil),
                              size: CGSize(width: 20, height: 20),
-                             templateColor: .textPrimary)
+                             templateColor: .colorWhite)
     }
 
     static var unselectedCheckmark: PlatformViewModel {
