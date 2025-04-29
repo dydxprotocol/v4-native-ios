@@ -115,16 +115,17 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
     private func createHeader(text: String, rightAccessory: AnyView? = nil) -> some View {
         HStack(spacing: 0) {
             Text(text)
-                .themeFont(fontType: .plus)
+                .themeFont(fontType: .plus, fontSize: .medium)
                 .themeColor(foreground: .textPrimary)
                 .leftAligned()
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
 
             Spacer()
 
-            rightAccessory?.padding(.trailing, 16)
+            rightAccessory
         }
+        .padding(.horizontal, 16)
+        .padding(.top, 20)
+        .padding(.bottom, 8)
         .themeColor(background: .layer1)
     }
 }
