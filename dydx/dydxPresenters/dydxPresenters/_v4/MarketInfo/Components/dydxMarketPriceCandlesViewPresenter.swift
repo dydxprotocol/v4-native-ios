@@ -24,7 +24,7 @@ protocol dydxMarketPriceCandlesViewPresenterProtocol: HostedViewPresenterProtoco
 
 class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCandlesViewModel>, dydxMarketPriceCandlesViewPresenterProtocol, ChartViewDelegate {
     @Published var marketId: String?
-    private var tickSize: Double?
+    private var tickSize: Int?
 
     private let chartView = CombinedChartView()
 
@@ -162,7 +162,7 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
                             AbacusStateManager.shared.state.marketMap)
             .sink { [weak self] marketId, marketMap in
                 guard let marketId = marketId, let market = marketMap[marketId] else { return }
-                self?.tickSize = market.configs?.displayTickSize?.doubleValue
+                self?.tickSize = market.configs?.displayTickSizeDecimals?.intValue
             }
             .store(in: &subscriptions)
 
@@ -232,41 +232,40 @@ class dydxMarketPriceCandlesViewPresenter: HostedViewPresenter<dydxMarketPriceCa
             return
         }
 
-        let size = String(tickSize)
         let sign: PlatformUISign = (candle.candleClose?.doubleValue ?? 0) > (candle.candleOpen?.doubleValue ?? 0) ? .plus : .minus
 
         var highlights = [dydxMarketPriceCandlesHighlightViewModel.HighlightDataPoint]()
         if let open = candle.candleOpen {
-            let value = dydxFormatter.shared.raw(number: open, size: size)
+            let value = dydxFormatter.shared.raw(number: open, digits: tickSize)
             highlights += [.init(prompt: "O",
                                  amount: SignedAmountViewModel(text: value,
                                                                sign: sign,
                                                                coloringOption: .textOnly))]
         }
         if let high = candle.candleHigh {
-            let value = dydxFormatter.shared.raw(number: high, size: size)
+            let value = dydxFormatter.shared.raw(number: high, digits: tickSize)
             highlights += [.init(prompt: "H",
                                  amount: SignedAmountViewModel(text: value,
                                                                sign: sign,
                                                                coloringOption: .textOnly))]
         }
         if let low = candle.candleLow {
-            let value = dydxFormatter.shared.raw(number: low, size: size)
+            let value = dydxFormatter.shared.raw(number: low, digits: tickSize)
             highlights += [.init(prompt: "L",
                                  amount: SignedAmountViewModel(text: value,
                                                                sign: sign,
                                                                coloringOption: .textOnly))]
         }
         if let close = candle.candleClose {
-            let value = dydxFormatter.shared.raw(number: close, size: size)
+            let value = dydxFormatter.shared.raw(number: close, digits: tickSize)
             highlights += [.init(prompt: "C",
                                  amount: SignedAmountViewModel(text: value,
                                                                sign: sign,
                                                                coloringOption: .textOnly))]
         }
         if let marketCandle = candle.marketCandle {
-            let volume = NSNumber(value: marketCandle.baseTokenVolume)
-            let value = dydxFormatter.shared.condensed(number: volume, digits: 0)
+            let volume = NSNumber(value: marketCandle.usdVolume)
+            let value = dydxFormatter.shared.condensed(number: volume, digits: 3)
             highlights += [.init(prompt: "V",
                                  amount: SignedAmountViewModel(text: value,
                                                                sign: sign,

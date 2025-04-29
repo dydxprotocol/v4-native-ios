@@ -150,6 +150,7 @@
 		0280B39729CB63C70017D64A /* dydxOnboardWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0280B39629CB63C70017D64A /* dydxOnboardWelcomeView.swift */; };
 		0284201429AD705B00C0E7CC /* dydxFormatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0284200F29AD704E00C0E7CC /* dydxFormatter.framework */; };
 		0284201629AD71B600C0E7CC /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284201529AD71B600C0E7CC /* Enums.swift */; };
+		02844D012DC13FA8006F51CE /* dydxSimpleUIMarketCandlesHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02844D002DC13FA8006F51CE /* dydxSimpleUIMarketCandlesHighlightView.swift */; };
 		02860A9129C15E670079E644 /* dydxOnboardScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02860A8429C15E670079E644 /* dydxOnboardScanView.swift */; };
 		02865DD62CE7C4F100F03BC8 /* dydxMarketsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02865DD52CE7C4F100F03BC8 /* dydxMarketsSearchView.swift */; };
 		028DB33E2A0589270090BE58 /* dydxProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028DB33D2A0589270090BE58 /* dydxProfileHeaderView.swift */; };
@@ -594,6 +595,7 @@
 		0280B39629CB63C70017D64A /* dydxOnboardWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOnboardWelcomeView.swift; sourceTree = "<group>"; };
 		0284200929AD704E00C0E7CC /* dydxFormatter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFormatter.xcodeproj; path = ../dydxFormatter/dydxFormatter.xcodeproj; sourceTree = "<group>"; };
 		0284201529AD71B600C0E7CC /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		02844D002DC13FA8006F51CE /* dydxSimpleUIMarketCandlesHighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketCandlesHighlightView.swift; sourceTree = "<group>"; };
 		02860A8429C15E670079E644 /* dydxOnboardScanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxOnboardScanView.swift; sourceTree = "<group>"; };
 		02865DD52CE7C4F100F03BC8 /* dydxMarketsSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketsSearchView.swift; sourceTree = "<group>"; };
 		028DB33D2A0589270090BE58 /* dydxProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileHeaderView.swift; sourceTree = "<group>"; };
@@ -1418,6 +1420,7 @@
 				02048E222D39872800394CBE /* CollectionItemUtil.swift */,
 				027885EC2D1DE12C00366321 /* dydxSimpleUIMarketInfoHeaderView.swift */,
 				027885F12D1DEBE300366321 /* dydxSimpleUIMarketCandlesView.swift */,
+				02844D002DC13FA8006F51CE /* dydxSimpleUIMarketCandlesHighlightView.swift */,
 				027885F52D1E0C5500366321 /* dydxSimpleUIMarketCandlesResolutionsView.swift */,
 				027885F92D1E170900366321 /* dydxSimpleUIMarketPositionView.swift */,
 				02048E052D38A0FE00394CBE /* dydxSimpleUIMarketDetailsView.swift */,
@@ -2469,6 +2472,7 @@
 				0208627A28F4D95F00C9D3A0 /* dydxMarketInfoPagingView.swift in Sources */,
 				027F3EF72AB93ADC00602E5B /* dydxProfileBalancesViewModel.swift in Sources */,
 				02404FA82CD42E77001B571D /* dydxVaultTosView.swift in Sources */,
+				02844D012DC13FA8006F51CE /* dydxSimpleUIMarketCandlesHighlightView.swift in Sources */,
 				024B44F52983E38D00E35D54 /* dydxTradeStatusLogoView.swift in Sources */,
 				02865DD62CE7C4F100F03BC8 /* dydxMarketsSearchView.swift in Sources */,
 				02AEE4BC28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift in Sources */,
