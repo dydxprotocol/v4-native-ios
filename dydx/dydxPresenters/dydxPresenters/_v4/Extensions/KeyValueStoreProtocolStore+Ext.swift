@@ -32,7 +32,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
         case .hasAcknowledgedVaultDepositTerms: return false
         case .appMode: return nil
         case .showAppModeSurvey: return true
-        case .simpleUISortOrder: return SimpleUIMarketSortOption.volume.rawValue
+        case .simpleUISortOrder: return SimpleUIMarketSortOption.marketCap.rawValue
         }
     }
 }

@@ -104,6 +104,8 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
             }
             .sorted { (lhs: PerpetualMarket, rhs: PerpetualMarket) in
                 switch sortOption {
+                case .marketCap:
+                    return (lhs.marketCaps?.doubleValue ?? 0) > (rhs.marketCaps?.doubleValue ?? 0)
                 case .volume:
                     return (lhs.perpetual?.volume24H?.doubleValue ?? 0) > (rhs.perpetual?.volume24H?.doubleValue ?? 0)
                 case .price:
@@ -113,7 +115,7 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                 case .losers:
                     return (lhs.priceChange24HPercent?.doubleValue ?? 0) < (rhs.priceChange24HPercent?.doubleValue ?? 0)
                 case .favorites:
-                    return (lhs.perpetual?.volume24H?.doubleValue ?? 0) > (rhs.perpetual?.volume24H?.doubleValue ?? 0)
+                    return (lhs.marketCaps?.doubleValue ?? 0) > (rhs.marketCaps?.doubleValue ?? 0)
                 }
             }
             .compactMap { market in
@@ -166,6 +168,8 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                 }
                 .sorted { (lhs: PerpetualMarket, rhs: PerpetualMarket) in
                     switch sortOption {
+                    case .marketCap:
+                        return (lhs.marketCaps ?? 0) > (rhs.marketCaps ?? 0)
                     case .volume:
                         return (lhs.spot24hVolume?.doubleValue ?? 0) > (rhs.spot24hVolume?.doubleValue ?? 0)
                     case .price:

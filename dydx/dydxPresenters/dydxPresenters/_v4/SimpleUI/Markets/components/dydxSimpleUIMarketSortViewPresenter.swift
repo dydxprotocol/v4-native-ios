@@ -13,7 +13,7 @@ import ParticlesKit
 import PlatformUI
 
 enum SimpleUIMarketSortOption: String, CaseIterable {
-    case price, volume, gainers, losers, favorites
+    case price, volume, gainers, losers, favorites, marketCap
 
 }
 
@@ -22,11 +22,11 @@ final class SimpleUIMarketSortOptionState: SingletonProtocol {
 
     init() {
         if let simpleUISortOrder = SettingsStore.shared?.value(forDydxKey: .simpleUISortOrder) as? String {
-            current = SimpleUIMarketSortOption(rawValue: simpleUISortOrder) ?? .volume
+            current = SimpleUIMarketSortOption(rawValue: simpleUISortOrder) ?? .marketCap
         }
     }
 
-    @Published var current: SimpleUIMarketSortOption = .volume {
+    @Published var current: SimpleUIMarketSortOption = .marketCap {
         didSet {
             SettingsStore.shared?.setValue(current.rawValue, forDydxKey: .simpleUISortOrder)
         }
@@ -57,10 +57,10 @@ class dydxSimpleUIMarketSortViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
     private func updateSortOption(sortOption: SimpleUIMarketSortOption) {
         viewModel?.items = [
             .init(icon: "icon_sort_price",
-                  title: DataLocalizer.localize(path: "APP.GENERAL.PRICE"),
-                  selected: sortOption == .price,
+                  title: DataLocalizer.localize(path: "APP.GENERAL.MARKET_CAP"),
+                  selected: sortOption == .marketCap,
                   action: {
-                      SimpleUIMarketSortOptionState.shared.current = .price
+                      SimpleUIMarketSortOptionState.shared.current = .marketCap
                   }),
             .init(icon: "icon_sort_volume",
                   title: DataLocalizer.localize(path: "APP.TRADE.VOLUME"),
