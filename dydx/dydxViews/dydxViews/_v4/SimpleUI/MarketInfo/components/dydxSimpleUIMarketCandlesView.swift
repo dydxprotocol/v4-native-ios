@@ -13,12 +13,18 @@ import Utilities
 public class dydxSimpleUIMarketCandlesViewModel: PlatformViewModel {
     @Published public var chart: dydxChartViewModel?
     @Published public var resolutions = dydxSimpleUIMarketCandlesResolutionsViewModel()
+    @Published public var highlight: dydxSimpleUIMarketCandlesHighlightViewModel?
+    @Published public var highlightX: CGFloat? = 0
+    @Published public var highlightY: CGFloat? = 0
+
+    public let height: CGFloat = 224
 
     public init() { }
 
     public static var previewValue: dydxSimpleUIMarketCandlesViewModel {
         let vm = dydxSimpleUIMarketCandlesViewModel()
         vm.chart = .previewValue
+        vm.highlight = .previewValue
         return vm
     }
 
@@ -27,8 +33,20 @@ public class dydxSimpleUIMarketCandlesViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack(alignment: .leading, spacing: 8) {
-                self.chart?.createView(parentStyle: style)
-                    .frame(height: 224)
+                ZStack {
+                    self.chart?.createView(parentStyle: style)
+                        .frame(height: self.height)
+
+                    if let highlight = self.highlight,
+                       let highlightX = self.highlightX,
+                       let highlightY = self.highlightY {
+                        let x = highlight.width / 2
+                        let y = highlight.height / 2
+                        highlight.createView(parentStyle: style)
+                            .position(x: x + highlightX, y: y + highlightY)
+                    }
+                }
+                .frame(height: self.height)
 
                 self.resolutions.createView(parentStyle: style)
             }
