@@ -100,7 +100,12 @@ private class Wallets2ViewPresenter: HostedViewPresenter<Wallets2ViewModel> {
 
             viewModel.openInEtherscanTapped = {
                 if let ethereumAddress = wallet.ethereumAddress {
-                    let urlString = "https://etherscan.io/address/\(ethereumAddress)"
+                    let urlString: String
+                    if wallet.walletId == "phantom-wallet" {
+                        urlString = "https://solscan.io/account/\(ethereumAddress)"
+                    } else {
+                        urlString = "https://etherscan.io/address/\(ethereumAddress)"
+                    }
                     if let url = URL(string: urlString), URLHandler.shared?.canOpenURL(url) ?? false {
                         URLHandler.shared?.open(url, completionHandler: nil)
                     }

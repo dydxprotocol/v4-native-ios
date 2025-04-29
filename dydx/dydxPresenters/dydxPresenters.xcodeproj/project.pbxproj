@@ -835,7 +835,6 @@
 				645299E12AE86FB1000810E6 /* Update */,
 				024F487B29657DFC00E40247 /* User */,
 				2751D6442C59642000B36F95 /* Vault */,
-				0262EFA729D79EF3009889E2 /* Wallet */,
 			);
 			path = _v4;
 			sourceTree = "<group>";
@@ -1094,6 +1093,7 @@
 		0258BA1E299294A90098E1BE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				0258BA2729929E7D0098E1BE /* Components */,
 				02D6DB182D124AA4008AAEA1 /* AppMode */,
 				02F543B02C17AAD7000924E4 /* GasToken */,
 				278EA5622BB61094007A0E17 /* Notifications */,
@@ -1110,7 +1110,7 @@
 				02D1CED429C8DE93009ADF9A /* Language */,
 				0295391529FB254C009026E3 /* Theme */,
 				0253178B29C126FD00D6CC9B /* TradingNetwork */,
-				0258BA2729929E7D0098E1BE /* Components */,
+				0262EFA729D79EF3009889E2 /* Wallet */,
 				0258BA22299294BF0098E1BE /* dydxProfileViewBuilder.swift */,
 			);
 			path = Profile;

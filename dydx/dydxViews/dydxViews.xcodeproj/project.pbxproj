@@ -905,7 +905,6 @@
 				645299F02AE86FC3000810E6 /* Update */,
 				024F4864296579D100E40247 /* User */,
 				2751D6472C59645000B36F95 /* Vault */,
-				020DBF0129E0900F0068AAA6 /* Wallet */,
 			);
 			path = _v4;
 			sourceTree = "<group>";
@@ -1316,6 +1315,7 @@
 				0253177C29C126C800D6CC9B /* TradingNetwork */,
 				0258BA2429929D050098E1BE /* Components */,
 				0258BA1C2992949D0098E1BE /* dydxProfileView.swift */,
+				020DBF0129E0900F0068AAA6 /* Wallet */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
