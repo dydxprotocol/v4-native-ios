@@ -21,9 +21,9 @@ protocol dydxSimpleUIPositionListViewPresenterProtocol: HostedViewPresenterProto
 }
 
 class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPositionListViewModel>, dydxSimpleUIPositionListViewPresenterProtocol {
-    
+
     @Published var favUpdated = 0
-    
+
     override init() {
         super.init()
 
@@ -37,7 +37,7 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
             .CombineLatest4(AbacusStateManager.shared.state.marketList,
                             AbacusStateManager.shared.state.assetMap,
                             AbacusStateManager.shared.state.selectedSubaccountPositions,
-                            $favUpdated,
+                            $favUpdated
             )
            .sink { [weak self] markets, assetMap, positions, _ in
                self?.updateMarketList(markets: markets, assetMap: assetMap, positions: positions)
