@@ -85,7 +85,9 @@ private class dydxWalletListViewPresenter: HostedViewPresenter<dydxWalletListVie
     private let socialViewModel: dydxSocialViewModel = {
         let viewModel = dydxSocialViewModel()
         viewModel.onTap = {
-           Router.shared?.navigate(to: RoutingRequest(path: "/onboard/social", params: nil), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: nil), animated: true) {_, _ in
+                Router.shared?.navigate(to: RoutingRequest(path: "/onboard/social", params: nil), animated: true, completion: nil)
+            }
         }
         return viewModel
     }()

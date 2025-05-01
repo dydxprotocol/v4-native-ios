@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01EEEC77C8B7F3846916AF28 /* Pods_iOS_dydxV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 171807B0CCAE5C86B5D65793 /* Pods_iOS_dydxV4.framework */; };
+		0207D5142DC428D9005773B5 /* Privy in Frameworks */ = {isa = PBXBuildFile; productRef = 0207D5132DC428D9005773B5 /* Privy */; };
 		0207FED92D2F5B50004C2C9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0207FED82D2F5B50004C2C9F /* Launch Screen.storyboard */; };
 		0217A0A129D78BD5007F31C5 /* dydxBiometricsLocalAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */; };
 		022F35CD28D39304000BCA41 /* dydxPresenters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -922,6 +923,7 @@
 				314B729C23DD126F00139EB3 /* libAppsFlyerStaticInjections.a in Frameworks */,
 				31B77C3622DAD0B3004F9B21 /* RoutingKit.framework in Frameworks */,
 				31B77C4222DAD0B4004F9B21 /* UIToolkits.framework in Frameworks */,
+				0207D5142DC428D9005773B5 /* Privy in Frameworks */,
 				27491E322C54069C0014A574 /* libStatsigInjections.a in Frameworks */,
 				6466E116280F664900B8791B /* AmplitudeInjections.framework in Frameworks */,
 				31B77C2622DAD0B3004F9B21 /* JedioKit.framework in Frameworks */,
@@ -1534,6 +1536,7 @@
 			mainGroup = 3112F456216BBF8400708927;
 			packageReferences = (
 				02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */,
+				0207D5122DC428D9005773B5 /* XCRemoteSwiftPackageReference "privy-ios" */,
 			);
 			productRefGroup = 3112F460216BBF8400708927 /* Products */;
 			projectDirPath = "";
@@ -2891,6 +2894,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0207D5122DC428D9005773B5 /* XCRemoteSwiftPackageReference "privy-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/privy-io/privy-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.0;
+			};
+		};
 		02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/percy/percy-xcui-swift";
@@ -2902,6 +2913,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0207D5132DC428D9005773B5 /* Privy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0207D5122DC428D9005773B5 /* XCRemoteSwiftPackageReference "privy-ios" */;
+			productName = Privy;
+		};
 		02DA0B052B57633E00BFA975 /* PercyXcui */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */;

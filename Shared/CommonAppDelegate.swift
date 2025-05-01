@@ -22,6 +22,7 @@ import dydxStateManager
 import dydxViews
 import dydxAnalytics
 import StatsigInjections
+import dydxCartera
 
 open class CommonAppDelegate: ParticlesAppDelegate {
     open var notificationTag: String {
@@ -67,6 +68,7 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         FeatureService.shared?.activate { /* [weak self] in */
             Injection.shared?.injectFeatured(completion: completion)
         }
+        injectPrivy()
     }
 
     override open func injectAuth() {
@@ -138,6 +140,19 @@ open class CommonAppDelegate: ParticlesAppDelegate {
             return
         }
         StatsigFeatureFlagsProvider.shared = StatsigFeatureFlagsProvider(apiKey: apiKey, userId: dydxCompositeTracking.getStableId(), environment: environment)
+    }
+    
+    open func injectPrivy() {
+        Console.shared.log("injectPrivy")
+        guard let privyAppId = CredientialConfig.shared.credential(for: "privyAppId") else {
+            assertionFailure("privyAppId is missing")
+            return
+        }
+        guard let privyClientId = CredientialConfig.shared.credential(for: "privyClientId") else {
+            assertionFailure("privyClientId is missing")
+            return
+        }
+        PrivyAuthManager.shared = PrivyAuthManager(appId: privyAppId, appClientId: privyClientId)
     }
 
     open func injectAttribution() {

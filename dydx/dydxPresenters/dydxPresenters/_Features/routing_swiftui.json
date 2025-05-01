@@ -155,7 +155,7 @@
                 },
                 "/onboard/social":{
                     "destination":"dydxPresenters.dydxSocialLoginViewBuilder",
-                    "presentation":"push"
+                    "presentation":"prompt"
                 },
                 "/order":{
                     "destination":"dydxPresenters.dydxOrderDetailsViewBuilder",

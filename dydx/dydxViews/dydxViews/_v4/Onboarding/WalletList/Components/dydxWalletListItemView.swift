@@ -20,12 +20,12 @@ open class dydxWalletListItemView: PlatformViewModel {
                                               main: main,
                                               trailing: trailing)
                    .createView(parentStyle: style)
-                   .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+                   .frame(width: UIScreen.main.bounds.width - 32, height: 56)
                    .themeColor(background: .layer5)
                    .cornerRadius(16)
            }
            .frame(maxWidth: .infinity)
-           .frame(height: 64)
+           .frame(height: 56)
            .onTapGesture { [weak self] in
                self?.onTap?()
            }

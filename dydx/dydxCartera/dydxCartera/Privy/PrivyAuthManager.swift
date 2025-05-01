@@ -9,13 +9,35 @@ import Foundation
 import PrivySDK
 import Utilities
 
+public struct PrivyCallStatus {
+    public let success: Bool
+    public let error: Error?
+}
+
+public enum OAuthType {
+    case google, twitter, apple
+
+    var privyType: PrivySDK.OAuthProvider {
+        switch self {
+        case .google:
+            return .google
+        case .twitter:
+            return .twitter
+        case .apple:
+            return .apple
+        }
+    }
+}
+
 public class PrivyAuthManager {
     public static var shared: PrivyAuthManager?
 
-    private var currentSession: PrivySDK.AuthSession?
+    @Published public private(set) var isAuthenticated = false
 
-    private var isAuthenticated: Bool {
-        currentSession != nil
+    private var currentSession: PrivySDK.AuthSession? {
+        didSet {
+            isAuthenticated = currentSession != nil
+        }
     }
 
     private let privy: Privy
@@ -29,6 +51,16 @@ public class PrivyAuthManager {
             )
         )
         privy = PrivySdk.initialize(config: config)
+        privy.setAuthStateChangeCallback { [weak self] authState in
+            Task {
+                await self?.updateSession(authState: authState)
+            }
+        }
+
+        Task {
+            await updateSession()
+
+        }
     }
 
     public func sendEmailCode(email: String) async -> Bool {
@@ -36,37 +68,42 @@ public class PrivyAuthManager {
         return await privy.email.sendCode(to: email)
     }
 
-    public func loginWithEmail(email: String, code: String) async -> (Bool, Error?) {
+    public func loginWithEmail(email: String, code: String) async -> PrivyCallStatus {
         await privy.awaitReady()
 
         do {
-            _ = try await privy.email.loginWithCode(code, sentTo: email)
-            return await updateSession()
+            let authState = try await privy.email.loginWithCode(code, sentTo: email)
+            return await updateSession(authState: authState)
         } catch {
             currentSession = nil
-            return (false, error)
+            return PrivyCallStatus(success: false, error: error)
         }
     }
 
-    public func loginGoogle() async {
+    public func loginOAuth(type: OAuthType) async -> PrivyCallStatus {
         await privy.awaitReady()
 
-        currentSession = try? await privy.oAuth.login(with: .google)
+        do {
+            currentSession = try await privy.oAuth.login(with: type.privyType)
+            return await updateSession()
+        } catch {
+            return PrivyCallStatus(success: false, error: error)
+        }
      }
 
-    private func updateSession() async -> (Bool, Error?) {
+    private func updateSession(authState: PrivySDK.AuthState? = nil) async -> PrivyCallStatus {
         await privy.awaitReady()
 
-        switch privy.authState {
+        switch authState ?? privy.authState {
         case .authenticated(let session):
             currentSession = session
-            return (true, nil)
+            return PrivyCallStatus(success: true, error: nil)
         case .error(let error):
             currentSession = nil
-            return (false, error)
+            return PrivyCallStatus(success: false, error: error)
         default:
             currentSession = nil
-            return (false, nil)
+            return PrivyCallStatus(success: false, error: nil)
         }
     }
 }

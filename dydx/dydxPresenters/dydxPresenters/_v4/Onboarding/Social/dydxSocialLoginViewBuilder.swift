@@ -11,12 +11,13 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import dydxCartera
 
 public class dydxSocialLoginViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxSocialLoginViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxSocialLoginViewController(presenter: presenter, view: view, configuration: .default) as? T
+        return dydxSocialLoginViewController(presenter: presenter, view: view, configuration: .fullScreenSheet) as? T
     }
 }
 
@@ -34,15 +35,31 @@ private protocol dydxSocialLoginViewPresenterProtocol: HostedViewPresenterProtoc
 }
 
 private class dydxSocialLoginViewPresenter: HostedViewPresenter<dydxSocialLoginViewModel>, dydxSocialLoginViewPresenterProtocol {
+
+    private let connectWalletViewModel: dydxConnectWalletViewModel = {
+        let viewModel = dydxConnectWalletViewModel()
+        viewModel.onTap = {
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: nil), animated: true) {_, _ in
+                Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets", params: nil), animated: true, completion: nil)
+            }
+        }
+        return viewModel
+    }()
+
     override init() {
         super.init()
 
         viewModel = dydxSocialLoginViewModel()
-        
-        viewModel?.headerView.title = DataLocalizer.localize(path: "APP.GENERAL.FEES")
-        viewModel?.headerView.backButtonAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        viewModel?.connectWallet = connectWalletViewModel
+        viewModel?.googleAction = {
+            Task {
+                let ret = await PrivyAuthManager.shared?.loginOAuth(type: .google)
+                if let error = ret?.error {
+                    DispatchQueue.main.async {
+                        ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.FAILED"), message: nil, error: error)
+                    }
+                }
+            }
         }
-
     }
 }
