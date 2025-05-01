@@ -30,11 +30,11 @@
 		</data>
 		<key>Headers/AppsFlyerLib-Swift.h</key>
 		<data>
-		+3efZHwff+klT9+WxpNLSXo1yto=
+		+QGhWJuAQ0LDEjEH+RCHdw6dW9M=
 		</data>
 		<key>Headers/AppsFlyerLib.h</key>
 		<data>
-		aRvrYFwbGfgTOeKZeXKnQUiQHWI=
+		IPnreHe+oxUHBEm8tpY1suaviy4=
 		</data>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>
 		<data>
@@ -46,47 +46,47 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		6E9F4RTZq+03xhfNWYVAflvfmsI=
+		MWIMgegbtanmz3YwovNAIqHXEac=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		te2dHy7IvbaIGLLtXDFsBmqryQ4=
+		MihnduhWFnpJkH2cs4g111l6MEA=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		+Ousx3RR44wg2etzzliwvXbWgpE=
+		uKK1xzXUVCFKW/ZUyiOzbTSaL9A=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		/gtIRVFsHXn3J452tiAe9T8yl7w=
+		+ASYL7WfNpyODn8hS/amlfAK9Pw=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		+Ousx3RR44wg2etzzliwvXbWgpE=
+		uKK1xzXUVCFKW/ZUyiOzbTSaL9A=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		HfDE644/4r6dVBV7jq/oFpRLGSc=
+		aTrDSMqlZaJu4YwlBo6WIOWpuVo=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		te2dHy7IvbaIGLLtXDFsBmqryQ4=
+		MihnduhWFnpJkH2cs4g111l6MEA=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		5XjpegZ9zdxjERzV6Un3y/g7wEI=
+		k50tVvLeZ4qOJGVZfKMMRkSSy9U=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		cl0bUKOx4CWj8MsgtvNBuYC+6g0=
+		VXTDIZIsfv3rQngm7ZO4fsY3lk8=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		5XjpegZ9zdxjERzV6Un3y/g7wEI=
+		k50tVvLeZ4qOJGVZfKMMRkSSy9U=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		wdMWXUF7fNcQrQ9fVHWTIpNZ430=
+		3Qm9e2qBnmr+pj1xEM33hf7N4t4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>PrivacyInfo.xcprivacy</key>
 		<data>
-		Z5diDfyJ8Q98I5JWKtVGWEvkXII=
+		FVd29iSBeK1BUVwZVLnf3el6GyY=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -169,22 +169,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+3efZHwff+klT9+WxpNLSXo1yto=
+			+QGhWJuAQ0LDEjEH+RCHdw6dW9M=
 			</data>
 			<key>hash2</key>
 			<data>
-			qnssTwJrZtIDeyMBE1BfsXnl8XS/fgn8s6Let6FfKMw=
+			rTKGtwpFfQwOxIVLJGzeO1lPmZEk4x0fzury7YyMec0=
 			</data>
 		</dict>
 		<key>Headers/AppsFlyerLib.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			aRvrYFwbGfgTOeKZeXKnQUiQHWI=
+			IPnreHe+oxUHBEm8tpY1suaviy4=
 			</data>
 			<key>hash2</key>
 			<data>
-			tqMMk6M+RUKWdkuAJGLvIuRIJrWZMrtMmTh8KvqIQzo=
+			bkZFID6jvtrumTo30WK5wuwuCKIhh23bxSr52Nrzid0=
 			</data>
 		</dict>
 		<key>Headers/AppsFlyerLinkGenerator.h</key>
@@ -213,110 +213,110 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			te2dHy7IvbaIGLLtXDFsBmqryQ4=
+			MihnduhWFnpJkH2cs4g111l6MEA=
 			</data>
 			<key>hash2</key>
 			<data>
-			fSeCk4+QA/us/NJK4ysFKxk+Hq70/Vr4KlAgEYTlAUA=
+			WonsXvttIhOy9kgjYTg5drU6D7MlE2BxPPiaS8gMdpU=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+Ousx3RR44wg2etzzliwvXbWgpE=
+			uKK1xzXUVCFKW/ZUyiOzbTSaL9A=
 			</data>
 			<key>hash2</key>
 			<data>
-			MMopU7+L5nNcnI7aDgqx13WsEX3Sik+LWjxdD+P3wtI=
+			axyDs7DmT1KFzCyhJgtH8U5CLMCBrwFr7t8lOiAcoCk=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/gtIRVFsHXn3J452tiAe9T8yl7w=
+			+ASYL7WfNpyODn8hS/amlfAK9Pw=
 			</data>
 			<key>hash2</key>
 			<data>
-			iCg5XHUpdT54X15ZhYFvucX2KzKUEbF7MIM38w1Jzh4=
+			dkHhCN6OL1DCD87Pd8LQ8cKdhu7Ada2ZWFxlQ1KfZT8=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+Ousx3RR44wg2etzzliwvXbWgpE=
+			uKK1xzXUVCFKW/ZUyiOzbTSaL9A=
 			</data>
 			<key>hash2</key>
 			<data>
-			MMopU7+L5nNcnI7aDgqx13WsEX3Sik+LWjxdD+P3wtI=
+			axyDs7DmT1KFzCyhJgtH8U5CLMCBrwFr7t8lOiAcoCk=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HfDE644/4r6dVBV7jq/oFpRLGSc=
+			aTrDSMqlZaJu4YwlBo6WIOWpuVo=
 			</data>
 			<key>hash2</key>
 			<data>
-			iGHJVzHOwlspOiIWAoeX8Mr6tFh3QUlOL1KBEumpEtE=
+			x1f8vwG6W/1aQy/h1tr6G2vINWSK1G8ZNSUKxVm8Y74=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			te2dHy7IvbaIGLLtXDFsBmqryQ4=
+			MihnduhWFnpJkH2cs4g111l6MEA=
 			</data>
 			<key>hash2</key>
 			<data>
-			fSeCk4+QA/us/NJK4ysFKxk+Hq70/Vr4KlAgEYTlAUA=
+			WonsXvttIhOy9kgjYTg5drU6D7MlE2BxPPiaS8gMdpU=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5XjpegZ9zdxjERzV6Un3y/g7wEI=
+			k50tVvLeZ4qOJGVZfKMMRkSSy9U=
 			</data>
 			<key>hash2</key>
 			<data>
-			xAYn3VIzzW+1YLhXIaP+eGxo9qF7imZy1RX3VjZrLXY=
+			yerarAelog02Xszzqg6lCXWLK+ibXPHUih2z2eTlimc=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			cl0bUKOx4CWj8MsgtvNBuYC+6g0=
+			VXTDIZIsfv3rQngm7ZO4fsY3lk8=
 			</data>
 			<key>hash2</key>
 			<data>
-			tnwMjbnn/fkmlG43z2c8/rYNatQJ9s/ztlyg72JbY7Q=
+			jdkZwN0a7za+HtfX+BqqcqGivrOJK0DkCdTJgyh7FI0=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5XjpegZ9zdxjERzV6Un3y/g7wEI=
+			k50tVvLeZ4qOJGVZfKMMRkSSy9U=
 			</data>
 			<key>hash2</key>
 			<data>
-			xAYn3VIzzW+1YLhXIaP+eGxo9qF7imZy1RX3VjZrLXY=
+			yerarAelog02Xszzqg6lCXWLK+ibXPHUih2z2eTlimc=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wdMWXUF7fNcQrQ9fVHWTIpNZ430=
+			3Qm9e2qBnmr+pj1xEM33hf7N4t4=
 			</data>
 			<key>hash2</key>
 			<data>
-			xIYa3808R8NwM1tx6xRhwArfSDoRNKvFPQ5otDEflfg=
+			bq4WCJjn3vmtvmqAbMfNL/xi2GoPD7wTAalNFpIULhk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -334,11 +334,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Z5diDfyJ8Q98I5JWKtVGWEvkXII=
+			FVd29iSBeK1BUVwZVLnf3el6GyY=
 			</data>
 			<key>hash2</key>
 			<data>
-			6xKWyp82bfdpIC+qSEbhTjD40SP5BWjupWVxQg5FQkY=
+			likWDNPz2n8nbgQ4EH206tbgT461DNLeaj5Brpz2PTM=
 			</data>
 		</dict>
 	</dict>
