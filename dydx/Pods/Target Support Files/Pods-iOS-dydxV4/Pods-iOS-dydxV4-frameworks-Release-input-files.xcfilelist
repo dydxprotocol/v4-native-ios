@@ -51,4 +51,4 @@ ${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework
 ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
 ${BUILT_PRODUCTS_DIR}/AmplitudeSwift/AmplitudeSwift.framework
 ${BUILT_PRODUCTS_DIR}/AnalyticsConnector/AnalyticsConnector.framework
-${PODS_ROOT}/../../../v4-abacus/build/cocoapods/framework/Abacus.framework
+${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework
