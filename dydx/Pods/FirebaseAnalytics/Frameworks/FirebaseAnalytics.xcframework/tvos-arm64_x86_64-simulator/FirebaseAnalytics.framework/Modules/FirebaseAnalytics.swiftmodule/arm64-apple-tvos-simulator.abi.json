@@ -1,8 +1,8 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "FirebaseAnalytics",
+    "printedName": "FirebaseAnalytics",
     "children": [
       {
         "kind": "Import",
@@ -82,6 +82,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -143,22 +157,16 @@
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "ModifiedContent",
-                "printedName": "SwiftUI.ModifiedContent<τ_0_0, FirebaseAnalytics.LoggedAnalyticsModifier>",
+                "name": "OpaqueTypeArchetype",
+                "printedName": "some SwiftUI.View",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "GenericTypeParam",
-                    "printedName": "τ_0_0"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "LoggedAnalyticsModifier",
-                    "printedName": "FirebaseAnalytics.LoggedAnalyticsModifier",
-                    "usr": "s:17FirebaseAnalytics06LoggedB8ModifierV"
+                    "name": "View",
+                    "printedName": "SwiftUI.View",
+                    "usr": "s:7SwiftUI4ViewP"
                   }
-                ],
-                "usr": "s:7SwiftUI15ModifiedContentV"
+                ]
               },
               {
                 "kind": "TypeNominal",
@@ -201,6 +209,8 @@
             "genericSig": "<τ_0_0 where τ_0_0 : SwiftUI.View>",
             "sugared_genericSig": "<Self where Self : SwiftUI.View>",
             "declAttributes": [
+              "Preconcurrency",
+              "Custom",
               "AccessControl",
               "RawDocComment"
             ],
@@ -211,7 +221,7 @@
         "declKind": "Protocol",
         "usr": "s:7SwiftUI4ViewP",
         "mangledName": "$s7SwiftUI4ViewP",
-        "moduleName": "SwiftUI",
+        "moduleName": "SwiftUICore",
         "genericSig": "<τ_0_0.Body : SwiftUI.View>",
         "sugared_genericSig": "<Self.Body : SwiftUI.View>",
         "intro_Macosx": "10.15",
@@ -219,76 +229,49 @@
         "intro_tvOS": "13.0",
         "intro_watchOS": "6.0",
         "declAttributes": [
+          "Preconcurrency",
           "TypeEraser",
+          "OriginallyDefinedIn",
+          "OriginallyDefinedIn",
+          "OriginallyDefinedIn",
+          "OriginallyDefinedIn",
           "Available",
           "Available",
           "Available",
-          "Available"
+          "Available",
+          "Custom"
         ],
-        "isExternal": true
+        "isExternal": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
       }
     ],
     "json_format_version": 8
   },
   "ConstValues": [
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/pdchen\/firebaserelease\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1320,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Volumes\/google\/src\/cloud\/pdchen\/firebaserelease\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1358,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Volumes\/google\/src\/cloud\/pdchen\/firebaserelease\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3034,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Volumes\/google\/src\/cloud\/pdchen\/firebaserelease\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3075,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Volumes\/google\/src\/cloud\/pdchen\/firebaserelease\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3118,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Volumes\/google\/src\/cloud\/pdchen\/firebaserelease\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3162,
-      "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Volumes\/google\/src\/cloud\/pdchen\/firebaserelease\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+StoreKit.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3194,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Volumes\/google\/src\/cloud\/pdchen\/firebaserelease\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m163\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
       "kind": "StringLiteral",
       "offset": 2654,
       "length": 6,
       "value": "\"View\""
     },
     {
-      "filePath": "\/Volumes\/google\/src\/cloud\/pdchen\/firebaserelease\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
+      "filePath": "\/Volumes\/google\/src\/cloud\/hantran\/m163\/google3\/googlemac\/iPhone\/Firebase\/Analytics\/Sources\/Swift\/Analytics+SwiftUI.swift",
       "kind": "Dictionary",
       "offset": 2701,
       "length": 3,
