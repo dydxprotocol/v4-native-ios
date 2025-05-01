@@ -13,6 +13,7 @@ import ParticlesKit
 import PlatformUI
 import Cartera
 import dydxStateManager
+import dydxFormatter
 
 public class dydxWalletListViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -81,6 +82,14 @@ private class dydxWalletListViewPresenter: HostedViewPresenter<dydxWalletListVie
         return viewModel
     }()
 
+    private let socialViewModel: dydxSocialViewModel = {
+        let viewModel = dydxSocialViewModel()
+        viewModel.onTap = {
+           Router.shared?.navigate(to: RoutingRequest(path: "/onboard/social", params: nil), animated: true, completion: nil)
+        }
+        return viewModel
+    }()
+
     override init() {
         super.init()
 
@@ -125,10 +134,12 @@ private class dydxWalletListViewPresenter: HostedViewPresenter<dydxWalletListVie
         }
 
         let debugScan = UIDevice.current.isSimulator ? [debugScanViewModel] : []
+        let social = dydxBoolFeatureFlag.privy_ios.isEnabled ? [socialViewModel] : []
+        let allWallets = installedWalletViewModels + uninstalledWalletViewModels
         if mobileOnly {
-            viewModel?.items = [wcModalViewModel] + installedWalletViewModels + uninstalledWalletViewModels
+            viewModel?.items = [wcModalViewModel] + social + allWallets
         } else {
-            viewModel?.items = [desktopSyncViewModel] + debugScan + [wcModalViewModel] + installedWalletViewModels + uninstalledWalletViewModels
+            viewModel?.items = [desktopSyncViewModel] + debugScan + [wcModalViewModel] + social + allWallets
         }
     }
 }

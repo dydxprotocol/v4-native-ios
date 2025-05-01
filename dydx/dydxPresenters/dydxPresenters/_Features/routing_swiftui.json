@@ -153,6 +153,10 @@
                     "destination":"dydxPresenters.dydxWalletListViewBuilder",
                     "presentation":"prompt"
                 },
+                "/onboard/social":{
+                    "destination":"dydxPresenters.dydxSocialLoginViewBuilder",
+                    "presentation":"push"
+                },
                 "/order":{
                     "destination":"dydxPresenters.dydxOrderDetailsViewBuilder",
                     "presentation":"half"

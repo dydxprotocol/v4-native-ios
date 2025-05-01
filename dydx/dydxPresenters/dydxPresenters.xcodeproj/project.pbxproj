@@ -78,6 +78,7 @@
 		0253155E29BFA64C00D6CC9B /* dydxOnboardScanInstructionsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253155D29BFA64C00D6CC9B /* dydxOnboardScanInstructionsViewBuilder.swift */; };
 		025315BA29BFF18700D6CC9B /* CameraParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025315B529BFF17700D6CC9B /* CameraParticles.framework */; platformFilter = ios; };
 		0253179729C1270700D6CC9B /* dydxTradingNetworkViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253179629C1270700D6CC9B /* dydxTradingNetworkViewBuilder.swift */; };
+		02548B6C2DC3ED7C00FC0ABE /* dydxSocialLoginViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02548B6B2DC3ED7400FC0ABE /* dydxSocialLoginViewBuilder.swift */; };
 		0256F54229AFFCAC00A083C0 /* dydxOnboardConnectViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0256F54129AFFCAC00A083C0 /* dydxOnboardConnectViewBuilder.swift */; };
 		0257C78E2A00485500F6160B /* SparklineDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0257C78D2A00485500F6160B /* SparklineDataPoint.swift */; };
 		0258BA23299294BF0098E1BE /* dydxProfileViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258BA22299294BF0098E1BE /* dydxProfileViewBuilder.swift */; };
@@ -519,6 +520,7 @@
 		0253155D29BFA64C00D6CC9B /* dydxOnboardScanInstructionsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOnboardScanInstructionsViewBuilder.swift; sourceTree = "<group>"; };
 		025315AF29BFF17700D6CC9B /* CameraParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CameraParticles.xcodeproj; path = ../../CameraParticles/CameraParticles.xcodeproj; sourceTree = "<group>"; };
 		0253179629C1270700D6CC9B /* dydxTradingNetworkViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradingNetworkViewBuilder.swift; sourceTree = "<group>"; };
+		02548B6B2DC3ED7400FC0ABE /* dydxSocialLoginViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSocialLoginViewBuilder.swift; sourceTree = "<group>"; };
 		0256F54129AFFCAC00A083C0 /* dydxOnboardConnectViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOnboardConnectViewBuilder.swift; sourceTree = "<group>"; };
 		0257C78D2A00485500F6160B /* SparklineDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineDataPoint.swift; sourceTree = "<group>"; };
 		0258BA22299294BF0098E1BE /* dydxProfileViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileViewBuilder.swift; sourceTree = "<group>"; };
@@ -1059,6 +1061,14 @@
 				0253179629C1270700D6CC9B /* dydxTradingNetworkViewBuilder.swift */,
 			);
 			path = TradingNetwork;
+			sourceTree = "<group>";
+		};
+		02548B672DC3ED0300FC0ABE /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				02548B6B2DC3ED7400FC0ABE /* dydxSocialLoginViewBuilder.swift */,
+			);
+			path = Social;
 			sourceTree = "<group>";
 		};
 		02550F5029EA0E7500C00CE4 /* Receipt */ = {
@@ -1624,7 +1634,7 @@
 		02FF0BCF29AE92EE00781EDA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				277754282C069F8600E3E985 /* OnboardingAnalytics.swift */,
+				02548B672DC3ED0300FC0ABE /* Social */,
 				023848C62A9E782100B1A673 /* Tos */,
 				02C5500729D7998E001AAB15 /* QRCodeDisplay */,
 				023DC87229CCBD21000DD920 /* QRCode */,
@@ -1632,6 +1642,7 @@
 				02860A9229C15E760079E644 /* Scan */,
 				0256F53729AFFCA300A083C0 /* Connect */,
 				02FF0BD029AE92F300781EDA /* WalletList */,
+				277754282C069F8600E3E985 /* OnboardingAnalytics.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -2310,6 +2321,7 @@
 				272911D62C06A628003F3EA0 /* TransferAnalytics.swift in Sources */,
 				0204924D2D3DFDC400394CBE /* dydxSimpleUIFeesViewPresenter.swift in Sources */,
 				0257C78E2A00485500F6160B /* SparklineDataPoint.swift in Sources */,
+				02548B6C2DC3ED7C00FC0ABE /* dydxSocialLoginViewBuilder.swift in Sources */,
 				028DB3402A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift in Sources */,
 				27C027532AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift in Sources */,
 				02EF485629F732C600C97746 /* dydxFavoriteStore.swift in Sources */,

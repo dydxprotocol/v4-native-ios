@@ -1,20 +1,19 @@
 //
-//  dydxWcModalView.swift
+//  dydxSocialView.swift
 //  dydxUI
 //
-//  Created by Rui Huang on 10/12/2024.
-//  Copyright © 2024 dYdX Trading Inc. All rights reserved.
+//  Created by Rui Huang on 5/1/2025.
 //
 
 import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxWcModalViewModel: dydxWalletListItemView {
+public class dydxSocialViewModel: dydxWalletListItemView {
     public init() { }
 
-    public static var previewValue: dydxWcModalViewModel {
-        let vm = dydxWcModalViewModel()
+    public static var previewValue: dydxSocialViewModel {
+        let vm = dydxSocialViewModel()
         return vm
     }
 
@@ -22,15 +21,15 @@ public class dydxWcModalViewModel: dydxWalletListItemView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let main = Text(DataLocalizer.localize(path: "APP.WALLETS.WALLET_CONNECT_2"))
-            let trailing = Text(DataLocalizer.localize(path: "APP.GENERAL.RECOMMENDED"))
-                    .themeFont(fontSize: .small)
-                    .themeColor(foreground: .textTertiary)
+            let main = Text(DataLocalizer.localize(path: "APP.WALLETS.EMAIL_OR_SOCIAL"))
+            let trailing = PlatformIconViewModel(type: .system(name: "chevron.right"),
+                                                 size: CGSize(width: 12, height: 12),
+                                                 templateColor: .textTertiary)
             let image = PlatformIconViewModel(type: .asset(name: "icon_wc_logo", bundle: Bundle.dydxView),
                                      size: CGSize(width: 36, height: 36))
 
             return self.createItemView(main: main.wrappedViewModel,
-                                  trailing: trailing.wrappedViewModel,
+                                  trailing: trailing,
                                   image: image,
                                   style: style)
         }
@@ -38,13 +37,13 @@ public class dydxWcModalViewModel: dydxWalletListItemView {
 }
 
 #if DEBUG
-struct dydxWcModalView_Previews_Dark: PreviewProvider {
+struct dydxSocialView_Previews_Dark: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyDarkTheme()
         ThemeSettings.applyStyles()
-        return dydxWcModalViewModel.previewValue
+        return dydxSocialViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)
@@ -53,13 +52,13 @@ struct dydxWcModalView_Previews_Dark: PreviewProvider {
     }
 }
 
-struct dydxWcModalView_Previews_Light: PreviewProvider {
+struct dydxSocialView_Previews_Light: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyLightTheme()
         ThemeSettings.applyStyles()
-        return dydxWcModalViewModel.previewValue
+        return dydxSocialViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)

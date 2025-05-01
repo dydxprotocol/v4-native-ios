@@ -75,10 +75,10 @@
             },
             {
                 "title":{
-                    "text":"Abacus Static Typing"
+                    "text":"Privy"
                 },
                 "field":{
-                    "field":"abacus_static_typing",
+                    "field":"ff_privy_ios",
                     "optional":true,
                     "type" : "bool",
                     "options" : [

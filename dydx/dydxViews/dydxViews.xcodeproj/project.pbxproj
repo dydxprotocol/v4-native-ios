@@ -101,6 +101,8 @@
 		024FEB7E2ACB82A10087A55E /* NavHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024FEB7D2ACB82A10087A55E /* NavHeader.swift */; };
 		0253155129BFA62700D6CC9B /* dydxOnboardScanInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253155029BFA62700D6CC9B /* dydxOnboardScanInstructionsView.swift */; };
 		0253178A29C126EE00D6CC9B /* dydxTradingNetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253178929C126EE00D6CC9B /* dydxTradingNetworkView.swift */; };
+		02548B6A2DC3ED5E00FC0ABE /* dydxSocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02548B692DC3ED5E00FC0ABE /* dydxSocialLoginView.swift */; };
+		02548B702DC3EE8600FC0ABE /* dydxSocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02548B6F2DC3EE8600FC0ABE /* dydxSocialView.swift */; };
 		0256F53629AFFC9800A083C0 /* dydxOnboardConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0256F53529AFFC9800A083C0 /* dydxOnboardConnectView.swift */; };
 		025892C728BE82B900AAABF5 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 024B7BE328B80C2A00F7C386 /* Media.xcassets */; };
 		0258BA1D2992949D0098E1BE /* dydxProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258BA1C2992949D0098E1BE /* dydxProfileView.swift */; };
@@ -549,6 +551,8 @@
 		024FEB7D2ACB82A10087A55E /* NavHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavHeader.swift; sourceTree = "<group>"; };
 		0253155029BFA62700D6CC9B /* dydxOnboardScanInstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOnboardScanInstructionsView.swift; sourceTree = "<group>"; };
 		0253178929C126EE00D6CC9B /* dydxTradingNetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradingNetworkView.swift; sourceTree = "<group>"; };
+		02548B692DC3ED5E00FC0ABE /* dydxSocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSocialLoginView.swift; sourceTree = "<group>"; };
+		02548B6F2DC3EE8600FC0ABE /* dydxSocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSocialView.swift; sourceTree = "<group>"; };
 		0256F53529AFFC9800A083C0 /* dydxOnboardConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOnboardConnectView.swift; sourceTree = "<group>"; };
 		0258BA1C2992949D0098E1BE /* dydxProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileView.swift; sourceTree = "<group>"; };
 		0258BA2529929D1B0098E1BE /* dydxProfileButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileButtonsView.swift; sourceTree = "<group>"; };
@@ -1286,6 +1290,14 @@
 			path = TradingNetwork;
 			sourceTree = "<group>";
 		};
+		02548B682DC3ED2100FC0ABE /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				02548B692DC3ED5E00FC0ABE /* dydxSocialLoginView.swift */,
+			);
+			path = Social;
+			sourceTree = "<group>";
+		};
 		0256F52829AFFC7E00A083C0 /* Connect */ = {
 			isa = PBXGroup;
 			children = (
@@ -1752,6 +1764,7 @@
 		02FF0BBF29AE924300781EDA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				02548B682DC3ED2100FC0ABE /* Social */,
 				023848C72A9E783900B1A673 /* TOS */,
 				023DC88129CCBD2B000DD920 /* QRCode */,
 				0280B38929CB63B70017D64A /* Welcome */,
@@ -1780,6 +1793,7 @@
 				0232C03129AEF583006B2C51 /* dydxSyncDesktopView.swift */,
 				0232C04129AFC3D0006B2C51 /* dydxDebugScanView.swift */,
 				029E54872D08E18B005D4DC5 /* dydxWcModalView.swift */,
+				02548B6F2DC3EE8600FC0ABE /* dydxSocialView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -2303,9 +2317,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2486,6 +2504,7 @@
 				02FF0BD529AEB91900781EDA /* dydxWalletView.swift in Sources */,
 				024B44D12982D1FF00E35D54 /* dydxTradeStatusView.swift in Sources */,
 				027885FA2D1E170900366321 /* dydxSimpleUIMarketPositionView.swift in Sources */,
+				02548B6A2DC3ED5E00FC0ABE /* dydxSocialLoginView.swift in Sources */,
 				02A9B60E29005D5A00AE1516 /* AmountText.swift in Sources */,
 				02FCF0E728E795FA00D350CE /* HostedViewPresenter.swift in Sources */,
 				0258BA1D2992949D0098E1BE /* dydxProfileView.swift in Sources */,
@@ -2604,6 +2623,7 @@
 				02107A6B2979F4F5000D75E1 /* dydxReceiptMarginUsageView.swift in Sources */,
 				02AACB78298B5821002129B4 /* dydxTransferSectionsView.swift in Sources */,
 				27AFE4EA2C1902BF00168B0B /* dydxReceiptChangeItemView.swift in Sources */,
+				02548B702DC3EE8600FC0ABE /* dydxSocialView.swift in Sources */,
 				64A4DB9D296745A1008D8E20 /* dydxTradeInputTrailingPercentView.swift in Sources */,
 				024F488229657E7B00E40247 /* dydxTradeInputView.swift in Sources */,
 				024F488C2965BD0600E40247 /* dydxPortfolioHeaderView.swift in Sources */,
