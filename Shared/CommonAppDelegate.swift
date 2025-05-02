@@ -23,6 +23,7 @@ import dydxViews
 import dydxAnalytics
 import StatsigInjections
 import dydxCartera
+import dydxFormatter
 
 open class CommonAppDelegate: ParticlesAppDelegate {
     open var notificationTag: String {
@@ -68,7 +69,9 @@ open class CommonAppDelegate: ParticlesAppDelegate {
         FeatureService.shared?.activate { /* [weak self] in */
             Injection.shared?.injectFeatured(completion: completion)
         }
-        injectPrivy()
+        if dydxBoolFeatureFlag.privy_ios.isEnabled {
+            injectPrivy()
+        }
     }
 
     override open func injectAuth() {
