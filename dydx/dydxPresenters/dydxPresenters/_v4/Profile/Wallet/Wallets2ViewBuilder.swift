@@ -116,7 +116,15 @@ private class Wallets2ViewPresenter: HostedViewPresenter<Wallets2ViewModel> {
                 Router.shared?.navigate(to: RoutingRequest(url: "/my-profile/keyexport"), animated: true, completion: nil)
             }
 
-            viewModel.walletImageUrl  = wallet.imageUrl
+            if wallet.walletId == "google" {
+                viewModel.walletImage = .asset("logo_google")
+            } else if wallet.walletId == "apple" {
+                viewModel.walletImage = .asset("logo_apple")
+            } else if wallet.walletId == "twitter" {
+                viewModel.walletImage = .asset("logo_twitter")
+            } else {
+                viewModel.walletImage = .url(wallet.imageUrl)
+            }
 
             // TODO:
 //            viewModel.equity =

@@ -14,6 +14,16 @@ public struct PrivyCallStatus {
     public let error: Error?
 }
 
+public struct PrivySignStatus {
+    public let signature: String?
+    public let error: Error?
+}
+
+public struct PrivyWalletStatus {
+    public let wallet: PrivySDK.EmbeddedWallet?
+    public let error: Error?
+}
+
 public enum OAuthType {
     case google, twitter, apple
 
@@ -40,7 +50,7 @@ public class PrivyAuthManager {
         }
     }
 
-    private let privy: Privy
+    public let privy: Privy
 
     public init(appId: String, appClientId: String) {
         let config = PrivyConfig(
@@ -89,7 +99,34 @@ public class PrivyAuthManager {
         } catch {
             return PrivyCallStatus(success: false, error: error)
         }
-     }
+    }
+
+    public func getEmbeddedWallet() async -> PrivyWalletStatus {
+        if let user = currentSession?.user {
+            for account in user.linkedAccounts {
+                switch account {
+                case .embeddedWallet(let wallet):
+                    return PrivyWalletStatus(wallet: wallet, error: nil)
+                default:
+                    break
+                }
+            }
+        }
+
+        let walletState = privy.embeddedWallet.embeddedWalletState
+        switch walletState {
+        case .notCreated:
+            do {
+                let wallet = try await privy.embeddedWallet.createWallet(chainType: .ethereum)
+                return PrivyWalletStatus(wallet: wallet, error: nil)
+            } catch {
+                return PrivyWalletStatus(wallet: nil, error: error)
+            }
+
+        default:
+            return PrivyWalletStatus(wallet: nil, error: nil)
+        }
+    }
 
     private func updateSession(authState: PrivySDK.AuthState? = nil) async -> PrivyCallStatus {
         await privy.awaitReady()

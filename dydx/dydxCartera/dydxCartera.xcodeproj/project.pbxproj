@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		021A1DCA2AD34103008A3D73 /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 021A1DC92AD34103008A3D73 /* Cartera */; };
+		02308BF62DC441A000EECD8F /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 02669B922AD872A300A756AA /* Cartera */; };
+		02308BF72DC441A000EECD8F /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 029E51A22D08966E005D4DC5 /* Cartera */; };
+		02308BF82DC441A000EECD8F /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 0294C5FF2D790BD900F62FB5 /* Cartera */; };
+		02308BF92DC441A000EECD8F /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 0294C6022D790C3C00F62FB5 /* Cartera */; };
+		02308BFA2DC441A000EECD8F /* SolanaSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02886C762D84B766005EF461 /* SolanaSwift */; };
+		02308BFB2DC441A000EECD8F /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 024F0E5E2D88B9220001D799 /* Cartera */; };
+		02308D272DC4662F00EECD8F /* dydxPrivyWalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02308D262DC4662F00EECD8F /* dydxPrivyWalletSetup.swift */; };
 		023F7F082AD09725006CC4CD /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647D11422A9FF29100DA7815 /* Utilities.framework */; platformFilter = ios; };
 		023F7F0D2AD09732006CC4CD /* ParticlesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647D11D12AA0EE8D00DA7815 /* ParticlesKit.framework */; platformFilter = ios; };
 		02439C9029B03E8A00A083FE /* dydxCartera.docc in Sources */ = {isa = PBXBuildFile; fileRef = 02439C8F29B03E8A00A083FE /* dydxCartera.docc */; };
@@ -144,6 +151,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02308D262DC4662F00EECD8F /* dydxPrivyWalletSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPrivyWalletSetup.swift; sourceTree = "<group>"; };
 		023F7EFB2AD09703006CC4CD /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		023F7EFD2AD09703006CC4CD /* Pods_iOS_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_iOS_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		023F7EFF2AD09703006CC4CD /* Pods_iOS_UtilitiesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_iOS_UtilitiesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +204,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02308BFB2DC441A000EECD8F /* Cartera in Frameworks */,
+				02308BFA2DC441A000EECD8F /* SolanaSwift in Frameworks */,
+				02308BF92DC441A000EECD8F /* Cartera in Frameworks */,
+				02308BF82DC441A000EECD8F /* Cartera in Frameworks */,
+				02308BF72DC441A000EECD8F /* Cartera in Frameworks */,
+				02308BF62DC441A000EECD8F /* Cartera in Frameworks */,
 				023F7F0D2AD09732006CC4CD /* ParticlesKit.framework in Frameworks */,
 				023F7F082AD09725006CC4CD /* Utilities.framework in Frameworks */,
 				380B90E0F0184BA5387AC70A /* Pods_iOS_dydxCartera.framework in Frameworks */,
@@ -242,7 +256,6 @@
 		02439C8D29B03E8A00A083FE /* dydxCartera */ = {
 			isa = PBXGroup;
 			children = (
-				02844D722DC18790006F51CE /* Privy */,
 				02EF44D229F6F59A00C97746 /* WalletSetup */,
 				0274248529E766F6004C89AE /* Contracts */,
 				0274248229E74C9B004C89AE /* Utils */,
@@ -302,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				02844D7E2DC18822006F51CE /* PrivyAuthManager.swift */,
+				02308D262DC4662F00EECD8F /* dydxPrivyWalletSetup.swift */,
 			);
 			path = Privy;
 			sourceTree = "<group>";
@@ -359,6 +373,7 @@
 		02EF44D229F6F59A00C97746 /* WalletSetup */ = {
 			isa = PBXGroup;
 			children = (
+				02844D722DC18790006F51CE /* Privy */,
 				02EF44EA29F6FE0F00C97746 /* V4 */,
 				02EF44D729F6FA8D00C97746 /* StarkJavascript.swift */,
 				02EF44D329F6F5A700C97746 /* dydxWalletSetup.swift */,
@@ -664,9 +679,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -705,6 +724,7 @@
 				0274248429E74CA5004C89AE /* Parser+Eth.swift in Sources */,
 				0276AC912D833BA10039919D /* SolanaInteractor.swift in Sources */,
 				02439C9029B03E8A00A083FE /* dydxCartera.docc in Sources */,
+				02308D272DC4662F00EECD8F /* dydxPrivyWalletSetup.swift in Sources */,
 				0274248929E78576004C89AE /* ERC20Token.swift in Sources */,
 				02844D7F2DC18822006F51CE /* PrivyAuthManager.swift in Sources */,
 				02EF44D429F6F5A700C97746 /* dydxWalletSetup.swift in Sources */,

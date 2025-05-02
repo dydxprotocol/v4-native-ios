@@ -34,6 +34,7 @@
 		020EB697299D36AD00E8026B /* dydxApiStatusWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020EB696299D36AD00E8026B /* dydxApiStatusWorker.swift */; };
 		0216441128F36FBE00C7093E /* CandleDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0216441028F36FBE00C7093E /* CandleDataPoint.swift */; };
 		021B68B12AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B68A42AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift */; };
+		021F52672DC535A100598186 /* dydxOnboardingCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021F52652DC535A100598186 /* dydxOnboardingCompletion.swift */; };
 		0226DD262DA857F8009243C7 /* dydxAppModeSurveyViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226DD252DA857F6009243C7 /* dydxAppModeSurveyViewBuilder.swift */; };
 		02279D5F2CE7ECDC00266956 /* SortAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02279D5E2CE7ECD900266956 /* SortAction.swift */; };
 		02279D612CE7ED0400266956 /* FilterAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02279D602CE7ECF400266956 /* FilterAction.swift */; };
@@ -157,7 +158,7 @@
 		02E7B39A29D79A4400D6626D /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37029D79A4400D6626D /* settings.json */; };
 		02E7B39C29D79A4400D6626D /* debug.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37229D79A4400D6626D /* debug.json */; };
 		02E7B3A629D79A4400D6626D /* settings_notifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37C29D79A4400D6626D /* settings_notifications.json */; };
-		02E7B3A729D79A4400D6626D /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		02E7B3A729D79A4400D6626D /* (null) in Resources */ = {isa = PBXBuildFile; };
 		02E7B3B129D79A4400D6626D /* v4-native-client.js in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B38729D79A4400D6626D /* v4-native-client.js */; };
 		02E90C5A29D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90C5929D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift */; };
 		02EF485629F732C600C97746 /* dydxFavoriteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF485529F732C600C97746 /* dydxFavoriteStore.swift */; };
@@ -475,6 +476,7 @@
 		020EB696299D36AD00E8026B /* dydxApiStatusWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxApiStatusWorker.swift; sourceTree = "<group>"; };
 		0216441028F36FBE00C7093E /* CandleDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleDataPoint.swift; sourceTree = "<group>"; };
 		021B68A42AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxSecurityViewPresenter.swift; sourceTree = "<group>"; };
+		021F52652DC535A100598186 /* dydxOnboardingCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOnboardingCompletion.swift; sourceTree = "<group>"; };
 		0226DD252DA857F6009243C7 /* dydxAppModeSurveyViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAppModeSurveyViewBuilder.swift; sourceTree = "<group>"; };
 		02279D5E2CE7ECD900266956 /* SortAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAction.swift; sourceTree = "<group>"; };
 		02279D602CE7ECF400266956 /* FilterAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAction.swift; sourceTree = "<group>"; };
@@ -792,6 +794,14 @@
 				021B68A42AD9B86600C5C3BF /* dydxSecurityViewPresenter.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		021F52662DC535A100598186 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				021F52652DC535A100598186 /* dydxOnboardingCompletion.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		0230375A28C1176100412B72 /* Markets */ = {
@@ -1634,6 +1644,7 @@
 		02FF0BCF29AE92EE00781EDA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				021F52662DC535A100598186 /* Shared */,
 				02548B672DC3ED0300FC0ABE /* Social */,
 				023848C62A9E782100B1A673 /* Tos */,
 				02C5500729D7998E001AAB15 /* QRCodeDisplay */,
@@ -2173,7 +2184,7 @@
 				2741E3702A68787A000FA190 /* settings_direction_color_preference.json in Resources */,
 				278EA5612BB60F51007A0E17 /* notifications.json in Resources */,
 				02E7B39829D79A4400D6626D /* features.json in Resources */,
-				02E7B3A729D79A4400D6626D /* BuildFile in Resources */,
+				02E7B3A729D79A4400D6626D /* (null) in Resources */,
 				02E7B39929D79A4400D6626D /* test.js in Resources */,
 				02E7B39A29D79A4400D6626D /* settings.json in Resources */,
 				02F543B42C17AD6A000924E4 /* settings_gas_token.json in Resources */,
@@ -2248,9 +2259,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2319,6 +2334,7 @@
 				0257C78E2A00485500F6160B /* SparklineDataPoint.swift in Sources */,
 				02548B6C2DC3ED7C00FC0ABE /* dydxSocialLoginViewBuilder.swift in Sources */,
 				028DB3402A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift in Sources */,
+				021F52672DC535A100598186 /* dydxOnboardingCompletion.swift in Sources */,
 				27C027532AFD761300E92CCB /* dydxProfileSecondaryButtonsViewPresenter.swift in Sources */,
 				02EF485629F732C600C97746 /* dydxFavoriteStore.swift in Sources */,
 				0208627C28F4DAC000C9D3A0 /* dydxMarketInfoPagingViewPresenter.swift in Sources */,

@@ -47,6 +47,8 @@ public class dydxWalletSetup: WalletStatusDelegate {
     @Published public internal(set) var status: Status = .idle
     @Published public internal(set) var debugLink: String?
 
+    let parser = Parser()
+
     lazy var provider: CarteraProvider = {
         let provider = CarteraProvider()
         provider.walletStatusDelegate = self
@@ -92,6 +94,44 @@ public class dydxWalletSetup: WalletStatusDelegate {
 
     func sign(wallet: Wallet?, address: String, ethereumChainId: Int, signTypedDataAction: String, signTypedDataDomainName: String, useModal: Bool) {
 
+    }
+
+    func generatePrivateKey(walletId: String?, privateKeySignature: String, address: String) {
+        CosmoJavascript.shared.deriveCosmosKey(signature: privateKeySignature) { [weak self] data in
+            if let resultObject = (data as? String)?.jsonDictionary,
+               let mnemonic = self?.parser.asString(resultObject["mnemonic"]),
+               let cosmoAddress = self?.parser.asString(resultObject["address"]) {
+                self?.status = .signed(SetupResult(ethereumAddress: address,
+                                                   walletId: walletId,
+                                                   cosmoAddress: cosmoAddress,
+                                                   mnemonic: mnemonic))
+            } else {
+                self?.status = Status.createError(title: "deriveCosmosKey failed")
+            }
+        }
+    }
+
+    func typedData(action: String, chainId: Int?, signTypedDataDomainName: String) -> EIP712DomainTypedDataProvider {
+        let chainId = chainId ?? 1
+        let dydxSign = EIP712DomainTypedDataProvider(name: signTypedDataDomainName, chainId: chainId, version: nil)
+        dydxSign.message = message(action: action, chainId: chainId)
+        return dydxSign
+    }
+
+    func message(action: String, chainId: Int) -> WalletTypedData {
+        var definitions = [[String: String]]()
+        var data = [String: Any]()
+        definitions.append(type(name: "action", type: "string"))
+        data["action"] = action
+
+        let message = WalletTypedData(typeName: "dYdX")
+        message.definitions = definitions
+        message.data = data
+        return message
+    }
+
+    func type(name: String, type: String) -> [String: String] {
+        return ["name": name, "type": type]
     }
 
     // MARK: WalletStatusDelegate

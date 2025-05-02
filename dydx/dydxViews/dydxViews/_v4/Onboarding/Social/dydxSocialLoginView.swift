@@ -12,6 +12,8 @@ import Utilities
 public class dydxSocialLoginViewModel: PlatformViewModel {
     @Published public var connectWallet: dydxConnectWalletViewModel?
     @Published public var googleAction: (() -> Void)?
+    @Published public var twitterAction: (() -> Void)?
+    @Published public var appleAction: (() -> Void)?
 
     public init() { }
 
@@ -38,13 +40,9 @@ public class dydxSocialLoginViewModel: PlatformViewModel {
                 .leftAligned()
 
                 HStack {
-                    let content = PlatformIconViewModel(type: .asset(name: "logo_google", bundle: Bundle.dydxView),
-                                                        size: CGSize(width: 24, height: 24))
-                    PlatformButtonViewModel(content: content,
-                                            type: .defaultType(cornerRadius: 16),
-                                            state: .secondary) { [weak self] in
-                        self?.googleAction?()
-                    }.createView(parentStyle: style)
+                    self.createButton(parentStyle: style, logo_name: "logo_apple", templateColor: .textPrimary, action: self.appleAction)
+                    self.createButton(parentStyle: style, logo_name: "logo_google", action: self.googleAction)
+                    self.createButton(parentStyle: style, logo_name: "logo_twitter", templateColor: .textPrimary, action: self.twitterAction)
                 }
 
                 self.createDivider(parentStyle: style)
@@ -58,6 +56,21 @@ public class dydxSocialLoginViewModel: PlatformViewModel {
 
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
+    }
+
+    private func createButton(parentStyle: ThemeStyle,
+                              logo_name: String,
+                              templateColor: ThemeColor.SemanticColor? = nil,
+                              action: (() -> Void)?) -> some View {
+        let content = PlatformIconViewModel(type: .asset(name: logo_name, bundle: Bundle.dydxView),
+                                            size: CGSize(width: 24, height: 24),
+                                            templateColor: templateColor)
+        return PlatformButtonViewModel(content: content,
+                                       type: .defaultType(cornerRadius: 16),
+                                       state: .secondary) {
+            action?()
+        }
+                                       .createView(parentStyle: parentStyle)
     }
 
     private func createDivider(parentStyle: ThemeStyle) -> some View {
