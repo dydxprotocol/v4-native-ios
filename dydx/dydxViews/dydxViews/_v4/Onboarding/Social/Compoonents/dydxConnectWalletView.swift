@@ -22,17 +22,25 @@ public class dydxConnectWalletViewModel: dydxWalletListItemView {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let main = Text(DataLocalizer.localize(path: "APP.GENERAL.CONNECT_WALLET"))
-            let trailing = PlatformIconViewModel(type: .system(name: "chevron.right"),
-                                                 size: CGSize(width: 12, height: 12),
-                                                 templateColor: .textTertiary)
-            let image = PlatformIconViewModel(type: .asset(name: "icon_wallet", bundle: Bundle.dydxView),
-                                              size: CGSize(width: 24, height: 24),
-                                              templateColor: .textSecondary)
-
+            let trailing = HStack {
+                self.createIcons(style: style)
+                PlatformIconViewModel(type: .system(name: "chevron.right"),
+                                      size: CGSize(width: 12, height: 12),
+                                      templateColor: .textTertiary)
+                .createView(parentStyle: style)
+            }
             return self.createItemView(main: main.wrappedViewModel,
-                                  trailing: trailing,
-                                  image: image,
-                                  style: style)
+                                       trailing: trailing.wrappedViewModel,
+                                       image: nil,
+                                       style: style)
+        }
+    }
+
+    private func createIcons(style: ThemeStyle) -> some View {
+        HStack(spacing: -6) {
+            ForEach(["settings_metamask", "phantom_wallet", "coinbase_wallet", "icon_wc_logo"], id: \.self) { icon in
+                return self.createOptionIcon(style: style, icon: icon, templateColor: nil)
+            }
         }
     }
 }

@@ -11,24 +11,50 @@ import Utilities
 
 open class dydxWalletListItemView: PlatformViewModel {
     @Published public var onTap: (() -> Void)?
+    @Published public var isInstall: Bool = true
 
-    func createItemView(main: PlatformViewModel, trailing: PlatformViewModel, image: PlatformIconViewModel, style: ThemeStyle) -> AnyView {
+    func createItemView(main: PlatformViewModel, trailing: PlatformViewModel?, image: PlatformIconViewModel?, style: ThemeStyle) -> AnyView {
         AnyView(
-           Group {
-               PlatformTableViewCellViewModel(leading: PlatformView.nilViewModel,
-                                              logo: image,
-                                              main: main,
-                                              trailing: trailing)
-                   .createView(parentStyle: style)
-                   .frame(width: UIScreen.main.bounds.width - 32, height: 56)
-                   .themeColor(background: .layer5)
-                   .cornerRadius(16)
-           }
-           .frame(maxWidth: .infinity)
-           .frame(height: 56)
-           .onTapGesture { [weak self] in
-               self?.onTap?()
-           }
+            Button(action: { [weak self] in
+                self?.onTap?()
+            }, label: {
+                Group {
+                    PlatformTableViewCellViewModel(leading: PlatformView.nilViewModel,
+                                                   logo: image,
+                                                   main: main,
+                                                   trailing: trailing)
+                        .createView(parentStyle: style)
+                        .frame(width: UIScreen.main.bounds.width - 32, height: 56)
+                        .themeColor(background: .layer3)
+                        .cornerRadius(16)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 56)
+            })
        )
+    }
+
+    func createInstallLogo(style: ThemeStyle) -> some View {
+        HStack(spacing: 4) {
+            Text(DataLocalizer.localize(path: "APP.GENERAL.INSTALL"))
+                .themeColor(foreground: .textTertiary)
+                .themeFont(fontSize: .small)
+            PlatformIconViewModel(type: .asset(name: "icon_external_link", bundle: Bundle.dydxView),
+                                  size: CGSize(width: 14, height: 14),
+                                  templateColor: .textTertiary)
+            .createView(parentStyle: style)
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 2)
+        .themeColor(background: .layer4)
+        .cornerRadius(8, corners: .allCorners)
+    }
+
+    func createOptionIcon(style: ThemeStyle, icon: String, templateColor: ThemeColor.SemanticColor? = nil) -> some View {
+        PlatformIconViewModel(type: .asset(name: icon, bundle: Bundle.dydxView),
+                              clip: .circle(background: .layer2, spacing: 16, borderColor: nil),
+                              size: CGSize(width: 32, height: 32),
+                              templateColor: templateColor)
+        .createView(parentStyle: style)
     }
 }

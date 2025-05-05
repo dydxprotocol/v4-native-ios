@@ -11,14 +11,14 @@ import Utilities
 
 public class dydxSocialLoginViewModel: PlatformViewModel {
     @Published public var connectWallet: dydxConnectWalletViewModel?
-    @Published public var googleAction: (() -> Void)?
-    @Published public var twitterAction: (() -> Void)?
-    @Published public var appleAction: (() -> Void)?
+    @Published public var oauthViews = [dydxOAuthViewModel]()
+    @Published public var onScrollViewCreated: ((UIScrollView) -> Void)?
 
     public init() { }
 
     public static var previewValue: dydxSocialLoginViewModel {
         let vm = dydxSocialLoginViewModel()
+        vm.connectWallet = .previewValue
         return vm
     }
 
@@ -26,7 +26,7 @@ public class dydxSocialLoginViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let view = VStack(spacing: 16) {
+            let view = VStack(spacing: 8) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(DataLocalizer.localize(path: "APP.ONBOARDING.LOGIN_SIGNUP"))
                         .themeFont(fontSize: .largest)
@@ -39,20 +39,28 @@ public class dydxSocialLoginViewModel: PlatformViewModel {
                 .padding(.top, 40)
                 .leftAligned()
 
-                HStack {
-                    self.createButton(parentStyle: style, logo_name: "logo_apple", templateColor: .textPrimary, action: self.appleAction)
-                    self.createButton(parentStyle: style, logo_name: "logo_google", action: self.googleAction)
-                    self.createButton(parentStyle: style, logo_name: "logo_twitter", templateColor: .textPrimary, action: self.twitterAction)
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 12) {
+                        ForEach(self.oauthViews, id: \.self) { item in
+                            item.createView(parentStyle: style)
+                        }
+
+                        self.createDivider(parentStyle: style)
+
+                        self.connectWallet?.createView(parentStyle: style)
+
+                        Spacer(minLength: 28)
+                    }
+                    .padding(.top, 16)
+                    .introspectScrollView { [weak self] scrollView in
+                        self?.onScrollViewCreated?(scrollView)
+                    }
                 }
-
-                self.createDivider(parentStyle: style)
-
-                self.connectWallet?.createView(parentStyle: style)
 
                 Spacer()
             }
                 .padding([.leading, .trailing])
-                .themeColor(background: .layer3)
+                .themeColor(background: .layer1)
 
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
@@ -80,7 +88,7 @@ public class dydxSocialLoginViewModel: PlatformViewModel {
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontSize: .smaller)
                 .padding(.horizontal, 8)
-                .themeColor(background: .layer3)
+                .themeColor(background: .layer1)
         }
     }
 }

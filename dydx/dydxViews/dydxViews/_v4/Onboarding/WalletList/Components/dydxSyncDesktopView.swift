@@ -27,7 +27,7 @@ public class dydxSyncDesktopViewModel: dydxWalletListItemView {
                     .themeFont(fontSize: .small)
                     .themeColor(foreground: .textTertiary)
             let image = PlatformIconViewModel(type: .asset(name: "icon_qrscan", bundle: Bundle.dydxView),
-                                     size: CGSize(width: 36, height: 36))
+                                     size: CGSize(width: 24, height: 24))
 
             return self.createItemView(main: main.wrappedViewModel,
                                   trailing: trailing.wrappedViewModel,

@@ -25,11 +25,22 @@ public class dydxSocialLoginViewBuilder: NSObject, ObjectBuilderProtocol {
 }
 
 private class dydxSocialLoginViewController: HostingViewController<PlatformView, dydxSocialLoginViewModel> {
+    private var scrollView: UIScrollView?
+
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/onboard/social" {
-            return true
+            let presenter = presenter as? dydxSocialLoginViewPresenterProtocol
+            presenter?.viewModel?.onScrollViewCreated = { [weak self] scrollView in
+                self?.scrollView = scrollView
+            }
         }
         return false
+    }
+
+    // MARK: "half" presentation
+
+    override open var scrollable: UIScrollView? {
+        return scrollView
     }
 }
 
@@ -49,6 +60,22 @@ private class dydxSocialLoginViewPresenter: HostedViewPresenter<dydxSocialLoginV
         return viewModel
     }()
 
+    private lazy var googleViewModel: dydxOAuthViewModel = {
+        let viewModel = dydxOAuthViewModel(providerName: "Google", providerIcon: "logo_google", iconTemplateColor: nil)
+        viewModel.onTap = { [weak self] in
+            self?.performAction(type: .google, walletId: "google")
+        }
+        return viewModel
+    }()
+
+    private lazy var twitterViewModel: dydxOAuthViewModel = {
+        let viewModel = dydxOAuthViewModel(providerName: "X", providerIcon: "logo_twitter", iconTemplateColor: .textPrimary)
+        viewModel.onTap = { [weak self] in
+            self?.performAction(type: .twitter, walletId: "twitter")
+        }
+        return viewModel
+    }()
+
     private let walletSetup = dydxPrivyWalletSetup(privy: PrivyAuthManager.shared?.privy)
 
     override init() {
@@ -56,15 +83,7 @@ private class dydxSocialLoginViewPresenter: HostedViewPresenter<dydxSocialLoginV
 
         viewModel = dydxSocialLoginViewModel()
         viewModel?.connectWallet = connectWalletViewModel
-        viewModel?.appleAction = { [weak self] in
-            self?.performAction(type: .apple, walletId: "apple")
-        }
-        viewModel?.googleAction = { [weak self] in
-            self?.performAction(type: .google, walletId: "google")
-        }
-        viewModel?.twitterAction = { [weak self] in
-            self?.performAction(type: .twitter, walletId: "twitter")
-        }
+        viewModel?.oauthViews = [googleViewModel, twitterViewModel]
     }
 
     override func start() {

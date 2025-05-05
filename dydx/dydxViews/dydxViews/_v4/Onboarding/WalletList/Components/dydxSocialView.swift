@@ -21,17 +21,32 @@ public class dydxSocialViewModel: dydxWalletListItemView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let main = Text(DataLocalizer.localize(path: "APP.WALLETS.EMAIL_OR_SOCIAL"))
-            let trailing = PlatformIconViewModel(type: .system(name: "chevron.right"),
-                                                 size: CGSize(width: 12, height: 12),
-                                                 templateColor: .textTertiary)
-            let image = PlatformIconViewModel(type: .asset(name: "icon_wc_logo", bundle: Bundle.dydxView),
-                                     size: CGSize(width: 36, height: 36))
-
+            let main = Text(DataLocalizer.localize(path: "APP.ONBOARDING.SIGN_IN_WITH"))
+            let trailing = HStack {
+                self.createIcons(style: style)
+                PlatformIconViewModel(type: .system(name: "chevron.right"),
+                                      size: CGSize(width: 12, height: 12),
+                                      templateColor: .textTertiary)
+                .createView(parentStyle: style)
+            }
             return self.createItemView(main: main.wrappedViewModel,
-                                  trailing: trailing,
-                                  image: image,
-                                  style: style)
+                                       trailing: trailing.wrappedViewModel,
+                                       image: nil,
+                                       style: style)
+        }
+    }
+
+    private func createIcons(style: ThemeStyle) -> some View {
+        HStack(spacing: -6) {
+            ForEach(["logo_google", "logo_twitter", "icon_email"], id: \.self) { icon in
+                let templateColor: ThemeColor.SemanticColor?
+                if ["logo_twitter"].contains(icon) {
+                    templateColor = .textPrimary
+                } else {
+                    templateColor =  nil
+                }
+                return self.createOptionIcon(style: style, icon: icon, templateColor: templateColor)
+            }
         }
     }
 }

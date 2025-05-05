@@ -37,7 +37,7 @@ public class dydxWalletViewModel: dydxWalletListItemView {
                     .themeColor(foreground: .textSecondary)
             let image = PlatformIconViewModel(type: .url(url: self.imageUrl),
                                      clip: .defaultCircle,
-                                     size: CGSize(width: 36, height: 36))
+                                     size: CGSize(width: 24, height: 24))
 
             return self.createItemView(main: main.wrappedViewModel,
                                   trailing: trailing.wrappedViewModel,
