@@ -13,12 +13,14 @@ public class dydxSocialLoginViewModel: PlatformViewModel {
     @Published public var connectWallet: dydxConnectWalletViewModel?
     @Published public var oauthViews = [dydxOAuthViewModel]()
     @Published public var onScrollViewCreated: ((UIScrollView) -> Void)?
+    @Published public var emailInput: dydxEmailInputViewModel? = dydxEmailInputViewModel()
 
     public init() { }
 
     public static var previewValue: dydxSocialLoginViewModel {
         let vm = dydxSocialLoginViewModel()
         vm.connectWallet = .previewValue
+        vm.emailInput = .previewValue
         return vm
     }
 
@@ -41,6 +43,8 @@ public class dydxSocialLoginViewModel: PlatformViewModel {
 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 12) {
+                        self.emailInput?.createView(parentStyle: style)
+
                         ForEach(self.oauthViews, id: \.self) { item in
                             item.createView(parentStyle: style)
                         }

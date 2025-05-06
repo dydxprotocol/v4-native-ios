@@ -84,6 +84,20 @@ private class dydxSocialLoginViewPresenter: HostedViewPresenter<dydxSocialLoginV
         viewModel = dydxSocialLoginViewModel()
         viewModel?.connectWallet = connectWalletViewModel
         viewModel?.oauthViews = [googleViewModel, twitterViewModel]
+        viewModel?.emailInput?.onEdited = { [weak self] text in
+            if let text = text, !text.isEmpty {
+                self?.viewModel?.emailInput?.isValid = true
+            } else {
+                self?.viewModel?.emailInput?.isValid = false
+            }
+            self?.viewModel?.objectWillChange.send()
+        }
+        viewModel?.emailInput?.submitAction = { [weak self] in
+            let text = self?.viewModel?.emailInput?.value ?? ""
+            if text.isNotEmpty {
+                self?.performEmail(self?.viewModel?.emailInput?.value ?? "")
+            }
+        }
     }
 
     override func start() {
@@ -94,6 +108,24 @@ private class dydxSocialLoginViewPresenter: HostedViewPresenter<dydxSocialLoginV
                 self?.updateStatus(status: status)
             }
             .store(in: &subscriptions)
+    }
+
+    private func performEmail(_ email: String) {
+        Task {
+            let success = await PrivyAuthManager.shared?.sendEmailCode(email: email)
+            if success == true {
+                DispatchQueue.main.async {
+                    Router.shared?.navigate(to: RoutingRequest(path: "/onboard/social/otp", params: nil), animated: true, completion: nil)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.FAILED"),
+                                           message: nil,
+                                           type: .error,
+                                           error: nil)
+                }
+            }
+        }
     }
 
     private func performAction(type: OAuthType, walletId: String) {

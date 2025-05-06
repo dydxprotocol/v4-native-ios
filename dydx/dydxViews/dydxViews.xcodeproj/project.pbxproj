@@ -200,6 +200,7 @@
 		02DDB4562DC93D3F00FFFF2C /* dydxPhantomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDB4552DC93D3F00FFFF2C /* dydxPhantomView.swift */; };
 		02DDB4582DC94F2C00FFFF2C /* dydxCoinbaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDB4572DC94F2C00FFFF2C /* dydxCoinbaseView.swift */; };
 		02DDB45A2DC95DBF00FFFF2C /* dydxOAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDB4592DC95DBF00FFFF2C /* dydxOAuthView.swift */; };
+		02DDB5C82DCAC10D00FFFF2C /* dydxEmailInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDB5C72DCAC10D00FFFF2C /* dydxEmailInputView.swift */; };
 		02DDE09F28F37D4200945990 /* dydxMarketPriceCandlesHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDE09E28F37D4200945990 /* dydxMarketPriceCandlesHighlightView.swift */; };
 		02E0F7292DBA9A9400960ED1 /* BuyingPowerTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E0F7282DBA9A9400960ED1 /* BuyingPowerTooltip.swift */; };
 		02E318A82AB231FA0074DA98 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E318A72AB231FA0074DA98 /* PlaceholderView.swift */; };
@@ -653,6 +654,7 @@
 		02DDB4552DC93D3F00FFFF2C /* dydxPhantomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPhantomView.swift; sourceTree = "<group>"; };
 		02DDB4572DC94F2C00FFFF2C /* dydxCoinbaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCoinbaseView.swift; sourceTree = "<group>"; };
 		02DDB4592DC95DBF00FFFF2C /* dydxOAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOAuthView.swift; sourceTree = "<group>"; };
+		02DDB5C72DCAC10D00FFFF2C /* dydxEmailInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxEmailInputView.swift; sourceTree = "<group>"; };
 		02DDE09E28F37D4200945990 /* dydxMarketPriceCandlesHighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketPriceCandlesHighlightView.swift; sourceTree = "<group>"; };
 		02E0F7282DBA9A9400960ED1 /* BuyingPowerTooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyingPowerTooltip.swift; sourceTree = "<group>"; };
 		02E318A72AB231FA0074DA98 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
@@ -1316,6 +1318,7 @@
 			children = (
 				02548B722DC4195100FC0ABE /* dydxConnectWalletView.swift */,
 				02DDB4592DC95DBF00FFFF2C /* dydxOAuthView.swift */,
+				02DDB5C72DCAC10D00FFFF2C /* dydxEmailInputView.swift */,
 			);
 			path = Compoonents;
 			sourceTree = "<group>";
@@ -2530,6 +2533,7 @@
 				022A24622A030997003A385E /* dydxAlertItem.swift in Sources */,
 				027885F22D1DEBE300366321 /* dydxSimpleUIMarketCandlesView.swift in Sources */,
 				02FF0BD529AEB91900781EDA /* dydxWalletView.swift in Sources */,
+				02DDB5C82DCAC10D00FFFF2C /* dydxEmailInputView.swift in Sources */,
 				02DDB45A2DC95DBF00FFFF2C /* dydxOAuthView.swift in Sources */,
 				024B44D12982D1FF00E35D54 /* dydxTradeStatusView.swift in Sources */,
 				027885FA2D1E170900366321 /* dydxSimpleUIMarketPositionView.swift in Sources */,
