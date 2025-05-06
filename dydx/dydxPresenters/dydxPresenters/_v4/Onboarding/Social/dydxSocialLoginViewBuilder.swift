@@ -78,6 +78,8 @@ private class dydxSocialLoginViewPresenter: HostedViewPresenter<dydxSocialLoginV
 
     private let walletSetup = dydxPrivyWalletSetup(privy: PrivyAuthManager.shared?.privy)
 
+    private var email: String?
+
     override init() {
         super.init()
 
@@ -85,18 +87,18 @@ private class dydxSocialLoginViewPresenter: HostedViewPresenter<dydxSocialLoginV
         viewModel?.connectWallet = connectWalletViewModel
         viewModel?.oauthViews = [googleViewModel, twitterViewModel]
         viewModel?.emailInput?.onEdited = { [weak self] text in
-            if let text = text, !text.isEmpty {
-                self?.viewModel?.emailInput?.isValid = true
+            guard let self = self else { return }
+            self.email = text
+            if let text = text, self.isValidEmail(text) {
+                self.viewModel?.emailInput?.isValid = true
             } else {
-                self?.viewModel?.emailInput?.isValid = false
+                self.viewModel?.emailInput?.isValid = false
             }
-            self?.viewModel?.objectWillChange.send()
+            self.viewModel?.objectWillChange.send()
         }
         viewModel?.emailInput?.submitAction = { [weak self] in
-            let text = self?.viewModel?.emailInput?.value ?? ""
-            if text.isNotEmpty {
-                self?.performEmail(self?.viewModel?.emailInput?.value ?? "")
-            }
+            guard let self = self else { return }
+            self.performEmail(self.email ?? "")
         }
     }
 
@@ -110,9 +112,18 @@ private class dydxSocialLoginViewPresenter: HostedViewPresenter<dydxSocialLoginV
             .store(in: &subscriptions)
     }
 
+    private func isValidEmail(_ email: String) -> Bool {
+        let pattern =
+            #"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"#
+
+        let regex = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive])
+        let range = NSRange(email.startIndex..<email.endIndex, in: email)
+        return regex?.firstMatch(in: email, options: [], range: range) != nil
+    }
+
     private func performEmail(_ email: String) {
         Task {
-            let success = await PrivyAuthManager.shared?.sendEmailCode(email: email)
+            let success = true // await PrivyAuthManager.shared?.sendEmailCode(email: email)
             if success == true {
                 DispatchQueue.main.async {
                     Router.shared?.navigate(to: RoutingRequest(path: "/onboard/social/otp", params: nil), animated: true, completion: nil)

@@ -153,6 +153,7 @@
 		02DC87952CD441BC00F865C5 /* dydxVaultHistoryViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC87942CD441BB00F865C5 /* dydxVaultHistoryViewBuilder.swift */; };
 		02DDAD55292587C600CC7531 /* QRCodeDisplayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDAD54292587C600CC7531 /* QRCodeDisplayBuilder.swift */; };
 		02DDB4522DC92C4100FFFF2C /* dydxWalletListViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDB4512DC92C4000FFFF2C /* dydxWalletListViewBuilder.swift */; };
+		02DDB5E72DCAD09F00FFFF2C /* dydxEmailOtpViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDB5E62DCAD09D00FFFF2C /* dydxEmailOtpViewBuilder.swift */; };
 		02E7B39729D79A4400D6626D /* settings_debug.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B36D29D79A4400D6626D /* settings_debug.json */; };
 		02E7B39829D79A4400D6626D /* features.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B36E29D79A4400D6626D /* features.json */; };
 		02E7B39929D79A4400D6626D /* test.js in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B36F29D79A4400D6626D /* test.js */; };
@@ -596,6 +597,7 @@
 		02DC87942CD441BB00F865C5 /* dydxVaultHistoryViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultHistoryViewBuilder.swift; sourceTree = "<group>"; };
 		02DDAD54292587C600CC7531 /* QRCodeDisplayBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeDisplayBuilder.swift; sourceTree = "<group>"; };
 		02DDB4512DC92C4000FFFF2C /* dydxWalletListViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWalletListViewBuilder.swift; sourceTree = "<group>"; };
+		02DDB5E62DCAD09D00FFFF2C /* dydxEmailOtpViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxEmailOtpViewBuilder.swift; sourceTree = "<group>"; };
 		02E7B36D29D79A4400D6626D /* settings_debug.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings_debug.json; sourceTree = "<group>"; };
 		02E7B36E29D79A4400D6626D /* features.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = features.json; sourceTree = "<group>"; };
 		02E7B36F29D79A4400D6626D /* test.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
@@ -1078,6 +1080,7 @@
 		02548B672DC3ED0300FC0ABE /* Social */ = {
 			isa = PBXGroup;
 			children = (
+				02DDB5D82DCAD09100FFFF2C /* Otp */,
 				02548B6B2DC3ED7400FC0ABE /* dydxSocialLoginViewBuilder.swift */,
 			);
 			path = Social;
@@ -1543,6 +1546,14 @@
 				02DC87942CD441BB00F865C5 /* dydxVaultHistoryViewBuilder.swift */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		02DDB5D82DCAD09100FFFF2C /* Otp */ = {
+			isa = PBXGroup;
+			children = (
+				02DDB5E62DCAD09D00FFFF2C /* dydxEmailOtpViewBuilder.swift */,
+			);
+			path = Otp;
 			sourceTree = "<group>";
 		};
 		02E7B36B29D79A4400D6626D /* _Features */ = {
@@ -2390,6 +2401,7 @@
 				02860A9F29C15E760079E644 /* dydxOnboardScanViewBuilder.swift in Sources */,
 				277E90332B1FAE9A005CCBCB /* dydxRewardsHelpViewPresenter.swift in Sources */,
 				02FAFA5C29D4E08E001A0903 /* dydxDebugViewBuilder.swift in Sources */,
+				02DDB5E72DCAD09F00FFFF2C /* dydxEmailOtpViewBuilder.swift in Sources */,
 				02F543B22C17ABBB000924E4 /* dydxGasTokenViewBuilder.swift in Sources */,
 				27592DFA2C9A54D6002FBD4B /* dydxTransferAlertsProvider.swift in Sources */,
 				02279D612CE7ED0400266956 /* FilterAction.swift in Sources */,

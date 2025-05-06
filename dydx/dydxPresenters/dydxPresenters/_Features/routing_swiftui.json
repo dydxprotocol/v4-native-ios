@@ -157,6 +157,10 @@
                     "destination":"dydxPresenters.dydxSocialLoginViewBuilder",
                     "presentation":"prompt"
                 },
+                "/onboard/social/otp":{
+                    "destination":"dydxPresenters.dydxEmailOtpViewBuilder",
+                    "presentation":"push"
+                },
                 "/order":{
                     "destination":"dydxPresenters.dydxOrderDetailsViewBuilder",
                     "presentation":"half"
