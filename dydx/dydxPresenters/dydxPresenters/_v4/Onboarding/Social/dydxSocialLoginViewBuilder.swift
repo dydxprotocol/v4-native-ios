@@ -144,12 +144,12 @@ private class dydxSocialLoginViewPresenter: HostedViewPresenter<dydxSocialLoginV
         Task {
             let ret = await PrivyAuthManager.shared?.loginOAuth(type: type)
             if let error = ret?.error {
-                DispatchQueue.main.async {
-                    ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.FAILED"),
-                                           message: nil,
-                                           type: .error,
-                                           error: error)
-                }
+//                DispatchQueue.main.async {
+//                    ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.FAILED"),
+//                                           message: nil,
+//                                           type: .error,
+//                                           error: error)
+//                }
             } else {
                 let status = await PrivyAuthManager.shared?.getEmbeddedWallet()
                 if let status {

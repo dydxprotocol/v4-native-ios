@@ -15,17 +15,7 @@ public class dydxEmailOtpViewModel: PlatformViewModel {
     @Published public var resendAction: (() -> Void)?
     @Published public var onOtpChanged: ((String) -> Void)?
     @Published public var email: String?
-
     @Published public var otp: String = ""
-
-    private lazy var optBinding = Binding<String>(
-        get: {
-            self.otp
-        },
-        set: {
-            self.otp = $0
-        }
-    )
 
     public init() { }
 
@@ -42,45 +32,47 @@ public class dydxEmailOtpViewModel: PlatformViewModel {
             let view = VStack {
                 self.headerViewModel?.createView(parentStyle: style)
 
-                PlatformIconViewModel(type: .asset(name: "icon_email_2", bundle: Bundle.dydxView),
-                                      size: CGSize(width: 48, height: 48),
-                                      templateColor: .textPrimary)
-                .createView(parentStyle: style)
-                .padding(.top, 48)
+                VStack {
+                    PlatformIconViewModel(type: .asset(name: "icon_email_2", bundle: Bundle.dydxView),
+                                          size: CGSize(width: 48, height: 48),
+                                          templateColor: .textPrimary)
+                    .createView(parentStyle: style)
+                    .padding(.top, 48)
 
-                Text(DataLocalizer.localize(path: "APP.ONBOARDING.ENTER_OTP_CODE"))
-                    .themeColor(foreground: .textPrimary)
-                    .themeFont(fontType: .plus)
+                    Text(DataLocalizer.localize(path: "APP.ONBOARDING.ENTER_OTP_CODE"))
+                        .themeColor(foreground: .textPrimary)
+                        .themeFont(fontType: .plus)
 
-                Text(DataLocalizer.localize(path: "APP.ONBOARDING.CHECK_EMAIL_FOR_OTP_CODE",
-                                            params: ["EMAIL": self.email ?? ""]))
+                    Text(DataLocalizer.localize(path: "APP.ONBOARDING.CHECK_EMAIL_FOR_OTP_CODE",
+                                                params: ["EMAIL": self.email ?? ""]))
                     .themeFont(fontSize: .small)
 
-                OTPFieldViewModel(otp: self.otp, onOtpChanged: self.onOtpChanged)
-                    .createView(parentStyle: style)
-                    .padding(.vertical, 16)
+                    OTPFieldViewModel(otp: self.otp, onOtpChanged: self.onOtpChanged)
+                        .createView(parentStyle: style)
+                        .padding(.vertical, 16)
 
-                HStack {
-                    Text(DataLocalizer.localize(path: "APP.ONBOARDING.DID_NOT_GET_EMAIL"))
+                    HStack {
+                        Text(DataLocalizer.localize(path: "APP.ONBOARDING.DID_NOT_GET_EMAIL"))
 
-                    Button { [weak self] in
-                        self?.resendAction?()
-                    } label: {
-                        Text(DataLocalizer.localize(path: "APP.ONBOARDING.RESEND_CODE"))
-                            .themeColor(foreground: .colorPurple)
+                        Button { [weak self] in
+                            self?.resendAction?()
+                        } label: {
+                            Text(DataLocalizer.localize(path: "APP.ONBOARDING.RESEND_CODE"))
+                                .themeColor(foreground: .colorPurple)
+                        }
                     }
-                }
-                .themeFont(fontSize: .small)
+                    .themeFont(fontSize: .small)
 
-                PlatformIconViewModel(type: .asset(name: "logo_privy", bundle: Bundle.dydxView),
-                                      size: CGSize(width: 120, height: 10),
-                                      templateColor: .textPrimary)
-                .createView(parentStyle: style)
-                .padding(.top, 16)
+                    PlatformIconViewModel(type: .asset(name: "logo_privy", bundle: Bundle.dydxView),
+                                          size: CGSize(width: 120, height: 10),
+                                          templateColor: .textPrimary)
+                    .createView(parentStyle: style)
+                    .padding(.top, 16)
+                }
+                .padding([.leading, .trailing])
 
                 Spacer()
             }
-                .padding([.leading, .trailing])
                 .themeColor(background: .layer1)
 
             return AnyView(view)
