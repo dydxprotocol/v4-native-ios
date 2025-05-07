@@ -122,6 +122,8 @@ private class Wallets2ViewPresenter: HostedViewPresenter<Wallets2ViewModel> {
                 viewModel.walletImage = .asset("logo_apple")
             } else if wallet.walletId == "twitter" {
                 viewModel.walletImage = .asset("logo_twitter")
+            } else if wallet.walletId == "email" {
+                viewModel.walletImage = .asset("icon_email_2")
             } else {
                 viewModel.walletImage = .url(wallet.imageUrl)
             }
