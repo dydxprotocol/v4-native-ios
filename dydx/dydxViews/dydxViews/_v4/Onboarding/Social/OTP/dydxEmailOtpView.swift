@@ -9,26 +9,87 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import AEOTPTextField
 
 public class dydxEmailOtpViewModel: PlatformViewModel {
-    @Published public var text: String?
+    @Published public var headerViewModel: NavHeaderModel? = NavHeaderModel()
+    @Published public var resendAction: (() -> Void)?
+    @Published public var otpCommitAction: (() -> Void)?
+    @Published public var email: String?
+
+    @Published public var otp: String = ""
+
+    private lazy var optBinding = Binding<String>(
+        get: {
+            self.otp
+        },
+        set: {
+            self.otp = $0
+        }
+    )
 
     public init() { }
 
     public static var previewValue: dydxEmailOtpViewModel {
         let vm = dydxEmailOtpViewModel()
-        vm.text = "Test String"
+        vm.email = "test@example.com"
         return vm
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack {
-                
+                self.headerViewModel?.createView(parentStyle: style)
+
+                PlatformIconViewModel(type: .asset(name: "icon_email_2", bundle: Bundle.dydxView),
+                                      size: CGSize(width: 48, height: 48),
+                                      templateColor: .textPrimary)
+                .createView(parentStyle: style)
+                .padding(.top, 48)
+
+                Text(DataLocalizer.localize(path: "APP.ONBOARDING.ENTER_OTP_CODE"))
+                    .themeColor(foreground: .textPrimary)
+                    .themeFont(fontType: .plus)
+
+                Text(DataLocalizer.localize(path: "APP.ONBOARDING.CHECK_EMAIL_FOR_OTP_CODE",
+                                            params: ["EMAIL": self.email ?? ""]))
+                    .themeFont(fontSize: .small)
+
+                AEOTPView(text: self.optBinding,
+                          otpBackgroundColor: ThemeColor.SemanticColor.layer3.uiColor,
+                          otpFilledBackgroundColor: ThemeColor.SemanticColor.layer3.uiColor,
+                          otpCornerRaduis: 12,
+                          otpTextColor: ThemeColor.SemanticColor.textPrimary.uiColor,
+                          onCommit: { [weak self] in
+                    self?.otpCommitAction?()
+                })
+                    .padding(.vertical, 16)
+
+                HStack {
+                    Text(DataLocalizer.localize(path: "APP.ONBOARDING.DID_NOT_GET_EMAIL"))
+
+                    Button { [weak self] in
+                        self?.resendAction?()
+                    } label: {
+                        Text(DataLocalizer.localize(path: "APP.ONBOARDING.RESEND_CODE"))
+                            .themeColor(foreground: .colorPurple)
+                    }
+                }
+                .themeFont(fontSize: .small)
+
+                PlatformIconViewModel(type: .asset(name: "logo_privy", bundle: Bundle.dydxView),
+                                      size: CGSize(width: 120, height: 10),
+                                      templateColor: .textPrimary)
+                .createView(parentStyle: style)
+                .padding(.top, 16)
+
+                Spacer()
             }
-            
+                .padding([.leading, .trailing])
+                .themeColor(background: .layer1)
+
             return AnyView(view)
         }
     }

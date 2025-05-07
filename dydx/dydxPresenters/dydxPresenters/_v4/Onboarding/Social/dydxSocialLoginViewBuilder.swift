@@ -123,10 +123,11 @@ private class dydxSocialLoginViewPresenter: HostedViewPresenter<dydxSocialLoginV
 
     private func performEmail(_ email: String) {
         Task {
-            let success = true // await PrivyAuthManager.shared?.sendEmailCode(email: email)
+            let success = await PrivyAuthManager.shared?.sendEmailCode(email: email)
             if success == true {
                 DispatchQueue.main.async {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/onboard/social/otp", params: nil), animated: true, completion: nil)
+                    Router.shared?.navigate(to: RoutingRequest(path: "/onboard/social/otp",
+                                                               params: ["email": email]), animated: true, completion: nil)
                 }
             } else {
                 DispatchQueue.main.async {

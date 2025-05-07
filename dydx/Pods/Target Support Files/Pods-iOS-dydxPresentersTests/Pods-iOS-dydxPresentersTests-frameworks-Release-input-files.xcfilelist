@@ -7,6 +7,7 @@ ${BUILT_PRODUCTS_DIR}/SDWebImageSVGCoder/SDWebImageSVGCoder.framework
 ${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework
 ${BUILT_PRODUCTS_DIR}/Validator/Validator.framework
 ${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework
+${BUILT_PRODUCTS_DIR}/AEOTPTextField/AEOTPTextField.framework
 ${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework
 ${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework
 ${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework

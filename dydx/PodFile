@@ -101,6 +101,7 @@ def ios_ui_pods
   pod 'NVActivityIndicatorView'
   pod 'PanModal'
   pod 'ZSWTappableLabel'
+  pod 'AEOTPTextField'
 end
 
 abstract_target 'iOS' do

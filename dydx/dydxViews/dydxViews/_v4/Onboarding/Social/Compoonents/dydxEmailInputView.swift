@@ -17,6 +17,8 @@ public class dydxEmailInputViewModel: PlatformTextInputViewModel {
 
     public init() {
         super.init(placeHolder: "your@email.com",
+                   inputType: .emailAddress,
+                   contentType: .emailAddress,
                    padding: EdgeInsets(horizontal: 8, vertical: 16))
     }
 
