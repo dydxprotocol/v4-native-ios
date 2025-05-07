@@ -37,7 +37,7 @@ public class dydxSocialViewModel: dydxWalletListItemView {
     }
 
     private func createIcons(style: ThemeStyle) -> some View {
-        HStack(spacing: -6) {
+        HStack(spacing: -12) {
             ForEach(["logo_google", "logo_twitter", "icon_email"], id: \.self) { icon in
                 let templateColor: ThemeColor.SemanticColor?
                 if ["logo_twitter"].contains(icon) {

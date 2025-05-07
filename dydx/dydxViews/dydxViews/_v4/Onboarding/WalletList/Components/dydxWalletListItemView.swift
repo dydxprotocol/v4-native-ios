@@ -51,10 +51,17 @@ open class dydxWalletListItemView: PlatformViewModel {
     }
 
     func createOptionIcon(style: ThemeStyle, icon: String, templateColor: ThemeColor.SemanticColor? = nil) -> some View {
-        PlatformIconViewModel(type: .asset(name: icon, bundle: Bundle.dydxView),
-                              clip: .circle(background: .layer2, spacing: 16, borderColor: nil),
-                              size: CGSize(width: 32, height: 32),
-                              templateColor: templateColor)
-        .createView(parentStyle: style)
+        ZStack {
+            Rectangle()
+                .frame(width: 34, height: 34)
+                .themeColor(foreground: .layer3)
+                .clipShape(.circle)
+
+            PlatformIconViewModel(type: .asset(name: icon, bundle: Bundle.dydxView),
+                                  clip: .circle(background: .layer2, spacing: 14),
+                                  size: CGSize(width: 30, height: 30),
+                                  templateColor: templateColor)
+            .createView(parentStyle: style)
+        }
     }
 }

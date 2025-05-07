@@ -83,9 +83,9 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
             case .hasBalance:
                 view = AnyView(createPortfolioView(style: style))
             case .walletConnected:
-                view = AnyView(createLoggedOutView(style: style))
+                view = AnyView(createLoggedOutView(style: style, isLoggedOut: false))
             case .loggedOut:
-                view = AnyView(createLoggedOutView(style: style))
+                view = AnyView(createLoggedOutView(style: style, isLoggedOut: true))
             case .unknown:
                 view = AnyView(createLoadingView(style: style))
             }
@@ -229,7 +229,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
         }
     }
 
-    private func createLoggedOutView(style: ThemeStyle) -> some View {
+    private func createLoggedOutView(style: ThemeStyle, isLoggedOut: Bool) -> some View {
         VStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 0) {
                 Text(dydxFormatter.shared.dollar(number: 0.0, digits: 2) ?? "")
@@ -246,9 +246,11 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
 
             Spacer()
 
-            Text(DataLocalizer.localize(path: "APP.GENERAL.NO_FUNDS"))
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: .textTertiary)
+            if isLoggedOut == false {
+                Text(DataLocalizer.localize(path: "APP.GENERAL.NO_FUNDS"))
+                    .themeFont(fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
+            }
 
             let buttonLabel = HStack {
                 Text(

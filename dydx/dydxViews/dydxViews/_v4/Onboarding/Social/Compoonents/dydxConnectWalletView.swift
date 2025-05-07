@@ -37,7 +37,7 @@ public class dydxConnectWalletViewModel: dydxWalletListItemView {
     }
 
     private func createIcons(style: ThemeStyle) -> some View {
-        HStack(spacing: -6) {
+        HStack(spacing: -12) {
             ForEach(["settings_metamask", "phantom_wallet", "coinbase_wallet", "icon_wc_logo"], id: \.self) { icon in
                 return self.createOptionIcon(style: style, icon: icon, templateColor: nil)
             }
