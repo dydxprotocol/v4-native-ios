@@ -39,6 +39,7 @@
 		02BB8F0E2D5D1BF20087A7FC /* PlatformPopoverOptionsInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BB8F0D2D5D1BEF0087A7FC /* PlatformPopoverOptionsInput.swift */; };
 		02BB8F102D5D1C2F0087A7FC /* PlatformBooleanInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BB8F0F2D5D1C2C0087A7FC /* PlatformBooleanInput.swift */; };
 		02D1342F28EB68FC00B46941 /* TabGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D1342E28EB68FC00B46941 /* TabGroup.swift */; };
+		02DDB6512DCBE05C00FFFF2C /* OTPFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDB6502DCBE05C00FFFF2C /* OTPFieldView.swift */; };
 		02DE889C28A2C91B00728FF3 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DE889128A2C91200728FF3 /* Utilities.framework */; };
 		02DE88F828A2DB9C00728FF3 /* PlatformUIBundleClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DE88F728A2DB9C00728FF3 /* PlatformUIBundleClass.swift */; };
 		02DE89A628A2F10A00728FF3 /* SampleThemeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DE89A528A2F10A00728FF3 /* SampleThemeInput.swift */; };
@@ -151,6 +152,7 @@
 		02BB8F0D2D5D1BEF0087A7FC /* PlatformPopoverOptionsInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformPopoverOptionsInput.swift; sourceTree = "<group>"; };
 		02BB8F0F2D5D1C2C0087A7FC /* PlatformBooleanInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformBooleanInput.swift; sourceTree = "<group>"; };
 		02D1342E28EB68FC00B46941 /* TabGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabGroup.swift; sourceTree = "<group>"; };
+		02DDB6502DCBE05C00FFFF2C /* OTPFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPFieldView.swift; sourceTree = "<group>"; };
 		02DE888828A2C91200728FF3 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
 		02DE88F728A2DB9C00728FF3 /* PlatformUIBundleClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformUIBundleClass.swift; sourceTree = "<group>"; };
 		02DE89A528A2F10A00728FF3 /* SampleThemeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleThemeInput.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 		025B844028AACBDE0037FF7C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				02DDB64B2DCBE03B00FFFF2C /* OTPFieldView */,
 				02B3E6932D63778C00E90227 /* ExpandableText */,
 				020493592D41B6C900394CBE /* Loading */,
 				020490A02D3AEE4A00394CBE /* SlideButton */,
@@ -360,6 +363,14 @@
 				6488BBDB296F6AEA0096502F /* TabItemViewModel.swift */,
 			);
 			path = TabGroup;
+			sourceTree = "<group>";
+		};
+		02DDB64B2DCBE03B00FFFF2C /* OTPFieldView */ = {
+			isa = PBXGroup;
+			children = (
+				02DDB6502DCBE05C00FFFF2C /* OTPFieldView.swift */,
+			);
+			path = OTPFieldView;
 			sourceTree = "<group>";
 		};
 		02DE888928A2C91200728FF3 /* Products */ = {
@@ -763,6 +774,7 @@
 				02DE89A628A2F10A00728FF3 /* SampleThemeInput.swift in Sources */,
 				023788F528B9924D00F212E1 /* PlatformButton.swift in Sources */,
 				02E2C9C128A2C22B00F7C3BE /* SampleThemeLabel.swift in Sources */,
+				02DDB6512DCBE05C00FFFF2C /* OTPFieldView.swift in Sources */,
 				0243A73729BB8DBB00A083FE /* PlatformListViewModel.swift in Sources */,
 				277E7AC62BBF3BE8009F95DE /* InlineAlert.swift in Sources */,
 				02BB8F062D5D1AD40087A7FC /* PlatformValueInput.swift in Sources */,

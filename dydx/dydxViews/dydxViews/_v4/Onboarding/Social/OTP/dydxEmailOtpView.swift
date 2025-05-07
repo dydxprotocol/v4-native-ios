@@ -9,12 +9,11 @@
 import SwiftUI
 import PlatformUI
 import Utilities
-import AEOTPTextField
 
 public class dydxEmailOtpViewModel: PlatformViewModel {
     @Published public var headerViewModel: NavHeaderModel? = NavHeaderModel()
     @Published public var resendAction: (() -> Void)?
-    @Published public var otpCommitAction: (() -> Void)?
+    @Published public var onOtpChanged: ((String) -> Void)?
     @Published public var email: String?
 
     @Published public var otp: String = ""
@@ -57,14 +56,8 @@ public class dydxEmailOtpViewModel: PlatformViewModel {
                                             params: ["EMAIL": self.email ?? ""]))
                     .themeFont(fontSize: .small)
 
-                AEOTPView(text: self.optBinding,
-                          otpBackgroundColor: ThemeColor.SemanticColor.layer3.uiColor,
-                          otpFilledBackgroundColor: ThemeColor.SemanticColor.layer3.uiColor,
-                          otpCornerRaduis: 12,
-                          otpTextColor: ThemeColor.SemanticColor.textPrimary.uiColor,
-                          onCommit: { [weak self] in
-                    self?.otpCommitAction?()
-                })
+                OTPFieldViewModel(otp: self.otp, onOtpChanged: self.onOtpChanged)
+                    .createView(parentStyle: style)
                     .padding(.vertical, 16)
 
                 HStack {

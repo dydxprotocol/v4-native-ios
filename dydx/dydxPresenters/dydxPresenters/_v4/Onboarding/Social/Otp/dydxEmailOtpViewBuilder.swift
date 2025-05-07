@@ -57,8 +57,10 @@ private class dydxEmailOtpViewPresenter: HostedViewPresenter<dydxEmailOtpViewMod
         viewModel?.resendAction = { [weak self] in
             self?.resentEmail()
         }
-        viewModel?.otpCommitAction = { [weak self] in
-            self?.validateOtpCode()
+        viewModel?.onOtpChanged = { [weak self] otp in
+            if otp.length == 6 {
+                self?.validateOtpCode(otp: otp)
+            }
         }
         viewModel?.headerViewModel?.backButtonAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: nil), animated: true) {_, _ in
@@ -134,8 +136,8 @@ private class dydxEmailOtpViewPresenter: HostedViewPresenter<dydxEmailOtpViewMod
         }
     }
 
-    private func validateOtpCode() {
-        guard let otp = viewModel?.otp else {
+    private func validateOtpCode(otp: String?) {
+        guard let otp else {
             ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.FAILED"),
                                    message: "Invalid OTP code",
                                    type: .error,
