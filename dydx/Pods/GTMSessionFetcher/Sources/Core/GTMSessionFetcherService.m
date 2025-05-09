@@ -37,9 +37,7 @@ static id<GTMUserAgentProvider> SharedStandardUserAgentProvider(void) {
 
 #if !GTMSESSION_BUILD_COMBINED_SOURCES
 @interface GTMSessionFetcher (ServiceMethods)
-- (BOOL)beginFetchMayDelay:(BOOL)mayDelay
-              mayAuthorize:(BOOL)mayAuthorize
-               mayDecorate:(BOOL)mayDecorate;
+- (void)serviceRestartingFetcher;
 @end
 #endif  // !GTMSESSION_BUILD_COMBINED_SOURCES
 
@@ -338,6 +336,7 @@ static id<GTMUserAgentProvider> SharedStandardUserAgentProvider(void) {
 #pragma mark Queue Management
 
 - (void)addRunningFetcher:(GTMSessionFetcher *)fetcher forHost:(NSString *)host {
+  GTMSessionCheckSynchronized(self);
   // Add to the array of running fetchers for this host, creating the array if needed.
   NSMutableArray *runningForHost = [_runningFetchersByHost objectForKey:host];
   if (runningForHost == nil) {
@@ -349,6 +348,7 @@ static id<GTMUserAgentProvider> SharedStandardUserAgentProvider(void) {
 }
 
 - (void)addDelayedFetcher:(GTMSessionFetcher *)fetcher forHost:(NSString *)host {
+  GTMSessionCheckSynchronized(self);
   // Add to the array of delayed fetchers for this host, creating the array if needed.
   NSMutableArray *delayedForHost = [_delayedFetchersByHost objectForKey:host];
   if (delayedForHost == nil) {
@@ -421,10 +421,6 @@ static id<GTMUserAgentProvider> SharedStandardUserAgentProvider(void) {
   return shouldBeginResult;
 }
 
-- (void)startFetcher:(GTMSessionFetcher *)fetcher {
-  [fetcher beginFetchMayDelay:NO mayAuthorize:YES mayDecorate:YES];
-}
-
 // Internal utility. Returns a fetcher's delegate if it's a dispatcher, or nil if the fetcher
 // is its own delegate (possibly via proxy) and has no dispatcher.
 - (GTMSessionFetcherSessionDelegateDispatcher *)delegateDispatcherForFetcher:
@@ -486,7 +482,7 @@ static id<GTMUserAgentProvider> SharedStandardUserAgentProvider(void) {
   [self fetcherDidStop:fetcher callbacksPending:false];
 }
 
-- (void)fetcherDidStop:(GTMSessionFetcher *)fetcher callbacksPending:(BOOL) callbacksPending {
+- (void)fetcherDidStop:(GTMSessionFetcher *)fetcher callbacksPending:(BOOL)callbacksPending {
   // Entry point from the fetcher
   NSString *host = fetcher.serviceHost;
   if (!host) {
@@ -498,7 +494,7 @@ static id<GTMUserAgentProvider> SharedStandardUserAgentProvider(void) {
   // map when the task completes.
   if (!callbacksPending) {
     GTMSessionFetcherSessionDelegateDispatcher *delegateDispatcher =
-    [self delegateDispatcherForFetcher:fetcher];
+        [self delegateDispatcherForFetcher:fetcher];
     [delegateDispatcher removeFetcher:fetcher];
   }
 
@@ -554,7 +550,7 @@ static id<GTMUserAgentProvider> SharedStandardUserAgentProvider(void) {
 
   // Start fetchers outside of the synchronized block to avoid a deadlock.
   for (GTMSessionFetcher *nextFetcher in fetchersToStart) {
-    [self startFetcher:nextFetcher];
+    [nextFetcher serviceRestartingFetcher];
   }
 
   // The fetcher is no longer in the running or the delayed array,

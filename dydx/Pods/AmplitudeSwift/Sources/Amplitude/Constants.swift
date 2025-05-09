@@ -8,7 +8,7 @@
 import Foundation
 
 @objc(AMPLogLevel)
-public enum LogLevelEnum: Int {
+public enum LogLevelEnum: Int, Sendable {
     case OFF
     case ERROR
     case WARN
@@ -16,37 +16,9 @@ public enum LogLevelEnum: Int {
     case DEBUG
 }
 
-@objc(AMPServerZone)
-public enum ServerZone: Int {
-    case US
-    case EU
-
-    public typealias RawValue = String
-
-    public var rawValue: RawValue {
-        switch self {
-        case .US:
-            return "US"
-        case .EU:
-            return "EU"
-        }
-    }
-
-    public init?(rawValue: RawValue) {
-        switch rawValue {
-        case "US":
-            self = .US
-        case "EU":
-            self = .EU
-        default:
-            return nil
-        }
-    }
-}
-
 public struct Constants {
     static let SDK_LIBRARY = "amplitude-swift"
-    static let SDK_VERSION = "1.12.0"
+    static let SDK_VERSION = "1.13.0"
     public static let DEFAULT_API_HOST = "https://api2.amplitude.com/2/httpapi"
     public static let EU_DEFAULT_API_HOST = "https://api.eu.amplitude.com/2/httpapi"
     static let BATCH_API_HOST = "https://api2.amplitude.com/batch"
@@ -117,6 +89,12 @@ public struct Constants {
     static let AMP_NETWORK_DURATION_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Duration"
     static let AMP_NETWORK_REQUEST_BODY_SIZE_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Request Body Size"
     static let AMP_NETWORK_RESPONSE_BODY_SIZE_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Response Body Size"
+
+    struct RemoteConfig {
+        struct Key {
+            static let autocapture = "analyticsSDK.iosSDK.autocapture"
+        }
+    }
 
     public struct Configuration {
         public static let FLUSH_QUEUE_SIZE = 30

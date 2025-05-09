@@ -1,6 +1,8 @@
 PODS:
-  - Abacus (1.14.0)
-  - AmplitudeSwift (1.12.0):
+  - Abacus (1.14.1)
+  - AmplitudeCore (1.0.11)
+  - AmplitudeSwift (1.13.0):
+    - AmplitudeCore (< 2.0.0, >= 1.0.10)
     - AnalyticsConnector (~> 1.3.0)
   - AnalyticsConnector (1.3.1)
   - AppsFlyerFramework (6.17.0):
@@ -183,50 +185,50 @@ PODS:
     - GoogleToolboxForMac/Defines (= 5.0.0)
   - GoogleToolboxForMac/StringEncoding (5.0.0):
     - GoogleToolboxForMac/Defines (= 5.0.0)
-  - GoogleUtilities (8.0.2):
-    - GoogleUtilities/AppDelegateSwizzler (= 8.0.2)
-    - GoogleUtilities/Environment (= 8.0.2)
-    - GoogleUtilities/Logger (= 8.0.2)
-    - GoogleUtilities/MethodSwizzler (= 8.0.2)
-    - GoogleUtilities/Network (= 8.0.2)
-    - "GoogleUtilities/NSData+zlib (= 8.0.2)"
-    - GoogleUtilities/Privacy (= 8.0.2)
-    - GoogleUtilities/Reachability (= 8.0.2)
-    - GoogleUtilities/SwizzlerTestHelpers (= 8.0.2)
-    - GoogleUtilities/UserDefaults (= 8.0.2)
-  - GoogleUtilities/AppDelegateSwizzler (8.0.2):
+  - GoogleUtilities (8.1.0):
+    - GoogleUtilities/AppDelegateSwizzler (= 8.1.0)
+    - GoogleUtilities/Environment (= 8.1.0)
+    - GoogleUtilities/Logger (= 8.1.0)
+    - GoogleUtilities/MethodSwizzler (= 8.1.0)
+    - GoogleUtilities/Network (= 8.1.0)
+    - "GoogleUtilities/NSData+zlib (= 8.1.0)"
+    - GoogleUtilities/Privacy (= 8.1.0)
+    - GoogleUtilities/Reachability (= 8.1.0)
+    - GoogleUtilities/SwizzlerTestHelpers (= 8.1.0)
+    - GoogleUtilities/UserDefaults (= 8.1.0)
+  - GoogleUtilities/AppDelegateSwizzler (8.1.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Environment (8.0.2):
+  - GoogleUtilities/Environment (8.1.0):
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Logger (8.0.2):
+  - GoogleUtilities/Logger (8.1.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Privacy
-  - GoogleUtilities/MethodSwizzler (8.0.2):
+  - GoogleUtilities/MethodSwizzler (8.1.0):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Network (8.0.2):
+  - GoogleUtilities/Network (8.1.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Privacy
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (8.0.2)":
+  - "GoogleUtilities/NSData+zlib (8.1.0)":
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Privacy (8.0.2)
-  - GoogleUtilities/Reachability (8.0.2):
+  - GoogleUtilities/Privacy (8.1.0)
+  - GoogleUtilities/Reachability (8.1.0):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - GoogleUtilities/SwizzlerTestHelpers (8.0.2):
+  - GoogleUtilities/SwizzlerTestHelpers (8.1.0):
     - GoogleUtilities/MethodSwizzler
-  - GoogleUtilities/UserDefaults (8.0.2):
+  - GoogleUtilities/UserDefaults (8.1.0):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - GTMSessionFetcher (4.4.0):
-    - GTMSessionFetcher/Full (= 4.4.0)
-  - GTMSessionFetcher/Core (4.4.0)
-  - GTMSessionFetcher/Full (4.4.0):
+  - GTMSessionFetcher (4.5.0):
+    - GTMSessionFetcher/Full (= 4.5.0)
+  - GTMSessionFetcher/Core (4.5.0)
+  - GTMSessionFetcher/Full (4.5.0):
     - GTMSessionFetcher/Core
   - HMSegmentedControl (1.5.6)
   - iCarousel (1.8.3)
@@ -259,7 +261,7 @@ PODS:
     - SDWebImage (~> 5.10)
   - SimpleKeychain (0.12.5)
   - SnapKit (5.7.1)
-  - Statsig (1.53.1)
+  - Statsig (1.53.2)
   - SVGKit (3.0.0):
     - CocoaLumberjack (~> 3.0)
   - Validator (3.2.1)
@@ -310,6 +312,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - AmplitudeCore
     - AmplitudeSwift
     - AnalyticsConnector
     - AppsFlyerFramework
@@ -379,8 +382,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  Abacus: 7ab115944b4c504cdbc729d4b9d8219f3c3c8070
-  AmplitudeSwift: 7269c77825aac5cd8427a2d99bd87aa675fba75a
+  Abacus: 426f9a212c05d7b15e93b6ef3005143b2cc2ccb8
+  AmplitudeCore: 8c5929b25b531af7ad4f46474b1a71561640a015
+  AmplitudeSwift: 46a285740b7d586895ccf24f19db8ca391ae4e71
   AnalyticsConnector: 3def11199b4ddcad7202c778bde982ec5da0ebb3
   AppsFlyerFramework: 34cef9f9653f4fd01c27d4d87784425b9271f82f
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
@@ -410,8 +414,8 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 6ee0ee888bb1db802c49049001adb4013d7fe41b
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleToolboxForMac: d0a675de27cb3e7fbf157925680ac8421d86c257
-  GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
-  GTMSessionFetcher: 75b671f9e551e4c49153d4c4f8659ef4f559b970
+  GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
+  GTMSessionFetcher: fc75fc972958dceedee61cb662ae1da7a83a91cf
   HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   JTCalendar: 1b326e0d59dd1855b52c5f3feb059d2ff953805d
@@ -432,7 +436,7 @@ SPEC CHECKSUMS:
   SDWebImageSwiftUI: a6d7129fb68fc18c8b930b869ddcfce314e49ded
   SimpleKeychain: 8193a9e40967eccac933c1fde82de46c07a5ae26
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
-  Statsig: 1bc2b60ab12967d6ed462d1849c9fdd819a00386
+  Statsig: ce1e12b661d196eb40f89043d0d89f49c0407cfa
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0

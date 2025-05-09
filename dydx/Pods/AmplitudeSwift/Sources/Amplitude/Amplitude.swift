@@ -1,10 +1,12 @@
+@_exported import AmplitudeCore
 import Foundation
 
-public class Amplitude {
+public class Amplitude: PluginHost {
+
     public private(set) var configuration: Configuration
     private var inForeground = false
 
-    var sessionId: Int64 {
+    public var sessionId: Int64 {
         sessions.sessionId
     }
 
@@ -50,13 +52,17 @@ public class Amplitude {
         // Inform plugins after we've relinquished the lock
         if userIdChanged {
             timeline.apply { plugin in
-                plugin.onUserIdChanged(identity.userId)
+                if let amplitudePlugin = plugin as? Plugin {
+                    amplitudePlugin.onUserIdChanged(identity.userId)
+                }
             }
         }
 
         if deviceIdChanged {
             timeline.apply { plugin in
-                plugin.onDeviceIdChanged(identity.deviceId)
+                if let amplitudePlugin = plugin as? Plugin {
+                    amplitudePlugin.onDeviceIdChanged(identity.deviceId)
+                }
             }
         }
 
@@ -73,6 +79,8 @@ public class Amplitude {
 
     var contextPlugin: ContextPlugin
     let timeline = Timeline()
+
+    public let amplitudeContext: AmplitudeContext
 
     lazy var storage: any Storage = {
         return self.configuration.storageProvider
@@ -107,6 +115,21 @@ public class Amplitude {
         configuration: Configuration
     ) {
         self.configuration = configuration
+
+        let serverZone: AmplitudeCore.ServerZone
+        switch configuration.serverZone {
+        case .US:
+            serverZone = .US
+        case .EU:
+            serverZone = .EU
+        @unknown default:
+            serverZone = .US
+        }
+
+        amplitudeContext = AmplitudeContext(apiKey: configuration.apiKey,
+                                            instanceName: configuration.getNormalizeInstanceName(),
+                                            serverZone: serverZone,
+                                            logger: configuration.loggerProvider)
 
         let contextPlugin = ContextPlugin()
         self.contextPlugin = contextPlugin
@@ -317,8 +340,13 @@ public class Amplitude {
     }
 
     @discardableResult
-    public func add(plugin: Plugin) -> Amplitude {
-        plugin.setup(amplitude: self)
+
+    public func add(plugin: UniversalPlugin) -> Self {
+        if let plugin = plugin as? Plugin {
+            plugin.setup(amplitude: self)
+        } else {
+            plugin.setup(analyticsClient: self, amplitudeContext: amplitudeContext)
+        }
         timeline.add(plugin: plugin)
         return self
     }
@@ -327,6 +355,10 @@ public class Amplitude {
     public func remove(plugin: Plugin) -> Amplitude {
         timeline.remove(plugin: plugin)
         return self
+    }
+
+    public func plugin(name: String) -> UniversalPlugin? {
+        return timeline.plugin(name: name)
     }
 
     @discardableResult
@@ -367,7 +399,7 @@ public class Amplitude {
 
     @discardableResult
     public func setSessionId(timestamp: Int64) -> Amplitude {
-        trackingQueue.async { [self] in
+        trackingQueue.async { [self, identity] in
             let sessionEvents: [BaseEvent]
             if timestamp >= 0 {
                 sessionEvents = self.sessions.startNewSession(timestamp: timestamp)
@@ -375,6 +407,8 @@ public class Amplitude {
                 sessionEvents = self.sessions.endCurrentSession()
             }
             self.sessions.assignEventId(events: sessionEvents).forEach { e in
+                e.userId = e.userId ?? identity.userId
+                e.deviceId = e.deviceId ?? identity.deviceId
                 self.timeline.processEvent(event: e)
             }
         }
@@ -397,7 +431,11 @@ public class Amplitude {
     }
 
     public func apply(closure: (Plugin) -> Void) {
-        timeline.apply(closure)
+        timeline.apply { plugin in
+            if let plugin = plugin as? Plugin {
+                closure(plugin)
+            }
+        }
     }
 
     private func process(event: BaseEvent) {
@@ -412,14 +450,13 @@ public class Amplitude {
             applyIdentityUpdate(updatedIdentity, sendIdentifyIfNeeded: false)
         }
 
-        let identity = self.identity
-        event.userId = event.userId ?? identity.userId
-        event.deviceId = event.deviceId ?? identity.deviceId
-
-        let inForeground = inForeground
-        trackingQueue.async { [self] in
+        trackingQueue.async { [self, identity, inForeground] in
             let events = self.sessions.processEvent(event: event, inForeground: inForeground)
-            events.forEach { e in self.timeline.processEvent(event: e) }
+            events.forEach { e in
+                e.userId = e.userId ?? identity.userId
+                e.deviceId = e.deviceId ?? identity.deviceId
+                self.timeline.processEvent(event: e)
+            }
         }
     }
 
@@ -429,10 +466,14 @@ public class Amplitude {
             timestamp: timestamp,
             eventType: Constants.AMP_SESSION_START_EVENT
         )
-        trackingQueue.async { [self] in
+        trackingQueue.async { [self, identity] in
             // set inForeground to false to represent state before event was fired
             let events = self.sessions.processEvent(event: dummySessionStartEvent, inForeground: false)
-            events.forEach { e in self.timeline.processEvent(event: e) }
+            events.forEach { e in
+                e.userId = e.userId ?? identity.userId
+                e.deviceId = e.deviceId ?? identity.deviceId
+                self.timeline.processEvent(event: e)
+            }
         }
     }
 
@@ -560,5 +601,21 @@ public class Amplitude {
             }
         }
         logger?.debug(message: "Completed trimming events, kept \(eventCount) most recent events")
+    }
+}
+
+extension Amplitude: AnalyticsClient {
+
+    public func track(eventType: String, eventProperties: [String: Any]? = nil) {
+        track(eventType: eventType, eventProperties: eventProperties, options: nil)
+    }
+
+    public var optOut: Bool {
+        get {
+            return configuration.optOut
+        }
+        set {
+            configuration.optOut = newValue
+        }
     }
 }
