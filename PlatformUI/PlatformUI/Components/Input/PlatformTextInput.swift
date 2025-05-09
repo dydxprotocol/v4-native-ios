@@ -13,12 +13,14 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
         case `default`
         case decimalDigits
         case wholeNumber
+        case emailAddress
 
         fileprivate var keyboardType: UIKeyboardType {
             switch self {
             case .default: return .default
             case .decimalDigits: return .decimalPad
             case .wholeNumber: return .numberPad
+            case .emailAddress: return .emailAddress
             }
         }
 
@@ -27,6 +29,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
             case .default: return { $0 }
             case .decimalDigits: return { $0.cleanAsDecimalNumber() }
             case .wholeNumber: return { $0.truncateToWholeNumber() }
+            case .emailAddress: return { $0.trimmingCharacters(in: .whitespaces) }
             }
         }
     }
@@ -150,6 +153,7 @@ open class PlatformTextInputViewModel: PlatformValueInputViewModel {
                 currentValueRaw: self.rawInput,
                 placeHolder: self.placeHolder ?? "",
                 keyboardType: self.inputType.keyboardType,
+                contentType: self.contentType,
                 onEditingChanged: { focused in
                     self.focused = focused
                 },

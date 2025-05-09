@@ -49,7 +49,7 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
                 }
             }
         }
-        viewModel.learnMoreAction = learnMoreAction
+        viewModel.buyingPowerTooltip.learnMoreAction = learnMoreAction
         viewModel.marginUsageTooltip.learnMoreAction = learnMoreAction
 
         attachChildren(workers: childPresenters)
@@ -121,23 +121,10 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
 
         var chartEntries = lastChartEntries
         if lastPnls != pnls {
-            let entries = pnls.compactMap {
+            chartEntries = pnls.compactMap {
                 let date = $0.createdAtMilliseconds / 1000
                 let value = $0.equity
                 return dydxLineChartViewModel.Entry(date: date, value: value)
-            }
-            let maxEntryCount = 200 // for fast rendering
-            if entries.count > maxEntryCount {
-                var interpolatedEntries: [dydxLineChartViewModel.Entry] = []
-                let step = entries.count / maxEntryCount
-                for i in 0..<maxEntryCount {
-                    if i * step < entries.count {
-                        interpolatedEntries.append(entries[i * step])
-                    }
-                }
-                chartEntries = interpolatedEntries
-            } else {
-                chartEntries = entries
             }
             lastChartEntries = chartEntries
         }
@@ -152,6 +139,16 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
             viewModel?.chart.entries = chartEntries
             viewModel?.chart.showYLabels = false
             viewModel?.chart.valueLowerBoundOffset = (maxValue - minValue) * 0.8
+            viewModel?.chart.dataPointSelected = { [weak self] entry in
+                if let entry {
+                    self?.viewModel?.selectedEquityAmount = dydxFormatter.shared.dollar(number: entry.value, digits: 2)
+                    let date = Date(timeIntervalSince1970: TimeInterval(entry.date))
+                    self?.viewModel?.selectedEquityDate = dydxFormatter.shared.dateAndTime(date: date)
+                } else {
+                    self?.viewModel?.selectedEquityAmount = nil
+                    self?.viewModel?.selectedEquityDate = nil
+                }
+            }
         }
 
         lastPnls = pnls

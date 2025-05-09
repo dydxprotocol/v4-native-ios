@@ -38,22 +38,20 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
     }
 
     @Published public var buttonAction: (() -> Void)?
-    @Published public var learnMoreAction: (() -> Void)?
     @Published public var state: LoginState  = .unknown
     @Published public var sharedAccountViewModel: SharedAccountViewModel? = SharedAccountViewModel()
     @Published public var pnlAmount: SignedAmountViewModel?
     @Published public var pnlPercent: SignedAmountViewModel?
-    @Published public var chart = dydxLineChartViewModel()
+    @Published public var chart = dydxLineChartViewModel(backgroundColor: .layer1)
+
+    // Only populate the following if user selects a data point from the chart
+    @Published public var selectedEquityAmount: String?
+    @Published public var selectedEquityDate: String?
 
     @Published public var periodOption = dydxSimpleUIPortfolioPeriodViewModel.previewValue
 
     @Published public var marginUsageTooltip = MarginUsageTooltipModel()
-
-    private var buyingPowerTooltip: TooltipModel {
-        Tooltips.buyingPower { [weak self] in
-            self?.learnMoreAction?()
-        }
-    }
+    @Published public var buyingPowerTooltip = BuyingPowerTooltipModel()
 
     private var pnlColor: ThemeColor.SemanticColor {
         get {
@@ -72,6 +70,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
         vm.pnlPercent = .previewValue
         vm.state = .hasBalance
         vm.marginUsageTooltip = .previewValue
+        vm.buyingPowerTooltip = .previewValue
         return vm
     }
 
@@ -84,9 +83,9 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
             case .hasBalance:
                 view = AnyView(createPortfolioView(style: style))
             case .walletConnected:
-                view = AnyView(createLoggedOutView(style: style))
+                view = AnyView(createLoggedOutView(style: style, isLoggedOut: false))
             case .loggedOut:
-                view = AnyView(createLoggedOutView(style: style))
+                view = AnyView(createLoggedOutView(style: style, isLoggedOut: true))
             case .unknown:
                 view = AnyView(createLoadingView(style: style))
             }
@@ -155,21 +154,12 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
                 .padding(.top, 78)
 
             VStack(spacing: 16) {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(sharedAccountViewModel?.equity ?? "-")
-                        .themeFont(fontType: .plus, fontSize: .custom(size: 32))
-                        .themeColor(foreground: .textPrimary)
-                        .animation(.default)
-
-                    HStack(alignment: .center, spacing: 8) {
-                        pnlAmount?
-                            .createView(parentStyle: style.themeFont(fontSize: .small))
-                        pnlPercent?
-                            .createView(parentStyle: style.themeFont(fontSize: .small))
-
-                        periodOption.createView(parentStyle: style)
+                Group {
+                    if selectedEquityAmount != nil && selectedEquityDate != nil {
+                        createSelectedEquityView(style: style)
+                    } else {
+                        createCurrentEquityView(style: style)
                     }
-                    .themeFont(fontSize: .small)
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16)
@@ -204,7 +194,42 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
         }
     }
 
-    private func createLoggedOutView(style: ThemeStyle) -> some View {
+    private func createCurrentEquityView(style: ThemeStyle) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(sharedAccountViewModel?.equity ?? "-")
+                .themeFont(fontType: .plus, fontSize: .custom(size: 32))
+                .themeColor(foreground: .textPrimary)
+                .animation(.default)
+
+            HStack(alignment: .center, spacing: 8) {
+                pnlAmount?
+                    .createView(parentStyle: style.themeFont(fontSize: .small))
+                pnlPercent?
+                    .createView(parentStyle: style.themeFont(fontSize: .small))
+
+                periodOption.createView(parentStyle: style)
+            }
+            .themeFont(fontSize: .small)
+            .frame(minHeight: 28)
+        }
+    }
+
+    private func createSelectedEquityView(style: ThemeStyle) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(selectedEquityAmount ?? "-")
+                .themeFont(fontType: .plus, fontSize: .custom(size: 32))
+                .themeColor(foreground: .textPrimary)
+                .animation(.default)
+
+            Text(selectedEquityDate ?? "-")
+                .themeFont(fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+                .animation(.default)
+                .frame(minHeight: 28)
+        }
+    }
+
+    private func createLoggedOutView(style: ThemeStyle, isLoggedOut: Bool) -> some View {
         VStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 0) {
                 Text(dydxFormatter.shared.dollar(number: 0.0, digits: 2) ?? "")
@@ -221,9 +246,11 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
 
             Spacer()
 
-            Text(DataLocalizer.localize(path: "APP.GENERAL.NO_FUNDS"))
-                .themeFont(fontSize: .small)
-                .themeColor(foreground: .textTertiary)
+            if isLoggedOut == false {
+                Text(DataLocalizer.localize(path: "APP.GENERAL.NO_FUNDS"))
+                    .themeFont(fontSize: .small)
+                    .themeColor(foreground: .textTertiary)
+            }
 
             let buttonLabel = HStack {
                 Text(

@@ -29,7 +29,6 @@ public class dydxVaultViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
             return AnyView(dydxVaultView(viewModel: self))
-                .wrappedInAnyView()
         }
     }
 }

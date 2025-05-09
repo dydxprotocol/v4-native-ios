@@ -1,32 +1,41 @@
 //
 //  dydxWalletListView.swift
-//  dydxViews
+//  dydxUI
 //
-//  Created by Rui Huang on 2/28/23.
-//  Copyright © 2023 dYdX Trading Inc. All rights reserved.
+//  Created by Rui Huang on 05/05/2025.
+//  Copyright © 2025 dYdX Trading Inc. All rights reserved.
 //
 
 import SwiftUI
 import PlatformUI
 import Utilities
-import Introspect
 
 public class dydxWalletListViewModel: PlatformViewModel {
-    @Published public var items: [PlatformViewModel] = []
+    @Published public var socialView: dydxSocialViewModel?
+    @Published public var syncDesktopView: dydxSyncDesktopViewModel?
+    @Published public var debugView: dydxDebugScanViewModel?
+    @Published public var metamaskView: dydxMetamaskViewModel?
+    @Published public var phantomView: dydxPhantomViewModel?
+    @Published public var coinbaseView: dydxCoinbaseViewModel?
+    @Published public var wcModalView: dydxWcModalViewModel?
+
     @Published public var onScrollViewCreated: ((UIScrollView) -> Void)?
 
     public init() { }
 
     public static var previewValue: dydxWalletListViewModel {
         let vm = dydxWalletListViewModel()
-        vm.items = [
-            dydxWalletViewModel.previewValue,
-            dydxWalletViewModel.previewValue
-        ]
+        vm.socialView = .previewValue
+        vm.syncDesktopView = .previewValue
+        vm.debugView = .previewValue
+        vm.metamaskView = .previewValue
+        vm.phantomView = .previewValue
+        vm.coinbaseView = .previewValue
+        vm.wcModalView = .previewValue
         return vm
     }
 
-    public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformUI.PlatformView {
+    public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
@@ -36,7 +45,7 @@ public class dydxWalletListViewModel: PlatformViewModel {
                     Text(DataLocalizer.localize(path: "APP.ONBOARDING.SELECT_WALLET"))
                         .themeFont(fontSize: .largest)
 
-                    Text(DataLocalizer.localize(path: "APP.ONBOARDING.SELECT_WALLET_TEXT"))
+                    Text(DataLocalizer.localize(path: "APP.ONBOARDING.LOGIN_SIGNUP_TEXT_2"))
                         .themeFont(fontSize: .small)
                         .themeColor(foreground: .textTertiary)
                 }
@@ -45,27 +54,43 @@ public class dydxWalletListViewModel: PlatformViewModel {
                 .leftAligned()
 
                 ScrollView(showsIndicators: false) {
-                    VStack(spacing: 8) {
+                    VStack(spacing: 12) {
 
-                        ForEach(self.items, id: \.id) { lineItem in
-                            lineItem
-                                .createView(parentStyle: style)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .animation(.default)
+                        self.syncDesktopView?.createView(parentStyle: style)
+                        self.debugView?.createView(parentStyle: style)
+                        self.metamaskView?.createView(parentStyle: style)
+                        self.phantomView?.createView(parentStyle: style)
+                        self.coinbaseView?.createView(parentStyle: style)
+                        self.wcModalView?.createView(parentStyle: style)
+
+                        self.createDivider(parentStyle: style)
+
+                        self.socialView?.createView(parentStyle: style)
 
                         Spacer(minLength: 28)
                     }
+                    .padding(.top, 16)
                     .introspectScrollView { [weak self] scrollView in
                         self?.onScrollViewCreated?(scrollView)
                     }
                 }
             }
                 .padding([.leading, .trailing])
-                .themeColor(background: .layer3)
+                .themeColor(background: .layer1)
 
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))
+        }
+    }
+
+    private func createDivider(parentStyle: ThemeStyle) -> some View {
+        ZStack(alignment: .center) {
+            DividerModel().createView(parentStyle: parentStyle)
+            Text(DataLocalizer.localize(path: "APP.GENERAL.OR"))
+                .themeColor(foreground: .textTertiary)
+                .themeFont(fontSize: .smaller)
+                .padding(.horizontal, 8)
+                .themeColor(background: .layer1)
         }
     }
 }
@@ -79,6 +104,8 @@ struct dydxWalletListView_Previews_Dark: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxWalletListViewModel.previewValue
             .createView()
+            .themeColor(background: .layer0)
+            .environmentObject(themeSettings)
             // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
     }
@@ -92,6 +119,8 @@ struct dydxWalletListView_Previews_Light: PreviewProvider {
         ThemeSettings.applyStyles()
         return dydxWalletListViewModel.previewValue
             .createView()
+            .themeColor(background: .layer0)
+            .environmentObject(themeSettings)
         // .edgesIgnoringSafeArea(.bottom)
             .previewLayout(.sizeThatFits)
     }

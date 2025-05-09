@@ -47,8 +47,8 @@ public class dydxMarketTilesViewModel: PlatformViewModel {
                                       templateColor: .textTertiary)
                 .createView(parentStyle: style)
                 .padding(8)
-                .themeColor(background: .layer3)
-                .border(borderWidth: 1, cornerRadius: 8, borderColor: ThemeColor.SemanticColor.layer5.color)
+                .themeColor(background: .transparent)
+                .border(borderWidth: 1, cornerRadius: 8, borderColor: ThemeColor.SemanticColor.borderDefault.color)
                 .wrappedViewModel
             }
             let selectedItems = self.allTiles.map { tile in
@@ -56,7 +56,7 @@ public class dydxMarketTilesViewModel: PlatformViewModel {
                     PlatformIconViewModel(type: tile.icon,
                                           clip: .noClip,
                                           size: CGSize(width: 24, height: 24),
-                                          templateColor: .textSecondary)
+                                          templateColor: .textPrimary)
                         .createView(parentStyle: style)
                     Text(tile.text)
                         .themeFont(fontSize: .smaller)
@@ -66,8 +66,8 @@ public class dydxMarketTilesViewModel: PlatformViewModel {
                 }
                 .padding(8)
                 .themeColor(foreground: .textPrimary)
-                .themeColor(background: .layer0)
-                .border(borderWidth: 1, cornerRadius: 8, borderColor: ThemeColor.SemanticColor.layer5.color)
+                .themeColor(background: .layer5)
+                .border(borderWidth: 1, cornerRadius: 8, borderColor: ThemeColor.SemanticColor.borderDefault.color)
                 .wrappedViewModel
             }
             return AnyView(

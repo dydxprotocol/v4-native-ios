@@ -65,6 +65,7 @@ private class dydxAppModeSurveyViewPresenter: HostedViewPresenter<dydxAppModeSur
     override func onHalfSheetDismissal() {
         super.onHalfSheetDismissal()
 
+        logCancel()
         switchMode()
     }
 
@@ -121,6 +122,18 @@ private class dydxAppModeSurveyViewPresenter: HostedViewPresenter<dydxAppModeSur
             feedback: nil,
             isSubmit: false,
             isDoNotShowAgain: true
+        )
+        Tracking.shared?.log(event: event)
+    }
+
+    private func logCancel() {
+        let event = AnalyticsEventV2.AppModeSurveyEvent(
+            option1: false,
+            option2: false,
+            option3: false,
+            feedback: nil,
+            isSubmit: false,
+            isDoNotShowAgain: false
         )
         Tracking.shared?.log(event: event)
     }

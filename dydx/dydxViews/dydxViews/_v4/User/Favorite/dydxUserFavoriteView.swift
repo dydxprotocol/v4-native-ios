@@ -39,7 +39,7 @@ public class dydxUserFavoriteViewModel: PlatformViewModel {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            let icon = self.isFavorited ? "action_like_small" : "action_dislike_small"
+            let icon = self.isFavorited ? "action_like" : "action_dislike"
             let content = PlatformIconViewModel(type: .asset(name: icon, bundle: Bundle.dydxView),
                                                 size: self.size)
 

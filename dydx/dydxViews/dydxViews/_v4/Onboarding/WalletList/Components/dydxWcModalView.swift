@@ -11,13 +11,10 @@ import PlatformUI
 import Utilities
 
 public class dydxWcModalViewModel: dydxWalletListItemView {
-    @Published public var text: String?
-
     public init() { }
 
     public static var previewValue: dydxWcModalViewModel {
         let vm = dydxWcModalViewModel()
-        vm.text = "Test String"
         return vm
     }
 
@@ -26,14 +23,14 @@ public class dydxWcModalViewModel: dydxWalletListItemView {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let main = Text(DataLocalizer.localize(path: "APP.WALLETS.WALLET_CONNECT_2"))
-            let trailing = Text(DataLocalizer.localize(path: "APP.GENERAL.RECOMMENDED"))
-                    .themeFont(fontSize: .small)
-                    .themeColor(foreground: .textTertiary)
+            let trailing = PlatformIconViewModel(type: .system(name: "chevron.right"),
+                                                 size: CGSize(width: 12, height: 12),
+                                                 templateColor: .textTertiary)
             let image = PlatformIconViewModel(type: .asset(name: "icon_wc_logo", bundle: Bundle.dydxView),
-                                     size: CGSize(width: 36, height: 36))
+                                     size: CGSize(width: 24, height: 24))
 
             return self.createItemView(main: main.wrappedViewModel,
-                                  trailing: trailing.wrappedViewModel,
+                                  trailing: trailing,
                                   image: image,
                                   style: style)
         }

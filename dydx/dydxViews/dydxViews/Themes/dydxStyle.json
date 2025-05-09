@@ -63,10 +63,10 @@
     },
     "pill_tab_group_unselected_item": {
         "_textColor": "text_secondary",
-        "_layerColor": "layer_5"
+        "_layerColor": "transparent"
     },
     "pill_tab_group_selected_item": {
         "_textColor": "text_primary",
-        "_layerColor": "layer_2"
+        "_layerColor": "layer_4"
     }
 }

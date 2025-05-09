@@ -106,6 +106,7 @@ public class SearchBoxModel: PlatformViewModel {
                 .clipShape(Capsule())
                 .padding(.vertical, 8)
                 .padding(.horizontal, 16)
+                .frame(height: 52)
 
             return AnyView(view)
         }

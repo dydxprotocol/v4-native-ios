@@ -14,12 +14,14 @@ import Foundation
 public class dydxSimpleUIMarketInfoHeaderViewModel: PlatformViewModel {
     @Published public var sharedMarketViewModel: SharedMarketViewModel? = SharedMarketViewModel()
     @Published public var onBackButtonTap: (() -> Void)?
+    @Published public var favoriteViewModel: dydxUserFavoriteViewModel? = dydxUserFavoriteViewModel(size: .init(width: 20, height: 20))
 
     public init() { }
 
     public static var previewValue: dydxSimpleUIMarketInfoHeaderViewModel {
         let vm = dydxSimpleUIMarketInfoHeaderViewModel()
         vm.sharedMarketViewModel = .previewValue
+        vm.favoriteViewModel = .previewValue
         return vm
     }
 
@@ -41,6 +43,9 @@ public class dydxSimpleUIMarketInfoHeaderViewModel: PlatformViewModel {
                 Spacer()
 
                 self.createPriceChange(style: style)
+
+                self.favoriteViewModel?.createView(parentStyle: style)
+                    .frame(width: 32)
             }
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 16)

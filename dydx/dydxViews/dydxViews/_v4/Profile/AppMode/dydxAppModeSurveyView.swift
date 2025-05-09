@@ -128,7 +128,7 @@ public class dydxAppModeSurveyViewModel: PlatformViewModel {
                 let buttonText = DataLocalizer.localize(path: "SURVEY.SUBMIT")
                 let buttonContent = Text(buttonText)
                     .themeFont(fontType: .plus, fontSize: .large)
-                    .themeColor(foreground: self.canSubmit ? .textPrimary : .textTertiary)
+                    .themeColor(foreground: self.canSubmit ? .colorWhite : .textTertiary)
                     .wrappedViewModel
                 PlatformButtonViewModel(content: buttonContent,
                                         type: buttonType,

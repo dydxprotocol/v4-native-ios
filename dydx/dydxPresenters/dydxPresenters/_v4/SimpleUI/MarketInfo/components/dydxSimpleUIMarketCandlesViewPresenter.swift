@@ -16,12 +16,14 @@ import dydxStateManager
 import Abacus
 import Combine
 import DGCharts
+import dydxFormatter
 
 protocol dydxSimpleUIMarketCandlesViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxSimpleUIMarketCandlesViewModel? { get }
 }
 
 class dydxSimpleUIMarketCandlesViewPresenter: HostedViewPresenter<dydxSimpleUIMarketCandlesViewModel>, dydxSimpleUIMarketCandlesViewPresenterProtocol, ChartViewDelegate {
+    private var tickSize: Int?
 
     @Published var marketId: String?
 
@@ -100,6 +102,17 @@ class dydxSimpleUIMarketCandlesViewPresenter: HostedViewPresenter<dydxSimpleUIMa
         }
     }
 
+    private var selectedChartEntry: ChartDataEntry? {
+        didSet {
+            if selectedChartEntry !== oldValue {
+                displayHighlight()
+                if selectedChartEntry === nil || oldValue === nil {
+                    HapticFeedback.shared?.impact(level: .high)
+                }
+            }
+        }
+    }
+
     override init() {
         super.init()
 
@@ -147,6 +160,15 @@ class dydxSimpleUIMarketCandlesViewPresenter: HostedViewPresenter<dydxSimpleUIMa
                 self?.updateGraphData(candles: candles, resolutionIndex: resolutionIndex)
             }
             .store(in: &subscriptions)
+
+        Publishers
+            .CombineLatest($marketId,
+                            AbacusStateManager.shared.state.marketMap)
+            .sink { [weak self] marketId, marketMap in
+                guard let marketId = marketId, let market = marketMap[marketId] else { return }
+                self?.tickSize = market.configs?.displayTickSizeDecimals?.intValue
+            }
+            .store(in: &subscriptions)
     }
 
     private func updateGraphData(candles: MarketCandles, resolutionIndex: Int) {
@@ -170,6 +192,106 @@ class dydxSimpleUIMarketCandlesViewPresenter: HostedViewPresenter<dydxSimpleUIMa
              }
          } else {
             listInteractor.list = []
+        }
+    }
+
+    // MARK: ChartViewDelegate
+
+    func chartViewDidEndPanning(_ chartView: ChartViewBase) {
+        chartView.highlightValue(nil)
+        selectedChartEntry = nil
+    }
+
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        chartView.highlightValue(nil)
+        selectedChartEntry = nil
+    }
+
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        chartView.highlightValue(highlight)
+        let animated = (selectedChartEntry !== nil)
+        selectedChartEntry = entry
+        moveHighlightAway(x: highlight.xPx, y: highlight.yPx, chartView: chartView, animated: animated)
+    }
+
+    private func moveHighlightAway(x: CGFloat, y: CGFloat, chartView: ChartViewBase, animated: Bool) {
+        let point = CGPoint(x: x, y: y)
+        let translated = point // chartView.convert(point, to: view)
+
+        let highlightFrameWidth = viewModel?.highlight?.width ?? 0
+        let highlightFrameHeight = viewModel?.highlight?.height ?? 0
+
+        let viewSize = CGSize(width: UIScreen.main.bounds.width, height: viewModel?.height ?? 0)
+
+        var targetX = x
+        var targetY = y
+        if translated.x > viewSize.width / 2 {
+            targetX = max(x - highlightFrameWidth - 8, 16)
+        } else {
+            targetX = min(x + 8, viewSize.width - highlightFrameWidth - 16)
+        }
+        targetY = viewSize.height / 2 - highlightFrameHeight / 2
+        if targetY < 16 {
+            targetY = 16
+        } else if targetY + highlightFrameHeight > viewSize.height - 16 {
+            targetY = viewSize.height - 16 - highlightFrameHeight
+        }
+        viewModel?.highlightX = targetX
+        viewModel?.highlightY = targetY
+    }
+
+    private func displayHighlight() {
+        guard let tickSize = tickSize,
+              let candle = selectedChartEntry?.model as? CandleDataPoint  else {
+            viewModel?.highlight = nil
+            return
+        }
+
+        viewModel?.highlight = viewModel?.highlight ?? dydxSimpleUIMarketCandlesHighlightViewModel()
+
+        let sign: PlatformUISign = (candle.candleClose?.doubleValue ?? 0) > (candle.candleOpen?.doubleValue ?? 0) ? .plus : .minus
+
+        var highlights = [dydxSimpleUIMarketCandlesHighlightViewModel.HighlightDataPoint]()
+        if let open = candle.candleOpen {
+            let value = dydxFormatter.shared.raw(number: open, digits: tickSize)
+            highlights += [.init(prompt: DataLocalizer.localize(path: "APP.TRADE.AVERAGE_OPEN_SHORT"),
+                                 amount: SignedAmountViewModel(text: value,
+                                                               sign: sign,
+                                                               coloringOption: .textOnly))]
+        }
+        if let high = candle.candleHigh {
+            let value = dydxFormatter.shared.raw(number: high, digits: tickSize)
+            highlights += [.init(prompt: DataLocalizer.localize(path: "APP.TRADE.HIGH"),
+                                 amount: SignedAmountViewModel(text: value,
+                                                               sign: sign,
+                                                               coloringOption: .textOnly))]
+        }
+        if let low = candle.candleLow {
+            let value = dydxFormatter.shared.raw(number: low, digits: tickSize)
+            highlights += [.init(prompt: DataLocalizer.localize(path: "APP.TRADE.LOW"),
+                                 amount: SignedAmountViewModel(text: value,
+                                                               sign: sign,
+                                                               coloringOption: .textOnly))]
+        }
+        if let close = candle.candleClose {
+            let value = dydxFormatter.shared.raw(number: close, digits: tickSize)
+            highlights += [.init(prompt: DataLocalizer.localize(path: "APP.TRADE.AVERAGE_CLOSE_SHORT"),
+                                 amount: SignedAmountViewModel(text: value,
+                                                               sign: sign,
+                                                               coloringOption: .textOnly))]
+        }
+        if let marketCandle = candle.marketCandle {
+            let volume = NSNumber(value: marketCandle.usdVolume)
+            let value = dydxFormatter.shared.condensed(number: volume, digits: 3)
+            highlights += [.init(prompt: DataLocalizer.localize(path: "APP.TRADE.VOLUME"),
+                                 amount: SignedAmountViewModel(text: value,
+                                                               sign: sign,
+                                                               coloringOption: .textOnly))]
+        }
+
+        viewModel?.highlight?.dataPoints = highlights
+        if let startedAtMilliseconds =  candle.marketCandle?.startedAtMilliseconds {
+            viewModel?.highlight?.date =  dydxFormatter.shared.dateAndTime(date: Date(milliseconds: startedAtMilliseconds))
         }
     }
 }

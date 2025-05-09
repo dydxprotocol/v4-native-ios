@@ -9,17 +9,33 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import dydxFormatter
 
 public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
+    public enum ScrollAction {
+        case none
+        case toTop
+    }
+
     @Published public var marketList: dydxSimpleUIMarketListViewModel?
     @Published public var onTextChanged: ((String) -> Void)?
     @Published public var keyboardUp: Bool = false
+    @Published public var marketSort: dydxSimpleUIMarketSortViewModel?
+    @Published public var filter = dydxMarketAssetFilterViewModel()
+
+    @Published public var scrollAction: ScrollAction = .none
+    @Published public var searchText: String = ""
+    @Published public var showCount = false
+
+    private static let topId = UUID().uuidString
 
     public init() { }
 
     public static var previewValue: dydxSimpleUIMarketSearchViewModel {
         let vm = dydxSimpleUIMarketSearchViewModel()
         vm.marketList = .previewValue
+        vm.marketSort = .previewValue
+        vm.filter = .previewValue
         return vm
     }
 
@@ -34,23 +50,58 @@ public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
                 bottomPadding = max((self.safeAreaInsets?.bottom ?? 0), 16)
             }
 
+            let headerText: String
+            if self.showCount {
+                let marketsCount = self.marketList?.markets?.count ?? 0
+                let countString = dydxFormatter.shared.localFormatted(number: Double(marketsCount) * 1.0, digits: 0) ?? "0"
+                headerText = DataLocalizer.localize(path: "APP.GENERAL.MARKETS_FOUND", params: ["COUNT": countString])
+            } else {
+                headerText = DataLocalizer.localize(path: "APP.GENERAL.MARKETS")
+            }
+
             let view = ZStack(alignment: .bottom) {
                 VStack(spacing: 0) {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        LazyVStack(pinnedViews: [.sectionHeaders]) {
+                    ScrollViewReader { proxy in
+                        ScrollView(.vertical, showsIndicators: false) {
+                            LazyVStack(pinnedViews: [.sectionHeaders]) {
+                                Rectangle()
+                                    .frame(height: 4)
+                                    .themeColor(foreground: .layer1)
+                                    .id(Self.topId)
 
-                            let marketHeader = self.createHeader(text: DataLocalizer.localize(path: "APP.GENERAL.MARKETS"))
-                            Section(header: marketHeader) {
-                                self.marketList?.createView(parentStyle: style)
+                                let sortView = AnyView(self.marketSort?.createView(parentStyle: style))
+                                let marketHeader = VStack {
+                                    self.createHeader(text: headerText,
+                                                      rightAccessory: sortView)
+                                    self.filter.createView(parentStyle: style)
+                                        .padding(.leading, 16)
+                                }
+                                    .padding(.bottom, 8)
+                                    .themeColor(background: .layer1)
 
-                                Spacer(minLength: 96)
+                                Section(header: marketHeader) {
+                                    self.marketList?.createView(parentStyle: style)
+
+                                    Spacer(minLength: 96)
+                                }
+                                .onChange(of: self.scrollAction) { newValue in
+                                    if newValue == .toTop {
+                                        withAnimation {
+                                            proxy.scrollTo(Self.topId, anchor: .top)
+                                        }
+                                    }
+                                    self.scrollAction = .none
+                                }
+                                .onAppear {
+                                    self.scrollAction = .none
+                                }
                             }
                         }
                     }
                     .clipped()      // prevent blending into status bar
                 }
 
-                SearchBoxModel(searchText: "", focusedOnAppear: true, onEditingChanged: { [weak self] focused in
+                SearchBoxModel(searchText: self.searchText, focusedOnAppear: true, onEditingChanged: { [weak self] focused in
                     self?.keyboardUp = focused
                 }, onTextChanged: { [weak self] text in
                     self?.onTextChanged?(text)
@@ -69,14 +120,18 @@ public class dydxSimpleUIMarketSearchViewModel: PlatformViewModel {
         }
     }
 
-    private func createHeader(text: String) -> some View {
-        VStack(spacing: 0) {
+    private func createHeader(text: String, rightAccessory: AnyView? = nil) -> some View {
+        HStack(spacing: 0) {
             Text(text)
                 .themeFont(fontType: .plus)
                 .themeColor(foreground: .textPrimary)
                 .leftAligned()
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
+
+            Spacer()
+
+            rightAccessory?.padding(.trailing, 16)
         }
         .themeColor(background: .layer1)
     }

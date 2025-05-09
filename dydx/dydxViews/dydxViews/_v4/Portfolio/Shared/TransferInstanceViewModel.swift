@@ -84,7 +84,7 @@ public class TransferInstanceViewModel: PlatformViewModel {
             .createView(parentStyle: parentStyle
                                         .themeFont(fontSize: .smaller)
                                         .themeColor(foreground: .textTertiary))
-            .frame(width: 32)
+            .frame(width: 48)
             .themeFont(fontSize: .small)
     }
 

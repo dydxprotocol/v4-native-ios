@@ -79,7 +79,7 @@ struct RadioButton: View {
             .padding(.horizontal, width == nil ? padding : 0)
             // if height is specified, i.e. non-nil, setting vertical inset to 0 will allow entire space to be used horizontally
             .padding(.vertical, height == nil ? padding : 0)
-            .themeColor(background: isSelected ? .layer1 : .layer3)
+            .themeColor(background: isSelected ? .layer5 : .transparent)
             .borderAndClip(style: .capsule, borderColor: .borderDefault)
             .onTapGesture {
                 selectionAction()

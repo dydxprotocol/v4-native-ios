@@ -42,12 +42,14 @@ public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIM
     private let positionListPresenter = dydxSimpleUIPositionListViewPresenter()
     private let portfolioPresenter = dydxSimpleUIPortfolioViewPresenter()
     private let headerPresenter = dydxSimpleUIMarketsHeaderViewPresenter()
+    private let sortPresenter = dydxSimpleUIMarketSortViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = [
         marketListPresenter,
         positionListPresenter,
         portfolioPresenter,
-        headerPresenter
+        headerPresenter,
+        sortPresenter
     ]
 
     override init() {
@@ -57,6 +59,7 @@ public class dydxSimpleUIMarketsViewPresenter: HostedViewPresenter<dydxSimpleUIM
         positionListPresenter.$viewModel.assign(to: &viewModel.$positionList)
         portfolioPresenter.$viewModel.assign(to: &viewModel.$portfolio)
         headerPresenter.$viewModel.assign(to: &viewModel.$header)
+        sortPresenter.$viewModel.assign(to: &viewModel.$marketSort)
 
         super.init()
 

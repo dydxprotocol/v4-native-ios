@@ -299,8 +299,6 @@
 				02841F6429AD6F0200C0E7CC /* PBXTargetDependency */,
 			);
 			name = dydxFormatter;
-			packageProductDependencies = (
-			);
 			productName = dydxFormatter;
 			productReference = 02841E2929AD6E5500C0E7CC /* dydxFormatter.framework */;
 			productType = "com.apple.product-type.framework";
@@ -352,8 +350,6 @@
 				Base,
 			);
 			mainGroup = 02841E1F29AD6E5500C0E7CC;
-			packageReferences = (
-			);
 			productRefGroup = 02841E2A29AD6E5500C0E7CC /* Products */;
 			projectDirPath = "";
 			projectReferences = (

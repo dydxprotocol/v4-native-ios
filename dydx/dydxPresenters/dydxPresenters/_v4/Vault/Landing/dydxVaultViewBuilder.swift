@@ -17,6 +17,7 @@ import DGCharts
 import dydxStateManager
 import Abacus
 import Combine
+import dydxFormatter
 
 public class dydxVaultViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -195,5 +196,16 @@ private class dydxVaultViewBuilderPresenter: HostedViewPresenter<dydxVaultViewMo
                 }
             } ?? []
         viewModel?.vaultChart?.chart.entries = entries
+
+        viewModel?.vaultChart?.chart.dataPointSelected = { [weak self] entry in
+            if let entry {
+                let date = Date(timeIntervalSince1970: entry.date)
+                self?.viewModel?.vaultChart?.selectedTime = dydxFormatter.shared.dateAndTime(date: date)
+                self?.viewModel?.vaultChart?.selectedValue = dydxFormatter.shared.dollar(number: entry.value, digits: 0)
+            } else {
+                self?.viewModel?.vaultChart?.selectedTime = nil
+                self?.viewModel?.vaultChart?.selectedValue = nil
+            }
+        }
     }
 }

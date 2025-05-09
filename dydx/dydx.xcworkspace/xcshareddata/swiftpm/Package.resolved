@@ -1,5 +1,5 @@
 {
-  "originHash" : "a858961351e010bd8a13e79ee492c0c7c59810ebddf89b83982e848c3d329532",
+  "originHash" : "d82059fadaea45dac5912dec5e3373e18c3e5b39d58f7c982742c814017b7b6a",
   "pins" : [
     {
       "identity" : "base58swift",
@@ -62,6 +62,15 @@
       "state" : {
         "revision" : "a2e9a86dfc3f5b69ef53cbda28a0ea71098c9f77",
         "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "privy-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/privy-io/privy-ios",
+      "state" : {
+        "revision" : "b50567ed7cd88660026f75b97f681df49998a917",
+        "version" : "1.9.0"
       }
     },
     {

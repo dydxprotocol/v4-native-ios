@@ -72,7 +72,7 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
                     .themeFont(fontSize: textFontSize)
                     .padding(edgeInsets)
                     .themeStyle(styleKey: styleKey, parentStyle: style)
-                    .borderAndClip(style: .capsule, borderColor: .layer6, lineWidth: borderWidth)
+                    .borderAndClip(style: .capsule, borderColor: .borderDefault, lineWidth: borderWidth)
                     .wrappedInAnyView()
             case .textWithPillAccessory(let text, let pillConfig):
                 return HStack(alignment: .center, spacing: 4) {
@@ -89,7 +89,7 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
                 }
                 .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
                 .themeStyle(styleKey: styleKey, parentStyle: style)
-                .borderAndClip(style: .capsule, borderColor: .layer6, lineWidth: borderWidth)
+                .borderAndClip(style: .capsule, borderColor: .borderDefault, lineWidth: borderWidth)
                 .wrappedInAnyView()
             case .icon(let image):
                 let height = ThemeSettings.shared.themeConfig.themeFont.uiFont(of: .base, fontSize: textFontSize)?.lineHeight ?? 14
@@ -100,7 +100,7 @@ public class TabItemViewModel: PlatformViewModel, Equatable {
                     .padding(.vertical, 6)
                     .padding(.horizontal, 8)
                     .themeStyle(styleKey: styleKey, parentStyle: style)
-                    .borderAndClip(style: .capsule, borderColor: .layer6, lineWidth: borderWidth)
+                    .borderAndClip(style: .capsule, borderColor: .borderDefault, lineWidth: borderWidth)
                     .wrappedInAnyView()
             case .bar(let value):
                 let content = VStack {

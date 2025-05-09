@@ -49,6 +49,11 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
                 self?.showOnRamp()
             }
         }
+        viewModel.connectWalletAction = {
+            let request = RoutingRequest(path: "/onboard/wallets",
+                                         params: ["mobileOnly": "true"])
+            Router.shared?.navigate(to: request, animated: true, completion: nil)
+        }
 
         attachChildren(workers: childPresenters)
     }
@@ -61,11 +66,14 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
         }
 
         Publishers
-            .CombineLatest3(
+            .CombineLatest4(
                 AbacusStateManager.shared.state.transferInput,
                 transferTokenDetails.$defaultToken,
-                transferTokenDetails.$selectedToken)
-            .sink { [weak self] transferInput, defaultToken, selectedToken in
+                transferTokenDetails.$selectedToken,
+                AbacusStateManager.shared.state.currentWallet
+                    .map(\.?.ethereumAddress)
+            )
+            .sink { [weak self] transferInput, defaultToken, selectedToken, sourceAddress in
                 if transferInput.type != .deposit {
                     AbacusStateManager.shared.startDeposit()
                 }
@@ -83,6 +91,13 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
                 }
                 if transferInput.token != token?.tokenAddress {
                     AbacusStateManager.shared.transfer(input: token?.tokenAddress, type: .token)
+                }
+
+                if let sourceAddress = sourceAddress,
+                   sourceAddress.starts(with: "dydx") == false {
+                    self?.viewModel?.showConnectWallet = false
+                } else {
+                    self?.viewModel?.showConnectWallet = true
                 }
             }
             .store(in: &subscriptions)

@@ -110,10 +110,13 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
             step1ViewModel.status = .completed
             step2ViewModel.status = .completed
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                if let cosmoAddress = result.cosmoAddress, let mnemonic = result.mnemonic {
-                    self?.onboardingAnalytics.log(step: .keyDerivation)
-                    self?.finish(ethereumAddress: result.ethereumAddress, cosmoAddress: cosmoAddress, mnemonic: mnemonic, walletId: result.walletId ?? "")
-                }
+                guard let self else { return }
+                AbacusStateManager.shared.state.currentWallet
+                    .prefix(1)
+                    .sink { walletInstance in
+                        dydxOnboardCompletion.finish(walletInstance: walletInstance, result: result)
+                    }
+                    .store(in: &self.subscriptions)
             }
 
         case .error(let error):
