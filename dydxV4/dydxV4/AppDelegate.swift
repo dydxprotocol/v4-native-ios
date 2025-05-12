@@ -156,7 +156,7 @@ class AppDelegate: CommonAppDelegate {
     }
 
     override func deepLinkHandled(deeplink: URL, successful: Bool) {
-        Tracking.shared?.log(event: AnalyticsEventV2.DeepLinkHandled(url: deeplink.absoluteString, succeeded: successful))
+        Tracking.shared?.logEvent(event: AnalyticsEventV2.DeepLinkHandled(url: deeplink.absoluteString, succeeded: successful))
     }
 
     override func customHandle(url: URL) -> Bool {

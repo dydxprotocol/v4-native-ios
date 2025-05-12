@@ -466,7 +466,7 @@ public enum AnalyticsEventV2 {
 }
 
 public extension Utilities.TrackingProtocol {
-    func log(event: TrackableEvent) {
+    func logEvent(event: TrackableEvent) {
         if let event = event as? AnalyticsEventV2.NavigatePage {
             // for firebase auto-generated dashboard(s). Cannot import firebase analytics to use the event `AnalyticsEventScreenView` here because
             // Firebase's binary distributions, including Firebase Analytics, are build as static xcframeworks and do not support being linked into dynamic frameworks

@@ -111,7 +111,7 @@ private class dydxAppModeSurveyViewPresenter: HostedViewPresenter<dydxAppModeSur
             isSubmit: true,
             isDoNotShowAgain: false
         )
-        Tracking.shared?.log(event: event)
+        Tracking.shared?.logEvent(event: event)
     }
 
     private func logDontShowAgain() {
@@ -123,7 +123,7 @@ private class dydxAppModeSurveyViewPresenter: HostedViewPresenter<dydxAppModeSur
             isSubmit: false,
             isDoNotShowAgain: true
         )
-        Tracking.shared?.log(event: event)
+        Tracking.shared?.logEvent(event: event)
     }
 
     private func logCancel() {
@@ -135,6 +135,6 @@ private class dydxAppModeSurveyViewPresenter: HostedViewPresenter<dydxAppModeSur
             isSubmit: false,
             isDoNotShowAgain: false
         )
-        Tracking.shared?.log(event: event)
+        Tracking.shared?.logEvent(event: event)
     }
 }

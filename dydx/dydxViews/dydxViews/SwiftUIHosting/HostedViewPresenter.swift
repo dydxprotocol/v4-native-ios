@@ -107,7 +107,7 @@ open class HostedViewPresenter<ViewModel: PlatformViewModeling>: ObjectViewPrese
                                                       toPath: toRoute,
                                                       fromQuery: currentRoute?.url?.query,
                                                       toQuery: request.url?.query)
-            Tracking.shared?.log(event: event)
+            Tracking.shared?.logEvent(event: event)
         }
 
         Router.shared?.navigate(to: request, animated: animated, completion: completion)

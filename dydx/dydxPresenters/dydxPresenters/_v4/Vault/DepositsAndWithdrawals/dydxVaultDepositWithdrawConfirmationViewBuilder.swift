@@ -208,7 +208,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
                 switch transferType {
                 case .deposit:
                     guard let subaccountNumber = subaccount?.subaccountNumber, let amount = self?.amount else { return }
-                    Tracking.shared?.log(event: AnalyticsEventV2.AttemptVaultOperation(type: transferType.analyticsInputType,
+                    Tracking.shared?.logEvent(event: AnalyticsEventV2.AttemptVaultOperation(type: transferType.analyticsInputType,
                                                                                        amount: amount,
                                                                                        slippage: nil))
                     result = await CosmoJavascript.shared.depositToMegavault(subaccountNumber: subaccountNumber, amountUsdc: amount)
@@ -216,7 +216,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
                     guard let subaccountTo = formValidationResult.submissionData?.withdraw?.subaccountTo,
                           let shares = formValidationResult.submissionData?.withdraw?.shares,
                           let minAmount = formValidationResult.submissionData?.withdraw?.minAmount else { return }
-                    Tracking.shared?.log(event: AnalyticsEventV2.AttemptVaultOperation(type: transferType.analyticsInputType,
+                    Tracking.shared?.logEvent(event: AnalyticsEventV2.AttemptVaultOperation(type: transferType.analyticsInputType,
                                                                                        amount: formValidationResult.summaryData.estimatedAmountReceived?.doubleValue,
                                                                                        slippage: formValidationResult.summaryData.estimatedSlippage?.doubleValue))
                     result = await CosmoJavascript.shared.withdrawFromMegavault(subaccountTo: subaccountTo, shares: shares, minAmount: minAmount)
@@ -226,7 +226,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
                     case .success(let chainTransaction):
                         let amount = self?.amount ?? 0
                         let actualAmount = chainTransaction.actualWithdrawalAmount?.doubleValue ?? 0
-                        Tracking.shared?.log(event: AnalyticsEventV2.SuccessfulVaultOperation(type: transferType.analyticsInputType,
+                        Tracking.shared?.logEvent(event: AnalyticsEventV2.SuccessfulVaultOperation(type: transferType.analyticsInputType,
                                                                                               amount: amount,
                                                                                               amountDiff: actualAmount - amount))
                         SettingsStore.shared?.setValue(true, forDydxKey: .hasAcknowledgedVaultDepositTerms)
@@ -234,7 +234,7 @@ private class dydxVaultDepositWithdrawConfirmationViewPresenter: HostedViewPrese
                         AbacusStateManager.shared.refreshVaultAccount()
                     case .failure(let error):
                         self?.viewModel?.submitState = .enabled
-                        Tracking.shared?.log(event: AnalyticsEventV2.VaultOperationProtocolError(type: transferType.analyticsInputType))
+                        Tracking.shared?.logEvent(event: AnalyticsEventV2.VaultOperationProtocolError(type: transferType.analyticsInputType))
                         ErrorInfo.shared?.info(title: nil, message: error.message, error: error)
                     }
                 }

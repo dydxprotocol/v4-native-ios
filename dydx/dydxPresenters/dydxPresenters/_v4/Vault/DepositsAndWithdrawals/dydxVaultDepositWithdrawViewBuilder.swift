@@ -219,7 +219,7 @@ private class dydxVaultDepositWithdrawViewPresenter: HostedViewPresenter<dydxVau
 
     private func updateSubmitAction(amount: Double, transferType: dydxViews.VaultTransferType) {
         viewModel?.submitAction = {
-            Tracking.shared?.log(event: AnalyticsEventV2.VaultFormPreviewStep(amount: amount, type: transferType.analyticsInputType))
+            Tracking.shared?.logEvent(event: AnalyticsEventV2.VaultFormPreviewStep(amount: amount, type: transferType.analyticsInputType))
             Router.shared?.navigate(to: RoutingRequest(path: transferType.confirmScreenPath, params: ["amount": amount]), animated: true, completion: nil)
         }
     }

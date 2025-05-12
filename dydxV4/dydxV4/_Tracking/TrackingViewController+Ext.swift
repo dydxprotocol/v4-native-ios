@@ -39,7 +39,7 @@ extension TrackingViewController: ScreenIdentifiable, TrackingViewProtocol {
     }
 
     public func logScreenView() {
-        Tracking.shared?.log(event: AnalyticsEventV2.NavigatePage(screen: self))
+        Tracking.shared?.logEvent(event: AnalyticsEventV2.NavigatePage(screen: self))
     }
 
 }

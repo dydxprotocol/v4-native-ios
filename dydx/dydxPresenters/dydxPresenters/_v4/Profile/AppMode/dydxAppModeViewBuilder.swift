@@ -91,7 +91,7 @@ public extension AppMode {
             if current != newValue {
                 let fromMode = current?.rawValue ?? "none"
                 let toMode = newValue?.rawValue ?? "none"
-                Tracking.shared?.log(event: AnalyticsEventV2.ModeSelectorEvent(fromMode: fromMode, toMode: toMode))
+                Tracking.shared?.logEvent(event: AnalyticsEventV2.ModeSelectorEvent(fromMode: fromMode, toMode: toMode))
 
                 SettingsStore.shared?.setValue(newValue?.rawValue, forDydxKey: .appMode)
             }
