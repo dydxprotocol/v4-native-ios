@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02B4296C2DD2BFE200CC3476 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B429632DD2B74D00CC3476 /* Utilities.framework */; };
 		2742BEB22BF6860100E13C09 /* dydxAnalytics.docc in Sources */ = {isa = PBXBuildFile; fileRef = 2742BEB12BF6860100E13C09 /* dydxAnalytics.docc */; };
 		2742BEB82BF6860100E13C09 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742BEAD2BF6860100E13C09 /* dydxAnalytics.framework */; };
 		2742BEBD2BF6860100E13C09 /* dydxAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742BEBC2BF6860100E13C09 /* dydxAnalyticsTests.swift */; };
 		2742BEBE2BF6860100E13C09 /* dydxAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 2742BEB02BF6860100E13C09 /* dydxAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2742C0312BF6887100E13C09 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0302BF6887100E13C09 /* Utilities.framework */; platformFilter = ios; };
 		2742C0352BF6888500E13C09 /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0342BF6888500E13C09 /* PlatformParticles.framework */; };
 		2742C04A2BF688BD00E13C09 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */; };
 		27600EEE2C65133B00DBB570 /* UserProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27600EED2C65133B00DBB570 /* UserProperty.swift */; };
@@ -117,6 +117,55 @@
 			remoteGlobalIDString = 313A536D21B9805F00A92D62;
 			remoteInfo = UtilitiesAppleTVTests;
 		};
+		02B42A132DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31ACB72921B0EE2D00391ADF;
+			remoteInfo = PlatformParticles;
+		};
+		02B42A152DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB7C621BB592E00BEF926;
+			remoteInfo = PlatformParticlesAppleWatch;
+		};
+		02B42A172DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBB4321BB7A4B00BEF926;
+			remoteInfo = PlatformParticlesAppleTV;
+		};
+		02B42A192DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31CFF7C121D7D1F200DE7A79;
+			remoteInfo = MessageParticles;
+		};
+		02B42A1B2DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31ACB73221B0EE2D00391ADF;
+			remoteInfo = PlatformParticlesTests;
+		};
+		02B42A1D2DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBB4B21BB7A4B00BEF926;
+			remoteInfo = PlatformParticlesAppleTVTests;
+		};
+		02B42A1F2DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31CFF7C921D7D1F300DE7A79;
+			remoteInfo = MessageParticlesTests;
+		};
 		2742BEB92BF6860100E13C09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2742BEA42BF6860100E13C09 /* Project object */;
@@ -151,9 +200,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02B4296C2DD2BFE200CC3476 /* Utilities.framework in Frameworks */,
 				B0A26DA7EA1E90F936ECE27B /* Pods_iOS_dydxAnalytics.framework in Frameworks */,
 				2742C0352BF6888500E13C09 /* PlatformParticles.framework in Frameworks */,
-				2742C0312BF6887100E13C09 /* Utilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +239,20 @@
 				02B429672DD2B74D00CC3476 /* Utilities.framework */,
 				02B429692DD2B74D00CC3476 /* UtilitiesTests.xctest */,
 				02B4296B2DD2B74D00CC3476 /* UtilitiesAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02B42A0A2DD2C03000CC3476 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02B42A142DD2C03000CC3476 /* PlatformParticles.framework */,
+				02B42A162DD2C03000CC3476 /* PlatformParticles.framework */,
+				02B42A182DD2C03000CC3476 /* PlatformParticles.framework */,
+				02B42A1A2DD2C03000CC3476 /* MessageParticles.framework */,
+				02B42A1C2DD2C03000CC3476 /* PlatformParticlesTests.xctest */,
+				02B42A1E2DD2C03000CC3476 /* PlatformParticlesAppleTVTests.xctest */,
+				02B42A202DD2C03000CC3476 /* MessageParticlesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -285,8 +348,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				02B429452DD2B74D00CC3476 /* PBXTargetDependency */,
 				02B429472DD2B74D00CC3476 /* PBXTargetDependency */,
+				02B429452DD2B74D00CC3476 /* PBXTargetDependency */,
 			);
 			name = dydxAnalytics;
 			productName = dydxAnalytics;
@@ -341,6 +404,10 @@
 			productRefGroup = 2742BEAE2BF6860100E13C09 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 02B42A0A2DD2C03000CC3476 /* Products */;
+					ProjectRef = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+				},
 				{
 					ProductGroup = 02B4293F2DD2B74D00CC3476 /* Products */;
 					ProjectRef = 02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */;
@@ -441,6 +508,55 @@
 			fileType = wrapper.cfbundle;
 			path = UtilitiesAppleTVTests.xctest;
 			remoteRef = 02B4296A2DD2B74D00CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A142DD2C03000CC3476 /* PlatformParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformParticles.framework;
+			remoteRef = 02B42A132DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A162DD2C03000CC3476 /* PlatformParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformParticles.framework;
+			remoteRef = 02B42A152DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A182DD2C03000CC3476 /* PlatformParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformParticles.framework;
+			remoteRef = 02B42A172DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A1A2DD2C03000CC3476 /* MessageParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MessageParticles.framework;
+			remoteRef = 02B42A192DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A1C2DD2C03000CC3476 /* PlatformParticlesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PlatformParticlesTests.xctest;
+			remoteRef = 02B42A1B2DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A1E2DD2C03000CC3476 /* PlatformParticlesAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PlatformParticlesAppleTVTests.xctest;
+			remoteRef = 02B42A1D2DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A202DD2C03000CC3476 /* MessageParticlesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MessageParticlesTests.xctest;
+			remoteRef = 02B42A1F2DD2C03000CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
