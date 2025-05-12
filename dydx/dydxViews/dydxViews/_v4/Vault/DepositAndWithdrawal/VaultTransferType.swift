@@ -7,7 +7,7 @@
 
 import Utilities
 import SwiftUI
-import enum dydxAnalytics.AnalyticsEventV2
+import dydxAnalytics
 
 public enum VaultTransferType: CaseIterable, RadioButtonContentDisplayable {
     case deposit
