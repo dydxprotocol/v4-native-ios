@@ -653,7 +653,6 @@
 		02AEE4B928F0DBF9006842E8 /* dydxMarketPriceCandlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketPriceCandlesView.swift; sourceTree = "<group>"; };
 		02AEE4BB28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketPriceCandlesControlView.swift; sourceTree = "<group>"; };
 		02B27A392AE8BC5A00A995EC /* dydxHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxHelpView.swift; sourceTree = "<group>"; };
-		02B429132DD2B2DA00CC3476 /* dydxAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxAnalytics.xcodeproj; path = ../dydxAnalytics/dydxAnalytics.xcodeproj; sourceTree = "<group>"; };
 		02B429222DD2B2FC00CC3476 /* dydxAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxAnalytics.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxAnalytics/dydxAnalytics.xcodeproj"; sourceTree = "<absolute>"; };
 		02B8419C28EF68C300C4D25B /* dydxMarketInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketInfoView.swift; sourceTree = "<group>"; };
 		02C789632D712953004C3284 /* dydxTransferInstantStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferInstantStatusView.swift; sourceTree = "<group>"; };
@@ -1106,7 +1105,6 @@
 				024B79BB28B7F53800F7C386 /* Products */,
 				7A3BF1DF7DC711519B8176C6 /* Pods */,
 				ED13AE6112472E95629FA451 /* Frameworks */,
-				02B429222DD2B2FC00CC3476 /* dydxAnalytics.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1437,7 +1435,7 @@
 		02684E0628BD40BE0007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				02B429132DD2B2DA00CC3476 /* dydxAnalytics.xcodeproj */,
+				02B429222DD2B2FC00CC3476 /* dydxAnalytics.xcodeproj */,
 				0284200929AD704E00C0E7CC /* dydxFormatter.xcodeproj */,
 				024B7B1F28B7F7C200F7C386 /* PlatformUI.xcodeproj */,
 				024B7B2828B7F7C200F7C386 /* PlatformParticles.xcodeproj */,
