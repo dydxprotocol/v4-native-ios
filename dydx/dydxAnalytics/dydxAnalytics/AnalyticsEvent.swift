@@ -8,6 +8,7 @@
 import Foundation
 import PlatformParticles
 import Utilities
+import Abacus
 
 //
 // Events defined in the v4-web repo.  Ideally, we should keep this in-sync with v4-web
@@ -283,11 +284,188 @@ public enum AnalyticsEventV2 {
             self.isSubmit = isSubmit
             self.isDoNotShowAgain = isDoNotShowAgain
         }
+    }
 
+    public struct DepositInitiatedEvent: TrackableEvent {
+        let transferInput: TransferInput
+        let summary: TransferInputSummary?
+
+        public var name: String { "DepositInitiated" }
+        public var customParameters: [String: Any] {
+            let params: [String: Any?] = [
+            "sourceAssetDenom": transferInput.token,
+            "sourceAssetChainID": transferInput.chain,
+            "amountIn": transferInput.size?.size,
+            "amountOut": summary?.toAmount,
+            "usdAmountOut": summary?.toAmountUSDC,
+            "estimatedAmountOut": summary?.toAmountMin,
+            "swapPriceImpactPercent": summary?.aggregatePriceImpact,
+            "estimatedRouteDurationSeconds": summary?.estimatedRouteDurationSeconds
+            ]
+            return params.filterNils() as [String: Any]
+        }
+
+        public init(transferInput: TransferInput, summary: TransferInputSummary?) {
+            self.transferInput = transferInput
+            self.summary = summary
+        }
+    }
+
+    public struct DepositSubmittedEvent: TrackableEvent {
+        let transferInput: TransferInput
+        let summary: TransferInputSummary?
+        let txHash: String
+        let isInstantDeposit: Bool
+
+        public var name: String { "DepositSubmitted" }
+        public var customParameters: [String: Any] {
+            let params: [String: Any?] = [
+            "tokenInDenom": transferInput.token,
+            "tokenInChainId": transferInput.chain,
+            "tokenAmount": transferInput.size?.size,
+            "estimatedAmountUsd": summary?.toAmountUSDC,
+            "isInstantDeposit": isInstantDeposit,
+            "txHash": txHash
+            ]
+            return params.filterNils() as [String: Any]
+        }
+
+        public init(transferInput: TransferInput, summary: TransferInputSummary?, txHash: String, isInstantDeposit: Bool) {
+            self.transferInput = transferInput
+            self.summary = summary
+            self.txHash = txHash
+            self.isInstantDeposit = isInstantDeposit
+        }
+    }
+
+    public struct DepositErrorEvent: TrackableEvent {
+        let transferInput: TransferInput
+        let errorMessage: String
+
+        public var name: String { "DepositError" }
+
+        public var customParameters: [String: Any] {
+            let params: [String: Any?] = [
+                "tokenInDenom": transferInput.token,
+                "tokenInChainId": transferInput.chain,
+                "error": errorMessage
+            ]
+            return params.filterNils() as [String: Any]
+        }
+
+        public init(transferInput: TransferInput, errorMessage: String) {
+            self.transferInput = transferInput
+            self.errorMessage = errorMessage
+        }
+    }
+
+    public struct DepositFinalizedEvent: TrackableEvent {
+        let status: Abacus.TransferStatus
+
+        public var name: String { "DepositFinalized" }
+
+        public var customParameters: [String: Any] {
+            let params: [String: Any?] = [
+                "tokenInChainId": status.routeStatuses?.first?.chainId
+            ]
+            return params.filterNils() as [String: Any]
+        }
+
+        public init(status: Abacus.TransferStatus) {
+            self.status = status
+        }
+    }
+
+    public struct WithdrawInitiatedEvent: TrackableEvent {
+        let transferInput: TransferInput
+        let summary: TransferInputSummary?
+
+        public var name: String { "WithdrawInitiated" }
+        public var customParameters: [String: Any] {
+            let params: [String: Any?] = [
+            "sourceAssetDenom": transferInput.token,
+            "sourceAssetChainID": transferInput.chain,
+            "amountIn": transferInput.size?.size,
+            "amountOut": summary?.toAmount,
+            "usdAmountOut": summary?.toAmountUSDC,
+            "estimatedAmountOut": summary?.toAmountMin,
+            "swapPriceImpactPercent": summary?.aggregatePriceImpact,
+            "estimatedRouteDurationSeconds": summary?.estimatedRouteDurationSeconds
+            ]
+            return params.filterNils() as [String: Any]
+        }
+
+        public init(transferInput: TransferInput, summary: TransferInputSummary?) {
+            self.transferInput = transferInput
+            self.summary = summary
+        }
+    }
+
+    public struct WithdrawSubmittedEvent: TrackableEvent {
+        let transferInput: TransferInput
+        let summary: TransferInputSummary?
+        let txHash: String
+        let isInstantWithdraw: Bool
+
+        public var name: String { "WithdrawSubmitted" }
+        public var customParameters: [String: Any] {
+            let params: [String: Any?] = [
+            "destinationChainId": transferInput.chain,
+            "estimatedAmountUsd": summary?.toAmountUSDC,
+            "isInstantWithdraw": isInstantWithdraw,
+            "txHash": txHash
+            ]
+            return params.filterNils() as [String: Any]
+        }
+
+        public init(transferInput: TransferInput, summary: TransferInputSummary?, txHash: String, isInstantWithdraw: Bool) {
+            self.transferInput = transferInput
+            self.summary = summary
+            self.txHash = txHash
+            self.isInstantWithdraw = isInstantWithdraw
+        }
+    }
+
+    public struct WithdrawErrorEvent: TrackableEvent {
+        let transferInput: TransferInput
+        let errorMessage: String
+
+        public var name: String { "WithdrawError" }
+
+        public var customParameters: [String: Any] {
+            let params: [String: Any?] = [
+                "tokenInDenom": transferInput.token,
+                "tokenInChainId": transferInput.chain,
+                "error": errorMessage
+            ]
+            return params.filterNils() as [String: Any]
+        }
+
+        public init(transferInput: TransferInput, errorMessage: String) {
+            self.transferInput = transferInput
+            self.errorMessage = errorMessage
+        }
+    }
+
+    public struct WithdrawFinalizedEvent: TrackableEvent {
+        let status: Abacus.TransferStatus
+
+        public var name: String { "WithdrawFinalized" }
+
+        public var customParameters: [String: Any] {
+            let params: [String: Any?] = [
+                "tokenInChainId": status.routeStatuses?.last?.chainId
+            ]
+            return params.filterNils() as [String: Any]
+        }
+
+        public init(status: Abacus.TransferStatus) {
+            self.status = status
+        }
     }
 }
 
-public extension TrackingProtocol {
+public extension Utilities.TrackingProtocol {
     func log(event: TrackableEvent) {
         if let event = event as? AnalyticsEventV2.NavigatePage {
             // for firebase auto-generated dashboard(s). Cannot import firebase analytics to use the event `AnalyticsEventScreenView` here because
