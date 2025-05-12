@@ -132,6 +132,7 @@
 		02A6520C2DB6F965006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A651FE2DB6F964006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift */; };
 		02A8980628E76175006F1658 /* dydxStateManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DD9728CFB30000727949 /* dydxStateManager.framework */; platformFilter = ios; };
 		02B27A492AE8BC7600A995EC /* dydxHelpViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B27A482AE8BC7600A995EC /* dydxHelpViewPresenter.swift */; };
+		02B429122DD2B05B00CC3476 /* VaultTransferType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B429112DD2AF2100CC3476 /* VaultTransferType+Ext.swift */; };
 		02B6CE752A7087A700C5F088 /* dydxTransferSubaccountWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6CE742A7087A700C5F088 /* dydxTransferSubaccountWorker.swift */; };
 		02B8341E2D50343400B955F5 /* OnboardingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B834102D50343400B955F5 /* OnboardingState.swift */; };
 		02B841B228EF6C6400C4D25B /* dydxMarketInfoViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B841B128EF6C6400C4D25B /* dydxMarketInfoViewBuilder.swift */; };
@@ -160,7 +161,7 @@
 		02E7B39A29D79A4400D6626D /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37029D79A4400D6626D /* settings.json */; };
 		02E7B39C29D79A4400D6626D /* debug.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37229D79A4400D6626D /* debug.json */; };
 		02E7B3A629D79A4400D6626D /* settings_notifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37C29D79A4400D6626D /* settings_notifications.json */; };
-		02E7B3A729D79A4400D6626D /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		02E7B3A729D79A4400D6626D /* (null) in Resources */ = {isa = PBXBuildFile; };
 		02E7B3B129D79A4400D6626D /* v4-native-client.js in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B38729D79A4400D6626D /* v4-native-client.js */; };
 		02E90C5A29D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90C5929D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift */; };
 		02EF485629F732C600C97746 /* dydxFavoriteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF485529F732C600C97746 /* dydxFavoriteStore.swift */; };
@@ -576,6 +577,7 @@
 		02A651882DB6DA21006DBD5F /* dydxSimpleUIMenuButtonsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuButtonsViewPresenter.swift; sourceTree = "<group>"; };
 		02A651FE2DB6F964006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketSortViewPresenter.swift; sourceTree = "<group>"; };
 		02B27A482AE8BC7600A995EC /* dydxHelpViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxHelpViewPresenter.swift; sourceTree = "<group>"; };
+		02B429112DD2AF2100CC3476 /* VaultTransferType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultTransferType+Ext.swift"; sourceTree = "<group>"; };
 		02B6CE742A7087A700C5F088 /* dydxTransferSubaccountWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferSubaccountWorker.swift; sourceTree = "<group>"; };
 		02B834102D50343400B955F5 /* OnboardingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingState.swift; sourceTree = "<group>"; };
 		02B841B128EF6C6400C4D25B /* dydxMarketInfoViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketInfoViewBuilder.swift; sourceTree = "<group>"; };
@@ -1728,6 +1730,7 @@
 				02404F8C2CD42E44001B571D /* Tos */,
 				27457F4C2C8AC89800873640 /* Landing */,
 				27823D022C77E30F009BCD51 /* DepositsAndWithdrawals */,
+				02B429112DD2AF2100CC3476 /* VaultTransferType+Ext.swift */,
 			);
 			path = Vault;
 			sourceTree = "<group>";
@@ -2198,7 +2201,7 @@
 				2741E3702A68787A000FA190 /* settings_direction_color_preference.json in Resources */,
 				278EA5612BB60F51007A0E17 /* notifications.json in Resources */,
 				02E7B39829D79A4400D6626D /* features.json in Resources */,
-				02E7B3A729D79A4400D6626D /* BuildFile in Resources */,
+				02E7B3A729D79A4400D6626D /* (null) in Resources */,
 				02E7B39929D79A4400D6626D /* test.js in Resources */,
 				02E7B39A29D79A4400D6626D /* settings.json in Resources */,
 				02F543B42C17AD6A000924E4 /* settings_gas_token.json in Resources */,
@@ -2273,9 +2276,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2289,6 +2296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02B429122DD2B05B00CC3476 /* VaultTransferType+Ext.swift in Sources */,
 				024FEB662ACB75FA0087A55E /* dydxFeesStuctureViewBuilder.swift in Sources */,
 				02048FCC2D39E5DF00394CBE /* dydxSimpleUITradeInputHeaderViewPresenter.swift in Sources */,
 				02C789722D712961004C3284 /* dydxTransferInstantStatusViewBuilder.swift in Sources */,

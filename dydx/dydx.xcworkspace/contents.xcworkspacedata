@@ -185,4 +185,7 @@
    <FileRef
       location = "group:../StatsigInjections/StatsigInjections.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:VaultTransferType.swift">
+   </FileRef>
 </Workspace>
