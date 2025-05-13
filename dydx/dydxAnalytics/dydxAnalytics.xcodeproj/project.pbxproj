@@ -166,6 +166,41 @@
 			remoteGlobalIDString = 31CFF7C921D7D1F300DE7A79;
 			remoteInfo = MessageParticlesTests;
 		};
+		02B42B6C2DD2C29800CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AB9216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		02B42B6E2DD2C29800CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3196823721B791CF00AE0F28;
+			remoteInfo = UtilitiesAppleWatch;
+		};
+		02B42B702DD2C29800CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536521B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTV;
+		};
+		02B42B722DD2C29800CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AC2216BC9C9008ABEE9;
+			remoteInfo = UtilitiesTests;
+		};
+		02B42B742DD2C29800CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536D21B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTVTests;
+		};
 		2742BEB92BF6860100E13C09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2742BEA42BF6860100E13C09 /* Project object */;
@@ -253,6 +288,18 @@
 				02B42A1C2DD2C03000CC3476 /* PlatformParticlesTests.xctest */,
 				02B42A1E2DD2C03000CC3476 /* PlatformParticlesAppleTVTests.xctest */,
 				02B42A202DD2C03000CC3476 /* MessageParticlesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02B42B582DD2C29800CC3476 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02B42B6D2DD2C29800CC3476 /* Utilities.framework */,
+				02B42B6F2DD2C29800CC3476 /* Utilities.framework */,
+				02B42B712DD2C29800CC3476 /* Utilities.framework */,
+				02B42B732DD2C29800CC3476 /* UtilitiesTests.xctest */,
+				02B42B752DD2C29800CC3476 /* UtilitiesAppleTVTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -413,6 +460,10 @@
 					ProjectRef = 02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */;
 				},
 				{
+					ProductGroup = 02B42B582DD2C29800CC3476 /* Products */;
+					ProjectRef = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+				},
+				{
 					ProductGroup = 02B429422DD2B74D00CC3476 /* Products */;
 					ProjectRef = 02B429412DD2B74D00CC3476 /* Utilities.xcodeproj */;
 				},
@@ -557,6 +608,41 @@
 			fileType = wrapper.cfbundle;
 			path = MessageParticlesTests.xctest;
 			remoteRef = 02B42A1F2DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42B6D2DD2C29800CC3476 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 02B42B6C2DD2C29800CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42B6F2DD2C29800CC3476 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 02B42B6E2DD2C29800CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42B712DD2C29800CC3476 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 02B42B702DD2C29800CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42B732DD2C29800CC3476 /* UtilitiesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UtilitiesTests.xctest;
+			remoteRef = 02B42B722DD2C29800CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42B752DD2C29800CC3476 /* UtilitiesAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UtilitiesAppleTVTests.xctest;
+			remoteRef = 02B42B742DD2C29800CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
