@@ -153,7 +153,7 @@ private class dydxTransferInstantStatusViewPresenter: HostedViewPresenter<dydxTr
                 viewModel?.status = .success
                 deleteTransferInstance(transactionHash: transactionHash)
 
-                Tracking.shared?.logEvent(event: AnalyticsEventV2.DepositFinalizedEvent(status: status))
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.DepositFinalizedEvent(status: status))
             }
         }
     }

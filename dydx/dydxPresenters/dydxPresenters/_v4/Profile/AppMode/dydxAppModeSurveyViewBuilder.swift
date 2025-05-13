@@ -12,6 +12,7 @@ import RoutingKit
 import ParticlesKit
 import PlatformUI
 import dydxAnalytics
+import Abacus
 
 public class dydxAppModeSurveyViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -103,7 +104,7 @@ private class dydxAppModeSurveyViewPresenter: HostedViewPresenter<dydxAppModeSur
     }
 
     private func logSubmission() {
-        let event = AnalyticsEventV2.AppModeSurveyEvent(
+        let event = ClientTrackableEventType.AppModeSurveyEvent(
             option1: selectedKeys.contains(surveyOptionKeys[0]),
             option2: selectedKeys.contains(surveyOptionKeys[1]),
             option3: selectedKeys.contains(surveyOptionKeys[2]),
@@ -111,11 +112,11 @@ private class dydxAppModeSurveyViewPresenter: HostedViewPresenter<dydxAppModeSur
             isSubmit: true,
             isDoNotShowAgain: false
         )
-        Tracking.shared?.logEvent(event: event)
+        Tracking.shared?.logSharedEvent(event)
     }
 
     private func logDontShowAgain() {
-        let event = AnalyticsEventV2.AppModeSurveyEvent(
+        let event = ClientTrackableEventType.AppModeSurveyEvent(
             option1: false,
             option2: false,
             option3: false,
@@ -123,11 +124,11 @@ private class dydxAppModeSurveyViewPresenter: HostedViewPresenter<dydxAppModeSur
             isSubmit: false,
             isDoNotShowAgain: true
         )
-        Tracking.shared?.logEvent(event: event)
+        Tracking.shared?.logSharedEvent(event)
     }
 
     private func logCancel() {
-        let event = AnalyticsEventV2.AppModeSurveyEvent(
+        let event = ClientTrackableEventType.AppModeSurveyEvent(
             option1: false,
             option2: false,
             option3: false,
@@ -135,6 +136,6 @@ private class dydxAppModeSurveyViewPresenter: HostedViewPresenter<dydxAppModeSur
             isSubmit: false,
             isDoNotShowAgain: false
         )
-        Tracking.shared?.logEvent(event: event)
+        Tracking.shared?.logSharedEvent(event)
     }
 }

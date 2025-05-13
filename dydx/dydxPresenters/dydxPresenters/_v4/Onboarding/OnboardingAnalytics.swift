@@ -10,6 +10,7 @@ import Utilities
 import dydxStateManager
 import Combine
 import dydxAnalytics
+import Abacus
 
 public final class OnboardingAnalytics {
 
@@ -29,7 +30,7 @@ public final class OnboardingAnalytics {
                 } else {
                     state = .walletConnected
                 }
-                Tracking.shared?.logEvent(event: AnalyticsEventV2.OnboardingStepChanged(step: step, state: state))
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.OnboardingStepChanged(step: step.rawValue, state: state.rawValue))
             }
             .store(in: &subscriptions)
     }

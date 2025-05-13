@@ -226,7 +226,7 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
         if let transactionHash = transactionHash,
            let status = statuses?[transactionHash] {
             if routeCompleted(transferStatus: status, chainId: transfer.toChainId) {
-                Tracking.shared?.logEvent(event: AnalyticsEventV2.WithdrawFinalizedEvent(status: status))
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.WithdrawFinalizedEvent(status: status))
 
                 viewModel?.title = DataLocalizer.localize(path: "APP.V4_WITHDRAWAL.COMPLETED_TITLE")
                 viewModel?.text = DataLocalizer.localize(path: "APP.V4_WITHDRAWAL.COMPLETED_TEXT")

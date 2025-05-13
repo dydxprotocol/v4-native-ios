@@ -13,6 +13,7 @@ import PlatformParticles
 import Utilities
 import RoutingKit
 import dydxAnalytics
+import Abacus
 
 public protocol HostedViewPresenterProtocol: WorkerProtocol {
     var currentRoute: RoutingRequest? { get set }
@@ -103,11 +104,11 @@ open class HostedViewPresenter<ViewModel: PlatformViewModeling>: ObjectViewPrese
 
     public func navigate(to request: RoutingRequest, animated: Bool, completion: RoutingCompletionBlock?) {
         if let toRoute = request.url?.relativePath {
-            let event = AnalyticsEventV2.RoutingEvent(fromPath: currentRoute?.url?.relativePath,
-                                                      toPath: toRoute,
-                                                      fromQuery: currentRoute?.url?.query,
-                                                      toQuery: request.url?.query)
-            Tracking.shared?.logEvent(event: event)
+            let event = ClientTrackableEventType.RoutingEvent(fromPath: currentRoute?.url?.relativePath,
+                                                              toPath: toRoute,
+                                                              fromQuery: currentRoute?.url?.query,
+                                                              toQuery: request.url?.query)
+            Tracking.shared?.logSharedEvent(event)
         }
 
         Router.shared?.navigate(to: request, animated: animated, completion: completion)

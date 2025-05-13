@@ -12,6 +12,7 @@ import RoutingKit
 import ParticlesKit
 import PlatformUI
 import dydxAnalytics
+import Abacus
 
 public class dydxAppModeViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -91,7 +92,7 @@ public extension AppMode {
             if current != newValue {
                 let fromMode = current?.rawValue ?? "none"
                 let toMode = newValue?.rawValue ?? "none"
-                Tracking.shared?.logEvent(event: AnalyticsEventV2.ModeSelectorEvent(fromMode: fromMode, toMode: toMode))
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.ModeSelectorEvent(fromMode: fromMode, toMode: toMode))
 
                 SettingsStore.shared?.setValue(newValue?.rawValue, forDydxKey: .appMode)
             }

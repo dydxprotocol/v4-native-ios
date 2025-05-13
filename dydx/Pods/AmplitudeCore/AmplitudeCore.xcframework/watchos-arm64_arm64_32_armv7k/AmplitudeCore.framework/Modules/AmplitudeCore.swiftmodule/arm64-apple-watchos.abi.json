@@ -2042,6 +2042,87 @@
             "protocolReq": true,
             "reqNewWitnessTableEntry": true,
             "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "plugins",
+            "printedName": "plugins(type:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[τ_1_0]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_1_0"
+                  }
+                ],
+                "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Metatype",
+                "printedName": "τ_1_0.Type",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_1_0"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:13AmplitudeCore10PluginHostP7plugins4typeSayqd__Gqd__m_tAA09UniversalC0Rd__lF",
+            "mangledName": "$s13AmplitudeCore10PluginHostP7plugins4typeSayqd__Gqd__m_tAA09UniversalC0Rd__lF",
+            "moduleName": "AmplitudeCore",
+            "genericSig": "<τ_0_0, τ_1_0 where τ_0_0 : AmplitudeCore.PluginHost, τ_1_0 : AmplitudeCore.UniversalPlugin>",
+            "sugared_genericSig": "<Self, PluginType where Self : AmplitudeCore.PluginHost, PluginType : AmplitudeCore.UniversalPlugin>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "plugins",
+            "printedName": "plugins(type:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[τ_1_0]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_1_0"
+                  }
+                ],
+                "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Metatype",
+                "printedName": "τ_1_0.Type",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_1_0"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:13AmplitudeCore10PluginHostPAAE7plugins4typeSayqd__Gqd__m_tAA09UniversalC0Rd__lF",
+            "mangledName": "$s13AmplitudeCore10PluginHostPAAE7plugins4typeSayqd__Gqd__m_tAA09UniversalC0Rd__lF",
+            "moduleName": "AmplitudeCore",
+            "genericSig": "<τ_0_0, τ_1_0 where τ_0_0 : AmplitudeCore.PluginHost, τ_1_0 : AmplitudeCore.UniversalPlugin>",
+            "sugared_genericSig": "<Self, PluginType where Self : AmplitudeCore.PluginHost, PluginType : AmplitudeCore.UniversalPlugin>",
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Protocol",
@@ -4898,6 +4979,13 @@
       "offset": 1127,
       "length": 8,
       "value": "\"%@: %@\""
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Plugins\/PluginHost.swift",
+      "kind": "Array",
+      "offset": 518,
+      "length": 2,
+      "value": "[]"
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",

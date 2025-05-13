@@ -82,6 +82,11 @@ public protocol AnalyticsIdentity {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public protocol PluginHost {
   func plugin(name: Swift.String) -> (any AmplitudeCore.UniversalPlugin)?
+  func plugins<PluginType>(type: PluginType.Type) -> [PluginType] where PluginType : AmplitudeCore.UniversalPlugin
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension AmplitudeCore.PluginHost {
+  public func plugins<PluginType>(type: PluginType.Type) -> [PluginType] where PluginType : AmplitudeCore.UniversalPlugin
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public protocol UniversalPlugin : AnyObject {
