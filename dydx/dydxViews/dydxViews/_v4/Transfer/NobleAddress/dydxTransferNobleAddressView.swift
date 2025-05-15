@@ -48,7 +48,8 @@ public class dydxTransferNobleAddressViewModel: PlatformViewModel {
                         Text(self.text_1)
                             .multilineTextAlignment(.center)
 
-                        if let address = self.address, let cgImage = EFQRCode.generate(for: address) {
+                        let icon = UIImage(named: "icon_noble", in: Bundle.dydxView, compatibleWith: nil)
+                        if let address = self.address, let cgImage = EFQRCode.generate(for: address, icon: icon?.cgImage) {
                             let uiImage = UIImage(cgImage: cgImage)
                             Spacer()
                             Image(uiImage: uiImage)
