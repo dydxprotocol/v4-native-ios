@@ -175,6 +175,7 @@
 		02AEE36C28EF7CC8006842E8 /* dydxMarketInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEE36B28EF7CC8006842E8 /* dydxMarketInfoHeaderView.swift */; };
 		02AEE4BA28F0DBF9006842E8 /* dydxMarketPriceCandlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEE4B928F0DBF9006842E8 /* dydxMarketPriceCandlesView.swift */; };
 		02AEE4BC28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEE4BB28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift */; };
+		02B23D5F2DD5298D004E727E /* dydxTransferNobleItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B23D5E2DD5298D004E727E /* dydxTransferNobleItemView.swift */; };
 		02B27A3A2AE8BC5A00A995EC /* dydxHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B27A392AE8BC5A00A995EC /* dydxHelpView.swift */; };
 		02B4292D2DD2B30500CC3476 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B4292A2DD2B2FC00CC3476 /* dydxAnalytics.framework */; };
 		02B8419D28EF68C300C4D25B /* dydxMarketInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B8419C28EF68C300C4D25B /* dydxMarketInfoView.swift */; };
@@ -214,6 +215,7 @@
 		02F1D3882BEAA6CA00A9376C /* dydxTradeInputMarginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F1D3872BEAA6CA00A9376C /* dydxTradeInputMarginView.swift */; };
 		02F6E7112A8292FC0018F00C /* dydxProfileFeesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F6E7102A8292FC0018F00C /* dydxProfileFeesView.swift */; };
 		02F7010329EA192A004DEB5E /* dydxReceiptItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F7010229EA192A004DEB5E /* dydxReceiptItemView.swift */; };
+		02F802802DD56BE70009BA8F /* dydxTransferNobleAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8027F2DD56BE70009BA8F /* dydxTransferNobleAddressView.swift */; };
 		02F958142A1BDEE500828F9A /* dydxKeyExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F958132A1BDEE500828F9A /* dydxKeyExportView.swift */; };
 		02F95A7C2A1D2C5900828F9A /* dydxPortfolioSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F95A7B2A1D2C5900828F9A /* dydxPortfolioSelectorView.swift */; };
 		02F95A8C2A1D6A9200828F9A /* dydxProfileHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F95A8B2A1D6A9200828F9A /* dydxProfileHistoryView.swift */; };
@@ -652,6 +654,7 @@
 		02AEE36B28EF7CC8006842E8 /* dydxMarketInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketInfoHeaderView.swift; sourceTree = "<group>"; };
 		02AEE4B928F0DBF9006842E8 /* dydxMarketPriceCandlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketPriceCandlesView.swift; sourceTree = "<group>"; };
 		02AEE4BB28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketPriceCandlesControlView.swift; sourceTree = "<group>"; };
+		02B23D5E2DD5298D004E727E /* dydxTransferNobleItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferNobleItemView.swift; sourceTree = "<group>"; };
 		02B27A392AE8BC5A00A995EC /* dydxHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxHelpView.swift; sourceTree = "<group>"; };
 		02B429222DD2B2FC00CC3476 /* dydxAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxAnalytics.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxAnalytics/dydxAnalytics.xcodeproj"; sourceTree = "<absolute>"; };
 		02B8419C28EF68C300C4D25B /* dydxMarketInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketInfoView.swift; sourceTree = "<group>"; };
@@ -691,6 +694,7 @@
 		02F1D3872BEAA6CA00A9376C /* dydxTradeInputMarginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTradeInputMarginView.swift; sourceTree = "<group>"; };
 		02F6E7102A8292FC0018F00C /* dydxProfileFeesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileFeesView.swift; sourceTree = "<group>"; };
 		02F7010229EA192A004DEB5E /* dydxReceiptItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxReceiptItemView.swift; sourceTree = "<group>"; };
+		02F8027F2DD56BE70009BA8F /* dydxTransferNobleAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferNobleAddressView.swift; sourceTree = "<group>"; };
 		02F958132A1BDEE500828F9A /* dydxKeyExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxKeyExportView.swift; sourceTree = "<group>"; };
 		02F95A7B2A1D2C5900828F9A /* dydxPortfolioSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioSelectorView.swift; sourceTree = "<group>"; };
 		02F95A8B2A1D6A9200828F9A /* dydxProfileHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileHistoryView.swift; sourceTree = "<group>"; };
@@ -1596,6 +1600,7 @@
 		02A5C84A297FBCAA00FFE1F9 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
+				02F802902DD56D080009BA8F /* NobleAddress */,
 				027CB27729EEFF670069781A /* TransferStatus */,
 				02F99F3C29E4D5600009B3E8 /* Search */,
 				02084B1F297FC2BE00CF9522 /* Components */,
@@ -1796,6 +1801,14 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
+		02F802902DD56D080009BA8F /* NobleAddress */ = {
+			isa = PBXGroup;
+			children = (
+				02F8027F2DD56BE70009BA8F /* dydxTransferNobleAddressView.swift */,
+			);
+			path = NobleAddress;
+			sourceTree = "<group>";
+		};
 		02F958062A1BDED300828F9A /* KeyExport */ = {
 			isa = PBXGroup;
 			children = (
@@ -1818,6 +1831,7 @@
 			children = (
 				02F99F3D29E4D5750009B3E8 /* dydxTransferSearchItemView.swift */,
 				023DB0B02D694D1700F15534 /* dydxInstantDepositSearchItemView.swift */,
+				02B23D5E2DD5298D004E727E /* dydxTransferNobleItemView.swift */,
 				023DB0AC2D6947D800F15534 /* dydxInstantDepositSearchView.swift */,
 			);
 			path = Search;
@@ -2410,9 +2424,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2534,6 +2552,7 @@
 				27DBF3C92C4A05B9009EB2D6 /* dydxTitledNumberField.swift in Sources */,
 				02D6DBB62D134BCF008AAEA1 /* dydxSimpleUIMarketListView.swift in Sources */,
 				0284201629AD71B600C0E7CC /* Enums.swift in Sources */,
+				02F802802DD56BE70009BA8F /* dydxTransferNobleAddressView.swift in Sources */,
 				02678FA629666BE600EE346B /* dydxPortfolioOrdersView.swift in Sources */,
 				273C2F382C496F4F00F8391F /* dydxSliderInputView.swift in Sources */,
 				020DBF0F29E0924E0068AAA6 /* dydxTransferDepositView.swift in Sources */,
@@ -2600,6 +2619,7 @@
 				027885FA2D1E170900366321 /* dydxSimpleUIMarketPositionView.swift in Sources */,
 				02548B6A2DC3ED5E00FC0ABE /* dydxSocialLoginView.swift in Sources */,
 				02A9B60E29005D5A00AE1516 /* AmountText.swift in Sources */,
+				02B23D5F2DD5298D004E727E /* dydxTransferNobleItemView.swift in Sources */,
 				02FCF0E728E795FA00D350CE /* HostedViewPresenter.swift in Sources */,
 				0258BA1D2992949D0098E1BE /* dydxProfileView.swift in Sources */,
 				276909102AAFD8BE0075B2D6 /* dydxPortfolioTransfersViewModel.swift in Sources */,

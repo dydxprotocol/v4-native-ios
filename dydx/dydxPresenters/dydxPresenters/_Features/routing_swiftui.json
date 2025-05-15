@@ -317,6 +317,10 @@
                     "destination":"dydxPresenters.dydxInstantDepositSearchViewBuilder",
                     "presentation":"push"
                 },
+                "/transfer/deposit/noble":{
+                    "destination":"dydxPresenters.dydxTransferNobleAddressViewBuilder",
+                    "presentation":"push"
+                },
                 "/transfer/status":{
                     "destination":"dydxPresenters.dydxTransferStatusViewBuilder",
                     "presentation":"prompt"

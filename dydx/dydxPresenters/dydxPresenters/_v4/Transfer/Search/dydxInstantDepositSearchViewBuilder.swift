@@ -79,6 +79,20 @@ private class dydxInstantDepositSearchViewPresenter: HostedViewPresenter<dydxIns
                 viewModel?.otherTokens = nullViewModels
             }
             .store(in: &subscriptions)
+
+        AbacusStateManager.shared.state.currentWallet
+            .sink { [weak self] wallet in
+                guard let self else { return }
+                if wallet != nil {
+                    self.viewModel?.nobleItem = dydxTransferNobleItemViewModel()
+                    self.viewModel?.nobleItem?.nobleAdddressAction = {
+                        Router.shared?.navigate(to: RoutingRequest(path: "/transfer/deposit/noble"), animated: true, completion: nil)
+                    }
+                } else {
+                    self.viewModel?.nobleItem = nil
+                }
+             }
+            .store(in: &subscriptions)
     }
 
     private func createItemViewModel(token: TransferTokenInfo, selected: TransferTokenInfo?) -> dydxInstantDepositSearchItemViewModel {

@@ -171,6 +171,7 @@
 		02F6E71F2A8293270018F00C /* dydxProfileFeesViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F6E71E2A8293270018F00C /* dydxProfileFeesViewPresenter.swift */; };
 		02F700FE29EA0FD9004DEB5E /* dydxReceiptPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F700FD29EA0FD9004DEB5E /* dydxReceiptPresenter.swift */; };
 		02F7010029EA165F004DEB5E /* dydxTransferReceiptViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F700FF29EA165F004DEB5E /* dydxTransferReceiptViewPresenter.swift */; };
+		02F8028F2DD56BF60009BA8F /* dydxTransferNobleAddressViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8028E2DD56BF50009BA8F /* dydxTransferNobleAddressViewBuilder.swift */; };
 		02F958232A1BDEFA00828F9A /* dydxKeyExportViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F958222A1BDEFA00828F9A /* dydxKeyExportViewBuilder.swift */; };
 		02F95A7E2A1D314400828F9A /* dydxPortfolioSelectorViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F95A7D2A1D314400828F9A /* dydxPortfolioSelectorViewPresenter.swift */; };
 		02F95A8E2A1D6AAD00828F9A /* dydxProfileHistoryViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F95A8D2A1D6AAD00828F9A /* dydxProfileHistoryViewPresenter.swift */; };
@@ -616,6 +617,7 @@
 		02F6E71E2A8293270018F00C /* dydxProfileFeesViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileFeesViewPresenter.swift; sourceTree = "<group>"; };
 		02F700FD29EA0FD9004DEB5E /* dydxReceiptPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxReceiptPresenter.swift; sourceTree = "<group>"; };
 		02F700FF29EA165F004DEB5E /* dydxTransferReceiptViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferReceiptViewPresenter.swift; sourceTree = "<group>"; };
+		02F8028E2DD56BF50009BA8F /* dydxTransferNobleAddressViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferNobleAddressViewBuilder.swift; sourceTree = "<group>"; };
 		02F958222A1BDEFA00828F9A /* dydxKeyExportViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxKeyExportViewBuilder.swift; sourceTree = "<group>"; };
 		02F95A7D2A1D314400828F9A /* dydxPortfolioSelectorViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioSelectorViewPresenter.swift; sourceTree = "<group>"; };
 		02F95A8D2A1D6AAD00828F9A /* dydxProfileHistoryViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileHistoryViewPresenter.swift; sourceTree = "<group>"; };
@@ -1392,6 +1394,7 @@
 		02A5C859297FBCCB00FFE1F9 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
+				02F802912DD56D160009BA8F /* NobleAddress */,
 				02C789732D723400004C3284 /* TransferInput+Ext.swift */,
 				02C789542D70FBB0004C3284 /* TransferRouteSelectionInfo.swift */,
 				02322A342D6BBB4C00F22533 /* TransferTokenDetails.swift */,
@@ -1612,6 +1615,14 @@
 				02F543B12C17ABBB000924E4 /* dydxGasTokenViewBuilder.swift */,
 			);
 			path = GasToken;
+			sourceTree = "<group>";
+		};
+		02F802912DD56D160009BA8F /* NobleAddress */ = {
+			isa = PBXGroup;
+			children = (
+				02F8028E2DD56BF50009BA8F /* dydxTransferNobleAddressViewBuilder.swift */,
+			);
+			path = NobleAddress;
 			sourceTree = "<group>";
 		};
 		02F958152A1BDEEF00828F9A /* KeyExport */ = {
@@ -2402,6 +2413,7 @@
 				64A4DB9929664818008D8E20 /* dydxTradeReceiptPresenter.swift in Sources */,
 				0236F0CB2968793A00EB995F /* dydxPortfolioFillsViewPresenter.swift in Sources */,
 				278EA5662BB61C24007A0E17 /* KeyValueStoreProtocolStore+Ext.swift in Sources */,
+				02F8028F2DD56BF60009BA8F /* dydxTransferNobleAddressViewBuilder.swift in Sources */,
 				02860A9F29C15E760079E644 /* dydxOnboardScanViewBuilder.swift in Sources */,
 				277E90332B1FAE9A005CCBCB /* dydxRewardsHelpViewPresenter.swift in Sources */,
 				02FAFA5C29D4E08E001A0903 /* dydxDebugViewBuilder.swift in Sources */,
