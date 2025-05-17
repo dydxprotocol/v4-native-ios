@@ -53,7 +53,6 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
             .compactMap { $0 }
             .sink { [weak self] account in
                 self?.updateMarginUsageChange(account: account)
-                self?.updateEquityChange(account: account)
             }
             .store(in: &subscriptions)
     }
@@ -135,22 +134,5 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
         }
 
         marginUsageViewModel.marginChange = MarginUsageChangeModel(before: before, after: after)
-    }
-
-    private func updateEquityChange(account: Subaccount) {
-        let before: AmountTextModel?
-        if let beforeAmount = account.equity?.current?.doubleValue {
-            before = AmountTextModel(amount: NSNumber(floatLiteral: beforeAmount), tickSize: NSNumber(floatLiteral: 0.01))
-        } else {
-            before = nil
-        }
-        let after: AmountTextModel?
-        if let afterAmount = account.equity?.postOrder?.doubleValue, afterAmount != account.equity?.current?.doubleValue {
-            after = AmountTextModel(amount: NSNumber(floatLiteral: afterAmount), tickSize: NSNumber(floatLiteral: 0.01))
-        } else {
-            after = nil
-        }
-
-        equlityViewModel.equityChange = .init(before: before, after: after)
     }
 }
