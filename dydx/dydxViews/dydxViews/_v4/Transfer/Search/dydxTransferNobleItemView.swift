@@ -54,14 +54,11 @@ public class dydxTransferNobleItemViewModel: PlatformViewModel {
                 .padding(.vertical, 12)
                 .themeColor(background: .layer3)
                 .cornerRadius(12)
+                .onTapGesture { [weak self] in
+                    self?.nobleAdddressAction?()
+                }
 
-            let button = Button {
-                self.nobleAdddressAction?()
-            } label: {
-                view
-            }
-
-            return AnyView(button)
+            return AnyView(view)
         }
     }
 

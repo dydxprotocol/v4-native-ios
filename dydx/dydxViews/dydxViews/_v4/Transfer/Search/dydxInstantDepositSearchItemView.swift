@@ -79,14 +79,11 @@ public class dydxInstantDepositSearchItemViewModel: PlatformViewModel {
                 .if(self.selected) { view in
                     view.borderAndClip(style: .cornerRadius(12), borderColor: .colorPurple, lineWidth: 2)
                 }
+                .onTapGesture { [weak self] in
+                    self?.selectAction?()
+                }
 
-            let button = Button {
-                self.selectAction?()
-            } label: {
-                view
-            }
-
-            return AnyView(button)
+            return AnyView(view)
         }
     }
 }
