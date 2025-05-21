@@ -71,7 +71,7 @@ public enum dydxNumberFeatureFlag: String {
         case .min_deposit_for_launchable_market:
             return 10000.0
         case .min_usdc_for_deposit:
-            return 10.0
+            return  Installation.source == .debug ? 1.0 : 10.0
         }
     }
 

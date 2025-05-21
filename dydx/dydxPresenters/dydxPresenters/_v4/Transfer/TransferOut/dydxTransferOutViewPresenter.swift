@@ -67,22 +67,6 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
             }
         }
 
-        viewModel.$addressInput
-            .debounce(for: .milliseconds(10), scheduler: DispatchQueue.main)
-            .removeDuplicates()
-            .sink(receiveValue: { address in
-                AbacusStateManager.shared.transfer(input: address, type: .address)
-            })
-            .store(in: &subscriptions)
-
-        viewModel.memoBox.$text
-            .debounce(for: .milliseconds(10), scheduler: DispatchQueue.main)
-            .removeDuplicates()
-            .sink(receiveValue: { memo in
-                AbacusStateManager.shared.transfer(input: memo, type: .memo)
-            })
-            .store(in: &subscriptions)
-
         self.viewModel = viewModel
 
         attachChildren(workers: childPresenters)
@@ -126,6 +110,22 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
                     self?.viewModel?.objectWillChange.send()
                 }
             }
+            .store(in: &subscriptions)
+
+        viewModel?.$addressInput
+            .debounce(for: .milliseconds(10), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink(receiveValue: { address in
+                AbacusStateManager.shared.transfer(input: address, type: .address)
+            })
+            .store(in: &subscriptions)
+
+        viewModel?.memoBox.$text
+            .debounce(for: .milliseconds(10), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink(receiveValue: { memo in
+                AbacusStateManager.shared.transfer(input: memo, type: .memo)
+            })
             .store(in: &subscriptions)
     }
 

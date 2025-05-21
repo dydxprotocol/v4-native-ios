@@ -165,6 +165,10 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
             .prefix(1)
             .flatMapLatest { [weak self] input, wallet in
                 self?.onboardingAnalytics.log(step: .depositInitiated)
+                let summary = selectedRoute == .instant ? input.goFastSummary : input.summary
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.DepositInitiatedEvent(transferInput: input,
+                                                                                   summary: summary))
+
                 let payload = selectedRoute == .instant ? input.goFastRequestPayload : input.requestPayload
                 return DepositTransaction(walletAddress: wallet.ethereumAddress,
                                           walletId: wallet.walletId,
@@ -180,10 +184,18 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 switch event {
                 case let .result(hash, error):
                     if let error = error {
+                        Tracking.shared?.logSharedEvent(ClientTrackableEventType.DepositErrorEvent(transferInput: transferInput,
+                                                                                       errorMessage: error.localizedDescription))
+
                         self?.showError(error: error)
                     } else if let hash = hash {
                         self?.onboardingAnalytics.log(step: .depositFunds)
                         self?.transferAnalytics.logDeposit(transferInput: transferInput)
+                        Tracking.shared?.logSharedEvent(ClientTrackableEventType.DepositSubmittedEvent(transferInput: transferInput,
+                                                                                           summary: transferInput.summary,
+                                                                                           txHash: hash,
+                                                                                           isInstantDeposit: selectedRoute == .instant))
+
                         self?.addTransferHash(hash: hash,
                                               fromChainName: transferInput.chainName ?? transferInput.networkName,
                                               toChainName: AbacusStateManager.shared.environment?.chainName,
@@ -193,6 +205,8 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                         self?.resetInputFields()
                         TransferTokenDetails.shared?.refresh()
                     } else {
+                        Tracking.shared?.logSharedEvent(ClientTrackableEventType.DepositErrorEvent(transferInput: transferInput, errorMessage: "No hash"))
+
                         ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
                                                message: DataLocalizer.localize(path: "APP.V4.NO_HASH"),
                                                type: .error,
@@ -260,18 +274,25 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
             guard let self = self,
                   let destinationAddress = transferInput.address,
                   let originationAddress = currentWallet?.cosmoAddress else { return }
+
             self.screen(originationAddress: originationAddress, destinationAddress: destinationAddress) { success in
                 guard success else { return }
                 guard let data = transferInput.requestPayload?.data,
                       let amount = transferInput.size?.usdcSize, (self.parser.asDecimal(amount)?.doubleValue ?? 0) > 0.0 else {
                     return
                 }
+
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.WithdrawInitiatedEvent(transferInput: transferInput,
+                                                                                                summary: transferInput.summary))
+
                 if transferInput.isCctp {
                     AbacusStateManager.shared.commitCCTPWithdraw { [weak self] success, error, result in
                         if success {
                             self?.transferAnalytics.logWithdrawal(transferInput: transferInput)
                             self?.postTransaction(result: result, transferInput: transferInput)
                         } else {
+                            Tracking.shared?.logSharedEvent(ClientTrackableEventType.WithdrawErrorEvent(transferInput: transferInput, errorMessage: error?.localizedDescription ?? ""))
+
                             ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
                                                    message: error?.localizedDescription,
                                                    type: .error,
@@ -282,13 +303,16 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 } else {
                     let gasFee = transferInput.summary?.gasFee?.doubleValue ?? 0
                     let usdcBalanceInWallet = usdcBalanceInWallet ?? 0
+                    let subaccount = Int(selectedSubaccount.subaccountNumber)
                     if usdcBalanceInWallet >= gasFee {
-                        CosmoJavascript.shared.withdrawToIBC(subaccount: Int(selectedSubaccount.subaccountNumber), amount: amount, payload: data) { [weak self] result in
+                        CosmoJavascript.shared.withdrawToIBC(subaccount: subaccount, amount: amount, payload: data) { [weak self] result in
                             self?.transferAnalytics.logWithdrawal(transferInput: transferInput)
                             self?.postTransaction(result: result, transferInput: transferInput)
                             self?.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
                         }
                     } else {
+                        Tracking.shared?.logSharedEvent(ClientTrackableEventType.WithdrawErrorEvent(transferInput: transferInput, errorMessage: "No gas"))
+
                         self.showNoGas()
                         self.viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONFIRM_WITHDRAW"))
                     }
@@ -383,21 +407,21 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
     private func postTransaction(result: Any?, transferInput: TransferInput) {
         if let result = (result as? String)?.jsonDictionary {
             if let error = result["error"] as? [String: Any] {
+                let message = error["message"] as? String
+                if transferInput.type == .withdrawal {
+                    Tracking.shared?.logSharedEvent(ClientTrackableEventType.WithdrawErrorEvent(transferInput: transferInput, errorMessage: message ?? ""))
+                }
                 ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
-                                       message: error["message"] as? String,
+                                       message: message,
                                        type: .error,
                                        error: nil, time: nil)
-            } else if let hash = result["transactionHash"] as? String {
-                let fullHash = "0x" + hash
-                addTransferHash(hash: fullHash,
-                                fromChainName: AbacusStateManager.shared.environment?.chainName,
-                                toChainName: transferInput.chainName ?? transferInput.networkName,
-                                transferInput: transferInput,
-                                requestPayload: transferInput.requestPayload)
-                showTransferStatus(hash: fullHash, transferInput: transferInput, isInstant: false)
-                resetInputFields()
-                TransferTokenDetails.shared?.refresh()
-            } else if let hash = result["hash"] as? String {
+            } else if let hash = (result["transactionHash"] as? String) ?? (result["hash"] as? String) {
+                if transferInput.type == .withdrawal {
+                    Tracking.shared?.logSharedEvent(ClientTrackableEventType.WithdrawSubmittedEvent(transferInput: transferInput,
+                                                                                                    summary: transferInput.summary,
+                                                                                                    txHash: hash,
+                                                                                                    isInstantWithdraw: false))
+                }
                 let fullHash = "0x" + hash
                 addTransferHash(hash: fullHash,
                                 fromChainName: AbacusStateManager.shared.environment?.chainName,
@@ -408,12 +432,19 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 resetInputFields()
                 TransferTokenDetails.shared?.refresh()
             } else {
+                if transferInput.type == .withdrawal {
+                    Tracking.shared?.logSharedEvent(ClientTrackableEventType.WithdrawErrorEvent(transferInput: transferInput, errorMessage: "No hash"))
+                }
                 ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
                                        message: DataLocalizer.localize(path: "APP.V4.NO_HASH"),
                                        type: .error,
                                        error: nil, time: nil)
             }
         } else {
+            if transferInput.type == .withdrawal {
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.WithdrawErrorEvent(transferInput: transferInput, errorMessage: "No hash"))
+            }
+
             ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"),
                                    message: DataLocalizer.localize(path: "APP.V4.NO_HASH"),
                                    type: .error,

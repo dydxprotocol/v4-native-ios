@@ -14,6 +14,7 @@ import PlatformParticles
 import PlatformUI
 import RoutingKit
 import Utilities
+import dydxAnalytics
 
 public class dydxTransferStatusViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -225,6 +226,8 @@ private class dydxTransferStatusViewPresenter: HostedViewPresenter<dydxTransferS
         if let transactionHash = transactionHash,
            let status = statuses?[transactionHash] {
             if routeCompleted(transferStatus: status, chainId: transfer.toChainId) {
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.WithdrawFinalizedEvent(status: status))
+
                 viewModel?.title = DataLocalizer.localize(path: "APP.V4_WITHDRAWAL.COMPLETED_TITLE")
                 viewModel?.text = DataLocalizer.localize(path: "APP.V4_WITHDRAWAL.COMPLETED_TEXT")
                 step1.status = .completed

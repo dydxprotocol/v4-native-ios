@@ -49,6 +49,16 @@ final class dydxTransferReceiptViewPresenter: dydxReceiptPresenter {
                 }
             }
             .store(in: &subscriptions)
+
+        Publishers.CombineLatest3(
+            AbacusStateManager.shared.state.selectedSubaccount.compactMap { $0 },
+            AbacusStateManager.shared.state.transferInput,
+            TransferRouteSelectionInfo.shared.$selected
+        )
+        .sink { [weak self] account, input, selectedRoute in
+            self?.updateEquityChange(account: account, transferInput: input, selectedRoute: selectedRoute)
+        }
+        .store(in: &subscriptions)
     }
 
     private func updateReceipt(transferInput: TransferInput?) {
@@ -150,5 +160,57 @@ final class dydxTransferReceiptViewPresenter: dydxReceiptPresenter {
             // hard coding this because web has it hard coded
             transferDurationViewModel.value = DataLocalizer.shared?.localize(path: "APP.GENERAL.TIME_STRINGS.X_MINUTES_LOWERCASED", params: ["X": "< 30"])
         }
+    }
+
+    private func updateEquityChange(account: Subaccount,
+                                    transferInput: TransferInput,
+                                    selectedRoute: TransferRouteSelection?) {
+        let currentEquity = account.equity?.current?.doubleValue
+
+        let transferUsdcSize: Double?
+        switch transferInput.type {
+            case .deposit:
+                switch selectedRoute {
+                case .instant:
+                    transferUsdcSize = transferInput.goFastSummary?.toAmountUSD?.doubleValue
+                case .regular:
+                    transferUsdcSize = transferInput.summary?.toAmountUSD?.doubleValue
+                default:
+                    transferUsdcSize = nil
+            }
+        case .withdrawal, .transferout:
+            transferUsdcSize = transferInput.summary?.usdcSize?.doubleValue
+        default:
+            transferUsdcSize = nil
+        }
+
+        let afterAmountUSD: Double?
+        if let currentEquity = currentEquity, let transferUsdcSize = transferUsdcSize {
+            switch transferInput.type {
+            case .deposit:
+                afterAmountUSD = currentEquity + transferUsdcSize
+            case .withdrawal, .transferout:
+                afterAmountUSD = max(0.0, currentEquity - transferUsdcSize)
+            default:
+                afterAmountUSD = nil
+            }
+        } else {
+            afterAmountUSD = nil
+        }
+
+        let before: AmountTextModel?
+        if let beforeAmount = currentEquity {
+            before = AmountTextModel(amount: NSNumber(floatLiteral: beforeAmount), tickSize: NSNumber(floatLiteral: 0.01))
+        } else {
+            before = nil
+        }
+        let after: AmountTextModel?
+        if let afterAmount = afterAmountUSD, afterAmount != currentEquity {
+            after = AmountTextModel(amount: NSNumber(floatLiteral: afterAmount), tickSize: NSNumber(floatLiteral: 0.01))
+        } else {
+            after = nil
+        }
+
+        equlityViewModel.equityChange = .init(before: before, after: after)
     }
 }

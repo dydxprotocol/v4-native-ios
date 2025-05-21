@@ -8,6 +8,7 @@
 import Foundation
 import PlatformParticles
 import Utilities
+import Abacus
 
 //
 // Events defined in the v4-web repo.  Ideally, we should keep this in-sync with v4-web
@@ -128,167 +129,10 @@ public enum AnalyticsEventV2 {
             self.isAuthorized = isAuthorized
         }
     }
-
-    public struct OnboardingStepChanged: TrackableEvent {
-        let step: OnboardingStep
-        let state: OnboardingState
-
-        public var name: String { "OnboardingStepChanged" }
-        public var customParameters: [String: Any] {[
-            "step": step.rawValue,
-            "state": state.rawValue
-        ]}
-
-        public init(step: OnboardingStep, state: OnboardingState) {
-            self.step = step
-            self.state = state
-        }
-    }
-
-    public struct VaultFormPreviewStep: TrackableEvent {
-        let type: VaultAnalyticsInputType
-        let amount: Double
-
-        public var name: String { "VaultFormPreviewStep" }
-        public var customParameters: [String: Any] {[
-            "amount": amount,
-            "operation": type.rawValue
-        ]}
-
-        public init(amount: Double, type: VaultAnalyticsInputType) {
-            self.amount = amount
-            self.type = type
-        }
-    }
-
-    public struct AttemptVaultOperation: TrackableEvent {
-        let type: VaultAnalyticsInputType
-        let amount: Double?
-        let slippage: Double?
-
-        public var name: String { "AttemptVaultOperation" }
-        public var customParameters: [String: Any] {
-            var dict: [String: Any] = [
-                "operation": type.rawValue
-            ]
-            if let amount {
-                dict["amount"] = amount
-            }
-            if let slippage {
-                dict["slippage"] = slippage
-            }
-            return dict
-        }
-
-        public init(type: VaultAnalyticsInputType, amount: Double?, slippage: Double?) {
-            self.type = type
-            self.amount = amount
-            self.slippage = slippage
-        }
-    }
-
-    public struct SuccessfulVaultOperation: TrackableEvent {
-        let type: VaultAnalyticsInputType
-        let amount: Double
-        let amountDiff: Double
-
-        public var name: String { "SuccessfulVaultOperation" }
-        public var customParameters: [String: Any] {[
-            "operation": type.rawValue,
-            "amount": amount,
-            "amountDiff": amountDiff
-        ]}
-
-        public init(type: VaultAnalyticsInputType, amount: Double, amountDiff: Double) {
-            self.type = type
-            self.amount = amount
-            self.amountDiff = amountDiff
-        }
-    }
-
-    public struct VaultOperationProtocolError: TrackableEvent {
-        let type: VaultAnalyticsInputType
-
-        public var name: String { "VaultOperationProtocolError" }
-        public var customParameters: [String: Any] {[
-            "operation": type.rawValue
-        ]}
-
-        public init(type: VaultAnalyticsInputType) {
-            self.type = type
-        }
-    }
-
-    public struct RoutingEvent: TrackableEvent {
-        let fromPath: String?
-        let toPath: String
-        let fromQuery: String?
-        let toQuery: String?
-
-        public var name: String { "RoutingEvent" }
-        public var customParameters: [String: Any] {[
-            "fromPath": fromPath ?? "nil",
-            "toPath": toPath,
-            "fromQuery": fromQuery ?? "nil",
-            "toQuery": toQuery ?? "nil"
-        ]}
-
-        public init(fromPath: String? = nil, toPath: String, fromQuery: String? = nil, toQuery: String? = nil) {
-            self.fromPath = fromPath
-            self.toPath = toPath
-            self.fromQuery = fromQuery
-            self.toQuery = toQuery
-        }
-    }
-
-    public struct ModeSelectorEvent: TrackableEvent {
-        let fromMode: String
-        let toMode: String
-
-        public var name: String { "ModeSelectorEvent" }
-        public var customParameters: [String: Any] {[
-            "from": fromMode,
-            "to": toMode
-        ]}
-
-        public init(fromMode: String, toMode: String) {
-            self.fromMode = fromMode
-            self.toMode = toMode
-        }
-    }
-
-    public struct AppModeSurveyEvent: TrackableEvent {
-        let option1: Bool
-        let option2: Bool
-        let option3: Bool
-        let feedback: String?
-        let isSubmit: Bool
-        let isDoNotShowAgain: Bool
-
-        public var name: String { "AppModeSurveyEvent" }
-        public var customParameters: [String: Any] {[
-            "option1": option1,
-            "option2": option2,
-            "option3": option3,
-            "feedback": feedback ?? "nil",
-            "isSubmit": isSubmit,
-            "isDoNotShowAgain": isDoNotShowAgain
-        ]}
-
-        public init(option1: Bool, option2: Bool, option3: Bool, feedback: String? = nil, isSubmit: Bool, isDoNotShowAgain: Bool) {
-            self.option1 = option1
-            self.option2 = option2
-            self.option3 = option3
-            self.feedback = feedback
-            self.isSubmit = isSubmit
-            self.isDoNotShowAgain = isDoNotShowAgain
-        }
-
-    }
 }
 
-public extension TrackingProtocol {
-    func log(event: TrackableEvent) {
+public extension Utilities.TrackingProtocol {
+    func logEvent(event: TrackableEvent) {
         if let event = event as? AnalyticsEventV2.NavigatePage {
             // for firebase auto-generated dashboard(s). Cannot import firebase analytics to use the event `AnalyticsEventScreenView` here because
             // Firebase's binary distributions, including Firebase Analytics, are build as static xcframeworks and do not support being linked into dynamic frameworks
@@ -298,6 +142,13 @@ public extension TrackingProtocol {
         log(event: event.name, data: event.customParameters)
         #if DEBUG
         Console.shared.log(event.description)
+        #endif
+    }
+
+    func logSharedEvent(_ event: ClientTrackableEvent) {
+        log(event: event.name, data: event.customParameters)
+        #if DEBUG
+        Console.shared.log(event.name)
         #endif
     }
 }

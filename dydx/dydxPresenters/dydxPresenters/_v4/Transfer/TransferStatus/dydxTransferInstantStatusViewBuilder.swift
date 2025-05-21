@@ -15,6 +15,7 @@ import Abacus
 import Combine
 import dydxFormatter
 import dydxStateManager
+import dydxAnalytics
 
 public class dydxTransferInstantStatusViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -151,6 +152,8 @@ private class dydxTransferInstantStatusViewPresenter: HostedViewPresenter<dydxTr
                 viewModel?.subtitle = DataLocalizer.localize(path: "APP.V4_DEPOSIT.COMPLETED_TEXT")
                 viewModel?.status = .success
                 deleteTransferInstance(transactionHash: transactionHash)
+
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.DepositFinalizedEvent(status: status))
             }
         }
     }

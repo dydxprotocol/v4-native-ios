@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02B4296C2DD2BFE200CC3476 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B429632DD2B74D00CC3476 /* Utilities.framework */; };
 		2742BEB22BF6860100E13C09 /* dydxAnalytics.docc in Sources */ = {isa = PBXBuildFile; fileRef = 2742BEB12BF6860100E13C09 /* dydxAnalytics.docc */; };
 		2742BEB82BF6860100E13C09 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742BEAD2BF6860100E13C09 /* dydxAnalytics.framework */; };
 		2742BEBD2BF6860100E13C09 /* dydxAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742BEBC2BF6860100E13C09 /* dydxAnalyticsTests.swift */; };
 		2742BEBE2BF6860100E13C09 /* dydxAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 2742BEB02BF6860100E13C09 /* dydxAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2742C0312BF6887100E13C09 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0302BF6887100E13C09 /* Utilities.framework */; platformFilter = ios; };
 		2742C0352BF6888500E13C09 /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2742C0342BF6888500E13C09 /* PlatformParticles.framework */; };
 		2742C04A2BF688BD00E13C09 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */; };
 		27600EEE2C65133B00DBB570 /* UserProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27600EED2C65133B00DBB570 /* UserProperty.swift */; };
@@ -19,6 +19,188 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		02B429442DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31ACB72821B0EE2D00391ADF;
+			remoteInfo = PlatformParticles;
+		};
+		02B429462DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429412DD2B74D00CC3476 /* Utilities.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E65AB8216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		02B4294F2DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31ACB72921B0EE2D00391ADF;
+			remoteInfo = PlatformParticles;
+		};
+		02B429512DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB7C621BB592E00BEF926;
+			remoteInfo = PlatformParticlesAppleWatch;
+		};
+		02B429532DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBB4321BB7A4B00BEF926;
+			remoteInfo = PlatformParticlesAppleTV;
+		};
+		02B429552DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31CFF7C121D7D1F200DE7A79;
+			remoteInfo = MessageParticles;
+		};
+		02B429572DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31ACB73221B0EE2D00391ADF;
+			remoteInfo = PlatformParticlesTests;
+		};
+		02B429592DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBB4B21BB7A4B00BEF926;
+			remoteInfo = PlatformParticlesAppleTVTests;
+		};
+		02B4295B2DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31CFF7C921D7D1F300DE7A79;
+			remoteInfo = MessageParticlesTests;
+		};
+		02B429622DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429412DD2B74D00CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AB9216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		02B429642DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429412DD2B74D00CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3196823721B791CF00AE0F28;
+			remoteInfo = UtilitiesAppleWatch;
+		};
+		02B429662DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429412DD2B74D00CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536521B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTV;
+		};
+		02B429682DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429412DD2B74D00CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AC2216BC9C9008ABEE9;
+			remoteInfo = UtilitiesTests;
+		};
+		02B4296A2DD2B74D00CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429412DD2B74D00CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536D21B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTVTests;
+		};
+		02B42A132DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31ACB72921B0EE2D00391ADF;
+			remoteInfo = PlatformParticles;
+		};
+		02B42A152DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EB7C621BB592E00BEF926;
+			remoteInfo = PlatformParticlesAppleWatch;
+		};
+		02B42A172DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBB4321BB7A4B00BEF926;
+			remoteInfo = PlatformParticlesAppleTV;
+		};
+		02B42A192DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31CFF7C121D7D1F200DE7A79;
+			remoteInfo = MessageParticles;
+		};
+		02B42A1B2DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31ACB73221B0EE2D00391ADF;
+			remoteInfo = PlatformParticlesTests;
+		};
+		02B42A1D2DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313EBB4B21BB7A4B00BEF926;
+			remoteInfo = PlatformParticlesAppleTVTests;
+		};
+		02B42A1F2DD2C03000CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31CFF7C921D7D1F300DE7A79;
+			remoteInfo = MessageParticlesTests;
+		};
+		02B42B6C2DD2C29800CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AB9216BC9C9008ABEE9;
+			remoteInfo = Utilities;
+		};
+		02B42B6E2DD2C29800CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3196823721B791CF00AE0F28;
+			remoteInfo = UtilitiesAppleWatch;
+		};
+		02B42B702DD2C29800CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536521B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTV;
+		};
+		02B42B722DD2C29800CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 31E65AC2216BC9C9008ABEE9;
+			remoteInfo = UtilitiesTests;
+		};
+		02B42B742DD2C29800CC3476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 313A536D21B9805F00A92D62;
+			remoteInfo = UtilitiesAppleTVTests;
+		};
 		2742BEB92BF6860100E13C09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2742BEA42BF6860100E13C09 /* Project object */;
@@ -26,108 +208,14 @@
 			remoteGlobalIDString = 2742BEAC2BF6860100E13C09;
 			remoteInfo = dydxAnalytics;
 		};
-		275C16D62BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 31ACB72921B0EE2D00391ADF;
-			remoteInfo = PlatformParticles;
-		};
-		275C16D82BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 313EB7C621BB592E00BEF926;
-			remoteInfo = PlatformParticlesAppleWatch;
-		};
-		275C16DA2BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 313EBB4321BB7A4B00BEF926;
-			remoteInfo = PlatformParticlesAppleTV;
-		};
-		275C16DC2BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 31CFF7C121D7D1F200DE7A79;
-			remoteInfo = MessageParticles;
-		};
-		275C16DE2BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 31ACB73221B0EE2D00391ADF;
-			remoteInfo = PlatformParticlesTests;
-		};
-		275C16E02BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 313EBB4B21BB7A4B00BEF926;
-			remoteInfo = PlatformParticlesAppleTVTests;
-		};
-		275C16E22BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 31CFF7C921D7D1F300DE7A79;
-			remoteInfo = MessageParticlesTests;
-		};
-		275C16EC2BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16E42BF7D723009313EC /* Utilities.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 31E65AB9216BC9C9008ABEE9;
-			remoteInfo = Utilities;
-		};
-		275C16EE2BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16E42BF7D723009313EC /* Utilities.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3196823721B791CF00AE0F28;
-			remoteInfo = UtilitiesAppleWatch;
-		};
-		275C16F02BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16E42BF7D723009313EC /* Utilities.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 313A536521B9805F00A92D62;
-			remoteInfo = UtilitiesAppleTV;
-		};
-		275C16F22BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16E42BF7D723009313EC /* Utilities.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 31E65AC2216BC9C9008ABEE9;
-			remoteInfo = UtilitiesTests;
-		};
-		275C16F42BF7D723009313EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16E42BF7D723009313EC /* Utilities.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 313A536D21B9805F00A92D62;
-			remoteInfo = UtilitiesAppleTVTests;
-		};
-		277754362C069FAC00E3E985 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16E42BF7D723009313EC /* Utilities.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 31E65AB8216BC9C9008ABEE9;
-			remoteInfo = Utilities;
-		};
-		277754382C069FBB00E3E985 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 31ACB72821B0EE2D00391ADF;
-			remoteInfo = PlatformParticles;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		01EA0D087F796711159C478C /* Pods-iOS-dydxAnalytics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxAnalytics.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxAnalytics/Pods-iOS-dydxAnalytics.release.xcconfig"; sourceTree = "<group>"; };
+		02B429382DD2B72500CC3476 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
+		02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformParticles.xcodeproj; path = ../../PlatformParticles/PlatformParticles.xcodeproj; sourceTree = "<group>"; };
+		02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformParticles.xcodeproj; path = "/Users/ruihuang/v4-native-ios/PlatformParticles/PlatformParticles.xcodeproj"; sourceTree = "<absolute>"; };
+		02B429412DD2B74D00CC3476 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = "/Users/ruihuang/v4-native-ios/Utilities/Utilities.xcodeproj"; sourceTree = "<absolute>"; };
 		2742BEAD2BF6860100E13C09 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742BEB02BF6860100E13C09 /* dydxAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dydxAnalytics.h; sourceTree = "<group>"; };
 		2742BEB12BF6860100E13C09 /* dydxAnalytics.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = dydxAnalytics.docc; sourceTree = "<group>"; };
@@ -137,8 +225,6 @@
 		2742C0342BF6888500E13C09 /* PlatformParticles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PlatformParticles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742C0372BF6888A00E13C09 /* dydxStateManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxStateManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742C03C2BF688B400E13C09 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
-		275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformParticles.xcodeproj; path = ../../../PlatformParticles/PlatformParticles.xcodeproj; sourceTree = "<group>"; };
-		275C16E42BF7D723009313EC /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
 		27600EED2C65133B00DBB570 /* UserProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProperty.swift; sourceTree = "<group>"; };
 		2FCEC9737902553D7EB58EF0 /* Pods_iOS_dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0A5DAA1E87EA50A32BE597 /* Pods-iOS-dydxAnalytics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxAnalytics.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxAnalytics/Pods-iOS-dydxAnalytics.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,9 +235,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02B4296C2DD2BFE200CC3476 /* Utilities.framework in Frameworks */,
 				B0A26DA7EA1E90F936ECE27B /* Pods_iOS_dydxAnalytics.framework in Frameworks */,
 				2742C0352BF6888500E13C09 /* PlatformParticles.framework in Frameworks */,
-				2742C0312BF6887100E13C09 /* Utilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +252,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02B4293F2DD2B74D00CC3476 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02B429502DD2B74D00CC3476 /* PlatformParticles.framework */,
+				02B429522DD2B74D00CC3476 /* PlatformParticles.framework */,
+				02B429542DD2B74D00CC3476 /* PlatformParticles.framework */,
+				02B429562DD2B74D00CC3476 /* MessageParticles.framework */,
+				02B429582DD2B74D00CC3476 /* PlatformParticlesTests.xctest */,
+				02B4295A2DD2B74D00CC3476 /* PlatformParticlesAppleTVTests.xctest */,
+				02B4295C2DD2B74D00CC3476 /* MessageParticlesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02B429422DD2B74D00CC3476 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02B429632DD2B74D00CC3476 /* Utilities.framework */,
+				02B429652DD2B74D00CC3476 /* Utilities.framework */,
+				02B429672DD2B74D00CC3476 /* Utilities.framework */,
+				02B429692DD2B74D00CC3476 /* UtilitiesTests.xctest */,
+				02B4296B2DD2B74D00CC3476 /* UtilitiesAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02B42A0A2DD2C03000CC3476 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02B42A142DD2C03000CC3476 /* PlatformParticles.framework */,
+				02B42A162DD2C03000CC3476 /* PlatformParticles.framework */,
+				02B42A182DD2C03000CC3476 /* PlatformParticles.framework */,
+				02B42A1A2DD2C03000CC3476 /* MessageParticles.framework */,
+				02B42A1C2DD2C03000CC3476 /* PlatformParticlesTests.xctest */,
+				02B42A1E2DD2C03000CC3476 /* PlatformParticlesAppleTVTests.xctest */,
+				02B42A202DD2C03000CC3476 /* MessageParticlesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02B42B582DD2C29800CC3476 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02B42B6D2DD2C29800CC3476 /* Utilities.framework */,
+				02B42B6F2DD2C29800CC3476 /* Utilities.framework */,
+				02B42B712DD2C29800CC3476 /* Utilities.framework */,
+				02B42B732DD2C29800CC3476 /* UtilitiesTests.xctest */,
+				02B42B752DD2C29800CC3476 /* UtilitiesAppleTVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		1D21DCC99EA6EE27EE38A5E2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,12 +328,15 @@
 		2742BEA32BF6860100E13C09 = {
 			isa = PBXGroup;
 			children = (
-				275C16CB2BF7D70C009313EC /* Dependencies */,
+				02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */,
+				02B429382DD2B72500CC3476 /* Utilities.xcodeproj */,
 				2742BEAF2BF6860100E13C09 /* dydxAnalytics */,
 				2742BEBB2BF6860100E13C09 /* dydxAnalyticsTests */,
 				2742BEAE2BF6860100E13C09 /* Products */,
 				1F6F39109DACBB1018A8A105 /* Pods */,
 				1D21DCC99EA6EE27EE38A5E2 /* Frameworks */,
+				02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */,
+				02B429412DD2B74D00CC3476 /* Utilities.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -227,41 +368,6 @@
 			path = dydxAnalyticsTests;
 			sourceTree = "<group>";
 		};
-		275C16CB2BF7D70C009313EC /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */,
-				275C16E42BF7D723009313EC /* Utilities.xcodeproj */,
-			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
-		275C16CD2BF7D723009313EC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				275C16D72BF7D723009313EC /* PlatformParticles.framework */,
-				275C16D92BF7D723009313EC /* PlatformParticles.framework */,
-				275C16DB2BF7D723009313EC /* PlatformParticles.framework */,
-				275C16DD2BF7D723009313EC /* MessageParticles.framework */,
-				275C16DF2BF7D723009313EC /* PlatformParticlesTests.xctest */,
-				275C16E12BF7D723009313EC /* PlatformParticlesAppleTVTests.xctest */,
-				275C16E32BF7D723009313EC /* MessageParticlesTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		275C16E52BF7D723009313EC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				275C16ED2BF7D723009313EC /* Utilities.framework */,
-				275C16EF2BF7D723009313EC /* Utilities.framework */,
-				275C16F12BF7D723009313EC /* Utilities.framework */,
-				275C16F32BF7D723009313EC /* UtilitiesTests.xctest */,
-				275C16F52BF7D723009313EC /* UtilitiesAppleTVTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -289,8 +395,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				277754392C069FBB00E3E985 /* PBXTargetDependency */,
-				277754372C069FAC00E3E985 /* PBXTargetDependency */,
+				02B429472DD2B74D00CC3476 /* PBXTargetDependency */,
+				02B429452DD2B74D00CC3476 /* PBXTargetDependency */,
 			);
 			name = dydxAnalytics;
 			productName = dydxAnalytics;
@@ -346,12 +452,20 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 275C16CD2BF7D723009313EC /* Products */;
-					ProjectRef = 275C16CC2BF7D723009313EC /* PlatformParticles.xcodeproj */;
+					ProductGroup = 02B42A0A2DD2C03000CC3476 /* Products */;
+					ProjectRef = 02B4293B2DD2B73200CC3476 /* PlatformParticles.xcodeproj */;
 				},
 				{
-					ProductGroup = 275C16E52BF7D723009313EC /* Products */;
-					ProjectRef = 275C16E42BF7D723009313EC /* Utilities.xcodeproj */;
+					ProductGroup = 02B4293F2DD2B74D00CC3476 /* Products */;
+					ProjectRef = 02B4293E2DD2B74D00CC3476 /* PlatformParticles.xcodeproj */;
+				},
+				{
+					ProductGroup = 02B42B582DD2C29800CC3476 /* Products */;
+					ProjectRef = 02B429382DD2B72500CC3476 /* Utilities.xcodeproj */;
+				},
+				{
+					ProductGroup = 02B429422DD2B74D00CC3476 /* Products */;
+					ProjectRef = 02B429412DD2B74D00CC3476 /* Utilities.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -363,88 +477,172 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		275C16D72BF7D723009313EC /* PlatformParticles.framework */ = {
+		02B429502DD2B74D00CC3476 /* PlatformParticles.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = PlatformParticles.framework;
-			remoteRef = 275C16D62BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B4294F2DD2B74D00CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16D92BF7D723009313EC /* PlatformParticles.framework */ = {
+		02B429522DD2B74D00CC3476 /* PlatformParticles.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = PlatformParticles.framework;
-			remoteRef = 275C16D82BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B429512DD2B74D00CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16DB2BF7D723009313EC /* PlatformParticles.framework */ = {
+		02B429542DD2B74D00CC3476 /* PlatformParticles.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = PlatformParticles.framework;
-			remoteRef = 275C16DA2BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B429532DD2B74D00CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16DD2BF7D723009313EC /* MessageParticles.framework */ = {
+		02B429562DD2B74D00CC3476 /* MessageParticles.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = MessageParticles.framework;
-			remoteRef = 275C16DC2BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B429552DD2B74D00CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16DF2BF7D723009313EC /* PlatformParticlesTests.xctest */ = {
+		02B429582DD2B74D00CC3476 /* PlatformParticlesTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = PlatformParticlesTests.xctest;
-			remoteRef = 275C16DE2BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B429572DD2B74D00CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16E12BF7D723009313EC /* PlatformParticlesAppleTVTests.xctest */ = {
+		02B4295A2DD2B74D00CC3476 /* PlatformParticlesAppleTVTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = PlatformParticlesAppleTVTests.xctest;
-			remoteRef = 275C16E02BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B429592DD2B74D00CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16E32BF7D723009313EC /* MessageParticlesTests.xctest */ = {
+		02B4295C2DD2B74D00CC3476 /* MessageParticlesTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = MessageParticlesTests.xctest;
-			remoteRef = 275C16E22BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B4295B2DD2B74D00CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16ED2BF7D723009313EC /* Utilities.framework */ = {
+		02B429632DD2B74D00CC3476 /* Utilities.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Utilities.framework;
-			remoteRef = 275C16EC2BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B429622DD2B74D00CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16EF2BF7D723009313EC /* Utilities.framework */ = {
+		02B429652DD2B74D00CC3476 /* Utilities.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Utilities.framework;
-			remoteRef = 275C16EE2BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B429642DD2B74D00CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16F12BF7D723009313EC /* Utilities.framework */ = {
+		02B429672DD2B74D00CC3476 /* Utilities.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Utilities.framework;
-			remoteRef = 275C16F02BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B429662DD2B74D00CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16F32BF7D723009313EC /* UtilitiesTests.xctest */ = {
+		02B429692DD2B74D00CC3476 /* UtilitiesTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = UtilitiesTests.xctest;
-			remoteRef = 275C16F22BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B429682DD2B74D00CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		275C16F52BF7D723009313EC /* UtilitiesAppleTVTests.xctest */ = {
+		02B4296B2DD2B74D00CC3476 /* UtilitiesAppleTVTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = UtilitiesAppleTVTests.xctest;
-			remoteRef = 275C16F42BF7D723009313EC /* PBXContainerItemProxy */;
+			remoteRef = 02B4296A2DD2B74D00CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A142DD2C03000CC3476 /* PlatformParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformParticles.framework;
+			remoteRef = 02B42A132DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A162DD2C03000CC3476 /* PlatformParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformParticles.framework;
+			remoteRef = 02B42A152DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A182DD2C03000CC3476 /* PlatformParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PlatformParticles.framework;
+			remoteRef = 02B42A172DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A1A2DD2C03000CC3476 /* MessageParticles.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MessageParticles.framework;
+			remoteRef = 02B42A192DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A1C2DD2C03000CC3476 /* PlatformParticlesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PlatformParticlesTests.xctest;
+			remoteRef = 02B42A1B2DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A1E2DD2C03000CC3476 /* PlatformParticlesAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PlatformParticlesAppleTVTests.xctest;
+			remoteRef = 02B42A1D2DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42A202DD2C03000CC3476 /* MessageParticlesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MessageParticlesTests.xctest;
+			remoteRef = 02B42A1F2DD2C03000CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42B6D2DD2C29800CC3476 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 02B42B6C2DD2C29800CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42B6F2DD2C29800CC3476 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 02B42B6E2DD2C29800CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42B712DD2C29800CC3476 /* Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Utilities.framework;
+			remoteRef = 02B42B702DD2C29800CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42B732DD2C29800CC3476 /* UtilitiesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UtilitiesTests.xctest;
+			remoteRef = 02B42B722DD2C29800CC3476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02B42B752DD2C29800CC3476 /* UtilitiesAppleTVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UtilitiesAppleTVTests.xctest;
+			remoteRef = 02B42B742DD2C29800CC3476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -513,20 +711,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		02B429452DD2B74D00CC3476 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PlatformParticles;
+			targetProxy = 02B429442DD2B74D00CC3476 /* PBXContainerItemProxy */;
+		};
+		02B429472DD2B74D00CC3476 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Utilities;
+			targetProxy = 02B429462DD2B74D00CC3476 /* PBXContainerItemProxy */;
+		};
 		2742BEBA2BF6860100E13C09 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2742BEAC2BF6860100E13C09 /* dydxAnalytics */;
 			targetProxy = 2742BEB92BF6860100E13C09 /* PBXContainerItemProxy */;
-		};
-		277754372C069FAC00E3E985 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Utilities;
-			targetProxy = 277754362C069FAC00E3E985 /* PBXContainerItemProxy */;
-		};
-		277754392C069FBB00E3E985 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = PlatformParticles;
-			targetProxy = 277754382C069FBB00E3E985 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

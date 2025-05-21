@@ -66,14 +66,14 @@ final class dydxNotificationHandlerDelegate: NSObject, NotificationHandlerDelega
         if lastPermission != permission {
             if permission == .denied {
                 if lastPermission == .notDetermined || lastPermission == .authorized {
-                    Tracking.shared?.log(event: AnalyticsEventV2.NotificationPermissionsChanged(isAuthorized: false))
+                    Tracking.shared?.logEvent(event: AnalyticsEventV2.NotificationPermissionsChanged(isAuthorized: false))
                 }
                 if lastPermission == .authorized {
                     sendTokenDeletion()
                 }
             } else if permission == .authorized {
                 if lastPermission == .notDetermined || lastPermission == .denied {
-                    Tracking.shared?.log(event: AnalyticsEventV2.NotificationPermissionsChanged(isAuthorized: true))
+                    Tracking.shared?.logEvent(event: AnalyticsEventV2.NotificationPermissionsChanged(isAuthorized: true))
                 }
                 sendTokenUpdate()
             }

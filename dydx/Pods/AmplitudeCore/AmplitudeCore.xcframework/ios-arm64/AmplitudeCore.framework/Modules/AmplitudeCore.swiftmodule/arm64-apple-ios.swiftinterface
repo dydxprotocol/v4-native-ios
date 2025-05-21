@@ -1,0 +1,181 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name AmplitudeCore
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Combine
+import Foundation
+import OSLog
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public struct AmplitudeContext {
+  public let apiKey: Swift.String
+  public let instanceName: Swift.String
+  public let serverZone: AmplitudeCore.ServerZone
+  public let remoteConfigClient: AmplitudeCore.RemoteConfigClient
+  public let logger: any AmplitudeCore.CoreLogger
+  public init(apiKey: Swift.String, instanceName: Swift.String = "$default_instance", serverZone: AmplitudeCore.ServerZone = .US, logger: any AmplitudeCore.CoreLogger = OSLogger(logLevel: .error))
+}
+@objc public enum LogLevel : Swift.Int, Swift.Comparable, Swift.Sendable {
+  case off = 0
+  case error = 1
+  case warn = 2
+  case log = 3
+  case debug = 4
+  public static func < (lhs: AmplitudeCore.LogLevel, rhs: AmplitudeCore.LogLevel) -> Swift.Bool
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @preconcurrency public protocol CoreLogger : Swift.Sendable {
+  @objc func error(message: Swift.String)
+  @objc func warn(message: Swift.String)
+  @objc func log(message: Swift.String)
+  @objc func debug(message: Swift.String)
+}
+final public class OSLogger : AmplitudeCore.CoreLogger {
+  final public let logLevel: AmplitudeCore.LogLevel
+  public init(logLevel: AmplitudeCore.LogLevel = .off)
+  @objc final public func error(message: Swift.String)
+  @objc final public func warn(message: Swift.String)
+  @objc final public func log(message: Swift.String)
+  @objc final public func debug(message: Swift.String)
+  final public func log(_ logLevel: AmplitudeCore.LogLevel, _ message: Swift.String)
+  @objc deinit
+}
+#if compiler(>=5.3) && $PrimaryAssociatedTypes2
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public protocol AnalyticsClient<Identity> : AnyObject {
+  associatedtype Identity : AmplitudeCore.AnalyticsIdentity
+  var identity: Self.Identity { get }
+  var sessionId: Swift.Int64 { get }
+  var optOut: Swift.Bool { get }
+  func track(eventType: Swift.String, eventProperties: [Swift.String : Any]?)
+}
+#else
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public protocol AnalyticsClient : AnyObject {
+  associatedtype Identity : AmplitudeCore.AnalyticsIdentity
+  var identity: Self.Identity { get }
+  var sessionId: Swift.Int64 { get }
+  var optOut: Swift.Bool { get }
+  func track(eventType: Swift.String, eventProperties: [Swift.String : Any]?)
+}
+#endif
+public protocol AnalyticsEvent {
+  var userId: Swift.String? { get }
+  var deviceId: Swift.String? { get }
+  var timestamp: Swift.Int64? { get }
+  var sessionId: Swift.Int64? { get }
+  var eventType: Swift.String { get }
+  var eventProperties: [Swift.String : Any]? { get set }
+}
+public protocol AnalyticsIdentity {
+  var deviceId: Swift.String? { get }
+  var userId: Swift.String? { get }
+  var userProperties: [Swift.String : Any] { get }
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public protocol PluginHost {
+  func plugin(name: Swift.String) -> (any AmplitudeCore.UniversalPlugin)?
+  func plugins<PluginType>(type: PluginType.Type) -> [PluginType] where PluginType : AmplitudeCore.UniversalPlugin
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension AmplitudeCore.PluginHost {
+  public func plugins<PluginType>(type: PluginType.Type) -> [PluginType] where PluginType : AmplitudeCore.UniversalPlugin
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public protocol UniversalPlugin : AnyObject {
+  var name: Swift.String? { get }
+  func setup(analyticsClient: any AmplitudeCore.AnalyticsClient, amplitudeContext: AmplitudeCore.AmplitudeContext)
+  func execute<Event>(_ event: inout Event) where Event : AmplitudeCore.AnalyticsEvent
+  func teardown()
+  func onIdentityChanged(_ identity: any AmplitudeCore.AnalyticsIdentity)
+  func onSessionIdChanged(_ sessionId: Swift.Int64)
+  func onOptOutChanged(_ optOut: Swift.Bool)
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension AmplitudeCore.UniversalPlugin {
+  public var name: Swift.String? {
+    get
+  }
+  public func setup(analyticsClient: any AmplitudeCore.AnalyticsClient, amplitudeContext: AmplitudeCore.AmplitudeContext)
+  public func execute<Event>(_ event: inout Event) where Event : AmplitudeCore.AnalyticsEvent
+  public func teardown()
+  public func onIdentityChanged(_ identity: any AmplitudeCore.AnalyticsIdentity)
+  public func onSessionIdChanged(_ sessionId: Swift.Int64)
+  public func onOptOutChanged(_ optOut: Swift.Bool)
+}
+#if compiler(>=5.3) && $Actors
+@objc @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public actor RemoteConfigClient : ObjectiveC.NSObject {
+  public enum DeliveryMode : Swift.Sendable {
+    case all
+    case waitForRemote(timeout: Foundation.TimeInterval = 3)
+  }
+  public enum Source : Swift.Sendable {
+    case cache
+    case remote
+    public static func == (a: AmplitudeCore.RemoteConfigClient.Source, b: AmplitudeCore.RemoteConfigClient.Source) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum RemoteConfigError : Swift.Error {
+    case notInCache
+    case invalidServerURL
+    case badResponse
+    case preInit
+    case cancelled
+    public static func == (a: AmplitudeCore.RemoteConfigClient.RemoteConfigError, b: AmplitudeCore.RemoteConfigClient.RemoteConfigError) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public typealias RemoteConfig = [Swift.String : any Swift.Sendable]
+  #if compiler(>=5.3) && $Sendable
+  public typealias RemoteConfigCallback = @Sendable (AmplitudeCore.RemoteConfigClient.RemoteConfig?, AmplitudeCore.RemoteConfigClient.Source, Foundation.Date?) -> Swift.Void
+  #endif
+  public typealias RemoteConfigSubscription = Swift.Sendable
+  public convenience init(apiKey: Swift.String, serverZone: AmplitudeCore.ServerZone, instanceName: Swift.String? = nil, logger: any AmplitudeCore.CoreLogger)
+  #if compiler(>=5.3) && $Sendable
+  @discardableResult
+  nonisolated public func subscribe(key: Swift.String? = nil, deliveryMode: AmplitudeCore.RemoteConfigClient.DeliveryMode = .all, callback: @escaping AmplitudeCore.RemoteConfigClient.RemoteConfigCallback) -> any Swift.Sendable
+  #endif
+  nonisolated public func unsubscribe(_ token: any Swift.Sendable)
+  nonisolated public func updateConfigs()
+  @objc deinit
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  @_semantics("defaultActor") nonisolated final public var unownedExecutor: _Concurrency.UnownedSerialExecutor {
+    get
+  }
+}
+#endif
+@objc(AMPServerZone) public enum ServerZone : Swift.Int, Swift.Sendable {
+  case US
+  case EU
+  public typealias RawValue = Swift.String
+  public var rawValue: AmplitudeCore.ServerZone.RawValue {
+    get
+  }
+  public init?(rawValue: AmplitudeCore.ServerZone.RawValue)
+}
+extension AmplitudeCore.LogLevel : Swift.Hashable {}
+extension AmplitudeCore.LogLevel : Swift.RawRepresentable {}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension AmplitudeCore.RemoteConfigClient.Source : Swift.Equatable {}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension AmplitudeCore.RemoteConfigClient.Source : Swift.Hashable {}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension AmplitudeCore.RemoteConfigClient.RemoteConfigError : Swift.Equatable {}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension AmplitudeCore.RemoteConfigClient.RemoteConfigError : Swift.Hashable {}
+extension AmplitudeCore.ServerZone : Swift.Equatable {}
+extension AmplitudeCore.ServerZone : Swift.Hashable {}
+extension AmplitudeCore.ServerZone : Swift.RawRepresentable {}

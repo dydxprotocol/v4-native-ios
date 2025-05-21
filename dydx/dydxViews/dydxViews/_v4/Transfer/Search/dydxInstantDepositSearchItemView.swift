@@ -56,8 +56,10 @@ public class dydxInstantDepositSearchItemViewModel: PlatformViewModel {
                 VStack(alignment: .leading) {
                     Text(self.token ?? "")
                         .themeFont(fontSize: .medium)
+                        .themeColor(foreground: .textPrimary)
                     Text(self.chain ?? "")
                         .themeFont(fontSize: .small)
+                        .themeColor(foreground: .textTertiary)
                 }
 
                 Spacer()

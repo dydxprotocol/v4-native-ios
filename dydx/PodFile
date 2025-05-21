@@ -282,17 +282,20 @@ abstract_target 'iOS' do
     project '../dydx/dydxViews/dydxViews'
     ios_ui_pods
     swifiui_pods
+    abacus_pods
   end
   
   target 'dydxViewsTests' do
     project '../dydx/dydxViews/dydxViews'
     ios_ui_pods
     swifiui_pods
+    abacus_pods
   end
 
   target 'dydxAnalytics' do
     project '../dydx/dydxAnalytics/dydxAnalytics'
     ios_util_pods
+    abacus_pods
   end
   
   target 'dydxPresenters' do

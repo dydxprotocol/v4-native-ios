@@ -7,7 +7,6 @@
 
 import Utilities
 import SwiftUI
-import enum dydxAnalytics.AnalyticsEventV2
 
 public enum VaultTransferType: CaseIterable, RadioButtonContentDisplayable {
     case deposit
@@ -74,13 +73,6 @@ public enum VaultTransferType: CaseIterable, RadioButtonContentDisplayable {
         switch self {
         case .deposit: return DataLocalizer.localize(path: "APP.VAULTS.MEGAVAULT")
         case .withdraw: return DataLocalizer.localize(path: "APP.VAULTS.CROSS_ACCOUNT")
-        }
-    }
-
-    public var analyticsInputType: AnalyticsEventV2.VaultAnalyticsInputType {
-        switch self {
-        case .deposit: return .deposit
-        case .withdraw: return .withdraw
         }
     }
 }

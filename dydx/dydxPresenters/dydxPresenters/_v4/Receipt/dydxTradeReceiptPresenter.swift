@@ -73,6 +73,13 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
                 }
             }
             .store(in: &subscriptions)
+
+        AbacusStateManager.shared.state.selectedSubaccount
+            .compactMap { $0 }
+            .sink { [weak self] account in
+                self?.updateEquityChange(account: account)
+            }
+            .store(in: &subscriptions)
     }
 
     private func updateTradingFee(tradeSummary: TradeInputSummary?) {
@@ -144,5 +151,22 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
         } else {
             rewardsViewModel.rewards = SignedAmountViewModel(text: value, sign: .minus, coloringOption: .signOnly)
         }
+    }
+
+    private func updateEquityChange(account: Subaccount) {
+        let before: AmountTextModel?
+        if let beforeAmount = account.equity?.current?.doubleValue {
+            before = AmountTextModel(amount: NSNumber(floatLiteral: beforeAmount), tickSize: NSNumber(floatLiteral: 0.01))
+        } else {
+            before = nil
+        }
+        let after: AmountTextModel?
+        if let afterAmount = account.equity?.postOrder?.doubleValue, afterAmount != account.equity?.current?.doubleValue {
+            after = AmountTextModel(amount: NSNumber(floatLiteral: afterAmount), tickSize: NSNumber(floatLiteral: 0.01))
+        } else {
+            after = nil
+        }
+
+        equlityViewModel.equityChange = .init(before: before, after: after)
     }
 }
