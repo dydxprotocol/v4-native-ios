@@ -99,11 +99,11 @@ final class TransferTokenDetails {
 }
 
 enum TransferChain: String {
-    case Ethereum, Optimism, Arbitrum, Base, Polygon, Solana
+    case Ethereum, Optimism, Arbitrum, Base, Polygon, Avalanche, Solana
 }
 
 enum TransferToken: String {
-    case ETH, USDC, POL, SOL
+    case ETH, USDC, POL, SOL, AVAX
 }
 
 struct TransferTokenInfo: Equatable {
@@ -125,6 +125,7 @@ struct TransferTokenInfo: Equatable {
         case .Base: logoName = "base.png"
         case .Polygon: logoName = "polygon.png"
         case .Solana: logoName = "solana.png"
+        case .Avalanche: logoName = "avalanche.png"
         }
         return AbacusStateManager.shared.deploymentUri + "/chains/\(logoName)"
     }
@@ -136,6 +137,7 @@ struct TransferTokenInfo: Equatable {
         case .USDC: logoName = "usdc.png"
         case .POL: logoName = "pol.png"
         case .SOL: logoName = "sol.png"
+        case .AVAX: logoName = "avax.png"
         }
         return AbacusStateManager.shared.deploymentUri + "/currencies/\(logoName)"
     }
@@ -146,6 +148,7 @@ struct TransferTokenInfo: Equatable {
         case .POL: return 18
         case .USDC: return 6
         case .SOL: return 9
+        case .AVAX: return 18
         }
     }
 }
@@ -156,11 +159,15 @@ private let mainnetTokens: [TransferTokenInfo] = [
     TransferTokenInfo(chain: .Optimism, chainId: "10", token: .USDC, tokenAddress: "0x0b2c639c533813f4aa9d7837caf62653d097ff85"),
     TransferTokenInfo(chain: .Arbitrum, chainId: "42161", token: .USDC, tokenAddress: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"),
     TransferTokenInfo(chain: .Polygon, chainId: "137", token: .USDC, tokenAddress: "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"),
+    TransferTokenInfo(chain: .Avalanche, chainId: "43114", token: .USDC, tokenAddress: "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"),
+
     TransferTokenInfo(chain: .Ethereum, chainId: "1", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Base, chainId: "8453", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Optimism, chainId: "10", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Arbitrum, chainId: "42161", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Polygon, chainId: "137", token: .POL, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+    TransferTokenInfo(chain: .Avalanche, chainId: "43114", token: .AVAX, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+
 //    TransferTokenInfo(chain: .Solana, chainId: "solana", token: .SOL, tokenAddress: "solana-native"),
     TransferTokenInfo(chain: .Solana, chainId: "solana", token: .USDC, tokenAddress: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
 
@@ -172,11 +179,15 @@ private let testnetTokens: [TransferTokenInfo] = [
     TransferTokenInfo(chain: .Optimism, chainId: "11155420", token: .USDC, tokenAddress: "0xD0C591da9805D1f801B297bDF46352287E0A6A63"),
     TransferTokenInfo(chain: .Arbitrum, chainId: "421614", token: .USDC, tokenAddress: "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d"),
     TransferTokenInfo(chain: .Polygon, chainId: "80002", token: .USDC, tokenAddress: "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582"),
+    TransferTokenInfo(chain: .Avalanche, chainId: "43113", token: .USDC, tokenAddress: "0x5425890298aed601595a70AB815c96711a31Bc65"),
+
     TransferTokenInfo(chain: .Ethereum, chainId: "11155111", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Base, chainId: "84532", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Optimism, chainId: "11155420", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Arbitrum, chainId: "421614", token: .ETH, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
     TransferTokenInfo(chain: .Polygon, chainId: "80002", token: .POL, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+    TransferTokenInfo(chain: .Avalanche, chainId: "43113", token: .AVAX, tokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"),
+
 //    TransferTokenInfo(chain: .Solana, chainId: "solana-devnet", token: .SOL, tokenAddress: "solana-devnet-native"),
     TransferTokenInfo(chain: .Solana, chainId: "solana-devnet", token: .USDC, tokenAddress: "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU")
 ]
