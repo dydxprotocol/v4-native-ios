@@ -53,9 +53,10 @@ private class dydxTransferNobleAddressViewPresenter: HostedViewPresenter<dydxTra
             .sink { [weak self] wallet in
                 guard let self else { return }
                 if let address = wallet?.cosmoAddress {
-                    self.viewModel?.address  = AbacusStringUtils().toNobleAddress(dydxAddress: address)
+                    let nobleAddress = AbacusStringUtils().toNobleAddress(dydxAddress: address)
+                    self.viewModel?.address = nobleAddress
                     self.viewModel?.copyAction = {
-                        UIPasteboard.general.string = address
+                        UIPasteboard.general.string = nobleAddress
                         ErrorInfo.shared?.info(title: nil,
                                                message: DataLocalizer.localize(path: "APP.V4.NOBLE_ADDRESS_COPIED"),
                                                type: .info,
