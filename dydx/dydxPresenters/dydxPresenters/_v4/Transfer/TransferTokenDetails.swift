@@ -19,7 +19,7 @@ final class TransferTokenDetails {
         AbacusStateManager.shared.state.marketMap
         .compactMap { marketMap in
             var markets = [String: Double]()
-            for marketId in ["ETH-USD", "POL-USD", "SOL-USD"] {
+            for marketId in ["ETH-USD", "POL-USD", "SOL-USD", "AVAX-USD"] {
                 if let oraclePrice = marketMap[marketId]?.oraclePrice?.doubleValue {
                     markets[marketId] = oraclePrice
                 }
