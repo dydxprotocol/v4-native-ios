@@ -18,6 +18,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
     @Published public var header: dydxSimpleUIMarketsHeaderViewModel?
     @Published public var hasPosition: Bool = false
     @Published public var marketSort: dydxSimpleUIMarketSortViewModel?
+    @Published public var positionsToggle: dydxSimpleUIPositionsToggleViewModel?
 
     @Published public var searchText: String = ""
     private lazy var searchTextBinding = Binding(
@@ -40,6 +41,7 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
         vm.portfolio = .previewValue
         vm.header = .previewValue
         vm.marketSort = .previewValue
+        vm.positionsToggle = .previewValue
         return vm
     }
 
@@ -75,7 +77,8 @@ public class dydxSimpleUIMarketsViewModel: PlatformViewModel {
                             DividerModel().createView(parentStyle: style)
 
                             if self.hasPosition {
-                                let header = self.createHeader(text: DataLocalizer.localize(path: "APP.GENERAL.YOUR_POSITIONS"))
+                                let toggleView = AnyView(self.positionsToggle?.createView(parentStyle: style))
+                                let header = self.createHeader(text: DataLocalizer.localize(path: "APP.GENERAL.YOUR_POSITIONS"), rightAccessory: toggleView)
                                 Section(header: header) {
                                     self.positionList?.createView(parentStyle: style)
                                 }

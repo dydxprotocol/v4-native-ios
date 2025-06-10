@@ -20,6 +20,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
     case appMode = "app_mode"
     case showAppModeSurvey = "show_app_mode_survey"
     case simpleUISortOrder = "simple_ui_sort_order"
+    case simpleUIPositionToggle = "simple_ui_position_toggle"
 
     public var defaultValue: Any? {
         switch self {
@@ -33,6 +34,7 @@ public enum dydxSettingsStoreKey: String, CaseIterable {
         case .appMode: return nil
         case .showAppModeSurvey: return true
         case .simpleUISortOrder: return SimpleUIMarketSortOption.marketCap.rawValue
+        case .simpleUIPositionToggle: return SimpleUIPositionToggleOption.pnl.rawValue
         }
     }
 }

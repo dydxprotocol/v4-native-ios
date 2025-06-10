@@ -131,6 +131,7 @@
 		02A651892DB6DA22006DBD5F /* dydxSimpleUIMenuButtonsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A651882DB6DA21006DBD5F /* dydxSimpleUIMenuButtonsViewPresenter.swift */; };
 		02A6520C2DB6F965006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A651FE2DB6F964006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift */; };
 		02A8980628E76175006F1658 /* dydxStateManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DD9728CFB30000727949 /* dydxStateManager.framework */; platformFilter = ios; };
+		02B184B72DF773FC00B6681A /* dydxSimpleUIPositionsToggleViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B184A92DF773F800B6681A /* dydxSimpleUIPositionsToggleViewPresenter.swift */; };
 		02B27A492AE8BC7600A995EC /* dydxHelpViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B27A482AE8BC7600A995EC /* dydxHelpViewPresenter.swift */; };
 		02B429122DD2B05B00CC3476 /* VaultTransferType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B429112DD2AF2100CC3476 /* VaultTransferType+Ext.swift */; };
 		02B6CE752A7087A700C5F088 /* dydxTransferSubaccountWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6CE742A7087A700C5F088 /* dydxTransferSubaccountWorker.swift */; };
@@ -577,6 +578,7 @@
 		02A651842DB408E9006DBD5F /* dydxSimpleUIMenuAccountViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuAccountViewPresenter.swift; sourceTree = "<group>"; };
 		02A651882DB6DA21006DBD5F /* dydxSimpleUIMenuButtonsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuButtonsViewPresenter.swift; sourceTree = "<group>"; };
 		02A651FE2DB6F964006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketSortViewPresenter.swift; sourceTree = "<group>"; };
+		02B184A92DF773F800B6681A /* dydxSimpleUIPositionsToggleViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIPositionsToggleViewPresenter.swift; sourceTree = "<group>"; };
 		02B27A482AE8BC7600A995EC /* dydxHelpViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxHelpViewPresenter.swift; sourceTree = "<group>"; };
 		02B429112DD2AF2100CC3476 /* VaultTransferType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultTransferType+Ext.swift"; sourceTree = "<group>"; };
 		02B6CE742A7087A700C5F088 /* dydxTransferSubaccountWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferSubaccountWorker.swift; sourceTree = "<group>"; };
@@ -1541,6 +1543,7 @@
 				02D6DBB82D134BE8008AAEA1 /* dydxSimpleUIMarketListViewPresenter.swift */,
 				02048B112D35E3DE00394CBE /* dydxSimpleUIPositionListViewPresenter.swift */,
 				02A651FE2DB6F964006DBD5F /* dydxSimpleUIMarketSortViewPresenter.swift */,
+				02B184A92DF773F800B6681A /* dydxSimpleUIPositionsToggleViewPresenter.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -2391,6 +2394,7 @@
 				020EB697299D36AD00E8026B /* dydxApiStatusWorker.swift in Sources */,
 				02A5C85E297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift in Sources */,
 				023848C22A9E637C00B1A673 /* SettingsLandingViewPresenter.swift in Sources */,
+				02B184B72DF773FC00B6681A /* dydxSimpleUIPositionsToggleViewPresenter.swift in Sources */,
 				0258BA23299294BF0098E1BE /* dydxProfileViewBuilder.swift in Sources */,
 				0208631028F5186E00C9D3A0 /* OrderbookLineDataPoint.swift in Sources */,
 				023AB3C82BEAD5F3005230B2 /* dydxTargetLeverageViewBuilder.swift in Sources */,

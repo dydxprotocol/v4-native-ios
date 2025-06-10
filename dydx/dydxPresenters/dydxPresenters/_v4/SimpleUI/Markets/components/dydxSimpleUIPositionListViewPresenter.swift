@@ -33,21 +33,33 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
     override func start() {
         super.start()
 
+        let modifiersPublisher =
+            Publishers
+                .CombineLatest(
+                    SimpleUIPositionToggleOptionState.shared.$current,
+                    $favUpdated)
+                .map { ($0, $1) }
+                .eraseToAnyPublisher()
+
         Publishers
             .CombineLatest4(AbacusStateManager.shared.state.marketList,
                             AbacusStateManager.shared.state.assetMap,
                             AbacusStateManager.shared.state.selectedSubaccountPositions,
-                            $favUpdated
+                            modifiersPublisher
             )
-           .sink { [weak self] markets, assetMap, positions, _ in
-               self?.updateMarketList(markets: markets, assetMap: assetMap, positions: positions)
+           .sink { [weak self] markets, assetMap, positions, modifier in
+               self?.updateMarketList(markets: markets,
+                                      assetMap: assetMap,
+                                      positions: positions,
+                                      positionToggleOption: modifier.0)
             }
             .store(in: &subscriptions)
     }
 
     private func updateMarketList(markets: [PerpetualMarket],
                                   assetMap: [String: Asset],
-                                  positions: [SubaccountPosition]) {
+                                  positions: [SubaccountPosition],
+                                  positionToggleOption: SimpleUIPositionToggleOption) {
         let markets = markets.filter { $0.status?.canTrade == true }
         viewModel?.positions = markets
             .compactMap { market in
@@ -67,6 +79,7 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
                     asset: asset,
                     position: position,
                     isFavorite: isFavorite,
+                    positionToggleOption: positionToggleOption,
                     onMarketSelected: { [weak self] in
                         self?.navigate(to: RoutingRequest(path: "/market", params: ["market": market.id]), animated: true, completion: nil)
                     },

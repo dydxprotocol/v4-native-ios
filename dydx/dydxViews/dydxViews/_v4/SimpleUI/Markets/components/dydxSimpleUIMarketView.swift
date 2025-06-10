@@ -16,12 +16,20 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
         case market, position
     }
 
+    public enum PositionToggleType {
+        case price, pnl, marginUsage
+    }
+
     public let displayType: DisplayType
+    public let positionToggleType: PositionToggleType
     public let marketId: String
     public let assetName: String
     public let iconUrl: String?
     public let price: String?
     public let change: SignedAmountViewModel?
+    public let unrealizedPNLAmount: SignedAmountViewModel?
+    public let marginValue: String?
+    public let marginUsage: MarginUsageModel?
     public let sideText: SideTextViewModel
     public let leverage: Double?
     public let volume: Double?
@@ -35,12 +43,21 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     public let isFavorite: Bool
     public let onFavoriteTapped: (() -> Void)?
 
+    var leverageText: String? {
+        guard let leverage else { return nil }
+        return String(format: "%.2fx", leverage)
+    }
+
     public init(displayType: DisplayType,
+                positionToggleType: PositionToggleType,
                 marketId: String,
                 assetName: String,
                 iconUrl: String?,
                 price: String?,
                 change: SignedAmountViewModel?,
+                unrealizedPNLAmount: SignedAmountViewModel?,
+                marginValue: String?,
+                marginUsage: MarginUsageModel?,
                 sideText: SideTextViewModel,
                 leverage: Double?,
                 volumn: Double?,
@@ -55,11 +72,15 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 onFavoriteTapped: (() -> Void)?
     ) {
         self.displayType = displayType
+        self.positionToggleType = positionToggleType
         self.marketId = marketId
         self.assetName = assetName
         self.iconUrl = iconUrl
         self.price = price
         self.change = change
+        self.unrealizedPNLAmount = unrealizedPNLAmount
+        self.marginValue = marginValue
+        self.marginUsage = marginUsage
         self.sideText = sideText
         self.leverage = leverage
         self.volume = volumn
@@ -76,11 +97,15 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
 
     public static var previewValue: dydxSimpleUIMarketViewModel {
         let vm = dydxSimpleUIMarketViewModel(displayType: .market,
+                                             positionToggleType: .pnl,
                                              marketId: "ETH-USD",
                                              assetName: "ETH",
                                              iconUrl: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
                                              price: "50_000",
                                              change: .previewValue,
+                                             unrealizedPNLAmount: .previewValue,
+                                             marginValue: "$111.22",
+                                             marginUsage: .previewValue,
                                              sideText: .previewValue,
                                              leverage: 1.34,
                                              volumn: nil,
@@ -121,19 +146,13 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                     Button { [weak self] in
                         self?.onMarketSelected?()
                     } label: {
-                        HStack(spacing: 20) {
-                            HStack(spacing: 12) {
-                                self.createIcon(style: style)
-                                switch self.displayType {
-                                case .market:
-                                    self.createNameVolume(style: style)
-                                case .position:
-                                    self.createSideSizeValue(style: style)
-                                }
+                        HStack {
+                            switch self.displayType {
+                            case .market:
+                                self.createMarketItemView(style: style)
+                            case .position:
+                                self.createPositionItemView(style: style)
                             }
-                            Spacer()
-
-                            self.createPriceChange(style: style)
                         }
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
@@ -151,6 +170,37 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
             }
 
             return AnyView(view)
+        }
+    }
+
+    private func createMarketItemView(style: ThemeStyle) -> some View {
+        HStack(spacing: 20) {
+            HStack(spacing: 12) {
+                self.createIcon(style: style)
+                self.createNameVolume(style: style)
+            }
+            Spacer()
+
+            self.createPriceChange(style: style)
+        }
+    }
+
+    private func createPositionItemView(style: ThemeStyle) -> some View {
+        HStack(spacing: 20) {
+            HStack(spacing: 12) {
+                self.createIcon(style: style)
+                self.createSideSizeValue(style: style)
+            }
+            Spacer()
+
+            switch self.positionToggleType {
+            case .price:
+                self.createPriceChange(style: style)
+            case .pnl:
+                self.createPnl(style: style)
+            case .marginUsage:
+                self.createMarginUsage(style: style)
+            }
         }
     }
 
@@ -195,14 +245,20 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     private func createSideSizeValue(style: ThemeStyle) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 4) {
-                sideText.createView(parentStyle: style.themeFont(fontSize: .medium))
-                if let positionSize {
-                    Text(positionSize)
-                        .themeColor(foreground: .textPrimary)
-                        .themeFont(fontSize: .medium)
-                    TokenTextViewModel(symbol: assetName, withBorder: true)
-                        .createView(parentStyle: style.themeFont(fontSize: .smallest))
+                Text(assetName)
+                    .themeColor(foreground: .textPrimary)
+                    .themeFont(fontSize: .medium)
+
+                if let leverageText {
+                    Text(leverageText)
+                        .themeColor(foreground: .textSecondary)
+                        .themeFont(fontSize: .smaller)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 3)
+                        .themeColor(background: .layer4)
+                        .cornerRadius(6, corners: .allCorners)
                 }
+
                 if isFavorite {
                     PlatformIconViewModel(type: .asset(name: "action_like", bundle: Bundle.dydxView),
                                           size: CGSize(width: 12, height: 12))
@@ -210,10 +266,14 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 }
             }
 
-            let valueString = dydxFormatter.shared.dollar(number: self.positionTotal, digits: 2)
-            Text(valueString ?? "")
-                .themeColor(foreground: .textTertiary)
-                .themeFont(fontSize: .small)
+            HStack(spacing: 4) {
+                sideText.createView(parentStyle: style.themeFont(fontSize: .small))
+                if let positionSize {
+                    Text(positionSize)
+                        .themeColor(foreground: .textTertiary)
+                        .themeFont(fontSize: .small)
+                }
+            }
         }
     }
 
@@ -234,10 +294,11 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
             HStack(spacing: 4) {
                 if isLaunched {
                     if let marketCapText = dydxFormatter.shared.dollarVolume(number: marketCaps) {
-                        Text(marketCapText)
-
                         Text(DataLocalizer.localize(path: "APP.GENERAL.MARKET"))
                             .themeColor(foreground: .textTertiary)
+
+                        Text(marketCapText)
+
                     } else {
                         Text("-")
                     }
@@ -257,6 +318,27 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
                 .themeFont(fontSize: .medium)
 
             change?.createView(parentStyle: style.themeFont(fontSize: .small))
+        }
+    }
+
+    private func createPnl(style: ThemeStyle) -> some View {
+        VStack(alignment: .trailing, spacing: 4) {
+            let valueString = dydxFormatter.shared.dollar(number: self.positionTotal, digits: 2)
+            Text(valueString ?? "")
+                .themeColor(foreground: .textPrimary)
+                .themeFont(fontSize: .medium)
+
+            unrealizedPNLAmount?.createView(parentStyle: style.themeFont(fontSize: .small))
+        }
+    }
+
+    private func createMarginUsage(style: ThemeStyle) -> some View {
+        VStack(alignment: .trailing, spacing: 4) {
+            Text(marginValue ?? "")
+                .themeColor(foreground: .textPrimary)
+                .themeFont(fontSize: .medium)
+
+            marginUsage?.createView(parentStyle: style.themeFont(fontType: .base, fontSize: .small))
         }
     }
 }

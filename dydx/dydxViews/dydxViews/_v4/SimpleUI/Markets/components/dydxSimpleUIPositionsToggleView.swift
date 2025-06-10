@@ -1,8 +1,8 @@
 //
-//  dydxSimpleUIMarketSortView.swift
+//  dydxSimpleUIPositionsToggleView.swift
 //  dydxUI
 //
-//  Created by Rui Huang on 21/04/2025.
+//  Created by Rui Huang on 10/06/2025.
 //  Copyright © 2025 dYdX Trading Inc. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxSimpleUIMarketSortViewModel: PlatformViewModel {
+public class dydxSimpleUIPositionsToggleViewModel: PlatformViewModel {
     @Published public var items: [dydxMarketsMenuItem] = []
 
     @Published private var present: Bool = false
@@ -25,8 +25,8 @@ public class dydxSimpleUIMarketSortViewModel: PlatformViewModel {
 
     public init() { }
 
-    public static var previewValue: dydxSimpleUIMarketSortViewModel {
-        let vm = dydxSimpleUIMarketSortViewModel()
+    public static var previewValue: dydxSimpleUIPositionsToggleViewModel {
+        let vm = dydxSimpleUIPositionsToggleViewModel()
         vm.items = [
             .init(icon: "icon_copy", title: "Settings", subtitle: nil, selected: true, action: {}),
             .init(icon: "icon_copy", title: "Onboarding", subtitle: "subtitle", selected: false, action: {})
@@ -48,7 +48,7 @@ public class dydxSimpleUIMarketSortViewModel: PlatformViewModel {
                         .themeColor(foreground: .textTertiary)
                         .themeFont(fontSize: .smaller)
 
-                    PlatformIconViewModel(type: .asset(name: "icon_swap_vertical", bundle: Bundle.dydxView),
+                    PlatformIconViewModel(type: .asset(name: "icon_toggle", bundle: Bundle.dydxView),
                                           clip: .circle(background: .layer4, spacing: 9, borderColor: nil),
                                           size: CGSize(width: 25, height: 25),
                                           templateColor: .textTertiary)
@@ -70,7 +70,7 @@ public class dydxSimpleUIMarketSortViewModel: PlatformViewModel {
                     }
                 }, view: {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(DataLocalizer.localize(path: "APP.GENERAL.SORT_BY"))
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.VIEW"))
                             .themeColor(foreground: .textTertiary)
                             .themeFont(fontSize: .small)
                             .padding(.horizontal, 16)
@@ -129,13 +129,13 @@ public class dydxSimpleUIMarketSortViewModel: PlatformViewModel {
 }
 
 #if DEBUG
-struct dydxSimpleUIMarketSortView_Previews_Dark: PreviewProvider {
+struct dydxSimpleUIPortfolioToggleView_Previews_Dark: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyDarkTheme()
         ThemeSettings.applyStyles()
-        return dydxSimpleUIMarketSortViewModel.previewValue
+        return dydxSimpleUIPositionsToggleViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)
@@ -144,13 +144,13 @@ struct dydxSimpleUIMarketSortView_Previews_Dark: PreviewProvider {
     }
 }
 
-struct dydxSimpleUIMarketSortView_Previews_Light: PreviewProvider {
+struct dydxSimpleUIPortfolioToggleView_Previews_Light: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
 
     static var previews: some View {
         ThemeSettings.applyLightTheme()
         ThemeSettings.applyStyles()
-        return dydxSimpleUIMarketSortViewModel.previewValue
+        return dydxSimpleUIPositionsToggleViewModel.previewValue
             .createView()
             .themeColor(background: .layer0)
             .environmentObject(themeSettings)

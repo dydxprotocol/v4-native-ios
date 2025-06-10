@@ -59,7 +59,13 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                             modifiersPublisher
             )
            .sink { [weak self] markets, assetMap, positions, modifiers in
-               self?.updateMarketList(markets: markets, assetMap: assetMap, positions: positions, searchText: modifiers.0, sortOption: modifiers.1, filterOption: modifiers.2, favUpdated: modifiers.3)
+               self?.updateMarketList(markets: markets,
+                                      assetMap: assetMap,
+                                      positions: positions,
+                                      searchText: modifiers.0,
+                                      sortOption: modifiers.1,
+                                      filterOption: modifiers.2,
+                                      favUpdated: modifiers.3)
             }
             .store(in: &subscriptions)
     }
@@ -132,6 +138,7 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                     asset: asset,
                     position: position,
                     isFavorite: isFavorite,
+                    positionToggleOption: nil,
                     onMarketSelected: { [weak self] in
                         self?.onMarketSelected?(market.id)
                     },
@@ -193,6 +200,7 @@ class dydxSimpleUIMarketListViewPresenter: HostedViewPresenter<dydxSimpleUIMarke
                         asset: asset,
                         position: nil,
                         isFavorite: isFavorite,
+                        positionToggleOption: nil,
                         onMarketSelected: { [weak self] in
                             self?.onMarketSelected?(market.id)
                         },
@@ -213,6 +221,7 @@ extension dydxSimpleUIMarketViewModel {
                            asset: Asset?,
                            position: SubaccountPosition?,
                            isFavorite: Bool,
+                           positionToggleOption: SimpleUIPositionToggleOption?,
                            onMarketSelected: (() -> Void)?,
                            onCancelAction: (() -> Void)?,
                            onFavoriteTapped: (() -> Void)?) -> dydxSimpleUIMarketViewModel {
@@ -231,14 +240,30 @@ extension dydxSimpleUIMarketViewModel {
 
         let positionSize = dydxFormatter.shared.localFormatted(number: position?.size.current?.abs().doubleValue, digits: market.configs?.displayStepSizeDecimals?.intValue ?? 1)
 
+        let amount = position?.unrealizedPnl.current?.doubleValue ?? 0
+        let amountText = dydxFormatter.shared.dollar(number: abs(amount), digits: 2) ?? ""
+        let percent = position?.unrealizedPnlPercent.current?.doubleValue ?? 0
+        let percentText = dydxFormatter.shared.percent(number: abs(percent), digits: 2) ?? ""
+        let unrealizedPnl = SignedAmountViewModel(text: "\(amountText) (\(percentText))",
+                                                  sign: .init(value: amount),
+                                                  coloringOption: .allText)
+
+        let marginValueText = dydxFormatter.shared.dollar(number: position?.marginValue.current?.doubleValue ?? 0, digits: 2) ?? ""
+
+        let marginUsage = MarginUsageModel(percent: position?.marginUsage.current?.doubleValue ?? 0)
+
         return dydxSimpleUIMarketViewModel(displayType: displayType,
+                                           positionToggleType: positionToggleOption?.viewOption ?? .pnl,
                                            marketId: market.id,
                                            assetName: asset?.displayableAssetId ?? market.assetId,
                                            iconUrl: asset?.resources?.imageUrl,
                                            price: price,
                                            change: change,
+                                           unrealizedPNLAmount: unrealizedPnl,
+                                           marginValue: marginValueText,
+                                           marginUsage: marginUsage,
                                            sideText: side,
-                                           leverage: position?.leverage.current?.doubleValue,
+                                           leverage: abs(position?.leverage.current?.doubleValue ?? 0),
                                            volumn: market.perpetual?.volume24H?.doubleValue,
                                            positionTotal: position?.notionalTotal.current?.doubleValue,
                                            positionSize: positionSize,
