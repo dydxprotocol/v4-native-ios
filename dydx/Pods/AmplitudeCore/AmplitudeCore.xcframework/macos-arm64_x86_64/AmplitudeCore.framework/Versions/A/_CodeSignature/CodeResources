@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		Vnd8NVzdJJOmNd2mm1TfHa9JUd8=
+		m58AYEyliQlIF/V7H0FvrLghTuo=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -15,77 +15,77 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			W4g8rBS+Vw2HCVBkAsv3c8GQGtuK0Vz4m8qt+z+xnBc=
+			QGhxWv7Yt3ouqligqxviOVHZTgQXS7TFKFx/Zfch4hw=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-macos.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			6rmu/zbUJrGsKX7g9tvmfzwr36oU7y5JzMQy+T8JS9g=
+			zZH1/lcfApsY6oPZMDTQvlj3mcdqFKrxhSScMQ9sOR4=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-macos.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			uft43ZYROAOVMBsV0qzLE2Yc3pyceezEnnWlWB66w+0=
+			4mX10zWM0TwUAXHprOxpORluPfRuaOM10+EJP/qOw/M=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-macos.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NuuKKGDRfmp9oyn/He4QToB4RggH7Y10LeB21MtRcXE=
+			ZXfWKLV6eBLgbeMIim3mdETDnSeX1QcTybaBLWlPlpw=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-macos.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			uft43ZYROAOVMBsV0qzLE2Yc3pyceezEnnWlWB66w+0=
+			4mX10zWM0TwUAXHprOxpORluPfRuaOM10+EJP/qOw/M=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-macos.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			j9jDnnzUYrseKmvlOW/PkV2LqzWPosAnE44fuG5/RR8=
+			HwjQtR1NgVWPOzKN39Y/MOXvRh46uZMIWNMyYb6LgtQ=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			6rmu/zbUJrGsKX7g9tvmfzwr36oU7y5JzMQy+T8JS9g=
+			zZH1/lcfApsY6oPZMDTQvlj3mcdqFKrxhSScMQ9sOR4=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mCBo/wUy6IgInK2IpYQvsHXAD5IJxc7oZcwpSiFK2WQ=
+			0YP7cU5XkWY1WR0jEeaKpjhPweHK1uZVTG7wW0of8NQ=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZJqJGS3qUlrtpu/SH3CV3vzf5fEGHmJGczlrBGNqK5U=
+			R0S+lRJbwCRGSCq9FDIkuAamdAk3vn2rNmZN1QKllOs=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mCBo/wUy6IgInK2IpYQvsHXAD5IJxc7oZcwpSiFK2WQ=
+			0YP7cU5XkWY1WR0jEeaKpjhPweHK1uZVTG7wW0of8NQ=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2uTyYgzgBN3GrCXOw/PCJxxh+Cxs5JK5kyNOx3lDWgU=
+			ZzKrhlHgxs6xZylzY5sv473fRXrR3qAieuzeavBwOHU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -99,7 +99,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Fru57XOyzmw2w0WWoQkyPiCjZSUNl3g5qL44k3UIreg=
+			8b7kXmX1zYyFwpwSoO22G2eKU3ZhIXmLlOlsn8XhbRc=
 			</data>
 		</dict>
 	</dict>

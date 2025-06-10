@@ -1,8 +1,8 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "AmplitudeCore",
+    "printedName": "AmplitudeCore",
     "children": [
       {
         "kind": "TypeDecl",
@@ -193,7 +193,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "CoreLogger",
-                "printedName": "AmplitudeCore.CoreLogger",
+                "printedName": "any AmplitudeCore.CoreLogger",
                 "usr": "c:@M@AmplitudeCore@objc(pl)CoreLogger"
               }
             ],
@@ -216,7 +216,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "CoreLogger",
-                    "printedName": "AmplitudeCore.CoreLogger",
+                    "printedName": "any AmplitudeCore.CoreLogger",
                     "usr": "c:@M@AmplitudeCore@objc(pl)CoreLogger"
                   }
                 ],
@@ -263,7 +263,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "CoreLogger",
-                "printedName": "AmplitudeCore.CoreLogger",
+                "printedName": "any AmplitudeCore.CoreLogger",
                 "hasDefaultArg": true,
                 "usr": "c:@M@AmplitudeCore@objc(pl)CoreLogger"
               }
@@ -293,6 +293,22 @@
           "Available",
           "Available",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -671,6 +687,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -859,6 +889,20 @@
           "ObjC"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
           {
             "kind": "Conformance",
             "name": "Sendable",
@@ -1120,6 +1164,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "CoreLogger",
             "printedName": "CoreLogger",
             "usr": "c:@M@AmplitudeCore@objc(pl)CoreLogger",
@@ -1358,6 +1416,22 @@
           "Available",
           "Available",
           "Available"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -1801,6 +1875,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -2000,6 +2090,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -2015,12 +2121,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "AmplitudeCore.UniversalPlugin?",
+                "printedName": "(any AmplitudeCore.UniversalPlugin)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "UniversalPlugin",
-                    "printedName": "AmplitudeCore.UniversalPlugin",
+                    "printedName": "any AmplitudeCore.UniversalPlugin",
                     "usr": "s:13AmplitudeCore15UniversalPluginP"
                   }
                 ],
@@ -2140,6 +2246,22 @@
           "Available",
           "Available",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -2218,7 +2340,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "AnalyticsClient",
-                "printedName": "AmplitudeCore.AnalyticsClient",
+                "printedName": "any AmplitudeCore.AnalyticsClient",
                 "usr": "s:13AmplitudeCore15AnalyticsClientP"
               },
               {
@@ -2299,7 +2421,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "AnalyticsIdentity",
-                "printedName": "AmplitudeCore.AnalyticsIdentity",
+                "printedName": "any AmplitudeCore.AnalyticsIdentity",
                 "usr": "s:13AmplitudeCore17AnalyticsIdentityP"
               }
             ],
@@ -2437,7 +2559,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "AnalyticsClient",
-                "printedName": "AmplitudeCore.AnalyticsClient",
+                "printedName": "any AmplitudeCore.AnalyticsClient",
                 "usr": "s:13AmplitudeCore15AnalyticsClientP"
               },
               {
@@ -2515,7 +2637,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "AnalyticsIdentity",
-                "printedName": "AmplitudeCore.AnalyticsIdentity",
+                "printedName": "any AmplitudeCore.AnalyticsIdentity",
                 "usr": "s:13AmplitudeCore17AnalyticsIdentityP"
               }
             ],
@@ -2598,6 +2720,22 @@
           "Available",
           "Available",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -2700,6 +2838,20 @@
           "Available"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
           {
             "kind": "Conformance",
             "name": "Sendable",
@@ -2828,6 +2980,20 @@
               "AccessControl"
             ],
             "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
               {
                 "kind": "Conformance",
                 "name": "Sendable",
@@ -3021,6 +3187,20 @@
               "AccessControl"
             ],
             "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
               {
                 "kind": "Conformance",
                 "name": "Equatable",
@@ -3339,6 +3519,20 @@
               "AccessControl"
             ],
             "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
               {
                 "kind": "Conformance",
                 "name": "Equatable",
@@ -3711,10 +3905,31 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
                 "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "BitwiseCopyable",
+                "printedName": "BitwiseCopyable",
+                "usr": "s:s15BitwiseCopyableP",
+                "mangledName": "$ss15BitwiseCopyableP"
               }
             ]
           },
@@ -3731,7 +3946,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Dictionary",
-                    "printedName": "[Swift.String : Swift.Sendable]",
+                    "printedName": "[Swift.String : any Swift.Sendable]",
                     "children": [
                       {
                         "kind": "TypeNominal",
@@ -3742,7 +3957,7 @@
                       {
                         "kind": "TypeNominal",
                         "name": "Sendable",
-                        "printedName": "Swift.Sendable",
+                        "printedName": "any Swift.Sendable",
                         "usr": "s:s8SendableP"
                       }
                     ],
@@ -3768,7 +3983,7 @@
                       {
                         "kind": "TypeNominal",
                         "name": "Dictionary",
-                        "printedName": "[Swift.String : Swift.Sendable]",
+                        "printedName": "[Swift.String : any Swift.Sendable]",
                         "children": [
                           {
                             "kind": "TypeNominal",
@@ -3779,7 +3994,7 @@
                           {
                             "kind": "TypeNominal",
                             "name": "Sendable",
-                            "printedName": "Swift.Sendable",
+                            "printedName": "any Swift.Sendable",
                             "usr": "s:s8SendableP"
                           }
                         ],
@@ -3859,7 +4074,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Dictionary",
-                    "printedName": "[Swift.String : Swift.Sendable]",
+                    "printedName": "[Swift.String : any Swift.Sendable]",
                     "children": [
                       {
                         "kind": "TypeNominal",
@@ -3870,7 +4085,7 @@
                       {
                         "kind": "TypeNominal",
                         "name": "Sendable",
-                        "printedName": "Swift.Sendable",
+                        "printedName": "any Swift.Sendable",
                         "usr": "s:s8SendableP"
                       }
                     ],
@@ -3896,6 +4111,20 @@
             "mangledName": "$s13AmplitudeCore18RemoteConfigClientC0cD4InfoV",
             "moduleName": "AmplitudeCore",
             "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
               {
                 "kind": "Conformance",
                 "name": "Sendable",
@@ -3946,7 +4175,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "CoreLogger",
-                "printedName": "AmplitudeCore.CoreLogger",
+                "printedName": "any AmplitudeCore.CoreLogger",
                 "usr": "c:@M@AmplitudeCore@objc(pl)CoreLogger"
               }
             ],
@@ -3985,14 +4214,14 @@
               {
                 "kind": "TypeNominal",
                 "name": "CoreLogger",
-                "printedName": "AmplitudeCore.CoreLogger",
+                "printedName": "any AmplitudeCore.CoreLogger",
                 "hasDefaultArg": true,
                 "usr": "c:@M@AmplitudeCore@objc(pl)CoreLogger"
               },
               {
                 "kind": "TypeNominal",
                 "name": "RemoteConfigStorage",
-                "printedName": "AmplitudeCore.RemoteConfigStorage",
+                "printedName": "any AmplitudeCore.RemoteConfigStorage",
                 "hasDefaultArg": true,
                 "usr": "s:13AmplitudeCore19RemoteConfigStorageP"
               },
@@ -4025,7 +4254,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Sendable",
-                "printedName": "Swift.Sendable",
+                "printedName": "any Swift.Sendable",
                 "usr": "s:s8SendableP"
               },
               {
@@ -4053,7 +4282,7 @@
               {
                 "kind": "TypeFunc",
                 "name": "Function",
-                "printedName": "([Swift.String : Swift.Sendable]?, AmplitudeCore.RemoteConfigClient.Source, Foundation.Date?) -> ()",
+                "printedName": "([Swift.String : any Swift.Sendable]?, AmplitudeCore.RemoteConfigClient.Source, Foundation.Date?) -> ()",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -4063,17 +4292,17 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Tuple",
-                    "printedName": "([Swift.String : Swift.Sendable]?, AmplitudeCore.RemoteConfigClient.Source, Foundation.Date?)",
+                    "printedName": "([Swift.String : any Swift.Sendable]?, AmplitudeCore.RemoteConfigClient.Source, Foundation.Date?)",
                     "children": [
                       {
                         "kind": "TypeNominal",
                         "name": "Optional",
-                        "printedName": "[Swift.String : Swift.Sendable]?",
+                        "printedName": "[Swift.String : any Swift.Sendable]?",
                         "children": [
                           {
                             "kind": "TypeNominal",
                             "name": "Dictionary",
-                            "printedName": "[Swift.String : Swift.Sendable]",
+                            "printedName": "[Swift.String : any Swift.Sendable]",
                             "children": [
                               {
                                 "kind": "TypeNominal",
@@ -4084,7 +4313,7 @@
                               {
                                 "kind": "TypeNominal",
                                 "name": "Sendable",
-                                "printedName": "Swift.Sendable",
+                                "printedName": "any Swift.Sendable",
                                 "usr": "s:s8SendableP"
                               }
                             ],
@@ -4143,7 +4372,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Sendable",
-                "printedName": "Swift.Sendable",
+                "printedName": "any Swift.Sendable",
                 "usr": "s:s8SendableP"
               }
             ],
@@ -4179,31 +4408,6 @@
               "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "RemoteConfigClient",
-                "printedName": "AmplitudeCore.RemoteConfigClient",
-                "usr": "c:@M@AmplitudeCore@objc(cs)RemoteConfigClient"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@AmplitudeCore@objc(cs)RemoteConfigClient(im)init",
-            "mangledName": "$s13AmplitudeCore18RemoteConfigClientCACycfc",
-            "moduleName": "AmplitudeCore",
-            "overriding": true,
-            "implicit": true,
-            "objc_name": "init",
-            "declAttributes": [
-              "ObjC",
-              "Override"
-            ],
-            "init_kind": "Designated"
           },
           {
             "kind": "Var",
@@ -4259,6 +4463,31 @@
                 "accessorKind": "get"
               }
             ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "RemoteConfigClient",
+                "printedName": "AmplitudeCore.RemoteConfigClient",
+                "usr": "c:@M@AmplitudeCore@objc(cs)RemoteConfigClient"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@AmplitudeCore@objc(cs)RemoteConfigClient(im)init",
+            "mangledName": "$s13AmplitudeCore18RemoteConfigClientCACycfc",
+            "moduleName": "AmplitudeCore",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
           }
         ],
         "declKind": "Class",
@@ -4289,6 +4518,20 @@
             "printedName": "Actor",
             "usr": "s:ScA",
             "mangledName": "$sScA"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -4338,13 +4581,6 @@
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
             "mangledName": "$ss28CustomDebugStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "AnyActor",
-            "printedName": "AnyActor",
-            "usr": "s:12_Concurrency8AnyActorP",
-            "mangledName": "$ss8AnyActorP"
           },
           {
             "kind": "Conformance",
@@ -4509,6 +4745,20 @@
           "Available"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "RemoteConfigStorage",
@@ -4702,6 +4952,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -4836,10 +5100,31 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Sendable",
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       }
@@ -4888,104 +5173,6 @@
       "offset": 254,
       "length": 1,
       "value": "4"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/CoreLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 345,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/CoreLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 388,
-      "length": 7,
-      "value": "\"ERROR\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/CoreLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 435,
-      "length": 6,
-      "value": "\"WARN\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/CoreLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 480,
-      "length": 5,
-      "value": "\"LOG\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/CoreLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 526,
-      "length": 7,
-      "value": "\"DEBUG\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/CoreLogger.swift",
-      "kind": "IntegerLiteral",
-      "offset": 181,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/CoreLogger.swift",
-      "kind": "IntegerLiteral",
-      "offset": 200,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/CoreLogger.swift",
-      "kind": "IntegerLiteral",
-      "offset": 218,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/CoreLogger.swift",
-      "kind": "IntegerLiteral",
-      "offset": 235,
-      "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/CoreLogger.swift",
-      "kind": "IntegerLiteral",
-      "offset": 254,
-      "length": 1,
-      "value": "4"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/OSLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 315,
-      "length": 11,
-      "value": "\"Amplitude\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/OSLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 338,
-      "length": 9,
-      "value": "\"Logging\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Logger\/OSLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 1127,
-      "length": 8,
-      "value": "\"%@: %@\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Plugins\/PluginHost.swift",
-      "kind": "Array",
-      "offset": 518,
-      "length": 2,
-      "value": "[]"
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
@@ -5059,104 +5246,6 @@
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6559,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6763,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "StringLiteral",
-      "offset": 9810,
-      "length": 57,
-      "value": "\"[RemoteConfigClient] Skipping updateConfigs: Too recent\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "StringLiteral",
-      "offset": 11558,
-      "length": 3,
-      "value": "\".\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "IntegerLiteral",
-      "offset": 12772,
-      "length": 3,
-      "value": "200"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "Array",
-      "offset": 12854,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "StringLiteral",
-      "offset": 12911,
-      "length": 9,
-      "value": "\"configs\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "IntegerLiteral",
-      "offset": 13046,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "FloatLiteral",
-      "offset": 13132,
-      "length": 3,
-      "value": "0.4"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "IntegerLiteral",
-      "offset": 13138,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "IntegerLiteral",
-      "offset": 13537,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "Array",
-      "offset": 13895,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "StringLiteral",
-      "offset": 13943,
-      "length": 9,
-      "value": "\"api_key\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "StringLiteral",
-      "offset": 14066,
-      "length": 13,
-      "value": "\"config_keys\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "StringLiteral",
       "offset": 458,
       "length": 18,
@@ -5177,53 +5266,11 @@
       "value": "\"lastFetch\""
     },
     {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "StringLiteral",
-      "offset": 14787,
-      "length": 34,
-      "value": "\"com.amplitude.remoteconfig.cache\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
-      "kind": "StringLiteral",
-      "offset": 14877,
-      "length": 3,
-      "value": "\".\""
-    },
-    {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Types\/ServerZone.swift",
       "kind": "IntegerLiteral",
       "offset": 178,
       "length": 2,
       "value": "1"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Types\/ServerZone.swift",
-      "kind": "StringLiteral",
-      "offset": 317,
-      "length": 4,
-      "value": "\"US\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Types\/ServerZone.swift",
-      "kind": "StringLiteral",
-      "offset": 359,
-      "length": 4,
-      "value": "\"EU\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Types\/ServerZone.swift",
-      "kind": "StringLiteral",
-      "offset": 459,
-      "length": 4,
-      "value": "\"US\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Types\/ServerZone.swift",
-      "kind": "StringLiteral",
-      "offset": 501,
-      "length": 4,
-      "value": "\"EU\""
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
@@ -5238,111 +5285,6 @@
       "offset": 360,
       "length": 1,
       "value": "2"
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 447,
-      "length": 18,
-      "value": "\"application\/json\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 487,
-      "length": 14,
-      "value": "\"Content-Type\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 528,
-      "length": 5,
-      "value": "\"*\/*\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 555,
-      "length": 8,
-      "value": "\"Accept\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 642,
-      "length": 18,
-      "value": "\"X-Client-Version\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 719,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 743,
-      "length": 20,
-      "value": "\"X-Client-Bundle-Id\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 840,
-      "length": 17,
-      "value": "\"CFBundleVersion\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 873,
-      "length": 11,
-      "value": "\"<unknown>\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 910,
-      "length": 29,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 927,
-      "length": 1,
-      "value": "\"\/\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 938,
-      "length": 24,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 961,
-      "length": 18,
-      "value": "\"X-Client-Library\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 1006,
-      "length": 5,
-      "value": "\"ios\""
-    },
-    {
-      "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Utilities\/HttpUtil.swift",
-      "kind": "StringLiteral",
-      "offset": 1033,
-      "length": 19,
-      "value": "\"X-Client-Platform\""
     }
   ]
 }

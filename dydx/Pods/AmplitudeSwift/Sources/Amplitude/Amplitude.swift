@@ -114,6 +114,7 @@ public class Amplitude {
     public init(
         configuration: Configuration
     ) {
+        trackingQueue.suspend()
         self.configuration = configuration
 
         let serverZone: AmplitudeCore.ServerZone
@@ -173,6 +174,7 @@ public class Amplitude {
         trackingQueue.async { [self] in
             self.trimQueuedEvents()
         }
+        trackingQueue.resume()
     }
 
     convenience init(apiKey: String, configuration: Configuration) {
@@ -352,7 +354,7 @@ public class Amplitude {
     }
 
     @discardableResult
-    public func remove(plugin: Plugin) -> Amplitude {
+    public func remove(plugin: UniversalPlugin) -> Amplitude {
         timeline.remove(plugin: plugin)
         return self
     }
