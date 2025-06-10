@@ -4176,6 +4176,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    limitations under the License.
 
 
+## GoogleAdsOnDeviceConversion
+
+Copyright 2024 Google
+
 ## GoogleAppMeasurement
 
 Copyright 2022 Google

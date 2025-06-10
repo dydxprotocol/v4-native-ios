@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
-// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name AmplitudeCore
-// swift-module-flags-ignorable: -enable-bare-slash-regex
+// swift-compiler-version: Apple Swift version 6.0.2 effective-5.10 (swiftlang-6.0.2.1.2 clang-1600.0.26.4)
+// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name AmplitudeCore
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
 import Combine
 import Foundation
 import OSLog
@@ -110,7 +110,6 @@ extension AmplitudeCore.UniversalPlugin {
   public func onSessionIdChanged(_ sessionId: Swift.Int64)
   public func onOptOutChanged(_ optOut: Swift.Bool)
 }
-#if compiler(>=5.3) && $Actors
 @objc @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public actor RemoteConfigClient : ObjectiveC.NSObject {
   public enum DeliveryMode : Swift.Sendable {
@@ -139,15 +138,11 @@ public actor RemoteConfigClient : ObjectiveC.NSObject {
     }
   }
   public typealias RemoteConfig = [Swift.String : any Swift.Sendable]
-  #if compiler(>=5.3) && $Sendable
   public typealias RemoteConfigCallback = @Sendable (AmplitudeCore.RemoteConfigClient.RemoteConfig?, AmplitudeCore.RemoteConfigClient.Source, Foundation.Date?) -> Swift.Void
-  #endif
   public typealias RemoteConfigSubscription = Swift.Sendable
   public convenience init(apiKey: Swift.String, serverZone: AmplitudeCore.ServerZone, instanceName: Swift.String? = nil, logger: any AmplitudeCore.CoreLogger)
-  #if compiler(>=5.3) && $Sendable
   @discardableResult
   nonisolated public func subscribe(key: Swift.String? = nil, deliveryMode: AmplitudeCore.RemoteConfigClient.DeliveryMode = .all, callback: @escaping AmplitudeCore.RemoteConfigClient.RemoteConfigCallback) -> any Swift.Sendable
-  #endif
   nonisolated public func unsubscribe(_ token: any Swift.Sendable)
   nonisolated public func updateConfigs()
   @objc deinit
@@ -156,7 +151,6 @@ public actor RemoteConfigClient : ObjectiveC.NSObject {
     get
   }
 }
-#endif
 @objc(AMPServerZone) public enum ServerZone : Swift.Int, Swift.Sendable {
   case US
   case EU

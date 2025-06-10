@@ -92,7 +92,7 @@ def ios_ui_pods
   pod 'COSTouchVisualizer'
   pod 'DrawerMenu'
   pod 'EasyTipView'
-  pod 'EFQRCode'
+  pod 'EFQRCode', '6.2.2'
   pod 'FloatingPanel', '2.7.0'
   pod 'HMSegmentedControl'
   pod 'iCarousel'
