@@ -44,13 +44,13 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
         Publishers
             .CombineLatest4(AbacusStateManager.shared.state.marketList,
                             AbacusStateManager.shared.state.assetMap,
-                            AbacusStateManager.shared.state.selectedSubaccountPositions,
+                            AbacusStateManager.shared.state.selectedSubaccount,
                             modifiersPublisher
             )
-           .sink { [weak self] markets, assetMap, positions, modifier in
+           .sink { [weak self] markets, assetMap, subaccount, modifier in
                self?.updateMarketList(markets: markets,
                                       assetMap: assetMap,
-                                      positions: positions,
+                                      subaccount: subaccount,
                                       positionToggleOption: modifier.0)
             }
             .store(in: &subscriptions)
@@ -58,8 +58,9 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
 
     private func updateMarketList(markets: [PerpetualMarket],
                                   assetMap: [String: Asset],
-                                  positions: [SubaccountPosition],
+                                  subaccount: Subaccount?,
                                   positionToggleOption: SimpleUIPositionToggleOption) {
+        let positions = subaccount?.openPositions ?? []
         let markets = markets.filter { $0.status?.canTrade == true }
         viewModel?.positions = markets
             .compactMap { market in
@@ -77,6 +78,7 @@ class dydxSimpleUIPositionListViewPresenter: HostedViewPresenter<dydxSimpleUIPos
                     displayType: .position,
                     market: market,
                     asset: asset,
+                    subaccount: subaccount,
                     position: position,
                     isFavorite: isFavorite,
                     positionToggleOption: positionToggleOption,

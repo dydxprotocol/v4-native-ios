@@ -333,7 +333,7 @@ public class dydxSimpleUIMarketViewModel: PlatformViewModel {
     }
 
     private func createMarginUsage(style: ThemeStyle) -> some View {
-        VStack(alignment: .trailing, spacing: 4) {
+        VStack(alignment: .trailing, spacing: 0) {
             Text(marginValue ?? "")
                 .themeColor(foreground: .textPrimary)
                 .themeFont(fontSize: .medium)
