@@ -21,7 +21,7 @@
             location = "group:../../v4-abacus/src/commonMain">
          </FileRef>
          <FileRef
-            location = "group:Pods/abacus/src/commonMain">
+            location = "group:Pods/Abacus/src/commonMain">
          </FileRef>
       </Group>
       <FileRef
