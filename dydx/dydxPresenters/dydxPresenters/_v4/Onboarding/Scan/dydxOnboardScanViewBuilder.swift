@@ -154,7 +154,8 @@ private class dydxOnboardScanViewPresenter: HostedViewPresenter<dydxOnboardScanV
                 AbacusStateManager.shared.setV4(ethereumAddress: nil,
                                                 walletId: nil,
                                                 cosmoAddress: address,
-                                                mnemonic: mnemonic)
+                                                mnemonic: mnemonic,
+                                                isNew: true)
                 Router.shared?.navigate(to: RoutingRequest(path: "/action/post_onboarding",
                                                            params: ["cosmoAddress": address, "mnemonic": mnemonic]),
                                         animated: true, completion: nil)

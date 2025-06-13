@@ -149,7 +149,7 @@ public final class AbacusStateManager: NSObject {
         if dydxBoolFeatureFlag.force_mainnet.isEnabled {
             deployment = "MAINNET"
             appConfigs.loadRemote = true
-            appConfigs.screening = false
+            // appConfigs.screening = false
         } else {
             // Expose more options for Testflight build
             switch Installation.source {
@@ -204,16 +204,9 @@ public final class AbacusStateManager: NSObject {
         if let cosmoAddress = _walletState.currentWallet?.cosmoAddress,
            let mnemonic = _walletState.currentWallet?.mnemonic {
             let walletId = _walletState.currentWallet?.walletId
-            setV4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic)
+            setV4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic, isNew: false)
         }
 
-        if let ethereumAddress = _walletState.currentWallet?.ethereumAddress,
-           let apiKey = _walletState.currentWallet?.apiKey,
-           let passPhrase = _walletState.currentWallet?.passPhrase,
-           let secret = _walletState.currentWallet?.secret {
-            let walletId = _walletState.currentWallet?.walletId
-            setV3(ethereumAddress: ethereumAddress, walletId: walletId, apiKey: apiKey, secret: secret, passPhrase: passPhrase)
-        }
         asyncStateManager.readyToConnect = true
         isStarted = true
     }
@@ -222,19 +215,12 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.market = market
     }
 
-    public func setV3(ethereumAddress: String, walletId: String?, apiKey: String, secret: String, passPhrase: String) {
-        let wallet = dydxWalletInstance.V3(ethereumAddress: ethereumAddress, walletId: walletId, apiKey: apiKey, secret: secret, passPhrase: passPhrase)
-        _walletState.setCurrentWallet(wallet: wallet)
-        asyncStateManager.accountAddress = ethereumAddress
-    }
-
-    public func setV4(ethereumAddress: String?, walletId: String?, cosmoAddress: String, mnemonic: String) {
+    public func setV4(ethereumAddress: String?, walletId: String?, cosmoAddress: String, mnemonic: String, isNew: Bool) {
         CosmoJavascript.shared.connectWallet(mnemonic: mnemonic) { [weak self] _ in
             if let self = self {
                 let wallet = dydxWalletInstance.V4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic)
                 self._walletState.setCurrentWallet(wallet: wallet)
-                self.asyncStateManager.accountAddress = cosmoAddress
-                self.asyncStateManager.sourceAddress = ethereumAddress
+                self.asyncStateManager.setAddresses(source: ethereumAddress, account: cosmoAddress, isNew: isNew)
                 if walletId == "phantom-wallet" {
                     self.asyncStateManager.walletConnectionType = .solana
                 } else {
@@ -252,7 +238,7 @@ public final class AbacusStateManager: NSObject {
             transferStateManager.clear()
         }
 
-        asyncStateManager.accountAddress = _walletState.currentWallet?.ethereumAddress
+        asyncStateManager.setAddresses(source: _walletState.currentWallet?.ethereumAddress, account: _walletState.currentWallet?.cosmoAddress, isNew: false)
     }
 
     public func setCandlesResolution(candlesResolution: String) {
