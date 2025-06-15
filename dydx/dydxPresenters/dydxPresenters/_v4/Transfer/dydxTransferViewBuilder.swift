@@ -135,6 +135,7 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
             if let key = Section.allSections.first?.key {
                 viewModel?.sectionSelection = key
                 viewModel?.sections.sectionIndex = 0
+                Tracking.shared?.log(event: "NavigateDialog", data: ["type": Section.allSections.first?.analyticTag as Any])
             }
         } else {
             // default to Faucet if no subaccount
@@ -178,6 +179,7 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
             viewModel?.sectionSelection = selectedSection.key
             viewModel?.sections.sectionIndex = index
             resetPresentersForVisibilityChange()
+            Tracking.shared?.log(event: "NavigateDialog", data: ["type": selectedSection.analyticTag as Any])
         }
     }
 
@@ -199,18 +201,27 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
 private struct Section: Equatable {
     let text: String
     let key: dydxTransferSectionsViewModel.TransferSection
+    let analyticTag: String?
 
     private static var depositSection: Section {
-        Self(text: DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT"), key: .deposit)
+        Self(text: DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT"),
+             key: .deposit,
+             analyticTag: "Deposit2")
     }
     private static var withdrawalSection: Section {
-        Self(text: DataLocalizer.localize(path: "APP.GENERAL.WITHDRAW"), key: .withdraw)
+        Self(text: DataLocalizer.localize(path: "APP.GENERAL.WITHDRAW"),
+             key: .withdraw,
+             analyticTag: "Withdraw2")
     }
     private static var transferOutSection: Section {
-        Self(text: DataLocalizer.localize(path: "APP.GENERAL.TRANSFER"), key: .transferOut)
+        Self(text: DataLocalizer.localize(path: "APP.GENERAL.TRANSFER"),
+             key: .transferOut,
+             analyticTag: "Transfer")
     }
     private static var faucetSection: Section {
-        Self(text: "Faucet", key: .faucet)
+        Self(text: "Faucet",
+             key: .faucet,
+             analyticTag: "Faucet")
     }
 
     static var allSections: [Section] {
