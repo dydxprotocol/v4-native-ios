@@ -188,17 +188,5 @@
       "info":{
          "modalType":"SHARE_ACTVITY"
       }
-   },
-   "/transfer":{
-      "event":"NavigateDialog",
-      "info":{
-         "modalType":"TRANSFER"
-      }
-   },
-   "/withdraw":{
-      "event":"NavigateDialog",
-      "info":{
-         "modalType":"WITHDRAW"
-      }
-   },
+   }
 }
