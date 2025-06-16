@@ -1,12 +1,15 @@
 ${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/CombineExt/CombineExt.framework
 ${BUILT_PRODUCTS_DIR}/KVOController/KVOController.framework
+${BUILT_PRODUCTS_DIR}/Popovers/Popovers.framework
 ${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImageSVGCoder/SDWebImageSVGCoder.framework
+${BUILT_PRODUCTS_DIR}/SDWebImageSwiftUI/SDWebImageSwiftUI.framework
 ${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework
 ${BUILT_PRODUCTS_DIR}/Validator/Validator.framework
 ${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework
+${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework
 ${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework
 ${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework
 ${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework
@@ -27,4 +30,4 @@ ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/ZSWTappableLabel/ZSWTappableLabel.framework
 ${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework
 ${BUILT_PRODUCTS_DIR}/pop/pop.framework
-${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework
+${BUILT_PRODUCTS_DIR}/Statsig/Statsig.framework

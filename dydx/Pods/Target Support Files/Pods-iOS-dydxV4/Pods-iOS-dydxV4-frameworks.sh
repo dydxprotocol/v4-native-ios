@@ -186,6 +186,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Validator/Validator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework"
+  install_framework "${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework"
@@ -228,7 +229,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AmplitudeSwift/AmplitudeSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AnalyticsConnector/AnalyticsConnector.framework"
-  install_framework "${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/AmplitudeCore/AmplitudeCore.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -242,6 +242,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Validator/Validator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework"
+  install_framework "${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework"
@@ -284,7 +285,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AmplitudeSwift/AmplitudeSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AnalyticsConnector/AnalyticsConnector.framework"
-  install_framework "${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/AmplitudeCore/AmplitudeCore.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

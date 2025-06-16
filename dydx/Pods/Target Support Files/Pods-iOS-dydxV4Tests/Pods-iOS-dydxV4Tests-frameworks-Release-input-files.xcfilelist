@@ -9,6 +9,7 @@ ${BUILT_PRODUCTS_DIR}/SDWebImageSwiftUI/SDWebImageSwiftUI.framework
 ${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework
 ${BUILT_PRODUCTS_DIR}/Validator/Validator.framework
 ${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework
+${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework
 ${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework
 ${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework
 ${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework
@@ -51,5 +52,4 @@ ${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework
 ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
 ${BUILT_PRODUCTS_DIR}/AmplitudeSwift/AmplitudeSwift.framework
 ${BUILT_PRODUCTS_DIR}/AnalyticsConnector/AnalyticsConnector.framework
-${PODS_ROOT}/Abacus/build/cocoapods/framework/Abacus.framework
 ${PODS_XCFRAMEWORKS_BUILD_DIR}/AmplitudeCore/AmplitudeCore.framework/AmplitudeCore

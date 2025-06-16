@@ -88,6 +88,7 @@ end
 def ios_ui_pods
   ios_util_pods
   uikit_pods
+  swifiui_pods
   pod 'Atributika'
   pod 'COSTouchVisualizer'
   pod 'DrawerMenu'
@@ -121,13 +122,16 @@ abstract_target 'iOS' do
   target 'PlatformUIJedio' do
     project '../PlatformUIJedio/PlatformUIJedio'
     ios_util_pods
-    swifiui_pods
+    ios_ui_pods
+    abacus_pods
   end
   
   target 'PlatformUIJedioTests' do
     project '../PlatformUIJedio/PlatformUIJedio'
     ios_util_pods
+    ios_ui_pods
     swifiui_pods
+    abacus_pods
   end
   
   target 'Utilities' do
@@ -233,18 +237,21 @@ abstract_target 'iOS' do
   target 'AppsFlyerStaticInjections' do
     project '../AppsFlyerStaticInjections/AppsFlyerStaticInjections'
     util_pods
+    ios_ui_pods
     appsflyer_pods
   end
   
   target 'StatsigInjections' do
     project '../StatsigInjections/StatsigInjections'
     ios_util_pods
+    ios_ui_pods
     statsig_pods
   end
 
   target 'FirebaseStaticInjections' do
     project '../FirebaseStaticInjections/FirebaseStaticInjections'
     ios_util_pods
+    ios_ui_pods
     firebase_pods
     crashlytics_pods
   end
@@ -252,6 +259,7 @@ abstract_target 'iOS' do
   target 'FirebaseStaticInjectionsTests' do
     project '../FirebaseStaticInjections/FirebaseStaticInjections'
     ios_util_pods
+    ios_ui_pods
     firebase_pods
     crashlytics_pods
   end
@@ -259,12 +267,14 @@ abstract_target 'iOS' do
   target 'AmplitudeInjections' do
     project '../AmplitudeInjections/AmplitudeInjections'
     ios_util_pods
+    ios_ui_pods
     amplitude_pods
   end
   
   target 'AmplitudeInjectionsTests' do
     project '../AmplitudeInjections/AmplitudeInjections'
     ios_util_pods
+    ios_ui_pods
     amplitude_pods
   end
   
@@ -281,20 +291,19 @@ abstract_target 'iOS' do
   target 'dydxViews' do
     project '../dydx/dydxViews/dydxViews'
     ios_ui_pods
-    swifiui_pods
     abacus_pods
   end
   
   target 'dydxViewsTests' do
     project '../dydx/dydxViews/dydxViews'
     ios_ui_pods
-    swifiui_pods
     abacus_pods
   end
 
   target 'dydxAnalytics' do
     project '../dydx/dydxAnalytics/dydxAnalytics'
     ios_util_pods
+    ios_ui_pods
     abacus_pods
   end
   
@@ -303,6 +312,7 @@ abstract_target 'iOS' do
     ios_util_pods
     ios_ui_pods
     abacus_pods
+    statsig_pods
   end
   
   target 'dydxPresentersTests' do
@@ -310,6 +320,7 @@ abstract_target 'iOS' do
     ios_util_pods
     ios_ui_pods
     abacus_pods
+    statsig_pods
   end
   
   target 'dydxStateManager' do
@@ -358,7 +369,6 @@ abstract_target 'iOS' do
   target 'dydxV4' do
     project '../dydxV4/dydxV4'
     ios_ui_pods
-    swifiui_pods
     firebase_pods
     crashlytics_pods
     appsflyer_pods
@@ -370,7 +380,6 @@ abstract_target 'iOS' do
   target 'dydxV4Tests' do
     project '../dydxV4/dydxV4'
     ios_ui_pods
-    swifiui_pods
     firebase_pods
     crashlytics_pods
     appsflyer_pods
