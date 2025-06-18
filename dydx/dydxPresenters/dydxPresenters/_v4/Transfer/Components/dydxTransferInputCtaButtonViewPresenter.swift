@@ -167,7 +167,8 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
                 self?.onboardingAnalytics.log(step: .depositInitiated)
                 let summary = selectedRoute == .instant ? input.goFastSummary : input.summary
                 Tracking.shared?.logSharedEvent(ClientTrackableEventType.DepositInitiatedEvent(transferInput: input,
-                                                                                   summary: summary))
+                                                                                               summary: summary,
+                                                                                               isInstantDeposit: selectedRoute == .instant))
 
                 let payload = selectedRoute == .instant ? input.goFastRequestPayload : input.requestPayload
                 return DepositTransaction(walletAddress: wallet.ethereumAddress,

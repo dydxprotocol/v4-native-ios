@@ -114,7 +114,7 @@ private class dydxFundingDetailsViewPresenter: HostedViewPresenter<dydxFundingDe
                   value: .number(price)),
 
             .init(title: DataLocalizer.localize(path: "APP.GENERAL.CREATED_AT"),
-                  value: .string(dydxFormatter.shared.dateAndTime(date: Date(milliseconds: funding.effectiveAtMilliSeconds))))
+                  value: .string(dydxFormatter.shared.dateAndTime(date: Date(milliseconds: funding.createdAtMilliseconds))))
         ]
 
         viewModel?.items = items

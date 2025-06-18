@@ -215,7 +215,7 @@
          <EnvironmentVariable
             key = "DYLD_FALLBACK_LIBRARY_PATH"
             value = "/Library/Developer/CoreSimulator/Volumes/iOS_23A5260l/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.0.simruntime/Contents/Resources/RuntimeRoot/System/Cryptexes/OS/usr/lib/swift"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>

@@ -82,10 +82,10 @@ class dydxProfileHistoryViewPresenter: HostedViewPresenter<dydxProfileHistoryVie
     }
 
     private func mostRecentOf(fill: SubaccountFill?, funding: SubaccountFundingPayment?, transfer: SubaccountTransfer?) -> AnyObject? {
-        if (fill?.createdAtMilliseconds ?? 0) > (funding?.effectiveAtMilliSeconds ?? 0),
+        if (fill?.createdAtMilliseconds ?? 0) > (funding?.createdAtMilliseconds ?? 0),
            (fill?.createdAtMilliseconds ?? 0) > (transfer?.updatedAtMilliseconds ?? 0) {
             return fill
-        } else if (funding?.effectiveAtMilliSeconds ?? 0) > (transfer?.updatedAtMilliseconds ?? 0) {
+        } else if (funding?.createdAtMilliseconds ?? 0) > (transfer?.updatedAtMilliseconds ?? 0) {
             return funding
         } else {
             return transfer

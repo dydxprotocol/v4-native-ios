@@ -67,7 +67,7 @@ class dydxPortfolioFundingViewPresenter: HostedViewPresenter<dydxPortfolioFundin
             let item = cache[funding] ?? dydxPortfolioFundingItemViewModel()
             cache[funding] = item
 
-            item.time = dydxFormatter.shared.interval(time: Date(milliseconds: funding.effectiveAtMilliSeconds))
+            item.time = dydxFormatter.shared.interval(time: Date(milliseconds: funding.createdAtMilliseconds))
             let amount = dydxFormatter.shared.dollar(number: abs(funding.payment), size: "0.0001")
             if funding.payment >= 0.0 {
                 item.amount = SignedAmountViewModel(text: amount, sign: .plus, coloringOption: .signOnly)
