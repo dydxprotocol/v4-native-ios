@@ -10,40 +10,41 @@ import SwiftUI
 import PlatformUI
 import Utilities
 
-public class dydxPortfolioFundingItemViewModel: PlatformViewModel {
-    public enum FundingStatus {
-        case earned
-        case paid
+public enum FundingStatus {
+    case earned
+    case paid
 
-        var directionText: String {
-            switch self {
-            case .earned:
-                return DataLocalizer.localize(path: "APP.GENERAL.FUNDING_EARNED", params: nil)
-            case .paid:
-                return DataLocalizer.localize(path: "APP.GENERAL.FUNDING_PAID", params: nil)
-            }
+    var directionText: String {
+        switch self {
+        case .earned:
+            return DataLocalizer.localize(path: "APP.GENERAL.FUNDING_EARNED", params: nil)
+        case .paid:
+            return DataLocalizer.localize(path: "APP.GENERAL.FUNDING_PAID", params: nil)
         }
-
-        var templateColor: ThemeColor.SemanticColor {
-            switch self {
-            case .earned:
-                return ThemeSettings.positiveColor
-            case .paid:
-                return  ThemeSettings.negativeColor
-            }
-        }
-
-        var statusIcon: String {
-            switch self {
-            case .earned:
-                return "icon_funding_earned"
-            case .paid:
-                return "icon_funding_paid"
-            }
-        }
-
     }
-    public init(amount: SignedAmountViewModel? = nil, rate: SignedAmountViewModel? = nil, time: String? = nil, sideText: SideTextViewModel = SideTextViewModel(), status: FundingStatus = .paid, position: String? = nil, token: TokenTextViewModel? = TokenTextViewModel(), logoUrl: URL? = nil) {
+
+    var templateColor: ThemeColor.SemanticColor {
+        switch self {
+        case .earned:
+            return ThemeSettings.positiveColor
+        case .paid:
+            return  ThemeSettings.negativeColor
+        }
+    }
+
+    var statusIcon: String {
+        switch self {
+        case .earned:
+            return "icon_funding_earned"
+        case .paid:
+            return "icon_funding_paid"
+        }
+    }
+}
+
+public class dydxPortfolioFundingItemViewModel: PlatformViewModel {
+
+    public init(amount: SignedAmountViewModel? = nil, rate: SignedAmountViewModel? = nil, time: String? = nil, sideText: SideTextViewModel = SideTextViewModel(), status: FundingStatus = .paid, position: String? = nil, token: TokenTextViewModel? = TokenTextViewModel(), logoUrl: URL? = nil, onTapAction: (() -> Void)? = nil) {
         self.amount = amount
         self.rate = rate
         self.time = time
@@ -52,6 +53,7 @@ public class dydxPortfolioFundingItemViewModel: PlatformViewModel {
         self.position = position
         self.token = token
         self.logoUrl = logoUrl
+        self.onTapAction = onTapAction
     }
 
     public var amount: SignedAmountViewModel?
@@ -62,6 +64,7 @@ public class dydxPortfolioFundingItemViewModel: PlatformViewModel {
     public var position: String?
     public var token: TokenTextViewModel?
     public var logoUrl: URL?
+    public var onTapAction: (() -> Void)?
 
     public static var previewValue: dydxPortfolioFundingItemViewModel {
         let item = dydxPortfolioFundingItemViewModel(amount: .previewValue,
@@ -91,6 +94,9 @@ public class dydxPortfolioFundingItemViewModel: PlatformViewModel {
                                                main: main.wrappedViewModel,
                                                trailing: trailing.wrappedViewModel)
                 .createView(parentStyle: parentStyle)
+                .onTapGesture { [weak self] in
+                    self?.onTapAction?()
+                }
             //    .padding(.vertical, -4)
             )
         }
@@ -175,9 +181,11 @@ public class dydxPortfolioFundingViewModel: PlatformListViewModel {
                 Spacer()
             }
             .frame(width: 80)
-            Text(DataLocalizer.localize(path: "APP.GENERAL.TYPE_AMOUNT"))
+            Text(DataLocalizer.localize(path: "APP.GENERAL.TYPE") + " / " +
+                 DataLocalizer.localize(path: "APP.GENERAL.POSITION"))
             Spacer()
-            Text(DataLocalizer.localize(path: "APP.GENERAL.PRICE_FEE"))
+            Text(DataLocalizer.localize(path: "APP.GENERAL.AMOUNT") + " / " +
+                 DataLocalizer.localize(path: "APP.TRADE.RATE"))
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 16)

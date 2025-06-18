@@ -169,6 +169,10 @@
                     "destination":"dydxPresenters.dydxOrderDetailsViewBuilder",
                     "presentation":"half"
                 },
+                "/funding":{
+                    "destination":"dydxPresenters.dydxFundingDetailsViewBuilder",
+                    "presentation":"half"
+                },
                 "/portfolio/cancel_pending_position/:market":{
                     "destination":"dydxPresenters.dydxCancelPendingIsolatedOrdersViewBuilder",
                     "presentation":"half"

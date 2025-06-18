@@ -25,7 +25,7 @@ class dydxPortfolioSelectorViewPresenter: HostedViewPresenter<dydxPortfolioSelec
         .overview,
         .positions,
         .orders,
-        .fees,
+        .funding,
         .trades,
         .transfers
     ].filterNils()
@@ -39,7 +39,7 @@ class dydxPortfolioSelectorViewPresenter: HostedViewPresenter<dydxPortfolioSelec
         case .trades: path = "APP.TRADE.TRADES"
         case .fees: path = "APP.GENERAL.FEES"
         case .transfers: path = "APP.GENERAL.TRANSFERS"
-        case .payments: path = "APP.TRADE.PAYMENTS"
+        case .funding: path = "APP.TRADE.FUNDING_PAYMENTS_SHORT"
         }
         return DataLocalizer.localize(path: path)
     }
@@ -53,7 +53,7 @@ class dydxPortfolioSelectorViewPresenter: HostedViewPresenter<dydxPortfolioSelec
         case .trades: path = "APP.PORTFOLIO.TRADES_DESCRIPTION"
         case .fees: path = "APP.PORTFOLIO.FEE_STRUCTURE"
         case .transfers: path = "APP.PORTFOLIO.TRANSFERS_DESCRIPTION"
-        case .payments: path = "APP.PORTFOLIO.PAYMENTS_DESCRIPTION"
+        case .funding: path = "APP.TRADE.FUNDING_PAYMENTS_DESCRIPTION"
         }
         return DataLocalizer.localize(path: path)
     }

@@ -29,8 +29,10 @@ private struct TabGroupView<ItemContent: PlatformViewModeling>: View {
             ForEach(0..<(model.items?.count ?? 0), id: \.self) { i in
                 if i == model.currentSelection {
                     selectedItemView(index: i)
+                        .id(i)
                 } else {
                     unselectedItemView(index: i)
+                        .id(i)
                 }
             }
         }

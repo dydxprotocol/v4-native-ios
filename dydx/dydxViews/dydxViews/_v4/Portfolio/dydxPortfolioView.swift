@@ -16,7 +16,7 @@ public class dydxPortfolioViewModel: PlatformViewModel {
     }
 
     public enum DisplayContent: String {
-        case overview, positions, orders, trades, fees, transfers, payments
+        case overview, positions, orders, trades, fees, transfers, funding
     }
 
     @Published public var displayContent: DisplayContent = .overview
@@ -103,7 +103,7 @@ public class dydxPortfolioViewModel: PlatformViewModel {
                         self?.orders
                             .createView(parentStyle: style)
                     }
-                case .payments:
+                case .funding:
                     self.createItemListView(style: style) { [weak self] in
                         self?.funding
                             .createView(parentStyle: style)

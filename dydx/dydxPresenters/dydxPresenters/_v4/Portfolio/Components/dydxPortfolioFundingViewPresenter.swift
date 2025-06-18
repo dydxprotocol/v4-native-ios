@@ -23,7 +23,7 @@ protocol dydxPortfolioFundingViewPresenterProtocol: HostedViewPresenterProtocol 
 class dydxPortfolioFundingViewPresenter: HostedViewPresenter<dydxPortfolioFundingViewModel>, dydxPortfolioFundingViewPresenterProtocol {
     @Published var filterByMarketId: String?
 
-    private var cache = [Double: dydxPortfolioFundingItemViewModel]()
+    private var cache = [SubaccountFundingPayment: dydxPortfolioFundingItemViewModel]()
 
     init(viewModel: dydxPortfolioFundingViewModel?) {
         super.init()
@@ -49,7 +49,8 @@ class dydxPortfolioFundingViewPresenter: HostedViewPresenter<dydxPortfolioFundin
                             AbacusStateManager.shared.state.configsAndAssetMap,
                             $filterByMarketId)
              .sink { [weak self] fundings, configsAndAssetMap, filterByMarketId in
-                self?.updatefundings(fundings: fundings, configsAndAssetMap: configsAndAssetMap, filterByMarketId: filterByMarketId)
+                 let truncated = Array(fundings.prefix(100))
+                 self?.updatefundings(fundings: truncated, configsAndAssetMap: configsAndAssetMap, filterByMarketId: filterByMarketId)
             }
             .store(in: &subscriptions)
     }
@@ -63,8 +64,8 @@ class dydxPortfolioFundingViewPresenter: HostedViewPresenter<dydxPortfolioFundin
                 return nil
             }
 
-            let item = cache[funding.effectiveAtMilliSeconds] ?? dydxPortfolioFundingItemViewModel()
-            cache[funding.effectiveAtMilliSeconds] = item
+            let item = cache[funding] ?? dydxPortfolioFundingItemViewModel()
+            cache[funding] = item
 
             item.time = dydxFormatter.shared.interval(time: Date(milliseconds: funding.effectiveAtMilliSeconds))
             let amount = dydxFormatter.shared.dollar(number: abs(funding.payment), size: "0.0001")
@@ -85,6 +86,10 @@ class dydxPortfolioFundingViewPresenter: HostedViewPresenter<dydxPortfolioFundin
             if let url = asset.resources?.imageUrl {
                 item.logoUrl = URL(string: url)
             }
+            item.onTapAction = {
+                Router.shared?.navigate(to: RoutingRequest(path: "/funding", params: ["item": funding]), animated: true, completion: nil)
+            }
+
             return item
         }
 

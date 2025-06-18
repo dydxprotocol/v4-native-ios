@@ -47,8 +47,7 @@ private class dydxOnboardQRCodeViewPresenter: HostedViewPresenter<dydxOnboardQRC
 
         let chainId = AbacusStateManager.shared.ethereumChainId
         walletSetup.startDebugLink(chainId: chainId) { [weak self] info, error in
-            if let chainId = info?.chainId,
-               let action = AbacusStateManager.shared.environment?.walletConnection?.signTypedDataAction,
+            if let action = AbacusStateManager.shared.environment?.walletConnection?.signTypedDataAction,
                let domain = AbacusStateManager.shared.environment?.walletConnection?.signTypedDataDomainName {
                 self?.walletSetup.start(walletId: info?.wallet?.id,
                                         ethereumChainId: chainId,

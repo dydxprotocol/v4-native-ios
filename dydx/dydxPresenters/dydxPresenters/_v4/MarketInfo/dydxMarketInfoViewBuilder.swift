@@ -239,7 +239,7 @@ private struct Section: Equatable {
     static let allSections: [Self] = [
         Self(text: DataLocalizer.localize(path: "APP.GENERAL.POSITION"), key: .positions),
         Self(text: DataLocalizer.localize(path: "APP.GENERAL.ORDERS"), key: .orders),
-        Self(text: DataLocalizer.localize(path: "APP.GENERAL.TRADES"), key: .trades)
-        // TODO: add back Funding when ready, see https://github.com/dydxprotocol/native-ios-v4/pull/118/files
+        Self(text: DataLocalizer.localize(path: "APP.GENERAL.TRADES"), key: .trades),
+        Self(text: DataLocalizer.localize(path: "APP.TRADE.FUNDING_PAYMENTS_SHORT"), key: .funding)
     ]
 }

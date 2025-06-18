@@ -115,8 +115,8 @@ private class dydxHistoryViewPresenter: HostedViewPresenter<dydxHistoryViewModel
         let selectionBar = SelectionBarModel()
         selectionBar.items = [
             SelectionBarModel.Item(text: DataLocalizer.localize(path: "APP.GENERAL.TRADES"), isSelected: true),
-            SelectionBarModel.Item(text: DataLocalizer.localize(path: "APP.GENERAL.TRANSFERS"), isSelected: false)
-         //   SelectionBarModel.Item(text: DataLocalizer.localize(path: "APP.GENERAL.FUNDING_PAYMENTS_SHORT"), isSelected: false)
+            SelectionBarModel.Item(text: DataLocalizer.localize(path: "APP.GENERAL.TRANSFERS"), isSelected: false),
+            SelectionBarModel.Item(text: DataLocalizer.localize(path: "APP.TRADE.FUNDING_PAYMENTS_SHORT"), isSelected: false)
         ]
         selectionBar.onSelectionChanged = { [weak self] selectedIndex in
             guard let self = self else {

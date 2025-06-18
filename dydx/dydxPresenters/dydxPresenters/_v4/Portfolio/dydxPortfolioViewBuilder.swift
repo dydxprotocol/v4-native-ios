@@ -34,7 +34,8 @@ private class dydxPortfolioViewController: HostingViewController<PlatformView, d
             "/portfolio/transfers",
             "/portfolio/orders",
             "/portfolio/positions",
-            "/portfolio/trades"
+            "/portfolio/trades",
+            "/portfolio/funding"
         ]
         if let path = request?.path, supportedPathes.contains(path) {
             if let presenter = presenter as? dydxPortfolioViewPresenterProtocol {
@@ -161,7 +162,7 @@ private class dydxPortfolioViewPresenter: HostedViewPresenter<dydxPortfolioViewM
             resetDisplayContent(selection: .orders)
         case .trades:
             resetDisplayContent(selection: .trades)
-        case .payments:
+        case .funding:
             resetDisplayContent(selection: .funding)
         case .fees:
             resetDisplayContent(selection: .fees)
@@ -195,8 +196,8 @@ private struct Section: Equatable {
         [
             Self(text: DataLocalizer.localize(path: "APP.TRADE.POSITIONS"), key: .positions),
             Self(text: DataLocalizer.localize(path: "APP.GENERAL.ORDERS"), key: .orders),
-            Self(text: DataLocalizer.localize(path: "APP.GENERAL.TRADES"), key: .trades)
-            // TODO: add back Funding when ready, see https://github.com/dydxprotocol/native-ios-v4/pull/118/files
+            Self(text: DataLocalizer.localize(path: "APP.GENERAL.TRADES"), key: .trades),
+            Self(text: DataLocalizer.localize(path: "APP.TRADE.FUNDING_PAYMENTS_SHORT"), key: .funding)
         ]
     }
 }

@@ -41,14 +41,21 @@ public class dydxPortfolioSectionsViewModel: PlatformViewModel {
             }
             return AnyView(
                 HStack {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        TabGroupModel(items: items,
-                                      selectedItems: selectedItems,
-                                      currentSelection: self.sectionIndex,
-                                      onSelectionChanged: self.onSelectionChanged,
-                                      spacing: 16)
+                    ScrollViewReader { proxy in
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            TabGroupModel(items: items,
+                                          selectedItems: selectedItems,
+                                          currentSelection: self.sectionIndex,
+                                          onSelectionChanged: { [weak self] idx in
+
+                                withAnimation {
+                                    proxy.scrollTo(idx, anchor: .center)
+                                }
+                                self?.onSelectionChanged?(idx)
+                            },
+                                          spacing: 16)
                             .createView(parentStyle: style)
-                            .animation(.none)
+                        }
                     }
                 }
                 .padding(.vertical, 16)

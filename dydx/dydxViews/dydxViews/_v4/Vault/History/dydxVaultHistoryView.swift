@@ -35,7 +35,7 @@ public class dydxVaultHistoryViewModel: PlatformViewModel {
                         .createView(parentStyle: style)
                 }
             }
-                .themeColor(background: .layer3)
+                .themeColor(background: .layer2)
 
             return AnyView(view)
         }
