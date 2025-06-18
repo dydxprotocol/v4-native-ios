@@ -36,9 +36,9 @@ public final class dydxRestrictionsWorker: BaseWorker {
         let title: String?
         let body: String?
         switch compliance.status {
-        case .compliant:
+        case .compliant, .firstStrike:
             return
-        case .firstStrike, .firstStrikeCloseOnly, .closeOnly:
+        case .firstStrikeCloseOnly, .closeOnly:
             title = DataLocalizer.shared?.localize(
                 path: "APP.COMPLIANCE.CLOSE_ONLY_TITLE",
                 params: nil) ?? ""

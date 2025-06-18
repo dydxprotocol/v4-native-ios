@@ -22,7 +22,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zZH1/lcfApsY6oPZMDTQvlj3mcdqFKrxhSScMQ9sOR4=
+			2zuxp3DG0nFLV0U4Fy9BWbR2vk4KqIo4IH0TrKqf0yM=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-macos.private.swiftinterface</key>
@@ -50,14 +50,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HwjQtR1NgVWPOzKN39Y/MOXvRh46uZMIWNMyYb6LgtQ=
+			Wq2n+XbnGbN2+sr4l7yDD4QMyAuTQWa2zG7Jtz5RDOo=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zZH1/lcfApsY6oPZMDTQvlj3mcdqFKrxhSScMQ9sOR4=
+			2zuxp3DG0nFLV0U4Fy9BWbR2vk4KqIo4IH0TrKqf0yM=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.private.swiftinterface</key>
@@ -85,7 +85,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZzKrhlHgxs6xZylzY5sv473fRXrR3qAieuzeavBwOHU=
+			JXILHrtcyYnDcmrBUbk47lWApQH2fHEWI482+tSn+z0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

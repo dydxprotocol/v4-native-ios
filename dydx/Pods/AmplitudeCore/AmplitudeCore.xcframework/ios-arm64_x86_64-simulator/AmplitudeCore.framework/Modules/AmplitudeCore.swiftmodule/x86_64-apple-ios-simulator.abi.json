@@ -5254,14 +5254,14 @@
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "StringLiteral",
-      "offset": 14619,
+      "offset": 15499,
       "length": 8,
       "value": "\"config\""
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "StringLiteral",
-      "offset": 14659,
+      "offset": 15539,
       "length": 11,
       "value": "\"lastFetch\""
     },
