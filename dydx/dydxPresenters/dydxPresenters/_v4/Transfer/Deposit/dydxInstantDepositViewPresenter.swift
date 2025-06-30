@@ -31,6 +31,8 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
         ctaButtonPresenter
     ]
 
+    private let staticSelector = true       // turn it to off to let user select
+
     override init() {
         let viewModel = dydxInstantDepositViewModel()
 
@@ -101,38 +103,82 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
             let minutesLocalized = DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.X_MINUTES", params: ["X": minutes])
             viewModel?.selector?.regularTime = minutesLocalized
         } else {
-            viewModel?.selector?.regularTime = "< " + DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.30MIN")
+            if staticSelector {
+                viewModel?.selector?.regularTime = nil
+            } else {
+                viewModel?.selector?.regularTime = "< " + DataLocalizer.localize(path: "APP.GENERAL.TIME_STRINGS.30MIN")
+            }
         }
 
         if let fees = transferInput.summary?.bridgeFee?.doubleValue,
            let amount = dydxFormatter.shared.dollar(number: parser.asNumber(fees)) {
             viewModel?.selector?.regularFee = amount
         } else {
-            viewModel?.selector?.regularFee = DataLocalizer.localize(path: "APP.ONBOARDING.SKIP_SLOW_ROUTE_DESC")
+            if staticSelector {
+                viewModel?.selector?.regularFee = nil
+            } else {
+                viewModel?.selector?.regularFee = DataLocalizer.localize(path: "APP.ONBOARDING.SKIP_SLOW_ROUTE_DESC")
+            }
         }
 
-        if let fees = transferInput.goFastSummary?.bridgeFee?.doubleValue,
-           let amount = dydxFormatter.shared.dollar(number: parser.asNumber(fees)) {
-            viewModel?.selector?.instantFee = amount
-            if TransferRouteSelectionInfo.shared.allSelections != [.regular, .instant] {
+        if staticSelector {
+            if shouldShowInstantDeposit(transferInput: transferInput) {
                 viewModel?.selector?.selection = .instant
-                TransferRouteSelectionInfo.shared.allSelections = [.regular, .instant]
                 TransferRouteSelectionInfo.shared.selected = .instant
-            }
-        } else {
-            viewModel?.selector?.instantFee = DataLocalizer.localize(path: "APP.GENERAL.UNAVAILABLE")
-            if TransferRouteSelectionInfo.shared.allSelections != [.regular] {
+            } else {
                 viewModel?.selector?.selection = .regular
-                TransferRouteSelectionInfo.shared.allSelections = [.regular]
                 TransferRouteSelectionInfo.shared.selected = .regular
             }
-        }
-        viewModel?.selector?.selectionAction = { [weak self] selected in
-            if TransferRouteSelectionInfo.shared.allSelections.contains(selected) {
-                TransferRouteSelectionInfo.shared.selected = selected
-                self?.viewModel?.selector?.selection = selected
+        } else {
+            if let fees = transferInput.goFastSummary?.bridgeFee?.doubleValue,
+               let amount = dydxFormatter.shared.dollar(number: parser.asNumber(fees)) {
+                viewModel?.selector?.instantFee = amount
+                if TransferRouteSelectionInfo.shared.allSelections != [.regular, .instant] {
+                    viewModel?.selector?.selection = .instant
+                    TransferRouteSelectionInfo.shared.allSelections = [.regular, .instant]
+                    TransferRouteSelectionInfo.shared.selected = .instant
+                }
+            } else {
+                viewModel?.selector?.instantFee = DataLocalizer.localize(path: "APP.GENERAL.UNAVAILABLE")
+                if TransferRouteSelectionInfo.shared.allSelections != [.regular] {
+                    viewModel?.selector?.selection = .regular
+                    TransferRouteSelectionInfo.shared.allSelections = [.regular]
+                    TransferRouteSelectionInfo.shared.selected = .regular
+                }
+            }
+            viewModel?.selector?.selectionAction = { [weak self] selected in
+                if TransferRouteSelectionInfo.shared.allSelections.contains(selected) {
+                    TransferRouteSelectionInfo.shared.selected = selected
+                    self?.viewModel?.selector?.selection = selected
+                }
             }
         }
+
+        viewModel?.freeDepositWarningMessage = staticSelector ? shouldShowInstantDepositWarning(transferInput: transferInput) : nil
+    }
+
+    private func shouldShowInstantDeposit(transferInput: TransferInput) -> Bool {
+        guard transferInput.goFastRequestPayload != nil else {
+            return false
+        }
+
+        return shouldShowInstantDepositWarning(transferInput: transferInput) == nil
+    }
+
+    private func shouldShowInstantDepositWarning(transferInput: TransferInput) -> String? {
+        let usdcSize: Double = transferInput.goFastSummary?.usdcSize?.doubleValue ?? transferInput.summary?.usdcSize?.doubleValue ?? 0
+        let minAmount = dydxNumberFeatureFlag.skip_ga_fast_transfer_min.value
+        let maxAmount = dydxNumberFeatureFlag.skip_go_fast_transfer_max.value
+        if usdcSize > 0,
+           let minAmountString = dydxFormatter.shared.localFormatted(number: minAmount, digits: 0),
+            let maxAmountString = dydxFormatter.shared.localFormatted(number: maxAmount, digits: 0) {
+            if usdcSize < minAmount {
+                return DataLocalizer.localize(path: "APP.DEPOSIT_MODAL.FREE_INSTANT_DEPOSIT_MIN", params: ["MIN_AMOUNT": minAmountString])
+            } else if usdcSize > maxAmount {
+                return DataLocalizer.localize(path: "APP.DEPOSIT_MODAL.FREE_INSTANT_DEPOSIT_MAX", params: ["MAX_AMOUNT": maxAmountString])
+            }
+        }
+        return nil
     }
 
     private func updateInputToken(transferInput: TransferInput, token: TransferTokenInfo?) {

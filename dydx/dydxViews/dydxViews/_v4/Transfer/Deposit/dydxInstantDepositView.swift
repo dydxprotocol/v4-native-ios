@@ -11,6 +11,7 @@ import PlatformUI
 import Utilities
 
 public class dydxInstantDepositViewModel: PlatformViewModel {
+    @Published public var uiStyle = DepositSelectorViewStyle.display_only
     @Published public var input: dydxInstantDepositInputModel? = dydxInstantDepositInputModel()
     @Published public var selector: dydxInstantDepositSelectorModel? =
         dydxInstantDepositSelectorModel()
@@ -18,6 +19,7 @@ public class dydxInstantDepositViewModel: PlatformViewModel {
     @Published public var validationViewModel: dydxValidationViewModel? = dydxValidationViewModel()
     @Published public var showConnectWallet = false
     @Published public var connectWalletAction: (() -> Void)?
+    @Published public var freeDepositWarningMessage: String?
 
     public init() { }
 
@@ -48,8 +50,33 @@ public class dydxInstantDepositViewModel: PlatformViewModel {
                         .createView(parentStyle: style)
                     }
                 } else {
-                    self.input?.createView(parentStyle: style)
-                    self.selector?.createView(parentStyle: style)
+                    switch self.uiStyle {
+                    case .toggle:
+                        self.input?.createView(parentStyle: style)
+                        self.selector?.createView(parentStyle: style)
+                    case .display_only:
+                        ZStack(alignment: .bottom) {
+                            self.selector?.createView(parentStyle: style)
+                                .padding()
+                                .padding(.top, 6)
+                                .themeColor(background: .layer1)
+                                .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
+
+                            VStack {
+                                self.input?.createView(parentStyle: style)
+                                    .topAligned()
+                                Spacer(minLength: 48)
+                            }
+                        }
+                        .frame(height: 120)
+
+                        if let freeDepositWarningMessage = self.freeDepositWarningMessage {
+                            InlineAlertViewModel(.init(title: nil,
+                                                       body: freeDepositWarningMessage,
+                                                       level: .custom(tabColor: .colorPurple, backgroundColor: .colorFadedPurple)))
+                            .createView(parentStyle: style)
+                        }
+                    }
                 }
 
                 Spacer()

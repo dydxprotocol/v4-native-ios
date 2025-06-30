@@ -91,6 +91,7 @@ public extension InlineAlertViewModel {
         case error
         case warning
         case success
+        case custom(tabColor: ThemeColor.SemanticColor, backgroundColor: ThemeColor.SemanticColor)
 
         fileprivate var tabColor: ThemeColor.SemanticColor {
             switch self {
@@ -100,6 +101,8 @@ public extension InlineAlertViewModel {
                 return .colorYellow
             case .success:
                 return .colorGreen
+            case .custom(tabColor: let tabColor, backgroundColor: _):
+                return tabColor
             }
         }
 
@@ -111,6 +114,8 @@ public extension InlineAlertViewModel {
                 return .colorFadedYellow
             case .success:
                 return .colorFadedGreen
+            case .custom(tabColor: _, backgroundColor: let backgroundColor):
+                return backgroundColor
             }
         }
     }

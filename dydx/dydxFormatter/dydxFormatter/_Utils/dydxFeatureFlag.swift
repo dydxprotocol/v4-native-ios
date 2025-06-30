@@ -66,12 +66,20 @@ public enum dydxNumberFeatureFlag: String {
     case min_deposit_for_launchable_market
     case min_usdc_for_deposit
 
+    // min/max of Skip Go Fast amount; hardcoded on Skip's end
+    case skip_ga_fast_transfer_min
+    case skip_go_fast_transfer_max
+
     var defaultValue: Double {
         switch self {
         case .min_deposit_for_launchable_market:
             return 10000.0
         case .min_usdc_for_deposit:
             return  Installation.source == .debug ? 1.0 : 10.0
+        case .skip_ga_fast_transfer_min:
+            return 100.0
+        case .skip_go_fast_transfer_max:
+            return 100000.0
         }
     }
 

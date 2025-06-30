@@ -14,7 +14,12 @@ public enum TransferRouteSelection {
     case instant, regular
 }
 
+public enum DepositSelectorViewStyle {
+    case toggle, display_only
+}
+
 public class dydxInstantDepositSelectorModel: PlatformViewModel {
+    @Published public var uiStyle = DepositSelectorViewStyle.display_only
     @Published public var selection: TransferRouteSelection = .regular
     @Published public var instantFee: String?
     @Published public var regularTime: String?
@@ -36,22 +41,66 @@ public class dydxInstantDepositSelectorModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack {
-                HStack(spacing: 16) {
-                    Button(action: {
-                        self.selectionAction?(.instant)
-                    }) {
-                        self.instantSelectView(style: style)
-                            .frame(maxWidth: .infinity)
+                switch self.uiStyle {
+                case .toggle:
+                    HStack(spacing: 16) {
+                        Button(action: {
+                            self.selectionAction?(.instant)
+                        }) {
+                            self.instantSelectView(style: style)
+                                .frame(maxWidth: .infinity)
+                        }
+                        Button(action: {
+                            self.selectionAction?(.regular)
+                        }) {
+                            self.regularSelectView(style: style)
+                                .frame(maxWidth: .infinity)
+                        }
                     }
-                    Button(action: {
-                        self.selectionAction?(.regular)
-                    }) {
-                        self.regularSelectView(style: style)
-                            .frame(maxWidth: .infinity)
-                    }
+                case .display_only:
+                    self.regularDisplayView(style: style)
                 }
             }
             return AnyView(view)
+        }
+    }
+
+    private func regularDisplayView(style: ThemeStyle) -> some View {
+        HStack {
+            Text(DataLocalizer.localize(path: "APP.DEPOSIT_MODAL.DEPOSIT_METHOD"))
+                .themeFont(fontSize: .small)
+                .themeColor(foreground: .textTertiary)
+
+            Spacer()
+
+            switch self.selection {
+            case .instant:
+                HStack(spacing: 4) {
+                    PlatformIconViewModel(type: .asset(name: "icon_instant_deposit", bundle: Bundle.dydxView),
+                                          clip: .noClip,
+                                          size: CGSize(width: 14, height: 14),
+                                          templateColor: .colorYellow)
+                    .createView(parentStyle: style)
+
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.INSTANT"))
+                        .themeFont(fontSize: .small)
+                        .themeColor(foreground: .textPrimary)
+
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.FREE"))
+                        .themeFont(fontSize: .smallest)
+                        .themeColor(foreground: .colorPurple)
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 3)
+                        .themeColor(background: .colorFadedPurple)
+                        .cornerRadius(6, corners: .allCorners)
+                }
+            case .regular:
+                HStack(spacing: 4) {
+                    Text(regularTime ?? "-")
+                        .themeFont(fontSize: .small)
+                        .themeColor(foreground: .textSecondary)
+                }
+            }
         }
     }
 
