@@ -58,14 +58,14 @@ public class dydxInstantDepositSelectorModel: PlatformViewModel {
                         }
                     }
                 case .display_only:
-                    self.regularDisplayView(style: style)
+                    self.displayView(style: style)
                 }
             }
             return AnyView(view)
         }
     }
 
-    private func regularDisplayView(style: ThemeStyle) -> some View {
+    private func displayView(style: ThemeStyle) -> some View {
         HStack {
             Text(DataLocalizer.localize(path: "APP.DEPOSIT_MODAL.DEPOSIT_METHOD"))
                 .themeFont(fontSize: .small)
