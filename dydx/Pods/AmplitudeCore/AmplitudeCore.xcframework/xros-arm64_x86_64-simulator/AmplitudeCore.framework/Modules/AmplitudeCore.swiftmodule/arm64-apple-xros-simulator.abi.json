@@ -323,6 +323,476 @@
       },
       {
         "kind": "TypeDecl",
+        "name": "InterfaceChangeSignal",
+        "printedName": "InterfaceChangeSignal",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "time",
+            "printedName": "time",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Date",
+                "printedName": "Foundation.Date",
+                "usr": "s:10Foundation4DateV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@AmplitudeCore@objc(cs)InterfaceChangeSignal(py)time",
+            "mangledName": "$s13AmplitudeCore21InterfaceChangeSignalC4time10Foundation4DateVvp",
+            "moduleName": "AmplitudeCore",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Date",
+                    "printedName": "Foundation.Date",
+                    "usr": "s:10Foundation4DateV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@AmplitudeCore@objc(cs)InterfaceChangeSignal(im)time",
+                "mangledName": "$s13AmplitudeCore21InterfaceChangeSignalC4time10Foundation4DateVvg",
+                "moduleName": "AmplitudeCore",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(time:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "InterfaceChangeSignal",
+                "printedName": "AmplitudeCore.InterfaceChangeSignal",
+                "usr": "c:@M@AmplitudeCore@objc(cs)InterfaceChangeSignal"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Date",
+                "printedName": "Foundation.Date",
+                "usr": "s:10Foundation4DateV"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@AmplitudeCore@objc(cs)InterfaceChangeSignal(im)initWithTime:",
+            "mangledName": "$s13AmplitudeCore21InterfaceChangeSignalC4timeAC10Foundation4DateV_tcfc",
+            "moduleName": "AmplitudeCore",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "InterfaceChangeSignal",
+                "printedName": "AmplitudeCore.InterfaceChangeSignal",
+                "usr": "c:@M@AmplitudeCore@objc(cs)InterfaceChangeSignal"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@AmplitudeCore@objc(cs)InterfaceChangeSignal(im)init",
+            "mangledName": "$s13AmplitudeCore21InterfaceChangeSignalCACycfc",
+            "moduleName": "AmplitudeCore",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@AmplitudeCore@objc(cs)InterfaceChangeSignal",
+        "mangledName": "$s13AmplitudeCore21InterfaceChangeSignalC",
+        "moduleName": "AmplitudeCore",
+        "isOpen": true,
+        "intro_Macosx": "10.15",
+        "intro_iOS": "13.0",
+        "intro_tvOS": "13.0",
+        "intro_watchOS": "6.0",
+        "declAttributes": [
+          "AccessControl",
+          "Available",
+          "Available",
+          "Available",
+          "Available",
+          "ObjCMembers",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "InterfaceSignalProvider",
+        "printedName": "InterfaceSignalProvider",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "isProviding",
+            "printedName": "isProviding",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:13AmplitudeCore23InterfaceSignalProviderP11isProvidingSbvp",
+            "mangledName": "$s13AmplitudeCore23InterfaceSignalProviderP11isProvidingSbvp",
+            "moduleName": "AmplitudeCore",
+            "protocolReq": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:13AmplitudeCore23InterfaceSignalProviderP11isProvidingSbvg",
+                "mangledName": "$s13AmplitudeCore23InterfaceSignalProviderP11isProvidingSbvg",
+                "moduleName": "AmplitudeCore",
+                "genericSig": "<τ_0_0 where τ_0_0 : AmplitudeCore.InterfaceSignalProvider>",
+                "sugared_genericSig": "<Self where Self : AmplitudeCore.InterfaceSignalProvider>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "addInterfaceSignalReceiver",
+            "printedName": "addInterfaceSignalReceiver(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "InterfaceSignalReceiver",
+                "printedName": "any AmplitudeCore.InterfaceSignalReceiver",
+                "usr": "c:@M@AmplitudeCore@objc(pl)InterfaceSignalReceiver"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:13AmplitudeCore23InterfaceSignalProviderP03addcD8ReceiveryyAA0cdG0_pF",
+            "mangledName": "$s13AmplitudeCore23InterfaceSignalProviderP03addcD8ReceiveryyAA0cdG0_pF",
+            "moduleName": "AmplitudeCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : AmplitudeCore.InterfaceSignalProvider>",
+            "sugared_genericSig": "<Self where Self : AmplitudeCore.InterfaceSignalProvider>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "removeInterfaceSignalReceiver",
+            "printedName": "removeInterfaceSignalReceiver(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "InterfaceSignalReceiver",
+                "printedName": "any AmplitudeCore.InterfaceSignalReceiver",
+                "usr": "c:@M@AmplitudeCore@objc(pl)InterfaceSignalReceiver"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:13AmplitudeCore23InterfaceSignalProviderP06removecD8ReceiveryyAA0cdG0_pF",
+            "mangledName": "$s13AmplitudeCore23InterfaceSignalProviderP06removecD8ReceiveryyAA0cdG0_pF",
+            "moduleName": "AmplitudeCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : AmplitudeCore.InterfaceSignalProvider>",
+            "sugared_genericSig": "<Self where Self : AmplitudeCore.InterfaceSignalProvider>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:13AmplitudeCore23InterfaceSignalProviderP",
+        "mangledName": "$s13AmplitudeCore23InterfaceSignalProviderP",
+        "moduleName": "AmplitudeCore",
+        "genericSig": "<τ_0_0 : AnyObject>",
+        "sugared_genericSig": "<Self : AnyObject>",
+        "intro_Macosx": "10.15",
+        "intro_iOS": "13.0",
+        "intro_tvOS": "13.0",
+        "intro_watchOS": "6.0",
+        "declAttributes": [
+          "AccessControl",
+          "Available",
+          "Available",
+          "Available",
+          "Available"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "InterfaceSignalReceiver",
+        "printedName": "InterfaceSignalReceiver",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "onInterfaceChanged",
+            "printedName": "onInterfaceChanged(signal:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "InterfaceChangeSignal",
+                "printedName": "AmplitudeCore.InterfaceChangeSignal",
+                "usr": "c:@M@AmplitudeCore@objc(cs)InterfaceChangeSignal"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmplitudeCore@objc(pl)InterfaceSignalReceiver(im)onInterfaceChangedWithSignal:",
+            "mangledName": "$s13AmplitudeCore23InterfaceSignalReceiverP02onC7Changed6signalyAA0c6ChangeD0C_tF",
+            "moduleName": "AmplitudeCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : AmplitudeCore.InterfaceSignalReceiver>",
+            "sugared_genericSig": "<Self where Self : AmplitudeCore.InterfaceSignalReceiver>",
+            "protocolReq": true,
+            "declAttributes": [
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onStartProviding",
+            "printedName": "onStartProviding()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmplitudeCore@objc(pl)InterfaceSignalReceiver(im)onStartProviding",
+            "mangledName": "$s13AmplitudeCore23InterfaceSignalReceiverP16onStartProvidingyyF",
+            "moduleName": "AmplitudeCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : AmplitudeCore.InterfaceSignalReceiver>",
+            "sugared_genericSig": "<Self where Self : AmplitudeCore.InterfaceSignalReceiver>",
+            "protocolReq": true,
+            "declAttributes": [
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onStopProviding",
+            "printedName": "onStopProviding()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmplitudeCore@objc(pl)InterfaceSignalReceiver(im)onStopProviding",
+            "mangledName": "$s13AmplitudeCore23InterfaceSignalReceiverP15onStopProvidingyyF",
+            "moduleName": "AmplitudeCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : AmplitudeCore.InterfaceSignalReceiver>",
+            "sugared_genericSig": "<Self where Self : AmplitudeCore.InterfaceSignalReceiver>",
+            "protocolReq": true,
+            "declAttributes": [
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "c:@M@AmplitudeCore@objc(pl)InterfaceSignalReceiver",
+        "mangledName": "$s13AmplitudeCore23InterfaceSignalReceiverP",
+        "moduleName": "AmplitudeCore",
+        "genericSig": "<τ_0_0 : AnyObject, τ_0_0 : Swift.Sendable>",
+        "sugared_genericSig": "<Self : AnyObject, Self : Swift.Sendable>",
+        "intro_Macosx": "10.15",
+        "intro_iOS": "13.0",
+        "intro_tvOS": "13.0",
+        "intro_watchOS": "6.0",
+        "declAttributes": [
+          "AccessControl",
+          "Available",
+          "Available",
+          "Available",
+          "Available",
+          "ObjC"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AmplitudeCore",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
         "name": "LogLevel",
         "printedName": "LogLevel",
         "children": [

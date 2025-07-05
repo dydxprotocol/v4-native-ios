@@ -15,21 +15,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QGhxWv7Yt3ouqligqxviOVHZTgQXS7TFKFx/Zfch4hw=
+			cZlbovSx53UwdZVCFI6No0AZ2gfo7TWMVYwrR2ShQ/k=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-macos.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2zuxp3DG0nFLV0U4Fy9BWbR2vk4KqIo4IH0TrKqf0yM=
+			5rLt3IsbJRTst48YA4521a3UrDtw400SPdP172u/WtE=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-macos.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4mX10zWM0TwUAXHprOxpORluPfRuaOM10+EJP/qOw/M=
+			fCQZtVARPQ1XFuwn4e4LzKRMsaa9tnrffnWWP/5XJWY=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-macos.swiftdoc</key>
@@ -43,28 +43,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4mX10zWM0TwUAXHprOxpORluPfRuaOM10+EJP/qOw/M=
+			fCQZtVARPQ1XFuwn4e4LzKRMsaa9tnrffnWWP/5XJWY=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-macos.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Wq2n+XbnGbN2+sr4l7yDD4QMyAuTQWa2zG7Jtz5RDOo=
+			He3EsY4EdzTqmtAue2BS9ENdSRJXMT2hGsIk3GA9HHE=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2zuxp3DG0nFLV0U4Fy9BWbR2vk4KqIo4IH0TrKqf0yM=
+			5rLt3IsbJRTst48YA4521a3UrDtw400SPdP172u/WtE=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0YP7cU5XkWY1WR0jEeaKpjhPweHK1uZVTG7wW0of8NQ=
+			m7zELfkIbZFGLHvxMdnekz0K07oLdJvCnUGmtlCQxGM=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.swiftdoc</key>
@@ -78,14 +78,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0YP7cU5XkWY1WR0jEeaKpjhPweHK1uZVTG7wW0of8NQ=
+			m7zELfkIbZFGLHvxMdnekz0K07oLdJvCnUGmtlCQxGM=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			JXILHrtcyYnDcmrBUbk47lWApQH2fHEWI482+tSn+z0=
+			1BfSiwSI3M0sMU/Hi97JDpDxu0E7ey63WtnXX42xQ6k=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

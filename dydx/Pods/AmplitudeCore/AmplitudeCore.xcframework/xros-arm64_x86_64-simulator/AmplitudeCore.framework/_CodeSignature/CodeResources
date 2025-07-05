@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/AmplitudeCore-Swift.h</key>
 		<data>
-		ZlChZT5Oma1KD9mwKYCVmnUXvPY=
+		1ZntJcj0MPMi+dr6EXXh7NS8//U=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -14,11 +14,11 @@
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.abi.json</key>
 		<data>
-		HjYeOPJ25mfrwK1g6M4c7sjjhNs=
+		Zalk0jMqL66f7xbB8OcFcLBfRo8=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.private.swiftinterface</key>
 		<data>
-		9GdbmHoa9qGEOBHhvie5uhcU4Gg=
+		wVx3PBmyIoEN3fySbMdNZotlnnU=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.swiftdoc</key>
 		<data>
@@ -26,19 +26,19 @@
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.swiftinterface</key>
 		<data>
-		9GdbmHoa9qGEOBHhvie5uhcU4Gg=
+		wVx3PBmyIoEN3fySbMdNZotlnnU=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.swiftmodule</key>
 		<data>
-		iZq/kyrzzEH2ISzd52VWvYE/KnI=
+		WJ8oddVn8m9EZc6V/X9XHm6gTyo=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.abi.json</key>
 		<data>
-		HjYeOPJ25mfrwK1g6M4c7sjjhNs=
+		Zalk0jMqL66f7xbB8OcFcLBfRo8=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.private.swiftinterface</key>
 		<data>
-		QTDQv49WYqXANnoBW2lhkjIaJkM=
+		CPNoY9w4l0CaoG2Ok7N6qgZi+kk=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.swiftdoc</key>
 		<data>
@@ -46,11 +46,11 @@
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.swiftinterface</key>
 		<data>
-		QTDQv49WYqXANnoBW2lhkjIaJkM=
+		CPNoY9w4l0CaoG2Ok7N6qgZi+kk=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.swiftmodule</key>
 		<data>
-		Uvp9uZoeIT5ItocZztRyMtJ2om4=
+		yylrzI5KPEGxG++HSe5fSJw/2sc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -63,21 +63,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QGhxWv7Yt3ouqligqxviOVHZTgQXS7TFKFx/Zfch4hw=
+			cZlbovSx53UwdZVCFI6No0AZ2gfo7TWMVYwrR2ShQ/k=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2zuxp3DG0nFLV0U4Fy9BWbR2vk4KqIo4IH0TrKqf0yM=
+			5rLt3IsbJRTst48YA4521a3UrDtw400SPdP172u/WtE=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			g8HMDwAQUgVsG8m+dY6NarSEMO2iO1S9QUru5aSghMQ=
+			MSepG+pZVvGMu6Z+9Cr2W862yMCqBu6Y/JGv1LafSRQ=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.swiftdoc</key>
@@ -91,28 +91,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			g8HMDwAQUgVsG8m+dY6NarSEMO2iO1S9QUru5aSghMQ=
+			MSepG+pZVvGMu6Z+9Cr2W862yMCqBu6Y/JGv1LafSRQ=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			QWEMw4OiUWqZl6K0TsLRS+tl/Myly4bGCUMKFUvNO5k=
+			JqtStdNMWW/yynMkDeS0gThtr6RGbIap1YQ53EwjykQ=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2zuxp3DG0nFLV0U4Fy9BWbR2vk4KqIo4IH0TrKqf0yM=
+			5rLt3IsbJRTst48YA4521a3UrDtw400SPdP172u/WtE=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZVyKEpFvqOEeBCuOj9kdlifAyXk5iBsCO/2AF7ApKeI=
+			+4IHTwLNcbI7IDARiucx0b4CI/7cbvZkKwgPjLItnMU=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.swiftdoc</key>
@@ -126,14 +126,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZVyKEpFvqOEeBCuOj9kdlifAyXk5iBsCO/2AF7ApKeI=
+			+4IHTwLNcbI7IDARiucx0b4CI/7cbvZkKwgPjLItnMU=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			B7ahEjrMFTHK5xcr05FrqJS7xLXzDpE+x3elpWVSVL4=
+			8oj3P1hVG4e+0ja+Q+nnOKiEau+neCNfWVSm8t0NyxY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

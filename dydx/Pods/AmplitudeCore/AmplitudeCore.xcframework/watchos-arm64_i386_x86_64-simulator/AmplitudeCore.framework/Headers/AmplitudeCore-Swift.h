@@ -312,6 +312,24 @@ SWIFT_PROTOCOL("_TtP13AmplitudeCore10CoreLogger_")
 - (void)debugWithMessage:(NSString * _Nonnull)message;
 @end
 
+@class NSDate;
+
+SWIFT_CLASS("_TtC13AmplitudeCore21InterfaceChangeSignal") SWIFT_AVAILABILITY(tvos,introduced=13.0) SWIFT_AVAILABILITY(watchos,introduced=6.0) SWIFT_AVAILABILITY(ios,introduced=13.0) SWIFT_AVAILABILITY(macos,introduced=10.15)
+@interface InterfaceChangeSignal : NSObject
+@property (nonatomic, readonly, copy) NSDate * _Nonnull time;
+- (nonnull instancetype)initWithTime:(NSDate * _Nonnull)time OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL("_TtP13AmplitudeCore23InterfaceSignalReceiver_") SWIFT_AVAILABILITY(tvos,introduced=13.0) SWIFT_AVAILABILITY(watchos,introduced=6.0) SWIFT_AVAILABILITY(ios,introduced=13.0) SWIFT_AVAILABILITY(macos,introduced=10.15)
+@protocol InterfaceSignalReceiver
+- (void)onInterfaceChangedWithSignal:(InterfaceChangeSignal * _Nonnull)signal;
+- (void)onStartProviding;
+- (void)onStopProviding;
+@end
+
 typedef SWIFT_ENUM(NSInteger, LogLevel, open) {
   LogLevelOff = 0,
   LogLevelError = 1,
@@ -654,6 +672,24 @@ SWIFT_PROTOCOL("_TtP13AmplitudeCore10CoreLogger_")
 - (void)debugWithMessage:(NSString * _Nonnull)message;
 @end
 
+@class NSDate;
+
+SWIFT_CLASS("_TtC13AmplitudeCore21InterfaceChangeSignal") SWIFT_AVAILABILITY(tvos,introduced=13.0) SWIFT_AVAILABILITY(watchos,introduced=6.0) SWIFT_AVAILABILITY(ios,introduced=13.0) SWIFT_AVAILABILITY(macos,introduced=10.15)
+@interface InterfaceChangeSignal : NSObject
+@property (nonatomic, readonly, copy) NSDate * _Nonnull time;
+- (nonnull instancetype)initWithTime:(NSDate * _Nonnull)time OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL("_TtP13AmplitudeCore23InterfaceSignalReceiver_") SWIFT_AVAILABILITY(tvos,introduced=13.0) SWIFT_AVAILABILITY(watchos,introduced=6.0) SWIFT_AVAILABILITY(ios,introduced=13.0) SWIFT_AVAILABILITY(macos,introduced=10.15)
+@protocol InterfaceSignalReceiver
+- (void)onInterfaceChangedWithSignal:(InterfaceChangeSignal * _Nonnull)signal;
+- (void)onStartProviding;
+- (void)onStopProviding;
+@end
+
 typedef SWIFT_ENUM(NSInteger, LogLevel, open) {
   LogLevelOff = 0,
   LogLevelError = 1,
@@ -994,6 +1030,24 @@ SWIFT_PROTOCOL("_TtP13AmplitudeCore10CoreLogger_")
 - (void)warnWithMessage:(NSString * _Nonnull)message;
 - (void)logWithMessage:(NSString * _Nonnull)message;
 - (void)debugWithMessage:(NSString * _Nonnull)message;
+@end
+
+@class NSDate;
+
+SWIFT_CLASS("_TtC13AmplitudeCore21InterfaceChangeSignal") SWIFT_AVAILABILITY(tvos,introduced=13.0) SWIFT_AVAILABILITY(watchos,introduced=6.0) SWIFT_AVAILABILITY(ios,introduced=13.0) SWIFT_AVAILABILITY(macos,introduced=10.15)
+@interface InterfaceChangeSignal : NSObject
+@property (nonatomic, readonly, copy) NSDate * _Nonnull time;
+- (nonnull instancetype)initWithTime:(NSDate * _Nonnull)time OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL("_TtP13AmplitudeCore23InterfaceSignalReceiver_") SWIFT_AVAILABILITY(tvos,introduced=13.0) SWIFT_AVAILABILITY(watchos,introduced=6.0) SWIFT_AVAILABILITY(ios,introduced=13.0) SWIFT_AVAILABILITY(macos,introduced=10.15)
+@protocol InterfaceSignalReceiver
+- (void)onInterfaceChangedWithSignal:(InterfaceChangeSignal * _Nonnull)signal;
+- (void)onStartProviding;
+- (void)onStopProviding;
 @end
 
 typedef SWIFT_ENUM(NSInteger, LogLevel, open) {

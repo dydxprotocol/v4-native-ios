@@ -18,6 +18,24 @@ public struct AmplitudeContext {
   public let logger: any AmplitudeCore.CoreLogger
   public init(apiKey: Swift.String, instanceName: Swift.String = "$default_instance", serverZone: AmplitudeCore.ServerZone = .US, logger: any AmplitudeCore.CoreLogger = OSLogger(logLevel: .error))
 }
+@objc @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@objcMembers public class InterfaceChangeSignal : ObjectiveC.NSObject {
+  @objc final public let time: Foundation.Date
+  @objc public init(time: Foundation.Date)
+  @objc deinit
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public protocol InterfaceSignalProvider : AnyObject {
+  var isProviding: Swift.Bool { get }
+  func addInterfaceSignalReceiver(_ receiver: any AmplitudeCore.InterfaceSignalReceiver)
+  func removeInterfaceSignalReceiver(_ receiver: any AmplitudeCore.InterfaceSignalReceiver)
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@objc public protocol InterfaceSignalReceiver : Swift.Sendable {
+  @objc func onInterfaceChanged(signal: AmplitudeCore.InterfaceChangeSignal)
+  @objc func onStartProviding()
+  @objc func onStopProviding()
+}
 @objc public enum LogLevel : Swift.Int, Swift.Comparable, Swift.Sendable {
   case off = 0
   case error = 1
