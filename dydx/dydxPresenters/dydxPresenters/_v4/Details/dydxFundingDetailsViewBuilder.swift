@@ -97,6 +97,13 @@ private class dydxFundingDetailsViewPresenter: HostedViewPresenter<dydxFundingDe
 
         let token = TokenTextViewModel(symbol: asset.displayableAssetId)
 
+        let side: String
+        if funding.positionSize >= 0 {
+            side = DataLocalizer.localize(path: "APP.GENERAL.BUY")
+        } else {
+            side = DataLocalizer.localize(path: "APP.GENERAL.SELL")
+        }
+
         let items: [dydxFundingDetailsViewModel.Item] = [
             .init(title: DataLocalizer.localize(path: "APP.GENERAL.MARKET"),
                   value: .any(token)),
@@ -109,6 +116,9 @@ private class dydxFundingDetailsViewPresenter: HostedViewPresenter<dydxFundingDe
 
             .init(title: DataLocalizer.localize(path: "APP.GENERAL.SIZE"),
                   value: .number(position)),
+
+            .init(title: DataLocalizer.localize(path: "APP.GENERAL.SIDE"),
+                 value: .string(side)),
 
             .init(title: DataLocalizer.localize(path: "APP.GENERAL.PRICE"),
                   value: .number(price)),

@@ -79,7 +79,7 @@ class dydxPortfolioFundingViewPresenter: HostedViewPresenter<dydxPortfolioFundin
             item.rate = SignedAmountViewModel(text: dydxFormatter.shared.percent(number: abs(funding.rate), digits: 6),
                                                     sign: funding.rate >= 0.0 ? .plus : .minus,
                                                    coloringOption: .allText)
-            item.sideText.side = funding.positionSize > 0 ? .long : .short
+            item.sideText.side = funding.positionSize > 0 ? .buy : .sell
             let position = dydxFormatter.shared.raw(number: NSNumber(value: abs(funding.positionSize)), digits: configs.displayStepSizeDecimals?.intValue ?? 1)
             item.position = position
             item.token?.symbol = asset.displayableAssetId
