@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import React
 import React_RCTAppDelegate
+import dydxTurnkey
 
 class dydxReactViewController: UIViewController {
   var reactNativeFactory: RCTReactNativeFactory?
@@ -20,13 +21,12 @@ class dydxReactViewController: UIViewController {
     reactNativeFactoryDelegate = ReactNativeDelegate()
     reactNativeFactory = RCTReactNativeFactory(delegate: reactNativeFactoryDelegate!)
     view = reactNativeFactory!.rootViewFactory.view(withModuleName: "HelloWorld")
-
   }
 }
 
 class ReactNativeDelegate: RCTDefaultReactNativeFactoryDelegate {
     override func sourceURL(for bridge: RCTBridge) -> URL? {
-      self.bundleURL()
+        TurnkeyBridgeManager.bundleURL
     }
 
     override func bundleURL() -> URL? {

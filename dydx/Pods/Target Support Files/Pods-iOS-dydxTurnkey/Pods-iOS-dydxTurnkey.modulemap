@@ -1,0 +1,6 @@
+framework module Pods_iOS_dydxTurnkey {
+  umbrella header "Pods-iOS-dydxTurnkey-umbrella.h"
+
+  export *
+  module * { export * }
+}

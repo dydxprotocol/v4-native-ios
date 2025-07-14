@@ -105,7 +105,6 @@ class AppDelegate: CommonAppDelegate {
                 AbacusStateManager.shared.state.restriction)
                 .prefix(1)
                 .sink { walletState, restriction in
-                    
                     // Show a sample react-native view
                     // Router.shared?.navigate(to: RoutingRequest(path: "/react_native", params: nil), animated: true, completion: nil)
                     

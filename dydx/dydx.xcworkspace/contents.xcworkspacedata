@@ -34,6 +34,9 @@
          location = "group:dydxPresenters/dydxPresenters.xcodeproj">
       </FileRef>
       <FileRef
+         location = "container:dydxTurnkey/dydxTurnkey.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:dydxStateManager/dydxStateManager.xcodeproj">
       </FileRef>
       <FileRef
@@ -186,6 +189,6 @@
       location = "group:../StatsigInjections/StatsigInjections.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:dydxFiatRamp/dydxFiatRamp.xcodeproj">
+      location = "group:dydxTurnkey/dydxTurnkey.xcodeproj">
    </FileRef>
 </Workspace>
