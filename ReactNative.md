@@ -11,3 +11,7 @@ Pod update:
 #  Test
 
 > npm start
+
+#  Create bundle
+
+> ./npx_bundle.sh

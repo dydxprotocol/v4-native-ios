@@ -398,13 +398,6 @@ abstract_target 'iOS' do
     amplitude_pods
     statsig_pods
     abacus_pods
-    
-   #  use_react_native!(
-   #   :path => config[:reactNativePath],
-   #   # An absolute path to your application root.
-   #   :app_path => "#{Pod::Config.instance.installation_root}/.."
-   # )
-   
   end
   
   target 'dydxV4Tests' do
