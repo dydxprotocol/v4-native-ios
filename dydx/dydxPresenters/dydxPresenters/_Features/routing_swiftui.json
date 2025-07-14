@@ -215,6 +215,10 @@
                     "destination":"dydxPresenters.dydxSecurityViewBuilder",
                     "presentation":"root"
                 },
+                "/react_native":{
+                    "destination":"dydxPresenters.dydxReactNativeBuilder",
+                    "presentation":"root"
+                },
                 "/settings":{
                     "destination":"dydxPresenters.dydxSettingsLandingViewBuilder",
                 },
