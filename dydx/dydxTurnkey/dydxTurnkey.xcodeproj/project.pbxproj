@@ -8,23 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		029F10572E270CFB00261191 /* ReactBridge in Frameworks */ = {isa = PBXBuildFile; productRef = 029F10562E270CFB00261191 /* ReactBridge */; };
+		029F10742E27182E00261191 /* TurnkeyBridgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F10722E27182E00261191 /* TurnkeyBridgeManager.swift */; };
+		029F10752E27182E00261191 /* TurnkeyNativeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F10732E27182E00261191 /* TurnkeyNativeModule.swift */; };
+		029F10762E27182E00261191 /* ReactNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F10712E27182E00261191 /* ReactNativeView.swift */; };
 		A471E1A9F61A587B7F18B08B /* Pods_iOS_dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34656E30362F6955DB48268B /* Pods_iOS_dydxTurnkey.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		029F10712E27182E00261191 /* ReactNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactNativeView.swift; sourceTree = "<group>"; };
+		029F10722E27182E00261191 /* TurnkeyBridgeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnkeyBridgeManager.swift; sourceTree = "<group>"; };
+		029F10732E27182E00261191 /* TurnkeyNativeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnkeyNativeModule.swift; sourceTree = "<group>"; };
 		02F5123C2E25A8D9002402A0 /* dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34656E30362F6955DB48268B /* Pods_iOS_dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9CDDC60F9B534365B3CDA9A /* Pods-iOS-dydxTurnkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxTurnkey.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey.debug.xcconfig"; sourceTree = "<group>"; };
 		C5D8B0DD084BF3476E9145CB /* Pods-iOS-dydxTurnkey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxTurnkey.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		02F5123E2E25A8D9002402A0 /* dydxTurnkey */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = dydxTurnkey;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		02F512392E25A8D9002402A0 /* Frameworks */ = {
@@ -39,10 +37,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		029F106A2E2717D600261191 /* dydxTurnkey */ = {
+			isa = PBXGroup;
+			children = (
+				029F10712E27182E00261191 /* ReactNativeView.swift */,
+				029F10722E27182E00261191 /* TurnkeyBridgeManager.swift */,
+				029F10732E27182E00261191 /* TurnkeyNativeModule.swift */,
+			);
+			path = dydxTurnkey;
+			sourceTree = "<group>";
+		};
 		02F512322E25A8D9002402A0 = {
 			isa = PBXGroup;
 			children = (
-				02F5123E2E25A8D9002402A0 /* dydxTurnkey */,
+				029F106A2E2717D600261191 /* dydxTurnkey */,
 				02F5123D2E25A8D9002402A0 /* Products */,
 				2D9F7BFDBE27099609A20777 /* Pods */,
 				E981D3F85BC4C8E196E521E5 /* Frameworks */,
@@ -103,9 +111,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				02F5123E2E25A8D9002402A0 /* dydxTurnkey */,
-			);
 			name = dydxTurnkey;
 			productName = dydxTurnkey;
 			productReference = 02F5123C2E25A8D9002402A0 /* dydxTurnkey.framework */;
@@ -123,6 +128,7 @@
 				TargetAttributes = {
 					02F5123B2E25A8D9002402A0 = {
 						CreatedOnToolsVersion = 16.3;
+						LastSwiftMigration = 1630;
 					};
 				};
 			};
@@ -209,6 +215,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				029F10742E27182E00261191 /* TurnkeyBridgeManager.swift in Sources */,
+				029F10752E27182E00261191 /* TurnkeyNativeModule.swift in Sources */,
+				029F10762E27182E00261191 /* ReactNativeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,8 +392,10 @@
 			baseConfigurationReference = A9CDDC60F9B534365B3CDA9A /* Pods-iOS-dydxTurnkey.debug.xcconfig */;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 75C6UARB5H;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -409,6 +420,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -419,8 +431,10 @@
 			baseConfigurationReference = C5D8B0DD084BF3476E9145CB /* Pods-iOS-dydxTurnkey.release.xcconfig */;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 75C6UARB5H;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
