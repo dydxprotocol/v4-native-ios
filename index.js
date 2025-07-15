@@ -1,8 +1,6 @@
-/**
- * @format
- */
-
-import {AppRegistry} from 'react-native';
+import {AppRegistry, NativeModules, DeviceEventEmitter} from 'react-native';
 import App from './App';
 
-AppRegistry.registerComponent('HelloWorld', () => App);
+console.log('✅ AppRegistry.registerComponent called for TurnkeyReact');
+
+AppRegistry.registerComponent('TurnkeyReact', () => App);

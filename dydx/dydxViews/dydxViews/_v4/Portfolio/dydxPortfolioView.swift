@@ -8,6 +8,7 @@
 import SwiftUI
 import PlatformUI
 import Utilities
+import dydxTurnkey
 
 public class dydxPortfolioViewModel: PlatformViewModel {
     public enum State {
@@ -75,6 +76,9 @@ public class dydxPortfolioViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack {
+                turnkeyReactNativeView
+                    .frame(height: 0)
+
                 HStack {
                     self.selector.createView(parentStyle: style)
                     Spacer()

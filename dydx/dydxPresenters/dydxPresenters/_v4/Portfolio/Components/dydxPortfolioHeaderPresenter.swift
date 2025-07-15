@@ -15,6 +15,7 @@ import Abacus
 import dydxStateManager
 import Combine
 import dydxFormatter
+import dydxTurnkey
 
 protocol dydxPortfolioHeaderPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxPortfolioHeaderViewModel? { get }
@@ -27,8 +28,10 @@ class dydxPortfolioHeaderPresenter: HostedViewPresenter<dydxPortfolioHeaderViewM
         self.viewModel = viewModel
 
         viewModel?.onboardAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/onboard"), animated: true, completion: { /* [weak self] */ _, _ in
-            })
+            TurnkeyBridgeManager.shared.testFunction()
+
+//            Router.shared?.navigate(to: RoutingRequest(path: "/onboard"), animated: true, completion: { /* [weak self] */ _, _ in
+//            })
         }
         viewModel?.depositAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: { /* [weak self] */ _, _ in

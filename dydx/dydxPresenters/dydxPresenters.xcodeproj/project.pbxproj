@@ -308,13 +308,6 @@
 			remoteGlobalIDString = 02F5123C2E25A8D9002402A0;
 			remoteInfo = dydxTurnkey;
 		};
-		026388052E25B8BE0077B0E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 026387542E25B88B0077B0E5 /* dydxTurnkey.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 02F5123C2E25A8D9002402A0;
-			remoteInfo = dydxTurnkey;
-		};
 		0284201E29AD725000C0E7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0284201929AD725000C0E7CC /* dydxViews.xcodeproj */;
@@ -335,6 +328,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 024B79B928B7F53800F7C386;
 			remoteInfo = dydxViews;
+		};
+		028FA1702E26C73F0069A9DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 026387542E25B88B0077B0E5 /* dydxTurnkey.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02F5123C2E25A8D9002402A0;
+			remoteInfo = dydxTurnkey;
 		};
 		029E0E7729AD9B8700FE271C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -920,7 +920,6 @@
 		023789DE28BD381C00F212E1 = {
 			isa = PBXGroup;
 			children = (
-				026387542E25B88B0077B0E5 /* dydxTurnkey.xcodeproj */,
 				02684E1628BD40CF0007CEFF /* Dependencies */,
 				023789EA28BD381C00F212E1 /* dydxPresenters */,
 				023789F628BD381C00F212E1 /* dydxPresentersTests */,
@@ -1223,14 +1222,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		026387FD2E25B8BE0077B0E5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				026388062E25B8BE0077B0E5 /* dydxTurnkey.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		02669B962AD87AA200A756AA /* Workers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1251,6 +1242,7 @@
 		02684E1628BD40CF0007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				026387542E25B88B0077B0E5 /* dydxTurnkey.xcodeproj */,
 				2741B2512C06A0CC00693B17 /* dydxAnalytics.xcodeproj */,
 				02D1CEE229C8DFFC009ADF9A /* PlatformUIJedio.xcodeproj */,
 				025315AF29BFF17700D6CC9B /* CameraParticles.xcodeproj */,
@@ -1410,6 +1402,14 @@
 				02860A9329C15E760079E644 /* dydxOnboardScanViewBuilder.swift */,
 			);
 			path = Scan;
+			sourceTree = "<group>";
+		};
+		028FA1662E26C73F0069A9DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				028FA1712E26C73F0069A9DE /* dydxTurnkey.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		0295391529FB254C009026E3 /* Theme */ = {
@@ -2100,7 +2100,7 @@
 					ProjectRef = 026387572E25B8930077B0E5 /* dydxTurnkey.xcodeproj */;
 				},
 				{
-					ProductGroup = 026387FD2E25B8BE0077B0E5 /* Products */;
+					ProductGroup = 028FA1662E26C73F0069A9DE /* Products */;
 					ProjectRef = 026387542E25B88B0077B0E5 /* dydxTurnkey.xcodeproj */;
 				},
 				{
@@ -2160,13 +2160,6 @@
 			remoteRef = 0263875D2E25B8930077B0E5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		026388062E25B8BE0077B0E5 /* dydxTurnkey.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = dydxTurnkey.framework;
-			remoteRef = 026388052E25B8BE0077B0E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		0284201F29AD725000C0E7CC /* dydxViews.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -2179,6 +2172,13 @@
 			fileType = wrapper.cfbundle;
 			path = dydxViewsTests.xctest;
 			remoteRef = 0284202029AD725000C0E7CC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		028FA1712E26C73F0069A9DE /* dydxTurnkey.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxTurnkey.framework;
+			remoteRef = 028FA1702E26C73F0069A9DE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		029E0E7829AD9B8700FE271C /* PlatformParticles.framework */ = {
@@ -2700,6 +2700,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
@@ -2730,6 +2731,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				CXX = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2759,6 +2761,8 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD = "";
+				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2780,6 +2784,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
@@ -2810,6 +2815,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				CXX = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2833,6 +2839,8 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD = "";
+				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (

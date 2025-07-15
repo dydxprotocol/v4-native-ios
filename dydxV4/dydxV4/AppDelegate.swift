@@ -23,6 +23,7 @@ import UIToolkits
 import Utilities
 import dydxAnalytics
 import dydxCartera
+import dydxTurnkey
 
 #if _iOS
     import FirebaseStaticInjections
@@ -50,6 +51,9 @@ class AppDelegate: CommonAppDelegate {
         SettingsStore.shared = dydxSettingsStore()
         DebugSettings.shared = SettingsStore.shared
         FeatureFlagsStore.shared = FeatureFlagsStore(tag: "FeatureFlags")
+        
+        // trigger the RN bridge loading
+        _ = TurnkeyBridgeManager.shared.bridge
     }
 
     override open func injectAppStart(completion: @escaping () -> Void) {

@@ -157,6 +157,7 @@
 		02860A9129C15E670079E644 /* dydxOnboardScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02860A8429C15E670079E644 /* dydxOnboardScanView.swift */; };
 		02865DD62CE7C4F100F03BC8 /* dydxMarketsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02865DD52CE7C4F100F03BC8 /* dydxMarketsSearchView.swift */; };
 		028DB33E2A0589270090BE58 /* dydxProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028DB33D2A0589270090BE58 /* dydxProfileHeaderView.swift */; };
+		028FA09D2E26C2AB0069A9DE /* dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028FA09C2E26C2A10069A9DE /* dydxTurnkey.framework */; };
 		02934CE5290067F1005DB99C /* SideChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02934CE4290067F1005DB99C /* SideChange.swift */; };
 		0297A0F72A6109E500619181 /* ProgressStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0297A0F62A6109E500619181 /* ProgressStepView.swift */; };
 		029CBE6C28F5F3F600259C1D /* dydxMarketFundingChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CBE6B28F5F3F600259C1D /* dydxMarketFundingChartView.swift */; };
@@ -464,6 +465,27 @@
 			remoteGlobalIDString = 02841E2829AD6E5500C0E7CC;
 			remoteInfo = dydxFormatter;
 		};
+		028FA0982E26C2A10069A9DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 028FA0952E26C2A10069A9DE /* dydxTurnkey.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02F5123B2E25A8D9002402A0;
+			remoteInfo = dydxTurnkey;
+		};
+		028FA09B2E26C2A10069A9DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 028FA0952E26C2A10069A9DE /* dydxTurnkey.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02F5123C2E25A8D9002402A0;
+			remoteInfo = dydxTurnkey;
+		};
+		028FA17D2E26C73F0069A9DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 028FA0852E26C29A0069A9DE /* dydxTurnkey.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02F5123C2E25A8D9002402A0;
+			remoteInfo = dydxTurnkey;
+		};
 		02B429252DD2B2FC00CC3476 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 02B429222DD2B2FC00CC3476 /* dydxAnalytics.xcodeproj */;
@@ -639,6 +661,8 @@
 		02860A8429C15E670079E644 /* dydxOnboardScanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxOnboardScanView.swift; sourceTree = "<group>"; };
 		02865DD52CE7C4F100F03BC8 /* dydxMarketsSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketsSearchView.swift; sourceTree = "<group>"; };
 		028DB33D2A0589270090BE58 /* dydxProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileHeaderView.swift; sourceTree = "<group>"; };
+		028FA0852E26C29A0069A9DE /* dydxTurnkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxTurnkey.xcodeproj; path = ../dydxTurnkey/dydxTurnkey.xcodeproj; sourceTree = SOURCE_ROOT; };
+		028FA0952E26C2A10069A9DE /* dydxTurnkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxTurnkey.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxTurnkey/dydxTurnkey.xcodeproj"; sourceTree = "<absolute>"; };
 		02934CE4290067F1005DB99C /* SideChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideChange.swift; sourceTree = "<group>"; };
 		0297A0F62A6109E500619181 /* ProgressStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStepView.swift; sourceTree = "<group>"; };
 		029CBE6B28F5F3F600259C1D /* dydxMarketFundingChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketFundingChartView.swift; sourceTree = "<group>"; };
@@ -807,6 +831,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				028FA09D2E26C2AB0069A9DE /* dydxTurnkey.framework in Frameworks */,
 				02B4292D2DD2B30500CC3476 /* dydxAnalytics.framework in Frameworks */,
 				0284201429AD705B00C0E7CC /* dydxFormatter.framework in Frameworks */,
 				024B7B4E28B7F82400F7C386 /* Utilities.framework in Frameworks */,
@@ -1116,6 +1141,7 @@
 				024B79BB28B7F53800F7C386 /* Products */,
 				7A3BF1DF7DC711519B8176C6 /* Pods */,
 				ED13AE6112472E95629FA451 /* Frameworks */,
+				028FA0952E26C2A10069A9DE /* dydxTurnkey.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1446,6 +1472,7 @@
 		02684E0628BD40BE0007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				028FA0852E26C29A0069A9DE /* dydxTurnkey.xcodeproj */,
 				02B429222DD2B2FC00CC3476 /* dydxAnalytics.xcodeproj */,
 				0284200929AD704E00C0E7CC /* dydxFormatter.xcodeproj */,
 				024B7B1F28B7F7C200F7C386 /* PlatformUI.xcodeproj */,
@@ -1577,6 +1604,22 @@
 				02865DD52CE7C4F100F03BC8 /* dydxMarketsSearchView.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		028FA0962E26C2A10069A9DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				028FA09C2E26C2A10069A9DE /* dydxTurnkey.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		028FA1682E26C73F0069A9DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				028FA17E2E26C73F0069A9DE /* dydxTurnkey.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		029CBE5E28F5F3C800259C1D /* Funding */ = {
@@ -2173,6 +2216,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				028FA0992E26C2A10069A9DE /* PBXTargetDependency */,
 				02B429262DD2B2FC00CC3476 /* PBXTargetDependency */,
 				0284201329AD705400C0E7CC /* PBXTargetDependency */,
 				024B7B4128B7F7F900F7C386 /* PBXTargetDependency */,
@@ -2247,6 +2291,14 @@
 				{
 					ProductGroup = 0284200A29AD704E00C0E7CC /* Products */;
 					ProjectRef = 0284200929AD704E00C0E7CC /* dydxFormatter.xcodeproj */;
+				},
+				{
+					ProductGroup = 028FA1682E26C73F0069A9DE /* Products */;
+					ProjectRef = 028FA0852E26C29A0069A9DE /* dydxTurnkey.xcodeproj */;
+				},
+				{
+					ProductGroup = 028FA0962E26C2A10069A9DE /* Products */;
+					ProjectRef = 028FA0952E26C2A10069A9DE /* dydxTurnkey.xcodeproj */;
 				},
 				{
 					ProductGroup = 024B7B2928B7F7C200F7C386 /* Products */;
@@ -2382,6 +2434,20 @@
 			remoteRef = 0284201029AD704E00C0E7CC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		028FA09C2E26C2A10069A9DE /* dydxTurnkey.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxTurnkey.framework;
+			remoteRef = 028FA09B2E26C2A10069A9DE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		028FA17E2E26C73F0069A9DE /* dydxTurnkey.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxTurnkey.framework;
+			remoteRef = 028FA17D2E26C73F0069A9DE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		02B4292A2DD2B2FC00CC3476 /* dydxAnalytics.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -2433,9 +2499,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2819,6 +2889,11 @@
 			name = dydxFormatter;
 			targetProxy = 0284201229AD705400C0E7CC /* PBXContainerItemProxy */;
 		};
+		028FA0992E26C2A10069A9DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxTurnkey;
+			targetProxy = 028FA0982E26C2A10069A9DE /* PBXContainerItemProxy */;
+		};
 		02B429262DD2B2FC00CC3476 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = dydxAnalytics;
@@ -2831,6 +2906,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
@@ -2861,6 +2937,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				CXX = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2890,13 +2967,12 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD = "";
+				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -2911,6 +2987,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
@@ -2941,6 +3018,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				CXX = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2964,12 +3042,11 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD = "";
+				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
