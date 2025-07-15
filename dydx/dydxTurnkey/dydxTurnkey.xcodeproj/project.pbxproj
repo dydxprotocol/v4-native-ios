@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		029F10572E270CFB00261191 /* ReactBridge in Frameworks */ = {isa = PBXBuildFile; productRef = 029F10562E270CFB00261191 /* ReactBridge */; };
 		A471E1A9F61A587B7F18B08B /* Pods_iOS_dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34656E30362F6955DB48268B /* Pods_iOS_dydxTurnkey.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A471E1A9F61A587B7F18B08B /* Pods_iOS_dydxTurnkey.framework in Frameworks */,
+				029F10572E270CFB00261191 /* ReactBridge in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +135,9 @@
 			);
 			mainGroup = 02F512322E25A8D9002402A0;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				029F10552E270CFB00261191 /* XCRemoteSwiftPackageReference "ReactBridge" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 02F5123D2E25A8D9002402A0 /* Products */;
 			projectDirPath = "";
@@ -467,6 +472,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		029F10552E270CFB00261191 /* XCRemoteSwiftPackageReference "ReactBridge" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ikhvorost/ReactBridge.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		029F10562E270CFB00261191 /* ReactBridge */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 029F10552E270CFB00261191 /* XCRemoteSwiftPackageReference "ReactBridge" */;
+			productName = ReactBridge;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 02F512332E25A8D9002402A0 /* Project object */;
 }
