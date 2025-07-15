@@ -44,7 +44,7 @@ class dydxProfileSecondaryButtonsViewPresenter: HostedViewPresenter<dydxProfileS
                 AbacusStateManager.shared.state.alerts)
             .sink { [weak self] onboarded, alerts in
                 // do not show alerts if wallet not connected
-                if onboarded && dydxBoolFeatureFlag.isVaultEnabled.isEnabled {
+                if onboarded {
                     self?.viewModel?.alertsAction = {
                         Router.shared?.navigate(to: RoutingRequest(path: "/alerts"), animated: true, completion: nil)
                     }

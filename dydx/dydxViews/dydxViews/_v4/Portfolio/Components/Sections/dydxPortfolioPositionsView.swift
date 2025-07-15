@@ -377,7 +377,7 @@ public class dydxPortfolioPositionsViewModel: PlatformViewModel {
 
     @ViewBuilder
     public var megaVaultSection: some View {
-        if dydxBoolFeatureFlag.isVaultEnabled.isEnabled && shouldDisplayVaultSection {
+        if shouldDisplayVaultSection {
             VStack(spacing: 16) {
                 HStack(spacing: 8) {
                     Text(localizerPathKey: "APP.VAULTS.MEGAVAULT")

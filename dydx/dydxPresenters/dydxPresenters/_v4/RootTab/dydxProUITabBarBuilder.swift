@@ -38,7 +38,7 @@ public class dydxProUITabBarBuilder: NSObject, ObjectBuilderProtocol {
         view.backgroundColor = .clear
 
         createCenterButton()
-        maps = dydxBoolFeatureFlag.isVaultEnabled.isEnabled ? Self.tabBarItemInfosV2 : Self.tabBarItemInfos
+        maps = Self.tabBarItemInfos
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -84,29 +84,6 @@ public class dydxProUITabBarBuilder: NSObject, ObjectBuilderProtocol {
 
 private extension dydxProUITabBarController {
     static let tabBarItemInfos: [TabbarItemInfo] = [
-        .init(path: "/portfolio",
-              title: DataLocalizer.localize(path: "APP.PORTFOLIO.PORTFOLIO"),
-              image: "icon_portfolio",
-              split: true),
-        .init(path: "/markets",
-                title: DataLocalizer.localize(path: "APP.GENERAL.MARKETS"),
-                image: "icon_market",
-                split: true),
-        .init(path: "/trade",
-              title: DataLocalizer.localize(path: "APP.GENERAL.TRADE"),
-              image: "icon_trade",
-              split: true),
-        .init(path: "/alerts",
-              title: DataLocalizer.localize(path: "APP.GENERAL.ALERTS"),
-              image: "icon_alerts",
-              split: true),
-        .init(path: "/my-profile",
-              title: DataLocalizer.localize(path: "APP.GENERAL.PROFILE"),
-              image: "icon_profile",
-              split: true)
-    ]
-
-    static let tabBarItemInfosV2: [TabbarItemInfo] = [
         .init(path: "/portfolio",
               title: DataLocalizer.localize(path: "APP.PORTFOLIO.PORTFOLIO"),
               image: "icon_portfolio",
