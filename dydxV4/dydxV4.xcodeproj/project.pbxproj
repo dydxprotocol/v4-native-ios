@@ -231,13 +231,6 @@
 			remoteGlobalIDString = 029E0FD429ADB41400FE271C;
 			remoteInfo = dydxChart;
 		};
-		02A106E92E2853B900E65EE2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02A105582E28537C00E65EE2 /* dydxTurnkey.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 02A1054E2E28537C00E65EE2;
-			remoteInfo = dydxTurnkey;
-		};
 		02DA0AFD2B57609100BFA975 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3112F457216BBF8400708927 /* Project object */;
@@ -1002,6 +995,7 @@
 		02684D6028BD40830007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				02A105582E28537C00E65EE2 /* dydxTurnkey.xcodeproj */,
 				27491E2B2C5406680014A574 /* StatsigInjections.xcodeproj */,
 				6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */,
 				314B726523DD124E00139EB3 /* AppsFlyerStaticInjections.xcodeproj */,
@@ -1082,14 +1076,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		02A106E62E2853B900E65EE2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				02A106EA2E2853B900E65EE2 /* dydxTurnkey.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		02DA0AF82B57609100BFA975 /* dydxV4UITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1155,7 +1141,6 @@
 		3112F456216BBF8400708927 = {
 			isa = PBXGroup;
 			children = (
-				02A105582E28537C00E65EE2 /* dydxTurnkey.xcodeproj */,
 				02684D6028BD40830007CEFF /* Dependencies */,
 				020F66B92858F29300E2D072 /* NotificationExtension */,
 				0904864F08DCEDE87F5B4956 /* Frameworks */,
@@ -1603,10 +1588,6 @@
 					ProjectRef = 02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */;
 				},
 				{
-					ProductGroup = 02A106E62E2853B900E65EE2 /* Products */;
-					ProjectRef = 02A105582E28537C00E65EE2 /* dydxTurnkey.xcodeproj */;
-				},
-				{
 					ProductGroup = 0293B69628CE94E200DDB103 /* Products */;
 					ProjectRef = 024B7AC928B7F73700F7C386 /* dydxViews.xcodeproj */;
 				},
@@ -1769,13 +1750,6 @@
 			fileType = wrapper.cfbundle;
 			path = dydxChartTests.xctest;
 			remoteRef = 029E11EC29ADB9BC00FE271C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		02A106EA2E2853B900E65EE2 /* dydxTurnkey.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = dydxTurnkey.framework;
-			remoteRef = 02A106E92E2853B900E65EE2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		02E7DDA828CFB31000727949 /* dydxStateManager.framework */ = {
