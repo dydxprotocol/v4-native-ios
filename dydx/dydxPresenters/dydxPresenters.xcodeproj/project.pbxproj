@@ -127,7 +127,6 @@
 		029E0E8729AD9BA500FE271C /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E0E7829AD9B8700FE271C /* PlatformParticles.framework */; };
 		029E11A029ADB77E00FE271C /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E119329ADB77300FE271C /* dydxChart.framework */; };
 		029F14DE2E28257A00261191 /* dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0263875E2E25B8930077B0E5 /* dydxTurnkey.framework */; };
-		029F14DF2E28257A00261191 /* dydxTurnkey.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0263875E2E25B8930077B0E5 /* dydxTurnkey.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02A134C129A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A134C029A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift */; };
 		02A5C85E297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5C85D297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift */; };
 		02A6517F2DB30D87006DBD5F /* dydxSimpleUIMenuViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A6517E2DB30D86006DBD5F /* dydxSimpleUIMenuViewBuilder.swift */; };
@@ -167,7 +166,6 @@
 		02E7B39A29D79A4400D6626D /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37029D79A4400D6626D /* settings.json */; };
 		02E7B39C29D79A4400D6626D /* debug.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37229D79A4400D6626D /* debug.json */; };
 		02E7B3A629D79A4400D6626D /* settings_notifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37C29D79A4400D6626D /* settings_notifications.json */; };
-		02E7B3A729D79A4400D6626D /* (null) in Resources */ = {isa = PBXBuildFile; };
 		02E7B3B129D79A4400D6626D /* v4-native-client.js in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B38729D79A4400D6626D /* v4-native-client.js */; };
 		02E90C5A29D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90C5929D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift */; };
 		02EF485629F732C600C97746 /* dydxFavoriteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF485529F732C600C97746 /* dydxFavoriteStore.swift */; };
@@ -479,7 +477,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				029F14DF2E28257A00261191 /* dydxTurnkey.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2288,7 +2285,6 @@
 				2741E3702A68787A000FA190 /* settings_direction_color_preference.json in Resources */,
 				278EA5612BB60F51007A0E17 /* notifications.json in Resources */,
 				02E7B39829D79A4400D6626D /* features.json in Resources */,
-				02E7B3A729D79A4400D6626D /* (null) in Resources */,
 				02E7B39929D79A4400D6626D /* test.js in Resources */,
 				02E7B39A29D79A4400D6626D /* settings.json in Resources */,
 				02F543B42C17AD6A000924E4 /* settings_gas_token.json in Resources */,
