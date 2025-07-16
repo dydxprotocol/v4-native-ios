@@ -1001,7 +1001,6 @@
 				310C3A0721D9623E0081E56D /* Sources */,
 				310C3A0821D9623E0081E56D /* Frameworks */,
 				310C3A0921D9623E0081E56D /* Resources */,
-				A972A28775D43EE751105474 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1023,7 +1022,6 @@
 				310C3A1021D9623F0081E56D /* Frameworks */,
 				310C3A1121D9623F0081E56D /* Resources */,
 				B35B36B7F40D2535C98315E7 /* [CP] Embed Pods Frameworks */,
-				4ED26D8B61AED7A5425DCAB4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1100,7 +1098,6 @@
 				31E65AD9216BC9E1008ABEE9 /* Sources */,
 				31E65ADA216BC9E1008ABEE9 /* Frameworks */,
 				31E65ADB216BC9E1008ABEE9 /* Resources */,
-				FCB905DF92CCB0D6834FAE1B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1121,7 +1118,6 @@
 				31E65AE3216BC9E1008ABEE9 /* Frameworks */,
 				31E65AE4216BC9E1008ABEE9 /* Resources */,
 				160966E9F3148435C3309824 /* [CP] Embed Pods Frameworks */,
-				12A2B0DCCD3641789D76F975 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1292,23 +1288,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		12A2B0DCCD3641789D76F975 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-UIToolkitsTests/Pods-iOS-UIToolkitsTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-UIToolkitsTests/Pods-iOS-UIToolkitsTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-UIToolkitsTests/Pods-iOS-UIToolkitsTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		160966E9F3148435C3309824 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1392,23 +1371,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4ED26D8B61AED7A5425DCAB4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-UIAppToolkitsTests/Pods-iOS-UIAppToolkitsTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-UIAppToolkitsTests/Pods-iOS-UIAppToolkitsTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-UIAppToolkitsTests/Pods-iOS-UIAppToolkitsTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6335DE5A0A70EB35008676A7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1431,23 +1393,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A972A28775D43EE751105474 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-UIAppToolkits/Pods-iOS-UIAppToolkits-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-UIAppToolkits/Pods-iOS-UIAppToolkits-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-UIAppToolkits/Pods-iOS-UIAppToolkits-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B35B36B7F40D2535C98315E7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1463,23 +1408,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-UIAppToolkitsTests/Pods-iOS-UIAppToolkitsTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FCB905DF92CCB0D6834FAE1B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-UIToolkits/Pods-iOS-UIToolkits-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-UIToolkits/Pods-iOS-UIToolkits-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-UIToolkits/Pods-iOS-UIToolkits-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

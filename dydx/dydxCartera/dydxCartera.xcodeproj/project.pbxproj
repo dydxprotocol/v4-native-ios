@@ -461,7 +461,6 @@
 				02439C8729B03E8A00A083FE /* Sources */,
 				02439C8829B03E8A00A083FE /* Frameworks */,
 				02439C8929B03E8A00A083FE /* Resources */,
-				A55C7D6FADA76A97A32AB1BD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -495,7 +494,6 @@
 				02439C9229B03E8A00A083FE /* Frameworks */,
 				02439C9329B03E8A00A083FE /* Resources */,
 				AC4AE11DAABBE305265BC740 /* [CP] Embed Pods Frameworks */,
-				969D256A272D8D19A915FE91 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -671,40 +669,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		969D256A272D8D19A915FE91 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A55C7D6FADA76A97A32AB1BD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCartera/Pods-iOS-dydxCartera-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCartera/Pods-iOS-dydxCartera-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCartera/Pods-iOS-dydxCartera-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AC4AE11DAABBE305265BC740 /* [CP] Embed Pods Frameworks */ = {

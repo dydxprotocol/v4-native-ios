@@ -358,7 +358,6 @@
 				6466E0BE280F65FC00B8791B /* Sources */,
 				6466E0BF280F65FC00B8791B /* Frameworks */,
 				6466E0C0280F65FC00B8791B /* Resources */,
-				064161B58963718C57AF6F48 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -381,7 +380,6 @@
 				6466E0C9280F65FC00B8791B /* Frameworks */,
 				6466E0CA280F65FC00B8791B /* Resources */,
 				B4994CF9A975E15036B1B0B3 /* [CP] Embed Pods Frameworks */,
-				47117AD99420C5B93CF85BEB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -584,23 +582,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		064161B58963718C57AF6F48 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-AmplitudeInjections/Pods-iOS-AmplitudeInjections-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-AmplitudeInjections/Pods-iOS-AmplitudeInjections-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-AmplitudeInjections/Pods-iOS-AmplitudeInjections-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		187655C88A544A2C914E780B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -621,23 +602,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		47117AD99420C5B93CF85BEB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-AmplitudeInjectionsTests/Pods-iOS-AmplitudeInjectionsTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-AmplitudeInjectionsTests/Pods-iOS-AmplitudeInjectionsTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-AmplitudeInjectionsTests/Pods-iOS-AmplitudeInjectionsTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B4994CF9A975E15036B1B0B3 /* [CP] Embed Pods Frameworks */ = {

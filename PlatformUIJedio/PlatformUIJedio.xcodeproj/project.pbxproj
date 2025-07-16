@@ -599,7 +599,6 @@
 				02D1CD8D29C8D274009ADF9A /* Sources */,
 				02D1CD8E29C8D274009ADF9A /* Frameworks */,
 				02D1CD8F29C8D274009ADF9A /* Resources */,
-				44E0E10FD0E7BCCF019D1464 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -626,7 +625,6 @@
 				02D1CD9829C8D274009ADF9A /* Frameworks */,
 				02D1CD9929C8D274009ADF9A /* Resources */,
 				74423CE5696BC0BBC36C46AA /* [CP] Embed Pods Frameworks */,
-				A635C03A2185138824636CE3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -965,23 +963,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		44E0E10FD0E7BCCF019D1464 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedio/Pods-iOS-PlatformUIJedio-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedio/Pods-iOS-PlatformUIJedio-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedio/Pods-iOS-PlatformUIJedio-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4872C31DE1E391C3C3E81012 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1019,23 +1000,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A635C03A2185138824636CE3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
