@@ -11,7 +11,6 @@
 		029F10742E27182E00261191 /* TurnkeyBridgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F10722E27182E00261191 /* TurnkeyBridgeManager.swift */; };
 		029F10752E27182E00261191 /* TurnkeyNativeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F10732E27182E00261191 /* TurnkeyNativeModule.swift */; };
 		029F10762E27182E00261191 /* ReactNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F10712E27182E00261191 /* ReactNativeView.swift */; };
-		029F13FA2E28242600261191 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F13F92E28242400261191 /* Test.swift */; };
 		A471E1A9F61A587B7F18B08B /* Pods_iOS_dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34656E30362F6955DB48268B /* Pods_iOS_dydxTurnkey.framework */; };
 /* End PBXBuildFile section */
 
@@ -19,7 +18,6 @@
 		029F10712E27182E00261191 /* ReactNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactNativeView.swift; sourceTree = "<group>"; };
 		029F10722E27182E00261191 /* TurnkeyBridgeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnkeyBridgeManager.swift; sourceTree = "<group>"; };
 		029F10732E27182E00261191 /* TurnkeyNativeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnkeyNativeModule.swift; sourceTree = "<group>"; };
-		029F13F92E28242400261191 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		02F5123C2E25A8D9002402A0 /* dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34656E30362F6955DB48268B /* Pods_iOS_dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9CDDC60F9B534365B3CDA9A /* Pods-iOS-dydxTurnkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxTurnkey.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey.debug.xcconfig"; sourceTree = "<group>"; };
@@ -42,7 +40,6 @@
 		029F106A2E2717D600261191 /* dydxTurnkey */ = {
 			isa = PBXGroup;
 			children = (
-				029F13F92E28242400261191 /* Test.swift */,
 				029F10712E27182E00261191 /* ReactNativeView.swift */,
 				029F10722E27182E00261191 /* TurnkeyBridgeManager.swift */,
 				029F10732E27182E00261191 /* TurnkeyNativeModule.swift */,
@@ -108,6 +105,7 @@
 				02F512382E25A8D9002402A0 /* Sources */,
 				02F512392E25A8D9002402A0 /* Frameworks */,
 				02F5123A2E25A8D9002402A0 /* Resources */,
+				8FBB911159921893EE90CD19 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,6 +165,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8FBB911159921893EE90CD19 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D6D97E7D3FEB920F378768AA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -197,7 +216,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				029F10742E27182E00261191 /* TurnkeyBridgeManager.swift in Sources */,
-				029F13FA2E28242600261191 /* Test.swift in Sources */,
 				029F10752E27182E00261191 /* TurnkeyNativeModule.swift in Sources */,
 				029F10762E27182E00261191 /* ReactNativeView.swift in Sources */,
 			);
@@ -280,10 +298,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -361,10 +376,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -379,7 +391,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A9CDDC60F9B534365B3CDA9A /* Pods-iOS-dydxTurnkey.debug.xcconfig */;
 			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -418,7 +430,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5D8B0DD084BF3476E9145CB /* Pods-iOS-dydxTurnkey.release.xcconfig */;
 			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
