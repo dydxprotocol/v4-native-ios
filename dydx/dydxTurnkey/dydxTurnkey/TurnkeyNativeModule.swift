@@ -7,10 +7,11 @@
 
 import React
 import Foundation
-internal import ReactBridge
 
-@ReactModule(jsName: "TurnkeyNativeModule")
-class TurnkeyNativeModule: NSObject, RCTBridgeModule {
+@objc class TurnkeyNativeModule: NSObject, RCTBridgeModule {
+    public static func moduleName() -> String {
+        return "TurnkeyNativeModule"
+    }
 
     private var pendingCompletions: [String: (String) -> Void] = [:]
 
@@ -29,7 +30,6 @@ class TurnkeyNativeModule: NSObject, RCTBridgeModule {
         )
     }
 
-    @ReactMethod
     @objc public func onJsResponse(_ callbackId: String, _ result: String) {
         if let completion = pendingCompletions[callbackId] {
             completion(result)
