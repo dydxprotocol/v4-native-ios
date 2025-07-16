@@ -388,7 +388,7 @@ abstract_target 'iOS' do
     project '../dydx/dydxTurnkey/dydxTurnkey'
     ios_ui_pods
     
-    react_pods
+   # react_pods
   end
   
   target 'dydxV4' do

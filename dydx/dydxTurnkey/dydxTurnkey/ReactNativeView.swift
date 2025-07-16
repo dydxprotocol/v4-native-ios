@@ -5,6 +5,7 @@
 //  Created by Rui Huang on 14/07/2025.
 //
 
+/*
 import SwiftUI
 import React
 
@@ -68,3 +69,4 @@ public class ReactNativeHostingController: UIViewController {
 }
 
 public let turnkeyReactNativeView = ReactNativeView(moduleName: "TurnkeyReact")
+*/

@@ -5,6 +5,7 @@
 //  Created by Rui Huang on 15/07/2025.
 //
 
+/*
 import React
 import Foundation
 internal import ReactBridge
@@ -37,3 +38,5 @@ class TurnkeyNativeModule: NSObject, RCTBridgeModule {
         }
     }
 }
+
+*/
