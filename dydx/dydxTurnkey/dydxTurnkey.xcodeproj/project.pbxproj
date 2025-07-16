@@ -17,9 +17,22 @@
 		DC2F77A14CCE43B1893780CC /* Pods-iOS-dydxTurnkey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxTurnkey.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		02A107DF2E286ABC00E65EE2 /* Exceptions for "dydxTurnkey" folder in "dydxTurnkey" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			publicHeaders = (
+				dydxTurnkey.h,
+			);
+			target = 02A1054D2E28537C00E65EE2 /* dydxTurnkey */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		02A105502E28537C00E65EE2 /* dydxTurnkey */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				02A107DF2E286ABC00E65EE2 /* Exceptions for "dydxTurnkey" folder in "dydxTurnkey" target */,
+			);
 			path = dydxTurnkey;
 			sourceTree = "<group>";
 		};
