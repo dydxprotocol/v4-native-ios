@@ -188,4 +188,7 @@
    <FileRef
       location = "group:../StatsigInjections/StatsigInjections.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:dydxTurnkey/dydxTurnkey.xcodeproj">
+   </FileRef>
 </Workspace>

@@ -7,86 +7,78 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		029F10572E270CFB00261191 /* ReactBridge in Frameworks */ = {isa = PBXBuildFile; productRef = 029F10562E270CFB00261191 /* ReactBridge */; };
-		029F10742E27182E00261191 /* TurnkeyBridgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F10722E27182E00261191 /* TurnkeyBridgeManager.swift */; };
-		029F10752E27182E00261191 /* TurnkeyNativeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F10732E27182E00261191 /* TurnkeyNativeModule.swift */; };
-		029F10762E27182E00261191 /* ReactNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F10712E27182E00261191 /* ReactNativeView.swift */; };
-		A471E1A9F61A587B7F18B08B /* Pods_iOS_dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34656E30362F6955DB48268B /* Pods_iOS_dydxTurnkey.framework */; };
+		35C55D24A41A3DFA2BA54B75 /* Pods_iOS_dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AE56594D5B2D8D07259C597 /* Pods_iOS_dydxTurnkey.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		029F10712E27182E00261191 /* ReactNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactNativeView.swift; sourceTree = "<group>"; };
-		029F10722E27182E00261191 /* TurnkeyBridgeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnkeyBridgeManager.swift; sourceTree = "<group>"; };
-		029F10732E27182E00261191 /* TurnkeyNativeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnkeyNativeModule.swift; sourceTree = "<group>"; };
-		02F5123C2E25A8D9002402A0 /* dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		34656E30362F6955DB48268B /* Pods_iOS_dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9CDDC60F9B534365B3CDA9A /* Pods-iOS-dydxTurnkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxTurnkey.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey.debug.xcconfig"; sourceTree = "<group>"; };
-		C5D8B0DD084BF3476E9145CB /* Pods-iOS-dydxTurnkey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxTurnkey.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey.release.xcconfig"; sourceTree = "<group>"; };
+		02A1054E2E28537C00E65EE2 /* dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AE56594D5B2D8D07259C597 /* Pods_iOS_dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2C4215727E83011602DFFDB /* Pods-iOS-dydxTurnkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxTurnkey.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey.debug.xcconfig"; sourceTree = "<group>"; };
+		DC2F77A14CCE43B1893780CC /* Pods-iOS-dydxTurnkey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxTurnkey.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		02A105502E28537C00E65EE2 /* dydxTurnkey */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
+			path = dydxTurnkey;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
-		02F512392E25A8D9002402A0 /* Frameworks */ = {
+		02A1054B2E28537C00E65EE2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A471E1A9F61A587B7F18B08B /* Pods_iOS_dydxTurnkey.framework in Frameworks */,
-				029F10572E270CFB00261191 /* ReactBridge in Frameworks */,
+				35C55D24A41A3DFA2BA54B75 /* Pods_iOS_dydxTurnkey.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		029F106A2E2717D600261191 /* dydxTurnkey */ = {
+		02A105442E28537C00E65EE2 = {
 			isa = PBXGroup;
 			children = (
-				029F10712E27182E00261191 /* ReactNativeView.swift */,
-				029F10722E27182E00261191 /* TurnkeyBridgeManager.swift */,
-				029F10732E27182E00261191 /* TurnkeyNativeModule.swift */,
-			);
-			path = dydxTurnkey;
-			sourceTree = "<group>";
-		};
-		02F512322E25A8D9002402A0 = {
-			isa = PBXGroup;
-			children = (
-				029F106A2E2717D600261191 /* dydxTurnkey */,
-				02F5123D2E25A8D9002402A0 /* Products */,
-				2D9F7BFDBE27099609A20777 /* Pods */,
-				E981D3F85BC4C8E196E521E5 /* Frameworks */,
+				02A105502E28537C00E65EE2 /* dydxTurnkey */,
+				02A1054F2E28537C00E65EE2 /* Products */,
+				AF52E1FCFF6709EAE8289102 /* Pods */,
+				596AC3FA5A6C18D1162690A6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		02F5123D2E25A8D9002402A0 /* Products */ = {
+		02A1054F2E28537C00E65EE2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				02F5123C2E25A8D9002402A0 /* dydxTurnkey.framework */,
+				02A1054E2E28537C00E65EE2 /* dydxTurnkey.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2D9F7BFDBE27099609A20777 /* Pods */ = {
+		596AC3FA5A6C18D1162690A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A9CDDC60F9B534365B3CDA9A /* Pods-iOS-dydxTurnkey.debug.xcconfig */,
-				C5D8B0DD084BF3476E9145CB /* Pods-iOS-dydxTurnkey.release.xcconfig */,
+				2AE56594D5B2D8D07259C597 /* Pods_iOS_dydxTurnkey.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AF52E1FCFF6709EAE8289102 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C2C4215727E83011602DFFDB /* Pods-iOS-dydxTurnkey.debug.xcconfig */,
+				DC2F77A14CCE43B1893780CC /* Pods-iOS-dydxTurnkey.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
 			sourceTree = "<group>";
 		};
-		E981D3F85BC4C8E196E521E5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				34656E30362F6955DB48268B /* Pods_iOS_dydxTurnkey.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		02F512372E25A8D9002402A0 /* Headers */ = {
+		02A105492E28537C00E65EE2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -96,66 +88,65 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		02F5123B2E25A8D9002402A0 /* dydxTurnkey */ = {
+		02A1054D2E28537C00E65EE2 /* dydxTurnkey */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 02F512432E25A8D9002402A0 /* Build configuration list for PBXNativeTarget "dydxTurnkey" */;
+			buildConfigurationList = 02A105552E28537C00E65EE2 /* Build configuration list for PBXNativeTarget "dydxTurnkey" */;
 			buildPhases = (
-				D6D97E7D3FEB920F378768AA /* [CP] Check Pods Manifest.lock */,
-				02F512372E25A8D9002402A0 /* Headers */,
-				02F512382E25A8D9002402A0 /* Sources */,
-				02F512392E25A8D9002402A0 /* Frameworks */,
-				02F5123A2E25A8D9002402A0 /* Resources */,
-				8FBB911159921893EE90CD19 /* [CP] Copy Pods Resources */,
+				9A52AED412176393EAC141BA /* [CP] Check Pods Manifest.lock */,
+				02A105492E28537C00E65EE2 /* Headers */,
+				02A1054A2E28537C00E65EE2 /* Sources */,
+				02A1054B2E28537C00E65EE2 /* Frameworks */,
+				02A1054C2E28537C00E65EE2 /* Resources */,
+				40C0AFA2CB5766B55EFD157E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				02A105502E28537C00E65EE2 /* dydxTurnkey */,
+			);
 			name = dydxTurnkey;
 			productName = dydxTurnkey;
-			productReference = 02F5123C2E25A8D9002402A0 /* dydxTurnkey.framework */;
+			productReference = 02A1054E2E28537C00E65EE2 /* dydxTurnkey.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		02F512332E25A8D9002402A0 /* Project object */ = {
+		02A105452E28537C00E65EE2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
-					02F5123B2E25A8D9002402A0 = {
+					02A1054D2E28537C00E65EE2 = {
 						CreatedOnToolsVersion = 16.3;
-						LastSwiftMigration = 1630;
 					};
 				};
 			};
-			buildConfigurationList = 02F512362E25A8D9002402A0 /* Build configuration list for PBXProject "dydxTurnkey" */;
+			buildConfigurationList = 02A105482E28537C00E65EE2 /* Build configuration list for PBXProject "dydxTurnkey" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 02F512322E25A8D9002402A0;
+			mainGroup = 02A105442E28537C00E65EE2;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				029F10552E270CFB00261191 /* XCRemoteSwiftPackageReference "ReactBridge" */,
-			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 02F5123D2E25A8D9002402A0 /* Products */;
+			productRefGroup = 02A1054F2E28537C00E65EE2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				02F5123B2E25A8D9002402A0 /* dydxTurnkey */,
+				02A1054D2E28537C00E65EE2 /* dydxTurnkey */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		02F5123A2E25A8D9002402A0 /* Resources */ = {
+		02A1054C2E28537C00E65EE2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -165,7 +156,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8FBB911159921893EE90CD19 /* [CP] Copy Pods Resources */ = {
+		40C0AFA2CB5766B55EFD157E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -173,20 +164,16 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D6D97E7D3FEB920F378768AA /* [CP] Check Pods Manifest.lock */ = {
+		9A52AED412176393EAC141BA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -211,25 +198,21 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		02F512382E25A8D9002402A0 /* Sources */ = {
+		02A1054A2E28537C00E65EE2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				029F10742E27182E00261191 /* TurnkeyBridgeManager.swift in Sources */,
-				029F10752E27182E00261191 /* TurnkeyNativeModule.swift in Sources */,
-				029F10762E27182E00261191 /* ReactNativeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		02F512412E25A8D9002402A0 /* Debug */ = {
+		02A105532E28537C00E65EE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CC = "";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
@@ -260,7 +243,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
-				CXX = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 75C6UARB5H;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -291,14 +273,15 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
-				LD = "";
-				LDPLUSPLUS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -309,12 +292,11 @@
 			};
 			name = Debug;
 		};
-		02F512422E25A8D9002402A0 /* Release */ = {
+		02A105542E28537C00E65EE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CC = "";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
@@ -345,7 +327,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
-				CXX = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 75C6UARB5H;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -370,13 +351,14 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
 					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
-				LD = "";
-				LDPLUSPLUS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -387,26 +369,21 @@
 			};
 			name = Release;
 		};
-		02F512442E25A8D9002402A0 /* Debug */ = {
+		02A105562E28537C00E65EE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A9CDDC60F9B534365B3CDA9A /* Pods-iOS-dydxTurnkey.debug.xcconfig */;
+			baseConfigurationReference = C2C4215727E83011602DFFDB /* Pods-iOS-dydxTurnkey.debug.xcconfig */;
 			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_MODULE_DEBUGGING = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 75C6UARB5H;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -415,38 +392,32 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxTurnkey;
+				PRODUCT_BUNDLE_IDENTIFIER = exchangeV4.dydx.trading.dydxTurnkey;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		02F512452E25A8D9002402A0 /* Release */ = {
+		02A105572E28537C00E65EE2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5D8B0DD084BF3476E9145CB /* Pods-iOS-dydxTurnkey.release.xcconfig */;
+			baseConfigurationReference = DC2F77A14CCE43B1893780CC /* Pods-iOS-dydxTurnkey.release.xcconfig */;
 			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_MODULE_DEBUGGING = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 75C6UARB5H;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,12 +426,12 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = exchange.dydx.dydxTurnkey;
+				PRODUCT_BUNDLE_IDENTIFIER = exchangeV4.dydx.trading.dydxTurnkey;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;
-				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -469,44 +440,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		02F512362E25A8D9002402A0 /* Build configuration list for PBXProject "dydxTurnkey" */ = {
+		02A105482E28537C00E65EE2 /* Build configuration list for PBXProject "dydxTurnkey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02F512412E25A8D9002402A0 /* Debug */,
-				02F512422E25A8D9002402A0 /* Release */,
+				02A105532E28537C00E65EE2 /* Debug */,
+				02A105542E28537C00E65EE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		02F512432E25A8D9002402A0 /* Build configuration list for PBXNativeTarget "dydxTurnkey" */ = {
+		02A105552E28537C00E65EE2 /* Build configuration list for PBXNativeTarget "dydxTurnkey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02F512442E25A8D9002402A0 /* Debug */,
-				02F512452E25A8D9002402A0 /* Release */,
+				02A105562E28537C00E65EE2 /* Debug */,
+				02A105572E28537C00E65EE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		029F10552E270CFB00261191 /* XCRemoteSwiftPackageReference "ReactBridge" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ikhvorost/ReactBridge.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		029F10562E270CFB00261191 /* ReactBridge */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 029F10552E270CFB00261191 /* XCRemoteSwiftPackageReference "ReactBridge" */;
-			productName = ReactBridge;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 02F512332E25A8D9002402A0 /* Project object */;
+	rootObject = 02A105452E28537C00E65EE2 /* Project object */;
 }
