@@ -659,7 +659,6 @@
 		029CBE6B28F5F3F600259C1D /* dydxMarketFundingChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketFundingChartView.swift; sourceTree = "<group>"; };
 		029CBE7628F608F400259C1D /* dydxMarketTradesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketTradesView.swift; sourceTree = "<group>"; };
 		029E54872D08E18B005D4DC5 /* dydxWcModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWcModalView.swift; sourceTree = "<group>"; };
-		029F10A72E271F6100261191 /* dydxTurnkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxTurnkey.xcodeproj; path = ../dydxTurnkey/dydxTurnkey.xcodeproj; sourceTree = SOURCE_ROOT; };
 		029F10AA2E271F6C00261191 /* dydxTurnkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxTurnkey.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxTurnkey/dydxTurnkey.xcodeproj"; sourceTree = "<absolute>"; };
 		02A5C857297FBCBE00FFE1F9 /* dydxTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferView.swift; sourceTree = "<group>"; };
 		02A6517C2DB30D76006DBD5F /* dydxSimpleUIMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuView.swift; sourceTree = "<group>"; };
@@ -1465,7 +1464,6 @@
 		02684E0628BD40BE0007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				029F10A72E271F6100261191 /* dydxTurnkey.xcodeproj */,
 				02B429222DD2B2FC00CC3476 /* dydxAnalytics.xcodeproj */,
 				0284200929AD704E00C0E7CC /* dydxFormatter.xcodeproj */,
 				024B7B1F28B7F7C200F7C386 /* PlatformUI.xcodeproj */,
