@@ -8,9 +8,14 @@
 import React
 import Foundation
 
-@objc class TurnkeyNativeModule: NSObject, RCTBridgeModule {
-    public static func moduleName() -> String {
+@objc(TurnkeyNativeModule)
+class TurnkeyNativeModule: NSObject, RCTBridgeModule {
+    static func moduleName() -> String {
         return "TurnkeyNativeModule"
+    }
+
+    static func requiresMainQueueSetup() -> Bool {
+      return false
     }
 
     private var pendingCompletions: [String: (String) -> Void] = [:]
@@ -30,7 +35,7 @@ import Foundation
         )
     }
 
-    @objc public func onJsResponse(_ callbackId: String, _ result: String) {
+    @objc func onJsResponse(_ callbackId: String, _ result: String) {
         if let completion = pendingCompletions[callbackId] {
             completion(result)
             pendingCompletions.removeValue(forKey: callbackId)
