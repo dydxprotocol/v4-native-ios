@@ -523,6 +523,7 @@
 				319ACD04249404A800DB66F1 /* Sources */,
 				319ACD05249404A800DB66F1 /* Frameworks */,
 				319ACD06249404A800DB66F1 /* Resources */,
+				9641F4C6A91A6971A73CB8B4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -547,6 +548,7 @@
 				319ACD0E249404A800DB66F1 /* Frameworks */,
 				319ACD0F249404A800DB66F1 /* Resources */,
 				99B1D6594E694E7CA111A1E0 /* [CP] Embed Pods Frameworks */,
+				CEAAB08E2D2E5D2AA47BF495 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -886,6 +888,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9641F4C6A91A6971A73CB8B4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-CameraParticles/Pods-iOS-CameraParticles-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-CameraParticles/Pods-iOS-CameraParticles-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-CameraParticles/Pods-iOS-CameraParticles-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		99B1D6594E694E7CA111A1E0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -901,6 +920,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-CameraParticlesTests/Pods-iOS-CameraParticlesTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CEAAB08E2D2E5D2AA47BF495 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-CameraParticlesTests/Pods-iOS-CameraParticlesTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-CameraParticlesTests/Pods-iOS-CameraParticlesTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-CameraParticlesTests/Pods-iOS-CameraParticlesTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

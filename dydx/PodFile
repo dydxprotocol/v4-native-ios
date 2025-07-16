@@ -93,6 +93,7 @@ def ios_ui_pods
   ios_util_pods
   uikit_pods
   swifiui_pods
+  react_pods
   pod 'Atributika'
   pod 'COSTouchVisualizer'
   pod 'DrawerMenu'
@@ -385,7 +386,7 @@ abstract_target 'iOS' do
   target 'dydxTurnkey' do
     project '../dydx/dydxTurnkey/dydxTurnkey'
     ios_ui_pods
-    react_pods
+
   end
   
   target 'dydxV4' do

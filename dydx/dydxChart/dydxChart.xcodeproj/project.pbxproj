@@ -195,6 +195,7 @@
 				029E0FD129ADB41400FE271C /* Sources */,
 				029E0FD229ADB41400FE271C /* Frameworks */,
 				029E0FD329ADB41400FE271C /* Resources */,
+				E2CC9AE4FFC47E309B3B94AE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -215,6 +216,7 @@
 				029E0FDC29ADB41400FE271C /* Frameworks */,
 				029E0FDD29ADB41400FE271C /* Resources */,
 				A8CAB2DD5605C20453ED8183 /* [CP] Embed Pods Frameworks */,
+				D5E58F5CE0DD5AF91937C59A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -363,6 +365,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5E58F5CE0DD5AF91937C59A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxChartTests/Pods-iOS-dydxChartTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxChartTests/Pods-iOS-dydxChartTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxChartTests/Pods-iOS-dydxChartTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2CC9AE4FFC47E309B3B94AE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxChart/Pods-iOS-dydxChart-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxChart/Pods-iOS-dydxChart-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxChart/Pods-iOS-dydxChart-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
