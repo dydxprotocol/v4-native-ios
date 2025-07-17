@@ -89,7 +89,6 @@
 		025D22D628F65E1B00C4ADAE /* dydxMarketStatsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D22D528F65E1B00C4ADAE /* dydxMarketStatsViewPresenter.swift */; };
 		0262EFA629D79EE4009889E2 /* Wallets2ViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262EF9929D79EE4009889E2 /* Wallets2ViewBuilder.swift */; };
 		0262F2D529DB4891009889E2 /* WalletAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262F2D429DB4891009889E2 /* WalletAction.swift */; };
-		0263875F2E25B89D0077B0E5 /* dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0263875E2E25B8930077B0E5 /* dydxTurnkey.framework */; };
 		02669B7C2AD8661F00A756AA /* dydxCarteraConfigWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02669B7B2AD8661F00A756AA /* dydxCarteraConfigWorker.swift */; };
 		02669B952AD87A9D00A756AA /* dydxGlobalWorkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02669B942AD87A9D00A756AA /* dydxGlobalWorkers.swift */; };
 		0268BBFB2A8BE27800D0C59B /* dydxTransferOutViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268BBFA2A8BE27800D0C59B /* dydxTransferOutViewPresenter.swift */; };
@@ -127,6 +126,8 @@
 		029CBE7928F6092400259C1D /* dydxMarketTradesViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CBE7828F6092400259C1D /* dydxMarketTradesViewPresenter.swift */; };
 		029E0E8729AD9BA500FE271C /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E0E7829AD9B8700FE271C /* PlatformParticles.framework */; };
 		029E11A029ADB77E00FE271C /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E119329ADB77300FE271C /* dydxChart.framework */; };
+		02A107C32E2862F000E65EE2 /* dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A107C22E2862F000E65EE2 /* dydxTurnkey.framework */; };
+		02A107C42E2862F000E65EE2 /* dydxTurnkey.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02A107C22E2862F000E65EE2 /* dydxTurnkey.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02A134C129A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A134C029A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift */; };
 		02A5C85E297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5C85D297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift */; };
 		02A6517F2DB30D87006DBD5F /* dydxSimpleUIMenuViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A6517E2DB30D86006DBD5F /* dydxSimpleUIMenuViewBuilder.swift */; };
@@ -166,7 +167,6 @@
 		02E7B39A29D79A4400D6626D /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37029D79A4400D6626D /* settings.json */; };
 		02E7B39C29D79A4400D6626D /* debug.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37229D79A4400D6626D /* debug.json */; };
 		02E7B3A629D79A4400D6626D /* settings_notifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B37C29D79A4400D6626D /* settings_notifications.json */; };
-		02E7B3A729D79A4400D6626D /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		02E7B3B129D79A4400D6626D /* v4-native-client.js in Resources */ = {isa = PBXBuildFile; fileRef = 02E7B38729D79A4400D6626D /* v4-native-client.js */; };
 		02E90C5A29D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90C5929D62719004E2311 /* dydxFeatureFlagsViewBuilder.swift */; };
 		02EF485629F732C600C97746 /* dydxFavoriteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EF485529F732C600C97746 /* dydxFavoriteStore.swift */; };
@@ -294,20 +294,6 @@
 			remoteGlobalIDString = 319ACD07249404A800DB66F1;
 			remoteInfo = CameraParticles;
 		};
-		0263875A2E25B8930077B0E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 026387572E25B8930077B0E5 /* dydxTurnkey.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 02F5123B2E25A8D9002402A0;
-			remoteInfo = dydxTurnkey;
-		};
-		0263875D2E25B8930077B0E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 026387572E25B8930077B0E5 /* dydxTurnkey.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 02F5123C2E25A8D9002402A0;
-			remoteInfo = dydxTurnkey;
-		};
 		0284201E29AD725000C0E7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0284201929AD725000C0E7CC /* dydxViews.xcodeproj */;
@@ -328,13 +314,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 024B79B928B7F53800F7C386;
 			remoteInfo = dydxViews;
-		};
-		028FA1702E26C73F0069A9DE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 026387542E25B88B0077B0E5 /* dydxTurnkey.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 02F5123C2E25A8D9002402A0;
-			remoteInfo = dydxTurnkey;
 		};
 		029E0E7729AD9B8700FE271C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -413,6 +392,20 @@
 			remoteGlobalIDString = 029E0FD429ADB41400FE271C;
 			remoteInfo = dydxChart;
 		};
+		02A107D52E2862FD00E65EE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02A107D22E2862FD00E65EE2 /* dydxTurnkey.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02A1054D2E28537C00E65EE2;
+			remoteInfo = dydxTurnkey;
+		};
+		02A107D82E2862FD00E65EE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02A107D22E2862FD00E65EE2 /* dydxTurnkey.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02A1054E2E28537C00E65EE2;
+			remoteInfo = dydxTurnkey;
+		};
 		02A8980028E76167006F1658 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 02E7DD9128CFB30000727949 /* dydxStateManager.xcodeproj */;
@@ -477,6 +470,20 @@
 			remoteInfo = dydxAnalytics;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		029F14E02E28257A00261191 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				02A107C42E2862F000E65EE2 /* dydxTurnkey.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0201203B2DA74D1E00761811 /* dydxReactNativeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxReactNativeBuilder.swift; sourceTree = "<group>"; };
@@ -562,8 +569,6 @@
 		025D22D528F65E1B00C4ADAE /* dydxMarketStatsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketStatsViewPresenter.swift; sourceTree = "<group>"; };
 		0262EF9929D79EE4009889E2 /* Wallets2ViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallets2ViewBuilder.swift; sourceTree = "<group>"; };
 		0262F2D429DB4891009889E2 /* WalletAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAction.swift; sourceTree = "<group>"; };
-		026387542E25B88B0077B0E5 /* dydxTurnkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxTurnkey.xcodeproj; path = ../dydxTurnkey/dydxTurnkey.xcodeproj; sourceTree = SOURCE_ROOT; };
-		026387572E25B8930077B0E5 /* dydxTurnkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxTurnkey.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxTurnkey/dydxTurnkey.xcodeproj"; sourceTree = "<absolute>"; };
 		02669B7B2AD8661F00A756AA /* dydxCarteraConfigWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCarteraConfigWorker.swift; sourceTree = "<group>"; };
 		02669B942AD87A9D00A756AA /* dydxGlobalWorkers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxGlobalWorkers.swift; sourceTree = "<group>"; };
 		0268BBFA2A8BE27800D0C59B /* dydxTransferOutViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferOutViewPresenter.swift; sourceTree = "<group>"; };
@@ -601,6 +606,8 @@
 		029CBE7828F6092400259C1D /* dydxMarketTradesViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketTradesViewPresenter.swift; sourceTree = "<group>"; };
 		029E0E6D29AD9B8600FE271C /* PlatformParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformParticles.xcodeproj; path = ../../PlatformParticles/PlatformParticles.xcodeproj; sourceTree = "<group>"; };
 		029E118D29ADB77300FE271C /* dydxChart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxChart.xcodeproj; path = ../dydxChart/dydxChart.xcodeproj; sourceTree = "<group>"; };
+		02A107C22E2862F000E65EE2 /* dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		02A107D22E2862FD00E65EE2 /* dydxTurnkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxTurnkey.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxTurnkey/dydxTurnkey.xcodeproj"; sourceTree = "<absolute>"; };
 		02A134C029A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxClosePositionHeaderViewPresenter.swift; sourceTree = "<group>"; };
 		02A5C85D297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferViewBuilder.swift; sourceTree = "<group>"; };
 		02A6517E2DB30D86006DBD5F /* dydxSimpleUIMenuViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuViewBuilder.swift; sourceTree = "<group>"; };
@@ -727,7 +734,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0263875F2E25B89D0077B0E5 /* dydxTurnkey.framework in Frameworks */,
 				2741B25C2C06A0E100693B17 /* dydxAnalytics.framework in Frameworks */,
 				02D1CEED29C8E016009ADF9A /* PlatformUIJedio.framework in Frameworks */,
 				025315BA29BFF18700D6CC9B /* CameraParticles.framework in Frameworks */,
@@ -736,6 +742,7 @@
 				029E0E8729AD9BA500FE271C /* PlatformParticles.framework in Frameworks */,
 				0284202F29AD727200C0E7CC /* dydxViews.framework in Frameworks */,
 				02A8980628E76175006F1658 /* dydxStateManager.framework in Frameworks */,
+				02A107C32E2862F000E65EE2 /* dydxTurnkey.framework in Frameworks */,
 				314BBDE9F332ECA910BC414E /* Pods_iOS_dydxPresenters.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -927,7 +934,7 @@
 				F10F7B6C6C3DD5D631B7405B /* Pods */,
 				51E65BFD078A26FDF0980B06 /* Frameworks */,
 				02860A8229C15E490079E644 /* Recovered References */,
-				026387572E25B8930077B0E5 /* dydxTurnkey.xcodeproj */,
+				02A107D22E2862FD00E65EE2 /* dydxTurnkey.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1214,14 +1221,6 @@
 			path = Wallet;
 			sourceTree = "<group>";
 		};
-		026387582E25B8930077B0E5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0263875E2E25B8930077B0E5 /* dydxTurnkey.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		02669B962AD87AA200A756AA /* Workers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1242,7 +1241,6 @@
 		02684E1628BD40CF0007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				026387542E25B88B0077B0E5 /* dydxTurnkey.xcodeproj */,
 				2741B2512C06A0CC00693B17 /* dydxAnalytics.xcodeproj */,
 				02D1CEE229C8DFFC009ADF9A /* PlatformUIJedio.xcodeproj */,
 				025315AF29BFF17700D6CC9B /* CameraParticles.xcodeproj */,
@@ -1404,14 +1402,6 @@
 			path = Scan;
 			sourceTree = "<group>";
 		};
-		028FA1662E26C73F0069A9DE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				028FA1712E26C73F0069A9DE /* dydxTurnkey.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		0295391529FB254C009026E3 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
@@ -1439,6 +1429,14 @@
 			children = (
 				029E119329ADB77300FE271C /* dydxChart.framework */,
 				029E119529ADB77300FE271C /* dydxChartTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02A107D32E2862FD00E65EE2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02A107D92E2862FD00E65EE2 /* dydxTurnkey.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1913,6 +1911,7 @@
 		51E65BFD078A26FDF0980B06 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02A107C22E2862F000E65EE2 /* dydxTurnkey.framework */,
 				2742C05D2BF6898500E13C09 /* dydxAnalytics.framework */,
 				F1551C00FFF41C29CFC5BD94 /* Pods_iOS_dydxPresenters.framework */,
 				F6C6D464ED8DEF5D8CC88A87 /* Pods_iOS_dydxPresentersTests.framework */,
@@ -2005,11 +2004,12 @@
 				023789E528BD381C00F212E1 /* Frameworks */,
 				023789E628BD381C00F212E1 /* Resources */,
 				61FBF7BE3C766A5C646BD0F2 /* [CP] Copy Pods Resources */,
+				029F14E02E28257A00261191 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0263875B2E25B8930077B0E5 /* PBXTargetDependency */,
+				02A107D62E2862FD00E65EE2 /* PBXTargetDependency */,
 				2741B25B2C06A0D800693B17 /* PBXTargetDependency */,
 				02D1CEEC29C8E00D009ADF9A /* PBXTargetDependency */,
 				025315B929BFF18100D6CC9B /* PBXTargetDependency */,
@@ -2096,12 +2096,8 @@
 					ProjectRef = 02E7DD9128CFB30000727949 /* dydxStateManager.xcodeproj */;
 				},
 				{
-					ProductGroup = 026387582E25B8930077B0E5 /* Products */;
-					ProjectRef = 026387572E25B8930077B0E5 /* dydxTurnkey.xcodeproj */;
-				},
-				{
-					ProductGroup = 028FA1662E26C73F0069A9DE /* Products */;
-					ProjectRef = 026387542E25B88B0077B0E5 /* dydxTurnkey.xcodeproj */;
+					ProductGroup = 02A107D32E2862FD00E65EE2 /* Products */;
+					ProjectRef = 02A107D22E2862FD00E65EE2 /* dydxTurnkey.xcodeproj */;
 				},
 				{
 					ProductGroup = 0284201A29AD725000C0E7CC /* Products */;
@@ -2153,13 +2149,6 @@
 			remoteRef = 025315B629BFF17700D6CC9B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		0263875E2E25B8930077B0E5 /* dydxTurnkey.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = dydxTurnkey.framework;
-			remoteRef = 0263875D2E25B8930077B0E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		0284201F29AD725000C0E7CC /* dydxViews.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -2172,13 +2161,6 @@
 			fileType = wrapper.cfbundle;
 			path = dydxViewsTests.xctest;
 			remoteRef = 0284202029AD725000C0E7CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		028FA1712E26C73F0069A9DE /* dydxTurnkey.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = dydxTurnkey.framework;
-			remoteRef = 028FA1702E26C73F0069A9DE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		029E0E7829AD9B8700FE271C /* PlatformParticles.framework */ = {
@@ -2244,6 +2226,13 @@
 			remoteRef = 029E119429ADB77300FE271C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		02A107D92E2862FD00E65EE2 /* dydxTurnkey.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxTurnkey.framework;
+			remoteRef = 02A107D82E2862FD00E65EE2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		02D1CEE829C8DFFC009ADF9A /* PlatformUIJedio.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -2300,7 +2289,6 @@
 				2741E3702A68787A000FA190 /* settings_direction_color_preference.json in Resources */,
 				278EA5612BB60F51007A0E17 /* notifications.json in Resources */,
 				02E7B39829D79A4400D6626D /* features.json in Resources */,
-				02E7B3A729D79A4400D6626D /* BuildFile in Resources */,
 				02E7B39929D79A4400D6626D /* test.js in Resources */,
 				02E7B39A29D79A4400D6626D /* settings.json in Resources */,
 				02F543B42C17AD6A000924E4 /* settings_gas_token.json in Resources */,
@@ -2658,11 +2646,6 @@
 			name = CameraParticles;
 			targetProxy = 025315B829BFF18100D6CC9B /* PBXContainerItemProxy */;
 		};
-		0263875B2E25B8930077B0E5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = dydxTurnkey;
-			targetProxy = 0263875A2E25B8930077B0E5 /* PBXContainerItemProxy */;
-		};
 		0284202E29AD726B00C0E7CC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = dydxViews;
@@ -2677,6 +2660,11 @@
 			isa = PBXTargetDependency;
 			name = dydxChart;
 			targetProxy = 029E119E29ADB77900FE271C /* PBXContainerItemProxy */;
+		};
+		02A107D62E2862FD00E65EE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxTurnkey;
+			targetProxy = 02A107D52E2862FD00E65EE2 /* PBXContainerItemProxy */;
 		};
 		02A8980128E76167006F1658 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

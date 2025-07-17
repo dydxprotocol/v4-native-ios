@@ -1,5 +1,5 @@
 {
-  "originHash" : "ac0fb97dda7ca4e2e3da2a17a661ad8aa0bf3c4fbcff53496a7e09832354edae",
+  "originHash" : "c96dae786edc835745dd63fdf61f2aacb6890d941dea4bb908231f9e8cb3c5d1",
   "pins" : [
     {
       "identity" : "base58swift",
@@ -83,15 +83,6 @@
       }
     },
     {
-      "identity" : "reactbridge",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ikhvorost/ReactBridge.git",
-      "state" : {
-        "revision" : "030546fa672a275c164500025eed0f07e438f70f",
-        "version" : "1.4.1"
-      }
-    },
-    {
       "identity" : "secp256k1.swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Boilertalk/secp256k1.swift.git",
@@ -125,15 +116,6 @@
       "state" : {
         "revision" : "5ca09b6a2ad190f94aa3d6ddef45b187f8c0343b",
         "version" : "1.0.3"
-      }
-    },
-    {
-      "identity" : "swift-syntax",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-syntax.git",
-      "state" : {
-        "revision" : "0687f71944021d616d34d922343dcef086855920",
-        "version" : "600.0.1"
       }
     },
     {

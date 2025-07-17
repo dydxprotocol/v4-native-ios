@@ -306,6 +306,8 @@ abstract_target 'iOS' do
     project '../dydx/dydxViews/dydxViews'
     ios_ui_pods
     abacus_pods
+    
+    react_pods
   end
   
   target 'dydxViewsTests' do
@@ -385,6 +387,7 @@ abstract_target 'iOS' do
   target 'dydxTurnkey' do
     project '../dydx/dydxTurnkey/dydxTurnkey'
     ios_ui_pods
+    
     react_pods
   end
   
@@ -397,6 +400,8 @@ abstract_target 'iOS' do
     amplitude_pods
     statsig_pods
     abacus_pods
+    
+    react_pods
   end
   
   target 'dydxV4Tests' do
