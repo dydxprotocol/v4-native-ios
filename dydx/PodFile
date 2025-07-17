@@ -111,9 +111,13 @@ end
 def react_pods
   use_react_native!(
     :path => '../node_modules/react-native',
-#    :app_path => '/Users/ruihuang/v4-native-ios',
     :hermes_enabled => true # set to true if you're using Hermes
   )
+
+  pod 'react-native-get-random-values', :path => '../node_modules/react-native-get-random-values'
+  pod 'RNKeychain', :path => '../node_modules/react-native-keychain'
+  pod 'react-native-passkey', :path => '../node_modules/react-native-passkey'
+  pod 'RNInAppBrowser', :path => '../node_modules/react-native-inappbrowser-reborn'
 end
 
 abstract_target 'iOS' do

@@ -310,6 +310,7 @@ PODS:
     - React-RCTText (= 0.78.2)
     - React-RCTVibration (= 0.78.2)
   - React-callinvoker (0.78.2)
+  - React-Codegen (0.1.0)
   - React-Core (0.78.2):
     - glog
     - hermes-engine
@@ -1501,6 +1502,15 @@ PODS:
     - React-jsiexecutor
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
+  - react-native-get-random-values (1.11.0):
+    - React-Core
+  - react-native-passkey (3.1.0):
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Codegen
+    - React-Core
+    - ReactCommon/turbomodule/core
   - React-NativeModulesApple (0.78.2):
     - glog
     - hermes-engine
@@ -1788,6 +1798,29 @@ PODS:
     - React-logger (= 0.78.2)
     - React-perflogger (= 0.78.2)
     - React-utils (= 0.78.2)
+  - RNInAppBrowser (3.7.0):
+    - React-Core
+  - RNKeychain (9.2.3):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - SDWebImage (5.21.1):
     - SDWebImage/Core (= 5.21.1)
   - SDWebImage/Core (5.21.1)
@@ -1875,6 +1908,8 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
+  - react-native-passkey (from `../node_modules/react-native-passkey`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-performancetimeline (from `../node_modules/react-native/ReactCommon/react/performance/timeline`)
@@ -1903,6 +1938,8 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNInAppBrowser (from `../node_modules/react-native-inappbrowser-reborn`)
+  - RNKeychain (from `../node_modules/react-native-keychain`)
   - SDWebImage
   - SDWebImageSVGCoder
   - SDWebImageSwiftUI
@@ -1960,6 +1997,7 @@ SPEC REPOS:
     - PromisesSwift
     - RDHCollectionViewGridLayout
     - ReachabilitySwift
+    - React-Codegen
     - SDWebImageSVGCoder
     - SDWebImageSwiftUI
     - SimpleKeychain
@@ -2054,6 +2092,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-get-random-values:
+    :path: "../node_modules/react-native-get-random-values"
+  react-native-passkey:
+    :path: "../node_modules/react-native-passkey"
   React-NativeModulesApple:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios"
   React-perflogger:
@@ -2110,6 +2152,10 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNInAppBrowser:
+    :path: "../node_modules/react-native-inappbrowser-reborn"
+  RNKeychain:
+    :path: "../node_modules/react-native-keychain"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -2181,6 +2227,7 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   React: 3b5754191f1b65f1dbc52fbea7959c3d2d9e39c9
   React-callinvoker: 6beeaf4c7db11b6cc953fac45f2c76e3fb125013
+  React-Codegen: 4b8b4817cea7a54b83851d4c1f91f79aa73de30a
   React-Core: 8a10ac9de53373a3ecb5dfcbcf56df1d3dad0861
   React-CoreModules: af6999b35c7c01b0e12b59d27f3e054e13da43b1
   React-cxxreact: 833f00155ce8c2fda17f6d286f8eaeff2ececc69
@@ -2205,6 +2252,8 @@ SPEC CHECKSUMS:
   React-logger: 763728cf4eebc9c5dc9bfc3649e22295784f69f3
   React-Mapbuffer: 86e068fae064bbd3f24781d6ae5445b0266b2a10
   React-microtasksnativemodule: fd98e3e44af51599576705ec7a85a36e35978913
+  react-native-get-random-values: d16467cf726c618e9c7a8c3c39c31faa2244bbba
+  react-native-passkey: 3aac247c18127443ef4a002b59d8e12dc7e99f2e
   React-NativeModulesApple: 5c61cef9e7f0e1d6216ff0af41a3b882806a5cec
   React-perflogger: 5f8fa36a8e168fb355efe72099efe77213bc2ac6
   React-performancetimeline: 4f3521ee6238c9caf1b0969da2c4f610ff72b922
@@ -2233,6 +2282,8 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: 4893bde33952f997a323eb1a1ee87a72764018ff
   ReactCodegen: 31f8d982d351eb4dbf3af220f363c7398ae667c8
   ReactCommon: 0adf8f24a3415b6815613bad362d390726b33fc7
+  RNInAppBrowser: 6d3eb68d471b9834335c664704719b8be1bfdb20
+  RNKeychain: a62db5d0ed91ce7bcb6f65b8c42ae2557701afc1
   SDWebImage: f29024626962457f3470184232766516dee8dfea
   SDWebImageSVGCoder: 8e10c8f6cc879c7dfb317b284e13dd589379f01c
   SDWebImageSwiftUI: a6d7129fb68fc18c8b930b869ddcfce314e49ded
@@ -2244,6 +2295,6 @@ SPEC CHECKSUMS:
   Yoga: 6eb60fc2c0eef63e7d2ef4a56e0a3353534143a2
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: f3e8a43c260e1b78461f03e54e779f6007d608eb
+PODFILE CHECKSUM: 1fdd3bf7c5539f0d963bafb1500d99d44cc0f3c1
 
 COCOAPODS: 1.16.2

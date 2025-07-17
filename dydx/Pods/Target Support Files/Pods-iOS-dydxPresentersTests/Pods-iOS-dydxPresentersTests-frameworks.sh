@@ -210,6 +210,9 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RCT-Folly/folly.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RCTDeprecation/RCTDeprecation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RNInAppBrowser/RNInAppBrowser.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RNKeychain/RNKeychain.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-Codegen/React_Codegen.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-Core/React.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-Fabric/React_Fabric.framework"
@@ -261,6 +264,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/fmt/fmt.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/glog/glog.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/react-native-get-random-values/react_native_get_random_values.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/react-native-passkey/react_native_passkey.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -298,6 +303,9 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RCT-Folly/folly.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RCTDeprecation/RCTDeprecation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RNInAppBrowser/RNInAppBrowser.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RNKeychain/RNKeychain.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-Codegen/React_Codegen.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-Core/React.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React-Fabric/React_Fabric.framework"
@@ -349,6 +357,8 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/fmt/fmt.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/glog/glog.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/react-native-get-random-values/react_native_get_random_values.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/react-native-passkey/react_native_passkey.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

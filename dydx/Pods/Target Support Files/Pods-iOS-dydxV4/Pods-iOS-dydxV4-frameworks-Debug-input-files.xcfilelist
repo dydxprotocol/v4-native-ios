@@ -54,6 +54,9 @@ ${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework
 ${BUILT_PRODUCTS_DIR}/RCT-Folly/folly.framework
 ${BUILT_PRODUCTS_DIR}/RCTDeprecation/RCTDeprecation.framework
 ${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework
+${BUILT_PRODUCTS_DIR}/RNInAppBrowser/RNInAppBrowser.framework
+${BUILT_PRODUCTS_DIR}/RNKeychain/RNKeychain.framework
+${BUILT_PRODUCTS_DIR}/React-Codegen/React_Codegen.framework
 ${BUILT_PRODUCTS_DIR}/React-Core/React.framework
 ${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework
 ${BUILT_PRODUCTS_DIR}/React-Fabric/React_Fabric.framework
@@ -105,5 +108,7 @@ ${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework
 ${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework
 ${BUILT_PRODUCTS_DIR}/fmt/fmt.framework
 ${BUILT_PRODUCTS_DIR}/glog/glog.framework
+${BUILT_PRODUCTS_DIR}/react-native-get-random-values/react_native_get_random_values.framework
+${BUILT_PRODUCTS_DIR}/react-native-passkey/react_native_passkey.framework
 ${PODS_XCFRAMEWORKS_BUILD_DIR}/AmplitudeCore/AmplitudeCore.framework/AmplitudeCore
 ${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes

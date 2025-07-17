@@ -1,0 +1,29 @@
+{
+  "name": "react-native-passkey",
+  "version": "3.1.0",
+  "summary": "Passkey implementation for React Native",
+  "homepage": "https://github.com/f-23/react-native-passkey#readme",
+  "license": "MIT",
+  "authors": "f-23 <fabian@kuentzler.at> (https://github.com/f-23)",
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source": {
+    "git": "https://github.com/mTRx0/react-native-passkey.git",
+    "tag": "3.1.0"
+  },
+  "source_files": "ios/**/*.{h,m,mm,swift}",
+  "dependencies": {
+    "React-Core": [],
+    "React-Codegen": [],
+    "RCT-Folly": [],
+    "RCTRequired": [],
+    "RCTTypeSafety": [],
+    "ReactCommon/turbomodule/core": []
+  },
+  "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -DRCT_NEW_ARCH_ENABLED=1",
+  "pod_target_xcconfig": {
+    "HEADER_SEARCH_PATHS": "\"$(PODS_ROOT)/boost\"",
+    "CLANG_CXX_LANGUAGE_STANDARD": "c++17"
+  }
+}
