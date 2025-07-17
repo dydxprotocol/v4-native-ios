@@ -17,7 +17,10 @@ import Cartera
 
 public class dydxWalletListViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        if dydxBoolFeatureFlag.privy_ios.isEnabled {
+        if dydxBoolFeatureFlag.turnkey_ios.isEnabled {
+            let viewController = dydxTurnkeyLoginViewConntroller()
+            return viewController as? T
+        } else if dydxBoolFeatureFlag.privy_ios.isEnabled {
             let presenter = dydxWalletListViewPresenter()
             let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
             return dydxWalletListViewController(presenter: presenter, view: view, configuration: .fullScreenSheet) as? T

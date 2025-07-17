@@ -3,9 +3,9 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import {
   DeviceEventEmitter,
 } from 'react-native';
-import { NativeToJsRequestEvent, TurnkeyNativeModule } from './TurnkeyModule'
 
 import { NativeModules } from 'react-native';
+import { NativeToJsRequestEvent, TurnkeyNativeModule } from './TurnkeyModule';
 
 const TurnkeyCallbackContext = createContext({ isReady: false });
 

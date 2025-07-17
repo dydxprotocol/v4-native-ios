@@ -22,23 +22,23 @@ public struct ReactNativeView: UIViewControllerRepresentable {
 }
 
 // Helper UIViewController that waits for bridge readiness
-public class ReactNativeHostingController: UIViewController {
+open class ReactNativeHostingController: UIViewController {
     let moduleName: String
     let initialProperties: [String: Any]?
 
     private var rootView: RCTRootView?
 
-    init(moduleName: String, initialProperties: [String: Any]? = nil) {
+    public init(moduleName: String, initialProperties: [String: Any]? = nil) {
         self.moduleName = moduleName
         self.initialProperties = initialProperties
         super.init(nibName: nil, bundle: nil)
     }
 
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
         let bridge = TurnkeyBridgeManager.shared.bridge

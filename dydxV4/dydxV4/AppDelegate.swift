@@ -24,6 +24,7 @@ import Utilities
 import dydxAnalytics
 import dydxCartera
 import dydxTurnkey
+import React
 
 #if _iOS
     import FirebaseStaticInjections

@@ -35,26 +35,6 @@
             },
             {
                 "title":{
-                    "text":"Vault"
-                },
-                "field":{
-                    "field":"ff_vault_enabled",
-                    "optional":true,
-                    "type" : "bool",
-                    "options" : [
-                        {
-                            "text": "yes",
-                            "value" : 1
-                        },
-                        {
-                            "text": "no",
-                            "value" : 0
-                        }
-                    ]
-                }
-            },
-            {
-                "title":{
                     "text":"Prediction Marktes"
                 },
                 "field":{
@@ -119,6 +99,26 @@
                 },
                 "field":{
                     "field":"skip_go_fast",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : 1
+                        },
+                        {
+                            "text": "no",
+                            "value" : 0
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Turnkey"
+                },
+                "field":{
+                    "field":"ff_turnkey_ios",
                     "optional":true,
                     "type" : "bool",
                     "options" : [

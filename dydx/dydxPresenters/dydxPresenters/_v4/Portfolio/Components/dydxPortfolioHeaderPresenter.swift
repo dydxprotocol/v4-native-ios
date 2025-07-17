@@ -28,8 +28,6 @@ class dydxPortfolioHeaderPresenter: HostedViewPresenter<dydxPortfolioHeaderViewM
         self.viewModel = viewModel
 
         viewModel?.onboardAction = {
-//            TurnkeyBridgeManager.shared.testFunction()
-
             Router.shared?.navigate(to: RoutingRequest(path: "/onboard"), animated: true, completion: { /* [weak self] */ _, _ in
             })
         }

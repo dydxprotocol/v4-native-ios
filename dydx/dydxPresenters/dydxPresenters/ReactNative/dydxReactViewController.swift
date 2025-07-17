@@ -20,7 +20,7 @@ class dydxReactViewController: UIViewController {
         super.viewDidLoad()
         reactNativeFactoryDelegate = ReactNativeDelegate()
         reactNativeFactory = RCTReactNativeFactory(delegate: reactNativeFactoryDelegate!)
-        view = reactNativeFactory!.rootViewFactory.view(withModuleName: "HelloWorld")
+        view = reactNativeFactory!.rootViewFactory.view(withModuleName: "TurnkeyReact")
     }
 }
 
