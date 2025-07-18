@@ -3,27 +3,26 @@ import { useEffect, useState, useCallback } from "react";
 import { SharedConfigs } from "./SharedConfigs";
 import { Button } from "./ui/button";
 import { View, Text } from "react-native";
-// import GoogleIcon from "../../assets/svgs/google.svg";
+import GoogleIcon from "../assets/svgs/google.svg";
 import { OAUTH_TOKEN_EXPIRATION_SECONDS } from "./lib/constants";
 // import * as Crypto from "expo-crypto";
 import { styles } from "./TurnkeyStyle";
 import SHA256 from 'crypto-js/sha256';
 
-interface OAuthProps {
+type OAuthProps =  {
   onSuccess: (params: {
     oidcToken: string;
     providerName: string;
     targetPublicKey: string;
     expirationSeconds: string;
   }) => Promise<void>;
-  configs: SharedConfigs
+  configs: SharedConfigs;
 }
-
-interface AuthButtonProps extends OAuthProps {
+type AuthButtonProps = {
   nonce: string | null;
   targetPublicKey: string | null;
   refreshNonce: () => Promise<void>;
-}
+} & OAuthProps;
 
 export const GoogleAuthButton: React.FC<AuthButtonProps> = ({
   onSuccess,
@@ -64,10 +63,10 @@ export const GoogleAuthButton: React.FC<AuthButtonProps> = ({
     <Button
       onPress={handlePress}
      // className="border border-black rounded-xl bg-transparent flex-row items-center justify-center flex-1 h-16"
-      disabled={!nonce || !targetPublicKey}
+      disabled={nonce == null || !targetPublicKey}
     >
+        {/* <GoogleIcon width={24} height={24} /> */}
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-        {/* <GoogleIcon width={28} height={28} /> */}
         <Text style={styles.subtitle}>Google</Text>
       </View>
     </Button>

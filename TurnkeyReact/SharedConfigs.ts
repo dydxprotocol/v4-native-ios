@@ -1,6 +1,6 @@
 
 
-export interface SharedConfigs {
+type SharedConfigs = {
   appScheme: string;
   googleClientId: string;
 }
