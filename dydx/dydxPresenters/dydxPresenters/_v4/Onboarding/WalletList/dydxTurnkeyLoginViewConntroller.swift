@@ -12,7 +12,18 @@ import dydxTurnkey
 
 class dydxTurnkeyLoginViewConntroller: ReactNativeHostingController {
     init() {
-        super.init(moduleName: "TurnkeyLogin", initialProperties: nil)
+        guard let appScheme = Bundle.main.scheme else {
+            fatalError((#file as NSString).lastPathComponent + ": Bundle.main.scheme is nil")
+        }
+        let initialProperties: [String: Any] = [
+            // From https://console.cloud.google.com/auth/clients?inv=1&invt=Ab1olg&project=dydx-v4
+            "googleClientId": "441463123744-c5l96lvbfj6h910bvl8gmujgcj1r6f1h.apps.googleusercontent.com",
+            "appScheme": appScheme,
+            "turnkeyUrl": "https://api.turnkey.com",
+            // From Turnkey console
+            "turnkeyOrgId": "3174ac51-1637-47d8-9456-19549963e2ed"
+        ]
+        super.init(moduleName: "TurnkeyLogin", initialProperties: initialProperties)
     }
 
     @MainActor required init?(coder: NSCoder) {

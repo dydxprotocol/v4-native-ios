@@ -17,11 +17,14 @@ import { TurnkeyProvider } from '@turnkey/sdk-react-native';
 import { styles } from "./TurnkeyStyle";
 import "react-native-get-random-values";
 
-export function TurnkeyLogin(): React.JSX.Element {
-  return <SignInScreen />;
-}
+type TurnkeyConfigs = {
+  googleClientId: string,
+  appScheme: string,
+  turnkeyUrl: string,
+  turnkeyOrgId: string,
+};
 
-const SignInScreen: React.FC = () => {
+export const TurnkeyLogin = (configs: TurnkeyConfigs) => {
   const [email, setEmail] = useState<string>('');
 
   const handleEmailChange = (text: string) => {
@@ -33,14 +36,16 @@ const SignInScreen: React.FC = () => {
     return Promise.resolve();
   }
 
-  var configs = {
-    googleClientId: 'YOUR_GOOGLE_CLIENT_ID',
-    appScheme: 'dydx-v4',
-  }
+  // var configs = {
+  //   googleClientId: configs.googleClientId || 'YOUR_GOOGLE_CLIENT_ID',
+  //   appScheme: 'dydx-v4',
+  //   turnkeyUrl: 'YOUR_TURNKEY_URL',
+  //   turnkeyOrgId: 'TURNKEY_PARENT_ORG_ID',
+  // }
 
   const sessionConfig = {
-    apiBaseUrl: 'TURNKEY_API_URL',
-    organizationId: 'TURNKEY_PARENT_ORG_ID',
+    apiBaseUrl: configs.turnkeyUrl,
+    organizationId: configs.turnkeyOrgId,
     onSessionSelected: () => {
       console.log("onSessionSelected");
     },
@@ -113,5 +118,3 @@ const SignInScreen: React.FC = () => {
     </TurnkeyProvider>
   );
 };
-
-export default SignInScreen;

@@ -1,9 +1,9 @@
 import { useTurnkey } from "@turnkey/sdk-react-native";
 import { useEffect, useState, useCallback } from "react";
-import { SharedConfigs } from "./SharedConfigs";
+import { TurnkeyConfigs } from "./SharedConfigs";
 import { Button } from "./ui/button";
 import { View, Text } from "react-native";
-import GoogleIcon from "../assets/svgs/google.svg";
+// import GoogleIcon from "../assets/svgs/google.svg";
 import { OAUTH_TOKEN_EXPIRATION_SECONDS } from "./lib/constants";
 // import * as Crypto from "expo-crypto";
 import { styles } from "./TurnkeyStyle";
@@ -16,7 +16,7 @@ type OAuthProps =  {
     targetPublicKey: string;
     expirationSeconds: string;
   }) => Promise<void>;
-  configs: SharedConfigs;
+  configs: TurnkeyConfigs;
 }
 type AuthButtonProps = {
   nonce: string | null;

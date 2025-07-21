@@ -1,6 +1,8 @@
 
 
-type SharedConfigs = {
-  appScheme: string;
-  googleClientId: string;
-}
+export type TurnkeyConfigs = {
+  googleClientId: string,
+  appScheme: string,
+  turnkeyUrl: string,
+  turnkeyOrgId: string,
+};
