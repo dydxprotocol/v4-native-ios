@@ -11,25 +11,25 @@
 		0207D5142DC428D9005773B5 /* Privy in Frameworks */ = {isa = PBXBuildFile; productRef = 0207D5132DC428D9005773B5 /* Privy */; };
 		0207FED92D2F5B50004C2C9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0207FED82D2F5B50004C2C9F /* Launch Screen.storyboard */; };
 		0217A0A129D78BD5007F31C5 /* dydxBiometricsLocalAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */; };
-		022F35CD28D39304000BCA41 /* dydxPresenters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; settings = {ATTRIBUTES = (); }; };
+		022F35CD28D39304000BCA41 /* dydxPresenters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		02439D1129B03F6700A083FE /* dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; };
-		02439D1229B03F7B00A083FE /* dydxCartera.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; settings = {ATTRIBUTES = (); }; };
-		024B7A9628B7F6CC00F7C386 /* dydxViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 024B7A9428B7F6CC00F7C386 /* dydxViews.framework */; settings = {ATTRIBUTES = (); }; };
-		025B83FF28AAAB270037FF7C /* PlatformUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 025B83EB28AAAB120037FF7C /* PlatformUI.framework */; settings = {ATTRIBUTES = (); }; };
+		02439D1229B03F7B00A083FE /* dydxCartera.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		024B7A9628B7F6CC00F7C386 /* dydxViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 024B7A9428B7F6CC00F7C386 /* dydxViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		025B83FF28AAAB270037FF7C /* PlatformUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 025B83EB28AAAB120037FF7C /* PlatformUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		02756A6A287CA33E00803741 /* dydxNotificationHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02756A69287CA33E00803741 /* dydxNotificationHandlerDelegate.swift */; };
 		027B7CA62AD5E559005A8288 /* configs in Resources */ = {isa = PBXBuildFile; fileRef = 027B7CA52AD5E559005A8288 /* configs */; };
 		027E1E1329C912660098666F /* PlatformUIJedio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 027E1DFF29C912510098666F /* PlatformUIJedio.framework */; };
-		027E1E1429C912AC0098666F /* PlatformUIJedio.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 027E1DFF29C912510098666F /* PlatformUIJedio.framework */; settings = {ATTRIBUTES = (); }; };
-		0284210929AD780600C0E7CC /* dydxFormatter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 028420CF29AD77F400C0E7CC /* dydxFormatter.framework */; settings = {ATTRIBUTES = (); }; };
-		029E11F029ADB9C600FE271C /* dydxChart.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 029E11EB29ADB9BC00FE271C /* dydxChart.framework */; settings = {ATTRIBUTES = (); }; };
+		027E1E1429C912AC0098666F /* PlatformUIJedio.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 027E1DFF29C912510098666F /* PlatformUIJedio.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0284210929AD780600C0E7CC /* dydxFormatter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 028420CF29AD77F400C0E7CC /* dydxFormatter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		029E11F029ADB9C600FE271C /* dydxChart.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 029E11EB29ADB9BC00FE271C /* dydxChart.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		02A107AB2E2859E600E65EE2 /* dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A107AA2E2859B100E65EE2 /* dydxTurnkey.framework */; };
-		02A107AC2E2859E600E65EE2 /* dydxTurnkey.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02A107AA2E2859B100E65EE2 /* dydxTurnkey.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		02A107AC2E2859E600E65EE2 /* dydxTurnkey.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02A107AA2E2859B100E65EE2 /* dydxTurnkey.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02A5BB9F2A04617800BEE77E /* dydxAbacusDataLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5BB9E2A04617800BEE77E /* dydxAbacusDataLocalizer.swift */; };
 		02C7262B29D793C90098AFBC /* dydxCompositeTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C7262A29D793C90098AFBC /* dydxCompositeTracking.swift */; };
 		02DA0AFA2B57609100BFA975 /* dydxV4UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA0AF92B57609100BFA975 /* dydxV4UITests.swift */; };
 		02DA0AFC2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA0AFB2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift */; };
 		02DA0B062B57633E00BFA975 /* PercyXcui in Frameworks */ = {isa = PBXBuildFile; productRef = 02DA0B052B57633E00BFA975 /* PercyXcui */; };
-		02E7DDDF28CFB33B00727949 /* dydxStateManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DDA828CFB31000727949 /* dydxStateManager.framework */; settings = {ATTRIBUTES = (); }; };
+		02E7DDDF28CFB33B00727949 /* dydxStateManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DDA828CFB31000727949 /* dydxStateManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		02FF092E29ADBD9900781EDA /* dydxFormatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028420CF29AD77F400C0E7CC /* dydxFormatter.framework */; };
 		02FF092F29ADBD9F00781EDA /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E11EB29ADB9BC00FE271C /* dydxChart.framework */; };
 		02FF093029ADBDA300781EDA /* dydxPresenters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; };
@@ -40,7 +40,7 @@
 		274F43062BA4C0B400645059 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 274F43052BA4C0B400645059 /* PrivacyInfo.xcprivacy */; };
 		27968BA92BF7AC7A002F2C34 /* TrackingViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27968BA82BF7AC7A002F2C34 /* TrackingViewController+Ext.swift */; };
 		27ADEE6C2BC4A23400B8F1DB /* dydxSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ADEE6B2BC4A23400B8F1DB /* dydxSettingsStore.swift */; };
-		27B7B9892BF7C6DC00BB0114 /* dydxAnalytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27B7B9872BF7C6DC00BB0114 /* dydxAnalytics.framework */; settings = {ATTRIBUTES = (); }; };
+		27B7B9892BF7C6DC00BB0114 /* dydxAnalytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27B7B9872BF7C6DC00BB0114 /* dydxAnalytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		27D41AF12A8E9214009A2F37 /* UIApplication+URLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D41AF02A8E9214009A2F37 /* UIApplication+URLHandler.swift */; };
 		27DBDD222A8FF5B2002383C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27DBDCED2A8FF5B2002383C6 /* GoogleService-Info.plist */; };
 		27DBDD232A8FF5B2002383C6 /* GoogleService-Info-Staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27DBDD202A8FF5B2002383C6 /* GoogleService-Info-Staging.plist */; };
@@ -53,30 +53,30 @@
 		314C368524C7CC7600695F7E /* ui.json in Resources */ = {isa = PBXBuildFile; fileRef = 314C368424C7CC7600695F7E /* ui.json */; };
 		3162B58226E181BB000209E1 /* WebCrypto.js in Resources */ = {isa = PBXBuildFile; fileRef = 3162B55226E181BB000209E1 /* WebCrypto.js */; };
 		31AB94D326DEE83700DB42B9 /* CameraParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31AB94CE26DEE81000DB42B9 /* CameraParticles.framework */; platformFilter = ios; };
-		31AB94D426DEE83700DB42B9 /* CameraParticles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31AB94CE26DEE81000DB42B9 /* CameraParticles.framework */; settings = {ATTRIBUTES = (); }; };
+		31AB94D426DEE83700DB42B9 /* CameraParticles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31AB94CE26DEE81000DB42B9 /* CameraParticles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		31B77C2522DAD0B3004F9B21 /* libFirebaseStaticInjections.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B779FE22DAD020004F9B21 /* libFirebaseStaticInjections.a */; };
 		31B77C2622DAD0B3004F9B21 /* JedioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A4E22DAD021004F9B21 /* JedioKit.framework */; };
-		31B77C2722DAD0B3004F9B21 /* JedioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A4E22DAD021004F9B21 /* JedioKit.framework */; settings = {ATTRIBUTES = (); }; };
+		31B77C2722DAD0B3004F9B21 /* JedioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A4E22DAD021004F9B21 /* JedioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		31B77C2822DAD0B3004F9B21 /* ParticlesCommonModels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AF622DAD023004F9B21 /* ParticlesCommonModels.framework */; };
-		31B77C2922DAD0B3004F9B21 /* ParticlesCommonModels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AF622DAD023004F9B21 /* ParticlesCommonModels.framework */; settings = {ATTRIBUTES = (); }; };
+		31B77C2922DAD0B3004F9B21 /* ParticlesCommonModels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AF622DAD023004F9B21 /* ParticlesCommonModels.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		31B77C2A22DAD0B3004F9B21 /* ParticlesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A7822DAD022004F9B21 /* ParticlesKit.framework */; };
-		31B77C2B22DAD0B3004F9B21 /* ParticlesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A7822DAD022004F9B21 /* ParticlesKit.framework */; settings = {ATTRIBUTES = (); }; };
+		31B77C2B22DAD0B3004F9B21 /* ParticlesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A7822DAD022004F9B21 /* ParticlesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		31B77C3222DAD0B3004F9B21 /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77ADA22DAD022004F9B21 /* PlatformParticles.framework */; };
-		31B77C3322DAD0B3004F9B21 /* PlatformParticles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77ADA22DAD022004F9B21 /* PlatformParticles.framework */; settings = {ATTRIBUTES = (); }; };
+		31B77C3322DAD0B3004F9B21 /* PlatformParticles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77ADA22DAD022004F9B21 /* PlatformParticles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		31B77C3422DAD0B3004F9B21 /* PlatformRouting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AA222DAD022004F9B21 /* PlatformRouting.framework */; };
-		31B77C3522DAD0B3004F9B21 /* PlatformRouting.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AA222DAD022004F9B21 /* PlatformRouting.framework */; settings = {ATTRIBUTES = (); }; };
+		31B77C3522DAD0B3004F9B21 /* PlatformRouting.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AA222DAD022004F9B21 /* PlatformRouting.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		31B77C3622DAD0B3004F9B21 /* RoutingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A2D22DAD021004F9B21 /* RoutingKit.framework */; };
-		31B77C3722DAD0B3004F9B21 /* RoutingKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A2D22DAD021004F9B21 /* RoutingKit.framework */; settings = {ATTRIBUTES = (); }; };
+		31B77C3722DAD0B3004F9B21 /* RoutingKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A2D22DAD021004F9B21 /* RoutingKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		31B77C4022DAD0B3004F9B21 /* UIAppToolkits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AC422DAD022004F9B21 /* UIAppToolkits.framework */; };
-		31B77C4122DAD0B3004F9B21 /* UIAppToolkits.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AC422DAD022004F9B21 /* UIAppToolkits.framework */; settings = {ATTRIBUTES = (); }; };
+		31B77C4122DAD0B3004F9B21 /* UIAppToolkits.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77AC422DAD022004F9B21 /* UIAppToolkits.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		31B77C4222DAD0B4004F9B21 /* UIToolkits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77ABC22DAD022004F9B21 /* UIToolkits.framework */; };
-		31B77C4322DAD0B4004F9B21 /* UIToolkits.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77ABC22DAD022004F9B21 /* UIToolkits.framework */; settings = {ATTRIBUTES = (); }; };
+		31B77C4322DAD0B4004F9B21 /* UIToolkits.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77ABC22DAD022004F9B21 /* UIToolkits.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		31B77C4822DAD0B4004F9B21 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A0C22DAD020004F9B21 /* Utilities.framework */; };
-		31B77C4922DAD0B4004F9B21 /* Utilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A0C22DAD020004F9B21 /* Utilities.framework */; settings = {ATTRIBUTES = (); }; };
+		31B77C4922DAD0B4004F9B21 /* Utilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31B77A0C22DAD020004F9B21 /* Utilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		31F761C924BA3E98001EA293 /* WebParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F761B924BA3E7A001EA293 /* WebParticles.framework */; };
-		31F761CA24BA3E98001EA293 /* WebParticles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31F761B924BA3E7A001EA293 /* WebParticles.framework */; settings = {ATTRIBUTES = (); }; };
+		31F761CA24BA3E98001EA293 /* WebParticles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31F761B924BA3E7A001EA293 /* WebParticles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6466E116280F664900B8791B /* AmplitudeInjections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6466E0E2280F662600B8791B /* AmplitudeInjections.framework */; };
-		6466E117280F664900B8791B /* AmplitudeInjections.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6466E0E2280F662600B8791B /* AmplitudeInjections.framework */; settings = {ATTRIBUTES = (); }; };
+		6466E117280F664900B8791B /* AmplitudeInjections.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6466E0E2280F662600B8791B /* AmplitudeInjections.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		64AEE63E27B2F74C0038C791 /* config in Resources */ = {isa = PBXBuildFile; fileRef = 64AEE63D27B2F74C0038C791 /* config */; };
 		64AF47B72817400100EBFDC6 /* events.json in Resources */ = {isa = PBXBuildFile; fileRef = 64AF47B62817400100EBFDC6 /* events.json */; };
 		64AF480E28186EE500EBFDC6 /* dydxevents.json in Resources */ = {isa = PBXBuildFile; fileRef = 64AF480D28186EE500EBFDC6 /* dydxevents.json */; };
@@ -911,17 +911,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		02F511882E258D00002402A0 /* ../dydx/ios */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = ../dydx/ios;
-			sourceTree = SOURCE_ROOT;
-		};
+		02F511882E258D00002402A0 /* ../dydx/ios */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ../dydx/ios; sourceTree = SOURCE_ROOT; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2353,9 +2343,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2370,9 +2364,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2429,9 +2427,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2446,9 +2448,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2775,10 +2781,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				PRODUCT_BUNDLE_IDENTIFIER = exchangeV4.dydx.trading;
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
@@ -2853,10 +2856,7 @@
 				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				PRODUCT_BUNDLE_IDENTIFIER = exchangeV4.dydx.trading;
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
@@ -2884,7 +2884,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.12.7;
+				MARKETING_VERSION = 1.12.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) _iOS";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2908,7 +2908,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.12.7;
+				MARKETING_VERSION = 1.12.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) _iOS";
