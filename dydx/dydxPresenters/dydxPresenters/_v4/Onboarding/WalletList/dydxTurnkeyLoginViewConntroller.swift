@@ -17,7 +17,7 @@ class dydxTurnkeyLoginViewConntroller: ReactNativeHostingController {
         }
         let initialProperties: [String: Any] = [
             // From https://console.cloud.google.com/auth/clients?inv=1&invt=Ab1olg&project=dydx-v4
-            "googleClientId": "441463123744-c5l96lvbfj6h910bvl8gmujgcj1r6f1h.apps.googleusercontent.com",
+            "googleClientId": "441463123744-a02e7s84okic2ggqgdo7e7hlgpvkj3p8.apps.googleusercontent.com",
             "appScheme": appScheme,
             "turnkeyUrl": "https://api.turnkey.com",
             // From Turnkey console
