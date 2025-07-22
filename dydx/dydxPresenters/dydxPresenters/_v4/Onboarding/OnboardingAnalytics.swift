@@ -11,6 +11,7 @@ import dydxStateManager
 import Combine
 import dydxAnalytics
 import Abacus
+import dydxViews
 
 public final class OnboardingAnalytics {
 
