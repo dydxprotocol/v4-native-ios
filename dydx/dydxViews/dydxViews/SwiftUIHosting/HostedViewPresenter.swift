@@ -117,3 +117,12 @@ open class HostedViewPresenter<ViewModel: PlatformViewModeling>: ObjectViewPrese
 }
 
 public class SimpleHostedViewPresenter: HostedViewPresenter<PlatformViewModel> {}
+
+public extension Utilities.TrackingProtocol {
+    func logSharedEvent(_ event: ClientTrackableEvent) {
+        log(event: event.name, data: event.customParameters)
+#if DEBUG
+        Console.shared.log(event.name)
+#endif
+    }
+}
