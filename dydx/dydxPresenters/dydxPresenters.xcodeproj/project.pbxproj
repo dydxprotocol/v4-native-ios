@@ -127,7 +127,6 @@
 		029E0E8729AD9BA500FE271C /* PlatformParticles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E0E7829AD9B8700FE271C /* PlatformParticles.framework */; };
 		029E11A029ADB77E00FE271C /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E119329ADB77300FE271C /* dydxChart.framework */; };
 		02A107C32E2862F000E65EE2 /* dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A107C22E2862F000E65EE2 /* dydxTurnkey.framework */; };
-		02A107C42E2862F000E65EE2 /* dydxTurnkey.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02A107C22E2862F000E65EE2 /* dydxTurnkey.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02A10AD72E28896800E65EE2 /* dydxTurnkeyLoginViewConntroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A10AC92E28895B00E65EE2 /* dydxTurnkeyLoginViewConntroller.swift */; };
 		02A134C129A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A134C029A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift */; };
 		02A5C85E297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5C85D297FBCD700FFE1F9 /* dydxTransferViewBuilder.swift */; };
@@ -471,20 +470,6 @@
 			remoteInfo = dydxAnalytics;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		029F14E02E28257A00261191 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				02A107C42E2862F000E65EE2 /* dydxTurnkey.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0201203B2DA74D1E00761811 /* dydxReactNativeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxReactNativeBuilder.swift; sourceTree = "<group>"; };
@@ -2007,7 +1992,6 @@
 				023789E528BD381C00F212E1 /* Frameworks */,
 				023789E628BD381C00F212E1 /* Resources */,
 				61FBF7BE3C766A5C646BD0F2 /* [CP] Copy Pods Resources */,
-				029F14E02E28257A00261191 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
