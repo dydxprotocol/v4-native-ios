@@ -1,0 +1,189 @@
+import { ReactNode, createContext, useReducer } from "react";
+import { LoginMethod } from "../lib/types";
+import {
+  BACKEND_API_URL,
+} from "../lib/constants";
+import {
+  User,
+  useTurnkey,
+} from "@turnkey/sdk-react-native";
+
+type AuthActionType =
+  | { type: "PASSKEY"; payload: User }
+  | { type: "INIT_EMAIL_AUTH" }
+  | { type: "COMPLETE_EMAIL_AUTH"; payload: User }
+  | { type: "INIT_PHONE_AUTH" }
+  | { type: "COMPLETE_PHONE_AUTH"; payload: User }
+  | { type: "EMAIL_RECOVERY"; payload: User }
+  | { type: "WALLET_AUTH"; payload: User }
+  | { type: "OAUTH"; payload: User }
+  | { type: "LOADING"; payload: LoginMethod | null }
+  | { type: "ERROR"; payload: string }
+  | { type: "CLEAR_ERROR" };
+interface AuthState {
+  loading: LoginMethod | null;
+  error: string;
+  user: User | null;
+}
+
+const initialState: AuthState = {
+  loading: null,
+  error: "",
+  user: null,
+};
+
+function authReducer(state: AuthState, action: AuthActionType): AuthState {
+  switch (action.type) {
+    case "LOADING":
+      return { ...state, loading: action.payload ? action.payload : null };
+    case "ERROR":
+      return { ...state, error: action.payload, loading: null };
+    case "CLEAR_ERROR":
+      return { ...state, error: "" };
+    case "INIT_EMAIL_AUTH":
+      return { ...state, loading: null, error: "" };
+    case "COMPLETE_EMAIL_AUTH":
+      return { ...state, user: action.payload, loading: null, error: "" };
+    case "INIT_PHONE_AUTH":
+      return { ...state, loading: null, error: "" };
+    case "COMPLETE_PHONE_AUTH":
+      return { ...state, user: action.payload, loading: null, error: "" };
+    case "OAUTH":
+    case "PASSKEY":
+    case "EMAIL_RECOVERY":
+    case "WALLET_AUTH":
+    case "OAUTH":
+      return { ...state, user: action.payload, loading: null, error: "" };
+    default:
+      return state;
+  }
+}
+
+export interface AuthRelayProviderType {
+  state: AuthState;
+  initOtpLogin: (params: { otpType: string; contact: string }) => Promise<void>;
+  completeOtpAuth: (params: {
+    otpId: string;
+    otpCode: string;
+    organizationId: string;
+  }) => Promise<void>;
+  signUpWithPasskey: () => Promise<void>;
+  loginWithPasskey: () => Promise<void>;
+  loginWithOAuth: (params: {
+    oidcToken: string;
+    providerName: string;
+    targetPublicKey: string;
+    expirationSeconds: string;
+  }) => Promise<void>;
+  clearError: () => void;
+}
+
+export const AuthRelayContext = createContext<AuthRelayProviderType>({
+  state: initialState,
+  initOtpLogin: async () => Promise.resolve(),
+  completeOtpAuth: async () => Promise.resolve(),
+  signUpWithPasskey: async () => Promise.resolve(),
+  loginWithPasskey: async () => Promise.resolve(),
+  loginWithOAuth: async () => Promise.resolve(),
+  clearError: () => {},
+});
+
+interface AuthRelayProviderProps {
+  children: ReactNode;
+}
+
+export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
+  children,
+}) => {
+  const [state, dispatch] = useReducer(authReducer, initialState);
+  const { createEmbeddedKey, createSession, createSessionFromEmbeddedKey } =
+    useTurnkey();
+
+  const initOtpLogin = async ({
+    otpType,
+    contact,
+  }: {
+    otpType: string;
+    contact: string;
+  }) => {
+    // TODO: Implement OTP login initialization
+
+  };
+
+  const completeOtpAuth = async ({
+    otpId,
+    otpCode,
+    organizationId,
+  }: {
+    otpId: string;
+    otpCode: string;
+    organizationId: string;
+  }) => {
+    // TODO: Implement OTP authentication completion
+
+  };
+
+  // User will be prompted once for passkey creation then will leverage an api key session to have a smooth "one tap" login experience
+  const signUpWithPasskey = async () => {
+    // TODO: Implement passkey sign-up
+  };
+
+  const loginWithPasskey = async () => {
+    // TODO: Implement passkey login
+  };
+
+  const loginWithOAuth = async ({
+    oidcToken,
+    providerName,
+    targetPublicKey,
+    expirationSeconds,
+  }: {
+    oidcToken: string;
+    providerName: string;
+    targetPublicKey: string;
+    expirationSeconds: string;
+  }) => {
+    dispatch({ type: "LOADING", payload: LoginMethod.OAuth });
+    try {
+      const response = await fetch(`${BACKEND_API_URL}/auth/oAuthLogin`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          oidcToken,
+          providerName,
+          targetPublicKey,
+          expirationSeconds,
+        }),
+      }).then((res) => res.json());
+
+      const credentialBundle = response.credentialBundle;
+      if (credentialBundle) {
+        await createSession({ bundle: credentialBundle });
+      }
+    } catch (error: any) {
+      dispatch({ type: "ERROR", payload: error.message });
+    } finally {
+      dispatch({ type: "LOADING", payload: null });
+    }
+  };
+
+  const clearError = () => {
+    dispatch({ type: "CLEAR_ERROR" });
+  };
+
+  return (
+    <AuthRelayContext.Provider
+      value={{
+        state,
+        initOtpLogin,
+        completeOtpAuth,
+        signUpWithPasskey,
+        loginWithPasskey,
+        loginWithOAuth,
+        clearError,
+      }}
+    >
+      {children}
+    </AuthRelayContext.Provider>
+  );
+};
