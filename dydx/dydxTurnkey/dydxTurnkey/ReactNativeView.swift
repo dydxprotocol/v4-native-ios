@@ -7,6 +7,7 @@
 
 import SwiftUI
 import React
+import PlatformUI
 
 public struct ReactNativeView: UIViewControllerRepresentable {
     let moduleName: String
@@ -61,6 +62,7 @@ open class ReactNativeHostingController: UIViewController {
             initialProperties: initialProperties
         )
         rootView.frame = view.bounds
+        rootView.backgroundColor = ThemeColor.SemanticColor.layer0.uiColor
         rootView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(rootView)
         self.rootView = rootView

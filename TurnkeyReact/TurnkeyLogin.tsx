@@ -12,17 +12,12 @@ import {
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { OAuth } from './Oauth';
-import { TurnkeyProvider } from '@turnkey/sdk-react-native';
-import { styles } from "./TurnkeyStyle";
+import { OAuth } from './components/Oauth';
+import { Providers } from './providers/providers';
+import { styles } from "./turnkeyStyle";
 import "react-native-get-random-values";
+import { TurnkeyConfigs } from './sharedConfigs';
 
-type TurnkeyConfigs = {
-  googleClientId: string,
-  appScheme: string,
-  turnkeyUrl: string,
-  turnkeyOrgId: string,
-};
 
 export const TurnkeyLogin = (configs: TurnkeyConfigs) => {
   const [email, setEmail] = useState<string>('');
@@ -36,28 +31,8 @@ export const TurnkeyLogin = (configs: TurnkeyConfigs) => {
     return Promise.resolve();
   }
 
-  // var configs = {
-  //   googleClientId: configs.googleClientId || 'YOUR_GOOGLE_CLIENT_ID',
-  //   appScheme: 'dydx-v4',
-  //   turnkeyUrl: 'YOUR_TURNKEY_URL',
-  //   turnkeyOrgId: 'TURNKEY_PARENT_ORG_ID',
-  // }
-
-  const sessionConfig = {
-    apiBaseUrl: configs.turnkeyUrl,
-    organizationId: configs.turnkeyOrgId,
-    onSessionSelected: () => {
-      console.log("onSessionSelected");
-    },
-    onSessionCleared: () => {
-      console.log("onSessionCleared");
-    },
-  };
-
-
   return (
-    <TurnkeyProvider config={sessionConfig}>
-
+    <Providers configs={configs}>
       <ScrollView contentContainerStyle={styles.container}>
         {/* Header */}
         <Text style={styles.title}>Sign in</Text>
@@ -115,6 +90,6 @@ export const TurnkeyLogin = (configs: TurnkeyConfigs) => {
           <Text style={styles.actionButtonText}>Sign in with Wallet</Text>
         </TouchableOpacity>
       </ScrollView>
-    </TurnkeyProvider>
+    </Providers>
   );
 };
