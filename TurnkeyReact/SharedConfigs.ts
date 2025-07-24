@@ -5,4 +5,5 @@ export type TurnkeyConfigs = {
   appScheme: string,
   turnkeyUrl: string,
   turnkeyOrgId: string,
+  backendApiUrl: string,
 };

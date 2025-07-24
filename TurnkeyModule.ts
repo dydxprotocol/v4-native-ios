@@ -4,6 +4,8 @@ import { NativeModules } from 'react-native';
 // Define type for native module
 interface TurnkeyNativeModuleType {
   onJsResponse: (callbackId: string, result: string) => void;
+
+  onAuthRouteToWallet: () => void;
 }
 
 // Safely cast NativeModules

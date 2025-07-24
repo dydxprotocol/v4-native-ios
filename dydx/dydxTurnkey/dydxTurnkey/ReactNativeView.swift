@@ -7,7 +7,7 @@
 
 import SwiftUI
 import React
-import PlatformUI
+internal import PlatformUI
 
 public struct ReactNativeView: UIViewControllerRepresentable {
     let moduleName: String

@@ -7,6 +7,7 @@ import {
   User,
   useTurnkey,
 } from "@turnkey/sdk-react-native";
+import { TurnkeyNativeModule } from "../../TurnkeyModule";
 
 type AuthActionType =
   | { type: "PASSKEY"; payload: User }
@@ -106,8 +107,9 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     otpType: string;
     contact: string;
   }) => {
-    // TODO: Implement OTP login initialization
-
+    console.debug("initOtpLogin called with:", otpType, contact);
+    dispatch({ type: "LOADING", payload: LoginMethod.Email });
+    TurnkeyNativeModule.onAuthRouteToWallet();
   };
 
   const completeOtpAuth = async ({
@@ -119,17 +121,16 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     otpCode: string;
     organizationId: string;
   }) => {
-    // TODO: Implement OTP authentication completion
-
+    console.debug("completeOtpAuth called with:", otpId, otpCode, organizationId);
   };
 
   // User will be prompted once for passkey creation then will leverage an api key session to have a smooth "one tap" login experience
   const signUpWithPasskey = async () => {
-    // TODO: Implement passkey sign-up
+    console.debug("signUpWithPasskey called");
   };
 
   const loginWithPasskey = async () => {
-    // TODO: Implement passkey login
+    console.debug("loginWithPasskey called");
   };
 
   const loginWithOAuth = async ({

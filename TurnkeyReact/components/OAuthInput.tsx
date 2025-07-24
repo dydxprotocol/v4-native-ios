@@ -5,7 +5,6 @@ import { Button } from "./ui/button";
 import { View, Text } from "react-native";
 // import GoogleIcon from "../assets/svgs/google.svg";
 import { OAUTH_TOKEN_EXPIRATION_SECONDS } from "../lib/constants";
-// import * as Crypto from "expo-crypto";
 import { styles } from "../turnkeyStyle";
 import SHA256 from 'crypto-js/sha256';
 
@@ -115,8 +114,7 @@ export const useEmbeddedKeyAndNonce = () => {
   return { targetPublicKey, nonce, refreshNonce: generateNonce };
 };
 
-
-export const OAuth: React.FC<OAuthProps> = (props) => {
+export const OAuthInput: React.FC<OAuthProps> = (props) => {
   const { onSuccess, configs } = props;
 
   const { targetPublicKey, nonce, refreshNonce } = useEmbeddedKeyAndNonce();

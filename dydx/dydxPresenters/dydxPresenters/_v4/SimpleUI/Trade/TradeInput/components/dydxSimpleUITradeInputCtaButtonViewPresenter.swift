@@ -135,7 +135,7 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
         navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) {  _, _ in
             switch onboardingState {
             case .newUser:
-                self.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+                self.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)
             case .needDeposit:
                 self.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
             case .readyToTrade:

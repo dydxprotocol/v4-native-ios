@@ -1,16 +1,35 @@
 //
-//  dydxTurnkeyLoginViewConntroller.swift
+//  dydxTurnkeyAuthViewBuilder.swift
 //  dydxPresenters
 //
-//  Created by Rui Huang on 16/07/2025.
+//  Created by Rui Huang on 23/07/2025.
 //
 
+import Utilities
+import PlatformParticles
+import RoutingKit
+import ParticlesKit
+import PlatformUI
+import dydxFormatter
 import UIKit
 import React
 import React_RCTAppDelegate
 import dydxTurnkey
 
-class dydxTurnkeyLoginViewConntroller: ReactNativeHostingController {
+public struct OnboardingLandingRoute {
+    static var value: String {
+        dydxBoolFeatureFlag.turnkey_ios.isEnabled ? "/onboard/turnkey" : "/onboard/wallets"
+    }
+}
+
+public class dydxTurnkeyAuthViewBuilder: NSObject, ObjectBuilderProtocol {
+    public func build<T>() -> T? {
+        let viewController = dydxTurnkeyAuthViewConntroller()
+        return viewController as? T
+    }
+}
+
+private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController {
     init() {
         guard let appScheme = Bundle.main.scheme else {
             fatalError((#file as NSString).lastPathComponent + ": Bundle.main.scheme is nil")
@@ -21,7 +40,9 @@ class dydxTurnkeyLoginViewConntroller: ReactNativeHostingController {
             "appScheme": appScheme,
             "turnkeyUrl": "https://api.turnkey.com",
             // From Turnkey console
-            "turnkeyOrgId": "3174ac51-1637-47d8-9456-19549963e2ed"
+            "turnkeyOrgId": "3174ac51-1637-47d8-9456-19549963e2ed",
+            // Indexer backend
+            "backendApiUrl": "https://api.turnkey.com"
         ]
         super.init(moduleName: "TurnkeyLogin", initialProperties: initialProperties)
     }

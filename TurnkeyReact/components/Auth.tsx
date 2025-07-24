@@ -11,8 +11,12 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TurnkeyConfigs } from '../sharedConfigs';
 import { useAuthRelay } from '../hooks/useAuthRelay';
-import { OAuth } from './Oauth';
+import { OAuthInput } from './OAuthInput';
+import { EmailInput } from './EmailInput';
 import { styles } from "../turnkeyStyle";
+import { LoaderButton } from './ui/button';
+import { LoginMethod, OtpType } from '../lib/types';
+import { TurnkeyNativeModule } from '../../TurnkeyModule';
 
 export const Auth = ({configs }: { configs: TurnkeyConfigs }) => {
   const {
@@ -25,10 +29,7 @@ export const Auth = ({configs }: { configs: TurnkeyConfigs }) => {
   } = useAuthRelay();
   
   const [email, setEmail] = useState<string>('');
-
-  const handleEmailChange = (text: string) => {
-    setEmail(text);
-  };
+  const [isValidEmail, setIsValidEmail] = useState<boolean>(false);
 
   return (
       <ScrollView contentContainerStyle={styles.container}>
@@ -41,23 +42,27 @@ export const Auth = ({configs }: { configs: TurnkeyConfigs }) => {
 
         {/* Social icons row */}
         <View style={styles.socialRow}>
-          <OAuth onSuccess={loginWithOAuth} configs={configs} />
+          <OAuthInput onSuccess={loginWithOAuth} configs={configs} />
         </View>
 
         {/* Email input row */}
         <View style={styles.emailRow}>
-          <TextInput
-            style={styles.emailInput}
-            placeholder="your@email.com"
-            placeholderTextColor="#888"
-            value={email}
-            onChangeText={handleEmailChange}
-            keyboardType="email-address"
-          />
-          <TouchableOpacity style={styles.submitButton}>
-            <Text style={styles.submitButtonText}>Submit</Text>
-          </TouchableOpacity>
-        </View>
+            <EmailInput
+              initialValue={email}
+              onEmailChange={setEmail}
+              onValidationChange={setIsValidEmail}
+            />
+            <LoaderButton
+              variant="outline"
+              disabled={!!state.loading || !isValidEmail}
+              loading={state.loading === LoginMethod.Email}
+              onPress={() =>
+                initOtpLogin({ otpType: OtpType.Email, contact: email })
+              }
+            >
+              <Text style={styles.submitButtonText}>Submit</Text>
+            </LoaderButton>
+          </View>
 
         {/* Divider */}
         <View style={styles.dividerContainer}>
@@ -78,7 +83,9 @@ export const Auth = ({configs }: { configs: TurnkeyConfigs }) => {
         </TouchableOpacity>
 
         {/* Sign in with Wallet */}
-        <TouchableOpacity style={styles.actionButton}>
+        <TouchableOpacity style={styles.actionButton} onPress={async () => {
+              TurnkeyNativeModule.onAuthRouteToWallet();
+        }}>
           <Ionicons
             name="wallet"
             size={18}

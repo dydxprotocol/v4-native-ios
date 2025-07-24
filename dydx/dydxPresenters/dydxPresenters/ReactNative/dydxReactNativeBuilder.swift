@@ -13,6 +13,7 @@ import Utilities
 
 public class dydxReactNativeBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        return dydxReactViewController() as? T
+        // Sample
+        return dydxReactViewController(moduleName: "TurnkeyReact") as? T
     }
 }

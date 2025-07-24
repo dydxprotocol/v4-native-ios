@@ -68,7 +68,7 @@ private class dydxOnboardWelcomeViewPresenter: HostedViewPresenter<dydxOnboardWe
                 }
             case .walletOnboard:
                 self.onboardingAnalytics.log(step: .chooseWallet)
-                Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+                Router.shared?.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)
             }
         }
         viewModel?.tosUrl = AbacusStateManager.shared.environment?.links?.tos

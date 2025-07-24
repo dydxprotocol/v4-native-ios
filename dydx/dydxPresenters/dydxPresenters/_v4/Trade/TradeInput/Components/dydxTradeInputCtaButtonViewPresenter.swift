@@ -84,7 +84,7 @@ class dydxTradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInputCt
                     Router.shared?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
                 }
             } else {
-                Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+                Router.shared?.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)
             }
         }
         .store(in: &subscriptions)

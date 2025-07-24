@@ -102,7 +102,7 @@ private class dydxSimpleUIMenuViewPresenter: HostedViewPresenter<dydxSimpleUIMen
         icon: "icon_wallet_connect",
         title: DataLocalizer.localize(path: "APP.GENERAL.CONNECT_WALLET")) { [weak self] in
             self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) {_, _ in
-                self?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+                self?.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)
             }
         }
     }

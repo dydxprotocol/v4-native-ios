@@ -87,7 +87,7 @@ class dydxSimpleUIMenuAccountViewPresenter: HostedViewPresenter<dydxSimpleUIMenu
             if (wallets?.wallets.count ?? 0) > 0 {
                 Router.shared?.navigate(to: RoutingRequest(path: "/wallets"), animated: true, completion: nil)
             } else {
-                Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+                Router.shared?.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)
             }
         }
 

@@ -83,7 +83,7 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
                 } else {
                     self?.viewModel?.state = .loggedOut
                     self?.viewModel?.buttonAction = {
-                        self?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+                        self?.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)
                     }
                 }
             }

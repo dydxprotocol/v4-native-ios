@@ -7,6 +7,7 @@
 
 import React
 import Foundation
+internal import RoutingKit
 
 @objc(TurnkeyNativeModule)
 class TurnkeyNativeModule: NSObject, RCTBridgeModule {
@@ -40,6 +41,16 @@ class TurnkeyNativeModule: NSObject, RCTBridgeModule {
         if let completion = pendingCompletions[callbackId] {
             completion(result)
             pendingCompletions.removeValue(forKey: callbackId)
+        }
+    }
+
+    @objc(onAuthRouteToWallet)
+    func onAuthRouteToWallet() {
+        print("onAuthRouteToWallet")
+        DispatchQueue.main.async {
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+                Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+            }
         }
     }
 }

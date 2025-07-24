@@ -153,6 +153,10 @@
                     "destination":"dydxPresenters.dydxWalletListViewBuilder",
                     "presentation":"prompt"
                 },
+                "/onboard/turnkey":{
+                    "destination":"dydxPresenters.dydxTurnkeyAuthViewBuilder",
+                    "presentation":"prompt"
+                },
                 "/onboard/social":{
                     "destination":"dydxPresenters.dydxSocialLoginViewBuilder",
                     "presentation":"prompt"
