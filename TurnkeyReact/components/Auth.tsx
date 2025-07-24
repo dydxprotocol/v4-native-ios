@@ -18,7 +18,7 @@ import { LoaderButton } from './ui/button';
 import { LoginMethod, OtpType } from '../lib/types';
 import { TurnkeyNativeModule } from '../../TurnkeyModule';
 
-export const Auth = ({configs }: { configs: TurnkeyConfigs }) => {
+export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
   const {
     state,
     initOtpLogin,
@@ -27,12 +27,20 @@ export const Auth = ({configs }: { configs: TurnkeyConfigs }) => {
     loginWithOAuth,
     clearError
   } = useAuthRelay();
-  
+
   const [email, setEmail] = useState<string>('');
   const [isValidEmail, setIsValidEmail] = useState<boolean>(false);
 
   return (
-      <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView 
+      bounces={false} // iOS
+      overScrollMode="never" // Android
+      contentContainerStyle={styles.container}
+    >
+      <View style={styles.content}>
+        {/* Draggable indicator bar */}
+        <View style={styles.dragHandle} />
+
         {/* Header */}
         <Text style={styles.title}>Sign in</Text>
         <Text style={styles.subtitle}>
@@ -47,22 +55,22 @@ export const Auth = ({configs }: { configs: TurnkeyConfigs }) => {
 
         {/* Email input row */}
         <View style={styles.emailRow}>
-            <EmailInput
-              initialValue={email}
-              onEmailChange={setEmail}
-              onValidationChange={setIsValidEmail}
-            />
-            <LoaderButton
-              variant="outline"
-              disabled={!!state.loading || !isValidEmail}
-              loading={state.loading === LoginMethod.Email}
-              onPress={() =>
-                initOtpLogin({ otpType: OtpType.Email, contact: email })
-              }
-            >
-              <Text style={styles.submitButtonText}>Submit</Text>
-            </LoaderButton>
-          </View>
+          <EmailInput
+            initialValue={email}
+            onEmailChange={setEmail}
+            onValidationChange={setIsValidEmail}
+          />
+          <LoaderButton
+            variant="outline"
+            disabled={!!state.loading || !isValidEmail}
+            loading={state.loading === LoginMethod.Email}
+            onPress={() =>
+              initOtpLogin({ otpType: OtpType.Email, contact: email })
+            }
+          >
+            <Text style={styles.submitButtonText}>Submit</Text>
+          </LoaderButton>
+        </View>
 
         {/* Divider */}
         <View style={styles.dividerContainer}>
@@ -72,7 +80,7 @@ export const Auth = ({configs }: { configs: TurnkeyConfigs }) => {
         </View>
 
         {/* Sign in with Passkey */}
-        <TouchableOpacity style={styles.actionButton}>
+        {/* <TouchableOpacity style={styles.actionButton}>
           <Ionicons
             name="person"
             size={18}
@@ -80,11 +88,28 @@ export const Auth = ({configs }: { configs: TurnkeyConfigs }) => {
             style={{ marginRight: 8 }}
           />
           <Text style={styles.actionButtonText}>Sign in with Passkey</Text>
+        </TouchableOpacity> */}
+
+        {/* Sign in with Desktop */}
+        <TouchableOpacity 
+          style={styles.actionButton} 
+          onPress={async () => {
+            TurnkeyNativeModule.onAuthRouteToDesktopQR();
+        }}>
+          <Ionicons
+            name="person"
+            size={18}
+            color="#fff"
+            style={{ marginRight: 8 }}
+          />
+          <Text style={styles.actionButtonText}>Sign in with Desktop</Text>
         </TouchableOpacity>
 
         {/* Sign in with Wallet */}
-        <TouchableOpacity style={styles.actionButton} onPress={async () => {
-              TurnkeyNativeModule.onAuthRouteToWallet();
+        <TouchableOpacity 
+          style={styles.actionButton} 
+          onPress={async () => {
+            TurnkeyNativeModule.onAuthRouteToWallet();
         }}>
           <Ionicons
             name="wallet"
@@ -94,6 +119,7 @@ export const Auth = ({configs }: { configs: TurnkeyConfigs }) => {
           />
           <Text style={styles.actionButtonText}>Sign in with Wallet</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </View>
+    </ScrollView>
   );
 }

@@ -6,6 +6,7 @@ interface TurnkeyNativeModuleType {
   onJsResponse: (callbackId: string, result: string) => void;
 
   onAuthRouteToWallet: () => void;
+  onAuthRouteToDesktopQR: () => void;
 }
 
 // Safely cast NativeModules

@@ -24,5 +24,6 @@
 RCT_EXTERN_METHOD(onJsResponse:(NSString) callbackId :(NSString) result)
 
 RCT_EXTERN_METHOD(onAuthRouteToWallet)
+RCT_EXTERN_METHOD(onAuthRouteToDesktopQR)
 
 @end

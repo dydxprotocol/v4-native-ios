@@ -29,7 +29,7 @@ public class dydxTurnkeyAuthViewBuilder: NSObject, ObjectBuilderProtocol {
     }
 }
 
-private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController {
+private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, TurnkeyBridgeManagerDelegate {
     init() {
         guard let appScheme = Bundle.main.scheme else {
             fatalError((#file as NSString).lastPathComponent + ": Bundle.main.scheme is nil")
@@ -54,6 +54,23 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        TurnkeyBridgeManager.shared.delegate = self
         TurnkeyBridgeManager.shared.testFunction()
+    }
+
+    //
+    // MARK: TurnkeyBridgeManagerDelegate
+    //
+
+    func onAuthRouteToWallet() {
+        Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+            Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+        }
+    }
+
+    func onAuthRouteToDesktopQR() {
+        Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+            Router.shared?.navigate(to: RoutingRequest(path: "/onboard/scan/instructions"), animated: true, completion: nil)
+        }
     }
 }

@@ -34,6 +34,8 @@ private protocol dydxOnboardScanInstructionsViewPresenterProtocol: HostedViewPre
 }
 
 private class dydxOnboardScanInstructionsViewPresenter: HostedViewPresenter<dydxOnboardScanInstructionsViewModel>, dydxOnboardScanInstructionsViewPresenterProtocol {
+    var fromPath: String?
+
     override init() {
         super.init()
 
@@ -44,7 +46,9 @@ private class dydxOnboardScanInstructionsViewPresenter: HostedViewPresenter<dydx
         }
 
         viewModel?.backAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+                Router.shared?.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)
+            }
         }
     }
 }

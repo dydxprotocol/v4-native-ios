@@ -8,7 +8,7 @@ import { OAUTH_TOKEN_EXPIRATION_SECONDS } from "../lib/constants";
 import { styles } from "../turnkeyStyle";
 import SHA256 from 'crypto-js/sha256';
 
-type OAuthProps =  {
+type OAuthProps = {
   onSuccess: (params: {
     oidcToken: string;
     providerName: string;
@@ -61,10 +61,10 @@ export const GoogleAuthButton: React.FC<AuthButtonProps> = ({
   return (
     <Button
       onPress={handlePress}
-     // className="border border-black rounded-xl bg-transparent flex-row items-center justify-center flex-1 h-16"
+      // className="border border-black rounded-xl bg-transparent flex-row items-center justify-center flex-1 h-16"
       disabled={nonce == null || !targetPublicKey}
     >
-        {/* <GoogleIcon width={24} height={24} /> */}
+      {/* <GoogleIcon width={24} height={24} /> */}
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
         <Text style={styles.subtitle}>Google</Text>
       </View>
@@ -97,10 +97,10 @@ export const useEmbeddedKeyAndNonce = () => {
       setTargetPublicKey(pubKey);
 
       const hashedNonce = SHA256(pubKey).toString();
-    //   const hashedNonce = await Crypto.digestStringAsync(
-    //     Crypto.CryptoDigestAlgorithm.SHA256,
-    //     pubKey
-    //   );
+      //   const hashedNonce = await Crypto.digestStringAsync(
+      //     Crypto.CryptoDigestAlgorithm.SHA256,
+      //     pubKey
+      //   );
       setNonce(hashedNonce);
     } catch (error) {
       console.error("Error generating nonce and public key:", error);
@@ -120,7 +120,7 @@ export const OAuthInput: React.FC<OAuthProps> = (props) => {
   const { targetPublicKey, nonce, refreshNonce } = useEmbeddedKeyAndNonce();
 
   return (
-   // <View className="flex flex-row items-center justify-center w-full gap-4">
+    // <View className="flex flex-row items-center justify-center w-full gap-4">
     <View>
       <GoogleAuthButton
         onSuccess={onSuccess}

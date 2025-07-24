@@ -8,7 +8,7 @@ import { TurnkeyConfigs } from './sharedConfigs';
 export const TurnkeyLogin = (configs: TurnkeyConfigs) => {
   return (
     <Providers configs={configs}>
-     <Auth configs={configs} />
+      <Auth configs={configs} />
     </Providers>
   );
 };

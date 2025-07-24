@@ -7,26 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		025D04102E31E4900015E1D7 /* RoutingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025D04072E31E47F0015E1D7 /* RoutingKit.framework */; platformFilter = ios; };
 		025DFE822E3159310015E1D7 /* PlatformUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025DFE7F2E3159270015E1D7 /* PlatformUI.framework */; };
 		35C55D24A41A3DFA2BA54B75 /* Pods_iOS_dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AE56594D5B2D8D07259C597 /* Pods_iOS_dydxTurnkey.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		025D03FF2E31E47F0015E1D7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 025D03FC2E31E47F0015E1D7 /* RoutingKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 31E65B00216BCA10008ABEE9;
-			remoteInfo = RoutingKit;
-		};
-		025D04062E31E47F0015E1D7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 025D03FC2E31E47F0015E1D7 /* RoutingKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 31E65B01216BCA10008ABEE9;
-			remoteInfo = RoutingKit;
-		};
 		025DFE7A2E3159270015E1D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 025DFE772E3159270015E1D7 /* PlatformUI.xcodeproj */;
@@ -44,7 +29,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		025D03F92E31E4700015E1D7 /* RoutingKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RoutingKit.xcodeproj; path = ../../RoutingKit/RoutingKit.xcodeproj; sourceTree = "<group>"; };
 		025D03FC2E31E47F0015E1D7 /* RoutingKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RoutingKit.xcodeproj; path = "/Users/ruihuang/v4-native-ios/RoutingKit/RoutingKit.xcodeproj"; sourceTree = "<absolute>"; };
 		025DFE742E3159150015E1D7 /* PlatformUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformUI.xcodeproj; path = ../../PlatformUI/PlatformUI.xcodeproj; sourceTree = "<group>"; };
 		025DFE772E3159270015E1D7 /* PlatformUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformUI.xcodeproj; path = "/Users/ruihuang/v4-native-ios/PlatformUI/PlatformUI.xcodeproj"; sourceTree = "<absolute>"; };
@@ -80,7 +64,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025D04102E31E4900015E1D7 /* RoutingKit.framework in Frameworks */,
 				025DFE822E3159310015E1D7 /* PlatformUI.framework in Frameworks */,
 				35C55D24A41A3DFA2BA54B75 /* Pods_iOS_dydxTurnkey.framework in Frameworks */,
 			);
@@ -92,7 +75,6 @@
 		025D03FD2E31E47F0015E1D7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				025D04072E31E47F0015E1D7 /* RoutingKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,7 +97,6 @@
 		02A105442E28537C00E65EE2 = {
 			isa = PBXGroup;
 			children = (
-				025D03F92E31E4700015E1D7 /* RoutingKit.xcodeproj */,
 				025DFE742E3159150015E1D7 /* PlatformUI.xcodeproj */,
 				02A105502E28537C00E65EE2 /* dydxTurnkey */,
 				02A1054F2E28537C00E65EE2 /* Products */,
@@ -179,7 +160,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				025D04002E31E47F0015E1D7 /* PBXTargetDependency */,
 				025DFE7B2E3159270015E1D7 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
@@ -240,13 +220,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		025D04072E31E47F0015E1D7 /* RoutingKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RoutingKit.framework;
-			remoteRef = 025D04062E31E47F0015E1D7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		025DFE7F2E3159270015E1D7 /* PlatformUI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -323,11 +296,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		025D04002E31E47F0015E1D7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RoutingKit;
-			targetProxy = 025D03FF2E31E47F0015E1D7 /* PBXContainerItemProxy */;
-		};
 		025DFE7B2E3159270015E1D7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PlatformUI;

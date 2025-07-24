@@ -133,7 +133,11 @@ class dydxWalletListViewPresenter_Deprecated: HostedViewPresenter<dydxWalletList
         if mobileOnly {
             viewModel?.items = [wcModalViewModel] + social + allWallets
         } else {
-            viewModel?.items = [desktopSyncViewModel] + debugScan + [wcModalViewModel] + social + allWallets
+            if dydxBoolFeatureFlag.turnkey_ios.isEnabled {
+                viewModel?.items = debugScan + [wcModalViewModel] + social + allWallets
+            } else {
+                viewModel?.items = [desktopSyncViewModel] + debugScan + [wcModalViewModel] + social + allWallets
+            }
         }
     }
 }
