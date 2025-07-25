@@ -28,8 +28,6 @@ export const DEFAULT_ETHEREUM_ACCOUNTS = [
 
 export const APP_SCHEME = process.env.EXPO_PUBLIC_APP_SCHEME ?? "";
 
-export const BACKEND_API_URL = process.env.EXPO_PUBLIC_BACKEND_API_URL ?? "";
-
 export const TURNKEY_API_URL = process.env.EXPO_PUBLIC_TURNKEY_API_URL ?? "";
 export const TURNKEY_PARENT_ORG_ID =
   process.env.EXPO_PUBLIC_TURNKEY_ORGANIZATION_ID ?? "";
@@ -37,5 +35,3 @@ export const TURNKEY_PARENT_ORG_ID =
 export const RP_ID = process.env.EXPO_PUBLIC_RPID ?? "";
 export const PASSKEY_APP_NAME = process.env.EXPO_PUBLIC_PASSKEY_APP_NAME ?? "";
 
-export const OAUTH_TOKEN_EXPIRATION_SECONDS = "3600";
-export const GOOGLE_CLIENT_ID =process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID ?? "";

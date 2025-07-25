@@ -14,6 +14,7 @@ import { styles } from "../turnkeyStyle";
 import { LoaderButton } from './ui/button';
 import { LoginMethod, OtpType } from '../lib/types';
 import { TurnkeyNativeModule } from '../../TurnkeyModule';
+import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
 
 const renderError = () => {
   const {
@@ -43,6 +44,8 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
   const [email, setEmail] = useState<string>('');
   const [isValidEmail, setIsValidEmail] = useState<boolean>(false);
 
+  const embeddedKeyAndNonce = useEmbeddedKeyAndNonce();
+
   return (
     <ScrollView
       bounces={false} // iOS
@@ -63,7 +66,10 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
 
           {/* Social icons row */}
           <View style={styles.socialRow}>
-            <OAuthInput onSuccess={loginWithOAuth} configs={configs} />
+            <OAuthInput 
+              onSuccess={loginWithOAuth} 
+              configs={configs} 
+              embeddedKeyAndNonce={embeddedKeyAndNonce} />
           </View>
 
           {/* Email input row */}
@@ -78,7 +84,12 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
               disabled={!!state.loading || !isValidEmail}
               loading={state.loading === LoginMethod.Email}
               onPress={() =>
-                initOtpLogin({ otpType: OtpType.Email, contact: email })
+                initOtpLogin({
+                  otpType: OtpType.Email,
+                  contact: email,
+                  embeddedKeyAndNonce: embeddedKeyAndNonce,
+                  backendApiUrl: configs.backendApiUrl,
+                })
               }
             >
               <Text style={styles.submitButtonText}>Submit</Text>

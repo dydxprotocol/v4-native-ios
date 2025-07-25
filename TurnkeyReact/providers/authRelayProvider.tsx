@@ -1,14 +1,12 @@
 import { ReactNode, createContext, useReducer } from "react";
 import { LoginMethod } from "../lib/types";
 import {
-  BACKEND_API_URL,
-} from "../lib/constants";
-import {
   User,
   useTurnkey,
 } from "@turnkey/sdk-react-native";
 import { TurnkeyNativeModule } from "../../TurnkeyModule";
 import { DydxTurnkeySession } from "./dydxTurnkeySession";
+import { EmbeddedKeyAndNonce } from "../components/useEmbeddedKeyAndNonce";
 
 type AuthActionType =
   | { type: "PASSKEY"; payload: User }
@@ -65,13 +63,19 @@ export type OAuthRequest = {
   oidcToken: string;
   providerName: string;
   targetPublicKey: string;
-  expirationSeconds: string;
+  backendApiUrl: string;
+};
+
+export type OtpAuthRequest = {
+  otpType: string;
+  contact: string;
+  embeddedKeyAndNonce: EmbeddedKeyAndNonce;
   backendApiUrl: string;
 };
 
 export interface AuthRelayProviderType {
   state: AuthState;
-  initOtpLogin: (params: { otpType: string; contact: string }) => Promise<void>;
+  initOtpLogin: (params: OtpAuthRequest) => Promise<void>;
   completeOtpAuth: (params: {
     otpId: string;
     otpCode: string;
@@ -107,13 +111,42 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
   const initOtpLogin = async ({
     otpType,
     contact,
-  }: {
-    otpType: string;
-    contact: string;
-  }) => {
-    console.debug("initOtpLogin called with:", otpType, contact);
+    embeddedKeyAndNonce,
+    backendApiUrl,
+  }: OtpAuthRequest) => {
     dispatch({ type: "LOADING", payload: LoginMethod.Email });
-    TurnkeyNativeModule.onAuthRouteToWallet();
+    try {
+      const inputBody = {
+        "signinMethod": "email",
+        "userEmail": contact,
+        "targetPublicKey": embeddedKeyAndNonce.targetPublicKey,
+      };
+      const headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      };
+      const response = await fetch(`${backendApiUrl}/v4/turnkey/signin`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(inputBody),
+      }).then((res) => res.json());
+
+      if (response.errors && Array.isArray(response.errors)) {
+        // Handle API-reported errors
+        const errorMsg = response.errors.map((e: { msg: any; }) => e.msg).join(", ");
+        throw new Error(`Backend Error: ${errorMsg}`);
+      }
+
+      const credentialBundle = response.credentialBundle;
+      if (credentialBundle) {
+        const session = await createSession({ bundle: credentialBundle });
+        console.debug("Session created:", session);
+      }
+    } catch (error: any) {
+      dispatch({ type: "ERROR", payload: error.message });
+    } finally {
+      dispatch({ type: "LOADING", payload: null });
+    }
   };
 
   const completeOtpAuth = async ({
@@ -141,15 +174,13 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     oidcToken,
     providerName,
     targetPublicKey,
-    expirationSeconds,
     backendApiUrl,
   }: OAuthRequest) => {
-    const dydxSession = new DydxTurnkeySession(
-      targetPublicKey,
-      targetPublicKey,
-    );
-    const hash = await dydxSession.signOnboardingMessage();
-
+    // const dydxSession = new DydxTurnkeySession(
+    //   targetPublicKey,
+    //   targetPublicKey,
+    // );
+    // const hash = await dydxSession.signOnboardingMessage();
     dispatch({ type: "LOADING", payload: LoginMethod.OAuth });
     try {
       const inputBody = {
