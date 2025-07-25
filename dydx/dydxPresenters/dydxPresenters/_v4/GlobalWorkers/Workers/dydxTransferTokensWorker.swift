@@ -15,6 +15,7 @@ import dydxAnalytics
 import Abacus
 import dydxCartera
 import Web3
+import SolanaSwift
 
 public final class dydxTransferTokensWorker: BaseWorker {
     private var ethereumInteractors = [String: EthereumInteractor]()
@@ -23,7 +24,13 @@ public final class dydxTransferTokensWorker: BaseWorker {
     public override func start() {
         super.start()
 
-        let endpoint = AbacusStateManager.shared.isMainNet ? SolanaInteractor.mainnetEndpoint : SolanaInteractor.devnetEndpoint
+        let endpoint: APIEndPoint
+        let rpcUrl = AbacusStateManager.shared.environment?.endpoints.solanaRpcUrl
+        if let rpcUrl {
+            endpoint = APIEndPoint(address: rpcUrl, network: AbacusStateManager.shared.isMainNet ? .mainnetBeta : .testnet)
+        } else {
+            endpoint = AbacusStateManager.shared.isMainNet ? SolanaInteractor.mainnetEndpoint : SolanaInteractor.devnetEndpoint
+        }
         solanaInteractor = SolanaInteractor(endpoint: endpoint)
 
         let transferTokenDetails = TransferTokenDetails.create(isMainnet: AbacusStateManager.shared.isMainNet)

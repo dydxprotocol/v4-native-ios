@@ -18,7 +18,7 @@ public enum LogLevelEnum: Int, Sendable {
 
 public struct Constants {
     static let SDK_LIBRARY = "amplitude-swift"
-    static let SDK_VERSION = "1.13.8"
+    static let SDK_VERSION = "1.14.0"
     public static let DEFAULT_API_HOST = "https://api2.amplitude.com/2/httpapi"
     public static let EU_DEFAULT_API_HOST = "https://api.eu.amplitude.com/2/httpapi"
     static let BATCH_API_HOST = "https://api2.amplitude.com/batch"
@@ -57,6 +57,8 @@ public struct Constants {
     static let AMP_SCREEN_VIEWED_EVENT = "\(AMP_AMPLITUDE_PREFIX)Screen Viewed"
     static let AMP_ELEMENT_INTERACTED_EVENT = "\(AMP_AMPLITUDE_PREFIX)Element Interacted"
     static let AMP_NETWORK_TRACKING_EVENT = "\(AMP_AMPLITUDE_PREFIX)Network Request"
+    static let AMP_RAGE_CLICK_EVENT = "\(AMP_AMPLITUDE_PREFIX)Rage Click"
+    static let AMP_DEAD_CLICK_EVENT = "\(AMP_AMPLITUDE_PREFIX)Dead Click"
 
     static let AMP_REVENUE_EVENT = "revenue_amount"
 
@@ -86,9 +88,16 @@ public struct Constants {
     static let AMP_NETWORK_ERROR_MESSAGE_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Error Message"
     static let AMP_NETWORK_START_TIME_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Start Time"
     static let AMP_NETWORK_COMPLETION_TIME_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Completion Time"
-    static let AMP_NETWORK_DURATION_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Duration"
     static let AMP_NETWORK_REQUEST_BODY_SIZE_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Request Body Size"
     static let AMP_NETWORK_RESPONSE_BODY_SIZE_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Response Body Size"
+
+    static let AMP_BEGIN_TIME_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Begin Time"
+    static let AMP_END_TIME_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)End Time"
+    static let AMP_DURATION_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Duration"
+    static let AMP_COORDINATE_X = "\(AMP_AMPLITUDE_PREFIX)X"
+    static let AMP_COORDINATE_Y = "\(AMP_AMPLITUDE_PREFIX)Y"
+    static let AMP_CLICKS_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Clicks"
+    static let AMP_CLICK_COUNT_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Click Count"
 
     struct RemoteConfig {
         struct Key {
