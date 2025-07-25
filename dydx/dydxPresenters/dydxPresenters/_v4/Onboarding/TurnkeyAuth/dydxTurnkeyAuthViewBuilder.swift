@@ -42,7 +42,7 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
             // From Turnkey console
             "turnkeyOrgId": "3174ac51-1637-47d8-9456-19549963e2ed",
             // Indexer backend
-            "backendApiUrl": "https://api.turnkey.com"
+            "backendApiUrl": "http://dev2-indexer-apne1-lb-public-2076363889.ap-northeast-1.elb.amazonaws.com"
         ]
         super.init(moduleName: "TurnkeyLogin", initialProperties: initialProperties)
     }

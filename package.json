@@ -21,6 +21,7 @@
     "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.1",
     "crypto-js": "^4.2.0",
+    "ethers": "^5.8.0",
     "expo-crypto": "^14.1.5",
     "google-libphonenumber": "^3.2.42",
     "lucide-react-native": "^0.525.0",

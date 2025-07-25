@@ -7,14 +7,10 @@ import { View, Text } from "react-native";
 import { OAUTH_TOKEN_EXPIRATION_SECONDS } from "../lib/constants";
 import { styles } from "../turnkeyStyle";
 import SHA256 from 'crypto-js/sha256';
+import { OAuthRequest } from "../providers/authRelayProvider";
 
 type OAuthProps = {
-  onSuccess: (params: {
-    oidcToken: string;
-    providerName: string;
-    targetPublicKey: string;
-    expirationSeconds: string;
-  }) => Promise<void>;
+  onSuccess: (params: OAuthRequest) => Promise<void>;
   configs: TurnkeyConfigs;
 }
 type AuthButtonProps = {
@@ -38,6 +34,7 @@ export const GoogleAuthButton: React.FC<AuthButtonProps> = ({
       providerName: "google",
       targetPublicKey: targetPublicKey!,
       expirationSeconds: OAUTH_TOKEN_EXPIRATION_SECONDS,
+      backendApiUrl: configs.backendApiUrl,
     });
 
     // we refresh the nonce before authentication to ensure a new one is used

@@ -8,6 +8,7 @@ import {
   useTurnkey,
 } from "@turnkey/sdk-react-native";
 import { TurnkeyNativeModule } from "../../TurnkeyModule";
+import { DydxTurnkeySession } from "./dydxTurnkeySession";
 
 type AuthActionType =
   | { type: "PASSKEY"; payload: User }
@@ -60,6 +61,14 @@ function authReducer(state: AuthState, action: AuthActionType): AuthState {
   }
 }
 
+export type OAuthRequest = {
+  oidcToken: string;
+  providerName: string;
+  targetPublicKey: string;
+  expirationSeconds: string;
+  backendApiUrl: string;
+};
+
 export interface AuthRelayProviderType {
   state: AuthState;
   initOtpLogin: (params: { otpType: string; contact: string }) => Promise<void>;
@@ -70,12 +79,7 @@ export interface AuthRelayProviderType {
   }) => Promise<void>;
   signUpWithPasskey: () => Promise<void>;
   loginWithPasskey: () => Promise<void>;
-  loginWithOAuth: (params: {
-    oidcToken: string;
-    providerName: string;
-    targetPublicKey: string;
-    expirationSeconds: string;
-  }) => Promise<void>;
+  loginWithOAuth: (params: OAuthRequest) => Promise<void>;
   clearError: () => void;
 }
 
@@ -86,7 +90,7 @@ export const AuthRelayContext = createContext<AuthRelayProviderType>({
   signUpWithPasskey: async () => Promise.resolve(),
   loginWithPasskey: async () => Promise.resolve(),
   loginWithOAuth: async () => Promise.resolve(),
-  clearError: () => {},
+  clearError: () => { },
 });
 
 interface AuthRelayProviderProps {
@@ -138,28 +142,42 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     providerName,
     targetPublicKey,
     expirationSeconds,
-  }: {
-    oidcToken: string;
-    providerName: string;
-    targetPublicKey: string;
-    expirationSeconds: string;
-  }) => {
+    backendApiUrl,
+  }: OAuthRequest) => {
+    const dydxSession = new DydxTurnkeySession(
+      targetPublicKey,
+      targetPublicKey,
+    );
+    const hash = await dydxSession.signOnboardingMessage();
+
     dispatch({ type: "LOADING", payload: LoginMethod.OAuth });
     try {
-      const response = await fetch(`${BACKEND_API_URL}/auth/oAuthLogin`, {
+      const inputBody = {
+        "signinMethod": "social",
+        "targetPublicKey": targetPublicKey,
+        "provider": providerName,
+        "oidcToken": oidcToken,
+      };
+      const headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      };
+      const response = await fetch(`${backendApiUrl}/v4/turnkey/signin`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          oidcToken,
-          providerName,
-          targetPublicKey,
-          expirationSeconds,
-        }),
+        headers: headers,
+        body: JSON.stringify(inputBody),
       }).then((res) => res.json());
+
+      if (response.errors && Array.isArray(response.errors)) {
+        // Handle API-reported errors
+        const errorMsg = response.errors.map((e: { msg: any; }) => e.msg).join(", ");
+        throw new Error(`Backend Error: ${errorMsg}`);
+      }
 
       const credentialBundle = response.credentialBundle;
       if (credentialBundle) {
-        await createSession({ bundle: credentialBundle });
+        const session = await createSession({ bundle: credentialBundle });
+        console.debug("Session created:", session);
       }
     } catch (error: any) {
       dispatch({ type: "ERROR", payload: error.message });

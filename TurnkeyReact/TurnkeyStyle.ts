@@ -9,6 +9,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-start', // Align items to the top
   },
   content: {
+    flex: 1, 
+    justifyContent: 'space-between'
   },
   dragHandle: {
     alignSelf: 'center',

@@ -2,12 +2,9 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TurnkeyConfigs } from '../sharedConfigs';
 import { useAuthRelay } from '../hooks/useAuthRelay';
@@ -17,6 +14,21 @@ import { styles } from "../turnkeyStyle";
 import { LoaderButton } from './ui/button';
 import { LoginMethod, OtpType } from '../lib/types';
 import { TurnkeyNativeModule } from '../../TurnkeyModule';
+
+const renderError = () => {
+  const {
+    state,
+  } = useAuthRelay();
+
+  if (state.error && state.loading === null) {
+    return (
+      <Text style={{ color: 'red', marginBottom: 20, textAlign: 'center' }}>
+        {state.error}
+      </Text>
+    );
+  }
+  return null;
+}
 
 export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
   const {
@@ -32,55 +44,62 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
   const [isValidEmail, setIsValidEmail] = useState<boolean>(false);
 
   return (
-    <ScrollView 
+    <ScrollView
       bounces={false} // iOS
       overScrollMode="never" // Android
       contentContainerStyle={styles.container}
     >
       <View style={styles.content}>
-        {/* Draggable indicator bar */}
-        <View style={styles.dragHandle} />
+        <View>
+          {/* Draggable indicator bar */}
+          <View style={styles.dragHandle} />
 
-        {/* Header */}
-        <Text style={styles.title}>Sign in</Text>
-        <Text style={styles.subtitle}>
-          To get started, sign in with your social accounts, create a passkey or
-          connect your wallet.
-        </Text>
+          {/* Header */}
+          <Text style={styles.title}>Sign in</Text>
+          <Text style={styles.subtitle}>
+            To get started, sign in with your social accounts, create a passkey or
+            connect your wallet.
+          </Text>
 
-        {/* Social icons row */}
-        <View style={styles.socialRow}>
-          <OAuthInput onSuccess={loginWithOAuth} configs={configs} />
+          {/* Social icons row */}
+          <View style={styles.socialRow}>
+            <OAuthInput onSuccess={loginWithOAuth} configs={configs} />
+          </View>
+
+          {/* Email input row */}
+          <View style={styles.emailRow}>
+            <EmailInput
+              initialValue={email}
+              onEmailChange={setEmail}
+              onValidationChange={setIsValidEmail}
+            />
+            <LoaderButton
+              variant="outline"
+              disabled={!!state.loading || !isValidEmail}
+              loading={state.loading === LoginMethod.Email}
+              onPress={() =>
+                initOtpLogin({ otpType: OtpType.Email, contact: email })
+              }
+            >
+              <Text style={styles.submitButtonText}>Submit</Text>
+            </LoaderButton>
+          </View>
+
+          {renderError()}
+
         </View>
 
-        {/* Email input row */}
-        <View style={styles.emailRow}>
-          <EmailInput
-            initialValue={email}
-            onEmailChange={setEmail}
-            onValidationChange={setIsValidEmail}
-          />
-          <LoaderButton
-            variant="outline"
-            disabled={!!state.loading || !isValidEmail}
-            loading={state.loading === LoginMethod.Email}
-            onPress={() =>
-              initOtpLogin({ otpType: OtpType.Email, contact: email })
-            }
-          >
-            <Text style={styles.submitButtonText}>Submit</Text>
-          </LoaderButton>
-        </View>
+        <View>
 
-        {/* Divider */}
-        <View style={styles.dividerContainer}>
-          <View style={styles.divider} />
-          <Text style={styles.dividerText}>Or</Text>
-          <View style={styles.divider} />
-        </View>
+          {/* Divider */}
+          <View style={styles.dividerContainer}>
+            <View style={styles.divider} />
+            <Text style={styles.dividerText}>Or</Text>
+            <View style={styles.divider} />
+          </View>
 
-        {/* Sign in with Passkey */}
-        {/* <TouchableOpacity style={styles.actionButton}>
+          {/* Sign in with Passkey */}
+          {/* <TouchableOpacity style={styles.actionButton}>
           <Ionicons
             name="person"
             size={18}
@@ -90,35 +109,36 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
           <Text style={styles.actionButtonText}>Sign in with Passkey</Text>
         </TouchableOpacity> */}
 
-        {/* Sign in with Desktop */}
-        <TouchableOpacity 
-          style={styles.actionButton} 
-          onPress={async () => {
-            TurnkeyNativeModule.onAuthRouteToDesktopQR();
-        }}>
-          <Ionicons
-            name="person"
-            size={18}
-            color="#fff"
-            style={{ marginRight: 8 }}
-          />
-          <Text style={styles.actionButtonText}>Sign in with Desktop</Text>
-        </TouchableOpacity>
+          {/* Sign in with Desktop */}
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={async () => {
+              TurnkeyNativeModule.onAuthRouteToDesktopQR();
+            }}>
+            <Ionicons
+              name="person"
+              size={18}
+              color="#fff"
+              style={{ marginRight: 8 }}
+            />
+            <Text style={styles.actionButtonText}>Sign in with Desktop</Text>
+          </TouchableOpacity>
 
-        {/* Sign in with Wallet */}
-        <TouchableOpacity 
-          style={styles.actionButton} 
-          onPress={async () => {
-            TurnkeyNativeModule.onAuthRouteToWallet();
-        }}>
-          <Ionicons
-            name="wallet"
-            size={18}
-            color="#fff"
-            style={{ marginRight: 8 }}
-          />
-          <Text style={styles.actionButtonText}>Sign in with Wallet</Text>
-        </TouchableOpacity>
+          {/* Sign in with Wallet */}
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={async () => {
+              TurnkeyNativeModule.onAuthRouteToWallet();
+            }}>
+            <Ionicons
+              name="wallet"
+              size={18}
+              color="#fff"
+              style={{ marginRight: 8 }}
+            />
+            <Text style={styles.actionButtonText}>Sign in with Wallet</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
