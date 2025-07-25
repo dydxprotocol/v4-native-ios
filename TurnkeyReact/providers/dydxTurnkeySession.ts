@@ -20,7 +20,7 @@ export class DydxTurnkeySession {
     );
   }
 
-  async signOnboardingMessage(): Promise<string>   {
+  async signOnboardingMessage(walletAccountAddress: string): Promise<string> {
     const onboardingTypedData = {
       primaryType: 'dYdX',
       domain: {
@@ -35,7 +35,7 @@ export class DydxTurnkeySession {
         action: 'dYdX Chain Onboarding',
       },
     };
-    
+
     // Hash the typed message, keccak256 encoded
     const digest = _TypedDataEncoder.hash(
       onboardingTypedData.domain,
@@ -45,13 +45,21 @@ export class DydxTurnkeySession {
 
     console.log('Digest:', digest); // 0x-prefixed 32-byte hex
 
-    return Promise.resolve(digest);
-    // return this.client.signRawPayload({
-    //   signWith: "onboarding",
-    //   payload: digest,
-    //   encoding: "hex",
-    //   hashFunction: "keccak256",
-    // });
+    const response = this.client.signRawPayload({
+      type: "ACTIVITY_TYPE_SIGN_RAW_PAYLOAD_V2",
+      /** @description Timestamp (in milliseconds) of the request, used to verify liveness of user requests. */
+      timestampMs: "",
+      /** @description Unique identifier for a given Organization. */
+      organizationId: "",
+      parameters: {
+        signWith: walletAccountAddress,
+        payload: digest,
+        encoding: "PAYLOAD_ENCODING_HEXADECIMAL",
+        hashFunction: "HASH_FUNCTION_NO_OP",
+      }
+    });
+
+    return Promise.resolve("");
   }
 }
 

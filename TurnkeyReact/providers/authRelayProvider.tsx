@@ -115,39 +115,18 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     embeddedKeyAndNonce,
     configs,
   }: OtpAuthRequest) => {
-    dispatch({ type: "LOADING", payload: LoginMethod.Email });
-    try {
-      const inputBody = {
-        "signinMethod": "email",
-        "userEmail": contact,
-        "targetPublicKey": embeddedKeyAndNonce.targetPublicKey,
-      };
-      const headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      };
-      const response = await fetch(`${configs.backendApiUrl}/v4/turnkey/signin`, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(inputBody),
-      }).then((res) => res.json());
 
-      if (response.errors && Array.isArray(response.errors)) {
-        // Handle API-reported errors
-        const errorMsg = response.errors.map((e: { msg: any; }) => e.msg).join(", ");
-        throw new Error(`Backend Error: ${errorMsg}`);
-      }
+    const inputBody = {
+      "signinMethod": "email",
+      "userEmail": contact,
+      "targetPublicKey": embeddedKeyAndNonce.targetPublicKey,
+    };
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
 
-      const credentialBundle = response.credentialBundle;
-      if (credentialBundle) {
-        const session = await createSession({ bundle: credentialBundle });
-        console.debug("Session created:", session);
-      }
-    } catch (error: any) {
-      dispatch({ type: "ERROR", payload: error.message });
-    } finally {
-      dispatch({ type: "LOADING", payload: null });
-    }
+    //sendSignInRequest(headers, JSON.stringify(inputBody), configs);
   };
 
   const completeOtpAuth = async ({
@@ -182,23 +161,34 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     //   targetPublicKey,
     // );
     // const hash = await dydxSession.signOnboardingMessage();
+    const inputBody = {
+      "signinMethod": "social",
+      "targetPublicKey": targetPublicKey,
+      "provider": providerName,
+      "oidcToken": oidcToken,
+    };
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
+
+    sendSignInRequest(headers, JSON.stringify(inputBody), configs);
+  };
+
+  const sendSignInRequest = async (
+    headers: HeadersInit,
+    body: string,
+    configs: TurnkeyConfigs
+  ) => {
     dispatch({ type: "LOADING", payload: LoginMethod.OAuth });
     try {
-      const inputBody = {
-        "signinMethod": "social",
-        "targetPublicKey": targetPublicKey,
-        "provider": providerName,
-        "oidcToken": oidcToken,
-      };
-      const headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      };
       const response = await fetch(`${configs.backendApiUrl}/v4/turnkey/signin`, {
         method: "POST",
         headers: headers,
-        body: JSON.stringify(inputBody),
+        body: body,
       }).then((res) => res.json());
+
+      console.debug("Sign-in response:", response);
 
       if (response.errors && Array.isArray(response.errors)) {
         // Handle API-reported errors
@@ -206,21 +196,66 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         throw new Error(`Backend Error: ${errorMsg}`);
       }
 
-      const credentialBundle = response.credentialBundle;
-      if (credentialBundle) {
-        const session = await createSession({ bundle: credentialBundle });
-        console.debug("Session created:", session);
+      const salt = response.salt;
+      if (!salt) {
+        throw new Error("No salt provided in response");
       }
+      const credentialBundle = response.session;
+      if (!credentialBundle) {
+        throw new Error("No credential bundle provided in response");
+      }
+
+      const decodedSession = decodeSessionJwt(credentialBundle);
+      console.debug("Decoded session:", decodedSession);
+
+      const session = await createSession({ bundle: credentialBundle });
+      console.debug("Session created:", session);
+
     } catch (error: any) {
+      console.error("Error during sign-in:", error);
       dispatch({ type: "ERROR", payload: error.message });
     } finally {
       dispatch({ type: "LOADING", payload: null });
     }
-  };
+  }
 
   const clearError = () => {
     dispatch({ type: "CLEAR_ERROR" });
   };
+
+   function decodeSessionJwt(token: string): {
+    sessionType: string;
+    userId: string;
+    organizationId: string;
+    expiry: number;
+    publicKey: string;
+  } {
+    const [, payload] = token.split(".");
+    if (!payload) {
+      throw new Error("Invalid JWT: Missing payload");
+    }
+
+    const decoded = JSON.parse(atob(payload));
+    const {
+      exp,
+      public_key: publicKey,
+      session_type: sessionType,
+      user_id: userId,
+      organization_id: organizationId,
+    } = decoded;
+
+    if (!exp || !publicKey || !sessionType || !userId || !organizationId) {
+      throw new Error("JWT payload missing required fields");
+    }
+
+    return {
+      sessionType,
+      userId,
+      organizationId,
+      expiry: exp,
+      publicKey,
+    };
+  }
 
   return (
     <AuthRelayContext.Provider
