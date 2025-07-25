@@ -102,6 +102,9 @@ extension PhantomWalletConfig {
             appUrl = AbacusStateManager.shared.deploymentUri
             callbackUrl = envCallbackUrl
         }
-        self.init(appUrl: appUrl, appRedirectBaseUrl: callbackUrl)
+        self.init(appUrl: appUrl,
+                  appRedirectBaseUrl: callbackUrl,
+                  solanaMainnetUrl: environment.isMainNet ? environment.endpoints.solanaRpcUrl : nil,
+                  solanaTestnetUrl: environment.isMainNet ? nil : environment.endpoints.solanaRpcUrl)
     }
 }

@@ -1,8 +1,8 @@
 PODS:
-  - Abacus (1.14.8)
+  - Abacus (1.14.9)
   - AmplitudeCore (1.1.0)
-  - AmplitudeSwift (1.13.8):
-    - AmplitudeCore (< 2.0.0, >= 1.0.13)
+  - AmplitudeSwift (1.14.0):
+    - AmplitudeCore (< 2.0.0, >= 1.1.0)
     - AnalyticsConnector (~> 1.3.0)
   - AnalyticsConnector (1.3.1)
   - AppsFlyerFramework (6.17.2):
@@ -1831,7 +1831,7 @@ PODS:
   - SimpleKeychain (0.12.5)
   - SnapKit (5.7.1)
   - SocketRocket (0.7.1)
-  - Statsig (1.53.8)
+  - Statsig (1.53.9)
   - Validator (3.2.1)
   - Yoga (0.0.0)
   - ZSWTappableLabel (3.3.2)
@@ -2165,9 +2165,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  Abacus: d6e1f27eca3a8a4ed42fb79af552315381dc1a0a
+  Abacus: 5ae2424c50ae22132ff4f6a9ab66a5b5a90ab2b1
   AmplitudeCore: ecc568da676d59917dd1d60221eefe640fcd7f87
-  AmplitudeSwift: e0ba4e3ff7bf9b08712e28039b18143f02463aff
+  AmplitudeSwift: e96d3001ae5d20b596b9755e69840b5c75ea3adc
   AnalyticsConnector: 3def11199b4ddcad7202c778bde982ec5da0ebb3
   AppsFlyerFramework: 3e48c87fd356e7cbf09b87e176c0b04dc42f95fe
   Atributika: ecedf5259e4aa3c6278d840b6c18d60c1a8b6ca0
@@ -2290,11 +2290,11 @@ SPEC CHECKSUMS:
   SimpleKeychain: 8193a9e40967eccac933c1fde82de46c07a5ae26
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
-  Statsig: 1be7eba51740cff2731cc5b7543b7ecba4f70418
+  Statsig: 6c9e7c0467354136a1f828d553bb4ecb85f095b8
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
   Yoga: 6eb60fc2c0eef63e7d2ef4a56e0a3353534143a2
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: 1fdd3bf7c5539f0d963bafb1500d99d44cc0f3c1
+PODFILE CHECKSUM: 62bc0dab2864ea4d8e0db9cc5e95ab945a0ab2de
 
 COCOAPODS: 1.16.2
