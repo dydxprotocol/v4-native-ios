@@ -21,26 +21,24 @@ export const GoogleAuthButton: React.FC<OAuthProps> = ({
 }: OAuthProps) => {
   const { handleGoogleOAuth } = useTurnkey();
 
-  const onIdToken = async (idToken: string) => {
-    await onSuccess({
-      oidcToken: idToken,
-      providerName: "google",
-      targetPublicKey: embeddedKeyAndNonce.targetPublicKey!,
-      backendApiUrl: configs.backendApiUrl,
-    });
-
-    // we refresh the nonce before authentication to ensure a new one is used
-    // if the user logs out and logs in with oAuth again
-    await embeddedKeyAndNonce.refreshNonce();
-  };
-
   const handlePress = async () => {
     try {
       await handleGoogleOAuth({
         clientId: configs.googleClientId,
         nonce: embeddedKeyAndNonce.nonce!,
         scheme: configs.appScheme,
-        onSuccess: onIdToken,
+        onSuccess: async (idToken: string) => {
+          await onSuccess({
+            oidcToken: idToken,
+            providerName: "google",
+            targetPublicKey: embeddedKeyAndNonce.targetPublicKey!,
+            configs: configs,
+          });
+
+          // we refresh the nonce before authentication to ensure a new one is used
+          // if the user logs out and logs in with oAuth again
+          await embeddedKeyAndNonce.refreshNonce();
+        },
       });
     } catch (error) {
       console.error("Error in Google Auth:", error);

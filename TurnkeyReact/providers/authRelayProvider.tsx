@@ -7,6 +7,7 @@ import {
 import { TurnkeyNativeModule } from "../../TurnkeyModule";
 import { DydxTurnkeySession } from "./dydxTurnkeySession";
 import { EmbeddedKeyAndNonce } from "../components/useEmbeddedKeyAndNonce";
+import { TurnkeyConfigs } from "../sharedConfigs";
 
 type AuthActionType =
   | { type: "PASSKEY"; payload: User }
@@ -63,14 +64,14 @@ export type OAuthRequest = {
   oidcToken: string;
   providerName: string;
   targetPublicKey: string;
-  backendApiUrl: string;
+  configs: TurnkeyConfigs;
 };
 
 export type OtpAuthRequest = {
   otpType: string;
   contact: string;
   embeddedKeyAndNonce: EmbeddedKeyAndNonce;
-  backendApiUrl: string;
+  configs: TurnkeyConfigs;
 };
 
 export interface AuthRelayProviderType {
@@ -112,7 +113,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     otpType,
     contact,
     embeddedKeyAndNonce,
-    backendApiUrl,
+    configs,
   }: OtpAuthRequest) => {
     dispatch({ type: "LOADING", payload: LoginMethod.Email });
     try {
@@ -125,7 +126,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       };
-      const response = await fetch(`${backendApiUrl}/v4/turnkey/signin`, {
+      const response = await fetch(`${configs.backendApiUrl}/v4/turnkey/signin`, {
         method: "POST",
         headers: headers,
         body: JSON.stringify(inputBody),
@@ -174,7 +175,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     oidcToken,
     providerName,
     targetPublicKey,
-    backendApiUrl,
+    configs,
   }: OAuthRequest) => {
     // const dydxSession = new DydxTurnkeySession(
     //   targetPublicKey,
@@ -193,7 +194,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       };
-      const response = await fetch(`${backendApiUrl}/v4/turnkey/signin`, {
+      const response = await fetch(`${configs.backendApiUrl}/v4/turnkey/signin`, {
         method: "POST",
         headers: headers,
         body: JSON.stringify(inputBody),

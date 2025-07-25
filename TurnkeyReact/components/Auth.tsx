@@ -88,7 +88,7 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
                   otpType: OtpType.Email,
                   contact: email,
                   embeddedKeyAndNonce: embeddedKeyAndNonce,
-                  backendApiUrl: configs.backendApiUrl,
+                  configs: configs,
                 })
               }
             >

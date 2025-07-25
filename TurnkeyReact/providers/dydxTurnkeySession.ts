@@ -2,19 +2,20 @@
 import { ApiKeyStamper } from "@turnkey/api-key-stamper";
 import { TurnkeyClient } from "@turnkey/http";
 import { _TypedDataEncoder } from "ethers/lib/utils";
+import { TurnkeyConfigs } from "../sharedConfigs";
 
 export class DydxTurnkeySession {
   private stamper: ApiKeyStamper;
   private client: TurnkeyClient;
 
-  constructor(privateKey: string, publicKey: string) {
+  constructor(privateKey: string, publicKey: string, configs: TurnkeyConfigs) {
     this.stamper = new ApiKeyStamper({
       apiPublicKey: publicKey,
       apiPrivateKey: privateKey,
     });
 
     this.client = new TurnkeyClient(
-      { baseUrl: "https://api.turnkey.com" },
+      { baseUrl: configs.turnkeyUrl },
       this.stamper,
     );
   }
