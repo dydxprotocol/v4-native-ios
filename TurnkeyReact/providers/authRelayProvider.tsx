@@ -63,7 +63,7 @@ function authReducer(state: AuthState, action: AuthActionType): AuthState {
 export type OAuthRequest = {
   oidcToken: string;
   providerName: string;
-  targetPublicKey: string;
+  embeddedKeyAndNonce: EmbeddedKeyAndNonce;
   configs: TurnkeyConfigs;
 };
 
@@ -153,17 +153,12 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
   const loginWithOAuth = async ({
     oidcToken,
     providerName,
-    targetPublicKey,
+    embeddedKeyAndNonce,
     configs,
   }: OAuthRequest) => {
-    // const dydxSession = new DydxTurnkeySession(
-    //   targetPublicKey,
-    //   targetPublicKey,
-    // );
-    // const hash = await dydxSession.signOnboardingMessage();
     const inputBody = {
       "signinMethod": "social",
-      "targetPublicKey": targetPublicKey,
+      "targetPublicKey": embeddedKeyAndNonce.targetPublicKey,
       "provider": providerName,
       "oidcToken": oidcToken,
     };
@@ -172,12 +167,13 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       'Accept': 'application/json'
     };
 
-    sendSignInRequest(headers, JSON.stringify(inputBody), configs);
+    sendSignInRequest(headers, JSON.stringify(inputBody), embeddedKeyAndNonce, configs);
   };
 
   const sendSignInRequest = async (
     headers: HeadersInit,
     body: string,
+    embeddedKeyAndNonce: EmbeddedKeyAndNonce,
     configs: TurnkeyConfigs
   ) => {
     dispatch({ type: "LOADING", payload: LoginMethod.OAuth });
@@ -188,7 +184,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         body: body,
       }).then((res) => res.json());
 
-      console.debug("Sign-in response:", response);
+      console.log("Sign-in response:", response);
 
       if (response.errors && Array.isArray(response.errors)) {
         // Handle API-reported errors
@@ -200,16 +196,33 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       if (!salt) {
         throw new Error("No salt provided in response");
       }
-      const credentialBundle = response.session;
-      if (!credentialBundle) {
-        throw new Error("No credential bundle provided in response");
+      const session = response.session;
+      if (!session) {
+        throw new Error("No session provided in response");
       }
 
-      const decodedSession = decodeSessionJwt(credentialBundle);
-      console.debug("Decoded session:", decodedSession);
+      const dydxSession = DydxTurnkeySession.createFromSession(
+        embeddedKeyAndNonce.privateKey!,
+        session,
+        configs
+      );
 
-      const session = await createSession({ bundle: credentialBundle });
-      console.debug("Session created:", session);
+      const accounts = await dydxSession.loadWalletAccounts();
+      console.log("accounts:", accounts);
+
+      // get the eth account
+      const ethAccount = accounts.accounts.find((account) => account.addressFormat === "ADDRESS_FORMAT_ETHEREUM");
+      if (!ethAccount) {
+        throw new Error("No Ethereum account found in wallet accounts");
+      }
+      // get the solana account
+      const solanaAccount = accounts.accounts.find((account) => account.addressFormat === "ADDRESS_FORMAT_SOLANA");
+      if (!solanaAccount) {
+        throw new Error("No Solana account found in wallet accounts");
+      }
+
+      const signed = await dydxSession.signOnboardingMessage(ethAccount.address)
+      console.log("signed onboarding message:", signed);
 
     } catch (error: any) {
       console.error("Error during sign-in:", error);
@@ -223,39 +236,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     dispatch({ type: "CLEAR_ERROR" });
   };
 
-   function decodeSessionJwt(token: string): {
-    sessionType: string;
-    userId: string;
-    organizationId: string;
-    expiry: number;
-    publicKey: string;
-  } {
-    const [, payload] = token.split(".");
-    if (!payload) {
-      throw new Error("Invalid JWT: Missing payload");
-    }
 
-    const decoded = JSON.parse(atob(payload));
-    const {
-      exp,
-      public_key: publicKey,
-      session_type: sessionType,
-      user_id: userId,
-      organization_id: organizationId,
-    } = decoded;
-
-    if (!exp || !publicKey || !sessionType || !userId || !organizationId) {
-      throw new Error("JWT payload missing required fields");
-    }
-
-    return {
-      sessionType,
-      userId,
-      organizationId,
-      expiry: exp,
-      publicKey,
-    };
-  }
 
   return (
     <AuthRelayContext.Provider

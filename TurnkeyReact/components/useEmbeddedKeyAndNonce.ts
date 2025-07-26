@@ -1,6 +1,9 @@
 import { useTurnkey } from "@turnkey/sdk-react-native";
 import { SHA256 } from "crypto-js";
 import { useCallback, useEffect, useState } from "react";
+import {
+  generateP256KeyPair,
+} from "@turnkey/crypto";
 
 /**
  * The nonce is a unique, cryptographically secure string used to ensure the authenticity and integrity
@@ -17,6 +20,7 @@ import { useCallback, useEffect, useState } from "react";
  */
 
 export type EmbeddedKeyAndNonce = {
+  privateKey: string | null;
   targetPublicKey: string | null;
   nonce: string | null;
   refreshNonce: () => Promise<void>;
@@ -25,14 +29,20 @@ export type EmbeddedKeyAndNonce = {
 export const useEmbeddedKeyAndNonce = (): EmbeddedKeyAndNonce => {
   const { createEmbeddedKey } = useTurnkey();
 
+  const [privateKey, setPrivateKey] = useState<string | null>(null);
   const [targetPublicKey, setTargetPublicKey] = useState<string | null>(null);
   const [nonce, setNonce] = useState<string | null>(null);
 
   const generateNonce = useCallback(async () => {
     try {
-      const pubKey = await createEmbeddedKey();
-      setTargetPublicKey(pubKey);
+      const keypair = generateP256KeyPair();
 
+      const privKey = keypair.privateKey;
+      setPrivateKey(privKey);
+
+      const pubKey = keypair.publicKey;
+      setTargetPublicKey(pubKey);
+     
       const hashedNonce = SHA256(pubKey).toString();
       //   const hashedNonce = await Crypto.digestStringAsync(
       //     Crypto.CryptoDigestAlgorithm.SHA256,
@@ -48,5 +58,5 @@ export const useEmbeddedKeyAndNonce = (): EmbeddedKeyAndNonce => {
     generateNonce();
   }, [generateNonce]);
 
-  return { targetPublicKey, nonce, refreshNonce: generateNonce };
+  return { privateKey, targetPublicKey, nonce, refreshNonce: generateNonce };
 };

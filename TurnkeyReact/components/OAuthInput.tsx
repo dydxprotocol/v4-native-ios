@@ -1,5 +1,4 @@
 import { useTurnkey } from "@turnkey/sdk-react-native";
-import { useEffect, useState, useCallback } from "react";
 import { TurnkeyConfigs } from "../SharedConfigs";
 import { Button } from "./ui/button";
 import { View, Text } from "react-native";
@@ -31,7 +30,7 @@ export const GoogleAuthButton: React.FC<OAuthProps> = ({
           await onSuccess({
             oidcToken: idToken,
             providerName: "google",
-            targetPublicKey: embeddedKeyAndNonce.targetPublicKey!,
+            embeddedKeyAndNonce: embeddedKeyAndNonce,
             configs: configs,
           });
 
