@@ -31,10 +31,8 @@ export class DydxTurnkeySession {
   static createFromSession = (privateKey: string, jwtToken: string, configs: TurnkeyConfigs): DydxTurnkeySession => {
     const decodedSession = decodeSessionJwt(jwtToken);
     if (!decodedSession.publicKey || !decodedSession.organizationId || !decodedSession.userId) {
-      throw new Error("Invalid session JWT: Missing public key or organizationId");
+      throw new Error("Invalid session JWT: Missing public key organizationId userId");
     }
-
-    console.debug("Decoded session:", decodedSession);
 
     // Create a new instance of DydxTurnkeySession with the provided private key and decoded public key
     return new DydxTurnkeySession(
@@ -86,8 +84,6 @@ export class DydxTurnkeySession {
       onboardingTypedData.types,
       onboardingTypedData.message
     );
-
-    console.log('Digest:', digest); // 0x-prefixed 32-byte hex
 
     const response = await this.client.signRawPayload({
       type: "ACTIVITY_TYPE_SIGN_RAW_PAYLOAD_V2",
