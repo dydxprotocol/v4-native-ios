@@ -62,7 +62,7 @@ export class DydxTurnkeySession {
     return Promise.resolve(response);
   }
 
-  signOnboardingMessage = async (walletAccountAddress: string): Promise<string> => {
+  signOnboardingMessage = async (walletAccountAddress: string, salt: string): Promise<string> => {
     const onboardingTypedData = {
       primaryType: 'dYdX',
       domain: {
@@ -71,10 +71,12 @@ export class DydxTurnkeySession {
       types: {
         dYdX: [
           { name: 'action', type: 'string' },
+          { name: 'salt', type: 'string' },
         ],
       },
       message: {
         action: 'dYdX Chain Onboarding',
+        salt: salt,
       },
     };
 

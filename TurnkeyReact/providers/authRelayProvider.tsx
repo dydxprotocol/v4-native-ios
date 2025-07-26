@@ -218,7 +218,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         throw new Error("No Solana account found in wallet accounts");
       }
 
-      const signed = await dydxSession.signOnboardingMessage(ethAccount.address)
+      const signed = await dydxSession.signOnboardingMessage(ethAccount.address, salt);
 
       TurnkeyNativeModule.onAuthCompleted(
         signed,
