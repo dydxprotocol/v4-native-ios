@@ -184,8 +184,6 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         body: body,
       }).then((res) => res.json());
 
-      console.log("Sign-in response:", response);
-
       if (response.errors && Array.isArray(response.errors)) {
         // Handle API-reported errors
         const errorMsg = response.errors.map((e: { msg: any; }) => e.msg).join(", ");
@@ -208,7 +206,6 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       );
 
       const accounts = await dydxSession.loadWalletAccounts();
-      console.log("accounts:", accounts);
 
       // get the eth account
       const ethAccount = accounts.accounts.find((account) => account.addressFormat === "ADDRESS_FORMAT_ETHEREUM");
@@ -222,8 +219,12 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       }
 
       const signed = await dydxSession.signOnboardingMessage(ethAccount.address)
-      console.log("signed onboarding message:", signed);
 
+      TurnkeyNativeModule.onAuthCompleted(
+        signed,
+        ethAccount.address,
+        solanaAccount.address
+      );
     } catch (error: any) {
       console.error("Error during sign-in:", error);
       dispatch({ type: "ERROR", payload: error.message });
@@ -235,8 +236,6 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
   const clearError = () => {
     dispatch({ type: "CLEAR_ERROR" });
   };
-
-
 
   return (
     <AuthRelayContext.Provider

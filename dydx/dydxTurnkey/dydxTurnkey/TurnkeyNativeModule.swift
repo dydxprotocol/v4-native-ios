@@ -59,4 +59,11 @@ class TurnkeyNativeModule: NSObject, RCTBridgeModule {
         }
     }
 
+    @objc(onAuthCompleted:::)
+    func onAuthCompleted(onboardingSignature: String, evmAddress: String, svmAddress: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.onAuthCompleted(onboardingSignature: onboardingSignature, evmAddress: evmAddress, svmAddress: svmAddress)
+        }
+    }
+
 }

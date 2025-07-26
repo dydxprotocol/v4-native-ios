@@ -20,7 +20,7 @@ public class dydxWalletSetup: WalletStatusDelegate {
         public let secret: String?
         public let passPhrase: String?
 
-        init(ethereumAddress: String, walletId: String? = nil, cosmoAddress: String? = nil, mnemonic: String? = nil, apiKey: String? = nil, secret: String? = nil, passPhrase: String? = nil) {
+        public init(ethereumAddress: String, walletId: String? = nil, cosmoAddress: String? = nil, mnemonic: String? = nil, apiKey: String? = nil, secret: String? = nil, passPhrase: String? = nil) {
             self.ethereumAddress = ethereumAddress
             self.walletId = walletId
             self.cosmoAddress = cosmoAddress

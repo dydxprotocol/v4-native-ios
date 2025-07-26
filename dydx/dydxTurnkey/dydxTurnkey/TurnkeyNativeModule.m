@@ -25,5 +25,6 @@ RCT_EXTERN_METHOD(onJsResponse:(NSString) callbackId :(NSString) result)
 
 RCT_EXTERN_METHOD(onAuthRouteToWallet)
 RCT_EXTERN_METHOD(onAuthRouteToDesktopQR)
+RCT_EXTERN_METHOD(onAuthCompleted:(NSString) onboardingSignature :(NSString) evmAddress :(NSString) svmAddress)
 
 @end

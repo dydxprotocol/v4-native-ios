@@ -15,6 +15,7 @@ import UIKit
 import React
 import React_RCTAppDelegate
 import dydxTurnkey
+import dydxCartera
 
 public struct OnboardingLandingRoute {
     static var value: String {
@@ -71,6 +72,23 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
     func onAuthRouteToDesktopQR() {
         Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
             Router.shared?.navigate(to: RoutingRequest(path: "/onboard/scan/instructions"), animated: true, completion: nil)
+        }
+    }
+
+    func onAuthCompleted(onboardingSignature: String, evmAddress: String, svmAddress: String) {
+        CosmoJavascript.shared.deriveCosmosKey(signature: onboardingSignature) { [weak self] data in
+            if let resultObject = (data as? String)?.jsonDictionary,
+               let mnemonic = self?.parser.asString(resultObject["mnemonic"]),
+               let cosmoAddress = self?.parser.asString(resultObject["address"]) {
+
+                let result = dydxWalletSetup.SetupResult(ethereumAddress: evmAddress,
+                                                         walletId: nil,
+                                                         cosmoAddress: cosmoAddress,
+                                                         mnemonic: mnemonic)
+                dydxOnboardCompletion.finish(walletInstance: nil, result: result)
+            } else {
+                ErrorInfo.shared?.info(title: "Error", message: "deriveCosmosKey failed", type: .error, error: nil)
+            }
         }
     }
 }

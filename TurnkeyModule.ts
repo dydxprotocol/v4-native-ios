@@ -7,6 +7,7 @@ interface TurnkeyNativeModuleType {
 
   onAuthRouteToWallet: () => void;
   onAuthRouteToDesktopQR: () => void;
+  onAuthCompleted: (onboardingSignature: string, evmAddress: string, svmAddress: string) => void;
 }
 
 // Safely cast NativeModules
