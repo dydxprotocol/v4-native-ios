@@ -66,4 +66,10 @@ class TurnkeyNativeModule: NSObject, RCTBridgeModule {
         }
     }
 
+    @objc(onAppleAuthRequest:)
+    func onAppleAuthRequest(nonce: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.onAppleAuthRequest(nonce: nonce)
+        }
+    }
 }

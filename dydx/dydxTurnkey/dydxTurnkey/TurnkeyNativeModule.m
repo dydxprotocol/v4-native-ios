@@ -27,4 +27,6 @@ RCT_EXTERN_METHOD(onAuthRouteToWallet)
 RCT_EXTERN_METHOD(onAuthRouteToDesktopQR)
 RCT_EXTERN_METHOD(onAuthCompleted:(NSString) onboardingSignature :(NSString) evmAddress :(NSString) svmAddress)
 
+RCT_EXTERN_METHOD(onAppleAuthRequest:(NSString) nonce)
+
 @end

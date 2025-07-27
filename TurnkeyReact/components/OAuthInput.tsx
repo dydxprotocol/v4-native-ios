@@ -1,11 +1,12 @@
 import { useTurnkey } from "@turnkey/sdk-react-native";
 import { TurnkeyConfigs } from "../SharedConfigs";
 import { Button } from "./ui/button";
-import { View, Text } from "react-native";
+import { View, Text, DeviceEventEmitter } from "react-native";
 // import GoogleIcon from "../assets/svgs/google.svg";
 import { styles } from "../turnkeyStyle";
 import { OAuthRequest } from "../providers/authRelayProvider";
 import { EmbeddedKeyAndNonce, useEmbeddedKeyAndNonce } from "./useEmbeddedKeyAndNonce";
+import { AppleSignInCompletedEvent, NativeToJsRequestEvent, TurnkeyNativeModule } from "../../TurnkeyModule";
 
 type OAuthProps = {
   onSuccess: (params: OAuthRequest) => Promise<void>;
@@ -58,6 +59,53 @@ export const GoogleAuthButton: React.FC<OAuthProps> = ({
   );
 };
 
+export const AppleAuthButton: React.FC<OAuthProps> = ({
+  onSuccess,
+  configs,
+  embeddedKeyAndNonce
+}: OAuthProps) => {
+  DeviceEventEmitter.addListener(
+    'AppleSignInCompleted',
+    async ({ identityToken, error }: AppleSignInCompletedEvent) => {
+      console.log("Apple Sign-In Completed:", identityToken, error);
+      if (identityToken !== null && embeddedKeyAndNonce.targetPublicKey) {
+        await onSuccess({
+          oidcToken: identityToken,
+          providerName: "apple",
+          embeddedKeyAndNonce: embeddedKeyAndNonce,
+          configs: configs,
+        });
+
+        // we refresh the nonce before authentication to ensure a new one is used
+        // if the user logs out and logs in with oAuth again
+        await embeddedKeyAndNonce.refreshNonce();
+      }
+    }
+  );
+
+  const handleAppleAuth = async () => {
+    if (!embeddedKeyAndNonce.nonce) {
+      console.error("Nonce is not ready");
+      return;
+    }
+
+    TurnkeyNativeModule.onAppleAuthRequest(embeddedKeyAndNonce.nonce);
+  };
+
+  return (
+    <Button
+      onPress={handleAppleAuth}
+      // className="border border-black rounded-xl bg-transparent flex-row items-center justify-center flex-1 h-16"
+      disabled={embeddedKeyAndNonce.nonce == null || !embeddedKeyAndNonce.targetPublicKey}
+    >
+      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+        <Text style={styles.subtitle}>Apple</Text>
+        {/* <AppleIcon width={28} height={28} /> */}
+      </View>
+    </Button>
+  );
+};
+
 export const OAuthInput: React.FC<OAuthProps> = (props) => {
   const { onSuccess, configs, embeddedKeyAndNonce } = props;
 
@@ -69,12 +117,11 @@ export const OAuthInput: React.FC<OAuthProps> = (props) => {
         configs={configs}
         embeddedKeyAndNonce={embeddedKeyAndNonce}
       />
-      {/* <AppleAuthButton
+      <AppleAuthButton
         onSuccess={onSuccess}
-        nonce={nonce}
-        targetPublicKey={targetPublicKey}
-        refreshNonce={refreshNonce}
-      /> */}
+        configs={configs}
+        embeddedKeyAndNonce={embeddedKeyAndNonce}
+      />
     </View>
   );
 };

@@ -126,7 +126,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       'Accept': 'application/json'
     };
 
-    //sendSignInRequest(headers, JSON.stringify(inputBody), configs);
+    sendSignInRequest(headers, JSON.stringify(inputBody), embeddedKeyAndNonce, configs);
   };
 
   const completeOtpAuth = async ({

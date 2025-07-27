@@ -31,6 +31,8 @@ public class dydxTurnkeyAuthViewBuilder: NSObject, ObjectBuilderProtocol {
 }
 
 private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, TurnkeyBridgeManagerDelegate {
+    private let appleSignIn = AppleSignInManager()
+
     init() {
         guard let appScheme = Bundle.main.scheme else {
             fatalError((#file as NSString).lastPathComponent + ": Bundle.main.scheme is nil")
@@ -89,6 +91,12 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
             } else {
                 ErrorInfo.shared?.info(title: "Error", message: "deriveCosmosKey failed", type: .error, error: nil)
             }
+        }
+    }
+
+    func onAppleAuthRequest(nonce: String) {
+        appleSignIn.signInWithApple(nonce: nonce) { identityToken, error in
+            TurnkeyBridgeManager.shared.appleSignInCompleted(identityToken: identityToken, error: error?.localizedDescription)
         }
     }
 }
