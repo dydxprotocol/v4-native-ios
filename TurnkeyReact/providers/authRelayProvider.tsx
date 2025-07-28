@@ -126,7 +126,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       'Accept': 'application/json'
     };
 
-    sendSignInRequest(headers, JSON.stringify(inputBody), embeddedKeyAndNonce, configs);
+    sendSignInRequest(headers, JSON.stringify(inputBody), embeddedKeyAndNonce, configs, LoginMethod.Email);
   };
 
   const completeOtpAuth = async ({
@@ -167,16 +167,17 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       'Accept': 'application/json'
     };
 
-    sendSignInRequest(headers, JSON.stringify(inputBody), embeddedKeyAndNonce, configs);
+    sendSignInRequest(headers, JSON.stringify(inputBody), embeddedKeyAndNonce, configs, LoginMethod.OAuth);
   };
 
   const sendSignInRequest = async (
     headers: HeadersInit,
     body: string,
     embeddedKeyAndNonce: EmbeddedKeyAndNonce,
-    configs: TurnkeyConfigs
+    configs: TurnkeyConfigs,
+    loginMethod: LoginMethod
   ) => {
-    dispatch({ type: "LOADING", payload: LoginMethod.OAuth });
+    dispatch({ type: "LOADING", payload: loginMethod });
     try {
       const response = await fetch(`${configs.backendApiUrl}/v4/turnkey/signin`, {
         method: "POST",
@@ -190,46 +191,70 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         throw new Error(`Backend Error: ${errorMsg}`);
       }
 
-      const salt = response.salt;
-      if (!salt) {
-        throw new Error("No salt provided in response");
-      }
-      const session = response.session;
-      if (!session) {
-        throw new Error("No session provided in response");
+      if (loginMethod === LoginMethod.OAuth) {
+        handleOauthResponse(response, embeddedKeyAndNonce, configs);
+      } else if (loginMethod === LoginMethod.Email) {
+        handleEmailResponse(response, embeddedKeyAndNonce, configs);
       }
 
-      const dydxSession = DydxTurnkeySession.createFromSession(
-        embeddedKeyAndNonce.privateKey!,
-        session,
-        configs
-      );
-
-      const accounts = await dydxSession.loadWalletAccounts();
-
-      // get the eth account
-      const ethAccount = accounts.accounts.find((account) => account.addressFormat === "ADDRESS_FORMAT_ETHEREUM");
-      if (!ethAccount) {
-        throw new Error("No Ethereum account found in wallet accounts");
-      }
-      // get the solana account
-      const solanaAccount = accounts.accounts.find((account) => account.addressFormat === "ADDRESS_FORMAT_SOLANA");
-      if (!solanaAccount) {
-        throw new Error("No Solana account found in wallet accounts");
-      }
-
-      const signed = await dydxSession.signOnboardingMessage(ethAccount.address, salt);
-
-      TurnkeyNativeModule.onAuthCompleted(
-        signed,
-        ethAccount.address,
-        solanaAccount.address
-      );
     } catch (error: any) {
       console.error("Error during sign-in:", error);
       dispatch({ type: "ERROR", payload: error.message });
     } finally {
       dispatch({ type: "LOADING", payload: null });
+    }
+  }
+
+  const handleOauthResponse = async (
+    response: any,
+    embeddedKeyAndNonce: EmbeddedKeyAndNonce,
+    configs: TurnkeyConfigs,
+  ) => {
+    const salt = response.salt;
+    if (!salt) {
+      throw new Error("No salt provided in response");
+    }
+    const session = response.session;
+    if (!session) {
+      throw new Error("No session provided in response");
+    }
+
+    const dydxSession = DydxTurnkeySession.createFromSession(
+      embeddedKeyAndNonce.privateKey!,
+      session,
+      configs
+    );
+
+    const accounts = await dydxSession.loadWalletAccounts();
+
+    // get the eth account
+    const ethAccount = accounts.accounts.find((account) => account.addressFormat === "ADDRESS_FORMAT_ETHEREUM");
+    if (!ethAccount) {
+      throw new Error("No Ethereum account found in wallet accounts");
+    }
+    // get the solana account
+    const solanaAccount = accounts.accounts.find((account) => account.addressFormat === "ADDRESS_FORMAT_SOLANA");
+    if (!solanaAccount) {
+      throw new Error("No Solana account found in wallet accounts");
+    }
+
+    const signed = await dydxSession.signOnboardingMessage(ethAccount.address, salt);
+
+    TurnkeyNativeModule.onAuthCompleted(
+      signed,
+      ethAccount.address,
+      solanaAccount.address
+    );
+  }
+
+  const handleEmailResponse = async (
+    response: any,
+    embeddedKeyAndNonce: EmbeddedKeyAndNonce,
+    configs: TurnkeyConfigs,
+  ) => {
+    const salt = response.salt;
+    if (!salt) {
+      throw new Error("No salt provided in response");
     }
   }
 

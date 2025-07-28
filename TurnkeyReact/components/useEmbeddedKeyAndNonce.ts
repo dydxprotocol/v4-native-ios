@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import {
   generateP256KeyPair,
 } from "@turnkey/crypto";
+import { LoginMethod } from "../lib/types";
 
 /**
  * The nonce is a unique, cryptographically secure string used to ensure the authenticity and integrity
@@ -26,33 +27,33 @@ export type EmbeddedKeyAndNonce = {
   refreshNonce: () => Promise<void>;
 };
 
-export const useEmbeddedKeyAndNonce = (): EmbeddedKeyAndNonce => {
-  const { createEmbeddedKey } = useTurnkey();
-
+export const useEmbeddedKeyAndNonce = (loginMethod: LoginMethod): EmbeddedKeyAndNonce => {
   const [privateKey, setPrivateKey] = useState<string | null>(null);
   const [targetPublicKey, setTargetPublicKey] = useState<string | null>(null);
   const [nonce, setNonce] = useState<string | null>(null);
 
   const generateNonce = useCallback(async () => {
     try {
+      var pubKey: string;
+
       const keypair = generateP256KeyPair();
 
       const privKey = keypair.privateKey;
       setPrivateKey(privKey);
 
-      const pubKey = keypair.publicKey;
+      if (loginMethod === LoginMethod.OAuth) {
+        pubKey = keypair.publicKey;
+      } else {
+        pubKey = keypair.publicKeyUncompressed; // 65-byte uncompressed public key
+      }
       setTargetPublicKey(pubKey);
-     
+
       const hashedNonce = SHA256(pubKey).toString();
-      //   const hashedNonce = await Crypto.digestStringAsync(
-      //     Crypto.CryptoDigestAlgorithm.SHA256,
-      //     pubKey
-      //   );
       setNonce(hashedNonce);
     } catch (error) {
       console.error("Error generating nonce and public key:", error);
     }
-  }, [createEmbeddedKey]);
+  }, []);
 
   useEffect(() => {
     generateNonce();

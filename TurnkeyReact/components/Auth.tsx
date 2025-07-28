@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  DeviceEventEmitter,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TurnkeyConfigs } from '../sharedConfigs';
@@ -13,7 +14,7 @@ import { EmailInput } from './EmailInput';
 import { styles } from "../turnkeyStyle";
 import { LoaderButton } from './ui/button';
 import { LoginMethod, OtpType } from '../lib/types';
-import { TurnkeyNativeModule } from '../../TurnkeyModule';
+import { EmailTokenReceivedEvent, TurnkeyNativeModule } from '../../TurnkeyModule';
 import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
 
 const renderError = () => {
@@ -44,7 +45,27 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
   const [email, setEmail] = useState<string>('');
   const [isValidEmail, setIsValidEmail] = useState<boolean>(false);
 
-  const embeddedKeyAndNonce = useEmbeddedKeyAndNonce();
+  const oAuthEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.OAuth);
+  const emailEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.Email);
+
+  DeviceEventEmitter.addListener(
+    'EmailTokenReceived',
+    async ({ token }: EmailTokenReceivedEvent) => {
+      console.log("Email token Received:", token);
+      // if (identityToken !== null && embeddedKeyAndNonce.targetPublicKey) {
+      //   await onSuccess({
+      //     oidcToken: identityToken,
+      //     providerName: "apple",
+      //     embeddedKeyAndNonce: embeddedKeyAndNonce,
+      //     configs: configs,
+      //   });
+
+      //   // we refresh the nonce before authentication to ensure a new one is used
+      //   // if the user logs out and logs in with oAuth again
+      //   await embeddedKeyAndNonce.refreshNonce();
+      // }
+    }
+  );
 
   return (
     <ScrollView
@@ -66,10 +87,10 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
 
           {/* Social icons row */}
           <View style={styles.socialRow}>
-            <OAuthInput 
-              onSuccess={loginWithOAuth} 
-              configs={configs} 
-              embeddedKeyAndNonce={embeddedKeyAndNonce} />
+            <OAuthInput
+              onSuccess={loginWithOAuth}
+              configs={configs}
+              embeddedKeyAndNonce={oAuthEmbeddedKeyAndNonce} />
           </View>
 
           {/* Email input row */}
@@ -87,7 +108,7 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
                 initOtpLogin({
                   otpType: OtpType.Email,
                   contact: email,
-                  embeddedKeyAndNonce: embeddedKeyAndNonce,
+                  embeddedKeyAndNonce: emailEmbeddedKeyAndNonce,
                   configs: configs,
                 })
               }

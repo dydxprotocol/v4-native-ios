@@ -56,4 +56,13 @@ public class TurnkeyBridgeManager {
           completion: nil
         )
     }
+
+    public func emailTokenReceived(token: String) {
+        bridge.enqueueJSCall(
+          "RCTDeviceEventEmitter",
+          method: "emit",
+          args: ["EmailTokenReceived", ["token": token]],
+          completion: nil
+        )
+    }
 }

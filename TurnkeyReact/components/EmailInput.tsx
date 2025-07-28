@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Input } from "../components/ui/input";
 import { styles } from "../turnkeyStyle";
+import { DeviceEventEmitter } from "react-native";
+import { EmailTokenReceivedEvent } from "../../TurnkeyModule";
 
 interface EmailInputProps {
   initialValue?: string;

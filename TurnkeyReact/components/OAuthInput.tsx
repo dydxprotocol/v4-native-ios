@@ -67,7 +67,6 @@ export const AppleAuthButton: React.FC<OAuthProps> = ({
   DeviceEventEmitter.addListener(
     'AppleSignInCompleted',
     async ({ identityToken, error }: AppleSignInCompletedEvent) => {
-      console.log("Apple Sign-In Completed:", identityToken, error);
       if (identityToken !== null && embeddedKeyAndNonce.targetPublicKey) {
         await onSuccess({
           oidcToken: identityToken,

@@ -22,9 +22,12 @@ export interface NativeToJsRequestEvent {
   callbackId: string;
 }
 
-// Define type for event payload
 export interface AppleSignInCompletedEvent {
   identityToken: string | null;
   error: string | null;
+}
+
+export interface EmailTokenReceivedEvent {
+  token: string;
 }
 

@@ -30,7 +30,8 @@ public class dydxTurnkeyAuthViewBuilder: NSObject, ObjectBuilderProtocol {
     }
 }
 
-private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, TurnkeyBridgeManagerDelegate {
+private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, TurnkeyBridgeManagerDelegate, NavigableProtocol {
+
     private let appleSignIn = AppleSignInManager()
 
     init() {
@@ -59,6 +60,15 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
 
         TurnkeyBridgeManager.shared.delegate = self
         TurnkeyBridgeManager.shared.testFunction()
+    }
+
+    // MARK: NavigableProtocol
+
+    func navigate(to request: RoutingKit.RoutingRequest?, animated: Bool, completion: RoutingKit.RoutingCompletionBlock?) {
+        if let token = request?.params?["token"] as? String {
+
+        }
+        Console.shared.log(request)
     }
 
     //
