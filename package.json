@@ -5,6 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "bundle_ios": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output dydx/ios/main.jsbundle --assets-dest dydx/ios",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",

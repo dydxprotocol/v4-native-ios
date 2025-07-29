@@ -59,7 +59,7 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
         super.viewDidLoad()
 
         TurnkeyBridgeManager.shared.delegate = self
-        //TurnkeyBridgeManager.shared.testFunction()
+        // TurnkeyBridgeManager.shared.testFunction()
     }
 
     // MARK: NavigableProtocol
