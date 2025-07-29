@@ -148,6 +148,16 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       console.log("Decrypted bundle private key:", privateKey);
       console.log("Decrypted bundle public key:", publicKey);
 
+          }
+
+    const dydxSession = DydxTurnkeySession.createFromSession(
+      embeddedKeyAndNonce.privateKey!,
+      session,
+      configs
+    );
+
+    onboardDydx(dydxSession, salt);
+
     } catch (error) {
       console.error("Error decrypting credential bundle:", error);
       throw new Error("Failed to decrypt credential bundle");
@@ -238,7 +248,15 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       configs
     );
 
-    const accounts = await dydxSession.loadWalletAccounts();
+    onboardDydx(dydxSession, salt);
+  }
+
+
+  const onboardDydx = async (
+    dydxSession: DydxTurnkeySession,
+    salt: string,
+  ) => {
+     const accounts = await dydxSession.loadWalletAccounts();
 
     // get the eth account
     const ethAccount = accounts.accounts.find((account) => account.addressFormat === "ADDRESS_FORMAT_ETHEREUM");
@@ -258,7 +276,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       ethAccount.address,
       solanaAccount.address
     );
-  }
+  };
 
   const handleEmailResponse = async (
     response: any,
