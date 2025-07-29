@@ -12,6 +12,8 @@ import { decryptCredentialBundle, getPublicKey } from "@turnkey/crypto";
 import {
   uint8ArrayToHexString,
 } from "@turnkey/encoding";
+import { getValueWithKey, setValueWithKey } from "../lib/store";
+import { STORAGE_KEY } from "../lib/constants";
 
 type AuthActionType =
   | { type: "PASSKEY"; payload: User }
@@ -127,6 +129,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       "signinMethod": "email",
       "userEmail": contact,
       "targetPublicKey": embeddedKeyAndNonce.targetPublicKey,
+      "magicLink": "dydx-t-v4:///onboard/turnkey?token",
     };
     const headers = {
       'Content-Type': 'application/json',
@@ -141,6 +144,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     embeddedKeyAndNonce,
     configs,
   }: OtpAuthComplete) => {
+    dispatch({ type: "LOADING", payload: LoginMethod.Email });
     try {
       const privateKey = decryptCredentialBundle(token, embeddedKeyAndNonce.privateKey!);
       const publicKey = uint8ArrayToHexString(getPublicKey(privateKey));
@@ -148,19 +152,31 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       console.log("Decrypted bundle private key:", privateKey);
       console.log("Decrypted bundle public key:", publicKey);
 
-          }
+      const deleteKey = true; // Set to true to delete the key after use
+      const salt = await getValueWithKey(deleteKey, STORAGE_KEY.EMAIL_SALT)
+      if (!salt) {
+        throw new Error("No salt found in storage");
+      }
+      const organizationId = await getValueWithKey(deleteKey, STORAGE_KEY.ORGANIZATION_ID);
+      if (!organizationId) {
+        throw new Error("No organizationId found in storage");
+      }
+      const userId = await getValueWithKey(deleteKey, STORAGE_KEY.USER_ID);
+      if (!userId) {
+        throw new Error("No userId found in storage");
+      }
 
-    const dydxSession = DydxTurnkeySession.createFromSession(
-      embeddedKeyAndNonce.privateKey!,
-      session,
-      configs
-    );
+      const dydxSession = new DydxTurnkeySession(
+        privateKey, publicKey, configs, organizationId, userId
+      )
 
-    onboardDydx(dydxSession, salt);
+      onboardDydx(dydxSession, salt);
 
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error decrypting credential bundle:", error);
-      throw new Error("Failed to decrypt credential bundle");
+      dispatch({ type: "ERROR", payload: error.message });
+    } finally {
+      dispatch({ type: "LOADING", payload: null });
     }
   };
 
@@ -251,12 +267,11 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     onboardDydx(dydxSession, salt);
   }
 
-
   const onboardDydx = async (
     dydxSession: DydxTurnkeySession,
     salt: string,
   ) => {
-     const accounts = await dydxSession.loadWalletAccounts();
+    const accounts = await dydxSession.loadWalletAccounts();
 
     // get the eth account
     const ethAccount = accounts.accounts.find((account) => account.addressFormat === "ADDRESS_FORMAT_ETHEREUM");
@@ -287,6 +302,20 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     if (!salt) {
       throw new Error("No salt provided in response");
     }
+    const organizationId = response.organizationId;
+    if (!organizationId) {
+      throw new Error("No organizationId provided in response");
+    }
+    const userId = response.userId;
+    if (!userId) {
+      throw new Error("No userId provided in response");
+    }
+
+    // save data needed after the user clicks the magic link to secure store
+    // so that we retain the info if the app is closed
+    setValueWithKey(STORAGE_KEY.EMAIL_SALT, salt);
+    setValueWithKey(STORAGE_KEY.ORGANIZATION_ID, organizationId);
+    setValueWithKey(STORAGE_KEY.USER_ID, userId);
   }
 
   const clearError = () => {

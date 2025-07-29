@@ -35,3 +35,8 @@ export const TURNKEY_PARENT_ORG_ID =
 export const RP_ID = process.env.EXPO_PUBLIC_RPID ?? "";
 export const PASSKEY_APP_NAME = process.env.EXPO_PUBLIC_PASSKEY_APP_NAME ?? "";
 
+export class STORAGE_KEY {
+  static EMAIL_SALT = "salt";
+  static ORGANIZATION_ID = "organizationId";
+  static USER_ID = "userId";
+}

@@ -13,7 +13,7 @@ export class DydxTurnkeySession {
 
   walletAccounts: TurnkeyApi.TGetWalletAccountsResponse | null = null;
 
-  private constructor(privateKey: string, publicKey: string, configs: TurnkeyConfigs, organizationId: string, userId: string) {
+ constructor(privateKey: string, publicKey: string, configs: TurnkeyConfigs, organizationId: string, userId: string) {
     this.stamper = new ApiKeyStamper({
       apiPublicKey: publicKey,
       apiPrivateKey: privateKey,

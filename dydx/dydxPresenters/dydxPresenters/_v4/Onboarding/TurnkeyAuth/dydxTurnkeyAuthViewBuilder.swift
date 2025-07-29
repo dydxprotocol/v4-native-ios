@@ -59,16 +59,20 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
         super.viewDidLoad()
 
         TurnkeyBridgeManager.shared.delegate = self
-        TurnkeyBridgeManager.shared.testFunction()
+        //TurnkeyBridgeManager.shared.testFunction()
     }
 
     // MARK: NavigableProtocol
 
-    func navigate(to request: RoutingKit.RoutingRequest?, animated: Bool, completion: RoutingKit.RoutingCompletionBlock?) {
-        if let token = request?.params?["token"] as? String {
-            TurnkeyBridgeManager.shared.emailTokenReceived(token: token)
+    func navigate(to request: RoutingRequest?, animated: Bool, completion: RoutingKit.RoutingCompletionBlock?) {
+        if request?.path == "/onboard/turnkey" {
+            if let token = request?.params?["token"] as? String {
+                TurnkeyBridgeManager.shared.emailTokenReceived(token: token)
+            }
+            completion?(nil, true)
+        } else {
+            completion?(nil, false)
         }
-        Console.shared.log(request)
     }
 
     //
@@ -93,11 +97,13 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
                let mnemonic = self?.parser.asString(resultObject["mnemonic"]),
                let cosmoAddress = self?.parser.asString(resultObject["address"]) {
 
-                let result = dydxWalletSetup.SetupResult(ethereumAddress: evmAddress,
-                                                         walletId: nil,
-                                                         cosmoAddress: cosmoAddress,
-                                                         mnemonic: mnemonic)
-                dydxOnboardCompletion.finish(walletInstance: nil, result: result)
+                Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+                    let result = dydxWalletSetup.SetupResult(ethereumAddress: evmAddress,
+                                                             walletId: nil,
+                                                             cosmoAddress: cosmoAddress,
+                                                             mnemonic: mnemonic)
+                    dydxOnboardCompletion.finish(walletInstance: nil, result: result)
+                }
             } else {
                 ErrorInfo.shared?.info(title: "Error", message: "deriveCosmosKey failed", type: .error, error: nil)
             }
