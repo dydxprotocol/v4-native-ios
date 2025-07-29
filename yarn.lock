@@ -2775,7 +2775,7 @@
     bs58 "6.0.0"
     bs58check "4.0.0"
 
-"@turnkey/encoding@0.5.0":
+"@turnkey/encoding@^0.5.0", "@turnkey/encoding@0.5.0":
   version "0.5.0"
   resolved "https://registry.npmjs.org/@turnkey/encoding/-/encoding-0.5.0.tgz"
   integrity sha512-nRlKRQa6B5/xltGUKN1iKo4h4YC/0iFz0fAuFFZevc+YGDj7ddAP/3HkWmVvLmdoicUgs9rxvWbLRlgqPkbwzQ==

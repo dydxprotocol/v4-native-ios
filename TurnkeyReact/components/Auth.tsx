@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
-  DeviceEventEmitter,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TurnkeyConfigs } from '../sharedConfigs';
@@ -14,7 +13,7 @@ import { EmailInput } from './EmailInput';
 import { styles } from "../turnkeyStyle";
 import { LoaderButton } from './ui/button';
 import { LoginMethod, OtpType } from '../lib/types';
-import { EmailTokenReceivedEvent, TurnkeyNativeModule } from '../../TurnkeyModule';
+import { TurnkeyNativeModule } from '../../TurnkeyModule';
 import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
 
 const renderError = () => {
@@ -48,24 +47,6 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
   const oAuthEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.OAuth);
   const emailEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.Email);
 
-  DeviceEventEmitter.addListener(
-    'EmailTokenReceived',
-    async ({ token }: EmailTokenReceivedEvent) => {
-      console.log("Email token Received:", token);
-      // if (identityToken !== null && embeddedKeyAndNonce.targetPublicKey) {
-      //   await onSuccess({
-      //     oidcToken: identityToken,
-      //     providerName: "apple",
-      //     embeddedKeyAndNonce: embeddedKeyAndNonce,
-      //     configs: configs,
-      //   });
-
-      //   // we refresh the nonce before authentication to ensure a new one is used
-      //   // if the user logs out and logs in with oAuth again
-      //   await embeddedKeyAndNonce.refreshNonce();
-      // }
-    }
-  );
 
   return (
     <ScrollView
@@ -99,6 +80,8 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
               initialValue={email}
               onEmailChange={setEmail}
               onValidationChange={setIsValidEmail}
+              embeddedKeyAndNonce={emailEmbeddedKeyAndNonce}
+              configs={configs}
             />
             <LoaderButton
               variant="outline"

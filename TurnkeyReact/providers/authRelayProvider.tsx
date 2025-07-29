@@ -8,6 +8,10 @@ import { TurnkeyNativeModule } from "../../TurnkeyModule";
 import { DydxTurnkeySession } from "./dydxTurnkeySession";
 import { EmbeddedKeyAndNonce } from "../components/useEmbeddedKeyAndNonce";
 import { TurnkeyConfigs } from "../sharedConfigs";
+import { decryptCredentialBundle, getPublicKey } from "@turnkey/crypto";
+import {
+  uint8ArrayToHexString,
+} from "@turnkey/encoding";
 
 type AuthActionType =
   | { type: "PASSKEY"; payload: User }
@@ -74,14 +78,17 @@ export type OtpAuthRequest = {
   configs: TurnkeyConfigs;
 };
 
+export type OtpAuthComplete = {
+  otpType: string;
+  token: string;
+  embeddedKeyAndNonce: EmbeddedKeyAndNonce;
+  configs: TurnkeyConfigs;
+};
+
 export interface AuthRelayProviderType {
   state: AuthState;
   initOtpLogin: (params: OtpAuthRequest) => Promise<void>;
-  completeOtpAuth: (params: {
-    otpId: string;
-    otpCode: string;
-    organizationId: string;
-  }) => Promise<void>;
+  completeOtpAuth: (params: OtpAuthComplete) => Promise<void>;
   signUpWithPasskey: () => Promise<void>;
   loginWithPasskey: () => Promise<void>;
   loginWithOAuth: (params: OAuthRequest) => Promise<void>;
@@ -130,15 +137,21 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
   };
 
   const completeOtpAuth = async ({
-    otpId,
-    otpCode,
-    organizationId,
-  }: {
-    otpId: string;
-    otpCode: string;
-    organizationId: string;
-  }) => {
-    console.debug("completeOtpAuth called with:", otpId, otpCode, organizationId);
+    token,
+    embeddedKeyAndNonce,
+    configs,
+  }: OtpAuthComplete) => {
+    try {
+      const privateKey = decryptCredentialBundle(token, embeddedKeyAndNonce.privateKey!);
+      const publicKey = uint8ArrayToHexString(getPublicKey(privateKey));
+
+      console.log("Decrypted bundle private key:", privateKey);
+      console.log("Decrypted bundle public key:", publicKey);
+
+    } catch (error) {
+      console.error("Error decrypting credential bundle:", error);
+      throw new Error("Failed to decrypt credential bundle");
+    }
   };
 
   // User will be prompted once for passkey creation then will leverage an api key session to have a smooth "one tap" login experience

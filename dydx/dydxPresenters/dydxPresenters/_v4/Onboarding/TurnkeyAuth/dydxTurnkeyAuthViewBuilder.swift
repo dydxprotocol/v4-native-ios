@@ -66,7 +66,7 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
 
     func navigate(to request: RoutingKit.RoutingRequest?, animated: Bool, completion: RoutingKit.RoutingCompletionBlock?) {
         if let token = request?.params?["token"] as? String {
-
+            TurnkeyBridgeManager.shared.emailTokenReceived(token: token)
         }
         Console.shared.log(request)
     }

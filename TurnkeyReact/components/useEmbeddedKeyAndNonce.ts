@@ -34,13 +34,12 @@ export const useEmbeddedKeyAndNonce = (loginMethod: LoginMethod): EmbeddedKeyAnd
 
   const generateNonce = useCallback(async () => {
     try {
-      var pubKey: string;
-
       const keypair = generateP256KeyPair();
 
       const privKey = keypair.privateKey;
       setPrivateKey(privKey);
 
+      var pubKey: string;
       if (loginMethod === LoginMethod.OAuth) {
         pubKey = keypair.publicKey;
       } else {
