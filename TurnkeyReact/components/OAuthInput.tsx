@@ -67,24 +67,25 @@ export const AppleAuthButton: React.FC<OAuthProps> = ({
   embeddedKeyAndNonce
 }: OAuthProps) => {
   useEffect(() => {
-   DeviceEventEmitter.addListener(
-    'AppleSignInCompleted',
-    async ({ identityToken, error }: AppleSignInCompletedEvent) => {
-      if (identityToken !== null && embeddedKeyAndNonce.targetPublicKey) {
-        await onSuccess({
-          oidcToken: identityToken,
-          providerName: "apple",
-          embeddedKeyAndNonce: embeddedKeyAndNonce,
-          configs: configs,
-        });
+    DeviceEventEmitter.removeAllListeners('AppleSignInCompleted');
+    DeviceEventEmitter.addListener(
+      'AppleSignInCompleted',
+      async ({ identityToken, error }: AppleSignInCompletedEvent) => {
+        if (identityToken !== null && embeddedKeyAndNonce.targetPublicKey) {
+          await onSuccess({
+            oidcToken: identityToken,
+            providerName: "apple",
+            embeddedKeyAndNonce: embeddedKeyAndNonce,
+            configs: configs,
+          });
 
-        // we refresh the nonce before authentication to ensure a new one is used
-        // if the user logs out and logs in with oAuth again
-        await embeddedKeyAndNonce.refreshNonce();
+          // we refresh the nonce before authentication to ensure a new one is used
+          // if the user logs out and logs in with oAuth again
+          await embeddedKeyAndNonce.refreshNonce();
+        }
       }
-    }
-  );
-})
+    );
+  })
 
   const handleAppleAuth = async () => {
     if (!embeddedKeyAndNonce.nonce) {

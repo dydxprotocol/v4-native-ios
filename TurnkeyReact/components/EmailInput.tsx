@@ -24,7 +24,7 @@ export const EmailInput = ({
   configs,
 }: EmailInputProps) => {
   const { completeOtpAuth } = useAuthRelay();
-  
+
   useEffect(() => {
     DeviceEventEmitter.removeAllListeners('EmailTokenReceived');
     DeviceEventEmitter.addListener(
@@ -38,18 +38,8 @@ export const EmailInput = ({
           configs: configs,
         });
 
-        // if (identityToken !== null && embeddedKeyAndNonce.targetPublicKey) {
-        //   await onSuccess({
-        //     oidcToken: identityToken,
-        //     providerName: "apple",
-        //     embeddedKeyAndNonce: embeddedKeyAndNonce,
-        //     configs: configs,
-        //   });
-
-          // we refresh the nonce before authentication to ensure a new one is used
-          // if the user logs out and logs in with oAuth again
-          await embeddedKeyAndNonce.refreshNonce();
-       }
+        await embeddedKeyAndNonce.refreshNonce();
+      }
     );
   }, [embeddedKeyAndNonce]);
 

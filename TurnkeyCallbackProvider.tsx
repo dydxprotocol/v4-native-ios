@@ -14,6 +14,7 @@ export const TurnkeyCallbackProvider = ({ children }: { children: React.ReactNod
   const { user } = useTurnkey();
 
   useEffect(() => {
+    DeviceEventEmitter.removeAllListeners('NativeToJsRequest');
     DeviceEventEmitter.addListener(
       'NativeToJsRequest',
       async (event: NativeToJsRequestEvent) => {
