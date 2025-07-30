@@ -15,6 +15,7 @@ import { LoaderButton } from './ui/button';
 import { LoginMethod, OtpType } from '../lib/types';
 import { TurnkeyNativeModule } from '../../TurnkeyModule';
 import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
+import { Image } from 'react-native';
 
 const renderError = () => {
   const {
@@ -65,6 +66,17 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
             To get started, sign in with your social accounts, create a passkey or
             connect your wallet.
           </Text>
+
+          <Image
+            source={require('../../assets/logo_google.png')}
+            style={{ width: 100, height: 100 }}
+          />
+
+      <Image
+            source={require('../../assets/logo_apple.png')}
+            style={{ width: 100, height: 100 }}
+          />
+
 
           {/* Social icons row */}
           <View style={styles.socialRow}>
