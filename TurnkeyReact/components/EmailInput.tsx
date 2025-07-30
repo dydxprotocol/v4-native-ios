@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Input } from "../components/ui/input";
 import { styles } from "../turnkeyStyle";
-import { DeviceEventEmitter, Image, View, Text } from "react-native";
+import { DeviceEventEmitter, Image, View } from "react-native";
+import { Text } from './ui/text';
 import { EmailTokenReceivedEvent } from "../../TurnkeyModule";
 import { useEffect, useState } from 'react';
 import { useAuthRelay } from "../hooks/useAuthRelay";

@@ -2,12 +2,10 @@ import { useTurnkey } from "@turnkey/sdk-react-native";
 import { TurnkeyConfigs } from "../SharedConfigs";
 import { Button } from "./ui/button";
 import { View, Text, DeviceEventEmitter, Image } from "react-native";
-import GoogleIcon from "../../assets/svgs/google.svg";
 import { styles } from "../turnkeyStyle";
 import { OAuthRequest } from "../providers/authRelayProvider";
-import { EmbeddedKeyAndNonce, useEmbeddedKeyAndNonce } from "./useEmbeddedKeyAndNonce";
+import { EmbeddedKeyAndNonce } from "./useEmbeddedKeyAndNonce";
 import { AppleSignInCompletedEvent, TurnkeyNativeModule } from "../../TurnkeyModule";
-import { useAuthRelay } from "../hooks/useAuthRelay";
 import { useEffect } from "react";
 
 type OAuthProps = {

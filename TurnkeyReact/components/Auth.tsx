@@ -1,10 +1,10 @@
 import React from 'react';
 import {
   View,
-  Text,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import { Text } from './ui/text';
 import { TurnkeyConfigs } from '../sharedConfigs';
 import { useAuthRelay } from '../hooks/useAuthRelay';
 import { OAuthInput } from './OAuthInput';
@@ -14,7 +14,6 @@ import { LoginMethod, OtpType } from '../lib/types';
 import { TurnkeyNativeModule } from '../../TurnkeyModule';
 import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
 import { Image } from 'react-native';
-import { Button } from './ui/button';
 
 const renderError = () => {
   const {
