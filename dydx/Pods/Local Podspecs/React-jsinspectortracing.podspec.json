@@ -1,6 +1,6 @@
 {
   "name": "React-jsinspectortracing",
-  "version": "0.78.2",
+  "version": "0.79.2",
   "summary": "Experimental performance tooling for React Native DevTools",
   "homepage": "https://reactnative.dev/",
   "license": "MIT",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/facebook/react-native.git",
-    "tag": "v0.78.2"
+    "tag": "v0.79.2"
   },
   "source_files": "*.{cpp,h}",
   "header_dir": "jsinspector-modern/tracing",
@@ -23,6 +23,7 @@
   "module_name": "jsinspector_moderntracing",
   "header_mappings_dir": "../..",
   "dependencies": {
-    "RCT-Folly": []
+    "RCT-Folly": [],
+    "React-oscompat": []
   }
 }

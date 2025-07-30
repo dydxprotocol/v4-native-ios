@@ -1,6 +1,6 @@
 {
   "name": "React-RuntimeCore",
-  "version": "0.78.2",
+  "version": "0.79.2",
   "summary": "The React Native Runtime.",
   "homepage": "https://reactnative.dev/",
   "license": "MIT",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/facebook/react-native.git",
-    "tag": "v0.78.2"
+    "tag": "v0.79.2"
   },
   "source_files": [
     "*.{cpp,h}",
@@ -22,7 +22,7 @@
   ],
   "header_dir": "react/runtime",
   "pod_target_xcconfig": {
-    "HEADER_SEARCH_PATHS": "\"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/Headers/Private/React-Core\" \"${PODS_TARGET_SRCROOT}/../..\" \"${PODS_CONFIGURATION_BUILD_DIR}/React-Fabric/React_Fabric.framework/Headers\"",
+    "HEADER_SEARCH_PATHS": "\"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/Headers/Private/React-Core\" \"${PODS_TARGET_SRCROOT}/../..\" \"${PODS_CONFIGURATION_BUILD_DIR}/React-Fabric/React_Fabric.framework/Headers\" \"${PODS_CONFIGURATION_BUILD_DIR}/React-jsitooling/JSITooling.framework/Headers\"",
     "USE_HEADERMAP": "YES",
     "CLANG_CXX_LANGUAGE_STANDARD": "c++20",
     "GCC_WARN_PEDANTIC": "YES"
@@ -46,6 +46,8 @@
     "React-featureflags": [],
     "React-Fabric": [],
     "hermes-engine": [],
-    "React-jsinspector": []
+    "React-hermes": [],
+    "React-jsinspector": [],
+    "React-jsitooling": []
   }
 }

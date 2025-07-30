@@ -50,6 +50,7 @@ ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTFabric.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTImage.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTLinking.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTNetwork.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTRuntime.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTSettings.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTText.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTVibration.framework
@@ -70,11 +71,14 @@ ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsi.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsireact.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsinspector_modern.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsinspector_moderntracing.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSITooling.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/logger.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_microtasksnativemodule.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/oscompat.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/reactperflogger.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_performancetimeline.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_rendererconsistency.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_renderercss.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_rendererdebug.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_runtimescheduler.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_utils.framework

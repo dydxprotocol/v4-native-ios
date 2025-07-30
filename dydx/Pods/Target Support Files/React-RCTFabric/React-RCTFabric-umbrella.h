@@ -67,6 +67,7 @@
 #import "RCTIdentifierPool.h"
 #import "RCTLinearGradient.h"
 #import "RCTReactTaggedView.h"
+#import "RCTViewFinder.h"
 
 FOUNDATION_EXPORT double RCTFabricVersionNumber;
 FOUNDATION_EXPORT const unsigned char RCTFabricVersionString[];

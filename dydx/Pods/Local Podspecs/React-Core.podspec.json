@@ -1,6 +1,6 @@
 {
   "name": "React-Core",
-  "version": "0.78.2",
+  "version": "0.79.2",
   "summary": "The core of React Native.",
   "homepage": "https://reactnative.dev/",
   "license": "MIT",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/facebook/react-native.git",
-    "tag": "v0.78.2"
+    "tag": "v0.79.2"
   },
   "resource_bundles": {
     "React-Core_privacy": "React/Resources/PrivacyInfo.xcprivacy"
@@ -19,7 +19,7 @@
   "header_dir": "React",
   "weak_frameworks": "JavaScriptCore",
   "pod_target_xcconfig": {
-    "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/ReactCommon $(PODS_ROOT)/boost $(PODS_ROOT)/DoubleConversion $(PODS_ROOT)/fast_float/include $(PODS_ROOT)/fmt/include $(PODS_ROOT)/RCT-Folly ${PODS_ROOT}/Headers/Public/FlipperKit $(PODS_ROOT)/Headers/Public/ReactCommon $(PODS_ROOT)/Headers/Public/React-hermes $(PODS_ROOT)/Headers/Public/hermes-engine \"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector/jsinspector_modern.framework/Headers\" \"${PODS_CONFIGURATION_BUILD_DIR}/RCTDeprecation/RCTDeprecation.framework/Headers\"",
+    "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/ReactCommon $(PODS_ROOT)/boost $(PODS_ROOT)/DoubleConversion $(PODS_ROOT)/fast_float/include $(PODS_ROOT)/fmt/include $(PODS_ROOT)/RCT-Folly ${PODS_ROOT}/Headers/Public/FlipperKit $(PODS_ROOT)/Headers/Public/ReactCommon $(PODS_ROOT)/Headers/Public/React-hermes $(PODS_ROOT)/Headers/Public/hermes-engine \"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector/jsinspector_modern.framework/Headers\" \"${PODS_CONFIGURATION_BUILD_DIR}/React-jsitooling/JSITooling.framework/Headers\" \"${PODS_CONFIGURATION_BUILD_DIR}/RCTDeprecation/RCTDeprecation.framework/Headers\"",
     "DEFINES_MODULE": "YES",
     "GCC_PREPROCESSOR_DEFINITIONS": "RCT_METRO_PORT=${RCT_METRO_PORT}",
     "CLANG_CXX_LANGUAGE_STANDARD": "c++20",
@@ -46,9 +46,10 @@
     "Yoga": [],
     "glog": [],
     "React-jsinspector": [],
+    "React-jsitooling": [],
     "RCTDeprecation": [],
-    "React-hermes": [],
-    "hermes-engine": []
+    "hermes-engine": [],
+    "React-hermes": []
   },
   "subspecs": [
     {
@@ -61,6 +62,7 @@
         "React/FBReactNativeSpec/**/*",
         "React/Tests/**/*",
         "React/Inspector/**/*",
+        "React/Runtime/**/*",
         "React/CxxBridge/JSCExecutorFactory.{h,mm}"
       ],
       "private_header_files": "React/Cxx*/*.h"
@@ -73,10 +75,10 @@
       ],
       "dependencies": {
         "React-Core/Default": [
-          "0.78.2"
+          "0.79.2"
         ],
         "React-Core/RCTWebSocket": [
-          "0.78.2"
+          "0.79.2"
         ]
       },
       "private_header_files": "React/Inspector/RCTCxx*.h"
@@ -86,7 +88,7 @@
       "source_files": "Libraries/WebSocket/*.{h,m}",
       "dependencies": {
         "React-Core/Default": [
-          "0.78.2"
+          "0.79.2"
         ]
       }
     },

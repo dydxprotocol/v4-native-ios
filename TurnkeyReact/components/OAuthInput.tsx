@@ -2,7 +2,7 @@ import { useTurnkey } from "@turnkey/sdk-react-native";
 import { TurnkeyConfigs } from "../SharedConfigs";
 import { Button } from "./ui/button";
 import { View, Text, DeviceEventEmitter } from "react-native";
-// import GoogleIcon from "../assets/svgs/google.svg";
+import GoogleIcon from "../../assets/svgs/google.svg";
 import { styles } from "../turnkeyStyle";
 import { OAuthRequest } from "../providers/authRelayProvider";
 import { EmbeddedKeyAndNonce, useEmbeddedKeyAndNonce } from "./useEmbeddedKeyAndNonce";

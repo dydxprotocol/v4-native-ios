@@ -73,6 +73,7 @@ ${BUILT_PRODUCTS_DIR}/React-RCTFabric/RCTFabric.framework
 ${BUILT_PRODUCTS_DIR}/React-RCTImage/RCTImage.framework
 ${BUILT_PRODUCTS_DIR}/React-RCTLinking/RCTLinking.framework
 ${BUILT_PRODUCTS_DIR}/React-RCTNetwork/RCTNetwork.framework
+${BUILT_PRODUCTS_DIR}/React-RCTRuntime/RCTRuntime.framework
 ${BUILT_PRODUCTS_DIR}/React-RCTSettings/RCTSettings.framework
 ${BUILT_PRODUCTS_DIR}/React-RCTText/RCTText.framework
 ${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework
@@ -93,11 +94,14 @@ ${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework
 ${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework
 ${BUILT_PRODUCTS_DIR}/React-jsinspector/jsinspector_modern.framework
 ${BUILT_PRODUCTS_DIR}/React-jsinspectortracing/jsinspector_moderntracing.framework
+${BUILT_PRODUCTS_DIR}/React-jsitooling/JSITooling.framework
 ${BUILT_PRODUCTS_DIR}/React-logger/logger.framework
 ${BUILT_PRODUCTS_DIR}/React-microtasksnativemodule/React_microtasksnativemodule.framework
+${BUILT_PRODUCTS_DIR}/React-oscompat/oscompat.framework
 ${BUILT_PRODUCTS_DIR}/React-perflogger/reactperflogger.framework
 ${BUILT_PRODUCTS_DIR}/React-performancetimeline/React_performancetimeline.framework
 ${BUILT_PRODUCTS_DIR}/React-rendererconsistency/React_rendererconsistency.framework
+${BUILT_PRODUCTS_DIR}/React-renderercss/React_renderercss.framework
 ${BUILT_PRODUCTS_DIR}/React-rendererdebug/React_rendererdebug.framework
 ${BUILT_PRODUCTS_DIR}/React-runtimescheduler/React_runtimescheduler.framework
 ${BUILT_PRODUCTS_DIR}/React-utils/React_utils.framework

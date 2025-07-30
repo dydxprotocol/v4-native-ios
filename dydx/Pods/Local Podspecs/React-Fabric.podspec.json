@@ -1,6 +1,6 @@
 {
   "name": "React-Fabric",
-  "version": "0.78.2",
+  "version": "0.79.2",
   "summary": "Fabric for React Native.",
   "homepage": "https://reactnative.dev/",
   "license": "MIT",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/facebook/react-native.git",
-    "tag": "v0.78.2"
+    "tag": "v0.79.2"
   },
   "source_files": "dummyFile.cpp",
   "pod_target_xcconfig": {
@@ -47,7 +47,8 @@
     "React-cxxreact": [],
     "React-rendererdebug": [],
     "React-graphics": [],
-    "hermes-engine": []
+    "hermes-engine": [],
+    "React-hermes": []
   },
   "script_phases": [
     {
@@ -121,6 +122,7 @@
     },
     {
       "name": "components",
+      "exclude_files": "react/renderer/components/scrollview/tests",
       "subspecs": [
         {
           "name": "root",
@@ -140,6 +142,7 @@
             "RCT-Folly/Fabric": [
               "2024.11.18.00"
             ],
+            "React-renderercss": [],
             "Yoga": []
           },
           "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_HAVE_CLOCK_GETTIME=1 -Wno-comma -Wno-shorten-64-to-32",
@@ -153,6 +156,17 @@
           "pod_target_xcconfig": {
             "HEADER_SEARCH_PATHS": "\"$(PODS_ROOT)/Headers/Private/Yoga\""
           }
+        },
+        {
+          "name": "scrollview",
+          "dependencies": {
+            "RCT-Folly/Fabric": [
+              "2024.11.18.00"
+            ]
+          },
+          "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_HAVE_CLOCK_GETTIME=1 -Wno-comma -Wno-shorten-64-to-32",
+          "source_files": "react/renderer/components/scrollview/*.{m,mm,cpp,h}",
+          "header_dir": "react/renderer/components/scrollview"
         },
         {
           "name": "legacyviewmanagerinterop",

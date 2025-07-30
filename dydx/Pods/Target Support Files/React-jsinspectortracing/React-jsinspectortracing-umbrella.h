@@ -11,7 +11,14 @@
 #endif
 
 #import "jsinspector-modern/tracing/CdpTracing.h"
+#import "jsinspector-modern/tracing/EventLoopTaskReporter.h"
+#import "jsinspector-modern/tracing/InstanceTracingProfile.h"
 #import "jsinspector-modern/tracing/PerformanceTracer.h"
+#import "jsinspector-modern/tracing/ProfileTreeNode.h"
+#import "jsinspector-modern/tracing/RuntimeSamplingProfile.h"
+#import "jsinspector-modern/tracing/RuntimeSamplingProfileTraceEventSerializer.h"
+#import "jsinspector-modern/tracing/TraceEvent.h"
+#import "jsinspector-modern/tracing/TraceEventProfile.h"
 
 FOUNDATION_EXPORT double jsinspector_moderntracingVersionNumber;
 FOUNDATION_EXPORT const unsigned char jsinspector_moderntracingVersionString[];

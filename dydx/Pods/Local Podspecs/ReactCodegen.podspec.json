@@ -1,6 +1,6 @@
 {
   "name": "ReactCodegen",
-  "version": "0.78.2",
+  "version": "0.79.2",
   "summary": "Temp pod for generated files for React Native",
   "homepage": "https://facebook.com/",
   "license": "Unlicense",
@@ -40,7 +40,8 @@
     "React-utils": [],
     "React-featureflags": [],
     "React-RCTAppDelegate": [],
-    "hermes-engine": []
+    "hermes-engine": [],
+    "React-hermes": []
   },
   "script_phases": {
     "name": "Generate Specs",
@@ -50,6 +51,6 @@
     "output_files": [
       "${DERIVED_FILE_DIR}/react-codegen.log"
     ],
-    "script": "pushd \"$PODS_ROOT/../\" > /dev/null\nRCT_SCRIPT_POD_INSTALLATION_ROOT=$(pwd)\npopd >/dev/null\n\nexport RCT_SCRIPT_RN_DIR=$RCT_SCRIPT_POD_INSTALLATION_ROOT/../node_modules/react-native\nexport RCT_SCRIPT_APP_PATH=$RCT_SCRIPT_POD_INSTALLATION_ROOT/..\nexport RCT_SCRIPT_OUTPUT_DIR=$RCT_SCRIPT_POD_INSTALLATION_ROOT\nexport RCT_SCRIPT_TYPE=withCodegenDiscovery\n\nSCRIPT_PHASES_SCRIPT=\"$RCT_SCRIPT_RN_DIR/scripts/react_native_pods_utils/script_phases.sh\"\nWITH_ENVIRONMENT=\"$RCT_SCRIPT_RN_DIR/scripts/xcode/with-environment.sh\"\n/bin/sh -c \"$WITH_ENVIRONMENT $SCRIPT_PHASES_SCRIPT\"\n"
+    "script": "pushd \"$PODS_ROOT/../\" > /dev/null\nRCT_SCRIPT_POD_INSTALLATION_ROOT=$(pwd)\npopd >/dev/null\n\nexport RCT_SCRIPT_RN_DIR=\"$RCT_SCRIPT_POD_INSTALLATION_ROOT/../node_modules/react-native\"\nexport RCT_SCRIPT_APP_PATH=\"$RCT_SCRIPT_POD_INSTALLATION_ROOT/..\"\nexport RCT_SCRIPT_OUTPUT_DIR=\"$RCT_SCRIPT_POD_INSTALLATION_ROOT\"\nexport RCT_SCRIPT_TYPE=\"withCodegenDiscovery\"\n\nSCRIPT_PHASES_SCRIPT=\"$RCT_SCRIPT_RN_DIR/scripts/react_native_pods_utils/script_phases.sh\"\nWITH_ENVIRONMENT=\"$RCT_SCRIPT_RN_DIR/scripts/xcode/with-environment.sh\"\n/bin/sh -c \"$WITH_ENVIRONMENT $SCRIPT_PHASES_SCRIPT\"\n"
   }
 }

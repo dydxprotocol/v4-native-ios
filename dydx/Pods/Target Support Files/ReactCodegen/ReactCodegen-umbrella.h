@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "RCTModuleProviders.h"
 #import "RCTModulesConformingToProtocolsProvider.h"
 #import "RCTThirdPartyComponentsProvider.h"
 #import "react/renderer/components/rngesturehandler_codegen/ComponentDescriptors.h"
