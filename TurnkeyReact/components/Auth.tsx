@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TurnkeyConfigs } from '../sharedConfigs';
 import { useAuthRelay } from '../hooks/useAuthRelay';
 import { OAuthInput } from './OAuthInput';
 import { EmailInput } from './EmailInput';
 import { styles } from "../turnkeyStyle";
-import { LoaderButton } from './ui/button';
 import { LoginMethod, OtpType } from '../lib/types';
 import { TurnkeyNativeModule } from '../../TurnkeyModule';
 import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
 import { Image } from 'react-native';
+import { Button } from './ui/button';
 
 const renderError = () => {
   const {
@@ -34,20 +33,11 @@ const renderError = () => {
 
 export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
   const {
-    state,
-    initOtpLogin,
-    signUpWithPasskey,
-    loginWithPasskey,
     loginWithOAuth,
-    clearError
   } = useAuthRelay();
-
-  const [email, setEmail] = useState<string>('');
-  const [isValidEmail, setIsValidEmail] = useState<boolean>(false);
 
   const oAuthEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.OAuth);
   const emailEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.Email);
-
 
   return (
     <ScrollView
@@ -67,17 +57,6 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
             connect your wallet.
           </Text>
 
-          <Image
-            source={require('../../assets/logo_google.png')}
-            style={{ width: 100, height: 100 }}
-          />
-
-      <Image
-            source={require('../../assets/logo_apple.png')}
-            style={{ width: 100, height: 100 }}
-          />
-
-
           {/* Social icons row */}
           <View style={styles.socialRow}>
             <OAuthInput
@@ -89,27 +68,9 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
           {/* Email input row */}
           <View style={styles.emailRow}>
             <EmailInput
-              initialValue={email}
-              onEmailChange={setEmail}
-              onValidationChange={setIsValidEmail}
               embeddedKeyAndNonce={emailEmbeddedKeyAndNonce}
               configs={configs}
             />
-            <LoaderButton
-              variant="outline"
-              disabled={!!state.loading || !isValidEmail}
-              loading={state.loading === LoginMethod.Email}
-              onPress={() =>
-                initOtpLogin({
-                  otpType: OtpType.Email,
-                  contact: email,
-                  embeddedKeyAndNonce: emailEmbeddedKeyAndNonce,
-                  configs: configs,
-                })
-              }
-            >
-              <Text style={styles.submitButtonText}>Submit</Text>
-            </LoaderButton>
           </View>
 
           {renderError()}
@@ -142,13 +103,16 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
             onPress={async () => {
               TurnkeyNativeModule.onAuthRouteToDesktopQR();
             }}>
-            <Ionicons
-              name="person"
-              size={18}
-              color="#fff"
-              style={{ marginRight: 8 }}
+            <Image
+              source={require('../../assets/logo_desktop.png')}
+              style={{ width: 18, height: 18, marginEnd: 8 }}
             />
             <Text style={styles.actionButtonText}>Sign in with Desktop</Text>
+            <Image
+              source={require('../../assets/chevron_right.png')}
+              style={{ height: 10, tintColor: '#56565C' }}
+              resizeMode="contain"
+            />
           </TouchableOpacity>
 
           {/* Sign in with Wallet */}
@@ -157,13 +121,16 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
             onPress={async () => {
               TurnkeyNativeModule.onAuthRouteToWallet();
             }}>
-            <Ionicons
-              name="wallet"
-              size={18}
-              color="#fff"
-              style={{ marginRight: 8 }}
+            <Image
+              source={require('../../assets/logo_wallet.png')}
+              style={{ width: 16, height: 16, marginEnd: 8 }}
             />
             <Text style={styles.actionButtonText}>Sign in with Wallet</Text>
+            <Image
+              source={require('../../assets/chevron_right.png')}
+              style={{ height: 10, tintColor: '#56565C' }}
+              resizeMode="contain"
+            />
           </TouchableOpacity>
         </View>
       </View>

@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
-import { Pressable } from "react-native";
+import { Pressable, ViewStyle } from "react-native";
 import { TextClassContext } from "./text";
 import { cn } from "../../lib/utils";
 import { Spinner } from "./spinner";
@@ -66,21 +66,31 @@ type ButtonProps = React.ComponentPropsWithoutRef<typeof Pressable> &
 const Button = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   ButtonProps
->(({ className, variant, size, ...props }, ref) => {
+>(({ variant, size, disabled, ...props }, ref) => {
   return (
     <TextClassContext.Provider
       value={cn(
-        props.disabled && "web:pointer-events-none",
-        buttonTextVariants({ variant, size }),
+        disabled && "web:pointer-events-none",
+        buttonTextVariants({ variant, size })
       )}
     >
       <Pressable
-        className={cn(
-          props.disabled && "opacity-50 web:pointer-events-none",
-          buttonVariants({ variant, size, className }),
-        )}
         ref={ref}
         role="button"
+        disabled={disabled}
+        style={({ pressed }) => {
+          const baseStyle = buttonVariants({ variant, size }) as ViewStyle;
+          const pressedStyle = pressed ? { opacity: 0.75 } : {};
+          const disabledStyle = disabled ? { opacity: 0.5 } : {};
+
+          // If props.style is a function, call it with current state
+          const extraStyle =
+            typeof props.style === 'function'
+              ? props.style({ pressed })
+              : props.style;
+
+          return [baseStyle, pressedStyle, disabledStyle, extraStyle];
+        }}
         {...props}
       />
     </TextClassContext.Provider>
@@ -90,29 +100,3 @@ Button.displayName = "Button";
 
 export { Button, buttonTextVariants, buttonVariants };
 export type { ButtonProps };
-
-type LoaderButtonProps = ButtonProps & {
-  loading?: boolean;
-  children: React.ReactNode;
-};
-
-const LoaderButton = React.forwardRef<
-  React.ElementRef<typeof Button>,
-  LoaderButtonProps
->(({ children, loading, className, ...props }, ref) => {
-  return (
-    <Button
-      ref={ref}
-      className={cn("relative", className)}
-      {...props}
-      disabled={props.disabled || loading}
-    >
-      {loading && <Spinner size={18} className="absolute left-14 mx-auto" />}
-      {children}
-    </Button>
-  );
-});
-
-LoaderButton.displayName = "LoaderButton";
-
-export { LoaderButton };

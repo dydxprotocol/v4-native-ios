@@ -1,7 +1,7 @@
 import { useTurnkey } from "@turnkey/sdk-react-native";
 import { TurnkeyConfigs } from "../SharedConfigs";
 import { Button } from "./ui/button";
-import { View, Text, DeviceEventEmitter } from "react-native";
+import { View, Text, DeviceEventEmitter, Image } from "react-native";
 import GoogleIcon from "../../assets/svgs/google.svg";
 import { styles } from "../turnkeyStyle";
 import { OAuthRequest } from "../providers/authRelayProvider";
@@ -50,12 +50,14 @@ export const GoogleAuthButton: React.FC<OAuthProps> = ({
   return (
     <Button
       onPress={handlePress}
-      // className="border border-black rounded-xl bg-transparent flex-row items-center justify-center flex-1 h-16"
+      style={styles.socialButton}
       disabled={embeddedKeyAndNonce.nonce == null || !embeddedKeyAndNonce.targetPublicKey}
     >
-      {/* <GoogleIcon width={24} height={24} /> */}
-      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-        <Text style={styles.subtitle}>Google</Text>
+      <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+        <Image
+          source={require('../../assets/logo_google.png')}
+          style={{ width: 24, height: 24 }}
+        />
       </View>
     </Button>
   );
@@ -99,12 +101,16 @@ export const AppleAuthButton: React.FC<OAuthProps> = ({
   return (
     <Button
       onPress={handleAppleAuth}
-      // className="border border-black rounded-xl bg-transparent flex-row items-center justify-center flex-1 h-16"
+      style = {styles.socialButton}
       disabled={embeddedKeyAndNonce.nonce == null || !embeddedKeyAndNonce.targetPublicKey}
     >
-      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-        <Text style={styles.subtitle}>Apple</Text>
-        {/* <AppleIcon width={28} height={28} /> */}
+
+      <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+        <Image
+          source={require('../../assets/logo_apple.png')}
+          style={{ height: 26 }}
+          resizeMode="contain"
+        />
       </View>
     </Button>
   );
@@ -114,18 +120,19 @@ export const OAuthInput: React.FC<OAuthProps> = (props) => {
   const { onSuccess, configs, embeddedKeyAndNonce } = props;
 
   return (
-    // <View className="flex flex-row items-center justify-center w-full gap-4">
-    <View>
-      <GoogleAuthButton
-        onSuccess={onSuccess}
-        configs={configs}
-        embeddedKeyAndNonce={embeddedKeyAndNonce}
-      />
+    <View style={{ flexDirection: 'row', justifyContent: "space-evenly", gap: 8, width: '100%' }}>
+
       <AppleAuthButton
         onSuccess={onSuccess}
         configs={configs}
         embeddedKeyAndNonce={embeddedKeyAndNonce}
       />
+      <GoogleAuthButton
+        onSuccess={onSuccess}
+        configs={configs}
+        embeddedKeyAndNonce={embeddedKeyAndNonce}
+      />
+
     </View>
   );
 };
