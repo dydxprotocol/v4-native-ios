@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Input } from "../components/ui/input";
-import { styles } from "../turnkeyStyle";
+import { styles } from '../../rn_style/dydxStyle';
 import { DeviceEventEmitter, Image, View } from "react-native";
 import { Text } from './ui/text';
 import { EmailTokenReceivedEvent } from "../../TurnkeyModule";
@@ -45,7 +45,7 @@ export const EmailInput = ({
   return (
     <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
       <Image
-        source={require('../../assets/logo_mail.png')}
+        source={require('../../rn_style/assets/logo_mail.png')}
         style={{ width: 24, height: 24 }}
       />
 

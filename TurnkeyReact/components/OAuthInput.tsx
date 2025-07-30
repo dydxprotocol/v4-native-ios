@@ -2,7 +2,7 @@ import { useTurnkey } from "@turnkey/sdk-react-native";
 import { TurnkeyConfigs } from "../SharedConfigs";
 import { Button } from "./ui/button";
 import { View, Text, DeviceEventEmitter, Image } from "react-native";
-import { styles } from "../turnkeyStyle";
+import { styles } from '../../rn_style/dydxStyle';
 import { OAuthRequest } from "../providers/authRelayProvider";
 import { EmbeddedKeyAndNonce } from "./useEmbeddedKeyAndNonce";
 import { AppleSignInCompletedEvent, TurnkeyNativeModule } from "../../TurnkeyModule";
@@ -53,7 +53,7 @@ export const GoogleAuthButton: React.FC<OAuthProps> = ({
     >
       <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
         <Image
-          source={require('../../assets/logo_google.png')}
+          source={require('../../rn_style/assets/logo_google.png')}
           style={{ width: 24, height: 24 }}
         />
       </View>
@@ -105,7 +105,7 @@ export const AppleAuthButton: React.FC<OAuthProps> = ({
 
       <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
         <Image
-          source={require('../../assets/logo_apple.png')}
+          source={require('../../rn_style/assets/logo_apple.png')}
           style={{ height: 26 }}
           resizeMode="contain"
         />

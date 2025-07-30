@@ -9,7 +9,7 @@ import { TurnkeyConfigs } from '../sharedConfigs';
 import { useAuthRelay } from '../hooks/useAuthRelay';
 import { OAuthInput } from './OAuthInput';
 import { EmailInput } from './EmailInput';
-import { styles } from "../turnkeyStyle";
+import { styles } from '../../rn_style/dydxStyle';
 import { LoginMethod, OtpType } from '../lib/types';
 import { TurnkeyNativeModule } from '../../TurnkeyModule';
 import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
@@ -103,12 +103,12 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
               TurnkeyNativeModule.onAuthRouteToDesktopQR();
             }}>
             <Image
-              source={require('../../assets/logo_desktop.png')}
+              source={require('../../rn_style/assets/logo_desktop.png')}
               style={{ width: 18, height: 18, marginEnd: 8 }}
             />
             <Text style={styles.actionButtonText}>Sign in with Desktop</Text>
             <Image
-              source={require('../../assets/chevron_right.png')}
+              source={require('../../rn_style/assets/chevron_right.png')}
               style={{ height: 10, tintColor: '#56565C' }}
               resizeMode="contain"
             />
@@ -121,12 +121,12 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
               TurnkeyNativeModule.onAuthRouteToWallet();
             }}>
             <Image
-              source={require('../../assets/logo_wallet.png')}
+              source={require('../../rn_style/assets/logo_wallet.png')}
               style={{ width: 16, height: 16, marginEnd: 8 }}
             />
             <Text style={styles.actionButtonText}>Sign in with Wallet</Text>
             <Image
-              source={require('../../assets/chevron_right.png')}
+              source={require('../../rn_style/assets/chevron_right.png')}
               style={{ height: 10, tintColor: '#56565C' }}
               resizeMode="contain"
             />

@@ -1,4 +1,4 @@
 // react-native.config.js
 module.exports = {
-  assets: ['./assets/fonts'],
+  assets: ['./rn_style/assets/fonts'],
 };
