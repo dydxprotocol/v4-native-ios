@@ -76,7 +76,7 @@ public class dydxPortfolioViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack {
-                turnkeyReactNativeView
+                ReactNativeView(moduleName: "TurnkeyReact", bridge: TurnkeyBridgeManager.shared.bridge)
                     .frame(height: 0)
 
                 HStack {

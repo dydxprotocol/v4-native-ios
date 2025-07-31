@@ -50,7 +50,9 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
             "backendApiUrl": "http://dev2-indexer-apne1-lb-public-2076363889.ap-northeast-1.elb.amazonaws.com",
             "theme": dydxThemeSettings.shared.currentThemeType.rnThemeIdentifier
         ]
-        super.init(moduleName: "TurnkeyLogin", initialProperties: initialProperties)
+        super.init(moduleName: "TurnkeyLogin",
+                   initialProperties: initialProperties,
+                   bridge: TurnkeyBridgeManager.shared.bridge)
     }
 
     @MainActor required init?(coder: NSCoder) {
