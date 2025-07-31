@@ -7,4 +7,5 @@ export type TurnkeyConfigs = {
   turnkeyOrgId: string,
   backendApiUrl: string,
   theme: "light" | "dark" | "classicDark" | undefined,
+  strings: Record<string, string>,
 };

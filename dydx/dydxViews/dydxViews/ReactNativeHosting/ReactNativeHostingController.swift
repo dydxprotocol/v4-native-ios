@@ -8,6 +8,7 @@
 import SwiftUI
 import React
 import PlatformUI
+import Utilities
 
 public struct ReactNativeView: UIViewControllerRepresentable {
     let moduleName: String
@@ -23,17 +24,18 @@ public struct ReactNativeView: UIViewControllerRepresentable {
     }
 }
 
-// Helper UIViewController that waits for bridge readiness
 open class ReactNativeHostingController: UIViewController {
-    let bridge: RCTBridge
     let moduleName: String
     let initialProperties: [String: Any]?
+    let stringKeys: [DataLocalizer.Entry]
+    let bridge: RCTBridge
 
     private var rootView: RCTRootView?
 
-    public init(moduleName: String, initialProperties: [String: Any]? = nil, bridge: RCTBridge) {
+    public init(moduleName: String, initialProperties: [String: Any]? = nil, stringKeys: [DataLocalizer.Entry] = [], bridge: RCTBridge) {
         self.moduleName = moduleName
         self.initialProperties = initialProperties
+        self.stringKeys = stringKeys
         self.bridge = bridge
         super.init(nibName: nil, bundle: nil)
     }
@@ -57,10 +59,17 @@ open class ReactNativeHostingController: UIViewController {
     }
 
     private func setupRootView() {
+        var strings = [String: String]()
+        for entry in stringKeys {
+            strings[entry.path] = DataLocalizer.localize(path: entry.path, params: entry.params)
+        }
+        var props: [String: Any] = (initialProperties ?? [:])
+        props["strings"] = strings
+
         let rootView = RCTRootView(
             bridge: bridge,
             moduleName: moduleName,
-            initialProperties: initialProperties
+            initialProperties: props
         )
         rootView.frame = view.bounds
         rootView.backgroundColor = ThemeColor.SemanticColor.layer0.uiColor

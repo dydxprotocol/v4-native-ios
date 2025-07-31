@@ -58,7 +58,7 @@ export const EmailInput = ({
         autoCorrect={false}
         keyboardType="email-address"
         placeholderTextColor={currentTheme.colors.textTertiary}
-        placeholder="Enter your email"
+        placeholder={configs.strings["APP.TURNKEY_ONBOARD.EMAIL_PLACEHOLDER"]}
         value={email}
         onChangeText={(text: string) => {
           setEmail(text);
@@ -80,7 +80,9 @@ export const EmailInput = ({
           })
         }
       >
-        <Text style={{ color: isValidEmail ? currentTheme.colors.purple : currentTheme.colors.textTertiary }}>Submit</Text>
+        <Text style={{ color: isValidEmail ? currentTheme.colors.purple : currentTheme.colors.textTertiary }}>
+          {configs.strings["APP.TURNKEY_ONBOARD.SUBMIT"]}
+        </Text>
       </Button>
     </View>
 
