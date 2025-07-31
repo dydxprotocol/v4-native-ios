@@ -1,12 +1,13 @@
 import { useTurnkey } from "@turnkey/sdk-react-native";
 import { TurnkeyConfigs } from "../SharedConfigs";
 import { Button } from "./ui/button";
-import { View, Text, DeviceEventEmitter, Image } from "react-native";
-import { styles } from '../../rn_style/dydxStyle';
+import { View, DeviceEventEmitter, Image } from "react-native";
 import { OAuthRequest } from "../providers/authRelayProvider";
 import { EmbeddedKeyAndNonce } from "./useEmbeddedKeyAndNonce";
 import { AppleSignInCompletedEvent, TurnkeyNativeModule } from "../../TurnkeyModule";
 import { useEffect } from "react";
+import { currentTheme } from "../../rn_style/themes/currentTheme";
+import { useThemedStyles } from "../turnkeyStyle";
 
 type OAuthProps = {
   onSuccess: (params: OAuthRequest) => Promise<void>;
@@ -21,6 +22,8 @@ export const GoogleAuthButton: React.FC<OAuthProps> = ({
 }: OAuthProps) => {
   const { handleGoogleOAuth } = useTurnkey();
 
+  const styles = useThemedStyles(currentTheme);
+   
   const handlePress = async () => {
     try {
       await handleGoogleOAuth({
@@ -96,6 +99,8 @@ export const AppleAuthButton: React.FC<OAuthProps> = ({
     TurnkeyNativeModule.onAppleAuthRequest(embeddedKeyAndNonce.nonce);
   };
 
+     const styles = useThemedStyles(currentTheme);
+   
   return (
     <Button
       onPress={handleAppleAuth}
@@ -108,6 +113,7 @@ export const AppleAuthButton: React.FC<OAuthProps> = ({
           source={require('../../rn_style/assets/logo_apple.png')}
           style={{ height: 26 }}
           resizeMode="contain"
+          tintColor={currentTheme.colors.textPrimary}
         />
       </View>
     </Button>

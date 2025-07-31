@@ -55,4 +55,3 @@ export const darkTheme = {
   },
 };
 
-export const currentTheme = darkTheme;

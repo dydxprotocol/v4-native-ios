@@ -16,6 +16,7 @@ import React
 import React_RCTAppDelegate
 import dydxTurnkey
 import dydxCartera
+import dydxViews
 
 public struct OnboardingLandingRoute {
     static var value: String {
@@ -46,7 +47,8 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
             // From Turnkey console
             "turnkeyOrgId": "3174ac51-1637-47d8-9456-19549963e2ed",
             // Indexer backend
-            "backendApiUrl": "http://dev2-indexer-apne1-lb-public-2076363889.ap-northeast-1.elb.amazonaws.com"
+            "backendApiUrl": "http://dev2-indexer-apne1-lb-public-2076363889.ap-northeast-1.elb.amazonaws.com",
+            "theme": dydxThemeSettings.shared.currentThemeType.rnThemeIdentifier
         ]
         super.init(moduleName: "TurnkeyLogin", initialProperties: initialProperties)
     }

@@ -6,4 +6,5 @@ export type TurnkeyConfigs = {
   turnkeyUrl: string,
   turnkeyOrgId: string,
   backendApiUrl: string,
+  theme: "light" | "dark" | "classicDark" | undefined,
 };

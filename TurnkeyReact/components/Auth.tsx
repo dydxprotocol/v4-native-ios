@@ -9,12 +9,14 @@ import { TurnkeyConfigs } from '../sharedConfigs';
 import { useAuthRelay } from '../hooks/useAuthRelay';
 import { OAuthInput } from './OAuthInput';
 import { EmailInput } from './EmailInput';
-import { styles } from '../../rn_style/dydxStyle';
+import { useThemedStyles } from '../turnkeyStyle';
 import { LoginMethod, OtpType } from '../lib/types';
 import { TurnkeyNativeModule } from '../../TurnkeyModule';
 import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
 import { Image } from 'react-native';
+import { currentTheme } from '../../rn_style/themes/currentTheme';
 
+  
 const renderError = () => {
   const {
     state,
@@ -34,6 +36,9 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
   const {
     loginWithOAuth,
   } = useAuthRelay();
+
+
+  const styles = useThemedStyles(currentTheme);
 
   const oAuthEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.OAuth);
   const emailEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.Email);
@@ -104,7 +109,7 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
             }}>
             <Image
               source={require('../../rn_style/assets/logo_desktop.png')}
-              style={{ width: 18, height: 18, marginEnd: 8 }}
+              style={{ width: 18, height: 18, marginEnd: 8, tintColor: currentTheme.colors.textSecondary }}
             />
             <Text style={styles.actionButtonText}>Sign in with Desktop</Text>
             <Image
@@ -122,7 +127,7 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
             }}>
             <Image
               source={require('../../rn_style/assets/logo_wallet.png')}
-              style={{ width: 16, height: 16, marginEnd: 8 }}
+              style={{ width: 16, height: 16, marginEnd: 8, tintColor: currentTheme.colors.textSecondary }}
             />
             <Text style={styles.actionButtonText}>Sign in with Wallet</Text>
             <Image

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Input } from "../components/ui/input";
-import { styles } from '../../rn_style/dydxStyle';
+import { useThemedStyles } from '../turnkeyStyle';
 import { DeviceEventEmitter, Image, View } from "react-native";
 import { Text } from './ui/text';
 import { EmailTokenReceivedEvent } from "../../TurnkeyModule";
@@ -10,6 +10,7 @@ import { TurnkeyConfigs } from "../sharedConfigs";
 import { EmbeddedKeyAndNonce } from "./useEmbeddedKeyAndNonce";
 import { Button } from "./ui/button";
 import { OtpType } from "../lib/types";
+import { currentTheme } from "../../rn_style/themes/currentTheme";
 
 interface EmailInputProps {
   embeddedKeyAndNonce: EmbeddedKeyAndNonce;
@@ -23,6 +24,8 @@ export const EmailInput = ({
   const { initOtpLogin, completeOtpAuth, state } = useAuthRelay();
   const [email, setEmail] = useState<string>('');
   const [isValidEmail, setIsValidEmail] = useState<boolean>(false);
+
+  const styles = useThemedStyles(currentTheme);
 
   useEffect(() => {
     DeviceEventEmitter.removeAllListeners('EmailTokenReceived');
@@ -46,7 +49,7 @@ export const EmailInput = ({
     <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
       <Image
         source={require('../../rn_style/assets/logo_mail.png')}
-        style={{ width: 24, height: 24 }}
+        style={{ width: 24, height: 24, tintColor: currentTheme.colors.textTertiary }}
       />
 
       <Input

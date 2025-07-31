@@ -13,9 +13,9 @@ import UIKit
 import SwiftUI
 import Utilities
 
-class dydxThemeSettings {
-    static let shared = dydxThemeSettings()
-    @Published fileprivate(set) var currentThemeType: dydxThemeType = .dark
+public class dydxThemeSettings {
+    public static let shared = dydxThemeSettings()
+    @Published public fileprivate(set) var currentThemeType: dydxThemeType = .dark
 }
 
 public enum dydxThemeType: String {
@@ -36,6 +36,21 @@ public enum dydxThemeType: String {
     fileprivate var config: ThemeConfig? {
         guard let configFileName = self.configFileName else { return nil }
         return ThemeConfig.load(configJson: configFileName, bundle: Bundle(for: dydxViewBundleClass.self))
+    }
+
+    // theme id for the react native screens
+    public var rnThemeIdentifier: String {
+        switch self {
+        case .dark: return "dark"
+        case .light: return "light"
+        case .classicDark: return "classicDark"
+        case .system:
+            if UITraitCollection.current.userInterfaceStyle == .dark {
+                return "dark"
+            } else {
+                return "light"
+            }
+        }
     }
 }
 
