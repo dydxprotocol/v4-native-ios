@@ -45,6 +45,7 @@ export const EmailInput = ({
   }, [embeddedKeyAndNonce]);
 
   const [checkEmailModalVisible, setCheckEmailModalVisible] = useState(false);
+  const [showResendButton, setShowResendButton] = useState(false);
 
   const handleEmailSubmit = () => {
     if (isValidEmail) {
@@ -55,6 +56,10 @@ export const EmailInput = ({
         configs: configs,
       });
       setCheckEmailModalVisible(true);
+      setShowResendButton(false); // hide initially
+      setTimeout(() => {
+        setShowResendButton(true); // show after 10s
+      }, 10000);
     }
   };
 
@@ -88,18 +93,23 @@ export const EmailInput = ({
               <Text style={{ fontSize: currentTheme.fontSizes.small, color: currentTheme.colors.textTertiary, textAlign: 'center', marginBottom: 24 }}>
                 {configs.strings["APP.TURNKEY_ONBOARD.CHECK_EMAIL_DESCRIPTION"]}
               </Text>
-              <Button onPress={() => handleEmailSubmit()}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-                     backgroundColor: currentTheme.colors.layer5, borderRadius: 999, paddingHorizontal: 20, paddingVertical: 10 }}>
-                  <Image
-                    source={require('../../rn_style/assets/icon_refresh.png')} 
-                    style={{ width: 16, height: 16, tintColor: currentTheme.colors.purple, marginRight: 6 }}
-                  />
-                  <Text style={{ color: currentTheme.colors.purple, fontSize: currentTheme.fontSizes.small }}>
-                    {configs.strings["APP.TURNKEY_ONBOARD.RESEND"]}
-                  </Text>
-                </View>
-              </Button>
+
+              {showResendButton && (
+                <Button onPress={() => handleEmailSubmit()}>
+                  <View style={{
+                    flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+                    backgroundColor: currentTheme.colors.layer5, borderRadius: 999, paddingHorizontal: 20, paddingVertical: 10
+                  }}>
+                    <Image
+                      source={require('../../rn_style/assets/icon_refresh.png')}
+                      style={{ width: 16, height: 16, tintColor: currentTheme.colors.purple, marginRight: 6 }}
+                    />
+                    <Text style={{ color: currentTheme.colors.purple, fontSize: currentTheme.fontSizes.small }}>
+                      {configs.strings["APP.TURNKEY_ONBOARD.RESEND"]}
+                    </Text>
+                  </View>
+                </Button>
+              )}
             </View>
           </View>
         </View>
