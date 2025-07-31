@@ -83,7 +83,9 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
 
     func onAuthRouteToWallet() {
         Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
-            Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets", params: [
+                "backButtonRoute": "/onboard/turnkey"
+            ]), animated: true, completion: nil)
         }
     }
 

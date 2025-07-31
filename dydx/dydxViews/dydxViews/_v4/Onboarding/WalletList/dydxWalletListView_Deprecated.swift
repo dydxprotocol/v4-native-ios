@@ -14,6 +14,7 @@ import Introspect
 public class dydxWalletListViewModel_Deprecated: PlatformViewModel {
     @Published public var items: [PlatformViewModel] = []
     @Published public var onScrollViewCreated: ((UIScrollView) -> Void)?
+    @Published public var onBackButtonTapped: (() -> Void)?
 
     public init() { }
 
@@ -33,8 +34,16 @@ public class dydxWalletListViewModel_Deprecated: PlatformViewModel {
             let view = VStack(spacing: 8) {
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(DataLocalizer.localize(path: "APP.ONBOARDING.SELECT_WALLET"))
-                        .themeFont(fontSize: .largest)
+                    HStack(alignment: .center) {
+                        if let onBackButtonTapped = self.onBackButtonTapped {
+                            ChevronBackButtonModel(onBackButtonTap: onBackButtonTapped)
+                                .createView(parentStyle: style)
+                        }
+
+                        Text(DataLocalizer.localize(path: "APP.ONBOARDING.SELECT_WALLET"))
+                            .themeFont(fontSize: .larger)
+                            .themeColor(foreground: .textPrimary)
+                    }
 
                     Text(DataLocalizer.localize(path: "APP.ONBOARDING.SELECT_WALLET_TEXT"))
                         .themeFont(fontSize: .small)
