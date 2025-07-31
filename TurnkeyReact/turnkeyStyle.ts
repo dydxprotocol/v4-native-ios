@@ -96,5 +96,19 @@ export const useThemedStyles = (currentTheme: any) => {
       fontSize: currentTheme.fontSizes.medium,
       flex: 1,
     },
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    modalDialog: {
+      backgroundColor: currentTheme.colors.layer3,
+      padding: 20,
+      marginHorizontal: 16,
+      borderRadius: 16,
+      minWidth: 280,
+      alignItems: 'center',
+    },
   }), [currentTheme]);
 };

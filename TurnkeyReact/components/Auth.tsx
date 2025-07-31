@@ -10,7 +10,7 @@ import { useAuthRelay } from '../hooks/useAuthRelay';
 import { OAuthInput } from './OAuthInput';
 import { EmailInput } from './EmailInput';
 import { useThemedStyles } from '../turnkeyStyle';
-import { LoginMethod, OtpType } from '../lib/types';
+import { LoginMethod } from '../lib/types';
 import { TurnkeyNativeModule } from '../../TurnkeyModule';
 import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
 import { Image } from 'react-native';
@@ -107,7 +107,7 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
               TurnkeyNativeModule.onAuthRouteToDesktopQR();
             }}>
             <Image
-              source={require('../../rn_style/assets/logo_desktop.png')}
+              source={require('../../rn_style/assets/icon_desktop.png')}
               style={{ width: 18, height: 18, marginEnd: 8, tintColor: currentTheme.colors.textSecondary }}
             />
             <Text style={styles.actionButtonText}>{configs.strings["APP.TURNKEY_ONBOARD.SIGN_IN_DESKTOP"]}</Text>
@@ -125,7 +125,7 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
               TurnkeyNativeModule.onAuthRouteToWallet();
             }}>
             <Image
-              source={require('../../rn_style/assets/logo_wallet.png')}
+              source={require('../../rn_style/assets/icon_wallet.png')}
               style={{ width: 16, height: 16, marginEnd: 8, tintColor: currentTheme.colors.textSecondary }}
             />
             <Text style={styles.actionButtonText}>{configs.strings["APP.TURNKEY_ONBOARD.SIGN_IN_WALLET"]}</Text>
