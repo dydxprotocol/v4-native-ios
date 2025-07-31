@@ -68,9 +68,6 @@ export const useThemedStyles = (currentTheme: any) => {
       justifyContent: 'center',
       paddingHorizontal: 12,
     },
-    submitButtonText: {
-      color: currentTheme.colors.textPrimary,
-    },
     dividerContainer: {
       flexDirection: 'row',
       alignItems: 'center',

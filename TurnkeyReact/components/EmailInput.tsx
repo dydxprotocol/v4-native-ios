@@ -32,7 +32,6 @@ export const EmailInput = ({
     DeviceEventEmitter.addListener(
       'EmailTokenReceived',
       async ({ token }: EmailTokenReceivedEvent) => {
-        console.log("Email token Received:", token);
         completeOtpAuth({
           otpType: "email",
           token: token,
@@ -58,7 +57,7 @@ export const EmailInput = ({
         autoComplete="email"
         autoCorrect={false}
         keyboardType="email-address"
-        placeholderTextColor="#888"
+        placeholderTextColor={currentTheme.colors.textTertiary}
         placeholder="Enter your email"
         value={email}
         onChangeText={(text: string) => {
@@ -67,7 +66,7 @@ export const EmailInput = ({
           setIsValidEmail(isValid);
         }}
         aria-labelledby="emailLabel"
-        aria-errormessage="emai`lError"
+        aria-errormessage="emailError"
       />
 
       <Button
@@ -81,7 +80,7 @@ export const EmailInput = ({
           })
         }
       >
-        <Text style={styles.submitButtonText}>Submit</Text>
+        <Text style={{ color: isValidEmail ? currentTheme.colors.purple : currentTheme.colors.textTertiary }}>Submit</Text>
       </Button>
     </View>
 

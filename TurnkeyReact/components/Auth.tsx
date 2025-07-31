@@ -24,7 +24,7 @@ const renderError = () => {
 
   if (state.error && state.loading === null) {
     return (
-      <Text style={{ color: 'red', marginBottom: 20, textAlign: 'center' }}>
+      <Text style={{ color: currentTheme.colors.red, marginBottom: 20, textAlign: 'center' }}>
         {state.error}
       </Text>
     );
@@ -114,7 +114,7 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
             <Text style={styles.actionButtonText}>Sign in with Desktop</Text>
             <Image
               source={require('../../rn_style/assets/chevron_right.png')}
-              style={{ height: 10, tintColor: '#56565C' }}
+              style={{ height: 10, tintColor: currentTheme.colors.textTertiary }}
               resizeMode="contain"
             />
           </TouchableOpacity>
@@ -132,7 +132,7 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
             <Text style={styles.actionButtonText}>Sign in with Wallet</Text>
             <Image
               source={require('../../rn_style/assets/chevron_right.png')}
-              style={{ height: 10, tintColor: '#56565C' }}
+              style={{ height: 10, tintColor: currentTheme.colors.textTertiary}}
               resizeMode="contain"
             />
           </TouchableOpacity>
