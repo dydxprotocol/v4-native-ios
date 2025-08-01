@@ -79,11 +79,9 @@ private struct VaultDepositWithdrawView: View {
         }
         .padding(.horizontal, 16)
         .padding(.top, 48)
-        .padding(.bottom, self.safeAreaInsets?.bottom)
         .makeSheet()
         .frame(maxWidth: .infinity)
         .themeColor(background: .layer3)
-        .ignoresSafeArea(edges: [.bottom])
         .onTapGesture {
             PlatformView.hideKeyboard()
         }

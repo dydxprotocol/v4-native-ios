@@ -26,7 +26,6 @@
 		02714C8C29E0C3AD00CC1C44 /* ComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02714C8B29E0C3AD00CC1C44 /* ComboBox.swift */; };
 		0273A32D2ACDFFAC001B89F5 /* ThemeFontCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273A32C2ACDFFAC001B89F5 /* ThemeFontCache.swift */; };
 		0273A3332ACE06EE001B89F5 /* ThemeColorCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273A3322ACE06EE001B89F5 /* ThemeColorCache.swift */; };
-		0278DD0E2A7C7A1400FE6ABE /* PlatformViewModel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0278DD0D2A7C7A1400FE6ABE /* PlatformViewModel+Ext.swift */; };
 		027A7B45291E090F00DF402D /* ColoredText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A7B44291E090F00DF402D /* ColoredText.swift */; };
 		02ABDAF028D9150A00728C54 /* PlatformInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABDAEF28D9150A00728C54 /* PlatformInput.swift */; };
 		02B120B528A430DF00281498 /* ThemeViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B120B428A430DF00281498 /* ThemeViewModifiers.swift */; };
@@ -139,7 +138,6 @@
 		02714C8B29E0C3AD00CC1C44 /* ComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComboBox.swift; sourceTree = "<group>"; };
 		0273A32C2ACDFFAC001B89F5 /* ThemeFontCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeFontCache.swift; sourceTree = "<group>"; };
 		0273A3322ACE06EE001B89F5 /* ThemeColorCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColorCache.swift; sourceTree = "<group>"; };
-		0278DD0D2A7C7A1400FE6ABE /* PlatformViewModel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlatformViewModel+Ext.swift"; sourceTree = "<group>"; };
 		027A7B44291E090F00DF402D /* ColoredText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredText.swift; sourceTree = "<group>"; };
 		02ABDAEF28D9150A00728C54 /* PlatformInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformInput.swift; sourceTree = "<group>"; };
 		02B120B428A430DF00281498 /* ThemeViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewModifiers.swift; sourceTree = "<group>"; };
@@ -413,7 +411,6 @@
 				0207FCA42D2BCECD004C2C9F /* KeyboardObserving */,
 				02F16FDA28B491EE0085DC58 /* PlatformUI.swift */,
 				0230377728C15C0E00412B72 /* PlatformViewModel.swift */,
-				0278DD0D2A7C7A1400FE6ABE /* PlatformViewModel+Ext.swift */,
 				0243A73629BB8DBB00A083FE /* PlatformListViewModel.swift */,
 				025B844028AACBDE0037FF7C /* Components */,
 				02E2C99E28A1C96800F7C3BE /* DesignSystem */,
@@ -707,9 +704,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUITests/Pods-iOS-PlatformUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUITests/Pods-iOS-PlatformUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -766,7 +767,6 @@
 				27673BBE2C8FD24400689E3F /* AttributedString+Ext.swift in Sources */,
 				0230377828C15C0E00412B72 /* PlatformViewModel.swift in Sources */,
 				276581F82C139F36009E072A /* SingleAxisGeometryReader.swift in Sources */,
-				0278DD0E2A7C7A1400FE6ABE /* PlatformViewModel+Ext.swift in Sources */,
 				024399142D45B0880073DCF3 /* ShimmeringView.swift in Sources */,
 				0273A3332ACE06EE001B89F5 /* ThemeColorCache.swift in Sources */,
 				02ABDAF028D9150A00728C54 /* PlatformInput.swift in Sources */,
@@ -891,10 +891,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -968,10 +965,7 @@
 				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

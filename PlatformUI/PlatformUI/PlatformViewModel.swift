@@ -19,6 +19,14 @@ public protocol PlatformViewModeling: ObservableObject, Identifiable {
 open class PlatformViewModel: PlatformViewModeling {
     private let bodyBuilder: ((_ style: ThemeStyle) -> AnyView)?
 
+    public lazy var safeAreaInsets: UIEdgeInsets? = {
+        UIApplication
+                    .shared
+                    .connectedScenes
+                    .compactMap { ($0 as? UIWindowScene)?.keyWindow }
+                    .last?.safeAreaInsets
+    }()
+    
     public init(bodyBuilder: ((_ style: ThemeStyle) -> AnyView)? = nil) {
         self.bodyBuilder = bodyBuilder
     }

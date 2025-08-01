@@ -119,10 +119,8 @@ private struct TryAgainView: View {
         }
         .padding(.horizontal, 24)
         .padding(.top, 60)
-        .padding(.bottom, max((safeAreaInsets?.bottom ?? 0), 24))
         .themeColor(background: .layer4)
         .makeSheet(sheetStyle: .fitSize)
-        .ignoresSafeArea(edges: [.bottom])
     }
 }
 

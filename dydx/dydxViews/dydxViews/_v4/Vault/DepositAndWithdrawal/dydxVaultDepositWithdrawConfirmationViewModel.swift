@@ -69,11 +69,9 @@ private struct VaultDepositWithdrawConfirmationView: View {
         }
         .padding(.horizontal, 16)
         .padding(.top, 48)
-        .padding(.bottom, self.safeAreaInsets?.bottom)
         .makeSheet()
         .frame(maxWidth: .infinity)
         .themeColor(background: .layer3)
-        .ignoresSafeArea(edges: [.bottom])
     }
 
     private var titleRow: some View {

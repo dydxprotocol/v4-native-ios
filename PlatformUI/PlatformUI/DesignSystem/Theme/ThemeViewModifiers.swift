@@ -215,7 +215,7 @@ public func dragIndicator(topPadding: CGFloat = 18) -> some View {
 private struct SheetViewModifier: ViewModifier {
     let topPadding: CGFloat = 18
     let sheetStyle: MakeSheetStyle
-
+    
     @EnvironmentObject var themeSettings: ThemeSettings
 
     func body(content: Content) -> some View {
@@ -259,7 +259,7 @@ private struct SheetViewModifier: ViewModifier {
                     .opacity(0.8)
                 content
                 .padding(.top, 24)
-                .padding(.bottom, max((content.safeAreaInsets?.bottom ?? 0), 16))
+                .padding(.bottom, 16)
                 .padding(.horizontal, 24)
                 .themeColor(background: .layer3)
                 .cornerRadius(36, corners: [.topLeft, .topRight])
