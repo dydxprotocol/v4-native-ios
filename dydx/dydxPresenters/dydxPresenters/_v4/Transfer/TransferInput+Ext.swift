@@ -11,15 +11,7 @@ import BigInt
 
 extension TransferInput {
     var tokenAddress: String? {
-        let tokenAddress: String?
-        if dydxBoolFeatureFlag.skip_go_fast.isEnabled {
-            tokenAddress = token
-        } else if let token = token {
-            tokenAddress = resources?.tokenResources?[token]?.address
-        } else {
-            tokenAddress = nil
-        }
-        return tokenAddress
+        token
     }
 
     var tokenDecimals: Int? {

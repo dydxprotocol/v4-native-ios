@@ -170,7 +170,7 @@ public final class AbacusStateManager: NSObject {
         ]
         appConfigs.onboardingConfigs.alchemyApiKey = CredientialConfig.shared.credential(for: "alchemyApiKey")
         appConfigs.vaultConfigs = VaultConfigs.companion.forApp
-        appConfigs.skipGoFast = dydxBoolFeatureFlag.skip_go_fast.isEnabled
+        appConfigs.skipGoFast = true
 
         return AsyncAbacusStateManagerV2(
             deploymentUri: deploymentUri,

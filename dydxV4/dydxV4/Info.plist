@@ -29,7 +29,7 @@
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>{APP_SCHEME}</string>
+				<string>dydx-t-v4</string>
 			</array>
 		</dict>
 	</array>

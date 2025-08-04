@@ -36,7 +36,6 @@
 		0208627A28F4D95F00C9D3A0 /* dydxMarketInfoPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208627928F4D95F00C9D3A0 /* dydxMarketInfoPagingView.swift */; };
 		0208632328F51A6500C9D3A0 /* dydxMarketDepthChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208632228F51A6500C9D3A0 /* dydxMarketDepthChartView.swift */; };
 		020948EE2D52D63C008FE753 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020948ED2D52D63C008FE753 /* Tooltip.swift */; };
-		020DBF0F29E0924E0068AAA6 /* dydxTransferDepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020DBF0E29E0924E0068AAA6 /* dydxTransferDepositView.swift */; };
 		02107A5D2979F0BC000D75E1 /* dydxReceiptEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02107A5C2979F0BC000D75E1 /* dydxReceiptEmptyView.swift */; };
 		02107A6B2979F4F5000D75E1 /* dydxReceiptMarginUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02107A6A2979F4F5000D75E1 /* dydxReceiptMarginUsageView.swift */; };
 		02107A6F297A0FEA000D75E1 /* dydxReceiptFeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02107A6E297A0FEA000D75E1 /* dydxReceiptFeeView.swift */; };
@@ -533,7 +532,6 @@
 		0208627928F4D95F00C9D3A0 /* dydxMarketInfoPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketInfoPagingView.swift; sourceTree = "<group>"; };
 		0208632228F51A6500C9D3A0 /* dydxMarketDepthChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketDepthChartView.swift; sourceTree = "<group>"; };
 		020948ED2D52D63C008FE753 /* Tooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltip.swift; sourceTree = "<group>"; };
-		020DBF0E29E0924E0068AAA6 /* dydxTransferDepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferDepositView.swift; sourceTree = "<group>"; };
 		02107A5C2979F0BC000D75E1 /* dydxReceiptEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxReceiptEmptyView.swift; sourceTree = "<group>"; };
 		02107A6A2979F4F5000D75E1 /* dydxReceiptMarginUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxReceiptMarginUsageView.swift; sourceTree = "<group>"; };
 		02107A6E297A0FEA000D75E1 /* dydxReceiptFeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxReceiptFeeView.swift; sourceTree = "<group>"; };
@@ -1488,7 +1486,6 @@
 			isa = PBXGroup;
 			children = (
 				023DB0A52D691E1400F15534 /* Components */,
-				020DBF0E29E0924E0068AAA6 /* dydxTransferDepositView.swift */,
 				023DB0882D69122900F15534 /* dydxInstantDepositView.swift */,
 			);
 			path = Deposit;
@@ -2659,7 +2656,6 @@
 				02F802802DD56BE70009BA8F /* dydxTransferNobleAddressView.swift in Sources */,
 				02678FA629666BE600EE346B /* dydxPortfolioOrdersView.swift in Sources */,
 				273C2F382C496F4F00F8391F /* dydxSliderInputView.swift in Sources */,
-				020DBF0F29E0924E0068AAA6 /* dydxTransferDepositView.swift in Sources */,
 				02A651872DB6DA15006DBD5F /* dydxSimpleUIMenuButtonsView.swift in Sources */,
 				277E90412B1FAEAF005CCBCB /* dydxRewardsHelpView.swift in Sources */,
 				02714C9F29E0C7C500CC1C44 /* TokensComboBox.swift in Sources */,

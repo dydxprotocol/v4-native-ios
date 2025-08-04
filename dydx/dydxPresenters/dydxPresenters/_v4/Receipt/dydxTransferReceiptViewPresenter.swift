@@ -27,7 +27,7 @@ final class dydxTransferReceiptViewPresenter: dydxReceiptPresenter {
         )
         .sink { [weak self] lines, input in
             var filteredLines = lines
-            if dydxBoolFeatureFlag.skip_go_fast.isEnabled && input.type == .deposit {
+            if input.type == .deposit {
                 filteredLines.removeAll {
                     $0 == .bridgefee || $0 == .transferrouteestimatedduration || $0 == .slippage
                 }

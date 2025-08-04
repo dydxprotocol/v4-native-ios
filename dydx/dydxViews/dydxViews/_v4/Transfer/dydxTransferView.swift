@@ -13,19 +13,16 @@ import Utilities
 public class dydxTransferViewModel: PlatformViewModel {
     @Published public var sections = dydxTransferSectionsViewModel()
     @Published public var faucet = dydxTransferFaucetViewModel()
-    @Published public var deposit: dydxTransferDepositViewModel? = dydxTransferDepositViewModel()
     @Published public var instantDeposit: dydxInstantDepositViewModel? = dydxInstantDepositViewModel()
     @Published public var withdrawal: dydxTransferWithdrawalViewModel? = dydxTransferWithdrawalViewModel()
     @Published public var transferOut: dydxTransferOutViewModel? = dydxTransferOutViewModel()
     @Published public var sectionSelection: dydxTransferSectionsViewModel.TransferSection = .deposit
-    @Published public var instantDepositEnabled: Bool = false
 
     public init() { }
 
     public static var previewValue: dydxTransferViewModel {
         let vm = dydxTransferViewModel()
         vm.sections = .previewValue
-        vm.deposit = .previewValue
         vm.instantDeposit = .previewValue
         vm.withdrawal = .previewValue
         vm.transferOut = .previewValue
@@ -49,13 +46,9 @@ public class dydxTransferViewModel: PlatformViewModel {
                                 .createView(parentStyle: style)
 
                         case .deposit:
-                            if self.instantDepositEnabled {
-                                self.instantDeposit?
+                             self.instantDeposit?
                                     .createView(parentStyle: style)
-                            } else {
-                                self.deposit?
-                                    .createView(parentStyle: style)
-                            }
+
                         case .withdraw:
                             self.withdrawal?
                                 .createView(parentStyle: style)

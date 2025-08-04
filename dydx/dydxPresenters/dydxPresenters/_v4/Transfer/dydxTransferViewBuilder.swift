@@ -61,7 +61,6 @@ private protocol dydxTransferViewPresenterProtocol: HostedViewPresenterProtocol 
 private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewModel>, dydxTransferViewPresenterProtocol {
     var startingAt: TransferSection?
 
-    private let depositPresenter = dydxTransferDepositViewPresenter()
     private let instantDepositPresenter = dydxInstantDepositViewPresenter()
     private let withdrawalPresenter = dydxTransferWithdrawalViewPresenter()
     private let transferOutPresenter = dydxTransferOutViewPresenter()
@@ -69,7 +68,7 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
     private lazy var childPresenters: [HostedViewPresenterProtocol] = []
 
     private lazy var selectionPresenters: [dydxTransferSectionsViewModel.TransferSection: HostedViewPresenterProtocol] = [
-        .deposit: dydxBoolFeatureFlag.skip_go_fast.isEnabled ? instantDepositPresenter : depositPresenter,
+        .deposit: instantDepositPresenter,
         .withdraw: withdrawalPresenter,
         .transferOut: transferOutPresenter
     ]
@@ -77,11 +76,7 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
     override init() {
         let viewModel = dydxTransferViewModel()
 
-        if dydxBoolFeatureFlag.skip_go_fast.isEnabled {
-            instantDepositPresenter.$viewModel.assign(to: &viewModel.$instantDeposit)
-        } else {
-            depositPresenter.$viewModel.assign(to: &viewModel.$deposit)
-        }
+        instantDepositPresenter.$viewModel.assign(to: &viewModel.$instantDeposit)
         withdrawalPresenter.$viewModel.assign(to: &viewModel.$withdrawal)
         transferOutPresenter.$viewModel.assign(to: &viewModel.$transferOut)
 
@@ -102,8 +97,6 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
                                    error: nil, time: nil)
             HapticFeedback.shared?.notify(type: .success)
         }
-
-        viewModel.instantDepositEnabled = dydxBoolFeatureFlag.skip_go_fast.isEnabled
 
         self.viewModel = viewModel
 
