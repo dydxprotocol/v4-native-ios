@@ -14,9 +14,11 @@ public class dydxTransferViewModel: PlatformViewModel {
     @Published public var sections = dydxTransferSectionsViewModel()
     @Published public var faucet = dydxTransferFaucetViewModel()
     @Published public var instantDeposit: dydxInstantDepositViewModel? = dydxInstantDepositViewModel()
+    @Published public var turnkeyDeposit: dydxTurnkeyDepositViewModel? = dydxTurnkeyDepositViewModel()
     @Published public var withdrawal: dydxTransferWithdrawalViewModel? = dydxTransferWithdrawalViewModel()
     @Published public var transferOut: dydxTransferOutViewModel? = dydxTransferOutViewModel()
     @Published public var sectionSelection: dydxTransferSectionsViewModel.TransferSection = .deposit
+    @Published public var showTurnkeyDeposit: Bool = false
 
     public init() { }
 
@@ -24,6 +26,7 @@ public class dydxTransferViewModel: PlatformViewModel {
         let vm = dydxTransferViewModel()
         vm.sections = .previewValue
         vm.instantDeposit = .previewValue
+        vm.turnkeyDeposit = .previewValue
         vm.withdrawal = .previewValue
         vm.transferOut = .previewValue
         vm.faucet = .previewValue
@@ -36,40 +39,45 @@ public class dydxTransferViewModel: PlatformViewModel {
 
             let topPadding = 40.0
             let view =
-                ScrollView(showsIndicators: false) {
-                    VStack {
-                        self.sections.createView(parentStyle: style)
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    self.sections.createView(parentStyle: style)
 
-                        switch self.sectionSelection {
-                        case .faucet:
-                            self.faucet
+                    switch self.sectionSelection {
+                    case .faucet:
+                        self.faucet
+                            .createView(parentStyle: style)
+
+                    case .deposit:
+                        if self.showTurnkeyDeposit {
+                            self.turnkeyDeposit?
                                 .createView(parentStyle: style)
-
-                        case .deposit:
-                             self.instantDeposit?
-                                    .createView(parentStyle: style)
-
-                        case .withdraw:
-                            self.withdrawal?
-                                .createView(parentStyle: style)
-
-                        case .transferOut:
-                            self.transferOut?
+                        } else {
+                            self.instantDeposit?
                                 .createView(parentStyle: style)
                         }
 
-                        Spacer()
+                    case .withdraw:
+                        self.withdrawal?
+                            .createView(parentStyle: style)
+
+                    case .transferOut:
+                        self.transferOut?
+                            .createView(parentStyle: style)
                     }
-                    .frame(minHeight: UIScreen.main.bounds.size.height - topPadding - (self.safeAreaInsets?.top ?? 0) - (self.safeAreaInsets?.bottom ?? 0))
+
+                    Spacer()
                 }
-                .keyboardObserving()
-                .keyboardAccessory(background: .layer3, parentStyle: style)
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .padding([.leading, .trailing])
-                .padding(.top, topPadding)
-                .padding(.bottom, self.safeAreaInsets?.bottom)
-                .themeColor(background: .layer3)
-                .makeSheet()
+                .frame(minHeight: UIScreen.main.bounds.size.height - topPadding - (self.safeAreaInsets?.top ?? 0) - (self.safeAreaInsets?.bottom ?? 0))
+            }
+            .keyboardObserving()
+            .keyboardAccessory(background: .layer3, parentStyle: style)
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .padding([.leading, .trailing])
+            .padding(.top, topPadding)
+            .padding(.bottom, self.safeAreaInsets?.bottom)
+            .themeColor(background: .layer3)
+            .makeSheet()
 
             // make it visible under the tabbar
             return AnyView(view.ignoresSafeArea(edges: [.bottom]))

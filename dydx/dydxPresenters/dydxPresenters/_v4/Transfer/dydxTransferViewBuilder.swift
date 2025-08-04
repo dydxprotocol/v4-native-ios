@@ -62,13 +62,14 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
     var startingAt: TransferSection?
 
     private let instantDepositPresenter = dydxInstantDepositViewPresenter()
+    private let turnkeyDepositPresenter = dydxTurnkeyDepositViewPresenter()
     private let withdrawalPresenter = dydxTransferWithdrawalViewPresenter()
     private let transferOutPresenter = dydxTransferOutViewPresenter()
 
     private lazy var childPresenters: [HostedViewPresenterProtocol] = []
 
     private lazy var selectionPresenters: [dydxTransferSectionsViewModel.TransferSection: HostedViewPresenterProtocol] = [
-        .deposit: instantDepositPresenter,
+        .deposit: dydxBoolFeatureFlag.turnkey_ios.isEnabled ? turnkeyDepositPresenter : instantDepositPresenter,
         .withdraw: withdrawalPresenter,
         .transferOut: transferOutPresenter
     ]
@@ -77,6 +78,7 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
         let viewModel = dydxTransferViewModel()
 
         instantDepositPresenter.$viewModel.assign(to: &viewModel.$instantDeposit)
+        turnkeyDepositPresenter.$viewModel.assign(to: &viewModel.$turnkeyDeposit)
         withdrawalPresenter.$viewModel.assign(to: &viewModel.$withdrawal)
         transferOutPresenter.$viewModel.assign(to: &viewModel.$transferOut)
 
@@ -97,6 +99,8 @@ private class dydxTransferViewPresenter: HostedViewPresenter<dydxTransferViewMod
                                    error: nil, time: nil)
             HapticFeedback.shared?.notify(type: .success)
         }
+
+        viewModel.showTurnkeyDeposit = dydxBoolFeatureFlag.turnkey_ios.isEnabled
 
         self.viewModel = viewModel
 

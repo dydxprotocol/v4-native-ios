@@ -118,6 +118,7 @@
 		02678FA829666BFC00EE346B /* dydxPortfolioFillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02678FA729666BFC00EE346B /* dydxPortfolioFillsView.swift */; };
 		02678FAA29666C0E00EE346B /* dydxPortfolioFundingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02678FA929666C0E00EE346B /* dydxPortfolioFundingView.swift */; };
 		0268BBF92A8BE08C00D0C59B /* dydxTransferOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268BBF82A8BE08C00D0C59B /* dydxTransferOutView.swift */; };
+		026BB3CE2E41599E009F33AB /* dydxTurnkeyDepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026BB3CD2E41599E009F33AB /* dydxTurnkeyDepositView.swift */; };
 		02714C9D29E0C78600CC1C44 /* ChainsComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02714C9C29E0C78600CC1C44 /* ChainsComboBox.swift */; };
 		02714C9F29E0C7C500CC1C44 /* TokensComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02714C9E29E0C7C500CC1C44 /* TokensComboBox.swift */; };
 		0272C86B2D4D670600123722 /* dydxSimpleUiMarketLaunchableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272C86A2D4D670600123722 /* dydxSimpleUiMarketLaunchableView.swift */; };
@@ -617,6 +618,7 @@
 		02678FA729666BFC00EE346B /* dydxPortfolioFillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioFillsView.swift; sourceTree = "<group>"; };
 		02678FA929666C0E00EE346B /* dydxPortfolioFundingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioFundingView.swift; sourceTree = "<group>"; };
 		0268BBF82A8BE08C00D0C59B /* dydxTransferOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferOutView.swift; sourceTree = "<group>"; };
+		026BB3CD2E41599E009F33AB /* dydxTurnkeyDepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTurnkeyDepositView.swift; sourceTree = "<group>"; };
 		02714C9C29E0C78600CC1C44 /* ChainsComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainsComboBox.swift; sourceTree = "<group>"; };
 		02714C9E29E0C7C500CC1C44 /* TokensComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensComboBox.swift; sourceTree = "<group>"; };
 		0272C86A2D4D670600123722 /* dydxSimpleUiMarketLaunchableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUiMarketLaunchableView.swift; sourceTree = "<group>"; };
@@ -1487,6 +1489,7 @@
 			children = (
 				023DB0A52D691E1400F15534 /* Components */,
 				023DB0882D69122900F15534 /* dydxInstantDepositView.swift */,
+				026BB3CD2E41599E009F33AB /* dydxTurnkeyDepositView.swift */,
 			);
 			path = Deposit;
 			sourceTree = "<group>";
@@ -2832,6 +2835,7 @@
 				64A4DB72296621A8008D8E20 /* dydxReceiptView.swift in Sources */,
 				02195E212A20328900F73C17 /* dydxMarketOrderbookSpreadView.swift in Sources */,
 				027CB28529EEFF760069781A /* dydxTransferStatusView.swift in Sources */,
+				026BB3CE2E41599E009F33AB /* dydxTurnkeyDepositView.swift in Sources */,
 				026382E928F0EE6B00F766FA /* dydxMarketPriceCandlesTypesView.swift in Sources */,
 				0238FF162976432D002E1C1A /* TradeInputViewModifier.swift in Sources */,
 				2718DF432CCC46D000C05DD8 /* dydxTitledContent.swift in Sources */,
