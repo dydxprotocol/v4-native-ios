@@ -72,15 +72,15 @@ public struct dydxWalletInstance: Codable, Equatable {
     public var secret: String?
     public var passPhrase: String?
 
-    static func V4(ethereumAddress: String?, walletId: String?, cosmoAddress: String, mnemonic: String) -> Self {
-        Self.init(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic)
+    // Turnkey
+    public var svmAddress: String?
+    public var avalancheAddress: String?
+
+    static func V4(ethereumAddress: String?, walletId: String?, cosmoAddress: String, mnemonic: String, svmAddress: String?, avalancheAddress: String?) -> Self {
+        Self.init(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic, svmAddress: svmAddress, avalancheAddress: avalancheAddress)
     }
 
-    static func V3(ethereumAddress: String?, walletId: String?, apiKey: String, secret: String, passPhrase: String) -> Self {
-        Self.init(ethereumAddress: ethereumAddress, walletId: walletId, apiKey: apiKey, secret: secret, passPhrase: passPhrase)
-    }
-
-    private init(ethereumAddress: String?, walletId: String?, cosmoAddress: String? = nil, mnemonic: String? = nil, subaccountNumber: String? = nil, apiKey: String? = nil, secret: String? = nil, passPhrase: String? = nil) {
+    private init(ethereumAddress: String?, walletId: String?, cosmoAddress: String? = nil, mnemonic: String? = nil, subaccountNumber: String? = nil, apiKey: String? = nil, secret: String? = nil, passPhrase: String? = nil, svmAddress: String? = nil, avalancheAddress: String? = nil) {
         self.ethereumAddress = ethereumAddress
         self.walletId = walletId
         self.cosmoAddress = cosmoAddress
@@ -89,6 +89,8 @@ public struct dydxWalletInstance: Codable, Equatable {
         self.apiKey = apiKey
         self.secret = secret
         self.passPhrase = passPhrase
+        self.svmAddress = svmAddress
+        self.avalancheAddress = avalancheAddress
     }
 
     mutating func merge(another: dydxWalletInstance) {

@@ -16,18 +16,16 @@ public class dydxWalletSetup: WalletStatusDelegate {
         public let walletId: String?
         public let cosmoAddress: String?
         public let mnemonic: String?
-        public let apiKey: String?
-        public let secret: String?
-        public let passPhrase: String?
+        public let svmAddress: String?
+        public let avalancheAddress: String?
 
-        public init(ethereumAddress: String, walletId: String? = nil, cosmoAddress: String? = nil, mnemonic: String? = nil, apiKey: String? = nil, secret: String? = nil, passPhrase: String? = nil) {
+        public init(ethereumAddress: String, walletId: String? = nil, cosmoAddress: String? = nil, mnemonic: String? = nil, svmAddress: String? = nil, avalancheAddress: String? = nil) {
             self.ethereumAddress = ethereumAddress
             self.walletId = walletId
             self.cosmoAddress = cosmoAddress
             self.mnemonic = mnemonic
-            self.apiKey = apiKey
-            self.secret = secret
-            self.passPhrase = passPhrase
+            self.svmAddress = svmAddress
+            self.avalancheAddress = avalancheAddress
         }
     }
 

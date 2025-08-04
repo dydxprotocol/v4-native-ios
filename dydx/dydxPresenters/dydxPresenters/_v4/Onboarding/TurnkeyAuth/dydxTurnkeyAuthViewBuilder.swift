@@ -121,7 +121,9 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
                     let result = dydxWalletSetup.SetupResult(ethereumAddress: evmAddress,
                                                              walletId: nil,
                                                              cosmoAddress: cosmoAddress,
-                                                             mnemonic: mnemonic)
+                                                             mnemonic: mnemonic,
+                                                             svmAddress: svmAddress,
+                                                             avalancheAddress: nil)
                     dydxOnboardCompletion.finish(walletInstance: nil, result: result)
                 }
             } else {

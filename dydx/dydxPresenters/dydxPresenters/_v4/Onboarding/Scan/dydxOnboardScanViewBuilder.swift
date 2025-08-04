@@ -155,7 +155,9 @@ private class dydxOnboardScanViewPresenter: HostedViewPresenter<dydxOnboardScanV
                                                 walletId: nil,
                                                 cosmoAddress: address,
                                                 mnemonic: mnemonic,
-                                                isNew: true)
+                                                isNew: true,
+                                                svmAddress: nil,
+                                                avalancheAddress: nil)
                 Router.shared?.navigate(to: RoutingRequest(path: "/action/post_onboarding",
                                                            params: ["cosmoAddress": address, "mnemonic": mnemonic]),
                                         animated: true, completion: nil)
@@ -186,27 +188,4 @@ private class dydxOnboardScanViewPresenter: HostedViewPresenter<dydxOnboardScanV
     }
 
     private typealias AESDecryptCompletionBlock = (_ decrypted: String?) -> Void
-}
-
-private class V3WalletConnectionParser {
-    struct Result {
-        let ethereumAddress: String
-        let apiKey: String
-        let secret: String
-        let passPhrase: String
-    }
-
-    static func parse(json: [String: Any]?) -> Result? {
-        let parser = Parser()
-        if let json = json {
-            if let starkKeyPair = json["starkKeyPair"] as? [String: Any], let apiKeyPair = json["apiKeyPair"] as? [String: Any], let ethereumAddress = parser.asString(starkKeyPair["walletAddress"]) {
-                if let secret = parser.asString(apiKeyPair["secret"]),
-                   let key = parser.asString(apiKeyPair["key"]),
-                   let passphrase = parser.asString(apiKeyPair["passphrase"]) {
-                    return Result(ethereumAddress: ethereumAddress, apiKey: key, secret: secret, passPhrase: passphrase)
-                }
-            }
-        }
-        return nil
-    }
 }

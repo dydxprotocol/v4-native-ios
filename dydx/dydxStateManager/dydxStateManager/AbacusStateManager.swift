@@ -204,7 +204,15 @@ public final class AbacusStateManager: NSObject {
         if let cosmoAddress = _walletState.currentWallet?.cosmoAddress,
            let mnemonic = _walletState.currentWallet?.mnemonic {
             let walletId = _walletState.currentWallet?.walletId
-            setV4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic, isNew: false)
+            let svmAddress = _walletState.currentWallet?.svmAddress
+            let avalancheAddress = _walletState.currentWallet?.avalancheAddress
+            setV4(ethereumAddress: ethereumAddress,
+                  walletId: walletId,
+                  cosmoAddress: cosmoAddress,
+                  mnemonic: mnemonic,
+                  isNew: false,
+                  svmAddress: svmAddress,
+                  avalancheAddress: avalancheAddress)
         }
 
         asyncStateManager.readyToConnect = true
@@ -215,10 +223,10 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.market = market
     }
 
-    public func setV4(ethereumAddress: String?, walletId: String?, cosmoAddress: String, mnemonic: String, isNew: Bool) {
+    public func setV4(ethereumAddress: String?, walletId: String?, cosmoAddress: String, mnemonic: String, isNew: Bool, svmAddress: String? = nil, avalancheAddress: String? = nil) {
         CosmoJavascript.shared.connectWallet(mnemonic: mnemonic) { [weak self] _ in
             if let self = self {
-                let wallet = dydxWalletInstance.V4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic)
+                let wallet = dydxWalletInstance.V4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic, svmAddress: svmAddress, avalancheAddress: avalancheAddress)
                 self._walletState.setCurrentWallet(wallet: wallet)
                 self.asyncStateManager.setAddresses(source: ethereumAddress, account: cosmoAddress, isNew: isNew)
                 if walletId == "phantom-wallet" {

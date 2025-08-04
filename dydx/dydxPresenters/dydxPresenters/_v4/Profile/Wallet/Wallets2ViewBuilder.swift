@@ -95,7 +95,9 @@ private class Wallets2ViewPresenter: HostedViewPresenter<Wallets2ViewModel> {
                                                     walletId: wallet.walletId,
                                                     cosmoAddress: cosmoAddress,
                                                     mnemonic: mnemonic,
-                                                    isNew: true)
+                                                    isNew: true,
+                                                    svmAddress: nil,
+                                                    avalancheAddress: nil)
                 }
             }
 

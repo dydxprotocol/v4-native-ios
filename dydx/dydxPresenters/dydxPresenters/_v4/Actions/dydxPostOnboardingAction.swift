@@ -29,7 +29,15 @@ private class dydxPostOnboardingAction: NSObject, NavigableProtocol {
             if let ethereumAddress = parser.asString(request?.params?["ethereumAddress"]) {
                 if let cosmoAddress = parser.asString(request?.params?["cosmoAddress"]),
                     let mnemonic = parser.asString(request?.params?["mnemonic"]) {
-                    AbacusStateManager.shared.setV4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic, isNew: true)
+                    let svmAddress = parser.asString(request?.params?["svmAddress"])
+                    let avalancheAddress = parser.asString(request?.params?["avalancheAddress"])
+                    AbacusStateManager.shared.setV4(ethereumAddress: ethereumAddress,
+                                                    walletId: walletId,
+                                                    cosmoAddress: cosmoAddress,
+                                                    mnemonic: mnemonic,
+                                                    isNew: true,
+                                                    svmAddress: svmAddress,
+                                                    avalancheAddress: avalancheAddress)
                 }
             }
             Router.shared?.navigate(to: RoutingRequest(path: "/"), animated: animated, completion: completion)
