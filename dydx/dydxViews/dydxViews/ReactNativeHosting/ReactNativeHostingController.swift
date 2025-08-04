@@ -1,20 +1,22 @@
 //
-//  ReactNativeView.swift
-//  dydxTurnkey
+//  ReactNativeHostingController.swift
+//  dydxViews
 //
-//  Created by Rui Huang on 14/07/2025.
+//  Created by Rui Huang on 31/07/2025.
 //
 
 import SwiftUI
 import React
-internal import PlatformUI
+import PlatformUI
+import Utilities
 
 public struct ReactNativeView: UIViewControllerRepresentable {
     let moduleName: String
     let initialProperties: [String: Any]? = nil
+    let bridge: RCTBridge
 
     public func makeUIViewController(context: Context) -> ReactNativeHostingController {
-        return ReactNativeHostingController(moduleName: moduleName, initialProperties: initialProperties)
+        return ReactNativeHostingController(moduleName: moduleName, initialProperties: initialProperties, bridge: bridge)
     }
 
     public func updateUIViewController(_ uiViewController: ReactNativeHostingController, context: Context) {
@@ -22,16 +24,19 @@ public struct ReactNativeView: UIViewControllerRepresentable {
     }
 }
 
-// Helper UIViewController that waits for bridge readiness
 open class ReactNativeHostingController: UIViewController {
     let moduleName: String
     let initialProperties: [String: Any]?
+    let stringKeys: [DataLocalizer.Entry]
+    let bridge: RCTBridge
 
     private var rootView: RCTRootView?
 
-    public init(moduleName: String, initialProperties: [String: Any]? = nil) {
+    public init(moduleName: String, initialProperties: [String: Any]? = nil, stringKeys: [DataLocalizer.Entry] = [], bridge: RCTBridge) {
         self.moduleName = moduleName
         self.initialProperties = initialProperties
+        self.stringKeys = stringKeys
+        self.bridge = bridge
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -41,8 +46,6 @@ open class ReactNativeHostingController: UIViewController {
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-
-        let bridge = TurnkeyBridgeManager.shared.bridge
 
         if bridge.isLoading {
             NotificationCenter.default.addObserver(self, selector: #selector(onJSLoaded), name: NSNotification.Name.RCTJavaScriptDidLoad, object: bridge)
@@ -56,10 +59,17 @@ open class ReactNativeHostingController: UIViewController {
     }
 
     private func setupRootView() {
+        var strings = [String: String]()
+        for entry in stringKeys {
+            strings[entry.path] = DataLocalizer.localize(path: entry.path, params: entry.params)
+        }
+        var props: [String: Any] = (initialProperties ?? [:])
+        props["strings"] = strings
+
         let rootView = RCTRootView(
-            bridge: TurnkeyBridgeManager.shared.bridge,
+            bridge: bridge,
             moduleName: moduleName,
-            initialProperties: initialProperties
+            initialProperties: props
         )
         rootView.frame = view.bounds
         rootView.backgroundColor = ThemeColor.SemanticColor.layer0.uiColor
@@ -68,5 +78,3 @@ open class ReactNativeHostingController: UIViewController {
         self.rootView = rootView
     }
 }
-
-public let turnkeyReactNativeView = ReactNativeView(moduleName: "TurnkeyReact")

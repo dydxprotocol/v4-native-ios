@@ -22,4 +22,16 @@ public class DataLocalizer {
     static public func localize(path: String, params: [String: String]? = nil) -> String {
         Self.shared?.localize(path: path, params: params) ?? path.lastPathComponent.pathExtension
     }
+    
+    public struct Entry {
+        public init(path: String, params: [String : String]? = nil) {
+            self.path = path
+            self.params = params
+        }
+        
+        public let path: String
+        public let params: [String: String]?
+    }
 }
+
+

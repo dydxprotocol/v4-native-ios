@@ -50,7 +50,23 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
             "backendApiUrl": "http://dev2-indexer-apne1-lb-public-2076363889.ap-northeast-1.elb.amazonaws.com",
             "theme": dydxThemeSettings.shared.currentThemeType.rnThemeIdentifier
         ]
-        super.init(moduleName: "TurnkeyLogin", initialProperties: initialProperties)
+        let stringKeys: [DataLocalizer.Entry] = [
+            .init(path: "APP.TURNKEY_ONBOARD.SIGN_IN_TITLE"),
+            .init(path: "APP.TURNKEY_ONBOARD.SIGN_IN_DESCRIPTION"),
+            .init(path: "APP.TURNKEY_ONBOARD.SIGN_IN_PASSKEY"),
+            .init(path: "APP.TURNKEY_ONBOARD.SIGN_IN_WALLET"),
+            .init(path: "APP.TURNKEY_ONBOARD.SIGN_IN_DESKTOP"),
+            .init(path: "APP.TURNKEY_ONBOARD.SUBMIT"),
+            .init(path: "APP.TURNKEY_ONBOARD.EMAIL_PLACEHOLDER"),
+            .init(path: "APP.TURNKEY_ONBOARD.CHECK_EMAIL_TITLE"),
+            .init(path: "APP.TURNKEY_ONBOARD.CHECK_EMAIL_DESCRIPTION"),
+            .init(path: "APP.TURNKEY_ONBOARD.RESEND"),
+            .init(path: "APP.GENERAL.OR")
+        ]
+        super.init(moduleName: "TurnkeyLogin",
+                   initialProperties: initialProperties,
+                   stringKeys: stringKeys,
+                   bridge: TurnkeyBridgeManager.shared.bridge)
     }
 
     @MainActor required init?(coder: NSCoder) {
@@ -83,7 +99,9 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
 
     func onAuthRouteToWallet() {
         Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
-            Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets"), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/onboard/wallets", params: [
+                "backButtonRoute": "/onboard/turnkey"
+            ]), animated: true, completion: nil)
         }
     }
 

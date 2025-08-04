@@ -10,7 +10,7 @@ import { useAuthRelay } from '../hooks/useAuthRelay';
 import { OAuthInput } from './OAuthInput';
 import { EmailInput } from './EmailInput';
 import { useThemedStyles } from '../turnkeyStyle';
-import { LoginMethod, OtpType } from '../lib/types';
+import { LoginMethod } from '../lib/types';
 import { TurnkeyNativeModule } from '../../TurnkeyModule';
 import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
 import { Image } from 'react-native';
@@ -24,7 +24,7 @@ const renderError = () => {
 
   if (state.error && state.loading === null) {
     return (
-      <Text style={{ color: 'red', marginBottom: 20, textAlign: 'center' }}>
+      <Text style={{ color: currentTheme.colors.red, marginBottom: 20, textAlign: 'center' }}>
         {state.error}
       </Text>
     );
@@ -55,10 +55,9 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
           <View style={styles.dragHandle} />
 
           {/* Header */}
-          <Text style={styles.title}>Sign in</Text>
+          <Text style={styles.title}>{configs.strings["APP.TURNKEY_ONBOARD.SIGN_IN_TITLE"]}</Text>
           <Text style={styles.subtitle}>
-            To get started, sign in with your social accounts, create a passkey or
-            connect your wallet.
+            {configs.strings["APP.TURNKEY_ONBOARD.SIGN_IN_DESCRIPTION"]}
           </Text>
 
           {/* Social icons row */}
@@ -86,7 +85,7 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
           {/* Divider */}
           <View style={styles.dividerContainer}>
             <View style={styles.divider} />
-            <Text style={styles.dividerText}>Or</Text>
+            <Text style={styles.dividerText}>{configs.strings["APP.GENERAL.OR"]}</Text>
             <View style={styles.divider} />
           </View>
 
@@ -108,13 +107,13 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
               TurnkeyNativeModule.onAuthRouteToDesktopQR();
             }}>
             <Image
-              source={require('../../rn_style/assets/logo_desktop.png')}
+              source={require('../../rn_style/assets/icon_desktop.png')}
               style={{ width: 18, height: 18, marginEnd: 8, tintColor: currentTheme.colors.textSecondary }}
             />
-            <Text style={styles.actionButtonText}>Sign in with Desktop</Text>
+            <Text style={styles.actionButtonText}>{configs.strings["APP.TURNKEY_ONBOARD.SIGN_IN_DESKTOP"]}</Text>
             <Image
               source={require('../../rn_style/assets/chevron_right.png')}
-              style={{ height: 10, tintColor: '#56565C' }}
+              style={{ height: 10, tintColor: currentTheme.colors.textTertiary }}
               resizeMode="contain"
             />
           </TouchableOpacity>
@@ -126,13 +125,13 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
               TurnkeyNativeModule.onAuthRouteToWallet();
             }}>
             <Image
-              source={require('../../rn_style/assets/logo_wallet.png')}
+              source={require('../../rn_style/assets/icon_wallet.png')}
               style={{ width: 16, height: 16, marginEnd: 8, tintColor: currentTheme.colors.textSecondary }}
             />
-            <Text style={styles.actionButtonText}>Sign in with Wallet</Text>
+            <Text style={styles.actionButtonText}>{configs.strings["APP.TURNKEY_ONBOARD.SIGN_IN_WALLET"]}</Text>
             <Image
               source={require('../../rn_style/assets/chevron_right.png')}
-              style={{ height: 10, tintColor: '#56565C' }}
+              style={{ height: 10, tintColor: currentTheme.colors.textTertiary}}
               resizeMode="contain"
             />
           </TouchableOpacity>

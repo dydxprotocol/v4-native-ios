@@ -25,6 +25,8 @@ class dydxWalletListViewController_Deprecated: HostingViewController<PlatformVie
             presenter?.viewModel?.onScrollViewCreated = { [weak self] scrollView in
                 self?.scrollView = scrollView
             }
+            presenter?.backButtonRoute = request?.params?["backButtonRoute"] as? String
+
             return true
         }
         return false
@@ -40,6 +42,7 @@ class dydxWalletListViewController_Deprecated: HostingViewController<PlatformVie
 protocol dydxWalletListViewPresenterProtocol_Deprecated: HostedViewPresenterProtocol {
     var viewModel: dydxWalletListViewModel_Deprecated? { get }
     var mobileOnly: Bool { get set }
+    var backButtonRoute: String? { get set }
 }
 
 class dydxWalletListViewPresenter_Deprecated: HostedViewPresenter<dydxWalletListViewModel_Deprecated>, dydxWalletListViewPresenterProtocol_Deprecated {
@@ -47,6 +50,20 @@ class dydxWalletListViewPresenter_Deprecated: HostedViewPresenter<dydxWalletList
     var mobileOnly: Bool = false {
         didSet {
             updateWallets()
+        }
+    }
+
+    var backButtonRoute: String? {
+        didSet {
+            if let backButtonRoute = backButtonRoute {
+                viewModel?.onBackButtonTapped = {
+                    Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: nil), animated: true) {_, _ in
+                        Router.shared?.navigate(to: RoutingRequest(path: backButtonRoute), animated: true, completion: nil)
+                    }
+                }
+            } else {
+                viewModel?.onBackButtonTapped = nil
+            }
         }
     }
 
