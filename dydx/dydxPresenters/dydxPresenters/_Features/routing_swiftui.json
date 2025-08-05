@@ -189,6 +189,10 @@
                     "destination":"dydxPresenters.dydxTradingRewardsViewBuilder",
                     "presentation":"push"
                 },
+                "/profile/security":{
+                    "destination":"dydxPresenters.dydxWalletSecurityViewBuilder",
+                    "presentation":"push"
+                },
                 "/portfolio":{
                     "destination":"dydxPresenters.dydxPortfolioViewBuilder"
                 },
@@ -232,10 +236,6 @@
                 },
                 "/settings/debug":{
                     "destination":"dydxPresenters.dydxDebugViewBuilder",
-                    "presentation":"push"
-                },
-                "/settings/debug_theme_viewer":{
-                    "destination":"dydxPresenters.dydxDebugThemeViewerBuilder",
                     "presentation":"push"
                 },
                 "/settings/language":{

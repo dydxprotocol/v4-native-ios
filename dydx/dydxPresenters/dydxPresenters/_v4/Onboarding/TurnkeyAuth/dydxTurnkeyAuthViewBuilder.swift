@@ -119,7 +119,7 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
 
                 Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
                     let result = dydxWalletSetup.SetupResult(ethereumAddress: evmAddress,
-                                                             walletId: nil,
+                                                             walletId: "turnkey",
                                                              cosmoAddress: cosmoAddress,
                                                              mnemonic: mnemonic,
                                                              svmAddress: svmAddress,

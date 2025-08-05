@@ -72,14 +72,6 @@
                 "link" : {
                     "text" : "/settings/gas_token"
                 }
-            },
-            {
-                "title" : {
-                    "text" : "Debug Theme Viewer"
-                },
-                "link" : {
-                    "text" : "/settings/debug_theme_viewer"
-                }
             }
         ]
     }
