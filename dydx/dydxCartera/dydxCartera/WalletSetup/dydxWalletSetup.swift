@@ -12,20 +12,24 @@ import Utilities
 
 public class dydxWalletSetup: WalletStatusDelegate {
     public struct SetupResult {
-        public let ethereumAddress: String
+        public let ethereumAddress: String?
         public let walletId: String?
         public let cosmoAddress: String?
-        public let mnemonic: String?
+        public let dydxMnemonic: String?
         public let svmAddress: String?
         public let avalancheAddress: String?
+        public let loginMethod: String?
+        public let userEmail: String?
 
-        public init(ethereumAddress: String, walletId: String? = nil, cosmoAddress: String? = nil, mnemonic: String? = nil, svmAddress: String? = nil, avalancheAddress: String? = nil) {
+        public init(ethereumAddress: String? = nil, walletId: String? = nil, cosmoAddress: String? = nil, dydxMnemonic: String? = nil, svmAddress: String? = nil, avalancheAddress: String? = nil, loginMethod: String? = nil, userEmail: String? = nil) {
             self.ethereumAddress = ethereumAddress
             self.walletId = walletId
             self.cosmoAddress = cosmoAddress
-            self.mnemonic = mnemonic
+            self.dydxMnemonic = dydxMnemonic
             self.svmAddress = svmAddress
             self.avalancheAddress = avalancheAddress
+            self.loginMethod = loginMethod
+            self.userEmail = userEmail
         }
     }
 
@@ -97,12 +101,12 @@ public class dydxWalletSetup: WalletStatusDelegate {
     func generatePrivateKey(walletId: String?, privateKeySignature: String, address: String) {
         CosmoJavascript.shared.deriveCosmosKey(signature: privateKeySignature) { [weak self] data in
             if let resultObject = (data as? String)?.jsonDictionary,
-               let mnemonic = self?.parser.asString(resultObject["mnemonic"]),
+               let dydxMnemonic = self?.parser.asString(resultObject["mnemonic"]),
                let cosmoAddress = self?.parser.asString(resultObject["address"]) {
                 self?.status = .signed(SetupResult(ethereumAddress: address,
                                                    walletId: walletId,
                                                    cosmoAddress: cosmoAddress,
-                                                   mnemonic: mnemonic))
+                                                   dydxMnemonic: dydxMnemonic))
             } else {
                 self?.status = Status.createError(title: "deriveCosmosKey failed")
             }

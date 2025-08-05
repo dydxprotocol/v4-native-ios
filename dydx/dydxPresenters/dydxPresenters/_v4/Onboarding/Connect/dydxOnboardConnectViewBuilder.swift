@@ -133,17 +133,21 @@ private class dydxOnboardConnectViewPresenter: HostedViewPresenter<dydxOnboardCo
         }
     }
 
-    private func finish(ethereumAddress: String, cosmoAddress: String, mnemonic: String, walletId: String) {
+    private func finish(ethereumAddress: String, cosmoAddress: String, dydxMnemonic: String, walletId: String) {
         AbacusStateManager.shared.state.currentWallet
             .prefix(1)
             .sink { walletInstance in
+                let result = dydxWalletSetup.SetupResult(ethereumAddress: ethereumAddress,
+                                                         walletId: walletId,
+                                                         cosmoAddress: cosmoAddress,
+                                                         dydxMnemonic: dydxMnemonic)
                 if walletInstance == nil {
                     let accepted: (() -> Void) = {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/action/post_onboarding", params: ["ethereumAddress": ethereumAddress, "cosmoAddress": cosmoAddress, "mnemonic": mnemonic, "walletId": walletId]), animated: true, completion: nil)
+                        Router.shared?.navigate(to: RoutingRequest(path: "/action/post_onboarding", params: ["result": result]), animated: true, completion: nil)
                     }
                     Router.shared?.navigate(to: RoutingRequest(path: "/onboard/tos", params: ["accepted": accepted]), animated: true, completion: nil)
                 } else {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/action/post_onboarding", params: ["ethereumAddress": ethereumAddress, "cosmoAddress": cosmoAddress, "mnemonic": mnemonic, "walletId": walletId]), animated: true, completion: nil)
+                    Router.shared?.navigate(to: RoutingRequest(path: "/action/post_onboarding", params: ["result": result]), animated: true, completion: nil)
                 }
             }
             .store(in: &subscriptions)

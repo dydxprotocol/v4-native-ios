@@ -80,7 +80,9 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
         // TurnkeyBridgeManager.shared.testFunction()
     }
 
+    //
     // MARK: NavigableProtocol
+    //
 
     func navigate(to request: RoutingRequest?, animated: Bool, completion: RoutingKit.RoutingCompletionBlock?) {
         if request?.path == "/onboard/turnkey" {
@@ -111,19 +113,21 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
         }
     }
 
-    func onAuthCompleted(onboardingSignature: String, evmAddress: String, svmAddress: String) {
+    func onAuthCompleted(onboardingSignature: String, evmAddress: String, svmAddress: String, mnemonics: String, loginMethod: String, userEmail: String?) {
         CosmoJavascript.shared.deriveCosmosKey(signature: onboardingSignature) { [weak self] data in
             if let resultObject = (data as? String)?.jsonDictionary,
-               let mnemonic = self?.parser.asString(resultObject["mnemonic"]),
+               let dydxMnemonic = self?.parser.asString(resultObject["mnemonic"]),
                let cosmoAddress = self?.parser.asString(resultObject["address"]) {
 
                 Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
                     let result = dydxWalletSetup.SetupResult(ethereumAddress: evmAddress,
                                                              walletId: "turnkey",
                                                              cosmoAddress: cosmoAddress,
-                                                             mnemonic: mnemonic,
+                                                             dydxMnemonic: dydxMnemonic,
                                                              svmAddress: svmAddress,
-                                                             avalancheAddress: nil)
+                                                             avalancheAddress: nil,
+                                                             loginMethod: loginMethod,
+                                                             userEmail: userEmail)
                     dydxOnboardCompletion.finish(walletInstance: nil, result: result)
                 }
             } else {

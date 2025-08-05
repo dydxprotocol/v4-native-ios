@@ -11,7 +11,7 @@ import React
 public protocol TurnkeyBridgeManagerDelegate: AnyObject {
     func onAuthRouteToWallet()
     func onAuthRouteToDesktopQR()
-    func onAuthCompleted(onboardingSignature: String, evmAddress: String, svmAddress: String)
+    func onAuthCompleted(onboardingSignature: String, evmAddress: String, svmAddress: String, mnemonics: String, loginMethod: String, userEmail: String?)
     func onAppleAuthRequest(nonce: String)
 }
 

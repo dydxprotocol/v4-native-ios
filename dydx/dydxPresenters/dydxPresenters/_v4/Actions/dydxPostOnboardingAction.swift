@@ -11,6 +11,7 @@ import RoutingKit
 import dydxStateManager
 import Combine
 import dydxFormatter
+import dydxCartera
 
 public class dydxPostOnboardingActionBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -25,20 +26,16 @@ private class dydxPostOnboardingAction: NSObject, NavigableProtocol {
     func navigate(to request: RoutingRequest?, animated: Bool, completion: RoutingCompletionBlock?) {
         switch request?.path {
         case "/action/post_onboarding":
-            let walletId = parser.asString(request?.params?["walletId"])
-            if let ethereumAddress = parser.asString(request?.params?["ethereumAddress"]) {
-                if let cosmoAddress = parser.asString(request?.params?["cosmoAddress"]),
-                    let mnemonic = parser.asString(request?.params?["mnemonic"]) {
-                    let svmAddress = parser.asString(request?.params?["svmAddress"])
-                    let avalancheAddress = parser.asString(request?.params?["avalancheAddress"])
-                    AbacusStateManager.shared.setV4(ethereumAddress: ethereumAddress,
-                                                    walletId: walletId,
-                                                    cosmoAddress: cosmoAddress,
-                                                    mnemonic: mnemonic,
-                                                    isNew: true,
-                                                    svmAddress: svmAddress,
-                                                    avalancheAddress: avalancheAddress)
-                }
+            if let result = request?.params?["result"] as? dydxWalletSetup.SetupResult,
+               let cosmosAddress = result.cosmoAddress, let dydxMnemonic = result.dydxMnemonic {
+                AbacusStateManager.shared.setV4(ethereumAddress: result.ethereumAddress,
+                                                walletId: result.walletId,
+                                                cosmoAddress: cosmosAddress,
+                                                dydxMnemonic: dydxMnemonic,
+                                                isNew: true,
+                                                svmAddress: result.svmAddress,
+                                                avalancheAddress: result.avalancheAddress,
+                                                sourceWalletMnemonic: nil)
             }
             Router.shared?.navigate(to: RoutingRequest(path: "/"), animated: animated, completion: completion)
         default:

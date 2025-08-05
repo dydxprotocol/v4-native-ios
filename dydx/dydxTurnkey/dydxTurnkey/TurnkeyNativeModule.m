@@ -21,12 +21,21 @@
  
   For multiple arguments: `RCT_EXTERN_METHOD(methodName:(ParamType1)internalParamName1 [externalParamName2]:(ParamType2)internalParamName2 ...)`
  */
-RCT_EXTERN_METHOD(onJsResponse:(NSString) callbackId :(NSString) result)
+RCT_EXTERN_METHOD(onJsResponse
+                  :(NSString) callbackId
+                  :(NSString) result)
 
 RCT_EXTERN_METHOD(onAuthRouteToWallet)
 RCT_EXTERN_METHOD(onAuthRouteToDesktopQR)
-RCT_EXTERN_METHOD(onAuthCompleted:(NSString) onboardingSignature :(NSString) evmAddress :(NSString) svmAddress)
+RCT_EXTERN_METHOD(onAuthCompleted
+                  :(NSString) onboardingSignature
+                  :(NSString) evmAddress
+                  :(NSString) svmAddress
+                  :(NSString) mnemonics
+                  :(NSString) loginMethod
+                  :(NSString) userEmail)
 
-RCT_EXTERN_METHOD(onAppleAuthRequest:(NSString) nonce)
+RCT_EXTERN_METHOD(onAppleAuthRequest
+                  :(NSString) nonce)
 
 @end

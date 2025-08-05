@@ -7,7 +7,7 @@ interface TurnkeyNativeModuleType {
 
   onAuthRouteToWallet: () => void;
   onAuthRouteToDesktopQR: () => void;
-  onAuthCompleted: (onboardingSignature: string, evmAddress: string, svmAddress: string) => void;
+  onAuthCompleted: (onboardingSignature: string, evmAddress: string, svmAddress: string, mnemonics: string, loginMethod: string, userEmail: string | undefined) => void;
 
   onAppleAuthRequest: (nonce: string) => void;
 }

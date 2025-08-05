@@ -16,16 +16,27 @@ public class SecureStore: SecureStoreProtocol {
     private init() {}
 
     public func save(_ data: Data, service: String, account: String) {
+        guard let accessControl = SecAccessControlCreateWithFlags(
+            nil,
+            kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
+            [],
+            nil
+        ) else {
+            Console.shared.log("SecureStore: Failed to create access control.")
+            return
+        }
+        
         let query  = [
             kSecValueData: data,
             kSecClass: secClass,
             kSecAttrService: service,
-            kSecAttrAccount: account
+            kSecAttrAccount: account,
+            kSecAttrAccessControl: accessControl
         ] as [CFString: Any] as CFDictionary
-
+        
         // Add data in query to keychain
         let status = SecItemAdd(query, nil)
-
+        
         if status == errSecDuplicateItem {
             // Item already exist, thus update it.
             let query = [
@@ -33,15 +44,15 @@ public class SecureStore: SecureStoreProtocol {
                 kSecAttrAccount: account,
                 kSecClass: secClass
             ] as [CFString: Any] as CFDictionary
-
+            
             let attributesToUpdate = [kSecValueData: data] as CFDictionary
-
+            
             // Update existing item
             let status = SecItemUpdate(query, attributesToUpdate)
             if status != errSecSuccess {
                 Console.shared.log("SecureStore save() error: \(status)")
             }
-
+            
         } else if status != errSecSuccess {
             Console.shared.log("SecureStore save() error: \(status)")
         }

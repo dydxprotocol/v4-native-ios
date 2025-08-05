@@ -3,6 +3,10 @@ import { ApiKeyStamper } from "@turnkey/api-key-stamper";
 import { TurnkeyClient, TurnkeyApi } from "@turnkey/http";
 import { _TypedDataEncoder } from "ethers/lib/utils";
 import { TurnkeyConfigs } from "../sharedConfigs";
+import {
+  generateP256KeyPair,
+  decryptExportBundle,
+} from "@turnkey/crypto";
 
 export class DydxTurnkeySession {
   private stamper: ApiKeyStamper;
@@ -13,7 +17,7 @@ export class DydxTurnkeySession {
 
   walletAccounts: TurnkeyApi.TGetWalletAccountsResponse | null = null;
 
- constructor(privateKey: string, publicKey: string, configs: TurnkeyConfigs, organizationId: string, userId: string) {
+  constructor(privateKey: string, publicKey: string, configs: TurnkeyConfigs, organizationId: string, userId: string) {
     this.stamper = new ApiKeyStamper({
       apiPublicKey: publicKey,
       apiPrivateKey: privateKey,
@@ -60,6 +64,41 @@ export class DydxTurnkeySession {
 
     this.walletAccounts = response;
     return Promise.resolve(response);
+  }
+
+  exportWallet = async (walletId: string): Promise<string> => {
+    const {
+      publicKeyUncompressed: targetPublicKey,
+      privateKey: embeddedKey,
+    } = generateP256KeyPair();
+
+    const response = await this.client.exportWallet({
+      type: "ACTIVITY_TYPE_EXPORT_WALLET",
+      /** @description Timestamp (in milliseconds) of the request, used to verify liveness of user requests. */
+      timestampMs: Date.now().toString(),
+      organizationId: this.organizationId,
+      parameters: {
+        walletId: walletId,
+        targetPublicKey: targetPublicKey,
+        language: "MNEMONIC_LANGUAGE_ENGLISH",
+      }
+    });
+
+    const exportBundle =
+      response.activity.result.exportWalletResult?.exportBundle;
+
+    if (exportBundle == null || embeddedKey == null) {
+      throw new Error("Export bundle or embedded key is null");
+    }
+
+    const decrypted = await decryptExportBundle({
+      exportBundle,
+      embeddedKey,
+      organizationId: this.organizationId,
+      returnMnemonic: true,
+    });
+
+    return Promise.resolve(decrypted);
   }
 
   signOnboardingMessage = async (walletAccountAddress: string, salt: string): Promise<string> => {

@@ -206,13 +206,15 @@ public final class AbacusStateManager: NSObject {
             let walletId = _walletState.currentWallet?.walletId
             let svmAddress = _walletState.currentWallet?.svmAddress
             let avalancheAddress = _walletState.currentWallet?.avalancheAddress
+            let sourceWalletMnemonic = _walletState.currentWallet?.sourceWalletMnemonic
             setV4(ethereumAddress: ethereumAddress,
                   walletId: walletId,
                   cosmoAddress: cosmoAddress,
-                  mnemonic: mnemonic,
+                  dydxMnemonic: mnemonic,
                   isNew: false,
                   svmAddress: svmAddress,
-                  avalancheAddress: avalancheAddress)
+                  avalancheAddress: avalancheAddress,
+                  sourceWalletMnemonic: sourceWalletMnemonic)
         }
 
         asyncStateManager.readyToConnect = true
@@ -223,10 +225,10 @@ public final class AbacusStateManager: NSObject {
         asyncStateManager.market = market
     }
 
-    public func setV4(ethereumAddress: String?, walletId: String?, cosmoAddress: String, mnemonic: String, isNew: Bool, svmAddress: String? = nil, avalancheAddress: String? = nil) {
-        CosmoJavascript.shared.connectWallet(mnemonic: mnemonic) { [weak self] _ in
+    public func setV4(ethereumAddress: String?, walletId: String?, cosmoAddress: String, dydxMnemonic: String, isNew: Bool, svmAddress: String?, avalancheAddress: String?, sourceWalletMnemonic: String?) {
+        CosmoJavascript.shared.connectWallet(mnemonic: dydxMnemonic) { [weak self] _ in
             if let self = self {
-                let wallet = dydxWalletInstance.V4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: mnemonic, svmAddress: svmAddress, avalancheAddress: avalancheAddress)
+                let wallet = dydxWalletInstance.V4(ethereumAddress: ethereumAddress, walletId: walletId, cosmoAddress: cosmoAddress, mnemonic: dydxMnemonic, svmAddress: svmAddress, avalancheAddress: avalancheAddress, sourceWalletMnemonic: sourceWalletMnemonic)
                 self._walletState.setCurrentWallet(wallet: wallet)
                 self.asyncStateManager.setAddresses(source: ethereumAddress, account: cosmoAddress, isNew: isNew)
                 if walletId == "phantom-wallet" {

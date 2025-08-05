@@ -26,6 +26,7 @@
     "ethers": "^5.8.0",
     "expo-crypto": "^14.1.5",
     "google-libphonenumber": "^3.2.42",
+    "jwt-decode": "^4.0.0",
     "lucide-react-native": "^0.525.0",
     "nativewind": "^4.1.23",
     "pod-install": "^0.3.10",
@@ -45,7 +46,8 @@
     "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "^10.2.0",
     "react-native-worklets": "^0.4.0",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "text-encoding": "^0.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
