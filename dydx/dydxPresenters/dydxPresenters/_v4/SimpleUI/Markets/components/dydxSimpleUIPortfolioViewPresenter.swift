@@ -78,7 +78,7 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
                 if onboarded {
                     self?.viewModel?.state = .walletConnected
                     self?.viewModel?.buttonAction = {
-                        self?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
+                        self?.navigate(to: RoutingRequest(path: "/transfer/selector"), animated: true, completion: nil)
                     }
                 } else {
                     self?.viewModel?.state = .loggedOut

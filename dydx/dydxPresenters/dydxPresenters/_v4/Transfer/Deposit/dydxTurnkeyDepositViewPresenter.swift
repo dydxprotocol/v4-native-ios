@@ -11,6 +11,7 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import dydxStateManager
 
 protocol dydxTurnkeyDepositViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxTurnkeyDepositViewModel? { get }
@@ -21,5 +22,10 @@ class dydxTurnkeyDepositViewPresenter: HostedViewPresenter<dydxTurnkeyDepositVie
         super.init()
 
         viewModel = dydxTurnkeyDepositViewModel()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            AbacusStateManager.shared.startTrade()
+            AbacusStateManager.shared.startTransfer()
+        }
     }
 }

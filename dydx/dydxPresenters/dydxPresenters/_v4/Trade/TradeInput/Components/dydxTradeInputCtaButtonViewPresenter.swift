@@ -81,7 +81,7 @@ class dydxTradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInputCt
                 if subaccount?.equity?.current?.doubleValue ?? 0 > 0 {
                     Router.shared?.navigate(to: RoutingRequest(path: "/trade/status"), animated: true, completion: nil)
                 } else {
-                    Router.shared?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
+                    Router.shared?.navigate(to: RoutingRequest(path: "/transfer/deposit"), animated: true, completion: nil)
                 }
             } else {
                 Router.shared?.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)

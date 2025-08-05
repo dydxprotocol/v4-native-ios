@@ -24,15 +24,15 @@ class dydxProfileButtonsViewPresenter: HostedViewPresenter<dydxProfileButtonsVie
         self.viewModel = viewModel
 
         viewModel.depositAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.deposit.rawValue]), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/transfer/deposit", params: nil), animated: true, completion: nil)
         }
 
         viewModel.withdrawAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.withdrawal.rawValue]), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/transfer/withdrawal", params: nil), animated: true, completion: nil)
         }
 
         viewModel.transferAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.transferOut.rawValue]), animated: true, completion: nil)
+            Router.shared?.navigate(to: RoutingRequest(path: "/transfer/transferout", params: nil), animated: true, completion: nil)
         }
 
         viewModel.signOutAction = { [weak self] in

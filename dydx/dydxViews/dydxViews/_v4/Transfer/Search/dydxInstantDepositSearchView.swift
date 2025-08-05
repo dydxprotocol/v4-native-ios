@@ -43,6 +43,7 @@ public class dydxInstantDepositSearchViewModel: PlatformViewModel {
                 }
                 .padding(.vertical, 8)
                 .padding(.horizontal, 16)
+                .padding(.top, 8)
                 .frame(height: 54)
 
                 DividerModel().createView(parentStyle: style)

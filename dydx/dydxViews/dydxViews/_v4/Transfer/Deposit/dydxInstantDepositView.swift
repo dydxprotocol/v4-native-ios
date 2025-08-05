@@ -37,6 +37,19 @@ public class dydxInstantDepositViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack(spacing: 16) {
+                VStack {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT"))
+                        .themeColor(foreground: .textPrimary)
+                        .themeFont(fontSize: .larger)
+                        .centerAligned()
+                        .padding(.vertical, 8)
+                        .padding(.top, 8)
+                        .frame(height: 54)
+
+                    DividerModel().createView(parentStyle: style)
+                        .padding(.horizontal, -16)
+                }
+
                 if self.showConnectWallet {
                     HStack(spacing: 8) {
                         Text(DataLocalizer.localize(path: "APP.V4_DEPOSIT.MOBILE_WALLET_REQUIRED"))
@@ -47,7 +60,7 @@ public class dydxInstantDepositViewModel: PlatformViewModel {
                                                 type: .defaultType(fillWidth: false)) { [weak self] in
                             self?.connectWalletAction?()
                         }
-                        .createView(parentStyle: style)
+                                                .createView(parentStyle: style)
                     }
                 } else {
                     switch self.uiStyle {
@@ -93,6 +106,10 @@ public class dydxInstantDepositViewModel: PlatformViewModel {
                     self.ctaButton?.createView(parentStyle: style)
                 }
             }
+                .padding(.horizontal)
+                .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
+                .themeColor(background: .layer2)
+                .ignoresSafeArea(edges: [.bottom])
 
             return AnyView(view)
         }

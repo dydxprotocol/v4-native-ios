@@ -77,7 +77,11 @@ public class dydxTransferFaucetViewModel: PlatformViewModel {
                         Spacer()
                     }
                 }
-                .animation(.default)
+                    .padding(.horizontal)
+                    .padding(.top, 40)
+                    .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
+                    .themeColor(background: .layer2)
+                    .ignoresSafeArea(edges: [.bottom])
             )
 
         }

@@ -317,8 +317,24 @@
                     "destination":"dydxPresenters.dydxAdjustMarginInputViewBuilder",
                     "presentation":"prompt"
                 },
-                "/transfer":{
-                    "destination":"dydxPresenters.dydxTransferViewBuilder",
+                "/transfer/selector":{
+                    "destination":"dydxPresenters.dydxTransferSelectorViewBuilder",
+                    "presentation":"half"
+                },
+                "/transfer/deposit":{
+                    "destination":"dydxPresenters.dydxDepositViewBuilder",
+                    "presentation":"prompt"
+                },
+                "/transfer/withdrawal":{
+                    "destination":"dydxPresenters.dydxWithdrawalViewBuilder",
+                    "presentation":"prompt"
+                },
+                "/transfer/transferout":{
+                    "destination":"dydxPresenters.dydxTransferOutViewBuilder",
+                    "presentation":"prompt"
+                },
+                "/transfer/faucet":{
+                    "destination":"dydxPresenters.dydxFaucetViewBuilder",
                     "presentation":"prompt"
                 },
                 "/transfer/search":{

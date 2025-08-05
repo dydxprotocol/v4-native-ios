@@ -120,6 +120,7 @@
 		0268BBF92A8BE08C00D0C59B /* dydxTransferOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268BBF82A8BE08C00D0C59B /* dydxTransferOutView.swift */; };
 		026BB3CE2E41599E009F33AB /* dydxTurnkeyDepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026BB3CD2E41599E009F33AB /* dydxTurnkeyDepositView.swift */; };
 		026BB3EE2E418216009F33AB /* dydxWalletSecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026BB3ED2E418216009F33AB /* dydxWalletSecurityView.swift */; };
+		026BB3FC2E42A2A1009F33AB /* dydxTransferSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026BB3FB2E42A2A1009F33AB /* dydxTransferSelectorView.swift */; };
 		02714C9D29E0C78600CC1C44 /* ChainsComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02714C9C29E0C78600CC1C44 /* ChainsComboBox.swift */; };
 		02714C9F29E0C7C500CC1C44 /* TokensComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02714C9E29E0C7C500CC1C44 /* TokensComboBox.swift */; };
 		0272C86B2D4D670600123722 /* dydxSimpleUiMarketLaunchableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272C86A2D4D670600123722 /* dydxSimpleUiMarketLaunchableView.swift */; };
@@ -165,7 +166,6 @@
 		029E54882D08E18B005D4DC5 /* dydxWcModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E54872D08E18B005D4DC5 /* dydxWcModalView.swift */; };
 		02A107B02E2860CA00E65EE2 /* dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029F10B12E271F6C00261191 /* dydxTurnkey.framework */; };
 		02A51C0C2E3BD5690086ED2C /* ReactNativeHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A51C0B2E3BD5680086ED2C /* ReactNativeHostingController.swift */; };
-		02A5C858297FBCBE00FFE1F9 /* dydxTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5C857297FBCBE00FFE1F9 /* dydxTransferView.swift */; };
 		02A6517D2DB30D76006DBD5F /* dydxSimpleUIMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A6517C2DB30D76006DBD5F /* dydxSimpleUIMenuView.swift */; };
 		02A651822DB408D3006DBD5F /* dydxSimpleUIMenuAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A651812DB408D3006DBD5F /* dydxSimpleUIMenuAccountView.swift */; };
 		02A651872DB6DA15006DBD5F /* dydxSimpleUIMenuButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A651862DB6DA15006DBD5F /* dydxSimpleUIMenuButtonsView.swift */; };
@@ -174,7 +174,6 @@
 		02A9B60E29005D5A00AE1516 /* AmountText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9B60D29005D5A00AE1516 /* AmountText.swift */; };
 		02A9B6102900605400AE1516 /* SizeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9B60F2900605400AE1516 /* SizeText.swift */; };
 		02A9B612290061E000AE1516 /* SizeChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9B611290061E000AE1516 /* SizeChange.swift */; };
-		02AACB78298B5821002129B4 /* dydxTransferSectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AACB77298B5821002129B4 /* dydxTransferSectionsView.swift */; };
 		02AEE36C28EF7CC8006842E8 /* dydxMarketInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEE36B28EF7CC8006842E8 /* dydxMarketInfoHeaderView.swift */; };
 		02AEE4BA28F0DBF9006842E8 /* dydxMarketPriceCandlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEE4B928F0DBF9006842E8 /* dydxMarketPriceCandlesView.swift */; };
 		02AEE4BC28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEE4BB28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift */; };
@@ -620,6 +619,7 @@
 		0268BBF82A8BE08C00D0C59B /* dydxTransferOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferOutView.swift; sourceTree = "<group>"; };
 		026BB3CD2E41599E009F33AB /* dydxTurnkeyDepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTurnkeyDepositView.swift; sourceTree = "<group>"; };
 		026BB3ED2E418216009F33AB /* dydxWalletSecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWalletSecurityView.swift; sourceTree = "<group>"; };
+		026BB3FB2E42A2A1009F33AB /* dydxTransferSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferSelectorView.swift; sourceTree = "<group>"; };
 		02714C9C29E0C78600CC1C44 /* ChainsComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainsComboBox.swift; sourceTree = "<group>"; };
 		02714C9E29E0C7C500CC1C44 /* TokensComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensComboBox.swift; sourceTree = "<group>"; };
 		0272C86A2D4D670600123722 /* dydxSimpleUiMarketLaunchableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUiMarketLaunchableView.swift; sourceTree = "<group>"; };
@@ -663,7 +663,6 @@
 		029E54872D08E18B005D4DC5 /* dydxWcModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWcModalView.swift; sourceTree = "<group>"; };
 		029F10AA2E271F6C00261191 /* dydxTurnkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxTurnkey.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxTurnkey/dydxTurnkey.xcodeproj"; sourceTree = "<absolute>"; };
 		02A51C0B2E3BD5680086ED2C /* ReactNativeHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactNativeHostingController.swift; sourceTree = "<group>"; };
-		02A5C857297FBCBE00FFE1F9 /* dydxTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferView.swift; sourceTree = "<group>"; };
 		02A6517C2DB30D76006DBD5F /* dydxSimpleUIMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuView.swift; sourceTree = "<group>"; };
 		02A651812DB408D3006DBD5F /* dydxSimpleUIMenuAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuAccountView.swift; sourceTree = "<group>"; };
 		02A651862DB6DA15006DBD5F /* dydxSimpleUIMenuButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuButtonsView.swift; sourceTree = "<group>"; };
@@ -672,7 +671,6 @@
 		02A9B60D29005D5A00AE1516 /* AmountText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountText.swift; sourceTree = "<group>"; };
 		02A9B60F2900605400AE1516 /* SizeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeText.swift; sourceTree = "<group>"; };
 		02A9B611290061E000AE1516 /* SizeChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeChange.swift; sourceTree = "<group>"; };
-		02AACB77298B5821002129B4 /* dydxTransferSectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferSectionsView.swift; sourceTree = "<group>"; };
 		02AEE36B28EF7CC8006842E8 /* dydxMarketInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketInfoHeaderView.swift; sourceTree = "<group>"; };
 		02AEE4B928F0DBF9006842E8 /* dydxMarketPriceCandlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketPriceCandlesView.swift; sourceTree = "<group>"; };
 		02AEE4BB28F0DC78006842E8 /* dydxMarketPriceCandlesControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketPriceCandlesControlView.swift; sourceTree = "<group>"; };
@@ -900,7 +898,6 @@
 		02084B1F297FC2BE00CF9522 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				02084B2C297FC2CD00CF9522 /* dydxTransferFaucetView.swift */,
 				02714C9C29E0C78600CC1C44 /* ChainsComboBox.swift */,
 				02714C9E29E0C7C500CC1C44 /* TokensComboBox.swift */,
 				02F99D1429E0CC9D0009B3E8 /* TransferAmountBox.swift */,
@@ -1492,6 +1489,22 @@
 			path = WalletSecurity;
 			sourceTree = "<group>";
 		};
+		026BB3FA2E42A284009F33AB /* Selector */ = {
+			isa = PBXGroup;
+			children = (
+				026BB3FB2E42A2A1009F33AB /* dydxTransferSelectorView.swift */,
+			);
+			path = Selector;
+			sourceTree = "<group>";
+		};
+		026BB4002E42AC7F009F33AB /* Faucet */ = {
+			isa = PBXGroup;
+			children = (
+				02084B2C297FC2CD00CF9522 /* dydxTransferFaucetView.swift */,
+			);
+			path = Faucet;
+			sourceTree = "<group>";
+		};
 		02714C8E29E0C74800CC1C44 /* Deposit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1652,6 +1665,8 @@
 		02A5C84A297FBCAA00FFE1F9 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
+				026BB4002E42AC7F009F33AB /* Faucet */,
+				026BB3FA2E42A284009F33AB /* Selector */,
 				02F802902DD56D080009BA8F /* NobleAddress */,
 				027CB27729EEFF670069781A /* TransferStatus */,
 				02F99F3C29E4D5600009B3E8 /* Search */,
@@ -1659,8 +1674,6 @@
 				02714C8E29E0C74800CC1C44 /* Deposit */,
 				02FA5B5F2A12FACF0045F2F5 /* Withdrawal */,
 				0268BBF72A8BE06D00D0C59B /* TransferOut */,
-				02AACB77298B5821002129B4 /* dydxTransferSectionsView.swift */,
-				02A5C857297FBCBE00FFE1F9 /* dydxTransferView.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -2796,7 +2809,6 @@
 				0273A15F2ACCDDB1001B89F5 /* SelectionBar.swift in Sources */,
 				020490BD2D3AFA7800394CBE /* dydxSimpleUITradeInputCtaButtonView.swift in Sources */,
 				02031F032AC36CE60069E00D /* BuySellButton.swift in Sources */,
-				02A5C858297FBCBE00FFE1F9 /* dydxTransferView.swift in Sources */,
 				273F50162B7C3F120034792A /* SignedAmountView.swift in Sources */,
 				0277A22528BD7B14005A51F8 /* WalletConnectionView.swift in Sources */,
 				02D6DAE92D12349A008AAEA1 /* dydxSimpleUIMarketsView.swift in Sources */,
@@ -2843,7 +2855,6 @@
 				02FF0BCE29AE928700781EDA /* dydxWalletListView_Deprecated.swift in Sources */,
 				64A4DB61296620FF008D8E20 /* dydxTradeInputEditView.swift in Sources */,
 				02107A6B2979F4F5000D75E1 /* dydxReceiptMarginUsageView.swift in Sources */,
-				02AACB78298B5821002129B4 /* dydxTransferSectionsView.swift in Sources */,
 				27AFE4EA2C1902BF00168B0B /* dydxReceiptChangeItemView.swift in Sources */,
 				02548B702DC3EE8600FC0ABE /* dydxSocialView.swift in Sources */,
 				64A4DB9D296745A1008D8E20 /* dydxTradeInputTrailingPercentView.swift in Sources */,
@@ -2871,6 +2882,7 @@
 				02DDB4582DC94F2C00FFFF2C /* dydxCoinbaseView.swift in Sources */,
 				0276B9C828E6477500101791 /* dydxMarketSummaryView.swift in Sources */,
 				024B44F32983D57200E35D54 /* SharedFillView.swift in Sources */,
+				026BB3FC2E42A2A1009F33AB /* dydxTransferSelectorView.swift in Sources */,
 				0238FEC72970D26C002E1C1A /* SharedAccountView.swift in Sources */,
 				64A4DB7A296635BE008D8E20 /* dydxReceiptBuyingPowerView.swift in Sources */,
 				028DB33E2A0589270090BE58 /* dydxProfileHeaderView.swift in Sources */,

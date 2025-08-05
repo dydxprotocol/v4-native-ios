@@ -43,7 +43,7 @@ public class dydxProfileBalancesViewPresenter: HostedViewPresenter<dydxProfileBa
                 if let accountBalance = accountBalance {
                     self?.viewModel?.walletAmount = dydxFormatter.shared.raw(number: Parser.standard.asNumber(accountBalance), digits: decimal)
                     self?.viewModel?.transferAction = {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": "transferOut"]), animated: true, completion: nil)
+                        Router.shared?.navigate(to: RoutingRequest(path: "/transfer/transferout", params: nil), animated: true, completion: nil)
                     }
                 } else {
                     self?.viewModel?.walletAmount = "-"

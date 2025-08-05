@@ -32,7 +32,7 @@ class dydxPortfolioHeaderPresenter: HostedViewPresenter<dydxPortfolioHeaderViewM
             })
         }
         viewModel?.depositAction = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: { /* [weak self] */ _, _ in
+            Router.shared?.navigate(to: RoutingRequest(path: "/transfer/selector"), animated: true, completion: { /* [weak self] */ _, _ in
             })
         }
     }

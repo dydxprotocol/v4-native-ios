@@ -137,7 +137,7 @@ class dydxSimpleUITradeInputCtaButtonViewPresenter: HostedViewPresenter<dydxSimp
             case .newUser:
                 self.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)
             case .needDeposit:
-                self.navigate(to: RoutingRequest(path: "/transfer"), animated: true, completion: nil)
+                self.navigate(to: RoutingRequest(path: "/transfer/deposit"), animated: true, completion: nil)
             case .readyToTrade:
                 HapticFeedback.shared?.notify(type: .success)
                 self.navigate(to: RoutingRequest(path: "/trade/simple/status"), animated: true, completion: nil)

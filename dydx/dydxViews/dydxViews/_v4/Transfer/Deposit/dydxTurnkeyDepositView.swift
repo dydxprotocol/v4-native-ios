@@ -21,12 +21,31 @@ public class dydxTurnkeyDepositViewModel: PlatformViewModel {
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
-        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] _  in
+        PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
-            return AnyView(
-                Text(self.text ?? "")
-            )
+            let view = VStack {
+                VStack {
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT"))
+                        .themeColor(foreground: .textPrimary)
+                        .themeFont(fontSize: .larger)
+                        .centerAligned()
+                        .padding(.vertical, 8)
+                        .padding(.top, 8)
+                        .frame(height: 54)
+
+                    DividerModel().createView(parentStyle: style)
+                        .padding(.horizontal, -16)
+                }
+
+                Spacer()
+            }
+                .padding(.horizontal)
+                .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
+                .themeColor(background: .layer2)
+                .ignoresSafeArea(edges: [.bottom])
+
+            return AnyView(view)
         }
     }
 }

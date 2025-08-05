@@ -44,6 +44,19 @@ public class dydxTransferWithdrawalViewModel: PlatformViewModel {
 
             return AnyView(
                 VStack {
+                    VStack {
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.WITHDRAW"))
+                            .themeColor(foreground: .textPrimary)
+                            .themeFont(fontSize: .larger)
+                            .centerAligned()
+                            .padding(.vertical, 8)
+                            .padding(.top, 8)
+                            .frame(height: 54)
+
+                        DividerModel().createView(parentStyle: style)
+                            .padding(.horizontal, -16)
+                    }
+
                     Group {
                         VStack(spacing: 12) {
                             HStack {
@@ -73,6 +86,10 @@ public class dydxTransferWithdrawalViewModel: PlatformViewModel {
                         self.ctaButton?.createView(parentStyle: style)
                     }
                 }
+                    .padding(.horizontal)
+                    .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
+                    .themeColor(background: .layer2)
+                    .ignoresSafeArea(edges: [.bottom])
             )
         }
     }

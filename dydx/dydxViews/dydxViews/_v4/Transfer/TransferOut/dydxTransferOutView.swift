@@ -60,6 +60,19 @@ private struct dydxTransferOutView: View {
 
     var body: some View {
         VStack {
+            VStack {
+                Text(DataLocalizer.localize(path: "APP.GENERAL.TRANSFER_OUT"))
+                    .themeColor(foreground: .textPrimary)
+                    .themeFont(fontSize: .larger)
+                    .centerAligned()
+                    .padding(.vertical, 8)
+                    .padding(.top, 8)
+                    .frame(height: 54)
+
+                DividerModel().createView()
+                    .padding(.horizontal, -16)
+            }
+
             Group {
                 VStack(spacing: 12) {
                     HStack(spacing: 12) {
@@ -89,6 +102,8 @@ private struct dydxTransferOutView: View {
                 viewModel.ctaButton?.createView()
             }
         }
+        .padding(.horizontal)
+        .themeColor(background: .layer2)
     }
 }
 

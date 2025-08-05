@@ -46,14 +46,14 @@ class dydxSimpleUIMenuButtonsViewPresenter: HostedViewPresenter<dydxSimpleUIMenu
         if wallet != nil {
             viewModel?.depositAction = { [weak self] in
                 self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) {_, _ in
-                    self?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.deposit.rawValue]), animated: true, completion: nil)
+                    self?.navigate(to: RoutingRequest(path: "/transfer/deposit", params: nil), animated: true, completion: nil)
                 }
             }
         }
         if freeCollateral ?? 0 > 0 {
             viewModel?.transferAction = { [weak self] in
                 self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) {_, _ in
-                    self?.navigate(to: RoutingRequest(path: "/transfer", params: ["section": TransferSection.withdrawal.rawValue]), animated: true, completion: nil)
+                    self?.navigate(to: RoutingRequest(path: "/transfer/withdrawal", params: nil), animated: true, completion: nil)
                 }
             }
         }

@@ -68,7 +68,6 @@ public class dydxSearchViewModel: PlatformViewModel {
                 .padding(.top, 32)
                 .padding(.bottom, self.safeAreaInsets?.bottom)
                 .themeColor(background: .layer2)
-                .makeSheet()
                 .ignoresSafeArea(edges: [.bottom])
             )
         }
