@@ -35,7 +35,9 @@ private class dydxPostOnboardingAction: NSObject, NavigableProtocol {
                                                 isNew: true,
                                                 svmAddress: result.svmAddress,
                                                 avalancheAddress: result.avalancheAddress,
-                                                sourceWalletMnemonic: nil)
+                                                sourceWalletMnemonic: result.sourceWalletMnemonic,
+                                                loginMethod: result.loginMethod,
+                                                userEmail: result.userEmail)
             }
             Router.shared?.navigate(to: RoutingRequest(path: "/"), animated: animated, completion: completion)
         default:

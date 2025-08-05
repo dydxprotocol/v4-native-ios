@@ -98,7 +98,9 @@ private class Wallets2ViewPresenter: HostedViewPresenter<Wallets2ViewModel> {
                                                     isNew: true,
                                                     svmAddress: nil,
                                                     avalancheAddress: nil,
-                                                    sourceWalletMnemonic: nil)
+                                                    sourceWalletMnemonic: nil,
+                                                    loginMethod: nil,
+                                                    userEmail: nil)
                 }
             }
 
