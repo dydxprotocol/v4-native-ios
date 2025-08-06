@@ -89,7 +89,7 @@ public class dydxTransferSelectorViewModel: PlatformViewModel {
                 Spacer()
 
                 PlatformIconViewModel(type: .asset(name: "icon_chevron", bundle: Bundle.dydxView),
-                                      size: CGSize(width: 16, height: 16),
+                                      size: CGSize(width: 12, height: 12),
                                       templateColor: .textTertiary)
                 .createView(parentStyle: style)
             }

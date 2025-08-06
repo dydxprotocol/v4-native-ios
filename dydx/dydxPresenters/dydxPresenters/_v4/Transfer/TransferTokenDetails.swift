@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import dydxStateManager
+import Utilities
 
 final class TransferTokenDetails {
     @Published var selectedToken: TransferTokenInfo?
@@ -33,6 +34,13 @@ final class TransferTokenDetails {
 
     var currentInfos: [TransferTokenInfo] {
         _infos
+    }
+
+    // Chains that supports Turnkey embedded wallet deposit
+    var turnkeyInfos: [TransferTokenInfo] {
+        _infos.filter {
+            $0.token == .USDC
+        }
     }
 
     lazy var infos: AnyPublisher<[TransferTokenInfo], Never> =
@@ -100,6 +108,25 @@ final class TransferTokenDetails {
 
 enum TransferChain: String {
     case Ethereum, Optimism, Arbitrum, Base, Polygon, Avalanche, Solana
+
+    var supportedDepositTokenString: String {
+        switch self {
+        case .Ethereum: return "ETH, USDC"
+        case .Optimism: return "ETH, USDC"
+        case .Arbitrum: return "ETH, USDC"
+        case .Base: return "ETH, USDC"
+        case .Polygon: return "POL, USDC"
+        case .Solana: return "USDC"
+        case .Avalanche: return "AVAX, USDC"
+        }
+    }
+
+    var depositFeesString: String {
+        switch self {
+        case .Ethereum: return DataLocalizer.localize(path: "APP.DEPOSIT_MODAL.FREE_ABOVE", params: ["AMOUNT": "$100"])
+        default: return DataLocalizer.localize(path: "APP.GENERAL.FREE")
+        }
+    }
 }
 
 enum TransferToken: String {

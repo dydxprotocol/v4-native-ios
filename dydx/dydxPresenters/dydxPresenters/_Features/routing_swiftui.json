@@ -325,6 +325,10 @@
                     "destination":"dydxPresenters.dydxDepositViewBuilder",
                     "presentation":"prompt"
                 },
+                "/transfer/deposit/qr_code":{
+                    "destination":"dydxPresenters.dydxTurnkeyQRCodeViewBuilder",
+                    "presentation":"push"
+                },
                 "/transfer/withdrawal":{
                     "destination":"dydxPresenters.dydxWithdrawalViewBuilder",
                     "presentation":"prompt"

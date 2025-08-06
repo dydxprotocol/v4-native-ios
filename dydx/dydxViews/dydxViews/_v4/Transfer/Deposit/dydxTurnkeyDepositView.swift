@@ -10,13 +10,44 @@ import PlatformUI
 import Utilities
 
 public class dydxTurnkeyDepositViewModel: PlatformViewModel {
-    @Published public var text: String?
+    public struct Item: Equatable, Hashable {
+        public init(title: String, subtitle: String, tag: String, icon: URL?, action: @escaping () -> Void) {
+            self.title = title
+            self.subtitle = subtitle
+            self.tag = tag
+            self.icon = icon
+            self.action = action
+        }
+
+        public static func == (lhs: dydxTurnkeyDepositViewModel.Item, rhs: dydxTurnkeyDepositViewModel.Item) -> Bool {
+            lhs.title == rhs.title &&
+            lhs.subtitle == rhs.subtitle &&
+            lhs.tag == rhs.tag &&
+            lhs.icon == rhs.icon
+        }
+
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(title)
+            hasher.combine(subtitle)
+            hasher.combine(tag)
+        }
+
+        public let title: String
+        public let subtitle: String
+        public let tag: String
+        public let icon: URL?
+        public let action: () -> Void
+    }
+
+    @Published public var items: [Item] = []
 
     public init() { }
 
     public static var previewValue: dydxTurnkeyDepositViewModel {
         let vm = dydxTurnkeyDepositViewModel()
-        vm.text = "Test String"
+        vm.items = [
+            .init(title: "Title 1", subtitle: "Subtitle 1", tag: "1", icon: URL(string: "https://v4.testnet.dydx.exchange/chains/ethereum.png")!, action: {})
+         ]
         return vm
     }
 
@@ -36,6 +67,12 @@ public class dydxTurnkeyDepositViewModel: PlatformViewModel {
 
                     DividerModel().createView(parentStyle: style)
                         .padding(.horizontal, -16)
+
+                    ScrollView(showsIndicators: false) {
+                        ForEach(self.items, id: \.self) { item in
+                            self.createItemView(item: item, style: style)
+                        }
+                    }
                 }
 
                 Spacer()
@@ -47,6 +84,46 @@ public class dydxTurnkeyDepositViewModel: PlatformViewModel {
 
             return AnyView(view)
         }
+    }
+
+    private func createItemView(item: Item, style: ThemeStyle) -> some View {
+        let content =  HStack(spacing: 12) {
+            PlatformIconViewModel(type: .url(url: item.icon), clip: .circle(background: .transparent, spacing: 0), size: CGSize(width: 32, height: 32))
+                .createView(parentStyle: style)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(item.title)
+                    .themeColor(foreground: .textPrimary)
+                    .themeFont(fontSize: .small)
+
+                Text(item.subtitle)
+                    .themeColor(foreground: .textTertiary)
+                    .themeFont(fontSize: .smaller)
+            }
+
+            Spacer()
+
+            Text(item.tag)
+                .themeColor(foreground: .colorPurple)
+                .themeFont(fontSize: .smallest)
+                .padding(.vertical, 4)
+                .padding(.horizontal, 6)
+                .themeColor(background: .colorFadedPurple)
+                .cornerRadius(6, corners: .allCorners)
+
+            PlatformIconViewModel(type: .asset(name: "icon_chevron", bundle: Bundle.dydxView),
+                                  size: CGSize(width: 12, height: 12),
+                                  templateColor: .textTertiary)
+            .createView(parentStyle: style)
+        }
+        .padding(.vertical, 8)
+
+        return Button {
+            item.action()
+        } label: {
+            content
+        }
+
     }
 }
 

@@ -112,6 +112,7 @@
 		027885FC2D1E171C00366321 /* dydxSimpleUIMarketPositionViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027885FB2D1E171B00366321 /* dydxSimpleUIMarketPositionViewPresenter.swift */; };
 		027886042D1F4BD300366321 /* dydxSimpleUITradeInputViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027886032D1F4BD200366321 /* dydxSimpleUITradeInputViewBuilder.swift */; };
 		0278860A2D261FAA00366321 /* dydxSimpleUITradeInputSizeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027886092D261FA900366321 /* dydxSimpleUITradeInputSizeViewPresenter.swift */; };
+		0278F3732E43F7E5001040B6 /* dydxTurnkeyQRCodeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0278F3722E43F7E4001040B6 /* dydxTurnkeyQRCodeViewBuilder.swift */; };
 		0279656A29D795E8004DEB20 /* tabs_v4.json in Resources */ = {isa = PBXBuildFile; fileRef = 0279655B29D795E7004DEB20 /* tabs_v4.json */; };
 		0279656C29D795E8004DEB20 /* routing_swiftui.json in Resources */ = {isa = PBXBuildFile; fileRef = 0279656929D795E7004DEB20 /* routing_swiftui.json */; };
 		0279DE482BEBE76900F9ECF8 /* dydxTargetLeverageCtaButtonViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE472BEBE76900F9ECF8 /* dydxTargetLeverageCtaButtonViewPresenter.swift */; };
@@ -582,6 +583,7 @@
 		027885FB2D1E171B00366321 /* dydxSimpleUIMarketPositionViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMarketPositionViewPresenter.swift; sourceTree = "<group>"; };
 		027886032D1F4BD200366321 /* dydxSimpleUITradeInputViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputViewBuilder.swift; sourceTree = "<group>"; };
 		027886092D261FA900366321 /* dydxSimpleUITradeInputSizeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputSizeViewPresenter.swift; sourceTree = "<group>"; };
+		0278F3722E43F7E4001040B6 /* dydxTurnkeyQRCodeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTurnkeyQRCodeViewBuilder.swift; sourceTree = "<group>"; };
 		0279655B29D795E7004DEB20 /* tabs_v4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabs_v4.json; sourceTree = "<group>"; };
 		0279656929D795E7004DEB20 /* routing_swiftui.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = routing_swiftui.json; sourceTree = "<group>"; };
 		0279DE472BEBE76900F9ECF8 /* dydxTargetLeverageCtaButtonViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTargetLeverageCtaButtonViewPresenter.swift; sourceTree = "<group>"; };
@@ -1301,9 +1303,10 @@
 		02714C8F29E0C76200CC1C44 /* Deposit */ = {
 			isa = PBXGroup;
 			children = (
-				026BB3F12E429E78009F33AB /* dydxDepositViewBuilder.swift */,
+				0278F3712E43F7D5001040B6 /* QRCode */,
 				026BB3DC2E4159C1009F33AB /* dydxTurnkeyDepositViewPresenter.swift */,
 				023DB0962D69123500F15534 /* dydxInstantDepositViewPresenter.swift */,
+				026BB3F12E429E78009F33AB /* dydxDepositViewBuilder.swift */,
 			);
 			path = Deposit;
 			sourceTree = "<group>";
@@ -1371,6 +1374,14 @@
 				027886032D1F4BD200366321 /* dydxSimpleUITradeInputViewBuilder.swift */,
 			);
 			path = TradeInput;
+			sourceTree = "<group>";
+		};
+		0278F3712E43F7D5001040B6 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				0278F3722E43F7E4001040B6 /* dydxTurnkeyQRCodeViewBuilder.swift */,
+			);
+			path = QRCode;
 			sourceTree = "<group>";
 		};
 		0279DE462BEBE75D00F9ECF8 /* Components */ = {
@@ -2520,6 +2531,7 @@
 				0208627C28F4DAC000C9D3A0 /* dydxMarketInfoPagingViewPresenter.swift in Sources */,
 				0207FCA32D2A181D004C2C9F /* dydxSimpleUIMarketsHeaderViewPresenter.swift in Sources */,
 				0238FECB2970D681002E1C1A /* SharedAccountPresenter.swift in Sources */,
+				0278F3732E43F7E5001040B6 /* dydxTurnkeyQRCodeViewBuilder.swift in Sources */,
 				27592DF92C9A54D6002FBD4B /* dydxSystemAlertsProvider.swift in Sources */,
 				026BB3FF2E42A2BA009F33AB /* dydxTransferSelectorViewBuilder.swift in Sources */,
 				02A651852DB408EA006DBD5F /* dydxSimpleUIMenuAccountViewPresenter.swift in Sources */,

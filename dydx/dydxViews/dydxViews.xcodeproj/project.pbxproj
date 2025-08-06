@@ -144,6 +144,7 @@
 		027886082D261F4A00366321 /* dydxSimpleUITradeInputSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027886072D261F4A00366321 /* dydxSimpleUITradeInputSizeView.swift */; };
 		027887B92D26769000366321 /* dydxSimpleUITradeInputSizeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027887B82D26769000366321 /* dydxSimpleUITradeInputSizeItemView.swift */; };
 		027887BB2D268FE800366321 /* ValidationErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027887BA2D268FE800366321 /* ValidationErrorView.swift */; };
+		0278F3702E43F7C2001040B6 /* dydxTurnkeyQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0278F36F2E43F7C2001040B6 /* dydxTurnkeyQRCodeView.swift */; };
 		0279DE452BEBE75100F9ECF8 /* dydxTargetLeverageCtaButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE442BEBE75100F9ECF8 /* dydxTargetLeverageCtaButtonView.swift */; };
 		0279DE6B2BEC471700F9ECF8 /* dydxAdjustMarginInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE6A2BEC471700F9ECF8 /* dydxAdjustMarginInputView.swift */; };
 		0279DE872BED3F5400F9ECF8 /* dydxAdjustMarginDirectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279DE862BED3F5400F9ECF8 /* dydxAdjustMarginDirectionView.swift */; };
@@ -642,6 +643,7 @@
 		027886072D261F4A00366321 /* dydxSimpleUITradeInputSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputSizeView.swift; sourceTree = "<group>"; };
 		027887B82D26769000366321 /* dydxSimpleUITradeInputSizeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUITradeInputSizeItemView.swift; sourceTree = "<group>"; };
 		027887BA2D268FE800366321 /* ValidationErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationErrorView.swift; sourceTree = "<group>"; };
+		0278F36F2E43F7C2001040B6 /* dydxTurnkeyQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTurnkeyQRCodeView.swift; sourceTree = "<group>"; };
 		0279DE442BEBE75100F9ECF8 /* dydxTargetLeverageCtaButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTargetLeverageCtaButtonView.swift; sourceTree = "<group>"; };
 		0279DE6A2BEC471700F9ECF8 /* dydxAdjustMarginInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginInputView.swift; sourceTree = "<group>"; };
 		0279DE862BED3F5400F9ECF8 /* dydxAdjustMarginDirectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxAdjustMarginDirectionView.swift; sourceTree = "<group>"; };
@@ -1510,6 +1512,7 @@
 		02714C8E29E0C74800CC1C44 /* Deposit */ = {
 			isa = PBXGroup;
 			children = (
+				0278F3612E43F763001040B6 /* QRCode */,
 				023DB0A52D691E1400F15534 /* Components */,
 				023DB0882D69122900F15534 /* dydxInstantDepositView.swift */,
 				026BB3CD2E41599E009F33AB /* dydxTurnkeyDepositView.swift */,
@@ -1567,6 +1570,14 @@
 				027886052D1F4C0500366321 /* dydxSimpleUITradeInputView.swift */,
 			);
 			path = TradeInput;
+			sourceTree = "<group>";
+		};
+		0278F3612E43F763001040B6 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				0278F36F2E43F7C2001040B6 /* dydxTurnkeyQRCodeView.swift */,
+			);
+			path = QRCode;
 			sourceTree = "<group>";
 		};
 		0279DE412BEBE56C00F9ECF8 /* Components */ = {
@@ -2858,6 +2869,7 @@
 				02FF0BCE29AE928700781EDA /* dydxWalletListView_Deprecated.swift in Sources */,
 				64A4DB61296620FF008D8E20 /* dydxTradeInputEditView.swift in Sources */,
 				02107A6B2979F4F5000D75E1 /* dydxReceiptMarginUsageView.swift in Sources */,
+				0278F3702E43F7C2001040B6 /* dydxTurnkeyQRCodeView.swift in Sources */,
 				27AFE4EA2C1902BF00168B0B /* dydxReceiptChangeItemView.swift in Sources */,
 				02548B702DC3EE8600FC0ABE /* dydxSocialView.swift in Sources */,
 				64A4DB9D296745A1008D8E20 /* dydxTradeInputTrailingPercentView.swift in Sources */,
