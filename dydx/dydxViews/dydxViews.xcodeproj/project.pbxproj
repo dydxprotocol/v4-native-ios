@@ -121,6 +121,7 @@
 		026BB3CE2E41599E009F33AB /* dydxTurnkeyDepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026BB3CD2E41599E009F33AB /* dydxTurnkeyDepositView.swift */; };
 		026BB3EE2E418216009F33AB /* dydxWalletSecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026BB3ED2E418216009F33AB /* dydxWalletSecurityView.swift */; };
 		026BB3FC2E42A2A1009F33AB /* dydxTransferSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026BB3FB2E42A2A1009F33AB /* dydxTransferSelectorView.swift */; };
+		026BB44D2E430CD4009F33AB /* dydxDepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026BB44C2E430CD4009F33AB /* dydxDepositView.swift */; };
 		02714C9D29E0C78600CC1C44 /* ChainsComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02714C9C29E0C78600CC1C44 /* ChainsComboBox.swift */; };
 		02714C9F29E0C7C500CC1C44 /* TokensComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02714C9E29E0C7C500CC1C44 /* TokensComboBox.swift */; };
 		0272C86B2D4D670600123722 /* dydxSimpleUiMarketLaunchableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272C86A2D4D670600123722 /* dydxSimpleUiMarketLaunchableView.swift */; };
@@ -620,6 +621,7 @@
 		026BB3CD2E41599E009F33AB /* dydxTurnkeyDepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTurnkeyDepositView.swift; sourceTree = "<group>"; };
 		026BB3ED2E418216009F33AB /* dydxWalletSecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWalletSecurityView.swift; sourceTree = "<group>"; };
 		026BB3FB2E42A2A1009F33AB /* dydxTransferSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferSelectorView.swift; sourceTree = "<group>"; };
+		026BB44C2E430CD4009F33AB /* dydxDepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxDepositView.swift; sourceTree = "<group>"; };
 		02714C9C29E0C78600CC1C44 /* ChainsComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainsComboBox.swift; sourceTree = "<group>"; };
 		02714C9E29E0C7C500CC1C44 /* TokensComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensComboBox.swift; sourceTree = "<group>"; };
 		0272C86A2D4D670600123722 /* dydxSimpleUiMarketLaunchableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUiMarketLaunchableView.swift; sourceTree = "<group>"; };
@@ -1511,6 +1513,7 @@
 				023DB0A52D691E1400F15534 /* Components */,
 				023DB0882D69122900F15534 /* dydxInstantDepositView.swift */,
 				026BB3CD2E41599E009F33AB /* dydxTurnkeyDepositView.swift */,
+				026BB44C2E430CD4009F33AB /* dydxDepositView.swift */,
 			);
 			path = Deposit;
 			sourceTree = "<group>";
@@ -2887,6 +2890,7 @@
 				64A4DB7A296635BE008D8E20 /* dydxReceiptBuyingPowerView.swift in Sources */,
 				028DB33E2A0589270090BE58 /* dydxProfileHeaderView.swift in Sources */,
 				0232C03229AEF583006B2C51 /* dydxSyncDesktopView.swift in Sources */,
+				026BB44D2E430CD4009F33AB /* dydxDepositView.swift in Sources */,
 				64A4DB5F296620EE008D8E20 /* dydxTradeInputPostOnlyView.swift in Sources */,
 				0232C04029AEF866006B2C51 /* dydxWalletListItemView.swift in Sources */,
 				020948EE2D52D63C008FE753 /* Tooltip.swift in Sources */,

@@ -18,21 +18,13 @@ import dydxFormatter
 
 public class dydxDepositViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        if dydxBoolFeatureFlag.turnkey_ios.isEnabled {
-            let presenter = dydxTurnkeyDepositViewPresenter()
-            let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-            let viewController = dydxTurnkeyDepositViewController(presenter: presenter, view: view, configuration: .fullScreenSheet)
-            return viewController as? T
-        } else {
-            let presenter = dydxInstantDepositViewPresenter()
-            let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-            let viewController = dydxInstantDepositViewController(presenter: presenter, view: view, configuration: .fullScreenSheet)
-            return viewController as? T
-        }
+        let presenter = dydxDepositViewPresenter()
+        let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
+        return dydxDepositViewController(presenter: presenter, view: view, configuration: .fullScreenSheet) as? T
     }
 }
 
-private class dydxInstantDepositViewController: HostingViewController<PlatformView, dydxInstantDepositViewModel> {
+private class dydxDepositViewController: HostingViewController<PlatformView, dydxDepositViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/transfer/deposit" {
             Tracking.shared?.log(event: "NavigateDialog", data: ["type": "Deposit2"])
@@ -42,12 +34,40 @@ private class dydxInstantDepositViewController: HostingViewController<PlatformVi
     }
 }
 
-private class dydxTurnkeyDepositViewController: HostingViewController<PlatformView, dydxTurnkeyDepositViewModel> {
-    override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
-        if request?.path == "/transfer/deposit" {
-            Tracking.shared?.log(event: "NavigateDialog", data: ["type": "Deposit2"])
-            return true
-        }
-        return false
+private protocol dydxDepositViewPresenterProtocol: HostedViewPresenterProtocol {
+    var viewModel: dydxDepositViewModel? { get }
+}
+
+private class dydxDepositViewPresenter: HostedViewPresenter<dydxDepositViewModel>, dydxDepositViewPresenterProtocol {
+    private let instantPresenter = dydxInstantDepositViewPresenter()
+    private let turnkeyPresenter = dydxTurnkeyDepositViewPresenter()
+
+    override init() {
+        let viewModel = dydxDepositViewModel()
+
+        instantPresenter.$viewModel.assign(to: &viewModel.$instant)
+        turnkeyPresenter.$viewModel.assign(to: &viewModel.$turnkey)
+
+        super.init()
+
+        self.viewModel = viewModel
+    }
+
+    override func start() {
+        super.start()
+
+        AbacusStateManager.shared.state.walletState
+            .prefix(1)
+            .sink { [weak self]  walletState in
+                guard let self else { return }
+                if walletState.currentWallet?.walletId == "turnkey" {
+                    self.viewModel?.mode = .turnkey
+                    self.attachChild(worker: self.turnkeyPresenter)
+                } else {
+                    self.viewModel?.mode = .instant
+                    self.attachChild(worker: self.instantPresenter)
+                }
+            }
+            .store(in: &subscriptions)
     }
 }

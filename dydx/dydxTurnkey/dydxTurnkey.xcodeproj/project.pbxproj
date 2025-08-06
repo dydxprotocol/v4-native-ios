@@ -200,12 +200,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 025DFE992E31D5B00015E1D7 /* Products */;
-					ProjectRef = 025DFE742E3159150015E1D7 /* PlatformUI.xcodeproj */;
-				},
-				{
 					ProductGroup = 025DFE782E3159270015E1D7 /* Products */;
 					ProjectRef = 025DFE772E3159270015E1D7 /* PlatformUI.xcodeproj */;
+				},
+				{
+					ProductGroup = 025DFE992E31D5B00015E1D7 /* Products */;
+					ProjectRef = 025DFE742E3159150015E1D7 /* PlatformUI.xcodeproj */;
 				},
 				{
 					ProductGroup = 025D03FD2E31E47F0015E1D7 /* Products */;
