@@ -111,10 +111,7 @@ enum TransferChain: String {
 
     var supportedDepositTokenString: String {
         switch self {
-        case .Ethereum: return "ETH, USDC"
-        case .Optimism: return "ETH, USDC"
-        case .Arbitrum: return "ETH, USDC"
-        case .Base: return "ETH, USDC"
+        case .Ethereum, .Optimism, .Arbitrum, .Base: return "ETH, USDC"
         case .Polygon: return "POL, USDC"
         case .Solana: return "USDC"
         case .Avalanche: return "AVAX, USDC"
@@ -126,6 +123,36 @@ enum TransferChain: String {
         case .Ethereum: return DataLocalizer.localize(path: "APP.DEPOSIT_MODAL.FREE_ABOVE", params: ["AMOUNT": "$100"])
         default: return DataLocalizer.localize(path: "APP.GENERAL.FREE")
         }
+    }
+
+    var depositWarningString: String? {
+        let tokens: String
+        switch self {
+        case .Ethereum, .Optimism, .Arbitrum, .Base: tokens = "ETH " + DataLocalizer.localize(path: "APP.LEAGUES.AND") + " USDC"
+        case .Polygon: tokens =  "POL " + DataLocalizer.localize(path: "APP.LEAGUES.AND") + " USDC"
+        case .Solana: tokens = "USDC"
+        case .Avalanche: tokens =  "AVAX " + DataLocalizer.localize(path: "APP.LEAGUES.AND") + " USDC"
+        }
+
+        return DataLocalizer.localize(path: "APP.DEPOSIT_MODAL.TURNKEY_DEPOSIT_WARNING",
+                                      params: [
+                                       "TOKENS": tokens,
+                                       "NETWORK": self.rawValue
+                                      ])
+    }
+
+    var chainLogoUrl: String {
+        let logoName: String
+        switch self {
+        case .Ethereum: logoName = "ethereum.png"
+        case .Optimism: logoName = "optimism.png"
+        case .Arbitrum: logoName = "arbitrum.png"
+        case .Base: logoName = "base.png"
+        case .Polygon: logoName = "polygon.png"
+        case .Solana: logoName = "solana.png"
+        case .Avalanche: logoName = "avalanche.png"
+        }
+        return AbacusStateManager.shared.deploymentUri + "/chains/\(logoName)"
     }
 }
 
@@ -144,17 +171,7 @@ struct TransferTokenInfo: Equatable {
     var usdcAmount: Double?
 
     var chainLogoUrl: String {
-        let logoName: String
-        switch chain {
-        case .Ethereum: logoName = "ethereum.png"
-        case .Optimism: logoName = "optimism.png"
-        case .Arbitrum: logoName = "arbitrum.png"
-        case .Base: logoName = "base.png"
-        case .Polygon: logoName = "polygon.png"
-        case .Solana: logoName = "solana.png"
-        case .Avalanche: logoName = "avalanche.png"
-        }
-        return AbacusStateManager.shared.deploymentUri + "/chains/\(logoName)"
+        chain.chainLogoUrl
     }
 
     var tokenLogoUrl: String {

@@ -41,10 +41,8 @@ public struct ExpandableText: View {
     public init(text: String) {
         self.text = text
     }
+    
     public var body: some View {
-        
-      
-            
         ZStack(alignment: .bottomTrailing){
             Group {
                 if #available(iOS 15.0, *) {
