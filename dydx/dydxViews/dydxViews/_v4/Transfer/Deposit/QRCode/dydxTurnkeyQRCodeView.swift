@@ -79,7 +79,7 @@ public class dydxTurnkeyQRCodeViewModel: PlatformViewModel {
                     }
                     .frame(maxWidth: .infinity)
                 }
-                .frame(height: UIScreen.main.bounds.width / 2 + 8)
+                .frame(height: (UIScreen.main.bounds.width - 24 * 2) / 2)
                 .border(borderWidth: 1, cornerRadius: 8, borderColor: ThemeColor.SemanticColor.borderDefault.color)
 
                 if let address = self.address {
