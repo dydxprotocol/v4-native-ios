@@ -87,7 +87,7 @@ public class dydxTurnkeyDepositViewModel: PlatformViewModel {
     }
 
     private func createItemView(item: Item, style: ThemeStyle) -> some View {
-        let content =  HStack(spacing: 12) {
+        HStack(spacing: 12) {
             PlatformIconViewModel(type: .url(url: item.icon), clip: .circle(background: .transparent, spacing: 0), size: CGSize(width: 32, height: 32))
                 .createView(parentStyle: style)
 
@@ -117,13 +117,10 @@ public class dydxTurnkeyDepositViewModel: PlatformViewModel {
             .createView(parentStyle: style)
         }
         .padding(.vertical, 8)
-
-        return Button {
+        .themeColor(background: .layer2)
+        .onTapGesture {
             item.action()
-        } label: {
-            content
         }
-
     }
 }
 

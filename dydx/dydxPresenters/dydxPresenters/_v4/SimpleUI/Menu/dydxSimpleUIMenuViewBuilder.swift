@@ -89,7 +89,7 @@ private class dydxSimpleUIMenuViewPresenter: HostedViewPresenter<dydxSimpleUIMen
 
         let ethereumAddress = currentWallet?.ethereumAddress ?? ""
         if onboarded {
-            viewModel?.items = [alerts, history, settings, help, signOut(ethereumAddress: ethereumAddress)]
+            viewModel?.items = [accountItem(wallet: currentWallet), alerts, history, settings, help, signOut(ethereumAddress: ethereumAddress)]
         } else {
             viewModel?.items = [settings, help]
             viewModel?.depositAction = nil
@@ -124,6 +124,18 @@ private class dydxSimpleUIMenuViewPresenter: HostedViewPresenter<dydxSimpleUIMen
             title: DataLocalizer.localize(path: "APP.EMAIL_NOTIFICATIONS.SETTINGS")) { [weak self] in
                 self?.navigate(to: RoutingRequest(url: "/settings"), animated: true, completion: nil)
         }
+    }
+
+    private func accountItem(wallet: dydxWalletInstance?) -> dydxSimpleUIMenuViewModel.MenuItem {
+        dydxSimpleUIMenuViewModel.MenuItem(
+            icon: "icon_account",
+            title: DataLocalizer.localize(path: "APP.GENERAL.ACCOUNT")) { [weak self] in
+                if wallet?.walletId == "turnkey" {
+                    self?.navigate(to: RoutingRequest(path: "/profile/security"), animated: true, completion: nil)
+                } else {
+                    self?.navigate(to: RoutingRequest(path: "/wallets"), animated: true, completion: nil)
+                }
+            }
     }
 
     private var alerts: dydxSimpleUIMenuViewModel.MenuItem {

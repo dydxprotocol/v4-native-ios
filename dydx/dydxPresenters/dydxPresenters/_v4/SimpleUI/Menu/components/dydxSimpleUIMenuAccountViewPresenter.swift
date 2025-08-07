@@ -83,13 +83,6 @@ class dydxSimpleUIMenuAccountViewPresenter: HostedViewPresenter<dydxSimpleUIMenu
                                        error: nil, time: 3)
             }
         }
-        viewModel?.walletAction = {
-            if (wallets?.wallets.count ?? 0) > 0 {
-                Router.shared?.navigate(to: RoutingRequest(path: "/wallets"), animated: true, completion: nil)
-            } else {
-                Router.shared?.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)
-            }
-        }
 
         updateAddress()
     }

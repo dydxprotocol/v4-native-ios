@@ -19,7 +19,6 @@ public class dydxSimpleUIMenuAccountViewModel: PlatformViewModel {
     @Published public var address: String?
     @Published public var addressAction: (() -> Void)?
     @Published public var switchAction: (() -> Void)?
-    @Published public var walletAction: (() -> Void)?
     @Published public var addressType: AddressType = .dydx
 
     public init() { }
@@ -52,17 +51,6 @@ public class dydxSimpleUIMenuAccountViewModel: PlatformViewModel {
                     }
 
                     Spacer()
-
-                    Button {  [weak self] in
-                       self?.walletAction?()
-                    } label: {
-                        PlatformIconViewModel(type: .asset(name: "icon_drop_menu", bundle: Bundle.dydxView),
-                                              size: CGSize(width: 24, height: 24),
-                                              templateColor: .textTertiary)
-                        .createView(parentStyle: parentStyle)
-                    }
-                    .topAligned()
-                    .frame(maxHeight: 58)
                 }
 
                 HStack {

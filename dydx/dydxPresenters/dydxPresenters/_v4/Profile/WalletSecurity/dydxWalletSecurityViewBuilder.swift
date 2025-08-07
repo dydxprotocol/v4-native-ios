@@ -11,12 +11,14 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import dydxStateManager
+import Combine
 
 public class dydxWalletSecurityViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
         let presenter = dydxWalletSecurityViewPresenter()
         let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
-        return dydxWalletSecurityViewController(presenter: presenter, view: view, configuration: .default) as? T
+        return dydxWalletSecurityViewController(presenter: presenter, view: view, configuration: .fullScreenSheet) as? T
     }
 }
 
@@ -38,5 +40,24 @@ private class dydxWalletSecurityViewPresenter: HostedViewPresenter<dydxWalletSec
         super.init()
 
         viewModel = dydxWalletSecurityViewModel()
+        viewModel?.cancelAction = { [weak self] in
+            self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        }
+    }
+
+    override func start() {
+        super.start()
+
+        AbacusStateManager.shared.state.currentWallet
+            .sink { [weak self] wallet in
+                guard let wallet = wallet else {
+                    return
+                }
+                self?.viewModel?.email = wallet.userEmail
+                if let loginMethod = wallet.loginMethod {
+                    self?.viewModel?.loginMethod = dydxWalletSecurityViewModel.LoginMethod(rawValue: loginMethod) ?? .email
+                }
+            }
+            .store(in: &subscriptions)
     }
 }
