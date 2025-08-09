@@ -43,6 +43,9 @@ private class dydxWalletSecurityViewPresenter: HostedViewPresenter<dydxWalletSec
         viewModel?.cancelAction = { [weak self] in
             self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }
+        viewModel?.loginAction = { [weak self] in
+            self?.navigate(to: RoutingRequest(path: "/onboard/turnkey"), animated: true, completion: nil)
+        }
     }
 
     override func start() {
@@ -53,11 +56,32 @@ private class dydxWalletSecurityViewPresenter: HostedViewPresenter<dydxWalletSec
                 guard let wallet = wallet else {
                     return
                 }
-                self?.viewModel?.email = wallet.userEmail
-                if let loginMethod = wallet.loginMethod {
-                    self?.viewModel?.loginMethod = dydxWalletSecurityViewModel.LoginMethod(rawValue: loginMethod) ?? .email
-                }
+                self?.updateViewModel(wallet: wallet)
             }
             .store(in: &subscriptions)
+    }
+
+    private func updateViewModel(wallet: dydxWalletInstance) {
+        viewModel?.email = wallet.userEmail
+        if let loginMethod = wallet.loginMethod {
+            viewModel?.loginMethod = dydxWalletSecurityViewModel.LoginMethod(rawValue: loginMethod) ?? .email
+        }
+        viewModel?.sourceAddress = wallet.ethereumAddress
+        viewModel?.dydxAddress = wallet.cosmoAddress
+        viewModel?.exportSourceAction = { [weak self] in
+            guard let mnemonic = wallet.mnemonic else {
+                return
+            }
+            let params = ["mnemonic": mnemonic]
+            self?.navigate(to: RoutingRequest(path: "/my-profile/keyexport", params: params as [String: Any]), animated: true, completion: nil)
+        }
+
+        viewModel?.exportDydxAction = { [weak self] in
+            guard let mnemonic = wallet.sourceWalletMnemonic else {
+                return
+            }
+            let params = ["mnemonic": mnemonic]
+            self?.navigate(to: RoutingRequest(path: "/my-profile/keyexport", params: params as [String: Any]), animated: true, completion: nil)
+        }
     }
 }

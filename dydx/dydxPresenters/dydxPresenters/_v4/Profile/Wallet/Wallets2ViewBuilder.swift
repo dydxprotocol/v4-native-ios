@@ -119,7 +119,11 @@ private class Wallets2ViewPresenter: HostedViewPresenter<Wallets2ViewModel> {
             }
 
             viewModel.exportSecretPhraseTapped = {
-                Router.shared?.navigate(to: RoutingRequest(url: "/my-profile/keyexport"), animated: true, completion: nil)
+                guard let mnemonic = walletState.currentWallet?.mnemonic else {
+                    return
+                }
+                let params = ["mnemonic": mnemonic]
+                Router.shared?.navigate(to: RoutingRequest(path: "/my-profile/keyexport", params: params as [String: Any]), animated: true, completion: nil)
             }
 
             if wallet.walletId == "google" {

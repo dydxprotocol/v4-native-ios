@@ -36,7 +36,7 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
     private let appleSignIn = AppleSignInManager()
 
     init() {
-        guard let appScheme = Bundle.main.scheme else {
+        guard let appScheme = Bundle.main.scheme, appScheme != "{APP_SCHEME}" else {
             fatalError((#file as NSString).lastPathComponent + ": Bundle.main.scheme is nil")
         }
         let initialProperties: [String: Any] = [
@@ -126,6 +126,7 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
                                                              dydxMnemonic: dydxMnemonic,
                                                              svmAddress: svmAddress,
                                                              avalancheAddress: nil,
+                                                             sourceWalletMnemonic: mnemonics,
                                                              loginMethod: loginMethod,
                                                              userEmail: userEmail)
                     dydxOnboardCompletion.finish(walletInstance: nil, result: result)

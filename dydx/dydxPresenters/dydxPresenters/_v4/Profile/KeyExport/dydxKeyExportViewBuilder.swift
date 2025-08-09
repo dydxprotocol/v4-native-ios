@@ -25,6 +25,9 @@ public class dydxKeyExportViewBuilder: NSObject, ObjectBuilderProtocol {
 private class dydxKeyExportViewController: HostingViewController<PlatformView, dydxKeyExportViewModel> {
     override public func arrive(to request: RoutingRequest?, animated: Bool) -> Bool {
         if request?.path == "/my-profile/keyexport" {
+            if let presenter = self.presenter as? dydxKeyExportViewPresenter {
+                presenter.mnemonic = request?.params?["mnemonic"] as? String
+            }
             return true
         }
         return false
@@ -36,6 +39,8 @@ private protocol dydxKeyExportViewPresenterProtocol: HostedViewPresenterProtocol
 }
 
 private class dydxKeyExportViewPresenter: HostedViewPresenter<dydxKeyExportViewModel>, dydxKeyExportViewPresenterProtocol {
+    @Published var mnemonic: String?
+
     override init() {
         super.init()
 
@@ -45,12 +50,8 @@ private class dydxKeyExportViewPresenter: HostedViewPresenter<dydxKeyExportViewM
     override func start() {
         super.start()
 
-        AbacusStateManager.shared.state.walletState
-            .sink { [weak self] walletState in
-                guard let mnemonic = walletState.currentWallet?.mnemonic else {
-                    return
-                }
-
+        $mnemonic
+            .sink { [weak self] mnemonic in
                 self?.viewModel?.phrase = mnemonic
                 self?.viewModel?.copyAction = {
                     let pasteboard = UIPasteboard.general
