@@ -21,6 +21,7 @@ public class dydxWalletSecurityViewModel: PlatformViewModel {
     @Published public var exportDydxAction: (() -> Void)?
     @Published public var sourceAddress: String?
     @Published public var dydxAddress: String?
+    @Published public var showBackbutton: Bool = false
 
     public init() { }
 
@@ -40,8 +41,10 @@ public class dydxWalletSecurityViewModel: PlatformViewModel {
                 VStack(alignment: .leading, spacing: 24) {
                     ZStack {
                         HStack {
-                            ChevronBackButtonModel(onBackButtonTap: self.cancelAction ?? {})
-                                .createView(parentStyle: style)
+                            if self.showBackbutton {
+                                ChevronBackButtonModel(onBackButtonTap: self.cancelAction ?? {})
+                                    .createView(parentStyle: style)
+                            }
 
                             Spacer()
                         }

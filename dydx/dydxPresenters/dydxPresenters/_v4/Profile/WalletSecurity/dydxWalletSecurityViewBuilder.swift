@@ -29,6 +29,18 @@ private class dydxWalletSecurityViewController: HostingViewController<PlatformVi
         }
         return false
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if let presenter = presenter as? dydxWalletSecurityViewPresenter {
+            presenter.isPushed = isPushed
+        }
+    }
+
+    private var isPushed: Bool {
+        navigationController?.viewControllers.firstIndex(of: self) ?? 0 > 0
+    }
 }
 
 private protocol dydxWalletSecurityViewPresenterProtocol: HostedViewPresenterProtocol {
@@ -36,6 +48,12 @@ private protocol dydxWalletSecurityViewPresenterProtocol: HostedViewPresenterPro
 }
 
 private class dydxWalletSecurityViewPresenter: HostedViewPresenter<dydxWalletSecurityViewModel>, dydxWalletSecurityViewPresenterProtocol {
+    var isPushed: Bool = true {
+        didSet {
+            viewModel?.showBackbutton = isPushed
+        }
+    }
+
     override init() {
         super.init()
 

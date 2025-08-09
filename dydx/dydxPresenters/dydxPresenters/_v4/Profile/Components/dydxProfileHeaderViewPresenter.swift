@@ -32,7 +32,12 @@ class dydxProfileHeaderViewPresenter: HostedViewPresenter<dydxProfileHeaderViewM
                 .prefix(1)
                 .sink { walletState in
                     if walletState.wallets.count > 0 {
-                        Router.shared?.navigate(to: RoutingRequest(path: "/wallets"), animated: true, completion: nil)
+                        let walletId = walletState.wallets.first?.walletId
+                        if walletId == "turnkey" {
+                            Router.shared?.navigate(to: RoutingRequest(path: "/profile/security"), presentation: .prompt, animated: true, completion: nil)
+                        } else {
+                            Router.shared?.navigate(to: RoutingRequest(path: "/wallets"), animated: true, completion: nil)
+                        }
                     } else {
                         Router.shared?.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)
                     }

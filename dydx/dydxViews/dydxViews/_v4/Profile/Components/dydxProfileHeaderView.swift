@@ -37,7 +37,7 @@ public class dydxProfileHeaderViewModel: PlatformViewModel {
                                                      size: .init(width: 14, height: 8),
                                                      templateColor: .textTertiary)
             let manageWalletButton = HStack(spacing: 9) {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.MANAGE_WALLET"))
+                    Text(DataLocalizer.localize(path: "APP.GENERAL.ACCOUNT"))
                     .themeFont(fontSize: .small)
                     .themeColor(foreground: .textTertiary)
                     dropDownIcon.createView(parentStyle: parentStyle)
