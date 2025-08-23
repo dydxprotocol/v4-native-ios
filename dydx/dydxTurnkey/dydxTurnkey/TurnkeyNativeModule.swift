@@ -22,17 +22,22 @@ class TurnkeyNativeModule: NSObject, RCTBridgeModule {
 
     private var pendingCompletions: [String: (String) -> Void] = [:]
 
-    func callMyJsFunction(completion: @escaping (String) -> Void) {
+    func callMyJsFunction(functionName: String,
+                          params: [String: String] = [:],
+                          completion: @escaping (String) -> Void) {
         let bridge = TurnkeyBridgeManager.shared.bridge
         let callbackId = UUID().uuidString
 
         // Store completion for callback correlation
         pendingCompletions[callbackId] = completion
 
+        var params = params
+        params["callbackId"] = callbackId
+
         bridge.enqueueJSCall(
           "RCTDeviceEventEmitter",
           method: "emit",
-          args: ["NativeToJsRequest", ["callbackId": callbackId]],
+          args: [functionName, params],
           completion: nil
         )
     }

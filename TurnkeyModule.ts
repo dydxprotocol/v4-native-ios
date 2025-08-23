@@ -10,6 +10,8 @@ interface TurnkeyNativeModuleType {
   onAuthCompleted: (onboardingSignature: string, evmAddress: string, svmAddress: string, mnemonics: string, loginMethod: string, userEmail: string | undefined) => void;
 
   onAppleAuthRequest: (nonce: string) => void;
+
+  onUploadDydxAddressUploadResponse: (dydxAddress: string, result: string) => void;
 }
 
 // Safely cast NativeModules
@@ -31,3 +33,7 @@ export interface EmailTokenReceivedEvent {
   token: string;
 }
 
+export interface DydxAddressReceivedEvent {
+  callbackId: string;
+  dydxAddress: string;
+}

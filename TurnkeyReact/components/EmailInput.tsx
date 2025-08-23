@@ -11,6 +11,7 @@ import { EmbeddedKeyAndNonce } from "./useEmbeddedKeyAndNonce";
 import { Button } from "./ui/button";
 import { OtpType } from "../lib/types";
 import { currentTheme } from "../../rn_style/themes/currentTheme";
+import { DydxTurnkeySession } from "../providers/dydxTurnkeySession";
 
 interface EmailInputProps {
   embeddedKeyAndNonce: EmbeddedKeyAndNonce;
@@ -24,7 +25,7 @@ export const EmailInput = ({
   const { initOtpLogin, completeOtpAuth, state } = useAuthRelay();
   const [email, setEmail] = useState<string>('');
   const [isValidEmail, setIsValidEmail] = useState<boolean>(false);
-
+  const [session, setSession] = useState<DydxTurnkeySession | undefined>(undefined);
   const styles = useThemedStyles(currentTheme);
 
   useEffect(() => {
@@ -32,12 +33,13 @@ export const EmailInput = ({
     DeviceEventEmitter.addListener(
       'EmailTokenReceived',
       async ({ token }: EmailTokenReceivedEvent) => {
-        completeOtpAuth({
+        const session = await completeOtpAuth({
           otpType: "email",
           token: token,
-          embeddedKeyAndNonce: embeddedKeyAndNonce,
           configs: configs,
         });
+
+        setSession(session);
 
         await embeddedKeyAndNonce.refreshNonce();
       }

@@ -43,7 +43,7 @@ public class TurnkeyBridgeManager {
     private let module = TurnkeyNativeModule()
 
     public func testFunction() {
-        module.callMyJsFunction { result in
+        module.callMyJsFunction(functionName: "NativeToJsRequest") { result in
             print("Result: \(result)")
         }
     }
@@ -64,5 +64,16 @@ public class TurnkeyBridgeManager {
           args: ["EmailTokenReceived", ["token": token]],
           completion: nil
         )
+    }
+
+    public func uploadDydxAddress(dydxAddress: String, callback: @escaping (Bool, String?) -> Void) {
+        module.callMyJsFunction(functionName: "DydxAddressReceived",
+                                params: ["dydxAddress": dydxAddress]) { result in
+            if result == "success" {
+                callback(true, nil)
+            } else {
+                callback(false, result)
+            }
+        }
     }
 }

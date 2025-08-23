@@ -15,6 +15,7 @@ import {
 import { getValueWithKey, setValueWithKey } from "../lib/store";
 import { STORAGE_KEY } from "../lib/constants";
 import { jwtDecode } from 'jwt-decode';
+import { useState } from 'react';
 
 type AuthActionType =
   | { type: "PASSKEY"; payload: User }
@@ -84,29 +85,53 @@ export type OtpAuthRequest = {
 export type OtpAuthComplete = {
   otpType: string;
   token: string;
-  embeddedKeyAndNonce: EmbeddedKeyAndNonce;
+  configs: TurnkeyConfigs;
+};
+
+export type UploadDydxAddressRequest = {
+  dydxSession: DydxTurnkeySession;
+  dydxAddress: string;
   configs: TurnkeyConfigs;
 };
 
 export interface AuthRelayProviderType {
   state: AuthState;
   initOtpLogin: (params: OtpAuthRequest) => Promise<void>;
-  completeOtpAuth: (params: OtpAuthComplete) => Promise<void>;
+  completeOtpAuth: (params: OtpAuthComplete) => Promise<DydxTurnkeySession | undefined>;
   signUpWithPasskey: () => Promise<void>;
   loginWithPasskey: () => Promise<void>;
-  loginWithOAuth: (params: OAuthRequest) => Promise<void>;
+  loginWithOAuth: (params: OAuthRequest) => Promise<DydxTurnkeySession | undefined>;
   clearError: () => void;
+  uploadDydxAddress: (params: UploadDydxAddressRequest) => Promise<void>;
 }
 
 export const AuthRelayContext = createContext<AuthRelayProviderType>({
   state: initialState,
   initOtpLogin: async () => Promise.resolve(),
-  completeOtpAuth: async () => Promise.resolve(),
+  completeOtpAuth: async () => Promise.resolve(undefined),
   signUpWithPasskey: async () => Promise.resolve(),
   loginWithPasskey: async () => Promise.resolve(),
-  loginWithOAuth: async () => Promise.resolve(),
+  loginWithOAuth: async () => Promise.resolve(undefined),
   clearError: () => { },
+  uploadDydxAddress: async () => Promise.resolve(),
 });
+
+type SendSignInRequestParams = {
+  headers: HeadersInit;
+  body: string;
+  embeddedKeyAndNonce: EmbeddedKeyAndNonce;
+  configs: TurnkeyConfigs;
+  loginMethod: LoginMethod;
+  providerName?: string;
+  userEmail?: string;
+};
+
+type OnboardDydxParams = {
+  dydxSession: DydxTurnkeySession;
+  salt: string;
+  loginMethod: string;
+  userEmail?: string;
+};
 
 interface AuthRelayProviderProps {
   children: ReactNode;
@@ -135,23 +160,33 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       'Accept': 'application/json'
     };
 
-    sendSignInRequest(headers, JSON.stringify(inputBody), embeddedKeyAndNonce, configs, LoginMethod.Email, contact);
+    sendSignInRequest({
+      headers: headers,
+      body: JSON.stringify(inputBody),
+      embeddedKeyAndNonce,
+      configs,
+      loginMethod: LoginMethod.Email,
+      providerName: undefined,
+      userEmail: contact
+    });
   };
 
   const completeOtpAuth = async ({
+    otpType,
     token,
-    embeddedKeyAndNonce,
     configs,
-  }: OtpAuthComplete) => {
+  }: OtpAuthComplete): Promise<DydxTurnkeySession | undefined>  => {
     dispatch({ type: "LOADING", payload: LoginMethod.Email });
     try {
-      const privateKey = decryptCredentialBundle(token, embeddedKeyAndNonce.privateKey!);
+      const deleteKey = true; // Set to true to delete the key after use
+      const decryptKey = await getValueWithKey(deleteKey, STORAGE_KEY.PRIVATE_KEY);
+      if (!decryptKey) {
+        throw new Error("No private decrypt key found in storage");
+      }
+
+      const privateKey = decryptCredentialBundle(token, decryptKey);
       const publicKey = uint8ArrayToHexString(getPublicKey(privateKey));
 
-      console.log("Decrypted bundle private key:", privateKey);
-      console.log("Decrypted bundle public key:", publicKey);
-
-      const deleteKey = true; // Set to true to delete the key after use
       const salt = await getValueWithKey(deleteKey, STORAGE_KEY.EMAIL_SALT)
       if (!salt) {
         throw new Error("No salt found in storage");
@@ -173,7 +208,14 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         privateKey, publicKey, configs, organizationId, userId
       )
 
-      onboardDydx(dydxSession, salt, LoginMethod.Email, userEmail);
+      await onboardDydx({
+        dydxSession,
+        salt,
+        loginMethod: LoginMethod.Email,
+        userEmail
+      });
+
+      return Promise.resolve(dydxSession);
 
     } catch (error: any) {
       console.error("Error decrypting credential bundle:", error);
@@ -197,7 +239,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     providerName,
     embeddedKeyAndNonce,
     configs,
-  }: OAuthRequest) => {
+  }: OAuthRequest): Promise<DydxTurnkeySession | undefined> => {
     type GoogleIdTokenPayload = {
       email?: string;
       email_verified?: boolean;
@@ -216,18 +258,27 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       'Accept': 'application/json'
     };
 
-    sendSignInRequest(headers, JSON.stringify(inputBody), embeddedKeyAndNonce, configs, LoginMethod.OAuth, providerName, decoded.email);
+    const result = await sendSignInRequest({
+      headers: headers,
+      body: JSON.stringify(inputBody),
+      embeddedKeyAndNonce,
+      configs,
+      loginMethod: LoginMethod.OAuth,
+      providerName,
+      userEmail: decoded.email
+    });
+    return Promise.resolve(result);
   };
 
-  const sendSignInRequest = async (
-    headers: HeadersInit,
-    body: string,
-    embeddedKeyAndNonce: EmbeddedKeyAndNonce,
-    configs: TurnkeyConfigs,
-    loginMethod: LoginMethod,
-    providerName?: string,
-    userEmail?: string,
-  ) => {
+  const sendSignInRequest = async ({
+    headers,
+    body,
+    embeddedKeyAndNonce,
+    configs,
+    loginMethod,
+    providerName,
+    userEmail,
+  }: SendSignInRequestParams): Promise<DydxTurnkeySession | undefined>  => {
     dispatch({ type: "LOADING", payload: loginMethod });
     try {
       const response = await fetch(`${configs.backendApiUrl}/v4/turnkey/signin`, {
@@ -242,14 +293,17 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         throw new Error(`Backend Error: ${errorMsg}`);
       }
 
-      if (loginMethod === LoginMethod.OAuth) {
-        handleOauthResponse(response, embeddedKeyAndNonce, configs, providerName, userEmail);
+      if (loginMethod === LoginMethod.OAuth && providerName !== undefined) {
+        const result = await handleOauthResponse(response, embeddedKeyAndNonce, configs, providerName, userEmail);
+        return Promise.resolve(result);
       } else if (loginMethod === LoginMethod.Email && userEmail !== undefined) {
-        handleEmailResponse(response, embeddedKeyAndNonce, configs, "email", userEmail);
+        await handleEmailResponse(response, embeddedKeyAndNonce, configs, "email", userEmail);
+        return Promise.resolve(undefined);
       }
+      return Promise.resolve(undefined);
 
     } catch (error: any) {
-      console.error("Error during sign-in:", error);
+      console.error("Error during sign-in: ", error, error.message);
       dispatch({ type: "ERROR", payload: error.message });
     } finally {
       dispatch({ type: "LOADING", payload: null });
@@ -262,7 +316,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     configs: TurnkeyConfigs,
     loginMethod: string,
     userEmail?: string,
-  ) => {
+  ): Promise<DydxTurnkeySession | undefined> => {
     const salt = response.salt;
     if (!salt) {
       throw new Error("No salt provided in response");
@@ -278,15 +332,18 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       configs
     );
 
-    onboardDydx(dydxSession, salt, loginMethod, userEmail);
+    await onboardDydx({ dydxSession, salt, loginMethod, userEmail });
+    return Promise.resolve(dydxSession);
   }
 
-  const onboardDydx = async (
-    dydxSession: DydxTurnkeySession,
-    salt: string,
-    loginMethod: string,
-    userEmail?: string,
-  ) => {
+  const onboardDydx = async ({
+    dydxSession,
+    salt,
+    loginMethod,
+    userEmail,
+  }: OnboardDydxParams) => {
+   // const [session, setSession] = useState<DydxTurnkeySession | undefined>(undefined);
+
     const accounts = await dydxSession.loadWalletAccounts();
 
     // get the eth account
@@ -308,7 +365,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     if (!mnemonics) {
       throw new Error("Unable to export wallet mnemonics");
     }
-
+    
     TurnkeyNativeModule.onAuthCompleted(
       signed,
       ethAccount.address,
@@ -345,11 +402,67 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     setValueWithKey(STORAGE_KEY.ORGANIZATION_ID, organizationId);
     setValueWithKey(STORAGE_KEY.USER_ID, userId);
     setValueWithKey(STORAGE_KEY.EMAIL, userEmail);
+    if (embeddedKeyAndNonce.privateKey) {
+      setValueWithKey(STORAGE_KEY.PRIVATE_KEY, embeddedKeyAndNonce.privateKey);
+    }
   }
 
   const clearError = () => {
     dispatch({ type: "CLEAR_ERROR" });
   };
+
+  const uploadDydxAddress = async ({
+    dydxSession,
+    dydxAddress,
+    configs,
+  }: UploadDydxAddressRequest) => {
+    //const [session, setSession] = useState<DydxTurnkeySession | undefined>(undefined);
+    const session = dydxSession;
+
+    if (session == undefined) {
+      throw new Error("No active session found");
+    }
+    const accounts = await session.loadWalletAccounts();
+
+    // get the eth account
+    const ethAccount = accounts.accounts.find((account) => account.addressFormat === "ADDRESS_FORMAT_ETHEREUM");
+    if (!ethAccount) {
+      throw new Error("No Ethereum account found in wallet accounts");
+    }
+
+    const signature = await session.signUploadAddressMessage(ethAccount.address, dydxAddress);
+
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    }
+    const body = JSON.stringify({
+      dydxAddress,
+      signature
+    });
+
+    try {
+      const response = await fetch(`${configs.backendApiUrl}/v4/turnkey/uploadAddress`, {
+        method: "POST",
+        headers: headers,
+        body: body,
+      }).then((res) => res.json());
+
+      if (response.errors && Array.isArray(response.errors)) {
+        // Handle API-reported errors
+        const errorMsg = response.errors.map((e: { msg: any; }) => e.msg).join(", ");
+        throw new Error(`Backend Error: ${errorMsg}`);
+      }
+
+      // TODO(turnkey): handle policy returned in response
+
+    } catch (error: any) {
+      console.error("Error during sign-in: ", error, error.message);
+      dispatch({ type: "ERROR", payload: error.message });
+    } finally {
+      dispatch({ type: "LOADING", payload: null });
+    }
+  }
 
   return (
     <AuthRelayContext.Provider
@@ -361,6 +474,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         loginWithPasskey,
         loginWithOAuth,
         clearError,
+        uploadDydxAddress
       }}
     >
       {children}

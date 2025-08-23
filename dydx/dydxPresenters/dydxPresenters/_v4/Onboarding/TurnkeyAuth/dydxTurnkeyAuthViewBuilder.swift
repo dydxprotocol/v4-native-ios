@@ -119,17 +119,25 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
                let dydxMnemonic = self?.parser.asString(resultObject["mnemonic"]),
                let cosmoAddress = self?.parser.asString(resultObject["address"]) {
 
-                Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
-                    let result = dydxWalletSetup.SetupResult(ethereumAddress: evmAddress,
-                                                             walletId: "turnkey",
-                                                             cosmoAddress: cosmoAddress,
-                                                             dydxMnemonic: dydxMnemonic,
-                                                             svmAddress: svmAddress,
-                                                             avalancheAddress: nil,
-                                                             sourceWalletMnemonic: mnemonics,
-                                                             loginMethod: loginMethod,
-                                                             userEmail: userEmail)
-                    dydxOnboardCompletion.finish(walletInstance: nil, result: result)
+                TurnkeyBridgeManager.shared.uploadDydxAddress(dydxAddress: cosmoAddress) { success, error in
+                    guard success else {
+                        ErrorInfo.shared?.info(title: "Error",
+                                               message: "Address uppload failed: " + (error ?? ""),
+                                               type: .error, error: nil)
+                        return
+                    }
+                    Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+                        let result = dydxWalletSetup.SetupResult(ethereumAddress: evmAddress,
+                                                                 walletId: "turnkey",
+                                                                 cosmoAddress: cosmoAddress,
+                                                                 dydxMnemonic: dydxMnemonic,
+                                                                 svmAddress: svmAddress,
+                                                                 avalancheAddress: nil,
+                                                                 sourceWalletMnemonic: mnemonics,
+                                                                 loginMethod: loginMethod,
+                                                                 userEmail: userEmail)
+                        dydxOnboardCompletion.finish(walletInstance: nil, result: result)
+                    }
                 }
             } else {
                 ErrorInfo.shared?.info(title: "Error", message: "deriveCosmosKey failed", type: .error, error: nil)

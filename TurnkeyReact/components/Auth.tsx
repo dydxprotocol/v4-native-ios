@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   TouchableOpacity,
   ScrollView,
+  DeviceEventEmitter,
 } from 'react-native';
 import { Text } from './ui/text';
 import { TurnkeyConfigs } from '../sharedConfigs';
@@ -11,12 +12,13 @@ import { OAuthInput } from './OAuthInput';
 import { EmailInput } from './EmailInput';
 import { useThemedStyles } from '../turnkeyStyle';
 import { LoginMethod } from '../lib/types';
-import { TurnkeyNativeModule } from '../../TurnkeyModule';
+import { DydxAddressReceivedEvent, TurnkeyNativeModule } from '../../TurnkeyModule';
 import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
 import { Image } from 'react-native';
 import { currentTheme } from '../../rn_style/themes/currentTheme';
+import { DydxTurnkeySession } from '../providers/dydxTurnkeySession';
 
-  
+
 const renderError = () => {
   const {
     state,
@@ -35,8 +37,36 @@ const renderError = () => {
 export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
   const {
     loginWithOAuth,
+    uploadDydxAddress,
   } = useAuthRelay();
 
+ const [session, setSession] = useState<DydxTurnkeySession | undefined>(undefined);
+
+  useEffect(() => {
+    DeviceEventEmitter.removeAllListeners('DydxAddressReceived');
+    DeviceEventEmitter.addListener(
+      'DydxAddressReceived',
+      async ({ callbackId, dydxAddress }: DydxAddressReceivedEvent) => {
+        if (!session) {
+          console.error("No DYDX session available");
+          TurnkeyNativeModule.onJsResponse(callbackId, "failed: No DYDX session available");
+          return;
+        }
+
+        try {
+          await uploadDydxAddress({ 
+            dydxSession: session,
+            dydxAddress: dydxAddress,
+            configs: configs,
+          })
+           TurnkeyNativeModule.onJsResponse(callbackId, "success");
+        } catch (error) {
+          console.error("Error uploading dydx address:", error);
+          TurnkeyNativeModule.onJsResponse(callbackId, "failed: " + error);
+        }
+      }
+    );
+  });
 
   const styles = useThemedStyles(currentTheme);
 
@@ -63,7 +93,10 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
           {/* Social icons row */}
           <View style={styles.socialRow}>
             <OAuthInput
-              onSuccess={loginWithOAuth}
+              onSuccess={async (params) => {
+                const session = await loginWithOAuth(params);
+                setSession(session);
+              }}
               configs={configs}
               embeddedKeyAndNonce={oAuthEmbeddedKeyAndNonce} />
           </View>
@@ -131,7 +164,7 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
             <Text style={styles.actionButtonText}>{configs.strings["APP.TURNKEY_ONBOARD.SIGN_IN_WALLET"]}</Text>
             <Image
               source={require('../../rn_style/assets/chevron_right.png')}
-              style={{ height: 10, tintColor: currentTheme.colors.textTertiary}}
+              style={{ height: 10, tintColor: currentTheme.colors.textTertiary }}
               resizeMode="contain"
             />
           </TouchableOpacity>
