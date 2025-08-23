@@ -12,7 +12,7 @@ import { OAuthInput } from './OAuthInput';
 import { EmailInput } from './EmailInput';
 import { useThemedStyles } from '../turnkeyStyle';
 import { LoginMethod } from '../lib/types';
-import { DydxAddressReceivedEvent, TurnkeyNativeModule } from '../../TurnkeyModule';
+import { DydxAddressReceivedEvent, EmailTokenReceivedEvent, TurnkeyNativeModule } from '../../TurnkeyModule';
 import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
 import { Image } from 'react-native';
 import { currentTheme } from '../../rn_style/themes/currentTheme';
@@ -38,9 +38,13 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
   const {
     loginWithOAuth,
     uploadDydxAddress,
+    completeOtpAuth,
   } = useAuthRelay();
 
- const [session, setSession] = useState<DydxTurnkeySession | undefined>(undefined);
+  const [session, setSession] = useState<DydxTurnkeySession | undefined>(undefined);
+
+  const oAuthEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.OAuth);
+  const emailEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.Email);
 
   useEffect(() => {
     DeviceEventEmitter.removeAllListeners('DydxAddressReceived');
@@ -54,12 +58,12 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
         }
 
         try {
-          await uploadDydxAddress({ 
+          await uploadDydxAddress({
             dydxSession: session,
             dydxAddress: dydxAddress,
             configs: configs,
           })
-           TurnkeyNativeModule.onJsResponse(callbackId, "success");
+          TurnkeyNativeModule.onJsResponse(callbackId, "success");
         } catch (error) {
           console.error("Error uploading dydx address:", error);
           TurnkeyNativeModule.onJsResponse(callbackId, "failed: " + error);
@@ -68,10 +72,25 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
     );
   });
 
-  const styles = useThemedStyles(currentTheme);
+  useEffect(() => {
+    DeviceEventEmitter.removeAllListeners('EmailTokenReceived');
+    DeviceEventEmitter.addListener(
+      'EmailTokenReceived',
+      async ({ token }: EmailTokenReceivedEvent) => {
+        const session = await completeOtpAuth({
+          otpType: "email",
+          token: token,
+          configs: configs,
+        });
 
-  const oAuthEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.OAuth);
-  const emailEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.Email);
+        setSession(session);
+
+        await emailEmbeddedKeyAndNonce.refreshNonce();
+      }
+    );
+  }, [emailEmbeddedKeyAndNonce]);
+
+  const styles = useThemedStyles(currentTheme);
 
   return (
     <ScrollView

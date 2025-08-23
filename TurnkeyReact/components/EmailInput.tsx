@@ -28,23 +28,23 @@ export const EmailInput = ({
   const [session, setSession] = useState<DydxTurnkeySession | undefined>(undefined);
   const styles = useThemedStyles(currentTheme);
 
-  useEffect(() => {
-    DeviceEventEmitter.removeAllListeners('EmailTokenReceived');
-    DeviceEventEmitter.addListener(
-      'EmailTokenReceived',
-      async ({ token }: EmailTokenReceivedEvent) => {
-        const session = await completeOtpAuth({
-          otpType: "email",
-          token: token,
-          configs: configs,
-        });
+  // useEffect(() => {
+  //   DeviceEventEmitter.removeAllListeners('EmailTokenReceived');
+  //   DeviceEventEmitter.addListener(
+  //     'EmailTokenReceived',
+  //     async ({ token }: EmailTokenReceivedEvent) => {
+  //       const session = await completeOtpAuth({
+  //         otpType: "email",
+  //         token: token,
+  //         configs: configs,
+  //       });
 
-        setSession(session);
+  //       setSession(session);
 
-        await embeddedKeyAndNonce.refreshNonce();
-      }
-    );
-  }, [embeddedKeyAndNonce]);
+  //       await embeddedKeyAndNonce.refreshNonce();
+  //     }
+  //   );
+  // }, [embeddedKeyAndNonce]);
 
   const [checkEmailModalVisible, setCheckEmailModalVisible] = useState(false);
   const [showResendButton, setShowResendButton] = useState(false);
