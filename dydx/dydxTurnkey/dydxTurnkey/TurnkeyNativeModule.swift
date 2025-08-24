@@ -45,7 +45,9 @@ class TurnkeyNativeModule: NSObject, RCTBridgeModule {
     @objc(onJsResponse::)
     func onJsResponse(_ callbackId: String, _ result: String) {
         if let completion = pendingCompletions[callbackId] {
-            completion(result)
+            DispatchQueue.main.async {
+                completion(result)
+            }
             pendingCompletions.removeValue(forKey: callbackId)
         }
     }

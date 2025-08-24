@@ -365,7 +365,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     if (!mnemonics) {
       throw new Error("Unable to export wallet mnemonics");
     }
-    
+
     TurnkeyNativeModule.onAuthCompleted(
       signed,
       ethAccount.address,
@@ -438,7 +438,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     }
     const body = JSON.stringify({
       dydxAddress,
-      signature
+      signature: "0x" + signature
     });
 
     try {
@@ -459,6 +459,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     } catch (error: any) {
       console.error("Error during sign-in: ", error, error.message);
       dispatch({ type: "ERROR", payload: error.message });
+      throw error;
     } finally {
       dispatch({ type: "LOADING", payload: null });
     }

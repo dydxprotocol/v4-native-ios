@@ -17,6 +17,7 @@ import React_RCTAppDelegate
 import dydxTurnkey
 import dydxCartera
 import dydxViews
+import dydxStateManager
 
 public struct OnboardingLandingRoute {
     static var value: String {
@@ -39,15 +40,22 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
         guard let appScheme = Bundle.main.scheme, appScheme != "{APP_SCHEME}" else {
             fatalError((#file as NSString).lastPathComponent + ": Bundle.main.scheme is nil")
         }
+        guard let googleClientId = CredientialConfig.shared.credential(for: "googleClientId") else {
+            fatalError((#file as NSString).lastPathComponent + ": googleClientId is missing")
+        }
+        guard let turnkeyOrgId = CredientialConfig.shared.credential(for: "turnkeyOrgId") else {
+            fatalError((#file as NSString).lastPathComponent + ": turnkeyOrgId is missing")
+        }
+        guard let indexerUrl = AbacusStateManager.shared.environment?.endpoints.indexers?.first?.api else {
+            fatalError((#file as NSString).lastPathComponent + ": indexerUrl is missing")
+        }
+
         let initialProperties: [String: Any] = [
-            // From https://console.cloud.google.com/auth/clients?inv=1&invt=Ab1olg&project=dydx-v4
-            "googleClientId": "441463123744-a02e7s84okic2ggqgdo7e7hlgpvkj3p8.apps.googleusercontent.com",
+            "googleClientId": googleClientId,
             "appScheme": appScheme,
             "turnkeyUrl": "https://api.turnkey.com",
-            // From Turnkey console
-            "turnkeyOrgId": "3174ac51-1637-47d8-9456-19549963e2ed",
-            // Indexer backend
-            "backendApiUrl": "http://dev2-indexer-apne1-lb-public-2076363889.ap-northeast-1.elb.amazonaws.com",
+            "turnkeyOrgId": turnkeyOrgId,
+            "backendApiUrl": indexerUrl,
             "theme": dydxThemeSettings.shared.currentThemeType.rnThemeIdentifier
         ]
         let stringKeys: [DataLocalizer.Entry] = [
@@ -119,11 +127,8 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
                let dydxMnemonic = self?.parser.asString(resultObject["mnemonic"]),
                let cosmoAddress = self?.parser.asString(resultObject["address"]) {
 
-                TurnkeyBridgeManager.shared.uploadDydxAddress(dydxAddress: cosmoAddress) { success, error in
+                TurnkeyBridgeManager.shared.uploadDydxAddress(dydxAddress: cosmoAddress) { success, _ in
                     guard success else {
-                        ErrorInfo.shared?.info(title: "Error",
-                                               message: "Address uppload failed: " + (error ?? ""),
-                                               type: .error, error: nil)
                         return
                     }
                     Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
