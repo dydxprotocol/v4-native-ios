@@ -2,7 +2,6 @@ import { ReactNode, createContext, useReducer } from "react";
 import { LoginMethod } from "../lib/types";
 import {
   User,
-  useTurnkey,
 } from "@turnkey/sdk-react-native";
 import { TurnkeyNativeModule } from "../../TurnkeyModule";
 import { DydxTurnkeySession } from "./dydxTurnkeySession";
@@ -15,7 +14,6 @@ import {
 import { getValueWithKey, setValueWithKey } from "../lib/store";
 import { STORAGE_KEY } from "../lib/constants";
 import { jwtDecode } from 'jwt-decode';
-import { useState } from 'react';
 
 type AuthActionType =
   | { type: "PASSKEY"; payload: User }
@@ -416,7 +414,6 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     dydxAddress,
     configs,
   }: UploadDydxAddressRequest) => {
-    //const [session, setSession] = useState<DydxTurnkeySession | undefined>(undefined);
     const session = dydxSession;
 
     if (session == undefined) {

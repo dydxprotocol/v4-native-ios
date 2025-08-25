@@ -150,8 +150,7 @@ export class DydxTurnkeySession {
   }
 
   signUploadAddressMessage = async (walletAccountAddress: string, dydxAddress: string): Promise<string>  => {
-    const message = "\x19Ethereum Signed Message:\n" + dydxAddress.length + dydxAddress
-    const messageHash = ethers.utils.hashMessage(message);
+    const messageHash = ethers.utils.hashMessage(dydxAddress);
 
     const response = await this.client.signRawPayload({
       type: "ACTIVITY_TYPE_SIGN_RAW_PAYLOAD_V2",
