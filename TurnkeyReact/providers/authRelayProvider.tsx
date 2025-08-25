@@ -340,8 +340,6 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     loginMethod,
     userEmail,
   }: OnboardDydxParams) => {
-   // const [session, setSession] = useState<DydxTurnkeySession | undefined>(undefined);
-
     const accounts = await dydxSession.loadWalletAccounts();
 
     // get the eth account
