@@ -69,6 +69,8 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
             .init(path: "APP.TURNKEY_ONBOARD.CHECK_EMAIL_TITLE"),
             .init(path: "APP.TURNKEY_ONBOARD.CHECK_EMAIL_DESCRIPTION"),
             .init(path: "APP.TURNKEY_ONBOARD.RESEND"),
+            .init(path: "APP.TURNKEY_ONBOARD.CONTINUE_SIGN_IN_TITLE"),
+            .init(path: "APP.TURNKEY_ONBOARD.CONTINUE_SIGN_IN_DESCRIPTION"),
             .init(path: "APP.GENERAL.OR")
         ]
         super.init(moduleName: "TurnkeyLogin",

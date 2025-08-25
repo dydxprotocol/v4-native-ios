@@ -67,14 +67,6 @@ export class DydxTurnkeySession {
     return Promise.resolve(response);
   }
 
-  sendDydxAddress = async (dydxAddress: String): Promise<void> => {
-    const message = "\x19Ethereum Signed Message:\n" + dydxAddress.length + dydxAddress
-
-    const messageHash = ethers.utils.hashMessage(message);
-
-    return Promise.resolve();
-  }
-
   exportWallet = async (walletId: string): Promise<string> => {
     const {
       publicKeyUncompressed: targetPublicKey,
