@@ -34,7 +34,7 @@ public final class dydxTurnkeyAddressWorker: BaseWorker {
         }
     }
 
-    public func fetchAndUpdateTurnkeyAddress(wallet: dydxWalletInstance) {
+    private func fetchAndUpdateTurnkeyAddress(wallet: dydxWalletInstance) {
         guard let dydxAddress = wallet.cosmoAddress,
             let indexerUrl = AbacusStateManager.shared.environment?.endpoints.indexers?.first?.api else {
             return
