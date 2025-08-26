@@ -36,11 +36,3 @@ DeviceEventEmitter.addListener(
     }
   }
 );
-
-// Async function with typed param/return
-async function myJsFunction(callbackId: string): Promise<string> {
-  return (
-    'Hello Hello from JS!, callbackId: ' +
-    callbackId
-  );
-}
