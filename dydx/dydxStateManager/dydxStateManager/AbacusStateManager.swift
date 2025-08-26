@@ -244,6 +244,7 @@ public final class AbacusStateManager: NSObject {
 
         if _walletState.wallets.isEmpty {
             transferStateManager.clear()
+            dydxDepositAddressesStateManager.shared.clear()
         }
 
         asyncStateManager.setAddresses(source: _walletState.currentWallet?.ethereumAddress, account: _walletState.currentWallet?.cosmoAddress, isNew: false)

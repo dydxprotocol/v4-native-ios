@@ -42,27 +42,28 @@ public class TurnkeyBridgeManager {
 
     private let module = TurnkeyNativeModule()
 
-    public func testFunction() {
+    public func testFunction(completion: @escaping (String) -> Void) {
         module.callMyJsFunction(functionName: "NativeToJsRequest") { result in
             print("Result: \(result)")
+            completion(result)
         }
     }
 
     public func appleSignInCompleted(identityToken: String?, error: String?) {
         bridge.enqueueJSCall(
-          "RCTDeviceEventEmitter",
-          method: "emit",
-          args: ["AppleSignInCompleted", ["identityToken": identityToken, "error": error]],
-          completion: nil
+            "RCTDeviceEventEmitter",
+            method: "emit",
+            args: ["AppleSignInCompleted", ["identityToken": identityToken, "error": error]],
+            completion: nil
         )
     }
 
     public func emailTokenReceived(token: String) {
         bridge.enqueueJSCall(
-          "RCTDeviceEventEmitter",
-          method: "emit",
-          args: ["EmailTokenReceived", ["token": token]],
-          completion: nil
+            "RCTDeviceEventEmitter",
+            method: "emit",
+            args: ["EmailTokenReceived", ["token": token]],
+            completion: nil
         )
     }
 
@@ -74,6 +75,14 @@ public class TurnkeyBridgeManager {
             } else {
                 callback(false, result)
             }
+        }
+    }
+
+    public func fetchDepositAddresses(dydxAddress: String, indexerUrl: String, callback: @escaping (String?) -> Void) {
+        module.callMyJsFunction(functionName: "FetchDepositAddresses",
+                                params: ["dydxAddress": dydxAddress,
+                                         "indexerUrl": indexerUrl]) { result in
+            callback(result)
         }
     }
 }

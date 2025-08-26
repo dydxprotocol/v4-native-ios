@@ -125,6 +125,7 @@
 		0280B3A629CB63E10017D64A /* dydxOnboardWelcomeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0280B3A529CB63E10017D64A /* dydxOnboardWelcomeViewBuilder.swift */; };
 		0284202F29AD727200C0E7CC /* dydxViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0284201F29AD725000C0E7CC /* dydxViews.framework */; };
 		02860A9F29C15E760079E644 /* dydxOnboardScanViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02860A9329C15E760079E644 /* dydxOnboardScanViewBuilder.swift */; };
+		028CC03D2E5D778700290690 /* dydxTurnkeyAddressWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028CC02F2E5D778100290690 /* dydxTurnkeyAddressWorker.swift */; };
 		028DB3402A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */; };
 		028FB3EC2AD642B30013136C /* dydxTokenConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FB3EB2AD642B30013136C /* dydxTokenConstants.swift */; };
 		0295392329FB256E009026E3 /* dydxThemeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295392229FB256E009026E3 /* dydxThemeViewBuilder.swift */; };
@@ -596,6 +597,7 @@
 		0280B3A529CB63E10017D64A /* dydxOnboardWelcomeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxOnboardWelcomeViewBuilder.swift; sourceTree = "<group>"; };
 		0284201929AD725000C0E7CC /* dydxViews.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxViews.xcodeproj; path = ../dydxViews/dydxViews.xcodeproj; sourceTree = "<group>"; };
 		02860A9329C15E760079E644 /* dydxOnboardScanViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxOnboardScanViewBuilder.swift; sourceTree = "<group>"; };
+		028CC02F2E5D778100290690 /* dydxTurnkeyAddressWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTurnkeyAddressWorker.swift; sourceTree = "<group>"; };
 		028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileHeaderViewPresenter.swift; sourceTree = "<group>"; };
 		028FB3EB2AD642B30013136C /* dydxTokenConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTokenConstants.swift; sourceTree = "<group>"; };
 		0295392229FB256E009026E3 /* dydxThemeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxThemeViewBuilder.swift; sourceTree = "<group>"; };
@@ -1230,6 +1232,7 @@
 		02669B962AD87AA200A756AA /* Workers */ = {
 			isa = PBXGroup;
 			children = (
+				028CC02F2E5D778100290690 /* dydxTurnkeyAddressWorker.swift */,
 				64487FFE2AA248340068DD87 /* dydxAlertsWorker.swift */,
 				02F543B52C17B792000924E4 /* dydxGasTokenWorker.swift */,
 				020EB696299D36AD00E8026B /* dydxApiStatusWorker.swift */,
@@ -2405,9 +2408,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2422,9 +2429,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2439,9 +2450,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresenters/Pods-iOS-dydxPresenters-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresenters/Pods-iOS-dydxPresenters-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2588,6 +2603,7 @@
 				02D6DAFC2D123576008AAEA1 /* dydxRootBuilder.swift in Sources */,
 				02F543B62C17B792000924E4 /* dydxGasTokenWorker.swift in Sources */,
 				023DB0A42D69123700F15534 /* dydxInstantDepositViewPresenter.swift in Sources */,
+				028CC03D2E5D778700290690 /* dydxTurnkeyAddressWorker.swift in Sources */,
 				0279DE792BEC472600F9ECF8 /* dydxAdjustMarginInputViewBuilder.swift in Sources */,
 				6496DC3E295E122B00174CE7 /* dydxTradeInputViewBuilder.swift in Sources */,
 				64A4DB9529664803008D8E20 /* dydxTradeInputEditPresenter.swift in Sources */,
@@ -2802,10 +2818,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -2879,10 +2892,7 @@
 				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

@@ -58,9 +58,9 @@ private class dydxTurnkeyQRCodeViewPresenter: HostedViewPresenter<dydxTurnkeyQRC
         Publishers
             .CombineLatest(
                 $chain,
-                AbacusStateManager.shared.state.currentWallet
+                dydxDepositAddressesStateManager.shared.$state
             )
-            .sink { [weak self] chain, currentWallet in
+            .sink { [weak self] chain, addresses in
                 guard let self = self, let chain = chain,
                       let tokenChain = TransferChain(rawValue: chain) else {
                     return
@@ -69,11 +69,11 @@ private class dydxTurnkeyQRCodeViewPresenter: HostedViewPresenter<dydxTurnkeyQRC
                 let address: String?
                 switch tokenChain {
                 case .Ethereum, .Arbitrum, .Base, .Optimism, .Polygon:
-                    address = currentWallet?.ethereumAddress
+                    address = addresses?.evmAddress
                 case .Avalanche:
-                    address = currentWallet?.avalancheAddress
+                    address = addresses?.avalancheAddress
                 case .Solana:
-                    address = currentWallet?.svmAddress
+                    address = addresses?.svmAddress
                 }
                 self.viewModel?.address = address
                 self.viewModel?.chainIcon = URL(string: tokenChain.chainLogoUrl)
