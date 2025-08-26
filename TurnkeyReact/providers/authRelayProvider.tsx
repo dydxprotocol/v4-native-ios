@@ -433,7 +433,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     }
     const body = JSON.stringify({
       dydxAddress,
-      signature: "0x" + signature
+      signature
     });
 
     try {

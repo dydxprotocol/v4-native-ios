@@ -42,9 +42,9 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
     completeOtpAuth,
   } = useAuthRelay();
 
-  const [session, setSession] = useState<DydxTurnkeySession | undefined>(undefined);
+  const [session, setSession] = useState<DydxTurnkeySession>();
   const [continueModal, setContinueModal] = useState(false);
-  const [continueModalProviderName, setContinueModalProviderName] = useState<string | undefined>(undefined);
+  const [continueModalProviderName, setContinueModalProviderName] = useState<string>();
 
   const oAuthEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.OAuth);
   const emailEmbeddedKeyAndNonce = useEmbeddedKeyAndNonce(LoginMethod.Email);

@@ -146,7 +146,7 @@ export class DydxTurnkeySession {
 
     const result = response.activity.result.signRawPayloadResult;
 
-    return Promise.resolve(result.r + result.s + result.v); // Concatenate r, s, and v to form the full signature=
+    return Promise.resolve("0x" + result.r + result.s + result.v); // Concatenate r, s, and v to form the full signature=
   }
 
   signUploadAddressMessage = async (walletAccountAddress: string, dydxAddress: string): Promise<string>  => {
@@ -171,7 +171,7 @@ export class DydxTurnkeySession {
 
     const result = response.activity.result.signRawPayloadResult;
 
-    return Promise.resolve(result.r + result.s + result.v); // Concatenate r, s, and v to form the full signature=
+    return Promise.resolve("0x" + result.r + result.s + result.v); // Concatenate r, s, and v to form the full signature=
   }
 
   private getUser = async (): Promise<TurnkeyApi.TGetWhoamiResponse> => {
