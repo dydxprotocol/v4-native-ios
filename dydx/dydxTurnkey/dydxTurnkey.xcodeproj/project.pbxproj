@@ -29,8 +29,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		025D03FC2E31E47F0015E1D7 /* RoutingKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RoutingKit.xcodeproj; path = "/Users/ruihuang/v4-native-ios/RoutingKit/RoutingKit.xcodeproj"; sourceTree = "<absolute>"; };
-		025DFE742E3159150015E1D7 /* PlatformUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformUI.xcodeproj; path = ../../PlatformUI/PlatformUI.xcodeproj; sourceTree = "<group>"; };
 		025DFE772E3159270015E1D7 /* PlatformUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformUI.xcodeproj; path = "/Users/ruihuang/v4-native-ios/PlatformUI/PlatformUI.xcodeproj"; sourceTree = "<absolute>"; };
 		02A1054E2E28537C00E65EE2 /* dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AE56594D5B2D8D07259C597 /* Pods_iOS_dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,13 +70,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		025D03FD2E31E47F0015E1D7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		025DFE782E3159270015E1D7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,23 +78,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		025DFE992E31D5B00015E1D7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		02A105442E28537C00E65EE2 = {
 			isa = PBXGroup;
 			children = (
-				025DFE742E3159150015E1D7 /* PlatformUI.xcodeproj */,
 				02A105502E28537C00E65EE2 /* dydxTurnkey */,
 				02A1054F2E28537C00E65EE2 /* Products */,
 				AF52E1FCFF6709EAE8289102 /* Pods */,
 				596AC3FA5A6C18D1162690A6 /* Frameworks */,
 				025DFE772E3159270015E1D7 /* PlatformUI.xcodeproj */,
-				025D03FC2E31E47F0015E1D7 /* RoutingKit.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,16 +182,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 025DFE992E31D5B00015E1D7 /* Products */;
-					ProjectRef = 025DFE742E3159150015E1D7 /* PlatformUI.xcodeproj */;
-				},
-				{
 					ProductGroup = 025DFE782E3159270015E1D7 /* Products */;
 					ProjectRef = 025DFE772E3159270015E1D7 /* PlatformUI.xcodeproj */;
-				},
-				{
-					ProductGroup = 025D03FD2E31E47F0015E1D7 /* Products */;
-					ProjectRef = 025D03FC2E31E47F0015E1D7 /* RoutingKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
