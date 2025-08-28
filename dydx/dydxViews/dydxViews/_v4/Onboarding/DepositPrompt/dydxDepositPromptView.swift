@@ -40,7 +40,7 @@ public class dydxDepositPromptViewModel: PlatformViewModel {
                 .padding(.top, 16)
 
                 VStack(alignment: .center) {
-                    Text(DataLocalizer.localize(path: "APP.TURNKEY_ONBOARD.WELCOME"))
+                    Text(DataLocalizer.localize(path: "APP.TURNKEY_ONBOARD.WELCOME_TO_DYDX"))
                         .themeFont(fontType: .plus, fontSize: .larger)
                         .foregroundStyle(
                                 LinearGradient(
