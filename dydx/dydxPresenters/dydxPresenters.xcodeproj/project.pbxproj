@@ -68,6 +68,7 @@
 		023DC88029CCBD21000DD920 /* dydxOnboardQRCodeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DC87329CCBD21000DD920 /* dydxOnboardQRCodeViewBuilder.swift */; };
 		023FC7E32C94DCBF003D77A6 /* dydxPushNotificationToggleWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023FC7E22C94DCBF003D77A6 /* dydxPushNotificationToggleWorker.swift */; };
 		02404FAA2CD42E8C001B571D /* dydxVaultTosViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02404FA92CD42E89001B571D /* dydxVaultTosViewBuilder.swift */; };
+		024380622E6093E600F811A1 /* dydxDepositPromptViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024380612E6093E500F811A1 /* dydxDepositPromptViewBuilder.swift */; };
 		02439CCB29B03EEE00A083FE /* dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CC629B03ECD00A083FE /* dydxCartera.framework */; };
 		0243A76129BE572C00A083FE /* dydxCancelOrderActionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243A76029BE572C00A083FE /* dydxCancelOrderActionBuilder.swift */; };
 		02465B96297F6E2E00A4CA55 /* dydxPortfolioHeaderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02465B95297F6E2E00A4CA55 /* dydxPortfolioHeaderPresenter.swift */; };
@@ -540,6 +541,7 @@
 		023DC87329CCBD21000DD920 /* dydxOnboardQRCodeViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dydxOnboardQRCodeViewBuilder.swift; sourceTree = "<group>"; };
 		023FC7E22C94DCBF003D77A6 /* dydxPushNotificationToggleWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPushNotificationToggleWorker.swift; sourceTree = "<group>"; };
 		02404FA92CD42E89001B571D /* dydxVaultTosViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxVaultTosViewBuilder.swift; sourceTree = "<group>"; };
+		024380612E6093E500F811A1 /* dydxDepositPromptViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxDepositPromptViewBuilder.swift; sourceTree = "<group>"; };
 		02439CC029B03ECD00A083FE /* dydxCartera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxCartera.xcodeproj; path = ../dydxCartera/dydxCartera.xcodeproj; sourceTree = "<group>"; };
 		0243A76029BE572C00A083FE /* dydxCancelOrderActionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxCancelOrderActionBuilder.swift; sourceTree = "<group>"; };
 		02465B95297F6E2E00A4CA55 /* dydxPortfolioHeaderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioHeaderPresenter.swift; sourceTree = "<group>"; };
@@ -1032,6 +1034,14 @@
 				02404FA92CD42E89001B571D /* dydxVaultTosViewBuilder.swift */,
 			);
 			path = Tos;
+			sourceTree = "<group>";
+		};
+		024380602E6093DF00F811A1 /* DepositPrompt */ = {
+			isa = PBXGroup;
+			children = (
+				024380612E6093E500F811A1 /* dydxDepositPromptViewBuilder.swift */,
+			);
+			path = DepositPrompt;
 			sourceTree = "<group>";
 		};
 		02439CC129B03ECD00A083FE /* Products */ = {
@@ -1776,6 +1786,7 @@
 		02FF0BCF29AE92EE00781EDA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				024380602E6093DF00F811A1 /* DepositPrompt */,
 				025D04112E31E6760015E1D7 /* TurnkeyAuth */,
 				021F52662DC535A100598186 /* Shared */,
 				02548B672DC3ED0300FC0ABE /* Social */,
@@ -2472,6 +2483,7 @@
 			files = (
 				02B429122DD2B05B00CC3476 /* VaultTransferType+Ext.swift in Sources */,
 				024FEB662ACB75FA0087A55E /* dydxFeesStuctureViewBuilder.swift in Sources */,
+				024380622E6093E600F811A1 /* dydxDepositPromptViewBuilder.swift in Sources */,
 				02048FCC2D39E5DF00394CBE /* dydxSimpleUITradeInputHeaderViewPresenter.swift in Sources */,
 				02C789722D712961004C3284 /* dydxTransferInstantStatusViewBuilder.swift in Sources */,
 				02048AFC2D35837F00394CBE /* dydxSwitchAppModeActionBuilder.swift in Sources */,

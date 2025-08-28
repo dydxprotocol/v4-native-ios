@@ -165,6 +165,10 @@
                     "destination":"dydxPresenters.dydxEmailOtpViewBuilder",
                     "presentation":"push"
                 },
+                "/onboard/deposit_prompt":{
+                    "destination":"dydxPresenters.dydxDepositPromptViewBuilder",
+                    "presentation":"half"
+                },
                 "/order":{
                     "destination":"dydxPresenters.dydxOrderDetailsViewBuilder",
                     "presentation":"half"

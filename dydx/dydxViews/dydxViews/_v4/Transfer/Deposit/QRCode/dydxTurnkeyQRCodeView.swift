@@ -34,36 +34,36 @@ public class dydxTurnkeyQRCodeViewModel: PlatformViewModel {
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
-            
+
             let view = VStack(alignment: .leading, spacing: 24) {
                 HStack {
                     ChevronBackButtonModel(onBackButtonTap: self.cancelAction ?? {})
                         .createView(parentStyle: style)
-                    
+
                     Spacer()
                 }
                 .padding(.top, 24)
-                
+
                 // ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 24) {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT"))
                             .themeColor(foreground: .textPrimary)
                             .themeFont(fontSize: .larger)
-                        
+
                         Text(self.subtitle ?? "")
                             .themeColor(foreground: .textTertiary)
                             .themeFont(fontSize: .medium)
                     }
                     .padding(.horizontal, 8)
-                    
+
                     self.createQRCodeSection(style: style)
-                    
+
                     if let address = self.address {
                         self.createAddressSection(style: style, address: address)
                     }
                     Spacer()
-                    
+
                     if let footer = self.footer {
                         ValidationErrorViewModel(state: .warning,
                                                  message: footer)
@@ -75,7 +75,7 @@ public class dydxTurnkeyQRCodeViewModel: PlatformViewModel {
                 .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
                 .themeColor(background: .layer2)
                 .ignoresSafeArea(edges: [.bottom])
-            
+
             return AnyView(view)
         }
     }

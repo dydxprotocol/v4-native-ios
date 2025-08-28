@@ -38,8 +38,15 @@ private class dydxPostOnboardingAction: NSObject, NavigableProtocol {
                                                 sourceWalletMnemonic: result.sourceWalletMnemonic,
                                                 loginMethod: result.loginMethod,
                                                 userEmail: result.userEmail)
+
+                Router.shared?.navigate(to: RoutingRequest(path: "/"), animated: animated, completion: completion)
+
+                if result.walletId == "turnkey" {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        Router.shared?.navigate(to: RoutingRequest(path: "/onboard/deposit_prompt"), animated: true, completion: nil)
+                    }
+                }
             }
-            Router.shared?.navigate(to: RoutingRequest(path: "/"), animated: animated, completion: completion)
         default:
             completion?(nil, false)
         }
