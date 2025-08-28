@@ -101,35 +101,6 @@ public class ValidationErrorViewModel: PlatformViewModel {
     }
 }
 
-private struct ValidationErrorView: View {
-    @ObservedObject var viewModel: ValidationErrorViewModel
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            if let title = viewModel.title {
-                Text(title)
-                    .themeColor(foreground: .textPrimary)
-                    .themeFont(fontSize: .small)
-            }
-            if let message = viewModel.message {
-                Text(message)
-                    .themeFont(fontSize: .small)
-            }
-            if let link = viewModel.link {
-                Text(link.text)
-                    .themeColor(foreground: .textPrimary)
-                    .themeFont(fontSize: .small)
-            }
-        }
-        .padding(.vertical, 8)
-        .padding(.trailing, 16)
-        .padding(.leading, 16 + 6) // space + bar width
-
-        .themeColor(background: viewModel.state.backgroundColor)
-        .clipShape(.rect(cornerRadius: 6))
-    }
-}
-
 #if DEBUG
 struct ValidationErrorViewModel_Previews_Dark: PreviewProvider {
     @StateObject static var themeSettings = ThemeSettings.shared
