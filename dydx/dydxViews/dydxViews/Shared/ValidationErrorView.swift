@@ -45,6 +45,13 @@ public class ValidationErrorViewModel: PlatformViewModel {
     @Published public var title: String?
     @Published public var message: String?
 
+    public init(state: State = State.none, link: Link? = nil, title: String? = nil, message: String? = nil) {
+        self.state = state
+        self.link = link
+        self.title = title
+        self.message = message
+    }
+
     public static var previewValue: ValidationErrorViewModel = {
         let vm = ValidationErrorViewModel()
         vm.state = .error
@@ -59,10 +66,6 @@ public class ValidationErrorViewModel: PlatformViewModel {
             guard let self = self, self.state != .none else { return AnyView(PlatformView.nilView) }
 
             let view = HStack(spacing: 0) {
-                Rectangle()
-                    .fill(self.state.color.color)
-                    .frame(width: 6)
-
                 VStack(alignment: .leading, spacing: 8) {
                     if let title = self.title {
                         Text(title)
@@ -79,16 +82,51 @@ public class ValidationErrorViewModel: PlatformViewModel {
                             .themeFont(fontSize: .small)
                     }
                 }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
 
                 Spacer()
             }
+                .padding(.vertical, 8)
+                .padding(.leading, 16 + 6) // space + bar width
+                .padding(.trailing, 16)
+                .overlay(alignment: .leading) {
+                    Rectangle()
+                        .fill(self.state.color.color)
+                        .frame(width: 6) // height auto-matches the VStack
+                }
                 .themeColor(background: self.state.backgroundColor)
                 .clipShape(.rect(cornerRadius: 6))
 
             return AnyView(view)
         }
+    }
+}
+
+private struct ValidationErrorView: View {
+    @ObservedObject var viewModel: ValidationErrorViewModel
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if let title = viewModel.title {
+                Text(title)
+                    .themeColor(foreground: .textPrimary)
+                    .themeFont(fontSize: .small)
+            }
+            if let message = viewModel.message {
+                Text(message)
+                    .themeFont(fontSize: .small)
+            }
+            if let link = viewModel.link {
+                Text(link.text)
+                    .themeColor(foreground: .textPrimary)
+                    .themeFont(fontSize: .small)
+            }
+        }
+        .padding(.vertical, 8)
+        .padding(.trailing, 16)
+        .padding(.leading, 16 + 6) // space + bar width
+
+        .themeColor(background: viewModel.state.backgroundColor)
+        .clipShape(.rect(cornerRadius: 6))
     }
 }
 
