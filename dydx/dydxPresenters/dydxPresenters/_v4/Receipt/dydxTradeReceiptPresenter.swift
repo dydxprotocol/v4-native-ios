@@ -58,7 +58,11 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
                 self?.updatePositionMargin(position: position)
                 self?.updatePositionLeverage(position: position)
                 self?.updateTradingFee(tradeSummary: tradeSummary)
-                self?.updateTradingRewards(tradeSummary: tradeSummary)
+                if dydxBoolFeatureFlag.rewards_sep_2025.isEnabled {
+                    self?.updateTradingRewardsSep2025(tradeSummary: tradeSummary)
+                } else {
+                    self?.updateTradingRewards(tradeSummary: tradeSummary)
+                }
             }
             .store(in: &subscriptions)
 
@@ -138,6 +142,7 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
     }
 
     private func updateTradingRewards(tradeSummary: TradeInputSummary?) {
+        rewardsViewModel.isSep2025 = false
         guard let rewards = tradeSummary?.reward?.doubleValue,
               let value = dydxFormatter.shared.localFormatted(number: abs(rewards), digits: 6)  else {
             rewardsViewModel.rewards = nil
@@ -151,6 +156,18 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
         } else {
             rewardsViewModel.rewards = SignedAmountViewModel(text: value, sign: .minus, coloringOption: .signOnly)
         }
+    }
+
+    private func updateTradingRewardsSep2025(tradeSummary: TradeInputSummary?) {
+        rewardsViewModel.isSep2025 = true
+        guard let fee = tradeSummary?.fee?.doubleValue else {
+            rewardsViewModel.rewardsSep2025 = nil
+            return
+        }
+
+        var rewards = max(0.0, fee) * 0.5
+        let amount = dydxFormatter.shared.dollar(number: rewards, digits: 2)
+        rewardsViewModel.rewardsSep2025 = SignedAmountViewModel(text: amount, sign: .none, coloringOption: .signOnly)
     }
 
     private func updateEquityChange(account: Subaccount) {
@@ -167,6 +184,6 @@ final class dydxTradeReceiptPresenter: dydxReceiptPresenter {
             after = nil
         }
 
-        equlityViewModel.equityChange = .init(before: before, after: after)
+        equityViewModel.equityChange = .init(before: before, after: after)
     }
 }

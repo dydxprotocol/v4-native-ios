@@ -211,6 +211,6 @@ final class dydxTransferReceiptViewPresenter: dydxReceiptPresenter {
             after = nil
         }
 
-        equlityViewModel.equityChange = .init(before: before, after: after)
+        equityViewModel.equityChange = .init(before: before, after: after)
     }
 }

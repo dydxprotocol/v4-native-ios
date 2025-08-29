@@ -33,7 +33,7 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
     let exchangeRateViewModel = dydxReceiptItemViewModel()
     let exchangeReceivedViewModel = dydxReceiptItemViewModel()
     let slippageViewModel = dydxReceiptItemViewModel()
-    let equlityViewModel = dydxReceiptEquityViewModel()
+    let equityViewModel = dydxReceiptEquityViewModel()
     let rewardsViewModel = dydxReceiptRewardsViewModel()
     let transferDurationViewModel = dydxReceiptItemViewModel()
 
@@ -42,7 +42,7 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
 
         viewModel = dydxReceiptViewModel()
 
-        equlityViewModel.usdcTokenName = dydxTokenConstants.usdcTokenName
+        equityViewModel.usdcTokenName = dydxTokenConstants.usdcTokenName
         rewardsViewModel.nativeTokenLogoUrl = dydxTokenConstants.nativeTokenLogoUrl
     }
 
@@ -75,7 +75,7 @@ class dydxReceiptPresenter: HostedViewPresenter<dydxReceiptViewModel>, dydxRecei
             case .positionleverage:
                 return positionLeverageViewModel
             case .equity:
-                return equlityViewModel
+                return equityViewModel
             case .exchangerate:
                 return exchangeRateViewModel
             case .exchangereceived:
