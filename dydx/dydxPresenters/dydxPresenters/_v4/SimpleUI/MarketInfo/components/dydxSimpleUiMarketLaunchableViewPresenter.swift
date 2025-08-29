@@ -16,7 +16,6 @@ import dydxStateManager
 import Abacus
 import dydxFormatter
 import SwiftUI
-import Statsig
 
 protocol dydxSimpleUiMarketLaunchableViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxSimpleUiMarketLaunchableViewModel? { get }

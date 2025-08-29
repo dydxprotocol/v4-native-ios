@@ -15,6 +15,7 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
     @Published public var points: String?
     @Published public var aboutAction: (() -> Void)?
     @Published public var leaderboardAction: (() -> Void)?
+    @Published public var isSep2025: Bool = false
 
     public static var previewValue: dydxRewardsLaunchIncentivesViewModel = {
         let vm = dydxRewardsLaunchIncentivesViewModel()
@@ -22,11 +23,23 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
         return vm
     }()
 
-    private let launchIncentivesFormatted: AttributedString = {
-        guard let launchIncentives = DataLocalizer.shared?.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_HEADLINE", params: nil) else { return .init() }
+    private lazy var launchIncentivesFormatted: AttributedString = {
+        let launchIncentives: String?
+        if isSep2025 {
+            launchIncentives = DataLocalizer.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE") + ": " +
+            DataLocalizer.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_HEADLINE_SEP_2025",
+                                                      params: [
+                                                        "REWARD_AMOUNT": "$1M",
+                                                        "REBATE_PERCENT": "50%"
+                                                      ])
+        } else {
+            launchIncentives = DataLocalizer.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_HEADLINE", params: nil)
+        }
+        guard let launchIncentives else { return .init() }
+
         return AttributedString(launchIncentives)
-           .themeFont(fontType: .base, fontSize: .medium)
-           .themeColor(foreground: .textPrimary)
+            .themeFont(fontType: .base, fontSize: .medium)
+            .themeColor(foreground: .textPrimary)
     }()
 
     private var pointsFormatted: AttributedString {
@@ -104,10 +117,22 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style  in
             guard let self = self else { return AnyView(PlatformView.nilView) }
+
+            let body: String
+            if self.isSep2025 {
+                body = DataLocalizer.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_BODY_SEP_2025",
+                                              params: [
+                                                "REWARD_AMOUNT": "$1M",
+                                                "REBATE_PERCENT": "50%"
+                                              ])
+            } else {
+                body = DataLocalizer.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_BODY", params: nil)
+            }
+
             return VStack(spacing: 16) {
                 self.createEstimateSubCard()
                 VStack(alignment: .leading, spacing: 8) {
-                    HStack {
+                    HStack(alignment: .center) {
                         Text(self.launchIncentivesFormatted)
 
                         Text(DataLocalizer.localize(path: "APP.GENERAL.ACTIVE"))
@@ -119,9 +144,11 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
 
                         Spacer()
                     }
-                    Text(DataLocalizer.shared?.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_BODY", params: nil) ?? "")
+
+                    Text(body)
                         .themeFont(fontType: .base, fontSize: .small)
                         .themeColor(foreground: .textTertiary)
+
                     HStack(spacing: 8) {
                         Text(DataLocalizer.shared?.localize(path: "APP.TRADING_REWARDS.POWERED_BY", params: nil) ?? "")
                             .themeFont(fontType: .base, fontSize: .smaller)

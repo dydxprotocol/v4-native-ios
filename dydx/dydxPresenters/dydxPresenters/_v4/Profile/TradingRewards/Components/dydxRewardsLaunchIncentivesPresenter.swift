@@ -25,6 +25,7 @@ public class dydxRewardsLaunchIncentivesPresenter: HostedViewPresenter<dydxRewar
         super.init()
 
         viewModel = dydxRewardsLaunchIncentivesViewModel()
+        viewModel?.isSep2025 = dydxBoolFeatureFlag.rewards_sep_2025.isEnabled
     }
 
     public override func start() {
