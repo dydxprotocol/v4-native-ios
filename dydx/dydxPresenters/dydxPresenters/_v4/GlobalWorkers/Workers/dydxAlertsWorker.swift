@@ -12,6 +12,7 @@ import Foundation
 import ParticlesKit
 import RoutingKit
 import Utilities
+import dydxFormatter
 
 extension Abacus.NotificationType {
     var infoType: EInfoType {
@@ -53,6 +54,12 @@ final class dydxAlertsWorker: BaseWorker {
             // display alerts in chronological order they were received
             .sorted { $0.updateTimeInMilliseconds < $1.updateTimeInMilliseconds }
             .forEach { alert in
+                // Skip block reward notification for Sep 2025
+                if dydxBoolFeatureFlag.rewards_sep_2025.isEnabled,
+                   alert.id.starts(with: "blockReward:") {
+                    return
+                }
+
                 let link = alert.link
                 let actions = (link != nil) ? [ErrorAction(text: DataLocalizer.localize(path: "APP.GENERAL.VIEW")) {
                     Router.shared?.navigate(to: RoutingRequest(path: link!), animated: true, completion: nil)
