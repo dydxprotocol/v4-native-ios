@@ -56,6 +56,7 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
             "turnkeyUrl": "https://api.turnkey.com",
             "turnkeyOrgId": turnkeyOrgId,
             "backendApiUrl": indexerUrl,
+            "deploymentUri": AbacusStateManager.shared.deploymentUri,
             "theme": dydxThemeSettings.shared.currentThemeType.rnThemeIdentifier
         ]
         let stringKeys: [DataLocalizer.Entry] = [
