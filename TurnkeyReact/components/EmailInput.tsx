@@ -10,7 +10,6 @@ import { EmbeddedKeyAndNonce } from "./useEmbeddedKeyAndNonce";
 import { Button } from "./ui/button";
 import { OtpType } from "../lib/types";
 import { currentTheme } from "../../rn_style/themes/currentTheme";
-import Icon from "react-native-vector-icons/Feather";
 
 interface EmailInputProps {
   embeddedKeyAndNonce: EmbeddedKeyAndNonce;
@@ -86,7 +85,10 @@ export const EmailInput = ({
         onPress={() => handleEmailSubmit()}
       >
         <TouchableOpacity style={[styles.sendButton, { backgroundColor: isValidEmail ? currentTheme.colors.purple : currentTheme.colors.textTertiary }]}>
-          <Icon name="arrow-right" size={12} color="#fff" />
+          <Image
+            source={require('../../rn_style/assets/icon_arrow.png')}
+            style={{ width: 16, height: 16, tintColor: currentTheme.colors.white}}
+          />
         </TouchableOpacity>
 
         {/* <Text style={{ color: isValidEmail ? currentTheme.colors.purple : currentTheme.colors.textTertiary }}>
