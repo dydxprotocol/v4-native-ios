@@ -27,22 +27,23 @@ public class SettingHeaderViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
-                HStack(spacing: 16) {
+                ZStack {
                     if let dismissAction = self.dismissAction {
                         let buttonContent = PlatformIconViewModel(type: .system(name: "chevron.left"), size: CGSize(width: 16, height: 16), templateColor: .textTertiary)
                         PlatformButtonViewModel(content: buttonContent, type: .iconType) {
                             dismissAction()
                         }
                         .createView(parentStyle: style)
-                        .padding([.leading, .vertical], 8)
+                        .leftAligned()
                     }
 
                     Text(self.text ?? "")
                         .themeFont(fontType: .base, fontSize: .largest)
                         .themeColor(foreground: .textPrimary)
+                        .centerAligned()
                 }
-                    .padding(.horizontal, 8)
-                    .padding(.top, 8)
+                    .padding(.horizontal, 16)
+                    .frame(height: 64)
             )
         }
     }

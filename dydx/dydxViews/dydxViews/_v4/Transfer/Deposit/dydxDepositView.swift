@@ -41,6 +41,7 @@ public class dydxDepositViewModel: PlatformViewModel {
                     self.turnkey?.createView(parentStyle: style)
                 }
             }
+
             return AnyView(view)
         }
     }

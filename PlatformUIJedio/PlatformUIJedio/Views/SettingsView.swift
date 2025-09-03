@@ -60,8 +60,9 @@ public class SettingsViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = AnyView(
-                VStack(alignment: .leading, spacing: 30) {
+                VStack(alignment: .leading, spacing: 8) {
                     self.headerViewModel?.createView(parentStyle: style)
+                        .padding(.top, 16)
 
                     ScrollView(showsIndicators: false) {
                         // note, using a LazyVStack here caused app unresponsiveness, needs investigation

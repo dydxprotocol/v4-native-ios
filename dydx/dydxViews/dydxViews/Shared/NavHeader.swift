@@ -27,17 +27,17 @@ public class NavHeaderModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
-                HStack {
+                ZStack {
                     if let backButtonAction = self.backButtonAction {
                         ChevronBackButtonModel(onBackButtonTap: backButtonAction)
                             .createView(parentStyle: style)
+                            .leftAligned()
                     }
 
                     Text(self.title ?? "")
                         .themeFont(fontSize: .largest)
                         .themeColor(foreground: .textPrimary)
-
-                    Spacer()
+                        .centerAligned()
                 }
                 .padding(.horizontal, 16)
                 .frame(height: 64)

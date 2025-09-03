@@ -66,7 +66,7 @@ private struct dydxTransferOutView: View {
                     .themeFont(fontSize: .larger)
                     .centerAligned()
                     .padding(.vertical, 8)
-                    .padding(.top, 8)
+                    .padding(.top, 16)
                     .frame(height: 54)
 
                 DividerModel().createView()

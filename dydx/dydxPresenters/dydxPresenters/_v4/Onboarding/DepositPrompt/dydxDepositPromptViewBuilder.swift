@@ -52,11 +52,18 @@ private class dydxDepositPromptViewPresenter: HostedViewPresenter<dydxDepositPro
 
         AbacusStateManager.shared.state.currentWallet
             .sink { [weak self] wallet in
-                self?.viewModel?.user = wallet?.userEmail
+                let loginMode: dydxDepositPromptViewModel.LoginMode?
                 if let loginMethod = wallet?.loginMethod?.lowercased() {
-                    self?.viewModel?.mode = dydxDepositPromptViewModel.LoginMode(rawValue: loginMethod)
+                    loginMode = dydxDepositPromptViewModel.LoginMode(rawValue: loginMethod)
                 } else {
-                    self?.viewModel?.mode = nil
+                    loginMode = nil
+                }
+                self?.viewModel?.mode = loginMode
+
+                if loginMode == .apple {
+                    self?.viewModel?.user = "Apple User"
+                } else {
+                    self?.viewModel?.user = wallet?.userEmail
                 }
             }
             .store(in: &subscriptions)

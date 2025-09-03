@@ -50,6 +50,7 @@ public class dydxHistoryViewModel: PlatformViewModel {
 
             let view = VStack {
                 self.headerViewModel?.createView(parentStyle: style)
+                    .padding(.top, 16)
 
                 self.selectionBar?.createView(parentStyle: style)
                     .animation(.default, value: self.selectionBar?.items)

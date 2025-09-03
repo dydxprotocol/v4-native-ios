@@ -37,17 +37,19 @@ public class dydxAlertsViewModel: PlatformViewModel {
     }
 
     private func createHeader(parentStyle: ThemeStyle) -> some View {
-        HStack(spacing: 16) {
+        ZStack {
             let buttonContent = PlatformIconViewModel(type: .system(name: "chevron.left"), size: CGSize(width: 16, height: 16), templateColor: .textTertiary)
                 PlatformButtonViewModel(content: buttonContent, type: .iconType) {[weak self] in
                     self?.backAction?()
                 }
                 .createView()
                 .padding([.leading, .vertical], 8)
+                .leftAligned()
+
             Text(DataLocalizer.localize(path: "APP.GENERAL.ALERTS", params: nil))
                 .themeFont(fontType: .base, fontSize: .largest)
                 .themeColor(foreground: .textPrimary)
-            Spacer()
+                .centerAligned()
         }
     }
 
@@ -59,6 +61,7 @@ public class dydxAlertsViewModel: PlatformViewModel {
                 self.createHeader(parentStyle: style)
                     .frame(height: 48)
                     .padding([.leading, .trailing])
+                    .padding(.top, 16)
 
                 self.createAlertsView(parentStyle: style)
             }

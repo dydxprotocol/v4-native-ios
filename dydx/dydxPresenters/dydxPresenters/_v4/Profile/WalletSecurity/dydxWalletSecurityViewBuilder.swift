@@ -80,9 +80,19 @@ private class dydxWalletSecurityViewPresenter: HostedViewPresenter<dydxWalletSec
     }
 
     private func updateViewModel(wallet: dydxWalletInstance) {
-        viewModel?.email = wallet.userEmail
-        if let loginMethod = wallet.loginMethod {
-            viewModel?.loginMethod = dydxWalletSecurityViewModel.LoginMethod(rawValue: loginMethod) ?? .email
+        let loginMethod: dydxWalletSecurityViewModel.LoginMethod?
+        if let login = wallet.loginMethod {
+            loginMethod = dydxWalletSecurityViewModel.LoginMethod(rawValue: login) ?? .email
+        } else {
+            loginMethod = nil
+        }
+        if let loginMethod {
+            viewModel?.loginMethod = loginMethod
+        }
+        if loginMethod == .apple {
+            viewModel?.email = "Apple User"
+        } else {
+            viewModel?.email = wallet.userEmail
         }
         viewModel?.sourceAddress = wallet.ethereumAddress
         viewModel?.dydxAddress = wallet.cosmoAddress

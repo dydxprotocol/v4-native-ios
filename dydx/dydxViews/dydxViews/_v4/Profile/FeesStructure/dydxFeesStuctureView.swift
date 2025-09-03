@@ -28,7 +28,10 @@ public class dydxFeesStuctureViewModel: PlatformViewModel {
 
             let view = VStack {
                 self.headerViewModel?.createView(parentStyle: style)
+                    .padding(.top, 16)
+
                 self.feesViewModel?.createView(parentStyle: style)
+
                 Spacer()
             }
                 .frame(maxWidth: .infinity)
