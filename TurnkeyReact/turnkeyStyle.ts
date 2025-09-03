@@ -54,7 +54,7 @@ export const useThemedStyles = (currentTheme: any) => {
       alignItems: 'center',
       borderRadius: 16,
       paddingHorizontal: 8,
-      borderColor: currentTheme.colors.borderDefault,
+      borderColor: currentTheme.colors.layer4,
       borderWidth: 1,
       overflow: 'hidden',
       marginBottom: 24,

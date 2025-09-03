@@ -14,11 +14,13 @@ import { currentTheme } from "../../rn_style/themes/currentTheme";
 interface EmailInputProps {
   embeddedKeyAndNonce: EmbeddedKeyAndNonce;
   configs: TurnkeyConfigs;
+  focusChanged: (isFocused: boolean) => void;
 }
 
 export const EmailInput = ({
   embeddedKeyAndNonce,
   configs,
+  focusChanged,
 }: EmailInputProps) => {
   const { initOtpLogin, completeOtpAuth, state } = useAuthRelay();
   const [email, setEmail] = useState<string>('');
@@ -76,6 +78,8 @@ export const EmailInput = ({
           const isValid = validateEmail(text);
           setIsValidEmail(isValid);
         }}
+        onFocus={() => focusChanged(true)} 
+        onBlur={() => focusChanged(false)}
         aria-labelledby="emailLabel"
         aria-errormessage="emailError"
       />
@@ -87,7 +91,7 @@ export const EmailInput = ({
         <TouchableOpacity style={[styles.sendButton, { backgroundColor: isValidEmail ? currentTheme.colors.purple : currentTheme.colors.textTertiary }]}>
           <Image
             source={require('../../rn_style/assets/icon_arrow.png')}
-            style={{ width: 16, height: 16, tintColor: currentTheme.colors.white}}
+            style={{ width: 12, height: 12, tintColor: currentTheme.colors.white}}
           />
         </TouchableOpacity>
 
