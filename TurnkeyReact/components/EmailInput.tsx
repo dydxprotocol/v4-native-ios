@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Input } from "../components/ui/input";
 import { useThemedStyles } from '../turnkeyStyle';
-import { Image, Modal, View } from "react-native";
+import { Image, Modal, View, TouchableOpacity } from "react-native";
 import { Text } from './ui/text';
 import { useState } from 'react';
 import { useAuthRelay } from "../hooks/useAuthRelay";
@@ -10,6 +10,7 @@ import { EmbeddedKeyAndNonce } from "./useEmbeddedKeyAndNonce";
 import { Button } from "./ui/button";
 import { OtpType } from "../lib/types";
 import { currentTheme } from "../../rn_style/themes/currentTheme";
+import Icon from "react-native-vector-icons/Feather";
 
 interface EmailInputProps {
   embeddedKeyAndNonce: EmbeddedKeyAndNonce;
@@ -59,7 +60,7 @@ export const EmailInput = ({
 
       <Image
         source={require('../../rn_style/assets/icon_mail.png')}
-        style={{ width: 24, height: 24, tintColor: currentTheme.colors.textTertiary }}
+        style={{ width: 24, height: 24, tintColor: currentTheme.colors.textTertiary, marginLeft: 8 }}
       />
 
       <Input
@@ -84,9 +85,13 @@ export const EmailInput = ({
         disabled={!!state.loading || !isValidEmail}
         onPress={() => handleEmailSubmit()}
       >
-        <Text style={{ color: isValidEmail ? currentTheme.colors.purple : currentTheme.colors.textTertiary }}>
+        <TouchableOpacity style={[styles.sendButton, { backgroundColor: isValidEmail ? currentTheme.colors.purple : currentTheme.colors.textTertiary }]}>
+          <Icon name="arrow-right" size={12} color="#fff" />
+        </TouchableOpacity>
+
+        {/* <Text style={{ color: isValidEmail ? currentTheme.colors.purple : currentTheme.colors.textTertiary }}>
           {configs.strings["APP.TURNKEY_ONBOARD.SUBMIT"]}
-        </Text>
+        </Text> */}
       </Button>
     </View>
   );

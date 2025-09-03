@@ -31,7 +31,7 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
             switch self {
             case .hasBalance: return nil
             case .walletConnected: return nil
-            case .loggedOut: return "icon_wallet_connect"
+            case .loggedOut: return "icon_arrow"
             case .unknown: return nil
             }
         }
@@ -253,22 +253,22 @@ public class dydxSimpleUIPortfolioViewModel: PlatformViewModel {
             }
 
             let buttonLabel = HStack {
-                Text(
-                    self.state.buttonText
-                )
-                .themeFont(fontType: .base, fontSize: .medium)
+                Text(self.state.buttonText)
+                    .themeColor(foreground: .colorWhite)
+                    .themeFont(fontType: .base, fontSize: .medium)
 
                 if let iconName = self.state.buttonIcon {
                     PlatformIconViewModel(type: .asset(name: iconName, bundle: .dydxView),
-                                          size: CGSize(width: 20, height: 20))
-                        .createView(parentStyle: style)
+                                          size: CGSize(width: 16, height: 16),
+                                          templateColor: .colorWhite)
+                    .createView(parentStyle: style)
                 }
             }
             PlatformButtonViewModel(content: buttonLabel.wrappedViewModel,
                                     type: .defaultType(pilledCorner: true)) { [weak self] in
                 self?.buttonAction?()
             }
-            .createView(parentStyle: style)
+                                    .createView(parentStyle: style)
         }
         .background {
             Image(themedImageBaseName: "texture", bundle: .dydxView)
