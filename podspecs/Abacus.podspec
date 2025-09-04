@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'Abacus'
-spec.version = '1.14.9'
+spec.version = '1.14.11'
     spec.homepage                 = 'https://github.com/dydxprotocol/v4-abacus'
     spec.source                   = { :git => "git@github.com:dydxprotocol/v4-abacus.git", :tag => "v#{spec.version}" }
     spec.authors                  = ''
@@ -36,7 +36,7 @@ spec.version = '1.14.9'
                     rm -rf $PRODUCT_MODULE_NAME
                     git clone git@github.com:dydxprotocol/v4-abacus.git --branch v#{spec.version} $PRODUCT_MODULE_NAME
                     
-                    "$REPO_ROOT/gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
+                    "$REPO_ROOT/gradlew" -p "$REPO_ROOT" ${KOTLIN_PROJECT_PATH}syncFramework \
                         -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME \
                         -Pkotlin.native.cocoapods.archs="$ARCHS" \
                         -Pkotlin.native.cocoapods.configuration="$CONFIGURATION"
@@ -49,7 +49,7 @@ spec.version = '1.14.9'
                     mkdir $TARGET_FRAMEWORK
                     cp -rf $ABACUS_FRAMEWORK/* $TARGET_FRAMEWORK
                 else
-                    "$REPO_ROOT/gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
+                    "$REPO_ROOT/gradlew" -p "$REPO_ROOT" ${KOTLIN_PROJECT_PATH}syncFramework \
                         -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME \
                         -Pkotlin.native.cocoapods.archs="$ARCHS" \
                         -Pkotlin.native.cocoapods.configuration="$CONFIGURATION"
