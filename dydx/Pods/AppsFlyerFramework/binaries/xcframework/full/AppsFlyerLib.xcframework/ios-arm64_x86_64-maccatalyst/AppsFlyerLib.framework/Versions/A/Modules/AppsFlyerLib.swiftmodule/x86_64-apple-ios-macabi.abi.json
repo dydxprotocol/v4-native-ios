@@ -1557,6 +1557,7 @@
         "usr": "c:@M@AppsFlyerLib@objc(cs)AppsFlyerDMAService",
         "mangledName": "$s12AppsFlyerLib0aB10DMAServiceC",
         "moduleName": "AppsFlyerLib",
+        "objc_name": "AppsFlyerDMAService",
         "declAttributes": [
           "Final",
           "ObjCMembers",
@@ -2091,6 +2092,7 @@
         "usr": "c:@M@AppsFlyerLib@objc(cs)AppsFlyerConsent",
         "mangledName": "$s12AppsFlyerLib0aB7ConsentC",
         "moduleName": "AppsFlyerLib",
+        "objc_name": "AppsFlyerConsent",
         "declAttributes": [
           "AccessControl",
           "Final",
@@ -2724,105 +2726,105 @@
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerDMAService.swift",
       "kind": "BooleanLiteral",
-      "offset": 300,
+      "offset": 326,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerDMAService.swift",
       "kind": "StringLiteral",
-      "offset": 148,
+      "offset": 174,
       "length": 19,
       "value": "\"AppsFlyerLib.AppsFlyerDMAService\""
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 265,
+      "offset": 289,
       "length": 21,
       "value": "\"isUserSubjectToGDPR\""
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 331,
+      "offset": 355,
       "length": 24,
       "value": "\"hasConsentForDataUsage\""
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 409,
+      "offset": 433,
       "length": 33,
       "value": "\"hasConsentForAdsPersonalization\""
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 487,
+      "offset": 511,
       "length": 24,
       "value": "\"hasConsentForAdStorage\""
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 674,
+      "offset": 698,
       "length": 52,
       "value": "\"Appsflyer Consent Data: isUserSubjectToGDPR is nil\""
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "BooleanLiteral",
-      "offset": 751,
+      "offset": 775,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 1009,
+      "offset": 1033,
       "length": 55,
       "value": "\"Appsflyer Consent Data: hasConsentForDataUsage is nil\""
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "BooleanLiteral",
-      "offset": 1089,
+      "offset": 1113,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "StringLiteral",
-      "offset": 1377,
+      "offset": 1401,
       "length": 64,
       "value": "\"Appsflyer Consent Data: hasConsentForAdsPersonalization is nil\""
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "BooleanLiteral",
-      "offset": 1466,
+      "offset": 1490,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "BooleanLiteral",
-      "offset": 2125,
+      "offset": 2149,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "BooleanLiteral",
-      "offset": 3985,
+      "offset": 4009,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/ec2-user\/builds\/t3_Q67Ns\/0\/mobile\/ios\/appsflyer.sdk.ios\/AppsFlyerLib\/AppsFlyerLib\/CMP\/AppsFlyerConsent.swift",
       "kind": "Dictionary",
-      "offset": 4309,
+      "offset": 4333,
       "length": 3,
       "value": "[]"
     }

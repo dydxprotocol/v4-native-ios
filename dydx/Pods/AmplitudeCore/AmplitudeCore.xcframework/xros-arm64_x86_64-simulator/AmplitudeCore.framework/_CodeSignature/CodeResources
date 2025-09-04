@@ -6,51 +6,51 @@
 	<dict>
 		<key>Headers/AmplitudeCore-Swift.h</key>
 		<data>
-		1ZntJcj0MPMi+dr6EXXh7NS8//U=
+		YJeZVXiSbHtRujqKONUgPYw8Q/E=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		SSUhiq9913ibXFsmt1kISRhd19w=
+		VLiIWw0tIuV8P1JsUlvhVhsEzbo=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.abi.json</key>
 		<data>
-		Zalk0jMqL66f7xbB8OcFcLBfRo8=
+		zBmmNc6FnRl57XGTAyfoXn9H8PI=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.private.swiftinterface</key>
 		<data>
-		wVx3PBmyIoEN3fySbMdNZotlnnU=
+		7vJLFFAJwMAAbwSK6SgE4s2dPnw=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.swiftdoc</key>
 		<data>
-		hq8NsyJJPSlzdBLv5wVNIJ1jIB8=
+		VKYPtAMhZY1gvzI7gGMUcWsEW2g=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.swiftinterface</key>
 		<data>
-		wVx3PBmyIoEN3fySbMdNZotlnnU=
+		7vJLFFAJwMAAbwSK6SgE4s2dPnw=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.swiftmodule</key>
 		<data>
-		WJ8oddVn8m9EZc6V/X9XHm6gTyo=
+		kzcwTwFrQM0yo7NUI/d5h6tOSyE=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.abi.json</key>
 		<data>
-		Zalk0jMqL66f7xbB8OcFcLBfRo8=
+		zBmmNc6FnRl57XGTAyfoXn9H8PI=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.private.swiftinterface</key>
 		<data>
-		CPNoY9w4l0CaoG2Ok7N6qgZi+kk=
+		7sPp3O0mE80mzRwv2yUkr4K9Y3g=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.swiftdoc</key>
 		<data>
-		DaUoMvnQOtAiHo1MIezFGWyjhU0=
+		2aS3J5+n7WjshbI3GEUMKJOmaT8=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.swiftinterface</key>
 		<data>
-		CPNoY9w4l0CaoG2Ok7N6qgZi+kk=
+		7sPp3O0mE80mzRwv2yUkr4K9Y3g=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.swiftmodule</key>
 		<data>
-		yylrzI5KPEGxG++HSe5fSJw/2sc=
+		PihBVqHmQmzvTk6N41IcW2sEAwM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -63,77 +63,77 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			cZlbovSx53UwdZVCFI6No0AZ2gfo7TWMVYwrR2ShQ/k=
+			sjS9L6k94yaEzt+xA1dz0VgDr8KhSWqGd2DbcOiG3Ls=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5rLt3IsbJRTst48YA4521a3UrDtw400SPdP172u/WtE=
+			AIpLaEbEvjqrvcL1xgdjSU0A3NODIONeKK9OwKlWh2s=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			MSepG+pZVvGMu6Z+9Cr2W862yMCqBu6Y/JGv1LafSRQ=
+			QSNM151wXnHBNenc+056mk/JGq1ApcJAPIVYH9/QhOw=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yjS2GYz1KA+s0Nez221GQqo3sHqeZOq9qjG86D0I0+c=
+			pyKawCeMSDRJNG+M/Ybs3wtpYJMBTL4wmb7VLJqwQJU=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			MSepG+pZVvGMu6Z+9Cr2W862yMCqBu6Y/JGv1LafSRQ=
+			QSNM151wXnHBNenc+056mk/JGq1ApcJAPIVYH9/QhOw=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			JqtStdNMWW/yynMkDeS0gThtr6RGbIap1YQ53EwjykQ=
+			cT6lyiI2AdldonRUHDk6thDsQ6gQhVvaBwVOp9VVoMo=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5rLt3IsbJRTst48YA4521a3UrDtw400SPdP172u/WtE=
+			AIpLaEbEvjqrvcL1xgdjSU0A3NODIONeKK9OwKlWh2s=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+4IHTwLNcbI7IDARiucx0b4CI/7cbvZkKwgPjLItnMU=
+			79B0WxJm76lqYfiO9ESx08tDUCMlJyxQ+PLMxC8KgzQ=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+eRyCAF6t+e4QCxxkBRHIdu3DhIPyEc51IWqPm7xt+g=
+			tiFTDGU2UQEEc0WvKN81p6ZGv+j7iC0hyDBIxg34dkg=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+4IHTwLNcbI7IDARiucx0b4CI/7cbvZkKwgPjLItnMU=
+			79B0WxJm76lqYfiO9ESx08tDUCMlJyxQ+PLMxC8KgzQ=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			8oj3P1hVG4e+0ja+Q+nnOKiEau+neCNfWVSm8t0NyxY=
+			UI88N0535crl87k1oVh5K4wwJ0aNgp0L0JTFsKN9jJs=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

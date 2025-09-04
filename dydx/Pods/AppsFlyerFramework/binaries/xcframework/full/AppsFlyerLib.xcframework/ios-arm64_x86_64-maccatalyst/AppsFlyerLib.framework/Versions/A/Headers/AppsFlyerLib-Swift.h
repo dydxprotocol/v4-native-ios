@@ -302,7 +302,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class NSNumber;
 @class NSCoder;
 
-SWIFT_CLASS("_TtC12AppsFlyerLib16AppsFlyerConsent")
+SWIFT_CLASS_NAMED("AppsFlyerConsent")
 @interface AppsFlyerConsent : NSObject <NSCoding>
 @property (nonatomic, readonly) BOOL isUserSubjectToGDPR;
 @property (nonatomic, readonly) BOOL hasConsentForDataUsage;
@@ -629,7 +629,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class NSNumber;
 @class NSCoder;
 
-SWIFT_CLASS("_TtC12AppsFlyerLib16AppsFlyerConsent")
+SWIFT_CLASS_NAMED("AppsFlyerConsent")
 @interface AppsFlyerConsent : NSObject <NSCoding>
 @property (nonatomic, readonly) BOOL isUserSubjectToGDPR;
 @property (nonatomic, readonly) BOOL hasConsentForDataUsage;

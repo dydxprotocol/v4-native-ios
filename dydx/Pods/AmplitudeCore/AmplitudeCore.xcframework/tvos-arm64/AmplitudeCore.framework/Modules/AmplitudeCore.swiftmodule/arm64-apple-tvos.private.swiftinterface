@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.2 effective-5.10 (swiftlang-6.0.2.1.2 clang-1600.0.26.4)
-// swift-module-flags: -target arm64-apple-tvos11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name AmplitudeCore
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)
+// swift-module-flags: -target arm64-apple-tvos11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name AmplitudeCore
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1
 import Combine
 import Foundation
 import OSLog
@@ -65,7 +65,6 @@ final public class OSLogger : AmplitudeCore.CoreLogger {
   final public func log(_ logLevel: AmplitudeCore.LogLevel, _ message: Swift.String)
   @objc deinit
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public protocol AnalyticsClient<Identity> : AnyObject {
   associatedtype Identity : AmplitudeCore.AnalyticsIdentity
@@ -74,16 +73,6 @@ public protocol AnalyticsClient<Identity> : AnyObject {
   var optOut: Swift.Bool { get }
   func track(eventType: Swift.String, eventProperties: [Swift.String : Any]?)
 }
-#else
-@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-public protocol AnalyticsClient : AnyObject {
-  associatedtype Identity : AmplitudeCore.AnalyticsIdentity
-  var identity: Self.Identity { get }
-  var sessionId: Swift.Int64 { get }
-  var optOut: Swift.Bool { get }
-  func track(eventType: Swift.String, eventProperties: [Swift.String : Any]?)
-}
-#endif
 public protocol AnalyticsEvent {
   var userId: Swift.String? { get }
   var deviceId: Swift.String? { get }
@@ -146,6 +135,7 @@ public actor RemoteConfigClient : ObjectiveC.NSObject {
   public enum RemoteConfigError : Swift.Error {
     case notInCache
     case invalidServerURL
+    case invalidApiKey
     case badResponse
     case preInit
     case cancelled

@@ -8,7 +8,7 @@ import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class AppsFlyerConsent : ObjectiveC.NSObject, Foundation.NSCoding {
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc(AppsFlyerConsent) @objcMembers final public class AppsFlyerConsent : ObjectiveC.NSObject, Foundation.NSCoding {
   @objc final public var isUserSubjectToGDPR: Swift.Bool {
     @objc get
   }

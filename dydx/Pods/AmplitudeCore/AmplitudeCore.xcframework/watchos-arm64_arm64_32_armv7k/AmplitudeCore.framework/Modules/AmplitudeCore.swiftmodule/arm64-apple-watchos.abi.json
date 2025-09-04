@@ -3775,6 +3775,43 @@
               },
               {
                 "kind": "Var",
+                "name": "invalidApiKey",
+                "printedName": "invalidApiKey",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(AmplitudeCore.RemoteConfigClient.RemoteConfigError.Type) -> AmplitudeCore.RemoteConfigClient.RemoteConfigError",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "RemoteConfigError",
+                        "printedName": "AmplitudeCore.RemoteConfigClient.RemoteConfigError",
+                        "usr": "s:13AmplitudeCore18RemoteConfigClientC0cD5ErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "AmplitudeCore.RemoteConfigClient.RemoteConfigError.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "RemoteConfigError",
+                            "printedName": "AmplitudeCore.RemoteConfigClient.RemoteConfigError",
+                            "usr": "s:13AmplitudeCore18RemoteConfigClientC0cD5ErrorO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:13AmplitudeCore18RemoteConfigClientC0cD5ErrorO13invalidApiKeyyA2EmF",
+                "mangledName": "$s13AmplitudeCore18RemoteConfigClientC0cD5ErrorO13invalidApiKeyyA2EmF",
+                "moduleName": "AmplitudeCore"
+              },
+              {
+                "kind": "Var",
                 "name": "badResponse",
                 "printedName": "badResponse",
                 "children": [
@@ -5654,63 +5691,63 @@
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "StringLiteral",
-      "offset": 1074,
+      "offset": 1101,
       "length": 44,
       "value": "\"https:\/\/sr-client-cfg.amplitude.com\/config\""
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "StringLiteral",
-      "offset": 1152,
+      "offset": 1179,
       "length": 47,
       "value": "\"https:\/\/sr-client-cfg.eu.amplitude.com\/config\""
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "IntegerLiteral",
-      "offset": 1232,
+      "offset": 1259,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "IntegerLiteral",
-      "offset": 1283,
+      "offset": 1310,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "IntegerLiteral",
-      "offset": 1342,
+      "offset": 1369,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "IntegerLiteral",
-      "offset": 1346,
+      "offset": 1373,
       "length": 2,
       "value": "60"
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "Array",
-      "offset": 1382,
-      "length": 153,
-      "value": "[\"sessionReplay.sr_ios_privacy_config\", \"sessionReplay.sr_ios_sampling_config\", \"analyticsSDK.browserSDK\"]"
+      "offset": 1409,
+      "length": 149,
+      "value": "[\"sessionReplay.sr_ios_privacy_config\", \"sessionReplay.sr_ios_sampling_config\", \"analyticsSDK.iosSDK\"]"
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "StringLiteral",
-      "offset": 2504,
+      "offset": 2527,
       "length": 42,
       "value": "\"com.amplitude.sessionreplay.remoteconfig\""
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "Array",
-      "offset": 2905,
+      "offset": 2928,
       "length": 2,
       "value": "[]"
     },
@@ -5724,14 +5761,14 @@
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "StringLiteral",
-      "offset": 15499,
+      "offset": 15636,
       "length": 8,
       "value": "\"config\""
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "StringLiteral",
-      "offset": 15539,
+      "offset": 15676,
       "length": 11,
       "value": "\"lastFetch\""
     },
