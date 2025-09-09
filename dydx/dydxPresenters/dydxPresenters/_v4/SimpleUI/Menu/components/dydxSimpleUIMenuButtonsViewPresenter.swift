@@ -45,16 +45,12 @@ class dydxSimpleUIMenuButtonsViewPresenter: HostedViewPresenter<dydxSimpleUIMenu
     private func updateViewModel(wallet: dydxWalletInstance?, freeCollateral: Double?) {
         if wallet != nil {
             viewModel?.depositAction = { [weak self] in
-                self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) {_, _ in
-                    self?.navigate(to: RoutingRequest(path: "/transfer/deposit", params: nil), animated: true, completion: nil)
-                }
+                self?.navigate(to: RoutingRequest(path: "/transfer/deposit", params: nil), animated: true, completion: nil)
             }
         }
         if freeCollateral ?? 0 > 0 {
             viewModel?.transferAction = { [weak self] in
-                self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) {_, _ in
-                    self?.navigate(to: RoutingRequest(path: "/transfer/withdrawal", params: nil), animated: true, completion: nil)
-                }
+                self?.navigate(to: RoutingRequest(path: "/transfer/selector", params: nil), animated: true, completion: nil)
             }
         }
     }

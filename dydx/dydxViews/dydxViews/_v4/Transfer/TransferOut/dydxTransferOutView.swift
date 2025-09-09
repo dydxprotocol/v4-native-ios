@@ -103,7 +103,9 @@ private struct dydxTransferOutView: View {
             }
         }
         .padding(.horizontal)
+        .padding(.bottom, max((viewModel.safeAreaInsets?.bottom ?? 0), 16))
         .themeColor(background: .layer2)
+        .ignoresSafeArea(edges: [.bottom])
     }
 }
 

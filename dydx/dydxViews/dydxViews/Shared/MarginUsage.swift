@@ -86,7 +86,6 @@ public class MarginUsageModel: PlatformViewModel {
                         .padding(self.lineWidth)
                     if self.displayOption == .iconAndValue {
                         Text(marginPercent ?? "")
-                            .themeStyle(style: style)
                             .themeFont(fontType: .number, fontSize: .small)
                             .lineLimit(1)
                     }
