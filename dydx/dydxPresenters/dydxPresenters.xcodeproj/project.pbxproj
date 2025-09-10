@@ -559,7 +559,7 @@
 		0257C78D2A00485500F6160B /* SparklineDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineDataPoint.swift; sourceTree = "<group>"; };
 		0258BA22299294BF0098E1BE /* dydxProfileViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileViewBuilder.swift; sourceTree = "<group>"; };
 		0258BA2829929E870098E1BE /* dydxProfileButtonsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileButtonsViewPresenter.swift; sourceTree = "<group>"; };
-		025D04152E31E7610015E1D7 /* dydxTurnkeyAuthViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTurnkeyAuthViewBuilder.swift; sourceTree = "<group>"; };
+		025D04152E31E7610015E1D7 /* dydxTurnkeyAuthViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTurnkeyAuthViewBuilder.swift; sourceTree = "<group>"; tabWidth = 3; };
 		025D22D528F65E1B00C4ADAE /* dydxMarketStatsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketStatsViewPresenter.swift; sourceTree = "<group>"; };
 		0262EF9929D79EE4009889E2 /* Wallets2ViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallets2ViewBuilder.swift; sourceTree = "<group>"; };
 		0262F2D429DB4891009889E2 /* WalletAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAction.swift; sourceTree = "<group>"; };
