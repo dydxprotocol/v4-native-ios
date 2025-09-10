@@ -61,7 +61,7 @@ open class ReactNativeHostingController: UIViewController {
     private func setupRootView() {
         var strings = [String: String]()
         for entry in stringKeys {
-            strings[entry.path] = DataLocalizer.localize(path: entry.path, params: entry.params)
+            strings[entry.path] = entry.localized ?? DataLocalizer.localize(path: entry.path, params: entry.params)
         }
         var props: [String: Any] = (initialProperties ?? [:])
         props["strings"] = strings

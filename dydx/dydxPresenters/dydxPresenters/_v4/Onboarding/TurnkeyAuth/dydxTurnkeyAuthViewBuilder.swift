@@ -49,6 +49,12 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
         guard let indexerUrl = AbacusStateManager.shared.environment?.endpoints.indexers?.first?.api else {
             fatalError((#file as NSString).lastPathComponent + ": indexerUrl is missing")
         }
+        guard let tosUrl = AbacusStateManager.shared.environment?.links?.tos else {
+            fatalError((#file as NSString).lastPathComponent + ": tos is missing")
+        }
+        guard let privacyUrl = AbacusStateManager.shared.environment?.links?.privacy else {
+            fatalError((#file as NSString).lastPathComponent + ": privacy is missing")
+        }
 
         let initialProperties: [String: Any] = [
             "googleClientId": googleClientId,
@@ -59,6 +65,18 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
             "deploymentUri": AbacusStateManager.shared.deploymentUri,
             "theme": dydxThemeSettings.shared.currentThemeType.rnThemeIdentifier
         ]
+
+        // The terms string contains HTML links, so we need to construct it here
+        let tos = "<a href=\"\(tosUrl)\">\(DataLocalizer.localize(path: "APP.HEADER.TERMS_OF_USE"))</a>"
+        let privacy = "<a href=\"\(privacyUrl)\">\(DataLocalizer.localize(path: "APP.ONBOARDING.PRIVACY_POLICY"))</a>"
+        let terms = DataLocalizer.localize(
+            path: "APP.ONBOARDING.TOS_SHORT",
+            params: [
+                "TERMS_LINK": tos,
+                "PRIVACY_POLICY_LINK": privacy
+            ]
+        )
+
         let stringKeys: [DataLocalizer.Entry] = [
             .init(path: "APP.TURNKEY_ONBOARD.SIGN_IN_TITLE"),
             .init(path: "APP.TURNKEY_ONBOARD.SIGN_IN_DESCRIPTION"),
@@ -70,9 +88,12 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
             .init(path: "APP.TURNKEY_ONBOARD.CHECK_EMAIL_TITLE"),
             .init(path: "APP.TURNKEY_ONBOARD.CHECK_EMAIL_DESCRIPTION"),
             .init(path: "APP.TURNKEY_ONBOARD.RESEND"),
-            .init(path: "APP.TURNKEY_ONBOARD.CONTINUE_SIGN_IN_TITLE"),
+            .init(path: "APP.TURNKEY_ONBOARD.SIGN_IN_GOOGLE"),
+            .init(path: "APP.TURNKEY_ONBOARD.SIGN_IN_APPLE"),
+            .init(path: "APP.TURNKEY_ONBOARD.SIGN_IN_EMAIL"),
             .init(path: "APP.TURNKEY_ONBOARD.CONTINUE_SIGN_IN_DESCRIPTION"),
-            .init(path: "APP.GENERAL.OR")
+            .init(path: "APP.GENERAL.OR"),
+            .init(path: "APP.ONBOARDING.TOS_SHORT", localized: terms)
         ]
         super.init(moduleName: "TurnkeyLogin",
                    initialProperties: initialProperties,
@@ -88,9 +109,6 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
         super.viewDidLoad()
 
         TurnkeyBridgeManager.shared.delegate = self
-//        TurnkeyBridgeManager.shared.testFunction { result in
-//            print(result)
-//        }
     }
 
     //

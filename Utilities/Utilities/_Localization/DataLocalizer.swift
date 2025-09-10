@@ -24,13 +24,15 @@ public class DataLocalizer {
     }
     
     public struct Entry {
-        public init(path: String, params: [String : String]? = nil) {
+        public init(path: String, params: [String : String]? = nil, localized: String? = nil) {
             self.path = path
             self.params = params
+            self.localized = localized
         }
         
         public let path: String
         public let params: [String: String]?
+        public let localized: String? // this takes higher priority
     }
 }
 

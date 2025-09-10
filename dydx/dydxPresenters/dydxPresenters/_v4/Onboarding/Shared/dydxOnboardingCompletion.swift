@@ -16,7 +16,7 @@ struct dydxOnboardCompletion {
                        onboardingAnalytics: OnboardingAnalytics = .init()) {
         if result.cosmoAddress != nil && result.dydxMnemonic != nil {
             onboardingAnalytics.log(step: .keyDerivation)
-            if walletInstance == nil {
+            if walletInstance == nil && result.walletId != "turnkey" {
                 let accepted: (() -> Void) = {
                     Router.shared?.navigate(to: RoutingRequest(path: "/action/post_onboarding", params: ["result": result]), animated: true, completion: nil)
                 }
