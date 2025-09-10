@@ -5,6 +5,7 @@ import {
   ScrollView,
   DeviceEventEmitter,
   Modal,
+  ActivityIndicator,
 } from 'react-native';
 import { Button } from "./ui/button";
 import { Text } from './ui/text';
@@ -19,13 +20,15 @@ import { useEmbeddedKeyAndNonce } from './useEmbeddedKeyAndNonce';
 import { Image } from 'react-native';
 import { currentTheme } from '../../rn_style/themes/currentTheme';
 import { DydxTurnkeySession } from '../providers/dydxTurnkeySession';
+import RenderHTML from "react-native-render-html";
+import { useWindowDimensions, StyleSheet } from "react-native";
 
 const renderError = () => {
   const {
     state,
   } = useAuthRelay();
 
-  if (state.error && state.loading === null) {
+  if (state.error !== "" && state.loading === null) {
     return (
       <Text style={{ color: currentTheme.colors.red, marginBottom: 20, textAlign: 'center' }}>
         {state.error}
@@ -101,7 +104,16 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
   const styles = useThemedStyles(currentTheme);
 
   const [isEmailFocused, setIsEmailFocused] = useState(false);
-  
+
+  const { state } = useAuthRelay();
+  const hasError = state.error !== "" && state.loading === null;
+  const showContinueModal = continueModal && hasError === false;
+
+  const { width } = useWindowDimensions();
+  const source = {
+    html: configs.strings["APP.ONBOARDING.TOS_SHORT"],
+  };
+
   return (
     <ScrollView
       bounces={false} // iOS
@@ -110,7 +122,7 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
     >
       <View style={styles.content}>
         <ContinueSignInModal
-          visible={continueModal}
+          visible={showContinueModal}
           onClose={() => setContinueModal(false)}
           configs={configs}
           currentTheme={currentTheme}
@@ -211,6 +223,18 @@ export const Auth = ({ configs }: { configs: TurnkeyConfigs }) => {
               resizeMode="contain"
             />
           </TouchableOpacity>
+
+          <RenderHTML
+            contentWidth={width * 0.9} // 90% of screen width
+            source={source}
+            baseStyle={{ textAlign: "center" }} // center text inside
+
+            tagsStyles={{
+              body: { fontFamily: "Satoshi-Regular", fontSize: 11, color: currentTheme.colors.textTertiary },
+              a: { color: currentTheme.colors.purple }, // links color
+            }}
+          />
+
         </View>
       </View>
     </ScrollView>
@@ -240,71 +264,71 @@ const ContinueSignInModal = ({
   styles,
   providerName,
 }: ContinueSignInModalProps) => {
-  const iconSource = providerName
-    ? iconMap[providerName.toLowerCase()]
-    : undefined;
-
+  var signInTitle: string
+  switch (providerName?.toLowerCase()) {
+    case "google":
+      signInTitle = configs.strings['APP.TURNKEY_ONBOARD.SIGN_IN_GOOGLE'];
+      break;
+    case "apple":
+      signInTitle = configs.strings['APP.TURNKEY_ONBOARD.SIGN_IN_APPLE'];
+      break;
+    case "email":
+      signInTitle = configs.strings['APP.TURNKEY_ONBOARD.SIGN_IN_EMAIL'];
+      break;
+    default:
+      signInTitle = configs.strings['APP.TURNKEY_ONBOARD.CONTINUE_SIGN_IN_TITLE'];
+  }
   return (
     <Modal
       visible={visible}
-      transparent
-      animationType="fade"
+      animationType="slide"
       onRequestClose={onClose}
+      transparent={false} // full overlay
     >
       <View
-        style={[
-          styles.modalOverlay,
-          { flex: 1, justifyContent: 'center', alignItems: 'center' },
-        ]}
+        style={{
+          flex: 1,
+          backgroundColor: currentTheme.colors.layer1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
       >
-        <View style={[styles.modalDialog, { width: 300, alignItems: 'center' }]}>
-          <View style={{ width: '100%', alignItems: 'flex-end' }}>
-            <Button onPress={onClose}>
-              <Image
-                source={require('../../rn_style/assets/x-mark.png')}
-                style={{
-                  width: 16,
-                  height: 16,
-                  tintColor: currentTheme.colors.textPrimary,
-                  marginBottom: 24,
-                }}
-              />
-            </Button>
-          </View>
-
-          {iconSource && (
+        {/* Close button in top-right */}
+        <View style={{ position: 'absolute', top: 40, right: 20 }}>
+          <Button onPress={onClose}>
             <Image
-              source={iconSource}
+              source={require('../../rn_style/assets/x-mark.png')}
               style={{
                 width: 24,
                 height: 24,
-                resizeMode: 'contain',
-                tintColor: currentTheme.colors.textPrimary,
-                marginBottom: 12,
+                tintColor: currentTheme.colors.textSecondary,
               }}
             />
-          )}
-
-          <Text
-            style={{
-              fontSize: currentTheme.fontSizes.medium,
-              color: currentTheme.colors.textPrimary,
-              marginBottom: 8,
-            }}
-          >
-            {configs.strings['APP.TURNKEY_ONBOARD.CONTINUE_SIGN_IN_TITLE']}
-          </Text>
-          <Text
-            style={{
-              fontSize: currentTheme.fontSizes.small,
-              color: currentTheme.colors.textTertiary,
-              textAlign: 'center',
-              marginBottom: 24,
-            }}
-          >
-            {configs.strings['APP.TURNKEY_ONBOARD.CONTINUE_SIGN_IN_DESCRIPTION']}
-          </Text>
+          </Button>
         </View>
+
+        {/* Your overlay content */}
+        <ActivityIndicator size={32} color={currentTheme.colors.purple} />
+
+        <Text
+          style={{
+            fontSize: currentTheme.fontSizes.medium,
+            color: currentTheme.colors.textPrimary,
+            marginBottom: 8,
+          }}
+        >{signInTitle}
+        </Text>
+
+        <Text
+          style={{
+            fontSize: currentTheme.fontSizes.small,
+            color: currentTheme.colors.textTertiary,
+            textAlign: 'center',
+            paddingHorizontal: 24,
+          }}
+        >
+          {configs.strings['APP.TURNKEY_ONBOARD.CONTINUE_SIGN_IN_DESCRIPTION']}
+        </Text>
       </View>
     </Modal>
   );
