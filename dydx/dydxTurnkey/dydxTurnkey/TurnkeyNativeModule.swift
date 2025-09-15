@@ -7,6 +7,7 @@
 
 import React
 import Foundation
+internal import Utilities
 
 @objc(TurnkeyNativeModule)
 class TurnkeyNativeModule: NSObject, RCTBridgeModule {
@@ -78,5 +79,10 @@ class TurnkeyNativeModule: NSObject, RCTBridgeModule {
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.onAppleAuthRequest(nonce: nonce)
         }
+    }
+
+    @objc(onTrackingEvent::)
+    func onTrackingEvent(eventName: String, eventParams: [String: String]) {
+        Tracking.shared?.log(event: eventName, data: eventParams)
     }
 }
