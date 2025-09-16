@@ -55,10 +55,10 @@
             },
             {
                 "title":{
-                    "text":"Privy"
+                    "text":"Moonpay"
                 },
                 "field":{
-                    "field":"ff_privy_ios",
+                    "field":"ff_moonpay_ios",
                     "optional":true,
                     "type" : "bool",
                     "options" : [

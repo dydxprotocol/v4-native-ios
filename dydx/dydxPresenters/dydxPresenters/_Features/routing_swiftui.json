@@ -157,14 +157,6 @@
                     "destination":"dydxPresenters.dydxTurnkeyAuthViewBuilder",
                     "presentation":"prompt"
                 },
-                "/onboard/social":{
-                    "destination":"dydxPresenters.dydxSocialLoginViewBuilder",
-                    "presentation":"prompt"
-                },
-                "/onboard/social/otp":{
-                    "destination":"dydxPresenters.dydxEmailOtpViewBuilder",
-                    "presentation":"push"
-                },
                 "/onboard/deposit_prompt":{
                     "destination":"dydxPresenters.dydxDepositPromptViewBuilder",
                     "presentation":"half"

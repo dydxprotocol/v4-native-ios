@@ -11,10 +11,10 @@
 		0207D5142DC428D9005773B5 /* Privy in Frameworks */ = {isa = PBXBuildFile; productRef = 0207D5132DC428D9005773B5 /* Privy */; };
 		0207FED92D2F5B50004C2C9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0207FED82D2F5B50004C2C9F /* Launch Screen.storyboard */; };
 		0217A0A129D78BD5007F31C5 /* dydxBiometricsLocalAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */; };
-		022F35CD28D39304000BCA41 /* dydxPresenters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0226DEBB2DA9BE80009243C7 /* dydxFiatRamp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0226DEBA2DA9BE70009243C7 /* dydxFiatRamp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0226DEBE2DA9C018009243C7 /* MoonPaySdk in Frameworks */ = {isa = PBXBuildFile; productRef = 0226DEBD2DA9C018009243C7 /* MoonPaySdk */; };
 		0226DEC02DA9C025009243C7 /* MoonPaySdk in Frameworks */ = {isa = PBXBuildFile; productRef = 0226DEBF2DA9C025009243C7 /* MoonPaySdk */; };
+		022F35CD28D39304000BCA41 /* dydxPresenters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		02439D1129B03F6700A083FE /* dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; };
 		02439D1229B03F7B00A083FE /* dydxCartera.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		024B7A9628B7F6CC00F7C386 /* dydxViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 024B7A9428B7F6CC00F7C386 /* dydxViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -863,9 +863,9 @@
 		020F66BA2858F29300E2D072 /* dydxNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxNotificationService.swift; sourceTree = "<group>"; };
 		020F66BC2858F29300E2D072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxBiometricsLocalAuthenticator.swift; sourceTree = "<group>"; };
-		023890FC2E284A1F00887A80 /* dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0226DEB02DA9BE32009243C7 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = ../dydx/dydxFiatRamp/dydxFiatRamp.xcodeproj; sourceTree = "<group>"; };
 		0226DEB32DA9BE70009243C7 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxFiatRamp/dydxFiatRamp.xcodeproj"; sourceTree = "<absolute>"; };
+		023890FC2E284A1F00887A80 /* dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		02439CCC29B03F4C00A083FE /* dydxCartera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxCartera.xcodeproj; path = ../dydx/dydxCartera/dydxCartera.xcodeproj; sourceTree = "<group>"; };
 		024B7A9428B7F6CC00F7C386 /* dydxViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		024B7AC928B7F73700F7C386 /* dydxViews.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxViews.xcodeproj; path = ../dydx/dydxViews/dydxViews.xcodeproj; sourceTree = "<group>"; };

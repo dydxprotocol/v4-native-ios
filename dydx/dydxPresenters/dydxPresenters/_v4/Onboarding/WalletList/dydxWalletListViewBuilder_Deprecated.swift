@@ -145,7 +145,7 @@ class dydxWalletListViewPresenter_Deprecated: HostedViewPresenter<dydxWalletList
         }
 
         let debugScan = UIDevice.current.isSimulator ? [debugScanViewModel] : []
-        let social = dydxBoolFeatureFlag.privy_ios.isEnabled ? [socialViewModel] : []
+        let social = dydxBoolFeatureFlag.moonpay_ios.isEnabled ? [socialViewModel] : []
         let allWallets = installedWalletViewModels + uninstalledWalletViewModels
         if mobileOnly {
             viewModel?.items = [wcModalViewModel] + social + allWallets

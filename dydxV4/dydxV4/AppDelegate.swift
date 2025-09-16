@@ -80,10 +80,6 @@ class AppDelegate: CommonAppDelegate {
     
     override func injectFeatures(completion: @escaping () -> Void) {
         super.injectFeatures(completion: completion)
-        
-        if dydxBoolFeatureFlag.privy_ios.isEnabled {
-            injectPrivy()
-        }
     }
 
     override open func injection() -> ParticlesPlatformAppInjection {
@@ -177,18 +173,5 @@ class AppDelegate: CommonAppDelegate {
             Console.shared.log("CarteraConfig SDK throwing error: \(error)")
             return true
         }
-    }
-    
-    open func injectPrivy() {
-        Console.shared.log("injectPrivy")
-        guard let privyAppId = CredientialConfig.shared.credential(for: "privyAppId") else {
-            assertionFailure("privyAppId is missing")
-            return
-        }
-        guard let privyClientId = CredientialConfig.shared.credential(for: "privyClientId") else {
-            assertionFailure("privyClientId is missing")
-            return
-        }
-        PrivyAuthManager.shared = PrivyAuthManager(appId: privyAppId, appClientId: privyClientId)
     }
 }

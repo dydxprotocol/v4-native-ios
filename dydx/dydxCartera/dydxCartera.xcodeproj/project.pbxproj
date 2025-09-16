@@ -12,7 +12,6 @@
 		02308BF82DC441A000EECD8F /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 0294C5FF2D790BD900F62FB5 /* Cartera */; };
 		02308BF92DC441A000EECD8F /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 0294C6022D790C3C00F62FB5 /* Cartera */; };
 		02308BFA2DC441A000EECD8F /* SolanaSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02886C762D84B766005EF461 /* SolanaSwift */; };
-		02308D272DC4662F00EECD8F /* dydxPrivyWalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02308D262DC4662F00EECD8F /* dydxPrivyWalletSetup.swift */; };
 		023F7F082AD09725006CC4CD /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647D11422A9FF29100DA7815 /* Utilities.framework */; platformFilter = ios; };
 		023F7F0D2AD09732006CC4CD /* ParticlesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647D11D12AA0EE8D00DA7815 /* ParticlesKit.framework */; platformFilter = ios; };
 		02439C9029B03E8A00A083FE /* dydxCartera.docc in Sources */ = {isa = PBXBuildFile; fileRef = 02439C8F29B03E8A00A083FE /* dydxCartera.docc */; };
@@ -21,13 +20,12 @@
 		02439C9C29B03E8A00A083FE /* dydxCartera.h in Headers */ = {isa = PBXBuildFile; fileRef = 02439C8E29B03E8A00A083FE /* dydxCartera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		02439E4429B04D2700A083FE /* dydxV4WalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02439E4329B04D2700A083FE /* dydxV4WalletSetup.swift */; };
 		024F0E622D88B9310001D799 /* SolanaSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 024F0E612D88B9310001D799 /* SolanaSwift */; };
+		0260AD8F2E79FEA900A6E560 /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 021A1DC92AD34103008A3D73 /* Cartera */; };
 		0274248429E74CA5004C89AE /* Parser+Eth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248329E74CA5004C89AE /* Parser+Eth.swift */; };
 		0274248729E76718004C89AE /* EthConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248629E76718004C89AE /* EthConversions.swift */; };
 		0274248929E78576004C89AE /* ERC20Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248829E78576004C89AE /* ERC20Token.swift */; };
 		0274248B29E785AD004C89AE /* ContractFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274248A29E785AD004C89AE /* ContractFunction.swift */; };
 		0276AC912D833BA10039919D /* SolanaInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276AC902D833BA10039919D /* SolanaInteractor.swift */; };
-		02844D7D2DC187EF006F51CE /* Privy in Frameworks */ = {isa = PBXBuildFile; productRef = 02844D7C2DC187EF006F51CE /* Privy */; };
-		02844D7F2DC18822006F51CE /* PrivyAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02844D7E2DC18822006F51CE /* PrivyAuthManager.swift */; };
 		0294C8912D7930EB00F62FB5 /* Base58Swift in Frameworks */ = {isa = PBXBuildFile; productRef = 0294C8902D7930EB00F62FB5 /* Base58Swift */; };
 		029E51AA2D08AD3B005D4DC5 /* ABIEncoder+Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E51A62D08AD3B005D4DC5 /* ABIEncoder+Static.swift */; };
 		029E51AB2D08AD3B005D4DC5 /* ABIFunctionEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029E51A82D08AD3B005D4DC5 /* ABIFunctionEncodable.swift */; };
@@ -151,7 +149,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02308D262DC4662F00EECD8F /* dydxPrivyWalletSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPrivyWalletSetup.swift; sourceTree = "<group>"; };
 		023F7EFB2AD09703006CC4CD /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		023F7EFD2AD09703006CC4CD /* Pods_iOS_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_iOS_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		023F7EFF2AD09703006CC4CD /* Pods_iOS_UtilitiesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_iOS_UtilitiesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,7 +165,6 @@
 		0276AC902D833BA10039919D /* SolanaInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolanaInteractor.swift; sourceTree = "<group>"; };
 		027C74252A032E56004DF574 /* ParticlesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticlesKit.xcodeproj; path = ../../ParticlesKit/ParticlesKit.xcodeproj; sourceTree = "<group>"; };
 		027C74372A032E5E004DF574 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
-		02844D7E2DC18822006F51CE /* PrivyAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivyAuthManager.swift; sourceTree = "<group>"; };
 		029E51A52D08AD3B005D4DC5 /* ABIDecoder+Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ABIDecoder+Static.swift"; sourceTree = "<group>"; };
 		029E51A62D08AD3B005D4DC5 /* ABIEncoder+Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ABIEncoder+Static.swift"; sourceTree = "<group>"; };
 		029E51A72D08AD3B005D4DC5 /* ABIFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABIFunction.swift; sourceTree = "<group>"; };
@@ -204,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0260AD8F2E79FEA900A6E560 /* Cartera in Frameworks */,
 				02308BFA2DC441A000EECD8F /* SolanaSwift in Frameworks */,
 				02308BF92DC441A000EECD8F /* Cartera in Frameworks */,
 				02308BF82DC441A000EECD8F /* Cartera in Frameworks */,
@@ -216,7 +213,6 @@
 				380B90E0F0184BA5387AC70A /* Pods_iOS_dydxCartera.framework in Frameworks */,
 				0294C8912D7930EB00F62FB5 /* Base58Swift in Frameworks */,
 				024F0E622D88B9310001D799 /* SolanaSwift in Frameworks */,
-				02844D7D2DC187EF006F51CE /* Privy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,15 +307,6 @@
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		02844D722DC18790006F51CE /* Privy */ = {
-			isa = PBXGroup;
-			children = (
-				02844D7E2DC18822006F51CE /* PrivyAuthManager.swift */,
-				02308D262DC4662F00EECD8F /* dydxPrivyWalletSetup.swift */,
-			);
-			path = Privy;
-			sourceTree = "<group>";
-		};
 		029E51A42D08AD0C005D4DC5 /* web3swift */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,7 +360,6 @@
 		02EF44D229F6F59A00C97746 /* WalletSetup */ = {
 			isa = PBXGroup;
 			children = (
-				02844D722DC18790006F51CE /* Privy */,
 				02EF44EA29F6FE0F00C97746 /* V4 */,
 				02EF44D729F6FA8D00C97746 /* StarkJavascript.swift */,
 				02EF44D329F6F5A700C97746 /* dydxWalletSetup.swift */,
@@ -478,7 +464,6 @@
 				0294C8902D7930EB00F62FB5 /* Base58Swift */,
 				02886C762D84B766005EF461 /* SolanaSwift */,
 				024F0E612D88B9310001D799 /* SolanaSwift */,
-				02844D7C2DC187EF006F51CE /* Privy */,
 				02A50EE02E3424E20086ED2C /* Cartera */,
 				02A50EE32E34252E0086ED2C /* Cartera */,
 			);
@@ -536,7 +521,6 @@
 			packageReferences = (
 				0294C88F2D7930EB00F62FB5 /* XCRemoteSwiftPackageReference "Base58Swift" */,
 				024F0E602D88B9310001D799 /* XCRemoteSwiftPackageReference "solana-swift" */,
-				02844D7B2DC187EF006F51CE /* XCRemoteSwiftPackageReference "privy-ios" */,
 				02A50EE22E34252E0086ED2C /* XCRemoteSwiftPackageReference "cartera-ios" */,
 			);
 			productRefGroup = 02439C8C29B03E8A00A083FE /* Products */;
@@ -680,9 +664,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -721,9 +709,7 @@
 				0274248429E74CA5004C89AE /* Parser+Eth.swift in Sources */,
 				0276AC912D833BA10039919D /* SolanaInteractor.swift in Sources */,
 				02439C9029B03E8A00A083FE /* dydxCartera.docc in Sources */,
-				02308D272DC4662F00EECD8F /* dydxPrivyWalletSetup.swift in Sources */,
 				0274248929E78576004C89AE /* ERC20Token.swift in Sources */,
-				02844D7F2DC18822006F51CE /* PrivyAuthManager.swift in Sources */,
 				02EF44D429F6F5A700C97746 /* dydxWalletSetup.swift in Sources */,
 				029E51C22D08BE51005D4DC5 /* String+Numeric.swift in Sources */,
 				02EF44E429F6FA8D00C97746 /* StarkJavascript.swift in Sources */,
@@ -849,10 +835,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -926,10 +909,7 @@
 				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1082,14 +1062,6 @@
 				kind = branch;
 			};
 		};
-		02844D7B2DC187EF006F51CE /* XCRemoteSwiftPackageReference "privy-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/privy-io/privy-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.9.0;
-			};
-		};
 		0294C88F2D7930EB00F62FB5 /* XCRemoteSwiftPackageReference "Base58Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/heckj/Base58Swift.git";
@@ -1121,11 +1093,6 @@
 		02669B922AD872A300A756AA /* Cartera */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Cartera;
-		};
-		02844D7C2DC187EF006F51CE /* Privy */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 02844D7B2DC187EF006F51CE /* XCRemoteSwiftPackageReference "privy-ios" */;
-			productName = Privy;
 		};
 		02886C762D84B766005EF461 /* SolanaSwift */ = {
 			isa = XCSwiftPackageProductDependency;

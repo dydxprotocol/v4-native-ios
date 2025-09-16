@@ -62,10 +62,10 @@ public class dydxWalletListViewModel: PlatformViewModel {
                         self.phantomView?.createView(parentStyle: style)
                         self.coinbaseView?.createView(parentStyle: style)
                         self.wcModalView?.createView(parentStyle: style)
-
-                        self.createDivider(parentStyle: style)
-
-                        self.socialView?.createView(parentStyle: style)
+//
+//                        self.createDivider(parentStyle: style)
+//
+//                        self.socialView?.createView(parentStyle: style)
 
                         Spacer(minLength: 28)
                     }

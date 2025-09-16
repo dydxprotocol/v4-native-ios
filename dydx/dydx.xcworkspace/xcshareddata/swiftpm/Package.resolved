@@ -1,5 +1,5 @@
 {
-  "originHash" : "a14cd8cd0cf238c3f14b8eeb39c6ef3b8b85ccd9717f97038e6a98dfb08986d0",
+  "originHash" : "d82059fadaea45dac5912dec5e3373e18c3e5b39d58f7c982742c814017b7b6a",
   "pins" : [
     {
       "identity" : "base58swift",
@@ -35,6 +35,24 @@
       "state" : {
         "branch" : "main",
         "revision" : "044dd7436914b5f3bb7267ef2685b13476e1bfab"
+      }
+    },
+    {
+      "identity" : "mobile-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/moonpay/mobile-sdk-ios",
+      "state" : {
+        "revision" : "8f687fee8b6b39d57dc181f22959c746320d93cb",
+        "version" : "1.3.3"
+      }
+    },
+    {
+      "identity" : "percy-xcui-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/percy/percy-xcui-swift",
+      "state" : {
+        "revision" : "a2e9a86dfc3f5b69ef53cbda28a0ea71098c9f77",
+        "version" : "1.0.0"
       }
     },
     {

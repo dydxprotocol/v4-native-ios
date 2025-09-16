@@ -17,7 +17,7 @@ import Cartera
 
 public class dydxWalletListViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
-        if dydxBoolFeatureFlag.privy_ios.isEnabled {
+        if dydxBoolFeatureFlag.moonpay_ios.isEnabled {
             let presenter = dydxWalletListViewPresenter()
             let view = presenter.viewModel?.createView() ?? PlatformViewModel().createView()
             return dydxWalletListViewController(presenter: presenter, view: view, configuration: .fullScreenSheet) as? T
@@ -63,16 +63,16 @@ private class dydxWalletListViewPresenter: HostedViewPresenter<dydxWalletListVie
             updateWallets()
         }
     }
-
-    private let socialViewModel: dydxSocialViewModel = {
-        let viewModel = dydxSocialViewModel()
-        viewModel.onTap = {
-            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: nil), animated: true) {_, _ in
-                Router.shared?.navigate(to: RoutingRequest(path: "/onboard/social", params: nil), animated: true, completion: nil)
-            }
-        }
-        return viewModel
-    }()
+//
+//    private let socialViewModel: dydxSocialViewModel = {
+//        let viewModel = dydxSocialViewModel()
+//        viewModel.onTap = {
+//            Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss", params: nil), animated: true) {_, _ in
+//                Router.shared?.navigate(to: RoutingRequest(path: "/onboard/social", params: nil), animated: true, completion: nil)
+//            }
+//        }
+//        return viewModel
+//    }()
 
     private let desktopSyncViewModel: dydxSyncDesktopViewModel = {
         let viewModel = dydxSyncDesktopViewModel()
@@ -108,12 +108,12 @@ private class dydxWalletListViewPresenter: HostedViewPresenter<dydxWalletListVie
         super.init()
 
         viewModel = dydxWalletListViewModel()
-        viewModel?.syncDesktopView = mobileOnly ? nil : desktopSyncViewModel
+        viewModel?.syncDesktopView = mobileOnly ||  dydxBoolFeatureFlag.turnkey_ios.isEnabled ? nil : desktopSyncViewModel
         viewModel?.debugView = UIDevice.current.isSimulator ? debugScanViewModel : nil
         viewModel?.metamaskView = metamaskViewModel
         viewModel?.phantomView = phantomViewModel
         viewModel?.coinbaseView = coinbaseViewModel
-        viewModel?.socialView = socialViewModel
+       // viewModel?.socialView = socialViewModel
         viewModel?.wcModalView = wcModalViewModel
 
         updateWallets()

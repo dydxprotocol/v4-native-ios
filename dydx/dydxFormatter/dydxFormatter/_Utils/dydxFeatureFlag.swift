@@ -14,7 +14,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     case enable_app_rating
     case showPredictionMarketsUI = "ff_show_prediction_markets_ui"
     case simple_ui = "ff_simple_ui"
-    case privy_ios = "ff_privy_ios"
+    case moonpay_ios = "ff_moonpay_ios"
     case turnkey_ios = "ff_turnkey_ios"
     case rewards_sep_2025 = "ff_rewards_sep_2025"
 
@@ -28,7 +28,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
             return false
         case .simple_ui:
             return true
-        case .privy_ios:
+        case .moonpay_ios:
             return false
         case .turnkey_ios:
             return false
