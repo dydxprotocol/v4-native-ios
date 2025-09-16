@@ -143,7 +143,9 @@ abstract_target 'iOS' do
     project '../PlatformUIJedio/PlatformUIJedio'
     ios_util_pods
     ios_ui_pods
+    swifiui_pods
     abacus_pods
+    react_pods
   end
   
   target 'PlatformUIJedioTests' do
@@ -152,6 +154,7 @@ abstract_target 'iOS' do
     ios_ui_pods
     swifiui_pods
     abacus_pods
+    react_pods
   end
   
   target 'Utilities' do
@@ -312,7 +315,6 @@ abstract_target 'iOS' do
     project '../dydx/dydxViews/dydxViews'
     ios_ui_pods
     abacus_pods
-    
     react_pods
   end
   
@@ -320,6 +322,7 @@ abstract_target 'iOS' do
     project '../dydx/dydxViews/dydxViews'
     ios_ui_pods
     abacus_pods
+    react_pods
   end
 
   target 'dydxAnalytics' do
@@ -335,7 +338,6 @@ abstract_target 'iOS' do
     ios_ui_pods
     abacus_pods
     statsig_pods
-    
     react_pods
   end
   
@@ -345,6 +347,7 @@ abstract_target 'iOS' do
     ios_ui_pods
     abacus_pods
     statsig_pods
+    react_pods
   end
   
   target 'dydxStateManager' do
@@ -393,7 +396,6 @@ abstract_target 'iOS' do
   target 'dydxTurnkey' do
     project '../dydx/dydxTurnkey/dydxTurnkey'
     ios_ui_pods
-    
     react_pods
   end
   
@@ -406,7 +408,6 @@ abstract_target 'iOS' do
     amplitude_pods
     statsig_pods
     abacus_pods
-    
     react_pods
   end
   
@@ -419,6 +420,7 @@ abstract_target 'iOS' do
     amplitude_pods
     statsig_pods
     abacus_pods
+    react_pods
   end
   
 #  target 'NotificationExtensionV4' do

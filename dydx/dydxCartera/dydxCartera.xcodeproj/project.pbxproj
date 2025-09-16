@@ -1104,7 +1104,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dydxprotocol/cartera-ios";
 			requirement = {
-				branch = releases/0.1.13;
+				branch = releases/0.1.14;
 				kind = branch;
 			};
 		};

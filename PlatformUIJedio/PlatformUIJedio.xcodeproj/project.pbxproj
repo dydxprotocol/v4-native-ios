@@ -599,6 +599,7 @@
 				02D1CD8D29C8D274009ADF9A /* Sources */,
 				02D1CD8E29C8D274009ADF9A /* Frameworks */,
 				02D1CD8F29C8D274009ADF9A /* Resources */,
+				AB316E87596E8568C41FD124 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -625,6 +626,7 @@
 				02D1CD9829C8D274009ADF9A /* Frameworks */,
 				02D1CD9929C8D274009ADF9A /* Resources */,
 				74423CE5696BC0BBC36C46AA /* [CP] Embed Pods Frameworks */,
+				E4D791A189FFD74D85ED7C30 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1000,6 +1002,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB316E87596E8568C41FD124 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedio/Pods-iOS-PlatformUIJedio-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedio/Pods-iOS-PlatformUIJedio-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedio/Pods-iOS-PlatformUIJedio-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E4D791A189FFD74D85ED7C30 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

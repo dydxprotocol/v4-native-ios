@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dydxprotocol/cartera-ios",
       "state" : {
-        "branch" : "releases/0.1.13",
-        "revision" : "6a550457a7cb3ebc8c6095748000c758e6f300a2"
+        "branch" : "releases/0.1.14",
+        "revision" : "c77801ca98e0579ef15ed62ba2aaca4cba306a5c"
       }
     },
     {
@@ -33,17 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/krzyzanowskim/CryptoSwift.git",
       "state" : {
-        "revision" : "039f56c5d7960f277087a0be51f5eb04ed0ec073",
-        "version" : "1.5.1"
-      }
-    },
-    {
-      "identity" : "hdwallet",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/WalletConnect/HDWallet",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "748a85b1dfe9a2fa592bd9266c5a926e4e1d3f44"
+        "branch" : "main",
+        "revision" : "044dd7436914b5f3bb7267ef2685b13476e1bfab"
       }
     },
     {
@@ -170,15 +161,6 @@
       "state" : {
         "branch" : "1.0.5",
         "revision" : "4aa89e682f8d7ab1515d85d0797f0d25306bb56a"
-      }
-    },
-    {
-      "identity" : "walletconnectswift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/WalletConnect/WalletConnectSwift.git",
-      "state" : {
-        "revision" : "e0bbfd16d5c54a7aa7e316956d765399c6332fa2",
-        "version" : "1.7.0"
       }
     },
     {

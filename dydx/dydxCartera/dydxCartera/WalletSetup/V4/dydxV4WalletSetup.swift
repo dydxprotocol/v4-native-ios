@@ -58,7 +58,7 @@ public final class dydxV4WalletSetup: dydxWalletSetup {
                     if let bytes = Base58.base58Decode(signed) {
                         // Pad a leading zero to make it 65 bytes before passing it down v4-client
                         let data =  Data([0] + bytes)
-                        operationCallback(data.hex, error)
+                        operationCallback(data.hexString, error)
                     } else {
                         operationCallback(signed, error)
                     }
