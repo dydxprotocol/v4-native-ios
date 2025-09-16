@@ -113,6 +113,7 @@
 		0262F2D129DB47F2009889E2 /* Web.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0262F2C129DB4598009889E2 /* Web.storyboard */; };
 		026382E928F0EE6B00F766FA /* dydxMarketPriceCandlesTypesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026382E828F0EE6B00F766FA /* dydxMarketPriceCandlesTypesView.swift */; };
 		026382EB28F0EF0000F766FA /* dydxMarketPriceCandlesResolutionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026382EA28F0EF0000F766FA /* dydxMarketPriceCandlesResolutionsView.swift */; };
+		0263FEBE2DDE509D00B7519B /* dydxTransferFiatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0263FEBD2DDE509D00B7519B /* dydxTransferFiatItemView.swift */; };
 		02678F5B2965DEAD00EE346B /* dydxPortfolioSectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02678F5A2965DEAD00EE346B /* dydxPortfolioSectionsView.swift */; };
 		02678FA429666BD800EE346B /* dydxPortfolioPositionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02678FA329666BD800EE346B /* dydxPortfolioPositionsView.swift */; };
 		02678FA629666BE600EE346B /* dydxPortfolioOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02678FA529666BE600EE346B /* dydxPortfolioOrdersView.swift */; };
@@ -615,6 +616,7 @@
 		0262F2C129DB4598009889E2 /* Web.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Web.storyboard; sourceTree = "<group>"; };
 		026382E828F0EE6B00F766FA /* dydxMarketPriceCandlesTypesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketPriceCandlesTypesView.swift; sourceTree = "<group>"; };
 		026382EA28F0EF0000F766FA /* dydxMarketPriceCandlesResolutionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketPriceCandlesResolutionsView.swift; sourceTree = "<group>"; };
+		0263FEBD2DDE509D00B7519B /* dydxTransferFiatItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferFiatItemView.swift; sourceTree = "<group>"; };
 		02678F5A2965DEAD00EE346B /* dydxPortfolioSectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioSectionsView.swift; sourceTree = "<group>"; };
 		02678FA329666BD800EE346B /* dydxPortfolioPositionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioPositionsView.swift; sourceTree = "<group>"; };
 		02678FA529666BE600EE346B /* dydxPortfolioOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxPortfolioOrdersView.swift; sourceTree = "<group>"; };
@@ -1923,6 +1925,7 @@
 				02F99F3D29E4D5750009B3E8 /* dydxTransferSearchItemView.swift */,
 				023DB0B02D694D1700F15534 /* dydxInstantDepositSearchItemView.swift */,
 				02B23D5E2DD5298D004E727E /* dydxTransferNobleItemView.swift */,
+				0263FEBD2DDE509D00B7519B /* dydxTransferFiatItemView.swift */,
 				023DB0AC2D6947D800F15534 /* dydxInstantDepositSearchView.swift */,
 			);
 			path = Search;
@@ -2539,9 +2542,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2683,6 +2690,7 @@
 				0284201629AD71B600C0E7CC /* Enums.swift in Sources */,
 				02F802802DD56BE70009BA8F /* dydxTransferNobleAddressView.swift in Sources */,
 				02678FA629666BE600EE346B /* dydxPortfolioOrdersView.swift in Sources */,
+				0263FEBE2DDE509D00B7519B /* dydxTransferFiatItemView.swift in Sources */,
 				273C2F382C496F4F00F8391F /* dydxSliderInputView.swift in Sources */,
 				02A651872DB6DA15006DBD5F /* dydxSimpleUIMenuButtonsView.swift in Sources */,
 				277E90412B1FAEAF005CCBCB /* dydxRewardsHelpView.swift in Sources */,

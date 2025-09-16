@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		021A1DCA2AD34103008A3D73 /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 021A1DC92AD34103008A3D73 /* Cartera */; };
 		02308BF62DC441A000EECD8F /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 02669B922AD872A300A756AA /* Cartera */; };
 		02308BF72DC441A000EECD8F /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 029E51A22D08966E005D4DC5 /* Cartera */; };
 		02308BF82DC441A000EECD8F /* Cartera in Frameworks */ = {isa = PBXBuildFile; productRef = 0294C5FF2D790BD900F62FB5 /* Cartera */; };
@@ -218,7 +217,6 @@
 				0294C8912D7930EB00F62FB5 /* Base58Swift in Frameworks */,
 				024F0E622D88B9310001D799 /* SolanaSwift in Frameworks */,
 				02844D7D2DC187EF006F51CE /* Privy in Frameworks */,
-				021A1DCA2AD34103008A3D73 /* Cartera in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

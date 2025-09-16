@@ -42,6 +42,7 @@ private class dydxInstantDepositSearchViewPresenter: HostedViewPresenter<dydxIns
         super.init()
 
         viewModel = dydxInstantDepositSearchViewModel()
+        viewModel?.fiatEnabled = dydxBoolFeatureFlag.privy_ios.isEnabled
         viewModel?.cancelAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
         }

@@ -15,6 +15,8 @@ public class dydxInstantDepositSearchViewModel: PlatformViewModel {
     @Published public var tokens: [dydxInstantDepositSearchItemViewModel]?
     @Published public var otherTokens: [dydxInstantDepositSearchItemViewModel]?
     @Published public var nobleItem: dydxTransferNobleItemViewModel?
+    @Published public var fiatItem: dydxTransferNobleItemViewModel?
+    @Published public var fiatEnabled = false
 
     public init() { }
 
@@ -36,11 +38,18 @@ public class dydxInstantDepositSearchViewModel: PlatformViewModel {
                     ChevronBackButtonModel(onBackButtonTap: self.cancelAction ?? {})
                         .createView(parentStyle: style)
 
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.SELECT_TOKEN"))
-                        .themeColor(foreground: .textPrimary)
-                        .themeFont(fontSize: .larger)
-                        .centerAligned()
-                }
+                    if self.fiatEnabled {
+                        Text(DataLocalizer.localize(path: "APP.ONBOARDING.PAY_WITH"))
+                            .themeColor(foreground: .textPrimary)
+                            .themeFont(fontSize: .larger)
+                            .centerAligned()
+                    } else {
+                        Text(DataLocalizer.localize(path: "APP.GENERAL.SELECT_TOKEN"))
+                            .themeColor(foreground: .textPrimary)
+                            .themeFont(fontSize: .larger)
+                            .centerAligned()
+                    }
+                 }
                 .padding(.vertical, 8)
                 .padding(.horizontal, 16)
                 .padding(.top, 8)
@@ -50,31 +59,58 @@ public class dydxInstantDepositSearchViewModel: PlatformViewModel {
 
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack(pinnedViews: [.sectionHeaders]) {
-
-                        let header = self.createHeader(text: DataLocalizer.localize(path: "APP.GENERAL.YOUR_TOKENS"))
-                        Section(header: header) {
-                            self.nobleItem?.createView(parentStyle: style)
-                                .padding(.horizontal, 16)
-
-                            ForEach(self.tokens ?? [], id: \.id) { item in
-                                item.createView(parentStyle: style)
-                                    .padding(.horizontal, 16)
-                            }
+                        if self.fiatEnabled {
+                            self.createFiatSection(style: style)
                         }
-
-                        let otherHeader = self.createHeader(text: DataLocalizer.localize(path: "APP.GENERAL.OTHER_TOKENS"))
-                        Section(header: otherHeader) {
-                            ForEach(self.otherTokens ?? [], id: \.id) { item in
-                                item.createView(parentStyle: style)
-                                    .padding(.horizontal, 16)
-                            }
-                        }
+                        self.createCryptoSection(style: style)
+                        self.createOtherCryptoSection(style: style)
                     }
                 }
             }
                 .themeColor(background: .layer1)
 
             return AnyView(view)
+        }
+    }
+
+    private func createFiatSection(style: ThemeStyle) -> some View {
+        let header = self.createHeader(text: DataLocalizer.localize(path: "APP.SHARE_ACTIVITY_MODAL.CASH"))
+        return Section(header: header) {
+        }
+    }
+
+    private func createCryptoSection(style: ThemeStyle) -> some View {
+        let headerText: String
+        if fiatEnabled {
+            headerText = DataLocalizer.localize(path: "APP.ONBOARDING.CRYPTO")
+        } else {
+            headerText = DataLocalizer.localize(path: "APP.GENERAL.YOUR_TOKENS")
+        }
+        let header = self.createHeader(text: headerText)
+        return Section(header: header) {
+            self.nobleItem?.createView(parentStyle: style)
+                .padding(.horizontal, 16)
+
+            ForEach(self.tokens ?? [], id: \.id) { item in
+                item.createView(parentStyle: style)
+                    .padding(.horizontal, 16)
+            }
+        }
+    }
+
+    private func createOtherCryptoSection(style: ThemeStyle) -> some View {
+        let headerText: String
+        if fiatEnabled {
+            headerText = DataLocalizer.localize(path: "APP.ONBOARDING.OTHER_CRYPTO")
+        } else {
+            headerText = DataLocalizer.localize(path: "APP.GENERAL.OTHER_TOKENS")
+        }
+        let otherHeader = self.createHeader(text: headerText)
+        return Section(header: otherHeader) {
+            ForEach(self.otherTokens ?? [], id: \.id) { item in
+                item.createView(parentStyle: style)
+                    .padding(.horizontal, 16)
+            }
         }
     }
 

@@ -20,6 +20,7 @@ public class dydxInstantDepositViewModel: PlatformViewModel {
     @Published public var showConnectWallet = false
     @Published public var connectWalletAction: (() -> Void)?
     @Published public var freeDepositWarningMessage: String?
+    @Published public var fiatAction: (() -> Void)?
 
     public init() { }
 
@@ -91,6 +92,13 @@ public class dydxInstantDepositViewModel: PlatformViewModel {
                         }
                     }
                 }
+
+                let buttonText = Text("Deposit with Credit Cards ...")
+                PlatformButtonViewModel(content: buttonText.wrappedViewModel,
+                                        state: .secondary) { [weak self] in
+                    self?.fiatAction?()
+                }
+                .createView(parentStyle: style)
 
                 Spacer()
 

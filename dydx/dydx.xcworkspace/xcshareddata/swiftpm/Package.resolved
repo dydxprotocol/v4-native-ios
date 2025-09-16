@@ -1,5 +1,5 @@
 {
-  "originHash" : "c96dae786edc835745dd63fdf61f2aacb6890d941dea4bb908231f9e8cb3c5d1",
+  "originHash" : "a14cd8cd0cf238c3f14b8eeb39c6ef3b8b85ccd9717f97038e6a98dfb08986d0",
   "pins" : [
     {
       "identity" : "base58swift",
@@ -35,15 +35,6 @@
       "state" : {
         "branch" : "main",
         "revision" : "044dd7436914b5f3bb7267ef2685b13476e1bfab"
-      }
-    },
-    {
-      "identity" : "percy-xcui-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/percy/percy-xcui-swift",
-      "state" : {
-        "revision" : "a2e9a86dfc3f5b69ef53cbda28a0ea71098c9f77",
-        "version" : "1.0.0"
       }
     },
     {

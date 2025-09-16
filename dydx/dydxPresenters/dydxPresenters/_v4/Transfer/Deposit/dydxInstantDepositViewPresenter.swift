@@ -15,6 +15,7 @@ import dydxFormatter
 import dydxStateManager
 import Combine
 import Abacus
+import dydxFiatRamp
 
 protocol dydxInstantDepositViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxInstantDepositViewModel? { get }
@@ -32,6 +33,7 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
     ]
 
     private let staticSelector = true       // turn it to off to let user select
+    private let moonPayRamp = dydxMoonPayRamp()
 
     override init() {
         let viewModel = dydxInstantDepositViewModel()
@@ -48,6 +50,11 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
 
         self.viewModel = viewModel
 
+        viewModel.fiatAction = { [weak self] in
+            self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) { _, _ in
+                self?.showOnRamp()
+            }
+        }
         viewModel.connectWalletAction = {
             let request = RoutingRequest(path: "/onboard/wallets",
                                          params: ["mobileOnly": "true"])
@@ -71,7 +78,7 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
                 transferTokenDetails.$selectedToken,
                 AbacusStateManager.shared.state.currentWallet
                     .map(\.?.ethereumAddress)
-                )
+            )
             .sink { [weak self] transferInput, defaultToken, selectedToken, sourceAddress in
                 if transferInput.type != .deposit {
                     AbacusStateManager.shared.startDeposit()
@@ -97,6 +104,19 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
                     self?.viewModel?.showConnectWallet = false
                 } else {
                     self?.viewModel?.showConnectWallet = true
+                }
+            }
+            .store(in: &subscriptions)
+    }
+
+    private func showOnRamp() {
+        AbacusStateManager.shared.state.currentWallet
+            .prefix(1)
+            .sink { [weak self] wallet in
+                let dydxAddress = wallet?.cosmoAddress
+                if let dydxAddress,
+                   let nobleAddress = AbacusStringUtils.shared.toNobleAddress(dydxAddress: dydxAddress) {
+                    self?.moonPayRamp.show(targetAddress: nobleAddress, usdAmount: 20.00)
                 }
             }
             .store(in: &subscriptions)
