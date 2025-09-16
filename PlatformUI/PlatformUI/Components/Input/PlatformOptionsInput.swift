@@ -8,7 +8,7 @@
 import SwiftUI
 import Utilities
 
-public struct InputSelectOption {
+public struct InputSelectOption: Equatable {
     public var value: String
     public var string: String
 
@@ -19,7 +19,14 @@ public struct InputSelectOption {
 }
 
 open class PlatformOptionsInputViewModel: PlatformValueInputViewModel {
-    @Published public var options: [InputSelectOption]? // options of values to select from, set at update
+    @Published public var options: [InputSelectOption]? {
+        // options of values to select from, set at update
+        didSet {
+            if options != oldValue {
+                value = nil
+            }
+        }
+    }
 
     public var optionTitles: [String]? {
         options?.compactMap { $0.string }
