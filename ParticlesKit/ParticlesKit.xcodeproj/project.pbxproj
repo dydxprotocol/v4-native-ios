@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		024AC7542E7B7CB400EB0155 /* RoutingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31ACB70421B0ED3F00391ADF /* RoutingKit.framework */; };
 		027D5C0C28AB0AE300A5B900 /* ParticilesKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027D5C0B28AB0AE300A5B900 /* ParticilesKitConfig.swift */; };
 		02BCE2632899D64000E7BDCB /* WorkerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BCE2622899D64000E7BDCB /* WorkerProtocol.swift */; };
 		02EE8FDA28270CB000225B56 /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EE8FD928270CB000225B56 /* BaseInteractor.swift */; };
@@ -273,6 +274,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		024AC74B2E7B7BDD00EB0155 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31ACB6FE21B0ED3F00391ADF /* RoutingKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E65B00216BCA10008ABEE9;
+			remoteInfo = RoutingKit;
+		};
 		311C0FE521B0E9C4001775BA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 311C0FD121B0E9C4001775BA /* Project object */;
@@ -395,6 +403,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		024AC7522E7B7BE200EB0155 /* PlatformRouting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PlatformRouting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		027D5C0B28AB0AE300A5B900 /* ParticilesKitConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticilesKitConfig.swift; sourceTree = "<group>"; };
 		02BCE2622899D64000E7BDCB /* WorkerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerProtocol.swift; sourceTree = "<group>"; };
 		02EE8FD928270CB000225B56 /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
@@ -514,6 +523,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				024AC7542E7B7CB400EB0155 /* RoutingKit.framework in Frameworks */,
 				31ACB70D21B0ED5600391ADF /* Utilities.framework in Frameworks */,
 				43610BEC16BD2BC8D491E1B1 /* Pods_iOS_ParticlesKit.framework in Frameworks */,
 			);
@@ -1138,6 +1148,7 @@
 		3A1D787FE115AAF15B0C0C17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				024AC7522E7B7BE200EB0155 /* PlatformRouting.framework */,
 				0F5A39C4D74D1558E7AC8B3D /* Pods_iOS_ParticlesKit.framework */,
 				60D1A77CC9AD706005601A80 /* Pods_iOS_ParticlesKitTests.framework */,
 			);
@@ -1199,6 +1210,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				024AC74C2E7B7BDD00EB0155 /* PBXTargetDependency */,
 				31ACB70A21B0ED4800391ADF /* PBXTargetDependency */,
 			);
 			name = ParticlesKit;
@@ -1813,6 +1825,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		024AC74C2E7B7BDD00EB0155 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RoutingKit;
+			targetProxy = 024AC74B2E7B7BDD00EB0155 /* PBXContainerItemProxy */;
+		};
 		311C0FE621B0E9C4001775BA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 311C0FD921B0E9C4001775BA /* ParticlesKit */;
