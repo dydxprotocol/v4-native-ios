@@ -9,6 +9,7 @@ import Foundation
 import MoonPaySdk
 import Utilities
 import CryptoKit
+import ParticlesKit
 
 final public class dydxMoonPayRamp: SingletonProtocol {
     public static var shared = dydxMoonPayRamp()
@@ -22,6 +23,12 @@ final public class dydxMoonPayRamp: SingletonProtocol {
     }
 
     public func show(targetAddress: String, usdAmount: Double? = nil) {
+        guard let pk = CredientialConfig.shared.credential(for: "moonpayPk"),
+            let sk = CredientialConfig.shared.credential(for: "moonpaySk") else {
+            assertionFailure("Moonpay keys are missing")
+            return
+        }
+
         // These run in your application and are all the of handlers available to you.
         let handlers = MoonPayHandlers(
             onAuthToken: { data in
@@ -49,9 +56,7 @@ final public class dydxMoonPayRamp: SingletonProtocol {
             }
         )
 
-        let publicKey = isSandbox ?
-            "pk_test_2Cy2D3iPl0Y0DI8ru0yvtyeKC54R9GBV" :
-            "pk_live_dfZlD4fbkGsJEN9i18WrxbgXxENDnLx"
+        let publicKey = isSandbox ?  pk : "_to_do"
         let params = MoonPayBuyQueryParams(apiKey: publicKey)
         params.setBaseCurrencyCode(value: "USD")
         if let usdAmount {
@@ -79,7 +84,8 @@ final public class dydxMoonPayRamp: SingletonProtocol {
             let components = url.split(separator: "?")
             if components.count == 2 {
                 let queryString = "?" + components[1]
-                let signature = getSignature(encodedUrlData: queryString.data(using: .utf8)!)
+                let signature = getSignature(encodedUrlData: queryString.data(using: .utf8)!,
+                                             secretString: sk)
                 moonPaySdk?.updateSignature(signature: signature)
             }
         }
@@ -87,8 +93,7 @@ final public class dydxMoonPayRamp: SingletonProtocol {
         moonPaySdk?.show(mode: MoonPayRenderingOptioniOS.WebViewOverlay())
      }
 
-    private func getSignature(encodedUrlData: Data) -> String {
-        let secretString = isSandbox ? "sk_test_XkFPvgZ57z7DEEMm4lnzRwfj8DsfMHl9" : "sk_live_XqPSuGnQji5iPUQcEDTxjhHrKazuAmK"
+    private func getSignature(encodedUrlData: Data, secretString: String) -> String {
         let key = SymmetricKey(data: Data(secretString.utf8))
         let signature = HMAC<SHA256>.authenticationCode(for: encodedUrlData, using: key)
         let signatureHex = Data(signature).base64EncodedString()

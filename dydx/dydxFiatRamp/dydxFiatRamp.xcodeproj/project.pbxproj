@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0226DE942DA9B39C009243C7 /* MoonPaySdk in Frameworks */ = {isa = PBXBuildFile; productRef = 0226DE932DA9B39C009243C7 /* MoonPaySdk */; };
 		0226DEAF2DA9B8B6009243C7 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0226DEA62DA9B8A6009243C7 /* Utilities.framework */; platformFilter = ios; };
+		02D413252E7B484C00329B29 /* ParticlesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D4131C2E7B483E00329B29 /* ParticlesKit.framework */; platformFilter = ios; };
 		0BDC326586203D3236DB2D19 /* Pods_iOS_dydxFiatRamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8BBED2F072E5BF3DF211FDD /* Pods_iOS_dydxFiatRamp.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,13 +28,28 @@
 			remoteGlobalIDString = 31E65AB9216BC9C9008ABEE9;
 			remoteInfo = Utilities;
 		};
+		02D413142E7B483D00329B29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02D413112E7B483D00329B29 /* ParticlesKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 311C0FD921B0E9C4001775BA;
+			remoteInfo = ParticlesKit;
+		};
+		02D4131B2E7B483E00329B29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02D413112E7B483D00329B29 /* ParticlesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 311C0FDA21B0E9C4001775BA;
+			remoteInfo = ParticlesKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0226DD6A2DA9B235009243C7 /* dydxFiatRamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxFiatRamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0226DE982DA9B896009243C7 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
 		0226DE9B2DA9B8A6009243C7 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = "/Users/ruihuang/v4-native-ios/Utilities/Utilities.xcodeproj"; sourceTree = "<absolute>"; };
 		02897FCCC1203AED7E8244B3 /* Pods-iOS-dydxFiatRamp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxFiatRamp.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxFiatRamp/Pods-iOS-dydxFiatRamp.debug.xcconfig"; sourceTree = "<group>"; };
+		02D4130E2E7B483000329B29 /* ParticlesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticlesKit.xcodeproj; path = ../../ParticlesKit/ParticlesKit.xcodeproj; sourceTree = "<group>"; };
+		02D413112E7B483D00329B29 /* ParticlesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticlesKit.xcodeproj; path = "/Users/ruihuang/v4-native-ios/ParticlesKit/ParticlesKit.xcodeproj"; sourceTree = "<absolute>"; };
 		5AE7643649BF02BBA4F88CEA /* Pods-iOS-dydxFiatRamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxFiatRamp.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxFiatRamp/Pods-iOS-dydxFiatRamp.release.xcconfig"; sourceTree = "<group>"; };
 		C8BBED2F072E5BF3DF211FDD /* Pods_iOS_dydxFiatRamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxFiatRamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -41,8 +57,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0226DD6C2DA9B235009243C7 /* dydxFiatRamp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = dydxFiatRamp;
 			sourceTree = "<group>";
 		};
@@ -53,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D413252E7B484C00329B29 /* ParticlesKit.framework in Frameworks */,
 				0226DEAF2DA9B8B6009243C7 /* Utilities.framework in Frameworks */,
 				0BDC326586203D3236DB2D19 /* Pods_iOS_dydxFiatRamp.framework in Frameworks */,
 				0226DE942DA9B39C009243C7 /* MoonPaySdk in Frameworks */,
@@ -65,12 +80,13 @@
 		0226DD602DA9B235009243C7 = {
 			isa = PBXGroup;
 			children = (
-				0226DE972DA9B88A009243C7 /* Dependencies */,
+				02D4130E2E7B483000329B29 /* ParticlesKit.xcodeproj */,
+				0226DE9B2DA9B8A6009243C7 /* Utilities.xcodeproj */,
 				0226DD6C2DA9B235009243C7 /* dydxFiatRamp */,
 				0226DD6B2DA9B235009243C7 /* Products */,
 				8DC077F6172291FD6C91E9EB /* Pods */,
 				6A346609A73C975ED9A156CC /* Frameworks */,
-				0226DE9B2DA9B8A6009243C7 /* Utilities.xcodeproj */,
+				02D413112E7B483D00329B29 /* ParticlesKit.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,14 +98,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0226DE972DA9B88A009243C7 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				0226DE982DA9B896009243C7 /* Utilities.xcodeproj */,
-			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
 		0226DE9C2DA9B8A6009243C7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,9 +106,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0226DF1A2DA9CB93009243C7 /* Products */ = {
+		024AC2E22E7B48F600EB0155 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02D413122E7B483D00329B29 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02D4131C2E7B483E00329B29 /* ParticlesKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +165,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				02D413152E7B483D00329B29 /* PBXTargetDependency */,
 				0226DE9F2DA9B8A6009243C7 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
@@ -191,8 +208,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 0226DF1A2DA9CB93009243C7 /* Products */;
-					ProjectRef = 0226DE982DA9B896009243C7 /* Utilities.xcodeproj */;
+					ProductGroup = 02D413122E7B483D00329B29 /* Products */;
+					ProjectRef = 02D413112E7B483D00329B29 /* ParticlesKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 024AC2E22E7B48F600EB0155 /* Products */;
+					ProjectRef = 02D4130E2E7B483000329B29 /* ParticlesKit.xcodeproj */;
 				},
 				{
 					ProductGroup = 0226DE9C2DA9B8A6009243C7 /* Products */;
@@ -212,6 +233,13 @@
 			fileType = wrapper.framework;
 			path = Utilities.framework;
 			remoteRef = 0226DEA52DA9B8A6009243C7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02D4131C2E7B483E00329B29 /* ParticlesKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticlesKit.framework;
+			remoteRef = 02D4131B2E7B483E00329B29 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -266,6 +294,11 @@
 			isa = PBXTargetDependency;
 			name = Utilities;
 			targetProxy = 0226DE9E2DA9B8A6009243C7 /* PBXContainerItemProxy */;
+		};
+		02D413152E7B483D00329B29 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ParticlesKit;
+			targetProxy = 02D413142E7B483D00329B29 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -340,10 +373,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -417,10 +447,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
