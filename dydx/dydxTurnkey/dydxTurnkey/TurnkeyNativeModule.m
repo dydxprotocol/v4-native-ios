@@ -33,7 +33,8 @@ RCT_EXTERN_METHOD(onAuthCompleted
                   :(NSString) svmAddress
                   :(NSString) mnemonics
                   :(NSString) loginMethod
-                  :(NSString) userEmail)
+                  :(NSString) userEmail
+                  :(NSString) dydxAddress)
 
 RCT_EXTERN_METHOD(onAppleAuthRequest
                   :(NSString) nonce)
