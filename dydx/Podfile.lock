@@ -1,5 +1,5 @@
 PODS:
-  - abacus (0.4.18)
+  - Abacus (1.14.11)
   - AmplitudeCore (1.2.2)
   - AmplitudeSwift (1.14.0):
     - AmplitudeCore (< 2.0.0, >= 1.1.0)
@@ -1969,7 +1969,7 @@ PODS:
   - ZSWTappableLabel (3.3.2)
 
 DEPENDENCIES:
-  - abacus (from `~/v4-abacus`)
+  - Abacus (from `../podspecs/Abacus.podspec`)
   - AmplitudeSwift (~> 1.0)
   - AppsFlyerFramework
   - Atributika
@@ -2148,8 +2148,8 @@ SPEC REPOS:
     - SDWebImage
 
 EXTERNAL SOURCES:
-  abacus:
-    :path: "~/v4-abacus"
+  Abacus:
+    :podspec: "../podspecs/Abacus.podspec"
   boost:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
   DGCharts:
@@ -2309,7 +2309,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dydxprotocol/Charts.git
 
 SPEC CHECKSUMS:
-  abacus: 46f62be6dc9b3f888093eb2c9952d0267ab40670
+  Abacus: 45431bf1af1b2412bc53a7d723ba5136702353e7
   AmplitudeCore: 2cb120efbf0e96129d1a6972265ea479ee334565
   AmplitudeSwift: e96d3001ae5d20b596b9755e69840b5c75ea3adc
   AnalyticsConnector: 3def11199b4ddcad7202c778bde982ec5da0ebb3
@@ -2443,6 +2443,6 @@ SPEC CHECKSUMS:
   Yoga: 50518ade05048235d91a78b803336dbb5b159d5d
   ZSWTappableLabel: 92f11d677bb395a8294df48482316c4981783ca0
 
-PODFILE CHECKSUM: c5c8c523439e914ad7229a5264ae5a2612831aa4
+PODFILE CHECKSUM: 02f6da12bf1e623c2e4289631fb75d3b515a606f
 
 COCOAPODS: 1.16.2
