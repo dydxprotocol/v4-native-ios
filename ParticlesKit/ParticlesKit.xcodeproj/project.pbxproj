@@ -263,7 +263,6 @@
 		319BB7442429298200DC9E97 /* XibPresenterCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319BB7412429298200DC9E97 /* XibPresenterCache.swift */; };
 		319BB7452429298200DC9E97 /* XibPresenterCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319BB7412429298200DC9E97 /* XibPresenterCache.swift */; };
 		31AA4B302704F4BC00451307 /* GraphingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA4B2F2704F4BC00451307 /* GraphingProtocols.swift */; };
-		31ACB70C21B0ED5100391ADF /* RoutingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31ACB70421B0ED3F00391ADF /* RoutingKit.framework */; };
 		31ACB70D21B0ED5600391ADF /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31ACB6FB21B0ED3A00391ADF /* Utilities.framework */; };
 		31C016ED2735E530004B300E /* SequentialDataPoolInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C016EC2735E530004B300E /* SequentialDataPoolInteractor.swift */; };
 		31E8C49125F2B6A000F21CED /* WebSocketApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E8C49025F2B6A000F21CED /* WebSocketApi.swift */; };
@@ -385,13 +384,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 31E65B0A216BCA10008ABEE9;
 			remoteInfo = RoutingKitTests;
-		};
-		31ACB70721B0ED4800391ADF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 31ACB6FE21B0ED3F00391ADF /* RoutingKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 31E65B00216BCA10008ABEE9;
-			remoteInfo = RoutingKit;
 		};
 		31ACB70921B0ED4800391ADF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -523,7 +515,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				31ACB70D21B0ED5600391ADF /* Utilities.framework in Frameworks */,
-				31ACB70C21B0ED5100391ADF /* RoutingKit.framework in Frameworks */,
 				43610BEC16BD2BC8D491E1B1 /* Pods_iOS_ParticlesKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1208,7 +1199,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				31ACB70821B0ED4800391ADF /* PBXTargetDependency */,
 				31ACB70A21B0ED4800391ADF /* PBXTargetDependency */,
 			);
 			name = ParticlesKit;
@@ -1520,9 +1510,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-ParticlesKitTests/Pods-iOS-ParticlesKitTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-ParticlesKitTests/Pods-iOS-ParticlesKitTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1849,11 +1843,6 @@
 			name = UtilitiesAppleWatch;
 			targetProxy = 319682C621B7968600AE0F28 /* PBXContainerItemProxy */;
 		};
-		31ACB70821B0ED4800391ADF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RoutingKit;
-			targetProxy = 31ACB70721B0ED4800391ADF /* PBXContainerItemProxy */;
-		};
 		31ACB70A21B0ED4800391ADF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Utilities;
@@ -1934,10 +1923,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -2014,10 +2000,7 @@
 				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

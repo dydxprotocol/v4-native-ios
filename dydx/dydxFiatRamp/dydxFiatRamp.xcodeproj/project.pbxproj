@@ -48,7 +48,6 @@
 		0226DD6A2DA9B235009243C7 /* dydxFiatRamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxFiatRamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0226DE9B2DA9B8A6009243C7 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = "/Users/ruihuang/v4-native-ios/Utilities/Utilities.xcodeproj"; sourceTree = "<absolute>"; };
 		02897FCCC1203AED7E8244B3 /* Pods-iOS-dydxFiatRamp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxFiatRamp.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxFiatRamp/Pods-iOS-dydxFiatRamp.debug.xcconfig"; sourceTree = "<group>"; };
-		02D4130E2E7B483000329B29 /* ParticlesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticlesKit.xcodeproj; path = ../../ParticlesKit/ParticlesKit.xcodeproj; sourceTree = "<group>"; };
 		02D413112E7B483D00329B29 /* ParticlesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticlesKit.xcodeproj; path = "/Users/ruihuang/v4-native-ios/ParticlesKit/ParticlesKit.xcodeproj"; sourceTree = "<absolute>"; };
 		5AE7643649BF02BBA4F88CEA /* Pods-iOS-dydxFiatRamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxFiatRamp.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxFiatRamp/Pods-iOS-dydxFiatRamp.release.xcconfig"; sourceTree = "<group>"; };
 		C8BBED2F072E5BF3DF211FDD /* Pods_iOS_dydxFiatRamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxFiatRamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,13 +79,12 @@
 		0226DD602DA9B235009243C7 = {
 			isa = PBXGroup;
 			children = (
-				02D4130E2E7B483000329B29 /* ParticlesKit.xcodeproj */,
+				02D413112E7B483D00329B29 /* ParticlesKit.xcodeproj */,
 				0226DE9B2DA9B8A6009243C7 /* Utilities.xcodeproj */,
 				0226DD6C2DA9B235009243C7 /* dydxFiatRamp */,
 				0226DD6B2DA9B235009243C7 /* Products */,
 				8DC077F6172291FD6C91E9EB /* Pods */,
 				6A346609A73C975ED9A156CC /* Frameworks */,
-				02D413112E7B483D00329B29 /* ParticlesKit.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,13 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				0226DEA62DA9B8A6009243C7 /* Utilities.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		024AC2E22E7B48F600EB0155 /* Products */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -210,10 +201,6 @@
 				{
 					ProductGroup = 02D413122E7B483D00329B29 /* Products */;
 					ProjectRef = 02D413112E7B483D00329B29 /* ParticlesKit.xcodeproj */;
-				},
-				{
-					ProductGroup = 024AC2E22E7B48F600EB0155 /* Products */;
-					ProjectRef = 02D4130E2E7B483000329B29 /* ParticlesKit.xcodeproj */;
 				},
 				{
 					ProductGroup = 0226DE9C2DA9B8A6009243C7 /* Products */;
