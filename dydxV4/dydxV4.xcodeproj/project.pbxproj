@@ -11,12 +11,12 @@
 		0207D5142DC428D9005773B5 /* Privy in Frameworks */ = {isa = PBXBuildFile; productRef = 0207D5132DC428D9005773B5 /* Privy */; };
 		0207FED92D2F5B50004C2C9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0207FED82D2F5B50004C2C9F /* Launch Screen.storyboard */; };
 		0217A0A129D78BD5007F31C5 /* dydxBiometricsLocalAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */; };
-		0226DEBB2DA9BE80009243C7 /* dydxFiatRamp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0226DEBA2DA9BE70009243C7 /* dydxFiatRamp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0226DEBE2DA9C018009243C7 /* MoonPaySdk in Frameworks */ = {isa = PBXBuildFile; productRef = 0226DEBD2DA9C018009243C7 /* MoonPaySdk */; };
 		0226DEC02DA9C025009243C7 /* MoonPaySdk in Frameworks */ = {isa = PBXBuildFile; productRef = 0226DEBF2DA9C025009243C7 /* MoonPaySdk */; };
 		022F35CD28D39304000BCA41 /* dydxPresenters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		02439D1129B03F6700A083FE /* dydxCartera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; };
 		02439D1229B03F7B00A083FE /* dydxCartera.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02439CD429B03F4C00A083FE /* dydxCartera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		024AC62D2E7B713600EB0155 /* dydxFiatRamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0226E0082DA9CD1E009243C7 /* dydxFiatRamp.framework */; };
 		024B7A9628B7F6CC00F7C386 /* dydxViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 024B7A9428B7F6CC00F7C386 /* dydxViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		025B83FF28AAAB270037FF7C /* PlatformUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 025B83EB28AAAB120037FF7C /* PlatformUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		02756A6A287CA33E00803741 /* dydxNotificationHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02756A69287CA33E00803741 /* dydxNotificationHandlerDelegate.swift */; };
@@ -89,20 +89,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0226DEB62DA9BE70009243C7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0226DEB32DA9BE70009243C7 /* dydxFiatRamp.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 0226DD692DA9B235009243C7;
-			remoteInfo = dydxFiatRamp;
-		};
-		0226DEB92DA9BE70009243C7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0226DEB32DA9BE70009243C7 /* dydxFiatRamp.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0226DD6A2DA9B235009243C7;
-			remoteInfo = dydxFiatRamp;
-		};
 		0226E0072DA9CD1E009243C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0226DEB02DA9BE32009243C7 /* dydxFiatRamp.xcodeproj */;
@@ -144,6 +130,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 02439C8A29B03E8A00A083FE;
 			remoteInfo = dydxCartera;
+		};
+		024AC65E2E7B719400EB0155 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0226DEB02DA9BE32009243C7 /* dydxFiatRamp.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0226DD692DA9B235009243C7;
+			remoteInfo = dydxFiatRamp;
 		};
 		025B83EA28AAAB120037FF7C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -829,7 +822,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0226DEBB2DA9BE80009243C7 /* dydxFiatRamp.framework in Embed Frameworks */,
 				027E1E1429C912AC0098666F /* PlatformUIJedio.framework in Embed Frameworks */,
 				02439D1229B03F7B00A083FE /* dydxCartera.framework in Embed Frameworks */,
 				029E11F029ADB9C600FE271C /* dydxChart.framework in Embed Frameworks */,
@@ -864,7 +856,6 @@
 		020F66BC2858F29300E2D072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxBiometricsLocalAuthenticator.swift; sourceTree = "<group>"; };
 		0226DEB02DA9BE32009243C7 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = ../dydx/dydxFiatRamp/dydxFiatRamp.xcodeproj; sourceTree = "<group>"; };
-		0226DEB32DA9BE70009243C7 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxFiatRamp/dydxFiatRamp.xcodeproj"; sourceTree = "<absolute>"; };
 		023890FC2E284A1F00887A80 /* dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		02439CCC29B03F4C00A083FE /* dydxCartera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxCartera.xcodeproj; path = ../dydx/dydxCartera/dydxCartera.xcodeproj; sourceTree = "<group>"; };
 		024B7A9428B7F6CC00F7C386 /* dydxViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -938,17 +929,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		02F511882E258D00002402A0 /* ../dydx/ios */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = ../dydx/ios;
-			sourceTree = SOURCE_ROOT;
-		};
+		02F511882E258D00002402A0 /* ../dydx/ios */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ../dydx/ios; sourceTree = SOURCE_ROOT; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -964,6 +945,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				024AC62D2E7B713600EB0155 /* dydxFiatRamp.framework in Frameworks */,
 				2741B25E2C06A0F900693B17 /* dydxViews.framework in Frameworks */,
 				0226DEC02DA9C025009243C7 /* MoonPaySdk in Frameworks */,
 				2741B25D2C06A0F600693B17 /* dydxAnalytics.framework in Frameworks */,
@@ -1021,14 +1003,6 @@
 				0217A07C29D78B10007F31C5 /* dydxBiometricsLocalAuthenticator.swift */,
 			);
 			path = _Security;
-			sourceTree = "<group>";
-		};
-		0226DEB42DA9BE70009243C7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0226DEBA2DA9BE70009243C7 /* dydxFiatRamp.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		0226DFF42DA9CD1E009243C7 /* Products */ = {
@@ -1232,7 +1206,6 @@
 				3112F461216BBF8400708927 /* dydx */,
 				3112F478216BBF8600708927 /* dydxTests */,
 				02DA0AF82B57609100BFA975 /* dydxV4UITests */,
-				0226DEB32DA9BE70009243C7 /* dydxFiatRamp.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1516,8 +1489,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				024AC65F2E7B719400EB0155 /* PBXTargetDependency */,
 				02A107AE2E2859FF00E65EE2 /* PBXTargetDependency */,
-				0226DEB72DA9BE70009243C7 /* PBXTargetDependency */,
 				275C17092BF7D737009313EC /* PBXTargetDependency */,
 				275956062BF7D1FD008C77EE /* PBXTargetDependency */,
 				31B77BC422DAD077004F9B21 /* PBXTargetDependency */,
@@ -1666,10 +1639,6 @@
 					ProjectRef = 0226DEB02DA9BE32009243C7 /* dydxFiatRamp.xcodeproj */;
 				},
 				{
-					ProductGroup = 0226DEB42DA9BE70009243C7 /* Products */;
-					ProjectRef = 0226DEB32DA9BE70009243C7 /* dydxFiatRamp.xcodeproj */;
-				},
-				{
 					ProductGroup = 028420C829AD77F400C0E7CC /* Products */;
 					ProjectRef = 028420C729AD77F400C0E7CC /* dydxFormatter.xcodeproj */;
 				},
@@ -1752,13 +1721,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		0226DEBA2DA9BE70009243C7 /* dydxFiatRamp.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = dydxFiatRamp.framework;
-			remoteRef = 0226DEB92DA9BE70009243C7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		0226E0082DA9CD1E009243C7 /* dydxFiatRamp.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -2424,9 +2386,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2441,9 +2407,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2500,9 +2470,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2517,9 +2491,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2588,11 +2566,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0226DEB72DA9BE70009243C7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = dydxFiatRamp;
-			targetProxy = 0226DEB62DA9BE70009243C7 /* PBXContainerItemProxy */;
-		};
 		022F358F28D392CF000BCA41 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = dydxPresenters;
@@ -2607,6 +2580,11 @@
 			isa = PBXTargetDependency;
 			name = dydxCartera;
 			targetProxy = 02439D0F29B03F5D00A083FE /* PBXContainerItemProxy */;
+		};
+		024AC65F2E7B719400EB0155 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxFiatRamp;
+			targetProxy = 024AC65E2E7B719400EB0155 /* PBXContainerItemProxy */;
 		};
 		025B83FE28AAAB1F0037FF7C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2851,10 +2829,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				PRODUCT_BUNDLE_IDENTIFIER = exchangeV4.dydx.trading;
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
@@ -2929,10 +2904,7 @@
 				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				PRODUCT_BUNDLE_IDENTIFIER = exchangeV4.dydx.trading;
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;

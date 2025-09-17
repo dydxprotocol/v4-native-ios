@@ -63,12 +63,6 @@ public class dydxInstantDepositSearchViewModel: PlatformViewModel {
         }
     }
 
-    private func createFiatSection(style: ThemeStyle) -> some View {
-        let header = self.createHeader(text: DataLocalizer.localize(path: "APP.SHARE_ACTIVITY_MODAL.CASH"))
-        return Section(header: header) {
-        }
-    }
-
     private func createCryptoSection(style: ThemeStyle) -> some View {
         let headerText = DataLocalizer.localize(path: "APP.GENERAL.YOUR_TOKENS")
         let header = self.createHeader(text: headerText)
