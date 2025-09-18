@@ -135,19 +135,19 @@ public class dydxWalletSecurityViewModel: PlatformViewModel {
                 .themeColor(background: .layer5)
                 .clipShape(.capsule)
 
-                PlatformIconViewModel(type: .system(name: "chevron.right"),
-                                                     size: CGSize(width: 12, height: 12),
-                                                     templateColor: .textTertiary)
-                .createView(parentStyle: style)
+//                PlatformIconViewModel(type: .system(name: "chevron.right"),
+//                                                     size: CGSize(width: 12, height: 12),
+//                                                     templateColor: .textTertiary)
+//                .createView(parentStyle: style)
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 14)
             .themeColor(background: .layer3)
             .cornerRadius(12, corners: .allCorners)
         }
-        .onTapGesture { [weak self] in
-            self?.loginAction?()
-        }
+//        .onTapGesture { [weak self] in
+//            self?.loginAction?()
+//        }
     }
 
     private func createExportSection(style: ThemeStyle) -> some View {
