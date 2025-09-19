@@ -115,6 +115,26 @@
             },
             {
                 "title":{
+                    "text":"Apple Login"
+                },
+                "field":{
+                    "field":"ff_turnkey_ios_apple",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : 1
+                        },
+                        {
+                            "text": "no",
+                            "value" : 0
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
                     "text":"Rewards Sep 2025"
                 },
                 "field":{

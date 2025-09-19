@@ -63,7 +63,8 @@ private class dydxTurnkeyAuthViewConntroller: ReactNativeHostingController, Turn
             "turnkeyOrgId": turnkeyOrgId,
             "backendApiUrl": indexerUrl,
             "deploymentUri": AbacusStateManager.shared.deploymentUri,
-            "theme": dydxThemeSettings.shared.currentThemeType.rnThemeIdentifier
+            "theme": dydxThemeSettings.shared.currentThemeType.rnThemeIdentifier,
+            "enableAppleLoginIn": dydxBoolFeatureFlag.turnkey_ios_apple.isEnabled
         ]
 
         // The terms string contains HTML links, so we need to construct it here
