@@ -69,39 +69,44 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
         if Statsig.isInitialized() {
             initializationState = .initializedRemoteLoaded
             completion()
-        } else {
-            Statsig.start(sdkKey: apiKey, user: StatsigUser(userID: userId, customIDs: ["isNativeApp":"true"]), options: StatsigOptions(
-                initTimeout: nil,
-                disableCurrentVCLogging: true,
-                environment: environment.statsigEnvironemnt,
-                enableAutoValueUpdate: true,
-                autoValueUpdateIntervalSec: nil,
-                overrideStableID: nil,
-                enableCacheByFile: nil,
-                initializeValues: nil,
-                disableDiagnostics: nil,
-                disableHashing: nil,
-                shutdownOnBackground: nil,
-                api: nil,
-                eventLoggingApi: nil,
-                evaluationCallback: nil,
-                userValidationCallback: nil,
-                customCacheKey: nil,
-                urlSession: nil)) {[weak self] error in
-                    Console.shared.log("analytics log | Statsig feature flags finished initial fetch")
-                    if let error {
-                        Console.shared.log("analytics log | Statsig feature flags finished initial fetch with error: \(error)")
-                        return
-                    }
-                    
-                    self?.initializationState = .initializedRemoteLoaded
-                    // intentionally not calling completion here since we do not want ff init to be blocking startup
-                    // this may change if we need FF pre-launch
-//                    completion()
-                }
-            Console.shared.log("analytics log | Statsig initialized (local only, async feature flags fetch ongoing) | env: \(environment.debugDescription) | userId: \(userId)")
-            initializationState = .initializedRemoteLoading
+            return
         }
+        
+        let user = StatsigUser(userID: userId, customIDs: ["isNativeApp":"true"])
+        let options = StatsigOptions(
+            initTimeout: nil,
+            disableCurrentVCLogging: true,
+            environment: environment.statsigEnvironemnt,
+            enableAutoValueUpdate: true,
+            autoValueUpdateIntervalSec: nil,
+            overrideStableID: nil,
+            enableCacheByFile: nil,
+            initializeValues: nil,
+            disableDiagnostics: nil,
+            disableHashing: nil,
+            shutdownOnBackground: nil,
+            api: nil,
+            eventLoggingApi: nil,
+            evaluationCallback: nil,
+            userValidationCallback: nil,
+            customCacheKey: nil,
+            urlSession: nil)
+        Statsig.initialize(sdkKey: apiKey, user: user, options: options) {[weak self] error in
+            Console.shared.log("analytics log | Statsig feature flags finished initial fetch")
+            if let error {
+                Console.shared.log("analytics log | Statsig feature flags finished initial fetch with error: \(error)")
+                return
+            }
+            
+            self?.initializationState = .initializedRemoteLoaded
+            // intentionally not calling completion here since we do not want ff init to be blocking startup
+            // this may change if we need FF pre-launch
+            //                    completion()
+        
+        }
+        Console.shared.log("analytics log | Statsig initialized (local only, async feature flags fetch ongoing) | env: \(environment.debugDescription) | userId: \(userId)")
+        initializationState = .initializedRemoteLoading
+        
         completion()
     }
 
@@ -138,8 +143,8 @@ public final class StatsigFeatureFlagsProvider: NSObject, FeatureFlagsProtocol {
         return nil
     }
 
-    public func value<T>(feature: String, defaultValue: T) -> T {
-        let store = Statsig.getParameterStore("v4_params")
+    public func value<T>(store: String, feature: String, defaultValue: T) -> T {
+        let store = Statsig.getParameterStore(store)
         if let defaultValue = defaultValue as? StatsigDynamicConfigValue {
             let result = store.getValue(forKey: feature, defaultValue: defaultValue)
             if let result = result as? T {

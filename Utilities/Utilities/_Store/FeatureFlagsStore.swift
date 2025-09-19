@@ -42,7 +42,7 @@ public class FeatureFlagsStore: UserDefaultsStore, FeatureFlagsProtocol {
         return nil
     }
     
-    public func value<T>(feature: String, defaultValue: T) -> T {
+    public func value<T>(store: String, feature: String, defaultValue: T) -> T {
         let value = value(feature: feature)
         if let value = value as? T {
             return value

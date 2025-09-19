@@ -54,8 +54,8 @@ public class CompositeFeatureFlagsProvider: NSObject & FeatureFlagsProtocol {
         }
     }
    
-    public func value<T>(feature: String, defaultValue: T) -> T {
-        remote?.value(feature: feature, defaultValue: defaultValue) ?? defaultValue
+    public func value<T>(store: String, feature: String, defaultValue: T) -> T {
+        remote?.value(store: store, feature: feature, defaultValue: defaultValue) ?? defaultValue
     }
     
     public func isOn(feature: String) -> Bool? {

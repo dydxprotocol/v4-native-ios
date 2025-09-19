@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import dydxStateManager
 import Utilities
+import dydxFormatter
 
 final class TransferTokenDetails {
     @Published var selectedToken: TransferTokenInfo?
@@ -114,7 +115,7 @@ enum TransferChain: String {
         case .Ethereum, .Optimism, .Arbitrum, .Base: return "ETH, USDC"
         case .Polygon: return "POL, USDC"
         case .Solana: return "USDC"
-        case .Avalanche: return "AVAX, USDC"
+        case .Avalanche: return "USDC"
         }
     }
 
@@ -128,17 +129,33 @@ enum TransferChain: String {
     var depositWarningString: String? {
         let tokens: String
         switch self {
-        case .Ethereum, .Optimism, .Arbitrum, .Base: tokens = "ETH " + DataLocalizer.localize(path: "APP.LEAGUES.AND") + " USDC"
-        case .Polygon: tokens =  "POL " + DataLocalizer.localize(path: "APP.LEAGUES.AND") + " USDC"
+        case .Ethereum, .Optimism, .Arbitrum, .Base: tokens = "ETH " + DataLocalizer.localize(path: "APP.GENERAL.OR") + " USDC"
+        case .Polygon: tokens =  "POL " + DataLocalizer.localize(path: "APP.GENERAL.OR") + " USDC"
         case .Solana: tokens = "USDC"
-        case .Avalanche: tokens =  "AVAX " + DataLocalizer.localize(path: "APP.LEAGUES.AND") + " USDC"
+        case .Avalanche: tokens = "USDC"
         }
 
-        return DataLocalizer.localize(path: "APP.DEPOSIT_MODAL.TURNKEY_DEPOSIT_WARNING",
-                                      params: [
-                                       "TOKENS": tokens,
-                                       "NETWORK": self.rawValue
-                                      ])
+        let minSlow: String
+        let minFast: String
+        let maxVal: String
+        switch self {
+        case .Ethereum:
+            minSlow = dydxTurnkeyDepositParam.eth_min_slow.string
+            minFast = dydxTurnkeyDepositParam.eth_min_fast.string
+            maxVal = dydxTurnkeyDepositParam.eth_max.string
+        case .Arbitrum, .Base, .Optimism, .Polygon, .Solana, .Avalanche:
+            minSlow = dydxTurnkeyDepositParam.default_min_slow.string
+            minFast = dydxTurnkeyDepositParam.default_min_fast.string
+            maxVal = dydxTurnkeyDepositParam.default_max.string
+        }
+
+        return DataLocalizer.localize(path: "APP.TURNKEY_ONBOARD.DEPOSIT_NETWORK_WARNING", params: [
+            "ASSETS": tokens,
+            "NETWORK": rawValue,
+            "MIN_DEPOSIT": minSlow,
+            "MIN_INSTANT_DEPOSIT": minFast,
+            "MAX_DEPOSIT": maxVal
+        ])
     }
 
     var chainLogoUrl: String {

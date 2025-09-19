@@ -9,7 +9,7 @@
 import Utilities
 
 @objc public final class LocalFeatureFlagsCacheInteractor: LocalEntityCacheInteractor, SingletonProtocol, FeatureFlagsProtocol {
-    public func value<T>(feature: String, defaultValue: T) -> T {
+    public func value<T>(store: String, feature: String, defaultValue: T) -> T {
         defaultValue
     }
     
