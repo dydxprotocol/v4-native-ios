@@ -56,11 +56,6 @@ class dydxTransferOutViewPresenter: HostedViewPresenter<dydxTransferOutViewModel
 
         super.init()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            AbacusStateManager.shared.startTrade()
-            AbacusStateManager.shared.startTransfer()
-        }
-
         viewModel.amountBox?.stepSize = 0.01
         viewModel.amountBox?.onEdited = { [weak self] amount in
             var amountDouble = Parser.standard.asNumber(amount?.unlocalizedNumericValue)?.doubleValue ?? 0

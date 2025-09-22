@@ -100,7 +100,7 @@ private class dydxSimpleUIMenuViewPresenter: HostedViewPresenter<dydxSimpleUIMen
     private var signIn: dydxSimpleUIMenuViewModel.MenuItem {
         dydxSimpleUIMenuViewModel.MenuItem(
         icon: "icon_wallet_connect",
-        title: DataLocalizer.localize(path: "APP.GENERAL.CONNECT_WALLET")) { [weak self] in
+        title: DataLocalizer.localize(path: "APP.TURNKEY_ONBOARD.SIGN_IN_TITLE")) { [weak self] in
             self?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true) {_, _ in
                 self?.navigate(to: RoutingRequest(path: OnboardingLandingRoute.value), animated: true, completion: nil)
             }

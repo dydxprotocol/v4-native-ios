@@ -41,11 +41,6 @@ class dydxInstantDepositViewPresenter: HostedViewPresenter<dydxInstantDepositVie
 
         super.init()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            AbacusStateManager.shared.startTrade()
-            AbacusStateManager.shared.startTransfer()
-        }
-
         self.viewModel = viewModel
 
         viewModel.connectWalletAction = {

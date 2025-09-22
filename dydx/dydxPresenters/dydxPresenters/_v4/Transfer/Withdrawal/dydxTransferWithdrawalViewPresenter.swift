@@ -57,11 +57,6 @@ class dydxTransferWithdrawalViewPresenter: HostedViewPresenter<dydxTransferWithd
 
         super.init()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            AbacusStateManager.shared.startTrade()
-            AbacusStateManager.shared.startTransfer()
-        }
-
         viewModel.amountBox?.stepSize = 0.01
         viewModel.amountBox?.onEdited = { [weak self] amount in
             var amountDouble = Parser.standard.asNumber(amount?.unlocalizedNumericValue)?.doubleValue ?? 0
@@ -71,9 +66,13 @@ class dydxTransferWithdrawalViewPresenter: HostedViewPresenter<dydxTransferWithd
             }
         }
 
-        viewModel.addressInput?.onEdited = { address in
-            AbacusStateManager.shared.transfer(input: address, type: .address)
-        }
+        viewModel.$addressInput
+            .debounce(for: .milliseconds(10), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink(receiveValue: { address in
+                AbacusStateManager.shared.transfer(input: address, type: .address)
+            })
+            .store(in: &subscriptions)
 
         self.viewModel = viewModel
 
@@ -93,11 +92,14 @@ class dydxTransferWithdrawalViewPresenter: HostedViewPresenter<dydxTransferWithd
             .sink { type, wallet in
                 if type != .withdrawal {
                     AbacusStateManager.shared.startWithdrawal()
-                    if let ethereumAddress = wallet?.ethereumAddress {
-                        // Default to user's eth address
-                        AbacusStateManager.shared.transfer(input: ethereumAddress, type: .address)
+                    if wallet?.walletId != "turnkey" {
+                        if let ethereumAddress = wallet?.ethereumAddress {
+                            // Default to user's eth address
+                            AbacusStateManager.shared.transfer(input: ethereumAddress, type: .address)
+                        }
+                    } else {
+                        AbacusStateManager.shared.transfer(input: nil, type: .address)
                     }
-                    AbacusStateManager.shared.transfer(input: wallet?.ethereumAddress, type: .address)
                 }
             }
             .store(in: &subscriptions)
@@ -144,7 +146,7 @@ class dydxTransferWithdrawalViewPresenter: HostedViewPresenter<dydxTransferWithd
 
         currentSize = size
 
-        viewModel?.addressInput?.value = transferInput.address
+        viewModel?.addressInput = transferInput.address ?? ""
     }
 
     private func updateChainsTokensViewModel() {

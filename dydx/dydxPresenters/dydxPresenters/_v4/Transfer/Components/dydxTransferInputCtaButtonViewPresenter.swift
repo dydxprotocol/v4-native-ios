@@ -70,7 +70,7 @@ class dydxTransferInputCtaButtonViewPresenter: HostedViewPresenter<dydxTradeInpu
 
     private func updateCtaButtonState(transferInput: TransferInput, tradeErrors: [ValidationError], isOnboarded: Bool) {
         if !isOnboarded {
-            viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.GENERAL.CONNECT_WALLET"))
+            viewModel?.ctaButtonState = .enabled(DataLocalizer.localize(path: "APP.TURNKEY_ONBOARD.SIGN_IN_TITLE"))
         } else if hasValidSize(transferInput: transferInput) {
             let firstBlockingError = tradeErrors.first { $0.type == ErrorType.required || $0.type == ErrorType.error }
             let transferError = transferInput.errors

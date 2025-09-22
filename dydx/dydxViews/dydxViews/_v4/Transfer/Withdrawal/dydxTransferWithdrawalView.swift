@@ -11,9 +11,7 @@ import PlatformUI
 import Utilities
 
 public class dydxTransferWithdrawalViewModel: PlatformViewModel {
-    @Published public var addressInput: PlatformTextInputViewModel? =
-        PlatformTextInputViewModel(label: DataLocalizer.localize(path: "APP.GENERAL.DESTINATION"),
-                                   truncateMode: .middle)
+    @Published public var addressInput: String = ""
     @Published public var chainsComboBox: ChainsComboBoxModel? = ChainsComboBoxModel()
     @Published public var tokensComboBox: TokensComboBoxModel? = TokensComboBoxModel()
     @Published public var amountBox: TransferAmountBoxModel? =
@@ -22,11 +20,6 @@ public class dydxTransferWithdrawalViewModel: PlatformViewModel {
                                inputType: .decimalDigits)
     @Published public var ctaButton: dydxTradeInputCtaButtonViewModel? = dydxTradeInputCtaButtonViewModel()
     @Published public var validationViewModel: dydxValidationViewModel? = dydxValidationViewModel()
-
-    public init() {
-        super.init()
-        addressInput?.placeHolder = "0x000000000000000000"
-    }
 
     public static var previewValue: dydxTransferWithdrawalViewModel {
         let vm = dydxTransferWithdrawalViewModel()
@@ -43,55 +36,66 @@ public class dydxTransferWithdrawalViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             return AnyView(
-                VStack {
-                    VStack {
-                        Text(DataLocalizer.localize(path: "APP.GENERAL.WITHDRAW"))
-                            .themeColor(foreground: .textPrimary)
-                            .themeFont(fontSize: .larger)
-                            .centerAligned()
-                            .padding(.vertical, 8)
-                            .padding(.top, 16)
-                            .frame(height: 54)
-
-                        DividerModel().createView(parentStyle: style)
-                            .padding(.horizontal, -16)
-                    }
-
-                    Group {
-                        VStack(spacing: 12) {
-                            HStack {
-                                self.addressInput?.createView(parentStyle: style)
-                                    .makeInput()
-
-                                self.chainsComboBox?.createView(parentStyle: style)
-                            }
-                            .fixedSize(horizontal: false, vertical: true)
-
-                            self.tokensComboBox?.createView(parentStyle: style)
-                            self.amountBox?.createView(parentStyle: style)
-                        }
-                    }
-
-                    Spacer()
-
-                    VStack(spacing: -8) {
-                        VStack {
-                            self.validationViewModel?.createView(parentStyle: style)
-                        }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .themeColor(background: .layer1)
-                        .cornerRadius(12, corners: [.topLeft, .topRight])
-
-                        self.ctaButton?.createView(parentStyle: style)
-                    }
-                }
-                    .padding(.horizontal)
-                    .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
-                    .themeColor(background: .layer2)
-                    .ignoresSafeArea(edges: [.bottom])
+                dydxTransferWithdrawalView(viewModel: self, style: style)
             )
         }
+    }
+}
+
+private struct dydxTransferWithdrawalView: View {
+    @ObservedObject var viewModel: dydxTransferWithdrawalViewModel
+    let style: ThemeStyle
+
+    var body: some View {
+        VStack {
+            VStack {
+                Text(DataLocalizer.localize(path: "APP.GENERAL.WITHDRAW"))
+                    .themeColor(foreground: .textPrimary)
+                    .themeFont(fontSize: .larger)
+                    .centerAligned()
+                    .padding(.vertical, 8)
+                    .padding(.top, 16)
+                    .frame(height: 54)
+
+                DividerModel().createView(parentStyle: style)
+                    .padding(.horizontal, -16)
+            }
+
+            Group {
+                VStack(spacing: 12) {
+                    HStack {
+                        dydxTitledTextField(title: DataLocalizer.localize(path: "APP.GENERAL.DESTINATION"),
+                                            placeholder: "0x00000000000000",
+                                            text: $viewModel.addressInput)
+
+                        viewModel.chainsComboBox?.createView(parentStyle: style)
+                    }
+                    .fixedSize(horizontal: false, vertical: true)
+
+                    viewModel.tokensComboBox?.createView(parentStyle: style)
+                    viewModel.amountBox?.createView(parentStyle: style)
+                }
+            }
+
+            Spacer()
+
+            VStack(spacing: -8) {
+                VStack {
+                    viewModel.validationViewModel?.createView(parentStyle: style)
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .themeColor(background: .layer1)
+                .cornerRadius(12, corners: [.topLeft, .topRight])
+
+                viewModel.ctaButton?.createView(parentStyle: style)
+            }
+        }
+            .padding(.horizontal)
+            .padding(.bottom, max((viewModel.safeAreaInsets?.bottom ?? 0), 16))
+            .themeColor(background: .layer2)
+            .ignoresSafeArea(edges: [.bottom])
+
     }
 }
 

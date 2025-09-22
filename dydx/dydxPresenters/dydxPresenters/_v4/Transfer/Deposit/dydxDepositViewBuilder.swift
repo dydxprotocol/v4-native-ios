@@ -42,6 +42,11 @@ private class dydxDepositViewPresenter: HostedViewPresenter<dydxDepositViewModel
     private let instantPresenter = dydxInstantDepositViewPresenter()
     private let turnkeyPresenter = dydxTurnkeyDepositViewPresenter()
 
+    private lazy var childPresenters: [HostedViewPresenterProtocol] = [
+        instantPresenter,
+        turnkeyPresenter
+    ]
+
     override init() {
         let viewModel = dydxDepositViewModel()
 
@@ -68,5 +73,7 @@ private class dydxDepositViewPresenter: HostedViewPresenter<dydxDepositViewModel
                 }
             }
             .store(in: &subscriptions)
+
+        attachChildren(workers: childPresenters)
     }
 }
