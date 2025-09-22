@@ -74,17 +74,19 @@ private struct dydxTransferOutView: View {
             }
 
             Group {
-                VStack(spacing: 12) {
-                    HStack(spacing: 12) {
-                        dydxTitledTextField(title: DataLocalizer.localize(path: "APP.GENERAL.DESTINATION"),
-                                            placeholder: "dydx00000000000000",
-                                            text: $viewModel.addressInput)
-                        chainsStaticInputView
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 12) {
+                        HStack(spacing: 12) {
+                            dydxTitledTextField(title: DataLocalizer.localize(path: "APP.GENERAL.DESTINATION"),
+                                                placeholder: "dydx00000000000000",
+                                                text: $viewModel.addressInput)
+                            chainsStaticInputView
+                        }
+                        viewModel.tokensComboBox?.createView()
+                        viewModel.amountBox?.createView()
+                        viewModel.memoBox.createView()
+                            .frame(maxWidth: .infinity)
                     }
-                    viewModel.tokensComboBox?.createView()
-                    viewModel.amountBox?.createView()
-                    viewModel.memoBox.createView()
-                        .frame(maxWidth: .infinity)
                 }
             }
 
