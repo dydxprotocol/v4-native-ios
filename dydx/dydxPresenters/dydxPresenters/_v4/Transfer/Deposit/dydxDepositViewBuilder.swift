@@ -64,10 +64,10 @@ private class dydxDepositViewPresenter: HostedViewPresenter<dydxDepositViewModel
         AbacusStateManager.shared.state.walletState
             .sink { [weak self]  walletState in
                 guard let self else { return }
-                if walletState.currentWallet?.walletId == "turnkey" &&  self.viewModel?.mode != .turnkey {
+                if walletState.currentWallet?.walletId == "turnkey" {
                     self.viewModel?.mode = .turnkey
                     self.attachChild(worker: self.turnkeyPresenter)
-                } else if self.viewModel?.mode != .instant {
+                } else {
                     self.viewModel?.mode = .instant
                     self.attachChild(worker: self.instantPresenter)
                 }
