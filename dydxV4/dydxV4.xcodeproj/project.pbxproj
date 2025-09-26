@@ -30,7 +30,8 @@
 		02DA0AFC2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA0AFB2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift */; };
 		02DA0B062B57633E00BFA975 /* PercyXcui in Frameworks */ = {isa = PBXBuildFile; productRef = 02DA0B052B57633E00BFA975 /* PercyXcui */; };
 		02E7DDDF28CFB33B00727949 /* dydxStateManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DDA828CFB31000727949 /* dydxStateManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		02FC8F402E872176003B5AE8 /* dydxFiatRamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FC8DB72E86FBB0003B5AE8 /* dydxFiatRamp.framework */; };
+		02FC8F432E8726CB003B5AE8 /* dydxFiatRamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FC8DB72E86FBB0003B5AE8 /* dydxFiatRamp.framework */; };
+		02FC8F442E8726D8003B5AE8 /* dydxFiatRamp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02FC8DB72E86FBB0003B5AE8 /* dydxFiatRamp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02FF092E29ADBD9900781EDA /* dydxFormatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028420CF29AD77F400C0E7CC /* dydxFormatter.framework */; };
 		02FF092F29ADBD9F00781EDA /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E11EB29ADB9BC00FE271C /* dydxChart.framework */; };
 		02FF093029ADBDA300781EDA /* dydxPresenters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; };
@@ -276,18 +277,18 @@
 			remoteGlobalIDString = 02E7DC5D28CFAF5C00727949;
 			remoteInfo = dydxStateManager;
 		};
-		02FC8DB32E86FBB0003B5AE8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02FC8DB02E86FBB0003B5AE8 /* dydxFiatRamp.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 02FC8C502E86FAF6003B5AE8;
-			remoteInfo = dydxFiatRamp;
-		};
 		02FC8DB62E86FBB0003B5AE8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 02FC8DB02E86FBB0003B5AE8 /* dydxFiatRamp.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 02FC8C512E86FAF6003B5AE8;
+			remoteInfo = dydxFiatRamp;
+		};
+		02FC8F412E8726BA003B5AE8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02FC8DB02E86FBB0003B5AE8 /* dydxFiatRamp.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02FC8C502E86FAF6003B5AE8;
 			remoteInfo = dydxFiatRamp;
 		};
 		27491E2F2C5406680014A574 /* PBXContainerItemProxy */ = {
@@ -820,6 +821,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				02FC8F442E8726D8003B5AE8 /* dydxFiatRamp.framework in Embed Frameworks */,
 				02A107AC2E2859E600E65EE2 /* dydxTurnkey.framework in Embed Frameworks */,
 				027E1E1429C912AC0098666F /* PlatformUIJedio.framework in Embed Frameworks */,
 				02439D1229B03F7B00A083FE /* dydxCartera.framework in Embed Frameworks */,
@@ -943,7 +945,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02FC8F402E872176003B5AE8 /* dydxFiatRamp.framework in Frameworks */,
+				02FC8F432E8726CB003B5AE8 /* dydxFiatRamp.framework in Frameworks */,
 				2741B25E2C06A0F900693B17 /* dydxViews.framework in Frameworks */,
 				2741B25D2C06A0F600693B17 /* dydxAnalytics.framework in Frameworks */,
 				027E1E1329C912660098666F /* PlatformUIJedio.framework in Frameworks */,
@@ -1485,7 +1487,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				02FC8DB42E86FBB0003B5AE8 /* PBXTargetDependency */,
+				02FC8F422E8726BA003B5AE8 /* PBXTargetDependency */,
 				02A107AE2E2859FF00E65EE2 /* PBXTargetDependency */,
 				275C17092BF7D737009313EC /* PBXTargetDependency */,
 				275956062BF7D1FD008C77EE /* PBXTargetDependency */,
@@ -2611,10 +2613,10 @@
 			name = dydxStateManager;
 			targetProxy = 02E7DDDD28CFB32D00727949 /* PBXContainerItemProxy */;
 		};
-		02FC8DB42E86FBB0003B5AE8 /* PBXTargetDependency */ = {
+		02FC8F422E8726BA003B5AE8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = dydxFiatRamp;
-			targetProxy = 02FC8DB32E86FBB0003B5AE8 /* PBXContainerItemProxy */;
+			targetProxy = 02FC8F412E8726BA003B5AE8 /* PBXContainerItemProxy */;
 		};
 		27491E342C5406DD0014A574 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
