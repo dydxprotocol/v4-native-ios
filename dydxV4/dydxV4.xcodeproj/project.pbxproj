@@ -874,7 +874,6 @@
 		02DA0AFB2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxV4UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		02DA0B022B57622B00BFA975 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		02E7DD9A28CFB31000727949 /* dydxStateManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxStateManager.xcodeproj; path = ../dydx/dydxStateManager/dydxStateManager.xcodeproj; sourceTree = "<group>"; };
-		02FC8D7D2E86FBA8003B5AE8 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = ../dydx/dydxFiatRamp/dydxFiatRamp.xcodeproj; sourceTree = SOURCE_ROOT; };
 		02FC8DB02E86FBB0003B5AE8 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxFiatRamp/dydxFiatRamp.xcodeproj"; sourceTree = "<absolute>"; };
 		171807B0CCAE5C86B5D65793 /* Pods_iOS_dydxV4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxV4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2729BA102BF7C93100729A85 /* dydxAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1033,7 +1032,7 @@
 		02684D6028BD40830007CEFF /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				02FC8D7D2E86FBA8003B5AE8 /* dydxFiatRamp.xcodeproj */,
+				02FC8DB02E86FBB0003B5AE8 /* dydxFiatRamp.xcodeproj */,
 				02A105582E28537C00E65EE2 /* dydxTurnkey.xcodeproj */,
 				27491E2B2C5406680014A574 /* StatsigInjections.xcodeproj */,
 				6466E0DC280F662600B8791B /* AmplitudeInjections.xcodeproj */,
@@ -1205,7 +1204,6 @@
 				3112F461216BBF8400708927 /* dydx */,
 				3112F478216BBF8600708927 /* dydxTests */,
 				02DA0AF82B57609100BFA975 /* dydxV4UITests */,
-				02FC8DB02E86FBB0003B5AE8 /* dydxFiatRamp.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
