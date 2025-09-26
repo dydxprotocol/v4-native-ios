@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -160,12 +160,10 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		314B5D0423DCC9F400139EB3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
+			dstSubfolder = Product;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -186,11 +184,9 @@
 /* Begin PBXFrameworksBuildPhase section */
 		314B5D0323DCC9F400139EB3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				6047E9B193F06297554A2333 /* Pods_iOS_AppsFlyerStaticInjections.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -348,7 +344,6 @@
 				};
 			};
 			buildConfigurationList = 314B5D0123DCC9F400139EB3 /* Build configuration list for PBXProject "AppsFlyerStaticInjections" */;
-			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -356,6 +351,7 @@
 				Base,
 			);
 			mainGroup = 314B5CFD23DCC9F400139EB3;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 314B5D0723DCC9F400139EB3 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -504,24 +500,26 @@
 /* Begin PBXShellScriptBuildPhase section */
 		1E0A8731C460807DBC643A57 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-AppsFlyerStaticInjections-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -529,14 +527,12 @@
 /* Begin PBXSourcesBuildPhase section */
 		314B5D0223DCC9F400139EB3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				314B5E1B23DCCD3800139EB3 /* AppsFlyerInjections.swift in Sources */,
 				314B5D0A23DCC9F400139EB3 /* AppsFlyerStaticInjections.swift in Sources */,
 				314B5E1A23DCCD3800139EB3 /* AppsFlyerAttributor.swift in Sources */,
 				314B5E1923DCCD3800139EB3 /* AppsFlyerTracking.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -559,7 +555,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		314B5D0B23DCC9F400139EB3 /* Debug */ = {
+		314B5D0B23DCC9F400139EB3 /* Debug configuration for PBXProject "AppsFlyerStaticInjections" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -629,10 +625,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -641,7 +634,7 @@
 			};
 			name = Debug;
 		};
-		314B5D0C23DCC9F400139EB3 /* Release */ = {
+		314B5D0C23DCC9F400139EB3 /* Release configuration for PBXProject "AppsFlyerStaticInjections" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -704,10 +697,7 @@
 				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -717,7 +707,7 @@
 			};
 			name = Release;
 		};
-		314B5D0E23DCC9F400139EB3 /* Debug */ = {
+		314B5D0E23DCC9F400139EB3 /* Debug configuration for PBXNativeTarget "AppsFlyerStaticInjections" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 83655BBB6129CA84FF33CBD6 /* Pods-iOS-AppsFlyerStaticInjections.debug.xcconfig */;
 			buildSettings = {
@@ -731,7 +721,7 @@
 			};
 			name = Debug;
 		};
-		314B5D0F23DCC9F400139EB3 /* Release */ = {
+		314B5D0F23DCC9F400139EB3 /* Release configuration for PBXNativeTarget "AppsFlyerStaticInjections" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0BB984C1BE09B434B6BD5859 /* Pods-iOS-AppsFlyerStaticInjections.release.xcconfig */;
 			buildSettings = {
@@ -751,19 +741,17 @@
 		314B5D0123DCC9F400139EB3 /* Build configuration list for PBXProject "AppsFlyerStaticInjections" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				314B5D0B23DCC9F400139EB3 /* Debug */,
-				314B5D0C23DCC9F400139EB3 /* Release */,
+				314B5D0B23DCC9F400139EB3 /* Debug configuration for PBXProject "AppsFlyerStaticInjections" */,
+				314B5D0C23DCC9F400139EB3 /* Release configuration for PBXProject "AppsFlyerStaticInjections" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		314B5D0D23DCC9F400139EB3 /* Build configuration list for PBXNativeTarget "AppsFlyerStaticInjections" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				314B5D0E23DCC9F400139EB3 /* Debug */,
-				314B5D0F23DCC9F400139EB3 /* Release */,
+				314B5D0E23DCC9F400139EB3 /* Debug configuration for PBXNativeTarget "AppsFlyerStaticInjections" */,
+				314B5D0F23DCC9F400139EB3 /* Release configuration for PBXNativeTarget "AppsFlyerStaticInjections" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

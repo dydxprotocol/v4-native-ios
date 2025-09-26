@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -310,51 +310,41 @@
 /* Begin PBXFrameworksBuildPhase section */
 		313EBA9521BB791800BEF926 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				313EBAFA21BB799A00BEF926 /* Utilities.framework in Frameworks */,
 				313EBAFB21BB799A00BEF926 /* ParticlesKit.framework in Frameworks */,
 				313EBAFD21BB799A00BEF926 /* RoutingKit.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBAA221BB792600BEF926 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				313EBCFD21BB7DED00BEF926 /* Utilities.framework in Frameworks */,
 				313EBCFE21BB7DED00BEF926 /* ParticlesKit.framework in Frameworks */,
 				313EBD0021BB7DED00BEF926 /* RoutingKit.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBAAA21BB792600BEF926 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				313EBAAE21BB792600BEF926 /* JedioKit.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB84821B0F3F500391ADF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				31ACB8A621B0F46100391ADF /* Utilities.framework in Frameworks */,
 				31ACB8A721B0F46100391ADF /* ParticlesKit.framework in Frameworks */,
 				31ACB8A921B0F46100391ADF /* RoutingKit.framework in Frameworks */,
 				B812470D89D39155E00F81F0 /* Pods_iOS_JedioKit.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB85121B0F3F500391ADF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				31ACB85521B0F3F500391ADF /* JedioKit.framework in Frameworks */,
 				4B6E9CF3843CB9A0D4E39253 /* Pods_iOS_JedioKitTests.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -560,27 +550,21 @@
 /* Begin PBXHeadersBuildPhase section */
 		313EBA9321BB791800BEF926 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				313EBA9C21BB791800BEF926 /* JedioKit.h in Headers */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBAA021BB792600BEF926 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				313EBAB521BB792600BEF926 /* JedioKit.h in Headers */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB84621B0F3F500391ADF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				31ACB85C21B0F3F500391ADF /* JedioKit.h in Headers */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -716,7 +700,6 @@
 				};
 			};
 			buildConfigurationList = 31ACB84521B0F3F500391ADF /* Build configuration list for PBXProject "JedioKit" */;
-			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -724,6 +707,7 @@
 				Base,
 			);
 			mainGroup = 31ACB84121B0F3F500391ADF;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 31ACB84C21B0F3F500391ADF /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -862,105 +846,94 @@
 /* Begin PBXResourcesBuildPhase section */
 		313EBA9621BB791800BEF926 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBAA321BB792600BEF926 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBAAB21BB792600BEF926 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB84921B0F3F500391ADF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB85221B0F3F500391ADF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		1D7AFA444B30200810187177 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-JedioKitTests/Pods-iOS-JedioKitTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-JedioKitTests/Pods-iOS-JedioKitTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-JedioKitTests/Pods-iOS-JedioKitTests-frameworks.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-JedioKitTests/Pods-iOS-JedioKitTests-frameworks.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		6DFDA40381ECAD22EC0726BF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-JedioKit-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		E19BA38655AAAC278B197123 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-JedioKitTests-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -968,7 +941,6 @@
 /* Begin PBXSourcesBuildPhase section */
 		313EBA9421BB791800BEF926 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				314B5F0A23DCCDEC00139EB3 /* FieldDefinition.swift in Sources */,
 				314B5EF623DCCDEC00139EB3 /* NullFieldValidator.swift in Sources */,
@@ -988,11 +960,9 @@
 				314B5F0E23DCCDEC00139EB3 /* FieldDefinitionGroup.swift in Sources */,
 				314B5F2E23DCCDEC00139EB3 /* FieldListInteractor.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBAA121BB792600BEF926 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				314B5F0B23DCCDEC00139EB3 /* FieldDefinition.swift in Sources */,
 				314B5EF723DCCDEC00139EB3 /* NullFieldValidator.swift in Sources */,
@@ -1012,19 +982,15 @@
 				314B5F0F23DCCDEC00139EB3 /* FieldDefinitionGroup.swift in Sources */,
 				314B5F2F23DCCDEC00139EB3 /* FieldListInteractor.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBAA921BB792600BEF926 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				313EBAB321BB792600BEF926 /* JedioKitAppleTVTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB84721B0F3F500391ADF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				314B5F0923DCCDEC00139EB3 /* FieldDefinition.swift in Sources */,
 				314B5EF523DCCDEC00139EB3 /* NullFieldValidator.swift in Sources */,
@@ -1044,15 +1010,12 @@
 				314B5F0D23DCCDEC00139EB3 /* FieldDefinitionGroup.swift in Sources */,
 				314B5F2D23DCCDEC00139EB3 /* FieldListInteractor.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB85021B0F3F500391ADF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				31ACB85A21B0F3F500391ADF /* JedioKitTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -1115,7 +1078,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		313EBA9E21BB791800BEF926 /* Debug */ = {
+		313EBA9E21BB791800BEF926 /* Debug configuration for PBXNativeTarget "JedioKitAppleWatch" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -1143,7 +1106,7 @@
 			};
 			name = Debug;
 		};
-		313EBA9F21BB791800BEF926 /* Release */ = {
+		313EBA9F21BB791800BEF926 /* Release configuration for PBXNativeTarget "JedioKitAppleWatch" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -1171,7 +1134,7 @@
 			};
 			name = Release;
 		};
-		313EBAB721BB792600BEF926 /* Debug */ = {
+		313EBAB721BB792600BEF926 /* Debug configuration for PBXNativeTarget "JedioKitAppleTV" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
@@ -1198,7 +1161,7 @@
 			};
 			name = Debug;
 		};
-		313EBAB821BB792600BEF926 /* Release */ = {
+		313EBAB821BB792600BEF926 /* Release configuration for PBXNativeTarget "JedioKitAppleTV" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
@@ -1225,7 +1188,7 @@
 			};
 			name = Release;
 		};
-		313EBABA21BB792600BEF926 /* Debug */ = {
+		313EBABA21BB792600BEF926 /* Debug configuration for PBXNativeTarget "JedioKitAppleTVTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1244,7 +1207,7 @@
 			};
 			name = Debug;
 		};
-		313EBABB21BB792600BEF926 /* Release */ = {
+		313EBABB21BB792600BEF926 /* Release configuration for PBXNativeTarget "JedioKitAppleTVTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1263,7 +1226,7 @@
 			};
 			name = Release;
 		};
-		31ACB85D21B0F3F500391ADF /* Debug */ = {
+		31ACB85D21B0F3F500391ADF /* Debug configuration for PBXProject "JedioKit" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1347,7 +1310,7 @@
 			};
 			name = Debug;
 		};
-		31ACB85E21B0F3F500391ADF /* Release */ = {
+		31ACB85E21B0F3F500391ADF /* Release configuration for PBXProject "JedioKit" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1425,7 +1388,7 @@
 			};
 			name = Release;
 		};
-		31ACB86021B0F3F500391ADF /* Debug */ = {
+		31ACB86021B0F3F500391ADF /* Debug configuration for PBXNativeTarget "JedioKit" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FEA24D0A29E1C1E2DD2351B6 /* Pods-iOS-JedioKit.debug.xcconfig */;
 			buildSettings = {
@@ -1455,7 +1418,7 @@
 			};
 			name = Debug;
 		};
-		31ACB86121B0F3F500391ADF /* Release */ = {
+		31ACB86121B0F3F500391ADF /* Release configuration for PBXNativeTarget "JedioKit" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B918BE9A744104AEA35008A /* Pods-iOS-JedioKit.release.xcconfig */;
 			buildSettings = {
@@ -1485,7 +1448,7 @@
 			};
 			name = Release;
 		};
-		31ACB86321B0F3F500391ADF /* Debug */ = {
+		31ACB86321B0F3F500391ADF /* Debug configuration for PBXNativeTarget "JedioKitTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E300CFD413F55789DC9D3839 /* Pods-iOS-JedioKitTests.debug.xcconfig */;
 			buildSettings = {
@@ -1504,7 +1467,7 @@
 			};
 			name = Debug;
 		};
-		31ACB86421B0F3F500391ADF /* Release */ = {
+		31ACB86421B0F3F500391ADF /* Release configuration for PBXNativeTarget "JedioKitTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B5E7A2D21E0E6E3CCF07850E /* Pods-iOS-JedioKitTests.release.xcconfig */;
 			buildSettings = {
@@ -1529,55 +1492,49 @@
 		313EBA9D21BB791800BEF926 /* Build configuration list for PBXNativeTarget "JedioKitAppleWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313EBA9E21BB791800BEF926 /* Debug */,
-				313EBA9F21BB791800BEF926 /* Release */,
+				313EBA9E21BB791800BEF926 /* Debug configuration for PBXNativeTarget "JedioKitAppleWatch" */,
+				313EBA9F21BB791800BEF926 /* Release configuration for PBXNativeTarget "JedioKitAppleWatch" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		313EBAB621BB792600BEF926 /* Build configuration list for PBXNativeTarget "JedioKitAppleTV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313EBAB721BB792600BEF926 /* Debug */,
-				313EBAB821BB792600BEF926 /* Release */,
+				313EBAB721BB792600BEF926 /* Debug configuration for PBXNativeTarget "JedioKitAppleTV" */,
+				313EBAB821BB792600BEF926 /* Release configuration for PBXNativeTarget "JedioKitAppleTV" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		313EBAB921BB792600BEF926 /* Build configuration list for PBXNativeTarget "JedioKitAppleTVTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313EBABA21BB792600BEF926 /* Debug */,
-				313EBABB21BB792600BEF926 /* Release */,
+				313EBABA21BB792600BEF926 /* Debug configuration for PBXNativeTarget "JedioKitAppleTVTests" */,
+				313EBABB21BB792600BEF926 /* Release configuration for PBXNativeTarget "JedioKitAppleTVTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31ACB84521B0F3F500391ADF /* Build configuration list for PBXProject "JedioKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31ACB85D21B0F3F500391ADF /* Debug */,
-				31ACB85E21B0F3F500391ADF /* Release */,
+				31ACB85D21B0F3F500391ADF /* Debug configuration for PBXProject "JedioKit" */,
+				31ACB85E21B0F3F500391ADF /* Release configuration for PBXProject "JedioKit" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31ACB85F21B0F3F500391ADF /* Build configuration list for PBXNativeTarget "JedioKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31ACB86021B0F3F500391ADF /* Debug */,
-				31ACB86121B0F3F500391ADF /* Release */,
+				31ACB86021B0F3F500391ADF /* Debug configuration for PBXNativeTarget "JedioKit" */,
+				31ACB86121B0F3F500391ADF /* Release configuration for PBXNativeTarget "JedioKit" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31ACB86221B0F3F500391ADF /* Build configuration list for PBXNativeTarget "JedioKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31ACB86321B0F3F500391ADF /* Debug */,
-				31ACB86421B0F3F500391ADF /* Release */,
+				31ACB86321B0F3F500391ADF /* Debug configuration for PBXNativeTarget "JedioKitTests" */,
+				31ACB86421B0F3F500391ADF /* Release configuration for PBXNativeTarget "JedioKitTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -190,23 +190,19 @@
 /* Begin PBXFrameworksBuildPhase section */
 		6466E0BF280F65FC00B8791B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				6466E1BE280F7A0000B8791B /* ParticlesKit.framework in Frameworks */,
 				6466E1BB280F79F700B8791B /* PlatformParticles.framework in Frameworks */,
 				6466E184280F676600B8791B /* Utilities.framework in Frameworks */,
 				8F8DCEFC15BE98EB45B19BFC /* Pods_iOS_AmplitudeInjections.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6466E0C9280F65FC00B8791B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				6466E0CD280F65FC00B8791B /* AmplitudeInjections.framework in Frameworks */,
 				2E552127448AEBE948E414DC /* Pods_iOS_AmplitudeInjectionsTests.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -340,11 +336,9 @@
 /* Begin PBXHeadersBuildPhase section */
 		6466E0BD280F65FC00B8791B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				6466E0D3280F65FC00B8791B /* AmplitudeInjections.h in Headers */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -410,7 +404,6 @@
 				};
 			};
 			buildConfigurationList = 6466E0BC280F65FC00B8791B /* Build configuration list for PBXProject "AmplitudeInjections" */;
-			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -418,6 +411,7 @@
 				Base,
 			);
 			mainGroup = 6466E0B8280F65FC00B8791B;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 6466E0C3280F65FC00B8791B /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -567,84 +561,79 @@
 /* Begin PBXResourcesBuildPhase section */
 		6466E0C0280F65FC00B8791B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6466E0CA280F65FC00B8791B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		187655C88A544A2C914E780B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-AmplitudeInjectionsTests-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		B4994CF9A975E15036B1B0B3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-AmplitudeInjectionsTests/Pods-iOS-AmplitudeInjectionsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-AmplitudeInjectionsTests/Pods-iOS-AmplitudeInjectionsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-AmplitudeInjectionsTests/Pods-iOS-AmplitudeInjectionsTests-frameworks.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-AmplitudeInjectionsTests/Pods-iOS-AmplitudeInjectionsTests-frameworks.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		CF131249E735CD8F27C6747F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-AmplitudeInjections-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -652,20 +641,16 @@
 /* Begin PBXSourcesBuildPhase section */
 		6466E0BE280F65FC00B8791B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				6466E0C7280F65FC00B8791B /* AmplitudeInjections.docc in Sources */,
 				6466E18C280F776F00B8791B /* AmplitudeTracking.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6466E0C8280F65FC00B8791B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				6466E0D2280F65FC00B8791B /* AmplitudeInjectionsTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -693,7 +678,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		6466E0D4280F65FC00B8791B /* Debug */ = {
+		6466E0D4280F65FC00B8791B /* Debug configuration for PBXProject "AmplitudeInjections" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -774,7 +759,7 @@
 			};
 			name = Debug;
 		};
-		6466E0D5280F65FC00B8791B /* Release */ = {
+		6466E0D5280F65FC00B8791B /* Release configuration for PBXProject "AmplitudeInjections" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -849,7 +834,7 @@
 			};
 			name = Release;
 		};
-		6466E0D7280F65FC00B8791B /* Debug */ = {
+		6466E0D7280F65FC00B8791B /* Debug configuration for PBXNativeTarget "AmplitudeInjections" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 419DB5F69656134F2104F7DB /* Pods-iOS-AmplitudeInjections.debug.xcconfig */;
 			buildSettings = {
@@ -878,7 +863,7 @@
 			};
 			name = Debug;
 		};
-		6466E0D8280F65FC00B8791B /* Release */ = {
+		6466E0D8280F65FC00B8791B /* Release configuration for PBXNativeTarget "AmplitudeInjections" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A51231A2804523D59E2156DA /* Pods-iOS-AmplitudeInjections.release.xcconfig */;
 			buildSettings = {
@@ -907,7 +892,7 @@
 			};
 			name = Release;
 		};
-		6466E0DA280F65FC00B8791B /* Debug */ = {
+		6466E0DA280F65FC00B8791B /* Debug configuration for PBXNativeTarget "AmplitudeInjectionsTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AC592F9389429E65880A30DD /* Pods-iOS-AmplitudeInjectionsTests.debug.xcconfig */;
 			buildSettings = {
@@ -924,7 +909,7 @@
 			};
 			name = Debug;
 		};
-		6466E0DB280F65FC00B8791B /* Release */ = {
+		6466E0DB280F65FC00B8791B /* Release configuration for PBXNativeTarget "AmplitudeInjectionsTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C0446A52CF1E7E532E741771 /* Pods-iOS-AmplitudeInjectionsTests.release.xcconfig */;
 			buildSettings = {
@@ -947,28 +932,25 @@
 		6466E0BC280F65FC00B8791B /* Build configuration list for PBXProject "AmplitudeInjections" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6466E0D4280F65FC00B8791B /* Debug */,
-				6466E0D5280F65FC00B8791B /* Release */,
+				6466E0D4280F65FC00B8791B /* Debug configuration for PBXProject "AmplitudeInjections" */,
+				6466E0D5280F65FC00B8791B /* Release configuration for PBXProject "AmplitudeInjections" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		6466E0D6280F65FC00B8791B /* Build configuration list for PBXNativeTarget "AmplitudeInjections" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6466E0D7280F65FC00B8791B /* Debug */,
-				6466E0D8280F65FC00B8791B /* Release */,
+				6466E0D7280F65FC00B8791B /* Debug configuration for PBXNativeTarget "AmplitudeInjections" */,
+				6466E0D8280F65FC00B8791B /* Release configuration for PBXNativeTarget "AmplitudeInjections" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		6466E0D9280F65FC00B8791B /* Build configuration list for PBXNativeTarget "AmplitudeInjectionsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6466E0DA280F65FC00B8791B /* Debug */,
-				6466E0DB280F65FC00B8791B /* Release */,
+				6466E0DA280F65FC00B8791B /* Debug configuration for PBXNativeTarget "AmplitudeInjectionsTests" */,
+				6466E0DB280F65FC00B8791B /* Release configuration for PBXNativeTarget "AmplitudeInjectionsTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

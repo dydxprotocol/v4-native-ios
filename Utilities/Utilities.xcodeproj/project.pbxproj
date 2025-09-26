@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -418,43 +418,33 @@
 /* Begin PBXFrameworksBuildPhase section */
 		313A536221B9805F00A92D62 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313A536A21B9805F00A92D62 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				313A536E21B9805F00A92D62 /* Utilities.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3196823421B791CF00AE0F28 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31E65AB6216BC9C9008ABEE9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				310E61E9216C0F910043BB33 /* Security.framework in Frameworks */,
 				4EDE0B13DB89059A45D982F2 /* Pods_iOS_Utilities.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31E65ABF216BC9C9008ABEE9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				31E65AC3216BC9C9008ABEE9 /* Utilities.framework in Frameworks */,
 				35EE5B244960774B9B6D4D55 /* Pods_iOS_UtilitiesTests.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -909,30 +899,24 @@
 /* Begin PBXHeadersBuildPhase section */
 		313A536021B9805F00A92D62 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				313A537521B9805F00A92D62 /* Utilities.h in Headers */,
 				314B647623DCCF0200139EB3 /* NSObject+Class.h in Headers */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3196823221B791CF00AE0F28 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				3196823B21B791CF00AE0F28 /* Utilities.h in Headers */,
 				314B647523DCCF0200139EB3 /* NSObject+Class.h in Headers */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31E65AB4216BC9C9008ABEE9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				31E65ACA216BC9C9008ABEE9 /* Utilities.h in Headers */,
 				314B647423DCCF0200139EB3 /* NSObject+Class.h in Headers */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -947,8 +931,6 @@
 				313A536321B9805F00A92D62 /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			name = UtilitiesAppleTV;
 			productName = UtilitiesAppleTV;
@@ -984,8 +966,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = UtilitiesAppleWatch;
 			productName = UtilitiesAppleWatch;
 			productReference = 3196823721B791CF00AE0F28 /* Utilities.framework */;
@@ -1002,8 +982,6 @@
 				31E65AB7216BC9C9008ABEE9 /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			name = Utilities;
 			productName = Utilities;
@@ -1059,7 +1037,6 @@
 				};
 			};
 			buildConfigurationList = 31E65AB3216BC9C9008ABEE9 /* Build configuration list for PBXProject "Utilities" */;
-			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1067,6 +1044,7 @@
 				Base,
 			);
 			mainGroup = 31E65AAF216BC9C9008ABEE9;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 31E65ABA216BC9C9008ABEE9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1083,105 +1061,94 @@
 /* Begin PBXResourcesBuildPhase section */
 		313A536321B9805F00A92D62 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313A536B21B9805F00A92D62 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3196823521B791CF00AE0F28 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31E65AB7216BC9C9008ABEE9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31E65AC0216BC9C9008ABEE9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		1096C7EFE814E7860FABFC4C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-UtilitiesTests-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		160F8B73951F762A10CB5455 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-UtilitiesTests/Pods-iOS-UtilitiesTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-UtilitiesTests/Pods-iOS-UtilitiesTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-UtilitiesTests/Pods-iOS-UtilitiesTests-frameworks.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-UtilitiesTests/Pods-iOS-UtilitiesTests-frameworks.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		C4AE1B01FCD415A3B086A427 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-Utilities-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1189,7 +1156,6 @@
 /* Begin PBXSourcesBuildPhase section */
 		313A536121B9805F00A92D62 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				314B64D223DCCF0200139EB3 /* TimeCounter.swift in Sources */,
 				314B64B223DCCF0200139EB3 /* NSObject+Class.m in Sources */,
@@ -1256,19 +1222,15 @@
 				314B64EE23DCCF0200139EB3 /* ParsingProtocol.swift in Sources */,
 				312CE39C2630A48B00C519C0 /* StringLoader.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313A536921B9805F00A92D62 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				313A537321B9805F00A92D62 /* UtilitiesAppleTVTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3196823321B791CF00AE0F28 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				314B64B123DCCF0200139EB3 /* NSObject+Class.m in Sources */,
 				314B645D23DCCF0200139EB3 /* Debouncer.swift in Sources */,
@@ -1335,11 +1297,9 @@
 				314B64BD23DCCF0200139EB3 /* Int+Random.swift in Sources */,
 				314B64ED23DCCF0200139EB3 /* ParsingProtocol.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31E65AB5216BC9C9008ABEE9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				02E90C5E29D7444B004E2311 /* DebugSettingsStore.swift in Sources */,
 				314B64D023DCCF0200139EB3 /* TimeCounter.swift in Sources */,
@@ -1452,16 +1412,13 @@
 				314B64BC23DCCF0200139EB3 /* Int+Random.swift in Sources */,
 				314B64EC23DCCF0200139EB3 /* ParsingProtocol.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31E65ABE216BC9C9008ABEE9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				02EE90552829A95600225B56 /* NSObject+ObservingTests.swift in Sources */,
 				02EE8FE12828307900225B56 /* CombineObservingTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -1479,7 +1436,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		313A537621B9805F00A92D62 /* Debug */ = {
+		313A537621B9805F00A92D62 /* Debug configuration for PBXNativeTarget "UtilitiesAppleTV" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -1507,7 +1464,7 @@
 			};
 			name = Debug;
 		};
-		313A537721B9805F00A92D62 /* Release */ = {
+		313A537721B9805F00A92D62 /* Release configuration for PBXNativeTarget "UtilitiesAppleTV" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -1535,7 +1492,7 @@
 			};
 			name = Release;
 		};
-		313A537821B9805F00A92D62 /* Debug */ = {
+		313A537821B9805F00A92D62 /* Debug configuration for PBXNativeTarget "UtilitiesAppleTVTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1554,7 +1511,7 @@
 			};
 			name = Debug;
 		};
-		313A537921B9805F00A92D62 /* Release */ = {
+		313A537921B9805F00A92D62 /* Release configuration for PBXNativeTarget "UtilitiesAppleTVTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1573,7 +1530,7 @@
 			};
 			name = Release;
 		};
-		3196823C21B791CF00AE0F28 /* Debug */ = {
+		3196823C21B791CF00AE0F28 /* Debug configuration for PBXNativeTarget "UtilitiesAppleWatch" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -1601,7 +1558,7 @@
 			};
 			name = Debug;
 		};
-		3196823D21B791CF00AE0F28 /* Release */ = {
+		3196823D21B791CF00AE0F28 /* Release configuration for PBXNativeTarget "UtilitiesAppleWatch" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -1629,7 +1586,7 @@
 			};
 			name = Release;
 		};
-		31E65ACB216BC9C9008ABEE9 /* Debug */ = {
+		31E65ACB216BC9C9008ABEE9 /* Debug configuration for PBXProject "Utilities" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1713,7 +1670,7 @@
 			};
 			name = Debug;
 		};
-		31E65ACC216BC9C9008ABEE9 /* Release */ = {
+		31E65ACC216BC9C9008ABEE9 /* Release configuration for PBXProject "Utilities" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1791,7 +1748,7 @@
 			};
 			name = Release;
 		};
-		31E65ACE216BC9C9008ABEE9 /* Debug */ = {
+		31E65ACE216BC9C9008ABEE9 /* Debug configuration for PBXNativeTarget "Utilities" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D3D9E31E155FDD76DDDF56C9 /* Pods-iOS-Utilities.debug.xcconfig */;
 			buildSettings = {
@@ -1824,7 +1781,7 @@
 			};
 			name = Debug;
 		};
-		31E65ACF216BC9C9008ABEE9 /* Release */ = {
+		31E65ACF216BC9C9008ABEE9 /* Release configuration for PBXNativeTarget "Utilities" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D93995CCA6E58B36CA45B212 /* Pods-iOS-Utilities.release.xcconfig */;
 			buildSettings = {
@@ -1856,7 +1813,7 @@
 			};
 			name = Release;
 		};
-		31E65AD1216BC9C9008ABEE9 /* Debug */ = {
+		31E65AD1216BC9C9008ABEE9 /* Debug configuration for PBXNativeTarget "UtilitiesTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81539FD394D7847D50BD4749 /* Pods-iOS-UtilitiesTests.debug.xcconfig */;
 			buildSettings = {
@@ -1875,7 +1832,7 @@
 			};
 			name = Debug;
 		};
-		31E65AD2216BC9C9008ABEE9 /* Release */ = {
+		31E65AD2216BC9C9008ABEE9 /* Release configuration for PBXNativeTarget "UtilitiesTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 439FD4525821BD140CEE8DB1 /* Pods-iOS-UtilitiesTests.release.xcconfig */;
 			buildSettings = {
@@ -1900,55 +1857,49 @@
 		313A537A21B9805F00A92D62 /* Build configuration list for PBXNativeTarget "UtilitiesAppleTV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313A537621B9805F00A92D62 /* Debug */,
-				313A537721B9805F00A92D62 /* Release */,
+				313A537621B9805F00A92D62 /* Debug configuration for PBXNativeTarget "UtilitiesAppleTV" */,
+				313A537721B9805F00A92D62 /* Release configuration for PBXNativeTarget "UtilitiesAppleTV" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		313A537B21B9805F00A92D62 /* Build configuration list for PBXNativeTarget "UtilitiesAppleTVTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313A537821B9805F00A92D62 /* Debug */,
-				313A537921B9805F00A92D62 /* Release */,
+				313A537821B9805F00A92D62 /* Debug configuration for PBXNativeTarget "UtilitiesAppleTVTests" */,
+				313A537921B9805F00A92D62 /* Release configuration for PBXNativeTarget "UtilitiesAppleTVTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		3196823E21B791CF00AE0F28 /* Build configuration list for PBXNativeTarget "UtilitiesAppleWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3196823C21B791CF00AE0F28 /* Debug */,
-				3196823D21B791CF00AE0F28 /* Release */,
+				3196823C21B791CF00AE0F28 /* Debug configuration for PBXNativeTarget "UtilitiesAppleWatch" */,
+				3196823D21B791CF00AE0F28 /* Release configuration for PBXNativeTarget "UtilitiesAppleWatch" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31E65AB3216BC9C9008ABEE9 /* Build configuration list for PBXProject "Utilities" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31E65ACB216BC9C9008ABEE9 /* Debug */,
-				31E65ACC216BC9C9008ABEE9 /* Release */,
+				31E65ACB216BC9C9008ABEE9 /* Debug configuration for PBXProject "Utilities" */,
+				31E65ACC216BC9C9008ABEE9 /* Release configuration for PBXProject "Utilities" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31E65ACD216BC9C9008ABEE9 /* Build configuration list for PBXNativeTarget "Utilities" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31E65ACE216BC9C9008ABEE9 /* Debug */,
-				31E65ACF216BC9C9008ABEE9 /* Release */,
+				31E65ACE216BC9C9008ABEE9 /* Debug configuration for PBXNativeTarget "Utilities" */,
+				31E65ACF216BC9C9008ABEE9 /* Release configuration for PBXNativeTarget "Utilities" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31E65AD0216BC9C9008ABEE9 /* Build configuration list for PBXNativeTarget "UtilitiesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31E65AD1216BC9C9008ABEE9 /* Debug */,
-				31E65AD2216BC9C9008ABEE9 /* Release */,
+				31E65AD1216BC9C9008ABEE9 /* Debug configuration for PBXNativeTarget "UtilitiesTests" */,
+				31E65AD2216BC9C9008ABEE9 /* Release configuration for PBXNativeTarget "UtilitiesTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

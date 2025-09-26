@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -346,7 +346,6 @@
 /* Begin PBXFrameworksBuildPhase section */
 		02D1CD8E29C8D274009ADF9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				02D1CED329C8D548009ADF9A /* dydxViews.framework in Frameworks */,
 				02D1CEC729C8D4E6009ADF9A /* ParticlesKit.framework in Frameworks */,
@@ -357,16 +356,13 @@
 				02D1CE6429C8D2BC009ADF9A /* PlatformUI.framework in Frameworks */,
 				4F079DA1872A9168D6035DD6 /* Pods_iOS_PlatformUIJedio.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02D1CD9829C8D274009ADF9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				02D1CD9C29C8D274009ADF9A /* PlatformUIJedio.framework in Frameworks */,
 				DEAF6AF5E6F9D552E4F39981 /* Pods_iOS_PlatformUIJedioTests.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -581,11 +577,9 @@
 /* Begin PBXHeadersBuildPhase section */
 		02D1CD8C29C8D274009ADF9A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				02D1CDA229C8D274009ADF9A /* PlatformUIJedio.h in Headers */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -657,7 +651,6 @@
 				};
 			};
 			buildConfigurationList = 02D1CD8B29C8D274009ADF9A /* Build configuration list for PBXProject "PlatformUIJedio" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -665,6 +658,7 @@
 				Base,
 			);
 			mainGroup = 02D1CD8729C8D274009ADF9A;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 02D1CD9229C8D274009ADF9A /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -928,126 +922,111 @@
 /* Begin PBXResourcesBuildPhase section */
 		02D1CD8F29C8D274009ADF9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02D1CD9929C8D274009ADF9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		0A3362D6700B54B02C480932 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-PlatformUIJedioTests-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		4872C31DE1E391C3C3E81012 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-PlatformUIJedio-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		74423CE5696BC0BBC36C46AA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-frameworks.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-frameworks.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		AB316E87596E8568C41FD124 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedio/Pods-iOS-PlatformUIJedio-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedio/Pods-iOS-PlatformUIJedio-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedio/Pods-iOS-PlatformUIJedio-resources.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedio/Pods-iOS-PlatformUIJedio-resources.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		E4D791A189FFD74D85ED7C30 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-resources.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUIJedioTests/Pods-iOS-PlatformUIJedioTests-resources.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1055,7 +1034,6 @@
 /* Begin PBXSourcesBuildPhase section */
 		02D1CD8D29C8D274009ADF9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				02FAFA7729D4E838001A0903 /* FieldInputSwitchView.swift in Sources */,
 				02FAFA7B29D5027C001A0903 /* FieldInputSelectionGridView.swift in Sources */,
@@ -1071,15 +1049,12 @@
 				027E1EE029C95CBD0098666F /* FieldSettingsViewPresenter.swift in Sources */,
 				027E1EDE29C925FD0098666F /* SettingOptionView.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02D1CD9729C8D274009ADF9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				02D1CDA129C8D274009ADF9A /* PlatformUIJedioTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -1127,7 +1102,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		02D1CDA329C8D274009ADF9A /* Debug */ = {
+		02D1CDA329C8D274009ADF9A /* Debug configuration for PBXProject "PlatformUIJedio" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1208,7 +1183,7 @@
 			};
 			name = Debug;
 		};
-		02D1CDA429C8D274009ADF9A /* Release */ = {
+		02D1CDA429C8D274009ADF9A /* Release configuration for PBXProject "PlatformUIJedio" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1283,7 +1258,7 @@
 			};
 			name = Release;
 		};
-		02D1CDA629C8D274009ADF9A /* Debug */ = {
+		02D1CDA629C8D274009ADF9A /* Debug configuration for PBXNativeTarget "PlatformUIJedio" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BC76FBF717207B1934DB6F30 /* Pods-iOS-PlatformUIJedio.debug.xcconfig */;
 			buildSettings = {
@@ -1313,7 +1288,7 @@
 			};
 			name = Debug;
 		};
-		02D1CDA729C8D274009ADF9A /* Release */ = {
+		02D1CDA729C8D274009ADF9A /* Release configuration for PBXNativeTarget "PlatformUIJedio" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2DC89F0DDD206C12D9901366 /* Pods-iOS-PlatformUIJedio.release.xcconfig */;
 			buildSettings = {
@@ -1343,7 +1318,7 @@
 			};
 			name = Release;
 		};
-		02D1CDA929C8D274009ADF9A /* Debug */ = {
+		02D1CDA929C8D274009ADF9A /* Debug configuration for PBXNativeTarget "PlatformUIJedioTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9DD1B818407628F1B79C936E /* Pods-iOS-PlatformUIJedioTests.debug.xcconfig */;
 			buildSettings = {
@@ -1362,7 +1337,7 @@
 			};
 			name = Debug;
 		};
-		02D1CDAA29C8D274009ADF9A /* Release */ = {
+		02D1CDAA29C8D274009ADF9A /* Release configuration for PBXNativeTarget "PlatformUIJedioTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 36D266CC260D5D029E776CFA /* Pods-iOS-PlatformUIJedioTests.release.xcconfig */;
 			buildSettings = {
@@ -1387,28 +1362,25 @@
 		02D1CD8B29C8D274009ADF9A /* Build configuration list for PBXProject "PlatformUIJedio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02D1CDA329C8D274009ADF9A /* Debug */,
-				02D1CDA429C8D274009ADF9A /* Release */,
+				02D1CDA329C8D274009ADF9A /* Debug configuration for PBXProject "PlatformUIJedio" */,
+				02D1CDA429C8D274009ADF9A /* Release configuration for PBXProject "PlatformUIJedio" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02D1CDA529C8D274009ADF9A /* Build configuration list for PBXNativeTarget "PlatformUIJedio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02D1CDA629C8D274009ADF9A /* Debug */,
-				02D1CDA729C8D274009ADF9A /* Release */,
+				02D1CDA629C8D274009ADF9A /* Debug configuration for PBXNativeTarget "PlatformUIJedio" */,
+				02D1CDA729C8D274009ADF9A /* Release configuration for PBXNativeTarget "PlatformUIJedio" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02D1CDA829C8D274009ADF9A /* Build configuration list for PBXNativeTarget "PlatformUIJedioTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02D1CDA929C8D274009ADF9A /* Debug */,
-				02D1CDAA29C8D274009ADF9A /* Release */,
+				02D1CDA929C8D274009ADF9A /* Debug configuration for PBXNativeTarget "PlatformUIJedioTests" */,
+				02D1CDAA29C8D274009ADF9A /* Release configuration for PBXNativeTarget "PlatformUIJedioTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

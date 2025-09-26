@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -308,7 +308,6 @@
 /* Begin PBXFrameworksBuildPhase section */
 		319ACD05249404A800DB66F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				319ACD6B2494058E00DB66F1 /* ParticlesKit.framework in Frameworks */,
 				319ACD6F2494058E00DB66F1 /* UIToolkits.framework in Frameworks */,
@@ -317,16 +316,13 @@
 				319ACFE42497D96E00DB66F1 /* RoutingKit.framework in Frameworks */,
 				418FB83A9B23494A11A0E041 /* Pods_iOS_CameraParticles.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		319ACD0E249404A800DB66F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				319ACD12249404A800DB66F1 /* CameraParticles.framework in Frameworks */,
 				FB26021F0F8600AFCA6D10F0 /* Pods_iOS_CameraParticlesTests.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -505,11 +501,9 @@
 /* Begin PBXHeadersBuildPhase section */
 		319ACD03249404A800DB66F1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				319ACD19249404A800DB66F1 /* CameraParticles.h in Headers */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -578,7 +572,6 @@
 				};
 			};
 			buildConfigurationList = 319ACD02249404A800DB66F1 /* Build configuration list for PBXProject "CameraParticles" */;
-			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -586,6 +579,7 @@
 				Base,
 			);
 			mainGroup = 319ACCFE249404A800DB66F1;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 319ACD09249404A800DB66F1 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -827,84 +821,79 @@
 /* Begin PBXResourcesBuildPhase section */
 		319ACD06249404A800DB66F1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		319ACD0F249404A800DB66F1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		537D376FE9A40981E485AF47 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-CameraParticles-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		9415E6F380500F2C3588AA76 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-CameraParticlesTests-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		99B1D6594E694E7CA111A1E0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-CameraParticlesTests/Pods-iOS-CameraParticlesTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-CameraParticlesTests/Pods-iOS-CameraParticlesTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-CameraParticlesTests/Pods-iOS-CameraParticlesTests-frameworks.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-CameraParticlesTests/Pods-iOS-CameraParticlesTests-frameworks.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -912,7 +901,6 @@
 /* Begin PBXSourcesBuildPhase section */
 		319ACD04249404A800DB66F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				319ACD7A2494390300DB66F1 /* VidepProcessingCapture.swift in Sources */,
 				319ACEC82496966F00DB66F1 /* VideoTextScanner.swift in Sources */,
@@ -924,15 +912,12 @@
 				319ACFD22497D5C700DB66F1 /* TextVideoProcessingViewController.swift in Sources */,
 				319ACD7524940EDD00DB66F1 /* VideoProcessingViewController.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		319ACD0D249404A800DB66F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				319ACD17249404A800DB66F1 /* CameraParticlesTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -970,7 +955,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		319ACD1A249404A800DB66F1 /* Debug */ = {
+		319ACD1A249404A800DB66F1 /* Debug configuration for PBXProject "CameraParticles" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1052,7 +1037,7 @@
 			};
 			name = Debug;
 		};
-		319ACD1B249404A800DB66F1 /* Release */ = {
+		319ACD1B249404A800DB66F1 /* Release configuration for PBXProject "CameraParticles" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1128,7 +1113,7 @@
 			};
 			name = Release;
 		};
-		319ACD1D249404A800DB66F1 /* Debug */ = {
+		319ACD1D249404A800DB66F1 /* Debug configuration for PBXNativeTarget "CameraParticles" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF62150590C26FFFB47E26E9 /* Pods-iOS-CameraParticles.debug.xcconfig */;
 			buildSettings = {
@@ -1157,7 +1142,7 @@
 			};
 			name = Debug;
 		};
-		319ACD1E249404A800DB66F1 /* Release */ = {
+		319ACD1E249404A800DB66F1 /* Release configuration for PBXNativeTarget "CameraParticles" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 994AFEE6943DB72D744DA418 /* Pods-iOS-CameraParticles.release.xcconfig */;
 			buildSettings = {
@@ -1185,7 +1170,7 @@
 			};
 			name = Release;
 		};
-		319ACD20249404A800DB66F1 /* Debug */ = {
+		319ACD20249404A800DB66F1 /* Debug configuration for PBXNativeTarget "CameraParticlesTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BCB7953AE47B2AB20BC5F4A2 /* Pods-iOS-CameraParticlesTests.debug.xcconfig */;
 			buildSettings = {
@@ -1205,7 +1190,7 @@
 			};
 			name = Debug;
 		};
-		319ACD21249404A800DB66F1 /* Release */ = {
+		319ACD21249404A800DB66F1 /* Release configuration for PBXNativeTarget "CameraParticlesTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2D120953B7734D9A8E644E5D /* Pods-iOS-CameraParticlesTests.release.xcconfig */;
 			buildSettings = {
@@ -1231,28 +1216,25 @@
 		319ACD02249404A800DB66F1 /* Build configuration list for PBXProject "CameraParticles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				319ACD1A249404A800DB66F1 /* Debug */,
-				319ACD1B249404A800DB66F1 /* Release */,
+				319ACD1A249404A800DB66F1 /* Debug configuration for PBXProject "CameraParticles" */,
+				319ACD1B249404A800DB66F1 /* Release configuration for PBXProject "CameraParticles" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		319ACD1C249404A800DB66F1 /* Build configuration list for PBXNativeTarget "CameraParticles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				319ACD1D249404A800DB66F1 /* Debug */,
-				319ACD1E249404A800DB66F1 /* Release */,
+				319ACD1D249404A800DB66F1 /* Debug configuration for PBXNativeTarget "CameraParticles" */,
+				319ACD1E249404A800DB66F1 /* Release configuration for PBXNativeTarget "CameraParticles" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		319ACD1F249404A800DB66F1 /* Build configuration list for PBXNativeTarget "CameraParticlesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				319ACD20249404A800DB66F1 /* Debug */,
-				319ACD21249404A800DB66F1 /* Release */,
+				319ACD20249404A800DB66F1 /* Debug configuration for PBXNativeTarget "CameraParticlesTests" */,
+				319ACD21249404A800DB66F1 /* Release configuration for PBXNativeTarget "CameraParticlesTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

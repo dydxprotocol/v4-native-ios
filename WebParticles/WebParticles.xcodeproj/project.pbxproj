@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -305,7 +305,6 @@
 /* Begin PBXFrameworksBuildPhase section */
 		31471FD324BA392E00057221 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				31F7606124BA3E06001EA293 /* Utilities.framework in Frameworks */,
 				31F7605D24BA3E06001EA293 /* RoutingKit.framework in Frameworks */,
@@ -313,16 +312,13 @@
 				31F7605F24BA3E06001EA293 /* UIToolkits.framework in Frameworks */,
 				0D0099D26F496B5B2C346BBC /* Pods_iOS_WebParticles.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31471FDC24BA392E00057221 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				31471FE024BA392E00057221 /* WebParticles.framework in Frameworks */,
 				FD5CCD1840132D5A7D45F02B /* Pods_iOS_WebParticlesTests.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -532,11 +528,9 @@
 /* Begin PBXHeadersBuildPhase section */
 		31471FD124BA392E00057221 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				31471FE724BA392E00057221 /* WebParticles.h in Headers */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -605,7 +599,6 @@
 				};
 			};
 			buildConfigurationList = 31471FD024BA392E00057221 /* Build configuration list for PBXProject "WebParticles" */;
-			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -613,6 +606,7 @@
 				Base,
 			);
 			mainGroup = 31471FCC24BA392E00057221;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 31471FD724BA392E00057221 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -854,85 +848,80 @@
 /* Begin PBXResourcesBuildPhase section */
 		31471FD424BA392E00057221 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				314C359724C7BFC700695F7E /* Web.storyboard in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31471FDD24BA392E00057221 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		057F8599EE109D5C8D2E6B1E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-WebParticlesTests-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		74D1502CC820DA166852A563 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-WebParticlesTests/Pods-iOS-WebParticlesTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-WebParticlesTests/Pods-iOS-WebParticlesTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-WebParticlesTests/Pods-iOS-WebParticlesTests-frameworks.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-WebParticlesTests/Pods-iOS-WebParticlesTests-frameworks.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		9C006DF0C02E748E890F1B80 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-WebParticles-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -940,7 +929,6 @@
 /* Begin PBXSourcesBuildPhase section */
 		31471FD224BA392E00057221 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				31471FFE24BA3A0A00057221 /* WebProtocols.swift in Sources */,
 				31471FF824BA39C000057221 /* ParticlesWebViewController.swift in Sources */,
@@ -950,15 +938,12 @@
 				31471FFA24BA39DC00057221 /* WebCookie.swift in Sources */,
 				31471FF524BA397C00057221 /* ParticlesWebView.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31471FDB24BA392E00057221 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				31471FE524BA392E00057221 /* WebParticlesTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -996,7 +981,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		31471FE824BA392E00057221 /* Debug */ = {
+		31471FE824BA392E00057221 /* Debug configuration for PBXProject "WebParticles" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1078,7 +1063,7 @@
 			};
 			name = Debug;
 		};
-		31471FE924BA392E00057221 /* Release */ = {
+		31471FE924BA392E00057221 /* Release configuration for PBXProject "WebParticles" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1154,7 +1139,7 @@
 			};
 			name = Release;
 		};
-		31471FEB24BA392E00057221 /* Debug */ = {
+		31471FEB24BA392E00057221 /* Debug configuration for PBXNativeTarget "WebParticles" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F14D93AB29DF0B44062804F9 /* Pods-iOS-WebParticles.debug.xcconfig */;
 			buildSettings = {
@@ -1183,7 +1168,7 @@
 			};
 			name = Debug;
 		};
-		31471FEC24BA392E00057221 /* Release */ = {
+		31471FEC24BA392E00057221 /* Release configuration for PBXNativeTarget "WebParticles" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D576A3241A22A82F48623210 /* Pods-iOS-WebParticles.release.xcconfig */;
 			buildSettings = {
@@ -1211,7 +1196,7 @@
 			};
 			name = Release;
 		};
-		31471FEE24BA392E00057221 /* Debug */ = {
+		31471FEE24BA392E00057221 /* Debug configuration for PBXNativeTarget "WebParticlesTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 780C0C0AE831784B5F295109 /* Pods-iOS-WebParticlesTests.debug.xcconfig */;
 			buildSettings = {
@@ -1231,7 +1216,7 @@
 			};
 			name = Debug;
 		};
-		31471FEF24BA392E00057221 /* Release */ = {
+		31471FEF24BA392E00057221 /* Release configuration for PBXNativeTarget "WebParticlesTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 114AAE436549410818938EE0 /* Pods-iOS-WebParticlesTests.release.xcconfig */;
 			buildSettings = {
@@ -1257,28 +1242,25 @@
 		31471FD024BA392E00057221 /* Build configuration list for PBXProject "WebParticles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31471FE824BA392E00057221 /* Debug */,
-				31471FE924BA392E00057221 /* Release */,
+				31471FE824BA392E00057221 /* Debug configuration for PBXProject "WebParticles" */,
+				31471FE924BA392E00057221 /* Release configuration for PBXProject "WebParticles" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31471FEA24BA392E00057221 /* Build configuration list for PBXNativeTarget "WebParticles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31471FEB24BA392E00057221 /* Debug */,
-				31471FEC24BA392E00057221 /* Release */,
+				31471FEB24BA392E00057221 /* Debug configuration for PBXNativeTarget "WebParticles" */,
+				31471FEC24BA392E00057221 /* Release configuration for PBXNativeTarget "WebParticles" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31471FED24BA392E00057221 /* Build configuration list for PBXNativeTarget "WebParticlesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31471FEE24BA392E00057221 /* Debug */,
-				31471FEF24BA392E00057221 /* Release */,
+				31471FEE24BA392E00057221 /* Debug configuration for PBXNativeTarget "WebParticlesTests" */,
+				31471FEF24BA392E00057221 /* Release configuration for PBXNativeTarget "WebParticlesTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

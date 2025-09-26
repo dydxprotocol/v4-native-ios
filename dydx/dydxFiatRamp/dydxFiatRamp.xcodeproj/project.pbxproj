@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -40,8 +40,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		02FC8C532E86FAF6003B5AE8 /* dydxFiatRamp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = dydxFiatRamp;
 			sourceTree = "<group>";
 		};
@@ -50,13 +48,11 @@
 /* Begin PBXFrameworksBuildPhase section */
 		02FC8C4E2E86FAF6003B5AE8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				02FC8DD32E86FC7B003B5AE8 /* Utilities.framework in Frameworks */,
 				1EF59EFFC2ACEF85D3451F9E /* Pods_iOS_dydxFiatRamp.framework in Frameworks */,
 				02FC8DBB2E86FBEC003B5AE8 /* MoonPaySdk in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -111,10 +107,8 @@
 /* Begin PBXHeadersBuildPhase section */
 		02FC8C4C2E86FAF6003B5AE8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -169,7 +163,7 @@
 			packageReferences = (
 				02FC8DB92E86FBEC003B5AE8 /* XCRemoteSwiftPackageReference "mobile-sdk-ios" */,
 			);
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 02FC8C522E86FAF6003B5AE8 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -198,34 +192,34 @@
 /* Begin PBXResourcesBuildPhase section */
 		02FC8C4F2E86FAF6003B5AE8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		585870CE31AB37692092D6B5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxFiatRamp-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -233,10 +227,8 @@
 /* Begin PBXSourcesBuildPhase section */
 		02FC8C4D2E86FAF6003B5AE8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -249,7 +241,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		02FC8C562E86FAF6003B5AE8 /* Debug */ = {
+		02FC8C562E86FAF6003B5AE8 /* Debug configuration for PBXProject "dydxFiatRamp" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -319,10 +311,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -333,7 +322,7 @@
 			};
 			name = Debug;
 		};
-		02FC8C572E86FAF6003B5AE8 /* Release */ = {
+		02FC8C572E86FAF6003B5AE8 /* Release configuration for PBXProject "dydxFiatRamp" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -396,10 +385,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -410,7 +396,7 @@
 			};
 			name = Release;
 		};
-		02FC8C592E86FAF6003B5AE8 /* Debug */ = {
+		02FC8C592E86FAF6003B5AE8 /* Debug configuration for PBXNativeTarget "dydxFiatRamp" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7367A60FC8D08F9C019B6D50 /* Pods-iOS-dydxFiatRamp.debug.xcconfig */;
 			buildSettings = {
@@ -448,7 +434,7 @@
 			};
 			name = Debug;
 		};
-		02FC8C5A2E86FAF6003B5AE8 /* Release */ = {
+		02FC8C5A2E86FAF6003B5AE8 /* Release configuration for PBXNativeTarget "dydxFiatRamp" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7DF385AD513128C3D00DB198 /* Pods-iOS-dydxFiatRamp.release.xcconfig */;
 			buildSettings = {
@@ -492,19 +478,17 @@
 		02FC8C4B2E86FAF6003B5AE8 /* Build configuration list for PBXProject "dydxFiatRamp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02FC8C562E86FAF6003B5AE8 /* Debug */,
-				02FC8C572E86FAF6003B5AE8 /* Release */,
+				02FC8C562E86FAF6003B5AE8 /* Debug configuration for PBXProject "dydxFiatRamp" */,
+				02FC8C572E86FAF6003B5AE8 /* Release configuration for PBXProject "dydxFiatRamp" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02FC8C582E86FAF6003B5AE8 /* Build configuration list for PBXNativeTarget "dydxFiatRamp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02FC8C592E86FAF6003B5AE8 /* Debug */,
-				02FC8C5A2E86FAF6003B5AE8 /* Release */,
+				02FC8C592E86FAF6003B5AE8 /* Debug configuration for PBXNativeTarget "dydxFiatRamp" */,
+				02FC8C5A2E86FAF6003B5AE8 /* Release configuration for PBXNativeTarget "dydxFiatRamp" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
