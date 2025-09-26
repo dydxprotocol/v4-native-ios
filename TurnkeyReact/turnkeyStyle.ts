@@ -62,6 +62,7 @@ export const useThemedStyles = (currentTheme: any) => {
     },
     emailInput: {
       flex: 1,
+      height: 40,
       paddingHorizontal: 12,
       color: currentTheme.colors.textPrimary,
     },

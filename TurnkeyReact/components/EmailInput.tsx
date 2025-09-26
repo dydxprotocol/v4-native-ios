@@ -48,14 +48,15 @@ export const EmailInput = ({
     }
   };
 
+  const defaultEmail = configs.isSamsungDevice ? ' ' : ''; // Workaround for a React Native bug on Samsung devices
+
   return (
     <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-
       <CheckEmailModal
         visible={checkEmailModalVisible}
         onClose={() => setCheckEmailModalVisible(false)}
         onResend={() => {
-          TurnkeyNativeModule.onTrackingEvent("TurnkeyResendEMailClick", { });
+          TurnkeyNativeModule.onTrackingEvent("TurnkeyResendEMailClick", {});
           handleEmailSubmit();
         }}
         showResendButton={showResendButton}
@@ -64,10 +65,24 @@ export const EmailInput = ({
         styles={styles}
       />
 
-      <Image
-        source={require('../../rn_style/assets/icon_mail.png')}
-        style={{ width: 24, height: 24, tintColor: currentTheme.colors.textTertiary, marginLeft: 8 }}
-      />
+      {configs.isSamsungDevice ? (
+        <Text style={{
+          fontSize: currentTheme.fontSizes.medium,
+          color: currentTheme.colors.textTertiary,
+        }}>
+          {configs.strings["APP.GENERAL.EMAIL"] + ":"}
+        </Text>
+      ) : (
+        <Image
+          source={require('../../rn_style/assets/icon_mail.png')}
+          style={{
+            width: 24,
+            height: 24,
+            tintColor: currentTheme.colors.textTertiary,
+            marginLeft: 8,
+          }}
+        />
+      )}
 
       <Input
         style={styles.emailInput}
@@ -77,10 +92,11 @@ export const EmailInput = ({
         keyboardType="email-address"
         placeholderTextColor={currentTheme.colors.textTertiary}
         placeholder={configs.strings["APP.TURNKEY_ONBOARD.EMAIL_PLACEHOLDER"]}
-        value={email}
+        value={email && email.length > 0 ? email : defaultEmail} // Workaround for a React Native bug on Samsung devices
         onChangeText={(text: string) => {
-          setEmail(text);
-          const isValid = validateEmail(text);
+          const trimmedText = text.trim();
+          setEmail(trimmedText);
+          const isValid = validateEmail(trimmedText);
           setIsValidEmail(isValid);
         }}
         onFocus={(e) => {

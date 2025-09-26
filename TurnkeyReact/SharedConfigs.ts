@@ -10,4 +10,5 @@ export type TurnkeyConfigs = {
   theme: "light" | "dark" | "classicDark" | undefined,
   enableAppleLoginIn: boolean,
   strings: Record<string, string>,
+  isSamsungDevice: boolean,
 };
