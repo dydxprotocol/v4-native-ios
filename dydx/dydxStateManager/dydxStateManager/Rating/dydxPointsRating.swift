@@ -123,8 +123,6 @@ open class dydxPointsRating: NSObject, dydxRatingProtocol {
     }
 
     public func promptForRating() {
-        // feature flag in case the prompt has issues
-        guard dydxBoolFeatureFlag.enable_app_rating.isEnabled else { return }
         if shouldStopPreprompting {
             #if DEBUG
                 Console.shared.log("Simulate SKStoreReviewController.requestReview")
