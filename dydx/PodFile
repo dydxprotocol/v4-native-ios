@@ -123,7 +123,7 @@ def react_pods
 end
 
 abstract_target 'iOS' do
-  platform:ios, '16.0'
+  platform:ios, '17.6'
   
   # config = use_native_modules!
 
