@@ -399,6 +399,11 @@ abstract_target 'iOS' do
     react_pods
   end
   
+  target 'dydxFiatRamp' do
+    project '../dydx/dydxFiatRamp/dydxFiatRamp'
+    ios_ui_pods
+  end
+  
   target 'dydxV4' do
     project '../dydxV4/dydxV4'
     ios_ui_pods

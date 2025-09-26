@@ -25,6 +25,9 @@
          </FileRef>
       </Group>
       <FileRef
+         location = "container:dydxFiatRamp/dydxFiatRamp.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:dydxAnalytics/dydxAnalytics.xcodeproj">
       </FileRef>
       <FileRef
@@ -190,5 +193,8 @@
    </FileRef>
    <FileRef
       location = "group:dydxTurnkey/dydxTurnkey.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:dydxFiatRamp/dydxFiatRamp.xcodeproj">
    </FileRef>
 </Workspace>
