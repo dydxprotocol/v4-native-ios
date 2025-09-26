@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,7 +30,8 @@
 		02DA0AFC2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA0AFB2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift */; };
 		02DA0B062B57633E00BFA975 /* PercyXcui in Frameworks */ = {isa = PBXBuildFile; productRef = 02DA0B052B57633E00BFA975 /* PercyXcui */; };
 		02E7DDDF28CFB33B00727949 /* dydxStateManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02E7DDA828CFB31000727949 /* dydxStateManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		02FC96292E8750B6003B5AE8 /* dydxFiatRamp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02FC8DB72E86FBB0003B5AE8 /* dydxFiatRamp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		02FC96C32E875218003B5AE8 /* dydxFiatRamp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02FC8DB72E86FBB0003B5AE8 /* dydxFiatRamp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		02FC96C42E875296003B5AE8 /* dydxFiatRamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FC8DB72E86FBB0003B5AE8 /* dydxFiatRamp.framework */; };
 		02FF092E29ADBD9900781EDA /* dydxFormatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028420CF29AD77F400C0E7CC /* dydxFormatter.framework */; };
 		02FF092F29ADBD9F00781EDA /* dydxChart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029E11EB29ADB9BC00FE271C /* dydxChart.framework */; };
 		02FF093029ADBDA300781EDA /* dydxPresenters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0293B66528CE94E200DDB103 /* dydxPresenters.framework */; };
@@ -806,21 +807,18 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		020F66C02858F29300E2D072 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstSubfolder = PlugIns;
 			files = (
 			);
 			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		312C8BC921F9878D00142C7A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstSubfolder = Frameworks;
 			files = (
-				02FC96292E8750B6003B5AE8 /* dydxFiatRamp.framework in Embed Frameworks */,
+				02FC96C32E875218003B5AE8 /* dydxFiatRamp.framework in Embed Frameworks */,
 				02A107AC2E2859E600E65EE2 /* dydxTurnkey.framework in Embed Frameworks */,
 				027E1E1429C912AC0098666F /* PlatformUIJedio.framework in Embed Frameworks */,
 				02439D1229B03F7B00A083FE /* dydxCartera.framework in Embed Frameworks */,
@@ -845,7 +843,6 @@
 				6466E117280F664900B8791B /* AmplitudeInjections.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -928,22 +925,24 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		02F511882E258D00002402A0 /* ../dydx/ios */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ../dydx/ios; sourceTree = SOURCE_ROOT; };
+		02F511882E258D00002402A0 /* ../dydx/ios */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ../dydx/ios;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		02DA0AF42B57609100BFA975 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				02DA0B062B57633E00BFA975 /* PercyXcui in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3112F45C216BBF8400708927 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
+				02FC96C42E875296003B5AE8 /* dydxFiatRamp.framework in Frameworks */,
 				2741B25E2C06A0F900693B17 /* dydxViews.framework in Frameworks */,
 				2741B25D2C06A0F600693B17 /* dydxAnalytics.framework in Frameworks */,
 				027E1E1329C912660098666F /* PlatformUIJedio.framework in Frameworks */,
@@ -971,15 +970,12 @@
 				31B77C3422DAD0B3004F9B21 /* PlatformRouting.framework in Frameworks */,
 				01EEEC77C8B7F3846916AF28 /* Pods_iOS_dydxV4.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3112F472216BBF8600708927 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				B9522364B513316410922110 /* Pods_iOS_dydxV4Tests.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -1589,7 +1585,6 @@
 				};
 			};
 			buildConfigurationList = 3112F45A216BBF8400708927 /* Build configuration list for PBXProject "dydxV4" */;
-			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1602,6 +1597,7 @@
 				02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */,
 				0207D5122DC428D9005773B5 /* XCRemoteSwiftPackageReference "privy-ios" */,
 			);
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 3112F460216BBF8400708927 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -2239,14 +2235,11 @@
 /* Begin PBXResourcesBuildPhase section */
 		02DA0AF52B57609100BFA975 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3112F45D216BBF8400708927 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				027B7CA62AD5E559005A8288 /* configs in Resources */,
 				3162B58226E181BB000209E1 /* WebCrypto.js in Resources */,
@@ -2262,106 +2255,91 @@
 				64AF480E28186EE500EBFDC6 /* dydxevents.json in Resources */,
 				27DBDD242A8FF5B2002383C6 /* credentials.json in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3112F473216BBF8600708927 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		0201207B2DA75F2D00761811 /* Run Script (Bundle React Native code and images) */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
 			name = "Run Script (Bundle React Native code and images)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
+			shellScript = (
+				"set -e",
+				"",
+				"WITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"",
+				"REACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"",
+				"",
+				"/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"",
+				"",
+			);
 		};
 		026F2E9E28230DBD00DF3EB5 /* Run Script (Swiftlint --fix) */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
 			name = "Run Script (Swiftlint --fix)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  cd ../dydx\n  swiftlint --fix \nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = (
+				"export PATH=\"$PATH:/opt/homebrew/bin\"",
+				"if which swiftlint > /dev/null; then",
+				"  cd ../dydx",
+				"  swiftlint --fix ",
+				"else",
+				"  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"",
+				"fi",
+				"",
+			);
 		};
 		026FC3F22AFAD39800C52F20 /* Run Script (set_scheme.sh) */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 12;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
 			name = "Run Script (set_scheme.sh)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_DIR=${PROJECT_DIR}/../scripts/\n\nif [ $ENABLE_PREVIEWS == \"NO\" ]\nthen\n    OUTPUT=$(bash \"${SCRIPT_DIR}/set_scheme.sh\")\n\n    # Echo the captured output (xcode does not automatically mirror it in build log)\n    echo \"$OUTPUT\"\nfi\n\n";
+			shellScript = (
+				"# Type a script or drag a script file from your workspace to insert its path.",
+				"SCRIPT_DIR=${PROJECT_DIR}/../scripts/",
+				"",
+				"if [ $ENABLE_PREVIEWS == \"NO\" ]",
+				"then",
+				"    OUTPUT=$(bash \"${SCRIPT_DIR}/set_scheme.sh\")",
+				"",
+				"    # Echo the captured output (xcode does not automatically mirror it in build log)",
+				"    echo \"$OUTPUT\"",
+				"fi",
+				"",
+				"",
+			);
 		};
 		026FC4232AFAD3EB00C52F20 /* Run Script (unset_scheme.sh) */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 12;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
 			name = "Run Script (unset_scheme.sh)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_DIR=${PROJECT_DIR}/../scripts/\n\nif [ $ENABLE_PREVIEWS == \"NO\" ]\nthen\n    OUTPUT=$(bash \"${SCRIPT_DIR}/unset_scheme.sh\")\n\n# Echo the captured output (xcode does not automatically mirror it in build log)\n    echo \"$OUTPUT\"\nfi\n\n";
+			shellScript = (
+				"# Type a script or drag a script file from your workspace to insert its path.",
+				"SCRIPT_DIR=${PROJECT_DIR}/../scripts/",
+				"",
+				"if [ $ENABLE_PREVIEWS == \"NO\" ]",
+				"then",
+				"    OUTPUT=$(bash \"${SCRIPT_DIR}/unset_scheme.sh\")",
+				"",
+				"# Echo the captured output (xcode does not automatically mirror it in build log)",
+				"    echo \"$OUTPUT\"",
+				"fi",
+				"",
+				"",
+			);
 		};
 		02C19F3D29DDD79300F77028 /* Run Script (Set Secrets) */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 12;
-			files = (
-			);
 			inputFileListPaths = (
 				"",
 			);
-			inputPaths = (
-			);
 			name = "Run Script (Set Secrets)";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"",
 				"",
@@ -2369,156 +2347,151 @@
 				"${PROJECT_DIR}/../dydxV4/dydxV4/_Configurations/GoogleService-Info-Staging.plist",
 				"${PROJECT_DIR}/../dydxV4/dydxV4/_Configurations/GoogleService-Info.plist",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\n# Path to the secrets directory\nSET_SECRETS_PATH=\"${PROJECT_DIR}/../scripts/set_secrets.sh\"\n\n# Check if the set_secrets script is available\nif [ ! -f \"$SET_SECRETS_PATH\" ]; then\n  echo \"Error: set_secrets.sh not found at $SET_SECRETS_PATH\"\n  exit 1\nfi\n\n# Execute the set_secrets script with the shouldUseEmptySecrets argument\nset_secrets_output=$(bash \"$SET_SECRETS_PATH\")\n\n# Echo the captured output (xcode does not automatically mirror it in build log)\necho \"Output from set_secrets was:\\n$set_secrets_output\"\n";
+			shellScript = (
+				"#!/bin/bash",
+				"",
+				"# Path to the secrets directory",
+				"SET_SECRETS_PATH=\"${PROJECT_DIR}/../scripts/set_secrets.sh\"",
+				"",
+				"# Check if the set_secrets script is available",
+				"if [ ! -f \"$SET_SECRETS_PATH\" ]; then",
+				"  echo \"Error: set_secrets.sh not found at $SET_SECRETS_PATH\"",
+				"  exit 1",
+				"fi",
+				"",
+				"# Execute the set_secrets script with the shouldUseEmptySecrets argument",
+				"set_secrets_output=$(bash \"$SET_SECRETS_PATH\")",
+				"",
+				"# Echo the captured output (xcode does not automatically mirror it in build log)",
+				"echo \"Output from set_secrets was:\\n$set_secrets_output\"",
+				"",
+			);
 		};
 		0EDD4459F9EEEA64AF8E4A1F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		16DEFDB1896BDF443F34E3AC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		1BB4784D1077A2438C300ED1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxV4Tests-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		3165906D227F532B00BAF133 /* Run Script (Firebase) */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
 				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
 			name = "Run Script (Firebase)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/FirebaseCrashlytics/run\"",
+				"",
+			);
 		};
 		52574510D5C216006099A2F7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		5BD099095C70B5B9617985A5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		7BA92DF4D740E1A995F10DA9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxV4-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2526,16 +2499,13 @@
 /* Begin PBXSourcesBuildPhase section */
 		02DA0AF32B57609100BFA975 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				02DA0AFA2B57609100BFA975 /* dydxV4UITests.swift in Sources */,
 				02DA0AFC2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3112F45B216BBF8400708927 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				02C7262B29D793C90098AFBC /* dydxCompositeTracking.swift in Sources */,
 				27D41AF12A8E9214009A2F37 /* UIApplication+URLHandler.swift in Sources */,
@@ -2548,15 +2518,12 @@
 				64AF4811281880B100EBFDC6 /* dydxAmplitudeTracking.swift in Sources */,
 				02A5BB9F2A04617800BEE77E /* dydxAbacusDataLocalizer.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3112F471216BBF8600708927 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				3112F47A216BBF8600708927 /* dydxTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -2704,7 +2671,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		02DA0B002B57609100BFA975 /* Debug */ = {
+		02DA0B002B57609100BFA975 /* Debug configuration for PBXNativeTarget "dydxV4UITests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -2729,7 +2696,7 @@
 			};
 			name = Debug;
 		};
-		02DA0B012B57609100BFA975 /* Release */ = {
+		02DA0B012B57609100BFA975 /* Release configuration for PBXNativeTarget "dydxV4UITests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -2753,7 +2720,7 @@
 			};
 			name = Release;
 		};
-		3112F487216BBF8600708927 /* Debug */ = {
+		3112F487216BBF8600708927 /* Debug configuration for PBXProject "dydxV4" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2835,7 +2802,7 @@
 			};
 			name = Debug;
 		};
-		3112F488216BBF8600708927 /* Release */ = {
+		3112F488216BBF8600708927 /* Release configuration for PBXProject "dydxV4" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2911,7 +2878,7 @@
 			};
 			name = Release;
 		};
-		3112F48A216BBF8600708927 /* Debug */ = {
+		3112F48A216BBF8600708927 /* Debug configuration for PBXNativeTarget "dydxV4" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4CA3E661F388FD1F860FDCC6 /* Pods-iOS-dydxV4.debug.xcconfig */;
 			buildSettings = {
@@ -2934,7 +2901,7 @@
 			};
 			name = Debug;
 		};
-		3112F48B216BBF8600708927 /* Release */ = {
+		3112F48B216BBF8600708927 /* Release configuration for PBXNativeTarget "dydxV4" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A7579EE7C41F2F8512489E50 /* Pods-iOS-dydxV4.release.xcconfig */;
 			buildSettings = {
@@ -2959,7 +2926,7 @@
 			};
 			name = Release;
 		};
-		3112F48D216BBF8600708927 /* Debug */ = {
+		3112F48D216BBF8600708927 /* Debug configuration for PBXNativeTarget "dydxV4Tests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9A272731AB9E7D334C507723 /* Pods-iOS-dydxV4Tests.debug.xcconfig */;
 			buildSettings = {
@@ -2980,7 +2947,7 @@
 			};
 			name = Debug;
 		};
-		3112F48E216BBF8600708927 /* Release */ = {
+		3112F48E216BBF8600708927 /* Release configuration for PBXNativeTarget "dydxV4Tests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 930BA4E7AF034E657D571B06 /* Pods-iOS-dydxV4Tests.release.xcconfig */;
 			buildSettings = {
@@ -3007,37 +2974,33 @@
 		02DA0AFF2B57609100BFA975 /* Build configuration list for PBXNativeTarget "dydxV4UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02DA0B002B57609100BFA975 /* Debug */,
-				02DA0B012B57609100BFA975 /* Release */,
+				02DA0B002B57609100BFA975 /* Debug configuration for PBXNativeTarget "dydxV4UITests" */,
+				02DA0B012B57609100BFA975 /* Release configuration for PBXNativeTarget "dydxV4UITests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		3112F45A216BBF8400708927 /* Build configuration list for PBXProject "dydxV4" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3112F487216BBF8600708927 /* Debug */,
-				3112F488216BBF8600708927 /* Release */,
+				3112F487216BBF8600708927 /* Debug configuration for PBXProject "dydxV4" */,
+				3112F488216BBF8600708927 /* Release configuration for PBXProject "dydxV4" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		3112F489216BBF8600708927 /* Build configuration list for PBXNativeTarget "dydxV4" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3112F48A216BBF8600708927 /* Debug */,
-				3112F48B216BBF8600708927 /* Release */,
+				3112F48A216BBF8600708927 /* Debug configuration for PBXNativeTarget "dydxV4" */,
+				3112F48B216BBF8600708927 /* Release configuration for PBXNativeTarget "dydxV4" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		3112F48C216BBF8600708927 /* Build configuration list for PBXNativeTarget "dydxV4Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3112F48D216BBF8600708927 /* Debug */,
-				3112F48E216BBF8600708927 /* Release */,
+				3112F48D216BBF8600708927 /* Debug configuration for PBXNativeTarget "dydxV4Tests" */,
+				3112F48E216BBF8600708927 /* Release configuration for PBXNativeTarget "dydxV4Tests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
