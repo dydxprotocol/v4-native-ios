@@ -231,6 +231,7 @@
 		02F99F3E29E4D5750009B3E8 /* dydxTransferSearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F99F3D29E4D5750009B3E8 /* dydxTransferSearchItemView.swift */; };
 		02F99F4029E50D3A0009B3E8 /* ChevronBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F99F3F29E50D3A0009B3E8 /* ChevronBackButton.swift */; };
 		02FA5B6F2A12FB040045F2F5 /* dydxTransferWithdrawalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA5B6E2A12FB040045F2F5 /* dydxTransferWithdrawalView.swift */; };
+		02FC8A572E862CE5003B5AE8 /* dydxFiatDepositItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC8A562E862CE5003B5AE8 /* dydxFiatDepositItemView.swift */; };
 		02FCF0E728E795FA00D350CE /* HostedViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCF0E628E795FA00D350CE /* HostedViewPresenter.swift */; };
 		02FD2B8B292307A200A5609E /* LeverageRiskChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FD2B8A292307A200A5609E /* LeverageRiskChange.swift */; };
 		02FF0BCE29AE928700781EDA /* dydxWalletListView_Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF0BCD29AE928700781EDA /* dydxWalletListView_Deprecated.swift */; };
@@ -731,6 +732,7 @@
 		02F99F3D29E4D5750009B3E8 /* dydxTransferSearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferSearchItemView.swift; sourceTree = "<group>"; };
 		02F99F3F29E50D3A0009B3E8 /* ChevronBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronBackButton.swift; sourceTree = "<group>"; };
 		02FA5B6E2A12FB040045F2F5 /* dydxTransferWithdrawalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTransferWithdrawalView.swift; sourceTree = "<group>"; };
+		02FC8A562E862CE5003B5AE8 /* dydxFiatDepositItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxFiatDepositItemView.swift; sourceTree = "<group>"; };
 		02FCF0E628E795FA00D350CE /* HostedViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostedViewPresenter.swift; sourceTree = "<group>"; };
 		02FD2B8A292307A200A5609E /* LeverageRiskChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeverageRiskChange.swift; sourceTree = "<group>"; };
 		02FF0BCD29AE928700781EDA /* dydxWalletListView_Deprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxWalletListView_Deprecated.swift; sourceTree = "<group>"; };
@@ -1080,6 +1082,7 @@
 			children = (
 				023DB0A62D691E3D00F15534 /* dydxInstantDepositSelector.swift */,
 				023DB0AA2D6932ED00F15534 /* dydxInstantDepositInput.swift */,
+				02FC8A562E862CE5003B5AE8 /* dydxFiatDepositItemView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -2697,6 +2700,7 @@
 				02A651872DB6DA15006DBD5F /* dydxSimpleUIMenuButtonsView.swift in Sources */,
 				277E90412B1FAEAF005CCBCB /* dydxRewardsHelpView.swift in Sources */,
 				02714C9F29E0C7C500CC1C44 /* TokensComboBox.swift in Sources */,
+				02FC8A572E862CE5003B5AE8 /* dydxFiatDepositItemView.swift in Sources */,
 				64A4DC652968A17C008D8E20 /* dydxTradeInputSideView.swift in Sources */,
 				0279DE912BED610400F9ECF8 /* dydxAdjustMarginReceiptViewModel.swift in Sources */,
 				024FEB7E2ACB82A10087A55E /* NavHeader.swift in Sources */,

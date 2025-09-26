@@ -35,7 +35,7 @@
             },
             {
                 "title":{
-                    "text":"Prediction Marktes"
+                    "text":"Prediction Markets"
                 },
                 "field":{
                     "field":"ff_show_prediction_markets_ui",
@@ -139,6 +139,26 @@
                 },
                 "field":{
                     "field":"ff_rewards_sep_2025",
+                    "optional":true,
+                    "type" : "bool",
+                    "options" : [
+                        {
+                            "text": "yes",
+                            "value" : 1
+                        },
+                        {
+                            "text": "no",
+                            "value" : 0
+                        }
+                    ]
+                }
+            },
+            {
+                "title":{
+                    "text":"Fiat Deposit"
+                },
+                "field":{
+                    "field":"ff_fiat_deposit",
                     "optional":true,
                     "type" : "bool",
                     "options" : [

@@ -40,6 +40,7 @@ public class dydxTurnkeyDepositViewModel: PlatformViewModel {
     }
 
     @Published public var items: [Item] = []
+    @Published public var fiatAction: (() -> Void)?
 
     public init() { }
 
@@ -56,26 +57,28 @@ public class dydxTurnkeyDepositViewModel: PlatformViewModel {
             guard let self = self else { return AnyView(PlatformView.nilView) }
 
             let view = VStack {
-                VStack {
-                    Text(DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT"))
-                        .themeColor(foreground: .textPrimary)
-                        .themeFont(fontSize: .larger)
-                        .centerAligned()
-                        .padding(.vertical, 8)
-                        .padding(.top, 16)
-                        .frame(height: 54)
+                Text(DataLocalizer.localize(path: "APP.GENERAL.DEPOSIT"))
+                    .themeColor(foreground: .textPrimary)
+                    .themeFont(fontSize: .larger)
+                    .centerAligned()
+                    .padding(.vertical, 8)
+                    .padding(.top, 16)
+                    .frame(height: 54)
 
-                    DividerModel().createView(parentStyle: style)
-                        .padding(.horizontal, -16)
+                DividerModel().createView(parentStyle: style)
+                    .padding(.horizontal, -16)
 
-                    ScrollView(showsIndicators: false) {
-                        ForEach(self.items, id: \.self) { item in
-                            self.createItemView(item: item, style: style)
-                        }
-                    }
+                ForEach(self.items, id: \.self) { item in
+                    self.createItemView(item: item, style: style)
                 }
 
                 Spacer()
+
+                if let fiatAction = self.fiatAction {
+                    self.createDivider(parentStyle: style)
+                    dydxFiatDepositItemViewModel(selectAction: fiatAction)
+                        .createView(parentStyle: style)
+                }
             }
                 .padding(.horizontal)
                 .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
@@ -120,6 +123,17 @@ public class dydxTurnkeyDepositViewModel: PlatformViewModel {
         .themeColor(background: .layer2)
         .onTapGesture {
             item.action()
+        }
+    }
+
+    private func createDivider(parentStyle: ThemeStyle) -> some View {
+        ZStack(alignment: .center) {
+            DividerModel().createView(parentStyle: parentStyle)
+            Text(DataLocalizer.localize(path: "APP.GENERAL.OR"))
+                .themeColor(foreground: .textTertiary)
+                .themeFont(fontSize: .smaller)
+                .padding(.horizontal, 8)
+                .themeColor(background: .layer1)
         }
     }
 }

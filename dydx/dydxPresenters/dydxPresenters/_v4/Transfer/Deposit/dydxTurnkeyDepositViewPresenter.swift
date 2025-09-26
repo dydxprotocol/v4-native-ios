@@ -12,6 +12,7 @@ import RoutingKit
 import ParticlesKit
 import PlatformUI
 import dydxStateManager
+import dydxFormatter
 
 protocol dydxTurnkeyDepositViewPresenterProtocol: HostedViewPresenterProtocol {
     var viewModel: dydxTurnkeyDepositViewModel? { get }
@@ -43,6 +44,12 @@ class dydxTurnkeyDepositViewPresenter: HostedViewPresenter<dydxTurnkeyDepositVie
                 return createItem(for: info)
             } else {
                 return nil
+            }
+        }
+
+        if dydxBoolFeatureFlag.fiat_deposit.isEnabled {
+            viewModel?.fiatAction = {
+
             }
         }
     }

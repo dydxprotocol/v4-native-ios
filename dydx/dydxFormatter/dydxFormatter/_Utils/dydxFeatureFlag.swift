@@ -17,7 +17,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
     case turnkey_ios = "ff_turnkey_ios"
     case turnkey_ios_apple = "ff_turnkey_ios_apple"
     case rewards_sep_2025 = "ff_rewards_sep_2025"
-    case fiat_deposit
+    case fiat_deposit = "ff_fiat_deposit"
 
     var defaultValue: Bool {
         switch self {
