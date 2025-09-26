@@ -88,8 +88,17 @@ private class dydxInstantDepositSearchViewPresenter: HostedViewPresenter<dydxIns
                     self.viewModel?.nobleItem?.nobleAdddressAction = {
                         Router.shared?.navigate(to: RoutingRequest(path: "/transfer/deposit/noble"), animated: true, completion: nil)
                     }
+                    if dydxBoolFeatureFlag.fiat_deposit.isEnabled {
+                        self.viewModel?.fiatItem = dydxTransferFiatItemViewModel()
+                        self.viewModel?.fiatItem?.selectAction = {
+
+                        }
+                    } else {
+                        self.viewModel?.fiatItem = nil
+                    }
                 } else {
                     self.viewModel?.nobleItem = nil
+                    self.viewModel?.fiatItem = nil
                 }
              }
             .store(in: &subscriptions)
