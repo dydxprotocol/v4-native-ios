@@ -51,7 +51,7 @@ final public class dydxMoonPayRamp: SingletonProtocol {
 
         let publicKey = isSandbox ?
             "pk_test_2Cy2D3iPl0Y0DI8ru0yvtyeKC54R9GBV" :
-            "pk_live_dfZlD4fbkGsJEN9i18WrxbgXxENDnLx"
+            "<to_do>"
         let params = MoonPayBuyQueryParams(apiKey: publicKey)
         params.setBaseCurrencyCode(value: "USD")
         if let usdAmount {
@@ -88,7 +88,7 @@ final public class dydxMoonPayRamp: SingletonProtocol {
      }
 
     private func getSignature(encodedUrlData: Data) -> String {
-        let secretString = isSandbox ? "sk_test_XkFPvgZ57z7DEEMm4lnzRwfj8DsfMHl9" : "sk_live_XqPSuGnQji5iPUQcEDTxjhHrKazuAmK"
+        let secretString = isSandbox ? "sk_test_XkFPvgZ57z7DEEMm4lnzRwfj8DsfMHl9" : "<to_do>"
         let key = SymmetricKey(data: Data(secretString.utf8))
         let signature = HMAC<SHA256>.authenticationCode(for: encodedUrlData, using: key)
         let signatureHex = Data(signature).base64EncodedString()
