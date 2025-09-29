@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -181,18 +181,22 @@
 /* Begin PBXFrameworksBuildPhase section */
 		02E7DC5B28CFAF5C00727949 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				027CB2A029EF04270069781A /* dydxCartera.framework in Frameworks */,
 				2C5008B2746C7DE99CEE2723 /* Pods_iOS_dydxStateManager.framework in Frameworks */,
 				6478FC22296DEF8C00654C56 /* Utilities.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02E7DC6528CFAF5C00727949 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02E7DC6928CFAF5C00727949 /* dydxStateManager.framework in Frameworks */,
 				BC6CB1658D1931171844032C /* Pods_iOS_dydxStateManagerTests.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -415,9 +419,11 @@
 /* Begin PBXHeadersBuildPhase section */
 		02E7DC5928CFAF5C00727949 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02E7DC6F28CFAF5C00727949 /* dydxStateManager.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -439,6 +445,8 @@
 				6478FC21296DEF7900654C56 /* PBXTargetDependency */,
 			);
 			name = dydxStateManager;
+			packageProductDependencies = (
+			);
 			productName = dydxStateManager;
 			productReference = 02E7DC5E28CFAF5C00727949 /* dydxStateManager.framework */;
 			productType = "com.apple.product-type.framework";
@@ -459,6 +467,8 @@
 				02E7DC6B28CFAF5C00727949 /* PBXTargetDependency */,
 			);
 			name = dydxStateManagerTests;
+			packageProductDependencies = (
+			);
 			productName = dydxStateManagerTests;
 			productReference = 02E7DC6828CFAF5C00727949 /* dydxStateManagerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -489,7 +499,7 @@
 				Base,
 			);
 			mainGroup = 02E7DC5428CFAF5C00727949;
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 02E7DC5F28CFAF5C00727949 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -565,79 +575,84 @@
 /* Begin PBXResourcesBuildPhase section */
 		02E7DC5C28CFAF5C00727949 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02E7DC6628CFAF5C00727949 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		208EE9A7B6AF9201DB858E69 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxStateManager-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		2D0F787A9E150B25379A1896 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxStateManagerTests/Pods-iOS-dydxStateManagerTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxStateManagerTests/Pods-iOS-dydxStateManagerTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxStateManagerTests/Pods-iOS-dydxStateManagerTests-frameworks.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxStateManagerTests/Pods-iOS-dydxStateManagerTests-frameworks.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		870A29B7CE91F02533439FA8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxStateManagerTests-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -645,6 +660,7 @@
 /* Begin PBXSourcesBuildPhase section */
 		02E7DC5A28CFAF5C00727949 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				27B957EF2B97C11400EF9304 /* dydxRatingService.swift in Sources */,
 				6473ACB42A65B18B00BBC01F /* AbacusRestImp.swift in Sources */,
@@ -683,13 +699,16 @@
 				02603B9129F1A95E00DFFD11 /* dydxClientState.swift in Sources */,
 				021385BF28DBD22100A9BCA5 /* WebsocketConnection.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02E7DC6428CFAF5C00727949 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				27B957F12B97C38100EF9304 /* dydxPointsRatingTests.swift in Sources */,
 				02E7DC6E28CFAF5C00727949 /* dydxStateManagerTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -712,7 +731,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		02E7DC7028CFAF5C00727949 /* Debug configuration for PBXProject "dydxStateManager" */ = {
+		02E7DC7028CFAF5C00727949 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -793,7 +812,7 @@
 			};
 			name = Debug;
 		};
-		02E7DC7128CFAF5C00727949 /* Release configuration for PBXProject "dydxStateManager" */ = {
+		02E7DC7128CFAF5C00727949 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -868,7 +887,7 @@
 			};
 			name = Release;
 		};
-		02E7DC7328CFAF5C00727949 /* Debug configuration for PBXNativeTarget "dydxStateManager" */ = {
+		02E7DC7328CFAF5C00727949 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2B92F4E7154946D45C9D7E8 /* Pods-iOS-dydxStateManager.debug.xcconfig */;
 			buildSettings = {
@@ -899,7 +918,7 @@
 			};
 			name = Debug;
 		};
-		02E7DC7428CFAF5C00727949 /* Release configuration for PBXNativeTarget "dydxStateManager" */ = {
+		02E7DC7428CFAF5C00727949 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E6D3DA899DFEFDD81C52D56F /* Pods-iOS-dydxStateManager.release.xcconfig */;
 			buildSettings = {
@@ -930,7 +949,7 @@
 			};
 			name = Release;
 		};
-		02E7DC7628CFAF5C00727949 /* Debug configuration for PBXNativeTarget "dydxStateManagerTests" */ = {
+		02E7DC7628CFAF5C00727949 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0A4CAEAB97CAC9BF55AFDC2 /* Pods-iOS-dydxStateManagerTests.debug.xcconfig */;
 			buildSettings = {
@@ -949,7 +968,7 @@
 			};
 			name = Debug;
 		};
-		02E7DC7728CFAF5C00727949 /* Release configuration for PBXNativeTarget "dydxStateManagerTests" */ = {
+		02E7DC7728CFAF5C00727949 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D6FE89878FC84305172B64C9 /* Pods-iOS-dydxStateManagerTests.release.xcconfig */;
 			buildSettings = {
@@ -974,25 +993,28 @@
 		02E7DC5828CFAF5C00727949 /* Build configuration list for PBXProject "dydxStateManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02E7DC7028CFAF5C00727949 /* Debug configuration for PBXProject "dydxStateManager" */,
-				02E7DC7128CFAF5C00727949 /* Release configuration for PBXProject "dydxStateManager" */,
+				02E7DC7028CFAF5C00727949 /* Debug */,
+				02E7DC7128CFAF5C00727949 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02E7DC7228CFAF5C00727949 /* Build configuration list for PBXNativeTarget "dydxStateManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02E7DC7328CFAF5C00727949 /* Debug configuration for PBXNativeTarget "dydxStateManager" */,
-				02E7DC7428CFAF5C00727949 /* Release configuration for PBXNativeTarget "dydxStateManager" */,
+				02E7DC7328CFAF5C00727949 /* Debug */,
+				02E7DC7428CFAF5C00727949 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02E7DC7528CFAF5C00727949 /* Build configuration list for PBXNativeTarget "dydxStateManagerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02E7DC7628CFAF5C00727949 /* Debug configuration for PBXNativeTarget "dydxStateManagerTests" */,
-				02E7DC7728CFAF5C00727949 /* Release configuration for PBXNativeTarget "dydxStateManagerTests" */,
+				02E7DC7628CFAF5C00727949 /* Debug */,
+				02E7DC7728CFAF5C00727949 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -203,6 +203,7 @@
 /* Begin PBXFrameworksBuildPhase section */
 		02439C8829B03E8A00A083FE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02308BFA2DC441A000EECD8F /* SolanaSwift in Frameworks */,
 				02308BF92DC441A000EECD8F /* Cartera in Frameworks */,
@@ -219,13 +220,16 @@
 				02844D7D2DC187EF006F51CE /* Privy in Frameworks */,
 				021A1DCA2AD34103008A3D73 /* Cartera in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02439C9229B03E8A00A083FE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02439C9629B03E8A00A083FE /* dydxCartera.framework in Frameworks */,
 				4CEA3DA15AAE34D6C283DEAB /* Pods_iOS_dydxCarteraTests.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -440,10 +444,12 @@
 /* Begin PBXHeadersBuildPhase section */
 		02439C8629B03E8A00A083FE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02DE2EAF2D0A05AE007E1277 /* keccak-tiny.h in Headers */,
 				02439C9C29B03E8A00A083FE /* dydxCartera.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -498,6 +504,8 @@
 				02439C9829B03E8A00A083FE /* PBXTargetDependency */,
 			);
 			name = dydxCarteraTests;
+			packageProductDependencies = (
+			);
 			productName = dydxCarteraTests;
 			productReference = 02439C9529B03E8A00A083FE /* dydxCarteraTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -534,7 +542,7 @@
 				02844D7B2DC187EF006F51CE /* XCRemoteSwiftPackageReference "privy-ios" */,
 				02A50EE22E34252E0086ED2C /* XCRemoteSwiftPackageReference "cartera-ios" */,
 			);
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 02439C8C29B03E8A00A083FE /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -631,79 +639,84 @@
 /* Begin PBXResourcesBuildPhase section */
 		02439C8929B03E8A00A083FE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02439C9329B03E8A00A083FE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		8DB54B35C64DC065707C5193 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxCarteraTests-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		AC4AE11DAABBE305265BC740 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-frameworks.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxCarteraTests/Pods-iOS-dydxCarteraTests-frameworks.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		F24B672A85EBD5A52347BD2D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxCartera-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -711,6 +724,7 @@
 /* Begin PBXSourcesBuildPhase section */
 		02439C8729B03E8A00A083FE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				0274248429E74CA5004C89AE /* Parser+Eth.swift in Sources */,
 				0276AC912D833BA10039919D /* SolanaInteractor.swift in Sources */,
@@ -742,12 +756,15 @@
 				02439E4429B04D2700A083FE /* dydxV4WalletSetup.swift in Sources */,
 				02DE2A6E2D0A0091007E1277 /* KeccakExtensions.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02439C9129B03E8A00A083FE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02439C9B29B03E8A00A083FE /* dydxCarteraTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -770,7 +787,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		02439C9D29B03E8A00A083FE /* Debug configuration for PBXProject "dydxCartera" */ = {
+		02439C9D29B03E8A00A083FE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -851,7 +868,7 @@
 			};
 			name = Debug;
 		};
-		02439C9E29B03E8A00A083FE /* Release configuration for PBXProject "dydxCartera" */ = {
+		02439C9E29B03E8A00A083FE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -926,7 +943,7 @@
 			};
 			name = Release;
 		};
-		02439CA029B03E8A00A083FE /* Debug configuration for PBXNativeTarget "dydxCartera" */ = {
+		02439CA029B03E8A00A083FE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FF46E9BCE4665A7F5178EA3F /* Pods-iOS-dydxCartera.debug.xcconfig */;
 			buildSettings = {
@@ -957,7 +974,7 @@
 			};
 			name = Debug;
 		};
-		02439CA129B03E8A00A083FE /* Release configuration for PBXNativeTarget "dydxCartera" */ = {
+		02439CA129B03E8A00A083FE /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 755B5FABDB988B2B3FA3C414 /* Pods-iOS-dydxCartera.release.xcconfig */;
 			buildSettings = {
@@ -988,7 +1005,7 @@
 			};
 			name = Release;
 		};
-		02439CA329B03E8A00A083FE /* Debug configuration for PBXNativeTarget "dydxCarteraTests" */ = {
+		02439CA329B03E8A00A083FE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2B84BD453F47B7FDF851873 /* Pods-iOS-dydxCarteraTests.debug.xcconfig */;
 			buildSettings = {
@@ -1007,7 +1024,7 @@
 			};
 			name = Debug;
 		};
-		02439CA429B03E8A00A083FE /* Release configuration for PBXNativeTarget "dydxCarteraTests" */ = {
+		02439CA429B03E8A00A083FE /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 87F24A5A06C93C6D25E9CABC /* Pods-iOS-dydxCarteraTests.release.xcconfig */;
 			buildSettings = {
@@ -1032,25 +1049,28 @@
 		02439C8529B03E8A00A083FE /* Build configuration list for PBXProject "dydxCartera" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02439C9D29B03E8A00A083FE /* Debug configuration for PBXProject "dydxCartera" */,
-				02439C9E29B03E8A00A083FE /* Release configuration for PBXProject "dydxCartera" */,
+				02439C9D29B03E8A00A083FE /* Debug */,
+				02439C9E29B03E8A00A083FE /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02439C9F29B03E8A00A083FE /* Build configuration list for PBXNativeTarget "dydxCartera" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02439CA029B03E8A00A083FE /* Debug configuration for PBXNativeTarget "dydxCartera" */,
-				02439CA129B03E8A00A083FE /* Release configuration for PBXNativeTarget "dydxCartera" */,
+				02439CA029B03E8A00A083FE /* Debug */,
+				02439CA129B03E8A00A083FE /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02439CA229B03E8A00A083FE /* Build configuration list for PBXNativeTarget "dydxCarteraTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02439CA329B03E8A00A083FE /* Debug configuration for PBXNativeTarget "dydxCarteraTests" */,
-				02439CA429B03E8A00A083FE /* Release configuration for PBXNativeTarget "dydxCarteraTests" */,
+				02439CA329B03E8A00A083FE /* Debug */,
+				02439CA429B03E8A00A083FE /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

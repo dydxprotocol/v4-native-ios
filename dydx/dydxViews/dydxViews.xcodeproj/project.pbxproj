@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -830,6 +830,7 @@
 /* Begin PBXFrameworksBuildPhase section */
 		024B79B728B7F53800F7C386 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02B4292D2DD2B30500CC3476 /* dydxAnalytics.framework in Frameworks */,
 				0284201429AD705B00C0E7CC /* dydxFormatter.framework in Frameworks */,
@@ -839,13 +840,16 @@
 				024B7B4D28B7F80F00F7C386 /* PlatformUI.framework in Frameworks */,
 				D389C2240B81C64330A95B2D /* Pods_iOS_dydxViews.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		024B79C128B7F53800F7C386 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				024B79C528B7F53800F7C386 /* dydxViews.framework in Frameworks */,
 				C8941195E6ED78EE1CE7B9D6 /* Pods_iOS_dydxViewsTests.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -2226,9 +2230,11 @@
 /* Begin PBXHeadersBuildPhase section */
 		024B79B528B7F53800F7C386 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				024B79CB28B7F53800F7C386 /* dydxViews.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -2279,6 +2285,8 @@
 				024B79C728B7F53800F7C386 /* PBXTargetDependency */,
 			);
 			name = dydxViewsTests;
+			packageProductDependencies = (
+			);
 			productName = dydxViewsTests;
 			productReference = 024B79C428B7F53800F7C386 /* dydxViewsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -2312,7 +2320,7 @@
 			packageReferences = (
 				027C379D29AEC11000381B00 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 024B79BB28B7F53800F7C386 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -2488,6 +2496,7 @@
 /* Begin PBXResourcesBuildPhase section */
 		024B79B828B7F53800F7C386 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				0262F2D129DB47F2009889E2 /* Web.storyboard in Resources */,
 				025892C728BE82B900AAABF5 /* Media.xcassets in Resources */,
@@ -2499,109 +2508,123 @@
 				024B7B5728B7F8B100F7C386 /* ThemeDark.json in Resources */,
 				0277A21F28BD75F9005A51F8 /* dydxStyle.json in Resources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		024B79C228B7F53800F7C386 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		4BBB9E86D6047394C7316F6E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViews/Pods-iOS-dydxViews-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViews/Pods-iOS-dydxViews-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViews/Pods-iOS-dydxViews-resources.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViews/Pods-iOS-dydxViews-resources.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		905D757C7E878993AFECAC82 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-frameworks.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		C20174BD8243139063D2F35B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxViewsTests-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		EE5EFCD73A7E856E07125D6C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxViews-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		F9895A3D28B175D88D250BC6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-resources.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxViewsTests/Pods-iOS-dydxViewsTests-resources.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2609,6 +2632,7 @@
 /* Begin PBXSourcesBuildPhase section */
 		024B79B628B7F53800F7C386 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				277E91082B2241C1005CCBCB /* dydxRewardsRewardView.swift in Sources */,
 				278A4DA22B8FA609003898EB /* dydxRateAppView.swift in Sources */,
@@ -2903,12 +2927,15 @@
 				0232C04029AEF866006B2C51 /* dydxWalletListItemView.swift in Sources */,
 				020948EE2D52D63C008FE753 /* Tooltip.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		024B79C028B7F53800F7C386 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				024B79CA28B7F53800F7C386 /* dydxViewsTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -2951,7 +2978,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		024B79CC28B7F53800F7C386 /* Debug configuration for PBXProject "dydxViews" */ = {
+		024B79CC28B7F53800F7C386 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3032,7 +3059,7 @@
 			};
 			name = Debug;
 		};
-		024B79CD28B7F53800F7C386 /* Release configuration for PBXProject "dydxViews" */ = {
+		024B79CD28B7F53800F7C386 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3107,7 +3134,7 @@
 			};
 			name = Release;
 		};
-		024B79CF28B7F53800F7C386 /* Debug configuration for PBXNativeTarget "dydxViews" */ = {
+		024B79CF28B7F53800F7C386 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4FF528D5C65F7B79E5D5812D /* Pods-iOS-dydxViews.debug.xcconfig */;
 			buildSettings = {
@@ -3187,7 +3214,7 @@
 			};
 			name = Debug;
 		};
-		024B79D028B7F53800F7C386 /* Release configuration for PBXNativeTarget "dydxViews" */ = {
+		024B79D028B7F53800F7C386 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 56215C8552C695D06CA8B438 /* Pods-iOS-dydxViews.release.xcconfig */;
 			buildSettings = {
@@ -3267,7 +3294,7 @@
 			};
 			name = Release;
 		};
-		024B79D228B7F53800F7C386 /* Debug configuration for PBXNativeTarget "dydxViewsTests" */ = {
+		024B79D228B7F53800F7C386 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5438BABFE3AE995EEE3657BD /* Pods-iOS-dydxViewsTests.debug.xcconfig */;
 			buildSettings = {
@@ -3286,7 +3313,7 @@
 			};
 			name = Debug;
 		};
-		024B79D328B7F53800F7C386 /* Release configuration for PBXNativeTarget "dydxViewsTests" */ = {
+		024B79D328B7F53800F7C386 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B6435FD67A304C184D6A7E96 /* Pods-iOS-dydxViewsTests.release.xcconfig */;
 			buildSettings = {
@@ -3311,25 +3338,28 @@
 		024B79B428B7F53800F7C386 /* Build configuration list for PBXProject "dydxViews" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				024B79CC28B7F53800F7C386 /* Debug configuration for PBXProject "dydxViews" */,
-				024B79CD28B7F53800F7C386 /* Release configuration for PBXProject "dydxViews" */,
+				024B79CC28B7F53800F7C386 /* Debug */,
+				024B79CD28B7F53800F7C386 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		024B79CE28B7F53800F7C386 /* Build configuration list for PBXNativeTarget "dydxViews" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				024B79CF28B7F53800F7C386 /* Debug configuration for PBXNativeTarget "dydxViews" */,
-				024B79D028B7F53800F7C386 /* Release configuration for PBXNativeTarget "dydxViews" */,
+				024B79CF28B7F53800F7C386 /* Debug */,
+				024B79D028B7F53800F7C386 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		024B79D128B7F53800F7C386 /* Build configuration list for PBXNativeTarget "dydxViewsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				024B79D228B7F53800F7C386 /* Debug configuration for PBXNativeTarget "dydxViewsTests" */,
-				024B79D328B7F53800F7C386 /* Release configuration for PBXNativeTarget "dydxViewsTests" */,
+				024B79D228B7F53800F7C386 /* Debug */,
+				024B79D328B7F53800F7C386 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

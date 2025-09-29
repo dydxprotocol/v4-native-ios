@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -233,17 +233,21 @@
 /* Begin PBXFrameworksBuildPhase section */
 		2742BEAA2BF6860100E13C09 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02B4296C2DD2BFE200CC3476 /* Utilities.framework in Frameworks */,
 				B0A26DA7EA1E90F936ECE27B /* Pods_iOS_dydxAnalytics.framework in Frameworks */,
 				2742C0352BF6888500E13C09 /* PlatformParticles.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2742BEB42BF6860100E13C09 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				2742BEB82BF6860100E13C09 /* dydxAnalytics.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -369,9 +373,11 @@
 /* Begin PBXHeadersBuildPhase section */
 		2742BEA82BF6860100E13C09 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				2742BEBE2BF6860100E13C09 /* dydxAnalytics.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -393,6 +399,8 @@
 				02B429452DD2B74D00CC3476 /* PBXTargetDependency */,
 			);
 			name = dydxAnalytics;
+			packageProductDependencies = (
+			);
 			productName = dydxAnalytics;
 			productReference = 2742BEAD2BF6860100E13C09 /* dydxAnalytics.framework */;
 			productType = "com.apple.product-type.framework";
@@ -411,6 +419,8 @@
 				2742BEBA2BF6860100E13C09 /* PBXTargetDependency */,
 			);
 			name = dydxAnalyticsTests;
+			packageProductDependencies = (
+			);
 			productName = dydxAnalyticsTests;
 			productReference = 2742BEB72BF6860100E13C09 /* dydxAnalyticsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -441,7 +451,7 @@
 				Base,
 			);
 			mainGroup = 2742BEA32BF6860100E13C09;
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 2742BEAE2BF6860100E13C09 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -644,39 +654,41 @@
 /* Begin PBXResourcesBuildPhase section */
 		2742BEAB2BF6860100E13C09 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2742BEB52BF6860100E13C09 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		2F461CEA49B9938E4A9A36FD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxAnalytics-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -684,17 +696,21 @@
 /* Begin PBXSourcesBuildPhase section */
 		2742BEA92BF6860100E13C09 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				2742BEB22BF6860100E13C09 /* dydxAnalytics.docc in Sources */,
 				27600EEE2C65133B00DBB570 /* UserProperty.swift in Sources */,
 				2742C04A2BF688BD00E13C09 /* AnalyticsEvent.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2742BEB32BF6860100E13C09 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				2742BEBD2BF6860100E13C09 /* dydxAnalyticsTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -717,7 +733,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		2742BEBF2BF6860100E13C09 /* Debug configuration for PBXProject "dydxAnalytics" */ = {
+		2742BEBF2BF6860100E13C09 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -801,7 +817,7 @@
 			};
 			name = Debug;
 		};
-		2742BEC02BF6860100E13C09 /* Release configuration for PBXProject "dydxAnalytics" */ = {
+		2742BEC02BF6860100E13C09 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -878,7 +894,7 @@
 			};
 			name = Release;
 		};
-		2742BEC22BF6860100E13C09 /* Debug configuration for PBXNativeTarget "dydxAnalytics" */ = {
+		2742BEC22BF6860100E13C09 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7D0A5DAA1E87EA50A32BE597 /* Pods-iOS-dydxAnalytics.debug.xcconfig */;
 			buildSettings = {
@@ -914,7 +930,7 @@
 			};
 			name = Debug;
 		};
-		2742BEC32BF6860100E13C09 /* Release configuration for PBXNativeTarget "dydxAnalytics" */ = {
+		2742BEC32BF6860100E13C09 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 01EA0D087F796711159C478C /* Pods-iOS-dydxAnalytics.release.xcconfig */;
 			buildSettings = {
@@ -950,7 +966,7 @@
 			};
 			name = Release;
 		};
-		2742BEC52BF6860100E13C09 /* Debug configuration for PBXNativeTarget "dydxAnalyticsTests" */ = {
+		2742BEC52BF6860100E13C09 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -968,7 +984,7 @@
 			};
 			name = Debug;
 		};
-		2742BEC62BF6860100E13C09 /* Release configuration for PBXNativeTarget "dydxAnalyticsTests" */ = {
+		2742BEC62BF6860100E13C09 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -992,25 +1008,28 @@
 		2742BEA72BF6860100E13C09 /* Build configuration list for PBXProject "dydxAnalytics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2742BEBF2BF6860100E13C09 /* Debug configuration for PBXProject "dydxAnalytics" */,
-				2742BEC02BF6860100E13C09 /* Release configuration for PBXProject "dydxAnalytics" */,
+				2742BEBF2BF6860100E13C09 /* Debug */,
+				2742BEC02BF6860100E13C09 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		2742BEC12BF6860100E13C09 /* Build configuration list for PBXNativeTarget "dydxAnalytics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2742BEC22BF6860100E13C09 /* Debug configuration for PBXNativeTarget "dydxAnalytics" */,
-				2742BEC32BF6860100E13C09 /* Release configuration for PBXNativeTarget "dydxAnalytics" */,
+				2742BEC22BF6860100E13C09 /* Debug */,
+				2742BEC32BF6860100E13C09 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		2742BEC42BF6860100E13C09 /* Build configuration list for PBXNativeTarget "dydxAnalyticsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2742BEC52BF6860100E13C09 /* Debug configuration for PBXNativeTarget "dydxAnalyticsTests" */,
-				2742BEC62BF6860100E13C09 /* Release configuration for PBXNativeTarget "dydxAnalyticsTests" */,
+				2742BEC52BF6860100E13C09 /* Debug */,
+				2742BEC62BF6860100E13C09 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

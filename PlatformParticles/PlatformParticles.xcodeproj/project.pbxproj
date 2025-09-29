@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -801,6 +801,7 @@
 /* Begin PBXFrameworksBuildPhase section */
 		313EB7C321BB592E00BEF926 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				317E99AA23D80E5300C348FA /* ParticlesCommonModels.framework in Frameworks */,
 				313EB86F21BB73FE00BEF926 /* UIToolkits.framework in Frameworks */,
@@ -809,9 +810,11 @@
 				313EB7D821BB598300BEF926 /* RoutingKit.framework in Frameworks */,
 				313EB7D921BB598300BEF926 /* PlatformRouting.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBB4021BB7A4B00BEF926 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				317E99AD23D80E5B00C348FA /* ParticlesCommonModels.framework in Frameworks */,
 				313EBCF821BB7D7400BEF926 /* Utilities.framework in Frameworks */,
@@ -820,15 +823,19 @@
 				313EBCFB21BB7D7400BEF926 /* PlatformRouting.framework in Frameworks */,
 				313EBCFC21BB7D7400BEF926 /* UIToolkits.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBB4821BB7A4B00BEF926 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EBB4C21BB7A4B00BEF926 /* PlatformParticles.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB72621B0EE2D00391ADF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				310C3B2D21D9C9C70081E56D /* UIAppToolkits.framework in Frameworks */,
 				0271236928E545A50015D39F /* SwiftMessages in Frameworks */,
@@ -840,16 +847,20 @@
 				317E99A723D80E4900C348FA /* ParticlesCommonModels.framework in Frameworks */,
 				F1601E34A925CDC119296640 /* Pods_iOS_PlatformParticles.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB72F21B0EE2D00391ADF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31ACB73321B0EE2D00391ADF /* PlatformParticles.framework in Frameworks */,
 				6A4D707CD262BA071D79871D /* Pods_iOS_PlatformParticlesTests.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CFF7BE21D7D1F200DE7A79 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31CFF7DC21D7D23C00DE7A79 /* PlatformParticles.framework in Frameworks */,
 				31CFF7DD21D7D23C00DE7A79 /* ParticlesKit.framework in Frameworks */,
@@ -857,12 +868,15 @@
 				31CFF7DF21D7D23C00DE7A79 /* UIToolkits.framework in Frameworks */,
 				31CFF7E021D7D23C00DE7A79 /* Utilities.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CFF7C621D7D1F300DE7A79 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31CFF7CA21D7D1F300DE7A79 /* MessageParticles.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -1579,27 +1593,35 @@
 /* Begin PBXHeadersBuildPhase section */
 		313EB7C121BB592E00BEF926 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EB7CA21BB592E00BEF926 /* PlatformParticles.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBB3E21BB7A4B00BEF926 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EBB5321BB7A4B00BEF926 /* PlatformParticles.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB72421B0EE2D00391ADF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31ACB73A21B0EE2D00391ADF /* PlatformParticles.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CFF7BC21D7D1F200DE7A79 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31CFF7D121D7D1F300DE7A79 /* MessageParticles.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -1624,6 +1646,8 @@
 				313EB7D521BB596000BEF926 /* PBXTargetDependency */,
 			);
 			name = PlatformParticlesAppleWatch;
+			packageProductDependencies = (
+			);
 			productName = PlatformParticlesAppleWatch;
 			productReference = 313EB7C621BB592E00BEF926 /* PlatformParticles.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1648,6 +1672,8 @@
 				313EBCE421BB7D2C00BEF926 /* PBXTargetDependency */,
 			);
 			name = PlatformParticlesAppleTV;
+			packageProductDependencies = (
+			);
 			productName = PlatformParticlesAppleTV;
 			productReference = 313EBB4321BB7A4B00BEF926 /* PlatformParticles.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1666,6 +1692,8 @@
 				313EBB4E21BB7A4B00BEF926 /* PBXTargetDependency */,
 			);
 			name = PlatformParticlesAppleTVTests;
+			packageProductDependencies = (
+			);
 			productName = PlatformParticlesAppleTVTests;
 			productReference = 313EBB4B21BB7A4B00BEF926 /* PlatformParticlesAppleTVTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1715,6 +1743,8 @@
 				31ACB73521B0EE2D00391ADF /* PBXTargetDependency */,
 			);
 			name = PlatformParticlesTests;
+			packageProductDependencies = (
+			);
 			productName = PlatformParticlesTests;
 			productReference = 31ACB73221B0EE2D00391ADF /* PlatformParticlesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1734,6 +1764,8 @@
 				31CFF7DB21D7D21200DE7A79 /* PBXTargetDependency */,
 			);
 			name = MessageParticles;
+			packageProductDependencies = (
+			);
 			productName = MessageParticles;
 			productReference = 31CFF7C121D7D1F200DE7A79 /* MessageParticles.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1752,6 +1784,8 @@
 				31CFF7CC21D7D1F300DE7A79 /* PBXTargetDependency */,
 			);
 			name = MessageParticlesTests;
+			packageProductDependencies = (
+			);
 			productName = MessageParticlesTests;
 			productReference = 31CFF7C921D7D1F300DE7A79 /* MessageParticlesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1804,7 +1838,7 @@
 			packageReferences = (
 				0271236728E545A50015D39F /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 31ACB72A21B0EE2D00391ADF /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -2076,22 +2110,29 @@
 /* Begin PBXResourcesBuildPhase section */
 		313EB7C421BB592E00BEF926 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				314C35D924C7C36E00695F7E /* NotificationPermissionAction.xib in Resources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBB4121BB7A4B00BEF926 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBB4921BB7A4B00BEF926 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB72721B0EE2D00391ADF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				314C35CC24C7C31400695F7E /* Version.xib in Resources */,
 				314C35E024C7C3A600695F7E /* TableViewCell.xib in Resources */,
@@ -2111,87 +2152,95 @@
 				317F18C12572DA8A00D178B8 /* text_table_cell.xib in Resources */,
 				314C35E324C7C3A600695F7E /* image_collection_cell.xib in Resources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB73021B0EE2D00391ADF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CFF7BF21D7D1F200DE7A79 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CFF7C721D7D1F300DE7A79 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		03C20C522A64DB6829F3E42A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformParticlesTests/Pods-iOS-PlatformParticlesTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformParticlesTests/Pods-iOS-PlatformParticlesTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformParticlesTests/Pods-iOS-PlatformParticlesTests-frameworks.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformParticlesTests/Pods-iOS-PlatformParticlesTests-frameworks.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		428C18730BA8C27E584F9DE6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-PlatformParticlesTests-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		A01C7D16C3374E753C7B2950 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-PlatformParticles-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2199,6 +2248,7 @@
 /* Begin PBXSourcesBuildPhase section */
 		313EB7C221BB592E00BEF926 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EB86C21BB73B400BEF926 /* XibListPresenter.swift in Sources */,
 				3111C2442543AD2E00F204D9 /* CompositeObjectPresenter.swift in Sources */,
@@ -2208,9 +2258,11 @@
 				3101F9C62511303E00AC4010 /* ConfirmAction.swift in Sources */,
 				313EBE0321BC400300BEF926 /* DefaultExtensionDelegate.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBB3F21BB7A4B00BEF926 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				314B603823DCCE2900139EB3 /* ListPresenter+iOS.swift in Sources */,
 				314B600A23DCCE2900139EB3 /* ErrorAlert.swift in Sources */,
@@ -2276,15 +2328,19 @@
 				3128DDFE26B89CE90099B62E /* LikedTableViewListPresenter.swift in Sources */,
 				314B604823DCCE2900139EB3 /* ListLoadingPresenter.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBB4721BB7A4B00BEF926 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EBB5121BB7A4B00BEF926 /* PlatformParticlesAppleTVTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB72521B0EE2D00391ADF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				314B603723DCCE2900139EB3 /* ListPresenter+iOS.swift in Sources */,
 				3111C2432543AD2E00F204D9 /* CompositeObjectPresenter.swift in Sources */,
@@ -2395,26 +2451,33 @@
 				314B605F23DCCE2900139EB3 /* AppInfoPresenter.swift in Sources */,
 				314B604723DCCE2900139EB3 /* ListLoadingPresenter.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31ACB72E21B0EE2D00391ADF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31ACB73821B0EE2D00391ADF /* PlatformParticlesTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CFF7BD21D7D1F200DE7A79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				310D8902262DF3EC00FEF56A /* ObjectViewPresenter.swift in Sources */,
 				3111C2462543AD2E00F204D9 /* CompositeObjectPresenter.swift in Sources */,
 				31EAFE3225C63A8800412F11 /* NavigationObjectPresenter.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CFF7C521D7D1F300DE7A79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31CFF7CF21D7D1F300DE7A79 /* MessageParticlesTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -2537,7 +2600,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		313EB7CC21BB592E00BEF926 /* Debug configuration for PBXNativeTarget "PlatformParticlesAppleWatch" */ = {
+		313EB7CC21BB592E00BEF926 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -2567,7 +2630,7 @@
 			};
 			name = Debug;
 		};
-		313EB7CD21BB592E00BEF926 /* Release configuration for PBXNativeTarget "PlatformParticlesAppleWatch" */ = {
+		313EB7CD21BB592E00BEF926 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -2596,7 +2659,7 @@
 			};
 			name = Release;
 		};
-		313EBB6121BB7A4B00BEF926 /* Debug configuration for PBXNativeTarget "PlatformParticlesAppleTV" */ = {
+		313EBB6121BB7A4B00BEF926 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
@@ -2623,7 +2686,7 @@
 			};
 			name = Debug;
 		};
-		313EBB6221BB7A4B00BEF926 /* Release configuration for PBXNativeTarget "PlatformParticlesAppleTV" */ = {
+		313EBB6221BB7A4B00BEF926 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
@@ -2650,7 +2713,7 @@
 			};
 			name = Release;
 		};
-		313EBB6421BB7A4B00BEF926 /* Debug configuration for PBXNativeTarget "PlatformParticlesAppleTVTests" */ = {
+		313EBB6421BB7A4B00BEF926 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -2669,7 +2732,7 @@
 			};
 			name = Debug;
 		};
-		313EBB6521BB7A4B00BEF926 /* Release configuration for PBXNativeTarget "PlatformParticlesAppleTVTests" */ = {
+		313EBB6521BB7A4B00BEF926 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -2688,7 +2751,7 @@
 			};
 			name = Release;
 		};
-		31ACB73B21B0EE2D00391ADF /* Debug configuration for PBXProject "PlatformParticles" */ = {
+		31ACB73B21B0EE2D00391ADF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2772,7 +2835,7 @@
 			};
 			name = Debug;
 		};
-		31ACB73C21B0EE2D00391ADF /* Release configuration for PBXProject "PlatformParticles" */ = {
+		31ACB73C21B0EE2D00391ADF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2850,7 +2913,7 @@
 			};
 			name = Release;
 		};
-		31ACB73E21B0EE2D00391ADF /* Debug configuration for PBXNativeTarget "PlatformParticles" */ = {
+		31ACB73E21B0EE2D00391ADF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F4B59F8B8C5836B5E6EDB8F8 /* Pods-iOS-PlatformParticles.debug.xcconfig */;
 			buildSettings = {
@@ -2878,7 +2941,7 @@
 			};
 			name = Debug;
 		};
-		31ACB73F21B0EE2D00391ADF /* Release configuration for PBXNativeTarget "PlatformParticles" */ = {
+		31ACB73F21B0EE2D00391ADF /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8E50A1767A8443DAE7A5E486 /* Pods-iOS-PlatformParticles.release.xcconfig */;
 			buildSettings = {
@@ -2906,7 +2969,7 @@
 			};
 			name = Release;
 		};
-		31ACB74121B0EE2D00391ADF /* Debug configuration for PBXNativeTarget "PlatformParticlesTests" */ = {
+		31ACB74121B0EE2D00391ADF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C0294673341C6FE9011A57B7 /* Pods-iOS-PlatformParticlesTests.debug.xcconfig */;
 			buildSettings = {
@@ -2925,7 +2988,7 @@
 			};
 			name = Debug;
 		};
-		31ACB74221B0EE2D00391ADF /* Release configuration for PBXNativeTarget "PlatformParticlesTests" */ = {
+		31ACB74221B0EE2D00391ADF /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B09049A22701CF86FA5E0853 /* Pods-iOS-PlatformParticlesTests.release.xcconfig */;
 			buildSettings = {
@@ -2944,7 +3007,7 @@
 			};
 			name = Release;
 		};
-		31CFF7D321D7D1F300DE7A79 /* Debug configuration for PBXNativeTarget "MessageParticles" */ = {
+		31CFF7D321D7D1F300DE7A79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -2973,7 +3036,7 @@
 			};
 			name = Debug;
 		};
-		31CFF7D421D7D1F300DE7A79 /* Release configuration for PBXNativeTarget "MessageParticles" */ = {
+		31CFF7D421D7D1F300DE7A79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -3001,7 +3064,7 @@
 			};
 			name = Release;
 		};
-		31CFF7D621D7D1F300DE7A79 /* Debug configuration for PBXNativeTarget "MessageParticlesTests" */ = {
+		31CFF7D621D7D1F300DE7A79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -3020,7 +3083,7 @@
 			};
 			name = Debug;
 		};
-		31CFF7D721D7D1F300DE7A79 /* Release configuration for PBXNativeTarget "MessageParticlesTests" */ = {
+		31CFF7D721D7D1F300DE7A79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -3045,65 +3108,73 @@
 		313EB7CB21BB592E00BEF926 /* Build configuration list for PBXNativeTarget "PlatformParticlesAppleWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313EB7CC21BB592E00BEF926 /* Debug configuration for PBXNativeTarget "PlatformParticlesAppleWatch" */,
-				313EB7CD21BB592E00BEF926 /* Release configuration for PBXNativeTarget "PlatformParticlesAppleWatch" */,
+				313EB7CC21BB592E00BEF926 /* Debug */,
+				313EB7CD21BB592E00BEF926 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		313EBB6021BB7A4B00BEF926 /* Build configuration list for PBXNativeTarget "PlatformParticlesAppleTV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313EBB6121BB7A4B00BEF926 /* Debug configuration for PBXNativeTarget "PlatformParticlesAppleTV" */,
-				313EBB6221BB7A4B00BEF926 /* Release configuration for PBXNativeTarget "PlatformParticlesAppleTV" */,
+				313EBB6121BB7A4B00BEF926 /* Debug */,
+				313EBB6221BB7A4B00BEF926 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		313EBB6321BB7A4B00BEF926 /* Build configuration list for PBXNativeTarget "PlatformParticlesAppleTVTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313EBB6421BB7A4B00BEF926 /* Debug configuration for PBXNativeTarget "PlatformParticlesAppleTVTests" */,
-				313EBB6521BB7A4B00BEF926 /* Release configuration for PBXNativeTarget "PlatformParticlesAppleTVTests" */,
+				313EBB6421BB7A4B00BEF926 /* Debug */,
+				313EBB6521BB7A4B00BEF926 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31ACB72321B0EE2D00391ADF /* Build configuration list for PBXProject "PlatformParticles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31ACB73B21B0EE2D00391ADF /* Debug configuration for PBXProject "PlatformParticles" */,
-				31ACB73C21B0EE2D00391ADF /* Release configuration for PBXProject "PlatformParticles" */,
+				31ACB73B21B0EE2D00391ADF /* Debug */,
+				31ACB73C21B0EE2D00391ADF /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31ACB73D21B0EE2D00391ADF /* Build configuration list for PBXNativeTarget "PlatformParticles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31ACB73E21B0EE2D00391ADF /* Debug configuration for PBXNativeTarget "PlatformParticles" */,
-				31ACB73F21B0EE2D00391ADF /* Release configuration for PBXNativeTarget "PlatformParticles" */,
+				31ACB73E21B0EE2D00391ADF /* Debug */,
+				31ACB73F21B0EE2D00391ADF /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31ACB74021B0EE2D00391ADF /* Build configuration list for PBXNativeTarget "PlatformParticlesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31ACB74121B0EE2D00391ADF /* Debug configuration for PBXNativeTarget "PlatformParticlesTests" */,
-				31ACB74221B0EE2D00391ADF /* Release configuration for PBXNativeTarget "PlatformParticlesTests" */,
+				31ACB74121B0EE2D00391ADF /* Debug */,
+				31ACB74221B0EE2D00391ADF /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31CFF7D221D7D1F300DE7A79 /* Build configuration list for PBXNativeTarget "MessageParticles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31CFF7D321D7D1F300DE7A79 /* Debug configuration for PBXNativeTarget "MessageParticles" */,
-				31CFF7D421D7D1F300DE7A79 /* Release configuration for PBXNativeTarget "MessageParticles" */,
+				31CFF7D321D7D1F300DE7A79 /* Debug */,
+				31CFF7D421D7D1F300DE7A79 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31CFF7D521D7D1F300DE7A79 /* Build configuration list for PBXNativeTarget "MessageParticlesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31CFF7D621D7D1F300DE7A79 /* Debug configuration for PBXNativeTarget "MessageParticlesTests" */,
-				31CFF7D721D7D1F300DE7A79 /* Release configuration for PBXNativeTarget "MessageParticlesTests" */,
+				31CFF7D621D7D1F300DE7A79 /* Debug */,
+				31CFF7D721D7D1F300DE7A79 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

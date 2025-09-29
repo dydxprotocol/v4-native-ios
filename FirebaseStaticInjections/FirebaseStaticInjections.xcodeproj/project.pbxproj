@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -212,10 +212,12 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		31B3E3BB22763B19009E8FEF /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolder = Product;
+			dstSubfolderSpec = 16;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -245,16 +247,20 @@
 /* Begin PBXFrameworksBuildPhase section */
 		31B3E3BA22763B19009E8FEF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				462A35FDB56C49B164E4A815 /* Pods_iOS_FirebaseStaticInjections.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31B3E52922763ED5009E8FEF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31B3E53122763ED5009E8FEF /* libFirebaseStaticInjections.a in Frameworks */,
 				D6DEC39DD1C2D90EF8486C38 /* Pods_iOS_FirebaseStaticInjectionsTests.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -469,6 +475,8 @@
 				31B3E45A22763B64009E8FEF /* PBXTargetDependency */,
 			);
 			name = FirebaseStaticInjections;
+			packageProductDependencies = (
+			);
 			productName = FirebaseStaticInjections;
 			productReference = 31B3E3BD22763B19009E8FEF /* libFirebaseStaticInjections.a */;
 			productType = "com.apple.product-type.library.static";
@@ -489,6 +497,8 @@
 				31B3E53322763ED5009E8FEF /* PBXTargetDependency */,
 			);
 			name = FirebaseStaticInjectionsTests;
+			packageProductDependencies = (
+			);
 			productName = FirebaseStaticInjectionsTests;
 			productReference = 31B3E52C22763ED5009E8FEF /* FirebaseStaticInjectionsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -520,7 +530,7 @@
 				Base,
 			);
 			mainGroup = 31B3E3B422763B19009E8FEF;
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 31B3E3BE22763B19009E8FEF /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -709,74 +719,77 @@
 /* Begin PBXResourcesBuildPhase section */
 		31B3E52A22763ED5009E8FEF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		2392E21FBB5775A2A4C80A4C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-FirebaseStaticInjections-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		8B2ACFD82C7387329C9B46A2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-FirebaseStaticInjectionsTests/Pods-iOS-FirebaseStaticInjectionsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-FirebaseStaticInjectionsTests/Pods-iOS-FirebaseStaticInjectionsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-FirebaseStaticInjectionsTests/Pods-iOS-FirebaseStaticInjectionsTests-frameworks.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-FirebaseStaticInjectionsTests/Pods-iOS-FirebaseStaticInjectionsTests-frameworks.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		D235A5D738179D856B66C201 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-FirebaseStaticInjectionsTests-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -784,18 +797,22 @@
 /* Begin PBXSourcesBuildPhase section */
 		31B3E3B922763B19009E8FEF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				314B5E4723DCCD6800139EB3 /* FirebaseRunner.swift in Sources */,
 				314B5E4923DCCD6800139EB3 /* CrashlyticsErrorLogging.swift in Sources */,
 				314B5E4A23DCCD6800139EB3 /* FirebaseTracking.swift in Sources */,
 				314B5E4B23DCCD6800139EB3 /* FirebaseNotification.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31B3E52822763ED5009E8FEF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31B3E52F22763ED5009E8FEF /* FirebaseStaticInjectionsTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -828,7 +845,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		31B3E3C222763B19009E8FEF /* Debug configuration for PBXProject "FirebaseStaticInjections" */ = {
+		31B3E3C222763B19009E8FEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -908,7 +925,7 @@
 			};
 			name = Debug;
 		};
-		31B3E3C322763B19009E8FEF /* Release configuration for PBXProject "FirebaseStaticInjections" */ = {
+		31B3E3C322763B19009E8FEF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -982,7 +999,7 @@
 			};
 			name = Release;
 		};
-		31B3E3C522763B19009E8FEF /* Debug configuration for PBXNativeTarget "FirebaseStaticInjections" */ = {
+		31B3E3C522763B19009E8FEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B53FEE6286BC8AE67AA8289D /* Pods-iOS-FirebaseStaticInjections.debug.xcconfig */;
 			buildSettings = {
@@ -996,7 +1013,7 @@
 			};
 			name = Debug;
 		};
-		31B3E3C622763B19009E8FEF /* Release configuration for PBXNativeTarget "FirebaseStaticInjections" */ = {
+		31B3E3C622763B19009E8FEF /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DF7BF46C45A090E041492199 /* Pods-iOS-FirebaseStaticInjections.release.xcconfig */;
 			buildSettings = {
@@ -1010,7 +1027,7 @@
 			};
 			name = Release;
 		};
-		31B3E53522763ED5009E8FEF /* Debug configuration for PBXNativeTarget "FirebaseStaticInjectionsTests" */ = {
+		31B3E53522763ED5009E8FEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2AC82E9412F0658CCD3B5F99 /* Pods-iOS-FirebaseStaticInjectionsTests.debug.xcconfig */;
 			buildSettings = {
@@ -1030,7 +1047,7 @@
 			};
 			name = Debug;
 		};
-		31B3E53622763ED5009E8FEF /* Release configuration for PBXNativeTarget "FirebaseStaticInjectionsTests" */ = {
+		31B3E53622763ED5009E8FEF /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AF31C47E0D98E7411788154 /* Pods-iOS-FirebaseStaticInjectionsTests.release.xcconfig */;
 			buildSettings = {
@@ -1056,25 +1073,28 @@
 		31B3E3B822763B19009E8FEF /* Build configuration list for PBXProject "FirebaseStaticInjections" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31B3E3C222763B19009E8FEF /* Debug configuration for PBXProject "FirebaseStaticInjections" */,
-				31B3E3C322763B19009E8FEF /* Release configuration for PBXProject "FirebaseStaticInjections" */,
+				31B3E3C222763B19009E8FEF /* Debug */,
+				31B3E3C322763B19009E8FEF /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31B3E3C422763B19009E8FEF /* Build configuration list for PBXNativeTarget "FirebaseStaticInjections" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31B3E3C522763B19009E8FEF /* Debug configuration for PBXNativeTarget "FirebaseStaticInjections" */,
-				31B3E3C622763B19009E8FEF /* Release configuration for PBXNativeTarget "FirebaseStaticInjections" */,
+				31B3E3C522763B19009E8FEF /* Debug */,
+				31B3E3C622763B19009E8FEF /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31B3E53422763ED5009E8FEF /* Build configuration list for PBXNativeTarget "FirebaseStaticInjectionsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31B3E53522763ED5009E8FEF /* Debug configuration for PBXNativeTarget "FirebaseStaticInjectionsTests" */,
-				31B3E53622763ED5009E8FEF /* Release configuration for PBXNativeTarget "FirebaseStaticInjectionsTests" */,
+				31B3E53522763ED5009E8FEF /* Debug */,
+				31B3E53622763ED5009E8FEF /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

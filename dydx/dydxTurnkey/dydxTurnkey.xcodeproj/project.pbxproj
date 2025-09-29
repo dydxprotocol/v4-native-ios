@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -76,11 +76,13 @@
 /* Begin PBXFrameworksBuildPhase section */
 		02A1054B2E28537C00E65EE2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				0263CB552E787EDA00D843C7 /* Utilities.framework in Frameworks */,
 				025DFE822E3159310015E1D7 /* PlatformUI.framework in Frameworks */,
 				35C55D24A41A3DFA2BA54B75 /* Pods_iOS_dydxTurnkey.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -144,8 +146,10 @@
 /* Begin PBXHeadersBuildPhase section */
 		02A105492E28537C00E65EE2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -171,6 +175,8 @@
 				02A105502E28537C00E65EE2 /* dydxTurnkey */,
 			);
 			name = dydxTurnkey;
+			packageProductDependencies = (
+			);
 			productName = dydxTurnkey;
 			productReference = 02A1054E2E28537C00E65EE2 /* dydxTurnkey.framework */;
 			productType = "com.apple.product-type.framework";
@@ -200,7 +206,7 @@
 			);
 			mainGroup = 02A105442E28537C00E65EE2;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 02A1054F2E28537C00E65EE2 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -240,50 +246,55 @@
 /* Begin PBXResourcesBuildPhase section */
 		02A1054C2E28537C00E65EE2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		40C0AFA2CB5766B55EFD157E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey-resources.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey-resources.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		9A52AED412176393EAC141BA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxTurnkey-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -291,8 +302,10 @@
 /* Begin PBXSourcesBuildPhase section */
 		02A1054A2E28537C00E65EE2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -310,7 +323,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		02A105532E28537C00E65EE2 /* Debug configuration for PBXProject "dydxTurnkey" */ = {
+		02A105532E28537C00E65EE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -391,7 +404,7 @@
 			};
 			name = Debug;
 		};
-		02A105542E28537C00E65EE2 /* Release configuration for PBXProject "dydxTurnkey" */ = {
+		02A105542E28537C00E65EE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -465,7 +478,7 @@
 			};
 			name = Release;
 		};
-		02A105562E28537C00E65EE2 /* Debug configuration for PBXNativeTarget "dydxTurnkey" */ = {
+		02A105562E28537C00E65EE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C2C4215727E83011602DFFDB /* Pods-iOS-dydxTurnkey.debug.xcconfig */;
 			buildSettings = {
@@ -504,7 +517,7 @@
 			};
 			name = Debug;
 		};
-		02A105572E28537C00E65EE2 /* Release configuration for PBXNativeTarget "dydxTurnkey" */ = {
+		02A105572E28537C00E65EE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DC2F77A14CCE43B1893780CC /* Pods-iOS-dydxTurnkey.release.xcconfig */;
 			buildSettings = {
@@ -548,17 +561,19 @@
 		02A105482E28537C00E65EE2 /* Build configuration list for PBXProject "dydxTurnkey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02A105532E28537C00E65EE2 /* Debug configuration for PBXProject "dydxTurnkey" */,
-				02A105542E28537C00E65EE2 /* Release configuration for PBXProject "dydxTurnkey" */,
+				02A105532E28537C00E65EE2 /* Debug */,
+				02A105542E28537C00E65EE2 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02A105552E28537C00E65EE2 /* Build configuration list for PBXNativeTarget "dydxTurnkey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02A105562E28537C00E65EE2 /* Debug configuration for PBXNativeTarget "dydxTurnkey" */,
-				02A105572E28537C00E65EE2 /* Release configuration for PBXNativeTarget "dydxTurnkey" */,
+				02A105562E28537C00E65EE2 /* Debug */,
+				02A105572E28537C00E65EE2 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

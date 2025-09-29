@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -186,17 +186,21 @@
 /* Begin PBXFrameworksBuildPhase section */
 		02E2C92828A1C8A400F7C3BE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02DE889C28A2C91B00728FF3 /* Utilities.framework in Frameworks */,
 				CEE5B6E4D97A1CD73E8B2718 /* Pods_iOS_PlatformUI.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02E2C93228A1C8A400F7C3BE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02E2C93628A1C8A400F7C3BE /* PlatformUI.framework in Frameworks */,
 				1C811E336064517E256D1290 /* Pods_iOS_PlatformUITests.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -519,9 +523,11 @@
 /* Begin PBXHeadersBuildPhase section */
 		02E2C92628A1C8A400F7C3BE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02E2C93C28A1C8A400F7C3BE /* PlatformUI.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -542,6 +548,8 @@
 				02DE889B28A2C91500728FF3 /* PBXTargetDependency */,
 			);
 			name = PlatformUI;
+			packageProductDependencies = (
+			);
 			productName = PlatformUI;
 			productReference = 02E2C92B28A1C8A400F7C3BE /* PlatformUI.framework */;
 			productType = "com.apple.product-type.framework";
@@ -562,6 +570,8 @@
 				02E2C93828A1C8A400F7C3BE /* PBXTargetDependency */,
 			);
 			name = PlatformUITests;
+			packageProductDependencies = (
+			);
 			productName = PlatformUITests;
 			productReference = 02E2C93528A1C8A400F7C3BE /* PlatformUITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -592,7 +602,7 @@
 				Base,
 			);
 			mainGroup = 02E2C92128A1C8A400F7C3BE;
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 02E2C92C28A1C8A400F7C3BE /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -650,82 +660,87 @@
 /* Begin PBXResourcesBuildPhase section */
 		02E2C92928A1C8A400F7C3BE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02F16FDF28B539850085DC58 /* SampleStyle.json in Resources */,
 				0242E3E92A9B1AE1007605F9 /* Media.xcassets in Resources */,
 				02E2C9A028A1C98700F7C3BE /* SampleTheme.json in Resources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02E2C93328A1C8A400F7C3BE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		74961D630C239663B2CD100A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-PlatformUITests-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		B2CF303B6AF214DBE22D1F40 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUITests/Pods-iOS-PlatformUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUITests/Pods-iOS-PlatformUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUITests/Pods-iOS-PlatformUITests-frameworks.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformUITests/Pods-iOS-PlatformUITests-frameworks.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		D8FB6CF93871A4AFE500D3BF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-PlatformUI-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -733,6 +748,7 @@
 /* Begin PBXSourcesBuildPhase section */
 		02E2C92728A1C8A400F7C3BE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				0273A32D2ACDFFAC001B89F5 /* ThemeFontCache.swift in Sources */,
 				02714C8C29E0C3AD00CC1C44 /* ComboBox.swift in Sources */,
@@ -783,12 +799,15 @@
 				027A7B45291E090F00DF402D /* ColoredText.swift in Sources */,
 				02B3E6992D6377A000E90227 /* ExpandableText.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02E2C93128A1C8A400F7C3BE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02E2C93B28A1C8A400F7C3BE /* PlatformUITests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -806,7 +825,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		02E2C93D28A1C8A400F7C3BE /* Debug configuration for PBXProject "PlatformUI" */ = {
+		02E2C93D28A1C8A400F7C3BE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -887,7 +906,7 @@
 			};
 			name = Debug;
 		};
-		02E2C93E28A1C8A400F7C3BE /* Release configuration for PBXProject "PlatformUI" */ = {
+		02E2C93E28A1C8A400F7C3BE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -962,7 +981,7 @@
 			};
 			name = Release;
 		};
-		02E2C94028A1C8A400F7C3BE /* Debug configuration for PBXNativeTarget "PlatformUI" */ = {
+		02E2C94028A1C8A400F7C3BE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C889AD4B581381A925B00E9D /* Pods-iOS-PlatformUI.debug.xcconfig */;
 			buildSettings = {
@@ -1005,7 +1024,7 @@
 			};
 			name = Debug;
 		};
-		02E2C94128A1C8A400F7C3BE /* Release configuration for PBXNativeTarget "PlatformUI" */ = {
+		02E2C94128A1C8A400F7C3BE /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 366BD14FE1ED4F2AF21D924E /* Pods-iOS-PlatformUI.release.xcconfig */;
 			buildSettings = {
@@ -1048,7 +1067,7 @@
 			};
 			name = Release;
 		};
-		02E2C94328A1C8A400F7C3BE /* Debug configuration for PBXNativeTarget "PlatformUITests" */ = {
+		02E2C94328A1C8A400F7C3BE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FAAE8CE674BDAAFF34EB30CA /* Pods-iOS-PlatformUITests.debug.xcconfig */;
 			buildSettings = {
@@ -1067,7 +1086,7 @@
 			};
 			name = Debug;
 		};
-		02E2C94428A1C8A400F7C3BE /* Release configuration for PBXNativeTarget "PlatformUITests" */ = {
+		02E2C94428A1C8A400F7C3BE /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7900D7C9D4E7016DDF14E98A /* Pods-iOS-PlatformUITests.release.xcconfig */;
 			buildSettings = {
@@ -1092,25 +1111,28 @@
 		02E2C92528A1C8A400F7C3BE /* Build configuration list for PBXProject "PlatformUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02E2C93D28A1C8A400F7C3BE /* Debug configuration for PBXProject "PlatformUI" */,
-				02E2C93E28A1C8A400F7C3BE /* Release configuration for PBXProject "PlatformUI" */,
+				02E2C93D28A1C8A400F7C3BE /* Debug */,
+				02E2C93E28A1C8A400F7C3BE /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02E2C93F28A1C8A400F7C3BE /* Build configuration list for PBXNativeTarget "PlatformUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02E2C94028A1C8A400F7C3BE /* Debug configuration for PBXNativeTarget "PlatformUI" */,
-				02E2C94128A1C8A400F7C3BE /* Release configuration for PBXNativeTarget "PlatformUI" */,
+				02E2C94028A1C8A400F7C3BE /* Debug */,
+				02E2C94128A1C8A400F7C3BE /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02E2C94228A1C8A400F7C3BE /* Build configuration list for PBXNativeTarget "PlatformUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02E2C94328A1C8A400F7C3BE /* Debug configuration for PBXNativeTarget "PlatformUITests" */,
-				02E2C94428A1C8A400F7C3BE /* Release configuration for PBXNativeTarget "PlatformUITests" */,
+				02E2C94328A1C8A400F7C3BE /* Debug */,
+				02E2C94428A1C8A400F7C3BE /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

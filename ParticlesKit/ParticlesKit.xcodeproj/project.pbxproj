@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -520,38 +520,48 @@
 /* Begin PBXFrameworksBuildPhase section */
 		311C0FD721B0E9C4001775BA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31ACB70D21B0ED5600391ADF /* Utilities.framework in Frameworks */,
 				31ACB70C21B0ED5100391ADF /* RoutingKit.framework in Frameworks */,
 				43610BEC16BD2BC8D491E1B1 /* Pods_iOS_ParticlesKit.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		311C0FE021B0E9C4001775BA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				311C0FE421B0E9C4001775BA /* ParticlesKit.framework in Frameworks */,
 				F34126D2B87AD51FA888323B /* Pods_iOS_ParticlesKitTests.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EB15E21BA246A00BEF926 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EB28121BA282300BEF926 /* RoutingKit.framework in Frameworks */,
 				313EB21A21BA268600BEF926 /* Utilities.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EB16621BA246A00BEF926 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EB16A21BA246A00BEF926 /* ParticlesKit.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		319682B121B7967B00AE0F28 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				319682C821B7969100AE0F28 /* Utilities.framework in Frameworks */,
 				319682C921B7969100AE0F28 /* RoutingKit.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -1160,21 +1170,27 @@
 /* Begin PBXHeadersBuildPhase section */
 		311C0FD521B0E9C4001775BA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				311C0FEB21B0E9C4001775BA /* ParticlesKit.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EB15C21BA246A00BEF926 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EB17121BA246B00BEF926 /* ParticlesKit.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		319682AF21B7967B00AE0F28 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				319682B821B7967B00AE0F28 /* ParticlesKit.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -1196,6 +1212,8 @@
 				31ACB70A21B0ED4800391ADF /* PBXTargetDependency */,
 			);
 			name = ParticlesKit;
+			packageProductDependencies = (
+			);
 			productName = ParticlesKit;
 			productReference = 311C0FDA21B0E9C4001775BA /* ParticlesKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1216,6 +1234,8 @@
 				311C0FE621B0E9C4001775BA /* PBXTargetDependency */,
 			);
 			name = ParticlesKitTests;
+			packageProductDependencies = (
+			);
 			productName = ParticlesKitTests;
 			productReference = 311C0FE321B0E9C4001775BA /* ParticlesKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1236,6 +1256,8 @@
 				313EB21921BA267E00BEF926 /* PBXTargetDependency */,
 			);
 			name = ParticlesKitAppleTV;
+			packageProductDependencies = (
+			);
 			productName = ParticlesKitAppleTV;
 			productReference = 313EB16121BA246A00BEF926 /* ParticlesKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1254,6 +1276,8 @@
 				313EB16C21BA246A00BEF926 /* PBXTargetDependency */,
 			);
 			name = ParticlesKitAppleTVTests;
+			packageProductDependencies = (
+			);
 			productName = ParticlesKitAppleTVTests;
 			productReference = 313EB16921BA246A00BEF926 /* ParticlesKitAppleTVTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1274,6 +1298,8 @@
 				319682C721B7968600AE0F28 /* PBXTargetDependency */,
 			);
 			name = ParticlesKitAppleWatch;
+			packageProductDependencies = (
+			);
 			productName = ParticlesKitAppleWatch;
 			productReference = 319682B421B7967B00AE0F28 /* ParticlesKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1314,7 +1340,7 @@
 				Base,
 			);
 			mainGroup = 311C0FD021B0E9C4001775BA;
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 311C0FDB21B0E9C4001775BA /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -1414,96 +1440,107 @@
 /* Begin PBXResourcesBuildPhase section */
 		311C0FD821B0E9C4001775BA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				3101F99325112F2600AC4010 /* Login.xib in Resources */,
 				3101F99425112F2600AC4010 /* Logout.xib in Resources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		311C0FE121B0E9C4001775BA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EB15F21BA246A00BEF926 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EB16721BA246A00BEF926 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		319682B221B7967B00AE0F28 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		468DD600B99D16F585C15085 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-ParticlesKitTests-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		951D57A7D97EE5EA27F6AA50 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-ParticlesKit-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		F2EB2AC14AD2688FE5159478 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-ParticlesKitTests/Pods-iOS-ParticlesKitTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-ParticlesKitTests/Pods-iOS-ParticlesKitTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-ParticlesKitTests/Pods-iOS-ParticlesKitTests-frameworks.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-ParticlesKitTests/Pods-iOS-ParticlesKitTests-frameworks.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1511,6 +1548,7 @@
 /* Begin PBXSourcesBuildPhase section */
 		311C0FD621B0E9C4001775BA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31308B6B24FAEE67003B5B9A /* PlacemarkProtocols.swift in Sources */,
 				314B61F123DCCE6200139EB3 /* JsonCredentialsProvider.swift in Sources */,
@@ -1600,15 +1638,19 @@
 				314B61D923DCCE6200139EB3 /* DebugErrorLogging.swift in Sources */,
 				314B61FD23DCCE6200139EB3 /* FilteredListInteractorProtocol.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		311C0FDF21B0E9C4001775BA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				311C0FE921B0E9C4001775BA /* ParticlesKitTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EB15D21BA246A00BEF926 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				3101F98425112E5600AC4010 /* AuthLoginAction.swift in Sources */,
 				31439A822677F53D003871A1 /* ObjectCompositeLineInteractor.swift in Sources */,
@@ -1692,15 +1734,19 @@
 				312CE30D2630867E00C519C0 /* JsonKeychainCaching.swift in Sources */,
 				314B61FF23DCCE6200139EB3 /* FilteredListInteractorProtocol.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EB16521BA246A00BEF926 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EB16F21BA246B00BEF926 /* ParticlesKitAppleTVTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		319682B021B7967B00AE0F28 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				314B61F223DCCE6200139EB3 /* JsonCredentialsProvider.swift in Sources */,
 				31308B6C24FAEE67003B5B9A /* PlacemarkProtocols.swift in Sources */,
@@ -1782,6 +1828,7 @@
 				314B61DA23DCCE6200139EB3 /* DebugErrorLogging.swift in Sources */,
 				314B61FE23DCCE6200139EB3 /* FilteredListInteractorProtocol.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -1829,7 +1876,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		311C0FEC21B0E9C4001775BA /* Debug configuration for PBXProject "ParticlesKit" */ = {
+		311C0FEC21B0E9C4001775BA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1913,7 +1960,7 @@
 			};
 			name = Debug;
 		};
-		311C0FED21B0E9C4001775BA /* Release configuration for PBXProject "ParticlesKit" */ = {
+		311C0FED21B0E9C4001775BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1991,7 +2038,7 @@
 			};
 			name = Release;
 		};
-		311C0FEF21B0E9C4001775BA /* Debug configuration for PBXNativeTarget "ParticlesKit" */ = {
+		311C0FEF21B0E9C4001775BA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F4958EED19842A183A1F5D89 /* Pods-iOS-ParticlesKit.debug.xcconfig */;
 			buildSettings = {
@@ -2021,7 +2068,7 @@
 			};
 			name = Debug;
 		};
-		311C0FF021B0E9C4001775BA /* Release configuration for PBXNativeTarget "ParticlesKit" */ = {
+		311C0FF021B0E9C4001775BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F8B0D0DBC7474890A91F85F0 /* Pods-iOS-ParticlesKit.release.xcconfig */;
 			buildSettings = {
@@ -2051,7 +2098,7 @@
 			};
 			name = Release;
 		};
-		311C0FF221B0E9C4001775BA /* Debug configuration for PBXNativeTarget "ParticlesKitTests" */ = {
+		311C0FF221B0E9C4001775BA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2A672EF94927348861EE35DA /* Pods-iOS-ParticlesKitTests.debug.xcconfig */;
 			buildSettings = {
@@ -2070,7 +2117,7 @@
 			};
 			name = Debug;
 		};
-		311C0FF321B0E9C4001775BA /* Release configuration for PBXNativeTarget "ParticlesKitTests" */ = {
+		311C0FF321B0E9C4001775BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E42E061D721836FD4F3D1BB1 /* Pods-iOS-ParticlesKitTests.release.xcconfig */;
 			buildSettings = {
@@ -2089,7 +2136,7 @@
 			};
 			name = Release;
 		};
-		313EB17221BA246B00BEF926 /* Debug configuration for PBXNativeTarget "ParticlesKitAppleTV" */ = {
+		313EB17221BA246B00BEF926 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
@@ -2116,7 +2163,7 @@
 			};
 			name = Debug;
 		};
-		313EB17321BA246B00BEF926 /* Release configuration for PBXNativeTarget "ParticlesKitAppleTV" */ = {
+		313EB17321BA246B00BEF926 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
@@ -2143,7 +2190,7 @@
 			};
 			name = Release;
 		};
-		313EB17421BA246B00BEF926 /* Debug configuration for PBXNativeTarget "ParticlesKitAppleTVTests" */ = {
+		313EB17421BA246B00BEF926 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -2162,7 +2209,7 @@
 			};
 			name = Debug;
 		};
-		313EB17521BA246B00BEF926 /* Release configuration for PBXNativeTarget "ParticlesKitAppleTVTests" */ = {
+		313EB17521BA246B00BEF926 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -2181,7 +2228,7 @@
 			};
 			name = Release;
 		};
-		319682B921B7967B00AE0F28 /* Debug configuration for PBXNativeTarget "ParticlesKitAppleWatch" */ = {
+		319682B921B7967B00AE0F28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -2209,7 +2256,7 @@
 			};
 			name = Debug;
 		};
-		319682BA21B7967B00AE0F28 /* Release configuration for PBXNativeTarget "ParticlesKitAppleWatch" */ = {
+		319682BA21B7967B00AE0F28 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -2243,49 +2290,55 @@
 		311C0FD421B0E9C4001775BA /* Build configuration list for PBXProject "ParticlesKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				311C0FEC21B0E9C4001775BA /* Debug configuration for PBXProject "ParticlesKit" */,
-				311C0FED21B0E9C4001775BA /* Release configuration for PBXProject "ParticlesKit" */,
+				311C0FEC21B0E9C4001775BA /* Debug */,
+				311C0FED21B0E9C4001775BA /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		311C0FEE21B0E9C4001775BA /* Build configuration list for PBXNativeTarget "ParticlesKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				311C0FEF21B0E9C4001775BA /* Debug configuration for PBXNativeTarget "ParticlesKit" */,
-				311C0FF021B0E9C4001775BA /* Release configuration for PBXNativeTarget "ParticlesKit" */,
+				311C0FEF21B0E9C4001775BA /* Debug */,
+				311C0FF021B0E9C4001775BA /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		311C0FF121B0E9C4001775BA /* Build configuration list for PBXNativeTarget "ParticlesKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				311C0FF221B0E9C4001775BA /* Debug configuration for PBXNativeTarget "ParticlesKitTests" */,
-				311C0FF321B0E9C4001775BA /* Release configuration for PBXNativeTarget "ParticlesKitTests" */,
+				311C0FF221B0E9C4001775BA /* Debug */,
+				311C0FF321B0E9C4001775BA /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		313EB18421BA246B00BEF926 /* Build configuration list for PBXNativeTarget "ParticlesKitAppleTV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313EB17221BA246B00BEF926 /* Debug configuration for PBXNativeTarget "ParticlesKitAppleTV" */,
-				313EB17321BA246B00BEF926 /* Release configuration for PBXNativeTarget "ParticlesKitAppleTV" */,
+				313EB17221BA246B00BEF926 /* Debug */,
+				313EB17321BA246B00BEF926 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		313EB18521BA246B00BEF926 /* Build configuration list for PBXNativeTarget "ParticlesKitAppleTVTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313EB17421BA246B00BEF926 /* Debug configuration for PBXNativeTarget "ParticlesKitAppleTVTests" */,
-				313EB17521BA246B00BEF926 /* Release configuration for PBXNativeTarget "ParticlesKitAppleTVTests" */,
+				313EB17421BA246B00BEF926 /* Debug */,
+				313EB17521BA246B00BEF926 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		319682C321B7967B00AE0F28 /* Build configuration list for PBXNativeTarget "ParticlesKitAppleWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				319682B921B7967B00AE0F28 /* Debug configuration for PBXNativeTarget "ParticlesKitAppleWatch" */,
-				319682BA21B7967B00AE0F28 /* Release configuration for PBXNativeTarget "ParticlesKitAppleWatch" */,
+				319682B921B7967B00AE0F28 /* Debug */,
+				319682BA21B7967B00AE0F28 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

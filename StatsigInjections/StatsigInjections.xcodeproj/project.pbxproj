@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -59,10 +59,12 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		2795C88C2C53FF8B00155009 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolder = Product;
+			dstSubfolderSpec = 16;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -78,9 +80,11 @@
 /* Begin PBXFrameworksBuildPhase section */
 		2795C88B2C53FF8B00155009 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				41594E9E5B027E2DD01CE0F6 /* Pods_iOS_StatsigInjections.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -160,6 +164,8 @@
 				27E4ECAB2C540AF500E4F87C /* PBXTargetDependency */,
 			);
 			name = StatsigInjections;
+			packageProductDependencies = (
+			);
 			productName = StatsigInjections;
 			productReference = 2795C88E2C53FF8B00155009 /* libStatsigInjections.a */;
 			productType = "com.apple.product-type.library.static";
@@ -187,7 +193,7 @@
 				Base,
 			);
 			mainGroup = 2795C8852C53FF8B00155009;
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 2795C88F2C53FF8B00155009 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -244,26 +250,24 @@
 /* Begin PBXShellScriptBuildPhase section */
 		B89343A163A6D5685D0D5500 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-StatsigInjections-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -271,9 +275,11 @@
 /* Begin PBXSourcesBuildPhase section */
 		2795C88A2C53FF8B00155009 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				2795C8922C53FF8B00155009 /* StatsigInjections.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -286,7 +292,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		2795C8932C53FF8B00155009 /* Debug configuration for PBXProject "StatsigInjections" */ = {
+		2795C8932C53FF8B00155009 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -367,7 +373,7 @@
 			};
 			name = Debug;
 		};
-		2795C8942C53FF8B00155009 /* Release configuration for PBXProject "StatsigInjections" */ = {
+		2795C8942C53FF8B00155009 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -441,7 +447,7 @@
 			};
 			name = Release;
 		};
-		2795C8962C53FF8B00155009 /* Debug configuration for PBXNativeTarget "StatsigInjections" */ = {
+		2795C8962C53FF8B00155009 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 77234A743052758A3A3902A8 /* Pods-iOS-StatsigInjections.debug.xcconfig */;
 			buildSettings = {
@@ -456,7 +462,7 @@
 			};
 			name = Debug;
 		};
-		2795C8972C53FF8B00155009 /* Release configuration for PBXNativeTarget "StatsigInjections" */ = {
+		2795C8972C53FF8B00155009 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0DC92405F45F1BEA1A1791D /* Pods-iOS-StatsigInjections.release.xcconfig */;
 			buildSettings = {
@@ -477,17 +483,19 @@
 		2795C8892C53FF8B00155009 /* Build configuration list for PBXProject "StatsigInjections" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2795C8932C53FF8B00155009 /* Debug configuration for PBXProject "StatsigInjections" */,
-				2795C8942C53FF8B00155009 /* Release configuration for PBXProject "StatsigInjections" */,
+				2795C8932C53FF8B00155009 /* Debug */,
+				2795C8942C53FF8B00155009 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		2795C8952C53FF8B00155009 /* Build configuration list for PBXNativeTarget "StatsigInjections" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2795C8962C53FF8B00155009 /* Debug configuration for PBXNativeTarget "StatsigInjections" */,
-				2795C8972C53FF8B00155009 /* Release configuration for PBXNativeTarget "StatsigInjections" */,
+				2795C8962C53FF8B00155009 /* Debug */,
+				2795C8972C53FF8B00155009 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

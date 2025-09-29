@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -379,29 +379,36 @@
 /* Begin PBXFrameworksBuildPhase section */
 		313EB75C21BB4CA300BEF926 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EB76D21BB4D1000BEF926 /* Utilities.framework in Frameworks */,
 				31F762D424BA3F6C001EA293 /* ParticlesKit.framework in Frameworks */,
 				313EB76E21BB4D1000BEF926 /* RoutingKit.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBBE221BB7B7D00BEF926 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				310CDBAD21C6FA44009665CF /* UIToolkits.framework in Frameworks */,
 				31F762D724BA3F76001EA293 /* ParticlesKit.framework in Frameworks */,
 				313EBC3C21BB7BD500BEF926 /* Utilities.framework in Frameworks */,
 				313EBC3D21BB7BD500BEF926 /* RoutingKit.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBBEA21BB7B7D00BEF926 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EBBEE21BB7B7E00BEF926 /* PlatformRouting.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CEE9B22170FA2700DC61DA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				314B6ED923DD0AA900139EB3 /* UIAppToolkits.framework in Frameworks */,
 				311D6FA92176F04900655040 /* Utilities.framework in Frameworks */,
@@ -410,13 +417,16 @@
 				31F762D124BA3F5C001EA293 /* ParticlesKit.framework in Frameworks */,
 				9EA919B6201D5FB65A741E9F /* Pods_iOS_PlatformRouting.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CEE9BB2170FA2700DC61DA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31CEE9BF2170FA2700DC61DA /* PlatformRouting.framework in Frameworks */,
 				A32C1736A60BE927D3C195A4 /* Pods_iOS_PlatformRoutingTests.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -774,21 +784,27 @@
 /* Begin PBXHeadersBuildPhase section */
 		313EB75A21BB4CA300BEF926 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EB76321BB4CA300BEF926 /* PlatformRouting.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBBE021BB7B7D00BEF926 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EBBF521BB7B7E00BEF926 /* PlatformRouting.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CEE9B02170FA2700DC61DA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31CEE9C62170FA2700DC61DA /* PlatformRouting.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -809,6 +825,8 @@
 				313EB76C21BB4CFE00BEF926 /* PBXTargetDependency */,
 			);
 			name = PlatformRoutingAppleWatch;
+			packageProductDependencies = (
+			);
 			productName = PlatformRoutingAppleWatch;
 			productReference = 313EB75F21BB4CA300BEF926 /* PlatformRouting.framework */;
 			productType = "com.apple.product-type.framework";
@@ -830,6 +848,8 @@
 				313EBC3521BB7BA900BEF926 /* PBXTargetDependency */,
 			);
 			name = PlatformRoutingAppleTV;
+			packageProductDependencies = (
+			);
 			productName = PlatformRoutingAppleTV;
 			productReference = 313EBBE521BB7B7D00BEF926 /* PlatformRouting.framework */;
 			productType = "com.apple.product-type.framework";
@@ -848,6 +868,8 @@
 				313EBBF021BB7B7E00BEF926 /* PBXTargetDependency */,
 			);
 			name = PlatformRoutingAppleTVTests;
+			packageProductDependencies = (
+			);
 			productName = PlatformRoutingAppleTVTests;
 			productReference = 313EBBED21BB7B7D00BEF926 /* PlatformRoutingAppleTVTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -872,6 +894,8 @@
 				311D6F742176EF8600655040 /* PBXTargetDependency */,
 			);
 			name = PlatformRouting;
+			packageProductDependencies = (
+			);
 			productName = PlatformRouting;
 			productReference = 31CEE9B52170FA2700DC61DA /* PlatformRouting.framework */;
 			productType = "com.apple.product-type.framework";
@@ -892,6 +916,8 @@
 				31CEE9C12170FA2700DC61DA /* PBXTargetDependency */,
 			);
 			name = PlatformRoutingTests;
+			packageProductDependencies = (
+			);
 			productName = PlatformRoutingTests;
 			productReference = 31CEE9BE2170FA2700DC61DA /* PlatformRoutingTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -932,7 +958,7 @@
 				Base,
 			);
 			mainGroup = 31CEE9AB2170FA2700DC61DA;
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 31CEE9B62170FA2700DC61DA /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -1124,22 +1150,29 @@
 /* Begin PBXResourcesBuildPhase section */
 		313EB75D21BB4CA300BEF926 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBBE321BB7B7D00BEF926 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31308B6524FAEDCC003B5B9A /* routing_shared.json in Resources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBBEB21BB7B7D00BEF926 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CEE9B32170FA2700DC61DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				314C35B024C7C1A000695F7E /* Embed.storyboard in Resources */,
 				311BAFEB255083C1004331D8 /* Mail.xib in Resources */,
@@ -1148,77 +1181,81 @@
 				314C35AF24C7C1A000695F7E /* Drawer.storyboard in Resources */,
 				311BB01F2550845A004331D8 /* Share.xib in Resources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CEE9BC2170FA2700DC61DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		0AAF26DCE230F7273CCC8A8A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-PlatformRouting-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		C850F16E67CF33B541CC64E5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-PlatformRoutingTests-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		F1A644C23DA0EB7D8A6B84BD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformRoutingTests/Pods-iOS-PlatformRoutingTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformRoutingTests/Pods-iOS-PlatformRoutingTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformRoutingTests/Pods-iOS-PlatformRoutingTests-frameworks.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-PlatformRoutingTests/Pods-iOS-PlatformRoutingTests-frameworks.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1226,15 +1263,18 @@
 /* Begin PBXSourcesBuildPhase section */
 		313EB75B21BB4CA300BEF926 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EB76821BB4CCB00BEF926 /* RoutingInterfaceController.swift in Sources */,
 				313EBE0021BC3D9000BEF926 /* RoutingExtensionDelegate.swift in Sources */,
 				314C35B724C7C29600695F7E /* DebugEnableAction.swift in Sources */,
 				313EB76721BB4CCB00BEF926 /* MappedAppleWatchRouter.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBBE121BB7B7D00BEF926 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				314B6E9123DD06B500139EB3 /* MappedUIKitAppRouter.swift in Sources */,
 				314B6E9323DD070600139EB3 /* RoutingMap+iOS.swift in Sources */,
@@ -1245,15 +1285,19 @@
 				314C35B824C7C29600695F7E /* DebugEnableAction.swift in Sources */,
 				314B6E9223DD06CB00139EB3 /* MappedUIKitRouter.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		313EBBE921BB7B7D00BEF926 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				313EBBF321BB7B7E00BEF926 /* PlatformRoutingAppleTVTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CEE9B12170FA2700DC61DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				314B627823DCCE8900139EB3 /* RoutingEmbeddingController.swift in Sources */,
 				314B627D23DCCE8900139EB3 /* TelAction.swift in Sources */,
@@ -1280,12 +1324,15 @@
 				314B627323DCCE8900139EB3 /* UINavigationViewController+Routing.swift in Sources */,
 				314B627B23DCCE8900139EB3 /* MailAction.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		31CEE9BA2170FA2700DC61DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				31CEE9C42170FA2700DC61DA /* PlatformRoutingTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -1353,7 +1400,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		313EB76521BB4CA300BEF926 /* Debug configuration for PBXNativeTarget "PlatformRoutingAppleWatch" */ = {
+		313EB76521BB4CA300BEF926 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -1381,7 +1428,7 @@
 			};
 			name = Debug;
 		};
-		313EB76621BB4CA300BEF926 /* Release configuration for PBXNativeTarget "PlatformRoutingAppleWatch" */ = {
+		313EB76621BB4CA300BEF926 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
@@ -1409,7 +1456,7 @@
 			};
 			name = Release;
 		};
-		313EBBF621BB7B7E00BEF926 /* Debug configuration for PBXNativeTarget "PlatformRoutingAppleTV" */ = {
+		313EBBF621BB7B7E00BEF926 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
@@ -1436,7 +1483,7 @@
 			};
 			name = Debug;
 		};
-		313EBBF721BB7B7E00BEF926 /* Release configuration for PBXNativeTarget "PlatformRoutingAppleTV" */ = {
+		313EBBF721BB7B7E00BEF926 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
@@ -1463,7 +1510,7 @@
 			};
 			name = Release;
 		};
-		313EBBF821BB7B7E00BEF926 /* Debug configuration for PBXNativeTarget "PlatformRoutingAppleTVTests" */ = {
+		313EBBF821BB7B7E00BEF926 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1482,7 +1529,7 @@
 			};
 			name = Debug;
 		};
-		313EBBF921BB7B7E00BEF926 /* Release configuration for PBXNativeTarget "PlatformRoutingAppleTVTests" */ = {
+		313EBBF921BB7B7E00BEF926 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1501,7 +1548,7 @@
 			};
 			name = Release;
 		};
-		31CEE9C72170FA2700DC61DA /* Debug configuration for PBXProject "PlatformRouting" */ = {
+		31CEE9C72170FA2700DC61DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1585,7 +1632,7 @@
 			};
 			name = Debug;
 		};
-		31CEE9C82170FA2700DC61DA /* Release configuration for PBXProject "PlatformRouting" */ = {
+		31CEE9C82170FA2700DC61DA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1663,7 +1710,7 @@
 			};
 			name = Release;
 		};
-		31CEE9CA2170FA2700DC61DA /* Debug configuration for PBXNativeTarget "PlatformRouting" */ = {
+		31CEE9CA2170FA2700DC61DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 306E17287D7FE48D8EEA3648 /* Pods-iOS-PlatformRouting.debug.xcconfig */;
 			buildSettings = {
@@ -1695,7 +1742,7 @@
 			};
 			name = Debug;
 		};
-		31CEE9CB2170FA2700DC61DA /* Release configuration for PBXNativeTarget "PlatformRouting" */ = {
+		31CEE9CB2170FA2700DC61DA /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 86201953C1DEEFBB5C8207DA /* Pods-iOS-PlatformRouting.release.xcconfig */;
 			buildSettings = {
@@ -1726,7 +1773,7 @@
 			};
 			name = Release;
 		};
-		31CEE9CD2170FA2700DC61DA /* Debug configuration for PBXNativeTarget "PlatformRoutingTests" */ = {
+		31CEE9CD2170FA2700DC61DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C92D500101D7BB756DE1D820 /* Pods-iOS-PlatformRoutingTests.debug.xcconfig */;
 			buildSettings = {
@@ -1745,7 +1792,7 @@
 			};
 			name = Debug;
 		};
-		31CEE9CE2170FA2700DC61DA /* Release configuration for PBXNativeTarget "PlatformRoutingTests" */ = {
+		31CEE9CE2170FA2700DC61DA /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F0F3C6868E6D2A68FE400D98 /* Pods-iOS-PlatformRoutingTests.release.xcconfig */;
 			buildSettings = {
@@ -1770,49 +1817,55 @@
 		313EB76421BB4CA300BEF926 /* Build configuration list for PBXNativeTarget "PlatformRoutingAppleWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313EB76521BB4CA300BEF926 /* Debug configuration for PBXNativeTarget "PlatformRoutingAppleWatch" */,
-				313EB76621BB4CA300BEF926 /* Release configuration for PBXNativeTarget "PlatformRoutingAppleWatch" */,
+				313EB76521BB4CA300BEF926 /* Debug */,
+				313EB76621BB4CA300BEF926 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		313EBC1421BB7B7E00BEF926 /* Build configuration list for PBXNativeTarget "PlatformRoutingAppleTV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313EBBF621BB7B7E00BEF926 /* Debug configuration for PBXNativeTarget "PlatformRoutingAppleTV" */,
-				313EBBF721BB7B7E00BEF926 /* Release configuration for PBXNativeTarget "PlatformRoutingAppleTV" */,
+				313EBBF621BB7B7E00BEF926 /* Debug */,
+				313EBBF721BB7B7E00BEF926 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		313EBC1521BB7B7E00BEF926 /* Build configuration list for PBXNativeTarget "PlatformRoutingAppleTVTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				313EBBF821BB7B7E00BEF926 /* Debug configuration for PBXNativeTarget "PlatformRoutingAppleTVTests" */,
-				313EBBF921BB7B7E00BEF926 /* Release configuration for PBXNativeTarget "PlatformRoutingAppleTVTests" */,
+				313EBBF821BB7B7E00BEF926 /* Debug */,
+				313EBBF921BB7B7E00BEF926 /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31CEE9AF2170FA2700DC61DA /* Build configuration list for PBXProject "PlatformRouting" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31CEE9C72170FA2700DC61DA /* Debug configuration for PBXProject "PlatformRouting" */,
-				31CEE9C82170FA2700DC61DA /* Release configuration for PBXProject "PlatformRouting" */,
+				31CEE9C72170FA2700DC61DA /* Debug */,
+				31CEE9C82170FA2700DC61DA /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31CEE9C92170FA2700DC61DA /* Build configuration list for PBXNativeTarget "PlatformRouting" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31CEE9CA2170FA2700DC61DA /* Debug configuration for PBXNativeTarget "PlatformRouting" */,
-				31CEE9CB2170FA2700DC61DA /* Release configuration for PBXNativeTarget "PlatformRouting" */,
+				31CEE9CA2170FA2700DC61DA /* Debug */,
+				31CEE9CB2170FA2700DC61DA /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		31CEE9CC2170FA2700DC61DA /* Build configuration list for PBXNativeTarget "PlatformRoutingTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31CEE9CD2170FA2700DC61DA /* Debug configuration for PBXNativeTarget "PlatformRoutingTests" */,
-				31CEE9CE2170FA2700DC61DA /* Release configuration for PBXNativeTarget "PlatformRoutingTests" */,
+				31CEE9CD2170FA2700DC61DA /* Debug */,
+				31CEE9CE2170FA2700DC61DA /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

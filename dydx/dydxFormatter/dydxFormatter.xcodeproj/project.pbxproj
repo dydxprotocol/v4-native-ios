@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -142,18 +142,22 @@
 /* Begin PBXFrameworksBuildPhase section */
 		02841E2629AD6E5500C0E7CC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				0262F22929DB430A009889E2 /* ParticlesKit.framework in Frameworks */,
 				02841F6529AD6F1100C0E7CC /* Utilities.framework in Frameworks */,
 				E16B15943DC7937C8F9D87D6 /* Pods_iOS_dydxFormatter.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02841E3029AD6E5500C0E7CC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02841E3429AD6E5500C0E7CC /* dydxFormatter.framework in Frameworks */,
 				D50ABD228F90F45E822E160E /* Pods_iOS_dydxFormatterTests.framework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -269,9 +273,11 @@
 /* Begin PBXHeadersBuildPhase section */
 		02841E2429AD6E5500C0E7CC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02841E3A29AD6E5500C0E7CC /* dydxFormatter.h in Headers */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -293,6 +299,8 @@
 				02841F6429AD6F0200C0E7CC /* PBXTargetDependency */,
 			);
 			name = dydxFormatter;
+			packageProductDependencies = (
+			);
 			productName = dydxFormatter;
 			productReference = 02841E2929AD6E5500C0E7CC /* dydxFormatter.framework */;
 			productType = "com.apple.product-type.framework";
@@ -313,6 +321,8 @@
 				02841E3629AD6E5500C0E7CC /* PBXTargetDependency */,
 			);
 			name = dydxFormatterTests;
+			packageProductDependencies = (
+			);
 			productName = dydxFormatterTests;
 			productReference = 02841E3329AD6E5500C0E7CC /* dydxFormatterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -343,7 +353,7 @@
 				Base,
 			);
 			mainGroup = 02841E1F29AD6E5500C0E7CC;
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 02841E2A29AD6E5500C0E7CC /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -440,79 +450,84 @@
 /* Begin PBXResourcesBuildPhase section */
 		02841E2729AD6E5500C0E7CC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02841E3129AD6E5500C0E7CC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		4BD392CA39EB8D4A073F8DDC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxFormatterTests-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		D91FF013BC023ABCFA407980 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxFormatterTests/Pods-iOS-dydxFormatterTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxFormatterTests/Pods-iOS-dydxFormatterTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxFormatterTests/Pods-iOS-dydxFormatterTests-frameworks.sh\"",
-				"",
+			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxFormatterTests/Pods-iOS-dydxFormatterTests-frameworks.sh\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 		FE09F3C882C187B4AD3CD3DB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-iOS-dydxFormatter-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = (
-				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
-				"if [ $? != 0 ] ; then",
-				"    # print error to STDERR",
-				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
-				"    exit 1",
-				"fi",
-				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
-				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
-				"",
-			);
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -520,6 +535,7 @@
 /* Begin PBXSourcesBuildPhase section */
 		02841E2529AD6E5500C0E7CC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02841E2E29AD6E5500C0E7CC /* dydxFormatter.docc in Sources */,
 				0262F16629DB3DCF009889E2 /* dydxFeatureFlag.swift in Sources */,
@@ -529,12 +545,15 @@
 				0262F17929DB4163009889E2 /* dydxClientSourceInjection.swift in Sources */,
 				27DBF3CB2C4AAC8A009EB2D6 /* dydxNumberInputFormatter.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02841E2F29AD6E5500C0E7CC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				02841E3929AD6E5500C0E7CC /* dydxFormatterTests.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -557,7 +576,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		02841E3B29AD6E5500C0E7CC /* Debug configuration for PBXProject "dydxFormatter" */ = {
+		02841E3B29AD6E5500C0E7CC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -638,7 +657,7 @@
 			};
 			name = Debug;
 		};
-		02841E3C29AD6E5500C0E7CC /* Release configuration for PBXProject "dydxFormatter" */ = {
+		02841E3C29AD6E5500C0E7CC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -713,7 +732,7 @@
 			};
 			name = Release;
 		};
-		02841E3E29AD6E5500C0E7CC /* Debug configuration for PBXNativeTarget "dydxFormatter" */ = {
+		02841E3E29AD6E5500C0E7CC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5172233B016C14B302F6B1C0 /* Pods-iOS-dydxFormatter.debug.xcconfig */;
 			buildSettings = {
@@ -743,7 +762,7 @@
 			};
 			name = Debug;
 		};
-		02841E3F29AD6E5500C0E7CC /* Release configuration for PBXNativeTarget "dydxFormatter" */ = {
+		02841E3F29AD6E5500C0E7CC /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CB164F70916C1A8A28D6A263 /* Pods-iOS-dydxFormatter.release.xcconfig */;
 			buildSettings = {
@@ -773,7 +792,7 @@
 			};
 			name = Release;
 		};
-		02841E4129AD6E5500C0E7CC /* Debug configuration for PBXNativeTarget "dydxFormatterTests" */ = {
+		02841E4129AD6E5500C0E7CC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 177FCA2765FA7FAE4B4AF56F /* Pods-iOS-dydxFormatterTests.debug.xcconfig */;
 			buildSettings = {
@@ -792,7 +811,7 @@
 			};
 			name = Debug;
 		};
-		02841E4229AD6E5500C0E7CC /* Release configuration for PBXNativeTarget "dydxFormatterTests" */ = {
+		02841E4229AD6E5500C0E7CC /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46DBD879AB8325C51F5F9732 /* Pods-iOS-dydxFormatterTests.release.xcconfig */;
 			buildSettings = {
@@ -817,25 +836,28 @@
 		02841E2329AD6E5500C0E7CC /* Build configuration list for PBXProject "dydxFormatter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02841E3B29AD6E5500C0E7CC /* Debug configuration for PBXProject "dydxFormatter" */,
-				02841E3C29AD6E5500C0E7CC /* Release configuration for PBXProject "dydxFormatter" */,
+				02841E3B29AD6E5500C0E7CC /* Debug */,
+				02841E3C29AD6E5500C0E7CC /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02841E3D29AD6E5500C0E7CC /* Build configuration list for PBXNativeTarget "dydxFormatter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02841E3E29AD6E5500C0E7CC /* Debug configuration for PBXNativeTarget "dydxFormatter" */,
-				02841E3F29AD6E5500C0E7CC /* Release configuration for PBXNativeTarget "dydxFormatter" */,
+				02841E3E29AD6E5500C0E7CC /* Debug */,
+				02841E3F29AD6E5500C0E7CC /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		02841E4029AD6E5500C0E7CC /* Build configuration list for PBXNativeTarget "dydxFormatterTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02841E4129AD6E5500C0E7CC /* Debug configuration for PBXNativeTarget "dydxFormatterTests" */,
-				02841E4229AD6E5500C0E7CC /* Release configuration for PBXNativeTarget "dydxFormatterTests" */,
+				02841E4129AD6E5500C0E7CC /* Debug */,
+				02841E4229AD6E5500C0E7CC /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
