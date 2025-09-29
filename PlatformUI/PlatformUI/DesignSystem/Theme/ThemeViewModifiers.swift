@@ -633,6 +633,7 @@ public extension View {
                                         PlatformView.hideKeyboard()
                                     }
                 .createView(parentStyle: parentStyle)
+                .frame(minWidth: 80)
         )
         return modifier(KeyboardAccessoryModifier(keyboardToolbarContent: keyboardToolbarContent, background: background))
     }

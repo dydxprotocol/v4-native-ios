@@ -11,6 +11,7 @@ import PlatformParticles
 import RoutingKit
 import ParticlesKit
 import PlatformUI
+import dydxFormatter
 
 public class dydxFiatDepositViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -34,6 +35,9 @@ private protocol dydxFiatDepositViewPresenterProtocol: HostedViewPresenterProtoc
 }
 
 private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositViewModel>, dydxFiatDepositViewPresenterProtocol {
+    private let feePercent = dydxFiatDepositParam.moonpay_fee_percent.value
+    private let minAmount = dydxFiatDepositParam.moonpay_min_deposit.value
+
     override init() {
         super.init()
 
@@ -46,5 +50,18 @@ private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositV
         viewModel?.providerName = "MoonPay"
         viewModel?.providerIcon = "logo_moonpay"
         viewModel?.providerSubtitle = DataLocalizer.localize(path: "APP.DEPOSIT_WITH_FIAT.MOONPAY_SUPPORT")
+        viewModel?.fee = dydxFormatter.shared.percent(number: feePercent / 100.0, digits: 2)
+        let minDollar = dydxFormatter.shared.dollar(number: minAmount, digits: 2)
+        viewModel?.amountSubtitle = DataLocalizer.localize(path: "APP.DEPOSIT_WITH_FIAT.MINIMUM_DEPOSIT",
+                                                           params: ["MIN": minDollar ?? "-"])
+        viewModel?.amountTextInput.onEdited = { [weak self] amount in
+            let amountValue: Double
+            if let amount {
+                amountValue = Double(amount) ?? 0
+            } else {
+                amountValue = 0
+            }
+            self?.viewModel?.ctaEnabled = amountValue >= self?.minAmount ?? 0
+        }
     }
 }

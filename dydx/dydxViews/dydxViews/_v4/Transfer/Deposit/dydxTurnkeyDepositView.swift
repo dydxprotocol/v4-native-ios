@@ -133,7 +133,7 @@ public class dydxTurnkeyDepositViewModel: PlatformViewModel {
                 .themeColor(foreground: .textTertiary)
                 .themeFont(fontSize: .smaller)
                 .padding(.horizontal, 8)
-                .themeColor(background: .layer1)
+                .themeColor(background: .layer2)
         }
     }
 }

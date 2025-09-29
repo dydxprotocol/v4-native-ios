@@ -13,13 +13,20 @@ import Utilities
 public class dydxFiatDepositViewModel: PlatformViewModel {
     @Published public var cancelAction: (() -> Void)?
     @Published public var ctaAction: (() -> Void)?
-    @Published public var ctaEnabled: Bool = true
+    @Published public var amountAction: ((String) -> Void)?
+    @Published public var ctaEnabled: Bool = false
     @Published public var providerName: String?
     @Published public var providerIcon: String?
     @Published public var providerSubtitle: String?
     @Published public var fee: String?
-    @Published public var maxAmount: String?
-    
+    @Published public var amountSubtitle: String?
+    @Published public var amountTextInput = PlatformTextInputViewModel(
+        placeHolder: "0.00",
+        inputType: .decimalDigits,
+        focusedOnAppear: true,
+        dynamicWidth: true
+    )
+
     public init() { }
 
     public static var previewValue: dydxFiatDepositViewModel {
@@ -27,13 +34,15 @@ public class dydxFiatDepositViewModel: PlatformViewModel {
         vm.providerName = "Test Provider"
         vm.providerSubtitle = "Test Subtitle"
         vm.fee = "5%"
-        vm.maxAmount = "$100 Max"
+        vm.amountSubtitle = "$100 Max"
         return vm
     }
 
     public override func createView(parentStyle: ThemeStyle = ThemeStyle.defaultStyle, styleKey: String? = nil) -> PlatformView {
         PlatformView(viewModel: self, parentStyle: parentStyle, styleKey: styleKey) { [weak self] style in
             guard let self = self else { return AnyView(PlatformView.nilView) }
+
+            let bottomPadding = max((self.safeAreaInsets?.bottom ?? 0), 16)
 
             let view = VStack(alignment: .leading, spacing: 24) {
                 ZStack {
@@ -53,22 +62,36 @@ public class dydxFiatDepositViewModel: PlatformViewModel {
                 }
                 .padding(.top, 24)
 
-                // ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 16) {
+                    Spacer()
+                    ScrollView(showsIndicators: false) {
+                        HStack(spacing: 4) {
+                            Spacer()
 
+                            Text("$")
+                                .themeColor(foreground: .textPrimary)
+                                .themeFont(fontType: .plus, fontSize: .custom(size: 42))
+                            self.amountTextInput.createView(parentStyle: style
+                                .themeFont(fontType: .plus, fontSize: .custom(size: 42)))
+
+                            Spacer()
+                        }
+                    }
                     Spacer()
 
-                    self.createProviderInfo(style: style)
+                    VStack(alignment: .leading, spacing: 16) {
+                        self.createProviderInfo(style: style)
 
-                    self.createCtaButton(style: style)
+                        self.createCtaButton(style: style)
+                    }
+                    .keyboardObserving(offset: -bottomPadding + 16, mode: .yOffset)
                 }
             }
-                .padding(.horizontal, 24)
-                .padding(.bottom, max((self.safeAreaInsets?.bottom ?? 0), 16))
+                .padding(.horizontal)
+                .padding(.bottom, bottomPadding)
                 .themeColor(background: .layer2)
-                .ignoresSafeArea(edges: [.bottom])
 
-            return AnyView(view)
+            return AnyView(view.ignoresSafeArea(edges: [.bottom]))
         }
     }
 
@@ -91,13 +114,24 @@ public class dydxFiatDepositViewModel: PlatformViewModel {
             }
 
             Spacer()
+
+            VStack(alignment: .trailing, spacing: 2) {
+                Text(fee ?? "")
+                    .themeColor(foreground: .textPrimary)
+                    .themeFont(fontSize: .medium)
+
+                Text(amountSubtitle ?? "")
+                    .themeColor(foreground: .textTertiary)
+                    .themeFont(fontSize: .medium)
+            }
         }
     }
 
     private func createCtaButton(style: ThemeStyle) -> some View {
+        let color: ThemeColor.SemanticColor = self.ctaEnabled ? .colorWhite : .textTertiary
         let buttonContent = Text(DataLocalizer.localize(path: "APP.DEPOSIT_WITH_FIAT.CONTINUE_TO",
                                                         params: ["PROVIDER": self.providerName ?? "Provider"]))
-            .themeColor(foreground: .colorWhite)
+            .themeColor(foreground: color)
             .themeFont(fontType: .base, fontSize: .medium)
 
         return PlatformButtonViewModel(content: buttonContent.wrappedViewModel,

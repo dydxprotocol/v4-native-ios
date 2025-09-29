@@ -119,3 +119,12 @@ public enum dydxTurnkeyDepositParam: String {
         FeatureService.shared?.value(store: "v4_params", feature: rawValue, defaultValue: "-") ?? "-"
     }
 }
+
+public enum dydxFiatDepositParam: String {
+    case moonpay_fee_percent
+    case moonpay_min_deposit
+
+    public var value: Double {
+        FeatureService.shared?.value(store: "v4_params", feature: rawValue, defaultValue: 0.0) ?? 0
+    }
+}

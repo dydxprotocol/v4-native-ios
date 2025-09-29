@@ -23,8 +23,6 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
 
     @Published public var validationErrorViewModel: ValidationErrorViewModel? = ValidationErrorViewModel()
 
-    @Published public var onScrollViewCreated: ((UIScrollView) -> Void)?
-
     public init() { }
 
     public static var previewValue: dydxSimpleUITradeInputViewModel {
@@ -67,9 +65,6 @@ public class dydxSimpleUITradeInputViewModel: PlatformViewModel {
                             self.validationErrorViewModel?
                                 .createView(parentStyle: parentStyle)
                                 .animation(.default)
-                        }
-                        .introspectScrollView { [weak self] scrollView in
-                            self?.onScrollViewCreated?(scrollView)
                         }
                     }
 
