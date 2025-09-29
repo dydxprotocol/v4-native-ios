@@ -130,6 +130,7 @@
 		028D1E2A2E8B226E00D377D6 /* dydxFiatDepositViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028D1E292E8B226D00D377D6 /* dydxFiatDepositViewBuilder.swift */; };
 		028DB3402A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */; };
 		028FB3EC2AD642B30013136C /* dydxTokenConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FB3EB2AD642B30013136C /* dydxTokenConstants.swift */; };
+		0291DA7B2E8B4F5100227468 /* dydxFiatRamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0291DA7A2E8B4F3B00227468 /* dydxFiatRamp.framework */; };
 		0295392329FB256E009026E3 /* dydxThemeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295392229FB256E009026E3 /* dydxThemeViewBuilder.swift */; };
 		0295392729FB28B7009026E3 /* settings_theme.json in Resources */ = {isa = PBXBuildFile; fileRef = 0295392629FB28B7009026E3 /* settings_theme.json */; };
 		029CBE7128F5FDF600259C1D /* dydxMarketFundingChartViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CBE7028F5FDF600259C1D /* dydxMarketFundingChartViewPresenter.swift */; };
@@ -322,6 +323,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 024B79B928B7F53800F7C386;
 			remoteInfo = dydxViews;
+		};
+		0291DA762E8B4F3B00227468 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0291DA732E8B4F3B00227468 /* dydxFiatRamp.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02FC8C502E86FAF6003B5AE8;
+			remoteInfo = dydxFiatRamp;
+		};
+		0291DA792E8B4F3B00227468 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0291DA732E8B4F3B00227468 /* dydxFiatRamp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02FC8C512E86FAF6003B5AE8;
+			remoteInfo = dydxFiatRamp;
 		};
 		029E0E7729AD9B8700FE271C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -604,6 +619,8 @@
 		028D1E292E8B226D00D377D6 /* dydxFiatDepositViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxFiatDepositViewBuilder.swift; sourceTree = "<group>"; };
 		028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileHeaderViewPresenter.swift; sourceTree = "<group>"; };
 		028FB3EB2AD642B30013136C /* dydxTokenConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTokenConstants.swift; sourceTree = "<group>"; };
+		0291DA632E8B4F2500227468 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = ../dydxFiatRamp/dydxFiatRamp.xcodeproj; sourceTree = "<group>"; };
+		0291DA732E8B4F3B00227468 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxFiatRamp/dydxFiatRamp.xcodeproj"; sourceTree = "<absolute>"; };
 		0295392229FB256E009026E3 /* dydxThemeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxThemeViewBuilder.swift; sourceTree = "<group>"; };
 		0295392629FB28B7009026E3 /* settings_theme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = settings_theme.json; sourceTree = "<group>"; };
 		029CBE7028F5FDF600259C1D /* dydxMarketFundingChartViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketFundingChartViewPresenter.swift; sourceTree = "<group>"; };
@@ -737,6 +754,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0291DA7B2E8B4F5100227468 /* dydxFiatRamp.framework in Frameworks */,
 				2741B25C2C06A0E100693B17 /* dydxAnalytics.framework in Frameworks */,
 				02D1CEED29C8E016009ADF9A /* PlatformUIJedio.framework in Frameworks */,
 				025315BA29BFF18700D6CC9B /* CameraParticles.framework in Frameworks */,
@@ -937,7 +955,9 @@
 				F10F7B6C6C3DD5D631B7405B /* Pods */,
 				51E65BFD078A26FDF0980B06 /* Frameworks */,
 				02860A8229C15E490079E644 /* Recovered References */,
+				0291DA632E8B4F2500227468 /* dydxFiatRamp.xcodeproj */,
 				02A107D22E2862FD00E65EE2 /* dydxTurnkey.xcodeproj */,
+				0291DA732E8B4F3B00227468 /* dydxFiatRamp.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1465,6 +1485,14 @@
 				028D1E292E8B226D00D377D6 /* dydxFiatDepositViewBuilder.swift */,
 			);
 			path = Fiat;
+			sourceTree = "<group>";
+		};
+		0291DA742E8B4F3B00227468 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0291DA7A2E8B4F3B00227468 /* dydxFiatRamp.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		0295391529FB254C009026E3 /* Theme */ = {
@@ -2076,6 +2104,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0291DA772E8B4F3B00227468 /* PBXTargetDependency */,
 				02A107D62E2862FD00E65EE2 /* PBXTargetDependency */,
 				2741B25B2C06A0D800693B17 /* PBXTargetDependency */,
 				02D1CEEC29C8E00D009ADF9A /* PBXTargetDependency */,
@@ -2163,6 +2192,10 @@
 					ProjectRef = 029E118D29ADB77300FE271C /* dydxChart.xcodeproj */;
 				},
 				{
+					ProductGroup = 0291DA742E8B4F3B00227468 /* Products */;
+					ProjectRef = 0291DA732E8B4F3B00227468 /* dydxFiatRamp.xcodeproj */;
+				},
+				{
 					ProductGroup = 02E7DD9228CFB30000727949 /* Products */;
 					ProjectRef = 02E7DD9128CFB30000727949 /* dydxStateManager.xcodeproj */;
 				},
@@ -2232,6 +2265,13 @@
 			fileType = wrapper.cfbundle;
 			path = dydxViewsTests.xctest;
 			remoteRef = 0284202029AD725000C0E7CC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0291DA7A2E8B4F3B00227468 /* dydxFiatRamp.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxFiatRamp.framework;
+			remoteRef = 0291DA792E8B4F3B00227468 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		029E0E7829AD9B8700FE271C /* PlatformParticles.framework */ = {
@@ -2742,6 +2782,11 @@
 			isa = PBXTargetDependency;
 			name = dydxViews;
 			targetProxy = 0284202D29AD726B00C0E7CC /* PBXContainerItemProxy */;
+		};
+		0291DA772E8B4F3B00227468 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxFiatRamp;
+			targetProxy = 0291DA762E8B4F3B00227468 /* PBXContainerItemProxy */;
 		};
 		029E0E8629AD9B9200FE271C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

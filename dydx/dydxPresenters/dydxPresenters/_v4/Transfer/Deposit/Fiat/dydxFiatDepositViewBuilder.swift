@@ -12,6 +12,8 @@ import RoutingKit
 import ParticlesKit
 import PlatformUI
 import dydxFormatter
+import dydxStateManager
+import dydxFiatRamp
 
 public class dydxFiatDepositViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -38,6 +40,10 @@ private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositV
     private let feePercent = dydxFiatDepositParam.moonpay_fee_percent.value
     private let minAmount = dydxFiatDepositParam.moonpay_min_deposit.value
 
+    private var depositAmount: Double?
+
+    private let moonPayRamp = dydxMoonPayRamp(isSandbox: !AbacusStateManager.shared.isMainNet)
+
     override init() {
         super.init()
 
@@ -45,6 +51,9 @@ private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositV
 
         viewModel?.cancelAction = {
             Router.shared?.navigate(to: RoutingRequest(path: "/action/dismiss"), animated: true, completion: nil)
+        }
+        viewModel?.ctaAction = { [weak self] in
+            self?.showMoonPayUI()
         }
 
         viewModel?.providerName = "MoonPay"
@@ -61,7 +70,25 @@ private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositV
             } else {
                 amountValue = 0
             }
+            self?.depositAmount = amountValue
             self?.viewModel?.ctaEnabled = amountValue >= self?.minAmount ?? 0
         }
     }
+
+    private func showMoonPayUI() {
+        guard let depositAmount, depositAmount >= minAmount else {
+            return
+        }
+
+        AbacusStateManager.shared.state.currentWallet
+            .prefix(1)
+            .sink { [weak self] wallet in
+                guard let cosmosAddress = wallet?.cosmoAddress else {
+                    return
+                }
+
+                self?.moonPayRamp.show(targetAddress: cosmosAddress, usdAmount: depositAmount)
+            }
+            .store(in: &subscriptions)
+     }
 }

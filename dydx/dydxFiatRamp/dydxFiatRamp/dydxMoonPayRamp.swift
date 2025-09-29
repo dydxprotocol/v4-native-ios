@@ -10,15 +10,14 @@ import MoonPaySdk
 import Utilities
 import CryptoKit
 
-final public class dydxMoonPayRamp: SingletonProtocol {
-    public static var shared = dydxMoonPayRamp()
-
+final public class dydxMoonPayRamp {
     private var moonPaySdk: MoonPayiOSSdk?
     private let session = URLSession(configuration: .default)
 
-    private let isSandbox: Bool = false
+    private let isSandbox: Bool
 
-    public init () {
+    public init (isSandbox: Bool) {
+        self.isSandbox = isSandbox
     }
 
     public func show(targetAddress: String, usdAmount: Double? = nil) {
