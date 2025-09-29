@@ -333,6 +333,10 @@
                     "destination":"dydxPresenters.dydxTurnkeyQRCodeViewBuilder",
                     "presentation":"push"
                 },
+                "/transfer/deposit/fiat":{
+                    "destination":"dydxPresenters.dydxFiatDepositViewBuilder",
+                    "presentation":"push"
+                },
                 "/transfer/withdrawal":{
                     "destination":"dydxPresenters.dydxWithdrawalViewBuilder",
                     "presentation":"prompt"

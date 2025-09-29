@@ -49,7 +49,7 @@ class dydxTurnkeyDepositViewPresenter: HostedViewPresenter<dydxTurnkeyDepositVie
 
         if dydxBoolFeatureFlag.fiat_deposit.isEnabled {
             viewModel?.fiatAction = {
-
+                Router.shared?.navigate(to: RoutingRequest(path: "/transfer/deposit/fiat"), animated: true, completion: nil)
             }
         }
     }
