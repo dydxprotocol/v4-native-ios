@@ -42,7 +42,9 @@ private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositV
 
     private var depositAmount: Double?
 
-    private let moonPayRamp = dydxMoonPayRamp(isSandbox: !AbacusStateManager.shared.isMainNet)
+    private let moonPayRamp = dydxMoonPayRamp(isSandbox: !AbacusStateManager.shared.isMainNet,
+                                              moonPayPk: CredientialConfig.shared.credential(for: "moonpayPk") ?? "Invalid Key",
+                                              moonPaySk: CredientialConfig.shared.credential(for: "moonpaySk") )
 
     override init() {
         super.init()
@@ -83,12 +85,22 @@ private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositV
         AbacusStateManager.shared.state.currentWallet
             .prefix(1)
             .sink { [weak self] wallet in
-                guard let cosmosAddress = wallet?.cosmoAddress else {
+                guard let self, let cosmosAddress = wallet?.cosmoAddress else {
                     return
                 }
 
-                self?.moonPayRamp.show(targetAddress: cosmosAddress, usdAmount: depositAmount)
+                self.showMoonPayUI(targetAddress: cosmosAddress, usdAmount: depositAmount)
             }
             .store(in: &subscriptions)
-     }
+    }
+
+    private func showMoonPayUI(targetAddress: String, usdAmount: Double) {
+        moonPayRamp.show(targetAddress: targetAddress, usdAmount: usdAmount) { message, error in
+            if let message {
+                ErrorInfo.shared?.info(title: message, message: nil, type: .info, error: nil)
+            } else if let error {
+                ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: error.message, type: .error, error: nil)
+            }
+        }
+    }
 }

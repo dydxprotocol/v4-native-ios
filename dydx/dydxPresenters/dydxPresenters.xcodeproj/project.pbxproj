@@ -338,6 +338,13 @@
 			remoteGlobalIDString = 02FC8C512E86FAF6003B5AE8;
 			remoteInfo = dydxFiatRamp;
 		};
+		0291DC232E8B530C00227468 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0291DA632E8B4F2500227468 /* dydxFiatRamp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02FC8C512E86FAF6003B5AE8;
+			remoteInfo = dydxFiatRamp;
+		};
 		029E0E7729AD9B8700FE271C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 029E0E6D29AD9B8600FE271C /* PlatformParticles.xcodeproj */;
@@ -1495,6 +1502,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0291DC1C2E8B530C00227468 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0291DC242E8B530C00227468 /* dydxFiatRamp.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0295391529FB254C009026E3 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
@@ -2192,6 +2207,10 @@
 					ProjectRef = 029E118D29ADB77300FE271C /* dydxChart.xcodeproj */;
 				},
 				{
+					ProductGroup = 0291DC1C2E8B530C00227468 /* Products */;
+					ProjectRef = 0291DA632E8B4F2500227468 /* dydxFiatRamp.xcodeproj */;
+				},
+				{
 					ProductGroup = 0291DA742E8B4F3B00227468 /* Products */;
 					ProjectRef = 0291DA732E8B4F3B00227468 /* dydxFiatRamp.xcodeproj */;
 				},
@@ -2272,6 +2291,13 @@
 			fileType = wrapper.framework;
 			path = dydxFiatRamp.framework;
 			remoteRef = 0291DA792E8B4F3B00227468 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0291DC242E8B530C00227468 /* dydxFiatRamp.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxFiatRamp.framework;
+			remoteRef = 0291DC232E8B530C00227468 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		029E0E7829AD9B8700FE271C /* PlatformParticles.framework */ = {

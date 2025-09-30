@@ -7,20 +7,44 @@
 
 import Foundation
 import MoonPaySdk
-import Utilities
+internal import Utilities
 import CryptoKit
+
+public enum dydxMoonPayRampError: Error {
+    case invalidUrl
+    case noSecretkey
+    case unableToGetSignature
+
+    public var message: String {
+        switch self {
+        case .invalidUrl:
+            return "Invalid URL"
+        case .noSecretkey:
+            return "No secret key"
+        case .unableToGetSignature:
+            return "Unable to get signature"
+        }
+    }
+}
 
 final public class dydxMoonPayRamp {
     private var moonPaySdk: MoonPayiOSSdk?
     private let session = URLSession(configuration: .default)
 
     private let isSandbox: Bool
+    private let moonPayPk: String
+    private let moonPaySk: String?
 
-    public init (isSandbox: Bool) {
+    public init (isSandbox: Bool, moonPayPk: String, moonPaySk: String? = nil) {
         self.isSandbox = isSandbox
+        self.moonPayPk = moonPayPk
+        self.moonPaySk = moonPaySk
     }
 
-    public func show(targetAddress: String, usdAmount: Double? = nil) {
+    public func show(targetAddress: String,
+                     usdAmount: Double? = nil,
+                     statusChangeHandler: @escaping ((String?, dydxMoonPayRampError?) -> Void)
+    ) {
         // These run in your application and are all the of handlers available to you.
         let handlers = MoonPayHandlers(
             onAuthToken: { data in
@@ -48,10 +72,7 @@ final public class dydxMoonPayRamp {
             }
         )
 
-        let publicKey = isSandbox ?
-            "pk_test_2Cy2D3iPl0Y0DI8ru0yvtyeKC54R9GBV" :
-            "<to_do>"
-        let params = MoonPayBuyQueryParams(apiKey: publicKey)
+        let params = MoonPayBuyQueryParams(apiKey: moonPayPk)
         params.setBaseCurrencyCode(value: "USD")
         if let usdAmount {
             params.setBaseCurrencyAmount(value: KotlinDouble(value: usdAmount))
@@ -78,20 +99,37 @@ final public class dydxMoonPayRamp {
             let components = url.split(separator: "?")
             if components.count == 2 {
                 let queryString = "?" + components[1]
-                let signature = getSignature(encodedUrlData: queryString.data(using: .utf8)!)
-                moonPaySdk?.updateSignature(signature: signature)
+                if let queryPath = queryString.data(using: .utf8) {
+                    getSignature(encodedUrlData: queryPath) { [weak self] signature, error in
+                        if let signature {
+                            self?.moonPaySdk?.updateSignature(signature: signature)
+                            self?.moonPaySdk?.show(mode: MoonPayRenderingOptioniOS.WebViewOverlay())
+                        } else {
+                            statusChangeHandler(nil, error)
+                        }
+                    }
+                }
+            } else {
+                statusChangeHandler(nil, dydxMoonPayRampError.invalidUrl)
             }
+        } else {
+            statusChangeHandler(nil, dydxMoonPayRampError.unableToGetSignature)
         }
+    }
 
-        moonPaySdk?.show(mode: MoonPayRenderingOptioniOS.WebViewOverlay())
-     }
-
-    private func getSignature(encodedUrlData: Data) -> String {
-        let secretString = isSandbox ? "sk_test_XkFPvgZ57z7DEEMm4lnzRwfj8DsfMHl9" : "<to_do>"
-        let key = SymmetricKey(data: Data(secretString.utf8))
-        let signature = HMAC<SHA256>.authenticationCode(for: encodedUrlData, using: key)
-        let signatureHex = Data(signature).base64EncodedString()
-        return signatureHex
+    private func getSignature(encodedUrlData: Data, completion: @escaping ((String?, dydxMoonPayRampError?) -> Void)) {
+        if isSandbox {
+            if let moonPaySk {
+                 let key = SymmetricKey(data: Data(moonPaySk.utf8))
+                let signature = HMAC<SHA256>.authenticationCode(for: encodedUrlData, using: key)
+                let signatureHex = Data(signature).base64EncodedString()
+                completion(signatureHex, nil)
+            } else {
+                completion(nil, dydxMoonPayRampError.noSecretkey)
+            }
+        } else {
+            // completion(nil, Error("Not in sandbox"))
+        }
     }
 
 //    private func upload(_ data: Data, to url: URL) async throws -> URLResponse {
