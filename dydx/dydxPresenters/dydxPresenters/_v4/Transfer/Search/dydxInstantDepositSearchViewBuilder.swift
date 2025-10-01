@@ -91,7 +91,7 @@ private class dydxInstantDepositSearchViewPresenter: HostedViewPresenter<dydxIns
                     if dydxBoolFeatureFlag.fiat_deposit.isEnabled {
                         self.viewModel?.fiatItem = dydxTransferFiatItemViewModel()
                         self.viewModel?.fiatItem?.selectAction = {
-
+                            Router.shared?.navigate(to: RoutingRequest(path: "/transfer/deposit/fiat"), animated: true, completion: nil)
                         }
                     } else {
                         self.viewModel?.fiatItem = nil

@@ -602,8 +602,6 @@
 				313EBAF521BB796900BEF926 /* PBXTargetDependency */,
 			);
 			name = JedioKitAppleWatch;
-			packageProductDependencies = (
-			);
 			productName = JedioKitAppleWatch;
 			productReference = 313EBA9821BB791800BEF926 /* JedioKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -625,8 +623,6 @@
 				313EBCA621BB7CD000BEF926 /* PBXTargetDependency */,
 			);
 			name = JedioKitAppleTV;
-			packageProductDependencies = (
-			);
 			productName = JedioKitAppleTV;
 			productReference = 313EBAA521BB792600BEF926 /* JedioKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -645,8 +641,6 @@
 				313EBAB021BB792600BEF926 /* PBXTargetDependency */,
 			);
 			name = JedioKitAppleTVTests;
-			packageProductDependencies = (
-			);
 			productName = JedioKitAppleTVTests;
 			productReference = 313EBAAD21BB792600BEF926 /* JedioKitAppleTVTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -669,8 +663,6 @@
 				31ACB8A021B0F44700391ADF /* PBXTargetDependency */,
 			);
 			name = JedioKit;
-			packageProductDependencies = (
-			);
 			productName = JedioKit;
 			productReference = 31ACB84B21B0F3F500391ADF /* JedioKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -691,8 +683,6 @@
 				31ACB85721B0F3F500391ADF /* PBXTargetDependency */,
 			);
 			name = JedioKitTests;
-			packageProductDependencies = (
-			);
 			productName = JedioKitTests;
 			productReference = 31ACB85421B0F3F500391ADF /* JedioKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -916,17 +906,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-JedioKitTests/Pods-iOS-JedioKitTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-JedioKitTests/Pods-iOS-JedioKitTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-JedioKitTests/Pods-iOS-JedioKitTests-frameworks.sh\"\n\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-JedioKitTests/Pods-iOS-JedioKitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6DFDA40381ECAD22EC0726BF /* [CP] Check Pods Manifest.lock */ = {
@@ -948,7 +934,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E19BA38655AAAC278B197123 /* [CP] Check Pods Manifest.lock */ = {
@@ -970,7 +956,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1345,7 +1331,10 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -1422,7 +1411,10 @@
 				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

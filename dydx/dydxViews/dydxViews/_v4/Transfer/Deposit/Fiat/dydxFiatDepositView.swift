@@ -65,7 +65,7 @@ public class dydxFiatDepositViewModel: PlatformViewModel {
                 VStack(alignment: .leading, spacing: 16) {
                     Spacer()
                     ScrollView(showsIndicators: false) {
-                        HStack(spacing: 4) {
+                        HStack(spacing: -8) {
                             Spacer()
 
                             Text("$")

@@ -25,6 +25,8 @@
 		02A107AB2E2859E600E65EE2 /* dydxTurnkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A107AA2E2859B100E65EE2 /* dydxTurnkey.framework */; };
 		02A107AC2E2859E600E65EE2 /* dydxTurnkey.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02A107AA2E2859B100E65EE2 /* dydxTurnkey.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02A5BB9F2A04617800BEE77E /* dydxAbacusDataLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5BB9E2A04617800BEE77E /* dydxAbacusDataLocalizer.swift */; };
+		02C43AB62E8CACE500CACA4E /* dydxFiatRamp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 028D146F2E8782E600D377D6 /* dydxFiatRamp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		02C43AE92E8CADCE00CACA4E /* MoonPaySdk in Frameworks */ = {isa = PBXBuildFile; productRef = 02C43AE82E8CADCE00CACA4E /* MoonPaySdk */; };
 		02C7262B29D793C90098AFBC /* dydxCompositeTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C7262A29D793C90098AFBC /* dydxCompositeTracking.swift */; };
 		02DA0AFA2B57609100BFA975 /* dydxV4UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA0AF92B57609100BFA975 /* dydxV4UITests.swift */; };
 		02DA0AFC2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA0AFB2B57609100BFA975 /* dydxV4UITestsLaunchTests.swift */; };
@@ -812,6 +814,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				02C43AB62E8CACE500CACA4E /* dydxFiatRamp.framework in Embed Frameworks */,
 				02A107AC2E2859E600E65EE2 /* dydxTurnkey.framework in Embed Frameworks */,
 				027E1E1429C912AC0098666F /* PlatformUIJedio.framework in Embed Frameworks */,
 				02439D1229B03F7B00A083FE /* dydxCartera.framework in Embed Frameworks */,
@@ -939,6 +942,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C43AE92E8CADCE00CACA4E /* MoonPaySdk in Frameworks */,
 				2741B25E2C06A0F900693B17 /* dydxViews.framework in Frameworks */,
 				2741B25D2C06A0F600693B17 /* dydxAnalytics.framework in Frameworks */,
 				027E1E1329C912660098666F /* PlatformUIJedio.framework in Frameworks */,
@@ -1510,8 +1514,6 @@
 				02F511882E258D00002402A0 /* ../dydx/ios */,
 			);
 			name = dydxV4;
-			packageProductDependencies = (
-			);
 			productName = dydx;
 			productReference = 3112F45F216BBF8400708927 /* dydxV4.app */;
 			productType = "com.apple.product-type.application";
@@ -1533,8 +1535,6 @@
 				3112F477216BBF8600708927 /* PBXTargetDependency */,
 			);
 			name = dydxV4Tests;
-			packageProductDependencies = (
-			);
 			productName = dydxTests;
 			productReference = 3112F475216BBF8600708927 /* dydxV4Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1598,6 +1598,7 @@
 			packageReferences = (
 				02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */,
 				0207D5122DC428D9005773B5 /* XCRemoteSwiftPackageReference "privy-ios" */,
+				02C43AE72E8CADCE00CACA4E /* XCRemoteSwiftPackageReference "mobile-sdk-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3112F460216BBF8400708927 /* Products */;
@@ -2389,7 +2390,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources.sh\"\n\n\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		16DEFDB1896BDF443F34E3AC /* [CP] Embed Pods Frameworks */ = {
@@ -2410,7 +2411,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks.sh\"\n\n\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1BB4784D1077A2438C300ED1 /* [CP] Check Pods Manifest.lock */ = {
@@ -2432,7 +2433,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3165906D227F532B00BAF133 /* Run Script (Firebase) */ = {
@@ -2473,7 +2474,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources.sh\"\n\n\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4/Pods-iOS-dydxV4-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5BD099095C70B5B9617985A5 /* [CP] Embed Pods Frameworks */ = {
@@ -2494,7 +2495,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks.sh\"\n\n\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxV4Tests/Pods-iOS-dydxV4Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7BA92DF4D740E1A995F10DA9 /* [CP] Check Pods Manifest.lock */ = {
@@ -2516,7 +2517,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n\n\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3044,6 +3045,14 @@
 				minimumVersion = 1.9.0;
 			};
 		};
+		02C43AE72E8CADCE00CACA4E /* XCRemoteSwiftPackageReference "mobile-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/moonpay/mobile-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 		02DA0B042B57633E00BFA975 /* XCRemoteSwiftPackageReference "percy-xcui-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/percy/percy-xcui-swift";
@@ -3059,6 +3068,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0207D5122DC428D9005773B5 /* XCRemoteSwiftPackageReference "privy-ios" */;
 			productName = Privy;
+		};
+		02C43AE82E8CADCE00CACA4E /* MoonPaySdk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02C43AE72E8CADCE00CACA4E /* XCRemoteSwiftPackageReference "mobile-sdk-ios" */;
+			productName = MoonPaySdk;
 		};
 		02DA0B052B57633E00BFA975 /* PercyXcui */ = {
 			isa = XCSwiftPackageProductDependency;

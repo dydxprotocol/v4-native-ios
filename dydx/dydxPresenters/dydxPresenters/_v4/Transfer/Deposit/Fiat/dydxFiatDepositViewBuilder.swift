@@ -14,6 +14,7 @@ import PlatformUI
 import dydxFormatter
 import dydxStateManager
 import dydxFiatRamp
+import Abacus
 
 public class dydxFiatDepositViewBuilder: NSObject, ObjectBuilderProtocol {
     public func build<T>() -> T? {
@@ -44,7 +45,8 @@ private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositV
 
     private let moonPayRamp = dydxMoonPayRamp(isSandbox: !AbacusStateManager.shared.isMainNet,
                                               moonPayPk: CredientialConfig.shared.credential(for: "moonpayPk") ?? "Invalid Key",
-                                              moonPaySk: CredientialConfig.shared.credential(for: "moonpaySk") )
+                                              moonPaySk: CredientialConfig.shared.credential(for: "moonpaySk"),
+                                              moonPaySignUrl: CredientialConfig.shared.credential(for: "moonpaySignUrl"))
 
     override init() {
         super.init()
@@ -85,21 +87,25 @@ private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositV
         AbacusStateManager.shared.state.currentWallet
             .prefix(1)
             .sink { [weak self] wallet in
-                guard let self, let cosmosAddress = wallet?.cosmoAddress else {
+                guard let self, let cosmosAddress = wallet?.cosmoAddress,
+                let nobleAddress = AbacusStringUtils().toNobleAddress(dydxAddress: cosmosAddress) else {
                     return
                 }
 
-                self.showMoonPayUI(targetAddress: cosmosAddress, usdAmount: depositAmount)
+                self.showMoonPayUI(targetAddress: nobleAddress, usdAmount: depositAmount)
             }
             .store(in: &subscriptions)
     }
 
     private func showMoonPayUI(targetAddress: String, usdAmount: Double) {
-        moonPayRamp.show(targetAddress: targetAddress, usdAmount: usdAmount) { message, error in
-            if let message {
-                ErrorInfo.shared?.info(title: message, message: nil, type: .info, error: nil)
-            } else if let error {
-                ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: error.message, type: .error, error: nil)
+        // Route to root because MoonPay SDK only works when there is no presented VC
+        navigate(to: RoutingRequest(path: "/"), animated: true) { [weak self] _, _ in
+            self?.moonPayRamp.show(targetAddress: targetAddress, usdAmount: usdAmount) { message, error in
+                if let message {
+                    ErrorInfo.shared?.info(title: message, message: nil, type: .info, error: nil)
+                } else if let error {
+                    ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: error.message, type: .error, error: nil)
+                }
             }
         }
     }

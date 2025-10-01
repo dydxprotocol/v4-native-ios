@@ -13,7 +13,9 @@ import CryptoKit
 public enum dydxMoonPayRampError: Error {
     case invalidUrl
     case noSecretkey
+    case noSignUrl
     case unableToGetSignature
+    case custom(String)
 
     public var message: String {
         switch self {
@@ -21,24 +23,29 @@ public enum dydxMoonPayRampError: Error {
             return "Invalid URL"
         case .noSecretkey:
             return "No secret key"
+        case .noSignUrl:
+            return "No sign url"
         case .unableToGetSignature:
             return "Unable to get signature"
+        case .custom(let msg):
+            return msg
         }
     }
 }
 
 final public class dydxMoonPayRamp {
     private var moonPaySdk: MoonPayiOSSdk?
-    private let session = URLSession(configuration: .default)
 
     private let isSandbox: Bool
     private let moonPayPk: String
     private let moonPaySk: String?
+    private let moonPaySignUrl: String?
 
-    public init (isSandbox: Bool, moonPayPk: String, moonPaySk: String? = nil) {
+    public init (isSandbox: Bool, moonPayPk: String, moonPaySk: String? = nil, moonPaySignUrl: String? = nil) {
         self.isSandbox = isSandbox
         self.moonPayPk = moonPayPk
         self.moonPaySk = moonPaySk
+        self.moonPaySignUrl = moonPaySignUrl
     }
 
     public func show(targetAddress: String,
@@ -105,22 +112,22 @@ final public class dydxMoonPayRamp {
                             self?.moonPaySdk?.updateSignature(signature: signature)
                             self?.moonPaySdk?.show(mode: MoonPayRenderingOptioniOS.WebViewOverlay())
                         } else {
-                            statusChangeHandler(nil, error)
+                            ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: error?.message, type: .error, error: nil)
                         }
                     }
                 }
             } else {
-                statusChangeHandler(nil, dydxMoonPayRampError.invalidUrl)
+                ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: dydxMoonPayRampError.invalidUrl.message, type: .error, error: nil)
             }
         } else {
-            statusChangeHandler(nil, dydxMoonPayRampError.unableToGetSignature)
+            ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: dydxMoonPayRampError.unableToGetSignature.message, type: .error, error: nil)
         }
     }
 
     private func getSignature(encodedUrlData: Data, completion: @escaping ((String?, dydxMoonPayRampError?) -> Void)) {
         if isSandbox {
             if let moonPaySk {
-                 let key = SymmetricKey(data: Data(moonPaySk.utf8))
+                let key = SymmetricKey(data: Data(moonPaySk.utf8))
                 let signature = HMAC<SHA256>.authenticationCode(for: encodedUrlData, using: key)
                 let signatureHex = Data(signature).base64EncodedString()
                 completion(signatureHex, nil)
@@ -128,19 +135,54 @@ final public class dydxMoonPayRamp {
                 completion(nil, dydxMoonPayRampError.noSecretkey)
             }
         } else {
-            // completion(nil, Error("Not in sandbox"))
+            if let moonPaySignUrl {
+                getRemoteSignature(encodedUrlData: encodedUrlData, url: moonPaySignUrl, completion: completion)
+            } else {
+
+            }
         }
     }
 
-//    private func upload(_ data: Data, to url: URL) async throws -> URLResponse {
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//
-//        let (responseData, response) = try await session.upload(
-//            for: request, from: data
-//        )
-//
-//        return response
-//    }
+    private func getRemoteSignature(encodedUrlData: Data, url: String, completion: @escaping ((String?, dydxMoonPayRampError?) -> Void)) {
+        let pathData = encodedUrlData.base64EncodedString()
+        let urlString = "\(url)?path=\(pathData)"
 
+        guard let url = URL(string: urlString) else {
+            completion(nil, dydxMoonPayRampError.invalidUrl)
+            return
+        }
+
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(nil, dydxMoonPayRampError.custom("Failed obtain signature: \(error)"))
+                }
+                return
+            }
+
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let signatureResponse = try decoder.decode(SignatureResponse.self, from: data)
+                    DispatchQueue.main.async {
+                        if let signature = signatureResponse.signature {
+                            completion(signature, nil)
+                        } else {
+                            completion(nil, dydxMoonPayRampError.custom("Unexpected response: \(String(decoding: data, as: UTF8.self))"))
+                        }
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(nil, dydxMoonPayRampError.custom("Failed to parse JSON: \(error)"))
+                    }
+                }
+            }
+        }
+
+        task.resume()
+    }
+}
+
+private struct SignatureResponse: Codable {
+    let signature: String?
 }
