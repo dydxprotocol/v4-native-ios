@@ -31,7 +31,7 @@
 
 /* Begin PBXFileReference section */
 		02FC8C512E86FAF6003B5AE8 /* dydxFiatRamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxFiatRamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		02FC8DBF2E86FC66003B5AE8 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = "/Users/ruihuang/v4-native-ios/Utilities/Utilities.xcodeproj"; sourceTree = "<absolute>"; };
+		02FC8DBF2E86FC66003B5AE8 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
 		4CA29953FB7AE8EACD27E9B0 /* Pods_iOS_dydxFiatRamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxFiatRamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7367A60FC8D08F9C019B6D50 /* Pods-iOS-dydxFiatRamp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxFiatRamp.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxFiatRamp/Pods-iOS-dydxFiatRamp.debug.xcconfig"; sourceTree = "<group>"; };
 		7DF385AD513128C3D00DB198 /* Pods-iOS-dydxFiatRamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxFiatRamp.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxFiatRamp/Pods-iOS-dydxFiatRamp.release.xcconfig"; sourceTree = "<group>"; };
