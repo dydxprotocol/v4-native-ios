@@ -100,13 +100,7 @@ private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositV
     private func showMoonPayUI(targetAddress: String, usdAmount: Double) {
         // Route to root because MoonPay SDK only works when there is no presented VC
         navigate(to: RoutingRequest(path: "/"), animated: true) { [weak self] _, _ in
-            self?.moonPayRamp.show(targetAddress: targetAddress, usdAmount: usdAmount) { message, error in
-                if let message {
-                    ErrorInfo.shared?.info(title: message, message: nil, type: .info, error: nil)
-                } else if let error {
-                    ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: error.message, type: .error, error: nil)
-                }
-            }
+            self?.moonPayRamp.show(targetAddress: targetAddress, usdAmount: usdAmount)
         }
     }
 }

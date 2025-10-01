@@ -10,30 +10,30 @@ import MoonPaySdk
 internal import Utilities
 import CryptoKit
 
-public enum dydxMoonPayRampError: Error {
-    case invalidUrl
-    case noSecretkey
-    case noSignUrl
-    case unableToGetSignature
-    case custom(String)
+final public class dydxMoonPayRamp {
+    enum dydxMoonPayRampError: Error {
+        case invalidUrl
+        case noSecretkey
+        case noSignUrl
+        case unableToGetSignature
+        case custom(String)
 
-    public var message: String {
-        switch self {
-        case .invalidUrl:
-            return "Invalid URL"
-        case .noSecretkey:
-            return "No secret key"
-        case .noSignUrl:
-            return "No sign url"
-        case .unableToGetSignature:
-            return "Unable to get signature"
-        case .custom(let msg):
-            return msg
+        var message: String {
+            switch self {
+            case .invalidUrl:
+                return "Invalid URL"
+            case .noSecretkey:
+                return "No secret key"
+            case .noSignUrl:
+                return "No sign url"
+            case .unableToGetSignature:
+                return "Unable to get signature"
+            case .custom(let msg):
+                return msg
+            }
         }
     }
-}
 
-final public class dydxMoonPayRamp {
     private var moonPaySdk: MoonPayiOSSdk?
 
     private let isSandbox: Bool
@@ -48,11 +48,7 @@ final public class dydxMoonPayRamp {
         self.moonPaySignUrl = moonPaySignUrl
     }
 
-    public func show(targetAddress: String,
-                     usdAmount: Double? = nil,
-                     statusChangeHandler: @escaping ((String?, dydxMoonPayRampError?) -> Void)
-    ) {
-        // These run in your application and are all the of handlers available to you.
+    public func show(targetAddress: String, usdAmount: Double? = nil) {
         let handlers = MoonPayHandlers(
             onAuthToken: { data in
                 print("onAuthToken called", data)
@@ -115,6 +111,8 @@ final public class dydxMoonPayRamp {
                             ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: error?.message, type: .error, error: nil)
                         }
                     }
+                } else {
+                    ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: dydxMoonPayRampError.invalidUrl.message, type: .error, error: nil)
                 }
             } else {
                 ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: dydxMoonPayRampError.invalidUrl.message, type: .error, error: nil)
@@ -138,7 +136,7 @@ final public class dydxMoonPayRamp {
             if let moonPaySignUrl {
                 getRemoteSignature(encodedUrlData: encodedUrlData, url: moonPaySignUrl, completion: completion)
             } else {
-
+                completion(nil, dydxMoonPayRampError.noSignUrl)
             }
         }
     }
@@ -176,6 +174,8 @@ final public class dydxMoonPayRamp {
                         completion(nil, dydxMoonPayRampError.custom("Failed to parse JSON: \(error)"))
                     }
                 }
+            } else {
+                completion(nil, dydxMoonPayRampError.unableToGetSignature)
             }
         }
 
