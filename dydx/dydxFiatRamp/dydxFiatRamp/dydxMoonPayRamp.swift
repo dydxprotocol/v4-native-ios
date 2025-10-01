@@ -7,7 +7,7 @@
 
 import Foundation
 import MoonPaySdk
-internal import Utilities
+import Utilities
 import CryptoKit
 
 final public class dydxMoonPayRamp {
