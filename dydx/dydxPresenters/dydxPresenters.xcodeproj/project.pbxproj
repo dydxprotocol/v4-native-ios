@@ -130,7 +130,6 @@
 		028D1E2A2E8B226E00D377D6 /* dydxFiatDepositViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028D1E292E8B226D00D377D6 /* dydxFiatDepositViewBuilder.swift */; };
 		028DB3402A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */; };
 		028FB3EC2AD642B30013136C /* dydxTokenConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FB3EB2AD642B30013136C /* dydxTokenConstants.swift */; };
-		0291DA7B2E8B4F5100227468 /* dydxFiatRamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0291DA7A2E8B4F3B00227468 /* dydxFiatRamp.framework */; };
 		0295392329FB256E009026E3 /* dydxThemeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295392229FB256E009026E3 /* dydxThemeViewBuilder.swift */; };
 		0295392729FB28B7009026E3 /* settings_theme.json in Resources */ = {isa = PBXBuildFile; fileRef = 0295392629FB28B7009026E3 /* settings_theme.json */; };
 		029CBE7128F5FDF600259C1D /* dydxMarketFundingChartViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CBE7028F5FDF600259C1D /* dydxMarketFundingChartViewPresenter.swift */; };
@@ -324,20 +323,6 @@
 			remoteGlobalIDString = 024B79B928B7F53800F7C386;
 			remoteInfo = dydxViews;
 		};
-		0291DA762E8B4F3B00227468 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0291DA732E8B4F3B00227468 /* dydxFiatRamp.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 02FC8C502E86FAF6003B5AE8;
-			remoteInfo = dydxFiatRamp;
-		};
-		0291DA792E8B4F3B00227468 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0291DA732E8B4F3B00227468 /* dydxFiatRamp.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 02FC8C512E86FAF6003B5AE8;
-			remoteInfo = dydxFiatRamp;
-		};
 		0291DC232E8B530C00227468 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0291DA632E8B4F2500227468 /* dydxFiatRamp.xcodeproj */;
@@ -421,20 +406,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 029E0FD429ADB41400FE271C;
 			remoteInfo = dydxChart;
-		};
-		02A107D52E2862FD00E65EE2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02A107D22E2862FD00E65EE2 /* dydxTurnkey.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 02A1054D2E28537C00E65EE2;
-			remoteInfo = dydxTurnkey;
-		};
-		02A107D82E2862FD00E65EE2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02A107D22E2862FD00E65EE2 /* dydxTurnkey.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 02A1054E2E28537C00E65EE2;
-			remoteInfo = dydxTurnkey;
 		};
 		02A8980028E76167006F1658 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -627,7 +598,7 @@
 		028DB33F2A05893D0090BE58 /* dydxProfileHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxProfileHeaderViewPresenter.swift; sourceTree = "<group>"; };
 		028FB3EB2AD642B30013136C /* dydxTokenConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxTokenConstants.swift; sourceTree = "<group>"; };
 		0291DA632E8B4F2500227468 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = ../dydxFiatRamp/dydxFiatRamp.xcodeproj; sourceTree = "<group>"; };
-		0291DA732E8B4F3B00227468 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxFiatRamp/dydxFiatRamp.xcodeproj"; sourceTree = "<absolute>"; };
+		0291DA732E8B4F3B00227468 /* dydxFiatRamp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxFiatRamp.xcodeproj; path = ../dydxFiatRamp/dydxFiatRamp.xcodeproj; sourceTree = "<group>"; };
 		0295392229FB256E009026E3 /* dydxThemeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxThemeViewBuilder.swift; sourceTree = "<group>"; };
 		0295392629FB28B7009026E3 /* settings_theme.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = settings_theme.json; sourceTree = "<group>"; };
 		029CBE7028F5FDF600259C1D /* dydxMarketFundingChartViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxMarketFundingChartViewPresenter.swift; sourceTree = "<group>"; };
@@ -636,7 +607,7 @@
 		029E0E6D29AD9B8600FE271C /* PlatformParticles.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformParticles.xcodeproj; path = ../../PlatformParticles/PlatformParticles.xcodeproj; sourceTree = "<group>"; };
 		029E118D29ADB77300FE271C /* dydxChart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxChart.xcodeproj; path = ../dydxChart/dydxChart.xcodeproj; sourceTree = "<group>"; };
 		02A107C22E2862F000E65EE2 /* dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		02A107D22E2862FD00E65EE2 /* dydxTurnkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxTurnkey.xcodeproj; path = "/Users/ruihuang/v4-native-ios/dydx/dydxTurnkey/dydxTurnkey.xcodeproj"; sourceTree = "<absolute>"; };
+		02A107D22E2862FD00E65EE2 /* dydxTurnkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxTurnkey.xcodeproj; path = ../dydxTurnkey/dydxTurnkey.xcodeproj; sourceTree = "<group>"; };
 		02A134C029A5A14700B13E83 /* dydxClosePositionHeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxClosePositionHeaderViewPresenter.swift; sourceTree = "<group>"; };
 		02A6517E2DB30D86006DBD5F /* dydxSimpleUIMenuViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuViewBuilder.swift; sourceTree = "<group>"; };
 		02A651842DB408E9006DBD5F /* dydxSimpleUIMenuAccountViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dydxSimpleUIMenuAccountViewPresenter.swift; sourceTree = "<group>"; };
@@ -761,7 +732,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0291DA7B2E8B4F5100227468 /* dydxFiatRamp.framework in Frameworks */,
 				2741B25C2C06A0E100693B17 /* dydxAnalytics.framework in Frameworks */,
 				02D1CEED29C8E016009ADF9A /* PlatformUIJedio.framework in Frameworks */,
 				025315BA29BFF18700D6CC9B /* CameraParticles.framework in Frameworks */,
@@ -1494,14 +1464,6 @@
 			path = Fiat;
 			sourceTree = "<group>";
 		};
-		0291DA742E8B4F3B00227468 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0291DA7A2E8B4F3B00227468 /* dydxFiatRamp.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		0291DC1C2E8B530C00227468 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1537,14 +1499,6 @@
 			children = (
 				029E119329ADB77300FE271C /* dydxChart.framework */,
 				029E119529ADB77300FE271C /* dydxChartTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		02A107D32E2862FD00E65EE2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				02A107D92E2862FD00E65EE2 /* dydxTurnkey.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2119,8 +2073,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0291DA772E8B4F3B00227468 /* PBXTargetDependency */,
-				02A107D62E2862FD00E65EE2 /* PBXTargetDependency */,
 				2741B25B2C06A0D800693B17 /* PBXTargetDependency */,
 				02D1CEEC29C8E00D009ADF9A /* PBXTargetDependency */,
 				025315B929BFF18100D6CC9B /* PBXTargetDependency */,
@@ -2207,16 +2159,8 @@
 					ProjectRef = 0291DA632E8B4F2500227468 /* dydxFiatRamp.xcodeproj */;
 				},
 				{
-					ProductGroup = 0291DA742E8B4F3B00227468 /* Products */;
-					ProjectRef = 0291DA732E8B4F3B00227468 /* dydxFiatRamp.xcodeproj */;
-				},
-				{
 					ProductGroup = 02E7DD9228CFB30000727949 /* Products */;
 					ProjectRef = 02E7DD9128CFB30000727949 /* dydxStateManager.xcodeproj */;
-				},
-				{
-					ProductGroup = 02A107D32E2862FD00E65EE2 /* Products */;
-					ProjectRef = 02A107D22E2862FD00E65EE2 /* dydxTurnkey.xcodeproj */;
 				},
 				{
 					ProductGroup = 0284201A29AD725000C0E7CC /* Products */;
@@ -2280,13 +2224,6 @@
 			fileType = wrapper.cfbundle;
 			path = dydxViewsTests.xctest;
 			remoteRef = 0284202029AD725000C0E7CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0291DA7A2E8B4F3B00227468 /* dydxFiatRamp.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = dydxFiatRamp.framework;
-			remoteRef = 0291DA792E8B4F3B00227468 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0291DC242E8B530C00227468 /* dydxFiatRamp.framework */ = {
@@ -2357,13 +2294,6 @@
 			fileType = wrapper.cfbundle;
 			path = dydxChartTests.xctest;
 			remoteRef = 029E119429ADB77300FE271C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		02A107D92E2862FD00E65EE2 /* dydxTurnkey.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = dydxTurnkey.framework;
-			remoteRef = 02A107D82E2862FD00E65EE2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		02D1CEE829C8DFFC009ADF9A /* PlatformUIJedio.framework */ = {
@@ -2496,9 +2426,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2513,9 +2447,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresentersTests/Pods-iOS-dydxPresentersTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2530,9 +2468,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresenters/Pods-iOS-dydxPresenters-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOS-dydxPresenters/Pods-iOS-dydxPresenters-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2793,11 +2735,6 @@
 			name = dydxViews;
 			targetProxy = 0284202D29AD726B00C0E7CC /* PBXContainerItemProxy */;
 		};
-		0291DA772E8B4F3B00227468 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = dydxFiatRamp;
-			targetProxy = 0291DA762E8B4F3B00227468 /* PBXContainerItemProxy */;
-		};
 		029E0E8629AD9B9200FE271C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PlatformParticles;
@@ -2807,11 +2744,6 @@
 			isa = PBXTargetDependency;
 			name = dydxChart;
 			targetProxy = 029E119E29ADB77900FE271C /* PBXContainerItemProxy */;
-		};
-		02A107D62E2862FD00E65EE2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = dydxTurnkey;
-			targetProxy = 02A107D52E2862FD00E65EE2 /* PBXContainerItemProxy */;
 		};
 		02A8980128E76167006F1658 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2901,10 +2833,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -2978,10 +2907,7 @@
 				LDPLUSPLUS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

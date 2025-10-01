@@ -8,30 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		02FC8DBB2E86FBEC003B5AE8 /* MoonPaySdk in Frameworks */ = {isa = PBXBuildFile; productRef = 02FC8DBA2E86FBEC003B5AE8 /* MoonPaySdk */; };
-		02FC8DD32E86FC7B003B5AE8 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FC8DC82E86FC66003B5AE8 /* Utilities.framework */; };
 		1EF59EFFC2ACEF85D3451F9E /* Pods_iOS_dydxFiatRamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA29953FB7AE8EACD27E9B0 /* Pods_iOS_dydxFiatRamp.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		02FC8DC72E86FC66003B5AE8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02FC8DBF2E86FC66003B5AE8 /* Utilities.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 31E65AB9216BC9C9008ABEE9;
-			remoteInfo = Utilities;
-		};
-		02FC8DD12E86FC6F003B5AE8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02FC8DBF2E86FC66003B5AE8 /* Utilities.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 31E65AB8216BC9C9008ABEE9;
-			remoteInfo = Utilities;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		02FC8C512E86FAF6003B5AE8 /* dydxFiatRamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxFiatRamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		02FC8DBF2E86FC66003B5AE8 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = "/Users/ruihuang/v4-native-ios/Utilities/Utilities.xcodeproj"; sourceTree = "<absolute>"; };
+		02FC8DBF2E86FC66003B5AE8 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
 		4CA29953FB7AE8EACD27E9B0 /* Pods_iOS_dydxFiatRamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxFiatRamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7367A60FC8D08F9C019B6D50 /* Pods-iOS-dydxFiatRamp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxFiatRamp.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxFiatRamp/Pods-iOS-dydxFiatRamp.debug.xcconfig"; sourceTree = "<group>"; };
 		7DF385AD513128C3D00DB198 /* Pods-iOS-dydxFiatRamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxFiatRamp.release.xcconfig"; path = "Target Support Files/Pods-iOS-dydxFiatRamp/Pods-iOS-dydxFiatRamp.release.xcconfig"; sourceTree = "<group>"; };
@@ -50,7 +32,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02FC8DD32E86FC7B003B5AE8 /* Utilities.framework in Frameworks */,
 				1EF59EFFC2ACEF85D3451F9E /* Pods_iOS_dydxFiatRamp.framework in Frameworks */,
 				02FC8DBB2E86FBEC003B5AE8 /* MoonPaySdk in Frameworks */,
 			);
@@ -74,14 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				02FC8C512E86FAF6003B5AE8 /* dydxFiatRamp.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		02FC8DC02E86FC66003B5AE8 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				02FC8DC82E86FC66003B5AE8 /* Utilities.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,7 +103,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				02FC8DD22E86FC6F003B5AE8 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				02FC8C532E86FAF6003B5AE8 /* dydxFiatRamp */,
@@ -170,28 +142,12 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 02FC8C522E86FAF6003B5AE8 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 02FC8DC02E86FC66003B5AE8 /* Products */;
-					ProjectRef = 02FC8DBF2E86FC66003B5AE8 /* Utilities.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				02FC8C502E86FAF6003B5AE8 /* dydxFiatRamp */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		02FC8DC82E86FC66003B5AE8 /* Utilities.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Utilities.framework;
-			remoteRef = 02FC8DC72E86FC66003B5AE8 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		02FC8C4F2E86FAF6003B5AE8 /* Resources */ = {
@@ -237,14 +193,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		02FC8DD22E86FC6F003B5AE8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Utilities;
-			targetProxy = 02FC8DD12E86FC6F003B5AE8 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		02FC8C562E86FAF6003B5AE8 /* Debug */ = {
