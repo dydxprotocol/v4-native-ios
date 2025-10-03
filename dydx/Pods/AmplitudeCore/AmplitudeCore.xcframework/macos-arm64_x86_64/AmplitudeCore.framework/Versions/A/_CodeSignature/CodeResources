@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		9ORqKcs5GKTn+Wwsg3ExprLAI8E=
+		GYB7HkQU8sodYfPlr7XFF7NMVFo=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -22,7 +22,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AIpLaEbEvjqrvcL1xgdjSU0A3NODIONeKK9OwKlWh2s=
+			AlJ4QIaj3Gexm74BGyBC67WT2RQE1yfDWNlgYGc4rhs=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-macos.private.swiftinterface</key>
@@ -57,7 +57,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AIpLaEbEvjqrvcL1xgdjSU0A3NODIONeKK9OwKlWh2s=
+			AlJ4QIaj3Gexm74BGyBC67WT2RQE1yfDWNlgYGc4rhs=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-macos.private.swiftinterface</key>
@@ -99,7 +99,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			q+4Hutjjfp4vRdEZs6pg6oKh7tSTcr0//3w32CSh1Iw=
+			IZZH9ofgXbF96JWdTSww88rqLaVpsiXbaFJmvZF0Zho=
 			</data>
 		</dict>
 	</dict>

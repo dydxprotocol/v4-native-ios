@@ -50,11 +50,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		C9OVbF70Dr4JbdSrOV99yyEevKU=
+		W1ohS/EwMN7xLscDfAWd+yWfpSg=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		QpGy7YKy5MIsVxq2HJltl3bmbXA=
+		TJ42x9vvwNM6um8PRsnxlk+kX6Q=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -74,7 +74,7 @@
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		QpGy7YKy5MIsVxq2HJltl3bmbXA=
+		TJ42x9vvwNM6um8PRsnxlk+kX6Q=
 		</data>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -228,11 +228,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			QpGy7YKy5MIsVxq2HJltl3bmbXA=
+			TJ42x9vvwNM6um8PRsnxlk+kX6Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			LkeOZ+OnFbqFiyOndmP265JqR7sCEnRqZwZ0EvN7Dqs=
+			kn4lIlv4yrrd3P35IvU5pZV/oMEeIItyZNR0zjgiVio=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -283,11 +283,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			QpGy7YKy5MIsVxq2HJltl3bmbXA=
+			TJ42x9vvwNM6um8PRsnxlk+kX6Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			LkeOZ+OnFbqFiyOndmP265JqR7sCEnRqZwZ0EvN7Dqs=
+			kn4lIlv4yrrd3P35IvU5pZV/oMEeIItyZNR0zjgiVio=
 			</data>
 		</dict>
 		<key>Modules/AppsFlyerLib.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>

@@ -5761,14 +5761,14 @@
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "StringLiteral",
-      "offset": 15636,
+      "offset": 16046,
       "length": 8,
       "value": "\"config\""
     },
     {
       "filePath": "\/Users\/runner\/work\/AmplitudeCore-Swift\/AmplitudeCore-Swift\/Sources\/AmplitudeCore\/Remote Config\/RemoteConfigClient.swift",
       "kind": "StringLiteral",
-      "offset": 15676,
+      "offset": 16086,
       "length": 11,
       "value": "\"lastFetch\""
     },

@@ -68,7 +68,7 @@ class dydxSimpleUIPortfolioViewPresenter: HostedViewPresenter<dydxSimpleUIPortfo
             Timer.publish(every: Self.loadingDelay, on: .main, in: .default).autoconnect()
         )
         .sink { [weak self] subaccount, pnls, onboarded, _ in
-            if subaccount?.freeCollateral?.current?.doubleValue ?? 0 > 0 {
+            if (subaccount?.freeCollateral?.current?.doubleValue ?? 0) != 0 {
                 self?.viewModel?.state = .hasBalance
                 self?.viewModel?.buttonAction = nil
                 if let subaccount = subaccount {

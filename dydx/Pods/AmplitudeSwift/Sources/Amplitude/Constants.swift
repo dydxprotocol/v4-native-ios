@@ -18,7 +18,7 @@ public enum LogLevelEnum: Int, Sendable {
 
 public struct Constants {
     static let SDK_LIBRARY = "amplitude-swift"
-    static let SDK_VERSION = "1.14.0"
+    static let SDK_VERSION = "1.15.1"
     public static let DEFAULT_API_HOST = "https://api2.amplitude.com/2/httpapi"
     public static let EU_DEFAULT_API_HOST = "https://api.eu.amplitude.com/2/httpapi"
     static let BATCH_API_HOST = "https://api2.amplitude.com/batch"
@@ -90,6 +90,10 @@ public struct Constants {
     static let AMP_NETWORK_COMPLETION_TIME_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Completion Time"
     static let AMP_NETWORK_REQUEST_BODY_SIZE_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Request Body Size"
     static let AMP_NETWORK_RESPONSE_BODY_SIZE_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Response Body Size"
+    static let AMP_NETWORK_REQUEST_HEADERS_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Request Headers"
+    static let AMP_NETWORK_RESPONSE_HEADERS_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Response Headers"
+    static let AMP_NETWORK_REQUEST_BODY_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Request Body"
+    static let AMP_NETWORK_RESPONSE_BODY_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Response Body"
 
     static let AMP_BEGIN_TIME_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)Begin Time"
     static let AMP_END_TIME_PROPERTY = "\(AMP_AMPLITUDE_PREFIX)End Time"

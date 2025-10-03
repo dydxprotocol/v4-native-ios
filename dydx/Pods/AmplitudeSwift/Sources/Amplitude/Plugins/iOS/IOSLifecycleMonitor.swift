@@ -13,11 +13,19 @@ import SwiftUI
 
 class IOSLifecycleMonitor: UtilityPlugin {
 
+    struct TrackingState {
+        var screenViews: Bool = false
+        var elementInteractions: Bool = false
+        var frustrationInteractions: Bool = false
+        var rageClick: Bool = false
+        var deadClick: Bool = false
+        var appLifecycles: Bool = false
+    }
+
     private var utils: DefaultEventUtils?
     private var sendApplicationOpenedOnDidBecomeActive = false
     private var remoteConfigSubscription: Any?
-    private(set) var trackScreenViews = false
-    private(set) var trackElementInteractions = false
+    @Atomic private(set) var trackingState = TrackingState()
 
     override init() {
         super.init()
@@ -43,8 +51,12 @@ class IOSLifecycleMonitor: UtilityPlugin {
     public override func setup(amplitude: Amplitude) {
         super.setup(amplitude: amplitude)
         utils = DefaultEventUtils(amplitude: amplitude)
-        trackScreenViews = amplitude.configuration.autocapture.contains(.screenViews)
-        trackElementInteractions = amplitude.configuration.autocapture.contains(.elementInteractions)
+        trackingState.screenViews = amplitude.configuration.autocapture.contains(.screenViews)
+        trackingState.elementInteractions = amplitude.configuration.autocapture.contains(.elementInteractions)
+        trackingState.frustrationInteractions = amplitude.configuration.autocapture.contains(.frustrationInteractions)
+        trackingState.rageClick = amplitude.configuration.interactionsOptions.rageClick.enabled
+        trackingState.deadClick = amplitude.configuration.interactionsOptions.deadClick.enabled
+        trackingState.appLifecycles = amplitude.configuration.autocapture.contains(.appLifecycles)
 
         // If we are already in the foreground, dispatch installed / opened events now
         // we want to dispatch this from the initiating thread to maintain event ordering.
@@ -69,13 +81,37 @@ class IOSLifecycleMonitor: UtilityPlugin {
                         return
                     }
 
+                    var newState = trackingState
+
                     if let pageViews = config["pageViews"] as? Bool {
-                        trackScreenViews = pageViews
+                        newState.screenViews = pageViews
                     }
 
                     if let interactions = config["elementInteractions"] as? Bool {
-                        trackElementInteractions = interactions
+                        newState.elementInteractions = interactions
                     }
+
+                    if let frustrationInteractions = config["frustrationInteractions"] as? [String: Any] {
+                        if let enabled = frustrationInteractions["enabled"] as? Bool {
+                            newState.frustrationInteractions = enabled
+                        }
+
+                        if let rageClick = frustrationInteractions["rageClick"] as? [String: Any],
+                           let rageClickEnabled = rageClick["enabled"] as? Bool {
+                            newState.rageClick = rageClickEnabled
+                        }
+
+                        if let deadClick = frustrationInteractions["deadClick"] as? [String: Any],
+                           let deadClickEnabled = deadClick["enabled"] as? Bool {
+                            newState.deadClick = deadClickEnabled
+                        }
+                    }
+
+                    if let appLifecycles = config["appLifecycles"] as? Bool {
+                        newState.appLifecycles = appLifecycles
+                    }
+
+                    trackingState = newState
 
                     updateAutocaptureSetup()
                 }
@@ -87,16 +123,16 @@ class IOSLifecycleMonitor: UtilityPlugin {
             return
         }
 
-        if trackScreenViews {
+        if trackingState.screenViews {
             UIKitScreenViews.register(amplitude)
         } else {
             UIKitScreenViews.unregister(amplitude)
         }
 
         // Register UIKitElementInteractions if either element interactions or frustration interactions is enabled
-        let needsElementInteractions = trackElementInteractions || amplitude.configuration.autocapture.contains(.frustrationInteractions)
+        let needsElementInteractions = trackingState.elementInteractions || trackingState.frustrationInteractions
         if needsElementInteractions {
-            UIKitElementInteractions.register(amplitude)
+            UIKitElementInteractions.register(amplitude, trackingState: trackingState)
         } else {
             UIKitElementInteractions.unregister(amplitude)
         }
@@ -150,7 +186,7 @@ class IOSLifecycleMonitor: UtilityPlugin {
             return
         }
         amplitude.onExitForeground(timestamp: currentTimestamp)
-        if amplitude.configuration.autocapture.contains(.appLifecycles) {
+        if trackingState.appLifecycles {
             amplitude.track(eventType: Constants.AMP_APPLICATION_BACKGROUNDED_EVENT)
         }
     }

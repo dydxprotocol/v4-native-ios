@@ -10,11 +10,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		VLiIWw0tIuV8P1JsUlvhVhsEzbo=
+		xCaTP1/fFwovM5r5m4KjDIl44Cg=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.abi.json</key>
 		<data>
-		zBmmNc6FnRl57XGTAyfoXn9H8PI=
+		tTFCfNL96k5eqhEKBSL6u4pCSCQ=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.private.swiftinterface</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.abi.json</key>
 		<data>
-		zBmmNc6FnRl57XGTAyfoXn9H8PI=
+		tTFCfNL96k5eqhEKBSL6u4pCSCQ=
 		</data>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.private.swiftinterface</key>
 		<data>
@@ -70,7 +70,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AIpLaEbEvjqrvcL1xgdjSU0A3NODIONeKK9OwKlWh2s=
+			AlJ4QIaj3Gexm74BGyBC67WT2RQE1yfDWNlgYGc4rhs=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/arm64-apple-xros-simulator.private.swiftinterface</key>
@@ -105,7 +105,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AIpLaEbEvjqrvcL1xgdjSU0A3NODIONeKK9OwKlWh2s=
+			AlJ4QIaj3Gexm74BGyBC67WT2RQE1yfDWNlgYGc4rhs=
 			</data>
 		</dict>
 		<key>Modules/AmplitudeCore.swiftmodule/x86_64-apple-xros-simulator.private.swiftinterface</key>

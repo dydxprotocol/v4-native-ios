@@ -44,8 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		025DFE772E3159270015E1D7 /* PlatformUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformUI.xcodeproj; path = "../../PlatformUI/PlatformUI.xcodeproj"; sourceTree = "<group>"; };
-		0263CB412E787EC900D843C7 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = "../../Utilities/Utilities.xcodeproj"; sourceTree = "<group>"; };
+		025DFE772E3159270015E1D7 /* PlatformUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PlatformUI.xcodeproj; path = ../../PlatformUI/PlatformUI.xcodeproj; sourceTree = "<group>"; };
+		0263CB412E787EC900D843C7 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
 		02A1054E2E28537C00E65EE2 /* dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AE56594D5B2D8D07259C597 /* Pods_iOS_dydxTurnkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxTurnkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2C4215727E83011602DFFDB /* Pods-iOS-dydxTurnkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-dydxTurnkey.debug.xcconfig"; path = "Target Support Files/Pods-iOS-dydxTurnkey/Pods-iOS-dydxTurnkey.debug.xcconfig"; sourceTree = "<group>"; };
