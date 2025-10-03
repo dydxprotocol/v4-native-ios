@@ -40,12 +40,14 @@ final public class dydxMoonPayRamp {
     private let moonPayPk: String
     private let moonPaySk: String?
     private let moonPaySignUrl: String?
+    private let isDarkTheme: Bool
 
-    public init (isSandbox: Bool, moonPayPk: String, moonPaySk: String? = nil, moonPaySignUrl: String? = nil) {
+    public init (isSandbox: Bool, moonPayPk: String, moonPaySk: String? = nil, moonPaySignUrl: String? = nil, isDarkTheme: Bool = false) {
         self.isSandbox = isSandbox
         self.moonPayPk = moonPayPk
         self.moonPaySk = moonPaySk
         self.moonPaySignUrl = moonPaySignUrl
+        self.isDarkTheme = isDarkTheme
     }
 
     public func show(targetAddress: String, usdAmount: Double? = nil) {
@@ -81,7 +83,7 @@ final public class dydxMoonPayRamp {
             params.setBaseCurrencyAmount(value: KotlinDouble(value: usdAmount))
         }
         params.setPaymentMethod(value: "apple_pay")
-        params.setTheme(value: "dark")
+        params.setTheme(value: isDarkTheme ? "dark" : "light")
         params.setCurrencyCode(value: "usdc_noble")
         params.setWalletAddress(value: targetAddress)
 

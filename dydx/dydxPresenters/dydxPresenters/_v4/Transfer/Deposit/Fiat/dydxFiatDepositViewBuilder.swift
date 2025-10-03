@@ -46,7 +46,8 @@ private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositV
     private let moonPayRamp = dydxMoonPayRamp(isSandbox: !AbacusStateManager.shared.isMainNet,
                                               moonPayPk: CredientialConfig.shared.credential(for: "moonpayPk") ?? "Invalid Key",
                                               moonPaySk: CredientialConfig.shared.credential(for: "moonpaySk"),
-                                              moonPaySignUrl: CredientialConfig.shared.credential(for: "moonpaySignUrl"))
+                                              moonPaySignUrl: CredientialConfig.shared.credential(for: "moonpaySignUrl"),
+                                              isDarkTheme: dydxThemeSettings.shared.currentThemeType == .dark)
 
     override init() {
         super.init()
@@ -65,7 +66,7 @@ private class dydxFiatDepositViewPresenter: HostedViewPresenter<dydxFiatDepositV
         viewModel?.providerSubtitle = DataLocalizer.localize(path: "APP.DEPOSIT_WITH_FIAT.MOONPAY_SUPPORT")
         viewModel?.fee = dydxFormatter.shared.percent(number: feePercent / 100.0, digits: 2)
         let minDollar = dydxFormatter.shared.dollar(number: minAmount, digits: 2)
-        viewModel?.amountSubtitle = DataLocalizer.localize(path: "APP.DEPOSIT_WITH_FIAT.MINIMUM_DEPOSIT",
+        viewModel?.amountSubtitle = DataLocalizer.localize(path: "APP.DEPOSIT_WITH_FIAT.MINIMUM_MOONPAY_DEPOSIT",
                                                            params: ["MIN": minDollar ?? "-"])
         viewModel?.amountTextInput.onEdited = { [weak self] amount in
             let amountValue: Double

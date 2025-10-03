@@ -47,7 +47,7 @@ public class dydxFiatDepositItemViewModel: PlatformViewModel {
                 Spacer()
             }
                 .frame(height: 48)
-                .themeColor(background: .layer4)
+                .themeColor(background: .layer3)
                 .cornerRadius(12)
 
             let button = Button {
