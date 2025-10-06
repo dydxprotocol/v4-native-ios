@@ -9,8 +9,12 @@ import Foundation
 import MoonPaySdk
 import Utilities
 import CryptoKit
+import Abacus
+import dydxAnalytics
 
 final public class dydxMoonPayRamp {
+    private static let providerName = "moonpay"
+
     enum dydxMoonPayRampError: Error {
         case invalidUrl
         case noSecretkey
@@ -51,29 +55,46 @@ final public class dydxMoonPayRamp {
     }
 
     public func show(targetAddress: String, usdAmount: Double? = nil) {
+        Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositShowInputEvent())
+
         let handlers = MoonPayHandlers(
-            onAuthToken: { data in
-                print("onAuthToken called", data)
+            onAuthToken: { _ in
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositMoonPayCallbackEvent(callbackName: "onAuthToken", data: [:]))
             },
             onSwapsCustomerSetupComplete: {
-                print("onSwapsCustomerSetupComplete called")
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositMoonPayCallbackEvent(callbackName: "onSwapsCustomerSetupComplete", data: [:]))
             },
             onUnsupportedRegion: {
-                print("onUnsupportedRegion called")
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositMoonPayCallbackEvent(callbackName: "onUnsupportedRegion", data: [:]))
             },
             onKmsWalletCreated: {
-                print("onKmsWalletCreated called")
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositMoonPayCallbackEvent(callbackName: "onKmsWalletCreated", data: [:]))
             },
             onLogin: { data in
-                print("onLogin called", data)
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositMoonPayCallbackEvent(callbackName: "onLogin", data: [
+                    "isRefresh": data.isRefresh
+                ]))
             },
-            onInitiateDeposit: { _ in
-                print("onInitiateDepositCalled")
+            onInitiateDeposit: { data in
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositMoonPayCallbackEvent(callbackName: "onInitiateDeposit", data: [
+                    "cryptoCurrency": data.cryptoCurrency,
+                    "cryptoCurrencyAmount": data.cryptoCurrencyAmount,
+                    "depositWalletAddress": data.depositWalletAddress,
+                    "fiatCurrency": data.fiatCurrency,
+                    "fiatCurrencyAmount": data.fiatCurrencyAmount ?? "0",
+                    "transactionId": data.transactionId
+                ]))
+
                 let response = OnInitiateDepositResponsePayload(depositId: "yourDepositId")
                 return response
             },
             onTransactionCreated: { data in
-                print("onTransactionCreated called", data)
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositMoonPayCallbackEvent(callbackName: "onTransactionCreated", data: [
+                    "baseCurrencyAmount": data.baseCurrencyAmount,
+                    "baseCurrencyCode": data.baseCurrencyCode,
+                    "id": data.id,
+                    "status": data.status
+                ]))
             }
         )
 
@@ -109,18 +130,24 @@ final public class dydxMoonPayRamp {
                         if let signature {
                             self?.moonPaySdk?.updateSignature(signature: signature)
                             self?.moonPaySdk?.show(mode: MoonPayRenderingOptioniOS.WebViewOverlay())
+
+                            Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositRouteToProviderCompletedEvent(amountUsd: KotlinDouble(value: usdAmount ?? 0), depositAddress: targetAddress, provider: Self.providerName))
                         } else {
                             ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: error?.message, type: .error, error: nil)
+                            Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositRouteToProviderErrorEvent(message: error?.message, provider: Self.providerName))
                         }
                     }
                 } else {
                     ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: dydxMoonPayRampError.invalidUrl.message, type: .error, error: nil)
+                    Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositRouteToProviderErrorEvent(message: dydxMoonPayRampError.invalidUrl.message, provider: Self.providerName))
                 }
             } else {
                 ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: dydxMoonPayRampError.invalidUrl.message, type: .error, error: nil)
+                Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositRouteToProviderErrorEvent(message: dydxMoonPayRampError.invalidUrl.message, provider: Self.providerName))
             }
         } else {
             ErrorInfo.shared?.info(title: DataLocalizer.localize(path: "APP.GENERAL.ERROR"), message: dydxMoonPayRampError.unableToGetSignature.message, type: .error, error: nil)
+            Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositRouteToProviderErrorEvent(message: dydxMoonPayRampError.unableToGetSignature.message, provider: Self.providerName))
         }
     }
 

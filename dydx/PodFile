@@ -402,6 +402,7 @@ abstract_target 'iOS' do
   target 'dydxFiatRamp' do
     project '../dydx/dydxFiatRamp/dydxFiatRamp'
     ios_ui_pods
+    abacus_pods
   end
   
   target 'dydxV4' do

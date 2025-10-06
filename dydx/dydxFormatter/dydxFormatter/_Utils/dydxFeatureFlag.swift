@@ -36,7 +36,7 @@ public enum dydxBoolFeatureFlag: String, CaseIterable {
         case .rewards_sep_2025:
             return false
         case .fiat_deposit:
-            return false
+            return true
         }
     }
 

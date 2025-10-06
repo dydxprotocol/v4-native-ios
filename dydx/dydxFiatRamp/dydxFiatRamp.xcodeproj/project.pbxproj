@@ -7,12 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0280A4982E942D5F00735D26 /* dydxAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0280A4952E942D5400735D26 /* dydxAnalytics.framework */; };
 		02FC8DBB2E86FBEC003B5AE8 /* MoonPaySdk in Frameworks */ = {isa = PBXBuildFile; productRef = 02FC8DBA2E86FBEC003B5AE8 /* MoonPaySdk */; };
 		02FC8DD32E86FC7B003B5AE8 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FC8DC82E86FC66003B5AE8 /* Utilities.framework */; };
 		1EF59EFFC2ACEF85D3451F9E /* Pods_iOS_dydxFiatRamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA29953FB7AE8EACD27E9B0 /* Pods_iOS_dydxFiatRamp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0280A4902E942D5400735D26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0280A48D2E942D5400735D26 /* dydxAnalytics.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2742BEAC2BF6860100E13C09;
+			remoteInfo = dydxAnalytics;
+		};
+		0280A4942E942D5400735D26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0280A48D2E942D5400735D26 /* dydxAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2742BEAD2BF6860100E13C09;
+			remoteInfo = dydxAnalytics;
+		};
 		02FC8DC72E86FC66003B5AE8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 02FC8DBF2E86FC66003B5AE8 /* Utilities.xcodeproj */;
@@ -30,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0280A4542E942B2400735D26 /* dydxStateManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = dydxStateManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0280A48A2E942D4600735D26 /* dydxAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxAnalytics.xcodeproj; path = ../dydxAnalytics/dydxAnalytics.xcodeproj; sourceTree = "<group>"; };
+		0280A48D2E942D5400735D26 /* dydxAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dydxAnalytics.xcodeproj; path = ../dydxAnalytics/dydxAnalytics.xcodeproj; sourceTree = "<group>"; };
 		02FC8C512E86FAF6003B5AE8 /* dydxFiatRamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = dydxFiatRamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FC8DBF2E86FC66003B5AE8 /* Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Utilities.xcodeproj; path = ../../Utilities/Utilities.xcodeproj; sourceTree = "<group>"; };
 		4CA29953FB7AE8EACD27E9B0 /* Pods_iOS_dydxFiatRamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_dydxFiatRamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,8 +58,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		02FC8C532E86FAF6003B5AE8 /* dydxFiatRamp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = dydxFiatRamp;
 			sourceTree = "<group>";
 		};
@@ -52,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0280A4982E942D5F00735D26 /* dydxAnalytics.framework in Frameworks */,
 				02FC8DD32E86FC7B003B5AE8 /* Utilities.framework in Frameworks */,
 				1EF59EFFC2ACEF85D3451F9E /* Pods_iOS_dydxFiatRamp.framework in Frameworks */,
 				02FC8DBB2E86FBEC003B5AE8 /* MoonPaySdk in Frameworks */,
@@ -61,14 +78,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0280A48E2E942D5400735D26 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0280A4952E942D5400735D26 /* dydxAnalytics.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0284D2D92E9433B300A1E83F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		02FC8C472E86FAF6003B5AE8 = {
 			isa = PBXGroup;
 			children = (
+				0280A48A2E942D4600735D26 /* dydxAnalytics.xcodeproj */,
 				02FC8DBF2E86FC66003B5AE8 /* Utilities.xcodeproj */,
 				02FC8C532E86FAF6003B5AE8 /* dydxFiatRamp */,
 				02FC8C522E86FAF6003B5AE8 /* Products */,
 				E8C8B0D26E74A67F0EB9E890 /* Pods */,
 				EBC0C8575CEF3DE7A75F0EEA /* Frameworks */,
+				0280A48D2E942D5400735D26 /* dydxAnalytics.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +135,7 @@
 		EBC0C8575CEF3DE7A75F0EEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0280A4542E942B2400735D26 /* dydxStateManager.framework */,
 				4CA29953FB7AE8EACD27E9B0 /* Pods_iOS_dydxFiatRamp.framework */,
 			);
 			name = Frameworks;
@@ -132,6 +167,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0280A4912E942D5400735D26 /* PBXTargetDependency */,
 				02FC8DD22E86FC6F003B5AE8 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
@@ -174,6 +210,14 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 0280A48E2E942D5400735D26 /* Products */;
+					ProjectRef = 0280A48D2E942D5400735D26 /* dydxAnalytics.xcodeproj */;
+				},
+				{
+					ProductGroup = 0284D2D92E9433B300A1E83F /* Products */;
+					ProjectRef = 0280A48A2E942D4600735D26 /* dydxAnalytics.xcodeproj */;
+				},
+				{
 					ProductGroup = 02FC8DC02E86FC66003B5AE8 /* Products */;
 					ProjectRef = 02FC8DBF2E86FC66003B5AE8 /* Utilities.xcodeproj */;
 				},
@@ -186,6 +230,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		0280A4952E942D5400735D26 /* dydxAnalytics.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = dydxAnalytics.framework;
+			remoteRef = 0280A4942E942D5400735D26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		02FC8DC82E86FC66003B5AE8 /* Utilities.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -241,6 +292,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0280A4912E942D5400735D26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dydxAnalytics;
+			targetProxy = 0280A4902E942D5400735D26 /* PBXContainerItemProxy */;
+		};
 		02FC8DD22E86FC6F003B5AE8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Utilities;
@@ -319,10 +375,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -396,10 +449,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -414,7 +464,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7367A60FC8D08F9C019B6D50 /* Pods-iOS-dydxFiatRamp.debug.xcconfig */;
 			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 75C6UARB5H;
@@ -438,6 +488,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;
@@ -452,7 +505,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7DF385AD513128C3D00DB198 /* Pods-iOS-dydxFiatRamp.release.xcconfig */;
 			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 75C6UARB5H;
@@ -476,6 +529,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;

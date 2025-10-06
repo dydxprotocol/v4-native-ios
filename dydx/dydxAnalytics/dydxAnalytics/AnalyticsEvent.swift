@@ -145,3 +145,12 @@ public extension Utilities.TrackingProtocol {
         #endif
     }
 }
+
+public extension Utilities.TrackingProtocol {
+    func logSharedEvent(_ event: ClientTrackableEvent) {
+        log(event: event.name, data: event.customParameters)
+#if DEBUG
+        Console.shared.log(event.name)
+#endif
+    }
+}
