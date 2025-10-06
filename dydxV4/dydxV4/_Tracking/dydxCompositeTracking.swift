@@ -58,16 +58,17 @@ public class dydxCompositeTracking: CompositeTracking {
             .sink { [weak self] walletState in
                 guard let self = self else { return }
                 let walletAddress = walletState?.ethereumAddress ?? walletState?.cosmoAddress
+                let wallet = CarteraConfig.shared.wallets.first { $0.id == walletState?.walletId }
                 if walletState?.walletId == "turnkey" {
                     let userId = walletState?.userEmail?.trim()?.lowercased().sha256() ?? walletAddress
                     self.setUserId(userId)
+                    self.setUserProperty(walletState?.walletId?.uppercased(), forUserProperty: .walletType)
                 } else {
                     self.setUserId(walletAddress)
+                    self.setUserProperty(wallet?.userFields?["analyticEvent"], forUserProperty: .walletType)
                 }
                 self.setUserProperty(walletAddress, forUserProperty: .walletAddress)
                 // TODO: might have to change this to match https://www.notion.so/dydx/V4-Web-Analytics-Events-d12c9dd791ee4c5d89e48588bb3ef702?pvs=4, but first this linear task needs to finish https://linear.app/dydx/issue/TRCL-2473/create-wallettype-user-property-field-value-in-cartera-wallets-json
-                let wallet = CarteraConfig.shared.wallets.first { $0.id == walletState?.walletId }
-                self.setUserProperty(wallet?.userFields?["analyticEvent"], forUserProperty: .walletType)
                 self.setUserProperty(walletState?.cosmoAddress, forUserProperty: .dydxAddress)
             }
             .store(in: &subscriptions)
