@@ -129,7 +129,7 @@ final public class dydxMoonPayRamp {
                     getSignature(encodedUrlData: queryPath) { [weak self] signature, error in
                         if let signature {
                             self?.moonPaySdk?.updateSignature(signature: signature)
-                            self?.moonPaySdk?.show(mode: MoonPayRenderingOptioniOS.WebViewOverlay())
+                            self?.moonPaySdk?.show(mode: MoonPayRenderingOptioniOS.InAppBrowser())
 
                             Tracking.shared?.logSharedEvent(ClientTrackableEventType.FiatDepositRouteToProviderCompletedEvent(amountUsd: KotlinDouble(value: usdAmount ?? 0), depositAddress: targetAddress, provider: Self.providerName))
                         } else {

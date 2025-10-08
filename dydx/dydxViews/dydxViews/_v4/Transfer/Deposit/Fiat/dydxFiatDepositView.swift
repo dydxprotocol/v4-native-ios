@@ -83,6 +83,15 @@ public class dydxFiatDepositViewModel: PlatformViewModel {
                         self.createProviderInfo(style: style)
 
                         self.createCtaButton(style: style)
+
+                        HStack {
+                            Spacer()
+                            Text(DataLocalizer.localize(path: "APP.DEPOSIT_WITH_FIAT.CONTINUE_TO_DISCLAIMER",
+                                                        params: ["PROVIDER": self.providerName ?? "Provider"]))
+                            .themeColor(foreground: .textTertiary)
+                            .themeFont(fontSize: .smallest)
+                            Spacer()
+                        }
                     }
                     .keyboardObserving(offset: -bottomPadding + 16, mode: .yOffset)
                 }
