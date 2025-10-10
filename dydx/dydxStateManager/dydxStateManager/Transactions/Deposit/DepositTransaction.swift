@@ -74,7 +74,7 @@ public struct DepositTransaction: AsyncStep {
     }
 
     public func run() -> AnyPublisher<AsyncEvent<ProgressType, ResultType>, Never> {
-        if chainId == "solana" || chainId == "solana-devnet"{
+        if chainId == "solana" || chainId == "solana-devnet" {
             solana?.run() ?? Empty<AsyncEvent<Void, ResultType>, Never>().eraseToAnyPublisher()
         } else {
             evm?.run() ?? Empty<AsyncEvent<Void, ResultType>, Never>().eraseToAnyPublisher()

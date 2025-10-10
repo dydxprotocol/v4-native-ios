@@ -128,3 +128,12 @@ public enum dydxFiatDepositParam: String {
         FeatureService.shared?.value(store: "v4_params", feature: rawValue, defaultValue: 0.0) ?? 0
     }
 }
+
+public enum dydxRewardsParam: String {
+    case rewards_dollar_amount
+    case rewards_fee_rebate_percent
+
+    public var string: String {
+        FeatureService.shared?.value(store: "v4_params", feature: rawValue, defaultValue: "-") ?? "-"
+    }
+}

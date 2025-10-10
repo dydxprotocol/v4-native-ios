@@ -16,6 +16,8 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
     @Published public var aboutAction: (() -> Void)?
     @Published public var leaderboardAction: (() -> Void)?
     @Published public var isSep2025: Bool = false
+    @Published public var rewardsAmount: String?
+    @Published public var rewardsRebate: String?
 
     public static var previewValue: dydxRewardsLaunchIncentivesViewModel = {
         let vm = dydxRewardsLaunchIncentivesViewModel()
@@ -29,8 +31,8 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
             launchIncentives = DataLocalizer.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE") + ": " +
             DataLocalizer.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_HEADLINE_SEP_2025",
                                                       params: [
-                                                        "REWARD_AMOUNT": "$1M",
-                                                        "REBATE_PERCENT": "50%"
+                                                        "REWARD_AMOUNT": rewardsAmount ?? "-",
+                                                        "REBATE_PERCENT": rewardsRebate ?? "-"
                                                       ])
         } else {
             launchIncentives = DataLocalizer.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_HEADLINE", params: nil)
