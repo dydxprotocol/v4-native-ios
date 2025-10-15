@@ -124,8 +124,8 @@ public class dydxRewardsLaunchIncentivesViewModel: PlatformViewModel {
             if self.isSep2025 {
                 body = DataLocalizer.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_BODY_SEP_2025",
                                               params: [
-                                                "REWARD_AMOUNT": "$1M",
-                                                "REBATE_PERCENT": "50%"
+                                                "REWARD_AMOUNT": rewardsAmount ?? "-",
+                                                "REBATE_PERCENT": rewardsRebate ?? "-"
                                               ])
             } else {
                 body = DataLocalizer.localize(path: "APP.REWARDS_SURGE_APRIL_2025.SURGE_BODY", params: nil)
